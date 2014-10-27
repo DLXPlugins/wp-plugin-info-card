@@ -1,0 +1,79 @@
+@import url("./wp-plugin-info-card.css");
+#wppic-admin-page #post-body-content .postbox .inside{
+	line-height: 1em;
+}
+#wppic-admin-page .postbox .inside pre {
+	display: inline-block;
+	background: #f1f1f1;
+}
+#wppic-shortcode:after {
+	content:'';
+	display:block;
+	clear:both;
+	padding-bottom:15px;
+}
+#wppic-liste li.wppic-dd {
+    padding-left: 35px;
+    list-style-type: none;
+	background-repeat: no-repeat;
+	background-position: left;
+	width: 100%;
+	position: relative;
+}
+#wppic-liste li.wppic-dd .wppic-remove-field {
+	height: 24px;
+	width: 24px;
+	display: inline-block;
+    cursor: pointer;
+	margin-left: 5px;
+	position: relative;
+}
+.wppic-button {
+	display: block;
+	position: relative;
+	padding: 5px 0 5px 25px;
+	text-decoration: none;
+}
+.wppic-button:before,
+#wppic-liste li.wppic-dd:before,
+#wppic-liste li.wppic-dd .wppic-remove-field:after {
+	font-family: "dashicons";
+	position: absolute;
+	display: inline-block;
+	left: 0px;
+	font-size: 1.5em;
+}
+.wppic-button.wppic-pluginHome:before {
+    content: "\f103";
+}
+.wppic-button.wppic-pluginOther:before {
+    content: "\f328";
+}
+.wppic-button.wppic-pluginPage:before {
+    content: "\f120";
+}
+.wppic-button.wppic-pluginSupport:before {
+    content: "\f223";
+}
+.wppic-button.wppic-pluginContact:before {
+    content: "\f130";
+}
+
+
+#wppic-liste li.wppic-dd:before {
+    cursor: move;
+	top: 6px;
+	height: 24px;
+	width: 24px;
+    content: "\f156";
+}
+#wppic-liste li.wppic-dd:first-child:before {
+	top: 2px;
+}
+#wppic-liste li.wppic-dd .wppic-remove-field:after {
+	top: 6px;
+	left: auto;
+	width: 24px;
+	height: 24px;
+    content: "\f335";
+}
