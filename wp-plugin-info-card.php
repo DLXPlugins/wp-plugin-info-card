@@ -4,7 +4,7 @@
  * Plugin URI: http://b-website.com/
  * Description: ##############################################
  * Author: Brice CAPOBIANCO - b*web
- * Author URI:
+ * Author URI: http://b-website.com/
  * Version: 1.0
  * Text Domain: wp_plugin_info_card
  */

@@ -96,33 +96,33 @@ function wppic_settings_page() {
                                         <li><strong>logo :</strong> 128x128.jpg, 256x256.jpg, 128x128.png, 256x256.png, svg, no (default:svg)</li>
                                         <li><strong>banner :</strong> jpg, png, no (default:empty)</li>
                                         <li><strong>align :</strong> center, left, right (default:empty)</li>
-                                        <li><strong>containerID :</strong> Custom div id, could be use for anchor (default:wp-pic-PLUGIN-NAME)</li>
+                                        <li><strong>containerID :</strong> Custom div id, may be used for anchor (default:wp-pic-PLUGIN-NAME)</li>
                                         <li><strong>custom :</strong> value to print : url|name|version|author|requires|rating|downloaded|last_updated|download_link (default:empty)</li>
                                     </ul>
                                 
-                                <h3>Simple example</h3>
+                                <h3>Basic example</h3>
 									<p>The slug is the only required parameter.
                                     	<pre>[wp-pic slug="wordpress-seo"]</pre><br/>
                                     </p>
                                 
-                                <h3>Advance exemples</h3>
-									<p>If the plugin has a wordpress logo (new feature on wp), you can specify it extension (jpg, png or svg) and if it is a JPG or PNG file, it dimensions (128x128 or 256x256). If not, set "logo" to "no" to avoid 404error in the consol log (cf above explanation).
+                                <h3>Advanced examples</h3>
+									<p>If the plugin has a wordpress logo (new feature on wp), you can specify its extension (jpg, png or svg) and whether it is a JPG or PNG file, its dimensions (128x128 or 256x256). If not, set "logo" to "no" to avoid a 404 error in the console log (cf above explanation).
                                     	<pre>[wp-pic slug="theme-check" logo="128x128.png" align="right" banner="jpg"]</pre><br/>
                                     </p>
 
-									<p>You can provide a custom image URL for the front rounded image (175px X 175px), it will overload the "logo" parameter if specified. If you know the banner extention (image displaying on the top of the plugin page), you can provided to avoid 404error in the consol log (cf above explanation).
+									<p>You can provide a custom image URL for the front rounded image (175px X 175px), it will overload the "logo" parameter if specified. If you know the banner extension (image displaying on the top of the plugin page), you may provide it to avoid a 404 error in the console log (cf above explanation).
                                     	<pre>[wp-pic slug="wordpress-seo" image="http//www.mywebsite/custom-image.jpg" align="right" banner="png" extraID="download-sexion"]</pre><br/>	
                                     </p>							
 									
-                                    <p>The custom parameter overload the others (except the "slug") and only return the value you asked.
+                                    <p>The custom parameter overloads the others (except the "slug") and only returns the value you required.
                                     	<pre>[wp-pic slug="wordpress-seo" custom="downloaded"]</pre><br/>
                                     </p>
 
-                                <h3>Known issue</h3>
+                                <h3>Known issues</h3>
                                 	<p>
-                                    At the time, WordPress.org does not include banner and plugin logo in the API. As explain in the Developper Center, banners are located in the assets folder of the plugin repo (allowed format are JPG or PNG) and they are named banner-772x250.<br/>
-                                	It has been nice to test if banner-772x250.jpg or banner-772x250.png exist, but WordPress does not accept HTTP request to their servers, so request are blocked due to Cross-Origin restriction. It is the same issue for the plugin SVG logo.<br/>
-                                	The workaround is to use CSS backgound fallback, but it gives a 404 serveur respons. To avoid those errors, please specify the "logo" and "banner" parameters. In any case, 404 is not really an "error", but a simple server response.
+                                    WordPress.org does not currently include a banner nor plugin logo in the API. As explained in the Developper Center, banners are located in the assets folder of the plugin repository (allowed format are JPG or PNG) and they are named banner-772x250.<br/>
+                                	It would be nice to test if banner-772x250.jpg or banner-772x250.png exists, but WordPress does not accept HTTP request to their servers, so requests are blocked due to Cross-Origin restriction. It is the same issue for the plugin SVG logo.<br/>
+                                	The workaround is to use CSS backgound fallback, but it gives a 404 server response. To avoid those errors, please specify the "logo" and "banner" parameters. In any case, 404 is not really an "error", but a simple server response.
                                     </p>
                              </div>
                         </div>
@@ -175,7 +175,7 @@ function wppic_list_form() {
                         $html .= '<li class="wppic-dd"><input type="text" name="wppic_settings[list][]"  value="' . $item . '"><span class="wppic-remove-field" title="remove"></span></li>';
                     }
             $html .= '</ul>';
-            $html .= '<p>Please refere to the wordpress.ord url of the plugin to find it slug :<i> https://wordpress.org/plugins/THE-SLUG/</i><p> ';               
+            $html .= '<p>Please refere to the wordpress.org url of the plugin to determine its slug :<i> https://wordpress.org/plugins/THE-SLUG/</i><p> ';               
         $html .= '</td>';
 	echo $html;
 }
@@ -192,7 +192,7 @@ function wppic_validate($input) {
 			add_settings_error(
 				'wppic-admin-notice',
 				'',
-				'<i>"' . $item . '"</i> is not a valide plugin name format. This key has been deleted.',
+				'<i>"' . $item . '"</i> is not a valid plugin name format. This key has been deleted.',
 				'error'
 			);
 			unset($input['list'][$key]);
