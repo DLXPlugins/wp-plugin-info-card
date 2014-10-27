@@ -88,7 +88,7 @@ function wppic_settings_page() {
                         <div id="wppic-shortcode" class="postbox">
                             <h3 class="hndle"><span>How to use WP Plugin Info Card shortodes?</span></h3>
                             <div class="inside">
-                            	<?php echo wppic_shortcode_function( array ( 'slug' => 'wordpress-seo', 'image'=>'', 'logo'=>'svg', 'banner'=>'png', 'align' => 'center',  ) ); ?>
+                            	<?php echo wppic_shortcode_function( array ( 'slug' => 'wordpress-seo', 'image'=>'', 'logo'=>'svg', 'banner'=>'png', 'align' => 'right',  ) ); ?>
                                 <h3>Shortcode parameters</h3>
                                     <ul>
                                         <li><strong>slug :</strong> plugin slug name</li>
