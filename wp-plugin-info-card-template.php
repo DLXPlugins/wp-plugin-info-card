@@ -97,7 +97,7 @@ function wppic_settings_page() {
                                         <li><strong>banner :</strong> jpg, png, no (default:empty)</li>
                                         <li><strong>align :</strong> center, left, right (default:empty)</li>
                                         <li><strong>containerID :</strong> Custom div id, may be used for anchor (default:wp-pic-PLUGIN-NAME)</li>
-                                        <li><strong>custom :</strong> value to print : url|name|version|author|requires|rating|downloaded|last_updated|download_link (default:empty)</li>
+                                        <li><strong>custom :</strong> value to print : url, name, version, author, requires, rating, num_ratings, downloaded, last_updated, download_link (default:empty)</li>
                                     </ul>
                                 
                                 <h3>Basic example</h3>
@@ -121,7 +121,7 @@ function wppic_settings_page() {
                                 <h3>Known issues</h3>
                                 	<p>
                                     WordPress.org does not currently include a banner nor plugin logo in the API. As explained in the Developper Center, banners are located in the assets folder of the plugin repository (allowed format are JPG or PNG) and they are named banner-772x250.<br/>
-                                	It would be nice to test if banner-772x250.jpg or banner-772x250.png exists, but WordPress does not accept HTTP request to their servers, so requests are blocked due to Cross-Origin restriction. It is the same issue for the plugin SVG logo.<br/>
+                                	It would be nice to test if banner-772x250.jpg or banner-772x250.png exists, but WordPress does not accept HTTP request to their servers, so requests are blocked due to Cross-Origin restriction. It is the same issue for the plugin SVG, JPG or PNG logo.<br/>
                                 	The workaround is to use CSS backgound fallback, but it gives a 404 server response. To avoid those errors, please specify the "logo" and "banner" parameters. In any case, 404 is not really an "error", but a simple server response.
                                     </p>
                              </div>

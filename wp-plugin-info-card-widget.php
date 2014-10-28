@@ -61,7 +61,7 @@ if (!function_exists('wppic_widgets')) {
 
 				$content .= '<div class="wp-pic-list">';
 					$content .= '<a class="wp-pic-widget-name" href="' . $wppic_plugin_data->url . '" target="_blank" title="WordPress.org Plugin Page">' . $wppic_plugin_data->name .'</a>';
-					$content .= '<span class="wp-pic-widget-rating" title="Ratings"><span>Ratings:</span> ' . $wppic_plugin_data->rating .'%</span>';
+					$content .= '<span class="wp-pic-widget-rating" title="Ratings"><span>Ratings:</span> ' . $wppic_plugin_data->rating .'% (' . $wppic_plugin_data->num_ratings . ' votes)</span>';
 					$content .= '<span class="wp-pic-widget-downloaded" title="Downloads"><span>Downloads:</span> ' . number_format($wppic_plugin_data->downloaded, 0, ',', ',') .'</span>';
 					$content .= '<p class="wp-pic-widget-updated"><span>Last updated:</span> ' . date(get_option( 'date_format' ), strtotime($wppic_plugin_data->last_updated)) .' (v.' . $wppic_plugin_data->version .')</p>';
 				$content .= '</div>';

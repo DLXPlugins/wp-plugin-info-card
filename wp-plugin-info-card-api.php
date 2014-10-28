@@ -4,9 +4,10 @@
  ***************************************************************/
 if (!function_exists('WP_Plugin_API_Parser')) {
 	function WP_Plugin_API_Parser($pluginName){
-		$wppic_plugin_data = get_transient( $wppic.'_'.preg_replace( '/\-/', '_', $pluginName) );
-		
+		$wppic_plugin_data = get_transient( 'wppic_'.preg_replace('/\-/', '_', $pluginName) );
+
 		if ( false === $wppic_plugin_data) {
+
 			$args = (object) array( 'slug' => $pluginName );
 			$request = array( 'action' => 'plugin_information', 'timeout' => 15, 'request' => serialize( $args) );
 			$url = 'http://api.wordpress.org/plugins/info/1.0/';
@@ -21,6 +22,7 @@ if (!function_exists('WP_Plugin_API_Parser')) {
 				'author' => $plugin_info->author,
 				'requires' => $plugin_info->requires,
 				'rating' => $plugin_info->rating,
+				'num_ratings' => $plugin_info->num_ratings,
 				'downloaded' => $plugin_info->downloaded,
 				'last_updated' => $plugin_info->last_updated,
 				'download_link' => $plugin_info->download_link

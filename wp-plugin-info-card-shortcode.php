@@ -30,7 +30,7 @@ if (!function_exists('wppic_shortcode_function')) {
 			"banner" => '',  		//jpg|png|no
 			"align" => '',  		//center|left|right
 			"containerID" => '',  	//Custom Div ID (could be use for anchor)
-			"custom" => '',  		//value to print : url|name|version|author|requires|rating|downloaded|last_updated|download_link
+			"custom" => '',  		//value to print : url|name|version|author|requires|rating|num_ratings|downloaded|last_updated|download_link
 		), $atts));
 		
 		$slug = trim($slug);
