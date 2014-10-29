@@ -29,7 +29,8 @@ if (!function_exists('wppic_shortcode_function')) {
 			"logo" => 'svg',		//jpg|png|svg|no
 			"banner" => '',  		//jpg|png|no
 			"align" => '',  		//center|left|right
-			"containerID" => '',  	//Custom Div ID (could be use for anchor)
+			"containerid" => '',  	//Custom Div ID (could be use for anchor)
+			"margin" => '',  		//Custom container margin - eg: "15px 0"
 			"custom" => '',  		//value to print : url|name|version|author|requires|rating|num_ratings|downloaded|last_updated|download_link
 		), $atts));
 		
@@ -48,7 +49,7 @@ if (!function_exists('wppic_shortcode_function')) {
 			
 			//Align card
 			if( $align == 'right' || $align == 'left') {
-				$align = 'style="float: ' . $align . ';"';
+				$align = 'float: ' . $align . '; ';
 			}
 			$alignCenter = false;
 			if( $align == 'center') {
@@ -80,17 +81,29 @@ if (!function_exists('wppic_shortcode_function')) {
 			}
 			
 			//Extra container ID
-			if(!empty($containerID)){
-				$containerID = ' id="' . $containerID . '"';
+			if(!empty($containerid)){
+				$containerid = ' id="' . $containerid . '"';
 			} else {
-				$containerID = ' id="wp-pic-'. $slug . '"';
+				$containerid = ' id="wp-pic-'. $slug . '"';
+			}
+
+			//Custom container margin
+			if(!empty($margin)){
+				$margin = 'margin:' . $margin . ';';
+			}
+
+
+			//Custom style
+			$style = '';
+			if(!empty($margin) || !empty($align)){
+				$style = 'style="' . $align . $margin . '"';
 			}
 
 			
 			//Output
 			if($alignCenter)
 			$content .= '<div class="wp-pic-center">';
-			$content .= '<div class="wp-pic" ' . $align . $containerID . '>';
+			$content .= '<div class="wp-pic" ' . $containerid . $style . ' >';
 				$content .= '<div class="wp-pic-flip">';
 					$content .= '<div class="wp-pic-face wp-pic-front">';
 						$content .= '<a class="wp-pic-logo" href="' . $wppic_plugin_data->url . '" ' . $bgImage . ' target="_blank" title="WordPress.org Plugin Page"></a>';

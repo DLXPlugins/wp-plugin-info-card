@@ -2,15 +2,23 @@
 #wppic-admin-page #post-body-content .postbox .inside{
 	line-height: 1em;
 }
-#wppic-admin-page .postbox .inside pre {
-	display: inline-block;
-	background: #f1f1f1;
+#wppic-admin-page pre {
+	display: block;
+	background: #EAEAEA;
+	margin: 0 0 10px;
+	padding: 5px;
+	overflow-x: auto;
 }
 #wppic-shortcode:after {
 	content:'';
 	display:block;
 	clear:both;
 	padding-bottom:15px;
+}
+#wppic-shortcode h3.hndle,
+#wppic-form h3.hndle {
+	margin: 0;
+	padding: 8px 0 8px 12px;
 }
 #wppic-liste li.wppic-dd {
     padding-left: 35px;
@@ -28,11 +36,22 @@
 	margin-left: 5px;
 	position: relative;
 }
+#wppic-about-list,
+#wppic-donate {
+	display: inline-block;
+	margin-right: 35px;
+	line-height: 30px;
+	vertical-align: top;
+}
 .wppic-button {
-	display: block;
+	display: inline-block;
 	position: relative;
 	padding: 5px 0 5px 25px;
 	text-decoration: none;
+	margin-right: 35px;
+}
+#wppic-donate form {
+	display: inline-block;
 }
 .wppic-button:before,
 #wppic-liste li.wppic-dd:before,
