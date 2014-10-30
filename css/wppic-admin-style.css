@@ -9,6 +9,9 @@
 	padding: 5px;
 	overflow-x: auto;
 }
+h3.wp-pic-title {
+	margin-top:20px;
+}
 #wppic-shortcode:after {
 	content:'';
 	display:block;
@@ -20,13 +23,20 @@
 	margin: 0;
 	padding: 8px 0 8px 12px;
 }
+input.wppic-add {
+	min-width: 50%;
+}
 #wppic-liste li.wppic-dd {
-    padding-left: 35px;
     list-style-type: none;
 	background-repeat: no-repeat;
 	background-position: left;
 	width: 100%;
 	position: relative;
+}
+#wppic-liste li.wppic-dd input[type=text] {
+	padding-left: 40px;
+	padding-right: 40px;
+	width: 100%;
 }
 #wppic-liste li.wppic-dd .wppic-remove-field {
 	height: 24px;
@@ -34,7 +44,9 @@
 	display: inline-block;
     cursor: pointer;
 	margin-left: 5px;
-	position: relative;
+	position: absolute;
+	right: 0;
+	top: 2px;
 }
 #wppic-about-list,
 #wppic-donate {
@@ -81,16 +93,16 @@
 
 #wppic-liste li.wppic-dd:before {
     cursor: move;
-	top: 6px;
+	top: 0px;
+	left: 5px;
 	height: 24px;
 	width: 24px;
     content: "\f156";
 }
 #wppic-liste li.wppic-dd:first-child:before {
-	top: 2px;
+
 }
 #wppic-liste li.wppic-dd .wppic-remove-field:after {
-	top: 6px;
 	left: auto;
 	width: 24px;
 	height: 24px;

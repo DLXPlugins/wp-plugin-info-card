@@ -1,18 +1,18 @@
 jQuery(document).ready(function($) {
 	
-	$this = $(this);
-	$('.wp-pic-flip.wp-pic-flipped').live('mouseleave',function() {
-		$this.data('delay', setTimeout( function () {
-			$('.wp-pic-flip').removeClass('wp-pic-flipped');
-		  }, 2000)
-		);
-	}).live('mouseenter',function() {
-		clearTimeout($this.data('delay'));
+	$('.wp-pic-flip').each(function(){
+		var timeoutFlip;
+		var $this = $(this);
+		$this.hover(function() {
+			clearTimeout(timeoutFlip);
+		}, function() {
+			timeoutFlip = setTimeout( function () {
+				$this.removeClass('wp-pic-flipped');
+			 }, 2000);
+		});
 	});
 	
 	$('.wp-pic-download').click(function(){
-		$('.wp-pic-flip').removeClass('wp-pic-flipped');
-		clearTimeout($this.data('delay'));
 		$(this).closest('.wp-pic-flip').addClass('wp-pic-flipped');
 		return true;
 	});

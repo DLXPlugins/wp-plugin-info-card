@@ -2,11 +2,11 @@
 /**
  * Plugin Name: WP Plugin Info Card by b*web
  * Plugin URI: http://b-website.com/
- * Description: ##############################################
+ * Description: WP Plugin Info Card allow you to display plugins identity cards in a beautiful box with a smooth 3D rotation effect. It uses Wordpress.org Plugin API.
  * Author: Brice CAPOBIANCO - b*web
  * Author URI: http://b-website.com/
  * Version: 1.0
- * Text Domain: wp_plugin_info_card
+ * Text Domain: wppic-translate
  */
 
 
@@ -61,8 +61,8 @@ require_once( WPPIC_PATH . 'wp-plugin-info-card-widget.php' );
  ***************************************************************/
 if (!function_exists('wppic_load_textdomain')) {
 	function wppic_load_textdomain() {
-		$path = dirname(plugin_basename( __FILE__ )) . '/langs/';
-		$loaded = load_plugin_textdomain( 'wp_plugin_info_card', false, $path);
+		$path = dirname(plugin_basename( __FILE__ )) . '/languages/';
+		$loaded = load_plugin_textdomain( 'wppic-translate', false, $path);
 	}
 	add_action('init', 'wppic_load_textdomain');
 }
@@ -71,7 +71,7 @@ if (!function_exists('wppic_load_textdomain')) {
  * Add settings link on extentions page
  ***************************************************************/
 function wppic_settings_link($links) { 
-  $settings_link = '<a href="admin.php?page='.WPPIC_ID.'">Settings</a>'; 
+  $settings_link = '<a href="admin.php?page='.WPPIC_ID.'">' . __('Settings', 'wppic-translate') . '</a>'; 
   array_push($links, $settings_link); 
   return $links; 
 }

@@ -3,9 +3,9 @@
  * Register Dashboard Widget
  ***************************************************************/ 
 if (!function_exists('wppic_dashboard_widgets')) {
-	$wppicSettings = get_option('wppic_settings');
-	if($wppicSettings['widget'] == true){
-		function wppic_add_dashboard_widgets() {
+	function wppic_add_dashboard_widgets() {
+		$wppicSettings = get_option('wppic_settings');
+		if($wppicSettings['widget'] == true){
 			wp_add_dashboard_widget('wppic-dashboard-widget', WPPIC_NAME .' board', 'wppic_widgets');
 		}
 	}
@@ -14,7 +14,7 @@ add_action('wp_dashboard_setup', 'wppic_add_dashboard_widgets');
 
 /***************************************************************
  * Dashboard Widget function
- ***************************************************************/ 
+ ***************************************************************/  
 if (!function_exists('wppic_widgets')) {
 	function wppic_widgets() {
 		
@@ -60,10 +60,10 @@ if (!function_exists('wppic_widgets')) {
 			if(!empty($wppic_plugin_data->name)){
 
 				$content .= '<div class="wp-pic-list">';
-					$content .= '<a class="wp-pic-widget-name" href="' . $wppic_plugin_data->url . '" target="_blank" title="WordPress.org Plugin Page">' . $wppic_plugin_data->name .'</a>';
-					$content .= '<span class="wp-pic-widget-rating" title="Ratings"><span>Ratings:</span> ' . $wppic_plugin_data->rating .'% (' . $wppic_plugin_data->num_ratings . ' votes)</span>';
-					$content .= '<span class="wp-pic-widget-downloaded" title="Downloads"><span>Downloads:</span> ' . number_format($wppic_plugin_data->downloaded, 0, ',', ',') .'</span>';
-					$content .= '<p class="wp-pic-widget-updated"><span>Last updated:</span> ' . date(get_option( 'date_format' ), strtotime($wppic_plugin_data->last_updated)) .' (v.' . $wppic_plugin_data->version .')</p>';
+					$content .= '<a class="wp-pic-widget-name" href="' . $wppic_plugin_data->url . '" target="_blank" title="' . __('WordPress.org Plugin Page', 'wppic-translate') . '">' . $wppic_plugin_data->name .'</a>';
+					$content .= '<span class="wp-pic-widget-rating"><span>' . __('Ratings', 'wppic-translate') . ':</span> ' . $wppic_plugin_data->rating .'% (' . $wppic_plugin_data->num_ratings . ' votes)</span>';
+					$content .= '<span class="wp-pic-widget-downloaded"><span>' . __('Downloads', 'wppic-translate') . ':</span> ' . number_format($wppic_plugin_data->downloaded, 0, ',', ',') .'</span>';
+					$content .= '<p class="wp-pic-widget-updated"><span>' . __('Last updated', 'wppic-translate') . ':</span> ' . date(get_option( 'date_format' ), strtotime($wppic_plugin_data->last_updated)) .' (v.' . $wppic_plugin_data->version .')</p>';
 				$content .= '</div>';
 				
 			}
