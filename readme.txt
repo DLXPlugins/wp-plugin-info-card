@@ -13,17 +13,17 @@ WP Plugin Info Card displays plugins identity cards in a beautiful box with a sm
 
 == Description ==
 
-= How it works? =
+= How does it work? =
 
 WP Plugin Info Card allow you to display plugins identity cards in a beautiful box with a smooth 3D rotation effect.
-It uses Wordpress.org plugin API to fetch data. You just have to provide a valid plugin ID (slug name) and insert the shortcode in any page to make it works in a second!
-Plugin is very lighweight and includes scripts and CSS only when needed. It also uses Wordpress transient to store data returned by the API for 10 minutes so your pages will no be impact by to many requests.
+It uses Wordpress.org plugin API to fetch data. All you need to do is provide a valid plugin ID (slug name), and then insert the shortcode in any page to make it work at once!
+This plugin is very light and includes scripts and CSS only if and when required. It also uses Wordpress transients to store data returned by the API for 10 minutes, so your page loading time will not be increased due to too many requests.
 
-The dashboard widget is very easy to set up, you just have to add as many plugins as you want in the admin page to make theme visible on your dashboard. Fields are added on the fly and are sortable via drag&drop.
+The dashboard widget is very easy to set up: you simply add as many plugins as you want in the admin page and they become visible in your dashboard. Fields are added on-the-fly and are sortable via drag-and-drop.
 
 [CHECK OUT THE DEMO](http://b-website.com/SOON... "Try It!")
 
-Please ask for help or report bugs if something goes wrong. It is the best way to make the community go ahead !
+Please ask for help or report bugs if anything goes wrong. It is the best way to make the community benefit !
 
 
 = Shortcode parameters =
@@ -33,9 +33,9 @@ Please ask for help or report bugs if something goes wrong. It is the best way t
 * logo: 128x128.jpg, 256x256.jpg, 128x128.png, 256x256.png, svg, no (default: svg)
 * banner: jpg, png, no (default:empty)
 * align: center, left, right (default: empty)
-* containerid: Custom div id, may be used for anchor (default: wp-pic-PLUGIN-NAME)
-* margin: Custom container margin - eg: "15px 0" (default: empty)
-* custom: value to print : url, name, version, author, requires, rating, num_ratings, downloaded, last_updated, download_link (default: empty)
+* containerid: custom div id, may be used for anchor (default: wp-pic-PLUGIN-NAME)
+* margin: custom container margin - eg: "15px 0" (default: empty)
+* custom: value to output : url, name, version, author, requires, rating, num_ratings, downloaded, last_updated, download_link (default: empty)
  
 
 = Basic example =
@@ -46,13 +46,13 @@ The slug is the only required parameter.
 
 = Advanced examples =
 
-If the plugin has a wordpress logo (new feature on wp), you can specify its extension (jpg, png or svg) and whether it is a JPG or PNG file, its dimensions (128x128 or 256x256). If not, set "logo" to "no" to avoid a 404 error in the console log (cf above explanation).
+If the plugin has a wordpress logo (new feature on wp), you may specify its extension (jpg, png or svg) and whether it is a JPG or PNG file, its dimensions (128x128 or 256x256). If not, set "logo" to "no" to avoid a 404 error in the console log (see explanation below).
 `[wp-pic slug="theme-check" logo="128x128.png" align="right" banner="jpg"]`
 
-You can provide a custom image URL for the front rounded image (175px X 175px), it will overload the "logo" parameter if specified. If you know the banner extension (image displaying on the top of the plugin page), you may provide it to avoid a 404 error in the console log (cf above explanation).
+You may provide a custom image URL for the front rounded image (175px X 175px), it will supplant the "logo" parameter if specified. If you know the banner extension (image displaying on the top of the plugin page), you may provide it to avoid a 404 error in the console log (see explanation below).
 `[wp-pic slug="wordpress-seo" image="http//www.mywebsite/custom-image.jpg" align="right" margin="0 0 0 20px" banner="png" containerid="download-sexion"]`
 
-The custom parameter overloads the others (except the "slug") and only returns the value you required.
+The custom parameter supplants the others (except the "slug") and only returns the value you required.
 `[wp-pic slug="wordpress-seo" custom="downloaded"]`
 
 
@@ -64,15 +64,15 @@ The workaround is to use CSS backgound fallback, but it gives a 404 server respo
 
 == Installation ==
 
-1. Upload and activate the plugin (or install it through  WP admin)
+1. Upload and activate the plugin (or install it through the WP admin console)
 2. Click on the "WP Plugin Info" menu
-3. Follow instructions, every option is documented ;)
+3. Follow instructions, every option is documented ;-)
 
 == Frequently Asked Questions ==
 
-= Is jquery cross browser compatible? =
+= Is JQuery cross-browser compatible? =
 
-Yes, on most recent browser except Opera (IE10+ works!)
+Yes, it is compatible with most recent browser except for Opera (IE10+ works!)
 
 
 == Screenshots ==
