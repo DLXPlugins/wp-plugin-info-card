@@ -85,11 +85,11 @@ function wppic_settings_page() {
 						' . wppic_shortcode_function( array ( "slug"=>"adblock-notify-by-bweb", "image"=>"", "logo"=>"svg", "banner"=>"png", "align"=>"right", "margin"=>"0 0 0 20px"  ) ) . '
 						
 						
-						<h3>' . __('How it works?', 'wppic-translate') . '</h3>
+						<h3>' . __('How does it work?', 'wppic-translate') . '</h3>
 						
-						<p>' . __('WP Plugin Info Card allow you to display plugins identity cards in a beautiful box with a smooth 3D rotation effect.', 'wppic-translate') . '</p>
-						<p>' . __('It uses Wordpress.org plugin API to fetch data. You just have to provide a valid plugin ID (slug name) and insert the shortcode in any page to make it works in a second!', 'wppic-translate') . '</p>
-						<p>' . __('Plugin is very lighweight and includes scripts and CSS only when needed. It also uses Wordpress transient to store data returned by the API for 10 minutes so your pages will no be impact by to many requests.', 'wppic-translate') . '</p>
+						<p>' . __('WP Plugin Info Card allows you to display plugins identity cards in a beautiful box with a smooth 3D rotation effect.', 'wppic-translate') . '</p>
+						<p>' . __('It uses Wordpress.org plugin API to fetch data. All you need to do is provide a valid plugin ID (slug name), and then insert the shortcode in any page to make it work at once!', 'wppic-translate') . '</p>
+						<p>' . __('This plugin is very light and includes scripts and CSS only if and when required. It also uses Wordpress transients to store data returned by the API for 10 minutes, so your page loading time will not be increased due to too many requests.', 'wppic-translate') . '</p>
 						
 						<p>&nbsp;</p>
 						<h3 class="wp-pic-title">' . __('Shortcode parameters', 'wppic-translate') . '</h3>
@@ -115,15 +115,15 @@ function wppic_settings_page() {
 						
 						<h3>' . __('Advanced examples', 'wppic-translate') . '</h3>
 						
-						<p>' . __('If the plugin has a wordpress logo (new feature on wp), you can specify its extension (jpg, png or svg) and whether it is a JPG or PNG file, its dimensions (128x128 or 256x256). If not, set "logo" to "no" to avoid a 404 error in the console log (cf above explanation).', 'wppic-translate') . '
+						<p>' . __('If the plugin has a WordPress logo (new feature on wp), you may specify its extension (jpg, png or svg) and whether it is a JPG or PNG file, its dimensions (128x128 or 256x256). If not, set "logo" to "no" to avoid a 404 error in the console log (see explanation below).', 'wppic-translate') . '
 							<pre> [wp-pic slug="theme-check" logo="128x128.png" align="right" banner="jpg"] </pre><br/>
 						</p>
 
-						<p>' . __('You can provide a custom image URL for the front rounded image (175px X 175px), it will overload the "logo" parameter if specified. If you know the banner extension (image displaying on the top of the plugin page), you may provide it to avoid a 404 error in the console log (cf above explanation).', 'wppic-translate') . '
+						<p>' . __('You may provide a custom image URL for the front rounded image (175px X 175px), it will supplant the "logo" parameter if specified. If you know the banner extension (image displaying on the top of the plugin page), you may provide it to avoid a 404 error in the console log (see explanation below).', 'wppic-translate') . '
 							<pre> [wp-pic slug="wordpress-seo" image="http//www.mywebsite/custom-image.jpg" align="right" margin="0 0 0 20px" banner="png" containerid="download-sexion"] </pre><br/>	
 						</p>							
 						
-						<p>' . __('The custom parameter overloads the others (except the "slug") and only returns the value you required.', 'wppic-translate') . '
+						<p>' . __('The custom parameter supplants the others (except the "slug") and only returns the value you required.', 'wppic-translate') . '
 							<pre> [wp-pic slug="wordpress-seo" custom="downloaded"] </pre><br/>
 						</p>
 
@@ -171,7 +171,7 @@ function wppic_list_widget() {
 	$wppicSettings = get_option('wppic_settings');
 	$content .= '<td>';
 		$content .= '<input type="checkbox" id="wppic-widget" name="wppic_settings[widget]"  value="1" ' . checked( 1, $wppicSettings['widget'], false ) . '/>';
-		$content .= '<label for="wppic-widget">' . __('Help: Don\'t forget to open dashboard option panel (top right) to insert it on your dashboard.', 'wppic-translate') . '</label>';
+		$content .= '<label for="wppic-widget">' . __('Help: Don\'t forget to open the dashboard option panel (top right) to insert it on your dashboard.', 'wppic-translate') . '</label>';
 	$content .= '</td>';
 	echo $content;
 }
@@ -191,7 +191,7 @@ function wppic_list_form() {
 						}
 					}
             $content .= '</ul>';
-            $content .= '<p>' . __('Please refere to the wordpress.org url of the plugin to determine its slug', 'wppic-translate') . ': <i> https://wordpress.org/plugins/THE-SLUG/</i><p>';               
+            $content .= '<p>' . __('Please refer to the plugin URL on wordpress.org to determine its slug', 'wppic-translate') . ': <i> https://wordpress.org/plugins/THE-SLUG/</i><p>';               
         $content .= '</td>';
 	echo $content;
 }
@@ -239,7 +239,7 @@ function wppic_plugins_about() {
     </div>
     
 	<div id="wppic-donate">
-        ' . __('Did you like it? Well, then please consider making a donation.', 'wppic-translate') . '
+        ' . __('Did you like it? If so, please consider making a donation.', 'wppic-translate') . '
 		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 		<input type="hidden" name="cmd" value="_s-xclick">
 		<input type="hidden" name="hosted_button_id" value="SVR5SERD3468E">

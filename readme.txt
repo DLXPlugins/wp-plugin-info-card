@@ -15,7 +15,7 @@ WP Plugin Info Card displays plugins identity cards in a beautiful box with a sm
 
 = How does it work? =
 
-WP Plugin Info Card allow you to display plugins identity cards in a beautiful box with a smooth 3D rotation effect.
+WP Plugin Info Card allows you to display plugins identity cards in a beautiful box with a smooth 3D rotation effect.
 It uses Wordpress.org plugin API to fetch data. All you need to do is provide a valid plugin ID (slug name), and then insert the shortcode in any page to make it work at once!
 This plugin is very light and includes scripts and CSS only if and when required. It also uses Wordpress transients to store data returned by the API for 10 minutes, so your page loading time will not be increased due to too many requests.
 
