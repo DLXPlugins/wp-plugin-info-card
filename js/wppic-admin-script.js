@@ -1,3 +1,7 @@
+/**
+ * Plugin Name: WP Plugin Info Card by b*web
+ * Author: Brice CAPOBIANCO - b*web
+ */
 jQuery(document).ready(function($) {
 	var wrapper         = $("#wppic-liste"); 		//Fields wrapper
 	var add_button      = $(".wppic-add-fields"); 	//Add button ID

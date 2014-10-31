@@ -1,0 +1,93 @@
+=== WP Plugin Info Card ===
+Contributors: Brice CAPOBIANCO
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7Z6YVM63739Y8
+Tags: API, plugin, card, blog, developper, design, dashboard, shortcode
+Requires at least: 3.7
+Tested up to: 4.0
+Stable tag: 1.0
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+ 
+WP Plugin Info Card displays plugins identity cards in a beautiful box with a smooth rotation effect using WP Plugin API. Dashboard widget included.
+
+== Description ==
+
+= How it works? =
+
+WP Plugin Info Card allow you to display plugins identity cards in a beautiful box with a smooth 3D rotation effect.
+It uses Wordpress.org plugin API to fetch data. You just have to provide a valid plugin ID (slug name) and insert the shortcode in any page to make it works in a second!
+Plugin is very lighweight and includes scripts and CSS only when needed. It also uses Wordpress transient to store data returned by the API for 10 minutes so your pages will no be impact by to many requests.
+
+The dashboard widget is very easy to set up, you just have to add as many plugins as you want in the admin page to make theme visible on your dashboard. Fields are added on the fly and are sortable via drag&drop.
+
+[CHECK OUT THE DEMO](http://b-website.com/SOON... "Try It!")
+
+Please ask for help or report bugs if something goes wrong. It is the best way to make the community go ahead !
+
+
+= Shortcode parameters =
+
+* slug: plugin slug name
+* image: image url to replace WP logo (default: empty)
+* logo: 128x128.jpg, 256x256.jpg, 128x128.png, 256x256.png, svg, no (default: svg)
+* banner: jpg, png, no (default:empty)
+* align: center, left, right (default: empty)
+* containerid: Custom div id, may be used for anchor (default: wp-pic-PLUGIN-NAME)
+* margin: Custom container margin - eg: "15px 0" (default: empty)
+* custom: value to print : url, name, version, author, requires, rating, num_ratings, downloaded, last_updated, download_link (default: empty)
+ 
+
+= Basic example =
+
+The slug is the only required parameter.
+`[wp-pic slug="wordpress-seo"]`
+
+
+= Advanced examples =
+
+If the plugin has a wordpress logo (new feature on wp), you can specify its extension (jpg, png or svg) and whether it is a JPG or PNG file, its dimensions (128x128 or 256x256). If not, set "logo" to "no" to avoid a 404 error in the console log (cf above explanation).
+`[wp-pic slug="theme-check" logo="128x128.png" align="right" banner="jpg"]`
+
+You can provide a custom image URL for the front rounded image (175px X 175px), it will overload the "logo" parameter if specified. If you know the banner extension (image displaying on the top of the plugin page), you may provide it to avoid a 404 error in the console log (cf above explanation).
+`[wp-pic slug="wordpress-seo" image="http//www.mywebsite/custom-image.jpg" align="right" margin="0 0 0 20px" banner="png" containerid="download-sexion"]`
+
+The custom parameter overloads the others (except the "slug") and only returns the value you required.
+`[wp-pic slug="wordpress-seo" custom="downloaded"]`
+
+
+= Known issues =
+
+WordPress.org does not currently include a banner nor plugin logo in the API. As explained in the Developper Center, banners are located in the assets folder of the plugin repository (allowed format are JPG or PNG) and they are named banner-772x250.
+It would be nice to test if banner-772x250.jpg or banner-772x250.png exists, but WordPress does not accept HTTP request to their servers, so requests are blocked due to Cross-Origin restriction. It is the same issue for the plugin SVG, JPG or PNG logo.
+The workaround is to use CSS backgound fallback, but it gives a 404 server response. To avoid those errors, please specify the "logo" and "banner" parameters. In any case, 404 is not really an "error", but a simple server response.
+
+== Installation ==
+
+1. Upload and activate the plugin (or install it through  WP admin)
+2. Click on the "WP Plugin Info" menu
+3. Follow instructions, every option is documented ;)
+
+== Frequently Asked Questions ==
+
+= Is jquery cross browser compatible? =
+
+Yes, on most recent browser except Opera (IE10+ works!)
+
+
+== Screenshots ==
+
+1. The plugin identity card
+2. The admin page
+3. The dashboard widget
+
+
+== Changelog ==
+
+= 1.0 =
+* First release.
+
+== Upgrade Notice ==
+
+= 1.0 =
+* First release.

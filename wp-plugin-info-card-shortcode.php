@@ -8,7 +8,7 @@ if (!function_exists('wppic_enqueue_custom_style')) {
 		if(function_exists('has_shortcode')) {
 			if(isset($post->post_content) AND has_shortcode( $post->post_content, 'wp-pic')) { 
 				wp_enqueue_style( 'wppic-css', plugins_url('css/wp-plugin-info-card.css', __FILE__ ), NULL, NULL);
-				wp_enqueue_script( 'wppic-js', WPPIC_URL . 'js/wppic-script.js', array( 'jquery' ),  NULL);
+				wp_enqueue_script( 'wppic-js', WPPIC_URL . 'js/wppic-script.js', array( 'jquery' ),  NULL, true);
 			}
 		}
 	}

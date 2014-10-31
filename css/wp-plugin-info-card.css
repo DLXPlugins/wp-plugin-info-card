@@ -26,10 +26,10 @@
 	left:0;
 	position: relative;
 	perspective: 1000;
-	-webkit-perspective: 1000;
-	-moz-perspective: 1000;
-	-ms-perspective: 1000;
-	-o-perspective: 1000;
+	-webkit-perspective: 5000;
+	-moz-perspective: 5000;
+	-ms-perspective: 5000;
+	-o-perspective: 5000;
 }
 .wp-pic .wp-pic-flip .wp-pic-face {
 	position: absolute;

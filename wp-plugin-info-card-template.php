@@ -82,10 +82,10 @@ function wppic_settings_page() {
 				<div id="wppic-shortcode" class="postbox">
 					<h3 class="hndle"><span>' . __('How to use WP Plugin Info Card shortodes?', 'wppic-translate') . '</span></h3>
 					<div class="inside">
-						' . wppic_shortcode_function( array ( "slug"=>"wordpress-seo", "image"=>"", "logo"=>"svg", "banner"=>"png", "align"=>"right", "margin"=>"0 0 0 20px"  ) ) . '
+						' . wppic_shortcode_function( array ( "slug"=>"adblock-notify-by-bweb", "image"=>"", "logo"=>"svg", "banner"=>"png", "align"=>"right", "margin"=>"0 0 0 20px"  ) ) . '
 						
 						
-						<h3>' . __('How it work?', 'wppic-translate') . '</h3>
+						<h3>' . __('How it works?', 'wppic-translate') . '</h3>
 						
 						<p>' . __('WP Plugin Info Card allow you to display plugins identity cards in a beautiful box with a smooth 3D rotation effect.', 'wppic-translate') . '</p>
 						<p>' . __('It uses Wordpress.org plugin API to fetch data. You just have to provide a valid plugin ID (slug name) and insert the shortcode in any page to make it works in a second!', 'wppic-translate') . '</p>
@@ -234,6 +234,7 @@ function wppic_plugins_about() {
         <a class="wppic-button wppic-pluginOther" href="#" target="_blank">' . __('My other plugins', 'wppic-translate') . '</a>
         <a class="wppic-button wppic-pluginPage" href="#" target="_blank">' . __('WordPress.org', 'wppic-translate') . '</a>
         <a class="wppic-button wppic-pluginSupport" href="#" target="_blank">' . __('Support', 'wppic-translate') . '</a>
+        <a class="wppic-button wppic-pluginContact" href="#" target="_blank">' . __('Suggestion?', 'wppic-translate') . '</a>
         <a class="wppic-button wppic-pluginContact" href="#" target="_blank">' . __('Suggestion?', 'wppic-translate') . '</a>
     </div>
     

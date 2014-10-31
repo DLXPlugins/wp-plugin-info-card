@@ -93,14 +93,32 @@ add_action('admin_head', 'wppic_add_favicon');
 
 
 /***************************************************************
+ * Purge all plugin transients
+ ***************************************************************/
+function wppic_delete_transients(){
+	global $wpdb;
+	$array = array();
+	$wppic_transients = $wpdb->get_results(
+		"SELECT option_name AS name,
+		option_value AS value FROM $wpdb->options 
+		WHERE option_name LIKE '_transient_wppic_%'"
+	);
+	foreach($wppic_transients as $singleTransient){
+		delete_transient(str_replace("_transient_", "", $singleTransient->name));
+	}
+}
+
+
+/***************************************************************
  * Remove Plugin settings from DB on uninstallation (= plugin deletion) 
  ***************************************************************/
 //Hooks for install
 if (function_exists('register_uninstall_hook')) {
 	register_uninstall_hook(__FILE__, 'wppic_uninstall');
 }
-
 function wppic_uninstall() {
+	//Pürge transients
+	wppic_delete_transients();
 	// Remove option from DB
 	delete_option( 'wppic_settings' );
 }
