@@ -29,8 +29,9 @@ if (!function_exists('wppic_shortcode_function')) {
 			"logo" => 'svg',		//jpg|png|svg|no
 			"banner" => '',  		//jpg|png|no
 			"align" => '',  		//center|left|right
-			"containerid" => '',  	//Custom Div ID (could be use for anchor)
-			"margin" => '',  		//Custom container margin - eg: "15px 0"
+			"containerid" => '',  	//custom Div ID (could be use for anchor)
+			"margin" => '',  		//custom container margin - eg: "15px 0"
+			"clear" => '',  		//clear float before or after the card: before|after
 			"custom" => '',  		//value to print : url|name|version|author|requires|rating|num_ratings|downloaded|last_updated|download_link
 		), $atts));
 		
@@ -101,6 +102,8 @@ if (!function_exists('wppic_shortcode_function')) {
 
 			
 			//Output
+			if($clear == 'before')
+			$content .= '<div style="clear:both"></div>';
 			if($alignCenter)
 			$content .= '<div class="wp-pic-center">';
 			$content .= '<div class="wp-pic" ' . $containerid . $style . ' >';
@@ -143,6 +146,9 @@ if (!function_exists('wppic_shortcode_function')) {
 			//Align center
 			if($alignCenter)
 			$content .= '</div>';
+			if($clear == 'after')
+			$content .= '<div style="clear:both"></div>';
+
 		}
 		return $content;
 			

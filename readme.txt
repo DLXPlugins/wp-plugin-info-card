@@ -35,6 +35,7 @@ Please ask for help or report bugs if anything goes wrong. It is the best way to
 * align: center, left, right (default: empty)
 * containerid: custom div id, may be used for anchor (default: wp-pic-PLUGIN-NAME)
 * margin: custom container margin - eg: "15px 0" (default: empty)
+* clear: clear float before or after the card: before, after (default: empty)
 * custom: value to output : url, name, version, author, requires, rating, num_ratings, downloaded, last_updated, download_link (default: empty)
  
 
@@ -70,7 +71,7 @@ The workaround is to use CSS backgound fallback, but it gives a 404 server respo
 
 == Frequently Asked Questions ==
 
-= Is JQuery cross-browser compatible? =
+= Is it cross-browser compatible? =
 
 Yes, it is compatible with most recent browser except for Opera (IE10+ works!)
 
