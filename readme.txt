@@ -73,14 +73,14 @@ The workaround is to use CSS backgound fallback, but it gives a 404 server respo
 
 = Is it cross-browser compatible? =
 
-Yes, it is compatible with most recent browser except for Opera (IE10+ works!)
+Yes, it is compatible with most recent browsers, except for Opera (but IE10+ works!)
 
 
 == Screenshots ==
 
-1. The plugin identity card
-2. The admin page
-3. The dashboard widget
+1. Plugin identity card
+2. Admin page
+3. Dashboard widget
 
 
 == Changelog ==
