@@ -16,12 +16,14 @@ WP Plugin Info Card displays plugins identity cards in a beautiful box with a sm
 = How does it work? =
 
 WP Plugin Info Card allows you to display plugins identity cards in a beautiful box with a smooth 3D rotation effect.
+
 It uses Wordpress.org plugin API to fetch data. All you need to do is provide a valid plugin ID (slug name), and then insert the shortcode in any page to make it work at once!
+
 This plugin is very light and includes scripts and CSS only if and when required. It also uses Wordpress transients to store data returned by the API for 10 minutes, so your page loading time will not be increased due to too many requests.
 
 The dashboard widget is very easy to set up: you simply add as many plugins as you want in the admin page and they become visible in your dashboard. Fields are added on-the-fly and are sortable via drag-and-drop.
 
-[CHECK OUT THE DEMO](http://b-website.com/SOON... "Try It!")
+[CHECK OUT THE DEMO](http://b-website.com/wp-plugin-info-card-for-wordpress "Try It!")
 
 Please ask for help or report bugs if anything goes wrong. It is the best way to make the community benefit !
 
@@ -60,7 +62,9 @@ The custom parameter supplants the others (except the "slug") and only returns t
 = Known issues =
 
 WordPress.org does not currently include a banner nor plugin logo in the API. As explained in the Developper Center, banners are located in the assets folder of the plugin repository (allowed format are JPG or PNG) and they are named banner-772x250.
+
 It would be nice to test if banner-772x250.jpg or banner-772x250.png exists, but WordPress does not accept HTTP request to their servers, so requests are blocked due to Cross-Origin restriction. It is the same issue for the plugin SVG, JPG or PNG logo.
+
 The workaround is to use CSS backgound fallback, but it gives a 404 server response. To avoid those errors, please specify the "logo" and "banner" parameters. In any case, 404 is not really an "error", but a simple server response.
 
 == Installation ==
