@@ -116,7 +116,7 @@ if (!function_exists('wppic_shortcode_function')) {
 							$content .= '<div class="wp-pic-bar">';
 								$content .= '<span class="wp-pic-rating">' . $wppic_plugin_data->rating .'%<em>' . __('Ratings', 'wppic-translate') . '</em></span>';
 								$content .= '<span class="wp-pic-downloaded">' . number_format($wppic_plugin_data->downloaded, 0, ',', ',') .'<em>' . __('Downloads', 'wppic-translate') . '</em></span>';
-								$content .= '<span class="wp-pic-requires">WP ' . $wppic_plugin_data->requires .'+<em>' . __('Requieres', 'wppic-translate') . '</em></span>';
+								$content .= '<span class="wp-pic-requires">WP ' . $wppic_plugin_data->requires .'+<em>' . __('Requires', 'wppic-translate') . '</em></span>';
 							$content .= '</div>';
 							$content .= '<div class="wp-pic-download">';
 								$content .= '<span>' . __('Download', 'wppic-translate') . '</span>';
@@ -132,7 +132,7 @@ if (!function_exists('wppic_shortcode_function')) {
 							$content .= '<div class="wp-pic-bar">';
 								$content .= '<span class="wp-pic-rating">' . $wppic_plugin_data->rating .'%<em>' . __('Ratings', 'wppic-translate') . '</em></span>';
 								$content .= '<span class="wp-pic-downloaded">' . number_format($wppic_plugin_data->downloaded, 0, ',', ',') .'<em>' . __('Downloads', 'wppic-translate') . '</em></span>';
-								$content .= '<span class="wp-pic-requires">WP ' . $wppic_plugin_data->requires .'+<em>' . __('Requieres', 'wppic-translate') . '</em></span>';
+								$content .= '<span class="wp-pic-requires">WP ' . $wppic_plugin_data->requires .'+<em>' . __('Requires', 'wppic-translate') . '</em></span>';
 							$content .= '</div>';
 							$content .= '<a class="wp-pic-wporg" href="' . $wppic_plugin_data->url . '" target="_blank" title="' . __('WordPress.org Plugin Page', 'wppic-translate') . '">' . __('WordPress.org Plugin Page', 'wppic-translate') . '</a>';
 						$content .= '</div>';

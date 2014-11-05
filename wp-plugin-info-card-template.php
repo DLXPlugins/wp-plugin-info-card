@@ -230,12 +230,12 @@ function wppic_validate($input) {
 function wppic_plugins_about() {
 	$content ='
     <div id="wppic-about-list">
-        <a class="wppic-button wppic-pluginHome" href="#" target="_blank">' . __('Plugin home page', 'wppic-translate') . '</a>
-        <a class="wppic-button wppic-pluginOther" href="#" target="_blank">' . __('My other plugins', 'wppic-translate') . '</a>
-        <a class="wppic-button wppic-pluginPage" href="#" target="_blank">' . __('WordPress.org', 'wppic-translate') . '</a>
-        <a class="wppic-button wppic-pluginSupport" href="#" target="_blank">' . __('Support', 'wppic-translate') . '</a>
-        <a class="wppic-button wppic-pluginContact" href="#" target="_blank">' . __('Suggestion?', 'wppic-translate') . '</a>
-        <a class="wppic-button wppic-pluginContact" href="#" target="_blank">' . __('Suggestion?', 'wppic-translate') . '</a>
+        <a class="wppic-button wppic-pluginHome" href="http://b-website.com/wp-plugin-info-card-for-wordpress" target="_blank">' . __('Plugin home page', 'wppic-translate') . '</a>
+        <a class="wppic-button wppic-pluginOther" href="http://b-website.com/category/plugins" target="_blank">' . __('My other plugins', 'wppic-translate') . '</a>
+        <a class="wppic-button wppic-pluginPage" href="https://wordpress.org/plugins/wp-plugin-info-card/" target="_blank">' . __('WordPress.org', 'wppic-translate') . '</a>
+        <a class="wppic-button wppic-pluginSupport" href="https://wordpress.org/support/plugin/wp-plugin-info-card" target="_blank">' . __('Support', 'wppic-translate') . '</a>
+        <a class="wppic-button wppic-pluginRate" href="https://wordpress.org/support/view/plugin-reviews/wp-plugin-info-card#postform" target="_blank">' . __('Give me five!', 'wppic-translate') . '</a>
+        <a class="wppic-button wppic-pluginContact" href="http://b-website.com/contact" target="_blank">' . __('Suggestion?', 'wppic-translate') . '</a>
     </div>
     
 	<div id="wppic-donate">
