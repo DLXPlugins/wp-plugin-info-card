@@ -27,7 +27,7 @@ The dashboard widget is very easy to set up: you simply add as many plugins as y
 
 [CHECK OUT THE DEMO](http://b-website.com/wp-plugin-info-card-for-wordpress "Try It!")
 
-**Please ask for help or report bugs if anything goes wrong. It is the best way to make the community benefit !**
+**Please ask for help or report bugs if anything goes wrong. It is the best way to make the community benefit!**
 
 
 = Shortcode parameters =
