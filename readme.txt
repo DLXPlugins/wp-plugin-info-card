@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: API, plugin, card, blog, developper, design, dashboard, shortcode
 Requires at least: 3.7
 Tested up to: 4.0
-Stable tag: 1.03
+Stable tag: 1.04
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,6 +94,9 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 
 
 == Changelog ==
+
+= 1.04 =
+* Fix a bug on foreach. Related topic: https://wordpress.org/support/topic/errors-on-saving-dashboard-widget?replies=5#post-6197891
 
 = 1.03 =
 * Fix on widget if plugin list is empty

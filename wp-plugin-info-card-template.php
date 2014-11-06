@@ -202,17 +202,18 @@ function wppic_list_form() {
  * Form validator
  ***************************************************************/
 function wppic_validate($input) {
-	foreach($input['list'] as $key=>$item){
-
-		if(!preg_match('/^[a-z][-a-z0-9]*$/', $item)) {
-			
-			add_settings_error(
-				'wppic-admin-notice',
-				'',
-				'<i>"' . $item . '"</i> ' . __('is not a valid plugin name format. This key has been deleted.', 'wppic-translate'),
-				'error'
-			);
-			unset($input['list'][$key]);
+	if(!empty($input['list'])){
+		foreach($input['list'] as $key=>$item){
+			if(!preg_match('/^[a-z][-a-z0-9]*$/', $item)) {
+				
+				add_settings_error(
+					'wppic-admin-notice',
+					'',
+					'<i>"' . $item . '"</i> ' . __('is not a valid plugin name format. This key has been deleted.', 'wppic-translate'),
+					'error'
+				);
+				unset($input['list'][$key]);
+			}
 		}
 	}
 	add_settings_error(
