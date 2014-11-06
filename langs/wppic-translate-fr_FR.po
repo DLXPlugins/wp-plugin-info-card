@@ -1,0 +1,294 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Plugin Info Card by b*web v1.01\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2014-11-06 20:05:48+0000\n"
+"Last-Translator: Brice Capobianco\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: wp-plugin-info-card-shortcode.php:120
+#: wp-plugin-info-card-shortcode.php:145
+#: wp-plugin-info-card-widget.php:63
+#@ wppic-translate
+msgid "WordPress.org Plugin Page"
+msgstr "Page WordPress.org du Plugin"
+
+#: wp-plugin-info-card-shortcode.php:125
+#: wp-plugin-info-card-shortcode.php:141
+#@ wppic-translate
+msgid "Ratings"
+msgstr "Evaluations"
+
+#: wp-plugin-info-card-shortcode.php:126
+#: wp-plugin-info-card-shortcode.php:142
+#@ wppic-translate
+msgid "Downloads"
+msgstr "Téléchargements"
+
+#: wp-plugin-info-card-shortcode.php:127
+#: wp-plugin-info-card-shortcode.php:143
+#@ wppic-translate
+msgid "Requires"
+msgstr "Requiert"
+
+#: wp-plugin-info-card-shortcode.php:130
+#@ wppic-translate
+msgid "Download"
+msgstr "Télécharger"
+
+#: wp-plugin-info-card-shortcode.php:135
+#: wp-plugin-info-card-shortcode.php:136
+#@ wppic-translate
+msgid "Direct download"
+msgstr "Téléchargement direct"
+
+#: wp-plugin-info-card-shortcode.php:150
+#@ wppic-translate
+msgid "Back"
+msgstr "Retour"
+
+#: wp-plugin-info-card-template.php:45
+#@ wppic-translate
+msgid "Enable dashboard widget"
+msgstr "Activer le widget du tableau de bord"
+
+#: wp-plugin-info-card-template.php:52
+#@ wppic-translate
+msgid "List of plugin to display"
+msgstr "Liste des plugins à afficher"
+
+#: wp-plugin-info-card-template.php:88
+#@ wppic-translate
+msgid "How does it work?"
+msgstr "Comment ça marche ?"
+
+#: wp-plugin-info-card-template.php:90
+#@ wppic-translate
+msgid "WP Plugin Info Card allows you to display plugins identity cards in a beautiful box with a smooth 3D rotation effect."
+msgstr "WP Plugin Info Card vous permet donc d’afficher la carte d’identité dans une carte recto/verso au design sympa."
+
+#: wp-plugin-info-card-template.php:91
+#@ wppic-translate
+msgid "It uses Wordpress.org plugin API to fetch data. All you need to do is provide a valid plugin ID (slug name), and then insert the shortcode in any page to make it work at once!"
+msgstr "Le plugin utilise l’API WordPress.org pour remonter toutes les informations d’un plugin grâce à son ID. Vous n’avez qu’à spécifier une ID valide (le nom sous forme de slug) dans un shortcode et le tour est joué !"
+
+#: wp-plugin-info-card-template.php:96
+#@ wppic-translate
+msgid "Shortcode parameters"
+msgstr "Paramètres du Shortcode"
+
+#: wp-plugin-info-card-template.php:100
+#@ wppic-translate
+msgid "image url to replace WP logo (default: empty)"
+msgstr "l’URL de l’image qui remplace le logo WP par défaut (défaut : vide)"
+
+#: wp-plugin-info-card-template.php:101
+#@ wppic-translate
+msgid "128x128.jpg, 256x256.jpg, 128x128.png, 256x256.png, svg, no (default: svg)"
+msgstr "128×128.jpg, 256×256.jpg, 128×128.png, 256×256.png, svg, no (défaut : svg)"
+
+#: wp-plugin-info-card-template.php:102
+#@ wppic-translate
+msgid "jpg, png, no (default:empty)"
+msgstr "jpg, png, no (défaut : vide)"
+
+#: wp-plugin-info-card-template.php:103
+#@ wppic-translate
+msgid "center, left, right (default: empty)"
+msgstr "center, left, right (défaut : vide)"
+
+#: wp-plugin-info-card-template.php:104
+#@ wppic-translate
+msgid "Custom div id, may be used for anchor (default: wp-pic-PLUGIN-NAME)"
+msgstr "ID personnalisée de la carte, peut être utilisée pour faire des ancres (défaut : wp-pic-LE-SLUG)"
+
+#: wp-plugin-info-card-template.php:105
+#@ wppic-translate
+msgid "Custom container margin - eg: \"15px 0\" (default: empty)"
+msgstr "marge autour de la carte – ex : “15px 0″ (défaut : vide)"
+
+#: wp-plugin-info-card-template.php:106
+#@ wppic-translate
+msgid "value to print : url, name, version, author, requires, rating, num_ratings, downloaded, last_updated, download_link (default: empty)"
+msgstr "valeur unique à retourner : url, name, version, author, requires, rating, num_ratings, downloaded, last_updated, download_link (défaut : vide)"
+
+#: wp-plugin-info-card-template.php:110
+#@ wppic-translate
+msgid "Basic example"
+msgstr "Exemple simple"
+
+#: wp-plugin-info-card-template.php:112
+#@ wppic-translate
+msgid "The slug is the only required parameter."
+msgstr "Le slug est le seul paramètre nécessaire."
+
+#: wp-plugin-info-card-template.php:117
+#@ wppic-translate
+msgid "Advanced examples"
+msgstr "Exemples avancés"
+
+#: wp-plugin-info-card-template.php:119
+#@ wppic-translate
+msgid "If the plugin has a WordPress logo (new feature on wp), you may specify its extension (jpg, png or svg) and whether it is a JPG or PNG file, its dimensions (128x128 or 256x256). If not, set \"logo\" to \"no\" to avoid a 404 error in the console log (see explanation below)."
+msgstr "Si le plugin a un logo dédié (c’est un nouveauté WordPress, il est visible dans l’interface d’ajout des plugin dans votre admin), vous pouvez spécifier son extention (jpg, png or svg) . Attention cependant, s’il s’agit d’une image JPG ou PNG, vous devez préciser ses dimensions ; 128×128 ou 256×256. S’il n’y a pas de logo, le paramètre “logo” doit avoir la valeur “no” afin d’éviter les erreurs 404 dans la console (voir l’explication plus bas)."
+
+#: wp-plugin-info-card-template.php:123
+#@ wppic-translate
+msgid "You may provide a custom image URL for the front rounded image (175px X 175px), it will supplant the \"logo\" parameter if specified. If you know the banner extension (image displaying on the top of the plugin page), you may provide it to avoid a 404 error in the console log (see explanation below)."
+msgstr "Vous pouvez spécifier l’URL de l’image de votre choix pour le logo rond de la carte (175px X 175px), si vous le faites, le paramètre “logo” sera alors ignoré. Si vous connaissez  l’extension – JPG ou PNG – de la bannière du plugin (l’image affiché sur la page du plugin), vous pouvez également la spécifier pour éviter les erreurs 404 (voir l’explication plus bas)."
+
+#: wp-plugin-info-card-template.php:127
+#@ wppic-translate
+msgid "The custom parameter supplants the others (except the \"slug\") and only returns the value you required."
+msgstr "Le paramètre “custom” supplante tous les autres, c’est à dire que si vous le spécifiez, tous les autres seront ignorés pour n’afficher que la valeur demandée."
+
+#: wp-plugin-info-card-template.php:131
+#@ wppic-translate
+msgid "Known issues"
+msgstr "Problèmes connus"
+
+#: wp-plugin-info-card-template.php:132
+#@ wppic-translate
+msgid "WordPress.org does not currently include a banner nor plugin logo in the API. As explained in the Developper Center, banners are located in the assets folder of the plugin repository (allowed format are JPG or PNG) and they are named banner-772x250."
+msgstr "WordPress.org n’inclus pas à ce jour les URLs des bannières ou des logos dans sont API. Comme expliqué dans le Developper Center, les bannières sont situés dans le dossier assets du plugin (les formats autorisés sont JPG ou PNG) et sont nommés banner-772×250."
+
+#: wp-plugin-info-card-template.php:133
+#@ wppic-translate
+msgid "It would be nice to test if banner-772x250.jpg or banner-772x250.png exists, but WordPress does not accept HTTP request to their servers, so requests are blocked due to Cross-Origin restriction. It is the same issue for the plugin SVG, JPG or PNG logo."
+msgstr "Il aurait été bien de pouvoir tester si banner-772×250.jpg ou banner-772×250.png existaient, mais WordPress n’autorise pas les requêtes HTTP sur ces serveurs, donc la requête est bloquée à cause d’une restriction Cross-Origin. Le problème est le même pour le logo du plugin."
+
+#: wp-plugin-info-card-template.php:134
+#@ wppic-translate
+msgid "The workaround is to use CSS backgound fallback, but it gives a 404 server response. To avoid those errors, please specify the \"logo\" and \"banner\" parameters. In any case, 404 is not really an \"error\", but a simple server response."
+msgstr "La solution alternative est donc d’utiliser le CSS pour essayer afficher une image ou une autre. Le problème est qu’une erreur 404 est retournée à chaque fois car une des deux images n’existe pas. Pour éviter ces erreurs vous devez donc préciser les paramètres “logo” et “banner”. Dans tous les cas, l’erreur 404 n’est pas vraiment une erreur grave puiqu’il s’agit d’une réponse serveur. Je vous conseil tout de même de spécifier les paramètres en question, ça sera plus clean et plus SEO frendly."
+
+#: wp-plugin-info-card-template.php:142
+#@ wppic-translate
+msgid "Dashboard Widget Settings"
+msgstr "Options du Widget du tableau de bord"
+
+#: wp-plugin-info-card-template.php:175
+#@ wppic-translate
+msgid "Help: Don't forget to open the dashboard option panel (top right) to insert it on your dashboard."
+msgstr "Aide : N'oubliez pas d'ouvrir le menu \"options de l'écran\" (en haut à droite) du tableau de bord pour activer le widget si ce n'est pas le cas."
+
+#: wp-plugin-info-card-template.php:187
+#@ wppic-translate
+msgid "Add a plugin"
+msgstr "Ajouter un plugin"
+
+#: wp-plugin-info-card-template.php:195
+#@ wppic-translate
+msgid "Please refer to the plugin URL on wordpress.org to determine its slug"
+msgstr "Merci de vous référer à l'URL du plugin sur WordPress.org pour déterminer le slug du plugin"
+
+#: wp-plugin-info-card-template.php:212
+#@ wppic-translate
+msgid "is not a valid plugin name format. This key has been deleted."
+msgstr "n'est pas un format de nom de plugin valide. Cette élément a été supprimé."
+
+#: wp-plugin-info-card-template.php:221
+#@ wppic-translate
+msgid "Options saved"
+msgstr "Paramètres sauvegardés"
+
+#: wp-plugin-info-card-template.php:234
+#@ wppic-translate
+msgid "Plugin home page"
+msgstr "Page du plugin"
+
+#: wp-plugin-info-card-template.php:235
+#@ wppic-translate
+msgid "My other plugins"
+msgstr "Mes autres plugins"
+
+#: wp-plugin-info-card-template.php:237
+#@ wppic-translate
+msgid "Support"
+msgstr "Support"
+
+#: wp-plugin-info-card-template.php:238
+#@ wppic-translate
+msgid "Give me five!"
+msgstr "Give me five !"
+
+#: wp-plugin-info-card-template.php:243
+#@ wppic-translate
+msgid "Did you like it? If so, please consider making a donation."
+msgstr "Vous aimez ce plugin ?  Merci de faire un donation."
+
+#: wp-plugin-info-card-template.php:247
+#@ wppic-translate
+msgid "PayPal - The safer, easier way to pay online!"
+msgstr "Paypal - Le moyen le plus sûr et simple de payer en ligne !"
+
+#: wp-plugin-info-card.php:74
+#@ wppic-translate
+msgid "Settings"
+msgstr "Options"
+
+#: wp-plugin-info-card-template.php:239
+#@ wppic-translate
+msgid "Any suggestions?"
+msgstr "Des suggestions ?"
+
+#: wp-plugin-info-card-template.php:83
+#@ wppic-translate
+msgid "How to use WP Plugin Info Card shortcodes?"
+msgstr "Comment utiliser le shortcode WP Plugin Info Card ?"
+
+#: wp-plugin-info-card-template.php:92
+#@ wppic-translate
+msgid "This plugin is very light and includes scripts and CSS only if and when required. For technical reason (it is a choice), the plugin will only works in your body content, not in your sidebar (widget area)."
+msgstr "Ce plugin est très léger et n’appel les scripts et le CSS que lorsqu’il en a besoin, c’est à dire seulement quand le shortcode est appelé ! Pour des raisons techniques (c’est un choix), le plugin ne fonctionne que dans le corps de page de vos contenus, pas dans les sidebars (zone de widgets)."
+
+#: wp-plugin-info-card-template.php:93
+#@ wppic-translate
+msgid "It also uses Wordpress transients to store data returned by the API for 10 minutes, so your page loading time will not be increased due to too many requests."
+msgstr "Le plugin utilise également les transients WordPress (cache en base de données) et stocke les informations retournées par l’API pendant 10 minutes, cela permet d’éviter de ralentir le chargement de vos pages en n’ayant pas à consulter l’API à chaque fois."
+
+#: wp-plugin-info-card-template.php:99
+#@ wppic-translate
+msgid "plugin slug name - Please refer to the plugin URL on wordpress.org to determine its slug: https://wordpress.org/plugins/THE-SLUG/"
+msgstr "le nom du plugin - Son ID/slug est simple à trouver, elle correspond à la fin de l'URL du plugin : https://wordpress.org/plugins/LE-SLUG/"
+
+#: wp-plugin-info-card-shortcode.php:137
+#@ wppic-translate
+msgid "Current Version:"
+msgstr "Version Actuelle :"
+
+#: wp-plugin-info-card-shortcode.php:138
+#: wp-plugin-info-card-widget.php:66
+#@ wppic-translate
+msgid "Last Updated:"
+msgstr "Dernière Mise à Jour :"
+
+#: wp-plugin-info-card-widget.php:64
+#@ wppic-translate
+msgid "Ratings:"
+msgstr "Evaluations :"
+
+#: wp-plugin-info-card-widget.php:65
+#@ wppic-translate
+msgid "Downloads:"
+msgstr "Téléchargements :"
+
+#: wp-plugin-info-card-shortcode.php:122
+#@ wppic-translate
+msgid "Author(s):"
+msgstr "Auteur(s) :"
+

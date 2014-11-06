@@ -90,6 +90,9 @@ input.wppic-add {
 .wppic-button.wppic-pluginSupport:before {
     content: "\f223";
 }
+.wppic-button.wppic-pluginRate:before {
+    content: "\f155";
+}
 .wppic-button.wppic-pluginContact:before {
     content: "\f130";
 }

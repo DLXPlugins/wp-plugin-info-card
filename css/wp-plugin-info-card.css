@@ -140,11 +140,11 @@
 	display: inline-block;
 	position: relative;
 	width: 33%;
-	padding: 42px 5px 10px 5px;
+	padding: 42px 0px 10px 0px;
 	border-right: 1px solid #ae3e19;
 	color: #fff;
 	font-weight: bold;
-	font-size: 13px;
+	font-size: 12px;
 	line-height: 17px;
 }
 .wp-pic .wp-pic-bar span:before{

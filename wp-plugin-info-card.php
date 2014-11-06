@@ -5,7 +5,7 @@
  * Description: WP Plugin Info Card displays plugins identity cards in a beautiful box with a smooth rotation effect using WP Plugin API. Dashboard widget included.
  * Author: Brice CAPOBIANCO
  * Author URI: http://b-website.com/
- * Version: 1.01
+ * Version: 1.02
  * Text Domain: wppic-translate
  */
 
@@ -61,7 +61,7 @@ require_once( WPPIC_PATH . 'wp-plugin-info-card-widget.php' );
  ***************************************************************/
 if (!function_exists('wppic_load_textdomain')) {
 	function wppic_load_textdomain() {
-		$path = dirname(plugin_basename( __FILE__ )) . '/languages/';
+		$path = dirname(plugin_basename( __FILE__ )) . '/langs/';
 		$loaded = load_plugin_textdomain( 'wppic-translate', false, $path);
 	}
 	add_action('init', 'wppic_load_textdomain');
