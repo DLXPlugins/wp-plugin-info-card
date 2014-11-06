@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Plugin Info Card by b*web v1.01\n"
+"Project-Id-Version: WP Plugin Info Card by b*web v1.02\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-11-06 20:05:48+0000\n"
+"PO-Revision-Date: 2014-11-06 20:43:12+0000\n"
 "Last-Translator: Brice Capobianco\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: wp-plugin-info-card-shortcode.php:120
 #: wp-plugin-info-card-shortcode.php:145
-#: wp-plugin-info-card-widget.php:63
+#: wp-plugin-info-card-widget.php:64
 #@ wppic-translate
 msgid "WordPress.org Plugin Page"
 msgstr "Page WordPress.org du Plugin"
@@ -272,17 +272,17 @@ msgid "Current Version:"
 msgstr "Version Actuelle :"
 
 #: wp-plugin-info-card-shortcode.php:138
-#: wp-plugin-info-card-widget.php:66
+#: wp-plugin-info-card-widget.php:67
 #@ wppic-translate
 msgid "Last Updated:"
 msgstr "Dernière Mise à Jour :"
 
-#: wp-plugin-info-card-widget.php:64
+#: wp-plugin-info-card-widget.php:65
 #@ wppic-translate
 msgid "Ratings:"
 msgstr "Evaluations :"
 
-#: wp-plugin-info-card-widget.php:65
+#: wp-plugin-info-card-widget.php:66
 #@ wppic-translate
 msgid "Downloads:"
 msgstr "Téléchargements :"
@@ -291,4 +291,9 @@ msgstr "Téléchargements :"
 #@ wppic-translate
 msgid "Author(s):"
 msgstr "Auteur(s) :"
+
+#: wp-plugin-info-card-widget.php:74
+#@ wppic-translate
+msgid "No plugin found"
+msgstr "Aucun plugin trouvé"
 
