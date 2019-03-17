@@ -118,7 +118,7 @@ class WP_Plugin_Card extends Component {
 		];
 		const layoutOptions = [
 			{ value: 'card', label: __('Card', 'wp-plugin-info-card' ) },
-			{ value: 'flat', label: __('Flat', 'wp-plugin-info-card' ) },
+			{ value: 'large', label: __('Large', 'wp-plugin-info-card' ) },
 			{ value: 'wordpress', label: __('WordPress', 'wp-plugin-info-card' ) }
 		];
 		const customPluginOptions = [

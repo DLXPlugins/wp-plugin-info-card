@@ -12,7 +12,8 @@
  */
 @import url(../src/css/wppic-style.min.css);
 .wp-pic-flip,
-.wp-pic-wordpress {
+.wp-pic-wordpress,
+.wp-pic-large {
   display: block !important; }
 
 .wp-pic-full-width {
