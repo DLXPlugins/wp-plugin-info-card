@@ -5,11 +5,17 @@
  * which makes it higher in priority.
  */
 
-.wp-block-cgb-block-wp-plugin-info-card  {
-  background: $green;
-  border: 0.2rem solid $black;
-  color: $black;
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 2rem;
+.wppic-block {
+  h3 {
+    width: 100%;
+  }
+  div {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  input {
+    display: inline-block;
+    width: 100%;
+  }
 }

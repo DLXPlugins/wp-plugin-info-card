@@ -62,3 +62,28 @@ function wp_plugin_info_card_cgb_editor_assets() { // phpcs:ignore
 
 // Hook: Editor assets.
 add_action( 'enqueue_block_editor_assets', 'wp_plugin_info_card_cgb_editor_assets' );
+
+function wppic_register_block() {
+	register_block_type( 'wp-plugin-info-card/wp-plugin-info-card', array(
+		'attributes' => array(
+			'type' => array(
+				'type' => 'string',
+				'default' => 'theme',
+			),
+			'slug' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'loading' => array(
+				'type' => 'boolean',
+				'default' => true
+			)
+		),
+		'render_callback' => 'wppic_block_editor',
+	) );
+}
+function wppic_block_editor( $attributes ) {
+	return $attributes['slug'];
+}
+
+add_action( 'init', 'wppic_register_block' );
