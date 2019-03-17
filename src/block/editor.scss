@@ -4,7 +4,23 @@
  * CSS for just Backend enqueued after style.scss
  * which makes it higher in priority.
  */
- @import './src/css/wppic-style.min.css';
+ @import '../src/css/wppic-style.min.css';
+.wp-pic-flip,
+.wp-pic-wordpress{
+  display: block !important;
+}
+.wp-pic-full-width {
+  float: none;
+  width: 100%;
+  .card.wp-pic {
+    width: 100%;
+  }
+  .card.wp-pic .wp-pic-front .wp-pic-name {
+    width: 100%;
+    text-align: center;
+    display: block;
+  }
+}
 .wppic-block {
   h3 {
     width: 100%;

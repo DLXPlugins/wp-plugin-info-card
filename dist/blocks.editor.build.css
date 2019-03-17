@@ -1,1 +1,38 @@
-@import url(./src/css/wppic-style.min.css);.wppic-block h3{width:100%}.wppic-block div{display:block;width:100%;margin-bottom:20px}.wppic-block input{display:inline-block;width:100%}
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+@import url(../src/css/wppic-style.min.css);
+.wp-pic-flip,
+.wp-pic-wordpress {
+  display: block !important; }
+
+.wp-pic-full-width {
+  float: none;
+  width: 100%; }
+  .wp-pic-full-width .card.wp-pic {
+    width: 100%; }
+  .wp-pic-full-width .card.wp-pic .wp-pic-front .wp-pic-name {
+    width: 100%;
+    text-align: center;
+    display: block; }
+
+.wppic-block h3 {
+  width: 100%; }
+
+.wppic-block div {
+  display: block;
+  width: 100%;
+  margin-bottom: 20px; }
+
+.wppic-block input {
+  display: inline-block;
+  width: 100%; }

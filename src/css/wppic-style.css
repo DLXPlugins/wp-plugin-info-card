@@ -2,7 +2,7 @@
  * Plugin Name: WP Plugin Info Card by b*web
  * Plugin URI: http://b-website.com/
  * Author: Brice CAPOBIANCO - b*web
- */		
+ */
 .wp-pic-center {
  	text-align: center;
 	clear: both;
@@ -12,6 +12,18 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   font-family: "Open Sans",sans-serif;
+}
+.wp-pic-full-width {
+	float: none;
+	width: 100%;
+}
+.wp-pic-full-width .card.wp-pic {
+	width: 100%;
+}
+.wp-pic-full-width .card.wp-pic .wp-pic-front .wp-pic-name {
+	width: 100%;
+	text-align: center;
+	display: block;
 }
 /*AJAX Call*/
 .wp-pic-body-loading {
@@ -579,7 +591,7 @@
     border-top: 1px solid #ddd;
     overflow: hidden;
 }
-.wordpress.wp-pic .wp-pic-plugin-card-top .wp-pic-column-name, 
+.wordpress.wp-pic .wp-pic-plugin-card-top .wp-pic-column-name,
 .wordpress.wp-pic .wp-pic-plugin-card-top .wp-pic-column-description {
     margin-left: 148px;
     margin-right: 120px;
@@ -698,9 +710,9 @@
 .wordpress.wp-pic .wp-pic-plugin-card-top .wp-pic-action-download{
     font-size: 10px;
 }
-.wordpress.wp-pic .wp-pic-plugin-card-bottom .wp-pic-column-downloaded, 
+.wordpress.wp-pic .wp-pic-plugin-card-bottom .wp-pic-column-downloaded,
 .wordpress.wp-pic .wp-pic-plugin-card-bottom .wp-pic-column-rating,
-.wordpress.wp-pic .wp-pic-theme-card-bottom .wp-pic-column-downloaded, 
+.wordpress.wp-pic .wp-pic-theme-card-bottom .wp-pic-column-downloaded,
 .wordpress.wp-pic .wp-pic-theme-card-bottom .wp-pic-column-rating {
     float: left;
     clear: left;
@@ -777,7 +789,7 @@
 	}
 }
 @media only screen and (max-width: 1000px) {
-	.wordpress.wp-pic .wp-pic-plugin-card-top .wp-pic-column-name, 
+	.wordpress.wp-pic .wp-pic-plugin-card-top .wp-pic-column-name,
 	.wordpress.wp-pic .wp-pic-plugin-card-top .wp-pic-column-description {
 		margin-right: 0;
 	}
@@ -819,7 +831,7 @@
 	.wordpress.wp-pic .wp-pic-theme-card-top .wp-pic-action-links {
 		    padding: 10px 10px 0 0;
 	}
-	.wordpress.wp-pic .wp-pic-plugin-card-bottom, 
+	.wordpress.wp-pic .wp-pic-plugin-card-bottom,
 	.wordpress.wp-pic .wp-pic-theme-card-bottom {
 		padding: 12px 10px;
 	}
@@ -1607,15 +1619,15 @@ a.wp-pic-credit:after {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
-  -webkit-transition: 
+  -webkit-transition:
       opacity 0.2s ease-in-out,
         visibility 0.2s ease-in-out,
         -webkit-transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
-    -moz-transition:    
+    -moz-transition:
         opacity 0.2s ease-in-out,
         visibility 0.2s ease-in-out,
         -moz-transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
-    transition:         
+    transition:
         opacity 0.2s ease-in-out,
         visibility 0.2s ease-in-out,
         transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
@@ -1656,7 +1668,7 @@ a.wp-pic-credit:after {
 [data-tooltip]:focus:after {
   -webkit-transform: translateY(-12px);
   -moz-transform:    translateY(-12px);
-  transform:         translateY(-12px); 
+  transform:         translateY(-12px);
 }
 a.wp-pic-credit:before,
 a.wp-pic-credit:after {
@@ -1683,7 +1695,7 @@ a.wp-pic-credit:focus:before,
 a.wp-pic-credit:focus:after {
   -webkit-transform: translateX(-12px);
   -moz-transform:    translateX(-12px);
-  transform:         translateX(-12px); 
+  transform:         translateX(-12px);
 }
 /*Minimal grid layout*/
 .wp-pic-grid,
@@ -1710,7 +1722,7 @@ a.wp-pic-credit:focus:after {
 	box-sizing: border-box;
 	margin: 0;
 	width: 100%;
-	padding: 10px 0 0 0;  
+	padding: 10px 0 0 0;
 }
 
 @media only screen and (min-width: 1000px) {
