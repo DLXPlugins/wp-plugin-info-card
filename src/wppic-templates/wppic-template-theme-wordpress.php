@@ -1,12 +1,12 @@
 <?php
 /***************************************************************
- * $wppic_data Object contain the following values: 
+ * $wppic_data Object contain the following values:
  * url, name, slug, version, preview_url, author_def, author, screenshot_url, rating, num_ratings, downloaded, last_updated_mk, last_updated, homepage, description, download_link
  ***************************************************************/
 
 //Needed to load the rating star function
 require_once( ABSPATH . 'wp-admin/includes/template.php' );
-		
+
 //ScreenShot URL
 //$image is the custom image URL if you provided it
 $banner = '';
@@ -36,7 +36,7 @@ if( !empty( $image ) ){
 			</h3>
 			<div class="wp-pic-action-links">
 				<a class="wp-pic-action-buttons" href="<?php echo $wppic_data->download_link ?>" title="<?php _e( 'Download', 'wp-plugin-info-card' ) ?>" target="_blank"><?php _e( 'Download' ) ?></a>
-			</div>	
+			</div>
 		</div>
 		<div class="wp-pic-theme-card-bottom">
 			<div class="wp-pic-column-rating" title="<?php printf( _n( '(based on %s rating)', '(based on %s ratings)', $wppic_data->num_ratings ), number_format_i18n( $wppic_data->num_ratings ) ); ?>">
@@ -47,7 +47,7 @@ if( !empty( $image ) ){
 				<strong><?php _e( 'Last Updated:', 'wp-plugin-info-card' ) ?></strong> <?php printf( __( '%s ago' ), human_time_diff( strtotime( $wppic_data->last_updated_mk ) ) ); ?>
 			</div>
 			<div class="wp-pic-column-downloaded">
-				<?php echo $wppic_data->downloaded ?> <?php _e( 'Downloads', 'wp-plugin-info-card' ) ?>
+				<?php echo number_format( $wppic_data->active_installs ); ?> <?php _e( 'Active Installs', 'wp-plugin-info-card' ) ?>
 			</div>
 			<div class="wp-pic-column-version">
 				<span><?php printf( __( 'Version: %s' ), $wppic_data->version ) ?></span>
@@ -59,12 +59,12 @@ if( !empty( $image ) ){
 /*
 <div class="wp-pic-wordpress theme" style="display: none;">
 	<div class="wp-pic-large-content">
-		
+
 		<div class="theme-card-left">
 			<div class="theme-screenshot">
-				<?php echo $banner ?> 
+				<?php echo $banner ?>
 			</div>
-			
+
 			<div class="theme-author"><?php printf( __( 'By %s' ), $wppic_data->author ) ?></div>
 			<h3 class="theme-name"><?php echo $wppic_data->name ?></h3>
 
@@ -82,8 +82,8 @@ if( !empty( $image ) ){
 			<?php echo $contentSummary ?>
 			<?php echo $wppic_data->credit ?>
 		</div>
-		
+
 	</div>
 </div>
-			
+
 			*/

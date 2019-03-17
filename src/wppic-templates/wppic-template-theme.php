@@ -1,6 +1,6 @@
 <?php
 /***************************************************************
- * $wppic_data Object contain the following values: 
+ * $wppic_data Object contain the following values:
  * url, name, slug, version, preview_url, author_def, author, screenshot_url, rating, num_ratings, downloaded, last_updated, homepage, description, download_link
  ***************************************************************/
 
@@ -30,7 +30,7 @@ if( !empty( $image ) ){
 					<?php echo $wppic_data->rating ?>%<em><?php _e( 'Ratings', 'wp-plugin-info-card' ) ?></em>
 				</a>
 				<a href="<?php echo $wppic_data->download_link ?>" class="wp-pic-downloaded" target="_blank" title="<?php _e( 'Direct download', 'wp-plugin-info-card' ) ?>">
-					<?php echo $wppic_data->downloaded ?><em><?php _e( 'Downloads', 'wp-plugin-info-card' ) ?></em>
+					<?php echo number_format( $wppic_data->active_installs ); ?><em><?php _e( 'Active Installs', 'wp-plugin-info-card' ) ?></em>
 				</a>
 				<a href="<?php echo $wppic_data->url ?>" class="wp-pic-version" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ) ?>">
 					<?php echo $wppic_data->version ?><em><?php _e( 'Version', 'wp-plugin-info-card' ) ?></em>
@@ -52,7 +52,7 @@ if( !empty( $image ) ){
 					<?php echo $wppic_data->rating ?>%<em><?php _e( 'Ratings', 'wp-plugin-info-card' ) ?></em>
 				</a>
 				<a href="<?php echo $wppic_data->download_link ?>" class="wp-pic-downloaded" target="_blank" title="<?php _e( 'Direct download', 'wp-plugin-info-card' ) ?>">
-					<?php echo $wppic_data->downloaded ?><em><?php _e( 'Downloads', 'wp-plugin-info-card' ) ?></em>
+					<?php echo number_format( $wppic_data->active_installs ); ?><em><?php _e( 'Active Installs', 'wp-plugin-info-card' ) ?></em>
 				</a>
 				<a href="<?php echo $wppic_data->url ?>" class="wp-pic-version" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ) ?>">
 					<?php echo $wppic_data->version ?><em><?php _e( 'Version', 'wp-plugin-info-card' ) ?></em>

@@ -130,7 +130,7 @@ class WP_Plugin_Card extends Component {
 			{ value: 'requires', label: __('Requires', 'wp-plugin-info-card' ) },
 			{ value: 'rating', label: __('Ratings', 'wp-plugin-info-card' ) },
 			{ value: 'num_ratings', label: __('Number of Ratings', 'wp-plugin-info-card' ) },
-			{ value: 'downloaded', label: __('Downloaded', 'wp-plugin-info-card' ) },
+			{ value: 'active_installs', label: __('Active Installs', 'wp-plugin-info-card' ) },
 			{ value: 'last_updated', label: __('Last Updated', 'wp-plugin-info-card' ) },
 			{ value: 'download_link', label: __('Download Link', 'wp-plugin-info-card' ) },
 		];
@@ -143,7 +143,7 @@ class WP_Plugin_Card extends Component {
 			{ value: 'screenshot_url', label: __('Screenshot URL', 'wp-plugin-info-card' ) },
 			{ value: 'rating', label: __('Ratings', 'wp-plugin-info-card' ) },
 			{ value: 'num_ratings', label: __('Number of Ratings', 'wp-plugin-info-card' ) },
-			{ value: 'downloaded', label: __('Downloaded', 'wp-plugin-info-card' ) },
+			{ value: 'active_installs', label: __('Active Installs', 'wp-plugin-info-card' ) },
 			{ value: 'last_updated', label: __('Last Updated', 'wp-plugin-info-card' ) },
 			{ value: 'homepage', label: __('Homepage', 'wp-plugin-info-card' ) },
 			{ value: 'download_link', label: __('Download Link', 'wp-plugin-info-card' ) },

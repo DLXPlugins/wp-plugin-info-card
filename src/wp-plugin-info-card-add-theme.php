@@ -42,7 +42,7 @@ function wppic_theme_api_parser( $wppic_data, $type, $slug ){
 				'screenshot_url'	=> $theme_info->screenshot_url,
 				'rating' 			=> $theme_info->rating,
 				'num_ratings' 		=> $theme_info->num_ratings,
-				'downloaded' 		=> number_format($theme_info->downloaded, 0, ',', ',' ),
+				'downloaded' 		=> number_format($theme_info->active_installs, 0, ',', ',' ),
 				'last_updated_mk' 	=> $theme_info->last_updated,
 				'last_updated' 		=> $theme_info->last_updated,
 				'homepage' 			=> $theme_info->homepage,

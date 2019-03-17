@@ -56,6 +56,7 @@ function wppic_plugin_api_parser( $wppic_data, $type, $slug ){
 				'rating' 			=> $plugin_info->rating,
 				'num_ratings' 		=> $plugin_info->num_ratings,
 				'ratings'			=> $plugin_info->ratings,
+				'downloaded'		=> $plugin_info->active_installs,
 				'active_installs' 	=> $plugin_info->active_installs,
 				'last_updated' 		=> $plugin_info->last_updated,
 				'last_updated_mk' 	=> $plugin_info->last_updated,

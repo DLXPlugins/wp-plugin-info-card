@@ -120,7 +120,7 @@ function wppic_register_block() {
 			),
 			'layout' => array(
 				'type' => 'string',
-				'default' => 'default'
+				'default' => 'card',
 			),
 			'custom' => array(
 				'type' => 'string',
