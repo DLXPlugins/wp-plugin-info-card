@@ -1,14 +1,14 @@
 === WP Plugin Info Card ===
 Contributors: briKou, ronalfy
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7Z6YVM63739Y8
+Donate link: https://mediaron.com/give/
 Tags: API, plugin, card, envato
 Requires at least: 3.7
 Tested up to: 5.1
-Stable tag: 2.5.2
+Stable tag: 3.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
- 
+
 WPPIC displays plugins & themes data in a beautiful box with a smooth rotation effect using WP Plugin & Theme APIs. Dashboard widget included.
 
 
@@ -39,7 +39,7 @@ This plugin uses the TinyMCE API to improve UI and make inserting shortcodes eas
 **Please ask for help or report bugs if anything goes wrong. It is the best way to make the community benefit!**
 
 
-[CHECK OUT THE DEMO](http://b-website.com/wp-plugin-info-card-for-wordpress "Try It!")
+[CHECK OUT THE DEMO](https://mediaron.com/wp-plugin-info-card/ "Try It!")
 
 
 
@@ -57,8 +57,8 @@ This plugin uses the TinyMCE API to improve UI and make inserting shortcodes eas
 * **clear:** clear float before or after the card: before, after (default: empty)
 * **expiration:** cache duration in minutes - numeric format only (default: 10)
 * **ajax:** load the plugin data asynchronously with AJAX: yes, no (default: no)
-* **custom:** value to display: (default: empty)	
-	* For plugins: url, name, icons, banners, version, author, requires, rating, num_ratings, downloaded, last_updated, download_link	
+* **custom:** value to display: (default: empty)
+	* For plugins: url, name, icons, banners, version, author, requires, rating, num_ratings, downloaded, last_updated, download_link
 	* For themes: url, name, version, author, screenshot_url, rating, num_ratings, downloaded, last_updated, homepage, download_link
 
 
@@ -76,7 +76,7 @@ The slug is the only required parameter for plugin. You have to set the "type" p
 
 
 
-[FULL DOCUMENTATION AND EXAMPLES](http://b-website.com/wp-plugin-info-card-for-wordpress "Documentation & examples")
+[FULL DOCUMENTATION AND EXAMPLES](https://mediaron.com/wp-plugin-info-card/ "Documentation & examples")
 
 
 
@@ -120,7 +120,7 @@ Themes by search term limit to 4 items with a two columns render
 
 
 
-[FULL DOCUMENTATION AND EXAMPLES](http://b-website.com/wp-plugin-info-card-for-wordpress "Documentation & examples")
+[FULL DOCUMENTATION AND EXAMPLES](https://mediaron.com/wp-plugin-info-card/ "Documentation & examples")
 
 
 
@@ -141,7 +141,7 @@ Themes by search term limit to 4 items with a two columns render
 * Deutsch - Thanks to [Christian Zumbrunnen](https://profiles.wordpress.org/chzumbrunnen "Christian Zumbrunnen")
 * Serbo-Croatian - Thanks to Andrijana Nikolic from [Web Hosting Geeks](http://webhostinggeeks.com/ "Web Hosting Geeks")
 
-Become a translator and send me your translation! [Contact-me](http://b-website.com/contact "Contact")
+Become a translator and send me your translation! [Contact-me](https://mediaron.com/contact/ "Contact")
 
 
 
@@ -180,6 +180,11 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 
 == Changelog ==
 
+= 3.0.0 =
+* Released 2019-03-17
+* Fixed downloaded being blank (changed to active installs)
+* Added Gutenberg block
+
 = 2.5.2 - 03/14/2019 =
 * Tested on WP 5.1 with success!
 * Tested on WP 4.7.3 with success!
@@ -191,10 +196,10 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 
 = 2.5 - 08/19/2016 =
 * New: Add "WordPress" layouts for plugins and themes
-* New: Add the ability to use custom queries to retrieve plugins & themes by tags, author, etc. (new shortcode: wp-pic-query) 
+* New: Add the ability to use custom queries to retrieve plugins & themes by tags, author, etc. (new shortcode: wp-pic-query)
 * New: The new shortcode wp-pic-query is able to output items in a grid system (1, 2 or 3 cols).
 * New: use wppic_api_query hook to perform query customization
-* New: use wppic_query_content to filter what wp-pic-query shortcode returns 
+* New: use wppic_query_content to filter what wp-pic-query shortcode returns
 * Fix translations + add new string to translations files
 * Fix live preview URL for themes
 * Fix typo on themes layouts
@@ -391,6 +396,9 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 * First release.
 
 == Upgrade Notice ==
+
+= 3.0.0 =
+Fixed downloaded being blank (changed to active installs). Added Gutenberg block.
 
 = 1.5 =
 * If you have installed the plugin before version 1.5 you have to deactivate it then reactivate it in order to register the cron job which will purge the plugin transients everyday.
