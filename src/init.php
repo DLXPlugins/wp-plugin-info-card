@@ -54,6 +54,19 @@ function wp_plugin_info_card_cgb_editor_assets() { // phpcs:ignore
 		'rest_url' => get_rest_url()
 	) );
 
+	if (function_exists('wp_set_script_translations')) {
+		wp_set_script_translations('wp_plugin_info_card-cgb-block-js', 'wp-plugin-info-card');
+	} elseif (function_exists('gutenberg_get_jed_locale_data')) {
+		$locale  = gutenberg_get_jed_locale_data('wp-plugin-info-card');
+		$content = 'wp.i18n.setLocaleData( ' . json_encode($locale) . ', "wp-plugin-info-card" );';
+		wp_script_add_data('wp_plugin_info_card-cgb-block-js', 'data', $content);
+	} elseif (function_exists('wp_get_jed_locale_data')) {
+		/* for 5.0 */
+		$locale  = wp_get_jed_locale_data('wp-plugin-info-card');
+		$content = 'wp.i18n.setLocaleData( ' . json_encode($locale) . ', "wp-plugin-info-card" );';
+		wp_script_add_data('wp_plugin_info_card-cgb-block-js', 'data', $content);
+	}
+
 	// Styles.
 	wp_enqueue_style(
 		'wp_plugin_info_card-cgb-block-editor-css', // Handle.
