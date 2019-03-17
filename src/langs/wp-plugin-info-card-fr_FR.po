@@ -1,0 +1,592 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Plugin Info Card by b*web\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-09-22 08:00+0000\n"
+"PO-Revision-Date: 2016-09-22 10:46+0200\n"
+"Last-Translator: Wp Trads <contact@wolforg.eu>\n"
+"Language-Team: Wp Trads <contact@wolforg.eu>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Textdomain-Support: yes\n"
+"Language: fr_FR\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#. translators: plugin header field 'Name'
+#: wp-plugin-info-card.php:0
+msgid "WP Plugin Info Card by b*web"
+msgstr "WP Plugin Info Card par b*web"
+
+#. translators: plugin header field 'Author'
+#: wp-plugin-info-card.php:0
+msgid "Brice CAPOBIANCO"
+msgstr "Brice CAPOBIANCO"
+
+#. translators: plugin header field 'AuthorURI'
+#: wp-plugin-info-card.php:0
+msgid "http://b-website.com/"
+msgstr "http://b-website.com/"
+
+#: wp-plugin-info-card.php:139
+msgid "Once Weekly"
+msgstr "Une fois par semaine"
+
+#: wp-plugin-info-card-ui.php:33
+msgid "WordPress"
+msgstr "WordPress"
+
+#. translators: plugin header field 'Version'
+#: wp-plugin-info-card.php:0
+msgid "2.5"
+msgstr "2.5"
+
+#: wppic-templates/wppic-template-plugin-wordpress.php:34
+msgctxt "Active plugin installs"
+msgid "1+ Million"
+msgstr "Plus d’un million"
+
+#: wppic-templates/wppic-template-plugin-wordpress.php:48
+#: wppic-templates/wppic-template-theme-wordpress.php:32
+#, php-format
+msgid "More information about %s"
+msgstr "Plus d’informations sur %s"
+
+#: wppic-templates/wppic-template-plugin-wordpress.php:59
+#: wppic-templates/wppic-template-theme-wordpress.php:35
+#, php-format
+msgid "By %s"
+msgstr "Par %s"
+
+#: wppic-templates/wppic-template-plugin-wordpress.php:64
+#: wppic-templates/wppic-template-theme-wordpress.php:42
+#, php-format
+msgid "(based on %s rating)"
+msgid_plural "(based on %s ratings)"
+msgstr[0] "(sur la base de %s note)"
+msgstr[1] "(sur la base de %s notes)"
+
+#: wppic-templates/wppic-template-plugin-wordpress.php:69
+#: wppic-templates/wppic-template-theme-wordpress.php:47
+#, php-format
+msgid "%s ago"
+msgstr "il y a %s"
+
+#: wppic-templates/wppic-template-plugin-wordpress.php:72
+#, php-format
+msgid "%s Active Installs"
+msgstr "%s Installations actives"
+
+#: wppic-templates/wppic-template-theme-wordpress.php:53
+#, php-format
+msgid "Version: %s"
+msgstr "Version : %s"
+
+#: wp-plugin-info-card-add-plugin.php:162 wp-plugin-info-card-add-theme.php:148
+#: wppic-templates/wppic-template-plugin-large.php:45
+#: wppic-templates/wppic-template-plugin-large.php:50
+#: wppic-templates/wppic-template-plugin-large.php:66
+#: wppic-templates/wppic-template-plugin.php:45
+#: wppic-templates/wppic-template-plugin.php:46
+#: wppic-templates/wppic-template-plugin.php:56
+#: wppic-templates/wppic-template-plugin.php:78
+#: wppic-templates/wppic-template-plugin.php:82
+#: wppic-templates/wppic-template-plugin.php:84
+#: wppic-templates/wppic-template-theme-large.php:44
+#: wppic-templates/wppic-template-theme.php:35
+#: wppic-templates/wppic-template-theme.php:57
+msgid "WordPress.org Plugin Page"
+msgstr "Voir sur WordPress.org"
+
+#: wppic-templates/wppic-template-plugin-large.php:60
+#: wppic-templates/wppic-template-plugin-large.php:61
+#: wppic-templates/wppic-template-plugin.php:50
+#: wppic-templates/wppic-template-plugin.php:51
+#: wppic-templates/wppic-template-plugin.php:72
+#: wppic-templates/wppic-template-plugin.php:73
+#: wppic-templates/wppic-template-theme-large.php:38
+#: wppic-templates/wppic-template-theme-large.php:39
+#: wppic-templates/wppic-template-theme.php:29
+#: wppic-templates/wppic-template-theme.php:30
+#: wppic-templates/wppic-template-theme.php:51
+#: wppic-templates/wppic-template-theme.php:52
+msgid "Ratings"
+msgstr "Notes"
+
+#: wppic-templates/wppic-template-plugin-large.php:64
+#: wppic-templates/wppic-template-plugin.php:54
+#: wppic-templates/wppic-template-plugin.php:76
+#: wppic-templates/wppic-template-theme-large.php:42
+#: wppic-templates/wppic-template-theme-wordpress.php:50
+#: wppic-templates/wppic-template-theme.php:33
+#: wppic-templates/wppic-template-theme.php:55
+msgid "Downloads"
+msgstr "Téléchargements"
+
+#: wppic-templates/wppic-template-plugin-large.php:67
+#: wppic-templates/wppic-template-plugin.php:57
+#: wppic-templates/wppic-template-plugin.php:79
+msgid "Requires"
+msgstr "Nécessaire"
+
+#: wppic-templates/wppic-template-plugin-large.php:54
+#: wppic-templates/wppic-template-plugin-large.php:63
+#: wppic-templates/wppic-template-plugin.php:53
+#: wppic-templates/wppic-template-plugin.php:66
+#: wppic-templates/wppic-template-plugin.php:67
+#: wppic-templates/wppic-template-plugin.php:75
+#: wppic-templates/wppic-template-theme-large.php:32
+#: wppic-templates/wppic-template-theme-large.php:41
+#: wppic-templates/wppic-template-theme.php:32
+#: wppic-templates/wppic-template-theme.php:45
+#: wppic-templates/wppic-template-theme.php:46
+#: wppic-templates/wppic-template-theme.php:54
+msgid "Direct download"
+msgstr "Téléchargement direct"
+
+#: wppic-templates/wppic-template-plugin.php:87
+#: wppic-templates/wppic-template-theme.php:66
+msgid "Back"
+msgstr "Retour"
+
+#: wp-plugin-info-card-admin.php:94
+msgid "Enable dashboard widget"
+msgstr "Activer le widget du tableau de bord"
+
+#: wp-plugin-info-card-admin.php:161
+msgid "Shortcode parameters"
+msgstr "Paramètres du code court"
+
+#: wp-plugin-info-card-admin.php:209
+msgid "Dashboard Widget Settings"
+msgstr "Options du widget du tableau de bord"
+
+#: wp-plugin-info-card-add-plugin.php:125
+msgid "Add a plugin"
+msgstr "Ajouter une extension"
+
+#: wp-plugin-info-card-add-plugin.php:126
+msgid "Please refer to the plugin URL on wordpress.org to determine its slug"
+msgstr ""
+"Merci de vous référer à l'URL de l’extension sur WordPress.org pour "
+"déterminer son identifiant"
+
+#: wp-plugin-info-card-admin.php:350
+msgid "Support"
+msgstr "Support"
+
+#: wp-plugin-info-card-admin.php:351
+msgid "Give me five!"
+msgstr "Donnez m’en 5 !"
+
+#: wp-plugin-info-card.php:81
+msgid "Settings"
+msgstr "Réglages"
+
+#: wp-plugin-info-card-admin.php:158
+msgid "How to use WP Plugin Info Card shortcodes?"
+msgstr "Comment utiliser le code court de WP Plugin Info Card ?"
+
+#: wp-plugin-info-card-admin.php:164
+msgid ""
+"plugin slug name - Please refer to the plugin URL on wordpress.org to "
+"determine its slug: https://wordpress.org/plugins/THE-SLUG/"
+msgstr ""
+"le nom de l’extension - Son identifiant est simple à trouver, elle "
+"correspond à la fin de l'URL de l’extension : https://wordpress.org/plugins/"
+"IDENTIFIANT/"
+
+#: wppic-templates/wppic-template-plugin-large.php:52
+#: wppic-templates/wppic-template-plugin.php:68
+#: wppic-templates/wppic-template-theme-large.php:30
+msgid "Current Version:"
+msgstr "Version actuelle :"
+
+#: wp-plugin-info-card-add-plugin.php:168 wp-plugin-info-card-add-theme.php:154
+#: wppic-templates/wppic-template-plugin-large.php:53
+#: wppic-templates/wppic-template-plugin-wordpress.php:69
+#: wppic-templates/wppic-template-plugin.php:69
+#: wppic-templates/wppic-template-theme-large.php:31
+#: wppic-templates/wppic-template-theme-wordpress.php:47
+#: wppic-templates/wppic-template-theme.php:48
+msgid "Last Updated:"
+msgstr "Dernière mise à jour :"
+
+#: wp-plugin-info-card-add-plugin.php:163 wp-plugin-info-card-add-theme.php:149
+msgid "Ratings:"
+msgstr "Notes :"
+
+#: wp-plugin-info-card-add-plugin.php:167 wp-plugin-info-card-add-theme.php:153
+msgid "Downloads:"
+msgstr "Téléchargements :"
+
+#: wppic-templates/wppic-template-plugin-large.php:51
+#: wppic-templates/wppic-template-plugin.php:47
+#: wppic-templates/wppic-template-theme-large.php:29
+#: wppic-templates/wppic-template-theme.php:26
+msgid "Author(s):"
+msgstr "Auteur(s) :"
+
+#: wp-plugin-info-card-admin.php:106
+msgid "Ajaxify dashboard widget"
+msgstr "Widget du tableau de bord en Ajax"
+
+#: wp-plugin-info-card-admin.php:113
+msgid "Will load the data asynchronously with AJAX."
+msgstr "Chargera les données du widget de manière asynchrone grâce à AJAX"
+
+#: wp-plugin-info-card-shortcode.php:117 wp-plugin-info-card-shortcode.php:237
+#: wp-plugin-info-card-widget.php:128
+msgid "does not exist."
+msgstr "n'existe pas."
+
+#: wp-plugin-info-card-admin.php:169
+msgid "custom div id, may be used for anchor (default: wp-pic-PLUGIN-NAME)"
+msgstr ""
+" ID personnalisée de la carte, peut être utilisée pour faire des ancres "
+"(défaut : wp-pic-IDENTIFIANT)"
+
+#: wp-plugin-info-card-admin.php:170
+msgid "custom container margin - eg: \"15px 0\" (default: empty)"
+msgstr "marge autour de la carte – ex :  \"15px 0 \" (défaut : vide)"
+
+#: wp-plugin-info-card-admin.php:171
+msgid "clear float before or after the card: before, after (default: empty"
+msgstr ""
+"réinitialiser le float avant ou après la carte : before, after (défaut : "
+"vide)"
+
+#: wp-plugin-info-card-admin.php:173
+msgid "load the plugin data asynchronously with AJAX: yes, no (default: no)"
+msgstr ""
+"charger les informations de l’extension de manière asynchrone grâce à AJAX : "
+"yes, no (défaut : no)"
+
+#: wp-plugin-info-card-admin.php:185 wp-plugin-info-card.php:92
+msgid "Documentation and examples"
+msgstr "Documentation et exemples"
+
+#: wp-plugin-info-card-ui-lang.php:19
+msgid "Insert WP Plugin Info Card Shortcode"
+msgstr "Insérer un code court WP Plugin Info Card"
+
+#: wp-plugin-info-card-ui-lang.php:26
+msgid "Custom container ID"
+msgstr "ID personnalisé du conteneur"
+
+#: wp-plugin-info-card-ui-lang.php:27
+msgid "Custom container margin (15px 0)"
+msgstr "Marge personnalisée du conteneur (15px 0)"
+
+#: wp-plugin-info-card-ui-lang.php:28
+msgid "Clear container float"
+msgstr "Nettoyer le float du conteneur"
+
+#: wp-plugin-info-card-ui-lang.php:29
+msgid "Cache duration in minutes (num. only)"
+msgstr "Durée du cache en minutes (num. seulement)"
+
+#: wp-plugin-info-card-ui-lang.php:30
+msgid "Load data async. with AJAX"
+msgstr "Charger les données avec AJAX"
+
+#: wp-plugin-info-card-ui-lang.php:31
+msgid "Single value to output"
+msgstr "Valeur unique à retourner"
+
+#: wp-plugin-info-card-ui-lang.php:32
+msgid "Do not specify"
+msgstr "Ne pas spécifier"
+
+#: wp-plugin-info-card-ui-lang.php:34
+msgid "yes"
+msgstr "oui"
+
+#: wp-plugin-info-card-ui-lang.php:35
+msgid "no"
+msgstr "non"
+
+#: wp-plugin-info-card-ui-lang.php:36
+msgid "center"
+msgstr "centrer"
+
+#: wp-plugin-info-card-ui-lang.php:37
+msgid "left"
+msgstr "gauche"
+
+#: wp-plugin-info-card-ui-lang.php:38
+msgid "right"
+msgstr "droite"
+
+#: wp-plugin-info-card-ui-lang.php:39
+msgid "before"
+msgstr "avant"
+
+#: wp-plugin-info-card-ui-lang.php:40
+msgid "after"
+msgstr "après"
+
+#: wp-plugin-info-card-admin.php:353 wp-plugin-info-card.php:94
+msgid "Donate"
+msgstr "Faire un don"
+
+#. translators: plugin header field 'PluginURI'
+#: wp-plugin-info-card.php:0
+msgid "http://b-website.com/wp-plugin-info-card-for-wordpress"
+msgstr "http://b-website.com/wp-plugin-info-card-for-wordpress"
+
+#: wppic-templates/wppic-template-theme-large.php:45
+#: wppic-templates/wppic-template-theme.php:36
+#: wppic-templates/wppic-template-theme.php:58
+msgid "Version"
+msgstr "Version"
+
+#: wppic-templates/wppic-template-theme-wordpress.php:28
+#: wppic-templates/wppic-template-theme.php:47
+msgid "Theme Preview"
+msgstr "Aperçu du thème"
+
+#: wppic-templates/wppic-template-theme-large.php:23
+#: wppic-templates/wppic-template-theme-large.php:28
+#: wppic-templates/wppic-template-theme.php:24
+#: wppic-templates/wppic-template-theme.php:25
+#: wppic-templates/wppic-template-theme.php:61
+#: wppic-templates/wppic-template-theme.php:63
+msgid "WordPress.org Theme Page"
+msgstr "Page WordPress.org du thème"
+
+#: wp-plugin-info-card-admin.php:56
+msgid "Color scheme"
+msgstr "Modèle de couleurs"
+
+#: wp-plugin-info-card-admin.php:172
+msgid "cache duration in minutes - numeric format only (default: 720)"
+msgstr ""
+"la durée de vie du cache en minutes – valeur numérique uniquement  (défaut : "
+"720)"
+
+#: wp-plugin-info-card-admin.php:249
+msgid "Default color scheme for your cards."
+msgstr "Modèle de couleurs par défaut de la carte"
+
+#: wp-plugin-info-card-add-theme.php:111
+msgid "Add a theme"
+msgstr "Ajouter un thème"
+
+#: wp-plugin-info-card-add-theme.php:112
+msgid "Please refer to the theme URL on wordpress.org to determine its slug"
+msgstr ""
+"Merci de vous référer à l'URL du thème sur WordPress.org pour déterminer son "
+"identifiant"
+
+#: wp-plugin-info-card-add-theme.php:123
+msgid "is not a valid theme name format. This key has been deleted."
+msgstr "n'est pas un format de nom de thème valide. Cette clé a été supprimée."
+
+#: wp-plugin-info-card-ui-lang.php:20
+msgid "Type of data to retrieve"
+msgstr "Type d'infos à retrouver"
+
+#: wp-plugin-info-card-add-plugin.php:147
+msgid "Plugins"
+msgstr "Extensions"
+
+#: wp-plugin-info-card-add-theme.php:132
+msgid "Themes"
+msgstr "Thèmes"
+
+#. translators: plugin header field 'Description'
+#: wp-plugin-info-card.php:0
+msgid ""
+"WP Plugin Info Card displays plugins & themes identity cards in a beautiful "
+"box with a smooth rotation effect using WordPress.org Plugin API & WordPress."
+"org Theme API. Dashboard widget included."
+msgstr ""
+"WP Plugin Info Card affiche la carte d’identité d’extensions ou de thèmes "
+"dans un petite carte animée par un effet de rotation 3D en utilisant les "
+"informations des API de thème et extensions de WordPress.org. Un widget pour "
+"suivre les statistiques de téléchargements et de votes de vos extensions et "
+"thèmes préférés est inclus."
+
+#: wp-plugin-info-card-admin.php:163
+msgid "(default: plugin)"
+msgstr "(défaut : extension)"
+
+#: wp-plugin-info-card-admin.php:168
+msgid "(default: empty)"
+msgstr "(défaut : vide)"
+
+#: wp-plugin-info-card-admin.php:176
+msgid "For plugins:"
+msgstr "Pour les extensions :"
+
+#: wp-plugin-info-card-admin.php:177
+msgid "For themes:"
+msgstr "Pour les thèmes :"
+
+#: wp-plugin-info-card-admin.php:118
+msgid "List of items to display"
+msgstr "Liste des éléments à afficher"
+
+#: wp-plugin-info-card-admin.php:145
+msgid "Cache was successfully cleared"
+msgstr "Le cache a bien été vidé"
+
+#: wp-plugin-info-card-admin.php:145
+msgid "Empty all cache"
+msgstr "Vider tous les caches"
+
+#: wp-plugin-info-card-shortcode.php:117 wp-plugin-info-card-shortcode.php:237
+#: wp-plugin-info-card-widget.php:128
+msgid "Item not found:"
+msgstr "Élément non trouvé :"
+
+#: wp-plugin-info-card-ui-lang.php:21
+msgid "The Slug/ID"
+msgstr "L’identifiant"
+
+#: wp-plugin-info-card-ui-lang.php:24
+msgid "Custom image URL"
+msgstr "URL de l'image personnalisée"
+
+#: wp-plugin-info-card-ui-lang.php:41
+msgid "You have to provide at least the slug/id parameter to continue."
+msgstr "Vous devez fournir au moins le paramètre identifiant pour poursuivre."
+
+#: wp-plugin-info-card-add-plugin.php:138
+msgid "is not a valid plugin name format. This key has been deleted."
+msgstr ""
+"n'est pas un format de nom d’extension valide. Cet élément a été supprimé."
+
+#: wp-plugin-info-card-admin.php:145
+msgid "Something went wrong"
+msgstr "Quelque chose s'est mal passé"
+
+#: wp-plugin-info-card-ui-lang.php:22
+msgid "Layout structure"
+msgstr "Structure de mise en page"
+
+#: wp-plugin-info-card-ui-lang.php:33
+msgid "Default scheme"
+msgstr "Thème par défaut"
+
+#: wp-plugin-info-card-ui.php:31
+msgid "Card (default)"
+msgstr "Carte (défaut)"
+
+#: wp-plugin-info-card-ui.php:32
+msgid "Large"
+msgstr "Large"
+
+#: wp-plugin-info-card-admin.php:63
+msgid "Force enqueuing CSS & JS"
+msgstr "Forcer l'ajout des fichiers CSS et JS"
+
+#: wp-plugin-info-card-admin.php:196
+msgid "General options"
+msgstr "Options générales"
+
+#: wp-plugin-info-card-admin.php:165
+msgid ""
+"template layout to use - Default is \"card\" so you may leave this parameter "
+"empty. Available layouts are: card, large (default: empty)"
+msgstr ""
+"modèle à utiliser - Le modèle par défaut est \"card\", vous pouvez donc "
+"laisser ce paramètre vide. Les modèles disponibles sont: carde, large "
+"(défaut: vide)"
+
+#: wp-plugin-info-card-admin.php:166
+msgid ""
+"card color scheme: scheme1 through scheme10 (default: default color scheme "
+"defined in admin)"
+msgstr ""
+"Thème de couleurs : de scheme1 à scheme10 (défaut : le thème défini dans "
+"l'admin)"
+
+#: wp-plugin-info-card-admin.php:167
+msgid "Image URL to override default WP logo (default: empty)"
+msgstr "URL de l’image pour remplacer le logo WP par défaut (défaut : vide)"
+
+#: wp-plugin-info-card-admin.php:174
+msgid "value to display: (default: empty)"
+msgstr "valeur à afficher (défaut : vide)"
+
+#: wp-plugin-info-card-admin.php:70
+msgid ""
+"By default the plugin enqueues scripts (JS & CSS) only for pages containing "
+"the shortcode. If you wish to force scripts enqueuing, check this box."
+msgstr ""
+"Par défaut, les scripts de l’extension (JS et CSS) ne sont appelés que sur "
+"les pages contenant le code court. Si vous voulez forcer leur ajout, cochez "
+"cette case."
+
+#: wp-plugin-info-card-admin.php:101
+msgid ""
+"Help: Don't forget to open the dashboard option panel (top right) to display "
+"it on your dashboard."
+msgstr ""
+"Aide : N'oubliez pas d'ouvrir le menu \"options de l'écran\" (en haut à "
+"droite) du tableau de bord pour activer le widget si ce n'est pas le cas."
+
+#: wp-plugin-info-card-admin.php:347
+msgid "Plugin homepage"
+msgstr "Page de l’extension"
+
+#: wp-plugin-info-card-admin.php:352
+msgid "Any suggestion?"
+msgstr "Des suggestions ?"
+
+#: wp-plugin-info-card-ui-lang.php:25
+msgid "Cards alignment"
+msgstr "Alignement de la carte"
+
+#: wp-plugin-info-card-widget.php:94
+msgid ""
+"Nothing found, please add at least one item in the WP Plugin Info Card "
+"settings page."
+msgstr ""
+"Aucune donnée, merci d'ajouter des éléments dans la page d'options de WP "
+"Plugin Info Card."
+
+#: wp-plugin-info-card.php:81
+msgid "WP Plugin Info Card Settings"
+msgstr "Réglages de WP Plugin Info Card"
+
+#: wp-plugin-info-card-admin.php:348 wp-plugin-info-card.php:93
+msgid "More plugins by b*web"
+msgstr "Plus d’extensions b*web"
+
+#: wppic-templates/wppic-template-plugin.php:61
+#: wppic-templates/wppic-template-theme.php:40
+msgid "More info"
+msgstr "Plus d'infos"
+
+#: wp-plugin-info-card-admin.php:75
+msgid "Display a discrete credit"
+msgstr "Afficher un crédit discret"
+
+#: wp-plugin-info-card-admin.php:82
+msgid "If you like this plugin, check this box!"
+msgstr "Si vous aimez cette extension, cochez cette case !"
+
+#: wp-plugin-info-card-shortcode.php:270
+msgid "This card has been generated with WP Plugin Info Card"
+msgstr "Cette carte a été générée avec WP Plugin Info Card"
+
+#: wp-plugin-info-card-ui-lang.php:23
+msgid "Color scheme (not available for WordPress layout)"
+msgstr "Style de couleur (non compatible avec le thème WP)"
+
+#: wppic-templates/wppic-template-plugin-wordpress.php:55
+#: wppic-templates/wppic-template-theme-wordpress.php:38
+msgid "Download"
+msgstr "Télécharger"
+
+#: wppic-templates/wppic-template-plugin-wordpress.php:75
+msgid "Compatible with WordPress"
+msgstr "Compatible avec WordPress"
