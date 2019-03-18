@@ -180,6 +180,10 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 
 == Changelog ==
 
+= 3.0.1 =
+* Released 2019-03-18
+* Fixing PHP notices and showing theme download count in dashboard widget.
+
 = 3.0.0 =
 * Released 2019-03-17
 * Fixed downloaded being blank (changed to active installs)
@@ -396,6 +400,9 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 * First release.
 
 == Upgrade Notice ==
+
+= 3.0.1 =
+Fixing PHP notices and showing theme download count in dashboard widget.
 
 = 3.0.0 =
 Fixed downloaded being blank (changed to active installs). Added Gutenberg block.
