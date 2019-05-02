@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Donate link: https://mediaron.com/give/
 Tags: API, plugin, card, envato, block, gutenberg
 Requires at least: 3.7
-Tested up to: 5.1
+Tested up to: 5.2
 Stable tag: 3.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
