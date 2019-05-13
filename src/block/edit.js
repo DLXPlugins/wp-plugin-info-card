@@ -74,7 +74,7 @@ class WP_Plugin_Card extends Component {
 				loading: false
 			} );
 			var rest_url = wppic.rest_url + 'wppic/v1/get_html/';
-			axios.get(rest_url + `?type=${this.state.type}&slug=${this.state.slug}&align=${this.props.attributes.align}&image=${this.props.attributes.image}&containerid=${this.props.attributes.containerid}&margin=${this.props.attributes.margin}&clear=${this.props.attributes.clear}&expiration=${this.props.attributes.expiration}&ajax=${this.props.attributes.ajax}&scheme=${this.props.attributes.scheme}&layout=${this.props.attributes.layout}}` ).then( ( response ) => {
+			axios.get(rest_url + `?type=${this.props.attributes.type}&slug=${this.props.attributes.slug}&align=${this.props.attributes.align}&image=${this.props.attributes.image}&containerid=${this.props.attributes.containerid}&margin=${this.props.attributes.margin}&clear=${this.props.attributes.clear}&expiration=${this.props.attributes.expiration}&ajax=${this.props.attributes.ajax}&scheme=${this.props.attributes.scheme}&layout=${this.props.attributes.layout}` ).then( ( response ) => {
 				// Now Set State
 				this.setState( {
 					html: response.data

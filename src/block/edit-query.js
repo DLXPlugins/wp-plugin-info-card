@@ -234,7 +234,7 @@ class WP_Plugin_Card_Query extends Component {
 				<Fragment>
 					{this.state.loading &&
 						<Placeholder>
-							<div className="wppic-block">
+							<div className="wppic-query-block">
 								<div>
 									<h3><label for="wppic-type-select">{__( 'Select a Type', 'wp-plugin-info-card' )}</label></h3>
 									<select id="wppic-type-select" onChange={ ( event ) => { this.props.setAttributes( { type: event.target.value } ); this.typeChange(event); } }>

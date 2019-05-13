@@ -6,8 +6,8 @@
  */
 
 //  Import CSS.
-import './wppic-editor-query.scss';
-import './wppic-style-query.scss';
+import './style.scss';
+import './editor.scss';
 import edit from './edit-query';
 
 
