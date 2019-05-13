@@ -9,10 +9,10 @@ if ( !defined( 'ABSPATH' ) ) {
 /***************************************************************
  * Query the WordPress Plugin and Theme APIs
  ***************************************************************/
-function wppic_shortcode_query_function( $atts, $content="" ) {	
+function wppic_shortcode_query_function( $atts, $content="" ) {
 
 	//Retrieve & extract shorcode parameters
-	extract( shortcode_atts( array( 
+	extract( shortcode_atts( array(
 		"search"		=> '',	//A search term. Default empty.
 		"tag"			=> '',	//Tag to filter themes. Comma separated list. Default empty.
 		"author"		=> '',	//Username of an author to filter themes. Default empty.
@@ -34,7 +34,7 @@ function wppic_shortcode_query_function( $atts, $content="" ) {
 		"layout" 		=> '',	//card|flat|wordpress
 		"custom" 		=> '',	//value to print : url|name|version|author|requires|rating|num_ratings|downloaded|last_updated|download_link
 	), $atts, 'wppic_default' ) );
-	
+
 	//Prepare the row columns
 	$column = false;
 	if ( is_numeric( $cols ) && $cols > 0 && $cols < 4 ) {
@@ -65,27 +65,27 @@ function wppic_shortcode_query_function( $atts, $content="" ) {
 		)
 	);
 	$queryArgs = apply_filters( 'wppic_api_query', $queryArgs, $type, $atts );
-	
+
 	$api = '';
-	
+
 	//Plugins query
 	if ( $type == 'plugin' ) {
 		$type = 'plugins';
 		require_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
-		$api = plugins_api( 'query_plugins', $queryArgs	);	
-	}	
+		$api = plugins_api( 'query_plugins', $queryArgs	);
+	}
 
 	//Themes query
 	if ( $type == 'theme' ) {
 		$type = 'themes';
 		require_once( ABSPATH . 'wp-admin/includes/theme.php' );
 		$api = themes_api( 'query_themes',$queryArgs );
-	}	
-	
+	}
+
 	//Get the query result to build the content
 	if( !is_wp_error( $api ) && !empty( $api ) ){
 		if( is_array( $api->$type ) ){
-			
+
 			$content = $row = $open = $close = '';
 			$count = 1;
 			if( $column ){
@@ -93,9 +93,10 @@ function wppic_shortcode_query_function( $atts, $content="" ) {
 				$close = '</div>';
 				$content .= '<div class="wp-pic-grid">';
 			}
-			
+
 			//Creat the loop wp-pic-1-
 			foreach ( $api->$type as $item ){
+				$item = json_decode( json_encode( $item ) );
 				if ( $column && ( $count ) % $cols == 1 && $cols > 1 ){
 					$row = true;
 					$content .= '<div class="wp-pic-row">';
@@ -111,19 +112,19 @@ function wppic_shortcode_query_function( $atts, $content="" ) {
 				}
 				$count++;
 			}
-			
+
 			if( $row ){
 				$content .= '</div>'; //end of row
 			}
 			if( $column ){
 				$content .= '</div>'; //end of grid
 			}
-			
+
 			return apply_filters( 'wppic_query_content', $content, $type, $atts );
-			
+
 		}
 	}
-	
+
 } //end of wp-pic-query Shortcode
 
 add_shortcode( 'wp-pic-query', 'wppic_shortcode_query_function' );
