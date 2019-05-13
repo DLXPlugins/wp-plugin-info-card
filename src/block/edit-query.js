@@ -291,7 +291,11 @@ class WP_Plugin_Card_Query extends Component {
 									<h3><label for="wppic-input-columns">{__( 'Columns', 'wp-plugin-info-card' )}</label></h3>
 								</div>
 								<div>
-									<input type="number" id="wppic-input-columns" value={this.state.cols} onChange={ ( event ) => { this.props.setAttributes( { cols: event.target.value } ); this.setState( { cols: event.target.value } ) } } />
+									<select id="wppic-input-columns" onChange={ ( event ) => { this.props.setAttributes( { cols: event.target.value } ); this.setState( { cols: event.target.value } ) } }>
+											<option value="1" selected={this.state.cols === '' ? 'selected': '' }>{__( '1', 'wp-plugin-info-card' )}</option>
+											<option value="2" selected={this.state.cols === '2' ? 'selected': '' }>{__( '2', 'wp-plugin-info-card' )}</option>
+											<option value="3" selected={this.state.cols === '3' ? 'selected': '' }>{__( '3', 'wp-plugin-info-card' )}</option>
+										</select>
 								</div>
 								<div>
 									<input type="submit" id="wppic-input-submit" value={__( 'Go', 'wp-plugin-info-card' )} onClick={ ( event ) => { this.props.setAttributes( { loading: false } ); this.pluginOnClick(event); } }  />
