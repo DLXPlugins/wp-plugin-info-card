@@ -74,7 +74,6 @@ function wppic_get_shortcode() {
 		'ajax' => isset( $_GET['ajax'] ) ? $_GET['ajax'] : '',
 		'scheme' => isset( $_GET['scheme'] ) ? $_GET['scheme'] : '',
 		'layout' => isset( $_GET['layout'] ) ? $_GET['layout'] : '',
-		'custom' => isset( $_GET['custom'] ) ? $_GET['custom'] : ''
 	);
 	die(wppic_shortcode_function($attrs));
 }
