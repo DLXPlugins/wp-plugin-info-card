@@ -89,6 +89,14 @@ class WP_Plugin_Card extends Component {
 		const { attributes, setAttributes } = this.props;
 		const { type, slug, loading, align, image, containerid, margin, clear, expiration, ajax, scheme, layout, custom, width} = attributes;
 		let htmlToReactParser = new HtmlToReactParser();
+
+		const resetSelect = [
+			{
+				icon: 'update',
+				title: __( 'Reset', 'wp-plugin-info-card' ),
+				onClick: () => this.setState( { loading: true } )
+			}
+		];
 		const alignOptions = [
 			{ value: 'left', label: __('Left', 'wp-plugin-info-card' ) },
 			{ value: 'center', label: __('Center', 'wp-plugin-info-card' ) },
@@ -278,6 +286,9 @@ class WP_Plugin_Card extends Component {
 					{!this.state.loading &&
 						<Fragment>
 							{inspectorControls}
+							<BlockControls>
+								<Toolbar controls={ resetSelect } />
+							</BlockControls>
 							<div className={'' != width ? 'wp-pic-full-width' : ''}>
 								{htmlToReactParser.parse(this.state.html)}
 							</div>
