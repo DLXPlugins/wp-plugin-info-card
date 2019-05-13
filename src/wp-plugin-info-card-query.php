@@ -37,6 +37,7 @@ function wppic_shortcode_query_function( $atts, $content="" ) {
 
 	//Prepare the row columns
 	$column = false;
+	$cols = absint( $cols );
 	if ( is_numeric( $cols ) && $cols > 0 && $cols < 4 ) {
 		$column = true;
 	}

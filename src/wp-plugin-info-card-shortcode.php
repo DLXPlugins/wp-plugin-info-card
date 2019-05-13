@@ -84,8 +84,8 @@ function wppic_get_shortcode() {
 
 function wppic_get_query_shortcode() {
 	$attrs = array(
-		'per_page' => $_GET['per_page'],
 		'cols' => $_GET['cols'],
+		'per_page' => $_GET['per_page'],
 		'type' => $_GET['type'],
 		'image' => isset( $_GET['image'] ) ? $_GET['image'] : '',
 		'align' => isset( $_GET['align'] ) ? $_GET['align'] : '',

@@ -249,8 +249,8 @@ function wppic_register_block() {
 function wppic_block_editor_query( $attributes ) {
 	if ( is_admin() ) return;
 	$args = array(
-		'per_page' => $attributes['per_page'],
 		'cols' => $attributes['cols'],
+		'per_page' => $attributes['per_page'],
 		'type' => $attributes['type'],
 		'align' => $attributes['align'],
 		'image' => $attributes['image'],
@@ -277,6 +277,7 @@ function wppic_block_editor_query( $attributes ) {
 	if ( ! empty( $attributes['author'] ) ) {
 		$args['author'] = $attributes['author'];
 	}
+	error_log( print_r( $args, true ) );
 	$html = '';
 	if( '' !== $attributes['width'] ) {
 		$html = sprintf( '<div class="wp-pic-full-width">%s</div>', wppic_shortcode_query_function( $args ) );

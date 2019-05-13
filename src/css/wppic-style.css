@@ -1732,6 +1732,9 @@ a.wp-pic-credit:focus:after {
 	.wp-pic-row [class*="wp-pic-1-"]:last-child  {
 	  padding-right: 0;
 	}
+	.wp-pic-row .wp-pic-1-1 {
+		width: 100%;
+	}
 	.wp-pic-row .wp-pic-1-2{
 		width: 50%;
 	}
