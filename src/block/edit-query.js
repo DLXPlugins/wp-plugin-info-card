@@ -53,6 +53,13 @@ class WP_Plugin_Card_Query extends Component {
 			scheme: this.props.attributes.scheme,
 			layout: this.props.attributes.layout,
 			width: this.props.attributes.width,
+			search: this.props.attributes.search,
+			tag: this.props.attributes.tag,
+			author: this.props.attributes.author,
+			user: this.props.attributes.user,
+			browse: this.props.attributes.browse,
+			per_page: this.props.attributes.per_page,
+			cols: this.props.attributes.cols,
 		};
 	}
 
@@ -73,8 +80,8 @@ class WP_Plugin_Card_Query extends Component {
 			this.setState( {
 				loading: false
 			} );
-			var rest_url = wppic.rest_url + 'wppic/v1/get_html/';
-			axios.get(rest_url + `?type=${this.state.type}&slug=${this.state.slug}&align=${this.props.attributes.align}&image=${this.props.attributes.image}&containerid=${this.props.attributes.containerid}&margin=${this.props.attributes.margin}&clear=${this.props.attributes.clear}&expiration=${this.props.attributes.expiration}&ajax=${this.props.attributes.ajax}&scheme=${this.props.attributes.scheme}&layout=${this.props.attributes.layout}}` ).then( ( response ) => {
+			var rest_url = wppic.rest_url + 'wppic/v1/get_query/';
+			axios.get(rest_url + `?type=${this.state.type}&slug=${this.state.slug}&align=${this.props.attributes.align}&image=${this.props.attributes.image}&containerid=${this.props.attributes.containerid}&margin=${this.props.attributes.margin}&clear=${this.props.attributes.clear}&expiration=${this.props.attributes.expiration}&ajax=${this.props.attributes.ajax}&scheme=${this.props.attributes.scheme}&layout=${this.props.attributes.layout}&search=${this.props.attributes.search}&tag=${this.props.attributes.tag}&author=${this.props.attributes.author}&user=${this.props.attributes.user}&browse=${this.props.attributes.browse}&per_page=${this.props.attributes.per_page}browse=${this.props.attributes.browse}&cols=${this.props.attributes.cols}}` ).then( ( response ) => {
 				// Now Set State
 				this.setState( {
 					html: response.data
@@ -86,7 +93,7 @@ class WP_Plugin_Card_Query extends Component {
 
 	render() {
 		const { attributes, setAttributes } = this.props;
-		const { type, slug, loading, align, image, containerid, margin, clear, expiration, ajax, scheme, layout, width} = attributes;
+		const { type, slug, loading, align, image, containerid, margin, clear, expiration, ajax, scheme, layout, width, search, tag, author, user, browse, per_page, cols } = attributes;
 		let htmlToReactParser = new HtmlToReactParser();
 
 		const resetSelect = [
@@ -236,10 +243,55 @@ class WP_Plugin_Card_Query extends Component {
 									</select>
 								</div>
 								<div>
-									<h3><label for="wppic-input-slug">{__( 'Enter a slug', 'wp-plugin-info-card' )}</label></h3>
+									<h3><label for="wppic-input-search">{__( 'Search', 'wp-plugin-info-card' )}</label></h3>
 								</div>
 								<div>
-									<input type="text" id="wppic-input-slug" value={this.state.slug} onChange={ ( event ) => { this.props.setAttributes( { slug: event.target.value } ); this.slugChange(event); } } />
+									<input type="text" id="wppic-input-search" value={this.state.search} onChange={ ( event ) => { this.props.setAttributes( { search: event.target.value } ); this.setState( { search: event.target.value } ) } } />
+								</div>
+								<div>
+									<h3><label for="wppic-input-tag">{__( 'Tags (can be comma separated)', 'wp-plugin-info-card' )}</label></h3>
+								</div>
+								<div>
+									<input type="text" id="wppic-input-tag" value={this.state.tag} onChange={ ( event ) => { this.props.setAttributes( { tag: event.target.value } ); this.setState( { tag: event.target.value } ) } } />
+								</div>
+								<div>
+									<h3><label for="wppic-input-author">{__( 'Username', 'wp-plugin-info-card' )}</label></h3>
+									<p>{__( 'Filter by Username', 'wp-plugin-info-card' )}</p>
+								</div>
+								<div>
+									<input type="text" id="wppic-input-author" value={this.state.author} onChange={ ( event ) => { this.props.setAttributes( { author: event.target.value } ); this.setState( { author: event.target.value } ) } } />
+								</div>
+								<div>
+									<h3><label for="wppic-input-user">{__( 'User', 'wp-plugin-info-card' )}</label></h3>
+									<p>{__( 'See the favorites from this username', 'wp-plugin-info-card' )}</p>
+								</div>
+								<div>
+									<input type="text" id="wppic-input-user" value={this.state.user} onChange={ ( event ) => { this.props.setAttributes( { user: event.target.value } ); this.setState( { author: event.target.value } ) } } />
+								</div>
+
+								<div>
+									<h3><label for="wppic-input-browse">{__( 'Browse', 'wp-plugin-info-card' )}</label></h3>
+								</div>
+								<div>
+									<select id="wppic-type-browse" onChange={ ( event ) => { this.props.setAttributes( { browse: event.target.value } ); this.setState( { browse: event.target.value } ) } }>
+											<option value="" selected={this.state.type === '' ? 'selected': '' }>{__( 'None', 'wp-plugin-info-card' )}</option>
+											<option value="featured" selected={this.state.type === 'featured' ? 'selected': '' }>{__( 'Featured', 'wp-plugin-info-card' )}</option>
+											<option value="updated" selected={this.state.type === 'updated' ? 'selected': '' }>{__( 'Updated', 'wp-plugin-info-card' )}</option>
+											<option value="favorites" selected={this.state.type === 'favorites' ? 'selected': '' }>{__( 'Favorites', 'wp-plugin-info-card' )}</option>
+											<option value="popular" selected={this.state.type === 'popular' ? 'selected': '' }>{__( 'Popular', 'wp-plugin-info-card' )}</option>
+										</select>
+								</div>
+								<div>
+									<h3><label for="wppic-input-per-page">{__( 'Per Page', 'wp-plugin-info-card' )}</label></h3>
+								</div>
+								<div>
+									<input type="number" id="wppic-input-per-page" value={this.state.per_page} onChange={ ( event ) => { this.props.setAttributes( { per_page: event.target.value } ); this.setState( { per_page: event.target.value } ) } } />
+								</div>
+								<div>
+									<h3><label for="wppic-input-columns">{__( 'Columns', 'wp-plugin-info-card' )}</label></h3>
+								</div>
+								<div>
+									<input type="number" id="wppic-input-columns" value={this.state.cols} onChange={ ( event ) => { this.props.setAttributes( { cols: event.target.value } ); this.setState( { cols: event.target.value } ) } } />
 								</div>
 								<div>
 									<input type="submit" id="wppic-input-submit" value={__( 'Go', 'wp-plugin-info-card' )} onClick={ ( event ) => { this.props.setAttributes( { loading: false } ); this.pluginOnClick(event); } }  />
