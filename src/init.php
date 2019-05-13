@@ -146,7 +146,138 @@ function wppic_register_block() {
 		),
 		'render_callback' => 'wppic_block_editor',
 	) );
+
+	register_block_type( 'wp-plugin-info-card/wp-plugin-info-card-query', array(
+		'attributes' => array(
+			'search' => array(
+				'type' => 'string',
+				'default' => '',
+			),
+			'tag' => array(
+				'type' => 'string',
+				'default' => '',
+			),
+			'author' => array(
+				'type' => 'string',
+				'default' => '',
+			),
+			'user' => array(
+				'type' => 'string',
+				'default' => '',
+			),
+			'browse' => array(
+				'type' => 'string',
+				'default' => '',
+			),
+			'per_page' => array(
+				'type' => 'int',
+				'default' => 24,
+			),
+			'per_page' => array(
+				'type' => 'int',
+				'default' => 24,
+			),
+			'cols' => array(
+				'type' => 'int',
+				'default' => 1,
+			),
+			'type' => array(
+				'type' => 'string',
+				'default' => 'theme',
+			),
+			'slug' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'loading' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'html' => array(
+				'type' => 'string',
+				'default' => '',
+			),
+			'align' => array(
+				'type' => 'string',
+				'default' => 'left'
+			),
+			'image' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'containerid' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'margin' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'clear' => array(
+				'type' => 'string',
+				'default' => 'none',
+			),
+			'expiration' => array(
+				'type' => 'int',
+				'default' => 0
+			),
+			'ajax' => array(
+				'type' => 'string',
+				'default' => 'false'
+			),
+			'scheme' => array(
+				'type' => 'string',
+				'default' => 'default'
+			),
+			'layout' => array(
+				'type' => 'string',
+				'default' => 'card',
+			),
+			'custom' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'width' => array(
+				'type' => 'string',
+				'default' => ''
+			)
+		),
+		'render_callback' => 'wppic_block_editor_query',
+	) );
 }
+
+function wppic_block_editor_query( $attributes ) {
+	if ( is_admin() ) return;
+	$args = array(
+		'search' => $attributes['search'],
+		'tag' => $attributes['tag'],
+		'author' => $attributes['author'],
+		'user' => $attributes['user'],
+		'browse' => $attributes['browse'],
+		'per_page' => $attributes['per_page'],
+		'cols' => $attributes['cols'],
+		'type' => $attributes['type'],
+		'slug' => $attributes['slug'],
+		'align' => $attributes['align'],
+		'image' => $attributes['image'],
+		'containerid' => $attributes['containerid'],
+		'margin' => $attributes['margin'],
+		'clear' => $attributes['clear'],
+		'expiration' => $attributes['expiration'],
+		'ajax' => $attributes['ajax'],
+		'scheme' => $attributes['scheme'],
+		'layout' => $attributes['layout'],
+		'custom' => $attributes['custom']
+	);
+	$html = '';
+	if( '' !== $attributes['width'] ) {
+		$html = sprintf( '<div class="wp-pic-full-width">%s</div>', wppic_shortcode_query_function( $args ) );
+	} else {
+		$html = wppic_shortcode_query_function( $args );
+	}
+	return $html;
+}
+
 function wppic_block_editor( $attributes ) {
 	if ( is_admin() ) return;
 	$args = array(

@@ -10,3 +10,4 @@
  */
 
 import './block/block.js';
+import './block/wppic-query.js';
