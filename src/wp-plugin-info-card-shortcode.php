@@ -84,8 +84,9 @@ function wppic_get_shortcode() {
 
 function wppic_get_query_shortcode() {
 	$attrs = array(
+		'per_page' => $_GET['per_page'],
+		'cols' => $_GET['cols'],
 		'type' => $_GET['type'],
-		'slug' => $_GET['slug'],
 		'image' => isset( $_GET['image'] ) ? $_GET['image'] : '',
 		'align' => isset( $_GET['align'] ) ? $_GET['align'] : '',
 		'containerid' => isset( $_GET['containerid'] ) ? $_GET['containerid'] : '',
@@ -96,6 +97,21 @@ function wppic_get_query_shortcode() {
 		'scheme' => isset( $_GET['scheme'] ) ? $_GET['scheme'] : '',
 		'layout' => isset( $_GET['layout'] ) ? $_GET['layout'] : '',
 	);
+	if ( ! empty( $_GET['browse'] ) ) {
+		$attrs['browse'] = $_GET['browse'];
+	}
+	if ( ! empty( $_GET['search'] ) ) {
+		$attrs['search'] = $_GET['search'];
+	}
+	if ( ! empty( $_GET['tag'] ) ) {
+		$attrs['tag'] = $_GET['tag'];
+	}
+	if ( ! empty( $_GET['user'] ) ) {
+		$attrs['user'] = $_GET['user'];
+	}
+	if ( ! empty( $_GET['author'] ) ) {
+		$attrs['author'] = $_GET['author'];
+	}
 	die(wppic_shortcode_query_function($attrs));
 }
 

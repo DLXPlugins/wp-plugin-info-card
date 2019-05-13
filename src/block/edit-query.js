@@ -76,7 +76,7 @@ class WP_Plugin_Card_Query extends Component {
 	}
 
 	pluginOnClick = (event) => {
-		if( '' !== this.state.type && '' !== this.state.slug ) {
+		if( '' !== this.state.type ) {
 			this.setState( {
 				loading: false
 			} );
@@ -266,7 +266,7 @@ class WP_Plugin_Card_Query extends Component {
 									<p>{__( 'See the favorites from this username', 'wp-plugin-info-card' )}</p>
 								</div>
 								<div>
-									<input type="text" id="wppic-input-user" value={this.state.user} onChange={ ( event ) => { this.props.setAttributes( { user: event.target.value } ); this.setState( { author: event.target.value } ) } } />
+									<input type="text" id="wppic-input-user" value={this.state.user} onChange={ ( event ) => { this.props.setAttributes( { user: event.target.value } ); this.setState( { user: event.target.value } ) } } />
 								</div>
 
 								<div>
@@ -274,11 +274,11 @@ class WP_Plugin_Card_Query extends Component {
 								</div>
 								<div>
 									<select id="wppic-type-browse" onChange={ ( event ) => { this.props.setAttributes( { browse: event.target.value } ); this.setState( { browse: event.target.value } ) } }>
-											<option value="" selected={this.state.type === '' ? 'selected': '' }>{__( 'None', 'wp-plugin-info-card' )}</option>
-											<option value="featured" selected={this.state.type === 'featured' ? 'selected': '' }>{__( 'Featured', 'wp-plugin-info-card' )}</option>
-											<option value="updated" selected={this.state.type === 'updated' ? 'selected': '' }>{__( 'Updated', 'wp-plugin-info-card' )}</option>
-											<option value="favorites" selected={this.state.type === 'favorites' ? 'selected': '' }>{__( 'Favorites', 'wp-plugin-info-card' )}</option>
-											<option value="popular" selected={this.state.type === 'popular' ? 'selected': '' }>{__( 'Popular', 'wp-plugin-info-card' )}</option>
+											<option value="" selected={this.state.browse === '' ? 'selected': '' }>{__( 'None', 'wp-plugin-info-card' )}</option>
+											<option value="featured" selected={this.state.browse === 'featured' ? 'selected': '' }>{__( 'Featured', 'wp-plugin-info-card' )}</option>
+											<option value="updated" selected={this.state.browse === 'updated' ? 'selected': '' }>{__( 'Updated', 'wp-plugin-info-card' )}</option>
+											<option value="favorites" selected={this.state.browse === 'favorites' ? 'selected': '' }>{__( 'Favorites', 'wp-plugin-info-card' )}</option>
+											<option value="popular" selected={this.state.browse === 'popular' ? 'selected': '' }>{__( 'Popular', 'wp-plugin-info-card' )}</option>
 										</select>
 								</div>
 								<div>

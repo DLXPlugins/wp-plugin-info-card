@@ -249,15 +249,9 @@ function wppic_register_block() {
 function wppic_block_editor_query( $attributes ) {
 	if ( is_admin() ) return;
 	$args = array(
-		'search' => $attributes['search'],
-		'tag' => $attributes['tag'],
-		'author' => $attributes['author'],
-		'user' => $attributes['user'],
-		'browse' => $attributes['browse'],
 		'per_page' => $attributes['per_page'],
 		'cols' => $attributes['cols'],
 		'type' => $attributes['type'],
-		'slug' => $attributes['slug'],
 		'align' => $attributes['align'],
 		'image' => $attributes['image'],
 		'containerid' => $attributes['containerid'],
@@ -267,8 +261,22 @@ function wppic_block_editor_query( $attributes ) {
 		'ajax' => $attributes['ajax'],
 		'scheme' => $attributes['scheme'],
 		'layout' => $attributes['layout'],
-		'custom' => $attributes['custom']
 	);
+	if ( ! empty( $attributes['browse'] ) ) {
+		$args['browse'] = $attributes['browse'];
+	}
+	if ( ! empty( $attributes['search'] ) ) {
+		$args['search'] = $attributes['search'];
+	}
+	if ( ! empty( $attributes['tag'] ) ) {
+		$args['tag'] = $attributes['tag'];
+	}
+	if ( ! empty( $attributes['user'] ) ) {
+		$args['user'] = $attributes['user'];
+	}
+	if ( ! empty( $attributes['author'] ) ) {
+		$args['author'] = $attributes['author'];
+	}
 	$html = '';
 	if( '' !== $attributes['width'] ) {
 		$html = sprintf( '<div class="wp-pic-full-width">%s</div>', wppic_shortcode_query_function( $args ) );
@@ -292,7 +300,6 @@ function wppic_block_editor( $attributes ) {
 		'ajax' => $attributes['ajax'],
 		'scheme' => $attributes['scheme'],
 		'layout' => $attributes['layout'],
-		'custom' => $attributes['custom']
 	);
 	$html = '';
 	if( '' !== $attributes['width'] ) {
