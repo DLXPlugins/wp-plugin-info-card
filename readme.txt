@@ -4,7 +4,7 @@ Donate link: https://mediaron.com/give/
 Tags: API, plugin, card, envato, block, gutenberg
 Requires at least: 3.7
 Tested up to: 5.2
-Stable tag: 3.0.1
+Stable tag: 3.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -179,6 +179,13 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 
 
 == Changelog ==
+
+= 3.1.0 =
+* Released 2019-04-13
+* Added Query Selector Gutenberg block
+* Removing Custom from Gutenberg blocks as it makes no sense from a block perspective
+* Fixing PHP error in query Selector
+* Adding Reset button to Gutenberg blocks so you can change your settings
 
 = 3.0.1 =
 * Released 2019-03-18
@@ -400,6 +407,9 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 * First release.
 
 == Upgrade Notice ==
+
+= 3.1.0 =
+Added Query Selector Gutenberg block. Removing Custom from Gutenberg blocks as it makes no sense from a block perspective. Fixing PHP error in query Selector. Adding Reset button to Gutenberg blocks so you can change your settings.
 
 = 3.0.1 =
 Fixing PHP notices and showing theme download count in dashboard widget.
