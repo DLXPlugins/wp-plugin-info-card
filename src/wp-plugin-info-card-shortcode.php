@@ -11,9 +11,10 @@ if ( !defined( 'ABSPATH' ) ) {
  * Register default plugin scripts
  ***************************************************************/
 function wppic_register_sripts() {
-	wp_enqueue_style( 'wppic-style', WPPIC_URL . 'css/wppic-style.min.css', NULL, WPPIC_VERSION );
+	$min_or_not = (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) ? '' : '.min';
+	wp_enqueue_style( 'wppic-style', WPPIC_URL . 'css/wppic-style' . $min_or_not .'.css', NULL, WPPIC_VERSION );
     wp_enqueue_style( 'dashicons' );
-	wp_enqueue_script( 'wppic-script', WPPIC_URL . 'js/wppic-script.min.js', array( 'jquery' ), WPPIC_VERSION, true );
+	wp_enqueue_script( 'wppic-script', WPPIC_URL . 'js/wppic-script' . $min_or_not .'.js', array( 'jquery' ), WPPIC_VERSION, true );
 }
 add_action( 'wppic_enqueue_scripts', 'wppic_register_sripts' );
 

@@ -920,6 +920,11 @@
 	}
 }
 
+/* Block Layout */
+.wp-block .wp-pic-back {
+	display: none;
+}
+
 /*Color Scheme 1*/
 .wp-pic.scheme1 .wp-pic-bar{
 	background-color: #db3939;
