@@ -42,6 +42,7 @@ class WP_Plugin_Card_Query extends Component {
 			type: this.props.attributes.type,
 			slug: this.props.attributes.slug,
 			loading: this.props.attributes.loading,
+			card_loading: false,
 			html: this.props.attributes.html,
 			align: this.props.attributes.align,
 			image: this.props.attributes.image,
@@ -78,12 +79,14 @@ class WP_Plugin_Card_Query extends Component {
 	pluginOnClick = (event) => {
 		if( '' !== this.state.type ) {
 			this.setState( {
-				loading: false
+				loading: false,
+				card_loading: true,
 			} );
 			var rest_url = wppic.rest_url + 'wppic/v1/get_query/';
 			axios.get(rest_url + `?type=${this.state.type}&slug=${this.state.slug}&align=${this.props.attributes.align}&image=${this.props.attributes.image}&containerid=${this.props.attributes.containerid}&margin=${this.props.attributes.margin}&clear=${this.props.attributes.clear}&expiration=${this.props.attributes.expiration}&ajax=${this.props.attributes.ajax}&scheme=${this.props.attributes.scheme}&layout=${this.props.attributes.layout}&search=${this.props.attributes.search}&tag=${this.props.attributes.tag}&author=${this.props.attributes.author}&user=${this.props.attributes.user}&browse=${this.props.attributes.browse}&per_page=${this.props.attributes.per_page}browse=${this.props.attributes.browse}&cols=${this.props.attributes.cols}}` ).then( ( response ) => {
 				// Now Set State
 				this.setState( {
+					card_loading: false,
 					html: response.data
 				} );
 				this.props.setAttributes({html: response.data});
@@ -303,7 +306,25 @@ class WP_Plugin_Card_Query extends Component {
 							</div>
 						</Placeholder>
 					}
-					{!this.state.loading &&
+					{this.state.card_loading &&
+						<Fragment>
+							<Placeholder>
+								<div>
+									<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+									width="40px" height="40px" viewBox="0 0 850.39 850.39" enable-background="new 0 0 850.39 850.39" >
+									<path fill="#DB3939" d="M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39
+									c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451
+									l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07
+									h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887
+									l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z"/></svg><br />
+									<div>
+										<Spinner />
+									</div>
+								</div>
+							</Placeholder>
+						</Fragment>
+					}
+					{!this.state.loading && !this.state.card_loading &&
 						<Fragment>
 							{inspectorControls}
 							<BlockControls>

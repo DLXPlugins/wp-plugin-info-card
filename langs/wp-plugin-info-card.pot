@@ -1,16 +1,16 @@
-# Copyright (C) 2019 Brice CAPOBIANCO
+# Copyright (C) 2019 Ronald Huereca
 # This file is distributed under the same license as the WP Plugin Info Card by MediaRon plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Plugin Info Card by MediaRon 3.0.0\n"
+"Project-Id-Version: WP Plugin Info Card by MediaRon 3.1.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-plugin-info-card\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-03-17T22:04:16+00:00\n"
-"PO-Revision-Date: 2019-03-17T22:04:16+00:00\n"
+"POT-Creation-Date: 2019-05-15T12:26:16+00:00\n"
+"PO-Revision-Date: 2019-05-15T12:26:16+00:00\n"
 "X-Generator: WP-CLI 2.0.1\n"
 "X-Domain: wp-plugin-info-card\n"
 
@@ -27,31 +27,31 @@ msgid "WP Plugin Info Card displays plugins & themes identity cards in a beautif
 msgstr ""
 
 #. Author of the plugin
-msgid "Brice CAPOBIANCO"
+msgid "Ronald Huereca"
 msgstr ""
 
 #. Author URI of the plugin
 msgid "https://mediaron.com"
 msgstr ""
 
-#: wp-plugin-info-card.php:81
+#: wp-plugin-info-card.php:82
 msgid "WP Plugin Info Card Settings"
 msgstr ""
 
-#: wp-plugin-info-card.php:81
+#: wp-plugin-info-card.php:82
 msgid "Settings"
 msgstr ""
 
-#: wp-plugin-info-card.php:92
+#: wp-plugin-info-card.php:93
 #: src/wp-plugin-info-card-admin.php:185
 msgid "Documentation and examples"
 msgstr ""
 
-#: wp-plugin-info-card.php:93
+#: wp-plugin-info-card.php:94
 msgid "More plugins by b*web"
 msgstr ""
 
-#: wp-plugin-info-card.php:94
+#: wp-plugin-info-card.php:95
 #: src/wp-plugin-info-card-admin.php:352
 msgid "Donate"
 msgstr ""
@@ -114,14 +114,14 @@ msgid "Nothing found, please add at least one item in the WP Plugin Info Card se
 msgstr ""
 
 #: src/wp-plugin-info-card-widget.php:128
-#: src/wp-plugin-info-card-shortcode.php:147
-#: src/wp-plugin-info-card-shortcode.php:267
+#: src/wp-plugin-info-card-shortcode.php:183
+#: src/wp-plugin-info-card-shortcode.php:303
 msgid "Item not found:"
 msgstr ""
 
 #: src/wp-plugin-info-card-widget.php:128
-#: src/wp-plugin-info-card-shortcode.php:147
-#: src/wp-plugin-info-card-shortcode.php:267
+#: src/wp-plugin-info-card-shortcode.php:183
+#: src/wp-plugin-info-card-shortcode.php:303
 msgid "does not exist."
 msgstr ""
 
@@ -313,9 +313,8 @@ msgstr ""
 
 #: src/wppic-templates/wppic-template-theme-wordpress.php:50
 #: src/wppic-templates/wppic-template-theme.php:33
-#: src/wppic-templates/wppic-template-theme.php:55
 #: src/wppic-templates/wppic-template-theme-large.php:42
-msgid "Active Installs"
+msgid "Downloads"
 msgstr ""
 
 #: src/wppic-templates/wppic-template-theme.php:24
@@ -375,6 +374,10 @@ msgstr ""
 msgid "More info"
 msgstr ""
 
+#: src/wppic-templates/wppic-template-theme.php:55
+msgid "Active Installs"
+msgstr ""
+
 #: src/wppic-templates/wppic-template-theme.php:66
 #: src/wppic-templates/wppic-template-plugin.php:87
 msgid "Back"
@@ -402,7 +405,7 @@ msgstr ""
 msgid "Requires"
 msgstr ""
 
-#: src/wp-plugin-info-card-shortcode.php:300
+#: src/wp-plugin-info-card-shortcode.php:336
 msgid "This card has been generated with WP Plugin Info Card"
 msgstr ""
 
