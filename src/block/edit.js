@@ -153,6 +153,7 @@ class WP_Plugin_Card extends Component {
 			{ value: 'none', label: __('Default', 'wp-plugin-info-card' ) },
 			{ value: 'full', label: __('Full Width', 'wp-plugin-info-card' ) },
 		];
+		const pluginOnClick = this.pluginOnClick;
 		const inspectorControls = (
 			<InspectorControls>
 				<PanelBody title={ __( 'WP Plugin Info Card', 'wp-plugin-info-card' ) }>
@@ -199,13 +200,13 @@ class WP_Plugin_Card extends Component {
 						label={ __( 'Container ID',  'wp-plugin-info-card' ) }
 						type="text"
 						value={ containerid }
-						onChange={ ( value ) => { this.props.setAttributes( { containerid: value }); this.props.attributes.containerid = value; this.setState( { containerid: value } ); this.pluginOnClick(value); } }
+						onChange={ ( value ) => { this.props.setAttributes( { containerid: value }); this.props.attributes.containerid = value; this.setState( { containerid: value } ); setTimeout( function() { pluginOnClick(value); }, 5000 ); } }
 					/>
 					<TextControl
 						label={ __( 'Margin',  'wp-plugin-info-card' ) }
 						type="text"
 						value={ margin }
-						onChange={ ( value ) => { this.props.setAttributes( { margin: value }); this.props.attributes.margin = value; this.setState( { margin: value } ); this.pluginOnClick(value); } }
+						onChange={ ( value ) => { this.props.setAttributes( { margin: value }); this.props.attributes.margin = value; this.setState( { margin: value } ); setTimeout( function() { pluginOnClick(value); }, 5000 ); } }
 					/>
 					<SelectControl
 							label={ __( 'Clear', 'wp-plugin-info-card' ) }
@@ -217,7 +218,7 @@ class WP_Plugin_Card extends Component {
 						label={ __( 'Expiration in minutes',  'wp-plugin-info-card' ) }
 						type="number"
 						value={ expiration }
-						onChange={ ( value ) => { this.props.setAttributes( { expiration: value }); this.props.attributes.expiration = value; this.setState( { expiration: value } ); this.pluginOnClick(value); } }
+						onChange={ ( value ) => { this.props.setAttributes( { expiration: value }); this.props.attributes.expiration = value; this.setState( { expiration: value } ); setTimeout( function() { pluginOnClick(value); }, 5000 ); } }
 					/>
 					<SelectControl
 							label={ __( 'Load card via Ajax?', 'wp-plugin-info-card' ) }
