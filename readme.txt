@@ -4,7 +4,7 @@ Donate link: https://mediaron.com/give/
 Tags: API, plugin, card, envato, block, gutenberg
 Requires at least: 3.7
 Tested up to: 5.2
-Stable tag: 3.1.1
+Stable tag: 3.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -179,6 +179,11 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 
 
 == Changelog ==
+
+= 3.1.5 =
+* Released 2019-05-15
+* Adding loading animation to Gutenberg blocks
+* Fixed theme download count from active installs to downloads
 
 = 3.1.1 =
 * Released 2019-05-13
@@ -411,6 +416,9 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 * First release.
 
 == Upgrade Notice ==
+
+= 3.1.5 =
+Adding loading animation to Gutenberg blocks. Fixed theme download count from active installs to downloads.
 
 = 3.1.1 =
 Fixed float on one column query layouts.
