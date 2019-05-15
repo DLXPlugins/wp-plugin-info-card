@@ -47,7 +47,7 @@ if( !empty( $image ) ){
 				<strong><?php _e( 'Last Updated:', 'wp-plugin-info-card' ) ?></strong> <?php printf( __( '%s ago' ), human_time_diff( strtotime( $wppic_data->last_updated_mk ) ) ); ?>
 			</div>
 			<div class="wp-pic-column-downloaded">
-				<?php echo number_format( $wppic_data->active_installs ); ?> <?php _e( 'Active Installs', 'wp-plugin-info-card' ) ?>
+				<?php echo number_format( filter_var( $wppic_data->downloaded, FILTER_SANITIZE_NUMBER_INT ) ); ?> <?php _e( 'Downloads', 'wp-plugin-info-card' ) ?>
 			</div>
 			<div class="wp-pic-column-version">
 				<span><?php printf( __( 'Version: %s' ), $wppic_data->version ) ?></span>
