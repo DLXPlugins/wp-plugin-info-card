@@ -1729,6 +1729,12 @@ a.wp-pic-credit:focus:after {
 	.wp-pic-row [class*="wp-pic-1-"] {
 		padding: 0 10px 10px 0;
 	}
+	.wp-pic-1-1{
+		width:100%;
+	}
+	.wp-pic-1-1 .wp-pic.card{
+		margin-bottom: 20px;
+	}
 	.wp-pic-row [class*="wp-pic-1-"]:last-child  {
 	  padding-right: 0;
 	}
