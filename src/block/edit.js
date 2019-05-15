@@ -133,7 +133,10 @@ class WP_Plugin_Card extends Component {
 		const layoutOptions = [
 			{ value: 'card', label: __('Card', 'wp-plugin-info-card' ) },
 			{ value: 'large', label: __('Large', 'wp-plugin-info-card' ) },
-			{ value: 'wordpress', label: __('WordPress', 'wp-plugin-info-card' ) }
+			{ value: 'wordpress', label: __('WordPress', 'wp-plugin-info-card' ) },
+			{ value: 'flex', label: __('Flex', 'wp-plugin-info-card' ) },
+			{ value: 'flex_large', label: __('Flex Large', 'wp-plugin-info-card' ) },
+			{ value: 'flex_wordpress', label: __('Flex WordPress', 'wp-plugin-info-card' ) }
 		];
 		const customThemeOptions = [
 			{ value: '', label: __('None', 'wp-plugin-info-card' ) },
