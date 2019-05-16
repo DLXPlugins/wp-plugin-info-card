@@ -934,6 +934,13 @@
 .card.wp-pic.flex {
 	height: auto;
 }
+.wp-pic-wrapper.left.flex .wp-pic,
+.wp-pic-wrapper.right.flex .wp-pic,
+.wp-pic-wrapper.center.flex .wp-pic {
+	position: relative;
+	width: 50%;
+	height: auto;
+}
 .wp-pic-wrapper.wide.flex .wp-pic {
 	position: relative;
 	width: 80%;
@@ -944,7 +951,7 @@
 	position: relative;
 	width: 100%;
 	padding: 0;
-	margin: 0;
+	margin: 0 auto;
 }
 .wp-pic-wrapper.flex .wp-pic .wp-pic-face {
 	position: relative;
@@ -1004,8 +1011,8 @@
 	border-top-right-radius: 0;
 	margin: 0;
 	bottom: inherit;
-	padding: 20px 0;
-	font-size: 20px;
+	padding: 20px 10px;
+	font-size: 18px;
 	text-align: center;
 	line-height: 1.4;
 	position: relative;
