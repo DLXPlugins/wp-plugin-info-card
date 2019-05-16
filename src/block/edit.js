@@ -25,6 +25,7 @@ const {
 const {
 	InspectorControls,
 	BlockControls,
+	BlockAlignmentToolbar,
 	MediaUpload,
 	RichText,
 	AlignmentToolbar,
@@ -44,7 +45,6 @@ class WP_Plugin_Card extends Component {
 			loading: this.props.attributes.loading,
 			card_loading: false,
 			html: this.props.attributes.html,
-			align: this.props.attributes.align,
 			image: this.props.attributes.image,
 			containerid: this.props.attributes.containerid,
 			margin: this.props.attributes.margin,
@@ -135,8 +135,8 @@ class WP_Plugin_Card extends Component {
 			{ value: 'large', label: __('Large', 'wp-plugin-info-card' ) },
 			{ value: 'wordpress', label: __('WordPress', 'wp-plugin-info-card' ) },
 			{ value: 'flex', label: __('Flex', 'wp-plugin-info-card' ) },
-			{ value: 'flex_large', label: __('Flex Large', 'wp-plugin-info-card' ) },
-			{ value: 'flex_wordpress', label: __('Flex WordPress', 'wp-plugin-info-card' ) }
+			{ value: 'flex-large', label: __('Flex Large', 'wp-plugin-info-card' ) },
+			{ value: 'flex-wordpress', label: __('Flex WordPress', 'wp-plugin-info-card' ) }
 		];
 		const customThemeOptions = [
 			{ value: '', label: __('None', 'wp-plugin-info-card' ) },
@@ -281,6 +281,15 @@ class WP_Plugin_Card extends Component {
 							{inspectorControls}
 							<BlockControls>
 								<Toolbar controls={ resetSelect } />
+								<BlockAlignmentToolbar
+									value={this.props.attributes.align}
+									onChange={ (value) => {
+										this.props.setAttributes( { align: value } ); this.props.attributes.align = value;
+										this.setState( { align: value});
+										this.pluginOnClick( value );
+									}}
+								>
+								</BlockAlignmentToolbar>
 							</BlockControls>
 							<div className={'' != width ? 'wp-pic-full-width' : ''}>
 								{htmlToReactParser.parse(this.state.html)}

@@ -277,7 +277,6 @@ function wppic_block_editor_query( $attributes ) {
 	if ( ! empty( $attributes['author'] ) ) {
 		$args['author'] = $attributes['author'];
 	}
-	error_log( print_r( $args, true ) );
 	$html = '';
 	if( '' !== $attributes['width'] ) {
 		$html = sprintf( '<div class="wp-pic-full-width">%s</div>', wppic_shortcode_query_function( $args ) );

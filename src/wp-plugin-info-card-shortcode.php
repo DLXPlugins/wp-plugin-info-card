@@ -159,10 +159,20 @@ function wppic_shortcode_function( $atts, $content="" ) {
 	$layout = trim( $layout);
 	$custom = trim( $custom);
 
-	if( empty( $layout ) )
+	if( empty( $layout ) ) {
 		$layout = 'card';
-
-	$addClass[] = $layout;
+	} else if ( 'flex' === $layout ) {
+		$addClass[] = 'flex';
+		$addClass[] = 'card';
+	} else if ( 'flex-wordpress' === $layout ) {
+		$addClass[] = 'wordpress';
+		$addClass[] = 'flex';
+	} else if ( 'flex-large' === $layout ) {
+		$addClass[] = 'large';
+		$addClass[] = 'flex';
+	} else {
+		$addClass[] = $layout;
+	}
 
 	//Random slug: comma-separated list
 	if ( strpos( $slug,',' ) !== false ) {
@@ -197,13 +207,29 @@ function wppic_shortcode_function( $atts, $content="" ) {
 
 		//Align card
 		$alignCenter = false;
-		if( $align == 'right' || $align == 'left' ) {
-			$align = 'float: ' . $align . '; ';
+		$alignStyle = '';
+		if ( strstr( $layout, 'flex' ) ) {
+			if ( 'right' == $align ) {
+				$alignStyle = 'justify-content: flex-end;';
+			} else if ( 'left' == $align ) {
+				$alignStyle = 'justify-content: flex-start;';
+			}
+			else if ( 'wide' == $align ) {
+				$alignStyle = 'width: 100%; margin: 0';
+			} else if ( 'full' == $align ) {
+				$alignStyle = 'width: 100%; margin: 0;';
+			} else {
+				$alignStyle = 'justify-content: center;';
+			}
+		} else {
+			if( $align == 'right' || $align == 'left' ) {
+				$alignStyle = 'float: ' . $align . '; ';
+			} else {
+				$alignStyle = '';
+				$alignCenter = true;
+			}
 		}
-		if( $align == 'center' ) {
-			$alignCenter = true;
-			$align = '';
-		}
+
 
 		//Extra container ID
 		if( !empty( $containerid ) ){
@@ -219,8 +245,8 @@ function wppic_shortcode_function( $atts, $content="" ) {
 
 		//Custom style
 		$style = '';
-		if( !empty( $margin ) || !empty( $align ) ){
-			$style = 'style="' . $align . $margin . '"';
+		if( !empty( $margin ) || !empty( $alignStyle ) ){
+			$style = 'style="' . $margin . $alignStyle . '"';
 		}
 
 		//Color scheme
@@ -236,11 +262,12 @@ function wppic_shortcode_function( $atts, $content="" ) {
 		if($clear == 'before' )
 		$content .= '<div style="clear:both"></div>';
 
-		if($alignCenter)
-		$content .= '<div class="wp-pic-center">';
+		$content .= sprintf( '<div class="wp-pic-wrapper %s %s" %s>', esc_attr( $align ), esc_attr( $layout ), $style );
+		if ($alignCenter)
+			$content .= '<div class="wp-pic-center">';
 
 		//Data attribute for ajax call
-		$content .= '<div class="wp-pic ' . implode( ' ',$addClass ) . '" ' . $containerid . $style . $ajaxData .' >';
+		$content .= '<div class="wp-pic ' . implode( ' ',$addClass ) . '" ' . $containerid . $ajaxData .' >';
 
 		if( $ajax != 'yes' ){
 			$content .= wppic_shortcode_content( $type, $slug, $image, $expiration, $layout );
@@ -253,6 +280,8 @@ function wppic_shortcode_function( $atts, $content="" ) {
 		//Align center
 		if( $alignCenter )
 		$content .= '</div>';
+
+		$content .= '</div><!-- .wp-pic-wrapper-->';
 
 		if( $clear == 'after' )
 		$content .= '<div style="clear:both"></div>';
