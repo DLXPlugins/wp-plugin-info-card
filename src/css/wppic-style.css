@@ -948,6 +948,16 @@
 .wp-pic-1-1 .wp-pic-wrapper.center.flex .wp-pic{
 	width: 100%;
 }
+.wp-pic-1-2 .wp-pic-wrapper.left.flex .wp-pic,
+.wp-pic-1-2 .wp-pic-wrapper.right.flex .wp-pic,
+.wp-pic-1-2 .wp-pic-wrapper.center.flex .wp-pic{
+	width: 100%;
+}
+.wp-pic-1-3 .wp-pic-wrapper.left.flex .wp-pic,
+.wp-pic-1-3 .wp-pic-wrapper.right.flex .wp-pic,
+.wp-pic-1-3 .wp-pic-wrapper.center.flex .wp-pic{
+	width: 100%;
+}
 .wp-pic-wrapper.wide.flex .wp-pic {
 	position: relative;
 	width: 80%;
@@ -957,10 +967,10 @@
 	padding-bottom: 20px;
 }
 .wp-pic-1-2 .wp-pic-wrapper.wide.flex .wp-pic {
-	width: 48%;
+	width: 100%;
 }
 .wp-pic-1-3 .wp-pic-wrapper.wide.flex .wp-pic {
-	width: 33%;
+	width: 100%;
 }
 .wp-pic-wrapper.full.flex .wp-pic {
 	position: relative;
@@ -971,10 +981,10 @@
 	padding-bottom: 20px;
 }
 .wp-pic-1-2 .wp-pic-wrapper.full.flex .wp-pic {
-	width: 48%;
+	width: 100%;
 }
 .wp-pic-1-3 .wp-pic-wrapper.full.flex .wp-pic {
-	width: 33%;
+	width: 100%;
 }
 .wp-pic-wrapper.flex .wp-pic .wp-pic-face {
 	position: relative;

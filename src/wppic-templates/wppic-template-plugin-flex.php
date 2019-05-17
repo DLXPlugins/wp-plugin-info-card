@@ -31,9 +31,15 @@ if( !empty( $image ) ){
 
 //Plugin banner
 $banner = '';
-if ( !empty( $wppic_data->banners[ 'high' ] ) ) {
-	$banner = 'style="background-image: url(' . esc_attr( $wppic_data->banners[ 'high' ] ) . ' );"';
+$banner_image = isset( $wppic_data->banners['high'] ) ? $wppic_data->banners['high'] : '';
+if ( empty( $banner_image ) ) {
+	if ( isset( $wppic_data->banners['low'] ) ) {
+		$banner_image = $wppic_data->banners['low'];
+	} else {
+		$banner_image = WPPIC_URL . 'img/default-banner.png';
+	}
 }
+$wppic_data->name = wp_trim_words( $wppic_data->name, 3 );
 
 /***************************************************************
  * Start template
@@ -41,9 +47,13 @@ if ( !empty( $wppic_data->banners[ 'high' ] ) ) {
 ?>
 <div class="wp-pic-flip" style="display: none;">
 	<div class="wp-pic-face wp-pic-front">
+		<?php
+		if ( ! empty( $banner_image ) ):
+		?>
 		<div class="wp-pic-banner-wrapper">
-			<a href="<?php echo $wppic_data->url ?>" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ) ?>"><img src="<?php echo esc_url( $wppic_data->banners[ 'high' ] ); ?>" alt="<?php echo esc_attr( $wppic_data->name ); ?>" /></a>
+			<a href="<?php echo $wppic_data->url ?>" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ) ?>"><img src="<?php echo esc_url( $banner_image ); ?>" alt="<?php echo esc_attr( $wppic_data->name ); ?>" /></a>
 		</div>
+		<?php endif; ?>
 		<div class="wp-pic-name-wrapper">
 			<a class="wp-pic-name" href="<?php echo $wppic_data->url ?>" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ) ?>"><strong><?php echo $wppic_data->name ?></strong></a>
 		</div>
