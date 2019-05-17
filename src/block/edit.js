@@ -188,7 +188,18 @@ class WP_Plugin_Card extends Component {
 									{__( 'Upload Image!', 'wp-plugin-info-card' )}
 								</button>
 								{image &&
-										<img src={image} alt={__( 'Plugin Card Image', 'wp-plugin-info-card' )} width="250" height="250" />
+									<Fragment>
+										<div>
+											<img src={image} alt={__( 'Plugin Card Image', 'wp-plugin-info-card' )} width="250" height="250" />
+										</div>
+										<div>
+											<button className="components-button is-button" onClick={ (event) => {
+												this.props.setAttributes( { image: '' } ); this.props.attributes.image = ''; this.setState( { image: '' } ); this.pluginOnClick( event );
+											} }>
+												{__( 'Reset Image', 'wp-plugin-info-card' )}
+											</button>
+										</div>
+									</Fragment>
 								}
 							</Fragment>
 						)}
