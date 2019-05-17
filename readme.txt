@@ -4,7 +4,7 @@ Donate link: https://mediaron.com/give/
 Tags: API, plugin, card, envato, block, gutenberg
 Requires at least: 3.7
 Tested up to: 5.2
-Stable tag: 3.1.5
+Stable tag: 3.1.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,9 +15,11 @@ WPPIC displays plugins & themes data in a beautiful box with a smooth rotation e
 
 == Description ==
 
+WPPIC displays plugins & themes data in a beautiful box with a smooth rotation effect using WP Plugin & Theme APIs. Dashboard widget included.
+
 [PREMIUM ADD-ON - WP Envato Affiliate Card](http://b-website.com/wp-envato-affiliate-card-powered-envato-market-api "WP Envato Affiliate Card")
 
-
+> Please rate the plugin if you like it. <a href="https://wordpress.org/support/plugin/wp-plugin-info-card/reviews/#new-post">Leave a review</a>!
 
 = How does it work? =
 
@@ -179,6 +181,11 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 
 
 == Changelog ==
+
+= 3.1.9 =
+* Released 2019-05-17
+* Gutenberg fixes and enhancements
+* New FLEX layout option in Gutenberg and the shortcodes
 
 = 3.1.5 =
 * Released 2019-05-15
@@ -417,23 +424,5 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 
 == Upgrade Notice ==
 
-= 3.1.5 =
-Adding loading animation to Gutenberg blocks. Fixed theme download count from active installs to downloads.
-
-= 3.1.1 =
-Fixed float on one column query layouts.
-
-= 3.1.0 =
-Added Query Selector Gutenberg block. Removing Custom from Gutenberg blocks as it makes no sense from a block perspective. Fixing PHP error in query Selector. Adding Reset button to Gutenberg blocks so you can change your settings.
-
-= 3.0.1 =
-Fixing PHP notices and showing theme download count in dashboard widget.
-
-= 3.0.0 =
-Fixed downloaded being blank (changed to active installs). Added Gutenberg block.
-
-= 1.5 =
-* If you have installed the plugin before version 1.5 you have to deactivate it then reactivate it in order to register the cron job which will purge the plugin transients everyday.
-
-= 1.0 =
-* First release.
+= 3.1.9 =
+Gutenberg fixes and enhancements. New FLEX layout option in Gutenberg and the shortcodes.
