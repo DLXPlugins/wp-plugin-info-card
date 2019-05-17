@@ -939,17 +939,20 @@
 .wp-pic-wrapper.center.flex .wp-pic {
 	position: relative;
 	width: 50%;
+	max-width: 1544px;
 	height: auto;
 }
 .wp-pic-wrapper.wide.flex .wp-pic {
 	position: relative;
 	width: 80%;
+	max-width: 1544px;
 	height: auto;
 	margin: 0 auto;
 }
 .wp-pic-wrapper.full.flex .wp-pic {
 	position: relative;
 	width: 100%;
+	max-width: 1544px;
 	padding: 0;
 	margin: 0 auto;
 }

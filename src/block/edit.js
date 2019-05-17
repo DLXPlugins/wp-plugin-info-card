@@ -135,8 +135,6 @@ class WP_Plugin_Card extends Component {
 			{ value: 'large', label: __('Large', 'wp-plugin-info-card' ) },
 			{ value: 'wordpress', label: __('WordPress', 'wp-plugin-info-card' ) },
 			{ value: 'flex', label: __('Flex', 'wp-plugin-info-card' ) },
-			{ value: 'flex-large', label: __('Flex Large', 'wp-plugin-info-card' ) },
-			{ value: 'flex-wordpress', label: __('Flex WordPress', 'wp-plugin-info-card' ) }
 		];
 		const widthOptions = [
 			{ value: 'none', label: __('Default', 'wp-plugin-info-card' ) },
@@ -156,7 +154,21 @@ class WP_Plugin_Card extends Component {
 							label={ __( 'Layout', 'wp-plugin-info-card' ) }
 							options={ layoutOptions }
 							value={ layout }
-							onChange={ ( value ) => { this.props.setAttributes( { layout: value } ); this.props.attributes.layout = value; this.setState( { layout: value}); this.pluginOnClick(value); } }
+							onChange={ ( value ) => {
+								if ( 'flex' == value ) {
+									this.props.setAttributes( { layout: value, align: 'full' } );
+									this.props.attributes.layout = value;
+									this.props.attributes.align = 'full';
+									this.setState( { layout: value, align: 'full' } );
+									this.pluginOnClick(value);
+								} else {
+									this.props.setAttributes( { layout: value, align: 'center' } );
+									this.props.attributes.layout = value;
+									this.props.attributes.align = 'center';
+									this.setState( { layout: value, align: 'center' } );
+									this.pluginOnClick(value);
+								}
+							} }
 					/>
 					<SelectControl
 							label={ __( 'Width', 'wp-plugin-info-card' ) }
@@ -283,7 +295,7 @@ class WP_Plugin_Card extends Component {
 									>
 									</BlockAlignmentToolbar>
 								}
-								{'flex' != this.state.layout &&
+								{'card' == this.state.layout &&
 									<AlignmentToolbar
 										value={this.props.attributes.align}
 										onChange={ (value) => {
