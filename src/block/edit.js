@@ -243,14 +243,14 @@ class WP_Plugin_Card extends Component {
 						<Placeholder>
 							<div className="wppic-block">
 								<div>
-									<h3><label for="wppic-type-select">{__( 'Select a Type', 'wp-plugin-info-card' )}</label></h3>
+									<h3><label htmlFor="wppic-type-select">{__( 'Select a Type', 'wp-plugin-info-card' )}</label></h3>
 									<select id="wppic-type-select" onChange={ ( event ) => { this.props.setAttributes( { type: event.target.value } ); this.typeChange(event); } }>
 										<option value="theme" selected={this.state.type === 'theme' ? 'selected': '' }>{__( 'Theme', 'wp-plugin-info-card' )}</option>
 										<option value="plugin" selected={this.state.type === 'plugin' ? 'selected': '' }>{__( 'Plugin', 'wp-plugin-info-card' )}</option>
 									</select>
 								</div>
 								<div>
-									<h3><label for="wppic-input-slug">{__( 'Enter a slug', 'wp-plugin-info-card' )}</label></h3>
+									<h3><label htmlFor="wppic-input-slug">{__( 'Enter a slug', 'wp-plugin-info-card' )}</label></h3>
 								</div>
 								<div>
 									<input type="text" id="wppic-input-slug" value={this.state.slug} onChange={ ( event ) => { this.props.setAttributes( { slug: event.target.value } ); this.slugChange(event); } } />
