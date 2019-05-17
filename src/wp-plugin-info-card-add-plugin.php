@@ -90,6 +90,7 @@ function wppic_plugin_template( $content, $data ){
 
 		//load custom user template if exists
 		$WPPICtemplatefile = '/wppic-templates/wppic-template-plugin';
+
 		ob_start();
 		if ( file_exists( get_stylesheet_directory() . $WPPICtemplatefile .  $layout . '.php' ) ) {
 			include( get_stylesheet_directory() . $WPPICtemplatefile .  $layout . '.php' );

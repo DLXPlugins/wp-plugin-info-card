@@ -28,6 +28,7 @@ const {
 	MediaUpload,
 	RichText,
 	AlignmentToolbar,
+	BlockAlignmentToolbar,
 	PanelColorSettings,
 } = wp.editor;
 
@@ -106,11 +107,6 @@ class WP_Plugin_Card_Query extends Component {
 				onClick: () => this.setState( { loading: true } )
 			}
 		];
-		const alignOptions = [
-			{ value: 'left', label: __('Left', 'wp-plugin-info-card' ) },
-			{ value: 'center', label: __('Center', 'wp-plugin-info-card' ) },
-			{ value: 'right', label: __('Right', 'wp-plugin-info-card' ) },
-		];
 		const clearOptions = [
 			{ value: 'none', label: __('None', 'wp-plugin-info-card' ) },
 			{ value: 'before', label: __('Before', 'wp-plugin-info-card' ) },
@@ -136,7 +132,8 @@ class WP_Plugin_Card_Query extends Component {
 		const layoutOptions = [
 			{ value: 'card', label: __('Card', 'wp-plugin-info-card' ) },
 			{ value: 'large', label: __('Large', 'wp-plugin-info-card' ) },
-			{ value: 'wordpress', label: __('WordPress', 'wp-plugin-info-card' ) }
+			{ value: 'wordpress', label: __('WordPress', 'wp-plugin-info-card' ) },
+			{ value: 'flex', label: __('Flex', 'wp-plugin-info-card' ) },
 		];
 		const customThemeOptions = [
 			{ value: '', label: __('None', 'wp-plugin-info-card' ) },
@@ -178,23 +175,28 @@ class WP_Plugin_Card_Query extends Component {
 							value={ width }
 							onChange={ ( value ) => {  this.props.setAttributes( { width: value } ); this.props.attributes.width = value; this.setState( { width: value}); } }
 					/>
-					<SelectControl
-							label={ __( 'Align', 'wp-plugin-info-card' ) }
-							options={ alignOptions }
-							value={ align }
-							onChange={ ( value ) => {  this.props.setAttributes( { align: value } ); this.props.attributes.align = value; this.setState( { align: value}); this.pluginOnClick(value); } }
-					/>
 					<MediaUpload
 						onSelect={(imageObject) => { this.props.setAttributes( { image: imageObject.url}); this.props.attributes.image = imageObject.url; this.setState( { image: imageObject.url } ); this.pluginOnClick(imageObject); } }
 						type="image"
 						value={image}
 						render={({ open }) => (
 							<Fragment>
-								<button onClick={open}>
+								<button className="components-button is-button" onClick={open}>
 									{__( 'Upload Image!', 'wp-plugin-info-card' )}
 								</button>
 								{image &&
-										<img src={image} alt={__( 'Plugin Card Image', 'wp-plugin-info-card' )} width="250" height="250" />
+									<Fragment>
+										<div>
+											<img src={image} alt={__( 'Plugin Card Image', 'wp-plugin-info-card' )} width="250" height="250" />
+										</div>
+										<div>
+											<button className="components-button is-button" onClick={ (event) => {
+												this.props.setAttributes( { image: '' } ); this.props.attributes.image = ''; this.setState( { image: '' } ); this.pluginOnClick( event );
+											} }>
+												{__( 'Reset Image', 'wp-plugin-info-card' )}
+											</button>
+										</div>
+									</Fragment>
 								}
 							</Fragment>
 						)}
@@ -240,33 +242,33 @@ class WP_Plugin_Card_Query extends Component {
 						<Placeholder>
 							<div className="wppic-query-block">
 								<div>
-									<h3><label for="wppic-type-select">{__( 'Select a Type', 'wp-plugin-info-card' )}</label></h3>
+									<h3><label htmlFor="wppic-type-select">{__( 'Select a Type', 'wp-plugin-info-card' )}</label></h3>
 									<select id="wppic-type-select" onChange={ ( event ) => { this.props.setAttributes( { type: event.target.value } ); this.typeChange(event); } }>
 										<option value="theme" selected={this.state.type === 'theme' ? 'selected': '' }>{__( 'Theme', 'wp-plugin-info-card' )}</option>
 										<option value="plugin" selected={this.state.type === 'plugin' ? 'selected': '' }>{__( 'Plugin', 'wp-plugin-info-card' )}</option>
 									</select>
 								</div>
 								<div>
-									<h3><label for="wppic-input-search">{__( 'Search', 'wp-plugin-info-card' )}</label></h3>
+									<h3><label htmlFor="wppic-input-search">{__( 'Search', 'wp-plugin-info-card' )}</label></h3>
 								</div>
 								<div>
 									<input type="text" id="wppic-input-search" value={this.state.search} onChange={ ( event ) => { this.props.setAttributes( { search: event.target.value } ); this.setState( { search: event.target.value } ) } } />
 								</div>
 								<div>
-									<h3><label for="wppic-input-tag">{__( 'Tags (can be comma separated)', 'wp-plugin-info-card' )}</label></h3>
+									<h3><label htmlFor="wppic-input-tag">{__( 'Tags (can be comma separated)', 'wp-plugin-info-card' )}</label></h3>
 								</div>
 								<div>
 									<input type="text" id="wppic-input-tag" value={this.state.tag} onChange={ ( event ) => { this.props.setAttributes( { tag: event.target.value } ); this.setState( { tag: event.target.value } ) } } />
 								</div>
 								<div>
-									<h3><label for="wppic-input-author">{__( 'Username', 'wp-plugin-info-card' )}</label></h3>
+									<h3><label htmlFor="wppic-input-author">{__( 'Username', 'wp-plugin-info-card' )}</label></h3>
 									<p>{__( 'Filter by Username', 'wp-plugin-info-card' )}</p>
 								</div>
 								<div>
 									<input type="text" id="wppic-input-author" value={this.state.author} onChange={ ( event ) => { this.props.setAttributes( { author: event.target.value } ); this.setState( { author: event.target.value } ) } } />
 								</div>
 								<div>
-									<h3><label for="wppic-input-user">{__( 'User', 'wp-plugin-info-card' )}</label></h3>
+									<h3><label htmlFor="wppic-input-user">{__( 'User', 'wp-plugin-info-card' )}</label></h3>
 									<p>{__( 'See the favorites from this username', 'wp-plugin-info-card' )}</p>
 								</div>
 								<div>
@@ -274,7 +276,7 @@ class WP_Plugin_Card_Query extends Component {
 								</div>
 
 								<div>
-									<h3><label for="wppic-input-browse">{__( 'Browse', 'wp-plugin-info-card' )}</label></h3>
+									<h3><label htmlFor="wppic-input-browse">{__( 'Browse', 'wp-plugin-info-card' )}</label></h3>
 								</div>
 								<div>
 									<select id="wppic-type-browse" onChange={ ( event ) => { this.props.setAttributes( { browse: event.target.value } ); this.setState( { browse: event.target.value } ) } }>
@@ -286,19 +288,19 @@ class WP_Plugin_Card_Query extends Component {
 										</select>
 								</div>
 								<div>
-									<h3><label for="wppic-input-per-page">{__( 'Per Page', 'wp-plugin-info-card' )}</label></h3>
+									<h3><label htmlFor="wppic-input-per-page">{__( 'Per Page', 'wp-plugin-info-card' )}</label></h3>
 								</div>
 								<div>
 									<input type="number" id="wppic-input-per-page" value={this.state.per_page} onChange={ ( event ) => { this.props.setAttributes( { per_page: event.target.value } ); this.setState( { per_page: event.target.value } ) } } />
 								</div>
 								<div>
-									<h3><label for="wppic-input-columns">{__( 'Columns', 'wp-plugin-info-card' )}</label></h3>
+									<h3><label htmlFor="wppic-input-columns">{__( 'Columns', 'wp-plugin-info-card' )}</label></h3>
 								</div>
 								<div>
 									<select id="wppic-input-columns" onChange={ ( event ) => { this.props.setAttributes( { cols: event.target.value } ); this.setState( { cols: event.target.value } ) } }>
-											<option value="1" selected={this.state.cols === '' ? 'selected': '' }>{__( '1', 'wp-plugin-info-card' )}</option>
-											<option value="2" selected={this.state.cols === '2' ? 'selected': '' }>{__( '2', 'wp-plugin-info-card' )}</option>
-											<option value="3" selected={this.state.cols === '3' ? 'selected': '' }>{__( '3', 'wp-plugin-info-card' )}</option>
+											<option value="1" selected={cols == 1 ? 'selected': '' }>{__( '1', 'wp-plugin-info-card' )}</option>
+											<option value="2" selected={cols == 2 ? 'selected': '' }>{__( '2', 'wp-plugin-info-card' )}</option>
+											<option value="3" selected={cols == 3 ? 'selected': '' }>{__( '3', 'wp-plugin-info-card' )}</option>
 										</select>
 								</div>
 								<div>
@@ -330,6 +332,27 @@ class WP_Plugin_Card_Query extends Component {
 							{inspectorControls}
 							<BlockControls>
 								<Toolbar controls={ resetSelect } />
+								{'flex' == this.state.layout &&
+									<BlockAlignmentToolbar
+										value={this.props.attributes.align}
+										onChange={ (value) => {
+											this.props.setAttributes( { align: value } ); this.props.attributes.align = value;
+											this.setState( { align: value});
+											this.pluginOnClick( value );
+										}}
+									>
+									</BlockAlignmentToolbar>
+								}
+								{'card' == this.state.layout &&
+									<AlignmentToolbar
+										value={this.props.attributes.align}
+										onChange={ (value) => {
+											this.props.setAttributes( { align: value } ); this.props.attributes.align = value;
+											this.setState( { align: value});
+											this.pluginOnClick( value );
+										} }
+									></AlignmentToolbar>
+								}
 							</BlockControls>
 							<div className={'' != width ? 'wp-pic-full-width' : ''}>
 								{htmlToReactParser.parse(this.state.html)}

@@ -25,6 +25,7 @@ const {
 const {
 	InspectorControls,
 	BlockControls,
+	BlockAlignmentToolbar,
 	MediaUpload,
 	RichText,
 	AlignmentToolbar,
@@ -44,7 +45,6 @@ class WP_Plugin_Card extends Component {
 			loading: this.props.attributes.loading,
 			card_loading: false,
 			html: this.props.attributes.html,
-			align: this.props.attributes.align,
 			image: this.props.attributes.image,
 			containerid: this.props.attributes.containerid,
 			margin: this.props.attributes.margin,
@@ -133,21 +133,8 @@ class WP_Plugin_Card extends Component {
 		const layoutOptions = [
 			{ value: 'card', label: __('Card', 'wp-plugin-info-card' ) },
 			{ value: 'large', label: __('Large', 'wp-plugin-info-card' ) },
-			{ value: 'wordpress', label: __('WordPress', 'wp-plugin-info-card' ) }
-		];
-		const customThemeOptions = [
-			{ value: '', label: __('None', 'wp-plugin-info-card' ) },
-			{ value: 'url', label: __('URL', 'wp-plugin-info-card' ) },
-			{ value: 'name', label: __('Name', 'wp-plugin-info-card' ) },
-			{ value: 'version', label: __('Version', 'wp-plugin-info-card' ) },
-			{ value: 'author', label: __('Author', 'wp-plugin-info-card' ) },
-			{ value: 'screenshot_url', label: __('Screenshot URL', 'wp-plugin-info-card' ) },
-			{ value: 'rating', label: __('Ratings', 'wp-plugin-info-card' ) },
-			{ value: 'num_ratings', label: __('Number of Ratings', 'wp-plugin-info-card' ) },
-			{ value: 'active_installs', label: __('Active Installs', 'wp-plugin-info-card' ) },
-			{ value: 'last_updated', label: __('Last Updated', 'wp-plugin-info-card' ) },
-			{ value: 'homepage', label: __('Homepage', 'wp-plugin-info-card' ) },
-			{ value: 'download_link', label: __('Download Link', 'wp-plugin-info-card' ) },
+			{ value: 'wordpress', label: __('WordPress', 'wp-plugin-info-card' ) },
+			{ value: 'flex', label: __('Flex', 'wp-plugin-info-card' ) },
 		];
 		const widthOptions = [
 			{ value: 'none', label: __('Default', 'wp-plugin-info-card' ) },
@@ -167,7 +154,21 @@ class WP_Plugin_Card extends Component {
 							label={ __( 'Layout', 'wp-plugin-info-card' ) }
 							options={ layoutOptions }
 							value={ layout }
-							onChange={ ( value ) => { this.props.setAttributes( { layout: value } ); this.props.attributes.layout = value; this.setState( { layout: value}); this.pluginOnClick(value); } }
+							onChange={ ( value ) => {
+								if ( 'flex' == value ) {
+									this.props.setAttributes( { layout: value, align: 'full' } );
+									this.props.attributes.layout = value;
+									this.props.attributes.align = 'full';
+									this.setState( { layout: value, align: 'full' } );
+									this.pluginOnClick(value);
+								} else {
+									this.props.setAttributes( { layout: value, align: 'center' } );
+									this.props.attributes.layout = value;
+									this.props.attributes.align = 'center';
+									this.setState( { layout: value, align: 'center' } );
+									this.pluginOnClick(value);
+								}
+							} }
 					/>
 					<SelectControl
 							label={ __( 'Width', 'wp-plugin-info-card' ) }
@@ -175,23 +176,28 @@ class WP_Plugin_Card extends Component {
 							value={ width }
 							onChange={ ( value ) => {  this.props.setAttributes( { width: value } ); this.props.attributes.width = value; this.setState( { width: value}); } }
 					/>
-					<SelectControl
-							label={ __( 'Align', 'wp-plugin-info-card' ) }
-							options={ alignOptions }
-							value={ align }
-							onChange={ ( value ) => {  this.props.setAttributes( { align: value } ); this.props.attributes.align = value; this.setState( { align: value}); this.pluginOnClick(value); } }
-					/>
 					<MediaUpload
 						onSelect={(imageObject) => { this.props.setAttributes( { image: imageObject.url}); this.props.attributes.image = imageObject.url; this.setState( { image: imageObject.url } ); this.pluginOnClick(imageObject); } }
 						type="image"
 						value={image}
 						render={({ open }) => (
 							<Fragment>
-								<button onClick={open}>
+								<button className="components-button is-button" onClick={open}>
 									{__( 'Upload Image!', 'wp-plugin-info-card' )}
 								</button>
 								{image &&
-										<img src={image} alt={__( 'Plugin Card Image', 'wp-plugin-info-card' )} width="250" height="250" />
+									<Fragment>
+										<div>
+											<img src={image} alt={__( 'Plugin Card Image', 'wp-plugin-info-card' )} width="250" height="250" />
+										</div>
+										<div>
+											<button className="components-button is-button" onClick={ (event) => {
+												this.props.setAttributes( { image: '' } ); this.props.attributes.image = ''; this.setState( { image: '' } ); this.pluginOnClick( event );
+											} }>
+												{__( 'Reset Image', 'wp-plugin-info-card' )}
+											</button>
+										</div>
+									</Fragment>
 								}
 							</Fragment>
 						)}
@@ -237,14 +243,14 @@ class WP_Plugin_Card extends Component {
 						<Placeholder>
 							<div className="wppic-block">
 								<div>
-									<h3><label for="wppic-type-select">{__( 'Select a Type', 'wp-plugin-info-card' )}</label></h3>
+									<h3><label htmlFor="wppic-type-select">{__( 'Select a Type', 'wp-plugin-info-card' )}</label></h3>
 									<select id="wppic-type-select" onChange={ ( event ) => { this.props.setAttributes( { type: event.target.value } ); this.typeChange(event); } }>
 										<option value="theme" selected={this.state.type === 'theme' ? 'selected': '' }>{__( 'Theme', 'wp-plugin-info-card' )}</option>
 										<option value="plugin" selected={this.state.type === 'plugin' ? 'selected': '' }>{__( 'Plugin', 'wp-plugin-info-card' )}</option>
 									</select>
 								</div>
 								<div>
-									<h3><label for="wppic-input-slug">{__( 'Enter a slug', 'wp-plugin-info-card' )}</label></h3>
+									<h3><label htmlFor="wppic-input-slug">{__( 'Enter a slug', 'wp-plugin-info-card' )}</label></h3>
 								</div>
 								<div>
 									<input type="text" id="wppic-input-slug" value={this.state.slug} onChange={ ( event ) => { this.props.setAttributes( { slug: event.target.value } ); this.slugChange(event); } } />
@@ -278,6 +284,27 @@ class WP_Plugin_Card extends Component {
 							{inspectorControls}
 							<BlockControls>
 								<Toolbar controls={ resetSelect } />
+								{'flex' == this.state.layout &&
+									<BlockAlignmentToolbar
+										value={this.props.attributes.align}
+										onChange={ (value) => {
+											this.props.setAttributes( { align: value } ); this.props.attributes.align = value;
+											this.setState( { align: value});
+											this.pluginOnClick( value );
+										}}
+									>
+									</BlockAlignmentToolbar>
+								}
+								{'card' == this.state.layout &&
+									<AlignmentToolbar
+										value={this.props.attributes.align}
+										onChange={ (value) => {
+											this.props.setAttributes( { align: value } ); this.props.attributes.align = value;
+											this.setState( { align: value});
+											this.pluginOnClick( value );
+										} }
+									></AlignmentToolbar>
+								}
 							</BlockControls>
 							<div className={'' != width ? 'wp-pic-full-width' : ''}>
 								{htmlToReactParser.parse(this.state.html)}

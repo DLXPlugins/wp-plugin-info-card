@@ -2,8 +2,8 @@
  * Plugin Name: WP Plugin Info Card by b*web
  * Plugin URI: http://b-website.com/
  * Author: Brice CAPOBIANCO - b*web
- */		
-@import url("./wppic-style.min.css");
+ */
+@import url("./wppic-style.css");
 i.mce-i-wppic-icon {
 	background-image:  url('../img/wppic.png');
 	background-image:  none, url('../img/wppic.svg'), url('../img/wppic.png');
