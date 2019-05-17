@@ -138,20 +138,6 @@ class WP_Plugin_Card extends Component {
 			{ value: 'flex-large', label: __('Flex Large', 'wp-plugin-info-card' ) },
 			{ value: 'flex-wordpress', label: __('Flex WordPress', 'wp-plugin-info-card' ) }
 		];
-		const customThemeOptions = [
-			{ value: '', label: __('None', 'wp-plugin-info-card' ) },
-			{ value: 'url', label: __('URL', 'wp-plugin-info-card' ) },
-			{ value: 'name', label: __('Name', 'wp-plugin-info-card' ) },
-			{ value: 'version', label: __('Version', 'wp-plugin-info-card' ) },
-			{ value: 'author', label: __('Author', 'wp-plugin-info-card' ) },
-			{ value: 'screenshot_url', label: __('Screenshot URL', 'wp-plugin-info-card' ) },
-			{ value: 'rating', label: __('Ratings', 'wp-plugin-info-card' ) },
-			{ value: 'num_ratings', label: __('Number of Ratings', 'wp-plugin-info-card' ) },
-			{ value: 'active_installs', label: __('Active Installs', 'wp-plugin-info-card' ) },
-			{ value: 'last_updated', label: __('Last Updated', 'wp-plugin-info-card' ) },
-			{ value: 'homepage', label: __('Homepage', 'wp-plugin-info-card' ) },
-			{ value: 'download_link', label: __('Download Link', 'wp-plugin-info-card' ) },
-		];
 		const widthOptions = [
 			{ value: 'none', label: __('Default', 'wp-plugin-info-card' ) },
 			{ value: 'full', label: __('Full Width', 'wp-plugin-info-card' ) },
@@ -286,15 +272,27 @@ class WP_Plugin_Card extends Component {
 							{inspectorControls}
 							<BlockControls>
 								<Toolbar controls={ resetSelect } />
-								<BlockAlignmentToolbar
-									value={this.props.attributes.align}
-									onChange={ (value) => {
-										this.props.setAttributes( { align: value } ); this.props.attributes.align = value;
-										this.setState( { align: value});
-										this.pluginOnClick( value );
-									}}
-								>
-								</BlockAlignmentToolbar>
+								{'flex' == this.state.layout &&
+									<BlockAlignmentToolbar
+										value={this.props.attributes.align}
+										onChange={ (value) => {
+											this.props.setAttributes( { align: value } ); this.props.attributes.align = value;
+											this.setState( { align: value});
+											this.pluginOnClick( value );
+										}}
+									>
+									</BlockAlignmentToolbar>
+								}
+								{'flex' != this.state.layout &&
+									<AlignmentToolbar
+										value={this.props.attributes.align}
+										onChange={ (value) => {
+											this.props.setAttributes( { align: value } ); this.props.attributes.align = value;
+											this.setState( { align: value});
+											this.pluginOnClick( value );
+										} }
+									></AlignmentToolbar>
+								}
 							</BlockControls>
 							<div className={'' != width ? 'wp-pic-full-width' : ''}>
 								{htmlToReactParser.parse(this.state.html)}

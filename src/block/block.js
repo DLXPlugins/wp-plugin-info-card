@@ -38,13 +38,13 @@ registerBlockType( 'wp-plugin-info-card/wp-plugin-info-card', {
    h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887
    l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z"/>
 </svg>,
+	className: 'wp-plugin-info-card-block',
 	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
 		__( 'WP Plugin Info Card', 'wp-plugin-info-card' ),
 		__( 'Plugin', 'wp-plugin-info-card' ),
 		__( 'Info', 'wp-plugin-info-card' ),
 	],
-
 	edit: edit,
 
 	// Render via PHP
