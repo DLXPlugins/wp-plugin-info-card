@@ -178,19 +178,13 @@ class WP_Plugin_Card extends Component {
 							value={ width }
 							onChange={ ( value ) => {  this.props.setAttributes( { width: value } ); this.props.attributes.width = value; this.setState( { width: value}); } }
 					/>
-					<SelectControl
-							label={ __( 'Align', 'wp-plugin-info-card' ) }
-							options={ alignOptions }
-							value={ align }
-							onChange={ ( value ) => {  this.props.setAttributes( { align: value } ); this.props.attributes.align = value; this.setState( { align: value}); this.pluginOnClick(value); } }
-					/>
 					<MediaUpload
 						onSelect={(imageObject) => { this.props.setAttributes( { image: imageObject.url}); this.props.attributes.image = imageObject.url; this.setState( { image: imageObject.url } ); this.pluginOnClick(imageObject); } }
 						type="image"
 						value={image}
 						render={({ open }) => (
 							<Fragment>
-								<button onClick={open}>
+								<button className="components-button is-button" onClick={open}>
 									{__( 'Upload Image!', 'wp-plugin-info-card' )}
 								</button>
 								{image &&
