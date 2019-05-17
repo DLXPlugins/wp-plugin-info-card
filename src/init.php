@@ -179,7 +179,7 @@ function wppic_register_block() {
 			),
 			'cols' => array(
 				'type' => 'int',
-				'default' => 1,
+				'default' => 2,
 			),
 			'type' => array(
 				'type' => 'string',
