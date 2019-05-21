@@ -1,25 +1,25 @@
-# Copyright (C) 2019 Ronald Huereca
-# This file is distributed under the same license as the WP Plugin Info Card by MediaRon plugin.
+# Copyright (C) 2019 Brice CAPOBIANCO
+# This file is distributed under the same license as the WP Plugin Info Card by b*web plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Plugin Info Card by MediaRon 3.1.1\n"
+"Project-Id-Version: WP Plugin Info Card by b*web 3.1.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-plugin-info-card\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-05-15T12:26:16+00:00\n"
-"PO-Revision-Date: 2019-05-15T12:26:16+00:00\n"
+"POT-Creation-Date: 2019-05-21T11:35:49+00:00\n"
+"PO-Revision-Date: 2019-05-21T11:35:49+00:00\n"
 "X-Generator: WP-CLI 2.0.1\n"
 "X-Domain: wp-plugin-info-card\n"
 
 #. Plugin Name of the plugin
-msgid "WP Plugin Info Card by MediaRon"
+msgid "WP Plugin Info Card by b*web"
 msgstr ""
 
 #. Plugin URI of the plugin
-msgid "https://mediaron/wp-plugin-info-card"
+msgid "http://b-website.com/wp-plugin-info-card-for-wordpress"
 msgstr ""
 
 #. Description of the plugin
@@ -27,55 +27,60 @@ msgid "WP Plugin Info Card displays plugins & themes identity cards in a beautif
 msgstr ""
 
 #. Author of the plugin
-msgid "Ronald Huereca"
+msgid "Brice CAPOBIANCO"
 msgstr ""
 
 #. Author URI of the plugin
-msgid "https://mediaron.com"
+msgid "http://b-website.com/"
 msgstr ""
 
-#: wp-plugin-info-card.php:82
+#: wp-plugin-info-card.php:81
 msgid "WP Plugin Info Card Settings"
 msgstr ""
 
-#: wp-plugin-info-card.php:82
+#: wp-plugin-info-card.php:81
 msgid "Settings"
 msgstr ""
 
-#: wp-plugin-info-card.php:93
+#: wp-plugin-info-card.php:92
 #: src/wp-plugin-info-card-admin.php:185
 msgid "Documentation and examples"
 msgstr ""
 
-#: wp-plugin-info-card.php:94
+#: wp-plugin-info-card.php:93
 msgid "More plugins by b*web"
 msgstr ""
 
-#: wp-plugin-info-card.php:95
+#: wp-plugin-info-card.php:94
 #: src/wp-plugin-info-card-admin.php:352
 msgid "Donate"
 msgstr ""
 
-#: src/wp-plugin-info-card-add-plugin.php:125
+#: src/wp-plugin-info-card-add-plugin.php:126
 msgid "Add a plugin"
 msgstr ""
 
-#: src/wp-plugin-info-card-add-plugin.php:126
+#: src/wp-plugin-info-card-add-plugin.php:127
 msgid "Please refer to the plugin URL on wordpress.org to determine its slug"
 msgstr ""
 
-#: src/wp-plugin-info-card-add-plugin.php:138
+#: src/wp-plugin-info-card-add-plugin.php:139
 msgid "is not a valid plugin name format. This key has been deleted."
 msgstr ""
 
-#: src/wp-plugin-info-card-add-plugin.php:147
+#: src/wp-plugin-info-card-add-plugin.php:148
 msgid "Plugins"
 msgstr ""
 
-#: src/wp-plugin-info-card-add-plugin.php:162
+#: src/wp-plugin-info-card-add-plugin.php:163
 #: src/wp-plugin-info-card-add-theme.php:143
-#: src/wppic-templates/wppic-template-theme.php:35
-#: src/wppic-templates/wppic-template-theme.php:57
+#: src/wppic-templates/wppic-template-theme.php:34
+#: src/wppic-templates/wppic-template-theme.php:56
+#: src/wppic-templates/wppic-template-theme-flex.php:47
+#: src/wppic-templates/wppic-template-plugin-flex.php:54
+#: src/wppic-templates/wppic-template-plugin-flex.php:58
+#: src/wppic-templates/wppic-template-plugin-flex.php:80
+#: src/wppic-templates/wppic-template-plugin-flex.php:85
 #: src/wppic-templates/wppic-template-plugin-large.php:45
 #: src/wppic-templates/wppic-template-plugin-large.php:50
 #: src/wppic-templates/wppic-template-plugin-large.php:66
@@ -89,20 +94,22 @@ msgstr ""
 msgid "WordPress.org Plugin Page"
 msgstr ""
 
-#: src/wp-plugin-info-card-add-plugin.php:163
+#: src/wp-plugin-info-card-add-plugin.php:164
 #: src/wp-plugin-info-card-add-theme.php:144
 msgid "Ratings:"
 msgstr ""
 
-#: src/wp-plugin-info-card-add-plugin.php:167
+#: src/wp-plugin-info-card-add-plugin.php:168
 msgid "Active Installs:"
 msgstr ""
 
-#: src/wp-plugin-info-card-add-plugin.php:168
+#: src/wp-plugin-info-card-add-plugin.php:169
 #: src/wp-plugin-info-card-add-theme.php:149
 #: src/wppic-templates/wppic-template-theme-wordpress.php:47
-#: src/wppic-templates/wppic-template-theme.php:48
+#: src/wppic-templates/wppic-template-theme.php:47
 #: src/wppic-templates/wppic-template-plugin-wordpress.php:69
+#: src/wppic-templates/wppic-template-theme-flex.php:34
+#: src/wppic-templates/wppic-template-plugin-flex.php:64
 #: src/wppic-templates/wppic-template-plugin-large.php:53
 #: src/wppic-templates/wppic-template-theme-large.php:31
 #: src/wppic-templates/wppic-template-plugin.php:69
@@ -114,14 +121,14 @@ msgid "Nothing found, please add at least one item in the WP Plugin Info Card se
 msgstr ""
 
 #: src/wp-plugin-info-card-widget.php:128
-#: src/wp-plugin-info-card-shortcode.php:183
-#: src/wp-plugin-info-card-shortcode.php:303
+#: src/wp-plugin-info-card-shortcode.php:194
+#: src/wp-plugin-info-card-shortcode.php:333
 msgid "Item not found:"
 msgstr ""
 
 #: src/wp-plugin-info-card-widget.php:128
-#: src/wp-plugin-info-card-shortcode.php:183
-#: src/wp-plugin-info-card-shortcode.php:303
+#: src/wp-plugin-info-card-shortcode.php:194
+#: src/wp-plugin-info-card-shortcode.php:333
 msgid "does not exist."
 msgstr ""
 
@@ -302,7 +309,8 @@ msgid "WordPress"
 msgstr ""
 
 #: src/wppic-templates/wppic-template-theme-wordpress.php:28
-#: src/wppic-templates/wppic-template-theme.php:47
+#: src/wppic-templates/wppic-template-theme.php:46
+#: src/wppic-templates/wppic-template-theme-flex.php:31
 msgid "Theme Preview"
 msgstr ""
 
@@ -312,31 +320,42 @@ msgid "Download"
 msgstr ""
 
 #: src/wppic-templates/wppic-template-theme-wordpress.php:50
-#: src/wppic-templates/wppic-template-theme.php:33
+#: src/wppic-templates/wppic-template-theme.php:32
+#: src/wppic-templates/wppic-template-theme.php:54
+#: src/wppic-templates/wppic-template-theme-flex.php:45
 #: src/wppic-templates/wppic-template-theme-large.php:42
 msgid "Downloads"
 msgstr ""
 
+#: src/wppic-templates/wppic-template-theme.php:23
 #: src/wppic-templates/wppic-template-theme.php:24
-#: src/wppic-templates/wppic-template-theme.php:25
-#: src/wppic-templates/wppic-template-theme.php:61
-#: src/wppic-templates/wppic-template-theme.php:63
+#: src/wppic-templates/wppic-template-theme.php:60
+#: src/wppic-templates/wppic-template-theme.php:62
+#: src/wppic-templates/wppic-template-theme-flex.php:25
+#: src/wppic-templates/wppic-template-theme-flex.php:28
+#: src/wppic-templates/wppic-template-theme-flex.php:52
 #: src/wppic-templates/wppic-template-theme-large.php:23
 #: src/wppic-templates/wppic-template-theme-large.php:28
 msgid "WordPress.org Theme Page"
 msgstr ""
 
-#: src/wppic-templates/wppic-template-theme.php:26
+#: src/wppic-templates/wppic-template-theme.php:25
+#: src/wppic-templates/wppic-template-theme-flex.php:37
+#: src/wppic-templates/wppic-template-plugin-flex.php:70
 #: src/wppic-templates/wppic-template-plugin-large.php:51
 #: src/wppic-templates/wppic-template-theme-large.php:29
 #: src/wppic-templates/wppic-template-plugin.php:47
 msgid "Author(s):"
 msgstr ""
 
+#: src/wppic-templates/wppic-template-theme.php:28
 #: src/wppic-templates/wppic-template-theme.php:29
-#: src/wppic-templates/wppic-template-theme.php:30
+#: src/wppic-templates/wppic-template-theme.php:50
 #: src/wppic-templates/wppic-template-theme.php:51
-#: src/wppic-templates/wppic-template-theme.php:52
+#: src/wppic-templates/wppic-template-theme-flex.php:41
+#: src/wppic-templates/wppic-template-theme-flex.php:42
+#: src/wppic-templates/wppic-template-plugin-flex.php:74
+#: src/wppic-templates/wppic-template-plugin-flex.php:75
 #: src/wppic-templates/wppic-template-plugin-large.php:60
 #: src/wppic-templates/wppic-template-plugin-large.php:61
 #: src/wppic-templates/wppic-template-theme-large.php:38
@@ -348,10 +367,12 @@ msgstr ""
 msgid "Ratings"
 msgstr ""
 
-#: src/wppic-templates/wppic-template-theme.php:32
+#: src/wppic-templates/wppic-template-theme.php:31
+#: src/wppic-templates/wppic-template-theme.php:44
 #: src/wppic-templates/wppic-template-theme.php:45
-#: src/wppic-templates/wppic-template-theme.php:46
-#: src/wppic-templates/wppic-template-theme.php:54
+#: src/wppic-templates/wppic-template-theme.php:53
+#: src/wppic-templates/wppic-template-theme-flex.php:44
+#: src/wppic-templates/wppic-template-plugin-flex.php:77
 #: src/wppic-templates/wppic-template-plugin-large.php:54
 #: src/wppic-templates/wppic-template-plugin-large.php:63
 #: src/wppic-templates/wppic-template-theme-large.php:32
@@ -363,22 +384,19 @@ msgstr ""
 msgid "Direct download"
 msgstr ""
 
-#: src/wppic-templates/wppic-template-theme.php:36
-#: src/wppic-templates/wppic-template-theme.php:58
+#: src/wppic-templates/wppic-template-theme.php:35
+#: src/wppic-templates/wppic-template-theme.php:57
+#: src/wppic-templates/wppic-template-theme-flex.php:48
 #: src/wppic-templates/wppic-template-theme-large.php:45
 msgid "Version"
 msgstr ""
 
-#: src/wppic-templates/wppic-template-theme.php:40
+#: src/wppic-templates/wppic-template-theme.php:39
 #: src/wppic-templates/wppic-template-plugin.php:61
 msgid "More info"
 msgstr ""
 
-#: src/wppic-templates/wppic-template-theme.php:55
-msgid "Active Installs"
-msgstr ""
-
-#: src/wppic-templates/wppic-template-theme.php:66
+#: src/wppic-templates/wppic-template-theme.php:65
 #: src/wppic-templates/wppic-template-plugin.php:87
 msgid "Back"
 msgstr ""
@@ -387,25 +405,37 @@ msgstr ""
 msgid "Compatible with WordPress"
 msgstr ""
 
+#: src/wppic-templates/wppic-template-theme-flex.php:53
+#: src/wppic-templates/wppic-template-plugin-flex.php:86
+msgid "Download:"
+msgstr ""
+
+#: src/wppic-templates/wppic-template-plugin-flex.php:61
 #: src/wppic-templates/wppic-template-plugin-large.php:52
 #: src/wppic-templates/wppic-template-theme-large.php:30
 #: src/wppic-templates/wppic-template-plugin.php:68
 msgid "Current Version:"
 msgstr ""
 
+#: src/wppic-templates/wppic-template-plugin-flex.php:67
+msgid "Tested Up To:"
+msgstr ""
+
+#: src/wppic-templates/wppic-template-plugin-flex.php:78
 #: src/wppic-templates/wppic-template-plugin-large.php:64
 #: src/wppic-templates/wppic-template-plugin.php:54
 #: src/wppic-templates/wppic-template-plugin.php:76
 msgid "Installs"
 msgstr ""
 
+#: src/wppic-templates/wppic-template-plugin-flex.php:81
 #: src/wppic-templates/wppic-template-plugin-large.php:67
 #: src/wppic-templates/wppic-template-plugin.php:57
 #: src/wppic-templates/wppic-template-plugin.php:79
 msgid "Requires"
 msgstr ""
 
-#: src/wp-plugin-info-card-shortcode.php:336
+#: src/wp-plugin-info-card-shortcode.php:366
 msgid "This card has been generated with WP Plugin Info Card"
 msgstr ""
 

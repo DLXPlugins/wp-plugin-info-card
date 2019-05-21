@@ -182,7 +182,7 @@ function wppic_settings_page() {
 						<p>
 							<pre> [wp-pic slug="adblock-notify-by-bweb" layout="large" scheme="scheme1" align="right" margin="0 0 0 20px" containerid="download-sexion" ajax="yes"] </pre>
 						</p>
-						<p class="documentation"><a href="https://mediaron.com/wp-plugin-info-card" target="_blank" title="'. __( 'Documentation and examples', 'wp-plugin-info-card' ) .'">'. __( 'Documentation and examples', 'wp-plugin-info-card' ) .' <span class="dashicons dashicons-external"></span></a></p>
+						<p class="documentation"><a href="http://b-website.com/wp-plugin-info-card-for-wordpress" target="_blank" title="'. __( 'Documentation and examples', 'wp-plugin-info-card' ) .'">'. __( 'Documentation and examples', 'wp-plugin-info-card' ) .' <span class="dashicons dashicons-external"></span></a></p>
 						' . $memcache . '
 					 </div>
 				</div>
@@ -344,12 +344,12 @@ function wppic_validate( $input ) {
 function wppic_plugins_about() {
 	$content ='
 		<div id="wppic-about-list">
-			<a class="wppic-button wppic-pluginHome" href="https://mediaron.com/wp-plugin-info-card" target="_blank">' . __( 'Plugin homepage', 'wp-plugin-info-card' ) . '</a>
+			<a class="wppic-button wppic-pluginHome" href="http://b-website.com/wp-plugin-info-card-for-wordpress" target="_blank">' . __( 'Plugin homepage', 'wp-plugin-info-card' ) . '</a>
 			<a class="wppic-button wppic-pluginPage" href="https://wordpress.org/plugins/wp-plugin-info-card/" target="_blank">WordPress.org</a>
 			<a class="wppic-button wppic-pluginSupport" href="https://wordpress.org/support/plugin/wp-plugin-info-card" target="_blank">' . __( 'Support', 'wp-plugin-info-card' ) . '</a>
 			<a class="wppic-button wppic-pluginRate" href="https://wordpress.org/support/view/plugin-reviews/wp-plugin-info-card?rate=5#postform" target="_blank">' . __( 'Give me five!', 'wp-plugin-info-card' ) . '</a>
-			<a class="wppic-button wppic-pluginContact" href="https://mediaron.com/contact/" target="_blank">' . __( 'Any suggestion?', 'wp-plugin-info-card' ) . '</a>
-			<a class="wppic-button wppic-pluginDonate" href="https://mediaron.com/give/" target="_blank">' . __( 'Donate', 'wp-plugin-info-card' ) . '</a>
+			<a class="wppic-button wppic-pluginContact" href="http://b-website.com/contact" target="_blank">' . __( 'Any suggestion?', 'wp-plugin-info-card' ) . '</a>
+			<a class="wppic-button wppic-pluginDonate" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7Z6YVM63739Y8" target="_blank">' . __( 'Donate', 'wp-plugin-info-card' ) . '</a>
 		</div>
 	';
 	return $content;
