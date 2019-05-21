@@ -161,15 +161,10 @@ function wppic_shortcode_function( $atts, $content="" ) {
 
 	if( empty( $layout ) ) {
 		$layout = 'card';
+		$addClass[] = $layout;
 	} else if ( 'flex' === $layout ) {
 		$addClass[] = 'flex';
 		$addClass[] = 'card';
-	} else if ( 'flex-wordpress' === $layout ) {
-		$addClass[] = 'wordpress';
-		$addClass[] = 'flex';
-	} else if ( 'flex-large' === $layout ) {
-		$addClass[] = 'large';
-		$addClass[] = 'flex';
 	} else {
 		$addClass[] = $layout;
 	}
