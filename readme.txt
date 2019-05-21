@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: API, plugin, card, envato, block, gutenberg
 Requires at least: 3.7
 Tested up to: 5.2
-Stable tag: 3.1.9
+Stable tag: 3.1.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -181,6 +181,10 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 
 
 == Changelog ==
+
+= 3.1.11 =
+* Released 2019-05-21
+* Fixing card styles not showing properly.
 
 = 3.1.10 =
 * Released 2019-05-21
@@ -427,6 +431,9 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 * First release.
 
 == Upgrade Notice ==
+
+= 3.1.11 =
+Fixing card styles not showing properly.
 
 = 3.1.10 =
 Documentation update.
