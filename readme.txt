@@ -1,6 +1,6 @@
 === WP Plugin Info Card ===
 Contributors: briKou, ronalfy
-Donate link: https://mediaron.com/give/
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7Z6YVM63739Y8
 Tags: API, plugin, card, envato, block, gutenberg
 Requires at least: 3.7
 Tested up to: 5.2
@@ -41,7 +41,7 @@ This plugin uses the TinyMCE API to improve UI and make inserting shortcodes eas
 **Please ask for help or report bugs if anything goes wrong. It is the best way to make the community benefit!**
 
 
-[CHECK OUT THE DEMO](https://mediaron.com/wp-plugin-info-card/ "Try It!")
+[CHECK OUT THE DEMO](http://b-website.com/wp-plugin-info-card-for-wordpress "Try It!")
 
 
 
@@ -78,7 +78,7 @@ The slug is the only required parameter for plugin. You have to set the "type" p
 
 
 
-[FULL DOCUMENTATION AND EXAMPLES](https://mediaron.com/wp-plugin-info-card/ "Documentation & examples")
+[FULL DOCUMENTATION AND EXAMPLES](http://b-website.com/wp-plugin-info-card-for-wordpress "Documentation & examples")
 
 
 
@@ -122,7 +122,7 @@ Themes by search term limit to 4 items with a two columns render
 
 
 
-[FULL DOCUMENTATION AND EXAMPLES](https://mediaron.com/wp-plugin-info-card/ "Documentation & examples")
+[FULL DOCUMENTATION AND EXAMPLES](http://b-website.com/wp-plugin-info-card-for-wordpress "Documentation & examples")
 
 
 
@@ -143,7 +143,7 @@ Themes by search term limit to 4 items with a two columns render
 * Deutsch - Thanks to [Christian Zumbrunnen](https://profiles.wordpress.org/chzumbrunnen "Christian Zumbrunnen")
 * Serbo-Croatian - Thanks to Andrijana Nikolic from [Web Hosting Geeks](http://webhostinggeeks.com/ "Web Hosting Geeks")
 
-Become a translator and send me your translation! [Contact-me](https://mediaron.com/contact/ "Contact")
+Become a translator and send me your translation! [Contact-me](http://b-website.com/contact "Contact")
 
 
 
@@ -181,6 +181,10 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 
 
 == Changelog ==
+
+= 3.1.10 =
+* Released 2019-05-21
+* Documentation Update
 
 = 3.1.9 =
 * Released 2019-05-17
@@ -423,6 +427,9 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 * First release.
 
 == Upgrade Notice ==
+
+= 3.1.10 =
+Documentation update.
 
 = 3.1.9 =
 Gutenberg fixes and enhancements. New FLEX layout option in Gutenberg and the shortcodes.
