@@ -357,7 +357,7 @@ function wppic_shortcode_content( $type=NULL, $slug=NULL, $image=NULL, $expirati
 	global 	$wppicSettings;
 	$credit = '';
 	if( isset( $wppicSettings[ 'credit' ] ) && $wppicSettings[ 'credit' ] == true ){
-		$credit .= '<a className="wp-pic-credit" href="http://b-website.com/wp-plugin-info-card-for-wordpress" target="_blank" data-tooltip="';
+		$credit .= '<a className="wp-pic-credit" href="https://mediaron.com/wp-plugin-info-card/" target="_blank" data-tooltip="';
 		$credit .= __( 'This card has been generated with WP Plugin Info Card', 'wp-plugin-info-card' );
 		$credit .= '"></a>';
 	}

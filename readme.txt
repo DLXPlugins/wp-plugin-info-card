@@ -1,23 +1,20 @@
 === WP Plugin Info Card ===
 Contributors: briKou, ronalfy
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7Z6YVM63739Y8
-Tags: API, plugin, card, envato, block, gutenberg
+Tags: API, plugin, card, theme, block, gutenberg
 Requires at least: 3.7
 Tested up to: 5.2
-Stable tag: 3.1.11
+Stable tag: 3.1.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 
-WPPIC displays plugins & themes data in a beautiful box with a smooth rotation effect using WP Plugin & Theme APIs. Dashboard widget included.
-
-
+WP Plugin Info Card displays plugins & themes data in a beautiful box with a smooth rotation effect using WP Plugin & Theme APIs. Dashboard widget included.
 
 == Description ==
 
-WPPIC displays plugins & themes data in a beautiful box with a smooth rotation effect using WP Plugin & Theme APIs. Dashboard widget included.
+> Credits: Originally developed and maintained by <a href="https://www.b-website.com/">Brice CAPOBIANCO</a>.
 
-[PREMIUM ADD-ON - WP Envato Affiliate Card](http://b-website.com/wp-envato-affiliate-card-powered-envato-market-api "WP Envato Affiliate Card")
+WPPIC displays plugins & themes data in a beautiful box with a smooth rotation effect using WP Plugin & Theme APIs. Dashboard widget included.
 
 > Please rate the plugin if you like it. <a href="https://wordpress.org/support/plugin/wp-plugin-info-card/reviews/#new-post">Leave a review</a>!
 
@@ -41,7 +38,7 @@ This plugin uses the TinyMCE API to improve UI and make inserting shortcodes eas
 **Please ask for help or report bugs if anything goes wrong. It is the best way to make the community benefit!**
 
 
-[CHECK OUT THE DEMO](http://b-website.com/wp-plugin-info-card-for-wordpress "Try It!")
+[CHECK OUT THE DEMO](https://mediaron.com/wp-plugin-info-card/ "Try It!")
 
 
 
@@ -78,7 +75,7 @@ The slug is the only required parameter for plugin. You have to set the "type" p
 
 
 
-[FULL DOCUMENTATION AND EXAMPLES](http://b-website.com/wp-plugin-info-card-for-wordpress "Documentation & examples")
+[FULL DOCUMENTATION AND EXAMPLES](https://mediaron.com/wp-plugin-info-card/ "Documentation & examples")
 
 
 
@@ -122,7 +119,7 @@ Themes by search term limit to 4 items with a two columns render
 
 
 
-[FULL DOCUMENTATION AND EXAMPLES](http://b-website.com/wp-plugin-info-card-for-wordpress "Documentation & examples")
+[FULL DOCUMENTATION AND EXAMPLES](https://mediaron.com/wp-plugin-info-card/wp-plugin-info-card-query-shortcode/ "Documentation & examples")
 
 
 
@@ -131,6 +128,10 @@ Themes by search term limit to 4 items with a two columns render
 * You can provide a list of slugs (comma-separated) in your shortcode slug parameter, WPPIC will randomly choose one item from the list on each page refresh.
 * You cane asily overload the plugin rendering. You need to create a new "wppic-templates" folder into your theme folder, then copy the template you want to overload from the WP Plugin Info Card "wppic-templates" folder.
 * You can create your own template file. You need to create a new "wppic-templates" folder into your theme folder, then copy the template file "wppic-template-plugin-large.php" or "wppic-template-theme-large.php" from the WP Plugin Info Card '/wppic-templates' folder. Rename the file as "wppic-template-plugin-NEWTEMPLATE.php" or "wppic-template-theme-NEWTEMPLATE.php", edit it as you go, and add your own CSS rules. Finally, call your new template by adding the following parameter in your shortcode: layout="NEWTEMPLATE"
+
+= Premium Addon =
+
+[PREMIUM ADD-ON - WP Envato Affiliate Card](http://b-website.com/wp-envato-affiliate-card-powered-envato-market-api "WP Envato Affiliate Card")
 
 
 
@@ -181,6 +182,11 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 
 
 == Changelog ==
+
+= 3.1.12 =
+* Released 2019-05-24
+* Documentation updates.
+* New scheme - Dark mode
 
 = 3.1.11 =
 * Released 2019-05-21
@@ -431,6 +437,9 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 * First release.
 
 == Upgrade Notice ==
+
+= 3.1.12 =
+Documentation updates. New scheme - Dark mode.
 
 = 3.1.11 =
 Fixing card styles not showing properly.

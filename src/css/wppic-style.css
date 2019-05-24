@@ -1412,6 +1412,50 @@
 	background-color: #19B5FE;
 }
 
+/*Color Scheme 11*/
+.wp-pic.scheme11 .wp-pic-no-plugin,
+.entry .wp-pic.scheme10 p,
+.wp-pic.scheme11 p,
+.wp-pic.scheme11 .wp-pic-back a:not(.wp-pic-page):hover ,
+.wp-pic.scheme11 .wp-pic-back p,
+.wp-pic.scheme11 .wp-pic-author a,
+.wp-pic.scheme11 .wp-pic-dl-link {
+	color: #FFF;
+}
+.wp-pic.scheme11 .wp-pic-bar{
+	background-color: #000000;
+}
+.wp-pic.scheme11 .wp-pic-bar span:after
+.wp-pic.scheme11 .wp-pic-bar a:after{
+	background-color: rgba(0, 0, 0, 0.90);
+}
+.wp-pic.scheme11 > div> div {
+	background-color: rgba(0, 0, 0, 0.90);
+}
+.wp-pic.scheme11 .wp-pic-front .wp-pic-name {
+	color: #FFF;
+}
+.wp-pic.scheme11 .wp-pic-bar em{
+	color: rgba(250, 250, 250, 0.80);
+}
+.wp-pic.scheme11 .wp-pic-flip .wp-pic-face.wp-pic-back ,
+.wp-pic.scheme11 .wp-pic-bar span,
+.wp-pic.scheme11 .wp-pic-bar a,
+.wp-pic.scheme11 .wp-pic-back a:not(.wp-pic-page),
+.wp-pic.scheme11 .wp-pic-asset-bg-title,
+.wp-pic.scheme11 .wp-pic-download-link span,
+.wp-pic.scheme11 .wp-pic-download,
+.wp-pic.scheme11 .wp-pic-page,
+.wp-pic.scheme11 a.wp-pic-page {
+	color: #fff;
+}
+.wp-pic.scheme11 .wp-pic-download,
+.wp-pic.scheme11 .wp-pic-asset-bg,
+.wp-pic.scheme11 a.wp-pic-page,
+.wp-pic.scheme11.flex .wp-pic-download-link span{
+	background-color: #000000;
+}
+
 /*DL effect*/
 .wp-pic .wp-pic-dl-effet {
 	-webkit-animation-duration: 0.75s;

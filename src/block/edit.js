@@ -129,6 +129,7 @@ class WP_Plugin_Card extends Component {
 			{ value: 'scheme8', label: __('Scheme 8', 'wp-plugin-info-card' ) },
 			{ value: 'scheme9', label: __('Scheme 9', 'wp-plugin-info-card' ) },
 			{ value: 'scheme10', label: __('Scheme 10', 'wp-plugin-info-card' ) },
+			{ value: 'scheme11', label: __('Scheme 11', 'wp-plugin-info-card' ) },
 		];
 		const layoutOptions = [
 			{ value: 'card', label: __('Card', 'wp-plugin-info-card' ) },
