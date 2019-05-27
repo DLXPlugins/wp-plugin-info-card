@@ -245,6 +245,7 @@ function wppic_color_scheme() {
 		$content .= '<option value="scheme8"  '. selected( $scheme, 'scheme8', FALSE ) . ' >Color scheme 8</option>';
 		$content .= '<option value="scheme9"  '. selected( $scheme, 'scheme9', FALSE ) . ' >Color scheme 9</option>';
 		$content .= '<option value="scheme10" '. selected( $scheme, 'scheme10', FALSE ) . '>Color scheme 10</option>';
+		$content .= '<option value="scheme11" '. selected( $scheme, 'scheme11', FALSE ) . '>Color scheme 11</option>';
 		$content .= '</select>';
 		$content .= '<label for="wppic-color-scheme">' . __( 'Default color scheme for your cards.', 'wp-plugin-info-card' ) . '</label>';
 	$content .= '</td>';
