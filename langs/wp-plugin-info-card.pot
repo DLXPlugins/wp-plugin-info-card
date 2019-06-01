@@ -9,12 +9,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-05-24T13:09:49+00:00\n"
-"PO-Revision-Date: 2019-05-24T13:09:49+00:00\n"
+"POT-Creation-Date: 2019-06-01T02:57:25+00:00\n"
+"PO-Revision-Date: 2019-06-01T02:57:25+00:00\n"
 "X-Generator: WP-CLI 2.0.1\n"
 "X-Domain: wp-plugin-info-card\n"
 
 #. Plugin Name of the plugin
+#: dist/blocks.build.js:1
 msgid "WP Plugin Info Card"
 msgstr ""
 
@@ -275,23 +276,23 @@ msgstr ""
 msgid "Dashboard Widget Settings"
 msgstr ""
 
-#: src/wp-plugin-info-card-admin.php:249
+#: src/wp-plugin-info-card-admin.php:250
 msgid "Default color scheme for your cards."
 msgstr ""
 
-#: src/wp-plugin-info-card-admin.php:347
+#: src/wp-plugin-info-card-admin.php:348
 msgid "Plugin homepage"
 msgstr ""
 
-#: src/wp-plugin-info-card-admin.php:349
+#: src/wp-plugin-info-card-admin.php:350
 msgid "Support"
 msgstr ""
 
-#: src/wp-plugin-info-card-admin.php:350
+#: src/wp-plugin-info-card-admin.php:351
 msgid "Give me five!"
 msgstr ""
 
-#: src/wp-plugin-info-card-admin.php:351
+#: src/wp-plugin-info-card-admin.php:352
 msgid "Any suggestions?"
 msgstr ""
 
@@ -300,10 +301,12 @@ msgid "Card (default)"
 msgstr ""
 
 #: src/wp-plugin-info-card-ui.php:32
+#: dist/blocks.build.js:1
 msgid "Large"
 msgstr ""
 
 #: src/wp-plugin-info-card-ui.php:33
+#: dist/blocks.build.js:1
 msgid "WordPress"
 msgstr ""
 
@@ -363,6 +366,7 @@ msgstr ""
 #: src/wppic-templates/wppic-template-plugin.php:51
 #: src/wppic-templates/wppic-template-plugin.php:72
 #: src/wppic-templates/wppic-template-plugin.php:73
+#: dist/blocks.build.js:1
 msgid "Ratings"
 msgstr ""
 
@@ -387,6 +391,7 @@ msgstr ""
 #: src/wppic-templates/wppic-template-theme.php:57
 #: src/wppic-templates/wppic-template-theme-flex.php:48
 #: src/wppic-templates/wppic-template-theme-large.php:45
+#: dist/blocks.build.js:1
 msgid "Version"
 msgstr ""
 
@@ -528,4 +533,272 @@ msgstr ""
 
 #: src/wp-plugin-info-card-ui-lang.php:41
 msgid "You have to provide at least the slug/id parameter to continue."
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Plugin"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Info"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Reset"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Left"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Center"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Right"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "None"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Before"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "After"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "No"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Yes"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Default"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Scheme 1"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Scheme 2"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Scheme 3"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Scheme 4"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Scheme 5"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Scheme 6"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Scheme 7"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Scheme 8"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Scheme 9"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Scheme 10"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Scheme 11"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Card"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Flex"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Full Width"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Scheme"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Layout"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Width"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Upload Image!"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Plugin Card Image"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Reset Image"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Container ID"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Margin"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Clear"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Expiration in minutes"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Load card via Ajax?"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Select a Type"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Theme"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Enter a slug"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Go"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "WP Plugin Info Card Query"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "URL"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Name"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Author"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Screenshot URL"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Number of Ratings"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Active Installs"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Last Updated"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Homepage"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Download Link"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Search"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Tags (can be comma separated)"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Username"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Filter by Username"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "User"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "See the favorites from this username"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Browse"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Featured"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Updated"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Favorites"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Popular"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Per Page"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "Columns"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "1"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "2"
+msgstr ""
+
+#: dist/blocks.build.js:1
+msgid "3"
 msgstr ""
