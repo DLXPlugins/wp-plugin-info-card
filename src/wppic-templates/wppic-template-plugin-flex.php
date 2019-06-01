@@ -39,7 +39,7 @@ if ( empty( $banner_image ) ) {
 		$banner_image = WPPIC_URL . 'img/default-banner.png';
 	}
 }
-$wppic_data->name = wp_trim_words( $wppic_data->name, 3 );
+$wppic_data->name = wp_trim_words( $wppic_data->name, 6 );
 
 /***************************************************************
  * Start template

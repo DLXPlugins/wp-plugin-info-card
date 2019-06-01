@@ -10,16 +10,10 @@ const { __ } = wp.i18n;
 const {
 	PanelBody,
 	Placeholder,
-	QueryControls,
-	RangeControl,
 	SelectControl,
 	Spinner,
 	TextControl,
-	ToggleControl,
 	Toolbar,
-	withAPIData,
-	ColorPalette,
-	Button,
 } = wp.components;
 
 const {
@@ -27,13 +21,8 @@ const {
 	BlockControls,
 	BlockAlignmentToolbar,
 	MediaUpload,
-	RichText,
 	AlignmentToolbar,
-	PanelColorSettings,
 } = wp.editor;
-
-// Import block dependencies and components
-import classnames from 'classnames';
 
 
 class WP_Plugin_Card extends Component {
@@ -107,6 +96,10 @@ class WP_Plugin_Card extends Component {
 			{ value: 'left', label: __('Left', 'wp-plugin-info-card' ) },
 			{ value: 'center', label: __('Center', 'wp-plugin-info-card' ) },
 			{ value: 'right', label: __('Right', 'wp-plugin-info-card' ) },
+		];
+		const assetType = [
+			{ value: 'plugin', label: __('Plugin', 'wp-plugin-info-card' ) },
+			{ value: 'theme', label: __('Theme', 'wp-plugin-info-card' ) },
 		];
 		const clearOptions = [
 			{ value: 'none', label: __('None', 'wp-plugin-info-card' ) },
@@ -245,10 +238,15 @@ class WP_Plugin_Card extends Component {
 							<div className="wppic-block">
 								<div>
 									<h3><label htmlFor="wppic-type-select">{__( 'Select a Type', 'wp-plugin-info-card' )}</label></h3>
-									<select id="wppic-type-select" onChange={ ( event ) => { this.props.setAttributes( { type: event.target.value } ); this.typeChange(event); } }>
-										<option value="theme" selected={this.state.type === 'theme' ? 'selected': '' }>{__( 'Theme', 'wp-plugin-info-card' )}</option>
-										<option value="plugin" selected={this.state.type === 'plugin' ? 'selected': '' }>{__( 'Plugin', 'wp-plugin-info-card' )}</option>
-									</select>
+									<SelectControl
+										label={ __( 'Select a Type', 'wp-plugin-info-card' ) }
+										options={ assetType }
+										value={ this.state.type }
+										onChange={ ( value ) => {
+											this.props.setAttributes( { type: event.target.value } );
+											this.typeChange(event);
+										} }
+									/>
 								</div>
 								<div>
 									<h3><label htmlFor="wppic-input-slug">{__( 'Enter a slug', 'wp-plugin-info-card' )}</label></h3>
@@ -256,6 +254,24 @@ class WP_Plugin_Card extends Component {
 								<div>
 									<input type="text" id="wppic-input-slug" value={this.state.slug} onChange={ ( event ) => { this.props.setAttributes( { slug: event.target.value } ); this.slugChange(event); } } />
 								</div>
+								<SelectControl
+										label={ __( 'Layout', 'wp-plugin-info-card' ) }
+										options={ layoutOptions }
+										value={ layout }
+										onChange={ ( value ) => {
+											if ( 'flex' == value ) {
+												this.props.setAttributes( { layout: value, align: 'full' } );
+												this.props.attributes.layout = value;
+												this.props.attributes.align = 'full';
+												this.setState( { layout: value, align: 'full' } );
+											} else {
+												this.props.setAttributes( { layout: value, align: 'center' } );
+												this.props.attributes.layout = value;
+												this.props.attributes.align = 'center';
+												this.setState( { layout: value, align: 'center' } );
+											}
+										} }
+								/>
 								<div>
 									<input type="submit" id="wppic-input-submit" value={__( 'Go', 'wp-plugin-info-card' )} onClick={ ( event ) => { this.props.setAttributes( { loading: false } ); this.pluginOnClick(event); } }  />
 								</div>
@@ -267,7 +283,7 @@ class WP_Plugin_Card extends Component {
 							<Placeholder>
 								<div>
 									<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-									width="40px" height="40px" viewBox="0 0 850.39 850.39" enable-background="new 0 0 850.39 850.39" >
+									width="40px" height="40px" viewBox="0 0 850.39 850.39" enableBackground="new 0 0 850.39 850.39" >
 									<path fill="#DB3939" d="M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39
 									c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451
 									l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07
