@@ -1,9 +1,9 @@
 === WP Plugin Info Card ===
 Contributors: briKou, ronalfy
-Tags: API, plugin, card, theme, block, gutenberg
+Tags: API, plugin, card, theme, block, blocks, gutenberg
 Requires at least: 3.7
 Tested up to: 5.2
-Stable tag: 3.1.12
+Stable tag: 3.1.15
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,6 +17,8 @@ WP Plugin Info Card displays plugins & themes data in a beautiful box with a smo
 WPPIC displays plugins & themes data in a beautiful box with a smooth rotation effect using WP Plugin & Theme APIs. Dashboard widget included.
 
 > Please rate the plugin if you like it. <a href="https://wordpress.org/support/plugin/wp-plugin-info-card/reviews/#new-post">Leave a review</a>!
+
+[youtube https://www.youtube.com/watch?v=8eKDCEoXGKU&rel=0]
 
 = How does it work? =
 
@@ -182,6 +184,12 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 
 
 == Changelog ==
+
+= 3.1.15 =
+* Released 2019-06-02.
+* Added Center as the default layout choice.
+* Added layout to the Gutenberg layout settings upon load.
+* Code cleanup and fixes.
 
 = 3.1.12 =
 * Released 2019-05-24
@@ -437,6 +445,9 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 * First release.
 
 == Upgrade Notice ==
+
+= 3.1.15 =
+Added layout options to Gutenberg block. Code cleanup and fixes.
 
 = 3.1.12 =
 Documentation updates. New scheme - Dark mode.
