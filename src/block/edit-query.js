@@ -101,7 +101,7 @@ class WP_Plugin_Card_Query extends Component {
 
 		const resetSelect = [
 			{
-				icon: 'pencil',
+				icon: 'edit',
 				title: __( 'Reset', 'wp-plugin-info-card' ),
 				onClick: () => this.setState( { loading: true } ),
 			},

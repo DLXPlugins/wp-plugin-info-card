@@ -1414,11 +1414,11 @@
 
 /*Color Scheme 11*/
 .wp-pic.scheme11 .wp-pic-no-plugin,
-.entry .wp-pic.scheme10 p,
+.entry .wp-pic.scheme11 p,
 .wp-pic.scheme11 p,
 .wp-pic.scheme11 .wp-pic-back a:not(.wp-pic-page):hover ,
 .wp-pic.scheme11 .wp-pic-back p,
-.wp-pic.scheme11 .wp-pic-author a,
+.wp-pic.scheme11:not(.wordpress) .wp-pic-author a,
 .wp-pic.scheme11 .wp-pic-dl-link {
 	color: #FFF;
 }
@@ -1454,6 +1454,59 @@
 .wp-pic.scheme11 a.wp-pic-page,
 .wp-pic.scheme11.flex .wp-pic-download-link span{
 	background-color: #000000;
+}
+
+/*Color Scheme 12*/
+.wp-pic.scheme12 .wp-pic-no-plugin,
+.entry .wp-pic.scheme12 p,
+.wp-pic.scheme12 p,
+.wp-pic.scheme12 .wp-pic-back a:not(.wp-pic-page):hover ,
+.wp-pic.scheme12 .wp-pic-back p,
+.wp-pic.scheme12:not(.wordpress) .wp-pic-author a,
+.wp-pic.scheme12 .wp-pic-dl-link,
+.wp-pic.scheme12 a.wp-pic-name {
+	color: #000;
+}
+.wp-pic.scheme12 .wp-pic-front a.wp-pic-name {
+	color: #000;
+}
+.wp-pic.scheme12 .wp-pic-bar{
+	background-color: #FF00FF;
+}
+.wp-pic.scheme12 .wp-pic-bar span:after
+.wp-pic.scheme12 .wp-pic-bar a:after{
+	background-color: #ff84ff;
+}
+.wp-pic.scheme12 > div> div {
+	background-color: #ff84ff;
+}
+.wp-pic.scheme12 .wp-pic-back .wp-pic-name,
+.wp-pic.scheme12 p.wp-pic-updated {
+	color: #FFFFFF;
+}
+.wp-pic.scheme12 .wp-pic-bar em{
+	color: rgba(255, 255, 255, 0.80);
+}
+.wp-pic.scheme12 .wp-pic-flip .wp-pic-face.wp-pic-back ,
+.wp-pic.scheme12 .wp-pic-bar span,
+.wp-pic.scheme12 .wp-pic-bar a,
+.wp-pic.scheme12 .wp-pic-back a:not(.wp-pic-page),
+.wp-pic.scheme12 .wp-pic-asset-bg-title,
+.wp-pic.scheme12 .wp-pic-download-link span,
+.wp-pic.scheme12 .wp-pic-download,
+.wp-pic.scheme12 .wp-pic-page,
+.wp-pic.scheme12 a.wp-pic-page {
+	color: #FFFFFF;
+}
+.wp-pic.scheme12 .wp-pic-download,
+.wp-pic.scheme12 .wp-pic-asset-bg,
+.wp-pic.scheme12 a.wp-pic-page,
+.wp-pic.scheme12.flex .wp-pic-download-link span{
+	background-color: #FF00FF;
+}
+.wp-pic.scheme12 .wp-pic-download,
+.wp-pic.scheme12 a.wp-pic-page {
+	background-color: #be01be;
 }
 
 /*DL effect*/
