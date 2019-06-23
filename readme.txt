@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Tags: API, plugin, card, theme, block, blocks, gutenberg
 Requires at least: 3.7
 Tested up to: 5.2
-Stable tag: 3.1.15
+Stable tag: 3.1.16
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,13 +140,11 @@ Themes by search term limit to 4 items with a two columns render
 
 = Languages =
 
-* English
-* French
-* Polish - Thanks to [Kuba Mikita](http://www.wpart.pl/ "Kuba Mikita")
-* Deutsch - Thanks to [Christian Zumbrunnen](https://profiles.wordpress.org/chzumbrunnen "Christian Zumbrunnen")
-* Serbo-Croatian - Thanks to Andrijana Nikolic from [Web Hosting Geeks](http://webhostinggeeks.com/ "Web Hosting Geeks")
+Please <a href="https://translate.wordpress.org/projects/wp-plugins/wp-plugin-info-card">contribute a translation on the plugin translation page</a>.
 
-Become a translator and send me your translation! [Contact-me](http://b-website.com/contact "Contact")
+= GitHub =
+
+Feel free to make pull requests or issues on the <a href="https://github.com/ronalfy/wp-plugin-info-card">WP Plugin Info Card GitHub account</a>.
 
 
 
@@ -163,7 +161,11 @@ Become a translator and send me your translation! [Contact-me](http://b-website.
 
 Yes, it is compatible with most recent browsers, except for Opera (but IE10+ works!)
 
+= How do I create my own template? =
 
+This video shows you how:
+
+[youtube https://www.youtube.com/watch?v=hFsVrjQXV_E&t=6s&rel=0]
 
 
 == Screenshots ==
@@ -184,6 +186,11 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 
 
 == Changelog ==
+
+= 3.1.16 =
+* Released 2019-06-23
+* Gutenberg block improvements
+* New color scheme (Scheme 12) for Magenta.
 
 = 3.1.15 =
 * Released 2019-06-02.
@@ -445,6 +452,9 @@ Yes, it is compatible with most recent browsers, except for Opera (but IE10+ wor
 * First release.
 
 == Upgrade Notice ==
+
+= 3.1.16 =
+* Gutenberg block improvements. New color scheme (Scheme 12) for Magenta.
 
 = 3.1.15 =
 Added layout options to Gutenberg block. Code cleanup and fixes.

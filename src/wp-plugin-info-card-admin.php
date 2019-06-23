@@ -142,7 +142,7 @@ function wppic_settings_page() {
 	if( !extension_loaded( 'Memcache' ) ){
 		$memcache = '
 			<p class="wppic-cache-clear">
-				<button class="wppic-cache-clear-button first button button-primary" data-success="' . __( 'Cache was successfully cleared', 'wp-plugin-info-card' ) . '" data-error="' . __( 'Something went wrong', 'wp-plugin-info-card' ) . '">' . __( 'Empty all cache', 'wp-plugin-info-card' ) . '</button>
+				<button class="wppic-cache-clear-button first button button-primary" data-success="' . __( 'Cache was successfully cleared', 'wp-plugin-info-card' ) . '" data-error="' . __( 'Something went wrong', 'wp-plugin-info-card' ) . '">' . __( 'Clear cache', 'wp-plugin-info-card' ) . '</button>
 				<span class="wppic-cache-clear-loader" style="display: none; background-image: url( ' . admin_url() . 'images/spinner-2x.gif);"></span>
 			</p>
 		';
@@ -246,6 +246,7 @@ function wppic_color_scheme() {
 		$content .= '<option value="scheme9"  '. selected( $scheme, 'scheme9', FALSE ) . ' >Color scheme 9</option>';
 		$content .= '<option value="scheme10" '. selected( $scheme, 'scheme10', FALSE ) . '>Color scheme 10</option>';
 		$content .= '<option value="scheme11" '. selected( $scheme, 'scheme11', FALSE ) . '>Color scheme 11</option>';
+		$content .= '<option value="scheme12" '. selected( $scheme, 'scheme12', FALSE ) . '>Color scheme 12</option>';
 		$content .= '</select>';
 		$content .= '<label for="wppic-color-scheme">' . __( 'Default color scheme for your cards.', 'wp-plugin-info-card' ) . '</label>';
 	$content .= '</td>';
