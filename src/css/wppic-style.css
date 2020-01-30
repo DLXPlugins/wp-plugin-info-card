@@ -25,6 +25,10 @@
 	text-align: center;
 	display: block;
 }
+.wp-pic-wrapper.multi {
+	display: inline-block;
+	margin-right: 10px;
+}
 /*AJAX Call*/
 .wp-pic-body-loading {
 	position:relative;
