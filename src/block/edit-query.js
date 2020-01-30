@@ -96,7 +96,7 @@ class WP_Plugin_Card_Query extends Component {
 
 	render() {
 		const { attributes, setAttributes } = this.props;
-		const { type, slug, loading, align, image, containerid, margin, clear, expiration, ajax, scheme, layout, width, search, tag, author, user, browse, per_page, cols } = attributes;
+		const { type, slug, loading, align, image, containerid, margin, clear, expiration, ajax, scheme, layout, width, search, tag, author, user, browse, per_page, cols, preview } = attributes;
 		const htmlToReactParser = new HtmlToReactParser();
 
 		const resetSelect = [
@@ -260,6 +260,13 @@ class WP_Plugin_Card_Query extends Component {
 				</PanelBody>
 			</InspectorControls>
 		);
+		if ( preview ) {
+			return(
+				<Fragment>
+					<img src={wppic.query_preview} />
+				</Fragment>
+			);
+		}
 		return (
 			<Fragment>
 				<Fragment>

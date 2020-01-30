@@ -39,6 +39,7 @@ registerBlockType( 'wp-plugin-info-card/wp-plugin-info-card', {
    l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z"/>
 </svg>,
 	className: 'wp-plugin-info-card-block',
+	description: __( 'Add a plugin or theme info card to your site.', 'wp-plugin-info-card' ),
 	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
 		__( 'WP Plugin Info Card', 'wp-plugin-info-card' ),
@@ -50,5 +51,10 @@ registerBlockType( 'wp-plugin-info-card/wp-plugin-info-card', {
 	// Render via PHP
 	save() {
 		return null;
+	},
+	example: {
+		attributes: {
+			'preview' : true,
+		},
 	},
 } );

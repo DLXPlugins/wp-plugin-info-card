@@ -44,11 +44,17 @@ registerBlockType( 'wp-plugin-info-card/wp-plugin-info-card-query', {
 		__( 'Plugin', 'wp-plugin-info-card' ),
 		__( 'Info', 'wp-plugin-info-card' ),
 	],
+	description: __( 'Query plugins or themes and have them displayed in a column layout', 'wp-plugin-info-card' ),
 
 	edit: edit,
 
 	// Render via PHP
 	save() {
 		return null;
+	},
+	example: {
+		attributes: {
+			'preview' : true,
+		},
 	},
 } );

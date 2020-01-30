@@ -23,7 +23,7 @@ function wp_plugin_info_card_cgb_block_assets() { // phpcs:ignore
 	// Styles.
 	wp_enqueue_style(
 		'wp_plugin_info_card-cgb-style-css', // Handle.
-		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ),// Block style CSS.
+		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
 		array( 'wp-editor' ),
 		WPPIC_VERSION,
 		'all'
@@ -55,7 +55,9 @@ function wp_plugin_info_card_cgb_editor_assets() { // phpcs:ignore
 		'wp_plugin_info_card-cgb-block-js',
 		'wppic',
 		array(
-			'rest_url' => get_rest_url(),
+			'rest_url'      => get_rest_url(),
+			'query_preview' => plugins_url( 'img/wp-query-preview.jpg', __FILE__ ),
+			'wppic_preview' => plugins_url( 'img/wp-pic-preview.jpg', __FILE__ ),
 		)
 	);
 
@@ -149,6 +151,10 @@ function wppic_register_block() {
 				'width'       => array(
 					'type'    => 'string',
 					'default' => '',
+				),
+				'preview'     => array(
+					'type'    => 'boolean',
+					'default' => false,
 				),
 			),
 			'render_callback' => 'wppic_block_editor',
@@ -250,6 +256,10 @@ function wppic_register_block() {
 				'width'       => array(
 					'type'    => 'string',
 					'default' => '',
+				),
+				'preview'     => array(
+					'type'    => 'boolean',
+					'default' => false,
 				),
 			),
 			'render_callback' => 'wppic_block_editor_query',

@@ -81,7 +81,7 @@ class WP_Plugin_Card extends Component {
 
 	render() {
 		const { attributes } = this.props;
-		const { image, containerid, margin, clear, expiration, ajax, scheme, layout, width } = attributes;
+		const { image, containerid, margin, clear, expiration, ajax, scheme, layout, width, preview } = attributes;
 		const htmlToReactParser = new HtmlToReactParser();
 
 		const resetSelect = [
@@ -247,6 +247,13 @@ class WP_Plugin_Card extends Component {
 				</PanelBody>
 			</InspectorControls>
 		);
+		if ( preview ) {
+			return(
+				<Fragment>
+					<img src={wppic.wppic_preview} />
+				</Fragment>
+			);
+		}
 		return (
 			<Fragment>
 				<Fragment>
