@@ -785,11 +785,6 @@
     text-decoration: none!important;
     color: #444;
 }
-@media only screen and (max-width: 1200px) {
-	.wordpress.wp-pic {
-		max-width: 48%;
-	}
-}
 @media only screen and (max-width: 1000px) {
 	.wordpress.wp-pic .wp-pic-plugin-card-top .wp-pic-column-name,
 	.wordpress.wp-pic .wp-pic-plugin-card-top .wp-pic-column-description {

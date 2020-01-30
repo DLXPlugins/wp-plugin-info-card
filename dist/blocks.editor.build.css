@@ -16,6 +16,9 @@
 .wp-pic-large {
   display: block !important; }
 
+.is-block-content .wp-pic {
+  max-width: 100% !important; }
+
 .wppic-query-block {
   display: -ms-flexbox;
   display: flex;
