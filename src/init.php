@@ -156,6 +156,10 @@ function wppic_register_block() {
 					'type'    => 'boolean',
 					'default' => false,
 				),
+				'multi'     => array(
+					'type'    => 'boolean',
+					'default' => false,
+				),
 			),
 			'render_callback' => 'wppic_block_editor',
 		)
@@ -325,6 +329,7 @@ function wppic_block_editor( $attributes ) {
 		'ajax'        => $attributes['ajax'],
 		'scheme'      => $attributes['scheme'],
 		'layout'      => $attributes['layout'],
+		'multi'       => isset( $attributes['multi'] ) ?  filter_var( $attributes['multi'], FILTER_VALIDATE_BOOLEAN ) : false,
 	);
 	$html = '';
 	if ( '' !== $attributes['width'] ) {

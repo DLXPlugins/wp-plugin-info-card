@@ -14,6 +14,7 @@ const {
 	Spinner,
 	TextControl,
 	Toolbar,
+	CheckboxControl,
 } = wp.components;
 
 const {
@@ -42,6 +43,7 @@ class WP_Plugin_Card extends Component {
 			scheme: this.props.attributes.scheme,
 			layout: this.props.attributes.layout,
 			width: this.props.attributes.width,
+			multi: this.props.attributes.multi,
 		};
 	}
 
@@ -68,7 +70,7 @@ class WP_Plugin_Card extends Component {
 				}
 			);
 			const restUrl = wppic.rest_url + 'wppic/v1/get_html/';
-			axios.get( restUrl + `?type=${ this.props.attributes.type }&slug=${ this.props.attributes.slug }&align=${ this.props.attributes.align }&image=${ this.props.attributes.image }&containerid=${ this.props.attributes.containerid }&margin=${ this.props.attributes.margin }&clear=${ this.props.attributes.clear }&expiration=${ this.props.attributes.expiration }&ajax=${ this.props.attributes.ajax }&scheme=${ this.props.attributes.scheme }&layout=${ this.props.attributes.layout }` ).then( ( response ) => {
+			axios.get( restUrl + `?type=${ this.props.attributes.type }&slug=${ this.props.attributes.slug }&align=${ this.props.attributes.align }&image=${ this.props.attributes.image }&containerid=${ this.props.attributes.containerid }&margin=${ this.props.attributes.margin }&clear=${ this.props.attributes.clear }&expiration=${ this.props.attributes.expiration }&ajax=${ this.props.attributes.ajax }&scheme=${ this.props.attributes.scheme }&layout=${ this.props.attributes.layout }&multi=${ this.props.attributes.multi }` ).then( ( response ) => {
 				// Now Set State
 				this.setState( {
 					card_loading: false,
@@ -81,7 +83,7 @@ class WP_Plugin_Card extends Component {
 
 	render() {
 		const { attributes } = this.props;
-		const { image, containerid, margin, clear, expiration, ajax, scheme, layout, width, preview } = attributes;
+		const { image, containerid, margin, clear, expiration, ajax, scheme, layout, width, preview, multi } = attributes;
 		const htmlToReactParser = new HtmlToReactParser();
 
 		const resetSelect = [
@@ -307,6 +309,17 @@ class WP_Plugin_Card extends Component {
 												this.setState( { layout: value, align: 'center' } );
 											}
 										} }
+									/>
+								</div>
+								<div>
+									<h3><label>{ __( 'Enable multiple output?', 'wp-plugin-info-card' ) }</label></h3>
+									<CheckboxControl
+										checked={ multi }
+										onChange={ ( value ) => {
+											this.props.attributes.multi = value;
+											this.setState( { multi: value } );
+										} }
+										help={__( 'Separate slugs by commas to show multiple items', 'wp-plugin-info-card' )}
 									/>
 								</div>
 								<div>
