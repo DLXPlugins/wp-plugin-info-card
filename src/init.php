@@ -110,7 +110,7 @@ function wppic_register_block() {
 				),
 				'align'       => array(
 					'type'    => 'string',
-					'default' => 'center',
+					'default' => 'full',
 				),
 				'image'       => array(
 					'type'    => 'string',
@@ -215,7 +215,7 @@ function wppic_register_block() {
 				),
 				'align'       => array(
 					'type'    => 'string',
-					'default' => 'center',
+					'default' => 'full',
 				),
 				'image'       => array(
 					'type'    => 'string',

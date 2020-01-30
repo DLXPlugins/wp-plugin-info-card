@@ -52,6 +52,9 @@ registerBlockType( 'wp-plugin-info-card/wp-plugin-info-card-query', {
 	save() {
 		return null;
 	},
+	supports: {
+		align: ['left', 'center', 'right', 'full'],
+	},
 	example: {
 		attributes: {
 			'preview' : true,

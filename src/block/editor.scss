@@ -10,6 +10,51 @@
 .wp-pic-large {
   display: block !important;
 }
+.wppic-query-block {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	div {
+		width: 100%;
+		text-align: center;
+		h3 {
+			margin: 1.8em 0 1.0em 0;
+		}
+		p {
+			margin: 10px 0;
+		}
+		input {
+			text-align: center;
+			width: 100%;
+			max-width: 25rem;
+		}
+		select {
+			width: 100%;
+			max-width: 25rem;
+		}
+	}
+	.button.button-primary {
+		margin-top: 1.8em;
+	}
+}
+.wppic-loading-placeholder {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.wppic-loading {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	svg {
+		width: 100%;
+	}
+	.wppic-spinner {
+		width: 100%;
+		text-align: center;
+	}
+}
 .wp-pic-full-width {
   float: none;
   width: 100%;
