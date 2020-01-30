@@ -1508,6 +1508,112 @@
 	background-color: #be01be;
 }
 
+/*Color Scheme 13*/
+.wp-pic.scheme13 .wp-pic-no-plugin,
+.entry .wp-pic.scheme13 p,
+.wp-pic.scheme13 p,
+.wp-pic.scheme13 .wp-pic-back a:not(.wp-pic-page):hover ,
+.wp-pic.scheme13 .wp-pic-back p,
+.wp-pic.scheme13:not(.wordpress) .wp-pic-author a,
+.wp-pic.scheme13 .wp-pic-dl-link,
+.wp-pic.scheme13 a.wp-pic-name {
+	color: #FFF;
+}
+.wp-pic.scheme13 .wp-pic-front a.wp-pic-name {
+	color: #FFF;
+}
+.wp-pic.scheme13 .wp-pic-bar{
+	background-image: linear-gradient(to top, rgb(30,60,114) 0%, rgb(30,60,114) 1%, rgb(42,82,152) 100%);
+}
+.wp-pic.scheme13 .wp-pic-bar span:after
+.wp-pic.scheme13 .wp-pic-bar a:after{
+	background-color: rgb(30,60,114);
+}
+.wp-pic.scheme13 > div> div {
+	background-image: linear-gradient(to top, rgb(30,60,114) 0%, rgb(30,60,114) 1%, rgb(42,82,152) 100%);
+}
+.wp-pic.scheme13 .wp-pic-back .wp-pic-name,
+.wp-pic.scheme13 p.wp-pic-updated {
+	color: #FFFFFF;
+}
+.wp-pic.scheme13 .wp-pic-bar em{
+	color: rgba(255, 255, 255, 0.80);
+}
+.wp-pic.scheme13 .wp-pic-flip .wp-pic-face.wp-pic-back ,
+.wp-pic.scheme13 .wp-pic-bar span,
+.wp-pic.scheme13 .wp-pic-bar a,
+.wp-pic.scheme13 .wp-pic-back a:not(.wp-pic-page),
+.wp-pic.scheme13 .wp-pic-asset-bg-title,
+.wp-pic.scheme13 .wp-pic-download-link span,
+.wp-pic.scheme13 .wp-pic-download,
+.wp-pic.scheme13 .wp-pic-page,
+.wp-pic.scheme13 a.wp-pic-page {
+	color: #FFFFFF;
+}
+.wp-pic.scheme13 .wp-pic-download,
+.wp-pic.scheme13 .wp-pic-asset-bg,
+.wp-pic.scheme13 a.wp-pic-page,
+.wp-pic.scheme13.flex .wp-pic-download-link span{
+	background-color: rgb(30,60,114);
+}
+.wp-pic.scheme13 .wp-pic-download,
+.wp-pic.scheme13 a.wp-pic-page {
+	background-color: rgb(42,82,152);
+}
+
+/*Color Scheme 14*/
+.wp-pic.scheme14 .wp-pic-no-plugin,
+.entry .wp-pic.scheme14 p,
+.wp-pic.scheme14 p,
+.wp-pic.scheme14 .wp-pic-back a:not(.wp-pic-page):hover ,
+.wp-pic.scheme14 .wp-pic-back p,
+.wp-pic.scheme14:not(.wordpress) .wp-pic-author a,
+.wp-pic.scheme14 .wp-pic-dl-link,
+.wp-pic.scheme14 a.wp-pic-name {
+	color: #FFF;
+}
+.wp-pic.scheme14 .wp-pic-front a.wp-pic-name {
+	color: #FFF;
+}
+.wp-pic.scheme14 .wp-pic-bar{
+	background: rgb(22,217,227);
+}
+.wp-pic.scheme14 .wp-pic-bar span:after
+.wp-pic.scheme14 .wp-pic-bar a:after{
+	background-color: rgb(48,199,236);
+}
+.wp-pic.scheme14 > div> div {
+	background-image: radial-gradient(circle 248px at center, rgb(22,217,227) 0%, rgb(48,199,236) 47%, rgb(70,174,247) 100%);
+}
+.wp-pic.scheme14 .wp-pic-back .wp-pic-name,
+.wp-pic.scheme14 p.wp-pic-updated {
+	color: #FFFFFF;
+}
+.wp-pic.scheme14 .wp-pic-bar em{
+	color: rgba(255, 255, 255, 0.80);
+}
+.wp-pic.scheme14 .wp-pic-flip .wp-pic-face.wp-pic-back ,
+.wp-pic.scheme14 .wp-pic-bar span,
+.wp-pic.scheme14 .wp-pic-bar a,
+.wp-pic.scheme14 .wp-pic-back a:not(.wp-pic-page),
+.wp-pic.scheme14 .wp-pic-asset-bg-title,
+.wp-pic.scheme14 .wp-pic-download-link span,
+.wp-pic.scheme14 .wp-pic-download,
+.wp-pic.scheme14 .wp-pic-page,
+.wp-pic.scheme14 a.wp-pic-page {
+	color: #FFFFFF;
+}
+.wp-pic.scheme14 .wp-pic-download,
+.wp-pic.scheme14 .wp-pic-asset-bg,
+.wp-pic.scheme14 a.wp-pic-page,
+.wp-pic.scheme14.flex .wp-pic-download-link span{
+	background-color: rgb(48,199,236);
+}
+.wp-pic.scheme14 .wp-pic-download,
+.wp-pic.scheme14 a.wp-pic-page {
+	background-color: rgb(70,174,247);
+}
+
 /*DL effect*/
 .wp-pic .wp-pic-dl-effet {
 	-webkit-animation-duration: 0.75s;
