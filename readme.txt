@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Tags: API, plugin, card, theme, block, blocks, gutenberg
 Requires at least: 3.7
 Tested up to: 5.3
-Stable tag: 3.1.16
+Stable tag: 3.1.20
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -188,6 +188,12 @@ This video shows you how:
 
 
 == Changelog ==
+
+= 3.1.20 =
+* Released 2020-01-30
+* Improved Gutenberg block loading and edit screens.
+* Blocks are full-width by default.
+* Added block previews to blocks.
 
 = 3.1.16 =
 * Released 2019-06-23
@@ -455,20 +461,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 3.1.16 =
-* Gutenberg block improvements. New color scheme (Scheme 12) for Magenta.
-
-= 3.1.15 =
-Added layout options to Gutenberg block. Code cleanup and fixes.
-
-= 3.1.12 =
-Documentation updates. New scheme - Dark mode.
-
-= 3.1.11 =
-Fixing card styles not showing properly.
-
-= 3.1.10 =
-Documentation update.
-
-= 3.1.9 =
-Gutenberg fixes and enhancements. New FLEX layout option in Gutenberg and the shortcodes.
+= 3.1.20 =
+Improved Gutenberg block loading and edit screens. Blocks are full-width by default. Added block previews to blocks.
