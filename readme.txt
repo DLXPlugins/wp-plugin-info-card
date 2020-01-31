@@ -194,6 +194,8 @@ This video shows you how:
 * Improved Gutenberg block loading and edit screens.
 * Blocks are full-width by default.
 * Added block previews to blocks.
+* New multi mode to allow multiple plugin output using one shortcode or one block.
+* Added two new color schemes.
 
 = 3.1.16 =
 * Released 2019-06-23
@@ -462,4 +464,4 @@ This video shows you how:
 == Upgrade Notice ==
 
 = 3.1.20 =
-Improved Gutenberg block loading and edit screens. Blocks are full-width by default. Added block previews to blocks.
+Improved Gutenberg block loading and edit screens. Blocks are full-width by default. Added block previews to blocks. New multi mode to output multiple plugins with one shortcode. Two new color schemes.
