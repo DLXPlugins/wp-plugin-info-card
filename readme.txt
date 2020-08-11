@@ -2,8 +2,8 @@
 Contributors: briKou, ronalfy
 Tags: API, plugin, card, theme, block, blocks, gutenberg
 Requires at least: 3.7
-Tested up to: 5.4
-Stable tag: 3.1.20
+Tested up to: 5.5
+Stable tag: 3.1.21
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -188,6 +188,9 @@ This video shows you how:
 
 
 == Changelog ==
+
+= 3.1.21 =
+* WordPress 5.5 compatibility.
 
 = 3.1.20 =
 * Released 2020-01-30
@@ -463,5 +466,6 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 3.1.20 =
-Improved Gutenberg block loading and edit screens. Blocks are full-width by default. Added block previews to blocks. New multi mode to output multiple plugins with one shortcode. Two new color schemes.
+= 3.1.21 =
+
+WordPress 5.5 compatibility.
