@@ -2,6 +2,7 @@
  * External dependencies
  */
 import axios from "axios";
+import Logo from "./Logo";
 const HtmlToReactParser = require("html-to-react").Parser;
 const { Component, Fragment } = wp.element;
 
@@ -9,7 +10,7 @@ const { __ } = wp.i18n;
 
 const {
 	PanelBody,
-	Placeholder,
+	PanelRow,
 	SelectControl,
 	Spinner,
 	TextControl,
@@ -159,151 +160,179 @@ class WP_Plugin_Card extends Component {
 		const pluginOnClick = this.pluginOnClick;
 		const inspectorControls = (
 			<InspectorControls>
-				<PanelBody title={__("WP Plugin Info Card", "wp-plugin-info-card")}>
-					<SelectControl
-						label={__("Scheme", "wp-plugin-info-card")}
-						options={schemeOptions}
-						value={scheme}
-						onChange={(value) => {
-							this.props.setAttributes({ scheme: value });
-							this.props.attributes.scheme = value;
-							this.setState({ scheme: value });
-							this.pluginOnClick(value);
-						}}
-					/>
-					<SelectControl
-						label={__("Layout", "wp-plugin-info-card")}
-						options={layoutOptions}
-						value={layout}
-						onChange={(value) => {
-							if ("flex" == value) {
-								this.props.setAttributes({ layout: value, align: "full" });
-								this.props.attributes.layout = value;
-								this.props.attributes.align = "full";
-								this.setState({ layout: value, align: "full" });
+				<PanelBody
+					title={__("Layout", "wp-plugin-info-card")}
+				>
+					<PanelRow>
+						<SelectControl
+							label={__("Scheme", "wp-plugin-info-card")}
+							options={schemeOptions}
+							value={scheme}
+							onChange={(value) => {
+								this.props.setAttributes({ scheme: value });
+								this.props.attributes.scheme = value;
+								this.setState({ scheme: value });
 								this.pluginOnClick(value);
-							} else {
-								this.props.setAttributes({ layout: value, align: "center" });
-								this.props.attributes.layout = value;
-								this.props.attributes.align = "center";
-								this.setState({ layout: value, align: "center" });
+							}}
+						/>
+					</PanelRow>
+					<PanelRow>
+						<SelectControl
+							label={__("Layout", "wp-plugin-info-card")}
+							options={layoutOptions}
+							value={layout}
+							onChange={(value) => {
+								if ("flex" == value) {
+									this.props.setAttributes({ layout: value, align: "full" });
+									this.props.attributes.layout = value;
+									this.props.attributes.align = "full";
+									this.setState({ layout: value, align: "full" });
+									this.pluginOnClick(value);
+								} else {
+									this.props.setAttributes({ layout: value, align: "center" });
+									this.props.attributes.layout = value;
+									this.props.attributes.align = "center";
+									this.setState({ layout: value, align: "center" });
+									this.pluginOnClick(value);
+								}
+							}}
+						/>
+					</PanelRow>
+				</PanelBody>
+				<PanelBody
+					title={__("Options", "wp-plugin-info-card")}
+					initialOpen={false}
+				>
+					<PanelRow>
+						<SelectControl
+							label={__("Width", "wp-plugin-info-card")}
+							options={widthOptions}
+							value={width}
+							onChange={(value) => {
+								this.props.setAttributes({ width: value });
+								this.props.attributes.width = value;
+								this.setState({ width: value });
+							}}
+						/>
+					</PanelRow>
+					<PanelRow>
+						<MediaUpload
+							onSelect={(imageObject) => {
+								this.props.setAttributes({ image: imageObject.url });
+								this.props.attributes.image = imageObject.url;
+								this.setState({ image: imageObject.url });
+								this.pluginOnClick(imageObject);
+							}}
+							type="image"
+							value={image}
+							render={({ open }) => (
+								<Fragment>
+									<button
+										className="components-button is-button"
+										onClick={open}
+									>
+										{__("Upload Image!", "wp-plugin-info-card")}
+									</button>
+									{image && (
+										<Fragment>
+											<div>
+												<img
+													src={image}
+													alt={__("Plugin Card Image", "wp-plugin-info-card")}
+													width="250"
+													height="250"
+												/>
+											</div>
+											<div>
+												<button
+													className="components-button is-button"
+													onClick={(event) => {
+														this.props.setAttributes({ image: "" });
+														this.props.attributes.image = "";
+														this.setState({ image: "" });
+														this.pluginOnClick(event);
+													}}
+												>
+													{__("Reset Image", "wp-plugin-info-card")}
+												</button>
+											</div>
+										</Fragment>
+									)}
+								</Fragment>
+							)}
+						/>
+					</PanelRow>
+					<PanelRow>
+						<TextControl
+							label={__("Container ID", "wp-plugin-info-card")}
+							type="text"
+							value={containerid}
+							onChange={(value) => {
+								this.props.setAttributes({ containerid: value });
+								this.props.attributes.containerid = value;
+								this.setState({ containerid: value });
+								setTimeout(function () {
+									pluginOnClick(value);
+								}, 5000);
+							}}
+						/>
+						</PanelRow>
+						<PanelRow>
+						<TextControl
+							label={__("Margin", "wp-plugin-info-card")}
+							type="text"
+							value={margin}
+							onChange={(value) => {
+								this.props.setAttributes({ margin: value });
+								this.props.attributes.margin = value;
+								this.setState({ margin: value });
+								setTimeout(function () {
+									pluginOnClick(value);
+								}, 5000);
+							}}
+						/>
+					</PanelRow>
+					<PanelRow>
+						<SelectControl
+							label={__("Clear", "wp-plugin-info-card")}
+							options={clearOptions}
+							value={clear}
+							onChange={(value) => {
+								this.props.setAttributes({ clear: value });
+								this.props.attributes.clear = value;
+								this.setState({ clear: value });
 								this.pluginOnClick(value);
-							}
-						}}
-					/>
-					<SelectControl
-						label={__("Width", "wp-plugin-info-card")}
-						options={widthOptions}
-						value={width}
-						onChange={(value) => {
-							this.props.setAttributes({ width: value });
-							this.props.attributes.width = value;
-							this.setState({ width: value });
-						}}
-					/>
-					<MediaUpload
-						onSelect={(imageObject) => {
-							this.props.setAttributes({ image: imageObject.url });
-							this.props.attributes.image = imageObject.url;
-							this.setState({ image: imageObject.url });
-							this.pluginOnClick(imageObject);
-						}}
-						type="image"
-						value={image}
-						render={({ open }) => (
-							<Fragment>
-								<button className="components-button is-button" onClick={open}>
-									{__("Upload Image!", "wp-plugin-info-card")}
-								</button>
-								{image && (
-									<Fragment>
-										<div>
-											<img
-												src={image}
-												alt={__("Plugin Card Image", "wp-plugin-info-card")}
-												width="250"
-												height="250"
-											/>
-										</div>
-										<div>
-											<button
-												className="components-button is-button"
-												onClick={(event) => {
-													this.props.setAttributes({ image: "" });
-													this.props.attributes.image = "";
-													this.setState({ image: "" });
-													this.pluginOnClick(event);
-												}}
-											>
-												{__("Reset Image", "wp-plugin-info-card")}
-											</button>
-										</div>
-									</Fragment>
-								)}
-							</Fragment>
-						)}
-					/>
-					<TextControl
-						label={__("Container ID", "wp-plugin-info-card")}
-						type="text"
-						value={containerid}
-						onChange={(value) => {
-							this.props.setAttributes({ containerid: value });
-							this.props.attributes.containerid = value;
-							this.setState({ containerid: value });
-							setTimeout(function () {
-								pluginOnClick(value);
-							}, 5000);
-						}}
-					/>
-					<TextControl
-						label={__("Margin", "wp-plugin-info-card")}
-						type="text"
-						value={margin}
-						onChange={(value) => {
-							this.props.setAttributes({ margin: value });
-							this.props.attributes.margin = value;
-							this.setState({ margin: value });
-							setTimeout(function () {
-								pluginOnClick(value);
-							}, 5000);
-						}}
-					/>
-					<SelectControl
-						label={__("Clear", "wp-plugin-info-card")}
-						options={clearOptions}
-						value={clear}
-						onChange={(value) => {
-							this.props.setAttributes({ clear: value });
-							this.props.attributes.clear = value;
-							this.setState({ clear: value });
-							this.pluginOnClick(value);
-						}}
-					/>
-					<TextControl
-						label={__("Expiration in minutes", "wp-plugin-info-card")}
-						type="number"
-						value={expiration}
-						onChange={(value) => {
-							this.props.setAttributes({ expiration: value });
-							this.props.attributes.expiration = value;
-							this.setState({ expiration: value });
-							setTimeout(function () {
-								pluginOnClick(value);
-							}, 5000);
-						}}
-					/>
-					<SelectControl
-						label={__("Load card via Ajax?", "wp-plugin-info-card")}
-						options={ajaxOptions}
-						value={ajax}
-						onChange={(value) => {
-							this.props.setAttributes({ ajax: value });
-							this.props.attributes.ajax = value;
-							this.setState({ ajax: value });
-							this.pluginOnClick(value);
-						}}
-					/>
+							}}
+						/>
+					</PanelRow>
+					<PanelRow>
+						<TextControl
+							label={__("Expiration in minutes", "wp-plugin-info-card")}
+							type="number"
+							value={expiration}
+							onChange={(value) => {
+								this.props.setAttributes({ expiration: value });
+								this.props.attributes.expiration = value;
+								this.setState({ expiration: value });
+								setTimeout(function () {
+									pluginOnClick(value);
+								}, 5000);
+							}}
+						/>
+					</PanelRow>
+					<PanelRow>
+						<SelectControl
+							label={__("Load card via Ajax?", "wp-plugin-info-card")}
+							options={ajaxOptions}
+							value={ajax}
+							onChange={(value) => {
+								this.props.setAttributes({ ajax: value });
+								this.props.attributes.ajax = value;
+								this.setState({ ajax: value });
+								this.pluginOnClick(value);
+							}}
+						/>
+					</PanelRow>
 				</PanelBody>
 			</InspectorControls>
 		);
@@ -320,26 +349,7 @@ class WP_Plugin_Card extends Component {
 					{this.state.loading && (
 						<div className="wppic-query-block wppic-query-block-panel">
 							<div className="wppic-block-svg">
-								<svg
-									version="1.1"
-									id="Calque_1"
-									xmlns="http://www.w3.org/2000/svg"
-									x="0px"
-									y="0px"
-									width="75px"
-									height="75px"
-									viewBox="0 0 850.39 850.39"
-									enable-background="new 0 0 850.39 850.39"
-								>
-									<path
-										fill="#DB3939"
-										d="M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39
-									c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451
-									l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07
-									h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887
-									l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z"
-									/>
-								</svg>
+							<Logo size="75" />
 							</div>
 							<div className="wp-pic-tab-panel">
 								<TabPanel
@@ -365,7 +375,10 @@ class WP_Plugin_Card extends Component {
 											tabContent = (
 												<Fragment>
 													<SelectControl
-														label={__("Select a Plugin or Theme", "wp-plugin-info-card")}
+														label={__(
+															"Select a Plugin or Theme",
+															"wp-plugin-info-card"
+														)}
 														options={assetType}
 														value={this.state.type}
 														onChange={(value) => {
@@ -376,7 +389,10 @@ class WP_Plugin_Card extends Component {
 														}}
 													/>
 													<TextControl
-														label={__('Plugin or Theme Slug', 'wp-plugin-info-card')}
+														label={__(
+															"Plugin or Theme Slug",
+															"wp-plugin-info-card"
+														)}
 														value={this.state.slug}
 														onChange={(value) => {
 															this.props.setAttributes({
@@ -384,12 +400,18 @@ class WP_Plugin_Card extends Component {
 															});
 															this.slugChange(value);
 														}}
-														help={__('Comma separated slugs are supported.', 'wp-plugin-info-card')}
+														help={__(
+															"Comma separated slugs are supported.",
+															"wp-plugin-info-card"
+														)}
 													/>
 													<CheckboxControl
-														label={__('Enable Multi Output', 'wp-plugin-info-card')}
+														label={__(
+															"Enable Multi Output",
+															"wp-plugin-info-card"
+														)}
 														help="Comma-separated slugs are outputted into multiple cards instead of shuffling between cards."
-														checked={ multi }
+														checked={multi}
 														onChange={(value) => {
 															this.props.attributes.multi = value;
 															this.setState({ multi: value });
@@ -402,7 +424,10 @@ class WP_Plugin_Card extends Component {
 												<Fragment>
 													<div>
 														<SelectControl
-															label={__('Select an initial layout', 'wp-plugin-info-card')}
+															label={__(
+																"Select an initial layout",
+																"wp-plugin-info-card"
+															)}
 															options={layoutOptions}
 															value={layout}
 															onChange={(value) => {
@@ -455,26 +480,9 @@ class WP_Plugin_Card extends Component {
 							<div className="wp-pic-gutenberg-button">
 								<Button
 									iconSize={20}
-									icon={<svg
-									version="1.1"
-									id="Calque_1"
-									xmlns="http://www.w3.org/2000/svg"
-									x="0px"
-									y="0px"
-									width="25px"
-									height="25px"
-									viewBox="0 0 850.39 850.39"
-									enable-background="new 0 0 850.39 850.39"
-								>
-									<path
-										fill="#DB3939"
-										d="M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39
-									c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451
-									l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07
-									h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887
-									l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z"
-									/>
-								</svg>}
+									icon={
+										<Logo size="25" />
+									}
 									isSecondary
 									id="wppic-input-submit"
 									onClick={(event) => {
@@ -482,7 +490,9 @@ class WP_Plugin_Card extends Component {
 										this.props.setAttributes({ loading: false });
 										this.pluginOnClick(event);
 									}}
-								>{__("Preview and Configure", "wp-plugin-info-card")}</Button>
+								>
+									{__("Preview and Configure", "wp-plugin-info-card")}
+								</Button>
 							</div>
 						</div>
 					)}
@@ -490,26 +500,7 @@ class WP_Plugin_Card extends Component {
 						<Fragment>
 							<div className="wppic-loading-placeholder">
 								<div className="wppic-loading">
-									<svg
-										version="1.1"
-										id="Calque_1"
-										xmlns="http://www.w3.org/2000/svg"
-										x="0px"
-										y="0px"
-										width="40px"
-										height="40px"
-										viewBox="0 0 850.39 850.39"
-										enableBackground="new 0 0 850.39 850.39"
-									>
-										<path
-											fill="#DB3939"
-											d="M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39
-								c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451
-								l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07
-								h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887
-								l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z"
-										/>
-									</svg>
+								<Logo size="45" />
 									<br />
 									<div className="wppic-spinner">
 										<Spinner />
