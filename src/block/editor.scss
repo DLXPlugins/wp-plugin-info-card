@@ -4,46 +4,89 @@
  * CSS for just Backend enqueued after style.scss
  * which makes it higher in priority.
  */
- @import '../src/css/wppic-style.css';
+@import "../src/css/wppic-style.css";
+
+/* Panel Styles */
+.wppic-query-block-panel {
+	position: relative;
+	background: #fff;
+	max-width: 500px;
+	margin: 0 auto;
+	padding: 20px;
+
+	select {
+		height: inherit !important;
+		font-size: 14px !important;
+		line-height: 1.2em !important;
+	}
+	#wppic-input-submit {
+		background: #FFF;
+		color: #cb212b;
+		padding: 15px 25px !important;
+	}
+}
+.wp-pic-tab-panel {
+	padding: 0 16px;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	.components-tab-panel__tabs {
+		.wppic-tab-layout,
+		.wppic-tab-slug {
+			border-radius: 0;
+			background: transparent;
+			border: none;
+			box-shadow: none;
+			cursor: pointer;
+			display: inline-block;
+			padding: 3px 15px;
+			margin-left: 0;
+			font-weight: 500;
+
+			&.active-tab {
+				font-weight: 700;
+				border-bottom: 2px solid #cb212b;
+			}
+		}
+	}
+}
+.wppic-block-svg {
+	text-align: center;
+}
 .wp-pic-flip,
 .wp-pic-wordpress,
 .wp-pic-large {
-  display: block !important;
+	display: block !important;
 }
 .is-block-content .wp-pic {
 	max-width: 100% !important;
 }
 .wppic-query-block {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	div {
-		width: 100%;
-		text-align: center;
-		h3 {
-			margin: 1.8em 0 1.0em 0;
-		}
-		p {
-			margin: 10px 0;
-		}
-		input {
-			text-align: center;
-			width: 100%;
-			max-width: 25rem;
-		}
-		select {
-			width: 100%;
-			max-width: 25rem;
-		}
+	.components-base-control__help {
+		text-align: left;
+		font-size: 12px;
+		margin: 0;
+		font-style: italic;
+		margin-bottom: 10px;
 	}
 	.button.button-primary {
 		margin-top: 1.8em;
 	}
+	.wp-pic-gutenberg-button {
+		text-align: center;
+		button {
+			margin-top: 20px;
+			text-align: center;
+		}
+	}
 }
 .wppic-loading-placeholder {
+	background: #FFF;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+	padding: 20px;
+	max-width: 400px;
+	margin: 0 auto;
 }
 .wppic-loading {
 	width: 100%;
@@ -59,28 +102,28 @@
 	}
 }
 .wp-pic-full-width {
-  float: none;
-  width: 100%;
-  .card.wp-pic {
-    width: 100%;
-  }
-  .card.wp-pic .wp-pic-front .wp-pic-name {
-    width: 100%;
-    text-align: center;
-    display: block;
-  }
+	float: none;
+	width: 100%;
+	.card.wp-pic {
+		width: 100%;
+	}
+	.card.wp-pic .wp-pic-front .wp-pic-name {
+		width: 100%;
+		text-align: center;
+		display: block;
+	}
 }
 .wppic-block {
-  h3 {
-    width: 100%;
-  }
-  div {
-    display: block;
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  input {
-    display: inline-block;
-    width: 100%;
-  }
+	h3 {
+		width: 100%;
+	}
+	div {
+		display: block;
+		width: 100%;
+		margin-bottom: 20px;
+	}
+	input {
+		display: inline-block;
+		width: 100%;
+	}
 }

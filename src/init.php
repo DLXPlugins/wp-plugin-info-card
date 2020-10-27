@@ -98,7 +98,7 @@ function wppic_register_block() {
 				),
 				'slug'        => array(
 					'type'    => 'string',
-					'default' => '',
+					'default' => 'wp-plugin-info-card',
 				),
 				'loading'     => array(
 					'type'    => 'boolean',
@@ -142,7 +142,7 @@ function wppic_register_block() {
 				),
 				'layout'      => array(
 					'type'    => 'string',
-					'default' => 'card',
+					'default' => 'large',
 				),
 				'custom'      => array(
 					'type'    => 'string',
