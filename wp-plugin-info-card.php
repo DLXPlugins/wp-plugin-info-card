@@ -38,7 +38,7 @@ if ( ! defined( 'WPPIC_NAME' ) ) {
 	define( 'WPPIC_NAME', 'WP Plugin Info Card' );
 }
 if ( ! defined( 'WPPIC_NAME_FULL' ) ) {
-	define( 'WPPIC_NAME_FULL', 'WP Plugin Info Card by b*web and Ronald Huereca' );
+	define( 'WPPIC_NAME_FULL', 'WP Plugin Info Card' );
 }
 if ( ! defined( 'WPPIC_ID' ) ) {
 	define( 'WPPIC_ID', 'wp-plugin-info-card' );
