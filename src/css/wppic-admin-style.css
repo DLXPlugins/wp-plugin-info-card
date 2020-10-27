@@ -4,6 +4,21 @@
  * Author: Brice CAPOBIANCO - b*web
  */
 @import url("./wppic-style.css");
+
+@-moz-keyframes wppic-spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes wppic-spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes wppic-spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+
 i.mce-i-wppic-icon {
 	background-image:  url('../img/wppic.png');
 	background-image:  none, url('../img/wppic.svg'), url('../img/wppic.png');
@@ -134,7 +149,7 @@ h3.wp-pic-title {
 	font-size: 1.5em;
 }
 .wppic-button.wppic-pluginHome:before {
-    content: "\f103";
+    content: "\f102";
 }
 .wppic-button.wppic-pluginOther:before {
     content: "\f106";
@@ -149,10 +164,13 @@ h3.wp-pic-title {
     content: "\f155";
 }
 .wppic-button.wppic-pluginContact:before {
-    content: "\f130";
+    content: "\f465";
 }
 .wppic-button.wppic-pluginDonate:before {
     content: "\f328";
+}
+.wppic-button.wppic-pluginCode:before {
+	content: "\f475";
 }
 .wppic-list li.wppic-dd:before {
     cursor: move;
@@ -238,12 +256,27 @@ h3.wp-pic-title {
 	display: block;
 	word-break: keep-all;
 	overflow-wrap: break-word;
-	background: #cb212b;
+	background: #000;
 	padding: 20px 30px;
 	color: #FFF;
 	max-width: 450px;
 	width: 100%;
 	font-weight: 700;
-	border: 3px solid #000;
+	border: 3px solid #cb212b;
 	border-radius: 2px;
+}
+.wppic-pluginHome:hover:before,
+.wppic-pluginPage:hover:before,
+.wppic-pluginSupport:hover:before,
+.wppic-pluginContact:hover:before,
+.wppic-pluginRate:hover:before,
+.wppic-button.wppic-pluginCode:hover:before {
+	color: #cb212b;
+	display: inline-block;
+}
+.wppic-pluginRate:hover:before {
+	animation-name: wppic-spin;
+    animation-duration: 2500ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }

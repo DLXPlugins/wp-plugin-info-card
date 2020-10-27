@@ -86,7 +86,7 @@ function wppic_register_settings() {
 		array(
             'id' 	=> 'wppic-credit',
             'name' 	=> 'credit',
-			'label' => __( 'If you like this plugin, check this box!', 'wp-plugin-info-card' )
+			'label' => __( 'Help spread the word about this plugin.', 'wp-plugin-info-card' )
         )
 	);
 
@@ -159,9 +159,9 @@ function wppic_settings_page() {
 	echo '
 	<div class="wrap">
 		<div id="post-body-content">
-			<div id="wppic-admin-page" class="postbox meta-box-sortabless">
+			<div id="wppic-admin-page" class="postbox meta-box-sortables">
 			<h1 style="vertical-align: middle; font-size: 36px"><img src="' . WPPIC_URL . 'img/wppic.svg" class="wppic-logo" alt="b*web" style="width: 25px; height: 25px;" />&nbsp;' . WPPIC_NAME_FULL . '</h1>
-			<p class="description">' . esc_html__( 'Beautiful plugin and theme cards', 'wp-plugin-info-card' ) . '</p>
+			<h2 class="description">' . esc_html__( 'Beautiful plugin and theme cards', 'wp-plugin-info-card' ) . '</h2>
 			' . wppic_plugins_about() . '
 				<div id="wppic-shortcode">
 					<h2 class="hndle">' . esc_html__( 'Using the Block Editor? Use our Blocks. No Shortcodes Needed', 'wp-plugin-info-card' ) . '</h2>
@@ -170,7 +170,7 @@ function wppic_settings_page() {
 					</div>
 					<h2 class="hndle"><span>' . __( 'How to use WP Plugin Info Card shortcodes?', 'wp-plugin-info-card' ) . '</span></h2>
 					<div class="inside">
-						' . wppic_shortcode_function( array ( 'type' => 'plugin', 'slug' => 'wp-plugin-info-card', 'image' => '', 'align' => 'right', 'margin' => '0 0 0 20px', 'scheme' => $scheme, 'layout' => $layout ) ) . '
+						' . wppic_shortcode_function( array ( 'type' => 'plugin', 'slug' => 'wp-plugin-info-card', 'image' => '', 'align' => 'right', 'margin' => '0 0 0 20px', 'scheme' => $scheme, 'layout' => 'card' ) ) . '
 						<h3 class="wp-pic-title">' . __( 'Shortcode parameters', 'wp-plugin-info-card' ) . '</h3>
 						<ul>
 							<li><strong>type:</strong> plugin, theme - ' . __( '(default: plugin)', 'wp-plugin-info-card' ) . '</li>
@@ -199,7 +199,7 @@ function wppic_settings_page() {
 						<p>
 							<code class="wppic-admin-shortcode">[wp-pic type="plugin" slug="adblock-notify-by-bweb"]</code>
 						</p>
-						<p class="documentation"><a href="https://mediaron.com/wp-plugin-info-card/" target="_blank" title="'. __( 'Documentation and examples', 'wp-plugin-info-card' ) .'">'. __( 'Documentation and examples', 'wp-plugin-info-card' ) .' <span class="dashicons dashicons-external"></span></a></p>
+						<p class="documentation"><a href="https://mediaron.com/wp-plugin-info-card/" target="_blank" title="'. __( 'View More Documentation and examples', 'wp-plugin-info-card' ) .'">'. __( 'View More Documentation and examples', 'wp-plugin-info-card' ) .' <span class="dashicons dashicons-external"></span></a></p>
 						' . $memcache . '
 					 </div>
 				</div>
@@ -289,6 +289,8 @@ function wppic_color_scheme() {
 		$content .= '<option value="scheme10" '. selected( $scheme, 'scheme10', FALSE ) . '>Color scheme 10</option>';
 		$content .= '<option value="scheme11" '. selected( $scheme, 'scheme11', FALSE ) . '>Color scheme 11</option>';
 		$content .= '<option value="scheme12" '. selected( $scheme, 'scheme12', FALSE ) . '>Color scheme 12</option>';
+		$content .= '<option value="scheme13" '. selected( $scheme, 'scheme13', FALSE ) . '>Color scheme 13</option>';
+		$content .= '<option value="scheme14" '. selected( $scheme, 'scheme14', FALSE ) . '>Color scheme 14</option>';
 		$content .= '</select>';
 		$content .= '<label for="wppic-color-scheme">' . __( 'Default color scheme for your cards.', 'wp-plugin-info-card' ) . '</label>';
 	$content .= '</td>';
@@ -387,13 +389,16 @@ function wppic_validate( $input ) {
  ***************************************************************/
 function wppic_plugins_about() {
 	$content ='
+		<hr />
 		<div id="wppic-about-list">
 			<a class="wppic-button wppic-pluginHome" href="https://mediaron.com/wp-plugin-info-card/" target="_blank">' . __( 'Plugin homepage', 'wp-plugin-info-card' ) . '</a>
 			<a class="wppic-button wppic-pluginPage" href="https://wordpress.org/plugins/wp-plugin-info-card/" target="_blank">WordPress.org</a>
 			<a class="wppic-button wppic-pluginSupport" href="https://wordpress.org/support/plugin/wp-plugin-info-card" target="_blank">' . __( 'Support', 'wp-plugin-info-card' ) . '</a>
 			<a class="wppic-button wppic-pluginRate" href="https://wordpress.org/support/view/plugin-reviews/wp-plugin-info-card?rate=5#postform" target="_blank">' . __( 'Rate Us Five Stars', 'wp-plugin-info-card' ) . '</a>
-			<a class="wppic-button wppic-pluginContact" href="https://wordpress.org/support/plugin/wp-plugin-info-card" target="_blank">' . __( 'Suggestions?', 'wp-plugin-info-card' ) . '</a>
+			<a class="wppic-button wppic-pluginCode" href="https://github.com/MediaRon/wp-plugin-info-card" target="_blank">' . __( 'Find Us On GitHub', 'wp-plugin-info-card' ) . '</a>
+			<a class="wppic-button wppic-pluginContact" href="https://mediaron.com/contact/" target="_blank">' . __( 'Contact Us', 'wp-plugin-info-card' ) . '</a>
 		</div>
+		<hr />
 	';
 	return $content;
 }

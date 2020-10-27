@@ -43,6 +43,7 @@ add_action( 'enqueue_block_assets', 'wp_plugin_info_card_cgb_block_assets' );
  * @since 1.0.0
  */
 function wp_plugin_info_card_cgb_editor_assets() { // phpcs:ignore
+
 	// Scripts.
 	wp_enqueue_script(
 		'wp_plugin_info_card-cgb-block-js', // Handle.
@@ -88,6 +89,10 @@ function wp_plugin_info_card_cgb_editor_assets() { // phpcs:ignore
 add_action( 'enqueue_block_editor_assets', 'wp_plugin_info_card_cgb_editor_assets' );
 
 function wppic_register_block() {
+	$options = get_option( 'wppic_settings' );
+
+	$default_scheme = isset( $options['colorscheme'] ) ? $options['colorscheme'] : 'default';
+	$default_layout = isset( $options['default_layout'] ) ? $options['default_layout'] : 'card';
 	register_block_type(
 		'wp-plugin-info-card/wp-plugin-info-card',
 		array(
@@ -138,11 +143,11 @@ function wppic_register_block() {
 				),
 				'scheme'      => array(
 					'type'    => 'string',
-					'default' => 'default',
+					'default' => $default_scheme,
 				),
 				'layout'      => array(
 					'type'    => 'string',
-					'default' => 'large',
+					'default' => $default_layout,
 				),
 				'custom'      => array(
 					'type'    => 'string',
@@ -156,7 +161,7 @@ function wppic_register_block() {
 					'type'    => 'boolean',
 					'default' => false,
 				),
-				'multi'     => array(
+				'multi'       => array(
 					'type'    => 'boolean',
 					'default' => false,
 				),
@@ -329,7 +334,7 @@ function wppic_block_editor( $attributes ) {
 		'ajax'        => $attributes['ajax'],
 		'scheme'      => $attributes['scheme'],
 		'layout'      => $attributes['layout'],
-		'multi'       => isset( $attributes['multi'] ) ?  filter_var( $attributes['multi'], FILTER_VALIDATE_BOOLEAN ) : false,
+		'multi'       => isset( $attributes['multi'] ) ? filter_var( $attributes['multi'], FILTER_VALIDATE_BOOLEAN ) : false,
 	);
 	$html = '';
 	if ( '' !== $attributes['width'] ) {
