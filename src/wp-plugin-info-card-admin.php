@@ -177,9 +177,15 @@ function wppic_settings_page() {
 					<h2><span>' . __( 'Shortcodes', 'wp-plugin-info-card' ) . '</span></h2>
 					<div class="inside">
 					<p class="description"> ' . esc_html__( 'Use shortcodes to show a plugin or theme card just about anywhere.', 'wp-plugin-info-card' ) . '</p>
-					<a class="button button-secondary" data-animation-effect="zoom" data-animation-duration="1000" data-fancybox data-src="#plugin-info-admim-demo" data-caption="' . esc_attr__( 'WP Plugin Info Card Large Layout', 'wp-plugin-info-card' ) . '" href="javascript:;">' . esc_html__( 'View Card Demo', 'wp-plugin-info-card' ) . '</a>
-					<div id="plugin-info-admim-demo" style="display: none; width: 100%; max-width: 800px">
-						' . do_shortcode( '[wp-pic type="plugin" scheme="scheme1" layout="large" slug="wp-plugin-info-card"]' ) . '
+					<a class="button button-secondary" data-animation-effect="zoom" data-animation-duration="1000" data-fancybox data-src="#plugin-info-admim-demo-card" data-caption="' . esc_attr__( 'WP Plugin Info Card Layout', 'wp-plugin-info-card' ) . '" href="javascript:;">' . esc_html__( 'View Card Demo', 'wp-plugin-info-card' ) . '</a> <a class="button button-secondary" data-animation-effect="zoom" data-animation-duration="1000" data-fancybox data-src="#plugin-info-admim-demo-wordpress" data-caption="' . esc_attr__( 'WP Plugin Info Card WordPress Layout', 'wp-plugin-info-card' ) . '" href="javascript:;">' . esc_html__( 'View WordPress Demo', 'wp-plugin-info-card' ) . '</a> <a class="button button-secondary" data-animation-effect="zoom" data-animation-duration="1000" data-fancybox data-src="#plugin-info-admim-demo-large" data-caption="' . esc_attr__( 'WP Plugin Info Card Large Layout', 'wp-plugin-info-card' ) . '" href="javascript:;">' . esc_html__( 'View Large Demo', 'wp-plugin-info-card' ) . '</a>
+					<div id="plugin-info-admim-demo-card" style="display: none; width: 100%; max-width: 400px">
+						' . do_shortcode( '[wp-pic type="plugin" scheme="scheme1" layout="card" slug="wp-plugin-info-card"]' ) . '
+					</div>
+					<div id="plugin-info-admim-demo-wordpress" style="display: none; width: 100%; max-width: 800px">
+						' . do_shortcode( '[wp-pic type="plugin" scheme="scheme1" layout="wordpress" slug="wp-plugin-info-card"]' ) . '
+					</div>
+					<div id="plugin-info-admim-demo-large" style="display: none; width: 100%; max-width: 800px">
+						' . do_shortcode( '[wp-pic type="theme" scheme="scheme1" layout="large" slug="twentytwenty"]' ) . '
 					</div>
 						<h3 class="wp-pic-title">' . __( 'Shortcode parameters', 'wp-plugin-info-card' ) . '</h3>
 						<ul>
