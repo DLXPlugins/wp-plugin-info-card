@@ -7,6 +7,18 @@
  	text-align: center;
 	clear: both;
 }
+.wp-pic-wrapper.card,
+.wp-pic.card {
+	position: relative;
+    margin: 0;
+    padding: 0;
+    min-width: auto;
+    max-width: auto;
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+    box-sizing: border-box;
+}
 .wp-pic * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -62,7 +74,9 @@
 	background-color: #fff;
 }
 .entry .wp-pic p,
-.wp-pic p{
+.wp-pic p,
+p.wp-pic-author,
+.editor-styles-wrapper p.wp-pic-author {
 	vertical-align: baseline;
 	font-size: 13px;
 	display: block;

@@ -62,7 +62,9 @@ function wppic_register_route() {
 		array(
 			'methods'  => 'GET',
 			'callback' => 'wppic_get_shortcode',
+			'permission_callback' => '__return_true',
 		)
+
 	);
 	register_rest_route(
 		'wppic/v1',
@@ -70,6 +72,7 @@ function wppic_register_route() {
 		array(
 			'methods'  => 'GET',
 			'callback' => 'wppic_get_query_shortcode',
+			'permission_callback' => '__return_true',
 		)
 	);
 }
