@@ -182,12 +182,16 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 	$multi       = filter_var( $multi, FILTER_VALIDATE_BOOLEAN );
 
 	if ( empty( $layout ) ) {
-		$layout     = 'card';
+		$layout     = 'wp-pic-card';
 		$addClass[] = $layout;
 	} elseif ( 'flex' === $layout ) {
 		$addClass[] = 'flex';
-		$addClass[] = 'card';
+		$addClass[] = 'wp-pic-card';
+	} elseif( 'card' === $layout ) {
+		$layout     = 'wp-pic-card';
+		$addClass[] = 'wp-pic-card';
 	} else {
+		$layout     = 'wp-pic-card';
 		$addClass[] = $layout;
 	}
 
@@ -202,7 +206,27 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 		}
 	}
 
+	$block_alignment = 'align-center';
+	switch( $align ) {
+		case 'left':
+			$block_alignment = 'alignleft';
+		break;
+		case 'right':
+			$block_alignment = 'alignright';
+		break;
+		case 'center':
+			$block_alignment = 'aligncenter';
+		break;
+		case 'wide':
+			$block_alignment = 'alignwide';
+		break;
+		case 'full':
+			$block_alignment = 'alignfull';
+		break;
+	}
+
 	if ( is_array( $slug ) && $multi ) {
+		$content .= sprintf( '<div class="wp-pic-multi %s">', esc_attr( $block_alignment ) );
 		foreach ( $slug as $asset_slug ) {
 			// For old plugin versions
 			if ( empty( $type ) ) {
@@ -287,7 +311,9 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 					$content .= '<div style="clear:both"></div>';
 				}
 
-				$content .= sprintf( '<div class="wp-pic-wrapper %s %s %s" %s>', esc_attr( $align ), esc_attr( $layout ), $multi ? 'multi' : '', $style );
+
+
+				$content .= sprintf( '<div class="wp-pic-wrapper %s %s %s" %s>', esc_attr( $block_alignment ), esc_attr( $layout ), $multi ? 'multi' : '', $style );
 				if ( $alignCenter ) {
 					$content .= '<div class="wp-pic-center">';
 				}
@@ -315,6 +341,7 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 				}
 			}
 		}
+		$content .= '</div>';
 	} else {
 		// For old plugin versions
 		if ( empty( $type ) ) {
@@ -398,7 +425,7 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 				$content .= '<div style="clear:both"></div>';
 			}
 
-			$content .= sprintf( '<div class="wp-pic-wrapper %s %s" %s>', esc_attr( $align ), esc_attr( $layout ), $style );
+			$content .= sprintf( '<div class="wp-pic-wrapper %s %s" %s>', esc_attr( $block_alignment ), esc_attr( $layout ), $style );
 			if ( $alignCenter ) {
 				$content .= '<div class="wp-pic-center">';
 			}
