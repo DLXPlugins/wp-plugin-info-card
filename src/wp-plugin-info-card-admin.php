@@ -11,13 +11,15 @@ if ( !defined( 'ABSPATH' ) ) {
  * Back-End Scripts & Styles enqueueing
  ***************************************************************/
 function wppic_admin_scripts() {
-	wp_enqueue_script( 'wppic-admin-js', WPPIC_URL . 'js/wppic-admin-script.js', array( 'jquery' ),  NULL);
-	wp_enqueue_script( 'wppic-js', WPPIC_URL . 'js/wppic-script.min.js', array( 'jquery' ),  NULL);
-	wp_enqueue_script( 'jquery-ui-sortable', WPPIC_URL . '/wp-includes/js/jquery/ui/jquery.ui.sortable.min.js', array( 'jquery' ),  NULL);
+	wp_register_script( 'wppic-lightbox', WPPIC_URL . 'lightbox/jquery.fancybox.min.js', array( 'jquery' ),  WPPIC_VERSION, true);
+	wp_enqueue_script( 'wppic-admin-js', WPPIC_URL . 'js/wppic-admin-script.js', array( 'jquery', 'wppic-lightbox' ),  WPPIC_VERSION, true);
+	wp_enqueue_script( 'wppic-js', WPPIC_URL . 'js/wppic-script.min.js', array( 'jquery' ),  WPPIC_VERSION, true);
+	wp_enqueue_script( 'jquery-ui-sortable', WPPIC_URL . '/wp-includes/js/jquery/ui/jquery.ui.sortable.min.js', array( 'jquery' ),  WPPIC_VERSION, true);
 }
 function wppic_admin_css() {
 	wp_enqueue_style( 'dashicons' );
-	wp_enqueue_style( 'wppic-admin-css', WPPIC_URL . 'css/wppic-admin-style.css', array(), NULL, NULL);
+	wp_enqueue_style( 'wppic-lightbox', WPPIC_URL . 'lightbox/jquery.fancybox.min.css', array(), WPPIC_VERSION, 'all');
+	wp_enqueue_style( 'wppic-admin-css', WPPIC_URL . 'css/wppic-admin-style.css', array(), WPPIC_VERSION, 'all');
 }
 
 
@@ -164,13 +166,21 @@ function wppic_settings_page() {
 			<h2 class="description">' . esc_html__( 'Beautiful plugin and theme cards', 'wp-plugin-info-card' ) . '</h2>
 			' . wppic_plugins_about() . '
 				<div id="wppic-shortcode">
-					<h2 class="hndle">' . esc_html__( 'Using the Block Editor? Use our Blocks. No Shortcodes Needed', 'wp-plugin-info-card' ) . '</h2>
+				<h2><span>' . esc_html__( 'Documentation', 'wp-plugin-info-card' ) . '</span></h2>
+				<div class="inside">
+				<p class="documentation"><a href="https://mediaron.com/wp-plugin-info-card/" target="_blank" title="'. __( 'View Documentation and examples', 'wp-plugin-info-card' ) .'">'. esc_html__( 'View Documentation and Examples', 'wp-plugin-info-card' ) .' <span class="dashicons dashicons-external"></span></a></p></div>
+					<h2>' . esc_html__( 'The Block Editor', 'wp-plugin-info-card' ) . '</h2>
 					<div class="inside">
 						<p class="description"> ' . esc_html__( 'Use our blocks to show your cards in the block editor. All options are supported.', 'wp-plugin-info-card' ) . 	'</p>
+						<a class="button button-secondary" data-animation-effect="zoom" data-animation-duration="1000" data-fancybox data-caption="' . esc_attr__( 'WP Plugin Info Card in the Block Editor', 'wp-plugin-info-card' ) . '" href="' . esc_url( WPPIC_URL . 'img/wppic.gif' ) . '">' . esc_html__( 'View Block Demo', 'wp-plugin-info-card' ) . '</a>
 					</div>
-					<h2 class="hndle"><span>' . __( 'How to use WP Plugin Info Card shortcodes?', 'wp-plugin-info-card' ) . '</span></h2>
+					<h2><span>' . __( 'Shortcodes', 'wp-plugin-info-card' ) . '</span></h2>
 					<div class="inside">
-						' . wppic_shortcode_function( array ( 'type' => 'plugin', 'slug' => 'wp-plugin-info-card', 'image' => '', 'align' => 'right', 'margin' => '0 0 0 20px', 'scheme' => $scheme, 'layout' => 'card' ) ) . '
+					<p class="description"> ' . esc_html__( 'Use shortcodes to show a plugin or theme card just about anywhere.', 'wp-plugin-info-card' ) . '</p>
+					<a class="button button-secondary" data-animation-effect="zoom" data-animation-duration="1000" data-fancybox data-src="#plugin-info-admim-demo" data-caption="' . esc_attr__( 'WP Plugin Info Card Large Layout', 'wp-plugin-info-card' ) . '" href="javascript:;">' . esc_html__( 'View Card Demo', 'wp-plugin-info-card' ) . '</a>
+					<div id="plugin-info-admim-demo" style="display: none; width: 100%; max-width: 800px">
+						' . do_shortcode( '[wp-pic type="plugin" scheme="scheme1" layout="large" slug="wp-plugin-info-card"]' ) . '
+					</div>
 						<h3 class="wp-pic-title">' . __( 'Shortcode parameters', 'wp-plugin-info-card' ) . '</h3>
 						<ul>
 							<li><strong>type:</strong> plugin, theme - ' . __( '(default: plugin)', 'wp-plugin-info-card' ) . '</li>
@@ -199,7 +209,6 @@ function wppic_settings_page() {
 						<p>
 							<code class="wppic-admin-shortcode">[wp-pic type="plugin" slug="adblock-notify-by-bweb"]</code>
 						</p>
-						<p class="documentation"><a href="https://mediaron.com/wp-plugin-info-card/" target="_blank" title="'. __( 'View More Documentation and examples', 'wp-plugin-info-card' ) .'">'. __( 'View More Documentation and examples', 'wp-plugin-info-card' ) .' <span class="dashicons dashicons-external"></span></a></p>
 						' . $memcache . '
 					 </div>
 				</div>
