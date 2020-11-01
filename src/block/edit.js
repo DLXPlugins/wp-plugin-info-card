@@ -13,6 +13,7 @@ import PluginWordPress from './templates/PluginWordPress';
 import ThemeFlex from './templates/ThemeFlex';
 import ThemeWordPress from './templates/ThemeWordPress';
 import ThemeLarge from './templates/ThemeLarge';
+import ThemeCard from './templates/ThemeCard';
 import Logo from './Logo';
 const { Fragment, useEffect, useState } = wp.element;
 
@@ -490,6 +491,13 @@ const WPPluginInfoCard = ( props ) => {
 						) }
 						{ 'large' === layout && 'theme' === type && (
 							<ThemeLarge
+								scheme={ scheme }
+								image={ image }
+								data={ data }
+							/>
+						) }
+						{ 'card' === layout && 'theme' === type && (
+							<ThemeCard
 								scheme={ scheme }
 								image={ image }
 								data={ data }
