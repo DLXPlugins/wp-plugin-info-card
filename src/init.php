@@ -56,9 +56,10 @@ function wp_plugin_info_card_cgb_editor_assets() { // phpcs:ignore
 		'wp_plugin_info_card-cgb-block-js',
 		'wppic',
 		array(
-			'rest_url'      => get_rest_url(),
-			'query_preview' => plugins_url( 'img/wp-query-preview.jpg', __FILE__ ),
-			'wppic_preview' => plugins_url( 'img/wp-pic-preview.jpg', __FILE__ ),
+			'rest_url'             => get_rest_url(),
+			'query_preview'        => plugins_url( 'img/wp-query-preview.jpg', __FILE__ ),
+			'wppic_preview'        => plugins_url( 'img/wp-pic-preview.jpg', __FILE__ ),
+			'wppic_banner_default' => plugins_url( 'img/default-banner.png', __FILE__ ),
 		)
 	);
 
@@ -97,6 +98,10 @@ function wppic_register_block() {
 		'wp-plugin-info-card/wp-plugin-info-card',
 		array(
 			'attributes'      => array(
+				'assetData' => array(
+					'type' => 'object',
+					'default' => '__return_null',
+				),
 				'type'        => array(
 					'type'    => 'string',
 					'default' => 'plugin',

@@ -1,4 +1,4 @@
-const Logo = (props) => {
+const Logo = ( props ) => {
 	return (
 		<svg
 			version="1.1"
@@ -6,13 +6,13 @@ const Logo = (props) => {
 			xmlns="http://www.w3.org/2000/svg"
 			x="0px"
 			y="0px"
-			width={`${props.size}px`}
-			height={`${props.size}px`}
+			width={ `${ props.size }px` }
+			height={ `${ props.size }px` }
 			viewBox="0 0 850.39 850.39"
-			enable-background="new 0 0 850.39 850.39"
+			enableBackground="new 0 0 850.39 850.39"
 		>
 			<path
-				fill={`${props.fill}`}
+				fill={ `${ props.fill }` }
 				d="M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39
 									c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451
 									l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07
@@ -24,8 +24,8 @@ const Logo = (props) => {
 };
 
 Logo.defaultProps = {
-	size: "75",
-	fill: "#DB3939",
+	size: '75',
+	fill: '#DB3939',
 };
 
 export default Logo;

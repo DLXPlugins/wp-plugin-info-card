@@ -171,7 +171,6 @@ register_activation_hook( __FILE__, 'wppic_activation' );
 register_activation_hook( __FILE__, 'wppic_cron_activation' );
 register_activation_hook( __FILE__, 'wppic_delete_transients' );
 
-
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

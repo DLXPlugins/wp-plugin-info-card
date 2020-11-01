@@ -56,6 +56,9 @@ registerBlockType( 'wp-plugin-info-card/wp-plugin-info-card', {
 		'Add a plugin or theme info card to your site.',
 		'wp-plugin-info-card'
 	),
+	supports: {
+		align: true
+	},
 	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
 		__( 'WP Plugin Info Card', 'wp-plugin-info-card' ),
@@ -63,6 +66,7 @@ registerBlockType( 'wp-plugin-info-card/wp-plugin-info-card', {
 		__( 'Info', 'wp-plugin-info-card' ),
 	],
 	edit: edit,
+	name: 'wp-plugin-info-card/wp-plugin-info-card',
 
 	// Render via PHP
 	save() {

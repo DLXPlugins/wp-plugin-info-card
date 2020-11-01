@@ -90,8 +90,10 @@
 }
 .wppic-loading {
 	width: 100%;
+	padding: 20vh 30px;
 	display: flex;
 	flex-wrap: wrap;
+	align-items: center;
 	justify-content: center;
 	svg {
 		width: 100%;

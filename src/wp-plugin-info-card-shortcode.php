@@ -67,6 +67,16 @@ function wppic_register_route() {
 
 	);
 	register_rest_route(
+		'wppic/v2',
+		'/get_data',
+		array(
+			'methods'  => 'GET',
+			'callback' => 'wppic_get_asset_data',
+			'permission_callback' => '__return_true',
+		)
+
+	);
+	register_rest_route(
 		'wppic/v1',
 		'/get_query',
 		array(
@@ -94,6 +104,26 @@ function wppic_get_shortcode() {
 		'multi'      => isset( $_GET['multi'] ) ? filter_var( $_GET['multi'], FILTER_VALIDATE_BOOLEAN ) : false,
 	);
 	die( wppic_shortcode_function( $attrs ) );
+}
+
+function wppic_get_asset_data() {
+	$type = isset( $_GET['type'] ) ? sanitize_title( $_GET['type'] ) : 'plugin';
+	$slug = isset( $_GET['slug'] ) ? sanitize_title( $_GET['slug'] ) : 'slug';
+	$data = wppic_api_parser( $type, $slug );
+
+	if ( isset( $data->author ) ) {
+		$data->author = wp_strip_all_tags( $data->author );
+	}
+	if ( isset( $data->author ) ) {
+		$data->author = wp_strip_all_tags( $data->author );
+	}
+	if ( isset( $data->active_installs ) ) {
+		$data->active_installs = number_format_i18n( $data->active_installs );
+	}
+	if ( isset( $data->last_updated ) ) {
+		$data->last_updated = human_time_diff( strtotime( $data->last_updated ), time() ) . ' ' . _x( 'ago', 'Last time updated', 'wp-plugin-info-card' );
+	}
+	wp_send_json_success( $data );
 }
 
 function wppic_get_query_shortcode() {
@@ -191,7 +221,6 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 		$layout     = 'wp-pic-card';
 		$addClass[] = 'wp-pic-card';
 	} else {
-		$layout     = 'wp-pic-card';
 		$addClass[] = $layout;
 	}
 

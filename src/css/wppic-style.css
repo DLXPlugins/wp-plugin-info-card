@@ -79,7 +79,8 @@ p.wp-pic-author,
 	line-height: 18px;
 	color: #79808a;
 }
-.wp-pic a.wp-pic-logo {
+.wp-pic a.wp-pic-logo,
+.wp-pic span.wp-pic-logo {
 	width: 175px;
 	height: 175px;
 	display: inline-block;
@@ -474,6 +475,7 @@ p.wp-pic-author,
 	clear:both;
 }
 .large.wp-pic a.wp-pic-logo,
+.large.wp-pic span.wp-pic-logo,
 .large.wp-pic:not(.plugin) a.wp-pic-logo:not([data="no-image"]) {
 	width: 80px;
 	height: 80px;
@@ -1527,7 +1529,8 @@ p.wp-pic-author,
 .wp-pic.scheme13 a.wp-pic-name {
 	color: #FFF;
 }
-.wp-pic.scheme13 .wp-pic-front a.wp-pic-name {
+.wp-pic.scheme13 .wp-pic-front a.wp-pic-name,
+.wp-pic.scheme13 .wp-pic-front .wp-pic-name {
 	color: #FFF;
 }
 .wp-pic.scheme13 .wp-pic-bar{
