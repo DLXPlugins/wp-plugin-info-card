@@ -287,43 +287,12 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 				// Align card
 				$alignCenter = false;
 				$alignStyle  = '';
-				if ( strstr( $layout, 'flex' ) ) {
-					if ( 'right' == $align ) {
-						$alignStyle = 'justify-content: flex-end;';
-					} elseif ( 'left' == $align ) {
-						$alignStyle = 'justify-content: flex-start;';
-					} elseif ( 'wide' == $align ) {
-						$alignStyle = 'width: 100%; margin: 0';
-					} elseif ( 'full' == $align ) {
-						$alignStyle = 'width: 100%; margin: 0;';
-					} else {
-						$alignStyle = 'justify-content: center;';
-					}
-				} else {
-					if ( $align == 'right' || $align == 'left' ) {
-						$alignStyle = 'float: ' . $align . '; ';
-					} else {
-						$alignStyle  = '';
-						$alignCenter = true;
-					}
-				}
 
 				// Extra container ID
 				if ( ! empty( $containerid ) ) {
 					$containerid = ' id="' . $containerid . '"';
 				} else {
 					$containerid = ' id="wp-pic-' . esc_html( $asset_slug ) . '"';
-				}
-
-				// Custom container margin
-				if ( ! empty( $margin ) ) {
-					$margin = 'margin:' . $margin . ';';
-				}
-
-				// Custom style
-				$style = '';
-				if ( ! empty( $margin ) || ! empty( $alignStyle ) ) {
-					$style = 'style="' . $margin . $alignStyle . '"';
 				}
 
 				// Color scheme
@@ -401,26 +370,6 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 			// Align card
 			$alignCenter = false;
 			$alignStyle  = '';
-			if ( strstr( $layout, 'flex' ) ) {
-				if ( 'right' == $align ) {
-					$alignStyle = 'justify-content: flex-end;';
-				} elseif ( 'left' == $align ) {
-					$alignStyle = 'justify-content: flex-start;';
-				} elseif ( 'wide' == $align ) {
-					$alignStyle = 'width: 100%; margin: 0';
-				} elseif ( 'full' == $align ) {
-					$alignStyle = 'width: 100%; margin: 0;';
-				} else {
-					$alignStyle = 'justify-content: center;';
-				}
-			} else {
-				if ( $align == 'right' || $align == 'left' ) {
-					$alignStyle = 'float: ' . $align . '; ';
-				} else {
-					$alignStyle  = '';
-					$alignCenter = true;
-				}
-			}
 
 			// Extra container ID
 			if ( ! empty( $containerid ) ) {

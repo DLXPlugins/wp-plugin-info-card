@@ -452,6 +452,7 @@ const WPPluginInfoCard = ( props ) => {
 								scheme={ scheme }
 								image={ image }
 								data={ data }
+								align={ align }
 							/>
 						) }
 						{ 'card' === layout && 'plugin' === type && (
@@ -459,6 +460,7 @@ const WPPluginInfoCard = ( props ) => {
 								scheme={ scheme }
 								image={ image }
 								data={ data }
+								align={ align }
 							/>
 						) }
 						{ 'large' === layout && 'plugin' === type && (
@@ -466,6 +468,7 @@ const WPPluginInfoCard = ( props ) => {
 								scheme={ scheme }
 								image={ image }
 								data={ data }
+								align={ align }
 							/>
 						) }
 						{ 'wordpress' === layout && 'plugin' === type && (
@@ -473,6 +476,7 @@ const WPPluginInfoCard = ( props ) => {
 								scheme={ scheme }
 								image={ image }
 								data={ data }
+								align={ align }
 							/>
 						) }
 						{ 'flex' === layout && 'theme' === type && (
@@ -480,6 +484,7 @@ const WPPluginInfoCard = ( props ) => {
 								scheme={ scheme }
 								image={ image }
 								data={ data }
+								align={ align }
 							/>
 						) }
 						{ 'wordpress' === layout && 'theme' === type && (
@@ -487,6 +492,7 @@ const WPPluginInfoCard = ( props ) => {
 								scheme={ scheme }
 								image={ image }
 								data={ data }
+								align={ align }
 							/>
 						) }
 						{ 'large' === layout && 'theme' === type && (
@@ -494,6 +500,7 @@ const WPPluginInfoCard = ( props ) => {
 								scheme={ scheme }
 								image={ image }
 								data={ data }
+								align={ align }
 							/>
 						) }
 						{ 'card' === layout && 'theme' === type && (
@@ -501,6 +508,7 @@ const WPPluginInfoCard = ( props ) => {
 								scheme={ scheme }
 								image={ image }
 								data={ data }
+								align={ align }
 							/>
 						) }
 

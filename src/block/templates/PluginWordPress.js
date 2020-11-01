@@ -7,7 +7,12 @@ import StarRatings from 'react-star-ratings';
 const { __, _n, sprintf } = wp.i18n;
 
 const PluginWordPress = ( props ) => {
-	const classes = classnames( props.scheme, {
+	const wrapperClasses = classnames( `align${ props.align }`, {
+		wordpress: true,
+		'wp-pic-wrapper': true,
+		'wp-pic-card': true,
+	} );
+	const classes = classnames( props.scheme, `align${ props.align }`, {
 		'wp-pic': true,
 		'wp-pic-wordpress': true,
 		wordpress: true,
@@ -21,7 +26,7 @@ const PluginWordPress = ( props ) => {
 	}
 
 	return (
-		<div className="wp-pic-wrapper full wp-pic-card">
+		<div className={ wrapperClasses }>
 			<div className={ classes }>
 				<div className="wp-pic-wordpress" style={ { display: 'none' } }>
 					<div className="wp-pic-wordpress-content">

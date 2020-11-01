@@ -4,16 +4,20 @@ import BannerWrapper from '../components/BannerWrapper';
 const { __ } = wp.i18n;
 
 const PluginLarge = ( props ) => {
+	const wrapperClasses = classnames( `align${ props.align }`, {
+		large: true,
+		'wp-pic-wrapper': true,
+		'wp-pic-card': true,
+	} );
 	const classes = classnames( props.scheme, {
 		'wp-pic': true,
 		'wp-pic-card': true,
 		large: true,
-		full: false,
 		theme: true,
 	} );
 
 	return (
-		<div className="wp-pic-wrapper full wp-pic-card">
+		<div className={ wrapperClasses }>
 			<div className={ classes }>
 				<div className="wp-pic-large" style={ { display: 'none' } }>
 					<div className="wp-pic-large-content">

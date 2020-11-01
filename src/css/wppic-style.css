@@ -2127,3 +2127,130 @@ a.wp-pic-credit:focus:after {
 		width: 33.33%;
 	}
 }
+/* Block Front-end Styles */
+.wp-pic-wrapper.alignfull {
+	width: 100%;
+	text-align: center;
+	margin: 0 auto;
+}
+.wp-pic-wrapper.alignwide {
+	width: 100%;
+	text-align: center;
+	margin: 0 auto;
+}
+.wp-pic-wrapper.aligncenter {
+	width: 100%;
+	text-align: center;
+}
+.wp-pic-wrapper.alignleft{
+	width: 100%;
+	text-align: center;
+	float: left;
+}
+.wp-pic-wrapper.alignright {
+	width: 100%;
+	text-align: center;
+	margin-left: auto;
+	float: right;
+}
+.wp-pic-wrapper.alignfull.flex {
+	width: 100%;
+	max-width: 1000px;
+	text-align: center;
+	margin: 0 auto;
+}
+.wp-pic-wrapper.alignwide.flex {
+	width: 100%;
+	max-width: 850px;
+	text-align: center;
+	margin: 0 auto;
+}
+.wp-pic-wrapper.aligncenter.flex {
+	width: 100%;
+	max-width: 800px;
+	text-align: center;
+	margin: 0 auto;
+}
+.wp-pic-wrapper.alignleft.flex {
+	width: 100%;
+	max-width: 500px;
+	float: left;
+}
+.wp-pic-wrapper.alignright.flex {
+	width: 100%;
+	max-width: 500px;
+	float: right;
+}
+.wp-pic-wrapper.alignfull.flex {
+	width: 100%;
+	max-width: 1000px;
+	text-align: center;
+}
+.wp-pic-wrapper.alignfull.wordpress {
+	width: 100%;
+	text-align: center;
+	margin: 0 auto;
+	max-width: 550px;
+}
+.wp-pic-wrapper.alignwide.wordpress {
+	width: 100%;
+	text-align: center;
+	margin: 0 auto;
+	max-width: 550px;
+}
+.wp-pic-wrapper.aligncenter.wordpress {
+	width: 100%;
+	text-align: center;
+	max-width: 550px;
+}
+.wp-pic-wrapper.alignleft.wordpress {
+	width: 100%;
+	text-align: center;
+	max-width: 550px;
+	float: left;
+}
+.wp-pic-wrapper.alignright.wordpress {
+	width: 100%;
+	text-align: center;
+	margin-left: auto;
+	max-width: 550px;
+	float: right;
+}
+.wp-pic-wrapper.alignfull.large {
+	width: 100%;
+	text-align: center;
+	margin: 0 auto;
+	max-width: 950px;
+}
+.wp-pic-wrapper.alignwide.large {
+	width: 100%;
+	text-align: center;
+	margin: 0 auto;
+	max-width: 850px;
+}
+.wp-pic-wrapper.aligncenter.large {
+	width: 100%;
+	text-align: center;
+	max-width: 772px;
+}
+.wp-pic-wrapper.alignleft.large {
+	width: 100%;
+	text-align: center;
+	max-width: 450px;
+	float: left;
+}
+.wp-pic-wrapper.alignright.large {
+	width: 100%;
+	text-align: center;
+	max-width: 450px;
+	float: right;
+}
+
+.wp-pic-wrapper.alignfull.flex .wp-pic-card.wp-pic,
+.wp-pic-wrapper.aligncenter.flex .wp-pic-card.wp-pic,
+.wp-pic-wrapper.alignleft.flex .wp-pic-card.wp-pic,
+.wp-pic-wrapper.alignright.flex .wp-pic-card.wp-pic,
+.wp-pic-wrapper.alignwide.flex .wp-pic-card.wp-pic {
+	width: 100%;
+	height: auto;
+}

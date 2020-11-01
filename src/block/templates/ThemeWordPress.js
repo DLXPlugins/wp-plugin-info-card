@@ -6,15 +6,19 @@ import BannerWrapper from '../components/BannerWrapper';
 const { __, _n, sprintf } = wp.i18n;
 
 const ThemeWordPress = ( props ) => {
+	const wrapperClasses = classnames( `align${ props.align }`, {
+		wordpress: true,
+		'wp-pic-wrapper': true,
+		'wp-pic-card': true,
+	} );
 	const classes = classnames( props.scheme, {
 		'wp-pic': true,
 		'wp-pic-wordpress': true,
 		wordpress: true,
-		full: false,
 		theme: true,
 	} );
 	return (
-		<div className="wp-pic-wrapper full wp-pic-card">
+		<div className={ wrapperClasses }>
 			<div className={ classes }>
 				<div className="wp-pic-wordpress" style={ { display: 'none' } }>
 					<div className="wp-pic-theme-card-top">
