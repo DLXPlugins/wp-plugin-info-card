@@ -10,6 +10,7 @@ import PluginFlex from './templates/PluginFlex';
 import PluginCard from './templates/PluginCard';
 import PluginLarge from './templates/PluginLarge';
 import Logo from './Logo';
+import PluginWordPress from './templates/PluginWordPress';
 const { Fragment, useEffect, useState } = wp.element;
 
 const { __ } = wp.i18n;
@@ -458,6 +459,13 @@ const WPPluginInfoCard = ( props ) => {
 						) }
 						{ 'large' === layout && 'plugin' === type && (
 							<PluginLarge
+								scheme={ scheme }
+								image={ image }
+								data={ data }
+							/>
+						) }
+						{ 'wordpress' === layout && 'plugin' === type && (
+							<PluginWordPress
 								scheme={ scheme }
 								image={ image }
 								data={ data }

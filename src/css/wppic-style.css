@@ -1526,7 +1526,8 @@ p.wp-pic-author,
 .wp-pic.scheme13 .wp-pic-back p,
 .wp-pic.scheme13:not(.wordpress) .wp-pic-author a,
 .wp-pic.scheme13 .wp-pic-dl-link,
-.wp-pic.scheme13 a.wp-pic-name {
+.wp-pic.scheme13 a.wp-pic-name,
+.wp-pic.scheme13 .wp-pic-column-name {
 	color: #FFF;
 }
 .wp-pic.scheme13 .wp-pic-front a.wp-pic-name,
