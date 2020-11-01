@@ -1,6 +1,5 @@
 /* eslint-disable @wordpress/i18n-translator-comments */
 import classnames from 'classnames';
-import isNumeric from 'validator/lib/isNumeric';
 import StarRatings from 'react-star-ratings';
 import BannerWrapper from '../components/BannerWrapper';
 
@@ -65,10 +64,7 @@ const ThemeWordPress = ( props ) => {
 								aria-hidden="true"
 							>
 								<StarRatings
-									rating={
-										( props.data.rating / 100 ) *
-	5
-									}
+									rating={ ( props.data.rating / 100 ) * 5 }
 									starRatedColor="orange"
 									starDimension="20px"
 									starSpacing="0"
@@ -91,8 +87,10 @@ const ThemeWordPress = ( props ) => {
 							) }
 						</div>
 						<div className="wp-pic-column-version">
-								<span>{ __( 'Version', 'wp-plugin-info-card' ) }{ ' ' }
-								{ props.data.version }</span>
+							<span>
+								{ __( 'Version', 'wp-plugin-info-card' ) }{ ' ' }
+								{ props.data.version }
+							</span>
 						</div>
 					</div>
 				</div>
