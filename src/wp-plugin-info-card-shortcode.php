@@ -236,7 +236,7 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 	}
 
 	$block_alignment = 'align-center';
-	switch( $align ) {
+	switch ( $align ) {
 		case 'left':
 			$block_alignment = 'alignleft';
 		break;
