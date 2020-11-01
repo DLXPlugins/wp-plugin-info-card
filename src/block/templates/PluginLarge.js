@@ -80,7 +80,7 @@ const PluginLarge = ( props ) => {
 							<div className="wp-pic-bottom">
 								<div className="wp-pic-bar">
 									<span className="wp-pic-rating">
-										{ props.data.pluginRating }%{ ' ' }
+										{ props.data.rating }%{ ' ' }
 										<em>
 											{ __(
 												'Ratings',
