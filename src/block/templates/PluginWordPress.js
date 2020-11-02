@@ -79,9 +79,7 @@ const PluginWordPress = ( props ) => {
 								>
 									<StarRatings
 										rating={
-											( props.data.num_ratings *
-												( props.data.rating / 100 ) ) /
-											5
+											( props.data.rating / 100 ) * 5
 										}
 										starRatedColor="orange"
 										starDimension="20px"

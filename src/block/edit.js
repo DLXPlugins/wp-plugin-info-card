@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable camelcase */
@@ -82,6 +83,79 @@ const WPPluginInfoCard = ( props ) => {
 		setSlug( attributes.slug );
 	}, [] );
 
+	const outputInfoCards = ( cardDataArray ) => {
+		return cardDataArray.map( ( cardData ) => {
+			return (
+				<Fragment>
+					{ 'flex' === layout && 'plugin' === type && (
+						<PluginFlex
+							scheme={ scheme }
+							image={ image }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
+					{ 'card' === layout && 'plugin' === type && (
+						<PluginCard
+							scheme={ scheme }
+							image={ image }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
+					{ 'large' === layout && 'plugin' === type && (
+						<PluginLarge
+							scheme={ scheme }
+							image={ image }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
+					{ 'wordpress' === layout && 'plugin' === type && (
+						<PluginWordPress
+							scheme={ scheme }
+							image={ image }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
+					{ 'flex' === layout && 'theme' === type && (
+						<ThemeFlex
+							scheme={ scheme }
+							image={ image }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
+					{ 'wordpress' === layout && 'theme' === type && (
+						<ThemeWordPress
+							scheme={ scheme }
+							image={ image }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
+					{ 'large' === layout && 'theme' === type && (
+						<ThemeLarge
+							scheme={ scheme }
+							image={ image }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
+					{ 'card' === layout && 'theme' === type && (
+						<ThemeCard
+							scheme={ scheme }
+							image={ image }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
+				</Fragment>
+			);
+		} );
+	};
+
 	const resetSelect = [
 		{
 			icon: 'edit',
@@ -128,6 +202,7 @@ const WPPluginInfoCard = ( props ) => {
 	];
 
 	const layoutClass = 'card' === layout ? 'wp-pic-card' : layout;
+	const previewLoadingClass = cardLoading ? 'wp-pic-spin' : '';
 
 	const inspectorControls = (
 		<InspectorControls>
@@ -431,74 +506,10 @@ const WPPluginInfoCard = ( props ) => {
 							'is-placeholder',
 							layoutClass,
 							'wp-block-plugin-info-card',
-							`align${ align }`,
+							`align${ align }`
 						) }
 					>
-						{ 'flex' === layout && 'plugin' === type && (
-							<PluginFlex
-								scheme={ scheme }
-								image={ image }
-								data={ data }
-								align={ align }
-							/>
-						) }
-						{ 'card' === layout && 'plugin' === type && (
-							<PluginCard
-								scheme={ scheme }
-								image={ image }
-								data={ data }
-								align={ align }
-							/>
-						) }
-						{ 'large' === layout && 'plugin' === type && (
-							<PluginLarge
-								scheme={ scheme }
-								image={ image }
-								data={ data }
-								align={ align }
-							/>
-						) }
-						{ 'wordpress' === layout && 'plugin' === type && (
-							<PluginWordPress
-								scheme={ scheme }
-								image={ image }
-								data={ data }
-								align={ align }
-							/>
-						) }
-						{ 'flex' === layout && 'theme' === type && (
-							<ThemeFlex
-								scheme={ scheme }
-								image={ image }
-								data={ data }
-								align={ align }
-							/>
-						) }
-						{ 'wordpress' === layout && 'theme' === type && (
-							<ThemeWordPress
-								scheme={ scheme }
-								image={ image }
-								data={ data }
-								align={ align }
-							/>
-						) }
-						{ 'large' === layout && 'theme' === type && (
-							<ThemeLarge
-								scheme={ scheme }
-								image={ image }
-								data={ data }
-								align={ align }
-							/>
-						) }
-						{ 'card' === layout && 'theme' === type && (
-							<ThemeCard
-								scheme={ scheme }
-								image={ image }
-								data={ data }
-								align={ align }
-							/>
-						) }
-
+						{ outputInfoCards( data ) }
 					</div>
 				</Fragment>
 			) }

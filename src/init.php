@@ -99,8 +99,8 @@ function wppic_register_block() {
 		array(
 			'attributes'      => array(
 				'assetData' => array(
-					'type' => 'object',
-					'default' => '__return_null',
+					'type' => 'array',
+					'default' => [],
 				),
 				'type'        => array(
 					'type'    => 'string',

@@ -6,6 +6,21 @@
  */
 @import "../src/css/wppic-style.css";
 
+@keyframes wppicspin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/* Spin Styles */
+.wp-pic-spin svg {
+	animation: wppicspin 1.5s infinite linear;
+	transform-origin: 50% 50%;
+}
+
 /* Panel Styles */
 .wppic-query-block-panel {
 	position: relative;

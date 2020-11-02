@@ -60,28 +60,26 @@ function wppic_register_route() {
 		'wppic/v1',
 		'/get_html',
 		array(
-			'methods'  => 'GET',
-			'callback' => 'wppic_get_shortcode',
+			'methods'             => 'GET',
+			'callback'            => 'wppic_get_shortcode',
 			'permission_callback' => '__return_true',
 		)
-
 	);
 	register_rest_route(
 		'wppic/v2',
 		'/get_data',
 		array(
-			'methods'  => 'GET',
-			'callback' => 'wppic_get_asset_data',
+			'methods'             => 'GET',
+			'callback'            => 'wppic_get_asset_data',
 			'permission_callback' => '__return_true',
 		)
-
 	);
 	register_rest_route(
 		'wppic/v1',
 		'/get_query',
 		array(
-			'methods'  => 'GET',
-			'callback' => 'wppic_get_query_shortcode',
+			'methods'             => 'GET',
+			'callback'            => 'wppic_get_query_shortcode',
 			'permission_callback' => '__return_true',
 		)
 	);
@@ -101,28 +99,42 @@ function wppic_get_shortcode() {
 		'ajax'        => isset( $_GET['ajax'] ) ? $_GET['ajax'] : '',
 		'scheme'      => isset( $_GET['scheme'] ) ? $_GET['scheme'] : '',
 		'layout'      => isset( $_GET['layout'] ) ? $_GET['layout'] : '',
-		'multi'      => isset( $_GET['multi'] ) ? filter_var( $_GET['multi'], FILTER_VALIDATE_BOOLEAN ) : false,
+		'multi'       => isset( $_GET['multi'] ) ? filter_var( $_GET['multi'], FILTER_VALIDATE_BOOLEAN ) : false,
 	);
 	die( wppic_shortcode_function( $attrs ) );
 }
 
+/**
+ * Return plugin data based on passed strings.
+ */
 function wppic_get_asset_data() {
 	$type = isset( $_GET['type'] ) ? sanitize_title( $_GET['type'] ) : 'plugin';
-	$slug = isset( $_GET['slug'] ) ? sanitize_title( $_GET['slug'] ) : 'slug';
-	$data = wppic_api_parser( $type, $slug );
+	$slug = isset( $_GET['slug'] ) ? $_GET['slug'] : 'wp-plugin-info-card-not-found';
 
-	if ( isset( $data->author ) ) {
-		$data->author = wp_strip_all_tags( $data->author );
+	// Random slug: comma-separated list.
+	$slugs = explode( ',', $slug );
+	foreach ( $slugs as &$item_slug ) {
+		$item_slug = sanitize_title( trim( $item_slug ) );
 	}
-	if ( isset( $data->author ) ) {
-		$data->author = wp_strip_all_tags( $data->author );
+
+	$data = array();
+	foreach ( $slugs as $asset_slug ) {
+		$slug_data = wppic_api_parser( $type, $asset_slug );
+		if ( isset( $slug_data->author ) ) {
+			$slug_data->author = wp_strip_all_tags( $slug_data->author );
+		}
+		if ( isset( $slug_data->author ) ) {
+			$slug_data->author = wp_strip_all_tags( $slug_data->author );
+		}
+		if ( isset( $slug_data->active_installs ) ) {
+			$slug_data->active_installs = number_format_i18n( $slug_data->active_installs );
+		}
+		if ( isset( $slug_data->last_updated ) ) {
+			$slug_data->last_updated = human_time_diff( strtotime( $slug_data->last_updated ), time() ) . ' ' . _x( 'ago', 'Last time updated', 'wp-plugin-info-card' );
+		}
+		$data[] = $slug_data;
 	}
-	if ( isset( $data->active_installs ) ) {
-		$data->active_installs = number_format_i18n( $data->active_installs );
-	}
-	if ( isset( $data->last_updated ) ) {
-		$data->last_updated = human_time_diff( strtotime( $data->last_updated ), time() ) . ' ' . _x( 'ago', 'Last time updated', 'wp-plugin-info-card' );
-	}
+
 	wp_send_json_success( $data );
 }
 
@@ -217,7 +229,7 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 	} elseif ( 'flex' === $layout ) {
 		$addClass[] = 'flex';
 		$addClass[] = 'wp-pic-card';
-	} elseif( 'card' === $layout ) {
+	} elseif ( 'card' === $layout ) {
 		$layout     = 'wp-pic-card';
 		$addClass[] = 'wp-pic-card';
 	} else {
@@ -239,19 +251,19 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 	switch ( $align ) {
 		case 'left':
 			$block_alignment = 'alignleft';
-		break;
+			break;
 		case 'right':
 			$block_alignment = 'alignright';
-		break;
+			break;
 		case 'center':
 			$block_alignment = 'aligncenter';
-		break;
+			break;
 		case 'wide':
 			$block_alignment = 'alignwide';
-		break;
+			break;
 		case 'full':
 			$block_alignment = 'alignfull';
-		break;
+			break;
 	}
 
 	if ( is_array( $slug ) && $multi ) {
@@ -308,8 +320,6 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 				if ( $clear == 'before' ) {
 					$content .= '<div style="clear:both"></div>';
 				}
-
-
 
 				$content .= sprintf( '<div class="wp-pic-wrapper %s %s %s" %s>', esc_attr( $block_alignment ), esc_attr( $layout ), $multi ? 'multi' : '', $style );
 				if ( $alignCenter ) {

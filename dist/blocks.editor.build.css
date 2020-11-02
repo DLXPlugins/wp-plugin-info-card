@@ -11,6 +11,29 @@
  * which makes it higher in priority.
  */
 @import url(../src/css/wppic-style.css);
+@-webkit-keyframes wppicspin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+@keyframes wppicspin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+/* Spin Styles */
+.wp-pic-spin svg {
+  -webkit-animation: wppicspin 1.5s infinite linear;
+          animation: wppicspin 1.5s infinite linear;
+  -webkit-transform-origin: 50% 50%;
+      -ms-transform-origin: 50% 50%;
+          transform-origin: 50% 50%; }
+
 /* Panel Styles */
 .wppic-query-block-panel {
   position: relative;
