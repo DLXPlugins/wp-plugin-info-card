@@ -36,7 +36,6 @@ const {
 	BlockControls,
 	BlockAlignmentToolbar,
 	MediaUpload,
-	useBlockProps,
 } = wp.blockEditor;
 
 const WPPluginInfoCard = ( props ) => {
@@ -55,7 +54,6 @@ const WPPluginInfoCard = ( props ) => {
 	const [ data, setData ] = useState( attributes.assetData );
 	const [ align, setAlign ] = useState( attributes.align );
 
-	const blockProps = useBlockProps();
 	const loadData = () => {
 		setLoading( false );
 		setCardLoading( true );
@@ -64,9 +62,9 @@ const WPPluginInfoCard = ( props ) => {
 			.get( restUrl + `?type=${ type }&slug=${ slug }` )
 			.then( ( response ) => {
 				// Now Set State
-				setCardLoading( false );
 				setData( response.data.data );
 				setAttributes( { assetData: response.data.data } );
+				setCardLoading( false );
 			} );
 	};
 	const pluginOnClick = ( assetSlug, assetType ) => {
@@ -128,6 +126,8 @@ const WPPluginInfoCard = ( props ) => {
 		{ value: 'wordpress', label: __( 'WordPress', 'wp-plugin-info-card' ) },
 		{ value: 'flex', label: __( 'Flex', 'wp-plugin-info-card' ) },
 	];
+
+	const layoutClass = 'card' === layout ? 'wp-pic-card' : layout;
 
 	const inspectorControls = (
 		<InspectorControls>
@@ -427,12 +427,11 @@ const WPPluginInfoCard = ( props ) => {
 						<Toolbar controls={ resetSelect } />
 					</BlockControls>
 					<div
-						{ ...blockProps }
 						className={ classnames(
 							'is-placeholder',
-							blockProps.className,
+							layoutClass,
 							'wp-block-plugin-info-card',
-							align
+							`align${ align }`,
 						) }
 					>
 						{ 'flex' === layout && 'plugin' === type && (
