@@ -327,18 +327,6 @@ const WPPluginInfoCard = ( props ) => {
 													'wp-plugin-info-card'
 												) }
 											/>
-											<CheckboxControl
-												label={ __(
-													'Enable Multi Output',
-													'wp-plugin-info-card'
-												) }
-												help="Comma-separated slugs are outputted into multiple cards instead of shuffling between cards."
-												checked={ multi }
-												onChange={ ( value ) => {
-													attributes.multi = value;
-													setMulti( value );
-												} }
-											/>
 										</Fragment>
 									);
 								} else if ( 'layout' === tab.name ) {

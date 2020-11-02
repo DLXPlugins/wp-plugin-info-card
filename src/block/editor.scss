@@ -18,6 +18,9 @@
 		height: inherit !important;
 		font-size: 14px !important;
 		line-height: 1.2em !important;
+		border-width: 1px !important;
+		width: 100% !important;
+		max-width: 100% !important;
 	}
 	#wppic-input-submit {
 		background: #FFF;
@@ -29,6 +32,7 @@
 	padding: 0 16px;
 	border-top: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
+	text-align: left;
 	.components-tab-panel__tabs {
 		.wppic-tab-layout,
 		.wppic-tab-slug {
