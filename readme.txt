@@ -2,8 +2,8 @@
 Contributors: briKou, ronalfy
 Tags: API, plugin, card, theme, block, blocks, gutenberg
 Requires at least: 3.7
-Tested up to: 5.5
-Stable tag: 3.1.21
+Tested up to: 5.7
+Stable tag: 3.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
