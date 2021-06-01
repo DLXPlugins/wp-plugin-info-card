@@ -280,3 +280,35 @@ h3.wp-pic-title {
     animation-iteration-count: infinite;
     animation-timing-function: linear;
 }
+
+.wppic-admin-link {
+	display: inline-block;
+	position: relative;
+	color: #cb212b;
+	text-decoration: none;
+	font-size: 1.0em;
+}
+.wppic-admin-link.documentation {
+	font-size: 1.3em;
+	font-weight: 700;
+}
+
+.wppic-admin-link:hover {
+	color: #cb212b;
+}
+.wppic-admin-link:after {
+	position: absolute;
+	opacity: 0;
+	bottom: -4px;
+	left: 0;
+	width: 100%;
+	content: '';
+	display: inline-block;
+	height: 2px;
+	background-color: #cb212b;
+	border-radius: 10px;
+	transition: ease-in-out 0.2s;
+}
+.wppic-admin-link:hover:after {
+	opacity: 1;
+}

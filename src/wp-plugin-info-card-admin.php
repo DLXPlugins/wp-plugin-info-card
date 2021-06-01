@@ -162,13 +162,13 @@ function wppic_settings_page() {
 	<div class="wrap">
 		<div id="post-body-content">
 			<div id="wppic-admin-page" class="postbox meta-box-sortables">
-			<h1 style="vertical-align: middle; font-size: 36px"><img src="' . WPPIC_URL . 'img/wppic.svg" class="wppic-logo" alt="b*web" style="width: 25px; height: 25px;" />&nbsp;' . WPPIC_NAME_FULL . '</h1>
-			<h2 class="description">' . esc_html__( 'Beautiful plugin and theme cards', 'wp-plugin-info-card' ) . '</h2>
+			<h1 style="display: flex; align-items: center; font-size: 36px"><img src="' . WPPIC_URL . 'img/wppic.svg" class="wppic-logo" alt="b*web" style="width: 36px; height: 36px;" />&nbsp;' . WPPIC_NAME_FULL . '</h1>
+			<h2 class="description">' . esc_html__( 'Beautiful plugin and theme cards by:', 'wp-plugin-info-card' ) . ' ' . '<a class="wppic-admin-link" href="https://www.b-website.com/">Brice CAPOBIANCO</a>' . ' ' . esc_html__( 'and', 'wp-plugin-info-card' ) . ' ' . '<a class="wppic-admin-link" href="https://mediaron.com">Ronald Huereca</a></h2>
 			' . wppic_plugins_about() . '
 				<div id="wppic-shortcode">
 				<h2><span>' . esc_html__( 'Documentation', 'wp-plugin-info-card' ) . '</span></h2>
 				<div class="inside">
-				<p class="documentation"><a href="https://mediaron.com/wp-plugin-info-card/" target="_blank" title="'. __( 'View Documentation and examples', 'wp-plugin-info-card' ) .'">'. esc_html__( 'View Documentation and Examples', 'wp-plugin-info-card' ) .' <span class="dashicons dashicons-external"></span></a></p></div>
+				<p><a class="documentation wppic-admin-link" href="https://mediaron.com/wp-plugin-info-card/" target="_blank" title="'. __( 'View Documentation and examples', 'wp-plugin-info-card' ) .'">'. esc_html__( 'View Documentation and Examples', 'wp-plugin-info-card' ) .' <span class="dashicons dashicons-external"></span></a></p></div>
 					<h2>' . esc_html__( 'The Block Editor', 'wp-plugin-info-card' ) . '</h2>
 					<div class="inside">
 						<p class="description"> ' . esc_html__( 'Use our blocks to show your cards in the block editor. All options are supported.', 'wp-plugin-info-card' ) . 	'</p>
