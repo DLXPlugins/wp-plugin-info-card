@@ -72,7 +72,7 @@ $wppic_data->name = wp_trim_words( $wppic_data->name, 6 );
 		<div class="wp-pic-bottom">
 			<div class="wp-pic-bar">
 				<a href="https://wordpress.org/support/view/plugin-reviews/<?php echo $wppic_data->slug ?>" class="wp-pic-rating" target="_blank" title="<?php _e( 'Ratings', 'wp-plugin-info-card' ) ?>">
-					<?php echo $wppic_data->rating ?>%<em><?php _e( 'Ratings', 'wp-plugin-info-card' ) ?></em>
+					<?php echo round( $wppic_data->rating ); ?>%<em><?php _e( 'Ratings', 'wp-plugin-info-card' ) ?></em>
 				</a>
 				<a href="<?php echo $wppic_data->download_link ?>" class="wp-pic-downloaded" target="_blank" title="<?php _e( 'Direct download', 'wp-plugin-info-card' ) ?>">
 					<?php echo number_format_i18n( $wppic_data->active_installs ) ?>+<em><?php _e( 'Installs', 'wp-plugin-info-card' ) ?></em>
