@@ -19,7 +19,7 @@ function wppic_admin_scripts() {
 function wppic_admin_css() {
 	wp_enqueue_style( 'dashicons' );
 	wp_enqueue_style( 'wppic-lightbox', WPPIC_URL . 'lightbox/jquery.fancybox.min.css', array(), WPPIC_VERSION, 'all');
-	wp_enqueue_style( 'wppic-admin-css', WPPIC_URL . 'css/wppic-admin-style.css', array(), WPPIC_VERSION, 'all');
+	wp_enqueue_style( 'wppic-admin-css', plugins_url( '/dist/wppic-admin.css', WPPIC_FILE ), array(), WPPIC_VERSION, 'all');
 }
 
 

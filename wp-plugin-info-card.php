@@ -43,6 +43,9 @@ if ( ! defined( 'WPPIC_NAME_FULL' ) ) {
 if ( ! defined( 'WPPIC_ID' ) ) {
 	define( 'WPPIC_ID', 'wp-plugin-info-card' );
 }
+if ( ! defined( 'WPPIC_FILE' ) ) {
+	define( 'WPPIC_FILE', __FILE__ );
+}
 
 
 /***************************************************************
