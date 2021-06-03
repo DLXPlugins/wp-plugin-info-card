@@ -4,6 +4,21 @@
  * Author: Brice CAPOBIANCO - b*web
  */
 @import url("./wppic-style.css");
+
+@-moz-keyframes wppic-spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes wppic-spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes wppic-spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+
 i.mce-i-wppic-icon {
 	background-image:  url('../img/wppic.png');
 	background-image:  none, url('../img/wppic.svg'), url('../img/wppic.png');
@@ -47,6 +62,9 @@ i.mce-i-wppic-icon {
 	background-size: 100%;
 	position: absolute;
 	margin: 4px 0 0 5px;
+}
+#wppic-admin-page.postbox {
+	padding: 25px;
 }
 #wppic-admin-page #post-body-content .postbox .inside{
 	line-height: 1em;
@@ -131,7 +149,7 @@ h3.wp-pic-title {
 	font-size: 1.5em;
 }
 .wppic-button.wppic-pluginHome:before {
-    content: "\f103";
+    content: "\f102";
 }
 .wppic-button.wppic-pluginOther:before {
     content: "\f106";
@@ -146,10 +164,13 @@ h3.wp-pic-title {
     content: "\f155";
 }
 .wppic-button.wppic-pluginContact:before {
-    content: "\f130";
+    content: "\f465";
 }
 .wppic-button.wppic-pluginDonate:before {
     content: "\f328";
+}
+.wppic-button.wppic-pluginCode:before {
+	content: "\f475";
 }
 .wppic-list li.wppic-dd:before {
     cursor: move;
@@ -230,4 +251,90 @@ h3.wp-pic-title {
 }
 #wppic-dashboard-widget .wp-pic-widget-updated {
 	display: block;
+}
+.wppic-admin-shortcode {
+	display: block;
+	word-break: keep-all;
+	overflow-wrap: break-word;
+	background: #000;
+	padding: 20px 30px;
+	color: #FFF;
+	max-width: 450px;
+	width: 100%;
+	font-weight: 700;
+	border: 3px solid #cb212b;
+	border-radius: 2px;
+}
+.wppic-pluginHome:hover:before,
+.wppic-pluginPage:hover:before,
+.wppic-pluginSupport:hover:before,
+.wppic-pluginContact:hover:before,
+.wppic-pluginRate:hover:before,
+.wppic-button.wppic-pluginCode:hover:before {
+	color: #cb212b;
+	display: inline-block;
+}
+.wppic-pluginRate:hover:before {
+	animation-name: wppic-spin;
+    animation-duration: 3500ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.wppic-admin-link {
+	display: inline-block;
+	position: relative;
+	color: #cb212b;
+	text-decoration: none;
+	font-size: 1.0em;
+}
+.wppic-admin-link.documentation {
+	font-size: 1.3em;
+	font-weight: 700;
+}
+
+.wppic-admin-link:hover {
+	color: #cb212b;
+}
+.wppic-admin-link:after {
+	position: absolute;
+	opacity: 0;
+	bottom: -4px;
+	left: 0;
+	width: 100%;
+	content: '';
+	display: inline-block;
+	height: 2px;
+	background-color: #cb212b;
+	border-radius: 10px;
+	transition: ease-in-out 0.2s;
+}
+.wppic-admin-link:hover:after {
+	opacity: 1;
+}
+
+#wppic-about-list .wppic-button {
+	position: relative;
+	display: inline-block;
+	transition: all 0.3s ease-in-out;
+}
+#wppic-about-list .wppic-button:hover {
+	color: #db3939;
+	transition: all 0.3s ease-in-out;
+}
+#wppic-about-list .wppic-button:after {
+	position: absolute;
+	opacity: 0;
+	bottom: -4px;
+	left: 0;
+	width: 100%;
+	content: '';
+	display: inline-block;
+	height: 2px;
+	background-color: #cb212b;
+	border-radius: 10px;
+	transition: ease-in-out 0.2s;
+}
+#wppic-about-list .wppic-button:hover:after {
+	opacity: 1;
 }
