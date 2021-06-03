@@ -276,7 +276,7 @@ h3.wp-pic-title {
 }
 .wppic-pluginRate:hover:before {
 	animation-name: wppic-spin;
-    animation-duration: 2500ms;
+    animation-duration: 3500ms;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
 }
@@ -310,5 +310,31 @@ h3.wp-pic-title {
 	transition: ease-in-out 0.2s;
 }
 .wppic-admin-link:hover:after {
+	opacity: 1;
+}
+
+#wppic-about-list .wppic-button {
+	position: relative;
+	display: inline-block;
+	transition: all 0.3s ease-in-out;
+}
+#wppic-about-list .wppic-button:hover {
+	color: #db3939;
+	transition: all 0.3s ease-in-out;
+}
+#wppic-about-list .wppic-button:after {
+	position: absolute;
+	opacity: 0;
+	bottom: -4px;
+	left: 0;
+	width: 100%;
+	content: '';
+	display: inline-block;
+	height: 2px;
+	background-color: #cb212b;
+	border-radius: 10px;
+	transition: ease-in-out 0.2s;
+}
+#wppic-about-list .wppic-button:hover:after {
 	opacity: 1;
 }
