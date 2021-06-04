@@ -23,7 +23,7 @@ function wp_plugin_info_card_cgb_block_assets() { // phpcs:ignore
 	// Styles.
 	wp_enqueue_style(
 		'wp_plugin_info_card-cgb-style-css', // Handle.
-		plugins_url( 'dist/wppic-styles.css', dirname( __FILE__ ) ), // Block style CSS.
+		plugins_url( 'dist/main.css', dirname( __FILE__ ) ), // Block style CSS.
 		array( 'wp-editor' ),
 		WPPIC_VERSION,
 		'all'
