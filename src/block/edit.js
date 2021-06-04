@@ -57,7 +57,7 @@ const WPPluginInfoCard = ( props ) => {
 	const [ containerid, setContainerid ] = useState( attributes.containerid );
 	const [ scheme, setScheme ] = useState( attributes.scheme );
 	const [ layout, setLayout ] = useState( attributes.layout );
-	const [ multi, setMulti ] = useState( attributes.multi );
+	const [ multi, setMulti ] = useState( true );
 	const [ preview, setPreview ] = useState( false );
 	const [ data, setData ] = useState( attributes.assetData );
 	const [ align, setAlign ] = useState( attributes.align );
@@ -65,9 +65,11 @@ const WPPluginInfoCard = ( props ) => {
 	const loadData = () => {
 		setLoading( false );
 		setCardLoading( true );
-		const restUrl = wppic.rest_url + 'wppic/v2/get_data/';
+		const restUrl = wppic.rest_url + 'wppic/v2/get_data';
 		axios
-			.get( restUrl + `?type=${ type }&slug=${ slug }` )
+			.get(
+				restUrl + `?type=${ type }&slug=${ encodeURIComponent( slug ) }`
+			)
 			.then( ( response ) => {
 				// Now Set State
 				setData( response.data.data );
@@ -79,10 +81,7 @@ const WPPluginInfoCard = ( props ) => {
 		loadData();
 	};
 	useEffect( () => {
-		if ( ( null || false ) === data ) {
-			loadData();
-		}
-		setData( attributes.assetData );
+		loadData();
 		setImage( attributes.image );
 		setLayout( attributes.layout );
 		setLoading( attributes.loading );

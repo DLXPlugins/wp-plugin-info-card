@@ -2899,7 +2899,7 @@ var WPPluginInfoCard = function WPPluginInfoCard(props) {
       layout = _useState16[0],
       setLayout = _useState16[1];
 
-  var _useState17 = useState(attributes.multi),
+  var _useState17 = useState(true),
       _useState18 = _slicedToArray(_useState17, 2),
       multi = _useState18[0],
       setMulti = _useState18[1];
@@ -2922,8 +2922,8 @@ var WPPluginInfoCard = function WPPluginInfoCard(props) {
   var loadData = function loadData() {
     setLoading(false);
     setCardLoading(true);
-    var restUrl = wppic.rest_url + 'wppic/v2/get_data/';
-    axios__WEBPACK_IMPORTED_MODULE_0___default().get(restUrl + "?type=".concat(type, "&slug=").concat(slug)).then(function (response) {
+    var restUrl = wppic.rest_url + 'wppic/v2/get_data';
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get(restUrl + "?type=".concat(type, "&slug=").concat(encodeURIComponent(slug))).then(function (response) {
       // Now Set State
       setData(response.data.data);
       setAttributes({
@@ -2938,11 +2938,7 @@ var WPPluginInfoCard = function WPPluginInfoCard(props) {
   };
 
   useEffect(function () {
-    if (( false || false) === data) {
-      loadData();
-    }
-
-    setData(attributes.assetData);
+    loadData();
     setImage(attributes.image);
     setLayout(attributes.layout);
     setLoading(attributes.loading);
