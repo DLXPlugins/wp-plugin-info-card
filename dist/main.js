@@ -1833,6 +1833,42 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./src/block/Logo.js":
+/*!***************************!*\
+  !*** ./src/block/Logo.js ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var Logo = function Logo(props) {
+  return /*#__PURE__*/React.createElement("svg", {
+    version: "1.1",
+    id: "Calque_1",
+    xmlns: "http://www.w3.org/2000/svg",
+    x: "0px",
+    y: "0px",
+    width: "".concat(props.size, "px"),
+    height: "".concat(props.size, "px"),
+    viewBox: "0 0 850.39 850.39",
+    enableBackground: "new 0 0 850.39 850.39"
+  }, /*#__PURE__*/React.createElement("path", {
+    fill: "".concat(props.fill),
+    d: "M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39 c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451 l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07 h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887 l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z"
+  }));
+};
+
+Logo.defaultProps = {
+  size: '75',
+  fill: '#DB3939'
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Logo);
+
+/***/ }),
+
 /***/ "./src/block/block.js":
 /*!****************************!*\
   !*** ./src/block/block.js ***!
@@ -1909,6 +1945,94 @@ registerBlockType('wp-plugin-info-card/wp-plugin-info-card', {
     }
   }
 });
+
+/***/ }),
+
+/***/ "./src/block/components/BannerWrapper.js":
+/*!***********************************************!*\
+  !*** ./src/block/components/BannerWrapper.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var Fragment = wp.element.Fragment;
+
+var BannerWrapper = function BannerWrapper(props) {
+  var bannerImage = props.defaultBanner;
+
+  if ('high' in props.bannerImage && false !== props.bannerImage.high) {
+    bannerImage = props.bannerImage.high;
+  } else if ('low' in props.bannerImage && false !== props.bannerImage) {
+    bannerImage = props.bannerImage.low;
+  }
+
+  if (props.image) {
+    bannerImage = props.image;
+  }
+
+  return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-banner-wrapper"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: bannerImage,
+    alt: props.name
+  })));
+};
+
+BannerWrapper.defaultProps = {
+  name: '',
+  banners: {},
+  hasBanner: false,
+  bannerImage: {},
+  // eslint-disable-next-line no-undef
+  defaultBanner: wppic.wppic_banner_default,
+  image: false
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BannerWrapper);
+
+/***/ }),
+
+/***/ "./src/block/components/PicIcon.js":
+/*!*****************************************!*\
+  !*** ./src/block/components/PicIcon.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var Fragment = wp.element.Fragment;
+
+var PicIcon = function PicIcon(props) {
+  var icon = props.defaultIcon;
+
+  if (props.image) {
+    icon = props.image;
+  } else if (props.data.icons.svg) {
+    icon = props.data.icons.svg;
+  } else if (props.data.icons['2x']) {
+    icon = props.data.icons['2x'];
+  } else if (props.data.icons['1x']) {
+    icon = props.data.icons['1x'];
+  }
+
+  return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("img", {
+    src: icon,
+    className: "wp-pic-plugin-icon",
+    alt: props.data.name
+  }));
+};
+
+PicIcon.defaultProps = {
+  name: '',
+  image: false
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PicIcon);
 
 /***/ }),
 
@@ -2658,8 +2782,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-var _this = undefined;
-
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _templates_PluginFlex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./templates/PluginFlex */ "./src/block/templates/PluginFlex.js");
+/* harmony import */ var _templates_PluginCard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./templates/PluginCard */ "./src/block/templates/PluginCard.js");
+/* harmony import */ var _templates_PluginLarge__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./templates/PluginLarge */ "./src/block/templates/PluginLarge.js");
+/* harmony import */ var _templates_PluginWordPress__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./templates/PluginWordPress */ "./src/block/templates/PluginWordPress.js");
+/* harmony import */ var _templates_ThemeFlex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./templates/ThemeFlex */ "./src/block/templates/ThemeFlex.js");
+/* harmony import */ var _templates_ThemeWordPress__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./templates/ThemeWordPress */ "./src/block/templates/ThemeWordPress.js");
+/* harmony import */ var _templates_ThemeLarge__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./templates/ThemeLarge */ "./src/block/templates/ThemeLarge.js");
+/* harmony import */ var _templates_ThemeCard__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./templates/ThemeCard */ "./src/block/templates/ThemeCard.js");
+/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Logo */ "./src/block/Logo.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2672,82 +2805,193 @@ function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "und
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+/* eslint-disable react/jsx-key */
+
+/* eslint-disable no-unused-vars */
+
+/* eslint-disable no-undef */
+
+/* eslint-disable camelcase */
+
 /**
  * External dependencies
  */
 
 
-var HtmlToReactParser = __webpack_require__(/*! html-to-react */ "./node_modules/html-to-react/index.js").Parser;
+
+
+
+
+
+
+
+
 
 var _wp$element = wp.element,
-    Component = _wp$element.Component,
     Fragment = _wp$element.Fragment,
-    useState = _wp$element.useState,
-    useEffect = _wp$element.useEffect;
+    useEffect = _wp$element.useEffect,
+    useState = _wp$element.useState;
 var __ = wp.i18n.__;
 var _wp$components = wp.components,
     PanelBody = _wp$components.PanelBody,
-    Placeholder = _wp$components.Placeholder,
+    PanelRow = _wp$components.PanelRow,
     SelectControl = _wp$components.SelectControl,
     Spinner = _wp$components.Spinner,
+    TextControl = _wp$components.TextControl,
     Toolbar = _wp$components.Toolbar,
     CheckboxControl = _wp$components.CheckboxControl,
-    TextControl = _wp$components.TextControl;
+    TabPanel = _wp$components.TabPanel,
+    Button = _wp$components.Button;
 var _wp$blockEditor = wp.blockEditor,
     InspectorControls = _wp$blockEditor.InspectorControls,
     BlockControls = _wp$blockEditor.BlockControls,
     BlockAlignmentToolbar = _wp$blockEditor.BlockAlignmentToolbar,
-    MediaUpload = _wp$blockEditor.MediaUpload,
-    AlignmentToolbar = _wp$blockEditor.AlignmentToolbar;
+    MediaUpload = _wp$blockEditor.MediaUpload;
 
-var PluginInfoCard = function PluginInfoCard(props) {
+var WPPluginInfoCard = function WPPluginInfoCard(props) {
   var attributes = props.attributes,
-      setAttributes = props.setAttributes; // State.
+      setAttributes = props.setAttributes;
 
-  var _useState = useState(true),
+  var _useState = useState(attributes.type),
       _useState2 = _slicedToArray(_useState, 2),
-      loading = _useState2[0],
-      setLoading = _useState2[1];
+      type = _useState2[0],
+      setType = _useState2[1];
 
-  var _useState3 = useState(false),
+  var _useState3 = useState(attributes.slug),
       _useState4 = _slicedToArray(_useState3, 2),
-      cardLoading = _useState4[0],
-      setCardLoading = _useState4[1];
+      slug = _useState4[0],
+      setSlug = _useState4[1];
 
-  var type = attributes.type,
-      slug = attributes.slug,
-      html = attributes.html,
-      image = attributes.image,
-      containerid = attributes.containerid,
-      margin = attributes.margin,
-      clear = attributes.clear,
-      expiration = attributes.expiration,
-      ajax = attributes.ajax,
-      scheme = attributes.scheme,
-      layout = attributes.layout,
-      width = attributes.width,
-      multi = attributes.multi;
+  var _useState5 = useState(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      loading = _useState6[0],
+      setLoading = _useState6[1];
 
-  var pluginOnClick = function pluginOnClick(event) {
-    if ('' !== type && '' !== slug) {
-      setLoading(false);
-      setCardLoading(true); // eslint-disable-next-line no-undef
+  var _useState7 = useState(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      cardLoading = _useState8[0],
+      setCardLoading = _useState8[1];
 
-      var restUrl = wppic.rest_url + 'wppic/v1/get_html/';
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get(restUrl + "?type=".concat(attributes.type, "&slug=").concat(attributes.slug, "&align=").concat(attributes.align, "&image=").concat(attributes.image, "&containerid=").concat(attributes.containerid, "&margin=").concat(attributes.margin, "&clear=").concat(attributes.clear, "&expiration=").concat(attributes.expiration, "&ajax=").concat(attributes.ajax, "&scheme=").concat(attributes.scheme, "&layout=").concat(attributes.layout, "&multi=").concat(attributes.multi)).then(function (response) {
-        // Now Set State
-        setCardLoading(false);
-        setAttributes({
-          html: response.data
-        });
+  var _useState9 = useState(attributes.image),
+      _useState10 = _slicedToArray(_useState9, 2),
+      image = _useState10[0],
+      setImage = _useState10[1];
+
+  var _useState11 = useState(attributes.containerid),
+      _useState12 = _slicedToArray(_useState11, 2),
+      containerid = _useState12[0],
+      setContainerid = _useState12[1];
+
+  var _useState13 = useState(attributes.scheme),
+      _useState14 = _slicedToArray(_useState13, 2),
+      scheme = _useState14[0],
+      setScheme = _useState14[1];
+
+  var _useState15 = useState(attributes.layout),
+      _useState16 = _slicedToArray(_useState15, 2),
+      layout = _useState16[0],
+      setLayout = _useState16[1];
+
+  var _useState17 = useState(attributes.multi),
+      _useState18 = _slicedToArray(_useState17, 2),
+      multi = _useState18[0],
+      setMulti = _useState18[1];
+
+  var _useState19 = useState(false),
+      _useState20 = _slicedToArray(_useState19, 2),
+      preview = _useState20[0],
+      setPreview = _useState20[1];
+
+  var _useState21 = useState(attributes.assetData),
+      _useState22 = _slicedToArray(_useState21, 2),
+      data = _useState22[0],
+      setData = _useState22[1];
+
+  var _useState23 = useState(attributes.align),
+      _useState24 = _slicedToArray(_useState23, 2),
+      align = _useState24[0],
+      setAlign = _useState24[1];
+
+  var loadData = function loadData() {
+    setLoading(false);
+    setCardLoading(true);
+    var restUrl = wppic.rest_url + 'wppic/v2/get_data/';
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get(restUrl + "?type=".concat(type, "&slug=").concat(slug)).then(function (response) {
+      // Now Set State
+      setData(response.data.data);
+      setAttributes({
+        assetData: response.data.data
       });
-    }
+      setCardLoading(false);
+    });
   };
 
-  var htmlToReactParser = new HtmlToReactParser();
+  var pluginOnClick = function pluginOnClick(assetSlug, assetType) {
+    loadData();
+  };
+
+  useEffect(function () {
+    if (( false || false) === data) {
+      loadData();
+    }
+
+    setData(attributes.assetData);
+    setImage(attributes.image);
+    setLayout(attributes.layout);
+    setLoading(attributes.loading);
+    setType(attributes.type);
+    setSlug(attributes.slug);
+  }, []);
+
+  var outputInfoCards = function outputInfoCards(cardDataArray) {
+    return cardDataArray.map(function (cardData) {
+      return /*#__PURE__*/React.createElement(Fragment, null, 'flex' === layout && 'plugin' === type && /*#__PURE__*/React.createElement(_templates_PluginFlex__WEBPACK_IMPORTED_MODULE_2__.default, {
+        scheme: scheme,
+        image: image,
+        data: cardData,
+        align: align
+      }), 'card' === layout && 'plugin' === type && /*#__PURE__*/React.createElement(_templates_PluginCard__WEBPACK_IMPORTED_MODULE_3__.default, {
+        scheme: scheme,
+        image: image,
+        data: cardData,
+        align: align
+      }), 'large' === layout && 'plugin' === type && /*#__PURE__*/React.createElement(_templates_PluginLarge__WEBPACK_IMPORTED_MODULE_4__.default, {
+        scheme: scheme,
+        image: image,
+        data: cardData,
+        align: align
+      }), 'wordpress' === layout && 'plugin' === type && /*#__PURE__*/React.createElement(_templates_PluginWordPress__WEBPACK_IMPORTED_MODULE_5__.default, {
+        scheme: scheme,
+        image: image,
+        data: cardData,
+        align: align
+      }), 'flex' === layout && 'theme' === type && /*#__PURE__*/React.createElement(_templates_ThemeFlex__WEBPACK_IMPORTED_MODULE_6__.default, {
+        scheme: scheme,
+        image: image,
+        data: cardData,
+        align: align
+      }), 'wordpress' === layout && 'theme' === type && /*#__PURE__*/React.createElement(_templates_ThemeWordPress__WEBPACK_IMPORTED_MODULE_7__.default, {
+        scheme: scheme,
+        image: image,
+        data: cardData,
+        align: align
+      }), 'large' === layout && 'theme' === type && /*#__PURE__*/React.createElement(_templates_ThemeLarge__WEBPACK_IMPORTED_MODULE_8__.default, {
+        scheme: scheme,
+        image: image,
+        data: cardData,
+        align: align
+      }), 'card' === layout && 'theme' === type && /*#__PURE__*/React.createElement(_templates_ThemeCard__WEBPACK_IMPORTED_MODULE_9__.default, {
+        scheme: scheme,
+        image: image,
+        data: cardData,
+        align: align
+      }));
+    });
+  };
+
   var resetSelect = [{
     icon: 'edit',
-    title: __('Reset', 'wp-plugin-info-card'),
+    title: __('Edit and Configure', 'wp-plugin-info-card'),
     onClick: function onClick() {
       return setLoading(true);
     }
@@ -2835,16 +3079,11 @@ var PluginInfoCard = function PluginInfoCard(props) {
     value: 'flex',
     label: __('Flex', 'wp-plugin-info-card')
   }];
-  var widthOptions = [{
-    value: 'none',
-    label: __('Default', 'wp-plugin-info-card')
-  }, {
-    value: 'full',
-    label: __('Full Width', 'wp-plugin-info-card')
-  }];
+  var layoutClass = 'card' === layout ? 'wp-pic-card' : layout;
+  var previewLoadingClass = cardLoading ? 'wp-pic-spin' : '';
   var inspectorControls = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
-    title: __('WP Plugin Info Card', 'wp-plugin-info-card')
-  }, /*#__PURE__*/React.createElement(SelectControl, {
+    title: __('Layout', 'wp-plugin-info-card')
+  }, /*#__PURE__*/React.createElement(PanelRow, null, /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Scheme', 'wp-plugin-info-card'),
     options: schemeOptions,
     value: scheme,
@@ -2852,15 +3091,9 @@ var PluginInfoCard = function PluginInfoCard(props) {
       setAttributes({
         scheme: value
       });
-      attributes.scheme = value;
-
-      _this.setState({
-        scheme: value
-      });
-
-      _this.pluginOnClick(value);
+      setScheme(value);
     }
-  }), /*#__PURE__*/React.createElement(SelectControl, {
+  })), /*#__PURE__*/React.createElement(PanelRow, null, /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Layout', 'wp-plugin-info-card'),
     options: layoutOptions,
     value: layout,
@@ -2870,36 +3103,26 @@ var PluginInfoCard = function PluginInfoCard(props) {
           layout: value,
           align: 'full'
         });
-        attributes.layout = value;
-        attributes.align = 'full';
-        pluginOnClick(value);
+        setLayout(value);
+        setAlign('full');
       } else {
         setAttributes({
           layout: value,
           align: 'center'
         });
-        attributes.layout = value;
-        attributes.align = 'center';
-        pluginOnClick(value);
+        setLayout(value);
+        setAlign('center');
       }
     }
-  }), /*#__PURE__*/React.createElement(SelectControl, {
-    label: __('Width', 'wp-plugin-info-card'),
-    options: widthOptions,
-    value: width,
-    onChange: function onChange(value) {
-      setAttributes({
-        width: value
-      });
-      attributes.width = value;
-    }
-  }), /*#__PURE__*/React.createElement(MediaUpload, {
+  }))), /*#__PURE__*/React.createElement(PanelBody, {
+    title: __('Options', 'wp-plugin-info-card'),
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(PanelRow, null, /*#__PURE__*/React.createElement(MediaUpload, {
     onSelect: function onSelect(imageObject) {
       setAttributes({
         image: imageObject.url
       });
-      attributes.image = imageObject.url;
-      pluginOnClick(imageObject);
+      setImage(imageObject.url);
     },
     type: "image",
     value: image,
@@ -2919,12 +3142,11 @@ var PluginInfoCard = function PluginInfoCard(props) {
           setAttributes({
             image: ''
           });
-          attributes.image = '';
-          pluginOnClick(event);
+          setImage('');
         }
       }, __('Reset Image', 'wp-plugin-info-card')))));
     }
-  }), /*#__PURE__*/React.createElement(TextControl, {
+  })), /*#__PURE__*/React.createElement(PanelRow, null, /*#__PURE__*/React.createElement(TextControl, {
     label: __('Container ID', 'wp-plugin-info-card'),
     type: "text",
     value: containerid,
@@ -2932,65 +3154,14 @@ var PluginInfoCard = function PluginInfoCard(props) {
       setAttributes({
         containerid: value
       });
-      attributes.containerid = value;
-      setTimeout(function () {
-        pluginOnClick(value);
-      }, 5000);
+      setContainerid(value);
     }
-  }), /*#__PURE__*/React.createElement(TextControl, {
-    label: __('Margin', 'wp-plugin-info-card'),
-    type: "text",
-    value: margin,
-    onChange: function onChange(value) {
-      setAttributes({
-        margin: value
-      });
-      attributes.margin = value;
-      setTimeout(function () {
-        pluginOnClick(value);
-      }, 5000);
-    }
-  }), /*#__PURE__*/React.createElement(SelectControl, {
-    label: __('Clear', 'wp-plugin-info-card'),
-    options: clearOptions,
-    value: clear,
-    onChange: function onChange(value) {
-      setAttributes({
-        clear: value
-      });
-      attributes.clear = value;
-      pluginOnClick(value);
-    }
-  }), /*#__PURE__*/React.createElement(TextControl, {
-    label: __('Expiration in minutes', 'wp-plugin-info-card'),
-    type: "number",
-    value: expiration,
-    onChange: function onChange(value) {
-      setAttributes({
-        expiration: value
-      });
-      attributes.expiration = value;
-      setTimeout(function () {
-        pluginOnClick(value);
-      }, 5000);
-    }
-  }), /*#__PURE__*/React.createElement(SelectControl, {
-    label: __('Load card via Ajax?', 'wp-plugin-info-card'),
-    options: ajaxOptions,
-    value: ajax,
-    onChange: function onChange(value) {
-      setAttributes({
-        ajax: value
-      });
-      attributes.ajax = value;
-      pluginOnClick(value);
-    }
-  })));
+  }))));
 
-  if (props.attributes.preview) {
+  if (preview) {
     return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("img", {
       src: wppic.wppic_preview,
-      alt: "WPPIC Preview"
+      alt: ""
     }));
   }
 
@@ -2999,7 +3170,7 @@ var PluginInfoCard = function PluginInfoCard(props) {
       className: "wppic-loading-placeholder"
     }, /*#__PURE__*/React.createElement("div", {
       className: "wppic-loading"
-    }, /*#__PURE__*/React.createElement(Logo, {
+    }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_10__.default, {
       size: "45"
     }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
       className: "wppic-spinner"
@@ -3010,7 +3181,7 @@ var PluginInfoCard = function PluginInfoCard(props) {
     className: "wppic-query-block wppic-query-block-panel"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-block-svg"
-  }, /*#__PURE__*/React.createElement(Logo, {
+  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_10__.default, {
     size: "75"
   })), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-tab-panel"
@@ -3093,7 +3264,7 @@ var PluginInfoCard = function PluginInfoCard(props) {
     className: "wp-pic-gutenberg-button"
   }, /*#__PURE__*/React.createElement(Button, {
     iconSize: 20,
-    icon: /*#__PURE__*/React.createElement(Logo, {
+    icon: /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_10__.default, {
       size: "25"
     }),
     isSecondary: true,
@@ -3109,18 +3280,718 @@ var PluginInfoCard = function PluginInfoCard(props) {
     className: "wppic-loading-placeholder"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-loading"
-  }, /*#__PURE__*/React.createElement(Logo, {
+  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_10__.default, {
     size: "45"
   }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
     className: "wppic-spinner"
   }, /*#__PURE__*/React.createElement(Spinner, null))))), !loading && !cardLoading && /*#__PURE__*/React.createElement(Fragment, null, inspectorControls, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(Toolbar, {
     controls: resetSelect
   })), /*#__PURE__*/React.createElement("div", {
-    className: classnames('is-placeholder', layoutClass, 'wp-block-plugin-info-card', "align".concat(align))
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('is-placeholder', layoutClass, 'wp-block-plugin-info-card', "align".concat(align))
   }, outputInfoCards(data))));
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PluginInfoCard);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WPPluginInfoCard);
+
+/***/ }),
+
+/***/ "./src/block/templates/PluginCard.js":
+/*!*******************************************!*\
+  !*** ./src/block/templates/PluginCard.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! validator/lib/isNumeric */ "./node_modules/validator/lib/isNumeric.js");
+/* harmony import */ var validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var __ = wp.i18n.__;
+
+var PluginCard = function PluginCard(props) {
+  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()("align".concat(props.align), {
+    'wp-pic-wrapper': true,
+    'wp-pic-card': true
+  });
+  var classes = classnames__WEBPACK_IMPORTED_MODULE_0___default()(props.scheme, {
+    'wp-pic': true,
+    'wp-pic-card': true,
+    plugin: true
+  }); // WordPress Requires.
+
+  var requires = props.data.requires;
+
+  if (validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_1___default()(requires)) {
+    requires = 'WP ' + requires + '+';
+  }
+
+  var icon = '';
+
+  if (props.data.icons.svg) {
+    icon = props.data.icons.svg;
+  } else if (props.data.icons['2x']) {
+    icon = props.data.icons['2x'];
+  } else if (props.data.icons['1x']) {
+    icon = props.data.icons['1x'];
+  } else {
+    icon = props.defaultIcon;
+  }
+
+  var bgImageStyles = {
+    backgroundImage: "url(".concat(icon, ")"),
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover'
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: wrapperClasses
+  }, /*#__PURE__*/React.createElement("div", {
+    className: classes
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-flip",
+    style: {
+      display: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-face wp-pic-front"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-logo",
+    style: bgImageStyles
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-name"
+  }, props.data.name), /*#__PURE__*/React.createElement("p", {
+    className: "wp-pic-author"
+  }, __('Author(s):', 'wp-plugin-info-card'), ' ', props.data.author), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-bottom"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-bar"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-rating"
+  }, props.data.rating, "%", /*#__PURE__*/React.createElement("em", null, __('Ratings', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-downloaded"
+  }, props.data.active_installs, "+", /*#__PURE__*/React.createElement("em", null, __('Installs', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-requires"
+  }, props.data.requires, /*#__PURE__*/React.createElement("em", null, __('Requires', 'wp-plugin-info-card')))), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-download"
+  }, /*#__PURE__*/React.createElement("span", null, __('More info', 'wp-plugin-info-card'))))))));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PluginCard);
+
+/***/ }),
+
+/***/ "./src/block/templates/PluginFlex.js":
+/*!*******************************************!*\
+  !*** ./src/block/templates/PluginFlex.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_BannerWrapper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/BannerWrapper */ "./src/block/components/BannerWrapper.js");
+
+
+var __ = wp.i18n.__;
+
+var PluginFlex = function PluginFlex(props) {
+  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()("align".concat(props.align), {
+    flex: true,
+    'wp-pic-wrapper': true,
+    'wp-pic-card': true
+  });
+  var classes = classnames__WEBPACK_IMPORTED_MODULE_0___default()(props.scheme, {
+    'wp-pic': true,
+    flex: true,
+    'wp-pic-card': true,
+    plugin: true
+  });
+  return /*#__PURE__*/React.createElement("div", {
+    className: wrapperClasses
+  }, /*#__PURE__*/React.createElement("div", {
+    className: classes
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-flip",
+    style: {
+      display: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-face wp-pic-front"
+  }, /*#__PURE__*/React.createElement(_components_BannerWrapper__WEBPACK_IMPORTED_MODULE_1__.default, {
+    name: props.data.name,
+    bannerImage: props.data.banners,
+    image: props.image
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-name-wrapper"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-name"
+  }, /*#__PURE__*/React.createElement("strong", null, props.data.name))), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-version-wrapper"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "wp-pic-version"
+  }, /*#__PURE__*/React.createElement("span", null, __('Current Version:', 'wp-plugin-info-card')), ' ', props.data.version)), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-updated-wrapper"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "wp-pic-updated"
+  }, /*#__PURE__*/React.createElement("span", null, __('Last Updated:', 'wp-plugin-info-card')), ' ', props.data.last_updated)), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-tested-wrapper"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "wp-pic-tested"
+  }, /*#__PURE__*/React.createElement("span", null, __('Tested Up To:', 'wp-plugin-info-card')), ' ', props.data.tested)), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-author-wrapper"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "wp-pic-author"
+  }, __('Author(s):', 'wp-plugin-info-card'), ' ', props.data.author)), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-bottom"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-bar"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-rating"
+  }, props.data.rating, "%", ' ', /*#__PURE__*/React.createElement("em", null, __('Ratings', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-downloaded"
+  }, props.data.active_installs, '+', ' ', /*#__PURE__*/React.createElement("em", null, __('Installs', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-requires"
+  }, props.data.requires, /*#__PURE__*/React.createElement("em", null, __('Requires', 'wp-plugin-info-card')))), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-download-link"
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", null, __('Download', 'wp-plugin-info-card'), ' ', props.data.name))))))));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PluginFlex);
+
+/***/ }),
+
+/***/ "./src/block/templates/PluginLarge.js":
+/*!********************************************!*\
+  !*** ./src/block/templates/PluginLarge.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! validator/lib/isNumeric */ "./node_modules/validator/lib/isNumeric.js");
+/* harmony import */ var validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_BannerWrapper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/BannerWrapper */ "./src/block/components/BannerWrapper.js");
+
+
+
+var __ = wp.i18n.__;
+
+var PluginLarge = function PluginLarge(props) {
+  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()("align".concat(props.align), {
+    large: true,
+    'wp-pic-wrapper': true,
+    'wp-pic-card': true
+  });
+  var classes = classnames__WEBPACK_IMPORTED_MODULE_0___default()(props.scheme, {
+    'wp-pic': true,
+    'wp-pic-card': true,
+    large: true,
+    plugin: true
+  }); // WordPress Requires.
+
+  var requires = props.data.requires;
+
+  if (validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_2___default()(requires)) {
+    requires = 'WP ' + requires + '+';
+  }
+
+  var icon = '';
+
+  if (props.data.icons.svg) {
+    icon = props.data.icons.svg;
+  } else if (props.data.icons['2x']) {
+    icon = props.data.icons['2x'];
+  } else if (props.data.icons['1x']) {
+    icon = props.data.icons['1x'];
+  } else {
+    icon = props.defaultIcon;
+  }
+
+  var bgImageStyles = {
+    backgroundImage: "url(".concat(icon, ")"),
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover'
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: wrapperClasses
+  }, /*#__PURE__*/React.createElement("div", {
+    className: classes
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-large",
+    style: {
+      display: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-large-content"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-asset-bg"
+  }, /*#__PURE__*/React.createElement(_components_BannerWrapper__WEBPACK_IMPORTED_MODULE_1__.default, {
+    name: props.data.name,
+    bannerImage: props.data.banners,
+    image: props.image
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-asset-bg-title"
+  }, /*#__PURE__*/React.createElement("span", null, props.data.name))), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-half-first"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-logo",
+    style: bgImageStyles
+  }), /*#__PURE__*/React.createElement("p", {
+    className: "wp-pic-author"
+  }, __('Author(s):', 'wp-plugin-info-card'), ' ', props.data.author), /*#__PURE__*/React.createElement("p", {
+    className: "wp-pic-version"
+  }, /*#__PURE__*/React.createElement("span", null, __('Current Version:', 'wp-plugin-info-card')), ' ', props.data.version), /*#__PURE__*/React.createElement("p", {
+    className: "wp-pic-updated"
+  }, /*#__PURE__*/React.createElement("span", null, __('Last Updated:', 'wp-plugin-info-card')), ' ', props.data.last_updated)), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-half-last"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-bottom"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-bar"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-rating"
+  }, props.data.rating, "%", ' ', /*#__PURE__*/React.createElement("em", null, __('Ratings', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-downloaded"
+  }, props.data.active_installs, '+', ' ', /*#__PURE__*/React.createElement("em", null, __('Installs', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-requires"
+  }, props.data.requires, /*#__PURE__*/React.createElement("em", null, __('Requires', 'wp-plugin-info-card'))))))))));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PluginLarge);
+
+/***/ }),
+
+/***/ "./src/block/templates/PluginWordPress.js":
+/*!************************************************!*\
+  !*** ./src/block/templates/PluginWordPress.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! validator/lib/isNumeric */ "./node_modules/validator/lib/isNumeric.js");
+/* harmony import */ var validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_PicIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/PicIcon */ "./src/block/components/PicIcon.js");
+/* harmony import */ var react_star_ratings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-star-ratings */ "./node_modules/react-star-ratings/build/index.js");
+/* eslint-disable @wordpress/i18n-translator-comments */
+
+
+
+
+var _wp$i18n = wp.i18n,
+    __ = _wp$i18n.__,
+    _n = _wp$i18n._n,
+    sprintf = _wp$i18n.sprintf;
+
+var PluginWordPress = function PluginWordPress(props) {
+  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()("align".concat(props.align), {
+    wordpress: true,
+    'wp-pic-wrapper': true,
+    'wp-pic-card': true
+  });
+  var classes = classnames__WEBPACK_IMPORTED_MODULE_0___default()(props.scheme, "align".concat(props.align), {
+    'wp-pic': true,
+    'wp-pic-wordpress': true,
+    wordpress: true,
+    full: false,
+    plugin: true
+  }); // WordPress Requires.
+
+  var requires = props.data.requires;
+
+  if (validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_3___default()(requires)) {
+    requires = 'WP ' + requires + '+';
+  }
+
+  return /*#__PURE__*/React.createElement("div", {
+    className: wrapperClasses
+  }, /*#__PURE__*/React.createElement("div", {
+    className: classes
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-wordpress",
+    style: {
+      display: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-wordpress-content"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-plugin-card-top"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-column-name"
+  }, /*#__PURE__*/React.createElement("h3", null, props.data.name, /*#__PURE__*/React.createElement(_components_PicIcon__WEBPACK_IMPORTED_MODULE_1__.default, {
+    image: props.image,
+    data: props.data
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-action-links"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-action-buttons"
+  }, __('Download', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-column-description"
+  }, /*#__PURE__*/React.createElement("p", null, props.data.short_description), /*#__PURE__*/React.createElement("p", {
+    className: "authors"
+  }, /*#__PURE__*/React.createElement("cite", null, sprintf(__('By %s', 'wp-plugin-info-card'), props.data.author))))), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-plugin-card-bottom"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-column-rating",
+    title: sprintf(_n('(based on %s rating)', '(based on %s ratings)', props.data.num_ratings, 'wp-plugin-info-card'), props.data.num_ratings)
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-num-ratings",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement(react_star_ratings__WEBPACK_IMPORTED_MODULE_2__.default, {
+    rating: props.data.rating / 100 * 5,
+    starRatedColor: "orange",
+    starDimension: "20px",
+    starSpacing: "0",
+    numberOfStars: 5,
+    name: ""
+  }), "\xA0 (", props.data.num_ratings, ")")), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-column-updated"
+  }, /*#__PURE__*/React.createElement("strong", null, __('Last Updated:', 'wp-plugin-info-card')), ' ', props.data.last_updated), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-column-downloaded"
+  }, sprintf(__('%s+ Active Installs', 'wp-plugin-info-card'), props.data.active_installs)), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-column-compatibility"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-compatibility-compatible"
+  }, __('Compatible with WordPress', 'wp-plugin-info-card'), ' ', props.data.requires)))))));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PluginWordPress);
+
+/***/ }),
+
+/***/ "./src/block/templates/ThemeCard.js":
+/*!******************************************!*\
+  !*** ./src/block/templates/ThemeCard.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+
+var __ = wp.i18n.__;
+
+var ThemeCard = function ThemeCard(props) {
+  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()("align".concat(props.align), {
+    'wp-pic-wrapper': true,
+    'wp-pic-card': true
+  });
+  var classes = classnames__WEBPACK_IMPORTED_MODULE_0___default()(props.scheme, {
+    'wp-pic': true,
+    'wp-pic-card': true,
+    theme: true
+  });
+  var banner = props.image || props.data.screenshot_url;
+  var bgImageStyles = {
+    backgroundImage: "url(".concat(banner, ")"),
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover'
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: wrapperClasses
+  }, /*#__PURE__*/React.createElement("div", {
+    className: classes
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-flip",
+    style: {
+      display: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-face wp-pic-front"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-logo",
+    style: bgImageStyles
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-name"
+  }, props.data.name), /*#__PURE__*/React.createElement("p", {
+    className: "wp-pic-author"
+  }, __('Author(s):', 'wp-plugin-info-card'), ' ', props.data.author), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-bottom"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-bar"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-rating"
+  }, props.data.rating, "%", /*#__PURE__*/React.createElement("em", null, __('Ratings', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-downloaded"
+  }, props.data.downloaded, /*#__PURE__*/React.createElement("em", null, __('Downloads', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-requires"
+  }, props.data.version, /*#__PURE__*/React.createElement("em", null, __('Version', 'wp-plugin-info-card')))), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-download"
+  }, /*#__PURE__*/React.createElement("span", null, __('More info', 'wp-plugin-info-card'))))))));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ThemeCard);
+
+/***/ }),
+
+/***/ "./src/block/templates/ThemeFlex.js":
+/*!******************************************!*\
+  !*** ./src/block/templates/ThemeFlex.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_BannerWrapper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/BannerWrapper */ "./src/block/components/BannerWrapper.js");
+
+
+var __ = wp.i18n.__;
+
+var PluginFlex = function PluginFlex(props) {
+  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()("align".concat(props.align), {
+    flex: true,
+    'wp-pic-wrapper': true,
+    'wp-pic-card': true
+  });
+  var classes = classnames__WEBPACK_IMPORTED_MODULE_0___default()(props.scheme, {
+    'wp-pic': true,
+    flex: true,
+    'wp-pic-card': true,
+    theme: true
+  });
+  return /*#__PURE__*/React.createElement("div", {
+    className: wrapperClasses
+  }, /*#__PURE__*/React.createElement("div", {
+    className: classes
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-flip",
+    style: {
+      display: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-face wp-pic-front"
+  }, /*#__PURE__*/React.createElement(_components_BannerWrapper__WEBPACK_IMPORTED_MODULE_1__.default, {
+    name: props.data.name,
+    bannerImage: props.data.banners,
+    image: props.image || props.data.screenshot_url
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-name-wrapper"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-name"
+  }, /*#__PURE__*/React.createElement("strong", null, props.data.name))), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-preview-wrapper"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-preview"
+  }, /*#__PURE__*/React.createElement("span", null, __('Theme Preview', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-updated-wrapper"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "wp-pic-updated"
+  }, /*#__PURE__*/React.createElement("span", null, __('Last Updated:', 'wp-plugin-info-card')), ' ', props.data.last_updated)), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-author-wrapper"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "wp-pic-author"
+  }, __('Author(s):', 'wp-plugin-info-card'), ' ', props.data.author)), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-bottom"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-bar"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-rating"
+  }, props.data.rating, "%", ' ', /*#__PURE__*/React.createElement("em", null, __('Ratings', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-downloaded"
+  }, props.data.downloaded, '+', ' ', /*#__PURE__*/React.createElement("em", null, __('Downloads', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-version"
+  }, props.data.version, /*#__PURE__*/React.createElement("em", null, __('Version', 'wp-plugin-info-card')))), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-download-link"
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", null, __('Download', 'wp-plugin-info-card'), ' ', props.data.name)))))))));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PluginFlex);
+
+/***/ }),
+
+/***/ "./src/block/templates/ThemeLarge.js":
+/*!*******************************************!*\
+  !*** ./src/block/templates/ThemeLarge.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_BannerWrapper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/BannerWrapper */ "./src/block/components/BannerWrapper.js");
+
+
+var __ = wp.i18n.__;
+
+var PluginLarge = function PluginLarge(props) {
+  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()("align".concat(props.align), {
+    large: true,
+    'wp-pic-wrapper': true,
+    'wp-pic-card': true
+  });
+  var classes = classnames__WEBPACK_IMPORTED_MODULE_0___default()(props.scheme, {
+    'wp-pic': true,
+    'wp-pic-card': true,
+    large: true,
+    theme: true
+  });
+  return /*#__PURE__*/React.createElement("div", {
+    className: wrapperClasses
+  }, /*#__PURE__*/React.createElement("div", {
+    className: classes
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-large",
+    style: {
+      display: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-large-content"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-asset-bg"
+  }, /*#__PURE__*/React.createElement(_components_BannerWrapper__WEBPACK_IMPORTED_MODULE_1__.default, {
+    name: props.data.name,
+    bannerImage: props.data.banners,
+    image: props.image || props.data.screenshot_url
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-asset-bg-title"
+  }, /*#__PURE__*/React.createElement("span", null, props.data.name))), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-half-first"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-logo",
+    href: "#"
+  }), /*#__PURE__*/React.createElement("p", {
+    className: "wp-pic-author"
+  }, __('Author(s):', 'wp-plugin-info-card'), ' ', props.data.author), /*#__PURE__*/React.createElement("p", {
+    className: "wp-pic-version"
+  }, /*#__PURE__*/React.createElement("span", null, __('Current Version:', 'wp-plugin-info-card')), ' ', props.data.version), /*#__PURE__*/React.createElement("p", {
+    className: "wp-pic-updated"
+  }, /*#__PURE__*/React.createElement("span", null, __('Last Updated:', 'wp-plugin-info-card')), ' ', props.data.last_updated)), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-half-last"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-bottom"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-bar"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-rating"
+  }, props.data.rating, "%", ' ', /*#__PURE__*/React.createElement("em", null, __('Ratings', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-downloaded"
+  }, props.data.downloaded, '+', ' ', /*#__PURE__*/React.createElement("em", null, __('Downloads', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-requires"
+  }, props.data.version, /*#__PURE__*/React.createElement("em", null, __('Version', 'wp-plugin-info-card'))))))))));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PluginLarge);
+
+/***/ }),
+
+/***/ "./src/block/templates/ThemeWordPress.js":
+/*!***********************************************!*\
+  !*** ./src/block/templates/ThemeWordPress.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_star_ratings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-star-ratings */ "./node_modules/react-star-ratings/build/index.js");
+/* harmony import */ var _components_BannerWrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/BannerWrapper */ "./src/block/components/BannerWrapper.js");
+/* eslint-disable @wordpress/i18n-translator-comments */
+
+
+
+var _wp$i18n = wp.i18n,
+    __ = _wp$i18n.__,
+    _n = _wp$i18n._n,
+    sprintf = _wp$i18n.sprintf;
+
+var ThemeWordPress = function ThemeWordPress(props) {
+  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()("align".concat(props.align), {
+    wordpress: true,
+    'wp-pic-wrapper': true,
+    'wp-pic-card': true
+  });
+  var classes = classnames__WEBPACK_IMPORTED_MODULE_0___default()(props.scheme, {
+    'wp-pic': true,
+    'wp-pic-wordpress': true,
+    wordpress: true,
+    theme: true
+  });
+  return /*#__PURE__*/React.createElement("div", {
+    className: wrapperClasses
+  }, /*#__PURE__*/React.createElement("div", {
+    className: classes
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-wordpress",
+    style: {
+      display: 'none'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-theme-card-top"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-theme-screenshot"
+  }, /*#__PURE__*/React.createElement(_components_BannerWrapper__WEBPACK_IMPORTED_MODULE_2__.default, {
+    name: props.data.name,
+    bannerImage: props.data.banners,
+    image: props.image || props.data.screenshot_url
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-theme-preview"
+  }, __('Theme Preview', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("h3", null, props.data.name, "\xA0", /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-author"
+  }, sprintf(__('By %s', 'wp-plugin-info-card'), props.data.author))), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-action-links"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-action-buttons"
+  }, __('Download', 'wp-plugin-info-card')))), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-theme-card-bottom"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-column-rating",
+    title: sprintf(_n('(based on %s rating)', '(based on %s ratings)', props.data.num_ratings, 'wp-plugin-info-card'), props.data.num_ratings)
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-num-ratings",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement(react_star_ratings__WEBPACK_IMPORTED_MODULE_1__.default, {
+    rating: props.data.rating / 100 * 5,
+    starRatedColor: "orange",
+    starDimension: "20px",
+    starSpacing: "0",
+    numberOfStars: 5,
+    name: ""
+  }), "\xA0 (", props.data.num_ratings, ")")), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-column-updated"
+  }, /*#__PURE__*/React.createElement("strong", null, __('Last Updated:', 'wp-plugin-info-card')), ' ', props.data.last_updated), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-column-downloaded"
+  }, sprintf(__('%s+ Downloads', 'wp-plugin-info-card'), props.data.downloaded)), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-column-version"
+  }, /*#__PURE__*/React.createElement("span", null, __('Version', 'wp-plugin-info-card'), ' ', props.data.version))))));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ThemeWordPress);
 
 /***/ }),
 
@@ -6610,6 +7481,870 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/object-assign/index.js":
+/*!*********************************************!*\
+  !*** ./node_modules/object-assign/index.js ***!
+  \*********************************************/
+/***/ ((module) => {
+
+"use strict";
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+
+/* eslint-disable no-unused-vars */
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+function shouldUseNative() {
+	try {
+		if (!Object.assign) {
+			return false;
+		}
+
+		// Detect buggy property enumeration order in older V8 versions.
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+		test1[5] = 'de';
+		if (Object.getOwnPropertyNames(test1)[0] === '5') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test2 = {};
+		for (var i = 0; i < 10; i++) {
+			test2['_' + String.fromCharCode(i)] = i;
+		}
+		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+			return test2[n];
+		});
+		if (order2.join('') !== '0123456789') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test3 = {};
+		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+			test3[letter] = letter;
+		});
+		if (Object.keys(Object.assign({}, test3)).join('') !==
+				'abcdefghijklmnopqrst') {
+			return false;
+		}
+
+		return true;
+	} catch (err) {
+		// We don't expect any of the above to throw, but better to be safe.
+		return false;
+	}
+}
+
+module.exports = shouldUseNative() ? Object.assign : function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (getOwnPropertySymbols) {
+			symbols = getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/prop-types/checkPropTypes.js":
+/*!***************************************************!*\
+  !*** ./node_modules/prop-types/checkPropTypes.js ***!
+  \***************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+var printWarning = function() {};
+
+if (true) {
+  var ReactPropTypesSecret = __webpack_require__(/*! ./lib/ReactPropTypesSecret */ "./node_modules/prop-types/lib/ReactPropTypesSecret.js");
+  var loggedTypeFailures = {};
+  var has = Function.call.bind(Object.prototype.hasOwnProperty);
+
+  printWarning = function(text) {
+    var message = 'Warning: ' + text;
+    if (typeof console !== 'undefined') {
+      console.error(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  };
+}
+
+/**
+ * Assert that the values match with the type specs.
+ * Error messages are memorized and will only be shown once.
+ *
+ * @param {object} typeSpecs Map of name to a ReactPropType
+ * @param {object} values Runtime values that need to be type-checked
+ * @param {string} location e.g. "prop", "context", "child context"
+ * @param {string} componentName Name of the component for error messages.
+ * @param {?Function} getStack Returns the component stack.
+ * @private
+ */
+function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
+  if (true) {
+    for (var typeSpecName in typeSpecs) {
+      if (has(typeSpecs, typeSpecName)) {
+        var error;
+        // Prop type validation may throw. In case they do, we don't want to
+        // fail the render phase where it didn't fail before. So we log it.
+        // After these have been cleaned up, we'll let them throw.
+        try {
+          // This is intentionally an invariant that gets caught. It's the same
+          // behavior as without this statement except with a better message.
+          if (typeof typeSpecs[typeSpecName] !== 'function') {
+            var err = Error(
+              (componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' +
+              'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.'
+            );
+            err.name = 'Invariant Violation';
+            throw err;
+          }
+          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
+        } catch (ex) {
+          error = ex;
+        }
+        if (error && !(error instanceof Error)) {
+          printWarning(
+            (componentName || 'React class') + ': type specification of ' +
+            location + ' `' + typeSpecName + '` is invalid; the type checker ' +
+            'function must return `null` or an `Error` but returned a ' + typeof error + '. ' +
+            'You may have forgotten to pass an argument to the type checker ' +
+            'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' +
+            'shape all require an argument).'
+          );
+        }
+        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
+          // Only monitor this failure once because there tends to be a lot of the
+          // same error.
+          loggedTypeFailures[error.message] = true;
+
+          var stack = getStack ? getStack() : '';
+
+          printWarning(
+            'Failed ' + location + ' type: ' + error.message + (stack != null ? stack : '')
+          );
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Resets warning cache when testing.
+ *
+ * @private
+ */
+checkPropTypes.resetWarningCache = function() {
+  if (true) {
+    loggedTypeFailures = {};
+  }
+}
+
+module.exports = checkPropTypes;
+
+
+/***/ }),
+
+/***/ "./node_modules/prop-types/factoryWithTypeCheckers.js":
+/*!************************************************************!*\
+  !*** ./node_modules/prop-types/factoryWithTypeCheckers.js ***!
+  \************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+var ReactIs = __webpack_require__(/*! react-is */ "./node_modules/react-is/index.js");
+var assign = __webpack_require__(/*! object-assign */ "./node_modules/object-assign/index.js");
+
+var ReactPropTypesSecret = __webpack_require__(/*! ./lib/ReactPropTypesSecret */ "./node_modules/prop-types/lib/ReactPropTypesSecret.js");
+var checkPropTypes = __webpack_require__(/*! ./checkPropTypes */ "./node_modules/prop-types/checkPropTypes.js");
+
+var has = Function.call.bind(Object.prototype.hasOwnProperty);
+var printWarning = function() {};
+
+if (true) {
+  printWarning = function(text) {
+    var message = 'Warning: ' + text;
+    if (typeof console !== 'undefined') {
+      console.error(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  };
+}
+
+function emptyFunctionThatReturnsNull() {
+  return null;
+}
+
+module.exports = function(isValidElement, throwOnDirectAccess) {
+  /* global Symbol */
+  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
+  var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
+
+  /**
+   * Returns the iterator method function contained on the iterable object.
+   *
+   * Be sure to invoke the function with the iterable as context:
+   *
+   *     var iteratorFn = getIteratorFn(myIterable);
+   *     if (iteratorFn) {
+   *       var iterator = iteratorFn.call(myIterable);
+   *       ...
+   *     }
+   *
+   * @param {?object} maybeIterable
+   * @return {?function}
+   */
+  function getIteratorFn(maybeIterable) {
+    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
+    if (typeof iteratorFn === 'function') {
+      return iteratorFn;
+    }
+  }
+
+  /**
+   * Collection of methods that allow declaration and validation of props that are
+   * supplied to React components. Example usage:
+   *
+   *   var Props = require('ReactPropTypes');
+   *   var MyArticle = React.createClass({
+   *     propTypes: {
+   *       // An optional string prop named "description".
+   *       description: Props.string,
+   *
+   *       // A required enum prop named "category".
+   *       category: Props.oneOf(['News','Photos']).isRequired,
+   *
+   *       // A prop named "dialog" that requires an instance of Dialog.
+   *       dialog: Props.instanceOf(Dialog).isRequired
+   *     },
+   *     render: function() { ... }
+   *   });
+   *
+   * A more formal specification of how these methods are used:
+   *
+   *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
+   *   decl := ReactPropTypes.{type}(.isRequired)?
+   *
+   * Each and every declaration produces a function with the same signature. This
+   * allows the creation of custom validation functions. For example:
+   *
+   *  var MyLink = React.createClass({
+   *    propTypes: {
+   *      // An optional string or URI prop named "href".
+   *      href: function(props, propName, componentName) {
+   *        var propValue = props[propName];
+   *        if (propValue != null && typeof propValue !== 'string' &&
+   *            !(propValue instanceof URI)) {
+   *          return new Error(
+   *            'Expected a string or an URI for ' + propName + ' in ' +
+   *            componentName
+   *          );
+   *        }
+   *      }
+   *    },
+   *    render: function() {...}
+   *  });
+   *
+   * @internal
+   */
+
+  var ANONYMOUS = '<<anonymous>>';
+
+  // Important!
+  // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
+  var ReactPropTypes = {
+    array: createPrimitiveTypeChecker('array'),
+    bool: createPrimitiveTypeChecker('boolean'),
+    func: createPrimitiveTypeChecker('function'),
+    number: createPrimitiveTypeChecker('number'),
+    object: createPrimitiveTypeChecker('object'),
+    string: createPrimitiveTypeChecker('string'),
+    symbol: createPrimitiveTypeChecker('symbol'),
+
+    any: createAnyTypeChecker(),
+    arrayOf: createArrayOfTypeChecker,
+    element: createElementTypeChecker(),
+    elementType: createElementTypeTypeChecker(),
+    instanceOf: createInstanceTypeChecker,
+    node: createNodeChecker(),
+    objectOf: createObjectOfTypeChecker,
+    oneOf: createEnumTypeChecker,
+    oneOfType: createUnionTypeChecker,
+    shape: createShapeTypeChecker,
+    exact: createStrictShapeTypeChecker,
+  };
+
+  /**
+   * inlined Object.is polyfill to avoid requiring consumers ship their own
+   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+   */
+  /*eslint-disable no-self-compare*/
+  function is(x, y) {
+    // SameValue algorithm
+    if (x === y) {
+      // Steps 1-5, 7-10
+      // Steps 6.b-6.e: +0 != -0
+      return x !== 0 || 1 / x === 1 / y;
+    } else {
+      // Step 6.a: NaN == NaN
+      return x !== x && y !== y;
+    }
+  }
+  /*eslint-enable no-self-compare*/
+
+  /**
+   * We use an Error-like object for backward compatibility as people may call
+   * PropTypes directly and inspect their output. However, we don't use real
+   * Errors anymore. We don't inspect their stack anyway, and creating them
+   * is prohibitively expensive if they are created too often, such as what
+   * happens in oneOfType() for any type before the one that matched.
+   */
+  function PropTypeError(message) {
+    this.message = message;
+    this.stack = '';
+  }
+  // Make `instanceof Error` still work for returned errors.
+  PropTypeError.prototype = Error.prototype;
+
+  function createChainableTypeChecker(validate) {
+    if (true) {
+      var manualPropTypeCallCache = {};
+      var manualPropTypeWarningCount = 0;
+    }
+    function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
+      componentName = componentName || ANONYMOUS;
+      propFullName = propFullName || propName;
+
+      if (secret !== ReactPropTypesSecret) {
+        if (throwOnDirectAccess) {
+          // New behavior only for users of `prop-types` package
+          var err = new Error(
+            'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+            'Use `PropTypes.checkPropTypes()` to call them. ' +
+            'Read more at http://fb.me/use-check-prop-types'
+          );
+          err.name = 'Invariant Violation';
+          throw err;
+        } else if ( true && typeof console !== 'undefined') {
+          // Old behavior for people using React.PropTypes
+          var cacheKey = componentName + ':' + propName;
+          if (
+            !manualPropTypeCallCache[cacheKey] &&
+            // Avoid spamming the console because they are often not actionable except for lib authors
+            manualPropTypeWarningCount < 3
+          ) {
+            printWarning(
+              'You are manually calling a React.PropTypes validation ' +
+              'function for the `' + propFullName + '` prop on `' + componentName  + '`. This is deprecated ' +
+              'and will throw in the standalone `prop-types` package. ' +
+              'You may be seeing this warning due to a third-party PropTypes ' +
+              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.'
+            );
+            manualPropTypeCallCache[cacheKey] = true;
+            manualPropTypeWarningCount++;
+          }
+        }
+      }
+      if (props[propName] == null) {
+        if (isRequired) {
+          if (props[propName] === null) {
+            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
+          }
+          return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
+        }
+        return null;
+      } else {
+        return validate(props, propName, componentName, location, propFullName);
+      }
+    }
+
+    var chainedCheckType = checkType.bind(null, false);
+    chainedCheckType.isRequired = checkType.bind(null, true);
+
+    return chainedCheckType;
+  }
+
+  function createPrimitiveTypeChecker(expectedType) {
+    function validate(props, propName, componentName, location, propFullName, secret) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== expectedType) {
+        // `propValue` being instance of, say, date/regexp, pass the 'object'
+        // check, but we can offer a more precise error message here rather than
+        // 'of type `object`'.
+        var preciseType = getPreciseType(propValue);
+
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createAnyTypeChecker() {
+    return createChainableTypeChecker(emptyFunctionThatReturnsNull);
+  }
+
+  function createArrayOfTypeChecker(typeChecker) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (typeof typeChecker !== 'function') {
+        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
+      }
+      var propValue = props[propName];
+      if (!Array.isArray(propValue)) {
+        var propType = getPropType(propValue);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
+      }
+      for (var i = 0; i < propValue.length; i++) {
+        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret);
+        if (error instanceof Error) {
+          return error;
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createElementTypeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      if (!isValidElement(propValue)) {
+        var propType = getPropType(propValue);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createElementTypeTypeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      if (!ReactIs.isValidElementType(propValue)) {
+        var propType = getPropType(propValue);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement type.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createInstanceTypeChecker(expectedClass) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (!(props[propName] instanceof expectedClass)) {
+        var expectedClassName = expectedClass.name || ANONYMOUS;
+        var actualClassName = getClassName(props[propName]);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createEnumTypeChecker(expectedValues) {
+    if (!Array.isArray(expectedValues)) {
+      if (true) {
+        if (arguments.length > 1) {
+          printWarning(
+            'Invalid arguments supplied to oneOf, expected an array, got ' + arguments.length + ' arguments. ' +
+            'A common mistake is to write oneOf(x, y, z) instead of oneOf([x, y, z]).'
+          );
+        } else {
+          printWarning('Invalid argument supplied to oneOf, expected an array.');
+        }
+      }
+      return emptyFunctionThatReturnsNull;
+    }
+
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      for (var i = 0; i < expectedValues.length; i++) {
+        if (is(propValue, expectedValues[i])) {
+          return null;
+        }
+      }
+
+      var valuesString = JSON.stringify(expectedValues, function replacer(key, value) {
+        var type = getPreciseType(value);
+        if (type === 'symbol') {
+          return String(value);
+        }
+        return value;
+      });
+      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + String(propValue) + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createObjectOfTypeChecker(typeChecker) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (typeof typeChecker !== 'function') {
+        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
+      }
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
+      }
+      for (var key in propValue) {
+        if (has(propValue, key)) {
+          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+          if (error instanceof Error) {
+            return error;
+          }
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createUnionTypeChecker(arrayOfTypeCheckers) {
+    if (!Array.isArray(arrayOfTypeCheckers)) {
+       true ? printWarning('Invalid argument supplied to oneOfType, expected an instance of array.') : 0;
+      return emptyFunctionThatReturnsNull;
+    }
+
+    for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+      var checker = arrayOfTypeCheckers[i];
+      if (typeof checker !== 'function') {
+        printWarning(
+          'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
+          'received ' + getPostfixForTypeWarning(checker) + ' at index ' + i + '.'
+        );
+        return emptyFunctionThatReturnsNull;
+      }
+    }
+
+    function validate(props, propName, componentName, location, propFullName) {
+      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+        var checker = arrayOfTypeCheckers[i];
+        if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret) == null) {
+          return null;
+        }
+      }
+
+      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createNodeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (!isNode(props[propName])) {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createShapeTypeChecker(shapeTypes) {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+      }
+      for (var key in shapeTypes) {
+        var checker = shapeTypes[key];
+        if (!checker) {
+          continue;
+        }
+        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+        if (error) {
+          return error;
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createStrictShapeTypeChecker(shapeTypes) {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+      }
+      // We need to check all keys in case some are required but missing from
+      // props.
+      var allKeys = assign({}, props[propName], shapeTypes);
+      for (var key in allKeys) {
+        var checker = shapeTypes[key];
+        if (!checker) {
+          return new PropTypeError(
+            'Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' +
+            '\nBad object: ' + JSON.stringify(props[propName], null, '  ') +
+            '\nValid keys: ' +  JSON.stringify(Object.keys(shapeTypes), null, '  ')
+          );
+        }
+        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+        if (error) {
+          return error;
+        }
+      }
+      return null;
+    }
+
+    return createChainableTypeChecker(validate);
+  }
+
+  function isNode(propValue) {
+    switch (typeof propValue) {
+      case 'number':
+      case 'string':
+      case 'undefined':
+        return true;
+      case 'boolean':
+        return !propValue;
+      case 'object':
+        if (Array.isArray(propValue)) {
+          return propValue.every(isNode);
+        }
+        if (propValue === null || isValidElement(propValue)) {
+          return true;
+        }
+
+        var iteratorFn = getIteratorFn(propValue);
+        if (iteratorFn) {
+          var iterator = iteratorFn.call(propValue);
+          var step;
+          if (iteratorFn !== propValue.entries) {
+            while (!(step = iterator.next()).done) {
+              if (!isNode(step.value)) {
+                return false;
+              }
+            }
+          } else {
+            // Iterator will provide entry [k,v] tuples rather than values.
+            while (!(step = iterator.next()).done) {
+              var entry = step.value;
+              if (entry) {
+                if (!isNode(entry[1])) {
+                  return false;
+                }
+              }
+            }
+          }
+        } else {
+          return false;
+        }
+
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  function isSymbol(propType, propValue) {
+    // Native Symbol.
+    if (propType === 'symbol') {
+      return true;
+    }
+
+    // falsy value can't be a Symbol
+    if (!propValue) {
+      return false;
+    }
+
+    // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
+    if (propValue['@@toStringTag'] === 'Symbol') {
+      return true;
+    }
+
+    // Fallback for non-spec compliant Symbols which are polyfilled.
+    if (typeof Symbol === 'function' && propValue instanceof Symbol) {
+      return true;
+    }
+
+    return false;
+  }
+
+  // Equivalent of `typeof` but with special handling for array and regexp.
+  function getPropType(propValue) {
+    var propType = typeof propValue;
+    if (Array.isArray(propValue)) {
+      return 'array';
+    }
+    if (propValue instanceof RegExp) {
+      // Old webkits (at least until Android 4.0) return 'function' rather than
+      // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
+      // passes PropTypes.object.
+      return 'object';
+    }
+    if (isSymbol(propType, propValue)) {
+      return 'symbol';
+    }
+    return propType;
+  }
+
+  // This handles more types than `getPropType`. Only used for error messages.
+  // See `createPrimitiveTypeChecker`.
+  function getPreciseType(propValue) {
+    if (typeof propValue === 'undefined' || propValue === null) {
+      return '' + propValue;
+    }
+    var propType = getPropType(propValue);
+    if (propType === 'object') {
+      if (propValue instanceof Date) {
+        return 'date';
+      } else if (propValue instanceof RegExp) {
+        return 'regexp';
+      }
+    }
+    return propType;
+  }
+
+  // Returns a string that is postfixed to a warning about an invalid type.
+  // For example, "undefined" or "of type array"
+  function getPostfixForTypeWarning(value) {
+    var type = getPreciseType(value);
+    switch (type) {
+      case 'array':
+      case 'object':
+        return 'an ' + type;
+      case 'boolean':
+      case 'date':
+      case 'regexp':
+        return 'a ' + type;
+      default:
+        return type;
+    }
+  }
+
+  // Returns class name of the object, if any.
+  function getClassName(propValue) {
+    if (!propValue.constructor || !propValue.constructor.name) {
+      return ANONYMOUS;
+    }
+    return propValue.constructor.name;
+  }
+
+  ReactPropTypes.checkPropTypes = checkPropTypes;
+  ReactPropTypes.resetWarningCache = checkPropTypes.resetWarningCache;
+  ReactPropTypes.PropTypes = ReactPropTypes;
+
+  return ReactPropTypes;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/prop-types/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/prop-types/index.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+if (true) {
+  var ReactIs = __webpack_require__(/*! react-is */ "./node_modules/react-is/index.js");
+
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = __webpack_require__(/*! ./factoryWithTypeCheckers */ "./node_modules/prop-types/factoryWithTypeCheckers.js")(ReactIs.isElement, throwOnDirectAccess);
+} else {}
+
+
+/***/ }),
+
+/***/ "./node_modules/prop-types/lib/ReactPropTypesSecret.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/prop-types/lib/ReactPropTypesSecret.js ***!
+  \*************************************************************/
+/***/ ((module) => {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+
+module.exports = ReactPropTypesSecret;
+
+
+/***/ }),
+
 /***/ "./node_modules/ramda/src/addIndex.js":
 /*!********************************************!*\
   !*** ./node_modules/ramda/src/addIndex.js ***!
@@ -8005,6 +9740,975 @@ var toPairs = /*#__PURE__*/_curry1(function toPairs(obj) {
   return pairs;
 });
 module.exports = toPairs;
+
+/***/ }),
+
+/***/ "./node_modules/react-is/cjs/react-is.development.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/react-is/cjs/react-is.development.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+/** @license React v16.8.6
+ * react-is.development.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+
+
+if (true) {
+  (function() {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+// The Symbol used to tag the ReactElement-like types. If there is no native Symbol
+// nor polyfill, then a plain number is used for performance.
+var hasSymbol = typeof Symbol === 'function' && Symbol.for;
+
+var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
+var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
+var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
+var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
+var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
+var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
+var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace;
+var REACT_ASYNC_MODE_TYPE = hasSymbol ? Symbol.for('react.async_mode') : 0xeacf;
+var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
+var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
+var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
+var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
+var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
+
+function isValidElementType(type) {
+  return typeof type === 'string' || typeof type === 'function' ||
+  // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
+  type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE);
+}
+
+/**
+ * Forked from fbjs/warning:
+ * https://github.com/facebook/fbjs/blob/e66ba20ad5be433eb54423f2b097d829324d9de6/packages/fbjs/src/__forks__/warning.js
+ *
+ * Only change is we use console.warn instead of console.error,
+ * and do nothing when 'console' is not supported.
+ * This really simplifies the code.
+ * ---
+ * Similar to invariant but only logs a warning if the condition is not met.
+ * This can be used to log issues in development environments in critical
+ * paths. Removing the logging code for production environments will keep the
+ * same logic and follow the same code paths.
+ */
+
+var lowPriorityWarning = function () {};
+
+{
+  var printWarning = function (format) {
+    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    var argIndex = 0;
+    var message = 'Warning: ' + format.replace(/%s/g, function () {
+      return args[argIndex++];
+    });
+    if (typeof console !== 'undefined') {
+      console.warn(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  };
+
+  lowPriorityWarning = function (condition, format) {
+    if (format === undefined) {
+      throw new Error('`lowPriorityWarning(condition, format, ...args)` requires a warning ' + 'message argument');
+    }
+    if (!condition) {
+      for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+        args[_key2 - 2] = arguments[_key2];
+      }
+
+      printWarning.apply(undefined, [format].concat(args));
+    }
+  };
+}
+
+var lowPriorityWarning$1 = lowPriorityWarning;
+
+function typeOf(object) {
+  if (typeof object === 'object' && object !== null) {
+    var $$typeof = object.$$typeof;
+    switch ($$typeof) {
+      case REACT_ELEMENT_TYPE:
+        var type = object.type;
+
+        switch (type) {
+          case REACT_ASYNC_MODE_TYPE:
+          case REACT_CONCURRENT_MODE_TYPE:
+          case REACT_FRAGMENT_TYPE:
+          case REACT_PROFILER_TYPE:
+          case REACT_STRICT_MODE_TYPE:
+          case REACT_SUSPENSE_TYPE:
+            return type;
+          default:
+            var $$typeofType = type && type.$$typeof;
+
+            switch ($$typeofType) {
+              case REACT_CONTEXT_TYPE:
+              case REACT_FORWARD_REF_TYPE:
+              case REACT_PROVIDER_TYPE:
+                return $$typeofType;
+              default:
+                return $$typeof;
+            }
+        }
+      case REACT_LAZY_TYPE:
+      case REACT_MEMO_TYPE:
+      case REACT_PORTAL_TYPE:
+        return $$typeof;
+    }
+  }
+
+  return undefined;
+}
+
+// AsyncMode is deprecated along with isAsyncMode
+var AsyncMode = REACT_ASYNC_MODE_TYPE;
+var ConcurrentMode = REACT_CONCURRENT_MODE_TYPE;
+var ContextConsumer = REACT_CONTEXT_TYPE;
+var ContextProvider = REACT_PROVIDER_TYPE;
+var Element = REACT_ELEMENT_TYPE;
+var ForwardRef = REACT_FORWARD_REF_TYPE;
+var Fragment = REACT_FRAGMENT_TYPE;
+var Lazy = REACT_LAZY_TYPE;
+var Memo = REACT_MEMO_TYPE;
+var Portal = REACT_PORTAL_TYPE;
+var Profiler = REACT_PROFILER_TYPE;
+var StrictMode = REACT_STRICT_MODE_TYPE;
+var Suspense = REACT_SUSPENSE_TYPE;
+
+var hasWarnedAboutDeprecatedIsAsyncMode = false;
+
+// AsyncMode should be deprecated
+function isAsyncMode(object) {
+  {
+    if (!hasWarnedAboutDeprecatedIsAsyncMode) {
+      hasWarnedAboutDeprecatedIsAsyncMode = true;
+      lowPriorityWarning$1(false, 'The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
+    }
+  }
+  return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
+}
+function isConcurrentMode(object) {
+  return typeOf(object) === REACT_CONCURRENT_MODE_TYPE;
+}
+function isContextConsumer(object) {
+  return typeOf(object) === REACT_CONTEXT_TYPE;
+}
+function isContextProvider(object) {
+  return typeOf(object) === REACT_PROVIDER_TYPE;
+}
+function isElement(object) {
+  return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
+}
+function isForwardRef(object) {
+  return typeOf(object) === REACT_FORWARD_REF_TYPE;
+}
+function isFragment(object) {
+  return typeOf(object) === REACT_FRAGMENT_TYPE;
+}
+function isLazy(object) {
+  return typeOf(object) === REACT_LAZY_TYPE;
+}
+function isMemo(object) {
+  return typeOf(object) === REACT_MEMO_TYPE;
+}
+function isPortal(object) {
+  return typeOf(object) === REACT_PORTAL_TYPE;
+}
+function isProfiler(object) {
+  return typeOf(object) === REACT_PROFILER_TYPE;
+}
+function isStrictMode(object) {
+  return typeOf(object) === REACT_STRICT_MODE_TYPE;
+}
+function isSuspense(object) {
+  return typeOf(object) === REACT_SUSPENSE_TYPE;
+}
+
+exports.typeOf = typeOf;
+exports.AsyncMode = AsyncMode;
+exports.ConcurrentMode = ConcurrentMode;
+exports.ContextConsumer = ContextConsumer;
+exports.ContextProvider = ContextProvider;
+exports.Element = Element;
+exports.ForwardRef = ForwardRef;
+exports.Fragment = Fragment;
+exports.Lazy = Lazy;
+exports.Memo = Memo;
+exports.Portal = Portal;
+exports.Profiler = Profiler;
+exports.StrictMode = StrictMode;
+exports.Suspense = Suspense;
+exports.isValidElementType = isValidElementType;
+exports.isAsyncMode = isAsyncMode;
+exports.isConcurrentMode = isConcurrentMode;
+exports.isContextConsumer = isContextConsumer;
+exports.isContextProvider = isContextProvider;
+exports.isElement = isElement;
+exports.isForwardRef = isForwardRef;
+exports.isFragment = isFragment;
+exports.isLazy = isLazy;
+exports.isMemo = isMemo;
+exports.isPortal = isPortal;
+exports.isProfiler = isProfiler;
+exports.isStrictMode = isStrictMode;
+exports.isSuspense = isSuspense;
+  })();
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/react-is/index.js":
+/*!****************************************!*\
+  !*** ./node_modules/react-is/index.js ***!
+  \****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+if (false) {} else {
+  module.exports = __webpack_require__(/*! ./cjs/react-is.development.js */ "./node_modules/react-is/cjs/react-is.development.js");
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/react-star-ratings/build/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/react-star-ratings/build/index.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var _starRatings = __webpack_require__(/*! ./star-ratings */ "./node_modules/react-star-ratings/build/star-ratings.js");
+
+var _starRatings2 = _interopRequireDefault(_starRatings);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// polyfill for ie
+Number.isInteger = Number.isInteger || function (value) {
+  return typeof value === 'number' && isFinite(value) && Math.floor(value) === value;
+};
+
+exports.default = _starRatings2.default;
+
+/***/ }),
+
+/***/ "./node_modules/react-star-ratings/build/star-ratings.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/react-star-ratings/build/star-ratings.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _star = __webpack_require__(/*! ./star */ "./node_modules/react-star-ratings/build/star.js");
+
+var _star2 = _interopRequireDefault(_star);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var StarRatings = function (_React$Component) {
+  _inherits(StarRatings, _React$Component);
+
+  function StarRatings() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, StarRatings);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = StarRatings.__proto__ || Object.getPrototypeOf(StarRatings)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      highestStarHovered: -Infinity
+    }, _this.fillId = 'starGrad' + Math.random().toFixed(15).slice(2), _this.hoverOverStar = function (starRating) {
+      return function () {
+        _this.setState({
+          highestStarHovered: starRating
+        });
+      };
+    }, _this.unHoverOverStar = function () {
+      _this.setState({
+        highestStarHovered: -Infinity
+      });
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(StarRatings, [{
+    key: 'stopColorStyle',
+    value: function stopColorStyle(color) {
+      var stopColorStyle = {
+        stopColor: color,
+        stopOpacity: '1'
+      };
+      return this.props.ignoreInlineStyles ? {} : stopColorStyle;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          starRatedColor = _props.starRatedColor,
+          starEmptyColor = _props.starEmptyColor;
+
+
+      return _react2.default.createElement(
+        'div',
+        {
+          className: 'star-ratings',
+          title: this.titleText,
+          style: this.starRatingsStyle
+        },
+        _react2.default.createElement(
+          'svg',
+          {
+            className: 'star-grad',
+            style: this.starGradientStyle
+          },
+          _react2.default.createElement(
+            'defs',
+            null,
+            _react2.default.createElement(
+              'linearGradient',
+              { id: this.fillId, x1: '0%', y1: '0%', x2: '100%', y2: '0%' },
+              _react2.default.createElement('stop', { offset: '0%', className: 'stop-color-first', style: this.stopColorStyle(starRatedColor) }),
+              _react2.default.createElement('stop', { offset: this.offsetValue, className: 'stop-color-first', style: this.stopColorStyle(starRatedColor) }),
+              _react2.default.createElement('stop', { offset: this.offsetValue, className: 'stop-color-final', style: this.stopColorStyle(starEmptyColor) }),
+              _react2.default.createElement('stop', { offset: '100%', className: 'stop-color-final', style: this.stopColorStyle(starEmptyColor) })
+            )
+          )
+        ),
+        this.renderStars
+      );
+    }
+  }, {
+    key: 'starRatingsStyle',
+    get: function get() {
+      var starRatingsStyle = {
+        position: 'relative',
+        boxSizing: 'border-box',
+        display: 'inline-block'
+      };
+      return this.props.ignoreInlineStyles ? {} : starRatingsStyle;
+    }
+  }, {
+    key: 'starGradientStyle',
+    get: function get() {
+      var starGradientStyle = {
+        position: 'absolute',
+        zIndex: '0',
+        width: '0',
+        height: '0',
+        visibility: 'hidden'
+      };
+      return this.props.ignoreInlineStyles ? {} : starGradientStyle;
+    }
+  }, {
+    key: 'titleText',
+    get: function get() {
+      var _props2 = this.props,
+          typeOfWidget = _props2.typeOfWidget,
+          selectedRating = _props2.rating;
+
+      var hoveredRating = this.state.highestStarHovered;
+      var currentRating = hoveredRating > 0 ? hoveredRating : selectedRating;
+      // fix it at 2 decimal places and remove trailing 0s
+      var formattedRating = parseFloat(currentRating.toFixed(2)).toString();
+      if (Number.isInteger(currentRating)) {
+        formattedRating = String(currentRating);
+      }
+      var starText = typeOfWidget + 's';
+      if (formattedRating === '1') {
+        starText = typeOfWidget;
+      }
+      return formattedRating + ' ' + starText;
+    }
+  }, {
+    key: 'offsetValue',
+    get: function get() {
+      var rating = this.props.rating;
+      var ratingIsInteger = Number.isInteger(rating);
+      var offsetValue = '0%';
+      if (!ratingIsInteger) {
+        var firstTwoDecimals = rating.toFixed(2).split('.')[1].slice(0, 2);
+        offsetValue = firstTwoDecimals + '%';
+      }
+      return offsetValue;
+    }
+  }, {
+    key: 'renderStars',
+    get: function get() {
+      var _this2 = this;
+
+      var _props3 = this.props,
+          changeRating = _props3.changeRating,
+          selectedRating = _props3.rating,
+          numberOfStars = _props3.numberOfStars,
+          starDimension = _props3.starDimension,
+          starSpacing = _props3.starSpacing,
+          starRatedColor = _props3.starRatedColor,
+          starEmptyColor = _props3.starEmptyColor,
+          starHoverColor = _props3.starHoverColor,
+          gradientPathName = _props3.gradientPathName,
+          ignoreInlineStyles = _props3.ignoreInlineStyles,
+          svgIconPath = _props3.svgIconPath,
+          svgIconViewBox = _props3.svgIconViewBox,
+          name = _props3.name;
+      var highestStarHovered = this.state.highestStarHovered;
+
+
+      var numberOfStarsArray = Array.apply(null, Array(numberOfStars));
+
+      return numberOfStarsArray.map(function (_, index) {
+        var starRating = index + 1;
+        var isStarred = starRating <= selectedRating;
+
+        // hovered only matters when changeRating is true
+        var hoverMode = highestStarHovered > 0;
+        var isHovered = starRating <= highestStarHovered;
+        var isCurrentHoveredStar = starRating === highestStarHovered;
+
+        // only matters when changeRating is false
+        // given star 5 and rating 4.2:  5 > 4.2 && 4 < 4.2;
+        var isPartiallyFullStar = starRating > selectedRating && starRating - 1 < selectedRating;
+
+        var isFirstStar = starRating === 1;
+        var isLastStar = starRating === numberOfStars;
+
+        return _react2.default.createElement(_star2.default, {
+          key: starRating,
+          fillId: _this2.fillId,
+          changeRating: changeRating ? function () {
+            return changeRating(starRating, name);
+          } : null,
+          hoverOverStar: changeRating ? _this2.hoverOverStar(starRating) : null,
+          unHoverOverStar: changeRating ? _this2.unHoverOverStar : null,
+          isStarred: isStarred,
+          isPartiallyFullStar: isPartiallyFullStar,
+          isHovered: isHovered,
+          hoverMode: hoverMode,
+          isCurrentHoveredStar: isCurrentHoveredStar,
+          isFirstStar: isFirstStar,
+          isLastStar: isLastStar,
+          starDimension: starDimension,
+          starSpacing: starSpacing,
+          starHoverColor: starHoverColor,
+          starRatedColor: starRatedColor,
+          starEmptyColor: starEmptyColor,
+          gradientPathName: gradientPathName,
+          ignoreInlineStyles: ignoreInlineStyles,
+          svgIconPath: svgIconPath,
+          svgIconViewBox: svgIconViewBox
+        });
+      });
+    }
+  }]);
+
+  return StarRatings;
+}(_react2.default.Component);
+
+StarRatings.propTypes = {
+  rating: _propTypes2.default.number.isRequired,
+  numberOfStars: _propTypes2.default.number.isRequired,
+  changeRating: _propTypes2.default.func,
+  starHoverColor: _propTypes2.default.string.isRequired,
+  starRatedColor: _propTypes2.default.string.isRequired,
+  starEmptyColor: _propTypes2.default.string.isRequired,
+  starDimension: _propTypes2.default.string.isRequired,
+  starSpacing: _propTypes2.default.string.isRequired,
+  gradientPathName: _propTypes2.default.string.isRequired,
+  ignoreInlineStyles: _propTypes2.default.bool.isRequired,
+  svgIconPath: _propTypes2.default.string.isRequired,
+  svgIconViewBox: _propTypes2.default.string.isRequired,
+  name: _propTypes2.default.string
+};
+
+StarRatings.defaultProps = {
+  rating: 0,
+  typeOfWidget: 'Star',
+  numberOfStars: 5,
+  changeRating: null,
+  starHoverColor: 'rgb(230, 67, 47)',
+  starRatedColor: 'rgb(109, 122, 130)',
+  starEmptyColor: 'rgb(203, 211, 227)',
+  starDimension: '50px',
+  starSpacing: '7px',
+  gradientPathName: '',
+  ignoreInlineStyles: false,
+  svgIconPath: 'm25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z',
+  svgIconViewBox: '0 0 51 48'
+};
+
+exports.default = StarRatings;
+
+/***/ }),
+
+/***/ "./node_modules/react-star-ratings/build/star.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/react-star-ratings/build/star.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _classnames = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Star = function (_React$Component) {
+  _inherits(Star, _React$Component);
+
+  function Star() {
+    _classCallCheck(this, Star);
+
+    return _possibleConstructorReturn(this, (Star.__proto__ || Object.getPrototypeOf(Star)).apply(this, arguments));
+  }
+
+  _createClass(Star, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          changeRating = _props.changeRating,
+          hoverOverStar = _props.hoverOverStar,
+          unHoverOverStar = _props.unHoverOverStar,
+          svgIconViewBox = _props.svgIconViewBox,
+          svgIconPath = _props.svgIconPath;
+
+      return _react2.default.createElement(
+        'div',
+        {
+          className: 'star-container',
+          style: this.starContainerStyle,
+          onMouseEnter: hoverOverStar,
+          onMouseLeave: unHoverOverStar,
+          onClick: changeRating
+        },
+        _react2.default.createElement(
+          'svg',
+          {
+            viewBox: svgIconViewBox,
+            className: this.starClasses,
+            style: this.starSvgStyle
+          },
+          _react2.default.createElement('path', {
+            className: 'star',
+            style: this.pathStyle,
+            d: svgIconPath
+          })
+        )
+      );
+    }
+  }, {
+    key: 'starContainerStyle',
+    get: function get() {
+      var _props2 = this.props,
+          changeRating = _props2.changeRating,
+          starSpacing = _props2.starSpacing,
+          isFirstStar = _props2.isFirstStar,
+          isLastStar = _props2.isLastStar,
+          ignoreInlineStyles = _props2.ignoreInlineStyles;
+
+
+      var starContainerStyle = {
+        position: 'relative',
+        display: 'inline-block',
+        verticalAlign: 'middle',
+        paddingLeft: isFirstStar ? undefined : starSpacing,
+        paddingRight: isLastStar ? undefined : starSpacing,
+        cursor: changeRating ? 'pointer' : undefined
+      };
+      return ignoreInlineStyles ? {} : starContainerStyle;
+    }
+  }, {
+    key: 'starSvgStyle',
+    get: function get() {
+      var _props3 = this.props,
+          ignoreInlineStyles = _props3.ignoreInlineStyles,
+          isCurrentHoveredStar = _props3.isCurrentHoveredStar,
+          starDimension = _props3.starDimension;
+
+      var starSvgStyle = {
+        width: starDimension,
+        height: starDimension,
+        transition: 'transform .2s ease-in-out',
+        transform: isCurrentHoveredStar ? 'scale(1.1)' : undefined
+      };
+
+      return ignoreInlineStyles ? {} : starSvgStyle;
+    }
+  }, {
+    key: 'pathStyle',
+    get: function get() {
+      var _props4 = this.props,
+          isStarred = _props4.isStarred,
+          isPartiallyFullStar = _props4.isPartiallyFullStar,
+          isHovered = _props4.isHovered,
+          hoverMode = _props4.hoverMode,
+          starEmptyColor = _props4.starEmptyColor,
+          starRatedColor = _props4.starRatedColor,
+          starHoverColor = _props4.starHoverColor,
+          gradientPathName = _props4.gradientPathName,
+          fillId = _props4.fillId,
+          ignoreInlineStyles = _props4.ignoreInlineStyles;
+
+
+      var fill = void 0;
+      if (hoverMode) {
+        if (isHovered) fill = starHoverColor;else fill = starEmptyColor;
+      } else {
+        if (isPartiallyFullStar) fill = 'url(\'' + gradientPathName + '#' + fillId + '\')';else if (isStarred) fill = starRatedColor;else fill = starEmptyColor;
+      }
+
+      var pathStyle = {
+        fill: fill,
+        transition: 'fill .2s ease-in-out'
+      };
+
+      return ignoreInlineStyles ? {} : pathStyle;
+    }
+  }, {
+    key: 'starClasses',
+    get: function get() {
+      var _props5 = this.props,
+          isSelected = _props5.isSelected,
+          isPartiallyFullStar = _props5.isPartiallyFullStar,
+          isHovered = _props5.isHovered,
+          isCurrentHoveredStar = _props5.isCurrentHoveredStar,
+          ignoreInlineStyles = _props5.ignoreInlineStyles;
+
+
+      var starClasses = (0, _classnames2.default)({
+        'widget-svg': true,
+        'widget-selected': isSelected,
+        'multi-widget-selected': isPartiallyFullStar,
+        'hovered': isHovered,
+        'current-hovered': isCurrentHoveredStar
+      });
+
+      return ignoreInlineStyles ? {} : starClasses;
+    }
+  }]);
+
+  return Star;
+}(_react2.default.Component);
+
+Star.propTypes = {
+  fillId: _propTypes2.default.string.isRequired,
+  changeRating: _propTypes2.default.func,
+  hoverOverStar: _propTypes2.default.func,
+  unHoverOverStar: _propTypes2.default.func,
+  isStarred: _propTypes2.default.bool.isRequired,
+  isPartiallyFullStar: _propTypes2.default.bool.isRequired,
+  isHovered: _propTypes2.default.bool.isRequired,
+  hoverMode: _propTypes2.default.bool.isRequired,
+  isCurrentHoveredStar: _propTypes2.default.bool.isRequired,
+  isFirstStar: _propTypes2.default.bool.isRequired,
+  isLastStar: _propTypes2.default.bool.isRequired,
+  starDimension: _propTypes2.default.string.isRequired,
+  starSpacing: _propTypes2.default.string.isRequired,
+  starHoverColor: _propTypes2.default.string.isRequired,
+  starRatedColor: _propTypes2.default.string.isRequired,
+  starEmptyColor: _propTypes2.default.string.isRequired,
+  gradientPathName: _propTypes2.default.string.isRequired,
+  ignoreInlineStyles: _propTypes2.default.bool.isRequired,
+  svgIconPath: _propTypes2.default.string.isRequired,
+  svgIconViewBox: _propTypes2.default.string.isRequired
+};
+
+exports.default = Star;
+
+/***/ }),
+
+/***/ "./node_modules/validator/lib/alpha.js":
+/*!*********************************************!*\
+  !*** ./node_modules/validator/lib/alpha.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.commaDecimal = exports.dotDecimal = exports.farsiLocales = exports.arabicLocales = exports.englishLocales = exports.decimal = exports.alphanumeric = exports.alpha = void 0;
+var alpha = {
+  'en-US': /^[A-Z]+$/i,
+  'bg-BG': /^[А-Я]+$/i,
+  'cs-CZ': /^[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ]+$/i,
+  'da-DK': /^[A-ZÆØÅ]+$/i,
+  'de-DE': /^[A-ZÄÖÜß]+$/i,
+  'el-GR': /^[Α-ώ]+$/i,
+  'es-ES': /^[A-ZÁÉÍÑÓÚÜ]+$/i,
+  'fr-FR': /^[A-ZÀÂÆÇÉÈÊËÏÎÔŒÙÛÜŸ]+$/i,
+  'it-IT': /^[A-ZÀÉÈÌÎÓÒÙ]+$/i,
+  'nb-NO': /^[A-ZÆØÅ]+$/i,
+  'nl-NL': /^[A-ZÁÉËÏÓÖÜÚ]+$/i,
+  'nn-NO': /^[A-ZÆØÅ]+$/i,
+  'hu-HU': /^[A-ZÁÉÍÓÖŐÚÜŰ]+$/i,
+  'pl-PL': /^[A-ZĄĆĘŚŁŃÓŻŹ]+$/i,
+  'pt-PT': /^[A-ZÃÁÀÂÄÇÉÊËÍÏÕÓÔÖÚÜ]+$/i,
+  'ru-RU': /^[А-ЯЁ]+$/i,
+  'sl-SI': /^[A-ZČĆĐŠŽ]+$/i,
+  'sk-SK': /^[A-ZÁČĎÉÍŇÓŠŤÚÝŽĹŔĽÄÔ]+$/i,
+  'sr-RS@latin': /^[A-ZČĆŽŠĐ]+$/i,
+  'sr-RS': /^[А-ЯЂЈЉЊЋЏ]+$/i,
+  'sv-SE': /^[A-ZÅÄÖ]+$/i,
+  'tr-TR': /^[A-ZÇĞİıÖŞÜ]+$/i,
+  'uk-UA': /^[А-ЩЬЮЯЄIЇҐі]+$/i,
+  'vi-VN': /^[A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴĐÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸ]+$/i,
+  'ku-IQ': /^[ئابپتجچحخدرڕزژسشعغفڤقکگلڵمنوۆھەیێيطؤثآإأكضصةظذ]+$/i,
+  ar: /^[ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوىيًٌٍَُِّْٰ]+$/,
+  he: /^[א-ת]+$/,
+  fa: /^['آاءأؤئبپتثجچحخدذرزژسشصضطظعغفقکگلمنوهةی']+$/i
+};
+exports.alpha = alpha;
+var alphanumeric = {
+  'en-US': /^[0-9A-Z]+$/i,
+  'bg-BG': /^[0-9А-Я]+$/i,
+  'cs-CZ': /^[0-9A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ]+$/i,
+  'da-DK': /^[0-9A-ZÆØÅ]+$/i,
+  'de-DE': /^[0-9A-ZÄÖÜß]+$/i,
+  'el-GR': /^[0-9Α-ω]+$/i,
+  'es-ES': /^[0-9A-ZÁÉÍÑÓÚÜ]+$/i,
+  'fr-FR': /^[0-9A-ZÀÂÆÇÉÈÊËÏÎÔŒÙÛÜŸ]+$/i,
+  'it-IT': /^[0-9A-ZÀÉÈÌÎÓÒÙ]+$/i,
+  'hu-HU': /^[0-9A-ZÁÉÍÓÖŐÚÜŰ]+$/i,
+  'nb-NO': /^[0-9A-ZÆØÅ]+$/i,
+  'nl-NL': /^[0-9A-ZÁÉËÏÓÖÜÚ]+$/i,
+  'nn-NO': /^[0-9A-ZÆØÅ]+$/i,
+  'pl-PL': /^[0-9A-ZĄĆĘŚŁŃÓŻŹ]+$/i,
+  'pt-PT': /^[0-9A-ZÃÁÀÂÄÇÉÊËÍÏÕÓÔÖÚÜ]+$/i,
+  'ru-RU': /^[0-9А-ЯЁ]+$/i,
+  'sl-SI': /^[0-9A-ZČĆĐŠŽ]+$/i,
+  'sk-SK': /^[0-9A-ZÁČĎÉÍŇÓŠŤÚÝŽĹŔĽÄÔ]+$/i,
+  'sr-RS@latin': /^[0-9A-ZČĆŽŠĐ]+$/i,
+  'sr-RS': /^[0-9А-ЯЂЈЉЊЋЏ]+$/i,
+  'sv-SE': /^[0-9A-ZÅÄÖ]+$/i,
+  'tr-TR': /^[0-9A-ZÇĞİıÖŞÜ]+$/i,
+  'uk-UA': /^[0-9А-ЩЬЮЯЄIЇҐі]+$/i,
+  'ku-IQ': /^[٠١٢٣٤٥٦٧٨٩0-9ئابپتجچحخدرڕزژسشعغفڤقکگلڵمنوۆھەیێيطؤثآإأكضصةظذ]+$/i,
+  'vi-VN': /^[0-9A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴĐÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸ]+$/i,
+  ar: /^[٠١٢٣٤٥٦٧٨٩0-9ءآأؤإئابةتثجحخدذرزسشصضطظعغفقكلمنهوىيًٌٍَُِّْٰ]+$/,
+  he: /^[0-9א-ת]+$/,
+  fa: /^['0-9آاءأؤئبپتثجچحخدذرزژسشصضطظعغفقکگلمنوهةی۱۲۳۴۵۶۷۸۹۰']+$/i
+};
+exports.alphanumeric = alphanumeric;
+var decimal = {
+  'en-US': '.',
+  ar: '٫',
+  fa: '٫'
+};
+exports.decimal = decimal;
+var englishLocales = ['AU', 'GB', 'HK', 'IN', 'NZ', 'ZA', 'ZM'];
+exports.englishLocales = englishLocales;
+
+for (var locale, i = 0; i < englishLocales.length; i++) {
+  locale = "en-".concat(englishLocales[i]);
+  alpha[locale] = alpha['en-US'];
+  alphanumeric[locale] = alphanumeric['en-US'];
+  decimal[locale] = decimal['en-US'];
+} // Source: http://www.localeplanet.com/java/
+
+
+var arabicLocales = ['AE', 'BH', 'DZ', 'EG', 'IQ', 'JO', 'KW', 'LB', 'LY', 'MA', 'QM', 'QA', 'SA', 'SD', 'SY', 'TN', 'YE'];
+exports.arabicLocales = arabicLocales;
+
+for (var _locale, _i = 0; _i < arabicLocales.length; _i++) {
+  _locale = "ar-".concat(arabicLocales[_i]);
+  alpha[_locale] = alpha.ar;
+  alphanumeric[_locale] = alphanumeric.ar;
+  decimal[_locale] = decimal.ar;
+}
+
+var farsiLocales = ['IR', 'AF'];
+exports.farsiLocales = farsiLocales;
+
+for (var _locale2, _i2 = 0; _i2 < farsiLocales.length; _i2++) {
+  _locale2 = "fa-".concat(farsiLocales[_i2]);
+  alpha[_locale2] = alpha.fa;
+  alphanumeric[_locale2] = alphanumeric.fa;
+  decimal[_locale2] = decimal.fa;
+} // Source: https://en.wikipedia.org/wiki/Decimal_mark
+
+
+var dotDecimal = ['ar-EG', 'ar-LB', 'ar-LY'];
+exports.dotDecimal = dotDecimal;
+var commaDecimal = ['bg-BG', 'cs-CZ', 'da-DK', 'de-DE', 'el-GR', 'en-ZM', 'es-ES', 'fr-FR', 'it-IT', 'ku-IQ', 'hu-HU', 'nb-NO', 'nn-NO', 'nl-NL', 'pl-PL', 'pt-PT', 'ru-RU', 'sl-SI', 'sr-RS@latin', 'sr-RS', 'sv-SE', 'tr-TR', 'uk-UA', 'vi-VN'];
+exports.commaDecimal = commaDecimal;
+
+for (var _i3 = 0; _i3 < dotDecimal.length; _i3++) {
+  decimal[dotDecimal[_i3]] = decimal['en-US'];
+}
+
+for (var _i4 = 0; _i4 < commaDecimal.length; _i4++) {
+  decimal[commaDecimal[_i4]] = ',';
+}
+
+alpha['pt-BR'] = alpha['pt-PT'];
+alphanumeric['pt-BR'] = alphanumeric['pt-PT'];
+decimal['pt-BR'] = decimal['pt-PT']; // see #862
+
+alpha['pl-Pl'] = alpha['pl-PL'];
+alphanumeric['pl-Pl'] = alphanumeric['pl-PL'];
+decimal['pl-Pl'] = decimal['pl-PL'];
+
+/***/ }),
+
+/***/ "./node_modules/validator/lib/isNumeric.js":
+/*!*************************************************!*\
+  !*** ./node_modules/validator/lib/isNumeric.js ***!
+  \*************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = isNumeric;
+
+var _assertString = _interopRequireDefault(__webpack_require__(/*! ./util/assertString */ "./node_modules/validator/lib/util/assertString.js"));
+
+var _alpha = __webpack_require__(/*! ./alpha */ "./node_modules/validator/lib/alpha.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var numericNoSymbols = /^[0-9]+$/;
+
+function isNumeric(str, options) {
+  (0, _assertString.default)(str);
+
+  if (options && options.no_symbols) {
+    return numericNoSymbols.test(str);
+  }
+
+  return new RegExp("^[+-]?([0-9]*[".concat((options || {}).locale ? _alpha.decimal[options.locale] : '.', "])?[0-9]+$")).test(str);
+}
+
+module.exports = exports.default;
+module.exports.default = exports.default;
+
+/***/ }),
+
+/***/ "./node_modules/validator/lib/util/assertString.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/validator/lib/util/assertString.js ***!
+  \*********************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = assertString;
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function assertString(input) {
+  var isString = typeof input === 'string' || input instanceof String;
+
+  if (!isString) {
+    var invalidType;
+
+    if (input === null) {
+      invalidType = 'null';
+    } else {
+      invalidType = _typeof(input);
+
+      if (invalidType === 'object' && input.constructor && input.constructor.hasOwnProperty('name')) {
+        invalidType = input.constructor.name;
+      } else {
+        invalidType = "a ".concat(invalidType);
+      }
+    }
+
+    throw new TypeError("Expected string but received ".concat(invalidType, "."));
+  }
+}
+
+module.exports = exports.default;
+module.exports.default = exports.default;
 
 /***/ }),
 
