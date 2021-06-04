@@ -3240,7 +3240,7 @@ var WPPluginInfoCard = function WPPluginInfoCard(props) {
         options: layoutOptions,
         value: layout,
         onChange: function onChange(value) {
-          if ('flex' == value) {
+          if ('flex' === value) {
             setAttributes({
               layout: value,
               align: 'full'
@@ -3317,7 +3317,7 @@ var WPPluginInfoCard = function WPPluginInfoCard(props) {
           onClose();
         },
         value: scheme
-      }, ">"));
+      }));
     });
   })), /*#__PURE__*/React.createElement(Toolbar, {
     label: "Options"
@@ -3338,7 +3338,7 @@ var WPPluginInfoCard = function WPPluginInfoCard(props) {
           onClose();
         },
         value: layout
-      }, ">"));
+      }));
     });
   }))), /*#__PURE__*/React.createElement("div", {
     className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('is-placeholder', layoutClass, 'wp-block-plugin-info-card', "align".concat(align))

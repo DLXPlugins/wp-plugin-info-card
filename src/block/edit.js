@@ -436,7 +436,9 @@ const WPPluginInfoCard = ( props ) => {
 													options={ layoutOptions }
 													value={ layout }
 													onChange={ ( value ) => {
-														if ( 'flex' == value ) {
+														if (
+															'flex' === value
+														) {
 															setAttributes( {
 																layout: value,
 																align: 'full',
@@ -525,10 +527,10 @@ const WPPluginInfoCard = ( props ) => {
 								{ ( toolbarItemHTMLProps ) => (
 									<DropdownMenu
 										toggleProps={ toolbarItemHTMLProps }
-										label={
-											__( 'Select Color Scheme',
-											'wp-plugin-info-card' )
-										}
+										label={ __(
+											'Select Color Scheme',
+											'wp-plugin-info-card'
+										) }
 										icon="admin-customizer"
 									>
 										{ ( { onClose } ) => (
@@ -543,9 +545,7 @@ const WPPluginInfoCard = ( props ) => {
 														onClose();
 													} }
 													value={ scheme }
-												>
-													>
-												</MenuItemsChoice>
+												/>
 											</Fragment>
 										) }
 									</DropdownMenu>
@@ -557,10 +557,10 @@ const WPPluginInfoCard = ( props ) => {
 								{ ( toolbarItemHTMLProps ) => (
 									<DropdownMenu
 										toggleProps={ toolbarItemHTMLProps }
-										label={
-											__( 'Select a Layout',
-											'wp-plugin-info-card' )
-										}
+										label={ __(
+											'Select a Layout',
+											'wp-plugin-info-card'
+										) }
 										icon="layout"
 									>
 										{ ( { onClose } ) => (
@@ -575,9 +575,7 @@ const WPPluginInfoCard = ( props ) => {
 														onClose();
 													} }
 													value={ layout }
-												>
-													>
-												</MenuItemsChoice>
+												/>
 											</Fragment>
 										) }
 									</DropdownMenu>
