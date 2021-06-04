@@ -1787,6 +1787,7 @@ p.wp-pic-author,
 }
 
 .wp-pic.scheme13 > div > div {
+  color: #FFF;
   background-image: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);
 }
 
@@ -1821,6 +1822,10 @@ p.wp-pic-author,
 .wp-pic.scheme13 .wp-pic-download,
 .wp-pic.scheme13 a.wp-pic-page {
   background-color: #2a5298;
+}
+
+.wp-pic.scheme13 .wp-pic-column-name h3 {
+  color: #FFF;
 }
 
 /*Color Scheme 14*/
