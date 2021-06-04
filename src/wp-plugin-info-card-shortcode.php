@@ -300,6 +300,12 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 				$alignCenter = false;
 				$alignStyle  = '';
 
+				// Custom style
+				$style = '';
+				if ( ! empty( $margin ) || ! empty( $alignStyle ) ) {
+					$style = 'style="' . $margin . $alignStyle . '"';
+				}
+
 				// Extra container ID
 				if ( ! empty( $containerid ) ) {
 					$containerid = ' id="' . $containerid . '"';

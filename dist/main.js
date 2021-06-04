@@ -3315,7 +3315,7 @@ __webpack_require__.r(__webpack_exports__);
 var __ = wp.i18n.__;
 
 var PluginCard = function PluginCard(props) {
-  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()("align".concat(props.align), {
+  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()({
     'wp-pic-wrapper': true,
     'wp-pic-card': true
   });
@@ -3404,7 +3404,7 @@ __webpack_require__.r(__webpack_exports__);
 var __ = wp.i18n.__;
 
 var PluginFlex = function PluginFlex(props) {
-  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()("align".concat(props.align), {
+  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()({
     flex: true,
     'wp-pic-wrapper': true,
     'wp-pic-card': true
@@ -3491,7 +3491,7 @@ __webpack_require__.r(__webpack_exports__);
 var __ = wp.i18n.__;
 
 var PluginLarge = function PluginLarge(props) {
-  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()("align".concat(props.align), {
+  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()({
     large: true,
     'wp-pic-wrapper': true,
     'wp-pic-card': true
@@ -3603,7 +3603,7 @@ var _wp$i18n = wp.i18n,
     sprintf = _wp$i18n.sprintf;
 
 var PluginWordPress = function PluginWordPress(props) {
-  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()("align".concat(props.align), {
+  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()({
     wordpress: true,
     'wp-pic-wrapper': true,
     'wp-pic-card': true
@@ -3695,7 +3695,7 @@ __webpack_require__.r(__webpack_exports__);
 var __ = wp.i18n.__;
 
 var ThemeCard = function ThemeCard(props) {
-  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()("align".concat(props.align), {
+  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()({
     'wp-pic-wrapper': true,
     'wp-pic-card': true
   });
@@ -3766,7 +3766,7 @@ __webpack_require__.r(__webpack_exports__);
 var __ = wp.i18n.__;
 
 var PluginFlex = function PluginFlex(props) {
-  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()("align".concat(props.align), {
+  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()({
     flex: true,
     'wp-pic-wrapper': true,
     'wp-pic-card': true
@@ -3846,7 +3846,7 @@ __webpack_require__.r(__webpack_exports__);
 var __ = wp.i18n.__;
 
 var PluginLarge = function PluginLarge(props) {
-  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()("align".concat(props.align), {
+  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()({
     large: true,
     'wp-pic-wrapper': true,
     'wp-pic-card': true
@@ -3931,7 +3931,7 @@ var _wp$i18n = wp.i18n,
     sprintf = _wp$i18n.sprintf;
 
 var ThemeWordPress = function ThemeWordPress(props) {
-  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()("align".concat(props.align), {
+  var wrapperClasses = classnames__WEBPACK_IMPORTED_MODULE_0___default()({
     wordpress: true,
     'wp-pic-wrapper': true,
     'wp-pic-card': true

@@ -149,3 +149,44 @@
 		width: 100%;
 	}
 }
+
+.wp-block[data-align=left],
+.wp-block[data-align=center],
+.wp-block[data-align=right],
+.wp-block[data-align=full] {
+	& > div.wp-block-plugin-info-card {
+		display: flex;
+		justify-content: flex-start;
+		flex-wrap: wrap;
+		float: none;
+		margin-right: 1em;
+	}
+}
+.wp-block[data-align=center] > div.wp-block-plugin-info-card,
+.wp-block[data-align=full] > div.wp-block-plugin-info-card {
+	justify-content: center;
+}
+.wp-block[data-align=right] > div.wp-block-plugin-info-card  {
+	justify-content: flex-end;
+}
+div[data-type="wp-plugin-info-card/wp-plugin-info-card"] .wp-block {
+	height: auto;
+}
+.wp-pic-card.wp-block-plugin-info-card > div {
+	margin-right: 1em;
+	margin-bottom: 1em;
+	&:last-child {
+		margin-right: 0;
+		margin-bottom: 0;
+	}
+}
+.is-placeholder .flex.wp-pic-wrapper.wp-pic-card {
+	margin-bottom: 1em;
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+.is-placeholder .flex.wp-pic-wrapper.wp-pic-card .wp-pic-card {
+	width: 100%;
+	margin-bottom: 1em;
+}

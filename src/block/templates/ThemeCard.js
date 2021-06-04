@@ -3,7 +3,7 @@ import classnames from 'classnames';
 const { __ } = wp.i18n;
 
 const ThemeCard = ( props ) => {
-	const wrapperClasses = classnames( `align${ props.align }`, {
+	const wrapperClasses = classnames( {
 		'wp-pic-wrapper': true,
 		'wp-pic-card': true,
 	} );

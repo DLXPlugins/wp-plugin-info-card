@@ -4,7 +4,7 @@ import isNumeric from 'validator/lib/isNumeric';
 const { __ } = wp.i18n;
 
 const PluginCard = ( props ) => {
-	const wrapperClasses = classnames( `align${ props.align }`, {
+	const wrapperClasses = classnames( {
 		'wp-pic-wrapper': true,
 		'wp-pic-card': true,
 	} );

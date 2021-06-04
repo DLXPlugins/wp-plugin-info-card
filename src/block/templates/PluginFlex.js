@@ -4,7 +4,7 @@ import BannerWrapper from '../components/BannerWrapper';
 const { __ } = wp.i18n;
 
 const PluginFlex = ( props ) => {
-	const wrapperClasses = classnames( `align${ props.align }`, {
+	const wrapperClasses = classnames( {
 		flex: true,
 		'wp-pic-wrapper': true,
 		'wp-pic-card': true,
