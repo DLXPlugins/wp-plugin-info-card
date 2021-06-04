@@ -3303,7 +3303,7 @@ var WPPluginInfoCard = function WPPluginInfoCard(props) {
   }, /*#__PURE__*/React.createElement(ToolbarItem, null, function (toolbarItemHTMLProps) {
     return /*#__PURE__*/React.createElement(DropdownMenu, {
       toggleProps: toolbarItemHTMLProps,
-      label: ('Select Color Scheme', 'wp-plugin-info-card'),
+      label: __('Select Color Scheme', 'wp-plugin-info-card'),
       icon: "admin-customizer"
     }, function (_ref2) {
       var onClose = _ref2.onClose;
@@ -3317,7 +3317,28 @@ var WPPluginInfoCard = function WPPluginInfoCard(props) {
           onClose();
         },
         value: scheme
-      }));
+      }, ">"));
+    });
+  })), /*#__PURE__*/React.createElement(Toolbar, {
+    label: "Options"
+  }, /*#__PURE__*/React.createElement(ToolbarItem, null, function (toolbarItemHTMLProps) {
+    return /*#__PURE__*/React.createElement(DropdownMenu, {
+      toggleProps: toolbarItemHTMLProps,
+      label: __('Select a Layout', 'wp-plugin-info-card'),
+      icon: "layout"
+    }, function (_ref3) {
+      var onClose = _ref3.onClose;
+      return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(MenuItemsChoice, {
+        choices: layoutOptions,
+        onSelect: function onSelect(value) {
+          setAttributes({
+            layout: value
+          });
+          setLayout(value);
+          onClose();
+        },
+        value: layout
+      }, ">"));
     });
   }))), /*#__PURE__*/React.createElement("div", {
     className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('is-placeholder', layoutClass, 'wp-block-plugin-info-card', "align".concat(align))
