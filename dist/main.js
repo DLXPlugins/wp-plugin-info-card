@@ -2994,124 +2994,130 @@ var PluginInfoCard = function PluginInfoCard(props) {
     }));
   }
 
-  return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(Fragment, null, loading && /*#__PURE__*/React.createElement(Placeholder, null, /*#__PURE__*/React.createElement("div", {
-    className: "wppic-query-block"
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("svg", {
-    version: "1.1",
-    id: "Calque_1",
-    xmlns: "http://www.w3.org/2000/svg",
-    x: "0px",
-    y: "0px",
-    width: "150px",
-    height: "150px",
-    viewBox: "0 0 850.39 850.39",
-    enableBackground: "new 0 0 850.39 850.39"
-  }, /*#__PURE__*/React.createElement("path", {
-    fill: "#DB3939",
-    d: "M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39 c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451 l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07 h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887 l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z"
-  }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, /*#__PURE__*/React.createElement("label", {
-    htmlFor: "wppic-type-select"
-  }, __('Select a Type', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement(SelectControl, {
-    options: assetType,
-    value: type,
-    onChange: function onChange(value) {
-      setAttributes({
-        type: value
-      });
-    },
-    label: __('Select a Type', 'wp-plugin-info-card')
-  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(TextControl, {
-    id: "wppic-input-slug",
-    value: slug,
-    onChange: function onChange(event) {
-      setAttributes({
-        slug: event.target.value
-      });
-    },
-    label: __('Enter a slug', 'wp-plugin-info-card')
-  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SelectControl, {
-    options: layoutOptions,
-    value: layout,
-    onChange: function onChange(value) {
-      if ('flex' === value) {
-        setAttributes({
-          layout: value,
-          align: 'full'
-        });
-        attributes.layout = value;
-        attributes.align = 'full';
-      } else {
-        setAttributes({
-          layout: value,
-          align: 'center'
-        });
-        attributes.layout = value;
-        attributes.align = 'center';
-      }
-    },
-    label: __('Select a Layout', 'wp-plugin-info-card')
-  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(CheckboxControl, {
-    checked: multi,
-    onChange: function onChange(value) {
-      attributes.multi = value;
-    },
-    label: __('Enable multiple output?', 'wp-plugin-info-card'),
-    help: __('Separate slugs by commas to show multiple items', 'wp-plugin-info-card')
-  }), /*#__PURE__*/React.createElement("p", {
-    className: "description"
-  }, __('Comma-separated slugs are outputted using multiple cards instead of shuffling by default.'))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
-    className: "button button-primary",
-    type: "submit",
+  if (cardLoading) {
+    return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", {
+      className: "wppic-loading-placeholder"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "wppic-loading"
+    }, /*#__PURE__*/React.createElement(Logo, {
+      size: "45"
+    }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
+      className: "wppic-spinner"
+    }, /*#__PURE__*/React.createElement(Spinner, null)))));
+  }
+
+  return /*#__PURE__*/React.createElement(Fragment, null, loading && /*#__PURE__*/React.createElement("div", {
+    className: "wppic-query-block wppic-query-block-panel"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-block-svg"
+  }, /*#__PURE__*/React.createElement(Logo, {
+    size: "75"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-tab-panel"
+  }, /*#__PURE__*/React.createElement(TabPanel, {
+    activeClass: "active-tab",
+    initialTabName: "slug",
+    tabs: [{
+      title: __('Type', 'wp-plugin-info-card'),
+      name: 'slug',
+      className: 'wppic-tab-slug'
+    }, {
+      title: __('Appearance', 'wp-plugin-info-card'),
+      name: 'layout',
+      className: 'wppic-tab-layout'
+    }]
+  }, function (tab) {
+    var tabContent;
+
+    if ('slug' === tab.name) {
+      tabContent = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(SelectControl, {
+        label: __('Select a Plugin or Theme', 'wp-plugin-info-card'),
+        options: assetType,
+        value: type,
+        onChange: function onChange(value) {
+          setAttributes({
+            type: value
+          });
+          setType(value);
+        }
+      }), /*#__PURE__*/React.createElement(TextControl, {
+        label: __('Plugin or Theme Slug', 'wp-plugin-info-card'),
+        value: slug,
+        onChange: function onChange(value) {
+          setAttributes({
+            slug: value
+          });
+          setSlug(value);
+        },
+        help: __('Comma separated slugs are supported.', 'wp-plugin-info-card')
+      }));
+    } else if ('layout' === tab.name) {
+      tabContent = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SelectControl, {
+        label: __('Select an initial layout', 'wp-plugin-info-card'),
+        options: layoutOptions,
+        value: layout,
+        onChange: function onChange(value) {
+          if ('flex' == value) {
+            setAttributes({
+              layout: value,
+              align: 'full'
+            });
+            setLayout(value);
+            setAlign('full');
+          } else {
+            setAttributes({
+              layout: value,
+              align: 'center'
+            });
+            setLayout(value);
+            setAlign('center');
+          }
+        }
+      }), /*#__PURE__*/React.createElement(SelectControl, {
+        label: __('Scheme', 'wp-plugin-info-card'),
+        options: schemeOptions,
+        value: scheme,
+        onChange: function onChange(value) {
+          setAttributes({
+            scheme: value
+          });
+          setScheme(value);
+        }
+      })));
+    } else {
+      tabContent = /*#__PURE__*/React.createElement(Fragment, null, "no data found");
+    }
+
+    return /*#__PURE__*/React.createElement("div", null, tabContent);
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-gutenberg-button"
+  }, /*#__PURE__*/React.createElement(Button, {
+    iconSize: 20,
+    icon: /*#__PURE__*/React.createElement(Logo, {
+      size: "25"
+    }),
+    isSecondary: true,
     id: "wppic-input-submit",
-    value: __('Go', 'wp-plugin-info-card'),
     onClick: function onClick(event) {
+      event.preventDefault();
       setAttributes({
         loading: false
       });
       pluginOnClick(event);
     }
-  })))), cardLoading && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(Placeholder, {
+  }, __('Preview and Configure', 'wp-plugin-info-card')))), cardLoading && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "wppic-loading-placeholder"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-loading"
-  }, /*#__PURE__*/React.createElement("svg", {
-    version: "1.1",
-    id: "Calque_1",
-    xmlns: "http://www.w3.org/2000/svg",
-    x: "0px",
-    y: "0px",
-    width: "40px",
-    height: "40px",
-    viewBox: "0 0 850.39 850.39",
-    enableBackground: "new 0 0 850.39 850.39"
-  }, /*#__PURE__*/React.createElement("path", {
-    fill: "#DB3939",
-    d: "M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39 c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451 l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07 h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887 l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z"
-  })), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(Logo, {
+    size: "45"
+  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
     className: "wppic-spinner"
   }, /*#__PURE__*/React.createElement(Spinner, null))))), !loading && !cardLoading && /*#__PURE__*/React.createElement(Fragment, null, inspectorControls, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(Toolbar, {
     controls: resetSelect
-  }), 'flex' == layout && /*#__PURE__*/React.createElement(BlockAlignmentToolbar, {
-    value: attributes.align,
-    onChange: function onChange(value) {
-      setAttributes({
-        align: value
-      });
-      attributes.align = value;
-      pluginOnClick(value);
-    }
-  }), 'card' == layout && /*#__PURE__*/React.createElement(AlignmentToolbar, {
-    value: attributes.align,
-    onChange: function onChange(value) {
-      setAttributes({
-        align: value
-      });
-      attributes.align = value;
-      pluginOnClick(value);
-    }
   })), /*#__PURE__*/React.createElement("div", {
-    className: '' != width ? 'wp-pic-full-width' : ''
-  }, htmlToReactParser.parse(html)))));
+    className: classnames('is-placeholder', layoutClass, 'wp-block-plugin-info-card', "align".concat(align))
+  }, outputInfoCards(data))));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PluginInfoCard);

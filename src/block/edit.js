@@ -278,192 +278,196 @@ const PluginInfoCard = ( props ) => {
 			</Fragment>
 		);
 	}
+
+	if ( cardLoading ) {
+		return (
+			<Fragment>
+				<div className="wppic-loading-placeholder">
+					<div className="wppic-loading">
+						<Logo size="45" />
+						<br />
+						<div className="wppic-spinner">
+							<Spinner />
+						</div>
+					</div>
+				</div>
+			</Fragment>
+		);
+	}
 	return (
 		<Fragment>
-			<Fragment>
-				{ loading && (
-					<Placeholder>
-						<div className="wppic-query-block">
-							<div>
-								<svg
-									version="1.1"
-									id="Calque_1"
-									xmlns="http://www.w3.org/2000/svg"
-									x="0px"
-									y="0px"
-									width="150px"
-									height="150px"
-									viewBox="0 0 850.39 850.39"
-									enableBackground="new 0 0 850.39 850.39"
-								>
-									<path
-										fill="#DB3939"
-										d="M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39
-								c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451
-								l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07
-								h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887
-								l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z"
-									/>
-								</svg>
-							</div>
-							<div>
-								<h3>
-									<label htmlFor="wppic-type-select">
-										{ __(
-											'Select a Type',
-											'wp-plugin-info-card'
-										) }
-									</label>
-								</h3>
-								<SelectControl
-									options={ assetType }
-									value={ type }
-									onChange={ ( value ) => {
-										setAttributes( {
-											type: value,
-										} );
-									} }
-									label={ __( 'Select a Type', 'wp-plugin-info-card' ) }
-								/>
-							</div>
-							<div>
-								<TextControl
-									id="wppic-input-slug"
-									value={ slug }
-									onChange={ ( event ) => {
-										setAttributes( {
-											slug: event.target.value,
-										} );
-									} }
-									label={ __( 'Enter a slug', 'wp-plugin-info-card' ) }
-								/>
-							</div>
-							<div>
-								<SelectControl
-									options={ layoutOptions }
-									value={ layout }
-									onChange={ ( value ) => {
-										if ( 'flex' === value ) {
-											setAttributes( {
-												layout: value,
-												align: 'full',
-											} );
-											attributes.layout = value;
-											attributes.align = 'full';
-										} else {
-											setAttributes( {
-												layout: value,
-												align: 'center',
-											} );
-											attributes.layout = value;
-											attributes.align = 'center';
-										}
-									} }
-									label={ __( 'Select a Layout', 'wp-plugin-info-card' ) }
-								/>
-							</div>
-							<div>
-								<CheckboxControl
-									checked={ multi }
-									onChange={ ( value ) => {
-										attributes.multi = value;
-									} }
-									label={ __(
-										'Enable multiple output?',
+			{ loading && (
+				<div className="wppic-query-block wppic-query-block-panel">
+					<div className="wppic-block-svg">
+						<Logo size="75" />
+					</div>
+					<div className="wp-pic-tab-panel">
+						<TabPanel
+							activeClass="active-tab"
+							initialTabName="slug"
+							tabs={ [
+								{
+									title: __( 'Type', 'wp-plugin-info-card' ),
+									name: 'slug',
+									className: 'wppic-tab-slug',
+								},
+								{
+									title: __(
+										'Appearance',
 										'wp-plugin-info-card'
-									) }
-									help={ __(
-										'Separate slugs by commas to show multiple items',
-										'wp-plugin-info-card'
-									) }
-								/>
-								<p className="description">
-									{ __(
-										'Comma-separated slugs are outputted using multiple cards instead of shuffling by default.'
-									) }
-								</p>
-							</div>
-							<div>
-								<input
-									className="button button-primary"
-									type="submit"
-									id="wppic-input-submit"
-									value={ __( 'Go', 'wp-plugin-info-card' ) }
-									onClick={ ( event ) => {
-										setAttributes( { loading: false } );
-										pluginOnClick( event );
-									} }
-								/>
-							</div>
-						</div>
-					</Placeholder>
-				) }
-				{ cardLoading && (
-					<Fragment>
-						<Placeholder className="wppic-loading-placeholder">
-							<div className="wppic-loading">
-								<svg
-									version="1.1"
-									id="Calque_1"
-									xmlns="http://www.w3.org/2000/svg"
-									x="0px"
-									y="0px"
-									width="40px"
-									height="40px"
-									viewBox="0 0 850.39 850.39"
-									enableBackground="new 0 0 850.39 850.39"
-								>
-									<path
-										fill="#DB3939"
-										d="M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39
-							c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451
-							l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07
-							h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887
-							l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z"
-									/>
-								</svg>
-								<br />
-								<div className="wppic-spinner">
-									<Spinner />
-								</div>
-							</div>
-						</Placeholder>
-					</Fragment>
-				) }
-				{ ! loading && ! cardLoading && (
-					<Fragment>
-						{ inspectorControls }
-						<BlockControls>
-							<Toolbar controls={ resetSelect } />
-							{ 'flex' == layout && (
-								<BlockAlignmentToolbar
-									value={ attributes.align }
-									onChange={ ( value ) => {
-										setAttributes( { align: value } );
-										attributes.align = value;
-										pluginOnClick( value );
-									} }
-								></BlockAlignmentToolbar>
-							) }
-							{ 'card' == layout && (
-								<AlignmentToolbar
-									value={ attributes.align }
-									onChange={ ( value ) => {
-										setAttributes( { align: value } );
-										attributes.align = value;
-										pluginOnClick( value );
-									} }
-								></AlignmentToolbar>
-							) }
-						</BlockControls>
-						<div
-							className={ '' != width ? 'wp-pic-full-width' : '' }
+									),
+									name: 'layout',
+									className: 'wppic-tab-layout',
+								},
+							] }
 						>
-							{ htmlToReactParser.parse( html ) }
+							{ ( tab ) => {
+								let tabContent;
+								if ( 'slug' === tab.name ) {
+									tabContent = (
+										<Fragment>
+											<SelectControl
+												label={ __(
+													'Select a Plugin or Theme',
+													'wp-plugin-info-card'
+												) }
+												options={ assetType }
+												value={ type }
+												onChange={ ( value ) => {
+													setAttributes( {
+														type: value,
+													} );
+													setType( value );
+												} }
+											/>
+											<TextControl
+												label={ __(
+													'Plugin or Theme Slug',
+													'wp-plugin-info-card'
+												) }
+												value={ slug }
+												onChange={ ( value ) => {
+													setAttributes( {
+														slug: value,
+													} );
+													setSlug( value );
+												} }
+												help={ __(
+													'Comma separated slugs are supported.',
+													'wp-plugin-info-card'
+												) }
+											/>
+										</Fragment>
+									);
+								} else if ( 'layout' === tab.name ) {
+									tabContent = (
+										<Fragment>
+											<div>
+												<SelectControl
+													label={ __(
+														'Select an initial layout',
+														'wp-plugin-info-card'
+													) }
+													options={ layoutOptions }
+													value={ layout }
+													onChange={ ( value ) => {
+														if ( 'flex' == value ) {
+															setAttributes( {
+																layout: value,
+																align: 'full',
+															} );
+															setLayout( value );
+															setAlign( 'full' );
+														} else {
+															setAttributes( {
+																layout: value,
+																align: 'center',
+															} );
+															setLayout( value );
+															setAlign(
+																'center'
+															);
+														}
+													} }
+												/>
+
+												<SelectControl
+													label={ __(
+														'Scheme',
+														'wp-plugin-info-card'
+													) }
+													options={ schemeOptions }
+													value={ scheme }
+													onChange={ ( value ) => {
+														setAttributes( {
+															scheme: value,
+														} );
+														setScheme( value );
+													} }
+												/>
+											</div>
+										</Fragment>
+									);
+								} else {
+									tabContent = (
+										<Fragment>no data found</Fragment>
+									);
+								}
+								return <div>{ tabContent }</div>;
+							} }
+						</TabPanel>
+					</div>
+					<div className="wp-pic-gutenberg-button">
+						<Button
+							iconSize={ 20 }
+							icon={ <Logo size="25" /> }
+							isSecondary
+							id="wppic-input-submit"
+							onClick={ ( event ) => {
+								event.preventDefault();
+								setAttributes( { loading: false } );
+								pluginOnClick( event );
+							} }
+						>
+							{ __(
+								'Preview and Configure',
+								'wp-plugin-info-card'
+							) }
+						</Button>
+					</div>
+				</div>
+			) }
+			{ cardLoading && (
+				<Fragment>
+					<div className="wppic-loading-placeholder">
+						<div className="wppic-loading">
+							<Logo size="45" />
+							<br />
+							<div className="wppic-spinner">
+								<Spinner />
+							</div>
 						</div>
-					</Fragment>
-				) }
-			</Fragment>
+					</div>
+				</Fragment>
+			) }
+			{ ! loading && ! cardLoading && (
+				<Fragment>
+					{ inspectorControls }
+					<BlockControls>
+						<Toolbar controls={ resetSelect } />
+					</BlockControls>
+					<div
+						className={ classnames(
+							'is-placeholder',
+							layoutClass,
+							'wp-block-plugin-info-card',
+							`align${ align }`
+						) }
+					>
+						{ outputInfoCards( data ) }
+					</div>
+				</Fragment>
+			) }
 		</Fragment>
 	);
 };
