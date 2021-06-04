@@ -2690,9 +2690,9 @@ var _wp$components = wp.components,
     Placeholder = _wp$components.Placeholder,
     SelectControl = _wp$components.SelectControl,
     Spinner = _wp$components.Spinner,
-    TextControl = _wp$components.TextControl,
     Toolbar = _wp$components.Toolbar,
-    CheckboxControl = _wp$components.CheckboxControl;
+    CheckboxControl = _wp$components.CheckboxControl,
+    TextControl = _wp$components.TextControl;
 var _wp$blockEditor = wp.blockEditor,
     InspectorControls = _wp$blockEditor.InspectorControls,
     BlockControls = _wp$blockEditor.BlockControls,
@@ -2704,7 +2704,7 @@ var PluginInfoCard = function PluginInfoCard(props) {
   var attributes = props.attributes,
       setAttributes = props.setAttributes; // State.
 
-  var _useState = useState(attributes.loading),
+  var _useState = useState(true),
       _useState2 = _slicedToArray(_useState, 2),
       loading = _useState2[0],
       setLoading = _useState2[1];
@@ -3018,19 +3018,18 @@ var PluginInfoCard = function PluginInfoCard(props) {
       setAttributes({
         type: value
       });
-    }
-  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, /*#__PURE__*/React.createElement("label", {
-    htmlFor: "wppic-input-slug"
-  }, __('Enter a slug', 'wp-plugin-info-card')))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
-    type: "text",
+    },
+    label: __('Select a Type', 'wp-plugin-info-card')
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(TextControl, {
     id: "wppic-input-slug",
     value: slug,
     onChange: function onChange(event) {
       setAttributes({
         slug: event.target.value
       });
-    }
-  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, /*#__PURE__*/React.createElement("label", null, __('Select a Layout', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement(SelectControl, {
+    },
+    label: __('Enter a slug', 'wp-plugin-info-card')
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SelectControl, {
     options: layoutOptions,
     value: layout,
     onChange: function onChange(value) {
@@ -3049,14 +3048,18 @@ var PluginInfoCard = function PluginInfoCard(props) {
         attributes.layout = value;
         attributes.align = 'center';
       }
-    }
-  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, /*#__PURE__*/React.createElement("label", null, __('Enable multiple output?', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement(CheckboxControl, {
+    },
+    label: __('Select a Layout', 'wp-plugin-info-card')
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(CheckboxControl, {
     checked: multi,
     onChange: function onChange(value) {
       attributes.multi = value;
     },
+    label: __('Enable multiple output?', 'wp-plugin-info-card'),
     help: __('Separate slugs by commas to show multiple items', 'wp-plugin-info-card')
-  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
+  }), /*#__PURE__*/React.createElement("p", {
+    className: "description"
+  }, __('Comma-separated slugs are outputted using multiple cards instead of shuffling by default.'))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
     className: "button button-primary",
     type: "submit",
     id: "wppic-input-submit",

@@ -12,9 +12,9 @@ const {
 	Placeholder,
 	SelectControl,
 	Spinner,
-	TextControl,
 	Toolbar,
 	CheckboxControl,
+	TextControl,
 } = wp.components;
 
 const {
@@ -29,7 +29,7 @@ const PluginInfoCard = ( props ) => {
 	const { attributes, setAttributes } = props;
 
 	// State.
-	const [ loading, setLoading ] = useState( attributes.loading );
+	const [ loading, setLoading ] = useState( true );
 	const [ cardLoading, setCardLoading ] = useState( false );
 
 	const {
@@ -323,21 +323,11 @@ const PluginInfoCard = ( props ) => {
 											type: value,
 										} );
 									} }
+									label={ __( 'Select a Type', 'wp-plugin-info-card' ) }
 								/>
 							</div>
 							<div>
-								<h3>
-									<label htmlFor="wppic-input-slug">
-										{ __(
-											'Enter a slug',
-											'wp-plugin-info-card'
-										) }
-									</label>
-								</h3>
-							</div>
-							<div>
-								<input
-									type="text"
+								<TextControl
 									id="wppic-input-slug"
 									value={ slug }
 									onChange={ ( event ) => {
@@ -345,17 +335,10 @@ const PluginInfoCard = ( props ) => {
 											slug: event.target.value,
 										} );
 									} }
+									label={ __( 'Enter a slug', 'wp-plugin-info-card' ) }
 								/>
 							</div>
 							<div>
-								<h3>
-									<label>
-										{ __(
-											'Select a Layout',
-											'wp-plugin-info-card'
-										) }
-									</label>
-								</h3>
 								<SelectControl
 									options={ layoutOptions }
 									value={ layout }
@@ -376,27 +359,29 @@ const PluginInfoCard = ( props ) => {
 											attributes.align = 'center';
 										}
 									} }
+									label={ __( 'Select a Layout', 'wp-plugin-info-card' ) }
 								/>
 							</div>
 							<div>
-								<h3>
-									<label>
-										{ __(
-											'Enable multiple output?',
-											'wp-plugin-info-card'
-										) }
-									</label>
-								</h3>
 								<CheckboxControl
 									checked={ multi }
 									onChange={ ( value ) => {
 										attributes.multi = value;
 									} }
+									label={ __(
+										'Enable multiple output?',
+										'wp-plugin-info-card'
+									) }
 									help={ __(
 										'Separate slugs by commas to show multiple items',
 										'wp-plugin-info-card'
 									) }
 								/>
+								<p className="description">
+									{ __(
+										'Comma-separated slugs are outputted using multiple cards instead of shuffling by default.'
+									) }
+								</p>
 							</div>
 							<div>
 								<input
