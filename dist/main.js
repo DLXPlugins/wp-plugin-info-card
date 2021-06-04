@@ -2951,8 +2951,10 @@ var WPPluginInfoCard = function WPPluginInfoCard(props) {
   }, []);
 
   var outputInfoCards = function outputInfoCards(cardDataArray) {
-    return cardDataArray.map(function (cardData) {
-      return /*#__PURE__*/React.createElement(Fragment, null, 'flex' === layout && 'plugin' === type && /*#__PURE__*/React.createElement(_templates_PluginFlex__WEBPACK_IMPORTED_MODULE_2__.default, {
+    return cardDataArray.map(function (cardData, key) {
+      return /*#__PURE__*/React.createElement(Fragment, {
+        key: key
+      }, 'flex' === layout && 'plugin' === type && /*#__PURE__*/React.createElement(_templates_PluginFlex__WEBPACK_IMPORTED_MODULE_2__.default, {
         scheme: scheme,
         image: image,
         data: cardData,

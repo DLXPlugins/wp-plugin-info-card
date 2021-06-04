@@ -91,9 +91,9 @@ const WPPluginInfoCard = ( props ) => {
 	}, [] );
 
 	const outputInfoCards = ( cardDataArray ) => {
-		return cardDataArray.map( ( cardData ) => {
+		return cardDataArray.map( ( cardData, key ) => {
 			return (
-				<Fragment>
+				<Fragment key={ key }>
 					{ 'flex' === layout && 'plugin' === type && (
 						<PluginFlex
 							scheme={ scheme }
