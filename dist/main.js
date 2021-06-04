@@ -2839,14 +2839,21 @@ var _wp$components = wp.components,
     Spinner = _wp$components.Spinner,
     TextControl = _wp$components.TextControl,
     Toolbar = _wp$components.Toolbar,
+    ToolbarGroup = _wp$components.ToolbarGroup,
+    ToolbarItem = _wp$components.ToolbarItem,
+    ToolbarDropdownMenu = _wp$components.ToolbarDropdownMenu,
+    DropdownMenu = _wp$components.DropdownMenu,
     CheckboxControl = _wp$components.CheckboxControl,
     TabPanel = _wp$components.TabPanel,
-    Button = _wp$components.Button;
+    Button = _wp$components.Button,
+    MenuGroup = _wp$components.MenuGroup,
+    MenuItemsChoice = _wp$components.MenuItemsChoice,
+    MenuItem = _wp$components.MenuItem;
 var _wp$blockEditor = wp.blockEditor,
     InspectorControls = _wp$blockEditor.InspectorControls,
-    BlockControls = _wp$blockEditor.BlockControls,
     BlockAlignmentToolbar = _wp$blockEditor.BlockAlignmentToolbar,
-    MediaUpload = _wp$blockEditor.MediaUpload;
+    MediaUpload = _wp$blockEditor.MediaUpload,
+    BlockControls = _wp$blockEditor.BlockControls;
 
 var WPPluginInfoCard = function WPPluginInfoCard(props) {
   var attributes = props.attributes,
@@ -3066,6 +3073,11 @@ var WPPluginInfoCard = function WPPluginInfoCard(props) {
     value: 'scheme14',
     label: __('Scheme 14', 'wp-plugin-info-card')
   }];
+  var headingOptions = [[{
+    title: __('Heading 1', 'kadence-blocks')
+  }], [{
+    title: __('Heading 2', 'kadence-blocks')
+  }]];
   var layoutOptions = [{
     value: 'card',
     label: __('Card', 'wp-plugin-info-card')
@@ -3286,7 +3298,28 @@ var WPPluginInfoCard = function WPPluginInfoCard(props) {
     className: "wppic-spinner"
   }, /*#__PURE__*/React.createElement(Spinner, null))))), !loading && !cardLoading && /*#__PURE__*/React.createElement(Fragment, null, inspectorControls, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(Toolbar, {
     controls: resetSelect
-  })), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement(Toolbar, {
+    label: "Options"
+  }, /*#__PURE__*/React.createElement(ToolbarItem, null, function (toolbarItemHTMLProps) {
+    return /*#__PURE__*/React.createElement(DropdownMenu, {
+      toggleProps: toolbarItemHTMLProps,
+      label: ('Select Color Scheme', 'wp-plugin-info-card'),
+      icon: "admin-customizer"
+    }, function (_ref2) {
+      var onClose = _ref2.onClose;
+      return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(MenuItemsChoice, {
+        choices: schemeOptions,
+        onSelect: function onSelect(value) {
+          setAttributes({
+            scheme: value
+          });
+          setScheme(value);
+          onClose();
+        },
+        value: scheme
+      }));
+    });
+  }))), /*#__PURE__*/React.createElement("div", {
     className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('is-placeholder', layoutClass, 'wp-block-plugin-info-card', "align".concat(align))
   }, outputInfoCards(data))));
 };
