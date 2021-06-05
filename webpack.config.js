@@ -65,15 +65,13 @@ module.exports = [
 		optimization: {
 			// Only concatenate modules in production, when not analyzing bundles.
 			concatenateModules: false,
+			minimize: true,
 			minimizer: [
 				new TerserPlugin( {
-					parallel: true,
 					terserOptions: {
 						mangle: {
 							reserved: [ '__', '_n', '_nx', '_x' ],
 						},
-						keep_fnames: true,
-						keep_classnames: true,
 					},
 				} ),
 			],
