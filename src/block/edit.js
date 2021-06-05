@@ -1,391 +1,562 @@
+/* eslint-disable react/jsx-key */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+/* eslint-disable camelcase */
 /**
  * External dependencies
  */
-import axios from 'axios';
-const HtmlToReactParser = require( 'html-to-react' ).Parser;
-const { Component, Fragment } = wp.element;
+import axios from "axios";
+import classnames from "classnames";
+import PluginFlex from "./templates/PluginFlex";
+import PluginCard from "./templates/PluginCard";
+import PluginLarge from "./templates/PluginLarge";
+import PluginWordPress from "./templates/PluginWordPress";
+import ThemeFlex from "./templates/ThemeFlex";
+import ThemeWordPress from "./templates/ThemeWordPress";
+import ThemeLarge from "./templates/ThemeLarge";
+import ThemeCard from "./templates/ThemeCard";
+import Logo from "./Logo";
+const { Fragment, useEffect, useState } = wp.element;
 
 const { __ } = wp.i18n;
 
 const {
 	PanelBody,
-	Placeholder,
+	PanelRow,
 	SelectControl,
 	Spinner,
 	TextControl,
 	Toolbar,
+	ToolbarGroup,
+	ToolbarButton,
+	ToolbarItem,
+	ToolbarDropdownMenu,
+	DropdownMenu,
 	CheckboxControl,
+	TabPanel,
+	Button,
+	MenuGroup,
+	MenuItemsChoice,
+	MenuItem,
 } = wp.components;
 
 const {
 	InspectorControls,
-	BlockControls,
 	BlockAlignmentToolbar,
 	MediaUpload,
-	AlignmentToolbar,
+	BlockControls,
 } = wp.blockEditor;
 
-class WP_Plugin_Card extends Component {
-	constructor() {
-		super( ...arguments );
-		this.state = {
-			type: this.props.attributes.type,
-			slug: this.props.attributes.slug,
-			loading: this.props.attributes.loading,
-			card_loading: false,
-			html: this.props.attributes.html,
-			image: this.props.attributes.image,
-			containerid: this.props.attributes.containerid,
-			margin: this.props.attributes.margin,
-			clear: this.props.attributes.clear,
-			expiration: this.props.attributes.expiration,
-			ajax: this.props.attributes.ajax,
-			scheme: this.props.attributes.scheme,
-			layout: this.props.attributes.layout,
-			width: this.props.attributes.width,
-			multi: this.props.attributes.multi,
-		};
-	}
+const WPPluginInfoCard = (props) => {
+	const { attributes, setAttributes } = props;
 
-	slugChange = ( event ) => {
-		this.setState( {
-			slug: event.target.value,
-		} );
-	}
+	const [type, setType] = useState(attributes.type);
+	const [slug, setSlug] = useState(attributes.slug);
+	const [loading, setLoading] = useState(false);
+	const [cardLoading, setCardLoading] = useState(false);
+	const [image, setImage] = useState(attributes.image);
+	const [containerid, setContainerid] = useState(attributes.containerid);
+	const [scheme, setScheme] = useState(attributes.scheme);
+	const [layout, setLayout] = useState(attributes.layout);
+	const [multi, setMulti] = useState(true);
+	const [preview, setPreview] = useState(false);
+	const [data, setData] = useState(attributes.assetData);
+	const [align, setAlign] = useState(attributes.align);
 
-	typeChange = ( event ) => {
-		this.setState( {
-			type: event.target.value,
-		} );
-	}
-
-	pluginOnClick = ( event ) => {
-		if ( '' !== this.state.type && '' !== this.state.slug ) {
-			this.setState( {
-				loading: false,
-			} );
-			this.setState(
-				{
-					card_loading: true,
-				}
-			);
-			const restUrl = wppic.rest_url + 'wppic/v1/get_html/';
-			axios.get( restUrl + `?type=${ this.props.attributes.type }&slug=${ this.props.attributes.slug }&align=${ this.props.attributes.align }&image=${ this.props.attributes.image }&containerid=${ this.props.attributes.containerid }&margin=${ this.props.attributes.margin }&clear=${ this.props.attributes.clear }&expiration=${ this.props.attributes.expiration }&ajax=${ this.props.attributes.ajax }&scheme=${ this.props.attributes.scheme }&layout=${ this.props.attributes.layout }&multi=${ this.props.attributes.multi }` ).then( ( response ) => {
+	const loadData = () => {
+		setLoading(false);
+		setCardLoading(true);
+		const restUrl = wppic.rest_url + "wppic/v2/get_data";
+		axios
+			.get(restUrl + `?type=${type}&slug=${encodeURIComponent(slug)}`)
+			.then((response) => {
 				// Now Set State
-				this.setState( {
-					card_loading: false,
-					html: response.data,
-				} );
-				this.props.setAttributes( { html: response.data } );
-			} );
+				setData(response.data.data);
+				setAttributes({ assetData: response.data.data });
+				setCardLoading(false);
+			});
+	};
+	const pluginOnClick = (assetSlug, assetType) => {
+		loadData();
+	};
+	useEffect(() => {
+		if ( ! data || 0 === data.length ) {
+			loadData();
 		}
-	}
+		setImage(attributes.image);
+		setLayout(attributes.layout);
+		setLoading(attributes.loading);
+		setType(attributes.type);
+		setSlug(attributes.slug);
+	}, []);
 
-	render() {
-		const { attributes } = this.props;
-		const { image, containerid, margin, clear, expiration, ajax, scheme, layout, width, preview, multi } = attributes;
-		const htmlToReactParser = new HtmlToReactParser();
+	const outputInfoCards = (cardDataArray) => {
+		return cardDataArray.map((cardData, key) => {
+			return (
+				<Fragment key={key}>
+					{"flex" === layout && "plugin" === type && (
+						<PluginFlex
+							scheme={scheme}
+							image={image}
+							data={cardData}
+							align={align}
+						/>
+					)}
+					{"card" === layout && "plugin" === type && (
+						<PluginCard
+							scheme={scheme}
+							image={image}
+							data={cardData}
+							align={align}
+						/>
+					)}
+					{"large" === layout && "plugin" === type && (
+						<PluginLarge
+							scheme={scheme}
+							image={image}
+							data={cardData}
+							align={align}
+						/>
+					)}
+					{"wordpress" === layout && "plugin" === type && (
+						<PluginWordPress
+							scheme={scheme}
+							image={image}
+							data={cardData}
+							align={align}
+						/>
+					)}
+					{"flex" === layout && "theme" === type && (
+						<ThemeFlex
+							scheme={scheme}
+							image={image}
+							data={cardData}
+							align={align}
+						/>
+					)}
+					{"wordpress" === layout && "theme" === type && (
+						<ThemeWordPress
+							scheme={scheme}
+							image={image}
+							data={cardData}
+							align={align}
+						/>
+					)}
+					{"large" === layout && "theme" === type && (
+						<ThemeLarge
+							scheme={scheme}
+							image={image}
+							data={cardData}
+							align={align}
+						/>
+					)}
+					{"card" === layout && "theme" === type && (
+						<ThemeCard
+							scheme={scheme}
+							image={image}
+							data={cardData}
+							align={align}
+						/>
+					)}
+				</Fragment>
+			);
+		});
+	};
 
-		const resetSelect = [
-			{
-				icon: 'edit',
-				title: __( 'Reset', 'wp-plugin-info-card' ),
-				onClick: () => this.setState( { loading: true } ),
-			},
-		];
-		const assetType = [
-			{ value: 'plugin', label: __( 'Plugin', 'wp-plugin-info-card' ) },
-			{ value: 'theme', label: __( 'Theme', 'wp-plugin-info-card' ) },
-		];
-		const clearOptions = [
-			{ value: 'none', label: __( 'None', 'wp-plugin-info-card' ) },
-			{ value: 'before', label: __( 'Before', 'wp-plugin-info-card' ) },
-			{ value: 'after', label: __( 'After', 'wp-plugin-info-card' ) },
-		];
-		const ajaxOptions = [
-			{ value: 'false', label: __( 'No', 'wp-plugin-info-card' ) },
-			{ value: 'true', label: __( 'Yes', 'wp-plugin-info-card' ) },
-		];
-		const schemeOptions = [
-			{ value: 'default', label: __( 'Default', 'wp-plugin-info-card' ) },
-			{ value: 'scheme1', label: __( 'Scheme 1', 'wp-plugin-info-card' ) },
-			{ value: 'scheme2', label: __( 'Scheme 2', 'wp-plugin-info-card' ) },
-			{ value: 'scheme3', label: __( 'Scheme 3', 'wp-plugin-info-card' ) },
-			{ value: 'scheme4', label: __( 'Scheme 4', 'wp-plugin-info-card' ) },
-			{ value: 'scheme5', label: __( 'Scheme 5', 'wp-plugin-info-card' ) },
-			{ value: 'scheme6', label: __( 'Scheme 6', 'wp-plugin-info-card' ) },
-			{ value: 'scheme7', label: __( 'Scheme 7', 'wp-plugin-info-card' ) },
-			{ value: 'scheme8', label: __( 'Scheme 8', 'wp-plugin-info-card' ) },
-			{ value: 'scheme9', label: __( 'Scheme 9', 'wp-plugin-info-card' ) },
-			{ value: 'scheme10', label: __( 'Scheme 10', 'wp-plugin-info-card' ) },
-			{ value: 'scheme11', label: __( 'Scheme 11', 'wp-plugin-info-card' ) },
-			{ value: 'scheme12', label: __( 'Scheme 12', 'wp-plugin-info-card' ) },
-			{ value: 'scheme13', label: __( 'Scheme 13', 'wp-plugin-info-card' ) },
-			{ value: 'scheme14', label: __( 'Scheme 14', 'wp-plugin-info-card' ) },
-		];
-		const layoutOptions = [
-			{ value: 'card', label: __( 'Card', 'wp-plugin-info-card' ) },
-			{ value: 'large', label: __( 'Large', 'wp-plugin-info-card' ) },
-			{ value: 'wordpress', label: __( 'WordPress', 'wp-plugin-info-card' ) },
-			{ value: 'flex', label: __( 'Flex', 'wp-plugin-info-card' ) },
-		];
-		const widthOptions = [
-			{ value: 'none', label: __( 'Default', 'wp-plugin-info-card' ) },
-			{ value: 'full', label: __( 'Full Width', 'wp-plugin-info-card' ) },
-		];
-		const pluginOnClick = this.pluginOnClick;
-		const inspectorControls = (
-			<InspectorControls>
-				<PanelBody title={ __( 'WP Plugin Info Card', 'wp-plugin-info-card' ) }>
+	const resetSelect = [
+		{
+			icon: "edit",
+			title: __("Edit and Configure", "wp-plugin-info-card"),
+			onClick: () => setLoading(true),
+		},
+	];
+	const assetType = [
+		{ value: "plugin", label: __("Plugin", "wp-plugin-info-card") },
+		{ value: "theme", label: __("Theme", "wp-plugin-info-card") },
+	];
+	const clearOptions = [
+		{ value: "none", label: __("None", "wp-plugin-info-card") },
+		{ value: "before", label: __("Before", "wp-plugin-info-card") },
+		{ value: "after", label: __("After", "wp-plugin-info-card") },
+	];
+	const ajaxOptions = [
+		{ value: "false", label: __("No", "wp-plugin-info-card") },
+		{ value: "true", label: __("Yes", "wp-plugin-info-card") },
+	];
+	const schemeOptions = [
+		{ value: "default", label: __("Default", "wp-plugin-info-card") },
+		{ value: "scheme1", label: __("Scheme 1", "wp-plugin-info-card") },
+		{ value: "scheme2", label: __("Scheme 2", "wp-plugin-info-card") },
+		{ value: "scheme3", label: __("Scheme 3", "wp-plugin-info-card") },
+		{ value: "scheme4", label: __("Scheme 4", "wp-plugin-info-card") },
+		{ value: "scheme5", label: __("Scheme 5", "wp-plugin-info-card") },
+		{ value: "scheme6", label: __("Scheme 6", "wp-plugin-info-card") },
+		{ value: "scheme7", label: __("Scheme 7", "wp-plugin-info-card") },
+		{ value: "scheme8", label: __("Scheme 8", "wp-plugin-info-card") },
+		{ value: "scheme9", label: __("Scheme 9", "wp-plugin-info-card") },
+		{ value: "scheme10", label: __("Scheme 10", "wp-plugin-info-card") },
+		{ value: "scheme11", label: __("Scheme 11", "wp-plugin-info-card") },
+		{ value: "scheme12", label: __("Scheme 12", "wp-plugin-info-card") },
+		{ value: "scheme13", label: __("Scheme 13", "wp-plugin-info-card") },
+		{ value: "scheme14", label: __("Scheme 14", "wp-plugin-info-card") },
+	];
+
+	const layoutOptions = [
+		{ value: "card", label: __("Card", "wp-plugin-info-card") },
+		{ value: "large", label: __("Large", "wp-plugin-info-card") },
+		{ value: "wordpress", label: __("WordPress", "wp-plugin-info-card") },
+		{ value: "flex", label: __("Flex", "wp-plugin-info-card") },
+	];
+
+	const layoutClass = "card" === layout ? "wp-pic-card" : layout;
+	const previewLoadingClass = cardLoading ? "wp-pic-spin" : "";
+
+	const inspectorControls = (
+		<InspectorControls>
+			<PanelBody title={__("Layout", "wp-plugin-info-card")}>
+				<PanelRow>
 					<SelectControl
-						label={ __( 'Scheme', 'wp-plugin-info-card' ) }
-						options={ schemeOptions }
-						value={ scheme }
-						onChange={ ( value ) => {
-							this.props.setAttributes( { scheme: value } ); this.props.attributes.scheme = value; this.setState( { scheme: value } ); this.pluginOnClick( value );
-						} }
+						label={__("Scheme", "wp-plugin-info-card")}
+						options={schemeOptions}
+						value={scheme}
+						onChange={(value) => {
+							setAttributes({ scheme: value });
+							setScheme(value);
+						}}
 					/>
+				</PanelRow>
+				<PanelRow>
 					<SelectControl
-						label={ __( 'Layout', 'wp-plugin-info-card' ) }
-						options={ layoutOptions }
-						value={ layout }
-						onChange={ ( value ) => {
-							if ( 'flex' == value ) {
-								this.props.setAttributes( { layout: value, align: 'full' } );
-								this.props.attributes.layout = value;
-								this.props.attributes.align = 'full';
-								this.setState( { layout: value, align: 'full' } );
-								this.pluginOnClick( value );
+						label={__("Layout", "wp-plugin-info-card")}
+						options={layoutOptions}
+						value={layout}
+						onChange={(value) => {
+							if ("flex" === value) {
+								setAttributes({
+									layout: value,
+									align: "full",
+								});
+								setLayout(value);
+								setAlign("full");
 							} else {
-								this.props.setAttributes( { layout: value, align: 'center' } );
-								this.props.attributes.layout = value;
-								this.props.attributes.align = 'center';
-								this.setState( { layout: value, align: 'center' } );
-								this.pluginOnClick( value );
+								setAttributes({
+									layout: value,
+									align: "center",
+								});
+								setLayout(value);
+								setAlign("center");
 							}
-						} }
+						}}
 					/>
-					<SelectControl
-						label={ __( 'Width', 'wp-plugin-info-card' ) }
-						options={ widthOptions }
-						value={ width }
-						onChange={ ( value ) => {
-							this.props.setAttributes( { width: value } ); this.props.attributes.width = value; this.setState( { width: value } );
-						} }
-					/>
+				</PanelRow>
+			</PanelBody>
+			<PanelBody
+				title={__("Options", "wp-plugin-info-card")}
+				initialOpen={false}
+			>
+				<PanelRow>
 					<MediaUpload
-						onSelect={ ( imageObject ) => {
-							this.props.setAttributes( { image: imageObject.url } ); this.props.attributes.image = imageObject.url; this.setState( { image: imageObject.url } ); this.pluginOnClick( imageObject );
-						} }
+						onSelect={(imageObject) => {
+							setAttributes({ image: imageObject.url });
+							setImage(imageObject.url);
+						}}
 						type="image"
-						value={ image }
-						render={ ( { open } ) => (
+						value={image}
+						render={({ open }) => (
 							<Fragment>
-								<button className="components-button is-button" onClick={ open }>
-									{ __( 'Upload Image!', 'wp-plugin-info-card' ) }
+								<button className="components-button is-button" onClick={open}>
+									{__("Upload Image!", "wp-plugin-info-card")}
 								</button>
-								{ image &&
+								{image && (
 									<Fragment>
 										<div>
-											<img src={ image } alt={ __( 'Plugin Card Image', 'wp-plugin-info-card' ) } width="250" height="250" />
+											<img
+												src={image}
+												alt={__("Plugin Card Image", "wp-plugin-info-card")}
+												width="250"
+												height="250"
+											/>
 										</div>
 										<div>
-											<button className="components-button is-button" onClick={ ( event ) => {
-												this.props.setAttributes( { image: '' } ); this.props.attributes.image = ''; this.setState( { image: '' } ); this.pluginOnClick( event );
-											} }>
-												{ __( 'Reset Image', 'wp-plugin-info-card' ) }
+											<button
+												className="components-button is-button"
+												onClick={(event) => {
+													setAttributes({
+														image: "",
+													});
+													setImage("");
+												}}
+											>
+												{__("Reset Image", "wp-plugin-info-card")}
 											</button>
 										</div>
 									</Fragment>
-								}
+								)}
 							</Fragment>
-						) }
+						)}
 					/>
+				</PanelRow>
+				<PanelRow>
 					<TextControl
-						label={ __( 'Container ID', 'wp-plugin-info-card' ) }
+						label={__("Container ID", "wp-plugin-info-card")}
 						type="text"
-						value={ containerid }
-						onChange={ ( value ) => {
-							this.props.setAttributes( { containerid: value } ); this.props.attributes.containerid = value; this.setState( { containerid: value } ); setTimeout( function() {
-								pluginOnClick( value );
-							}, 5000 );
-						} }
+						value={containerid}
+						onChange={(value) => {
+							setAttributes({ containerid: value });
+							setContainerid(value);
+						}}
 					/>
-					<TextControl
-						label={ __( 'Margin', 'wp-plugin-info-card' ) }
-						type="text"
-						value={ margin }
-						onChange={ ( value ) => {
-							this.props.setAttributes( { margin: value } ); this.props.attributes.margin = value; this.setState( { margin: value } ); setTimeout( function() {
-								pluginOnClick( value );
-							}, 5000 );
-						} }
-					/>
-					<SelectControl
-						label={ __( 'Clear', 'wp-plugin-info-card' ) }
-						options={ clearOptions }
-						value={ clear }
-						onChange={ ( value ) => {
-							this.props.setAttributes( { clear: value } ); this.props.attributes.clear = value; this.setState( { clear: value } ); this.pluginOnClick( value );
-						} }
-					/>
-					<TextControl
-						label={ __( 'Expiration in minutes', 'wp-plugin-info-card' ) }
-						type="number"
-						value={ expiration }
-						onChange={ ( value ) => {
-							this.props.setAttributes( { expiration: value } ); this.props.attributes.expiration = value; this.setState( { expiration: value } ); setTimeout( function() {
-								pluginOnClick( value );
-							}, 5000 );
-						} }
-					/>
-					<SelectControl
-						label={ __( 'Load card via Ajax?', 'wp-plugin-info-card' ) }
-						options={ ajaxOptions }
-						value={ ajax }
-						onChange={ ( value ) => {
-							this.props.setAttributes( { ajax: value } ); this.props.attributes.ajax = value; this.setState( { ajax: value } ); this.pluginOnClick( value );
-						} }
-					/>
+				</PanelRow>
+			</PanelBody>
+		</InspectorControls>
+	);
 
-				</PanelBody>
-			</InspectorControls>
-		);
-		if ( preview ) {
-			return(
-				<Fragment>
-					<img src={wppic.wppic_preview} />
-				</Fragment>
-			);
-		}
+	if (preview) {
 		return (
 			<Fragment>
-				<Fragment>
-					{ this.state.loading &&
-						<Placeholder>
-							<div className="wppic-query-block">
-								<div>
-									<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-										width="150px" height="150px" viewBox="0 0 850.39 850.39" enable-background="new 0 0 850.39 850.39" >
-									<path fill="#DB3939" d="M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39
-									c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451
-									l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07
-									h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887
-									l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z"/>
-									</svg>
-								</div>
-								<div>
-									<h3><label htmlFor="wppic-type-select">{ __( 'Select a Type', 'wp-plugin-info-card' ) }</label></h3>
-									<SelectControl
-										options={ assetType }
-										value={ this.state.type }
-										onChange={ ( value ) => {
-											this.props.setAttributes( { type: event.target.value } );
-											this.typeChange( event );
-										} }
-									/>
-								</div>
-								<div>
-									<h3><label htmlFor="wppic-input-slug">{ __( 'Enter a slug', 'wp-plugin-info-card' ) }</label></h3>
-								</div>
-								<div>
-									<input type="text" id="wppic-input-slug" value={ this.state.slug } onChange={ ( event ) => {
-										this.props.setAttributes( { slug: event.target.value } ); this.slugChange( event );
-									} } />
-								</div>
-								<div>
-									<h3><label>{ __( 'Select a Layout', 'wp-plugin-info-card' ) }</label></h3>
-									<SelectControl
-										options={ layoutOptions }
-										value={ layout }
-										onChange={ ( value ) => {
-											if ( 'flex' == value ) {
-												this.props.setAttributes( { layout: value, align: 'full' } );
-												this.props.attributes.layout = value;
-												this.props.attributes.align = 'full';
-												this.setState( { layout: value, align: 'full' } );
-											} else {
-												this.props.setAttributes( { layout: value, align: 'center' } );
-												this.props.attributes.layout = value;
-												this.props.attributes.align = 'center';
-												this.setState( { layout: value, align: 'center' } );
-											}
-										} }
-									/>
-								</div>
-								<div>
-									<h3><label>{ __( 'Enable multiple output?', 'wp-plugin-info-card' ) }</label></h3>
-									<CheckboxControl
-										checked={ multi }
-										onChange={ ( value ) => {
-											this.props.attributes.multi = value;
-											this.setState( { multi: value } );
-										} }
-										help={__( 'Separate slugs by commas to show multiple items', 'wp-plugin-info-card' )}
-									/>
-								</div>
-								<div>
-									<input className="button button-primary" type="submit" id="wppic-input-submit" value={ __( 'Go', 'wp-plugin-info-card' ) } onClick={ ( event ) => {
-										this.props.setAttributes( { loading: false } ); this.pluginOnClick( event );
-									} } />
-								</div>
-							</div>
-						</Placeholder>
-					}
-					{ this.state.card_loading &&
-						<Fragment>
-						<Placeholder className="wppic-loading-placeholder">
-							<div className="wppic-loading">
-								<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-									width="40px" height="40px" viewBox="0 0 850.39 850.39" enableBackground="new 0 0 850.39 850.39" >
-									<path fill="#DB3939" d="M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39
-								c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451
-								l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07
-								h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887
-								l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z" /></svg><br />
-								<div className="wppic-spinner">
-									<Spinner />
-								</div>
-							</div>
-						</Placeholder>
-					</Fragment>
-					}
-					{ ! this.state.loading && ! this.state.card_loading &&
-						<Fragment>
-							{ inspectorControls }
-							<BlockControls>
-								<Toolbar controls={ resetSelect } />
-								{ 'flex' == this.state.layout &&
-									<BlockAlignmentToolbar
-										value={ this.props.attributes.align }
-										onChange={ ( value ) => {
-											this.props.setAttributes( { align: value } ); this.props.attributes.align = value;
-											this.setState( { align: value } );
-											this.pluginOnClick( value );
-										} }
-									>
-									</BlockAlignmentToolbar>
-								}
-								{ 'card' == this.state.layout &&
-									<AlignmentToolbar
-										value={ this.props.attributes.align }
-										onChange={ ( value ) => {
-											this.props.setAttributes( { align: value } ); this.props.attributes.align = value;
-											this.setState( { align: value } );
-											this.pluginOnClick( value );
-										} }
-									></AlignmentToolbar>
-								}
-							</BlockControls>
-							<div className={ '' != width ? 'wp-pic-full-width' : '' }>
-								{ htmlToReactParser.parse( this.state.html ) }
-							</div>
-						</Fragment>
-					}
-				</Fragment>
+				<img src={wppic.wppic_preview} alt="" />
 			</Fragment>
 		);
 	}
-}
+	if (cardLoading) {
+		return (
+			<Fragment>
+				<div className="wppic-loading-placeholder">
+					<div className="wppic-loading">
+						<Logo size="45" />
+						<br />
+						<div className="wppic-spinner">
+							<Spinner />
+						</div>
+					</div>
+				</div>
+			</Fragment>
+		);
+	}
 
-export default WP_Plugin_Card;
+	return (
+		<Fragment>
+			{loading && (
+				<div className="wppic-query-block wppic-query-block-panel">
+					<div className="wppic-block-svg">
+						<Logo size="75" />
+					</div>
+					<div className="wp-pic-tab-panel">
+						<TabPanel
+							activeClass="active-tab"
+							initialTabName="slug"
+							tabs={[
+								{
+									title: __("Type", "wp-plugin-info-card"),
+									name: "slug",
+									className: "wppic-tab-slug",
+								},
+								{
+									title: __("Appearance", "wp-plugin-info-card"),
+									name: "layout",
+									className: "wppic-tab-layout",
+								},
+							]}
+						>
+							{(tab) => {
+								let tabContent;
+								if ("slug" === tab.name) {
+									tabContent = (
+										<Fragment>
+											<SelectControl
+												label={__(
+													"Select a Plugin or Theme",
+													"wp-plugin-info-card"
+												)}
+												options={assetType}
+												value={type}
+												onChange={(value) => {
+													setAttributes({
+														type: value,
+													});
+													setType(value);
+												}}
+											/>
+											<TextControl
+												label={__(
+													"Plugin or Theme Slug",
+													"wp-plugin-info-card"
+												)}
+												value={slug}
+												onChange={(value) => {
+													setAttributes({
+														slug: value,
+													});
+													setSlug(value);
+												}}
+												help={__(
+													"Comma separated slugs are supported.",
+													"wp-plugin-info-card"
+												)}
+											/>
+										</Fragment>
+									);
+								} else if ("layout" === tab.name) {
+									tabContent = (
+										<Fragment>
+											<div>
+												<SelectControl
+													label={__(
+														"Select an initial layout",
+														"wp-plugin-info-card"
+													)}
+													options={layoutOptions}
+													value={layout}
+													onChange={(value) => {
+														if ("flex" === value) {
+															setAttributes({
+																layout: value,
+																align: "full",
+															});
+															setLayout(value);
+															setAlign("full");
+														} else {
+															setAttributes({
+																layout: value,
+																align: "center",
+															});
+															setLayout(value);
+															setAlign("center");
+														}
+													}}
+												/>
+
+												<SelectControl
+													label={__("Scheme", "wp-plugin-info-card")}
+													options={schemeOptions}
+													value={scheme}
+													onChange={(value) => {
+														setAttributes({
+															scheme: value,
+														});
+														setScheme(value);
+													}}
+												/>
+											</div>
+										</Fragment>
+									);
+								} else {
+									tabContent = <Fragment>no data found</Fragment>;
+								}
+								return <div>{tabContent}</div>;
+							}}
+						</TabPanel>
+					</div>
+					<div className="wp-pic-gutenberg-button">
+						<Button
+							iconSize={20}
+							icon={<Logo size="25" />}
+							isSecondary
+							id="wppic-input-submit"
+							onClick={(event) => {
+								event.preventDefault();
+								setAttributes({ loading: false });
+								pluginOnClick(event);
+							}}
+						>
+							{__("Preview and Configure", "wp-plugin-info-card")}
+						</Button>
+					</div>
+				</div>
+			)}
+			{cardLoading && (
+				<Fragment>
+					<div className="wppic-loading-placeholder">
+						<div className="wppic-loading">
+							<Logo size="45" />
+							<br />
+							<div className="wppic-spinner">
+								<Spinner />
+							</div>
+						</div>
+					</div>
+				</Fragment>
+			)}
+			{!loading && !cardLoading && (
+				<Fragment>
+					{inspectorControls}
+					<BlockControls>
+						<ToolbarGroup>
+							<ToolbarButton
+								icon="edit"
+								title={__("Edit and Configure", "wp-plugin-info-card")}
+								onClick={() => setLoading(true)}
+							/>
+						</ToolbarGroup>
+						<ToolbarGroup>
+							<ToolbarItem as="button">
+								{(toolbarItemHTMLProps) => (
+									<DropdownMenu
+										toggleProps={toolbarItemHTMLProps}
+										label={__("Select Color Scheme", "wp-plugin-info-card")}
+										icon="admin-customizer"
+									>
+										{({ onClose }) => (
+											<Fragment>
+												<MenuItemsChoice
+													choices={schemeOptions}
+													onSelect={(value) => {
+														setAttributes({
+															scheme: value,
+														});
+														setScheme(value);
+														onClose();
+													}}
+													value={scheme}
+												/>
+											</Fragment>
+										)}
+									</DropdownMenu>
+								)}
+							</ToolbarItem>
+						</ToolbarGroup>
+						<ToolbarGroup>
+							<ToolbarItem as="button">
+								{(toolbarItemHTMLProps) => (
+									<DropdownMenu
+										toggleProps={toolbarItemHTMLProps}
+										label={__("Select a Layout", "wp-plugin-info-card")}
+										icon="layout"
+									>
+										{({ onClose }) => (
+											<Fragment>
+												<MenuItemsChoice
+													choices={layoutOptions}
+													onSelect={(value) => {
+														setAttributes({
+															layout: value,
+														});
+														setLayout(value);
+														onClose();
+													}}
+													value={layout}
+												/>
+											</Fragment>
+										)}
+									</DropdownMenu>
+								)}
+							</ToolbarItem>
+						</ToolbarGroup>
+					</BlockControls>
+					<div
+						className={classnames(
+							"is-placeholder",
+							layoutClass,
+							"wp-block-plugin-info-card",
+							`align${align}`
+						)}
+					>
+						{outputInfoCards(data)}
+					</div>
+				</Fragment>
+			)}
+		</Fragment>
+	);
+};
+
+export default WPPluginInfoCard;

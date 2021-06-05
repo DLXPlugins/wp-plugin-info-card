@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  ***************************************************************/
 function wppic_register_sripts() {
 	$min_or_not = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-	wp_enqueue_style( 'wppic-style', WPPIC_URL . 'css/wppic-style' . $min_or_not . '.css', null, WPPIC_VERSION );
+	wp_enqueue_style( 'wppic-style', plugins_url( '/dist/wppic-styles.css', WPPIC_FILE ), null, WPPIC_VERSION );
 	wp_enqueue_style( 'dashicons' );
 	wp_enqueue_script( 'wppic-script', WPPIC_URL . 'js/wppic-script' . $min_or_not . '.js', array( 'jquery' ), WPPIC_VERSION, true );
 }
@@ -60,16 +60,27 @@ function wppic_register_route() {
 		'wppic/v1',
 		'/get_html',
 		array(
-			'methods'  => 'GET',
-			'callback' => 'wppic_get_shortcode',
+			'methods'             => 'GET',
+			'callback'            => 'wppic_get_shortcode',
+			'permission_callback' => '__return_true',
+		)
+	);
+	register_rest_route(
+		'wppic/v2',
+		'/get_data',
+		array(
+			'methods'             => 'GET',
+			'callback'            => 'wppic_get_asset_data',
+			'permission_callback' => '__return_true',
 		)
 	);
 	register_rest_route(
 		'wppic/v1',
 		'/get_query',
 		array(
-			'methods'  => 'GET',
-			'callback' => 'wppic_get_query_shortcode',
+			'methods'             => 'GET',
+			'callback'            => 'wppic_get_query_shortcode',
+			'permission_callback' => '__return_true',
 		)
 	);
 }
@@ -88,9 +99,43 @@ function wppic_get_shortcode() {
 		'ajax'        => isset( $_GET['ajax'] ) ? $_GET['ajax'] : '',
 		'scheme'      => isset( $_GET['scheme'] ) ? $_GET['scheme'] : '',
 		'layout'      => isset( $_GET['layout'] ) ? $_GET['layout'] : '',
-		'multi'      => isset( $_GET['multi'] ) ? filter_var( $_GET['multi'], FILTER_VALIDATE_BOOLEAN ) : false,
+		'multi'       => isset( $_GET['multi'] ) ? filter_var( $_GET['multi'], FILTER_VALIDATE_BOOLEAN ) : false,
 	);
 	die( wppic_shortcode_function( $attrs ) );
+}
+
+/**
+ * Return plugin data based on passed strings.
+ */
+function wppic_get_asset_data() {
+	$type = isset( $_GET['type'] ) ? sanitize_title( $_GET['type'] ) : 'plugin';
+	$slug = isset( $_GET['slug'] ) ? $_GET['slug'] : 'wp-plugin-info-card-not-found';
+
+	// Random slug: comma-separated list.
+	$slugs = explode( ',', $slug );
+	foreach ( $slugs as &$item_slug ) {
+		$item_slug = sanitize_title( trim( $item_slug ) );
+	}
+
+	$data = array();
+	foreach ( $slugs as $asset_slug ) {
+		$slug_data = wppic_api_parser( $type, $asset_slug );
+		if ( isset( $slug_data->author ) ) {
+			$slug_data->author = wp_strip_all_tags( $slug_data->author );
+		}
+		if ( isset( $slug_data->author ) ) {
+			$slug_data->author = wp_strip_all_tags( $slug_data->author );
+		}
+		if ( isset( $slug_data->active_installs ) ) {
+			$slug_data->active_installs = number_format_i18n( $slug_data->active_installs );
+		}
+		if ( isset( $slug_data->last_updated ) ) {
+			$slug_data->last_updated = human_time_diff( strtotime( $slug_data->last_updated ), time() ) . ' ' . _x( 'ago', 'Last time updated', 'wp-plugin-info-card' );
+		}
+		$data[] = $slug_data;
+	}
+
+	wp_send_json_success( $data );
 }
 
 function wppic_get_query_shortcode() {
@@ -179,11 +224,14 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 	$multi       = filter_var( $multi, FILTER_VALIDATE_BOOLEAN );
 
 	if ( empty( $layout ) ) {
-		$layout     = 'card';
+		$layout     = 'wp-pic-card';
 		$addClass[] = $layout;
 	} elseif ( 'flex' === $layout ) {
 		$addClass[] = 'flex';
-		$addClass[] = 'card';
+		$addClass[] = 'wp-pic-card';
+	} elseif ( 'card' === $layout ) {
+		$layout     = 'wp-pic-card';
+		$addClass[] = 'wp-pic-card';
 	} else {
 		$addClass[] = $layout;
 	}
@@ -199,7 +247,27 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 		}
 	}
 
+	$block_alignment = 'align-center';
+	switch ( $align ) {
+		case 'left':
+			$block_alignment = 'alignleft';
+			break;
+		case 'right':
+			$block_alignment = 'alignright';
+			break;
+		case 'center':
+			$block_alignment = 'aligncenter';
+			break;
+		case 'wide':
+			$block_alignment = 'alignwide';
+			break;
+		case 'full':
+			$block_alignment = 'alignfull';
+			break;
+	}
+
 	if ( is_array( $slug ) && $multi ) {
+		$content .= sprintf( '<div class="wp-pic-multi %s">', esc_attr( $block_alignment ) );
 		foreach ( $slug as $asset_slug ) {
 			// For old plugin versions
 			if ( empty( $type ) ) {
@@ -231,25 +299,11 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 				// Align card
 				$alignCenter = false;
 				$alignStyle  = '';
-				if ( strstr( $layout, 'flex' ) ) {
-					if ( 'right' == $align ) {
-						$alignStyle = 'justify-content: flex-end;';
-					} elseif ( 'left' == $align ) {
-						$alignStyle = 'justify-content: flex-start;';
-					} elseif ( 'wide' == $align ) {
-						$alignStyle = 'width: 100%; margin: 0';
-					} elseif ( 'full' == $align ) {
-						$alignStyle = 'width: 100%; margin: 0;';
-					} else {
-						$alignStyle = 'justify-content: center;';
-					}
-				} else {
-					if ( $align == 'right' || $align == 'left' ) {
-						$alignStyle = 'float: ' . $align . '; ';
-					} else {
-						$alignStyle  = '';
-						$alignCenter = true;
-					}
+
+				// Custom style
+				$style = '';
+				if ( ! empty( $margin ) || ! empty( $alignStyle ) ) {
+					$style = 'style="' . $margin . $alignStyle . '"';
 				}
 
 				// Extra container ID
@@ -257,17 +311,6 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 					$containerid = ' id="' . $containerid . '"';
 				} else {
 					$containerid = ' id="wp-pic-' . esc_html( $asset_slug ) . '"';
-				}
-
-				// Custom container margin
-				if ( ! empty( $margin ) ) {
-					$margin = 'margin:' . $margin . ';';
-				}
-
-				// Custom style
-				$style = '';
-				if ( ! empty( $margin ) || ! empty( $alignStyle ) ) {
-					$style = 'style="' . $margin . $alignStyle . '"';
 				}
 
 				// Color scheme
@@ -284,7 +327,7 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 					$content .= '<div style="clear:both"></div>';
 				}
 
-				$content .= sprintf( '<div class="wp-pic-wrapper %s %s %s" %s>', esc_attr( $align ), esc_attr( $layout ), $multi ? 'multi' : '', $style );
+				$content .= sprintf( '<div class="wp-pic-wrapper %s %s %s" %s>', esc_attr( $block_alignment ), esc_attr( $layout ), $multi ? 'multi' : '', $style );
 				if ( $alignCenter ) {
 					$content .= '<div class="wp-pic-center">';
 				}
@@ -312,6 +355,7 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 				}
 			}
 		}
+		$content .= '</div>';
 	} else {
 		// For old plugin versions
 		if ( empty( $type ) ) {
@@ -342,26 +386,6 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 			// Align card
 			$alignCenter = false;
 			$alignStyle  = '';
-			if ( strstr( $layout, 'flex' ) ) {
-				if ( 'right' == $align ) {
-					$alignStyle = 'justify-content: flex-end;';
-				} elseif ( 'left' == $align ) {
-					$alignStyle = 'justify-content: flex-start;';
-				} elseif ( 'wide' == $align ) {
-					$alignStyle = 'width: 100%; margin: 0';
-				} elseif ( 'full' == $align ) {
-					$alignStyle = 'width: 100%; margin: 0;';
-				} else {
-					$alignStyle = 'justify-content: center;';
-				}
-			} else {
-				if ( $align == 'right' || $align == 'left' ) {
-					$alignStyle = 'float: ' . $align . '; ';
-				} else {
-					$alignStyle  = '';
-					$alignCenter = true;
-				}
-			}
 
 			// Extra container ID
 			if ( ! empty( $containerid ) ) {
@@ -395,7 +419,7 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 				$content .= '<div style="clear:both"></div>';
 			}
 
-			$content .= sprintf( '<div class="wp-pic-wrapper %s %s" %s>', esc_attr( $align ), esc_attr( $layout ), $style );
+			$content .= sprintf( '<div class="wp-pic-wrapper %s %s" %s>', esc_attr( $block_alignment ), esc_attr( $layout ), $style );
 			if ( $alignCenter ) {
 				$content .= '<div class="wp-pic-center">';
 			}

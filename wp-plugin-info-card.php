@@ -5,7 +5,7 @@
  * Description: WP Plugin Info Card displays plugins & themes identity cards in a beautiful box with a smooth rotation effect using WordPress.org Plugin API & WordPress.org Theme API. Dashboard widget included.
  * Author: Brice CAPOBIANCO, Ronald Huereca
  * Author URI: http://b-website.com/
- * Version: 3.2.0
+ * Version: 3.3.0
  * Domain Path: /langs
  * Text Domain: wp-plugin-info-card
  */
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Define constants
  ***************************************************************/
 if ( ! defined( 'WPPIC_VERSION' ) ) {
-	define( 'WPPIC_VERSION', '3.1.21' );
+	define( 'WPPIC_VERSION', '3.3.0' );
 }
 if ( ! defined( 'WPPIC_PATH' ) ) {
 	define( 'WPPIC_PATH', plugin_dir_path( __FILE__ ) . '/src/' );
@@ -38,10 +38,13 @@ if ( ! defined( 'WPPIC_NAME' ) ) {
 	define( 'WPPIC_NAME', 'WP Plugin Info Card' );
 }
 if ( ! defined( 'WPPIC_NAME_FULL' ) ) {
-	define( 'WPPIC_NAME_FULL', 'WP Plugin Info Card by b*web and Ronald Huereca' );
+	define( 'WPPIC_NAME_FULL', 'WP Plugin Info Card' );
 }
 if ( ! defined( 'WPPIC_ID' ) ) {
 	define( 'WPPIC_ID', 'wp-plugin-info-card' );
+}
+if ( ! defined( 'WPPIC_FILE' ) ) {
+	define( 'WPPIC_FILE', __FILE__ );
 }
 
 
@@ -170,7 +173,6 @@ function wppic_activation() {
 register_activation_hook( __FILE__, 'wppic_activation' );
 register_activation_hook( __FILE__, 'wppic_cron_activation' );
 register_activation_hook( __FILE__, 'wppic_delete_transients' );
-
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {

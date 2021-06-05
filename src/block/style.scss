@@ -4,6 +4,8 @@
  * CSS for both Frontend+Backend.
  */
 
+ @import "../common.scss";
+
 .wp-block-cgb-block-wp-plugin-info-card  {
   background: $red;
   border: 0.2rem solid $black;
