@@ -1,7 +1,7 @@
 const path = require( 'path' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
-
+const TerserPlugin = require( 'terser-webpack-plugin' );
 
 module.exports = [
 	{
@@ -13,10 +13,7 @@ module.exports = [
 					loader: 'babel-loader',
 					options: {
 						presets: [ '@babel/preset-env', '@babel/preset-react' ],
-						plugins: [
-							'@babel/plugin-proposal-class-properties',
-							'@babel/plugin-transform-arrow-functions',
-						],
+
 					},
 				},
 				{
@@ -64,6 +61,22 @@ module.exports = [
 			'@wordpress/components': 'wp.components',
 			'@wordpress/block-editor': 'wp.blockEditor',
 			'@wordpress/i18n': 'wp.i18n',
+		},
+		optimization: {
+			// Only concatenate modules in production, when not analyzing bundles.
+			concatenateModules: false,
+			minimizer: [
+				new TerserPlugin( {
+					parallel: true,
+					terserOptions: {
+						mangle: {
+							reserved: [ '__', '_n', '_nx', '_x' ],
+						},
+						keep_fnames: true,
+						keep_classnames: true,
+					},
+				} ),
+			],
 		},
 		plugins: [ new MiniCssExtractPlugin() ],
 	},
