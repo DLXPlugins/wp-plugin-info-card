@@ -23,7 +23,7 @@ function wp_plugin_info_card_cgb_block_assets() { // phpcs:ignore
 	// Styles.
 	wp_enqueue_style(
 		'wp_plugin_info_card-cgb-style-css', // Handle.
-		plugins_url( 'dist/main.css', dirname( __FILE__ ) ), // Block style CSS.
+		plugins_url( 'dist/wppic-editor.css', dirname( __FILE__ ) ), // Block style CSS.
 		array( 'wp-editor' ),
 		WPPIC_VERSION,
 		'all'
@@ -47,7 +47,7 @@ function wp_plugin_info_card_cgb_editor_assets() { // phpcs:ignore
 	// Scripts.
 	wp_enqueue_script(
 		'wp_plugin_info_card-cgb-block-js', // Handle.
-		plugins_url( '/dist/main.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
+		plugins_url( '/build/wppic-blocks.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
 		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
 		WPPIC_VERSION,
 		true // Enqueue the script in the footer.

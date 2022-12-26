@@ -7,15 +7,15 @@
  */
 import axios from "axios";
 import classnames from "classnames";
-import PluginFlex from "./templates/PluginFlex";
-import PluginCard from "./templates/PluginCard";
-import PluginLarge from "./templates/PluginLarge";
-import PluginWordPress from "./templates/PluginWordPress";
-import ThemeFlex from "./templates/ThemeFlex";
-import ThemeWordPress from "./templates/ThemeWordPress";
-import ThemeLarge from "./templates/ThemeLarge";
-import ThemeCard from "./templates/ThemeCard";
-import Logo from "./Logo";
+import PluginFlex from "../templates/PluginFlex";
+import PluginCard from "../templates/PluginCard";
+import PluginLarge from "../templates/PluginLarge";
+import PluginWordPress from "../templates/PluginWordPress";
+import ThemeFlex from "../templates/ThemeFlex";
+import ThemeWordPress from "../templates/ThemeWordPress";
+import ThemeLarge from "../templates/ThemeLarge";
+import ThemeCard from "../templates/ThemeCard";
+import Logo from "../Logo";
 const { Fragment, useEffect, useState } = wp.element;
 
 const { __ } = wp.i18n;
