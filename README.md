@@ -6,6 +6,8 @@ Developed by <a href="https://mediaron.com">Ronald Huereca</a> and <a href="http
 
 If you use WP Plugin Info Card, please consider a code contribution or sponsorship. It's a small plugin, but very important for those who use it. Your contribution or sponsorship will help keep WP Plugin Info Card current and maintained.
 
+<a href="https://github.com/sponsors/MediaRon">Please consider sponsoring WP Plugin Info Card</a>.
+
 ## Quick Links
 
 1. <a href="https://wordpress.org/plugins/wp-plugin-info-card">Plugin Page on WordPress.org</a>
