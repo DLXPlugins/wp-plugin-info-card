@@ -1,5 +1,7 @@
 # Welcome to WP Plugin Info Card
 
+![dlxplugins-1672016154370-1x](https://user-images.githubusercontent.com/636521/209486884-181a84e1-7863-43bf-9b3a-12560178f0be.jpeg)
+
 Developed by <a href="https://mediaron.com">Ronald Huereca</a> and <a href="https://www.b-website.com/">Brice CAPOBIANCO</a>.
 
 ## WP Plugin Info Card needs your help! 💜
