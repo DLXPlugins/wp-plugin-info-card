@@ -96,7 +96,7 @@ function wppic_register_block() {
 	$default_layout = isset( $options['default_layout'] ) ? $options['default_layout'] : 'card';
 
 	register_block_type(
-		wppic_get_plugin_dir( 'build/block/PluginInfoCard/block.json' ),
+		wppic_get_plugin_dir( 'build/blocks/PluginInfoCard/block.json' ),
 		array(
 			'render_callback' => 'wppic_block_editor',
 		)

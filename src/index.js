@@ -9,5 +9,5 @@
  * Webpack is compiling as the input file.
  */
 
-import './block/PluginInfoCard/block';
-import './block/PluginInfoCardQuery/wppic-query';
+import './blocks/PluginInfoCard/block';
+import './blocks/PluginInfoCardQuery/wppic-query';

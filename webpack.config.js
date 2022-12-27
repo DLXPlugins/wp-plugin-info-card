@@ -17,7 +17,7 @@ module.exports = ( env ) => {
 			entry: {
 				'wppic-admin': [ './src/scss/wppic-admin-style.scss' ],
 				'wppic-styles': [ './src/scss/wppic-style.scss' ],
-				'wppic-editor': [ './src/block/PluginInfoCard/editor.scss' ],
+				'wppic-editor': [ './src/scss/editor.scss' ],
 			},
 			mode: env.mode,
 			devtool: 'production' === env.mode ? false : 'source-map',
