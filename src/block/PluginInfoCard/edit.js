@@ -45,6 +45,7 @@ const {
 	BlockAlignmentToolbar,
 	MediaUpload,
 	BlockControls,
+	useBlockProps,
 } = wp.blockEditor;
 
 const WPPluginInfoCard = (props) => {
@@ -311,6 +312,10 @@ const WPPluginInfoCard = (props) => {
 		</InspectorControls>
 	);
 
+	const blockProps = useBlockProps( {
+		className: classnames( `wp-plugin-info-card align${ align }` ),
+	} );
+
 	if (preview) {
 		return (
 			<Fragment>
@@ -320,7 +325,7 @@ const WPPluginInfoCard = (props) => {
 	}
 	if (cardLoading) {
 		return (
-			<Fragment>
+			<div { ...blockProps}>
 				<div className="wppic-loading-placeholder">
 					<div className="wppic-loading">
 						<Logo size="45" />
@@ -330,11 +335,11 @@ const WPPluginInfoCard = (props) => {
 						</div>
 					</div>
 				</div>
-			</Fragment>
+			</div>
 		);
 	}
 
-	return (
+	const block = (
 		<Fragment>
 			{loading && (
 				<div className="wppic-query-block wppic-query-block-panel">
@@ -556,6 +561,10 @@ const WPPluginInfoCard = (props) => {
 				</Fragment>
 			)}
 		</Fragment>
+	);
+
+	return (
+		<div { ...blockProps }>{ block }</div>
 	);
 };
 

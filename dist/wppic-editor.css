@@ -41,6 +41,14 @@
   transform-origin: 50% 50%;
 }
 
+.wp-plugin-info-card.aligncenter, .wp-plugin-info-card.alignwide, .wp-plugin-info-card.alignfull {
+  display: flex;
+  justify-content: center;
+}
+.wp-plugin-info-card .has-click-to-share {
+  width: 100%; /* max width in block settings */
+}
+
 /* Panel Styles */
 .wppic-query-block-panel {
   position: relative;

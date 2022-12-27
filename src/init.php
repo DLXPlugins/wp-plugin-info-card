@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function wp_plugin_info_card_cgb_block_assets() { // phpcs:ignore
 	// Styles.
-	wp_enqueue_style(
+	wp_register_style(
 		'wp_plugin_info_card-cgb-style-css', // Handle.
 		plugins_url( 'dist/wppic-editor.css', dirname( __FILE__ ) ), // Block style CSS.
 		array( 'wp-editor' ),
@@ -45,9 +45,9 @@ add_action( 'enqueue_block_assets', 'wp_plugin_info_card_cgb_block_assets' );
 function wp_plugin_info_card_cgb_editor_assets() { // phpcs:ignore
 
 	// Scripts.
-	wp_enqueue_script(
+	wp_register_script(
 		'wp_plugin_info_card-cgb-block-js', // Handle.
-		plugins_url( '/build/wppic-blocks.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
+		plugins_url( 'build/wppic-blocks.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
 		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
 		WPPIC_VERSION,
 		true // Enqueue the script in the footer.
@@ -77,7 +77,7 @@ function wp_plugin_info_card_cgb_editor_assets() { // phpcs:ignore
 	}
 
 	// Styles.
-	wp_enqueue_style(
+	wp_register_style(
 		'wp_plugin_info_card-cgb-block-editor-css', // Handle.
 		plugins_url( 'dist/wppic-styles.css', dirname( __FILE__ ) ), // Block editor CSS.
 		array( 'wp-edit-blocks' ),
@@ -94,83 +94,10 @@ function wppic_register_block() {
 
 	$default_scheme = isset( $options['colorscheme'] ) ? $options['colorscheme'] : 'default';
 	$default_layout = isset( $options['default_layout'] ) ? $options['default_layout'] : 'card';
+
 	register_block_type(
-		'wp-plugin-info-card/wp-plugin-info-card',
+		wppic_get_plugin_dir( 'build/block/PluginInfoCard/block.json' ),
 		array(
-			'attributes'      => array(
-				'assetData' => array(
-					'type' => 'array',
-					'default' => [],
-				),
-				'type'        => array(
-					'type'    => 'string',
-					'default' => 'plugin',
-				),
-				'slug'        => array(
-					'type'    => 'string',
-					'default' => 'wp-plugin-info-card',
-				),
-				'loading'     => array(
-					'type'    => 'boolean',
-					'default' => true,
-				),
-				'html'        => array(
-					'type'    => 'string',
-					'default' => '',
-				),
-				'align'       => array(
-					'type'    => 'string',
-					'default' => 'full',
-				),
-				'image'       => array(
-					'type'    => 'string',
-					'default' => '',
-				),
-				'containerid' => array(
-					'type'    => 'string',
-					'default' => '',
-				),
-				'margin'      => array(
-					'type'    => 'string',
-					'default' => '',
-				),
-				'clear'       => array(
-					'type'    => 'string',
-					'default' => 'none',
-				),
-				'expiration'  => array(
-					'type'    => 'int',
-					'default' => 0,
-				),
-				'ajax'        => array(
-					'type'    => 'string',
-					'default' => 'false',
-				),
-				'scheme'      => array(
-					'type'    => 'string',
-					'default' => $default_scheme,
-				),
-				'layout'      => array(
-					'type'    => 'string',
-					'default' => $default_layout,
-				),
-				'custom'      => array(
-					'type'    => 'string',
-					'default' => '',
-				),
-				'width'       => array(
-					'type'    => 'string',
-					'default' => '',
-				),
-				'preview'     => array(
-					'type'    => 'boolean',
-					'default' => false,
-				),
-				'multi'       => array(
-					'type'    => 'boolean',
-					'default' => false,
-				),
-			),
 			'render_callback' => 'wppic_block_editor',
 		)
 	);

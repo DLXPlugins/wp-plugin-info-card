@@ -163,6 +163,21 @@ function wppic_uninstall() {
 	wppic_delete_transients();
 }
 
+/**
+ * Get the plugin directory for a path.
+ *
+ * @param string $path The path to the file.
+ *
+ * @return string The new path.
+ */
+function wppic_get_plugin_dir( $path = '' ) {
+	$dir = rtrim( plugin_dir_path( __FILE__ ), '/' );
+	if ( ! empty( $path ) && is_string( $path ) ) {
+		$dir .= '/' . ltrim( $path, '/' );
+	}
+	return $dir;
+}
+
 
 /***************************************************************
  * Hooks for install & uninstall
