@@ -101,6 +101,10 @@
 		"preview": {
 			"type": "boolean",
 			"default": false
+		},
+		"defaultsApplied": {
+			"type": "boolean",
+			"default": false
 		}
 		
 	},

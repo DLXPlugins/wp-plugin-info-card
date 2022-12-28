@@ -60,7 +60,7 @@ const WPPluginInfoCard = ( props ) => {
 	const [ scheme, setScheme ] = useState( attributes.scheme );
 	const [ layout, setLayout ] = useState( attributes.layout );
 	const [ multi, setMulti ] = useState( true );
-	const [ preview, setPreview ] = useState( false );
+	const [ preview, setPreview ] = useState( attributes.preview );
 	const [ data, setData ] = useState( attributes.assetData );
 	const [ align, setAlign ] = useState( attributes.align );
 
@@ -343,7 +343,11 @@ const WPPluginInfoCard = ( props ) => {
 	if ( preview ) {
 		return (
 			<Fragment>
-				<img src={ wppic.wppic_preview } alt="" />
+				<img
+					src={ wppic.wppic_preview }
+					alt=""
+					style={ { width: '100%', height: 'auto' } }
+				/>
 			</Fragment>
 		);
 	}
