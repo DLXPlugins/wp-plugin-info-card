@@ -10,6 +10,10 @@
 	"version": "1.0.0",
 	"textdomain": "wp-plugin-info-card",
 	"attributes": {
+		"assetData": {
+			"type": "array",
+			"default": []
+		},
 		"search": {
 			"type": "string",
 			"default": ""
@@ -31,8 +35,8 @@
 			"default": ""
 		},
 		"per_page": {
-			"type": "number",
-			"default": 24
+			"type": "string",
+			"default": "8"
 		},
 		"cols" : {
 			"type": "number",
@@ -114,7 +118,7 @@
 	},
 	"supports": {
 		"anchor": true,
-		"align": [ "left", "center", "right", "full" ],
+		"align": false,
 		"className": true
 	},
 	"editorScript": "wp_plugin_info_card-cgb-block-js",

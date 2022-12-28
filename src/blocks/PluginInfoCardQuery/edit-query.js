@@ -8,7 +8,7 @@ const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
 const { __ } = wp.i18n;
 
-const { useState, useEffect } = wp.element;
+const { useState, useEffect, Fragment } = wp.element;
 
 const {
 	PanelBody,
@@ -28,6 +28,15 @@ const {
 	useBlockProps,
 } = wp.blockEditor;
 
+import PluginFlex from '../templates/PluginFlex';
+import PluginCard from '../templates/PluginCard';
+import PluginLarge from '../templates/PluginLarge';
+import PluginWordPress from '../templates/PluginWordPress';
+import ThemeFlex from '../templates/ThemeFlex';
+import ThemeWordPress from '../templates/ThemeWordPress';
+import ThemeLarge from '../templates/ThemeLarge';
+import ThemeCard from '../templates/ThemeCard';
+
 const WP_Plugin_Card_Query = ( props ) => {
 	const { attributes, setAttributes } = props;
 
@@ -35,6 +44,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 	const [ cardLoading, setCardLoading ] = useState( false );
 
 	const {
+		assetData,
 		type,
 		slug,
 		html,
@@ -89,9 +99,83 @@ const WP_Plugin_Card_Query = ( props ) => {
 					// Now Set State
 					setLoading( false );
 					setCardLoading( false );
-					setAttributes( { html: response.data } );
+					setAttributes( { assetData: response.data.data.api_response } );
+					setAttributes( { html: response.data.data.html } );
 				} );
 		}
+	};
+
+	const outputInfoCards = () => {
+		return assetData.map( ( cardData, key ) => {
+			return (
+				<Fragment key={ key }>
+					{ 'flex' === layout && 'plugin' === type && (
+						<PluginFlex
+							scheme={ scheme }
+							image={ image }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
+					{ 'card' === layout && 'plugin' === type && (
+						<PluginCard
+							scheme={ scheme }
+							image={ image }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
+					{ 'large' === layout && 'plugin' === type && (
+						<PluginLarge
+							scheme={ scheme }
+							image={ image }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
+					{ 'wordpress' === layout && 'plugin' === type && (
+						<PluginWordPress
+							scheme={ scheme }
+							image={ image }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
+					{ 'flex' === layout && 'theme' === type && (
+						<ThemeFlex
+							scheme={ scheme }
+							image={ image }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
+					{ 'wordpress' === layout && 'theme' === type && (
+						<ThemeWordPress
+							scheme={ scheme }
+							image={ image }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
+					{ 'large' === layout && 'theme' === type && (
+						<ThemeLarge
+							scheme={ scheme }
+							image={ image }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
+					{ 'card' === layout && 'theme' === type && (
+						<ThemeCard
+							scheme={ scheme }
+							image={ image }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
+				</Fragment>
+			);
+		} );
 	};
 
 	const htmlToReactParser = new HtmlToReactParser();
@@ -180,8 +264,6 @@ const WP_Plugin_Card_Query = ( props ) => {
 					value={ scheme }
 					onChange={ ( value ) => {
 						setAttributes( { scheme: value } );
-						attributes.scheme = value;
-						pluginOnClick();
 					} }
 				/>
 				<SelectControl
@@ -190,8 +272,6 @@ const WP_Plugin_Card_Query = ( props ) => {
 					value={ layout }
 					onChange={ ( value ) => {
 						setAttributes( { layout: value } );
-						attributes.layout = value;
-						pluginOnClick();
 					} }
 				/>
 				<SelectControl
@@ -285,8 +365,6 @@ const WP_Plugin_Card_Query = ( props ) => {
 					value={ clear }
 					onChange={ ( value ) => {
 						setAttributes( { clear: value } );
-						attributes.clear = value;
-						pluginOnClick();
 					} }
 				/>
 				<TextControl
@@ -298,10 +376,6 @@ const WP_Plugin_Card_Query = ( props ) => {
 					value={ expiration }
 					onChange={ ( value ) => {
 						setAttributes( { expiration: value } );
-						attributes.expiration = value;
-						setTimeout( function () {
-							pluginOnClick();
-						}, 5000 );
 					} }
 				/>
 				<SelectControl
@@ -310,8 +384,6 @@ const WP_Plugin_Card_Query = ( props ) => {
 					value={ ajax }
 					onChange={ ( value ) => {
 						setAttributes( { ajax: value } );
-						attributes.ajax = value;
-						pluginOnClick();
 					} }
 				/>
 			</PanelBody>
@@ -713,7 +785,11 @@ const WP_Plugin_Card_Query = ( props ) => {
 								'' !== width ? 'wp-pic-full-width' : ''
 							}
 						>
-							{ htmlToReactParser.parse( html ) }
+							<div className={ `wp-pic-1-${ cols }` }>
+								<div className={ `wp-pic-grid cols-${ cols }` }>
+									{ outputInfoCards() }
+								</div>
+							</div>
 						</div>
 					</>
 				) }

@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import isNumeric from 'validator/lib/isNumeric';
 import BannerWrapper from '../components/BannerWrapper';
+const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
 const { __ } = wp.i18n;
 
@@ -37,6 +38,7 @@ const PluginLarge = ( props ) => {
 		backgroundRepeat: 'no-repeat',
 		backgroundSize: 'cover',
 	};
+	const htmlToReactParser = new HtmlToReactParser();
 	return (
 		<div className={ wrapperClasses }>
 			<div className={ classes }>
@@ -59,7 +61,7 @@ const PluginLarge = ( props ) => {
 							></span>
 							<p className="wp-pic-author">
 								{ __( 'Author(s):', 'wp-plugin-info-card' ) }{ ' ' }
-								{ props.data.author }
+								{ htmlToReactParser.parse( props.data.author ) }
 							</p>
 							<p className="wp-pic-version">
 								<span>
