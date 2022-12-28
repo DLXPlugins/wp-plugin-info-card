@@ -33,7 +33,6 @@ const WP_Plugin_Card_Query = ( props ) => {
 
 	const [ loading, setLoading ] = useState( false );
 	const [ cardLoading, setCardLoading ] = useState( false );
-	const [ preview, setPreview ] = useState( false );
 
 	const {
 		type,
@@ -55,6 +54,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 		user,
 		browse,
 		per_page,
+		preview,
 		cols,
 	} = attributes;
 

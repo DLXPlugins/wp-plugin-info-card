@@ -113,6 +113,11 @@
       "default": false
     }
   },
+  "example": {
+    "attributes": {
+      "preview": true
+    }
+  },
   "supports": {
     "anchor": true,
     "align": [
