@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
 const { __ } = wp.i18n;
 
@@ -21,6 +22,12 @@ const ThemeCard = ( props ) => {
 		backgroundSize: 'cover',
 	};
 
+	let author = props.data.author;
+	if ( author.hasOwnProperty( 'author' ) ) {
+		author = author.author;
+	}
+
+	const htmlToReactParser = new HtmlToReactParser();
 	return (
 		<div className={ wrapperClasses }>
 			<div className={ classes }>
@@ -30,10 +37,10 @@ const ThemeCard = ( props ) => {
 							className="wp-pic-logo"
 							style={ bgImageStyles }
 						></span>
-						<span className="wp-pic-name">{ props.data.name }</span>
+						<span className="wp-pic-name">{ htmlToReactParser.parse( props.data.name ) }</span>
 						<p className="wp-pic-author">
 							{ __( 'Author(s):', 'wp-plugin-info-card' ) }{ ' ' }
-							{ props.data.author }
+							{ author }
 						</p>
 						<div className="wp-pic-bottom">
 							<div className="wp-pic-bar">
@@ -47,7 +54,7 @@ const ThemeCard = ( props ) => {
 									</em>
 								</span>
 								<span className="wp-pic-downloaded">
-									{ props.data.downloaded }
+									{ props.data.downloaded.toLocaleString('en') }
 									<em>
 										{ __(
 											'Downloads',

@@ -191,6 +191,9 @@ function wppic_get_query_shortcode() {
 			'description' 		=> true,
 			'short_description'	=> true,
 			'banners'           => true,
+			'downloaded'  	    => true,
+			'last_updated'      => true,
+			'downloadlink'	    => true,
 		)
 	);
 	$type = $attrs['type'];

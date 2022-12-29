@@ -46,7 +46,7 @@ const PluginCard = ( props ) => {
 							className="wp-pic-logo"
 							style={ bgImageStyles }
 						></span>
-						<span className="wp-pic-name">{ props.data.name }</span>
+						<span className="wp-pic-name">{ htmlToReactParser.parse( props.data.name ) }</span>
 						<p className="wp-pic-author">
 							{ __( 'Author(s):', 'wp-plugin-info-card' ) }{ ' ' }
 							{ htmlToReactParser.parse( props.data.author ) }
@@ -63,7 +63,7 @@ const PluginCard = ( props ) => {
 									</em>
 								</span>
 								<span className="wp-pic-downloaded">
-									{ props.data.active_installs }+
+									{ props.data.active_installs.toLocaleString('en') }+
 									<em>
 										{ __(
 											'Installs',

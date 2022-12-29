@@ -2,6 +2,7 @@
   "name": "wp-plugin-info-card-cgb-guten-block",
   "version": "1.0.0",
   "private": true,
+  "main": "index.js",
   "scripts": {
     "start": "wp-scripts start wppic-blocks=./src/index.js --env mode=development",
     "dev": "wp-scripts start wppic-blocks=./src/index.js --env mode=development",
@@ -16,7 +17,8 @@
     "webpack-fix-style-only-entries": "^0.6.1"
   },
   "devDependencies": {
-    "@wordpress/eslint-plugin": "^7.3.0",
+    "@babel/eslint-parser": "^7.19.1",
+    "@wordpress/eslint-plugin": "^13.7.0",
     "@wordpress/scripts": "^25.0.0",
     "ajv": "^7.2.4",
     "axios": "^0.21.1",
@@ -24,7 +26,9 @@
     "classnames": "^2.2.6",
     "css-loader": "^5.2.6",
     "del": "^4.1.1",
-    "eslint": "^7.12.1",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "grunt": "^1.4.1",
     "grunt-cli": "^1.4.3",
     "grunt-contrib-compress": "^2.0.0",
@@ -33,7 +37,7 @@
     "merge-stream": "^2.0.0",
     "mini-css-extract-plugin": "^2.7.2",
     "postcss": "^8.4.20",
-    "react-number-format": "^4.4.1",
+    "prettier-eslint": "^15.0.1",
     "sass-loader": "^10.0.5",
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^5.1.3",

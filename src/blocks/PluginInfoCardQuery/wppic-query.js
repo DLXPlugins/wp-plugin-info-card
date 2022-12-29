@@ -6,10 +6,9 @@
  */
 
 //  Import CSS.
-import edit from "./edit-query";
+import edit from './edit-query';
 
 import metadata from './block.json';
-
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks

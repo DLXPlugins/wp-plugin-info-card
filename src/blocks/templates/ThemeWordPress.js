@@ -2,6 +2,7 @@
 import classnames from 'classnames';
 import StarRatings from 'react-star-ratings';
 import BannerWrapper from '../components/BannerWrapper';
+const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
 const { __, _n, sprintf } = wp.i18n;
 
@@ -17,6 +18,8 @@ const ThemeWordPress = ( props ) => {
 		wordpress: true,
 		theme: true,
 	} );
+
+	const htmlToReactParser = new HtmlToReactParser();
 	return (
 		<div className={ wrapperClasses }>
 			<div className={ classes }>
@@ -24,7 +27,7 @@ const ThemeWordPress = ( props ) => {
 					<div className="wp-pic-theme-card-top">
 						<div className="wp-pic-theme-screenshot">
 							<BannerWrapper
-								name={ props.data.name }
+								name={ htmlToReactParser.parse( props.data.name ) }
 								bannerImage={ props.data.banners }
 								image={
 									props.image || props.data.screenshot_url
@@ -35,7 +38,7 @@ const ThemeWordPress = ( props ) => {
 							</span>
 						</div>
 						<h3>
-							{ props.data.name }
+							{ htmlToReactParser.parse( props.data.name ) }
 							&nbsp;
 							<span className="wp-pic-author">
 								{ sprintf(
@@ -87,7 +90,7 @@ const ThemeWordPress = ( props ) => {
 						<div className="wp-pic-column-downloaded">
 							{ sprintf(
 								__( '%s+ Downloads', 'wp-plugin-info-card' ),
-								props.data.downloaded
+								props.data.downloaded.toLocaleString('en')
 							) }
 						</div>
 						<div className="wp-pic-column-version">

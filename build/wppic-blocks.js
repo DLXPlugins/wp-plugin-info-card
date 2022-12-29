@@ -3480,7 +3480,7 @@ var PluginCard = function PluginCard(a) {
     style: f
   }), /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-name"
-  }, a.data.name), /*#__PURE__*/React.createElement("p", {
+  }, g.parse(a.data.name)), /*#__PURE__*/React.createElement("p", {
     className: "wp-pic-author"
   }, __('Author(s):', 'wp-plugin-info-card'), ' ', g.parse(a.data.author)), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-bottom"
@@ -3490,7 +3490,7 @@ var PluginCard = function PluginCard(a) {
     className: "wp-pic-rating"
   }, a.data.rating, "%", /*#__PURE__*/React.createElement("em", null, __('Ratings', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-downloaded"
-  }, a.data.active_installs, "+", /*#__PURE__*/React.createElement("em", null, __('Installs', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
+  }, a.data.active_installs.toLocaleString('en'), "+", /*#__PURE__*/React.createElement("em", null, __('Installs', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-requires"
   }, a.data.requires, /*#__PURE__*/React.createElement("em", null, __('Requires', 'wp-plugin-info-card')))), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-download"
@@ -3516,6 +3516,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_BannerWrapper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/BannerWrapper */ "./src/blocks/components/BannerWrapper.js");
 
 
+var HtmlToReactParser = (__webpack_require__(/*! html-to-react */ "./node_modules/html-to-react/index.js").Parser);
 var __ = wp.i18n.__;
 var PluginFlex = function PluginFlex(a) {
   var b = classnames__WEBPACK_IMPORTED_MODULE_0___default()({
@@ -3529,6 +3530,7 @@ var PluginFlex = function PluginFlex(a) {
     'wp-pic-card': true,
     plugin: true
   });
+  var d = new HtmlToReactParser();
   return /*#__PURE__*/React.createElement("div", {
     className: b
   }, /*#__PURE__*/React.createElement("div", {
@@ -3548,7 +3550,7 @@ var PluginFlex = function PluginFlex(a) {
     className: "wp-pic-name-wrapper"
   }, /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-name"
-  }, /*#__PURE__*/React.createElement("strong", null, a.data.name))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("strong", null, d.parse(a.data.name)))), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-version-wrapper"
   }, /*#__PURE__*/React.createElement("p", {
     className: "wp-pic-version"
@@ -3564,7 +3566,7 @@ var PluginFlex = function PluginFlex(a) {
     className: "wp-pic-author-wrapper"
   }, /*#__PURE__*/React.createElement("p", {
     className: "wp-pic-author"
-  }, __('Author(s):', 'wp-plugin-info-card'), ' ', a.data.author)), /*#__PURE__*/React.createElement("div", {
+  }, __('Author(s):', 'wp-plugin-info-card'), ' ', d.parse(a.data.author))), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-bottom"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-bar"
@@ -3572,11 +3574,11 @@ var PluginFlex = function PluginFlex(a) {
     className: "wp-pic-rating"
   }, a.data.rating, "%", ' ', /*#__PURE__*/React.createElement("em", null, __('Ratings', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-downloaded"
-  }, a.data.active_installs, '+', ' ', /*#__PURE__*/React.createElement("em", null, __('Installs', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
+  }, a.data.active_installs.toLocaleString('en'), '+', ' ', /*#__PURE__*/React.createElement("em", null, __('Installs', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-requires"
   }, a.data.requires, /*#__PURE__*/React.createElement("em", null, __('Requires', 'wp-plugin-info-card')))), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-download-link"
-  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", null, __('Download', 'wp-plugin-info-card'), ' ', a.data.name))))))));
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", null, __('Download', 'wp-plugin-info-card'), ' ', d.parse(a.data.name)))))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PluginFlex);
 
@@ -3650,12 +3652,12 @@ var PluginLarge = function PluginLarge(a) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-asset-bg"
   }, /*#__PURE__*/React.createElement(_components_BannerWrapper__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    name: a.data.name,
+    name: g.parse(a.data.name),
     bannerImage: a.data.banners,
     image: a.image
   }), /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-asset-bg-title"
-  }, /*#__PURE__*/React.createElement("span", null, a.data.name))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("span", null, g.parse(a.data.name)))), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-half-first"
   }, /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-logo",
@@ -3676,7 +3678,7 @@ var PluginLarge = function PluginLarge(a) {
     className: "wp-pic-rating"
   }, a.data.rating, "%", ' ', /*#__PURE__*/React.createElement("em", null, __('Ratings', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-downloaded"
-  }, a.data.active_installs, '+', ' ', /*#__PURE__*/React.createElement("em", null, __('Installs', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
+  }, a.data.active_installs.toLocaleString('en'), '+', ' ', /*#__PURE__*/React.createElement("em", null, __('Installs', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-requires"
   }, a.data.requires, /*#__PURE__*/React.createElement("em", null, __('Requires', 'wp-plugin-info-card'))))))))));
 };
@@ -3745,7 +3747,7 @@ var PluginWordPress = function PluginWordPress(a) {
     className: "wp-pic-plugin-card-top"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-column-name"
-  }, /*#__PURE__*/React.createElement("h3", null, a.data.name, /*#__PURE__*/React.createElement(_components_PicIcon__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, /*#__PURE__*/React.createElement("h3", null, e.parse(a.data.name), /*#__PURE__*/React.createElement(_components_PicIcon__WEBPACK_IMPORTED_MODULE_1__["default"], {
     image: a.image,
     data: a.data
   }))), /*#__PURE__*/React.createElement("div", {
@@ -3775,7 +3777,7 @@ var PluginWordPress = function PluginWordPress(a) {
     className: "wp-pic-column-updated"
   }, /*#__PURE__*/React.createElement("strong", null, __('Last Updated:', 'wp-plugin-info-card')), ' ', a.data.last_updated), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-column-downloaded"
-  }, sprintf(__('%s+ Active Installs', 'wp-plugin-info-card'), a.data.active_installs)), /*#__PURE__*/React.createElement("div", {
+  }, sprintf(__('%s+ Active Installs', 'wp-plugin-info-card'), a.data.active_installs.toLocaleString('en'))), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-column-compatibility"
   }, /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-compatibility-compatible"
@@ -3799,6 +3801,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
 
+var HtmlToReactParser = (__webpack_require__(/*! html-to-react */ "./node_modules/html-to-react/index.js").Parser);
 var __ = wp.i18n.__;
 var ThemeCard = function ThemeCard(a) {
   var b = classnames__WEBPACK_IMPORTED_MODULE_0___default()({
@@ -3816,6 +3819,11 @@ var ThemeCard = function ThemeCard(a) {
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover'
   };
+  var f = a.data.author;
+  if (f.hasOwnProperty('author')) {
+    f = f.author;
+  }
+  var g = new HtmlToReactParser();
   return /*#__PURE__*/React.createElement("div", {
     className: b
   }, /*#__PURE__*/React.createElement("div", {
@@ -3832,9 +3840,9 @@ var ThemeCard = function ThemeCard(a) {
     style: e
   }), /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-name"
-  }, a.data.name), /*#__PURE__*/React.createElement("p", {
+  }, g.parse(a.data.name)), /*#__PURE__*/React.createElement("p", {
     className: "wp-pic-author"
-  }, __('Author(s):', 'wp-plugin-info-card'), ' ', a.data.author), /*#__PURE__*/React.createElement("div", {
+  }, __('Author(s):', 'wp-plugin-info-card'), ' ', f), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-bottom"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-bar"
@@ -3842,7 +3850,7 @@ var ThemeCard = function ThemeCard(a) {
     className: "wp-pic-rating"
   }, a.data.rating, "%", /*#__PURE__*/React.createElement("em", null, __('Ratings', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-downloaded"
-  }, a.data.downloaded, /*#__PURE__*/React.createElement("em", null, __('Downloads', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
+  }, a.data.downloaded.toLocaleString('en'), /*#__PURE__*/React.createElement("em", null, __('Downloads', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-requires"
   }, a.data.version, /*#__PURE__*/React.createElement("em", null, __('Version', 'wp-plugin-info-card')))), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-download"
@@ -3868,6 +3876,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_BannerWrapper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/BannerWrapper */ "./src/blocks/components/BannerWrapper.js");
 
 
+var HtmlToReactParser = (__webpack_require__(/*! html-to-react */ "./node_modules/html-to-react/index.js").Parser);
 var __ = wp.i18n.__;
 var PluginFlex = function PluginFlex(a) {
   var b = classnames__WEBPACK_IMPORTED_MODULE_0___default()({
@@ -3881,6 +3890,11 @@ var PluginFlex = function PluginFlex(a) {
     'wp-pic-card': true,
     theme: true
   });
+  var d = a.data.author;
+  if (d.hasOwnProperty('author')) {
+    d = d.author;
+  }
+  var e = new HtmlToReactParser();
   return /*#__PURE__*/React.createElement("div", {
     className: b
   }, /*#__PURE__*/React.createElement("div", {
@@ -3893,14 +3907,14 @@ var PluginFlex = function PluginFlex(a) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-face wp-pic-front"
   }, /*#__PURE__*/React.createElement(_components_BannerWrapper__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    name: a.data.name,
+    name: e.parse(a.data.name),
     bannerImage: a.data.banners,
     image: a.image || a.data.screenshot_url
   }), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-name-wrapper"
   }, /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-name"
-  }, /*#__PURE__*/React.createElement("strong", null, a.data.name))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("strong", null, e.parse(a.data.name)))), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-preview-wrapper"
   }, /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-preview"
@@ -3912,7 +3926,7 @@ var PluginFlex = function PluginFlex(a) {
     className: "wp-pic-author-wrapper"
   }, /*#__PURE__*/React.createElement("p", {
     className: "wp-pic-author"
-  }, __('Author(s):', 'wp-plugin-info-card'), ' ', a.data.author)), /*#__PURE__*/React.createElement("div", {
+  }, __('Author(s):', 'wp-plugin-info-card'), ' ', d)), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-bottom"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-bar"
@@ -3920,7 +3934,7 @@ var PluginFlex = function PluginFlex(a) {
     className: "wp-pic-rating"
   }, a.data.rating, "%", ' ', /*#__PURE__*/React.createElement("em", null, __('Ratings', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-downloaded"
-  }, a.data.downloaded, '+', ' ', /*#__PURE__*/React.createElement("em", null, __('Downloads', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
+  }, a.data.downloaded.toLocaleString('en'), '+', ' ', /*#__PURE__*/React.createElement("em", null, __('Downloads', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-version"
   }, a.data.version, /*#__PURE__*/React.createElement("em", null, __('Version', 'wp-plugin-info-card')))), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-download-link"
@@ -3946,6 +3960,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_BannerWrapper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/BannerWrapper */ "./src/blocks/components/BannerWrapper.js");
 
 
+var HtmlToReactParser = (__webpack_require__(/*! html-to-react */ "./node_modules/html-to-react/index.js").Parser);
 var __ = wp.i18n.__;
 var PluginLarge = function PluginLarge(a) {
   var b = classnames__WEBPACK_IMPORTED_MODULE_0___default()({
@@ -3959,6 +3974,11 @@ var PluginLarge = function PluginLarge(a) {
     large: true,
     theme: true
   });
+  var d = a.data.author;
+  if (d.hasOwnProperty('author')) {
+    d = d.author;
+  }
+  var e = new HtmlToReactParser();
   return /*#__PURE__*/React.createElement("div", {
     className: b
   }, /*#__PURE__*/React.createElement("div", {
@@ -3973,19 +3993,19 @@ var PluginLarge = function PluginLarge(a) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-asset-bg"
   }, /*#__PURE__*/React.createElement(_components_BannerWrapper__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    name: a.data.name,
+    name: e.parse(a.data.name),
     bannerImage: a.data.banners,
     image: a.image || a.data.screenshot_url
   }), /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-asset-bg-title"
-  }, /*#__PURE__*/React.createElement("span", null, a.data.name))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("span", null, e.parse(a.data.name)))), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-half-first"
   }, /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-logo",
     href: "#"
   }), /*#__PURE__*/React.createElement("p", {
     className: "wp-pic-author"
-  }, __('Author(s):', 'wp-plugin-info-card'), ' ', a.data.author), /*#__PURE__*/React.createElement("p", {
+  }, __('Author(s):', 'wp-plugin-info-card'), ' ', d), /*#__PURE__*/React.createElement("p", {
     className: "wp-pic-version"
   }, /*#__PURE__*/React.createElement("span", null, __('Current Version:', 'wp-plugin-info-card')), ' ', a.data.version), /*#__PURE__*/React.createElement("p", {
     className: "wp-pic-updated"
@@ -3999,7 +4019,7 @@ var PluginLarge = function PluginLarge(a) {
     className: "wp-pic-rating"
   }, a.data.rating, "%", ' ', /*#__PURE__*/React.createElement("em", null, __('Ratings', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-downloaded"
-  }, a.data.downloaded, '+', ' ', /*#__PURE__*/React.createElement("em", null, __('Downloads', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
+  }, a.data.downloaded.toLocaleString('en'), '+', ' ', /*#__PURE__*/React.createElement("em", null, __('Downloads', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-requires"
   }, a.data.version, /*#__PURE__*/React.createElement("em", null, __('Version', 'wp-plugin-info-card'))))))))));
 };
@@ -4026,6 +4046,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var HtmlToReactParser = (__webpack_require__(/*! html-to-react */ "./node_modules/html-to-react/index.js").Parser);
 var _wp$i18n = wp.i18n,
   __ = _wp$i18n.__,
   _n = _wp$i18n._n,
@@ -4042,6 +4063,7 @@ var ThemeWordPress = function ThemeWordPress(a) {
     wordpress: true,
     theme: true
   });
+  var d = new HtmlToReactParser();
   return /*#__PURE__*/React.createElement("div", {
     className: b
   }, /*#__PURE__*/React.createElement("div", {
@@ -4056,12 +4078,12 @@ var ThemeWordPress = function ThemeWordPress(a) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-theme-screenshot"
   }, /*#__PURE__*/React.createElement(_components_BannerWrapper__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    name: a.data.name,
+    name: d.parse(a.data.name),
     bannerImage: a.data.banners,
     image: a.image || a.data.screenshot_url
   }), /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-theme-preview"
-  }, __('Theme Preview', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("h3", null, a.data.name, "\xA0", /*#__PURE__*/React.createElement("span", {
+  }, __('Theme Preview', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("h3", null, d.parse(a.data.name), "\xA0", /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-author"
   }, sprintf(__('By %s', 'wp-plugin-info-card'), a.data.author))), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-action-links"
@@ -4086,7 +4108,7 @@ var ThemeWordPress = function ThemeWordPress(a) {
     className: "wp-pic-column-updated"
   }, /*#__PURE__*/React.createElement("strong", null, __('Last Updated:', 'wp-plugin-info-card')), ' ', a.data.last_updated), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-column-downloaded"
-  }, sprintf(__('%s+ Downloads', 'wp-plugin-info-card'), a.data.downloaded)), /*#__PURE__*/React.createElement("div", {
+  }, sprintf(__('%s+ Downloads', 'wp-plugin-info-card'), a.data.downloaded.toLocaleString('en'))), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-column-version"
   }, /*#__PURE__*/React.createElement("span", null, __('Version', 'wp-plugin-info-card'), ' ', a.data.version))))));
 };

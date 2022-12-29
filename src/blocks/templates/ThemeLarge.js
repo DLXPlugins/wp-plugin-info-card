@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import BannerWrapper from '../components/BannerWrapper';
+const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
 const { __ } = wp.i18n;
 
@@ -16,6 +17,13 @@ const PluginLarge = ( props ) => {
 		theme: true,
 	} );
 
+	let author = props.data.author;
+	if ( author.hasOwnProperty( 'author' ) ) {
+		author = author.author;
+	}
+
+	const htmlToReactParser = new HtmlToReactParser();
+
 	return (
 		<div className={ wrapperClasses }>
 			<div className={ classes }>
@@ -23,21 +31,21 @@ const PluginLarge = ( props ) => {
 					<div className="wp-pic-large-content">
 						<div className="wp-pic-asset-bg">
 							<BannerWrapper
-								name={ props.data.name }
+								name={ htmlToReactParser.parse( props.data.name ) }
 								bannerImage={ props.data.banners }
 								image={
 									props.image || props.data.screenshot_url
 								}
 							/>
 							<span className="wp-pic-asset-bg-title">
-								<span>{ props.data.name }</span>
+								<span>{ htmlToReactParser.parse( props.data.name ) }</span>
 							</span>
 						</div>
 						<div className="wp-pic-half-first">
 							<span className="wp-pic-logo" href="#"></span>
 							<p className="wp-pic-author">
 								{ __( 'Author(s):', 'wp-plugin-info-card' ) }{ ' ' }
-								{ props.data.author }
+								{ author }
 							</p>
 							<p className="wp-pic-version">
 								<span>
@@ -71,7 +79,7 @@ const PluginLarge = ( props ) => {
 										</em>
 									</span>
 									<span className="wp-pic-downloaded">
-										{ props.data.downloaded }
+										{ props.data.downloaded.toLocaleString('en') }
 										{ '+' }{ ' ' }
 										<em>
 											{ __(

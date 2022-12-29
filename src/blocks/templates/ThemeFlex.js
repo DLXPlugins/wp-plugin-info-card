@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import BannerWrapper from '../components/BannerWrapper';
+const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
 const { __ } = wp.i18n;
 
@@ -15,19 +16,25 @@ const PluginFlex = ( props ) => {
 		'wp-pic-card': true,
 		theme: true,
 	} );
+	let author = props.data.author;
+	if ( author.hasOwnProperty( 'author' ) ) {
+		author = author.author;
+	}
+
+	const htmlToReactParser = new HtmlToReactParser();
 	return (
 		<div className={ wrapperClasses }>
 			<div className={ classes }>
 				<div className="wp-pic-flip" style={ { display: 'none' } }>
 					<div className="wp-pic-face wp-pic-front">
 						<BannerWrapper
-							name={ props.data.name }
+							name={ htmlToReactParser.parse( props.data.name ) }
 							bannerImage={ props.data.banners }
 							image={ props.image || props.data.screenshot_url }
 						/>
 						<div className="wp-pic-name-wrapper">
 							<span className="wp-pic-name">
-								<strong>{ props.data.name }</strong>
+								<strong>{ htmlToReactParser.parse( props.data.name ) }</strong>
 							</span>
 						</div>
 						<div className="wp-pic-preview-wrapper">
@@ -57,7 +64,7 @@ const PluginFlex = ( props ) => {
 										'Author(s):',
 										'wp-plugin-info-card'
 									) }{ ' ' }
-									{ props.data.author }
+									{ author }
 								</p>
 							</div>
 
@@ -73,7 +80,7 @@ const PluginFlex = ( props ) => {
 										</em>
 									</span>
 									<span className="wp-pic-downloaded">
-										{ props.data.downloaded }
+										{ props.data.downloaded.toLocaleString('en') }
 										{ '+' }{ ' ' }
 										<em>
 											{ __(

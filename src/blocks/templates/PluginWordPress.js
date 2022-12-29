@@ -35,7 +35,7 @@ const PluginWordPress = ( props ) => {
 						<div className="wp-pic-plugin-card-top">
 							<div className="wp-pic-column-name">
 								<h3>
-									{ props.data.name }
+									{ htmlToReactParser.parse( props.data.name ) }
 									<PicIcon
 										image={ props.image }
 										data={ props.data }
@@ -107,7 +107,7 @@ const PluginWordPress = ( props ) => {
 										'%s+ Active Installs',
 										'wp-plugin-info-card'
 									),
-									props.data.active_installs
+									props.data.active_installs.toLocaleString('en')
 								) }
 							</div>
 							<div className="wp-pic-column-compatibility">

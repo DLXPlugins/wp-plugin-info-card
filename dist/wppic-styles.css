@@ -1060,6 +1060,7 @@ p.wp-pic-author,
 }
 
 .wp-pic-card.wp-pic.flex {
+  width: 100%;
   height: auto;
 }
 
@@ -1750,6 +1751,7 @@ p.wp-pic-author,
 .wp-pic.scheme13 a.wp-pic-name,
 .wp-pic.scheme13 .wp-pic-column-name,
 .wp-pic.scheme13 .wp-pic-preview,
+.wp-pic.scheme13 .authors a,
 .wp-pic.scheme13 .wp-pic-theme-card-bottom {
   color: #FFF;
 }
@@ -1805,7 +1807,7 @@ p.wp-pic-author,
   background-color: rgb(42, 82, 152);
 }
 
-.wp-pic.scheme13 .wp-pic-column-name h3 {
+.wp-pic.scheme13 .wp-pic-column-name h3, .wp-pic.scheme13 .wp-pic-column-name a {
   color: #FFF;
 }
 
@@ -2462,34 +2464,34 @@ a.wp-pic-credit:focus:after {
 
 .wp-pic-wrapper.alignfull.wordpress {
   width: 100%;
-  text-align: center;
+  text-align: left;
   margin: 0 auto;
   max-width: 550px;
 }
 
 .wp-pic-wrapper.alignwide.wordpress {
   width: 100%;
-  text-align: center;
+  text-align: left;
   margin: 0 auto;
   max-width: 550px;
 }
 
 .wp-pic-wrapper.aligncenter.wordpress {
   width: 100%;
-  text-align: center;
+  text-align: left;
   max-width: 550px;
 }
 
 .wp-pic-wrapper.alignleft.wordpress {
   width: 100%;
-  text-align: center;
+  text-align: left;
   max-width: 550px;
   float: left;
 }
 
 .wp-pic-wrapper.alignright.wordpress {
   width: 100%;
-  text-align: center;
+  text-align: left;
   margin-left: auto;
   max-width: 550px;
   float: right;

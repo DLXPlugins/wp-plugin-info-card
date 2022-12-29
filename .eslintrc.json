@@ -1,26 +1,33 @@
 {
-	"root": true,
-	"parser": "babel-eslint",
-	"extends": [ "plugin:@wordpress/eslint-plugin/recommended" ],
-	"env": {
-		"browser": false,
-		"es6": true,
-		"node": true,
-		"mocha": true,
-		"jest/globals": true
-	},
-	"parserOptions": {
-		"sourceType": "module",
-		"ecmaFeatures": {
-			"jsx": true
-		}
-	},
+	"parser": "@babel/eslint-parser",
 	"globals": {
 		"wp": true,
 		"wpApiSettings": true,
 		"window": true,
-		"document": true
+		"document": true,
+		"hasSettingsAdmin": "readonly",
+		"hasAppearanceAdmin": "readonly",
+		"hasBlockEditorAdmin": "readonly",
+		"hasEmailsAdmin":"readonly",
+		"has_gutenberg": "readonly",
+		"highlight_and_share": "readonly",
+		"React": "readonly"
 	},
+	"env": {
+		"browser": true,
+		"node": true,
+		"es6": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 6,
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true,
+			"experimentalObjectRestSpread": true
+		},
+		"requireConfigFile": false
+	},
+	"extends": ["plugin:@wordpress/eslint-plugin/recommended-with-formatting"],
 	"plugins": ["react", "jsx-a11y", "jest"],
 	"settings": {
 		"react": {
@@ -30,7 +37,7 @@
 	"rules": {
 		"array-bracket-spacing": ["error", "always"],
 		"brace-style": ["error", "1tbs"],
-		"camelcase": ["error", { "properties": "never" }],
+		"camelcase": 0,
 		"comma-dangle": ["error", "always-multiline"],
 		"comma-spacing": "error",
 		"comma-style": "error",
@@ -81,8 +88,7 @@
 		"no-restricted-syntax": [
 			"error",
 			{
-				"selector":
-					"ImportDeclaration[source.value=/^@wordpress\\u002F.+\\u002F/]",
+				"selector": "ImportDeclaration[source.value=/^@wordpress\\u002F.+\\u002F/]",
 				"message": "Path access on WordPress dependencies is not allowed."
 			},
 			{
@@ -118,18 +124,15 @@
 				"message": "Use @wordpress/utils as import path instead."
 			},
 			{
-				"selector":
-					"CallExpression[callee.name=/^__|_n|_x$/]:not([arguments.0.type=/^Literal|BinaryExpression$/])",
+				"selector": "CallExpression[callee.name=/^__|_n|_x$/]:not([arguments.0.type=/^Literal|BinaryExpression$/])",
 				"message": "Translate function arguments must be string literals."
 			},
 			{
-				"selector":
-					"CallExpression[callee.name=/^_n|_x$/]:not([arguments.1.type=/^Literal|BinaryExpression$/])",
+				"selector": "CallExpression[callee.name=/^_n|_x$/]:not([arguments.1.type=/^Literal|BinaryExpression$/])",
 				"message": "Translate function arguments must be string literals."
 			},
 			{
-				"selector":
-					"CallExpression[callee.name=_nx]:not([arguments.2.type=/^Literal|BinaryExpression$/])",
+				"selector": "CallExpression[callee.name=_nx]:not([arguments.2.type=/^Literal|BinaryExpression$/])",
 				"message": "Translate function arguments must be string literals."
 			}
 		],

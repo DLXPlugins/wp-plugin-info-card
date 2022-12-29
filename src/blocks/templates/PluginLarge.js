@@ -46,12 +46,12 @@ const PluginLarge = ( props ) => {
 					<div className="wp-pic-large-content">
 						<div className="wp-pic-asset-bg">
 							<BannerWrapper
-								name={ props.data.name }
+								name={ htmlToReactParser.parse( props.data.name ) }
 								bannerImage={ props.data.banners }
 								image={ props.image }
 							/>
 							<span className="wp-pic-asset-bg-title">
-								<span>{ props.data.name }</span>
+								<span>{ htmlToReactParser.parse( props.data.name ) }</span>
 							</span>
 						</div>
 						<div className="wp-pic-half-first">
@@ -95,7 +95,7 @@ const PluginLarge = ( props ) => {
 										</em>
 									</span>
 									<span className="wp-pic-downloaded">
-										{ props.data.active_installs }
+										{ props.data.active_installs.toLocaleString('en') }
 										{ '+' }{ ' ' }
 										<em>
 											{ __(
