@@ -158,8 +158,11 @@
 		width: 100%;
 	}
 	.wppic-spinner {
-		width: 100%;
-		text-align: center;
+		svg {
+			margin-top: 8px;
+			width: 18px;
+			height: 18px;
+		}
 	}
 }
 .wp-pic-full-width {

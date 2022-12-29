@@ -16,6 +16,7 @@ const {
 	SelectControl,
 	Spinner,
 	TextControl,
+	Button,
 	Toolbar,
 } = wp.components;
 
@@ -36,6 +37,7 @@ import ThemeFlex from '../templates/ThemeFlex';
 import ThemeWordPress from '../templates/ThemeWordPress';
 import ThemeLarge from '../templates/ThemeLarge';
 import ThemeCard from '../templates/ThemeCard';
+import Logo from '../Logo';
 
 const WP_Plugin_Card_Query = ( props ) => {
 	const { attributes, setAttributes } = props;
@@ -99,7 +101,9 @@ const WP_Plugin_Card_Query = ( props ) => {
 					// Now Set State
 					setLoading( false );
 					setCardLoading( false );
-					setAttributes( { assetData: response.data.data.api_response } );
+					setAttributes( {
+						assetData: response.data.data.api_response,
+					} );
 					setAttributes( { html: response.data.data.html } );
 				} );
 		}
@@ -342,7 +346,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 					onChange={ ( value ) => {
 						setAttributes( { containerid: value } );
 						attributes.containerId = value;
-						setTimeout( function () {
+						setTimeout( function() {
 							pluginOnClick();
 						}, 5000 );
 					} }
@@ -354,7 +358,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 					onChange={ ( value ) => {
 						setAttributes( { margin: value } );
 						attributes.margin = value;
-						setTimeout( function () {
+						setTimeout( function() {
 							pluginOnClick();
 						}, 5000 );
 					} }
@@ -389,367 +393,224 @@ const WP_Plugin_Card_Query = ( props ) => {
 			</PanelBody>
 		</InspectorControls>
 	);
-	
+
 	const block = (
 		<>
 			<>
 				{ loading && (
-					<Placeholder>
-						<div className="wppic-query-block">
-							<div>
-								<svg
-									version="1.1"
-									id="Calque_1"
-									xmlns="http://www.w3.org/2000/svg"
-									x="0px"
-									y="0px"
-									width="150px"
-									height="150px"
-									viewBox="0 0 850.39 850.39"
-									enableBackground="new 0 0 850.39 850.39"
-								>
-									<path
-										fill="#DB3939"
-										d="M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39
-								c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451
-								l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07
-								h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887
-								l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z"
-									/>
-								</svg>
-							</div>
-							<div>
-								<h3>
-									<label htmlFor="wppic-type-select">
-										{ __(
-											'Select a Type',
-											'wp-plugin-info-card'
-										) }
-									</label>
-								</h3>
-								<select
-									id="wppic-type-select"
-									onChange={ ( event ) => {
-										setAttributes( {
-											type: event.target.value,
-										} );
-									} }
-								>
-									<option
-										value="theme"
-										selected={
-											type === 'theme' ? 'selected' : ''
-										}
-									>
-										{ __( 'Theme', 'wp-plugin-info-card' ) }
-									</option>
-									<option
-										value="plugin"
-										selected={
-											type === 'plugin' ? 'selected' : ''
-										}
-									>
-										{ __(
+					<div className="wppic-query-block wppic-query-block-panel">
+						<div className="wppic-block-svg">
+							<Logo size="75" />
+						</div>
+						<div className="wp-pic-tab-panel">
+							<SelectControl
+								label={ __(
+									'Select a Type',
+									'wp-plugin-info-card'
+								) }
+								options={ [
+									{
+										label: __(
 											'Plugin',
 											'wp-plugin-info-card'
-										) }
-									</option>
-								</select>
-							</div>
-							<div>
-								<h3>
-									<label htmlFor="wppic-input-search">
-										{ __(
-											'Search',
+										),
+										value: 'plugin',
+									},
+									{
+										label: __(
+											'Theme',
 											'wp-plugin-info-card'
-										) }
-									</label>
-								</h3>
-							</div>
-							<div>
-								<input
-									type="text"
-									id="wppic-input-search"
-									value={ search }
-									onChange={ ( event ) => {
-										setAttributes( {
-											search: event.target.value,
-										} );
-									} }
-								/>
-							</div>
-							<div>
-								<h3>
-									<label htmlFor="wppic-input-tag">
-										{ __(
-											'Tags (can be comma separated)',
+										),
+										value: 'theme',
+									},
+								] }
+								value={ type }
+								onChange={ ( value ) => {
+									setAttributes( {
+										type: value,
+									} );
+								} }
+							/>
+							<TextControl
+								label={ __(
+									'Search',
+									'wp-plugin-info-card'
+								) }
+								value={ search }
+								onChange={ ( value ) => {
+									setAttributes( {
+										search: value,
+									} );
+								} }
+							/>
+							<TextControl
+								label={ __(
+									'Tags',
+									'wp-plugin-info-card'
+								) }
+								value={ tag }
+								onChange={ ( value ) => {
+									setAttributes( {
+										tag: value,
+									} );
+								} }
+								help={ __( 'Comma separated', 'wp-plugin-info-card' ) }
+							/>
+							<TextControl
+								label={ __(
+									'Author',
+									'wp-plugin-info-card'
+								) }
+								value={ author }
+								onChange={ ( value ) => {
+									setAttributes( {
+										author: value,
+									} );
+								} }
+							/>
+							<TextControl
+								label={ __(
+									'User (Username)',
+									'wp-plugin-info-card'
+								) }
+								value={ user }
+								onChange={ ( value ) => {
+									setAttributes( {
+										user: value,
+									} );
+								} }
+								help={ __( 'See the favorites from this username', 'wp-plugin-info-card' ) }
+							/>
+							<SelectControl
+								label={ __(
+									'Browse',
+									'wp-plugin-info-card'
+								) }
+								options={ [
+									{
+										label: __(
+											'None',
 											'wp-plugin-info-card'
-										) }
-									</label>
-								</h3>
-							</div>
-							<div>
-								<input
-									type="text"
-									id="wppic-input-tag"
-									value={ tag }
-									onChange={ ( event ) => {
-										setAttributes( {
-											tag: event.target.value,
-										} );
-									} }
-								/>
-							</div>
-							<div>
-								<h3>
-									<label htmlFor="wppic-input-author">
-										{ __(
-											'Username',
-											'wp-plugin-info-card'
-										) }
-									</label>
-								</h3>
-								<p>
-									{ __(
-										'Filter by Username',
-										'wp-plugin-info-card'
-									) }
-								</p>
-							</div>
-							<div>
-								<input
-									type="text"
-									id="wppic-input-author"
-									value={ author }
-									onChange={ ( event ) => {
-										setAttributes( {
-											author: event.target.value,
-										} );
-									} }
-								/>
-							</div>
-							<div>
-								<h3>
-									<label htmlFor="wppic-input-user">
-										{ __( 'User', 'wp-plugin-info-card' ) }
-									</label>
-								</h3>
-								<p>
-									{ __(
-										'See the favorites from this username',
-										'wp-plugin-info-card'
-									) }
-								</p>
-							</div>
-							<div>
-								<input
-									type="text"
-									id="wppic-input-user"
-									value={ user }
-									onChange={ ( event ) => {
-										setAttributes( {
-											user: event.target.value,
-										} );
-									} }
-								/>
-							</div>
-
-							<div>
-								<h3>
-									<label htmlFor="wppic-input-browse">
-										{ __(
-											'Browse',
-											'wp-plugin-info-card'
-										) }
-									</label>
-								</h3>
-							</div>
-							<div>
-								<select
-									id="wppic-type-browse"
-									onChange={ ( event ) => {
-										setAttributes( {
-											browse: event.target.value,
-										} );
-									} }
-								>
-									<option
-										value=""
-										selected={
-											browse === '' ? 'selected' : ''
-										}
-									>
-										{ __( 'None', 'wp-plugin-info-card' ) }
-									</option>
-									<option
-										value="featured"
-										selected={
-											browse === 'featured'
-												? 'selected'
-												: ''
-										}
-									>
-										{ __(
+										),
+										value: '',
+									},
+									{
+										label: __(
 											'Featured',
 											'wp-plugin-info-card'
-										) }
-									</option>
-									<option
-										value="updated"
-										selected={
-											browse === 'updated'
-												? 'selected'
-												: ''
-										}
-									>
-										{ __(
+										),
+										value: 'featured',
+									},
+									{
+										label: __(
 											'Updated',
 											'wp-plugin-info-card'
-										) }
-									</option>
-									<option
-										value="favorites"
-										selected={
-											browse === 'favorites'
-												? 'selected'
-												: ''
-										}
-									>
-										{ __(
+										),
+										value: 'updated',
+									},
+									{
+										label: __(
 											'Favorites',
 											'wp-plugin-info-card'
-										) }
-									</option>
-									<option
-										value="popular"
-										selected={
-											browse === 'popular'
-												? 'selected'
-												: ''
-										}
-									>
-										{ __(
+										),
+										value: 'favorites',
+									},
+									{
+										label: __(
 											'Popular',
 											'wp-plugin-info-card'
-										) }
-									</option>
-								</select>
-							</div>
-							<div>
-								<h3>
-									<label htmlFor="wppic-input-per-page">
-										{ __(
-											'Per Page',
+										),
+										value: 'popular',
+									},
+								] }
+								value={ browse }
+								onChange={ ( value ) => {
+									setAttributes( {
+										browse: value,
+									} );
+								} }
+							/>
+							<TextControl
+								type="number"
+								label={ __(
+									'Per Page',
+									'wp-plugin-info-card'
+								) }
+								value={ per_page }
+								onChange={ ( value ) => {
+									setAttributes( {
+										per_page: value,
+									} );
+								} }
+								help={ __( 'Set how many cards to return.', 'wp-plugin-info-card' ) }
+							/>
+							<SelectControl
+								label={ __(
+									'Columns',
+									'wp-plugin-info-card'
+								) }
+								options={ [
+									{
+										label: __(
+											'1',
 											'wp-plugin-info-card'
-										) }
-									</label>
-								</h3>
-							</div>
-							<div>
-								<input
-									type="number"
-									id="wppic-input-per-page"
-									value={ per_page }
-									onChange={ ( event ) => {
-										setAttributes( {
-											per_page: event.target.value,
-										} );
-									} }
-								/>
-							</div>
-							<div>
-								<h3>
-									<label htmlFor="wppic-input-columns">
-										{ __(
-											'Columns',
+										),
+										value: '1',
+									},
+									{
+										label: __(
+											'2',
 											'wp-plugin-info-card'
-										) }
-									</label>
-								</h3>
-							</div>
-							<div>
-								<select
-									id="wppic-input-columns"
-									onChange={ ( event ) => {
-										setAttributes( {
-											cols: event.target.value,
-										} );
-									} }
-								>
-									<option
-										value="1"
-										selected={
-											cols === 1 ? 'selected' : ''
-										}
-									>
-										{ __( '1', 'wp-plugin-info-card' ) }
-									</option>
-									<option
-										value="2"
-										selected={
-											cols === 2 ? 'selected' : ''
-										}
-									>
-										{ __( '2', 'wp-plugin-info-card' ) }
-									</option>
-									<option
-										value="3"
-										selected={
-											cols === 3 ? 'selected' : ''
-										}
-									>
-										{ __( '3', 'wp-plugin-info-card' ) }
-									</option>
-								</select>
-							</div>
-							<div>
-								<input
-									className="button button-primary"
-									type="submit"
-									id="wppic-input-submit"
-									value={ __(
-										'Search',
-										'wp-plugin-info-card'
-									) }
-									onClick={ ( event ) => {
-										setLoading( false );
-										pluginOnClick( event );
-									} }
-								/>
-							</div>
+										),
+										value: '2',
+									},
+									{
+										label: __(
+											'3',
+											'wp-plugin-info-card'
+										),
+										value: '3',
+									},
+								] }
+								value={ cols }
+								onChange={ ( value ) => {
+									setAttributes( {
+										cols: value,
+									} );
+								} }
+							/>
 						</div>
-					</Placeholder>
+						<div className="wp-pic-gutenberg-button">
+							<Button
+								iconSize={ 20 }
+								icon={ <Logo size="25" /> }
+								isSecondary
+								id="wppic-input-submit"
+								onClick={ ( event ) => {
+									event.preventDefault();
+									setLoading( false );
+									pluginOnClick( event );
+								} }
+							>
+								{ __(
+									'Query and Configure',
+									'wp-plugin-info-card'
+								) }
+							</Button>
+						</div>
+					</div>
 				) }
 				{ cardLoading && (
 					<>
-						<Placeholder className="wppic-loading-placeholder">
+						<div className="wppic-loading-placeholder">
 							<div className="wppic-loading">
-								<svg
-									version="1.1"
-									id="Calque_1"
-									xmlns="http://www.w3.org/2000/svg"
-									x="0px"
-									y="0px"
-									width="40px"
-									height="40px"
-									viewBox="0 0 850.39 850.39"
-									enableBackground="new 0 0 850.39 850.39"
-								>
-									<path
-										fill="#DB3939"
-										d="M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39
-								c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451
-								l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07
-								h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887
-								l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z"
-									/>
-								</svg>
+								<Logo size="45" />
 								<br />
 								<div className="wppic-spinner">
 									<Spinner />
 								</div>
 							</div>
-						</Placeholder>
+						</div>
 					</>
 				) }
 				{ ! loading && ! cardLoading && (
@@ -803,7 +664,10 @@ const WP_Plugin_Card_Query = ( props ) => {
 	if ( preview ) {
 		return (
 			<>
-				<img src={ wppic.query_preview } style={ { width: '100%', height: 'auto' } } />
+				<img
+					src={ wppic.query_preview }
+					style={ { width: '100%', height: 'auto' } }
+				/>
 			</>
 		);
 	}

@@ -172,9 +172,10 @@
 .wppic-loading svg {
   width: 100%;
 }
-.wppic-loading .wppic-spinner {
-  width: 100%;
-  text-align: center;
+.wppic-loading .wppic-spinner svg {
+  margin-top: 8px;
+  width: 18px;
+  height: 18px;
 }
 
 .wp-pic-full-width {
