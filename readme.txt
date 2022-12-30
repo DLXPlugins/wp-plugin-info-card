@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Tags: API, plugin, card, theme, block, blocks, gutenberg
 Requires at least: 3.7
 Tested up to: 6.1
-Stable tag: 3.4.0
+Stable tag: 3.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,7 +107,7 @@ This video shows you how:
 
 == Changelog ==
 
-= 3.3.4 =
+= 3.4.1 =
 * Released 2022-12-30
 * The Plugin Info Card Query block got a bit of a makeover.
 * Fixing numerous style and data inconsistencies in the block editor.
@@ -395,5 +395,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 3.4.0 =
+= 3.4.1 =
 The Plugin Info Card Query block got a bit of a makeover. Fixing numerous style and data inconsistencies in the block editor.
