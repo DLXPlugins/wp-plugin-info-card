@@ -92,7 +92,7 @@ const WPPluginInfoCard = ( props ) => {
 		setType( attributes.type );
 		setSlug( attributes.slug );
 
-		if ( ! attributes.defaultsApplied ) {
+		if ( ! attributes.defaultsApplied && 'default' !== attributes.scheme ) {
 			setAttributes( {
 				defaultsApplied: true,
 				scheme: wppic.default_scheme,
