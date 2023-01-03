@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Tags: API, plugin, card, theme, block, blocks, gutenberg
 Requires at least: 3.7
 Tested up to: 6.1
-Stable tag: 3.4.1
+Stable tag: 3.4.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,6 +106,10 @@ This video shows you how:
 11. WordPress layout with themes and 2 columns
 
 == Changelog ==
+
+= 3.4.2 =
+* Released 2023-01-02
+* Fixing defaults not being applied correctly for blocks.
 
 = 3.4.1 =
 * Released 2022-12-30
@@ -394,6 +398,9 @@ This video shows you how:
 * First release.
 
 == Upgrade Notice ==
+
+= 3.4.2 =
+Fixing defaults not being applied correctly for blocks.
 
 = 3.4.1 =
 The Plugin Info Card Query block got a bit of a makeover. Fixing numerous style and data inconsistencies in the block editor.

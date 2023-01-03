@@ -79,7 +79,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 		}
 
 		// Apply defaults.
-		if ( ! attributes.defaultsApplied ) {
+		if ( ! attributes.defaultsApplied && 'default' === attributes.scheme ) {
 			setAttributes( {
 				defaultsApplied: true,
 				scheme: wppic.default_scheme,
