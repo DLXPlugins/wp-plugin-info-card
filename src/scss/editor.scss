@@ -22,6 +22,34 @@
 	transform-origin: 50% 50%;
 }
 
+.wp-plugin-info-card {
+	&.aligncenter,
+	&.alignwide,
+	&.alignfull {
+		display: flex;
+		justify-content: center;
+	}
+}
+
+/* WP Pic Query Block Styles */
+.wp-plugin-info-card-query {
+	.wp-pic-grid {
+		display: grid;
+		row-gap: 10px;
+		column-gap: 10px;
+		&.cols-1 {
+			grid-template-columns: 1fr;
+		}
+		&.cols-2 {
+			grid-template-columns: 1fr 1fr;
+			
+		}
+		&.cols-3 {
+			grid-template-columns: 1fr 1fr 1fr;
+		}
+	}
+}
+
 /* Panel Styles */
 .wppic-query-block-panel {
 	position: relative;
@@ -130,8 +158,11 @@
 		width: 100%;
 	}
 	.wppic-spinner {
-		width: 100%;
-		text-align: center;
+		svg {
+			margin-top: 8px;
+			width: 18px;
+			height: 18px;
+		}
 	}
 }
 .wp-pic-full-width {

@@ -3,6 +3,8 @@ import classnames from 'classnames';
 import isNumeric from 'validator/lib/isNumeric';
 import PicIcon from '../components/PicIcon';
 import StarRatings from 'react-star-ratings';
+const HtmlToReactParser = require( 'html-to-react' ).Parser;
+
 
 const { __, _n, sprintf } = wp.i18n;
 
@@ -24,7 +26,7 @@ const PluginWordPress = ( props ) => {
 	if ( isNumeric( requires ) ) {
 		requires = 'WP ' + requires + '+';
 	}
-
+	const htmlToReactParser = new HtmlToReactParser();
 	return (
 		<div className={ wrapperClasses }>
 			<div className={ classes }>
@@ -33,7 +35,7 @@ const PluginWordPress = ( props ) => {
 						<div className="wp-pic-plugin-card-top">
 							<div className="wp-pic-column-name">
 								<h3>
-									{ props.data.name }
+									{ htmlToReactParser.parse( props.data.name ) }
 									<PicIcon
 										image={ props.image }
 										data={ props.data }
@@ -49,13 +51,13 @@ const PluginWordPress = ( props ) => {
 								<p>{ props.data.short_description }</p>
 								<p className="authors">
 									<cite>
-										{ sprintf(
+										{ htmlToReactParser.parse( sprintf(
 											__(
 												'By %s',
 												'wp-plugin-info-card'
 											),
-											props.data.author
-										) }
+											 props.data.author
+										) ) }
 									</cite>
 								</p>
 							</div>
@@ -105,7 +107,7 @@ const PluginWordPress = ( props ) => {
 										'%s+ Active Installs',
 										'wp-plugin-info-card'
 									),
-									props.data.active_installs
+									props.data.active_installs.toLocaleString('en')
 								) }
 							</div>
 							<div className="wp-pic-column-compatibility">

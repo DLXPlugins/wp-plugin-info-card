@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import isNumeric from 'validator/lib/isNumeric';
+const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
 const { __ } = wp.i18n;
 
@@ -34,6 +35,7 @@ const PluginCard = ( props ) => {
 		backgroundRepeat: 'no-repeat',
 		backgroundSize: 'cover',
 	};
+	const htmlToReactParser = new HtmlToReactParser();
 
 	return (
 		<div className={ wrapperClasses }>
@@ -44,10 +46,10 @@ const PluginCard = ( props ) => {
 							className="wp-pic-logo"
 							style={ bgImageStyles }
 						></span>
-						<span className="wp-pic-name">{ props.data.name }</span>
+						<span className="wp-pic-name">{ htmlToReactParser.parse( props.data.name ) }</span>
 						<p className="wp-pic-author">
 							{ __( 'Author(s):', 'wp-plugin-info-card' ) }{ ' ' }
-							{ props.data.author }
+							{ htmlToReactParser.parse( props.data.author ) }
 						</p>
 						<div className="wp-pic-bottom">
 							<div className="wp-pic-bar">
@@ -61,7 +63,7 @@ const PluginCard = ( props ) => {
 									</em>
 								</span>
 								<span className="wp-pic-downloaded">
-									{ props.data.active_installs }+
+									{ props.data.active_installs.toLocaleString('en') }+
 									<em>
 										{ __(
 											'Installs',

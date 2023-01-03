@@ -2,8 +2,8 @@
 Contributors: briKou, ronalfy
 Tags: API, plugin, card, theme, block, blocks, gutenberg
 Requires at least: 3.7
-Tested up to: 5.7
-Stable tag: 3.3.0
+Tested up to: 6.1
+Stable tag: 3.4.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,6 +106,16 @@ This video shows you how:
 11. WordPress layout with themes and 2 columns
 
 == Changelog ==
+
+= 3.4.2 =
+* Released 2023-01-02
+* Fixing defaults not being applied correctly for blocks.
+
+= 3.4.1 =
+* Released 2022-12-30
+* The Plugin Info Card Query block got a bit of a makeover.
+* Fixing numerous style and data inconsistencies in the block editor.
+* Updating block editor and plugin build scripts. <a href="https://github.com/MediaRon/wp-plugin-info-card">See GitHub</a>.
 
 = 3.3.3 =
 * Released 2021-06-04
@@ -389,9 +399,8 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 3.3.0 =
-Re-designed admin panel options. Re-designed primary Gutenberg block.
+= 3.4.2 =
+Fixing defaults not being applied correctly for blocks.
 
-= 3.1.21 =
-
-WordPress 5.5 compatibility.
+= 3.4.1 =
+The Plugin Info Card Query block got a bit of a makeover. Fixing numerous style and data inconsistencies in the block editor.

@@ -168,7 +168,65 @@ function wppic_get_query_shortcode() {
 	if ( ! empty( $_GET['author'] ) ) {
 		$attrs['author'] = $_GET['author'];
 	}
-	die( wppic_shortcode_query_function( $attrs ) );
+
+	//Build the query
+	$queryArgs = array(
+		'search' 	=> $attrs['search'],
+		'tag' 		=> $attrs['tag'],
+		'author' 	=> $attrs['author'],
+		'user' 		=> $attrs['user'],
+		'browse' 	=> $attrs['browse'],
+		'per_page' 	=> $attrs['per_page'],
+		'fields' => array(
+			'name'				=> true,
+			'requires'			=> true,
+			'tested'			=> true,
+			'compatibility'		=> true,
+			'screenshot_url'	=> true,
+			'ratings'			=> true,
+			'rating' 			=> true,
+			'num_ratings' 		=> true,
+			'homepage' 			=> true,
+			'sections' 			=> true,
+			'description' 		=> true,
+			'short_description'	=> true,
+			'banners'           => true,
+			'downloaded'  	    => true,
+			'last_updated'      => true,
+			'downloadlink'	    => true,
+		)
+	);
+	$type = $attrs['type'];
+	$queryArgs = apply_filters( 'wppic_api_query', $queryArgs, $type, $attrs );
+
+	$api = '';
+
+	//Plugins query
+	if ( $type === 'plugin' ) {
+		$type = 'plugins';
+		require_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
+		$api = plugins_api( 'query_plugins', $queryArgs	);
+	}
+
+	//Themes query
+	if ( $type === 'theme' ) {
+		$type = 'themes';
+		require_once( ABSPATH . 'wp-admin/includes/theme.php' );
+		$api = themes_api( 'query_themes',$queryArgs );
+	}
+
+	if( !is_wp_error( $api ) && !empty( $api ) ) {
+		if ( isset( $api->$type ) ) {
+			wp_send_json_success( 
+				array(
+					'api_response' => $api->$type,
+					'html' => wppic_shortcode_query_function( $attrs ),
+				)
+			);
+		}
+	}
+	wp_send_json_error( array( 'message' => 'No data found' ) );
+	die( '' );
 }
 
 /***************************************************************

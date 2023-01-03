@@ -1,5 +1,7 @@
 import classnames from 'classnames';
+import isNumeric from 'validator/lib/isNumeric';
 import BannerWrapper from '../components/BannerWrapper';
+const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
 const { __ } = wp.i18n;
 
@@ -13,9 +15,30 @@ const PluginLarge = ( props ) => {
 		'wp-pic': true,
 		'wp-pic-card': true,
 		large: true,
-		theme: true,
+		plugin: true,
 	} );
+	// WordPress Requires.
+	let requires = props.data.requires;
+	if ( isNumeric( requires ) ) {
+		requires = 'WP ' + requires + '+';
+	}
+	let icon = '';
+	if ( props.data.icons.svg ) {
+		icon = props.data.icons.svg;
+	} else if ( props.data.icons[ '2x' ] ) {
+		icon = props.data.icons[ '2x' ];
+	} else if ( props.data.icons[ '1x' ] ) {
+		icon = props.data.icons[ '1x' ];
+	} else {
+		icon = props.defaultIcon;
+	}
 
+	const bgImageStyles = {
+		backgroundImage: `url(${ icon })`,
+		backgroundRepeat: 'no-repeat',
+		backgroundSize: 'cover',
+	};
+	const htmlToReactParser = new HtmlToReactParser();
 	return (
 		<div className={ wrapperClasses }>
 			<div className={ classes }>
@@ -23,21 +46,22 @@ const PluginLarge = ( props ) => {
 					<div className="wp-pic-large-content">
 						<div className="wp-pic-asset-bg">
 							<BannerWrapper
-								name={ props.data.name }
+								name={ htmlToReactParser.parse( props.data.name ) }
 								bannerImage={ props.data.banners }
-								image={
-									props.image || props.data.screenshot_url
-								}
+								image={ props.image }
 							/>
 							<span className="wp-pic-asset-bg-title">
-								<span>{ props.data.name }</span>
+								<span>{ htmlToReactParser.parse( props.data.name ) }</span>
 							</span>
 						</div>
 						<div className="wp-pic-half-first">
-							<span className="wp-pic-logo" href="#"></span>
+							<span
+								className="wp-pic-logo"
+								style={ bgImageStyles }
+							></span>
 							<p className="wp-pic-author">
 								{ __( 'Author(s):', 'wp-plugin-info-card' ) }{ ' ' }
-								{ props.data.author }
+								{ htmlToReactParser.parse( props.data.author ) }
 							</p>
 							<p className="wp-pic-version">
 								<span>
@@ -71,20 +95,20 @@ const PluginLarge = ( props ) => {
 										</em>
 									</span>
 									<span className="wp-pic-downloaded">
-										{ props.data.downloaded }
+										{ props.data.active_installs.toLocaleString('en') }
 										{ '+' }{ ' ' }
 										<em>
 											{ __(
-												'Downloads',
+												'Installs',
 												'wp-plugin-info-card'
 											) }
 										</em>
 									</span>
 									<span className="wp-pic-requires">
-										{ props.data.version }
+										{ props.data.requires }
 										<em>
 											{ __(
-												'Version',
+												'Requires',
 												'wp-plugin-info-card'
 											) }
 										</em>
