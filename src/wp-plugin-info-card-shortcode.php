@@ -171,6 +171,9 @@ function wppic_get_query_shortcode() {
 		$attrs['author'] = $_GET['author'];
 	}
 
+	$sortby = isset( $_GET['sortby'] ) ? $_GET['sortby'] : '';
+	$sort	= isset( $_GET['sort'] ) ? $_GET['sort'] : '';
+
 	// Build the query
 	$queryArgs = array(
 		'search'   => $attrs['search'],
