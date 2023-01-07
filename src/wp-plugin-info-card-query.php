@@ -33,6 +33,8 @@ function wppic_shortcode_query_function( $atts, $content="" ) {
 		"scheme" 		=> '',	//color scheme : default|scheme1->scheme10 (default: empty)
 		"layout" 		=> '',	//card|flat|wordpress
 		"custom" 		=> '',	//value to print : url|name|version|author|requires|rating|num_ratings|downloaded|last_updated|download_link
+		"sortby"        => 'none', //none|active_installs (plugins only)|downloaded|last_updated
+		"sort"          => 'ASC', //ASC|DESC
 	), $atts, 'wppic_default' ) );
 
 	//Prepare the row columns
@@ -83,9 +85,42 @@ function wppic_shortcode_query_function( $atts, $content="" ) {
 		$api = themes_api( 'query_themes',$queryArgs );
 	}
 
+	// Begin sort.
+	$sort_results = array();
+	if ( 'plugins' === $type && ! is_wp_error( $api ) && ! empty( $api ) && 'none' !== $sortby ) {
+		$plugins = $api->plugins;
+		array_multisort(
+			array_column( $plugins, $sortby ),
+			'DESC' === $sort ? SORT_DESC : SORT_ASC,
+			$plugins
+		);
+		$sort_results = $plugins;
+	}
+	if ( 'themes' === $type && ! is_wp_error( $api ) && ! empty( $api ) && 'none' !== $sortby ) {
+		$themes = $api->themes;
+		array_multisort(
+			array_column( $themes, $sortby ),
+			'DESC' === $sort ? SORT_DESC : SORT_ASC,
+			$themes
+		);
+		$sort_results = $themes;
+	}
+
+	/**
+	 * Filter: wppic_query_results
+	 *
+	 * Sorted results ready for display.
+	 *
+	 * @param array $sort_results The sorted results.
+	 * @param string $type The type of query (plugins, themes).
+	 * @param string $sortby The field to sort by.
+	 * @param string $sort The sort order (ASC, DESC).
+	 */
+	$sort_results = apply_filters( 'wppic_query_results', $sort_results, $type, $sortby, $sort );
+
 	//Get the query result to build the content
-	if( !is_wp_error( $api ) && !empty( $api ) ){
-		if( is_array( $api->$type ) ){
+	if( !is_wp_error( $sort_results ) && !empty( $sort_results ) ){
+		if( is_array( $sort_results ) ){
 
 			$content = $row = $open = $close = '';
 			$count = 1;
@@ -96,7 +131,7 @@ function wppic_shortcode_query_function( $atts, $content="" ) {
 			}
 
 			//Creat the loop wp-pic-1-
-			foreach ( $api->$type as $item ){
+			foreach ( $sort_results as $item ){
 				$item = json_decode( json_encode( $item ) );
 				if ( $column && ( $count ) % $cols == 1 && $cols > 1 ){
 					$row = true;

@@ -12,7 +12,6 @@ const { useState, useEffect, Fragment } = wp.element;
 
 const {
 	PanelBody,
-	Placeholder,
 	SelectControl,
 	Spinner,
 	TextControl,
@@ -68,6 +67,8 @@ const WP_Plugin_Card_Query = ( props ) => {
 		per_page,
 		preview,
 		cols,
+		sortby,
+		sort,
 	} = attributes;
 
 	useEffect( () => {
@@ -95,7 +96,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 			axios
 				.get(
 					rest_url +
-						`?type=${ attributes.type }&slug=${ attributes.slug }&align=${ attributes.align }&image=${ attributes.image }&containerid=${ attributes.containerid }&margin=${ attributes.margin }&clear=${ attributes.clear }&expiration=${ attributes.expiration }&ajax=${ attributes.ajax }&scheme=${ attributes.scheme }&layout=${ attributes.layout }&search=${ attributes.search }&tag=${ attributes.tag }&author=${ attributes.author }&user=${ attributes.user }&browse=${ attributes.browse }&per_page=${ attributes.per_page }&cols=${ attributes.cols }}`
+						`?type=${ attributes.type }&slug=${ attributes.slug }&align=${ attributes.align }&image=${ attributes.image }&containerid=${ attributes.containerid }&margin=${ attributes.margin }&clear=${ attributes.clear }&expiration=${ attributes.expiration }&ajax=${ attributes.ajax }&scheme=${ attributes.scheme }&layout=${ attributes.layout }&search=${ attributes.search }&tag=${ attributes.tag }&author=${ attributes.author }&user=${ attributes.user }&browse=${ attributes.browse }&per_page=${ attributes.per_page }&cols=${ attributes.cols }}&sortby=${ attributes.sortby }&sort=${ attributes.sort }`
 				)
 				.then( ( response ) => {
 					// Now Set State
@@ -576,6 +577,76 @@ const WP_Plugin_Card_Query = ( props ) => {
 								onChange={ ( value ) => {
 									setAttributes( {
 										cols: value,
+									} );
+								} }
+							/>
+							<SelectControl
+								label={ __(
+									'Sort results by:',
+									'wp-plugin-info-card'
+								) }
+								options={ [
+									{
+										label: __(
+											'None',
+											'wp-plugin-info-card'
+										),
+										value: 'none',
+									},
+									{
+										label: __(
+											'Active Installs (Plugins only)',
+											'wp-plugin-info-card'
+										),
+										value: 'active_installs',
+									},
+									{
+										label: __(
+											'Downloads',
+											'wp-plugin-info-card'
+										),
+										value: 'downloaded',
+									},
+									{
+										label: __(
+											'Last Updated',
+											'wp-plugin-info-card'
+										),
+										value: 'last_updated',
+									},
+								] }
+								value={ sortby }
+								onChange={ ( value ) => {
+									setAttributes( {
+										sortby: value,
+									} );
+								} }
+							/>
+							<SelectControl
+								label={ __(
+									'Sort Order:',
+									'wp-plugin-info-card'
+								) }
+								options={ [
+									{
+										label: __(
+											'ASC',
+											'wp-plugin-info-card'
+										),
+										value: 'ASC',
+									},
+									{
+										label: __(
+											'DESC',
+											'wp-plugin-info-card'
+										),
+										value: 'DESC',
+									},
+								] }
+								value={ sort }
+								onChange={ ( value ) => {
+									setAttributes( {
+										sort: value,
 									} );
 								} }
 							/>

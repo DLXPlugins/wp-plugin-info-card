@@ -109,6 +109,14 @@
 		"defaultsApplied": {
 			"type": "boolean",
 			"default": false
+		},
+		"sortby": {
+			"type": "string",
+			"default": "none"
+		},
+		"sort": {
+			"type": "string",
+			"default": "ASC"
 		}
 	},
 	"example": {

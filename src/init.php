@@ -128,6 +128,8 @@ function wppic_block_editor_query( $attributes ) {
 		'ajax'        => $attributes['ajax'],
 		'scheme'      => $attributes['scheme'],
 		'layout'      => $attributes['layout'],
+		'sortby'      => $attributes['sortby'],
+		'sort'        => $attributes['sort'],
 	);
 	if ( ! empty( $attributes['browse'] ) ) {
 		$args['browse'] = $attributes['browse'];
