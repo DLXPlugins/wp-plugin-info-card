@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Tags: API, plugin, card, theme, block, blocks, gutenberg
 Requires at least: 3.7
 Tested up to: 6.1
-Stable tag: 3.4.5
+Stable tag: 3.4.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,7 +107,7 @@ This video shows you how:
 
 == Changelog ==
 
-= 3.4.5 =
+= 3.4.6 =
 * Released 2023-01-07
 * Added ability to sort results by active installs, downloads, and last updated in the Query shortcode/block.
 
@@ -403,5 +403,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 3.4.5 =
+= 3.4.6 =
 Added ability to sort results by active installs, downloads, and last updated in the Query shortcode/block.
