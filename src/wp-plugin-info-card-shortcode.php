@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  ***************************************************************/
 function wppic_register_sripts() {
 	$min_or_not = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-	wp_enqueue_style( 'wppic-style', plugins_url( '/dist/wppic-style.css', WPPIC_FILE ), null, WPPIC_VERSION );
+	wp_enqueue_style( 'wppic-style', plugins_url( '/dist/wppic-styles.css', WPPIC_FILE ), null, WPPIC_VERSION );
 	wp_enqueue_style( 'dashicons' );
 	wp_enqueue_script( 'wppic-script', WPPIC_URL . 'js/wppic-script' . $min_or_not . '.js', array( 'jquery' ), WPPIC_VERSION, true );
 }
@@ -152,6 +152,8 @@ function wppic_get_query_shortcode() {
 		'ajax'        => isset( $_GET['ajax'] ) ? $_GET['ajax'] : '',
 		'scheme'      => isset( $_GET['scheme'] ) ? $_GET['scheme'] : '',
 		'layout'      => isset( $_GET['layout'] ) ? $_GET['layout'] : '',
+		'sortby' 	=> isset( $_GET['sortby'] ) ? $_GET['sortby'] : '',
+		'sort' 		=> isset( $_GET['sort'] ) ? $_GET['sort'] : '',
 	);
 	if ( ! empty( $_GET['browse'] ) ) {
 		$attrs['browse'] = $_GET['browse'];
@@ -168,7 +170,100 @@ function wppic_get_query_shortcode() {
 	if ( ! empty( $_GET['author'] ) ) {
 		$attrs['author'] = $_GET['author'];
 	}
-	die( wppic_shortcode_query_function( $attrs ) );
+
+	$sortby = isset( $_GET['sortby'] ) ? $_GET['sortby'] : '';
+	$sort	= isset( $_GET['sort'] ) ? $_GET['sort'] : '';
+
+	// Build the query
+	$queryArgs = array(
+		'search'   => $attrs['search'],
+		'tag'      => $attrs['tag'],
+		'author'   => $attrs['author'],
+		'user'     => $attrs['user'],
+		'browse'   => $attrs['browse'],
+		'per_page' => $attrs['per_page'],
+		'fields'   => array(
+			'name'              => true,
+			'requires'          => true,
+			'tested'            => true,
+			'compatibility'     => true,
+			'screenshot_url'    => true,
+			'ratings'           => true,
+			'rating'            => true,
+			'num_ratings'       => true,
+			'homepage'          => true,
+			'sections'          => true,
+			'description'       => true,
+			'short_description' => true,
+			'banners'           => true,
+			'downloaded'        => true,
+			'last_updated'      => true,
+			'downloadlink'      => true,
+		),
+	);
+	$type      = $attrs['type'];
+	$queryArgs = apply_filters( 'wppic_api_query', $queryArgs, $type, $attrs );
+
+	$api = '';
+
+	// Plugins query
+	if ( $type === 'plugin' ) {
+		$type = 'plugins';
+		require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+		$api = plugins_api( 'query_plugins', $queryArgs );
+	}
+
+	// Themes query
+	if ( $type === 'theme' ) {
+		$type = 'themes';
+		require_once ABSPATH . 'wp-admin/includes/theme.php';
+		$api = themes_api( 'query_themes', $queryArgs );
+	}
+
+	// Begin sort.
+	$sort_results = array();
+	if ( 'plugins' === $type && ! is_wp_error( $api ) && ! empty( $api ) && 'none' !== $sortby ) {
+		$plugins = $api->plugins;
+		array_multisort(
+			array_column( $plugins, $sortby ),
+			'DESC' === $sort ? SORT_DESC : SORT_ASC,
+			$plugins
+		);
+		$sort_results = $plugins;
+	}
+	if ( 'themes' === $type && ! is_wp_error( $api ) && ! empty( $api ) && 'none' !== $sortby ) {
+		$themes = $api->themes;
+		array_multisort(
+			array_column( $themes, $sortby ),
+			'DESC' === $sort ? SORT_DESC : SORT_ASC,
+			$themes
+		);
+		$sort_results = $themes;
+	}
+
+	/**
+	 * Filter: wppic_query_results
+	 *
+	 * Sorted results ready for display.
+	 *
+	 * @param array $sort_results The sorted results.
+	 * @param string $type The type of query (plugins, themes).
+	 * @param string $sortby The field to sort by.
+	 * @param string $sort The sort order (ASC, DESC).
+	 */
+	$sort_results = apply_filters( 'wppic_query_results', $sort_results, $type, $sortby, $sort );
+
+	if ( ! is_wp_error( $sort_results ) && ! empty( $sort_results ) ) {
+
+		wp_send_json_success(
+			array(
+				'api_response' => json_decode( json_encode( $sort_results ) ),
+				'html'         => wppic_shortcode_query_function( $attrs ),
+			)
+		);
+	}
+	wp_send_json_error( array( 'message' => 'No data found' ) );
+	die( '' );
 }
 
 /***************************************************************
@@ -299,6 +394,12 @@ function wppic_shortcode_function( $atts, $content = '' ) {
 				// Align card
 				$alignCenter = false;
 				$alignStyle  = '';
+
+				// Custom style
+				$style = '';
+				if ( ! empty( $margin ) || ! empty( $alignStyle ) ) {
+					$style = 'style="' . $margin . $alignStyle . '"';
+				}
 
 				// Extra container ID
 				if ( ! empty( $containerid ) ) {

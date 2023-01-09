@@ -5,7 +5,7 @@
  * Description: WP Plugin Info Card displays plugins & themes identity cards in a beautiful box with a smooth rotation effect using WordPress.org Plugin API & WordPress.org Theme API. Dashboard widget included.
  * Author: Brice CAPOBIANCO, Ronald Huereca
  * Author URI: http://b-website.com/
- * Version: 3.2.0
+ * Version: 3.4.6
  * Domain Path: /langs
  * Text Domain: wp-plugin-info-card
  */
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Define constants
  ***************************************************************/
 if ( ! defined( 'WPPIC_VERSION' ) ) {
-	define( 'WPPIC_VERSION', '3.1.21' );
+	define( 'WPPIC_VERSION', '3.4.6' );
 }
 if ( ! defined( 'WPPIC_PATH' ) ) {
 	define( 'WPPIC_PATH', plugin_dir_path( __FILE__ ) . '/src/' );
@@ -161,6 +161,21 @@ function wppic_uninstall() {
 	wp_clear_scheduled_hook( 'wppic_daily_cron' );
 	//Purge transients
 	wppic_delete_transients();
+}
+
+/**
+ * Get the plugin directory for a path.
+ *
+ * @param string $path The path to the file.
+ *
+ * @return string The new path.
+ */
+function wppic_get_plugin_dir( $path = '' ) {
+	$dir = rtrim( plugin_dir_path( __FILE__ ), '/' );
+	if ( ! empty( $path ) && is_string( $path ) ) {
+		$dir .= '/' . ltrim( $path, '/' );
+	}
+	return $dir;
 }
 
 

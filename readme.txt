@@ -2,8 +2,8 @@
 Contributors: briKou, ronalfy
 Tags: API, plugin, card, theme, block, blocks, gutenberg
 Requires at least: 3.7
-Tested up to: 5.7
-Stable tag: 3.2.0
+Tested up to: 6.1
+Stable tag: 3.4.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,12 +36,7 @@ The plugin also uses WordPress transients to store data returned by the API for 
 
 The dashboard widget is very easy to set up: you simply add as many plugins and themes as you want in the admin page and they become visible in your dashboard. Fields are added on-the-fly and are sortable via drag-and-drop.
 
-It is perfect to keep track of your own plugins!
-
-This plugin uses the TinyMCE API to improve UI and make inserting shortcodes easier!
-
-
-**Please ask for help or report bugs if anything goes wrong. It is the best way to make the community benefit!**
+It is perfect to keep track of your own plugins and themes!
 
 
 [CHECK OUT THE DEMO](https://mediaron.com/wp-plugin-info-card/ "Try It!")
@@ -64,81 +59,9 @@ This plugin uses the TinyMCE API to improve UI and make inserting shortcodes eas
 	* For plugins: url, name, icons, banners, version, author, requires, rating, num_ratings, downloaded, last_updated, download_link
 	* For themes: url, name, version, author, screenshot_url, rating, num_ratings, downloaded, last_updated, homepage, download_link
 
-
-
-= Examples =
-
-The slug is the only required parameter for plugin. You have to set the "type" parameter for themes : type="theme"
-`[wp-pic slug="wp-plugin-info-card"]`
-
-`[wp-pic type="theme" slug="zerif-lite" align="right" expiration="60" ajax="yes"]`
-
-`[wp-pic slug="adblock-notify-by-bweb" layout="large" scheme="scheme1" align="right" margin="0 0 0 20px" containerid="download-sexion" ajax="yes"]`
-
-`[wp-pic slug="wp-plugin-info-card" custom="name" ] has been downloaded [wp-pic slug="wp-plugin-info-card" custom="downloaded" ] times!`
-
-
-
-[FULL DOCUMENTATION AND EXAMPLES](https://mediaron.com/wp-plugin-info-card/ "Documentation & examples")
-
-
-
-= [wp-pic-query] Query shortcode parameters - NEW (added in 2.5) =
-
-* **search:**  A search term. Default empty.
-* **tag:** Tag to filter themes/plugins. Comma separated list. Default empty.
-* **author:** Username of an author to filter themes/plugins. Default empty.
-* **user:** Username to query for their favorites. Default empty.
-* **browse:** Browse view: 'featured', 'popular', 'updated', 'favorites'.
-* **per_page:** Number of themes/plugins per query (page). Default 24.
-* **cols:** Columns layout to use: '2', '3'. Default empty (none).
-
-**Then use the [wp-pic] shortcode parameters**
-
-
-
-
-= Examples =
-
-Plugin by author (automattic) limit to 6 items with a two columns render
-`[wp-pic-query author="automattic" per_page="6" type="plugin" layout="wordpress" align="center" ajax="yes" cols="2"]`
-
-Plugin by user favorits collection limit to 4 with a two columns render
-`[wp-pic-query user="briKou" per_page="4" type="plugin" layout="wordpress" align="center" ajax="yes" cols="2"]`
-
-Popular plugins limit to 6 items with whitout column
-`[wp-pic-query browse="popular" per_page="6" type="plugin" layout="card" align="left" margin="1rem" ajax="yes" cols="1"]`
-
-Themes by author (wordpressdotorg) with a two columns render
-`[wp-pic-query author="wordpressdotorg" per_page="2" type="theme" layout="card" align="center" clear="after" ajax="yes" cols="2"]`
-
-Themes by tags (dark & four-columns) limit to 4 items with a two columns render
-`[wp-pic-query tag="dark,four-columns" per_page="4" type="theme" layout="wordpress" align="center" ajax="yes" cols="2"]`
-
-Themes by tag (buddypress)  limit to 2 items without columns
-`[wp-pic-query tag="buddypress" per_page="2" type="theme" layout="large" align="center" align="center"]`
-
-Themes by search term limit to 4 items with a two columns render
-`[wp-pic-query search="cool" per_page="4" type="theme" layout="wordpress" align="center" ajax="yes" cols="2"]`
-
-
-
-[FULL DOCUMENTATION AND EXAMPLES](https://mediaron.com/wp-plugin-info-card/wp-plugin-info-card-query-shortcode/ "Documentation & examples")
-
-
-
-= Other features =
-
-* You can provide a list of slugs (comma-separated) in your shortcode slug parameter, WPPIC will randomly choose one item from the list on each page refresh.
-* You cane asily overload the plugin rendering. You need to create a new "wppic-templates" folder into your theme folder, then copy the template you want to overload from the WP Plugin Info Card "wppic-templates" folder.
-* You can create your own template file. You need to create a new "wppic-templates" folder into your theme folder, then copy the template file "wppic-template-plugin-large.php" or "wppic-template-theme-large.php" from the WP Plugin Info Card '/wppic-templates' folder. Rename the file as "wppic-template-plugin-NEWTEMPLATE.php" or "wppic-template-theme-NEWTEMPLATE.php", edit it as you go, and add your own CSS rules. Finally, call your new template by adding the following parameter in your shortcode: layout="NEWTEMPLATE"
-
-= Premium Addon =
+[CHECK OUT MORE EXAMPLES](https://mediaron.com/wp-plugin-info-card/ "More documentation")
 
 [PREMIUM ADD-ON - WP Envato Affiliate Card](http://b-website.com/wp-envato-affiliate-card-powered-envato-market-api "WP Envato Affiliate Card")
-
-
-
 
 = Languages =
 
@@ -146,9 +69,7 @@ Please <a href="https://translate.wordpress.org/projects/wp-plugins/wp-plugin-in
 
 = GitHub =
 
-Feel free to make pull requests or issues on the <a href="https://github.com/ronalfy/wp-plugin-info-card">WP Plugin Info Card GitHub account</a>.
-
-
+Feel free to make pull requests or issues on the <a href="https://github.com/mediaron/wp-plugin-info-card">WP Plugin Info Card GitHub account</a>.
 
 
 == Installation ==
@@ -184,10 +105,26 @@ This video shows you how:
 10. WordPress layout with a plugin card
 11. WordPress layout with themes and 2 columns
 
-
-
-
 == Changelog ==
+
+= 3.4.6 =
+* Released 2023-01-07
+* Added ability to sort results by active installs, downloads, and last updated in the Query shortcode/block.
+
+= 3.4.2 =
+* Released 2023-01-02
+* Fixing defaults not being applied correctly for blocks.
+
+= 3.4.1 =
+* Released 2022-12-30
+* The Plugin Info Card Query block got a bit of a makeover.
+* Fixing numerous style and data inconsistencies in the block editor.
+* Updating block editor and plugin build scripts. <a href="https://github.com/MediaRon/wp-plugin-info-card">See GitHub</a>.
+
+= 3.3.3 =
+* Released 2021-06-04
+* Re-worked admin panel options.
+* Re-worked primary Gutenberg block.
 
 = 3.1.21 =
 * WordPress 5.5 compatibility.
@@ -466,6 +403,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 3.1.21 =
-
-WordPress 5.5 compatibility.
+= 3.4.6 =
+Added ability to sort results by active installs, downloads, and last updated in the Query shortcode/block.

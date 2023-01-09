@@ -1,8 +1,8 @@
 /**
  * Plugin Name: WP Plugin Info Card by b*web
  * Plugin URI: http://b-website.com/
- * Author: Brice CAPOBIANCO - b*web
  */
+ @import "../common.scss";
 .wp-pic-center {
  	text-align: center;
 	clear: both;
@@ -88,7 +88,7 @@ p.wp-pic-author,
 	margin: 35px 0 0;
 	-webkit-border-radius: 50% 50%;
 	border-radius: 50% 50%;
-	background-image: url(../img/wp-pic-sprite.png);
+	background-image: url(../src/img/wp-pic-sprite.png);
 	background-repeat: no-repeat;
 	background-position: 0 0;
 	background-size: cover;
@@ -135,7 +135,7 @@ p.wp-pic-author,
 	height: 32px;
 	left: 50%;
 	margin-left: -16px;
-	background-image: url(../img/wp-pic-sprite.png);
+	background-image: url(../src/img/wp-pic-sprite.png);
 	background-repeat: no-repeat;
 }
 .wp-pic .wp-pic-bar span:after,
@@ -362,7 +362,7 @@ p.wp-pic-author,
 	margin: 110px 0 -4px 0;
 	width: 98px;
 	height:98px;
-	background-image: url(../img/wp-pic-sprite.png);
+	background-image: url(../src/img/wp-pic-sprite.png);
 	background-repeat: no-repeat;
 	background-position: 0px -203px;
 	position: relative;
@@ -397,7 +397,7 @@ p.wp-pic-author,
 	height: 26px;
 	margin-top: 11px;
 	background-color: transparent;
-	background-image: url(../img/wp-pic-sprite.png);
+	background-image: url(../src/img/wp-pic-sprite.png);
 	background-repeat: no-repeat;
 	background-position: -100px -237px;
 }
@@ -668,7 +668,7 @@ p.wp-pic-author,
 	overflow: hidden;
 	-webkit-border-radius: 50% 50%;
 	border-radius: 50% 50%;
-	background-image: url(../img/wp-pic-sprite.png);
+	background-image: url(../src/img/wp-pic-sprite.png);
 	background-repeat: no-repeat;
 	background-position: 0 0;
 	background-size: cover;
@@ -941,6 +941,7 @@ p.wp-pic-author,
 	display: flex;
 }
 .wp-pic-card.wp-pic.flex {
+	width: 100%;
 	height: auto;
 }
 .wp-pic-wrapper.left.flex .wp-pic,
@@ -1529,6 +1530,7 @@ p.wp-pic-author,
 .wp-pic.scheme13 a.wp-pic-name,
 .wp-pic.scheme13 .wp-pic-column-name,
 .wp-pic.scheme13 .wp-pic-preview,
+.wp-pic.scheme13 .authors a,
 .wp-pic.scheme13 .wp-pic-theme-card-bottom {
 	color: #FFF;
 }
@@ -1544,6 +1546,7 @@ p.wp-pic-author,
 	background-color: rgb(30,60,114);
 }
 .wp-pic.scheme13 > div> div {
+	color: #FFF;
 	background-image: linear-gradient(to top, rgb(30,60,114) 0%, rgb(30,60,114) 1%, rgb(42,82,152) 100%);
 }
 .wp-pic.scheme13 .wp-pic-back .wp-pic-name,
@@ -1573,6 +1576,14 @@ p.wp-pic-author,
 .wp-pic.scheme13 .wp-pic-download,
 .wp-pic.scheme13 a.wp-pic-page {
 	background-color: rgb(42,82,152);
+}
+
+.wp-pic.scheme13 {
+	.wp-pic-column-name {
+		h3, a {
+			color: #FFF;
+		}
+	}
 }
 
 /*Color Scheme 14*/
@@ -2188,30 +2199,30 @@ a.wp-pic-credit:focus:after {
 }
 .wp-pic-wrapper.alignfull.wordpress {
 	width: 100%;
-	text-align: center;
+	text-align: left;
 	margin: 0 auto;
 	max-width: 550px;
 }
 .wp-pic-wrapper.alignwide.wordpress {
 	width: 100%;
-	text-align: center;
+	text-align: left;
 	margin: 0 auto;
 	max-width: 550px;
 }
 .wp-pic-wrapper.aligncenter.wordpress {
 	width: 100%;
-	text-align: center;
+	text-align: left;
 	max-width: 550px;
 }
 .wp-pic-wrapper.alignleft.wordpress {
 	width: 100%;
-	text-align: center;
+	text-align: left;
 	max-width: 550px;
 	float: left;
 }
 .wp-pic-wrapper.alignright.wordpress {
 	width: 100%;
-	text-align: center;
+	text-align: left;
 	margin-left: auto;
 	max-width: 550px;
 	float: right;
