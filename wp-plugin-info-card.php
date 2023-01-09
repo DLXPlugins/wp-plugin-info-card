@@ -119,6 +119,10 @@ class WP_Plugin_Info_Card {
 		$admin = new Admin();
 		$admin->run();
 
+		// Set up tinyMCE.
+		$tinymce = new TinyMce\Init();
+		$tinymce->run();
+
 	}
 }
 
