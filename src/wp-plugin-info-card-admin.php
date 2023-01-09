@@ -10,16 +10,8 @@ if ( !defined( 'ABSPATH' ) ) {
 /***************************************************************
  * Back-End Scripts & Styles enqueueing
  ***************************************************************/
-function wppic_admin_scripts() {
-	wp_register_script( 'wppic-lightbox', WPPIC_URL . 'lightbox/jquery.fancybox.min.js', array( 'jquery' ),  WPPIC_VERSION, true);
-	wp_enqueue_script( 'wppic-admin-js', WPPIC_URL . 'js/wppic-admin-script.js', array( 'jquery', 'wppic-lightbox' ),  WPPIC_VERSION, true);
-	wp_enqueue_script( 'wppic-js', WPPIC_URL . 'js/wppic-script.min.js', array( 'jquery' ),  WPPIC_VERSION, true);
-	wp_enqueue_script( 'jquery-ui-sortable', WPPIC_URL . '/wp-includes/js/jquery/ui/jquery.ui.sortable.min.js', array( 'jquery' ),  WPPIC_VERSION, true);
-}
 function wppic_admin_css() {
-	wp_enqueue_style( 'dashicons' );
-	wp_enqueue_style( 'wppic-lightbox', WPPIC_URL . 'lightbox/jquery.fancybox.min.css', array(), WPPIC_VERSION, 'all');
-	wp_enqueue_style( 'wppic-admin-css', plugins_url( '/dist/wppic-admin.css', WPPIC_FILE ), array(), WPPIC_VERSION, 'all');
+	
 }
 
 
@@ -28,11 +20,7 @@ function wppic_admin_css() {
  ***************************************************************/
 function wppic_create_menu() {
 
-	$admin_page = add_options_page( WPPIC_NAME_FULL, WPPIC_NAME, 'manage_options', WPPIC_ID,  'wppic_settings_page' );
-
-	//Enqueue sripts and style
-	add_action( 'admin_print_scripts-' . $admin_page, 'wppic_admin_scripts' );
-	add_action( 'admin_print_styles-' . $admin_page, 'wppic_admin_css' );
+	
 
 }
 add_action( 'admin_menu', 'wppic_create_menu' );
@@ -138,122 +126,7 @@ add_action( 'admin_init', 'wppic_register_settings' );
  * Admin page structure
  ***************************************************************/
 function wppic_settings_page() {
-	global 	$wppicSettings;
-
-	//Get default card color shceme
-	$scheme = $wppicSettings[ 'colorscheme' ];
-	if(	$scheme == 'default' ){
-		$scheme = '';
-	}
-	$layout = isset( $wppicSettings[ 'default_layout' ] ) ? $wppicSettings[ 'default_layout' ] : 'card';
-
-	//Check if memcache is loaded (no transients purging)
-	$memcache = '';
-	if( !extension_loaded( 'Memcache' ) ){
-		$memcache = '
-			<p class="wppic-cache-clear">
-				<button class="wppic-cache-clear-button first button button-primary" data-success="' . __( 'Cache was successfully cleared', 'wp-plugin-info-card' ) . '" data-error="' . __( 'Something went wrong', 'wp-plugin-info-card' ) . '">' . __( 'Clear cache', 'wp-plugin-info-card' ) . '</button>
-				<span class="wppic-cache-clear-loader" style="display: none; background-image: url( ' . admin_url() . 'images/spinner-2x.gif);"></span>
-			</p>
-		';
-	}
-
-	echo '
-	<div class="wrap">
-		<div id="post-body-content">
-			<div id="wppic-admin-page" class="postbox meta-box-sortables">
-			<h1 style="display: flex; align-items: center; font-size: 36px"><img src="' . WPPIC_URL . 'img/wppic.svg" class="wppic-logo" alt="b*web" style="width: 36px; height: 36px;" />&nbsp;' . WPPIC_NAME_FULL . '</h1>
-			<h2 class="description">' . esc_html__( 'Beautiful plugin and theme cards by:', 'wp-plugin-info-card' ) . ' ' . '<a class="wppic-admin-link" href="https://www.b-website.com/">Brice CAPOBIANCO</a>' . ' ' . esc_html__( 'and', 'wp-plugin-info-card' ) . ' ' . '<a class="wppic-admin-link" href="https://mediaron.com">Ronald Huereca</a></h2>
-			' . wppic_plugins_about() . '
-				<div id="wppic-shortcode">
-				<h2><span>' . esc_html__( 'Documentation', 'wp-plugin-info-card' ) . '</span></h2>
-				<div class="inside">
-				<p><a class="documentation wppic-admin-link" href="https://mediaron.com/wp-plugin-info-card/" target="_blank" title="'. __( 'View Documentation and examples', 'wp-plugin-info-card' ) .'">'. esc_html__( 'View Documentation and Examples', 'wp-plugin-info-card' ) .' <span class="dashicons dashicons-external"></span></a></p></div>
-					<h2>' . esc_html__( 'The Block Editor', 'wp-plugin-info-card' ) . '</h2>
-					<div class="inside">
-						<p class="description"> ' . esc_html__( 'Use our blocks to show your cards in the block editor. All options are supported.', 'wp-plugin-info-card' ) . 	'</p>
-						<a class="button button-secondary" data-animation-effect="zoom" data-animation-duration="1000" data-fancybox data-caption="' . esc_attr__( 'WP Plugin Info Card in the Block Editor', 'wp-plugin-info-card' ) . '" href="' . esc_url( WPPIC_URL . 'img/wppic.gif' ) . '">' . esc_html__( 'View Block Demo', 'wp-plugin-info-card' ) . '</a>
-					</div>
-					<h2><span>' . __( 'Shortcodes', 'wp-plugin-info-card' ) . '</span></h2>
-					<div class="inside">
-					<p class="description"> ' . esc_html__( 'Use shortcodes to show a plugin or theme card just about anywhere.', 'wp-plugin-info-card' ) . '</p>
-					<a class="button button-secondary" data-animation-effect="zoom" data-animation-duration="1000" data-fancybox data-src="#plugin-info-admim-demo-card" data-caption="' . esc_attr__( 'WP Plugin Info Card Layout', 'wp-plugin-info-card' ) . '" href="javascript:;">' . esc_html__( 'View Card Demo', 'wp-plugin-info-card' ) . '</a> <a class="button button-secondary" data-animation-effect="zoom" data-animation-duration="1000" data-fancybox data-src="#plugin-info-admim-demo-wordpress" data-caption="' . esc_attr__( 'WP Plugin Info Card WordPress Layout', 'wp-plugin-info-card' ) . '" href="javascript:;">' . esc_html__( 'View WordPress Demo', 'wp-plugin-info-card' ) . '</a> <a class="button button-secondary" data-animation-effect="zoom" data-animation-duration="1000" data-fancybox data-src="#plugin-info-admim-demo-large" data-caption="' . esc_attr__( 'WP Plugin Info Card Large Layout', 'wp-plugin-info-card' ) . '" href="javascript:;">' . esc_html__( 'View Large Demo', 'wp-plugin-info-card' ) . '</a>
-					<div id="plugin-info-admim-demo-card" style="display: none; width: 100%; max-width: 400px">
-						' . do_shortcode( '[wp-pic type="plugin" scheme="scheme1" layout="card" slug="wp-plugin-info-card"]' ) . '
-					</div>
-					<div id="plugin-info-admim-demo-wordpress" style="display: none; width: 100%; max-width: 800px">
-						' . do_shortcode( '[wp-pic type="plugin" scheme="scheme1" layout="wordpress" slug="wp-plugin-info-card"]' ) . '
-					</div>
-					<div id="plugin-info-admim-demo-large" style="display: none; width: 100%; max-width: 800px">
-						' . do_shortcode( '[wp-pic type="theme" scheme="scheme1" layout="large" slug="twentytwenty"]' ) . '
-					</div>
-						<h3 class="wp-pic-title">' . __( 'Shortcode parameters', 'wp-plugin-info-card' ) . '</h3>
-						<ul>
-							<li><strong>type:</strong> plugin, theme - ' . __( '(default: plugin)', 'wp-plugin-info-card' ) . '</li>
-							<li><strong>slug:</strong> ' . __( 'plugin slug name - Please refer to the plugin URL on wordpress.org to determine its slug: https://wordpress.org/plugins/THE-SLUG/', 'wp-plugin-info-card' ) . '</li>
-							<li><strong>layout:</strong> ' . __( 'template layout to use - Default is "card" so you may leave this parameter empty. Available layouts are: card, large, wordpress, and flex', 'wp-plugin-info-card' ) . '</li>
-							<li><strong>scheme:</strong> ' . __( 'card color scheme: scheme1 through scheme14 (default: default color scheme defined in admin)', 'wp-plugin-info-card' ) . '</li>
-							<li><strong>image:</strong> ' . __( 'Image URL to override default WP logo (default: empty)', 'wp-plugin-info-card' ) . '</li>
-							<li><strong>align:</strong> center, left, right ' . __( '(default: empty)', 'wp-plugin-info-card' ) . '</li>
-							<li><strong>containerid:</strong> ' . __( 'custom div id, may be used for anchor (default: wp-pic-PLUGIN-NAME)', 'wp-plugin-info-card' ) . '</li>
-							<li><strong>margin:</strong> ' . __( 'custom container margin - eg: "15px 0" (default: empty)', 'wp-plugin-info-card' ) . '</li>
-							<li><strong>clear:</strong> ' . __( 'clear float before or after the card: before, after (default: empty', 'wp-plugin-info-card' ) . '</li>
-							<li><strong>expiration:</strong> ' . __( 'cache duration in minutes - numeric format only (default: 720)', 'wp-plugin-info-card' ) . '</li>
-							<li><strong>ajax: (BETA)</strong> ' . __( 'load the plugin data asynchronously with AJAX: yes, no (default: no)', 'wp-plugin-info-card' ) . '</li>
-							<li><strong>custom:</strong> ' . __( 'value to display: (default: empty)', 'wp-plugin-info-card' ) . '
-								<ul>
-									<li>&nbsp;&nbsp;&nbsp;&nbsp;- ' . __( 'For plugins:', 'wp-plugin-info-card' ) . ' <i>url, name, icons, banners, version, author, requires, rating, num_ratings, downloaded, last_updated, download_link</i></li>
-									<li>&nbsp;&nbsp;&nbsp;&nbsp;- ' . __( 'For themes:', 'wp-plugin-info-card' ) . ' <i>url, name, version, author, screenshot_url, rating, num_ratings, downloaded, last_updated, homepage, download_link</i></li>
-								</ul>
-							</li>
-						</ul>
-						<p>&nbsp;</p>
-						<p>
-							<code class="wppic-admin-shortcode">[wp-pic type="plugin" slug="adblock-notify-by-bweb" layout="large" scheme="scheme13"]</code>
-						</p>
-						<p class="description">' . esc_html__( 'Select a default layout and scheme and you can just write it like:', 'wp-plugin-info-card' ) . '</p>
-						<p>
-							<code class="wppic-admin-shortcode">[wp-pic type="plugin" slug="adblock-notify-by-bweb"]</code>
-						</p>
-						' . $memcache . '
-					 </div>
-				</div>
-			</div>
-	';
-		?>
-			<form method="post" id="wppic_settings" action="options.php">
-				<?php settings_fields( 'wppic_settings' ) ?>
-				<div class="meta-box-sortabless">
-					<div id="wppic-form" class="postbox">
-						<h3 class="hndle"><span><?php  _e( 'General options', 'wp-plugin-info-card' ) ?></span></h3>
-						<div class="inside">
-                            <table class="form-table">
-                                <tr valign="top">
-                                    <?php do_settings_sections( WPPIC_ID . 'options' ) ?>
-                                </tr>
-                            </table>
-                            <?php submit_button() ?>
-						</div>
-					</div>
-				</div>
-				<div class="meta-box-sortabless">
-					<div id="wppic-form" class="postbox">
-						<h3 class="hndle"><span><?php  _e( 'Dashboard Widget Settings', 'wp-plugin-info-card' ) ?></span></h3>
-						<div class="inside">
-                            <table class="form-table">
-                                <tr valign="top">
-                                    <?php do_settings_sections( WPPIC_ID . 'widget' ) ?>
-                                </tr>
-                            </table>
-                            <?php submit_button() ?>
-						</div>
-					</div>
-
-				</div>
-			</form>
-		</div>
-    </div>
-<?php
+	
 }
 
 /***************************************************************

@@ -115,6 +115,10 @@ class WP_Plugin_Info_Card {
 		$blocks = new Blocks();
 		$blocks->run();
 
+		// Set up admin.
+		$admin = new Admin();
+		$admin->run();
+
 	}
 }
 
@@ -124,6 +128,6 @@ add_action( 'plugins_loaded', 'MediaRon\WPPIC\wp_plugin_info_card_instantiate' )
  * Instantiate the WPPIC class.
  */
 function wp_plugin_info_card_instantiate() {
-	$has = WP_Plugin_Info_Card::get_instance();
-	$has->plugins_loaded();
+	$wppic = WP_Plugin_Info_Card::get_instance();
+	$wppic->plugins_loaded();
 }
