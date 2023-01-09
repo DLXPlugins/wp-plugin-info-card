@@ -1,0 +1,25 @@
+{
+    "name": "mediaron/wp-plugin-info-card",
+    "description": "WP Plugin Info Card displays plugins & themes data in a beautiful box with a smooth rotation effect using WP Plugin & Theme APIs. Dashboard widget included.",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Ronald Huereca",
+            "email": "ronald@mediaron.com"
+        },
+		{
+			"name": "Brice CAPOBIANCO",
+			"email": "capobianco.brice@gmail.com"
+		}
+    ],
+    "minimum-stability": "dev",
+    "config": {
+        "vendor-dir": "lib"
+    },
+      "autoload": {
+        "psr-4": {
+            "MediaRon\\WPPIC\\": "php/"
+        }
+    }
+}
