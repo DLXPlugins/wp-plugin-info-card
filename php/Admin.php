@@ -22,6 +22,8 @@ class Admin {
 
 		add_action( 'admin_enqueue_scripts', array( $self, 'enqueue_admin_scripts' ) );
 		add_action( 'admin_menu', array( $self, 'add_options_page' ) );
+		add_action( 'admin_init', array( $self, 'register_settings' ) );
+		add_action( 'wp_ajax_async_wppic_clear_cache', array( $self, 'clear_cache' ) );
 		return $self;
 	}
 
@@ -127,7 +129,7 @@ class Admin {
 					<h2 class="description"><?php esc_html_e( 'Beautiful plugin and theme cards by:', 'wp-plugin-info-card' ); ?> <a class="wppic-admin-link" href="https://www.b-website.com/">Brice CAPOBIANCO</a> <?php esc_html_e( 'and', 'wp-plugin-info-card' ); ?> <a class="wppic-admin-link" href="https://mediaron.com">Ronald Huereca</a></h2>
 				</div>
 			</div>
-			<?php echo wppic_plugins_about(); ?>
+			<?php $this->about_output(); ?>
 			<div id="wppic-shortcode">
 				<h2><span><?php esc_html_e( 'Documentation', 'wp-plugin-info-card' ); ?></span></h2>
 				<div class="inside">
@@ -229,5 +231,264 @@ class Admin {
 			</form>
 		</div><!-- /.wrap -->
 		<?php
+	}
+
+	/**
+	 * Register settings API settings.
+	 */
+	public function register_settings() {
+		register_setting(
+			'wppic_settings',
+			'wppic_settings',
+			array( $this, 'sanitize_settings' )
+		);
+		add_settings_section(
+			'wppic_options',
+			'',
+			'',
+			Functions::get_plugin_slug() . 'options'
+		);
+		add_settings_field(
+			'wppic-default-layout',
+			__( 'Default Layout', 'wp-plugin-info-card' ),
+			array( $this, 'default_layout_settings' ),
+			Functions::get_plugin_slug() . 'options',
+			'wppic_options'
+		);
+		add_settings_field(
+			'wppic-color-scheme',
+			__( 'Color scheme', 'wp-plugin-info-card' ),
+			array( $this, 'color_schemes' ),
+			Functions::get_plugin_slug() . 'options',
+			'wppic_options'
+		);
+		add_settings_field(
+			'wppic-enqueue',
+			__( 'Force enqueuing CSS & JS', 'wp-plugin-info-card' ),
+			array( $this, 'checkbox' ),
+			Functions::get_plugin_slug() . 'options',
+			'wppic_options',
+			array(
+				'id'    => 'wppic-enqueue',
+				'name'  => 'enqueue',
+				'label' => __( 'By default the plugin enqueues scripts (JS & CSS) only for pages containing the shortcode. If you wish to force scripts enqueuing, check this box.', 'wp-plugin-info-card' ),
+			)
+		);
+		add_settings_field(
+			'wppic-credit',
+			__( 'Display a discrete credit', 'wp-plugin-info-card' ),
+			array( $this, 'checkbox' ),
+			Functions::get_plugin_slug() . 'options',
+			'wppic_options',
+			array(
+				'id'    => 'wppic-credit',
+				'name'  => 'credit',
+				'label' => __( 'Help spread the word about this plugin.', 'wp-plugin-info-card' ),
+			)
+		);
+
+		add_settings_section(
+			'wppic_list',
+			'',
+			'',
+			Functions::get_plugin_slug() . 'widget'
+		);
+		add_settings_field(
+			'wppic-list-widget',
+			__( 'Enable dashboard widget', 'wp-plugin-info-card' ),
+			array( $this, 'checkbox' ),
+			Functions::get_plugin_slug() . 'widget',
+			'wppic_list',
+			array(
+				'id'    => 'wppic-widget',
+				'name'  => 'widget',
+				'label' => __( 'Help: Don\'t forget to open the dashboard option panel (top right) to display it on your dashboard.', 'wp-plugin-info-card' ),
+			)
+		);
+		add_settings_field(
+			'wppic-list-ajax',
+			__( 'Ajaxify dashboard widget', 'wp-plugin-info-card' ),
+			array( $this, 'checkbox' ),
+			Functions::get_plugin_slug() . 'widget',
+			'wppic_list',
+			array(
+				'id'    => 'wppic-ajax',
+				'name'  => 'ajax',
+				'label' => __( 'Will load the data asynchronously with AJAX.', 'wp-plugin-info-card' ),
+			)
+		);
+		add_settings_field(
+			'wppic-list-form',
+			__( 'List of items to display', 'wp-plugin-info-card' ),
+			array( $this, 'list_form' ),
+			Functions::get_plugin_slug() . 'widget',
+			'wppic_list'
+		);
+	}
+
+	/**
+	 * Settings to validate.
+	 *
+	 * @param array $settings Array of admin settings.
+	 */
+	public function validate_settings( $settings ) {
+		if ( isset( $settings['list'] ) && ! empty( $settings['list'] ) ) {
+
+			$validation_list = array();
+			$validation_list = apply_filters( 'wppic_add_list_valdiation', $validation_list );
+
+			foreach ( $validation_list as $element ) {
+				if ( isset( $settings[ $element[0] ] ) && ! empty( $settings[ $element[0] ] ) ) {
+
+					// remove duplicate.
+					$settings[ $element[0] ] = array_unique( $settings[ $element[0] ] );
+
+					foreach ( $settings[ $element[0] ] as $key => $item ) {
+						if ( ! preg_match( $element[2], $item ) ) {
+							if ( ! empty( $item ) ) {
+								add_settings_error(
+									'wppic-admin-notice',
+									esc_attr( 'wppic-error' ),
+									'<i>"' . $item . '"</i> ' . $element[1],
+									'error'
+								);
+							}
+							unset( $settings[ $element[0] ][ $key ] );
+						}
+					}
+				}
+			}
+		}
+		return $settings;
+	}
+
+	/**
+	 * Output layout settings.
+	 */
+	public function default_layout_settings() {
+		$options = Options::get_options();
+
+		$layout = $options['default_layout'] ?? 'card';
+
+		$content  = '<td>';
+		$content .= '<select id="wppic-default-layout" name="wppic_settings[default_layout]">';
+		$content .= '<option value="card"  ' . selected( $layout, 'card', false ) . ' >' . esc_html__( 'Card', 'wp-plugin-info-card' ) . '</option>';
+		$content .= '<option value="wordpress"  ' . selected( $layout, 'WordPress', false ) . ' >' . esc_html__( 'WordPress Appearance', 'wp-plugin-info-card' ) . '</option>';
+		$content .= '<option value="large"  ' . selected( $layout, 'large', false ) . ' >' . esc_html__( 'Large Card Layout', 'wp-plugin-info-card' ) . '</option>';
+		$content .= '<option value="flex"  ' . selected( $layout, 'flex', false ) . ' >' . esc_html__( 'Wide Screen Flex Layout', 'wp-plugin-info-card' ) . '</option>';
+		$content .= '</select>';
+		$content .= '<label for="wppic-default-layout">' . esc_html__( 'Default layout for your cards.', 'wp-plugin-info-card' ) . '</label>';
+		$content .= '</td>';
+		// todo - sanitize.
+		echo $content;
+	}
+
+	/**
+	 * Output the color schemes interface.
+	 */
+	public function color_schemes() {
+		$options = Options::get_options();
+		$scheme  = $options['colorscheme'] ?? 'default';
+
+		$content  = '<td>';
+		$content .= '<select id="wppic-color-scheme" name="wppic_settings[colorscheme]">';
+		$content .= '<option value="default"  ' . selected( $scheme, 'default', false ) . ' >Default</option>';
+		$content .= '<option value="scheme1"  ' . selected( $scheme, 'scheme1', false ) . ' >Color scheme 1</option>';
+		$content .= '<option value="scheme2"  ' . selected( $scheme, 'scheme2', false ) . ' >Color scheme 2</option>';
+		$content .= '<option value="scheme3"  ' . selected( $scheme, 'scheme3', false ) . ' >Color scheme 3</option>';
+		$content .= '<option value="scheme4"  ' . selected( $scheme, 'scheme4', false ) . ' >Color scheme 4</option>';
+		$content .= '<option value="scheme5"  ' . selected( $scheme, 'scheme5', false ) . ' >Color scheme 5</option>';
+		$content .= '<option value="scheme6"  ' . selected( $scheme, 'scheme6', false ) . ' >Color scheme 6</option>';
+		$content .= '<option value="scheme7"  ' . selected( $scheme, 'scheme7', false ) . ' >Color scheme 7</option>';
+		$content .= '<option value="scheme8"  ' . selected( $scheme, 'scheme8', false ) . ' >Color scheme 8</option>';
+		$content .= '<option value="scheme9"  ' . selected( $scheme, 'scheme9', false ) . ' >Color scheme 9</option>';
+		$content .= '<option value="scheme10" ' . selected( $scheme, 'scheme10', false ) . '>Color scheme 10</option>';
+		$content .= '<option value="scheme11" ' . selected( $scheme, 'scheme11', false ) . '>Color scheme 11</option>';
+		$content .= '<option value="scheme12" ' . selected( $scheme, 'scheme12', false ) . '>Color scheme 12</option>';
+		$content .= '<option value="scheme13" ' . selected( $scheme, 'scheme13', false ) . '>Color scheme 13</option>';
+		$content .= '<option value="scheme14" ' . selected( $scheme, 'scheme14', false ) . '>Color scheme 14</option>';
+		$content .= '</select>';
+		$content .= '<label for="wppic-color-scheme">' . esc_html__( 'Default color scheme for your cards.', 'wp-plugin-info-card' ) . '</label>';
+		$content .= '</td>';
+		// todo sanitize.
+		echo $content;
+	}
+
+	/**
+	 * Checkbox output for settings.
+	 *
+	 * @param array $args Checkbox setting arguments.
+	 */
+	public function checkbox( $args ) {
+		$options  = Options::get_options();
+		$content  = '<td>';
+		$content .= '<input type="checkbox" id="' . $args['id'] . '" name="wppic_settings[' . $args['name'] . ']"  value="1" ';
+		if ( isset( $options[ $args['name'] ] ) ) {
+			$content .= checked( 1, $options[ $args['name'] ], false );
+		}
+		$content .= '/>';
+		$content .= '<label for="' . $args['id'] . '">' . $args['label'] . '</label>';
+		$content .= '</td>';
+		echo $content;
+	}
+
+	/**
+	 * Output the list form.
+	 */
+	public function list_form() {
+		$options         = Options::get_options();
+		$wppic_list_form = array();
+		$wppic_list_form = apply_filters( 'wppic_add_list_form', $wppic_list_form );
+
+		$content = '<td>';
+
+		if ( ! empty( $wppic_list_form ) ) {
+			foreach ( $wppic_list_form as $wppic_item_form ) {
+				$content     .= '<div class="form-list">';
+					$content .= '<button class="button wppic-add-fields" data-type="' . $wppic_item_form[0] . '">' . $wppic_item_form[1] . '</button><input type="text" name="wppic-add" class="wppic-add"  value="">';
+					$content .= '<ul id="wppic-' . $wppic_item_form[0] . '" class="wppic-list">';
+				if ( ! empty( $options[ $wppic_item_form[0] ] ) ) {
+					foreach ( $options[ $wppic_item_form[0] ] as $item ) {
+						$content .= '<li class="wppic-dd"><input type="text" name="wppic_settings[' . $wppic_item_form[0] . '][]"  value="' . $item . '"><span class="wppic-remove-field" title="remove"></span></li>';
+					}
+				}
+					$content .= '</ul>';
+					$content .= '<p>' . $wppic_item_form[2] . ' - <i>' . $wppic_item_form[3] . '</i> -<p>';
+				$content     .= '</div>';
+			}
+		}
+
+		$content .= '</td>';
+		// todo sanitize.
+		echo $content;
+	}
+
+	/**
+	 * Output the about section.
+	 */
+	private function about_output() {
+		$content = '<hr />
+			<div id="wppic-about-list">
+				<a class="wppic-button wppic-pluginHome" href="https://mediaron.com/wp-plugin-info-card/" target="_blank">' . __( 'Plugin homepage', 'wp-plugin-info-card' ) . '</a>
+				<a class="wppic-button wppic-pluginPage" href="https://wordpress.org/plugins/wp-plugin-info-card/" target="_blank">WordPress.org</a>
+				<a class="wppic-button wppic-pluginSupport" href="https://wordpress.org/support/plugin/wp-plugin-info-card" target="_blank">' . __( 'Support', 'wp-plugin-info-card' ) . '</a>
+				<a class="wppic-button wppic-pluginRate" href="https://wordpress.org/support/view/plugin-reviews/wp-plugin-info-card?rate=5#postform" target="_blank">' . __( 'Rate Us Five Stars', 'wp-plugin-info-card' ) . '</a>
+				<a class="wppic-button wppic-pluginCode" href="https://github.com/MediaRon/wp-plugin-info-card" target="_blank">' . __( 'Find Us On GitHub', 'wp-plugin-info-card' ) . '</a>
+				<a class="wppic-button wppic-pluginContact" href="https://mediaron.com/contact/" target="_blank">' . __( 'Contact Us', 'wp-plugin-info-card' ) . '</a>
+			</div>
+			<hr />
+		';
+		// todo sanitize.
+		echo $content;
+	}
+
+	/**
+	 * Clear Plugin cache.
+	 */
+	public function clear_cache() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		wppic_delete_transients();
 	}
 }

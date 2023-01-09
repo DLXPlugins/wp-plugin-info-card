@@ -3,20 +3,20 @@
   "description": "WP Plugin Info Card displays plugins & themes data in a beautiful box with a smooth rotation effect using WP Plugin & Theme APIs. Dashboard widget included.",
   "version": "1.0.0",
   "contributors": [
-	{
-	  "name": "Ronald Huereca",
-	  "email": "ronald@mediaron.com",
-	  "url": "https://mediaron.com"
-	},
-	{
-	  "name": "Brice CAPOBIANCO",
-	  "email": "capobianco.brice@gmail.com",
-	  "url": "https://www.b-website.com/en/"
-	}
+    {
+      "name": "Ronald Huereca",
+      "email": "ronald@mediaron.com",
+      "url": "https://mediaron.com"
+    },
+    {
+      "name": "Brice CAPOBIANCO",
+      "email": "capobianco.brice@gmail.com",
+      "url": "https://www.b-website.com/en/"
+    }
   ],
   "funding": {
-	"type": "github",
-	"url": "https://github.com/sponsors/MediaRon"
+    "type": "github",
+    "url": "https://github.com/sponsors/MediaRon"
   },
   "scripts": {
     "start": "wp-scripts start wppic-blocks=./src/index.js --env mode=development",
@@ -34,6 +34,7 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",
     "@wordpress/eslint-plugin": "^13.7.0",
+    "@wordpress/prettier-config": "^2.7.0",
     "@wordpress/scripts": "^25.0.0",
     "ajv": "^7.2.4",
     "axios": "^0.21.1",
