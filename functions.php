@@ -25,7 +25,7 @@ $wppicDateFormat = get_option( 'date_format' );
 /***************************************************************
  * Load plugin files
  ***************************************************************/
-$wppicFiles = array( 'api','shortcode','admin','widget','ui', 'add-plugin', 'add-theme', 'query' );
+$wppicFiles = array( 'api','shortcode','widget','ui', 'add-plugin', 'add-theme', 'query' );
 foreach( $wppicFiles as $wppicFile ){
 	require_once( WPPIC_PATH . 'wp-plugin-info-card-' . $wppicFile . '.php' );
 }
