@@ -21,6 +21,7 @@ class Blocks {
 
 		add_action( 'enqueue_block_assets', array( $self, 'register_block_assets' ) );
 		add_action( 'init', array( $self, 'register_blocks' ) );
+		add_filter( 'block_categories', array( $self, 'add_block_category' ), 10, 2 );
 
 		return $self;
 	}
@@ -63,9 +64,9 @@ class Blocks {
 			'wppic',
 			array(
 				'rest_url'             => get_rest_url(),
-				'query_preview'        => Functions::get_plugin_url( 'img/wp-query-preview.jpg' ),
-				'wppic_preview'        => Functions::get_plugin_url( 'img/wp-pic-preview.jpg' ),
-				'wppic_banner_default' => Functions::get_plugin_url( 'img/default-banner.png' ),
+				'query_preview'        => Functions::get_plugin_url( 'assets/img/wp-query-preview.jpg' ),
+				'wppic_preview'        => Functions::get_plugin_url( 'assets/img/wp-pic-preview.jpg' ),
+				'wppic_banner_default' => Functions::get_plugin_url( 'assets/img/default-banner.png' ),
 				'default_scheme'       => $default_scheme,
 				'default_layout'       => $default_layout,
 			)
@@ -177,5 +178,25 @@ class Blocks {
 			$html = Shortcodes::shortcode_function( $args );
 		}
 		return $html;
+	}
+
+	/**
+	 * Add block category for Plugin Info Card.
+	 *
+	 * @param array   $categories Array of existing categories.
+	 * @param WP_Post $post Post object.
+	 *
+	 * @return array Array of categories.
+	 */
+	public function add_block_category( $categories, $post ) {
+		return array_merge(
+			$categories,
+			array(
+				array(
+					'slug'  => 'wp-plugin-info-card',
+					'title' => __( 'WP Plugin Info Card', 'wp-plugin-info-card' ),
+				),
+			)
+		);
 	}
 }
