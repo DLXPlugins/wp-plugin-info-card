@@ -25,7 +25,7 @@ $wppicDateFormat = get_option( 'date_format' );
 /***************************************************************
  * Load plugin files
  ***************************************************************/
-$wppicFiles = array( 'api','shortcode','add-plugin', 'add-theme', 'query' );
+$wppicFiles = array( 'api','shortcode', 'add-theme', 'query' );
 foreach( $wppicFiles as $wppicFile ){
 	require_once( WPPIC_PATH . 'wp-plugin-info-card-' . $wppicFile . '.php' );
 }
@@ -115,21 +115,6 @@ function wppic_uninstall() {
 	wp_clear_scheduled_hook( 'wppic_daily_cron' );
 	//Purge transients
 	wppic_delete_transients();
-}
-
-/**
- * Get the plugin directory for a path.
- *
- * @param string $path The path to the file.
- *
- * @return string The new path.
- */
-function wppic_get_plugin_dir( $path = '' ) {
-	$dir = rtrim( plugin_dir_path( __FILE__ ), '/' );
-	if ( ! empty( $path ) && is_string( $path ) ) {
-		$dir .= '/' . ltrim( $path, '/' );
-	}
-	return $dir;
 }
 
 register_activation_hook( __FILE__, 'wppic_activation' );

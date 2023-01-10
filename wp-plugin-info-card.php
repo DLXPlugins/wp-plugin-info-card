@@ -123,6 +123,10 @@ class WP_Plugin_Info_Card {
 		$tinymce = new TinyMce\Init();
 		$tinymce->run();
 
+		// Set up Add Plugin.
+		$add_plugin = new Add_Plugin();
+		$add_plugin->run();
+
 	}
 }
 

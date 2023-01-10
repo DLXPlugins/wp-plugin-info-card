@@ -81,13 +81,13 @@ class Blocks {
 	 */
 	public function register_blocks() {
 		register_block_type(
-			wppic_get_plugin_dir( 'build/blocks/PluginInfoCard/block.json' ),
+			Functions::get_plugin_dir( 'build/blocks/PluginInfoCard/block.json' ),
 			array(
 				'render_callback' => array( $this, 'info_card_render' ),
 			)
 		);
 		register_block_type(
-			wppic_get_plugin_dir( 'build/blocks/PluginInfoCardQuery/block.json' ),
+			Functions::get_plugin_dir( 'build/blocks/PluginInfoCardQuery/block.json' ),
 			array(
 				'render_callback' => array( $this, 'info_card_query_render' ),
 			)
