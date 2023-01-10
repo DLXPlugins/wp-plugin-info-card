@@ -220,6 +220,11 @@ class Shortcodes {
 
 		// Begin sort.
 		$sort_results = array();
+		if ( 'plugins' === $type ) {
+			$sort_results = $api->plugins;
+		} elseif ( 'themes' === $type ) {
+			$sort_results = $api->themes;
+		}
 		if ( 'plugins' === $type && ! is_wp_error( $api ) && ! empty( $api ) && 'none' !== $sortby ) {
 			$plugins = $api->plugins;
 			array_multisort(
@@ -427,7 +432,7 @@ class Shortcodes {
 
 					// Data attribute for ajax call.
 					$content .= '<div class="wp-pic ' . esc_html( implode( ' ', $add_class ) ) . '" ' . esc_html( $containerid ) . $ajax_data . ' >';
-					if ( $ajax != 'yes' ) {
+					if ( 'yes' !== $ajax ) {
 						$content .= self::shortcode_content( $type, $asset_slug, $image, $expiration, $layout );
 					} else {
 						$content .= '<div class="wp-pic-body-loading"><div class="signal"></div></div>';
@@ -440,7 +445,7 @@ class Shortcodes {
 					}
 
 					$content .= '</div><!-- .wp-pic-wrapper-->';
-					if ( $clear == 'after' ) {
+					if ( 'after' === $clear ) {
 						$content .= '<div style="clear:both"></div>';
 					}
 				}
@@ -504,7 +509,7 @@ class Shortcodes {
 				}
 				$add_class[] = $scheme;
 				// Output.
-				if ( $clear == 'before' ) {
+				if ( 'before' === $clear ) {
 					$content .= '<div style="clear:both"></div>';
 				}
 
@@ -515,7 +520,7 @@ class Shortcodes {
 
 				// Data attribute for ajax call.
 				$content .= '<div class="wp-pic ' . esc_html( implode( ' ', $add_class ) ) . '" ' . $containerid . $ajax_data . ' >';
-				if ( $ajax != 'yes' ) {
+				if ( 'yes' !== $ajax ) {
 					$content .= self::shortcode_content( $type, $slug, $image, $expiration, $layout );
 				} else {
 					$content .= '<div class="wp-pic-body-loading"><div class="signal"></div></div>';
@@ -529,7 +534,7 @@ class Shortcodes {
 				}
 
 				$content .= '</div><!-- .wp-pic-wrapper-->';
-				if ( $clear == 'after' ) {
+				if ( 'after' === $clear ) {
 					$content .= '<div style="clear:both"></div>';
 				}
 			}
@@ -558,7 +563,7 @@ class Shortcodes {
 					'browse'      => '',  // Browse view: 'featured', 'popular', 'updated', 'favorites'.
 					'per_page'    => '',  // Number of themes per query (page). Default 24.
 					'cols'        => '',  // Columns layout to use: '2', '3'. Default empty (none).
-				// Default wppic shortcode attributs
+				// Default wppic shortcode attributs.
 					'type'        => '',  // plugin | theme.
 					'slug'        => '',  // plugin slug name.
 					'image'       => '',  // image url to replace WP logo (175px X 175px).
@@ -660,7 +665,7 @@ class Shortcodes {
 		 */
 		$sort_results = apply_filters( 'wppic_query_results', $sort_results, $type, $sortby, $sort );
 
-		// Get the query result to build the content
+		// Get the query result to build the content.
 		if ( ! is_wp_error( $sort_results ) && ! empty( $sort_results ) ) {
 			if ( is_array( $sort_results ) ) {
 
@@ -675,7 +680,7 @@ class Shortcodes {
 				// Creat the loop wp-pic-1-.
 				foreach ( $sort_results as $item ) {
 					$item = json_decode( json_encode( $item ) );
-					if ( $column && ( $count ) % $cols == 1 && $cols > 1 ) {
+					if ( $column && ( $count ) % $cols === 1 && $cols > 1 ) { // phpcs:ignore
 						$row      = true;
 						$content .= '<div class="wp-pic-row">';
 					}

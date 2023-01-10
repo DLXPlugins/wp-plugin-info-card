@@ -13,16 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /***************************************************************
- * Get options
- */
-global  $wppicSettings;
-$wppicSettings = get_option( 'wppic_settings' );
-
-global  $wppicDateFormat;
-$wppicDateFormat = get_option( 'date_format' );
-
-
-/***************************************************************
  * Fetching plugins and themes data through WordPress Plugin API
  ***************************************************************/
 function wppic_api_parser( $type, $slug, $expiration = 720, $extra = '' ) {
@@ -54,7 +44,7 @@ function wppic_api_parser( $type, $slug, $expiration = 720, $extra = '' ) {
  * Add settings link on plugin list page
  ***************************************************************/
 function wppic_settings_link( $links ) {
-	$links[] = '<a href="' . admin_url( 'options-general.php?page=' . WPPIC_ID ) . '" title="' . __( 'WP Plugin Info Card Settings', 'wp-plugin-info-card' ) . '">' . __( 'Settings', 'wp-plugin-info-card' ) . '</a>';
+	$links[] = '<a href="' . esc_url( admin_url( 'options-general.php?page=' . WPPIC_ID ) ) . '" title="' . esc_html__( 'WP Plugin Info Card Settings', 'wp-plugin-info-card' ) . '">' . __( 'Settings', 'wp-plugin-info-card' ) . '</a>';
 	return $links;
 }
 add_filter( 'plugin_action_links_' . WPPIC_BASE, 'wppic_settings_link' );
@@ -72,21 +62,6 @@ function wppic_meta_links( $links, $file ) {
 	return $links;
 }
 add_filter( 'plugin_row_meta', 'wppic_meta_links', 10, 2 );
-
-
-/***************************************************************
- * Admin Panel Favico
- ***************************************************************/
-function wppic_add_favicon() {
-	$screen = get_current_screen();
-	if ( $screen->id != 'toplevel_page_' . WPPIC_ID ) {
-		return;
-	}
-
-	$favicon_url = WPPIC_URL . 'img/wppic.svg';
-	echo '<link rel="shortcut icon" href="' . $favicon_url . '" />';
-}
-add_action( 'admin_head', 'wppic_add_favicon' );
 
 
 /***************************************************************
@@ -125,19 +100,5 @@ function wppic_cron_activation() {
 }
 add_action( 'wppic_daily_cron', 'wppic_delete_transients' );
 
-
-/***************************************************************
- * Remove plugin settings from DB on plugin deletion
- ***************************************************************/
-function wppic_uninstall() {
-	// Remove option from DB
-	delete_option( 'wppic_settings' );
-	// deactivate cron
-	wp_clear_scheduled_hook( 'wppic_daily_cron' );
-	// Purge transients
-	wppic_delete_transients();
-}
-
-register_activation_hook( __FILE__, 'wppic_activation' );
 register_activation_hook( __FILE__, 'wppic_cron_activation' );
 register_activation_hook( __FILE__, 'wppic_delete_transients' );
