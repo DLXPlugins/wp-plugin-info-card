@@ -2,7 +2,7 @@
  * Plugin Name: WP Plugin Info Card by b*web
  * Plugin URI: http://b-website.com/
  */
- @import "../common.scss";
+ @import "./common.scss";
 .wp-pic-center {
  	text-align: center;
 	clear: both;
@@ -88,7 +88,7 @@ p.wp-pic-author,
 	margin: 35px 0 0;
 	-webkit-border-radius: 50% 50%;
 	border-radius: 50% 50%;
-	background-image: url(../src/img/wp-pic-sprite.png);
+	background-image: url(../assets/img/wp-pic-sprite.png);
 	background-repeat: no-repeat;
 	background-position: 0 0;
 	background-size: cover;
@@ -135,7 +135,7 @@ p.wp-pic-author,
 	height: 32px;
 	left: 50%;
 	margin-left: -16px;
-	background-image: url(../src/img/wp-pic-sprite.png);
+	background-image: url(../assets/img/wp-pic-sprite.png);
 	background-repeat: no-repeat;
 }
 .wp-pic .wp-pic-bar span:after,
@@ -362,7 +362,7 @@ p.wp-pic-author,
 	margin: 110px 0 -4px 0;
 	width: 98px;
 	height:98px;
-	background-image: url(../src/img/wp-pic-sprite.png);
+	background-image: url(../assets/img/wp-pic-sprite.png);
 	background-repeat: no-repeat;
 	background-position: 0px -203px;
 	position: relative;
@@ -397,7 +397,7 @@ p.wp-pic-author,
 	height: 26px;
 	margin-top: 11px;
 	background-color: transparent;
-	background-image: url(../src/img/wp-pic-sprite.png);
+	background-image: url(../assets/img/wp-pic-sprite.png);
 	background-repeat: no-repeat;
 	background-position: -100px -237px;
 }
@@ -668,7 +668,7 @@ p.wp-pic-author,
 	overflow: hidden;
 	-webkit-border-radius: 50% 50%;
 	border-radius: 50% 50%;
-	background-image: url(../src/img/wp-pic-sprite.png);
+	background-image: url(../assets/img/wp-pic-sprite.png);
 	background-repeat: no-repeat;
 	background-position: 0 0;
 	background-size: cover;
@@ -1982,7 +1982,7 @@ a.wp-pic-credit {
 	position:absolute;
 	bottom: 15px;
 	right: 10px;
-	background-image: url(../img/wppic.svg);
+	background-image: url(../assets/img/wppic.svg);
 	background-size: cover;
 }
 .wp-pic .wp-pic-back a.wp-pic-credit {

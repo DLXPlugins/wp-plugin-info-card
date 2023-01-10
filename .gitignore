@@ -31,3 +31,5 @@ node_modules
 
 package
 wp-plugin-info-card.zip
+
+composer.lock
