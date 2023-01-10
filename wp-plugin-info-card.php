@@ -127,6 +127,10 @@ class WP_Plugin_Info_Card {
 		$add_plugin = new Add_Plugin();
 		$add_plugin->run();
 
+		// Set up Add Theme.
+		$add_theme = new Add_Theme();
+		$add_theme->run();
+
 	}
 }
 

@@ -24,7 +24,7 @@ class Add_Plugin {
 		add_filter( 'wppic_add_list_form', array( $self, 'list_form' ) );
 		add_filter( 'wppic_add_widget_type', array( $self, 'widget_type' ) );
 		add_filter( 'wppic_add_list_valdiation', array( $self, 'list_validation' ) );
-		add_filter( 'wppic_add_widget_item', array( $self, 'wppic_plugin_widget_item' ), 9, 3 );
+		add_filter( 'wppic_add_widget_item', array( $self, 'widget_item' ), 9, 3 );
 
 		return $self;
 	}
@@ -197,7 +197,7 @@ class Add_Plugin {
 	 *
 	 * @return string $content.
 	 */
-	public function wppic_plugin_widget_item( $content, $wppic_data, $type ) {
+	public function widget_item( $content, $wppic_data, $type ) {
 		if ( 'plugin' === $type ) {
 
 			$date_format = Options::get_date_format();
