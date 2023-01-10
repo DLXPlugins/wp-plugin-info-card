@@ -1,5 +1,1 @@
-<<<<<<< Updated upstream
-<?php return array('dependencies' => array('react'), 'version' => '67e6d14bbaaf61b925ce');
-=======
-<?php return array('dependencies' => array('react'), 'version' => '5eb59aec08d8ad340d7a');
->>>>>>> Stashed changes
+<?php return array('dependencies' => array('react'), 'version' => '2dbd8aa6f83fb96a3498');
