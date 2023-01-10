@@ -221,9 +221,9 @@ class Shortcodes {
 		// Begin sort.
 		$sort_results = array();
 		if ( 'plugins' === $type ) {
-			$sort_results = $api->plugins;
+			$sort_results = $api->plugins ?? null;
 		} elseif ( 'themes' === $type ) {
-			$sort_results = $api->themes;
+			$sort_results = $api->themes ?? null;
 		}
 		if ( 'plugins' === $type && ! is_wp_error( $api ) && ! empty( $api ) && 'none' !== $sortby ) {
 			$plugins = $api->plugins;
@@ -634,6 +634,11 @@ class Shortcodes {
 
 		// Begin sort.
 		$sort_results = array();
+		if ( 'plugins' === $type ) {
+			$sort_results = $api->plugins ?? null;
+		} elseif ( 'themes' === $type ) {
+			$sort_results = $api->themes ?? null;
+		}
 		if ( 'plugins' === $type && ! is_wp_error( $api ) && ! empty( $api ) && 'none' !== $sortby ) {
 			$plugins = $api->plugins;
 			array_multisort(
