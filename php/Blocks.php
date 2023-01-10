@@ -138,9 +138,9 @@ class Blocks {
 		}
 		$html = '';
 		if ( '' !== $attributes['width'] ) {
-			$html = sprintf( '<div class="wp-pic-full-width">%s</div>', wppic_shortcode_query_function( $args ) );
+			$html = sprintf( '<div class="wp-pic-full-width">%s</div>', Shortcodes::shortcode_query_function( $args ) );
 		} else {
-			$html = wppic_shortcode_query_function( $args );
+			$html = Shortcodes::shortcode_query_function( $args );
 		}
 		return $html;
 	}
@@ -172,9 +172,9 @@ class Blocks {
 		);
 		$html = '';
 		if ( '' !== $attributes['width'] ) {
-			$html = sprintf( '<div class="wp-pic-full-width">%s</div>', wppic_shortcode_function( $args ) );
+			$html = sprintf( '<div class="wp-pic-full-width">%s</div>', Shortcodes::shortcode_function( $args ) );
 		} else {
-			$html = wppic_shortcode_function( $args );
+			$html = Shortcodes::shortcode_function( $args );
 		}
 		return $html;
 	}

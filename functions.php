@@ -23,15 +23,6 @@ $wppicDateFormat = get_option( 'date_format' );
 
 
 /***************************************************************
- * Load plugin files
- */
-$wppicFiles = array( 'shortcode', 'query' );
-foreach ( $wppicFiles as $wppicFile ) {
-	require_once WPPIC_PATH . 'wp-plugin-info-card-' . $wppicFile . '.php';
-}
-
-
-/***************************************************************
  * Fetching plugins and themes data through WordPress Plugin API
  ***************************************************************/
 function wppic_api_parser( $type, $slug, $expiration = 720, $extra = '' ) {
@@ -42,7 +33,7 @@ function wppic_api_parser( $type, $slug, $expiration = 720, $extra = '' ) {
 
 	$wppic_data = get_transient( 'wppic_' . $extra . $type . '_' . preg_replace( '/\-/', '_', $slug ) );
 
-	// check if $expiration is numeric, only digit char
+	// check if $expiration is numeric, only digit char.
 	if ( empty( $expiration ) || ! ctype_digit( $expiration ) ) {
 		$expiration = 720;
 	}
@@ -52,7 +43,7 @@ function wppic_api_parser( $type, $slug, $expiration = 720, $extra = '' ) {
 		$wppic_data = false;
 		$wppic_data = apply_filters( 'wppic_add_api_parser', $wppic_data, $type, $slug );
 
-		// Transient duration  def:12houres
+		// Transient duration  def:12houres.
 		set_transient( 'wppic_' . $extra . $type . '_' . preg_replace( '/\-/', '_', $slug ), $wppic_data, $expiration * 60 );
 	}
 	return $wppic_data;
