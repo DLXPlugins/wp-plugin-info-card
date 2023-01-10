@@ -14,20 +14,48 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /***************************************************************
  * Get options
- ***************************************************************/
-global 	$wppicSettings;
+ */
+global  $wppicSettings;
 $wppicSettings = get_option( 'wppic_settings' );
 
-global 	$wppicDateFormat;
+global  $wppicDateFormat;
 $wppicDateFormat = get_option( 'date_format' );
 
 
 /***************************************************************
  * Load plugin files
+ */
+$wppicFiles = array( 'shortcode', 'query' );
+foreach ( $wppicFiles as $wppicFile ) {
+	require_once WPPIC_PATH . 'wp-plugin-info-card-' . $wppicFile . '.php';
+}
+
+
+/***************************************************************
+ * Fetching plugins and themes data through WordPress Plugin API
  ***************************************************************/
-$wppicFiles = array( 'api','shortcode', 'query' );
-foreach( $wppicFiles as $wppicFile ){
-	require_once( WPPIC_PATH . 'wp-plugin-info-card-' . $wppicFile . '.php' );
+function wppic_api_parser( $type, $slug, $expiration = 720, $extra = '' ) {
+
+	if ( ! empty( $extra ) ) {
+		$extra = $extra . '_';
+	}
+
+	$wppic_data = get_transient( 'wppic_' . $extra . $type . '_' . preg_replace( '/\-/', '_', $slug ) );
+
+	// check if $expiration is numeric, only digit char
+	if ( empty( $expiration ) || ! ctype_digit( $expiration ) ) {
+		$expiration = 720;
+	}
+
+	if ( false === $wppic_data || empty( $wppic_data ) ) {
+
+		$wppic_data = false;
+		$wppic_data = apply_filters( 'wppic_add_api_parser', $wppic_data, $type, $slug );
+
+		// Transient duration  def:12houres
+		set_transient( 'wppic_' . $extra . $type . '_' . preg_replace( '/\-/', '_', $slug ), $wppic_data, $expiration * 60 );
+	}
+	return $wppic_data;
 }
 
 
@@ -35,8 +63,8 @@ foreach( $wppicFiles as $wppicFile ){
  * Add settings link on plugin list page
  ***************************************************************/
 function wppic_settings_link( $links ) {
-  $links[] = '<a href="' . admin_url( 'options-general.php?page=' . WPPIC_ID ) . '" title="'. __( 'WP Plugin Info Card Settings', 'wp-plugin-info-card' ) .'">' . __( 'Settings', 'wp-plugin-info-card' ) . '</a>';
-  return $links;
+	$links[] = '<a href="' . admin_url( 'options-general.php?page=' . WPPIC_ID ) . '" title="' . __( 'WP Plugin Info Card Settings', 'wp-plugin-info-card' ) . '">' . __( 'Settings', 'wp-plugin-info-card' ) . '</a>';
+	return $links;
 }
 add_filter( 'plugin_action_links_' . WPPIC_BASE, 'wppic_settings_link' );
 
@@ -46,9 +74,9 @@ add_filter( 'plugin_action_links_' . WPPIC_BASE, 'wppic_settings_link' );
  ***************************************************************/
 function wppic_meta_links( $links, $file ) {
 	if ( $file === 'wp-plugin-info-card/wp-plugin-info-card.php' ) {
-		$links[] = '<a href="https://mediaron.com/wp-plugin-info-card/" target="_blank" title="'. __( 'Documentation and examples', 'wp-plugin-info-card' ) .'"><strong>'. __( 'Documentation and examples', 'wp-plugin-info-card' ) .'</strong></a>';
-		$links[] = '<a href="http://b-website.com/category/plugins" target="_blank" title="'. __( 'More plugins by b*web', 'wp-plugin-info-card' ) .'">'. __( 'More plugins by b*web', 'wp-plugin-info-card' ) .'</a>';
-		$links[] = '<a href="https://mediaron.com/project-type/wordpress-plugins/" target="_blank" title="'. __( 'More plugins by MediaRon', 'wp-plugin-info-card' ) .'">'. __( 'More plugins by MediaRon', 'wp-plugin-info-card' ) .'</a>';
+		$links[] = '<a href="https://mediaron.com/wp-plugin-info-card/" target="_blank" title="' . __( 'Documentation and examples', 'wp-plugin-info-card' ) . '"><strong>' . __( 'Documentation and examples', 'wp-plugin-info-card' ) . '</strong></a>';
+		$links[] = '<a href="http://b-website.com/category/plugins" target="_blank" title="' . __( 'More plugins by b*web', 'wp-plugin-info-card' ) . '">' . __( 'More plugins by b*web', 'wp-plugin-info-card' ) . '</a>';
+		$links[] = '<a href="https://mediaron.com/project-type/wordpress-plugins/" target="_blank" title="' . __( 'More plugins by MediaRon', 'wp-plugin-info-card' ) . '">' . __( 'More plugins by MediaRon', 'wp-plugin-info-card' ) . '</a>';
 	}
 	return $links;
 }
@@ -60,8 +88,9 @@ add_filter( 'plugin_row_meta', 'wppic_meta_links', 10, 2 );
  ***************************************************************/
 function wppic_add_favicon() {
 	$screen = get_current_screen();
-	if ( $screen->id != 'toplevel_page_' . WPPIC_ID )
+	if ( $screen->id != 'toplevel_page_' . WPPIC_ID ) {
 		return;
+	}
 
 	$favicon_url = WPPIC_URL . 'img/wppic.svg';
 	echo '<link rel="shortcut icon" href="' . $favicon_url . '" />';
@@ -72,16 +101,17 @@ add_action( 'admin_head', 'wppic_add_favicon' );
 /***************************************************************
  * Purge all plugin transients function
  ***************************************************************/
-function wppic_delete_transients(){
+function wppic_delete_transients() {
 	global $wpdb;
-	/*if( extension_loaded( 'Memcache' ) )
+	/*
+	if( extension_loaded( 'Memcache' ) )
 		return;*/
 	$wppic_transients = $wpdb->get_results(
 		"SELECT option_name AS name,
 		option_value AS value FROM $wpdb->options
 		WHERE option_name LIKE '_transient_wppic_%'"
 	);
-	foreach( ( array ) $wppic_transients as $singleTransient ){
+	foreach ( (array) $wppic_transients as $singleTransient ) {
 		delete_transient( str_replace( '_transient_', '', $singleTransient->name ) );
 	}
 }
@@ -91,9 +121,9 @@ function wppic_delete_transients(){
  * Cron to purge all plugin transients every weeks
  ***************************************************************/
 function wppic_add_weekly( $schedules ) {
-	$schedules[ 'wppic-weekly' ] = array(
+	$schedules['wppic-weekly'] = array(
 		'interval' => 604800,
-		'display' => __( 'Once Weekly' )
+		'display'  => __( 'Once Weekly' ),
 	);
 	return $schedules;
 }
@@ -111,9 +141,9 @@ add_action( 'wppic_daily_cron', 'wppic_delete_transients' );
 function wppic_uninstall() {
 	// Remove option from DB
 	delete_option( 'wppic_settings' );
-	//deactivate cron
+	// deactivate cron
 	wp_clear_scheduled_hook( 'wppic_daily_cron' );
-	//Purge transients
+	// Purge transients
 	wppic_delete_transients();
 }
 
