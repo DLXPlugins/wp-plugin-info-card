@@ -178,6 +178,11 @@ class Shortcodes {
 			$more_results = false;
 		}
 
+		// Query plugins and return.
+		foreach ( $return_plugins as $file => $plugin_data ) {
+			$return_plugins[ $file ] = wppic_api_parser( 'plugin', $plugin_data['slug'], HOUR_IN_SECONDS );
+		}
+
 		// Get next page.
 		$next_page = $page + 1;
 
@@ -192,7 +197,7 @@ class Shortcodes {
 			array(
 				'page'                => absint( $next_page ),
 				'more_results'        => $more_results,
-				'plugins'             => $plugins_on_org,
+				'plugins'             => $return_plugins,
 				'num_plugins'         => count( $plugins_on_org ),
 				'percentage_complete' => $percentage,
 			)

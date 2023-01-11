@@ -17,6 +17,7 @@ import ThemeLarge from '../templates/ThemeLarge';
 import ThemeCard from '../templates/ThemeCard';
 import Logo from '../Logo';
 import ProgressBar from '../components/ProgressBar';
+import { forEach } from 'lodash';
 const { Fragment, useEffect, useState } = wp.element;
 
 const { __ } = wp.i18n;
@@ -71,6 +72,7 @@ const SitePluginsCardGrid = ( props ) => {
 	const [ loadingPlugins, setLoadingPlugins ] = useState( false );
 	const [ statusMessage, setStatusMessage ] = useState( '' );
 	const [ progress, setProgress ] = useState( 0 );
+	const [ plugins, setPlugins ] = useState( {} );
 
 	/**
 	 * Load plugins recursively until all plugins are processed.
@@ -79,6 +81,7 @@ const SitePluginsCardGrid = ( props ) => {
 	 */
 	const loadPlugins = ( page = 1 ) => {
 		setLoadingPlugins( true );
+		setLoading( true );
 		const restUrl = wppic.rest_url + 'wppic/v2/get_site_plugins';
 		axios
 			.get(
@@ -101,8 +104,18 @@ const SitePluginsCardGrid = ( props ) => {
 					const percentageComplete = pluginResponseData.percentage_complete;
 					const morePlugins = pluginResponseData.more_results;
 					const nextPage = pluginResponseData.page;
+					const pluginData = pluginResponseData.plugins;
 
 					setProgress( percentageComplete );
+
+					// Merge arrays assetData and pluginData.
+					const pluginAssetData = assetData;
+					forEach( Object.values( pluginData ), ( plugin ) => {
+						pluginAssetData.push( plugin );
+					} );
+					setAttributes( {
+						assetData: pluginAssetData,
+					} );
 
 					// todo - append to assetData.
 					if ( morePlugins ) {
@@ -119,6 +132,13 @@ const SitePluginsCardGrid = ( props ) => {
 			} );
 	};
 	const pluginOnClick = ( assetSlug, assetType ) => {
+		setAttributes( {
+			assetData: [],
+		} );
+		setLoading( false );
+		setLoadingPlugins( true );
+
+		// Do ajax request to get activeplugins.
 		loadPlugins();
 	};
 	useEffect( () => {
@@ -237,7 +257,6 @@ const SitePluginsCardGrid = ( props ) => {
 	];
 
 	const layoutClass = 'card' === layout ? 'wp-pic-card' : layout;
-
 	const inspectorControls = (
 		<InspectorControls>
 			<PanelBody title={ __( 'Layout', 'wp-plugin-info-card' ) }>
@@ -364,7 +383,7 @@ const SitePluginsCardGrid = ( props ) => {
 					</div>
 				</>
 			) }
-			{ ( ! loading && assetData.length <= 0 ) && (
+			{ ( ! loading && Object.keys( assetData ).length <= 0 && ! loadingPlugins ) && (
 				<div className="wppic-site-plugins-block wppic-site-plugins-panel">
 					<div className="wppic-block-svg">
 						<Logo size="75" />
@@ -380,7 +399,7 @@ const SitePluginsCardGrid = ( props ) => {
 					{ getPluginsQueryButton }
 				</div>
 			) }
-			{ ( ! loading && assetData.length > 0 ) && (
+			{ ( ! loading && Object.keys( assetData ).length > 0 && ! loadingPlugins ) && (
 				<Fragment>
 					{ inspectorControls }
 					<BlockControls>
