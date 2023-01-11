@@ -173,20 +173,28 @@ class Shortcodes {
 
 		// Get plugins for page.
 		$more_results   = true;
-		$plugins_on_org = array_slice( $plugins_on_org, ( $page - 1 ) * $per_page, $per_page );
-		if ( empty( $plugins_on_org ) ) {
+		$return_plugins = array_slice( $plugins_on_org, ( $page - 1 ) * $per_page, $per_page );
+		if ( empty( $return_plugins ) ) {
 			$more_results = false;
 		}
 
 		// Get next page.
 		$next_page = $page + 1;
 
+		// Get percentage processed with page and per_page calculation.
+		$percentage = ( ( $page * $per_page ) / count( $plugins_on_org ) ) * 100;
+		if ( $percentage > 100 ) {
+			$percentage = 100;
+		}
+
 		// Get .org plugins.
 		wp_send_json_success(
 			array(
-				'page'         => absint( $next_page ),
-				'more_results' => $more_results,
-				'plugins'      => $plugins_on_org,
+				'page'                => absint( $next_page ),
+				'more_results'        => $more_results,
+				'plugins'             => $plugins_on_org,
+				'num_plugins'         => count( $plugins_on_org ),
+				'percentage_complete' => $percentage,
 			)
 		);
 	}

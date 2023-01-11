@@ -20,7 +20,7 @@
 		},
 		"loading": {
 			"type": "boolean",
-			"default": false
+			"default": true
 		},
 		"scheme": {
 			"type": "string",

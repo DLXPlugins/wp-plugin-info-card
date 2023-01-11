@@ -16,6 +16,7 @@ import ThemeWordPress from '../templates/ThemeWordPress';
 import ThemeLarge from '../templates/ThemeLarge';
 import ThemeCard from '../templates/ThemeCard';
 import Logo from '../Logo';
+import ProgressBar from '../components/ProgressBar';
 const { Fragment, useEffect, useState } = wp.element;
 
 const { __ } = wp.i18n;
@@ -35,6 +36,7 @@ const {
 	CheckboxControl,
 	TabPanel,
 	Button,
+	Notice,
 	MenuGroup,
 	MenuItemsChoice,
 	MenuItem,
@@ -65,32 +67,61 @@ const SitePluginsCardGrid = ( props ) => {
 		align,
 	} = attributes;
 
-	const [ loading, setLoading ] = useState( false );
+	const [ loading, setLoading ] = useState( attributes.loading );
 	const [ loadingPlugins, setLoadingPlugins ] = useState( false );
 	const [ statusMessage, setStatusMessage ] = useState( '' );
 	const [ progress, setProgress ] = useState( 0 );
 
-	const loadPlugins = () => {
+	/**
+	 * Load plugins recursively until all plugins are processed.
+	 *
+	 * @param {number} page The page to retrieve.
+	 */
+	const loadPlugins = ( page = 1 ) => {
 		setLoadingPlugins( true );
 		const restUrl = wppic.rest_url + 'wppic/v2/get_site_plugins';
 		axios
 			.get(
 				restUrl,
 				{
+					params: {
+						page,
+					},
 					headers: {
 						'X-WP-Nonce': wppic.rest_nonce,
 					},
 				}
 			)
 			.then( ( response ) => {
-				console.log( response );
+				if ( response.data.success ) {
+					// todo - process plugins.
+					const pluginResponseData = response.data.data;
+
+					// Calculate percentage.
+					const percentageComplete = pluginResponseData.percentage_complete;
+					const morePlugins = pluginResponseData.more_results;
+					const nextPage = pluginResponseData.page;
+
+					setProgress( percentageComplete );
+
+					// todo - append to assetData.
+					if ( morePlugins ) {
+						loadPlugins( nextPage );
+					} else {
+						// Set plugins and update status.
+						setLoading( false );
+						setAttributes( {
+							loading: false,
+						} );
+						setLoadingPlugins( false );
+					}
+				}
 			} );
 	};
 	const pluginOnClick = ( assetSlug, assetType ) => {
 		loadPlugins();
 	};
 	useEffect( () => {
-
 		if ( ! defaultsApplied && 'default' === scheme ) {
 			setAttributes( {
 				defaultsApplied: true,
@@ -179,19 +210,6 @@ const SitePluginsCardGrid = ( props ) => {
 			title: __( 'Edit and Configure', 'wp-plugin-info-card' ),
 			onClick: () => setLoading( true ),
 		},
-	];
-	const assetType = [
-		{ value: 'plugin', label: __( 'Plugin', 'wp-plugin-info-card' ) },
-		{ value: 'theme', label: __( 'Theme', 'wp-plugin-info-card' ) },
-	];
-	const clearOptions = [
-		{ value: 'none', label: __( 'None', 'wp-plugin-info-card' ) },
-		{ value: 'before', label: __( 'Before', 'wp-plugin-info-card' ) },
-		{ value: 'after', label: __( 'After', 'wp-plugin-info-card' ) },
-	];
-	const ajaxOptions = [
-		{ value: 'false', label: __( 'No', 'wp-plugin-info-card' ) },
-		{ value: 'true', label: __( 'Yes', 'wp-plugin-info-card' ) },
 	];
 	const schemeOptions = [
 		{ value: 'default', label: __( 'Default', 'wp-plugin-info-card' ) },
@@ -289,48 +307,80 @@ const SitePluginsCardGrid = ( props ) => {
 	// 	);
 	// }
 
-	const block = (
-		<Fragment>
-			<div className="wppic-query-block wppic-query-block-panel">
-				<div className="wppic-block-svg">
-					<Logo size="75" />
-				</div>
-				<div className="wppic-site-plugins-description">
-					<p>
-						{ __( 'Click "Load Plugins" to load your active plugins. Please note that plugins not hosted on the WordPress Plugin Directory will not be displayed.', 'wp-plugin-info-card' ) }
-					</p>
-				</div>
-				<div className="wp-pic-gutenberg-button">
-					<Button
-						iconSize={ 20 }
-						icon={ <Logo size="25" /> }
-						isSecondary
-						id="wppic-input-submit"
-						onClick={ ( event ) => {
-							pluginOnClick( event );
-						} }
-					>
-						{ __(
-							'Load Plugins',
-							'wp-plugin-info-card'
-						) }
-					</Button>
-				</div>
+	const getPluginsQueryButton = (
+		<>
+			<div className="wp-pic-gutenberg-button">
+				<Button
+					iconSize={ 20 }
+					icon={ ! loadingPlugins ? <Logo size="25" /> : <Spinner /> }
+					isSecondary
+					disabled={ loadingPlugins }
+					id="wppic-input-submit"
+					onClick={ ( event ) => {
+						setProgress( 0 );
+						pluginOnClick( event );
+					} }
+				>
+					{ ! loadingPlugins ? __(
+						'Load Plugins',
+						'wp-plugin-info-card'
+					) : __( 'Loading…', 'wp-plugin-info-card' ) }
+				</Button>
 			</div>
-			{ loading && (
-				<Fragment>
-					<div className="wppic-loading-placeholder">
-						<div className="wppic-loading">
-							<Logo size="45" />
-							<br />
-							<div className="wppic-spinner">
-								<Spinner />
-							</div>
-						</div>
-					</div>
-				</Fragment>
+			{ loadingPlugins && (
+				<>
+					<ProgressBar percentage={ progress } />
+				</>
 			) }
-			{ ! loading && (
+		</>
+	);
+
+	const block = (
+		<>
+			{ loading && (
+				<>
+					<BlockControls>
+						<ToolbarGroup>
+							<ToolbarButton
+								icon="welcome-view-site"
+								title={ __(
+									'View Preview',
+									'wp-plugin-info-card'
+								) }
+								onClick={ () => setLoading( false ) }
+							/>
+						</ToolbarGroup>
+					</BlockControls>
+					<div className="wppic-site-plugins-block wppic-site-plugins-panel">
+						<div className="wppic-block-svg">
+							<Logo size="75" />
+						</div>
+						<div className="wppic-site-plugins-description">
+							<p>
+								{ __( 'Click "Load Plugins" to load your active plugins. Please note that plugins not hosted on the WordPress Plugin Directory will not be displayed.', 'wp-plugin-info-card' ) }
+							</p>
+						</div>
+						{ getPluginsQueryButton }
+					</div>
+				</>
+			) }
+			{ ( ! loading && assetData.length <= 0 ) && (
+				<div className="wppic-site-plugins-block wppic-site-plugins-panel">
+					<div className="wppic-block-svg">
+						<Logo size="75" />
+					</div>
+					<div className="wppic-site-plugins-description">
+						<Notice
+							status="warning"
+							isDismissible={ false }
+						>
+							{ __( 'No plugins have been loaded or found. Please try again.', 'wp-plugin-info-card' ) }
+						</Notice>
+					</div>
+					{ getPluginsQueryButton }
+				</div>
+			) }
+			{ ( ! loading && assetData.length > 0 ) && (
 				<Fragment>
 					{ inspectorControls }
 					<BlockControls>
@@ -417,7 +467,7 @@ const SitePluginsCardGrid = ( props ) => {
 					</div>
 				</Fragment>
 			) }
-		</Fragment>
+		</>
 	);
 
 	return <div { ...blockProps }>{ block }</div>;
