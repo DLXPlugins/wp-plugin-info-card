@@ -4,7 +4,7 @@ const GridIcon = ( props ) => {
 	return (
 		<svg
 			height={ props.width }
-			viewBox="0 0 512 512"
+			viewBox="0 0 122.88 122.88"
 			width={ props.height }
 			xmlns="http://www.w3.org/2000/svg"
 		>

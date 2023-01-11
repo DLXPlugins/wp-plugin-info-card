@@ -51,22 +51,24 @@ const {
 const SitePluginsCardGrid = ( props ) => {
 	const { attributes, setAttributes } = props;
 
-	const [ type, setType ] = useState( attributes.type );
-	const [ slug, setSlug ] = useState( attributes.slug );
+	const {
+		assetData,
+		scheme,
+		layout,
+		preview,
+		defaultsApplied,
+		sortby,
+		sort,
+		cols,
+		colGap,
+		rowGap,
+		align,
+	} = attributes;
+
 	const [ loading, setLoading ] = useState( false );
-	const [ cardLoading, setCardLoading ] = useState( false );
-	const [ image, setImage ] = useState( attributes.image );
-	const [ containerid, setContainerid ] = useState( attributes.containerid );
-	const [ scheme, setScheme ] = useState( attributes.scheme );
-	const [ layout, setLayout ] = useState( attributes.layout );
-	const [ multi, setMulti ] = useState( true );
-	const [ preview, setPreview ] = useState( attributes.preview );
-	const [ data, setData ] = useState( attributes.assetData );
-	const [ align, setAlign ] = useState( attributes.align );
 
 	const loadData = () => {
 		setLoading( false );
-		setCardLoading( true );
 		const restUrl = wppic.rest_url + 'wppic/v2/get_data';
 		axios
 			.get(
@@ -76,30 +78,19 @@ const SitePluginsCardGrid = ( props ) => {
 				// Now Set State
 				setData( response.data.data );
 				setAttributes( { assetData: response.data.data } );
-				setCardLoading( false );
 			} );
 	};
 	const pluginOnClick = ( assetSlug, assetType ) => {
 		loadData();
 	};
 	useEffect( () => {
-		if ( ! data || 0 === data.length ) {
-			loadData();
-		}
-		setImage( attributes.image );
-		setLayout( attributes.layout );
-		setLoading( attributes.loading );
-		setType( attributes.type );
-		setSlug( attributes.slug );
 
-		if ( ! attributes.defaultsApplied && 'default' === attributes.scheme ) {
+		if ( ! defaultsApplied && 'default' === scheme ) {
 			setAttributes( {
 				defaultsApplied: true,
 				scheme: wppic.default_scheme,
 				layout: wppic.default_layout,
 			} );
-			setScheme( wppic.default_scheme );
-			setLayout( wppic.default_layout );
 		}
 	}, [] );
 
@@ -222,7 +213,6 @@ const SitePluginsCardGrid = ( props ) => {
 	];
 
 	const layoutClass = 'card' === layout ? 'wp-pic-card' : layout;
-	const previewLoadingClass = cardLoading ? 'wp-pic-spin' : '';
 
 	const inspectorControls = (
 		<InspectorControls>
@@ -249,86 +239,12 @@ const SitePluginsCardGrid = ( props ) => {
 									layout: value,
 									align: 'full',
 								} );
-								setLayout( value );
-								setAlign( 'full' );
 							} else {
 								setAttributes( {
 									layout: value,
 									align: 'center',
 								} );
-								setLayout( value );
-								setAlign( 'center' );
 							}
-						} }
-					/>
-				</PanelRow>
-			</PanelBody>
-			<PanelBody
-				title={ __( 'Options', 'wp-plugin-info-card' ) }
-				initialOpen={ false }
-			>
-				<PanelRow>
-					<MediaUpload
-						onSelect={ ( imageObject ) => {
-							setAttributes( { image: imageObject.url } );
-							setImage( imageObject.url );
-						} }
-						type="image"
-						value={ image }
-						render={ ( { open } ) => (
-							<Fragment>
-								<button
-									className="components-button is-button"
-									onClick={ open }
-								>
-									{ __(
-										'Upload Image!',
-										'wp-plugin-info-card'
-									) }
-								</button>
-								{ image && (
-									<Fragment>
-										<div>
-											<img
-												src={ image }
-												alt={ __(
-													'Plugin Card Image',
-													'wp-plugin-info-card'
-												) }
-												width="250"
-												height="250"
-											/>
-										</div>
-										<div>
-											<button
-												className="components-button is-button"
-												onClick={ ( event ) => {
-													setAttributes( {
-														image: '',
-													} );
-													setImage( '' );
-												} }
-											>
-												{ __(
-													'Reset Image',
-													'wp-plugin-info-card'
-												) }
-											</button>
-										</div>
-									</Fragment>
-								) }
-							</Fragment>
-						) }
-					/>
-				</PanelRow>
-				<PanelRow>
-					<TextControl
-						label={ __( 'Container ID', 'wp-plugin-info-card' ) }
-						type="text"
-						value={ containerid }
-						onChange={ ( value ) => {
-							setAttributes( { containerid: value } );
-							setContainerid( value );
 						} }
 					/>
 				</PanelRow>
@@ -337,7 +253,7 @@ const SitePluginsCardGrid = ( props ) => {
 	);
 
 	const blockProps = useBlockProps( {
-		className: classnames( `wp-plugin-info-card align${ align }` ),
+		className: classnames( `site-plugins-card-grid align${ align }` ),
 	} );
 
 	if ( preview ) {
@@ -351,21 +267,21 @@ const SitePluginsCardGrid = ( props ) => {
 			</div>
 		);
 	}
-	if ( cardLoading ) {
-		return (
-			<div { ...blockProps }>
-				<div className="wppic-loading-placeholder">
-					<div className="wppic-loading">
-						<Logo size="45" />
-						<br />
-						<div className="wppic-spinner">
-							<Spinner />
-						</div>
-					</div>
-				</div>
-			</div>
-		);
-	}
+	// if ( cardLoading ) {
+	// 	return (
+	// 		<div { ...blockProps }>
+	// 			<div className="wppic-loading-placeholder">
+	// 				<div className="wppic-loading">
+	// 					<Logo size="45" />
+	// 					<br />
+	// 					<div className="wppic-spinner">
+	// 						<Spinner />
+	// 					</div>
+	// 				</div>
+	// 			</div>
+	// 		</div>
+	// 	);
+	// }
 
 	const block = (
 		<Fragment>
@@ -512,7 +428,7 @@ const SitePluginsCardGrid = ( props ) => {
 					</div>
 				</div>
 			) }
-			{ cardLoading && (
+			{ loading && (
 				<Fragment>
 					<div className="wppic-loading-placeholder">
 						<div className="wppic-loading">
@@ -525,7 +441,7 @@ const SitePluginsCardGrid = ( props ) => {
 					</div>
 				</Fragment>
 			) }
-			{ ! loading && ! cardLoading && (
+			{ ! loading && (
 				<Fragment>
 					{ inspectorControls }
 					<BlockControls>
@@ -608,7 +524,7 @@ const SitePluginsCardGrid = ( props ) => {
 							`align${ align }`
 						) }
 					>
-						{ outputInfoCards( data ) }
+						hello
 					</div>
 				</Fragment>
 			) }

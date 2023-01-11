@@ -21,6 +21,10 @@
       "type": "array",
       "default": []
     },
+    "align": {
+      "type": "string",
+      "default": "center"
+    },
     "loading": {
       "type": "boolean",
       "default": false
