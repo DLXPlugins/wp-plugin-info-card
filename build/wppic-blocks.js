@@ -3490,7 +3490,15 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     p = _slicedToArray(o, 2),
     q = p[0],
     r = p[1];
-  var s = function loadData() {
+  var s = useState(''),
+    t = _slicedToArray(s, 2),
+    u = t[0],
+    v = t[1];
+  var w = useState(0),
+    x = _slicedToArray(w, 2),
+    y = x[0],
+    z = x[1];
+  var A = function loadData() {
     r(false);
     var a = wppic.rest_url + 'wppic/v2/get_data';
     axios__WEBPACK_IMPORTED_MODULE_0___default().get(a + "?type=".concat(type, "&slug=").concat(encodeURIComponent(slug))).then(function (a) {
@@ -3501,8 +3509,8 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
       });
     });
   };
-  var t = function pluginOnClick(a, b) {
-    s();
+  var B = function pluginOnClick(a, b) {
+    //loadData();
   };
   useEffect(function () {
     if (!h && 'default' === e) {
@@ -3513,7 +3521,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
       });
     }
   }, []);
-  var u = function outputInfoCards(a) {
+  var C = function outputInfoCards(a) {
     return a.map(function (a, b) {
       return /*#__PURE__*/React.createElement(Fragment, {
         key: b
@@ -3560,21 +3568,21 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
       }));
     });
   };
-  var v = [{
+  var D = [{
     icon: 'edit',
     title: __('Edit and Configure', 'wp-plugin-info-card'),
     onClick: function onClick() {
       return r(true);
     }
   }];
-  var w = [{
+  var E = [{
     value: 'plugin',
     label: __('Plugin', 'wp-plugin-info-card')
   }, {
     value: 'theme',
     label: __('Theme', 'wp-plugin-info-card')
   }];
-  var x = [{
+  var F = [{
     value: 'none',
     label: __('None', 'wp-plugin-info-card')
   }, {
@@ -3584,14 +3592,14 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     value: 'after',
     label: __('After', 'wp-plugin-info-card')
   }];
-  var y = [{
+  var G = [{
     value: 'false',
     label: __('No', 'wp-plugin-info-card')
   }, {
     value: 'true',
     label: __('Yes', 'wp-plugin-info-card')
   }];
-  var z = [{
+  var H = [{
     value: 'default',
     label: __('Default', 'wp-plugin-info-card')
   }, {
@@ -3637,7 +3645,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     value: 'scheme14',
     label: __('Scheme 14', 'wp-plugin-info-card')
   }];
-  var A = [{
+  var I = [{
     value: 'card',
     label: __('Card', 'wp-plugin-info-card')
   }, {
@@ -3650,12 +3658,12 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     value: 'flex',
     label: __('Flex', 'wp-plugin-info-card')
   }];
-  var B = 'card' === f ? 'wp-pic-card' : f;
-  var C = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
+  var J = 'card' === f ? 'wp-pic-card' : f;
+  var K = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Layout', 'wp-plugin-info-card')
   }, /*#__PURE__*/React.createElement(PanelRow, null, /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Scheme', 'wp-plugin-info-card'),
-    options: z,
+    options: H,
     value: e,
     onChange: function onChange(a) {
       c({
@@ -3665,7 +3673,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     }
   })), /*#__PURE__*/React.createElement(PanelRow, null, /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Layout', 'wp-plugin-info-card'),
-    options: A,
+    options: I,
     value: f,
     onChange: function onChange(a) {
       if ('flex' === a) {
@@ -3681,7 +3689,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
       }
     }
   }))));
-  var D = useBlockProps({
+  var L = useBlockProps({
     className: classnames__WEBPACK_IMPORTED_MODULE_1___default()("site-plugins-card-grid align".concat(n))
   });
   if (g) {
@@ -3715,88 +3723,15 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
   // 	);
   // }
 
-  var E = /*#__PURE__*/React.createElement(Fragment, null, q && /*#__PURE__*/React.createElement("div", {
+  var M = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "wppic-query-block wppic-query-block-panel"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-block-svg"
   }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_10__["default"], {
     size: "75"
   })), /*#__PURE__*/React.createElement("div", {
-    className: "wp-pic-tab-panel"
-  }, /*#__PURE__*/React.createElement(TabPanel, {
-    activeClass: "active-tab",
-    initialTabName: "slug",
-    tabs: [{
-      title: __('Type', 'wp-plugin-info-card'),
-      name: 'slug',
-      className: 'wppic-tab-slug'
-    }, {
-      title: __('Appearance', 'wp-plugin-info-card'),
-      name: 'layout',
-      className: 'wppic-tab-layout'
-    }]
-  }, function (a) {
-    var b;
-    if ('slug' === a.name) {
-      b = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(SelectControl, {
-        label: __('Select a Plugin or Theme', 'wp-plugin-info-card'),
-        options: w,
-        value: type,
-        onChange: function onChange(a) {
-          c({
-            type: a
-          });
-          setType(a);
-        }
-      }), /*#__PURE__*/React.createElement(TextControl, {
-        label: __('Plugin or Theme Slug', 'wp-plugin-info-card'),
-        value: slug,
-        onChange: function onChange(a) {
-          c({
-            slug: a
-          });
-          setSlug(a);
-        },
-        help: __('Comma separated slugs are supported.', 'wp-plugin-info-card')
-      }));
-    } else if ('layout' === a.name) {
-      b = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SelectControl, {
-        label: __('Select an initial layout', 'wp-plugin-info-card'),
-        options: A,
-        value: f,
-        onChange: function onChange(a) {
-          if ('flex' === a) {
-            c({
-              layout: a,
-              align: 'full'
-            });
-            setLayout(a);
-            setAlign('full');
-          } else {
-            c({
-              layout: a,
-              align: 'center'
-            });
-            setLayout(a);
-            setAlign('center');
-          }
-        }
-      }), /*#__PURE__*/React.createElement(SelectControl, {
-        label: __('Scheme', 'wp-plugin-info-card'),
-        options: z,
-        value: e,
-        onChange: function onChange(a) {
-          c({
-            scheme: a
-          });
-          setScheme(a);
-        }
-      })));
-    } else {
-      b = /*#__PURE__*/React.createElement(Fragment, null, "no data found");
-    }
-    return /*#__PURE__*/React.createElement("div", null, b);
-  })), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-site-plugins-description"
+  }, /*#__PURE__*/React.createElement("p", null, __('Click "Load Plugins" to load your active plugins. Please note that plugins not hosted on the WordPress Plugin Directory will not be displayed.', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-gutenberg-button"
   }, /*#__PURE__*/React.createElement(Button, {
     iconSize: 20,
@@ -3806,13 +3741,9 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     isSecondary: true,
     id: "wppic-input-submit",
     onClick: function onClick(a) {
-      a.preventDefault();
-      c({
-        loading: false
-      });
-      t(a);
+      B(a);
     }
-  }, __('Preview and Configure', 'wp-plugin-info-card')))), q && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }, __('Load Plugins', 'wp-plugin-info-card')))), q && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "wppic-loading-placeholder"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-loading"
@@ -3820,7 +3751,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     size: "45"
   }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
     className: "wppic-spinner"
-  }, /*#__PURE__*/React.createElement(Spinner, null))))), !q && /*#__PURE__*/React.createElement(Fragment, null, C, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
+  }, /*#__PURE__*/React.createElement(Spinner, null))))), !q && /*#__PURE__*/React.createElement(Fragment, null, K, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
     icon: "edit",
     title: __('Edit and Configure', 'wp-plugin-info-card'),
     onClick: function onClick() {
@@ -3836,7 +3767,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     }, function (a) {
       var b = a.onClose;
       return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(MenuItemsChoice, {
-        choices: z,
+        choices: H,
         onSelect: function onSelect(a) {
           c({
             scheme: a
@@ -3857,7 +3788,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     }, function (a) {
       var b = a.onClose;
       return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(MenuItemsChoice, {
-        choices: A,
+        choices: I,
         onSelect: function onSelect(a) {
           c({
             layout: a
@@ -3869,9 +3800,9 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
       }));
     });
   }))), /*#__PURE__*/React.createElement("div", {
-    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('is-placeholder', B, 'wp-block-plugin-info-card', "align".concat(n))
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('is-placeholder', J, 'wp-block-plugin-info-card', "align".concat(n))
   }, "hello")));
-  return /*#__PURE__*/React.createElement("div", D, E);
+  return /*#__PURE__*/React.createElement("div", L, M);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SitePluginsCardGrid);
 

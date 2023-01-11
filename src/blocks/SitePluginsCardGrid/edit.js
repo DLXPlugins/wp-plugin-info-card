@@ -66,6 +66,8 @@ const SitePluginsCardGrid = ( props ) => {
 	} = attributes;
 
 	const [ loading, setLoading ] = useState( false );
+	const [ statusMessage, setStatusMessage ] = useState( '' );
+	const [ progress, setProgress ] = useState( 0 );
 
 	const loadData = () => {
 		setLoading( false );
@@ -81,7 +83,7 @@ const SitePluginsCardGrid = ( props ) => {
 			} );
 	};
 	const pluginOnClick = ( assetSlug, assetType ) => {
-		loadData();
+		//loadData();
 	};
 	useEffect( () => {
 
@@ -285,149 +287,32 @@ const SitePluginsCardGrid = ( props ) => {
 
 	const block = (
 		<Fragment>
-			{ loading && (
-				<div className="wppic-query-block wppic-query-block-panel">
-					<div className="wppic-block-svg">
-						<Logo size="75" />
-					</div>
-					<div className="wp-pic-tab-panel">
-						<TabPanel
-							activeClass="active-tab"
-							initialTabName="slug"
-							tabs={ [
-								{
-									title: __( 'Type', 'wp-plugin-info-card' ),
-									name: 'slug',
-									className: 'wppic-tab-slug',
-								},
-								{
-									title: __(
-										'Appearance',
-										'wp-plugin-info-card'
-									),
-									name: 'layout',
-									className: 'wppic-tab-layout',
-								},
-							] }
-						>
-							{ ( tab ) => {
-								let tabContent;
-								if ( 'slug' === tab.name ) {
-									tabContent = (
-										<Fragment>
-											<SelectControl
-												label={ __(
-													'Select a Plugin or Theme',
-													'wp-plugin-info-card'
-												) }
-												options={ assetType }
-												value={ type }
-												onChange={ ( value ) => {
-													setAttributes( {
-														type: value,
-													} );
-													setType( value );
-												} }
-											/>
-											<TextControl
-												label={ __(
-													'Plugin or Theme Slug',
-													'wp-plugin-info-card'
-												) }
-												value={ slug }
-												onChange={ ( value ) => {
-													setAttributes( {
-														slug: value,
-													} );
-													setSlug( value );
-												} }
-												help={ __(
-													'Comma separated slugs are supported.',
-													'wp-plugin-info-card'
-												) }
-											/>
-										</Fragment>
-									);
-								} else if ( 'layout' === tab.name ) {
-									tabContent = (
-										<Fragment>
-											<div>
-												<SelectControl
-													label={ __(
-														'Select an initial layout',
-														'wp-plugin-info-card'
-													) }
-													options={ layoutOptions }
-													value={ layout }
-													onChange={ ( value ) => {
-														if (
-															'flex' === value
-														) {
-															setAttributes( {
-																layout: value,
-																align: 'full',
-															} );
-															setLayout( value );
-															setAlign( 'full' );
-														} else {
-															setAttributes( {
-																layout: value,
-																align: 'center',
-															} );
-															setLayout( value );
-															setAlign(
-																'center'
-															);
-														}
-													} }
-												/>
-
-												<SelectControl
-													label={ __(
-														'Scheme',
-														'wp-plugin-info-card'
-													) }
-													options={ schemeOptions }
-													value={ scheme }
-													onChange={ ( value ) => {
-														setAttributes( {
-															scheme: value,
-														} );
-														setScheme( value );
-													} }
-												/>
-											</div>
-										</Fragment>
-									);
-								} else {
-									tabContent = (
-										<Fragment>no data found</Fragment>
-									);
-								}
-								return <div>{ tabContent }</div>;
-							} }
-						</TabPanel>
-					</div>
-					<div className="wp-pic-gutenberg-button">
-						<Button
-							iconSize={ 20 }
-							icon={ <Logo size="25" /> }
-							isSecondary
-							id="wppic-input-submit"
-							onClick={ ( event ) => {
-								event.preventDefault();
-								setAttributes( { loading: false } );
-								pluginOnClick( event );
-							} }
-						>
-							{ __(
-								'Preview and Configure',
-								'wp-plugin-info-card'
-							) }
-						</Button>
-					</div>
+			<div className="wppic-query-block wppic-query-block-panel">
+				<div className="wppic-block-svg">
+					<Logo size="75" />
 				</div>
-			) }
+				<div className="wppic-site-plugins-description">
+					<p>
+						{ __( 'Click "Load Plugins" to load your active plugins. Please note that plugins not hosted on the WordPress Plugin Directory will not be displayed.', 'wp-plugin-info-card' ) }
+					</p>
+				</div>
+				<div className="wp-pic-gutenberg-button">
+					<Button
+						iconSize={ 20 }
+						icon={ <Logo size="25" /> }
+						isSecondary
+						id="wppic-input-submit"
+						onClick={ ( event ) => {
+							pluginOnClick( event );
+						} }
+					>
+						{ __(
+							'Load Plugins',
+							'wp-plugin-info-card'
+						) }
+					</Button>
+				</div>
+			</div>
 			{ loading && (
 				<Fragment>
 					<div className="wppic-loading-placeholder">
