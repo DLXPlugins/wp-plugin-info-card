@@ -6,9 +6,6 @@ const progressColor = '#4F8A10';
 
 const ProgressBar = ( props ) => {
 	const { percentage } = props;
-
-	console.log( percentage );
-
 	const [ lineStyle, setLineStyle ] = useState( {
 		width: '0',
 		backgroundColor: baseColor,

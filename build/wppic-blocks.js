@@ -4070,7 +4070,6 @@ var baseColor = '#99cc33';
 var progressColor = '#4F8A10';
 var ProgressBar = function ProgressBar(a) {
   var b = a.percentage;
-  console.log(b);
   var c = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
       width: '0',
       backgroundColor: baseColor
