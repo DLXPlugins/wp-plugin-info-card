@@ -110,6 +110,31 @@ class Shortcodes {
 				'permission_callback' => '__return_true',
 			)
 		);
+		register_rest_route(
+			'wppic/v2',
+			'/get_site_plugins',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'get_site_plugin_data' ),
+				'permission_callback' => array( $this, 'rest_check_permissions' ),
+			)
+		);
+	}
+
+	/**
+	 * Get plugin data for return.
+	 *
+	 * @param array $request Request data.
+	 */
+	public function get_site_plugin_data( $request ) {
+		wp_send_json_success();
+	}
+
+	/**
+	 * Check if user has access to REST API.
+	 */
+	public function rest_check_permissions() {
+		return current_user_can( 'edit_posts' );
 	}
 
 	/**

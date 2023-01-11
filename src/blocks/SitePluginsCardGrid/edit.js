@@ -66,24 +66,28 @@ const SitePluginsCardGrid = ( props ) => {
 	} = attributes;
 
 	const [ loading, setLoading ] = useState( false );
+	const [ loadingPlugins, setLoadingPlugins ] = useState( false );
 	const [ statusMessage, setStatusMessage ] = useState( '' );
 	const [ progress, setProgress ] = useState( 0 );
 
-	const loadData = () => {
-		setLoading( false );
-		const restUrl = wppic.rest_url + 'wppic/v2/get_data';
+	const loadPlugins = () => {
+		setLoadingPlugins( true );
+		const restUrl = wppic.rest_url + 'wppic/v2/get_site_plugins';
 		axios
 			.get(
-				restUrl + `?type=${ type }&slug=${ encodeURIComponent( slug ) }`
+				restUrl,
+				{
+					headers: {
+						'X-WP-Nonce': wppic.rest_nonce,
+					},
+				}
 			)
 			.then( ( response ) => {
-				// Now Set State
-				setData( response.data.data );
-				setAttributes( { assetData: response.data.data } );
+				console.log( response );
 			} );
 	};
 	const pluginOnClick = ( assetSlug, assetType ) => {
-		//loadData();
+		loadPlugins();
 	};
 	useEffect( () => {
 

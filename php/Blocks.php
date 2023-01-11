@@ -69,6 +69,7 @@ class Blocks {
 				'wppic_banner_default' => Functions::get_plugin_url( 'assets/img/default-banner.png' ),
 				'default_scheme'       => $default_scheme,
 				'default_layout'       => $default_layout,
+				'rest_nonce'           => wp_create_nonce( 'wp_rest' ),
 			)
 		);
 
