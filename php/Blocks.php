@@ -93,6 +93,12 @@ class Blocks {
 				'render_callback' => array( $this, 'info_card_query_render' ),
 			)
 		);
+		register_block_type(
+			Functions::get_plugin_dir( 'build/blocks/SitePluginsCardGrid/block.json' ),
+			array(
+				'render_callback' => array( $this, 'site_plugin_card_grid_render' ),
+			)
+		);
 	}
 
 	/**
@@ -198,5 +204,19 @@ class Blocks {
 				),
 			)
 		);
+	}
+
+	/**
+	 * Render the main info card block.
+	 *
+	 * @param array $attributes Array of block attributes.
+	 *
+	 * @return string Block rendered.
+	 */
+	public function site_plugin_card_grid_render( $attributes ) {
+		if ( is_admin() ) {
+			return;
+		}
+		return "hi";
 	}
 }

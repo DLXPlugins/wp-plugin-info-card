@@ -8,7 +8,7 @@ const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.b
 
 registerBlockType( metadata, {
 	icon: (
-		<InfoCardIcon fill="#DB3939" />
+		<InfoCardIcon fill="#333" />
 	),
 	edit,
 	save() {
