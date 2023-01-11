@@ -13,6 +13,58 @@ namespace MediaRon\WPPIC;
 class Functions {
 
 	/**
+	 * Checks if the plugin is on a multisite install.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param bool $network_admin Check if in network admin.
+	 *
+	 * @return true if multisite, false if not.
+	 */
+	public static function is_multisite( $network_admin = false ) {
+		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
+			require_once ABSPATH . '/wp-admin/includes/plugin.php';
+		}
+		$is_network_admin = false;
+		if ( $network_admin ) {
+			if ( is_network_admin() ) {
+				if ( is_multisite() && is_plugin_active_for_network( self::get_plugin_slug() ) ) {
+					return true;
+				}
+			} else {
+				return false;
+			}
+		}
+		if ( is_multisite() && is_plugin_active_for_network( self::get_plugin_slug() ) ) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Gets an array of plugins active on either the current site, or site-wide
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array A list of plugin paths (relative to the plugin directory)
+	 */
+	public static function get_active_plugins() {
+
+		// Gets all active plugins on the current site.
+		$active_plugins = get_option( 'active_plugins' );
+
+		if ( self::is_multisite() ) {
+			$network_active_plugins = get_site_option( 'active_sitewide_plugins' );
+			if ( ! empty( $network_active_plugins ) ) {
+				$network_active_plugins = array_keys( $network_active_plugins );
+				$active_plugins         = array_merge( $active_plugins, $network_active_plugins );
+			}
+		}
+
+		return $active_plugins;
+	}
+
+	/**
 	 * Sanitize an attribute based on type.
 	 *
 	 * @param array  $attributes Array of attributes.

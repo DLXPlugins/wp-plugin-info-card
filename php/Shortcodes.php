@@ -127,7 +127,68 @@ class Shortcodes {
 	 * @param array $request Request data.
 	 */
 	public function get_site_plugin_data( $request ) {
-		wp_send_json_success();
+		// Get cache data
+		$plugins_on_org = wp_cache_get( 'wppic_plugins_on_org', 'wppic' );
+
+		if ( ! $plugins_on_org || empty( $plugins_on_org ) ) {
+			// Retrieve plugins.
+			$active_plugin_slugs = Functions::get_active_plugins();
+			$all_plugins         = apply_filters( 'all_plugins', get_plugins() );
+			$active_plugins      = array();
+			$plugin_info         = get_site_transient( 'update_plugins' );
+
+			// Get active plugins.
+			foreach ( $all_plugins as $file => $plugin ) {
+				if ( in_array( $file, $active_plugin_slugs, true ) ) {
+					$active_plugins[ $file ] = $plugin;
+				}
+			}
+
+			// Get plugin information from .org.
+			$all_plugins_with_info = array();
+			foreach ( (array) $active_plugins as $plugin_file => $plugin_data ) {
+				// Extra info if known. array_merge() ensures $plugin_data has precedence if keys collide.
+				if ( isset( $plugin_info->response[ $plugin_file ] ) ) {
+					$all_plugins_with_info[ $plugin_file ] = array_merge( (array) $plugin_info->response[ $plugin_file ], $plugin_data );
+				} elseif ( isset( $plugin_info->no_update[ $plugin_file ] ) ) {
+					$all_plugins_with_info[ $plugin_file ] = array_merge( (array) $plugin_info->no_update[ $plugin_file ], $plugin_data );
+				}
+			}
+
+			// Check for plugins hosted on .org.
+			$plugins_on_org = array();
+			foreach ( $all_plugins_with_info as $plugin_file => $plugin_data ) {
+				if ( strstr( $plugin_data['id'], 'w.org' ) ) {
+					$plugins_on_org[ $plugin_file ] = $plugin_data;
+				}
+			}
+
+			// Cache results.
+			wp_cache_set( 'plugins_on_org', $plugins_on_org, 'wppic' );
+		}
+
+		// Get pagination.
+		$per_page = 5;
+		$page     = isset( $request['page'] ) ? absint( $request['page'] ) : 1;
+
+		// Get plugins for page.
+		$more_results   = true;
+		$plugins_on_org = array_slice( $plugins_on_org, ( $page - 1 ) * $per_page, $per_page );
+		if ( empty( $plugins_on_org ) ) {
+			$more_results = false;
+		}
+
+		// Get next page.
+		$next_page = $page + 1;
+
+		// Get .org plugins.
+		wp_send_json_success(
+			array(
+				'page'         => absint( $next_page ),
+				'more_results' => $more_results,
+				'plugins'      => $plugins_on_org,
+			)
+		);
 	}
 
 	/**
