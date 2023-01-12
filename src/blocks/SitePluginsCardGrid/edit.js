@@ -132,7 +132,7 @@ const SitePluginsCardGrid = ( props ) => {
 				}
 			} );
 	};
-	const pluginOnClick = ( assetSlug, assetType ) => {
+	const pluginOnClick = () => {
 		setPlugins( [] );
 		setLoading( false );
 		setAttributes( {
@@ -180,34 +180,6 @@ const SitePluginsCardGrid = ( props ) => {
 					) }
 					{ 'wordpress' === layout && (
 						<PluginWordPress
-							scheme={ scheme }
-							data={ cardData }
-							align={ align }
-						/>
-					) }
-					{ 'flex' === layout && (
-						<ThemeFlex
-							scheme={ scheme }
-							data={ cardData }
-							align={ align }
-						/>
-					) }
-					{ 'wordpress' === layout && (
-						<ThemeWordPress
-							scheme={ scheme }
-							data={ cardData }
-							align={ align }
-						/>
-					) }
-					{ 'large' === layout && (
-						<ThemeLarge
-							scheme={ scheme }
-							data={ cardData }
-							align={ align }
-						/>
-					) }
-					{ 'card' === layout && (
-						<ThemeCard
 							scheme={ scheme }
 							data={ cardData }
 							align={ align }
@@ -304,21 +276,6 @@ const SitePluginsCardGrid = ( props ) => {
 			</div>
 		);
 	}
-	// if ( cardLoading ) {
-	// 	return (
-	// 		<div { ...blockProps }>
-	// 			<div className="wppic-loading-placeholder">
-	// 				<div className="wppic-loading">
-	// 					<Logo size="45" />
-	// 					<br />
-	// 					<div className="wppic-spinner">
-	// 						<Spinner />
-	// 					</div>
-	// 				</div>
-	// 			</div>
-	// 		</div>
-	// 	);
-	// }
 
 	const getPluginsQueryButton = (
 		<>
@@ -347,8 +304,6 @@ const SitePluginsCardGrid = ( props ) => {
 			) }
 		</>
 	);
-
-	console.log( assetData );
 
 	const block = (
 		<>
@@ -468,6 +423,16 @@ const SitePluginsCardGrid = ( props ) => {
 									</DropdownMenu>
 								) }
 							</ToolbarItem>
+						</ToolbarGroup>
+						<ToolbarGroup>
+							<ToolbarButton
+								icon="image-rotate"
+								title={ __(
+									'Refresh Plugins',
+									'wp-plugin-info-card'
+								) }
+								onClick={ () => pluginOnClick() }
+							/>
 						</ToolbarGroup>
 					</BlockControls>
 					<div
