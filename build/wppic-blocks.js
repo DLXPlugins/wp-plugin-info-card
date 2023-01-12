@@ -3508,7 +3508,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     B = _slicedToArray(A, 2),
     C = B[0],
     D = B[1];
-  var E = useState({}),
+  var E = useState([]),
     F = _slicedToArray(E, 2),
     G = F[0],
     H = F[1];
@@ -3536,24 +3536,22 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
         var b = a.data.data;
 
         // Calculate percentage.
-        var e = b.percentage_complete;
-        var f = b.more_results;
-        var g = b.page;
-        var h = b.plugins;
-        D(e);
+        var d = b.percentage_complete;
+        var e = b.more_results;
+        var f = b.page;
+        var g = b.plugins;
+        D(d);
 
         // Merge arrays assetData and pluginData.
-        var i = d;
-        (0,lodash__WEBPACK_IMPORTED_MODULE_12__.forEach)(Object.values(h), function (a) {
-          i.push(a);
+        var h = G;
+        (0,lodash__WEBPACK_IMPORTED_MODULE_12__.forEach)(Object.values(g), function (a) {
+          h.push(a);
         });
-        c({
-          assetData: i
-        });
+        H(h);
 
         // todo - append to assetData.
-        if (f) {
-          I(g);
+        if (e) {
+          I(f);
         } else {
           // Set plugins and update status.
           r(false);
@@ -3561,15 +3559,19 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
             loading: false
           });
           v(false);
+          c({
+            assetData: G
+          });
         }
       }
     });
   };
   var J = function pluginOnClick(a, b) {
-    c({
-      assetData: []
-    });
+    H([]);
     r(false);
+    c({
+      loading: false
+    });
     v(true);
 
     // Do ajax request to get activeplugins.
@@ -3585,47 +3587,39 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     }
   }, []);
   var K = function outputInfoCards(a) {
-    return a.map(function (a, b) {
+    return Object.values(a).map(function (a, b) {
       return /*#__PURE__*/React.createElement(Fragment, {
         key: b
-      }, 'flex' === f && 'plugin' === type && /*#__PURE__*/React.createElement(_templates_PluginFlex__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }, 'flex' === f && /*#__PURE__*/React.createElement(_templates_PluginFlex__WEBPACK_IMPORTED_MODULE_2__["default"], {
         scheme: e,
-        image: image,
         data: a,
         align: n
-      }), 'card' === f && 'plugin' === type && /*#__PURE__*/React.createElement(_templates_PluginCard__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), 'card' === f && /*#__PURE__*/React.createElement(_templates_PluginCard__WEBPACK_IMPORTED_MODULE_3__["default"], {
         scheme: e,
-        image: image,
         data: a,
         align: n
-      }), 'large' === f && 'plugin' === type && /*#__PURE__*/React.createElement(_templates_PluginLarge__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }), 'large' === f && /*#__PURE__*/React.createElement(_templates_PluginLarge__WEBPACK_IMPORTED_MODULE_4__["default"], {
         scheme: e,
-        image: image,
         data: a,
         align: n
-      }), 'wordpress' === f && 'plugin' === type && /*#__PURE__*/React.createElement(_templates_PluginWordPress__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      }), 'wordpress' === f && /*#__PURE__*/React.createElement(_templates_PluginWordPress__WEBPACK_IMPORTED_MODULE_5__["default"], {
         scheme: e,
-        image: image,
         data: a,
         align: n
-      }), 'flex' === f && 'theme' === type && /*#__PURE__*/React.createElement(_templates_ThemeFlex__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }), 'flex' === f && /*#__PURE__*/React.createElement(_templates_ThemeFlex__WEBPACK_IMPORTED_MODULE_6__["default"], {
         scheme: e,
-        image: image,
         data: a,
         align: n
-      }), 'wordpress' === f && 'theme' === type && /*#__PURE__*/React.createElement(_templates_ThemeWordPress__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }), 'wordpress' === f && /*#__PURE__*/React.createElement(_templates_ThemeWordPress__WEBPACK_IMPORTED_MODULE_7__["default"], {
         scheme: e,
-        image: image,
         data: a,
         align: n
-      }), 'large' === f && 'theme' === type && /*#__PURE__*/React.createElement(_templates_ThemeLarge__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      }), 'large' === f && /*#__PURE__*/React.createElement(_templates_ThemeLarge__WEBPACK_IMPORTED_MODULE_8__["default"], {
         scheme: e,
-        image: image,
         data: a,
         align: n
-      }), 'card' === f && 'theme' === type && /*#__PURE__*/React.createElement(_templates_ThemeCard__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      }), 'card' === f && /*#__PURE__*/React.createElement(_templates_ThemeCard__WEBPACK_IMPORTED_MODULE_9__["default"], {
         scheme: e,
-        image: image,
         data: a,
         align: n
       }));
@@ -3779,6 +3773,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
   }, !u ? __('Load Plugins', 'wp-plugin-info-card') : __('Loading…', 'wp-plugin-info-card'))), u && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_ProgressBar__WEBPACK_IMPORTED_MODULE_11__["default"], {
     percentage: C
   })));
+  console.log(d);
   var S = /*#__PURE__*/React.createElement(React.Fragment, null, q && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
     icon: "welcome-view-site",
     title: __('View Preview', 'wp-plugin-info-card'),
@@ -3854,7 +3849,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     });
   }))), /*#__PURE__*/React.createElement("div", {
     className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('is-placeholder', O, 'wp-block-plugin-info-card', "align".concat(n))
-  }, "hello")));
+  }, K(d))));
   return /*#__PURE__*/React.createElement("div", Q, S);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SitePluginsCardGrid);

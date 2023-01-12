@@ -72,7 +72,7 @@ const SitePluginsCardGrid = ( props ) => {
 	const [ loadingPlugins, setLoadingPlugins ] = useState( false );
 	const [ statusMessage, setStatusMessage ] = useState( '' );
 	const [ progress, setProgress ] = useState( 0 );
-	const [ plugins, setPlugins ] = useState( {} );
+	const [ plugins, setPlugins ] = useState( [] );
 
 	/**
 	 * Load plugins recursively until all plugins are processed.
@@ -109,13 +109,11 @@ const SitePluginsCardGrid = ( props ) => {
 					setProgress( percentageComplete );
 
 					// Merge arrays assetData and pluginData.
-					const pluginAssetData = assetData;
+					const pluginAssetData = plugins;
 					forEach( Object.values( pluginData ), ( plugin ) => {
 						pluginAssetData.push( plugin );
 					} );
-					setAttributes( {
-						assetData: pluginAssetData,
-					} );
+					setPlugins( pluginAssetData );
 
 					// todo - append to assetData.
 					if ( morePlugins ) {
@@ -127,15 +125,19 @@ const SitePluginsCardGrid = ( props ) => {
 							loading: false,
 						} );
 						setLoadingPlugins( false );
+						setAttributes( {
+							assetData: plugins,
+						} );
 					}
 				}
 			} );
 	};
 	const pluginOnClick = ( assetSlug, assetType ) => {
-		setAttributes( {
-			assetData: [],
-		} );
+		setPlugins( [] );
 		setLoading( false );
+		setAttributes( {
+			loading: false,
+		} );
 		setLoadingPlugins( true );
 
 		// Do ajax request to get activeplugins.
@@ -152,69 +154,61 @@ const SitePluginsCardGrid = ( props ) => {
 	}, [] );
 
 	const outputInfoCards = ( cardDataArray ) => {
-		return cardDataArray.map( ( cardData, key ) => {
+		return Object.values( cardDataArray ).map( ( cardData, key ) => {
 			return (
 				<Fragment key={ key }>
-					{ 'flex' === layout && 'plugin' === type && (
+					{ 'flex' === layout && (
 						<PluginFlex
 							scheme={ scheme }
-							image={ image }
 							data={ cardData }
 							align={ align }
 						/>
 					) }
-					{ 'card' === layout && 'plugin' === type && (
+					{ 'card' === layout && (
 						<PluginCard
 							scheme={ scheme }
-							image={ image }
 							data={ cardData }
 							align={ align }
 						/>
 					) }
-					{ 'large' === layout && 'plugin' === type && (
+					{ 'large' === layout && (
 						<PluginLarge
 							scheme={ scheme }
-							image={ image }
 							data={ cardData }
 							align={ align }
 						/>
 					) }
-					{ 'wordpress' === layout && 'plugin' === type && (
+					{ 'wordpress' === layout && (
 						<PluginWordPress
 							scheme={ scheme }
-							image={ image }
 							data={ cardData }
 							align={ align }
 						/>
 					) }
-					{ 'flex' === layout && 'theme' === type && (
+					{ 'flex' === layout && (
 						<ThemeFlex
 							scheme={ scheme }
-							image={ image }
 							data={ cardData }
 							align={ align }
 						/>
 					) }
-					{ 'wordpress' === layout && 'theme' === type && (
+					{ 'wordpress' === layout && (
 						<ThemeWordPress
 							scheme={ scheme }
-							image={ image }
 							data={ cardData }
 							align={ align }
 						/>
 					) }
-					{ 'large' === layout && 'theme' === type && (
+					{ 'large' === layout && (
 						<ThemeLarge
 							scheme={ scheme }
-							image={ image }
 							data={ cardData }
 							align={ align }
 						/>
 					) }
-					{ 'card' === layout && 'theme' === type && (
+					{ 'card' === layout && (
 						<ThemeCard
 							scheme={ scheme }
-							image={ image }
 							data={ cardData }
 							align={ align }
 						/>
@@ -354,6 +348,8 @@ const SitePluginsCardGrid = ( props ) => {
 		</>
 	);
 
+	console.log( assetData );
+
 	const block = (
 		<>
 			{ loading && (
@@ -482,7 +478,7 @@ const SitePluginsCardGrid = ( props ) => {
 							`align${ align }`
 						) }
 					>
-						hello
+						{ outputInfoCards( assetData ) }
 					</div>
 				</Fragment>
 			) }

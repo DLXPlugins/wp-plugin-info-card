@@ -192,6 +192,8 @@ class Shortcodes {
 			$percentage = 100;
 		}
 
+		$return_plugins = json_decode( json_encode( $return_plugins ) );
+
 		// Get .org plugins.
 		wp_send_json_success(
 			array(
