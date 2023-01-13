@@ -3467,11 +3467,13 @@ var _wp$components = wp.components,
   DropdownMenu = _wp$components.DropdownMenu,
   CheckboxControl = _wp$components.CheckboxControl,
   TabPanel = _wp$components.TabPanel,
+  ButtonGroup = _wp$components.ButtonGroup,
   Button = _wp$components.Button,
   Notice = _wp$components.Notice,
   MenuGroup = _wp$components.MenuGroup,
   MenuItemsChoice = _wp$components.MenuItemsChoice,
-  MenuItem = _wp$components.MenuItem;
+  MenuItem = _wp$components.MenuItem,
+  BaseControl = _wp$components.BaseControl;
 var _wp$blockEditor = wp.blockEditor,
   InspectorControls = _wp$blockEditor.InspectorControls,
   BlockAlignmentToolbar = _wp$blockEditor.BlockAlignmentToolbar,
@@ -3609,13 +3611,42 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
       }));
     });
   };
-  var L = [{
-    icon: 'edit',
-    title: __('Edit and Configure', 'wp-plugin-info-card'),
-    onClick: function onClick() {
-      return r(true);
-    }
-  }];
+
+  /**
+   * Retrieve colums interface for sidebar options.
+   *
+   * @return {Element} The columns interface.
+   */
+  var L = function getCols() {
+    return /*#__PURE__*/React.createElement(BaseControl, {
+      id: "col-count",
+      label: __('Select How Many Columns', 'wp-plugin-info-card')
+    }, /*#__PURE__*/React.createElement(ButtonGroup, null, /*#__PURE__*/React.createElement(Button, {
+      isPrimary: k === 1,
+      isSecondary: k !== 1,
+      onClick: function onClick() {
+        c({
+          cols: 1
+        });
+      }
+    }, __('One', 'wp-plugin-info-card')), /*#__PURE__*/React.createElement(Button, {
+      isPrimary: k === 2,
+      isSecondary: k !== 2,
+      onClick: function onClick() {
+        c({
+          cols: 2
+        });
+      }
+    }, __('Two', 'wp-plugin-info-card')), /*#__PURE__*/React.createElement(Button, {
+      isPrimary: k === 3,
+      isSecondary: k !== 3,
+      onClick: function onClick() {
+        c({
+          cols: 3
+        });
+      }
+    }, __('Three', 'wp-plugin-info-card'))));
+  };
   var M = [{
     value: 'default',
     label: __('Default', 'wp-plugin-info-card')
@@ -3705,7 +3736,9 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
         });
       }
     }
-  }))));
+  })), /*#__PURE__*/React.createElement(PanelRow, {
+    className: "wppic-panel-rows-cols"
+  }, L())));
   var Q = useBlockProps({
     className: classnames__WEBPACK_IMPORTED_MODULE_1___default()("site-plugins-card-grid align".concat(n))
   });
@@ -3747,7 +3780,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     onClick: function onClick() {
       return r(false);
     }
-  }))), /*#__PURE__*/React.createElement("div", {
+  }, __('View Preview', 'wp-plugin-info-card')))), /*#__PURE__*/React.createElement("div", {
     className: "wppic-site-plugins-block wppic-site-plugins-panel"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-block-svg"
@@ -3772,7 +3805,13 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     onClick: function onClick() {
       return r(true);
     }
-  })), /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarItem, {
+  }, __('Edit', 'wp-plugin-info-card')), /*#__PURE__*/React.createElement(ToolbarButton, {
+    icon: "image-rotate",
+    title: __('Refresh Plugins', 'wp-plugin-info-card'),
+    onClick: function onClick() {
+      return J();
+    }
+  }, __('Refresh', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarItem, {
     as: "button"
   }, function (a) {
     return /*#__PURE__*/React.createElement(DropdownMenu, {
@@ -3814,12 +3853,6 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
         value: f
       }));
     });
-  })), /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
-    icon: "image-rotate",
-    title: __('Refresh Plugins', 'wp-plugin-info-card'),
-    onClick: function onClick() {
-      return J();
-    }
   }))), /*#__PURE__*/React.createElement("div", {
     className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('is-placeholder', O, 'wp-block-plugin-info-card', "align".concat(n))
   }, K(d))));

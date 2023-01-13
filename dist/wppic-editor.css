@@ -284,4 +284,18 @@ div[data-type="wp-plugin-info-card/wp-plugin-info-card"] .wp-block {
   transition: width 0.5s ease-in-out;
 }
 
+/* Row Column Buttons */
+.wppic-panel-rows-cols .components-base-control {
+  width: 100%;
+}
+.wppic-panel-rows-cols .components-button-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  text-align: center;
+}
+.wppic-panel-rows-cols .components-button-group button {
+  justify-content: center;
+}
+
 /*# sourceMappingURL=wppic-editor.css.map*/

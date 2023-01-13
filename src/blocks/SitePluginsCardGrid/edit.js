@@ -36,11 +36,13 @@ const {
 	DropdownMenu,
 	CheckboxControl,
 	TabPanel,
+	ButtonGroup,
 	Button,
 	Notice,
 	MenuGroup,
 	MenuItemsChoice,
 	MenuItem,
+	BaseControl,
 } = wp.components;
 
 const {
@@ -190,13 +192,53 @@ const SitePluginsCardGrid = ( props ) => {
 		} );
 	};
 
-	const resetSelect = [
-		{
-			icon: 'edit',
-			title: __( 'Edit and Configure', 'wp-plugin-info-card' ),
-			onClick: () => setLoading( true ),
-		},
-	];
+	/**
+	 * Retrieve colums interface for sidebar options.
+	 *
+	 * @return {Element} The columns interface.
+	 */
+	const getCols = () => {
+		return (
+			<BaseControl id="col-count" label={ __( 'Select How Many Columns', 'wp-plugin-info-card' ) }>
+				<ButtonGroup>
+					<Button
+						isPrimary={ cols === 1 }
+						isSecondary={ cols !== 1 }
+						onClick={ () => {
+							setAttributes( {
+								cols: 1,
+							} );
+						} }
+					>
+						{ __( 'One', 'wp-plugin-info-card' ) }
+					</Button>
+					<Button
+						isPrimary={ cols === 2 }
+						isSecondary={ cols !== 2 }
+						onClick={ () => {
+							setAttributes( {
+								cols: 2,
+							} );
+						} }
+					>
+						{ __( 'Two', 'wp-plugin-info-card' ) }
+					</Button>
+					<Button
+						isPrimary={ cols === 3 }
+						isSecondary={ cols !== 3 }
+						onClick={ () => {
+							setAttributes( {
+								cols: 3,
+							} );
+						} }
+					>
+						{ __( 'Three', 'wp-plugin-info-card' ) }
+					</Button>
+				</ButtonGroup>
+			</BaseControl>
+		);
+	};
+
 	const schemeOptions = [
 		{ value: 'default', label: __( 'Default', 'wp-plugin-info-card' ) },
 		{ value: 'scheme1', label: __( 'Scheme 1', 'wp-plugin-info-card' ) },
@@ -256,6 +298,9 @@ const SitePluginsCardGrid = ( props ) => {
 							}
 						} }
 					/>
+				</PanelRow>
+				<PanelRow className="wppic-panel-rows-cols">
+					{ getCols() }
 				</PanelRow>
 			</PanelBody>
 		</InspectorControls>
@@ -318,7 +363,9 @@ const SitePluginsCardGrid = ( props ) => {
 									'wp-plugin-info-card'
 								) }
 								onClick={ () => setLoading( false ) }
-							/>
+							>
+								{ __( 'View Preview', 'wp-plugin-info-card' ) }
+							</ToolbarButton>
 						</ToolbarGroup>
 					</BlockControls>
 					<div className="wppic-site-plugins-block wppic-site-plugins-panel">
@@ -362,7 +409,19 @@ const SitePluginsCardGrid = ( props ) => {
 									'wp-plugin-info-card'
 								) }
 								onClick={ () => setLoading( true ) }
-							/>
+							>
+								{ __( 'Edit', 'wp-plugin-info-card' ) }
+							</ToolbarButton>
+							<ToolbarButton
+								icon="image-rotate"
+								title={ __(
+									'Refresh Plugins',
+									'wp-plugin-info-card'
+								) }
+								onClick={ () => pluginOnClick() }
+							>
+								{ __( 'Refresh', 'wp-plugin-info-card' ) }
+							</ToolbarButton>
 						</ToolbarGroup>
 						<ToolbarGroup>
 							<ToolbarItem as="button">
@@ -423,16 +482,6 @@ const SitePluginsCardGrid = ( props ) => {
 									</DropdownMenu>
 								) }
 							</ToolbarItem>
-						</ToolbarGroup>
-						<ToolbarGroup>
-							<ToolbarButton
-								icon="image-rotate"
-								title={ __(
-									'Refresh Plugins',
-									'wp-plugin-info-card'
-								) }
-								onClick={ () => pluginOnClick() }
-							/>
 						</ToolbarGroup>
 					</BlockControls>
 					<div
