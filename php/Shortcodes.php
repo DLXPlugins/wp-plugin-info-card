@@ -790,12 +790,12 @@ class Shortcodes {
 
 		$attributes = shortcode_atts(
 			array(
-				'id' => '#wppic-plugin-site-grid',
-				'cols'       => 2,  // image url to replace WP logo (175px X 175px).
-				'col_gap'       => 20,  // center|left|right.
-				'row_gap' => 20,  // custom Div ID (could be use for anchor).
-				'scheme' => 'default',
-				'layout' => 'card',
+				'id'      => '#wppic-plugin-site-grid',
+				'cols'    => 2,
+				'col_gap' => 20,
+				'row_gap' => 20,
+				'scheme'  => 'default',
+				'layout'  => 'card',
 			),
 			$atts,
 			'wppic_default'
@@ -818,10 +818,10 @@ class Shortcodes {
 			<?php
 			foreach ( $plugins_on_org as $plugin ) {
 				$atts = array(
-					'slug' => $plugin['slug'],
+					'slug'   => $plugin['slug'],
 					'layout' => $attributes['layout'],
 					'scheme' => $attributes['scheme'],
-					'type' => 'plugin',
+					'type'   => 'plugin',
 				);
 				// Use the WPPIC shorcode to generate cards.
 				// todo - sanitize output.
