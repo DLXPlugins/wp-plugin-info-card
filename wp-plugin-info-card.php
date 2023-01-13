@@ -120,7 +120,7 @@ class WP_Plugin_Info_Card {
 		$admin->run();
 
 		// Set up tinyMCE.
-		$tinymce = new TinyMce\Init();
+		$tinymce = new TinyMCE\Init();
 		$tinymce->run();
 
 		// Set up Add Plugin.
