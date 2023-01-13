@@ -3539,7 +3539,6 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
       }
     }).then(function (a) {
       if (a.data.success) {
-        // todo - process plugins.
         var b = a.data.data;
 
         // Calculate percentage.
@@ -3555,8 +3554,6 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
           h.push(a);
         });
         J(h);
-
-        // todo - append to assetData.
         if (e) {
           K(f);
         } else {

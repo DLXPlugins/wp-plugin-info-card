@@ -104,7 +104,6 @@ const SitePluginsCardGrid = ( props ) => {
 			)
 			.then( ( response ) => {
 				if ( response.data.success ) {
-					// todo - process plugins.
 					const pluginResponseData = response.data.data;
 
 					// Calculate percentage.
@@ -122,7 +121,6 @@ const SitePluginsCardGrid = ( props ) => {
 					} );
 					setPlugins( pluginAssetData );
 
-					// todo - append to assetData.
 					if ( morePlugins ) {
 						loadPlugins( nextPage );
 					} else {

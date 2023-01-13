@@ -13,6 +13,7 @@
 */
 .wp-site-plugin-info-card {
   display: grid;
+  margin: 25px auto;
 }
 .wp-site-plugin-info-card .wp-pic-wrapper {
   display: flex;

@@ -824,8 +824,7 @@ class Shortcodes {
 					'type'   => 'plugin',
 				);
 				// Use the WPPIC shorcode to generate cards.
-				// todo - sanitize output.
-				echo self::shortcode_function( $atts );
+				echo wp_kses( self::shortcode_function( $atts ), Functions::get_kses_allowed_html() );
 			}
 			?>
 		</div>
@@ -891,8 +890,7 @@ class Shortcodes {
 			$error         .= '</div>';
 
 			if ( ! empty( $_POST['slug'] ) ) {
-				// todo sanitize.
-				echo $error;
+				echo wp_kses( $error, Functions::get_kses_allowed_html() );
 				die();
 			} else {
 				return $error;
@@ -917,8 +915,7 @@ class Shortcodes {
 		$content = apply_filters( 'wppic_add_template', $content, array( $type, $wppic_data, $image, $layout ) );
 
 		if ( ! empty( $_POST['slug'] ) ) {
-			// todo - sanitize.
-			echo $content;
+			echo wp_kses( $content, Functions::get_kses_allowed_html() );
 			die();
 		} else {
 			return $content;
