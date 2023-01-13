@@ -65,6 +65,55 @@ class Functions {
 	}
 
 	/**
+	 * Retrieve active plugins with .org data.
+	 *
+	 * This method filters out third-party plugins.
+	 */
+	public static function get_active_plugins_with_data() {
+		// Get cache data.
+		$plugins_on_org = wp_cache_get( 'wppic_plugins_on_org', 'wppic' );
+
+		if ( ! $plugins_on_org || empty( $plugins_on_org ) ) {
+			// Retrieve plugins.
+			$active_plugin_slugs = Functions::get_active_plugins();
+			$all_plugins         = apply_filters( 'all_plugins', get_plugins() );
+			$active_plugins      = array();
+			$plugin_info         = get_site_transient( 'update_plugins' );
+
+			// Get active plugins.
+			foreach ( $all_plugins as $file => $plugin ) {
+				if ( in_array( $file, $active_plugin_slugs, true ) ) {
+					$active_plugins[ $file ] = $plugin;
+				}
+			}
+
+			// Get plugin information from .org.
+			$all_plugins_with_info = array();
+			foreach ( (array) $active_plugins as $plugin_file => $plugin_data ) {
+				// Extra info if known. array_merge() ensures $plugin_data has precedence if keys collide.
+				if ( isset( $plugin_info->response[ $plugin_file ] ) ) {
+					$all_plugins_with_info[ $plugin_file ] = array_merge( (array) $plugin_info->response[ $plugin_file ], $plugin_data );
+				} elseif ( isset( $plugin_info->no_update[ $plugin_file ] ) ) {
+					$all_plugins_with_info[ $plugin_file ] = array_merge( (array) $plugin_info->no_update[ $plugin_file ], $plugin_data );
+				}
+			}
+
+			// Check for plugins hosted on .org.
+			$plugins_on_org = array();
+			foreach ( $all_plugins_with_info as $plugin_file => $plugin_data ) {
+				if ( strstr( $plugin_data['id'], 'w.org' ) ) {
+					$plugins_on_org[ $plugin_file ] = $plugin_data;
+				}
+			}
+
+			// Cache results.
+			wp_cache_set( 'plugins_on_org', $plugins_on_org, 'wppic' );
+		}
+
+		return $plugins_on_org;
+	}
+
+	/**
 	 * Sanitize an attribute based on type.
 	 *
 	 * @param array  $attributes Array of attributes.

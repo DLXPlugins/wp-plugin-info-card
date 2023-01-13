@@ -25,6 +25,7 @@ class Shortcodes {
 		add_action( 'rest_api_init', array( $self, 'register_rest_routes' ) );
 		add_shortcode( 'wp-pic', array( static::class, 'shortcode_function' ) );
 		add_shortcode( 'wp-pic-query', array( static::class, 'shortcode_query_function' ) );
+		add_shortcode( 'wp-pic-site-plugins', array( static::class, 'shortcode_active_site_plugins_function' ) );
 		add_action( 'wp_ajax_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
 		add_action( 'wp_ajax_nopriv_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
 		return $self;
@@ -127,45 +128,8 @@ class Shortcodes {
 	 * @param array $request Request data.
 	 */
 	public function get_site_plugin_data( $request ) {
-		// Get cache data
-		$plugins_on_org = wp_cache_get( 'wppic_plugins_on_org', 'wppic' );
-
-		if ( ! $plugins_on_org || empty( $plugins_on_org ) ) {
-			// Retrieve plugins.
-			$active_plugin_slugs = Functions::get_active_plugins();
-			$all_plugins         = apply_filters( 'all_plugins', get_plugins() );
-			$active_plugins      = array();
-			$plugin_info         = get_site_transient( 'update_plugins' );
-
-			// Get active plugins.
-			foreach ( $all_plugins as $file => $plugin ) {
-				if ( in_array( $file, $active_plugin_slugs, true ) ) {
-					$active_plugins[ $file ] = $plugin;
-				}
-			}
-
-			// Get plugin information from .org.
-			$all_plugins_with_info = array();
-			foreach ( (array) $active_plugins as $plugin_file => $plugin_data ) {
-				// Extra info if known. array_merge() ensures $plugin_data has precedence if keys collide.
-				if ( isset( $plugin_info->response[ $plugin_file ] ) ) {
-					$all_plugins_with_info[ $plugin_file ] = array_merge( (array) $plugin_info->response[ $plugin_file ], $plugin_data );
-				} elseif ( isset( $plugin_info->no_update[ $plugin_file ] ) ) {
-					$all_plugins_with_info[ $plugin_file ] = array_merge( (array) $plugin_info->no_update[ $plugin_file ], $plugin_data );
-				}
-			}
-
-			// Check for plugins hosted on .org.
-			$plugins_on_org = array();
-			foreach ( $all_plugins_with_info as $plugin_file => $plugin_data ) {
-				if ( strstr( $plugin_data['id'], 'w.org' ) ) {
-					$plugins_on_org[ $plugin_file ] = $plugin_data;
-				}
-			}
-
-			// Cache results.
-			wp_cache_set( 'plugins_on_org', $plugins_on_org, 'wppic' );
-		}
+		// Get plugin data for active plugins.
+		$plugins_on_org = Functions::get_active_plugins_with_data();
 
 		// Get pagination.
 		$per_page = 5;
@@ -815,6 +779,60 @@ class Shortcodes {
 		}
 
 	} //end of wp-pic-query Shortcode
+
+	/**
+	 * Main Shortcode function.
+	 *
+	 * @param array  $atts    Shortcode attributes.
+	 * @param string $content The content of the shortcode.
+	 */
+	public static function shortcode_active_site_plugins_function( $atts, $content = '' ) {
+
+		$attributes = shortcode_atts(
+			array(
+				'id' => '#wppic-plugin-site-grid',
+				'cols'       => 2,  // image url to replace WP logo (175px X 175px).
+				'col_gap'       => 20,  // center|left|right.
+				'row_gap' => 20,  // custom Div ID (could be use for anchor).
+				'scheme' => 'default',
+				'layout' => 'card',
+			),
+			$atts,
+			'wppic_default'
+		);
+
+		$plugins_on_org = Functions::get_active_plugins_with_data();
+
+		ob_start();
+
+		?>
+		<style>
+			.wppic-plugin-site-grid,
+			#<?php echo esc_attr( $attributes['id'] ); ?> {
+				grid-column-gap: <?php echo esc_attr( $attributes['col_gap'] ); ?>px;
+				grid-row-gap: <?php echo esc_attr( $attributes['row_gap'] ); ?>px;
+			}
+
+		</style>
+		<div id="<?php echo esc_attr( $attributes['id'] ); ?>" class="wp-site-plugin-info-card cols-<?php echo esc_attr( $attributes['cols'] ); ?>">
+			<?php
+			foreach ( $plugins_on_org as $plugin ) {
+				$atts = array(
+					'slug' => $plugin['slug'],
+					'layout' => $attributes['layout'],
+					'scheme' => $attributes['scheme'],
+					'type' => 'plugin',
+				);
+				// Use the WPPIC shorcode to generate cards.
+				// todo - sanitize output.
+				echo self::shortcode_function( $atts );
+			}
+			?>
+		</div>
+		<?php
+		$content = ob_get_clean();
+		return $content;
+	}
 
 	/**
 	 * Retrieve the shortcode content.

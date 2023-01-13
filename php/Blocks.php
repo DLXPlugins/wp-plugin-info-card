@@ -218,6 +218,16 @@ class Blocks {
 		if ( is_admin() ) {
 			return;
 		}
-		return "hi";
+
+		$shortcode_atts = array(
+			'id' 		=> $attributes['uniqueId'],
+			'cols'        => $attributes['cols'],
+			'colGap' 	=> $attributes['colGap'],
+			'rowGap' 	=> $attributes['rowGap'],
+			'scheme' 	=> $attributes['scheme'],
+			'align'       => $attributes['align'],
+			'layout' => $attributes['layout'],
+		);
+		return Shortcodes::shortcode_active_site_plugins_function( $shortcode_atts );
 	}
 }
