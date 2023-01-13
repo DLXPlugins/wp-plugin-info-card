@@ -128,7 +128,7 @@ class Add_Theme {
 	 */
 	public function list_form( $parameters ) {
 		$parameters[] = array(
-			'list',
+			'theme-list',
 			__( 'Add a Theme', 'wp-plugin-info-card' ),
 			__(
 				'Please refer to the plugin URL on wordpress.org to determine its slug',

@@ -75,7 +75,7 @@ class Functions {
 
 		if ( ! $plugins_on_org || empty( $plugins_on_org ) ) {
 			// Retrieve plugins.
-			$active_plugin_slugs = Functions::get_active_plugins();
+			$active_plugin_slugs = self::get_active_plugins();
 			$all_plugins         = apply_filters( 'all_plugins', get_plugins() );
 			$active_plugins      = array();
 			$plugin_info         = get_site_transient( 'update_plugins' );
@@ -452,10 +452,11 @@ class Functions {
 
 		// Add button fields.
 		$allowed_tags['button'] = array(
-			'type'  => array(),
-			'class' => array(),
-			'id'    => array(),
-			'name'  => array(),
+			'type'      => array(),
+			'class'     => array(),
+			'id'        => array(),
+			'name'      => array(),
+			'data-type' => array(),
 		);
 
 		// Add select field.
