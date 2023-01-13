@@ -11,6 +11,23 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+.wp-site-plugin-info-card {
+  display: grid;
+}
+.wp-site-plugin-info-card .wp-pic-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.wp-site-plugin-info-card.cols-1 {
+  grid-template-columns: 1fr;
+}
+.wp-site-plugin-info-card.cols-2 {
+  grid-template-columns: 1fr 1fr;
+}
+.wp-site-plugin-info-card.cols-3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
 .wp-pic-center {
   text-align: center;
   clear: both;

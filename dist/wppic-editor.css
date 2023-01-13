@@ -298,4 +298,53 @@ div[data-type="wp-plugin-info-card/wp-plugin-info-card"] .wp-block {
   justify-content: center;
 }
 
+/* Numbers Component */
+.components-base-control.wppic-numbers-component {
+  width: 100%;
+}
+
+.wppic-numbers-component-buttons__custom {
+  display: grid;
+  grid-template-columns: 1fr 32px;
+}
+.wppic-numbers-component-buttons__custom .components-wppic-control-button__number.has-icon svg {
+  width: 24px;
+  height: 24px;
+}
+.wppic-numbers-component-buttons__custom .components-base-control {
+  margin-bottom: 0 !important; /* override core styles */
+}
+.wppic-numbers-component-buttons__custom .components-base-control__field {
+  margin-bottom: 0 !important; /* override core styles */
+}
+.wppic-numbers-component-buttons__custom .components-text-control__input {
+  min-height: 36px;
+}
+
+.wppic-numbers-component-buttons__numbers {
+  display: grid;
+}
+.wppic-numbers-component-buttons__numbers .components-wppic-control-button__number.has-icon svg {
+  width: 24px;
+  height: 24px;
+}
+.wppic-numbers-component-buttons__numbers button {
+  justify-content: center;
+}
+.wppic-numbers-component-buttons__numbers.cols-1 {
+  grid-template-columns: 1fr 28px;
+}
+.wppic-numbers-component-buttons__numbers.cols-2 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.wppic-numbers-component-buttons__numbers.cols-3 {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.wppic-numbers-component-buttons__numbers.cols-4 {
+  grid-template-columns: 1fr 1fr 1fr 1fr 32px;
+}
+.wppic-numbers-component-buttons__numbers.cols-5 {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
 /*# sourceMappingURL=wppic-editor.css.map*/

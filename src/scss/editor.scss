@@ -279,3 +279,61 @@ div[data-type="wp-plugin-info-card/wp-plugin-info-card"] .wp-block {
 		}
 	}
 }
+
+/* Numbers Component */
+.components-base-control.wppic-numbers-component {
+	width: 100%;
+}
+.wppic-numbers-component-buttons__custom {
+	display: grid;
+	grid-template-columns: 1fr 32px;
+
+	.components-wppic-control-button__number {
+		&.has-icon {
+			svg {
+				width: 24px;
+				height: 24px;
+			}
+		}
+	}
+	.components-base-control {
+		margin-bottom: 0 !important; /* override core styles */
+	}
+	.components-base-control__field {
+		margin-bottom: 0 !important; /* override core styles */
+	}
+	.components-text-control__input {
+		min-height: 36px;
+	}
+}
+.wppic-numbers-component-buttons__numbers {
+	display: grid;
+
+	.components-wppic-control-button__number {
+		&.has-icon {
+			svg {
+				width: 24px;
+				height: 24px;
+			}
+		}
+	}
+
+	button {
+		justify-content: center;
+	}
+	&.cols-1 {
+		grid-template-columns: 1fr 28px;
+	}
+	&.cols-2 {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+	&.cols-3 {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
+	&.cols-4 {
+		grid-template-columns: 1fr 1fr 1fr 1fr 32px;
+	}
+	&.cols-5 {
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	}
+}

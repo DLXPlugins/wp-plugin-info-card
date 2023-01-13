@@ -1,0 +1,18 @@
+.wp-site-plugin-info-card {
+	display: grid;
+
+	.wp-pic-wrapper {
+		display: flex;
+		justify-content: center;
+	}
+
+	&.cols-1 {
+		grid-template-columns: 1fr;
+	}
+	&.cols-2 {
+		grid-template-columns: 1fr 1fr;
+	}
+	&.cols-3 {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+}

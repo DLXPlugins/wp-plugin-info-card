@@ -17,6 +17,7 @@ import ThemeLarge from '../templates/ThemeLarge';
 import ThemeCard from '../templates/ThemeCard';
 import Logo from '../Logo';
 import ProgressBar from '../components/ProgressBar';
+import NumbersComponent from '../components/Numbers';
 import { forEach } from 'lodash';
 const { Fragment, useEffect, useState } = wp.element;
 
@@ -53,8 +54,11 @@ const {
 	useBlockProps,
 } = wp.blockEditor;
 
+const { useInstanceId } = wp.compose;
+
 const SitePluginsCardGrid = ( props ) => {
 	const { attributes, setAttributes } = props;
+	const generatedUniqueId = useInstanceId( SitePluginsCardGrid, 'wp-plugin-info-card-id' );
 
 	const {
 		assetData,
@@ -68,6 +72,7 @@ const SitePluginsCardGrid = ( props ) => {
 		colGap,
 		rowGap,
 		align,
+		uniqueId,
 	} = attributes;
 
 	const [ loading, setLoading ] = useState( attributes.loading );
@@ -146,6 +151,7 @@ const SitePluginsCardGrid = ( props ) => {
 		loadPlugins();
 	};
 	useEffect( () => {
+		setAttributes( { uniqueId: generatedUniqueId } );
 		if ( ! defaultsApplied && 'default' === scheme ) {
 			setAttributes( {
 				defaultsApplied: true,
@@ -302,9 +308,39 @@ const SitePluginsCardGrid = ( props ) => {
 				<PanelRow className="wppic-panel-rows-cols">
 					{ getCols() }
 				</PanelRow>
+				<PanelRow className="wppic-panel-rows-numbers">
+					<NumbersComponent
+						value={ colGap }
+						label={ __( 'Column Gap (in px)', 'wp-plugin-info-card' ) }
+						numbers={ [ 20, 40, 60, 80 ] }
+						onClick={ ( value ) => {
+							setAttributes( { colGap: parseInt( value ) } );
+						} }
+						id="wppic-col-gap"
+					/>
+				</PanelRow>
+				<PanelRow className="wppic-panel-rows-numbers">
+					<NumbersComponent
+						value={ rowGap }
+						label={ __( 'Row Gap (in px)', 'wp-plugin-info-card' ) }
+						numbers={ [ 20, 40, 60, 80 ] }
+						onClick={ ( value ) => {
+							setAttributes( { rowGap: parseInt( value ) } );
+						} }
+						id="wppic-row-gap"
+					/>
+				</PanelRow>
 			</PanelBody>
 		</InspectorControls>
 	);
+
+	const styles = `
+		#${ uniqueId } {
+			display: grid;
+			column-gap: ${ colGap }px;
+			row-gap: ${ rowGap }px;
+		}
+	`;
 
 	const blockProps = useBlockProps( {
 		className: classnames( `site-plugins-card-grid align${ align }` ),
@@ -484,12 +520,16 @@ const SitePluginsCardGrid = ( props ) => {
 							</ToolbarItem>
 						</ToolbarGroup>
 					</BlockControls>
+					<style>{ styles }</style>
 					<div
+						id={ uniqueId }
 						className={ classnames(
 							'is-placeholder',
 							layoutClass,
 							'wp-block-plugin-info-card',
-							`align${ align }`
+							'wp-site-plugin-info-card',
+							`align${ align }`,
+							`cols-${ cols }`
 						) }
 					>
 						{ outputInfoCards( assetData ) }
