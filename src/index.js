@@ -8,6 +8,16 @@
  * All blocks should be included here since this is the file that
  * Webpack is compiling as the input file.
  */
+import InfoCardIcon from './blocks/components/InfoCardIcon';
 
 import './blocks/PluginInfoCard/block';
 import './blocks/PluginInfoCardQuery/wppic-query';
+import './blocks/SitePluginsCardGrid/block';
+
+/**
+ * Add Block Category Icon.
+ */
+( function() {
+	const InfoCardSVG = <InfoCardIcon fill="#DB3939" />;
+	wp.blocks.updateCategory( 'wp-plugin-info-card', { icon: InfoCardSVG } );
+}() );

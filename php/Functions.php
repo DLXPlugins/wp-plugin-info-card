@@ -13,6 +13,107 @@ namespace MediaRon\WPPIC;
 class Functions {
 
 	/**
+	 * Checks if the plugin is on a multisite install.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param bool $network_admin Check if in network admin.
+	 *
+	 * @return true if multisite, false if not.
+	 */
+	public static function is_multisite( $network_admin = false ) {
+		if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
+			require_once ABSPATH . '/wp-admin/includes/plugin.php';
+		}
+		$is_network_admin = false;
+		if ( $network_admin ) {
+			if ( is_network_admin() ) {
+				if ( is_multisite() && is_plugin_active_for_network( self::get_plugin_slug() ) ) {
+					return true;
+				}
+			} else {
+				return false;
+			}
+		}
+		if ( is_multisite() && is_plugin_active_for_network( self::get_plugin_slug() ) ) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Gets an array of plugins active on either the current site, or site-wide
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array A list of plugin paths (relative to the plugin directory)
+	 */
+	public static function get_active_plugins() {
+
+		// Gets all active plugins on the current site.
+		$active_plugins = get_option( 'active_plugins' );
+
+		if ( self::is_multisite() ) {
+			$network_active_plugins = get_site_option( 'active_sitewide_plugins' );
+			if ( ! empty( $network_active_plugins ) ) {
+				$network_active_plugins = array_keys( $network_active_plugins );
+				$active_plugins         = array_merge( $active_plugins, $network_active_plugins );
+			}
+		}
+
+		return $active_plugins;
+	}
+
+	/**
+	 * Retrieve active plugins with .org data.
+	 *
+	 * This method filters out third-party plugins.
+	 */
+	public static function get_active_plugins_with_data() {
+		// Get cache data.
+		$plugins_on_org = wp_cache_get( 'wppic_plugins_on_org', 'wppic' );
+
+		if ( ! $plugins_on_org || empty( $plugins_on_org ) ) {
+			// Retrieve plugins.
+			$active_plugin_slugs = self::get_active_plugins();
+			$all_plugins         = apply_filters( 'all_plugins', get_plugins() );
+			$active_plugins      = array();
+			$plugin_info         = get_site_transient( 'update_plugins' );
+
+			// Get active plugins.
+			foreach ( $all_plugins as $file => $plugin ) {
+				if ( in_array( $file, $active_plugin_slugs, true ) ) {
+					$active_plugins[ $file ] = $plugin;
+				}
+			}
+
+			// Get plugin information from .org.
+			$all_plugins_with_info = array();
+			foreach ( (array) $active_plugins as $plugin_file => $plugin_data ) {
+				// Extra info if known. array_merge() ensures $plugin_data has precedence if keys collide.
+				if ( isset( $plugin_info->response[ $plugin_file ] ) ) {
+					$all_plugins_with_info[ $plugin_file ] = array_merge( (array) $plugin_info->response[ $plugin_file ], $plugin_data );
+				} elseif ( isset( $plugin_info->no_update[ $plugin_file ] ) ) {
+					$all_plugins_with_info[ $plugin_file ] = array_merge( (array) $plugin_info->no_update[ $plugin_file ], $plugin_data );
+				}
+			}
+
+			// Check for plugins hosted on .org.
+			$plugins_on_org = array();
+			foreach ( $all_plugins_with_info as $plugin_file => $plugin_data ) {
+				if ( strstr( $plugin_data['id'], 'w.org' ) ) {
+					$plugins_on_org[ $plugin_file ] = $plugin_data;
+				}
+			}
+
+			// Cache results.
+			wp_cache_set( 'plugins_on_org', $plugins_on_org, 'wppic' );
+		}
+
+		return $plugins_on_org;
+	}
+
+	/**
 	 * Sanitize an attribute based on type.
 	 *
 	 * @param array  $attributes Array of attributes.
@@ -326,9 +427,10 @@ class Functions {
 	/**
 	 * Returns appropriate html for KSES.
 	 *
-	 * @param bool $svg Whether to add SVG data to KSES.
+	 * @param bool $svg         Whether to add SVG data to KSES.
+	 * @param bool $with_tables Whether to add tables to KSES.
 	 */
-	public static function get_kses_allowed_html( $svg = true ) {
+	public static function get_kses_allowed_html( $svg = true, $with_tables = false ) {
 		$allowed_tags = wp_kses_allowed_html( 'post' );
 
 		$allowed_tags['nav']        = array(
@@ -336,47 +438,149 @@ class Functions {
 		);
 		$allowed_tags['a']['class'] = array();
 
-		if ( ! $svg ) {
+		// Add form input fields.
+		$allowed_tags['input'] = array(
+			'type'        => array(),
+			'class'       => array(),
+			'id'          => array(),
+			'name'        => array(),
+			'value'       => array(),
+			'placeholder' => array(),
+			'required'    => array(),
+			'checked'     => array(),
+		);
+
+		// Add button fields.
+		$allowed_tags['button'] = array(
+			'type'      => array(),
+			'class'     => array(),
+			'id'        => array(),
+			'name'      => array(),
+			'data-type' => array(),
+		);
+
+		// Add select field.
+		$allowed_tags['select'] = array(
+			'class' => array(),
+			'id'    => array(),
+			'name'  => array(),
+		);
+
+		// Add options field.
+		$allowed_tags['option'] = array(
+			'value'    => array(),
+			'selected' => array(),
+		);
+
+		if ( ! $svg && ! $with_tables ) {
 			return $allowed_tags;
 		}
-		$allowed_tags['svg'] = array(
-			'xmlns'       => array(),
-			'fill'        => array(),
-			'viewbox'     => array(),
-			'role'        => array(),
-			'aria-hidden' => array(),
-			'focusable'   => array(),
-			'class'       => array(),
-			'width'       => array(),
-			'height'      => array(),
-		);
+		if ( $svg ) {
+			$allowed_tags['svg'] = array(
+				'xmlns'       => array(),
+				'fill'        => array(),
+				'viewbox'     => array(),
+				'role'        => array(),
+				'aria-hidden' => array(),
+				'focusable'   => array(),
+				'class'       => array(),
+				'width'       => array(),
+				'height'      => array(),
+			);
 
-		$allowed_tags['path'] = array(
-			'd'       => array(),
-			'fill'    => array(),
-			'opacity' => array(),
-		);
+			$allowed_tags['path'] = array(
+				'd'       => array(),
+				'fill'    => array(),
+				'opacity' => array(),
+			);
 
-		$allowed_tags['g'] = array();
+			$allowed_tags['g'] = array();
 
-		$allowed_tags['circle'] = array(
-			'cx'     => array(),
-			'cy'     => array(),
-			'r'      => array(),
-			'fill'   => array(),
-			'stroke' => array(),
-		);
+			$allowed_tags['circle'] = array(
+				'cx'     => array(),
+				'cy'     => array(),
+				'r'      => array(),
+				'fill'   => array(),
+				'stroke' => array(),
+			);
 
-		$allowed_tags['use'] = array(
-			'xlink:href' => array(),
-		);
+			$allowed_tags['use'] = array(
+				'xlink:href' => array(),
+			);
 
-		$allowed_tags['symbol'] = array(
-			'aria-hidden' => array(),
-			'viewBox'     => array(),
-			'id'          => array(),
-			'xmls'        => array(),
-		);
+			$allowed_tags['symbol'] = array(
+				'aria-hidden' => array(),
+				'viewBox'     => array(),
+				'id'          => array(),
+				'xmls'        => array(),
+			);
+		}
+
+		// Add HTML table markup.
+		if ( $with_tables ) {
+			$allowed_tags['html']  = array(
+				'lang' => array(),
+			);
+			$allowed_tags['head']  = array();
+			$allowed_tags['title'] = array();
+			$allowed_tags['meta']  = array(
+				'http-equiv' => array(),
+				'content'    => array(),
+				'name'       => array(),
+			);
+			$allowed_tags['body']  = array(
+				'style' => array(),
+			);
+			$allowed_tags['style'] = array();
+			$allowed_tags['table'] = array(
+				'class'        => array(),
+				'width'        => array(),
+				'border'       => array(),
+				'cellpadding'  => array(),
+				'cellspacing'  => array(),
+				'role'         => array(),
+				'presentation' => array(),
+				'align'        => array(),
+				'bgcolor'      => array(),
+			);
+			$allowed_tags['tbody'] = array();
+			$allowed_tags['thead'] = array();
+			$allowed_tags['tr']    = array(
+				'bgcolor' => array(),
+				'align'   => array(),
+				'style'   => array(),
+			);
+			$allowed_tags['th']    = array();
+			$allowed_tags['td']    = array(
+				'class' => array(),
+				'width' => array(),
+				'style' => array(),
+			);
+			if ( ! isset( $allowed_tags['div'] ) ) {
+				$allowed_tags['div'] = array(
+					'style' => array(),
+					'align' => array(),
+					'class' => array(),
+				);
+			} else {
+				$allowed_tags['div']['style'] = array();
+				$allowed_tags['div']['align'] = array();
+				$allowed_tags['div']['class'] = array();
+			}
+			if ( ! isset( $allowed_tags['p'] ) ) {
+				$allowed_tags['p'] = array(
+					'style' => array(),
+				);
+			} else {
+				$allowed_tags['p']['style'] = array();
+			}
+			$allowed_tags['h1'] = array(
+				'style' => array(),
+			);
+			$allowed_tags['h2'] = array(
+				'style' => array(),
+			);
+		}
 
 		return $allowed_tags;
 	}

@@ -342,13 +342,13 @@ const WPPluginInfoCard = ( props ) => {
 
 	if ( preview ) {
 		return (
-			<Fragment>
+			<div style={ { textAlign: 'center' } }>
 				<img
 					src={ wppic.wppic_preview }
 					alt=""
-					style={ { width: '100%', height: 'auto' } }
+					style={ { height: '415px', width: 'auto', textAlign: 'center' } }
 				/>
-			</Fragment>
+			</div>
 		);
 	}
 	if ( cardLoading ) {

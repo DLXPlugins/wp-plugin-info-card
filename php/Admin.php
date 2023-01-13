@@ -149,23 +149,17 @@ class Admin {
 				<a class="button button-secondary" data-animation-effect="zoom" data-animation-duration="1000" data-fancybox data-src="#plugin-info-admim-demo-card" data-caption="<?php esc_attr_e( 'WP Plugin Info Card Layout', 'wp-plugin-info-card' ); ?>" href="javascript:;"><?php esc_html_e( 'View Card Demo', 'wp-plugin-info-card' ); ?></a> <a class="button button-secondary" data-animation-effect="zoom" data-animation-duration="1000" data-fancybox data-src="#plugin-info-admim-demo-wordpress" data-caption="<?php esc_attr_e( 'WP Plugin Info Card WordPress Layout', 'wp-plugin-info-card' ); ?>" href="javascript:;"><?php esc_html_e( 'View WordPress Demo', 'wp-plugin-info-card' ); ?></a> <a class="button button-secondary" data-animation-effect="zoom" data-animation-duration="1000" data-fancybox data-src="#plugin-info-admim-demo-large" data-caption="<?php esc_attr_e( 'WP Plugin Info Card Large Layout', 'wp-plugin-info-card' ); ?>" href="javascript:;"><?php esc_html_e( 'View Large Demo', 'wp-plugin-info-card' ); ?></a>
 				<div id="plugin-info-admim-demo-card" style="display: none; width: 100%; max-width: 400px">
 				<?php
-				// todo - escaping.
-				// todo - can reuse escaping wpkses in functions.php.
-				echo do_shortcode( '[wp-pic type="plugin" scheme="scheme1" layout="card" slug="wp-plugin-info-card"]' );
+				echo wp_kses( do_shortcode( '[wp-pic type="plugin" scheme="scheme1" layout="card" slug="wp-plugin-info-card"]' ), Functions::get_kses_allowed_html() );
 				?>
 				</div>
 				<div id="plugin-info-admim-demo-wordpress" style="display: none; width: 100%; max-width: 800px">
 				<?php
-				// todo - escaping.
-				// todo - can reuse escaping wpkses in functions.php.
-				echo do_shortcode( '[wp-pic type="plugin" scheme="scheme1" layout="wordpress" slug="wp-plugin-info-card"]' );
+				echo wp_kses( do_shortcode( '[wp-pic type="plugin" scheme="scheme1" layout="wordpress" slug="wp-plugin-info-card"]' ), Functions::get_kses_allowed_html() );
 				?>
 				</div>
 				<div id="plugin-info-admim-demo-large" style="display: none; width: 100%; max-width: 800px">
 				<?php
-				// todo - escaping.
-				// todo - can reuse escaping wpkses in functions.php.
-				echo do_shortcode( '[wp-pic type="theme" scheme="scheme1" layout="large" slug="twentytwenty"]' );
+				echo wp_kses( do_shortcode( '[wp-pic type="theme" scheme="scheme1" layout="large" slug="twentytwenty"]' ), Functions::get_kses_allowed_html() );
 				?>
 				</div>
 				<h3 class="wp-pic-title"><?php echo esc_html_e( 'Shortcode parameters', 'wp-plugin-info-card' ); ?></h3>
@@ -197,8 +191,7 @@ class Admin {
 					<code class="wppic-admin-shortcode">[wp-pic type="plugin" slug="adblock-notify-by-bweb"]</code>
 				</p>
 				<?php
-				// todo - sanitize.
-				echo $memcache;
+				echo wp_kses( $memcache, Functions::get_kses_allowed_html() );
 				?>
 				</div><!-- /.inside -->
 			</div><!-- /#wppic-shortcode -->
@@ -382,8 +375,7 @@ class Admin {
 		$content .= '</select>';
 		$content .= '<label for="wppic-default-layout">' . esc_html__( 'Default layout for your cards.', 'wp-plugin-info-card' ) . '</label>';
 		$content .= '</td>';
-		// todo - sanitize.
-		echo $content;
+		echo wp_kses( $content, Functions::get_kses_allowed_html( true, true ) );
 	}
 
 	/**
@@ -413,8 +405,7 @@ class Admin {
 		$content .= '</select>';
 		$content .= '<label for="wppic-color-scheme">' . esc_html__( 'Default color scheme for your cards.', 'wp-plugin-info-card' ) . '</label>';
 		$content .= '</td>';
-		// todo sanitize.
-		echo $content;
+		echo wp_kses( $content, Functions::get_kses_allowed_html() );
 	}
 
 	/**
@@ -462,8 +453,7 @@ class Admin {
 		}
 
 		$content .= '</td>';
-		// todo sanitize.
-		echo $content;
+		echo wp_kses( $content, Functions::get_kses_allowed_html( true, true ) );
 	}
 
 	/**
@@ -481,8 +471,7 @@ class Admin {
 			</div>
 			<hr />
 		';
-		// todo sanitize.
-		echo $content;
+		echo wp_kses( $content, Functions::get_kses_allowed_html() );
 	}
 
 	/**
@@ -577,8 +566,7 @@ class Admin {
 
 		$content .= '</div>';
 
-		// todo - snaitize.
-		echo $content;
+		echo wp_kses( $content, Functions::get_kses_allowed_html() );
 
 	}
 
@@ -593,8 +581,7 @@ class Admin {
 		$content = $this->render_widget( $type, $slugs );
 
 		if ( ! empty( $list ) ) {
-			// todo - snaitize.
-			echo $content;
+			echo wp_kses( $content, Functions::get_kses_allowed_html() );
 		} else {
 			return $content;
 		}

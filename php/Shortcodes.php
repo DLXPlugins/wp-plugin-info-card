@@ -25,6 +25,7 @@ class Shortcodes {
 		add_action( 'rest_api_init', array( $self, 'register_rest_routes' ) );
 		add_shortcode( 'wp-pic', array( static::class, 'shortcode_function' ) );
 		add_shortcode( 'wp-pic-query', array( static::class, 'shortcode_query_function' ) );
+		add_shortcode( 'wp-pic-site-plugins', array( static::class, 'shortcode_active_site_plugins_function' ) );
 		add_action( 'wp_ajax_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
 		add_action( 'wp_ajax_nopriv_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
 		return $self;
@@ -110,6 +111,70 @@ class Shortcodes {
 				'permission_callback' => '__return_true',
 			)
 		);
+		register_rest_route(
+			'wppic/v2',
+			'/get_site_plugins',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'get_site_plugin_data' ),
+				'permission_callback' => array( $this, 'rest_check_permissions' ),
+			)
+		);
+	}
+
+	/**
+	 * Get plugin data for return.
+	 *
+	 * @param array $request Request data.
+	 */
+	public function get_site_plugin_data( $request ) {
+		// Get plugin data for active plugins.
+		$plugins_on_org = Functions::get_active_plugins_with_data();
+
+		// Get pagination.
+		$per_page = 5;
+		$page     = isset( $request['page'] ) ? absint( $request['page'] ) : 1;
+
+		// Get plugins for page.
+		$more_results   = true;
+		$return_plugins = array_slice( $plugins_on_org, ( $page - 1 ) * $per_page, $per_page );
+		if ( empty( $return_plugins ) ) {
+			$more_results = false;
+		}
+
+		// Query plugins and return.
+		foreach ( $return_plugins as $file => $plugin_data ) {
+			$return_plugins[ $file ] = wppic_api_parser( 'plugin', $plugin_data['slug'], HOUR_IN_SECONDS );
+		}
+
+		// Get next page.
+		$next_page = $page + 1;
+
+		// Get percentage processed with page and per_page calculation.
+		$percentage = ( ( $page * $per_page ) / count( $plugins_on_org ) ) * 100;
+		if ( $percentage > 100 ) {
+			$percentage = 100;
+		}
+
+		$return_plugins = json_decode( json_encode( $return_plugins ) );
+
+		// Get .org plugins.
+		wp_send_json_success(
+			array(
+				'page'                => absint( $next_page ),
+				'more_results'        => $more_results,
+				'plugins'             => $return_plugins,
+				'num_plugins'         => count( $plugins_on_org ),
+				'percentage_complete' => $percentage,
+			)
+		);
+	}
+
+	/**
+	 * Check if user has access to REST API.
+	 */
+	public function rest_check_permissions() {
+		return current_user_can( 'edit_posts' );
 	}
 
 	/**
@@ -716,6 +781,70 @@ class Shortcodes {
 	} //end of wp-pic-query Shortcode
 
 	/**
+	 * Main Shortcode function.
+	 *
+	 * @param array  $atts    Shortcode attributes.
+	 * @param string $content The content of the shortcode.
+	 */
+	public static function shortcode_active_site_plugins_function( $atts, $content = '' ) {
+
+		$options    = Options::get_options();
+		$attributes = shortcode_atts(
+			array(
+				'id'      => 'wppic-plugin-site-grid',
+				'cols'    => 2,
+				'col_gap' => 20,
+				'row_gap' => 20,
+				'scheme'  => '',
+				'layout'  => '',
+			),
+			$atts,
+			'wppic_default'
+		);
+
+		// Color scheme.
+		if ( empty( $attributes['scheme'] ) ) {
+			$attributes['scheme'] = $options['colorscheme'] ?? 'default';
+		}
+
+		// Layout.
+		if ( empty( $attributes['layout'] ) ) {
+			$attributes['layout'] = $options['layout'] ?? 'card';
+		}
+
+		$plugins_on_org = Functions::get_active_plugins_with_data();
+
+		ob_start();
+
+		?>
+		<style>
+			.wppic-plugin-site-grid,
+			#<?php echo esc_attr( $attributes['id'] ); ?> {
+				grid-column-gap: <?php echo esc_attr( $attributes['col_gap'] ); ?>px;
+				grid-row-gap: <?php echo esc_attr( $attributes['row_gap'] ); ?>px;
+			}
+
+		</style>
+		<div id="<?php echo esc_attr( $attributes['id'] ); ?>" class="wp-site-plugin-info-card cols-<?php echo esc_attr( $attributes['cols'] ); ?>">
+			<?php
+			foreach ( $plugins_on_org as $plugin ) {
+				$atts = array(
+					'slug'   => $plugin['slug'],
+					'layout' => $attributes['layout'],
+					'scheme' => $attributes['scheme'],
+					'type'   => 'plugin',
+				);
+				// Use the WPPIC shorcode to generate cards.
+				echo wp_kses( self::shortcode_function( $atts ), Functions::get_kses_allowed_html() );
+			}
+			?>
+		</div>
+		<?php
+		$content = ob_get_clean();
+		return $content;
+	}
+
+	/**
 	 * Retrieve the shortcode content.
 	 *
 	 * @param string $type plugin or theme.
@@ -772,8 +901,7 @@ class Shortcodes {
 			$error         .= '</div>';
 
 			if ( ! empty( $_POST['slug'] ) ) {
-				// todo sanitize.
-				echo $error;
+				echo wp_kses( $error, Functions::get_kses_allowed_html() );
 				die();
 			} else {
 				return $error;
@@ -798,8 +926,7 @@ class Shortcodes {
 		$content = apply_filters( 'wppic_add_template', $content, array( $type, $wppic_data, $image, $layout ) );
 
 		if ( ! empty( $_POST['slug'] ) ) {
-			// todo - sanitize.
-			echo $content;
+			echo wp_kses( $content, Functions::get_kses_allowed_html() );
 			die();
 		} else {
 			return $content;
