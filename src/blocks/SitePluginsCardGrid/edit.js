@@ -279,7 +279,6 @@ const SitePluginsCardGrid = ( props ) => {
 						value={ scheme }
 						onChange={ ( value ) => {
 							setAttributes( { scheme: value } );
-							setScheme( value );
 						} }
 					/>
 				</PanelRow>
@@ -476,7 +475,6 @@ const SitePluginsCardGrid = ( props ) => {
 														setAttributes( {
 															scheme: value,
 														} );
-														setScheme( value );
 														onClose();
 													} }
 													value={ scheme }
@@ -506,7 +504,6 @@ const SitePluginsCardGrid = ( props ) => {
 														setAttributes( {
 															layout: value,
 														} );
-														setLayout( value );
 														onClose();
 													} }
 													value={ layout }

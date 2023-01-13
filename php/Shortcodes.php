@@ -788,18 +788,29 @@ class Shortcodes {
 	 */
 	public static function shortcode_active_site_plugins_function( $atts, $content = '' ) {
 
+		$options    = Options::get_options();
 		$attributes = shortcode_atts(
 			array(
-				'id'      => '#wppic-plugin-site-grid',
+				'id'      => 'wppic-plugin-site-grid',
 				'cols'    => 2,
 				'col_gap' => 20,
 				'row_gap' => 20,
-				'scheme'  => 'default',
-				'layout'  => 'card',
+				'scheme'  => '',
+				'layout'  => '',
 			),
 			$atts,
 			'wppic_default'
 		);
+
+		// Color scheme.
+		if ( empty( $attributes['scheme'] ) ) {
+			$attributes['scheme'] = $options['colorscheme'] ?? 'default';
+		}
+
+		// Layout.
+		if ( empty( $attributes['layout'] ) ) {
+			$attributes['layout'] = $options['layout'] ?? 'card';
+		}
 
 		$plugins_on_org = Functions::get_active_plugins_with_data();
 
