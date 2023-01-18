@@ -36,6 +36,7 @@ class Shortcodes {
 	 */
 	public function enqueue_scripts() {
 		$min_or_not = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		wp_enqueue_style( 'dashicons' ); // for the star ratings.
 		wp_enqueue_style(
 			'wppic-style',
 			Functions::get_plugin_url( 'dist/wppic-styles.css' ),
