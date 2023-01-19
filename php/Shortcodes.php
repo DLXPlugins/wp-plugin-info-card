@@ -420,7 +420,7 @@ class Shortcodes {
 				$block_alignment = 'alignright';
 				break;
 			case 'center':
-				$block_alignment = 'align_center';
+				$block_alignment = 'align_center aligncenter';
 				break;
 			case 'wide':
 				$block_alignment = 'alignwide';
@@ -951,6 +951,9 @@ class Shortcodes {
 		$data = array();
 		foreach ( $slugs as $asset_slug ) {
 			$slug_data = wppic_api_parser( $type, $asset_slug );
+			if ( false === $slug_data ) {
+				continue;
+			}
 			if ( isset( $slug_data->author ) ) {
 				$slug_data->author = wp_strip_all_tags( $slug_data->author );
 			}
@@ -964,6 +967,11 @@ class Shortcodes {
 				$slug_data->last_updated = human_time_diff( strtotime( $slug_data->last_updated ), time() ) . ' ' . _x( 'ago', 'Last time updated', 'wp-plugin-info-card' );
 			}
 			$data[] = $slug_data;
+		}
+
+		// Return error if no data.
+		if ( empty( $data ) ) {
+			wp_send_json_error();
 		}
 
 		wp_send_json_success( $data );

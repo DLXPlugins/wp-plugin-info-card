@@ -26,18 +26,16 @@ const {
 	SelectControl,
 	Spinner,
 	TextControl,
-	Toolbar,
 	ToolbarGroup,
 	ToolbarButton,
 	ToolbarItem,
-	ToolbarDropdownMenu,
 	DropdownMenu,
-	CheckboxControl,
 	TabPanel,
 	Button,
-	MenuGroup,
 	MenuItemsChoice,
-	MenuItem,
+	BaseControl,
+	ButtonGroup,
+	Notice,
 } = wp.components;
 
 const {
@@ -48,8 +46,12 @@ const {
 	useBlockProps,
 } = wp.blockEditor;
 
+const { useInstanceId } = wp.compose;
+
 const WPPluginInfoCard = ( props ) => {
 	const { attributes, setAttributes } = props;
+
+	const generatedUniqueId = useInstanceId( WPPluginInfoCard, 'wp-plugin-info-card-id' );
 
 	const [ type, setType ] = useState( attributes.type );
 	const [ slug, setSlug ] = useState( attributes.slug );
@@ -63,20 +65,32 @@ const WPPluginInfoCard = ( props ) => {
 	const [ preview, setPreview ] = useState( attributes.preview );
 	const [ data, setData ] = useState( attributes.assetData );
 	const [ align, setAlign ] = useState( attributes.align );
+	const [ noData, setNoData ] = useState( false );
+
+	useEffect( () => {
+		setAttributes( { uniqueId: generatedUniqueId } );
+	}, [] );
 
 	const loadData = () => {
 		setLoading( false );
 		setCardLoading( true );
+		setNoData( false );
 		const restUrl = wppic.rest_url + 'wppic/v2/get_data';
 		axios
 			.get(
 				restUrl + `?type=${ type }&slug=${ encodeURIComponent( slug ) }`
 			)
 			.then( ( response ) => {
-				// Now Set State
-				setData( response.data.data );
-				setAttributes( { assetData: response.data.data } );
-				setCardLoading( false );
+				if ( response.data.success ) {
+					// Now Set State
+					setData( response.data.data );
+					setAttributes( { assetData: response.data.data } );
+					setCardLoading( false );
+				} else {
+					setNoData( true );
+					setCardLoading( false );
+					setLoading( true );
+				}
 			} );
 	};
 	const pluginOnClick = ( assetSlug, assetType ) => {
@@ -174,6 +188,53 @@ const WPPluginInfoCard = ( props ) => {
 				</Fragment>
 			);
 		} );
+	};
+
+	/**
+	 * Retrieve colums interface for sidebar options.
+	 *
+	 * @return {Element} The columns interface.
+	 */
+	const getCols = () => {
+		return (
+			<BaseControl id="col-count" label={ __( 'Select How Many Columns', 'wp-plugin-info-card' ) }>
+				<ButtonGroup>
+					<Button
+						isPrimary={ cols === 1 }
+						isSecondary={ cols !== 1 }
+						onClick={ () => {
+							setAttributes( {
+								cols: 1,
+							} );
+						} }
+					>
+						{ __( 'One', 'wp-plugin-info-card' ) }
+					</Button>
+					<Button
+						isPrimary={ cols === 2 }
+						isSecondary={ cols !== 2 }
+						onClick={ () => {
+							setAttributes( {
+								cols: 2,
+							} );
+						} }
+					>
+						{ __( 'Two', 'wp-plugin-info-card' ) }
+					</Button>
+					<Button
+						isPrimary={ cols === 3 }
+						isSecondary={ cols !== 3 }
+						onClick={ () => {
+							setAttributes( {
+								cols: 3,
+							} );
+						} }
+					>
+						{ __( 'Three', 'wp-plugin-info-card' ) }
+					</Button>
+				</ButtonGroup>
+			</BaseControl>
+		);
 	};
 
 	const resetSelect = [
@@ -398,7 +459,7 @@ const WPPluginInfoCard = ( props ) => {
 								let tabContent;
 								if ( 'slug' === tab.name ) {
 									tabContent = (
-										<Fragment>
+										<>
 											<SelectControl
 												label={ __(
 													'Select a Plugin or Theme',
@@ -430,7 +491,18 @@ const WPPluginInfoCard = ( props ) => {
 													'wp-plugin-info-card'
 												) }
 											/>
-										</Fragment>
+											{ noData && (
+												<Notice
+													status="error"
+													isDismissible={ false }
+												>
+													{ __(
+														'No data found for the given slug.',
+														'wp-plugin-info-card'
+													) }
+												</Notice>
+											) }
+										</>
 									);
 								} else if ( 'layout' === tab.name ) {
 									tabContent = (
