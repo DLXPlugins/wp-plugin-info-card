@@ -420,7 +420,7 @@ class Shortcodes {
 				$block_alignment = 'alignright';
 				break;
 			case 'center':
-				$block_alignment = 'align_center aligncenter';
+				$block_alignment = 'align_center';
 				break;
 			case 'wide':
 				$block_alignment = 'alignwide';

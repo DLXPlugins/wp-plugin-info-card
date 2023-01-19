@@ -347,7 +347,7 @@ const SitePluginsCardGrid = ( props ) => {
 		return (
 			<div style={ { textAlign: 'center' } }>
 				<img
-					src={ wppic.wppic_preview }
+					src={ wppic.site_plugins_preview }
 					alt=""
 					style={ { height: '415px', width: 'auto', textAlign: 'center' } }
 				/>
