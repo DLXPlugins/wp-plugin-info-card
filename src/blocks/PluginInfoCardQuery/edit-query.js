@@ -414,7 +414,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 						<div className="wppic-block-svg">
 							<Logo size="75" />
 						</div>
-						<div className="wp-pic-tab-panel">
+						<div className="wp-pic-tabs-panel">
 							{ noData && (
 								<div className="wppic-no-data">
 									<Notice
