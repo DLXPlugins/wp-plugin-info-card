@@ -178,6 +178,10 @@ class Blocks {
 			'scheme'      => $attributes['scheme'],
 			'layout'      => $attributes['layout'],
 			'multi'       => true,
+			'id'          => $attributes['uniqueId'],
+			'cols'        => $attributes['cols'],
+			'col_gap'     => $attributes['colGap'],
+			'row_gap'     => $attributes['rowGap'],
 		);
 		$html = '';
 		if ( '' !== $attributes['width'] ) {

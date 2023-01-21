@@ -11,10 +11,6 @@ import PluginFlex from '../templates/PluginFlex';
 import PluginCard from '../templates/PluginCard';
 import PluginLarge from '../templates/PluginLarge';
 import PluginWordPress from '../templates/PluginWordPress';
-import ThemeFlex from '../templates/ThemeFlex';
-import ThemeWordPress from '../templates/ThemeWordPress';
-import ThemeLarge from '../templates/ThemeLarge';
-import ThemeCard from '../templates/ThemeCard';
 import Logo from '../Logo';
 import ProgressBar from '../components/ProgressBar';
 import NumbersComponent from '../components/Numbers';
@@ -28,21 +24,14 @@ const {
 	PanelRow,
 	SelectControl,
 	Spinner,
-	TextControl,
-	Toolbar,
 	ToolbarGroup,
 	ToolbarButton,
 	ToolbarItem,
-	ToolbarDropdownMenu,
 	DropdownMenu,
-	CheckboxControl,
-	TabPanel,
 	ButtonGroup,
 	Button,
 	Notice,
-	MenuGroup,
 	MenuItemsChoice,
-	MenuItem,
 	BaseControl,
 } = wp.components;
 

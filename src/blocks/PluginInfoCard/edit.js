@@ -16,6 +16,8 @@ import ThemeWordPress from '../templates/ThemeWordPress';
 import ThemeLarge from '../templates/ThemeLarge';
 import ThemeCard from '../templates/ThemeCard';
 import Logo from '../Logo';
+import NumbersComponent from '../components/Numbers';
+import { uniqueId } from 'lodash';
 const { Fragment, useEffect, useState } = wp.element;
 
 const { __ } = wp.i18n;
@@ -51,6 +53,8 @@ const { useInstanceId } = wp.compose;
 const WPPluginInfoCard = ( props ) => {
 	const { attributes, setAttributes } = props;
 
+	const { cols, colGap, rowGap } = attributes;
+
 	const generatedUniqueId = useInstanceId( WPPluginInfoCard, 'wp-plugin-info-card-id' );
 
 	const [ type, setType ] = useState( attributes.type );
@@ -62,6 +66,7 @@ const WPPluginInfoCard = ( props ) => {
 	const [ scheme, setScheme ] = useState( attributes.scheme );
 	const [ layout, setLayout ] = useState( attributes.layout );
 	const [ multi, setMulti ] = useState( true );
+	const [ hasMultipleAssets, setHasMultipleAssets ] = useState( false );
 	const [ preview, setPreview ] = useState( attributes.preview );
 	const [ data, setData ] = useState( attributes.assetData );
 	const [ align, setAlign ] = useState( attributes.align );
@@ -70,6 +75,14 @@ const WPPluginInfoCard = ( props ) => {
 	useEffect( () => {
 		setAttributes( { uniqueId: generatedUniqueId } );
 	}, [] );
+
+	useEffect( () => {
+		if ( Object.values( attributes.assetData ).length > 1 ) {
+			setHasMultipleAssets( true );
+		} else {
+			setHasMultipleAssets( false );
+		}
+	}, [ attributes.assetData ] );
 
 	const loadData = () => {
 		setLoading( false );
@@ -323,6 +336,35 @@ const WPPluginInfoCard = ( props ) => {
 						} }
 					/>
 				</PanelRow>
+				{ hasMultipleAssets && (
+					<>
+						<PanelRow className="wppic-panel-rows-cols">
+							{ getCols() }
+						</PanelRow>
+						<PanelRow className="wppic-panel-rows-numbers">
+							<NumbersComponent
+								value={ colGap }
+								label={ __( 'Column Gap (in px)', 'wp-plugin-info-card' ) }
+								numbers={ [ 20, 40, 60, 80 ] }
+								onClick={ ( value ) => {
+									setAttributes( { colGap: parseInt( value ) } );
+								} }
+								id="wppic-col-gap"
+							/>
+						</PanelRow>
+						<PanelRow className="wppic-panel-rows-numbers">
+							<NumbersComponent
+								value={ rowGap }
+								label={ __( 'Row Gap (in px)', 'wp-plugin-info-card' ) }
+								numbers={ [ 20, 40, 60, 80 ] }
+								onClick={ ( value ) => {
+									setAttributes( { rowGap: parseInt( value ) } );
+								} }
+								id="wppic-row-gap"
+							/>
+						</PanelRow>
+					</>
+				) }
 			</PanelBody>
 			<PanelBody
 				title={ __( 'Options', 'wp-plugin-info-card' ) }
@@ -396,6 +438,14 @@ const WPPluginInfoCard = ( props ) => {
 			</PanelBody>
 		</InspectorControls>
 	);
+
+	const styles = `
+		#${ attributes.uniqueId } {
+			display: grid;
+			column-gap: ${ colGap }px;
+			row-gap: ${ rowGap }px;
+		}
+	`;
 
 	const blockProps = useBlockProps( {
 		className: classnames( `wp-plugin-info-card align${ align }` ),
@@ -672,12 +722,22 @@ const WPPluginInfoCard = ( props ) => {
 							</ToolbarItem>
 						</ToolbarGroup>
 					</BlockControls>
+					{ hasMultipleAssets && (
+						<style>
+							{ styles }
+						</style>
+					) }
 					<div
+						id={ attributes.uniqueId }
 						className={ classnames(
 							'is-placeholder',
 							layoutClass,
 							'wp-block-plugin-info-card',
-							`align${ align }`
+							`align${ align }`,
+							`cols-${ cols }`,
+							{
+								'has-grid': hasMultipleAssets,
+							}
 						) }
 					>
 						{ outputInfoCards( data ) }

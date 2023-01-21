@@ -345,6 +345,7 @@ class Shortcodes {
 
 		$attributes = shortcode_atts(
 			array(
+				'id'          => '',  // custom Div ID (could be use for anchor).
 				'type'        => '',  // plugin | theme.
 				'slug'        => '',  // plugin slug name.
 				'image'       => '',  // image url to replace WP logo (175px X 175px).
@@ -358,6 +359,9 @@ class Shortcodes {
 				'layout'      => '',  // card|large|flex|wordpress.
 				'custom'      => '',  // value to print : url|name|version|author|requires|rating|num_ratings|downloaded|last_updated|download_link.
 				'multi'       => false,
+				'cols'        => 2,
+				'col_gap'     => 20,
+				'row_gap'     => 20,
 
 			),
 			$atts,
@@ -373,6 +377,7 @@ class Shortcodes {
 
 		$add_class = array();
 		// Remove unnecessary spaces.
+		$id          = trim( $attributes['id'] );
 		$type        = trim( $attributes['type'] );
 		$slug        = trim( esc_html( $attributes['slug'] ) );
 		$image       = trim( esc_url( $attributes['image'] ) );
@@ -386,6 +391,9 @@ class Shortcodes {
 		$custom      = trim( $attributes['custom'] );
 		$multi       = filter_var( $attributes['multi'], FILTER_VALIDATE_BOOLEAN );
 		$align       = trim( $attributes['align'] );
+		$cols        = absint( $attributes['cols'] );
+		$col_gap     = absint( $attributes['col_gap'] );
+		$row_gap     = absint( $attributes['row_gap'] );
 
 		if ( empty( $layout ) ) {
 			$layout      = 'wp-pic-card';
@@ -431,7 +439,23 @@ class Shortcodes {
 		}
 
 		if ( is_array( $slug ) && $multi ) {
-			$content .= sprintf( '<div class="wp-pic-multi %s">', esc_attr( $block_alignment ) );
+			ob_start();
+			?>
+			<style>
+			.wppic-plugin-site-grid,
+			#<?php echo esc_attr( $attributes['id'] ); ?> {
+				grid-column-gap: <?php echo esc_attr( $col_gap ); ?>px;
+				grid-row-gap: <?php echo esc_attr( $row_gap ); ?>px;
+			}
+			</style>
+			<?php
+			$content .= ob_get_clean();
+			$content .= sprintf(
+				'<div id="%s" class="wp-block-plugin-info-card %s cols-%d has-grid">',
+				esc_attr( $id ),
+				esc_attr( $block_alignment ),
+				esc_attr( $cols ),
+			);
 			foreach ( $slug as $asset_slug ) {
 				// For old plugin versions.
 				if ( empty( $type ) ) {

@@ -11,6 +11,9 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+/* Responsive styles - In hindsight, should've used mobile-first */
+/* Mixin from: https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/ */
+/* It's only used here, so no external file for mixin? */
 .wp-site-plugin-info-card {
   display: grid;
   margin: 25px auto;
@@ -23,10 +26,58 @@
   grid-template-columns: 1fr;
 }
 .wp-site-plugin-info-card.cols-2 {
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .wp-site-plugin-info-card.cols-2 {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 .wp-site-plugin-info-card.cols-3 {
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .wp-site-plugin-info-card.cols-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 1024px) {
+  .wp-site-plugin-info-card.cols-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.wp-block-plugin-info-card.has-grid {
+  display: grid;
+  margin: 25px auto;
+}
+.wp-block-plugin-info-card.has-grid .wp-pic-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.wp-block-plugin-info-card.has-grid.cols-1 {
+  grid-template-columns: 1fr;
+}
+.wp-block-plugin-info-card.has-grid.cols-2 {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .wp-block-plugin-info-card.has-grid.cols-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.wp-block-plugin-info-card.has-grid.cols-3 {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .wp-block-plugin-info-card.has-grid.cols-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 1024px) {
+  .wp-block-plugin-info-card.has-grid.cols-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 .wp-pic-center {
