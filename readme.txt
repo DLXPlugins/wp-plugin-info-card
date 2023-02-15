@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Tags: API, plugin, card, theme, block, blocks, gutenberg
 Requires at least: 3.7
 Tested up to: 6.1
-Stable tag: 4.0.0
+Stable tag: 4.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,6 +100,10 @@ This video shows you how:
 11. WordPress layout with themes and 2 columns
 
 == Changelog ==
+
+= 4.0.1 =
+* Released 2023-02-14
+* Fixing undefined index in the main shortcode output.
 
 = 4.0.0 =
 * Released 2023-01-20
@@ -402,5 +406,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 4.0.0 =
-Added new site plugins shortcode and block. The plugin's code and build tools have been updated to the latest standards.
+= 4.0.1 =
+Fixing undefined index in the main shortcode output.
