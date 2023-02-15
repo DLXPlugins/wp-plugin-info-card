@@ -592,7 +592,7 @@ class Shortcodes {
 
 				// Color scheme.
 				if ( empty( $scheme ) ) {
-					$scheme = $options['colorscheme'];
+					$scheme = $options['colorscheme'] ?? '';
 					if ( 'default' === $scheme ) {
 						$scheme = '';
 					}
