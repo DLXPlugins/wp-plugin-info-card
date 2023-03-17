@@ -419,7 +419,7 @@ class Shortcodes {
 				$block_alignment = 'alignright';
 				break;
 			case 'center':
-				$block_alignment = 'align_center';
+				$block_alignment = 'aligncenter';
 				break;
 			case 'wide':
 				$block_alignment = 'alignwide';
