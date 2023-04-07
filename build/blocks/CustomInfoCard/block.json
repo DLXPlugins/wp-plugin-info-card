@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "title": "Custom Info Card",
+  "apiVersion": 2,
+  "name": "wp-plugin-info-card/custom-info-card",
+  "category": "wp-plugin-info-card",
+  "description": "A custom info card block for WordPress plugins and themes.",
+  "icon": "<svg id='Icon' enable-background='new 0 0 110 110' height='512' viewBox='0 0 110 110' width='512' xmlns='http://www.w3.org/2000/svg'><path id='Customize' d='m49 75c0 2.2-1.8 4-4 4s-4-1.8-4-4 1.8-4 4-4 4 1.8 4 4zm16-24c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zm45 4c0 30.4-24.6 55-55 55s-55-24.6-55-55 24.6-55 55-55 55 24.6 55 55zm-25 17h-30.5c-1.3-4.1-5.1-7-9.5-7s-8.3 2.9-9.5 7h-10.5v6h10.5c1.3 4.1 5.1 7 9.5 7s8.3-2.9 9.5-7h30.5zm0-20h-10.5c-1.3-4.1-5.1-7-9.5-7s-8.3 2.9-9.5 7h-30.5v6h30.5c1.3 4.1 5.1 7 9.5 7s8.3-2.9 9.5-7h10.5zm0-20h-30.5c-1.3-4.1-5.1-7-9.5-7s-8.3 2.9-9.5 7h-10.5v6h10.5c1.3 4.1 5.1 7 9.5 7s8.3-2.9 9.5-7h30.5zm-40-1c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4z'/></svg>",
+  "keywords": [
+    "wp plugin",
+    "plugin",
+    "card",
+    "theme",
+    "custom"
+  ],
+  "version": "1.0.0",
+  "textdomain": "wp-plugin-info-card",
+  "attributes": {
+    "bannerImage": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "example": {
+    "attributes": {
+      "preview": true
+    }
+  },
+  "supports": {
+    "anchor": true,
+    "align": [
+      "center",
+      "wide",
+      "full"
+    ],
+    "className": true
+  },
+  "editorScript": "wp-plugin-info-card-block-js",
+  "editorStyle": [
+    "wp-plugin-info-card-block-editor-css",
+    "wp-plugin-info-card-block-styles-css"
+  ]
+}

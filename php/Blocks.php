@@ -21,7 +21,7 @@ class Blocks {
 
 		add_action( 'enqueue_block_assets', array( $self, 'register_block_assets' ) );
 		add_action( 'init', array( $self, 'register_blocks' ) );
-		add_filter( 'block_categories', array( $self, 'add_block_category' ), 10, 2 );
+		add_filter( 'block_categories_all', array( $self, 'add_block_category' ), 10, 2 );
 
 		return $self;
 	}
@@ -101,6 +101,23 @@ class Blocks {
 				'render_callback' => array( $this, 'site_plugin_card_grid_render' ),
 			)
 		);
+		register_block_type(
+			Functions::get_plugin_dir( 'build/blocks/CustomInfoCard/block.json' ),
+			array(
+				'render_callback' => array( $this, 'custom_info_card_render' ),
+			)
+		);
+	}
+
+	/**
+	 * Render the custom info card block.
+	 *
+	 * @param array $attributes Array of attributes.
+	 *
+	 * @return string Block rendered.
+	 */
+	public function custom_info_card_render( $attributes ) {
+		return '';
 	}
 
 	/**

@@ -1,1 +1,1 @@
-<?php return array('dependencies' => array('lodash', 'react', 'wp-element'), 'version' => '150a381e5734201d4da5');
+<?php return array('dependencies' => array('lodash', 'react', 'wp-element'), 'version' => 'c6b6a28d79349b3a30d5');
