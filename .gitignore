@@ -33,3 +33,5 @@ package
 wp-plugin-info-card.zip
 
 composer.lock
+
+package-lock.json
