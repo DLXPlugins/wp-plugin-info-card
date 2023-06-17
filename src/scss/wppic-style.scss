@@ -1424,13 +1424,13 @@ p.wp-pic-author,
 }
 
 /*Color Scheme 11*/
-.wp-pic.scheme11 .wp-pic-no-plugin,
-.entry .wp-pic.scheme11 p,
-.wp-pic.scheme11 p,
+.wp-pic.scheme11:not(.wordpress) .wp-pic-no-plugin,
+.entry .wp-pic.scheme11:not(.wordpress) p,
+.wp-pic.scheme11:not(.wordpress) p,
 .wp-pic.scheme11 .wp-pic-back a:not(.wp-pic-page):hover ,
-.wp-pic.scheme11 .wp-pic-back p,
+.wp-pic.scheme11:not(.wordpress) .wp-pic-back p,
 .wp-pic.scheme11:not(.wordpress) .wp-pic-author a,
-.wp-pic.scheme11 .wp-pic-dl-link {
+.wp-pic.scheme11:not(.wordpress) .wp-pic-dl-link {
 	color: #FFF;
 }
 .wp-pic.scheme11 .wp-pic-bar{
