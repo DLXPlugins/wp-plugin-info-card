@@ -72,6 +72,7 @@
   padding: 20px;
   border: 2px solid #333;
   border-radius: 5px;
+  min-width: 450px;
 }
 .wppic-query-block-panel select,
 .wppic-site-plugins-panel select {

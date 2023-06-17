@@ -11,7 +11,8 @@
 		"hasEmailsAdmin":"readonly",
 		"has_gutenberg": "readonly",
 		"highlight_and_share": "readonly",
-		"React": "readonly"
+		"React": "readonly",
+		"wppic": "readonly",
 	},
 	"env": {
 		"browser": true,

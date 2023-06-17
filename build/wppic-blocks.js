@@ -2098,7 +2098,10 @@ Logo.defaultProps = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./block.json */ "./src/blocks/PluginInfoCard/block.json");
 /* harmony import */ var _components_InfoCardIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/InfoCardIcon */ "./src/blocks/components/InfoCardIcon.js");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/blocks/PluginInfoCard/edit.js");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./src/blocks/PluginInfoCard/edit.js");
+
 
 
 
@@ -2110,9 +2113,75 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__, {
   icon: /*#__PURE__*/React.createElement(_components_InfoCardIcon__WEBPACK_IMPORTED_MODULE_1__["default"], {
     fill: "#333"
   }),
-  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
+  edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
   save: function save() {
     return null;
+  },
+  transforms: {
+    from: [{
+      type: 'block',
+      blocks: ['core/embed'],
+      transform: function transform(a) {
+        var b = a.url,
+          c = a.providerNameSlug;
+        var d = /https:\/\/wordpress\.org\/plugins\/([a-z0-9-]+)\/?/i;
+        var e = /https:\/\/wordpress\.org\/themes\/([a-z0-9-]+)\/?/i;
+        var f = d.exec(b);
+        if (f) {
+          return (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__.createBlock)('wp-plugin-info-card/wp-plugin-info-card', {
+            slug: f[1],
+            type: 'plugin',
+            loading: false,
+            defaultsApplied: false
+          });
+        }
+        var g = e.exec(b);
+        if (g) {
+          return (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__.createBlock)('wp-plugin-info-card/wp-plugin-info-card', {
+            slug: g[1],
+            type: 'theme',
+            loading: false,
+            defaultsApplied: false
+          });
+        }
+      }
+    }, {
+      type: 'raw',
+      isMatch: function isMatch(a) {
+        if (a.nodeName === 'P') {
+          // RegEx for detecting plugin slug in WordPress URL.
+          var b = /https:\/\/wordpress\.org\/plugins\/([a-z0-9-]+)\/?/i;
+          var c = /https:\/\/wordpress\.org\/themes\/([a-z0-9-]+)\/?/i;
+          var d = b.exec(a.textContent);
+          var e = c.exec(a.textContent);
+          if (d || e) {
+            return true;
+          }
+        }
+        return false;
+      },
+      priority: 5,
+      transform: function transform(a) {
+        // Extract slug from URL.
+        var b = /https:\/\/wordpress\.org\/plugins\/([a-z0-9-]+)\/?/i;
+        var c = /https:\/\/wordpress\.org\/themes\/([a-z0-9-]+)\/?/i;
+        var d = b.exec(a.textContent);
+        var e = c.exec(a.textContent);
+        var f = '';
+        if (d) {
+          f = d[1];
+        }
+        if (e) {
+          f = e[1];
+        }
+        return (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__.createBlock)('wp-plugin-info-card/wp-plugin-info-card', {
+          slug: f,
+          type: d ? 'plugin' : 'theme',
+          loading: false,
+          defaultsApplied: false
+        });
+      }
+    }]
   }
 });
 
@@ -13558,6 +13627,17 @@ module.exports = window["React"];
 
 "use strict";
 module.exports = window["lodash"];
+
+/***/ }),
+
+/***/ "@wordpress/blocks":
+/*!********************************!*\
+  !*** external ["wp","blocks"] ***!
+  \********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["blocks"];
 
 /***/ }),
 
