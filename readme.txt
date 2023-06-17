@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Tags: API, plugin, card, theme, block, blocks, gutenberg
 Requires at least: 3.7
 Tested up to: 6.1
-Stable tag: 4.0.1
+Stable tag: 4.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,6 +100,12 @@ This video shows you how:
 11. WordPress layout with themes and 2 columns
 
 == Changelog ==
+
+= 4.0.5 =
+* Released 2023-06-17
+* Fixed a bug where the WordPress default layout was not saving.
+* Added block transforms for the main block so that pasting a theme or plugin URL should pull up WP Plugin Info Card automatically.
+* Added block transform to convert from regular embed into info card block.
 
 = 4.0.1 =
 * Released 2023-02-14
@@ -406,5 +412,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 4.0.1 =
-Fixing undefined index in the main shortcode output.
+= 4.0.5 =
+Fixing default not saving in the admin if choosing a WordPress layout. Added block transforms to make it easier to insert the block.
