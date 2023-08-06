@@ -17,8 +17,17 @@
   "textdomain": "wp-plugin-info-card",
   "attributes": {
     "bannerImage": {
-      "type": "string",
-      "default": ""
+      "type": "object",
+      "default": {
+        "url": "",
+        "id": 0,
+        "backgroundColor": "#000000",
+        "backgroundSize": "cover",
+        "backgroundPosition": "center center",
+        "backgroundRepeat": "no-repeat",
+        "backgroundOpacity": 1,
+        "backgroundOpacityHover": 1
+      }
     }
   },
   "example": {

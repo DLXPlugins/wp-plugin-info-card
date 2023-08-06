@@ -49,6 +49,7 @@ const {
 } = wp.blockEditor;
 
 const { useInstanceId } = wp.compose;
+import PluginLargeCustom from '../templates/PluginLargeCustom';
 
 const CustomInfoCard = ( props ) => {
 	const { attributes, setAttributes } = props;
@@ -194,27 +195,7 @@ const CustomInfoCard = ( props ) => {
 	const block = (
 		<>
 			<div className="wppic-query-block wppic-query-block-panel">
-				<div className="wppic-block-svg">
-					<Logo size="75" />
-				</div>
-				<div className="wp-pic-gutenberg-button">
-					<Button
-						iconSize={ 20 }
-						icon={ <Logo size="25" /> }
-						isSecondary
-						id="wppic-input-submit"
-						onClick={ ( event ) => {
-							event.preventDefault();
-							setAttributes( { loading: false } );
-							pluginOnClick( event );
-						} }
-					>
-						{ __(
-							'Preview and Configure',
-							'wp-plugin-info-card'
-						) }
-					</Button>
-				</div>
+				<PluginLargeCustom attributes={ attributes } setAttributes={ setAttributes } />
 			</div>
 			<>
 				<div className="wppic-loading-placeholder">
