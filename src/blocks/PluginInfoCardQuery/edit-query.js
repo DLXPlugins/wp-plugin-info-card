@@ -16,7 +16,7 @@ const {
 	Spinner,
 	TextControl,
 	Button,
-	Toolbar,
+	ToolbarGroup,
 	Notice,
 } = wp.components;
 
@@ -713,7 +713,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 					<>
 						{ inspectorControls }
 						<BlockControls>
-							<Toolbar controls={ resetSelect } />
+							<ToolbarGroup controls={ resetSelect } />
 							{ 'flex' === layout && (
 								<BlockAlignmentToolbar
 									value={ align }

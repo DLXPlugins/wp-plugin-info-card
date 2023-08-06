@@ -16,8 +16,10 @@ const PluginCard = ( props ) => {
 	} );
 	// WordPress Requires.
 	let requires = props.data.requires;
-	if ( isNumeric( requires ) ) {
+	if ( requires && isNumeric( requires ) ) {
 		requires = 'WP ' + requires + '+';
+	} else {
+		requires = props.data.tested;
 	}
 	let icon = '';
 	if ( props.data.icons.svg ) {
@@ -72,7 +74,7 @@ const PluginCard = ( props ) => {
 									</em>
 								</span>
 								<span className="wp-pic-requires">
-									{ props.data.requires }
+									{ requires }
 									<em>
 										{ __(
 											'Requires',

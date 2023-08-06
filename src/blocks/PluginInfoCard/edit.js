@@ -60,7 +60,7 @@ const WPPluginInfoCard = ( props ) => {
 	const [ type, setType ] = useState( attributes.type );
 	const [ slug, setSlug ] = useState( attributes.slug );
 	const [ loading, setLoading ] = useState( false );
-	const [ cardLoading, setCardLoading ] = useState( false );
+	const [ cardLoading, setCardLoading ] = useState( attributes.loading );
 	const [ image, setImage ] = useState( attributes.image );
 	const [ containerid, setContainerid ] = useState( attributes.containerid );
 	const [ scheme, setScheme ] = useState( attributes.scheme );

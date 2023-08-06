@@ -2,8 +2,8 @@
 Contributors: briKou, ronalfy
 Tags: API, plugin, card, theme, block, blocks, gutenberg
 Requires at least: 3.7
-Tested up to: 6.1
-Stable tag: 4.0.5
+Tested up to: 6.3
+Stable tag: 4.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,6 +100,12 @@ This video shows you how:
 11. WordPress layout with themes and 2 columns
 
 == Changelog ==
+
+= 4.0.7 =
+* Released 2023-08-05
+* Fixed a block editor bug where certain plugins were not returning a `require` argument.
+* Fixed a block editor bug where the site plugin list wasn't loading to due an invalid object type.
+* Tested with WordPress 6.3 and resolved any deprecation notices.
 
 = 4.0.5 =
 * Released 2023-06-17
@@ -412,5 +418,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 4.0.5 =
-Fixing default not saving in the admin if choosing a WordPress layout. Added block transforms to make it easier to insert the block.
+= 4.0.7 =
+Fix block editor bugs related to WordPress requirements and fixed WP 6.3 deprecation notices in the block editor.
