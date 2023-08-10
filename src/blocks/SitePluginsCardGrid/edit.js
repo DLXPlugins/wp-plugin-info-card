@@ -100,12 +100,11 @@ const SitePluginsCardGrid = ( props ) => {
 					const morePlugins = pluginResponseData.more_results;
 					const nextPage = pluginResponseData.page;
 					const pluginData = pluginResponseData.plugins;
-
 					setProgress( percentageComplete );
 
 					// Merge arrays assetData and pluginData.
 					const pluginAssetData = plugins;
-					forEach( Object.values( pluginData ), ( plugin ) => {
+					Object.values( pluginData ).forEach( ( plugin ) => {
 						pluginAssetData.push( plugin );
 					} );
 					setPlugins( pluginAssetData );

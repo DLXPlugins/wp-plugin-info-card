@@ -369,7 +369,7 @@ class Admin {
 		$content  = '<td>';
 		$content .= '<select id="wppic-default-layout" name="wppic_settings[default_layout]">';
 		$content .= '<option value="card"  ' . selected( $layout, 'card', false ) . ' >' . esc_html__( 'Card', 'wp-plugin-info-card' ) . '</option>';
-		$content .= '<option value="wordpress"  ' . selected( $layout, 'WordPress', false ) . ' >' . esc_html__( 'WordPress Appearance', 'wp-plugin-info-card' ) . '</option>';
+		$content .= '<option value="wordpress"  ' . selected( $layout, 'wordpress', false ) . ' >' . esc_html__( 'WordPress Appearance', 'wp-plugin-info-card' ) . '</option>';
 		$content .= '<option value="large"  ' . selected( $layout, 'large', false ) . ' >' . esc_html__( 'Large Card Layout', 'wp-plugin-info-card' ) . '</option>';
 		$content .= '<option value="flex"  ' . selected( $layout, 'flex', false ) . ' >' . esc_html__( 'Wide Screen Flex Layout', 'wp-plugin-info-card' ) . '</option>';
 		$content .= '</select>';
