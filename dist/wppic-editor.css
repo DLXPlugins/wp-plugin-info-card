@@ -1,4 +1,31 @@
-.wp-block-cgb-block-wp-plugin-info-card{background:#ff4500;border:.2rem solid #292929;color:#292929;margin:0 auto;max-width:740px;padding:2rem}@keyframes wppicspin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}.wp-pic-spin svg{animation:wppicspin 1.5s infinite linear;transform-origin:50% 50%}.wp-plugin-info-card.aligncenter,.wp-plugin-info-card.alignwide,.wp-plugin-info-card.alignfull{display:flex;justify-content:center}.wp-plugin-info-card-query .wp-pic-grid{display:grid;row-gap:10px;column-gap:10px}.wp-plugin-info-card-query .wp-pic-grid.cols-1{grid-template-columns:1fr}.wp-plugin-info-card-query .wp-pic-grid.cols-2{grid-template-columns:1fr 1fr}.wp-plugin-info-card-query .wp-pic-grid.cols-3{grid-template-columns:1fr 1fr 1fr}.wppic-query-block-panel,.wppic-site-plugins-panel{position:relative;background:#fff;max-width:500px;margin:0 auto;padding:20px;border:2px solid #333;border-radius:5px;min-width:450px}.wppic-query-block-panel select,.wppic-site-plugins-panel select{height:inherit !important;font-size:14px !important;line-height:1.2em !important;border-width:1px !important;width:100% !important;max-width:100% !important}.wppic-query-block-panel #wppic-input-submit,.wppic-site-plugins-panel #wppic-input-submit{background:#fff;color:#cb212b;box-shadow:inset 0 0 0 1px #cb212b;border-radius:3px;padding:15px 25px !important;transition:all ease-in-out .5s}.wppic-query-block-panel #wppic-input-submit:hover,.wppic-site-plugins-panel #wppic-input-submit:hover{box-shadow:inset 0 0 0 2px #cb212b}.wp-pic-tab-panel{padding:0 16px;border-top:1px solid #ddd;margin-top:10px;margin-bottom:5px;border-bottom:1px solid #ddd;text-align:left}.wp-pic-tab-panel .components-tab-panel__tabs{margin-bottom:20px}.wp-pic-tab-panel .components-tab-panel__tabs .wppic-tab-layout,.wp-pic-tab-panel .components-tab-panel__tabs .wppic-tab-slug{border-radius:0;background:rgba(0,0,0,0);border:none;box-shadow:none;cursor:pointer;display:inline-block;padding:3px 15px;margin-left:0;font-weight:500}.wp-pic-tab-panel .components-tab-panel__tabs .wppic-tab-layout.active-tab,.wp-pic-tab-panel .components-tab-panel__tabs .wppic-tab-slug.active-tab{font-weight:700;border-bottom:2px solid #cb212b}.wppic-block-svg{text-align:center}.wp-pic-flip,.wp-pic-wordpress,.wp-pic-large{display:block !important}.is-block-content .wp-pic{max-width:100% !important}.wppic-query-block .components-base-control__help,.wppic-site-plugins-block .components-base-control__help{text-align:left;font-size:12px;margin:0;font-style:italic;margin-bottom:10px}.wppic-query-block .button.button-primary,.wppic-site-plugins-block .button.button-primary{margin-top:1.8em}.wppic-query-block .wp-pic-gutenberg-button,.wppic-site-plugins-block .wp-pic-gutenberg-button{text-align:center}.wppic-query-block .wp-pic-gutenberg-button button,.wppic-site-plugins-block .wp-pic-gutenberg-button button{margin-top:20px;text-align:center}.wppic-loading-placeholder{background:#fff;display:flex;flex-wrap:wrap;justify-content:center;padding:20px;max-width:400px;margin:0 auto}.wppic-loading{width:100%;padding:20vh 30px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center}.wppic-loading svg{width:100%}.wppic-loading .wppic-spinner svg{margin-top:8px;width:18px;height:18px}.wp-pic-full-width{float:none;width:100%}.wp-pic-full-width .card.wp-pic{width:100%}.wp-pic-full-width .card.wp-pic .wp-pic-front .wp-pic-name{width:100%;text-align:center;display:block}.wppic-block h3{width:100%}.wppic-block div{display:block;width:100%;margin-bottom:20px}.wppic-block input{display:inline-block;width:100%}.wp-block[data-align=left]>div.wp-block-plugin-info-card,.wp-block[data-align=center]>div.wp-block-plugin-info-card,.wp-block[data-align=right]>div.wp-block-plugin-info-card,.wp-block[data-align=full]>div.wp-block-plugin-info-card{display:flex;justify-content:flex-start;flex-wrap:wrap;float:none;margin-right:1em}.wp-block[data-align=center]>div.wp-block-plugin-info-card,.wp-block[data-align=full]>div.wp-block-plugin-info-card{justify-content:center}.wp-block[data-align=right]>div.wp-block-plugin-info-card{justify-content:flex-end}div[data-type="wp-plugin-info-card/wp-plugin-info-card"] .wp-block{height:auto}.wp-pic-card.wp-block-plugin-info-card>div{margin-right:1em;margin-bottom:1em}.wp-pic-card.wp-block-plugin-info-card>div:last-child{margin-right:0;margin-bottom:0}.is-placeholder .flex.wp-pic-wrapper.wp-pic-card{margin-bottom:1em}.is-placeholder .flex.wp-pic-wrapper.wp-pic-card:last-child{margin-bottom:0}.is-placeholder .flex.wp-pic-wrapper.wp-pic-card .wp-pic-card{width:100%;margin-bottom:1em}.wppic-site-plugins-description p{text-align:center;font-size:14px;font-family:sans-serif}.wppic-line-count{display:flex;align-items:center;position:relative;border:1px solid #ddd;padding:4px 5px;width:100%;border-radius:15px;margin-top:15px;margin-bottom:15px;vertical-align:middle}.wppic-line-count span{display:block;height:5px;transition:width .5s ease-in-out}.wppic-panel-rows-cols .components-base-control{width:100%}.wppic-panel-rows-cols .components-button-group{display:grid;grid-template-columns:1fr 1fr 1fr;width:100%;text-align:center}.wppic-panel-rows-cols .components-button-group button{justify-content:center}.components-base-control.wppic-numbers-component{width:100%}.wppic-numbers-component-buttons__custom{display:grid;grid-template-columns:1fr 32px}.wppic-numbers-component-buttons__custom .components-wppic-control-button__number.has-icon svg{width:24px;height:24px}.wppic-numbers-component-buttons__custom .components-base-control{margin-bottom:0 !important}.wppic-numbers-component-buttons__custom .components-base-control__field{margin-bottom:0 !important}.wppic-numbers-component-buttons__custom .components-text-control__input{min-height:36px}.wppic-numbers-component-buttons__numbers{display:grid}.wppic-numbers-component-buttons__numbers .components-wppic-control-button__number.has-icon svg{width:24px;height:24px}.wppic-numbers-component-buttons__numbers button{justify-content:center}.wppic-numbers-component-buttons__numbers.cols-1{grid-template-columns:1fr 28px}.wppic-numbers-component-buttons__numbers.cols-2{grid-template-columns:1fr 1fr 1fr}.wppic-numbers-component-buttons__numbers.cols-3{grid-template-columns:1fr 1fr 1fr 1fr}.wppic-numbers-component-buttons__numbers.cols-4{grid-template-columns:1fr 1fr 1fr 1fr 32px}.wppic-numbers-component-buttons__numbers.cols-5{grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr}
+/*!*******************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/scss/editor.scss ***!
+  \*******************************************************************************************************************************************/
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+/**
+ * #.# Styles
+ *
+ * CSS for both Frontend+Backend.
+ */
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+.wp-block-cgb-block-wp-plugin-info-card {
+  background: orangered;
+  border: 0.2rem solid rgb(41, 41, 41);
+  color: rgb(41, 41, 41);
+  margin: 0 auto;
+  max-width: 740px;
+  padding: 2rem;
+}
 
 @keyframes wppicspin {
   0% {
@@ -40,11 +67,12 @@
 .wppic-site-plugins-panel {
   position: relative;
   background: #fff;
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
   padding: 20px;
   border: 2px solid #333;
   border-radius: 5px;
+  min-width: 450px;
 }
 .wppic-query-block-panel select,
 .wppic-site-plugins-panel select {

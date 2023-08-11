@@ -1,10 +1,11 @@
 import classnames from 'classnames';
 import isNumeric from 'validator/lib/isNumeric';
-import ImageSelector from '../../blocks/components/ImageSelector/index.js';
+// import ImageSelector from '../../blocks/components/ImageSelector/index.js';
 
 const { __ } = wp.i18n;
 
 const PluginLargeCustom = ( attributes ) => {
+	return null;
 	const wrapperClasses = classnames( {
 		large: true,
 		'wp-pic-wrapper': true,

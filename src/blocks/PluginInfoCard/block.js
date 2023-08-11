@@ -2,8 +2,6 @@ import metadata from './block.json';
 import InfoCardIcon from '../components/InfoCardIcon';
 import { registerBlockType, createBlock } from '@wordpress/blocks';
 
-import { createBlock } from '@wordpress/blocks';
-
 //  Import main block file.
 import edit from './edit';
 

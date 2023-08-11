@@ -20,6 +20,9 @@ import NumbersComponent from '../components/Numbers';
 import { uniqueId } from 'lodash';
 const { Fragment, useEffect, useState } = wp.element;
 
+// Media uploader script.
+import wpInfoCardImageCrop from './media-uploader-helper';
+
 const { __ } = wp.i18n;
 
 const {
@@ -49,7 +52,7 @@ const {
 } = wp.blockEditor;
 
 const { useInstanceId } = wp.compose;
-import PluginLargeCustom from '../templates/PluginLargeCustom';
+//import PluginLargeCustom from '../templates/PluginLargeCustom';
 
 const CustomInfoCard = ( props ) => {
 	const { attributes, setAttributes } = props;
@@ -65,10 +68,50 @@ const CustomInfoCard = ( props ) => {
 	const [ hasMultipleAssets, setHasMultipleAssets ] = useState( false );
 	const [ preview, setPreview ] = useState( attributes.preview );
 	const [ align, setAlign ] = useState( attributes.align );
+	const [ screen, setScreen ] = useState( attributes.currentScreen );
 
 	useEffect( () => {
 		setAttributes( { uniqueId: generatedUniqueId } );
 	}, [] );
+
+	const getWizardStartButton = (
+		<>
+			<div className="wp-pic-gutenberg-button">
+				<Button
+					iconSize={ 20 }
+					icon={ <Logo size="25" />}
+					isSecondary
+					id="wppic-input-submit"
+					onClick={ ( event ) => {
+						setScreen( 'screenOneImages')
+					} }
+				>
+					{ __( 'Start Wizard', 'wp-plugin-info-card' ) }
+				</Button>
+			</div>
+		</>
+	);
+
+	const getScreenOneImages = () => {
+		return (
+			<>
+				<Button
+					variant="primary"
+					onClick={ ( event ) => {
+						const buttonElement = event.target;
+						wpInfoCardImageCrop( event, {
+							suggestedWidth: 512,
+							suggestedHeight: 512,
+							title: __( 'Plugin Icon', 'wp-plugin-info-card' ),
+							buttonLabel: __( 'Add Plugin Icon', 'wp-plugin-info-card' ),
+						})
+					} }
+				>
+					{ __( 'Upload a Square Plugin Icon' ) }
+				</Button>
+			</>
+		);
+	}
 
 	const resetSelect = [
 		{
@@ -192,22 +235,8 @@ const CustomInfoCard = ( props ) => {
 		);
 	}
 
-	const block = (
-		<>
-			<div className="wppic-query-block wppic-query-block-panel">
-				<PluginLargeCustom attributes={ attributes } setAttributes={ setAttributes } />
-			</div>
-			<>
-				<div className="wppic-loading-placeholder">
-					<div className="wppic-loading">
-						<Logo size="45" />
-						<br />
-						<div className="wppic-spinner">
-							<Spinner />
-						</div>
-					</div>
-				</div>
-			</>
+	const getInspectorControls = () => {
+		return (
 			<>
 				{ inspectorControls }
 				<BlockControls>
@@ -252,23 +281,53 @@ const CustomInfoCard = ( props ) => {
 						</ToolbarItem>
 					</ToolbarGroup>
 				</BlockControls>
-				<div
-					id={ attributes.uniqueId }
-					className={ classnames(
-						'is-placeholder',
-						'wp-block-custom-info-card',
-						`align${ align }`,
-						{
-							'has-grid': hasMultipleAssets,
-						}
-					) }
-				>
-				</div>
 			</>
-		</>
-	);
+		)
+	};
 
-	return <div { ...blockProps }>{ block }</div>;
+	const screeenWizardStart = () => {
+		return (
+			<>
+				<div className="wppic-query-block wppic-query-block-panel">
+					<div className="wppic-site-plugins-block wppic-site-plugins-panel">
+						<div className="wppic-block-svg">
+							<Logo size="75" />
+						</div>
+						<div className="wppic-site-plugins-description">
+							<p>
+								{ __( 'A wizard will walk you through all the steps and data the plugin needs to display an info card.', 'wp-plugin-info-card' ) }
+							</p>
+						</div>
+						{ getWizardStartButton }
+					</div>
+				</div>
+				
+			</>
+		);
+	}
+
+	const wizardScreenOneImageSelect = () => {
+		return null;
+	}
+
+	console.log( screen );
+	const getScreenComponents = () => {
+		switch ( screen ) {
+			case 'wizardStart':
+				return screeenWizardStart();
+				break;
+			case 'screenOneImages':
+				return getScreenOneImages();
+				break;
+			default:
+				return null;
+		}
+	}
+
+	
+		
+
+	return <div { ...blockProps }>{ getScreenComponents() }</div>;
 };
 
 export default CustomInfoCard;

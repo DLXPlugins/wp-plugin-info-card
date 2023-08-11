@@ -28,6 +28,10 @@
         "backgroundOpacity": 1,
         "backgroundOpacityHover": 1
       }
+    },
+    "currentScreen": {
+      "type": "string",
+      "default": "wizardStart"
     }
   },
   "example": {
