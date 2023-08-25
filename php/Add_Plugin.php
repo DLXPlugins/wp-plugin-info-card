@@ -48,13 +48,14 @@ class Add_Plugin {
 					'slug'   => $slug,
 					'is_ssl' => is_ssl(),
 					'fields' => array(
-						'sections'          => false,
+						'sections'          => true,
 						'tags'              => false,
 						'short_description' => true,
 						'icons'             => true,
 						'banners'           => true,
 						'reviews'           => false,
 						'active_installs'   => true,
+						'downloaded'        => true,
 					),
 				)
 			);
@@ -67,6 +68,7 @@ class Add_Plugin {
 					'version'           => $plugin_info->version,
 					'author'            => $plugin_info->author,
 					'author_profile'    => $plugin_info->author_profile,
+					'author_homepage'   => $plugin_info->author_homepage,
 					'contributors'      => $plugin_info->contributors,
 					'requires'          => $plugin_info->requires,
 					'tested'            => $plugin_info->tested,
@@ -74,7 +76,7 @@ class Add_Plugin {
 					'rating'            => $plugin_info->rating,
 					'num_ratings'       => $plugin_info->num_ratings,
 					'ratings'           => $plugin_info->ratings,
-					'downloaded'        => $plugin_info->active_installs,
+					'downloaded'        => $plugin_info->downloaded,
 					'active_installs'   => $plugin_info->active_installs,
 					'last_updated'      => $plugin_info->last_updated,
 					'last_updated_mk'   => $plugin_info->last_updated,
