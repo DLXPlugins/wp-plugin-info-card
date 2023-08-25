@@ -1,0 +1,56 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "title": "Plugin Screenshots Info Card",
+  "apiVersion": 2,
+  "name": "wp-plugin-info-card/wp-plugin-info-card",
+  "category": "text",
+  "icon": "<svg viewBox='0 0 80 80'><path d='M47,41.5c0,3.9-3.1,7-7,7s-7-3.1-7-7s3.1-7,7-7S47,37.6,47,41.5z M59,31.5v20c0,1.7-1.3,3-3,3H24c-1.7,0-3-1.3-3-3v-20 c0-1.7,1.3-3,3-3h8c0.4,0,0.8-0.3,0.9-0.7l1.8-5.3h10.6l1.8,5.3c0.1,0.4,0.5,0.7,0.9,0.7h8C57.7,28.5,59,29.8,59,31.5z M49,41.5 c0-5-4-9-9-9s-9,4-9,9s4,9,9,9S49,46.5,49,41.5z M76,40c0,19.9-16.1,36-36,36S4,59.9,4,40S20.1,4,40,4S76,20.1,76,40z M61,31.5 c0-2.8-2.2-5-5-5h-7.3l-1.8-5.3c-0.1-0.4-0.5-0.7-0.9-0.7H34c-0.4,0-0.8,0.3-0.9,0.7l-1.8,5.3H24c-2.8,0-5,2.2-5,5v20 c0,2.8,2.2,5,5,5h32c2.8,0,5-2.2,5-5V31.5z'/></svg>",
+  "description": "Add a beautiful plugin card with screenshots.",
+  "keywords": [
+    "wp plugin",
+    "plugin",
+    "card",
+    "theme",
+    "screenshot"
+  ],
+  "version": "1.0.0",
+  "textdomain": "wp-plugin-info-card",
+  "attributes": {
+    "assetData": {
+      "type": "array",
+      "default": []
+    },
+    "type": {
+      "type": "string",
+      "default": "plugin"
+    },
+    "slug": {
+      "type": "string",
+      "default": "wp-plugin-info-card"
+    },
+    "loading": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "example": {
+    "attributes": {
+      "preview": true
+    }
+  },
+  "supports": {
+    "anchor": true,
+    "align": [
+      "wide",
+      "center",
+      "full"
+    ],
+    "className": true
+  },
+  "editorScript": "wp_plugin_info_card-cgb-block-js",
+  "editorStyle": [
+    "wp_plugin_info_card-cgb-block-editor-css",
+    "wp_plugin_info_card-cgb-style-css"
+  ],
+  "style": "has-style-frontend-css"
+}
