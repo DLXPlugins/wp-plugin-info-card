@@ -2,8 +2,8 @@
 Contributors: briKou, ronalfy
 Tags: API, plugin, card, theme, block, blocks, gutenberg
 Requires at least: 3.7
-Tested up to: 6.1
-Stable tag: 3.4.6
+Tested up to: 6.3
+Stable tag: 4.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,23 +41,17 @@ It is perfect to keep track of your own plugins and themes!
 
 [CHECK OUT THE DEMO](https://mediaron.com/wp-plugin-info-card/ "Try It!")
 
+= Quick Links (Shortcode Documentation) =
 
-= [wp-pic] Shortcode parameters =
+* <a href="https://wppic.mediaron.com/shortcodes/wp-pic">[wp-pic] shortcode and parameters</a>.
+* <a href="https://wppic.mediaron.com/shortcodes/wp-pic-query">[wp-pic-query] shortcode and parameters</a>.
+* <a href="https://wppic.mediaron.com/shortcodes/wp-pic-site-plugins">[wp-pic-site-plugins] shortcode and parameters</a>.
 
-* **type:** plugin, theme (default: plugin)
-* **slug:** plugin slug name - Please refer to the plugin/theme URL on wordpress.org to determine its slug: https://wordpress.org/plugins/THE-SLUG/
-* **layout:** template layout to use - Default is "card" so you may leave this parameter empty. Available layouts are: card, large, wordpress, and flex (default: empty)
-* **scheme:** card color scheme: scheme1 to scheme12 (default: default color scheme defined in admin)
-* **image:** image url to replace the default image or logo(default: empty)
-* **align:** center, left, right (default: empty)
-* **containerid:** custom div id, may be used for anchor (default: wp-pic-PLUGIN-NAME)
-* **margin:** custom container margin - eg: "15px 0" (default: empty)
-* **clear:** clear float before or after the card: before, after (default: empty)
-* **expiration:** cache duration in minutes - numeric format only (default: 10)
-* **ajax:** load the plugin data asynchronously with AJAX: yes, no (default: no)
-* **custom:** value to display: (default: empty)
-	* For plugins: url, name, icons, banners, version, author, requires, rating, num_ratings, downloaded, last_updated, download_link
-	* For themes: url, name, version, author, screenshot_url, rating, num_ratings, downloaded, last_updated, homepage, download_link
+= Quick Links (Block Documentation) =
+
+* <a href="https://wppic.mediaron.com/blocks/wp-plugin-info-card-block">WP Plugin Info Card block</a>.
+* <a href="https://wppic.mediaron.com/blocks/wp-plugin-info-card-query-block">WP Plugin Info Card Query block</a>.
+* <a href="https://wppic.mediaron.com/blocks/site-plugins-card-grid">Site Plugins Card Grid block</a>.
 
 [CHECK OUT MORE EXAMPLES](https://mediaron.com/wp-plugin-info-card/ "More documentation")
 
@@ -106,6 +100,27 @@ This video shows you how:
 11. WordPress layout with themes and 2 columns
 
 == Changelog ==
+
+= 4.0.7 =
+* Released 2023-08-05
+* Fixed a block editor bug where certain plugins were not returning a `require` argument.
+* Fixed a block editor bug where the site plugin list wasn't loading to due an invalid object type.
+* Tested with WordPress 6.3 and resolved any deprecation notices.
+
+= 4.0.5 =
+* Released 2023-06-17
+* Fixed a bug where the WordPress default layout was not saving.
+* Added block transforms for the main block so that pasting a theme or plugin URL should pull up WP Plugin Info Card automatically.
+* Added block transform to convert from regular embed into info card block.
+
+= 4.0.1 =
+* Released 2023-02-14
+* Fixing undefined index in the main shortcode output.
+
+= 4.0.0 =
+* Released 2023-01-20
+* New shortcode and block: <a href="https://wppic.mediaron.com/blocks/site-plugins-card-grid">Site Plugins Card Grid</a>.
+* The plugin's code and build scripts have been updated to the latest standards.
 
 = 3.4.6 =
 * Released 2023-01-07
@@ -403,5 +418,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 3.4.6 =
-Added ability to sort results by active installs, downloads, and last updated in the Query shortcode/block.
+= 4.0.7 =
+Fix block editor bugs related to WordPress requirements and fixed WP 6.3 deprecation notices in the block editor.

@@ -1,0 +1,88 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "title": "Site Plugins Card Grid",
+  "apiVersion": 2,
+  "name": "wp-plugin-info-card/site-plugins-card-grid",
+  "category": "wp-plugin-info-card",
+  "icon": "<svg height='24' viewBox='0 0 122.88 122.88' width='24' xmlns='http://www.w3.org/2000/svg'><path fill='#333' d='M0 0v122.88h122.88V0zm115.2 38.4H84.479V7.68H115.2zM46.08 76.8V46.08H76.8V76.8zm30.72 7.68v30.72H46.08V84.48zM38.4 76.8H7.68V46.08H38.4zm7.68-38.4V7.68H76.8V38.4zm38.399 7.68H115.2V76.8H84.479zM38.4 7.68V38.4H7.68V7.68zM7.68 84.48H38.4v30.72H7.68zm76.799 30.72V84.48H115.2v30.72z'></path></svg>",
+  "description": "Display all your active plugins in a grid layout.",
+  "keywords": [
+    "wp plugin",
+    "site",
+    "grid",
+    "plugin",
+    "card",
+    "active"
+  ],
+  "version": "1.0.0",
+  "textdomain": "wp-plugin-info-card",
+  "attributes": {
+    "assetData": {
+      "type": "array",
+      "default": []
+    },
+    "uniqueId": {
+      "type": "string",
+      "default": ""
+    },
+    "align": {
+      "type": "string",
+      "default": "center"
+    },
+    "loading": {
+      "type": "boolean",
+      "default": true
+    },
+    "scheme": {
+      "type": "string",
+      "default": "default"
+    },
+    "layout": {
+      "type": "string",
+      "default": "card"
+    },
+    "preview": {
+      "type": "boolean",
+      "default": false
+    },
+    "defaultsApplied": {
+      "type": "boolean",
+      "default": false
+    },
+    "sortby": {
+      "type": "string",
+      "default": "none"
+    },
+    "sort": {
+      "type": "string",
+      "default": "ASC"
+    },
+    "cols": {
+      "type": "number",
+      "default": 2
+    },
+    "colGap": {
+      "type": "number",
+      "default": 20
+    },
+    "rowGap": {
+      "type": "number",
+      "default": 20
+    }
+  },
+  "example": {
+    "attributes": {
+      "preview": true
+    }
+  },
+  "supports": {
+    "anchor": true,
+    "align": false,
+    "className": true
+  },
+  "editorScript": "wp-plugin-info-card-block-js",
+  "editorStyle": [
+    "wp-plugin-info-card-block-editor-css",
+    "wp-plugin-info-card-block-styles-css"
+  ]
+}

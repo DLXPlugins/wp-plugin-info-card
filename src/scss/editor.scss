@@ -51,12 +51,16 @@
 }
 
 /* Panel Styles */
-.wppic-query-block-panel {
+.wppic-query-block-panel,
+.wppic-site-plugins-panel {
 	position: relative;
 	background: #fff;
 	max-width: 500px;
 	margin: 0 auto;
 	padding: 20px;
+	border: 2px solid #333;
+	border-radius: 5px;
+	min-width: 450px;
 
 	select {
 		height: inherit !important;
@@ -119,7 +123,8 @@
 .is-block-content .wp-pic {
 	max-width: 100% !important;
 }
-.wppic-query-block {
+.wppic-query-block,
+.wppic-site-plugins-block {
 	.components-base-control__help {
 		text-align: left;
 		font-size: 12px;
@@ -231,4 +236,105 @@ div[data-type="wp-plugin-info-card/wp-plugin-info-card"] .wp-block {
 .is-placeholder .flex.wp-pic-wrapper.wp-pic-card .wp-pic-card {
 	width: 100%;
 	margin-bottom: 1em;
+}
+
+/* SitePluginsCardGrid Styles */
+.wppic-site-plugins-description {
+	p {
+		text-align: center;
+		font-size: 14px;
+		font-family: sans-serif;
+	}
+}
+.wppic-line-count {
+	display: flex;
+	align-items: center;
+	position: relative;
+	border: 1px solid #DDD;
+	padding: 4px 5px;
+	width: 100%;
+	border-radius: 15px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	vertical-align: middle;
+
+	span {
+		display: block;
+		height: 5px;
+		transition: width 0.5s ease-in-out;
+	}
+}
+/* Row Column Buttons */
+.wppic-panel-rows-cols {
+	.components-base-control {
+		width: 100%;
+	}
+	.components-button-group {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		width: 100%;
+		text-align: center;
+
+		button { 
+			justify-content: center;
+		}
+	}
+}
+
+/* Numbers Component */
+.components-base-control.wppic-numbers-component {
+	width: 100%;
+}
+.wppic-numbers-component-buttons__custom {
+	display: grid;
+	grid-template-columns: 1fr 32px;
+
+	.components-wppic-control-button__number {
+		&.has-icon {
+			svg {
+				width: 24px;
+				height: 24px;
+			}
+		}
+	}
+	.components-base-control {
+		margin-bottom: 0 !important; /* override core styles */
+	}
+	.components-base-control__field {
+		margin-bottom: 0 !important; /* override core styles */
+	}
+	.components-text-control__input {
+		min-height: 36px;
+	}
+}
+.wppic-numbers-component-buttons__numbers {
+	display: grid;
+
+	.components-wppic-control-button__number {
+		&.has-icon {
+			svg {
+				width: 24px;
+				height: 24px;
+			}
+		}
+	}
+
+	button {
+		justify-content: center;
+	}
+	&.cols-1 {
+		grid-template-columns: 1fr 28px;
+	}
+	&.cols-2 {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+	&.cols-3 {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
+	&.cols-4 {
+		grid-template-columns: 1fr 1fr 1fr 1fr 32px;
+	}
+	&.cols-5 {
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	}
 }

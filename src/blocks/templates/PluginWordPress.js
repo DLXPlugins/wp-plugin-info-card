@@ -23,8 +23,10 @@ const PluginWordPress = ( props ) => {
 	} );
 	// WordPress Requires.
 	let requires = props.data.requires;
-	if ( isNumeric( requires ) ) {
+	if ( requires && isNumeric( requires ) ) {
 		requires = 'WP ' + requires + '+';
+	} else {
+		requires = props.data.tested;
 	}
 	const htmlToReactParser = new HtmlToReactParser();
 	return (
@@ -116,7 +118,7 @@ const PluginWordPress = ( props ) => {
 										'Compatible with WordPress',
 										'wp-plugin-info-card'
 									) }{ ' ' }
-									{ props.data.requires }
+									{ requires }
 								</span>
 							</div>
 						</div>

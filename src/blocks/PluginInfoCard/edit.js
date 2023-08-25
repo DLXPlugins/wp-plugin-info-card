@@ -16,6 +16,8 @@ import ThemeWordPress from '../templates/ThemeWordPress';
 import ThemeLarge from '../templates/ThemeLarge';
 import ThemeCard from '../templates/ThemeCard';
 import Logo from '../Logo';
+import NumbersComponent from '../components/Numbers';
+import { uniqueId } from 'lodash';
 const { Fragment, useEffect, useState } = wp.element;
 
 const { __ } = wp.i18n;
@@ -26,18 +28,16 @@ const {
 	SelectControl,
 	Spinner,
 	TextControl,
-	Toolbar,
 	ToolbarGroup,
 	ToolbarButton,
 	ToolbarItem,
-	ToolbarDropdownMenu,
 	DropdownMenu,
-	CheckboxControl,
 	TabPanel,
 	Button,
-	MenuGroup,
 	MenuItemsChoice,
-	MenuItem,
+	BaseControl,
+	ButtonGroup,
+	Notice,
 } = wp.components;
 
 const {
@@ -48,35 +48,62 @@ const {
 	useBlockProps,
 } = wp.blockEditor;
 
+const { useInstanceId } = wp.compose;
+
 const WPPluginInfoCard = ( props ) => {
 	const { attributes, setAttributes } = props;
+
+	const { cols, colGap, rowGap } = attributes;
+
+	const generatedUniqueId = useInstanceId( WPPluginInfoCard, 'wp-plugin-info-card-id' );
 
 	const [ type, setType ] = useState( attributes.type );
 	const [ slug, setSlug ] = useState( attributes.slug );
 	const [ loading, setLoading ] = useState( false );
-	const [ cardLoading, setCardLoading ] = useState( false );
+	const [ cardLoading, setCardLoading ] = useState( attributes.loading );
 	const [ image, setImage ] = useState( attributes.image );
 	const [ containerid, setContainerid ] = useState( attributes.containerid );
 	const [ scheme, setScheme ] = useState( attributes.scheme );
 	const [ layout, setLayout ] = useState( attributes.layout );
 	const [ multi, setMulti ] = useState( true );
+	const [ hasMultipleAssets, setHasMultipleAssets ] = useState( false );
 	const [ preview, setPreview ] = useState( attributes.preview );
 	const [ data, setData ] = useState( attributes.assetData );
 	const [ align, setAlign ] = useState( attributes.align );
+	const [ noData, setNoData ] = useState( false );
+
+	useEffect( () => {
+		setAttributes( { uniqueId: generatedUniqueId } );
+	}, [] );
+
+	useEffect( () => {
+		if ( Object.values( attributes.assetData ).length > 1 ) {
+			setHasMultipleAssets( true );
+		} else {
+			setHasMultipleAssets( false );
+		}
+	}, [ attributes.assetData ] );
 
 	const loadData = () => {
 		setLoading( false );
 		setCardLoading( true );
+		setNoData( false );
 		const restUrl = wppic.rest_url + 'wppic/v2/get_data';
 		axios
 			.get(
 				restUrl + `?type=${ type }&slug=${ encodeURIComponent( slug ) }`
 			)
 			.then( ( response ) => {
-				// Now Set State
-				setData( response.data.data );
-				setAttributes( { assetData: response.data.data } );
-				setCardLoading( false );
+				if ( response.data.success ) {
+					// Now Set State
+					setData( response.data.data );
+					setAttributes( { assetData: response.data.data } );
+					setCardLoading( false );
+				} else {
+					setNoData( true );
+					setCardLoading( false );
+					setLoading( true );
+				}
 			} );
 	};
 	const pluginOnClick = ( assetSlug, assetType ) => {
@@ -176,6 +203,53 @@ const WPPluginInfoCard = ( props ) => {
 		} );
 	};
 
+	/**
+	 * Retrieve colums interface for sidebar options.
+	 *
+	 * @return {Element} The columns interface.
+	 */
+	const getCols = () => {
+		return (
+			<BaseControl id="col-count" label={ __( 'Select How Many Columns', 'wp-plugin-info-card' ) }>
+				<ButtonGroup>
+					<Button
+						isPrimary={ cols === 1 }
+						isSecondary={ cols !== 1 }
+						onClick={ () => {
+							setAttributes( {
+								cols: 1,
+							} );
+						} }
+					>
+						{ __( 'One', 'wp-plugin-info-card' ) }
+					</Button>
+					<Button
+						isPrimary={ cols === 2 }
+						isSecondary={ cols !== 2 }
+						onClick={ () => {
+							setAttributes( {
+								cols: 2,
+							} );
+						} }
+					>
+						{ __( 'Two', 'wp-plugin-info-card' ) }
+					</Button>
+					<Button
+						isPrimary={ cols === 3 }
+						isSecondary={ cols !== 3 }
+						onClick={ () => {
+							setAttributes( {
+								cols: 3,
+							} );
+						} }
+					>
+						{ __( 'Three', 'wp-plugin-info-card' ) }
+					</Button>
+				</ButtonGroup>
+			</BaseControl>
+		);
+	};
+
 	const resetSelect = [
 		{
 			icon: 'edit',
@@ -262,6 +336,35 @@ const WPPluginInfoCard = ( props ) => {
 						} }
 					/>
 				</PanelRow>
+				{ hasMultipleAssets && (
+					<>
+						<PanelRow className="wppic-panel-rows-cols">
+							{ getCols() }
+						</PanelRow>
+						<PanelRow className="wppic-panel-rows-numbers">
+							<NumbersComponent
+								value={ colGap }
+								label={ __( 'Column Gap (in px)', 'wp-plugin-info-card' ) }
+								numbers={ [ 20, 40, 60, 80 ] }
+								onClick={ ( value ) => {
+									setAttributes( { colGap: parseInt( value ) } );
+								} }
+								id="wppic-col-gap"
+							/>
+						</PanelRow>
+						<PanelRow className="wppic-panel-rows-numbers">
+							<NumbersComponent
+								value={ rowGap }
+								label={ __( 'Row Gap (in px)', 'wp-plugin-info-card' ) }
+								numbers={ [ 20, 40, 60, 80 ] }
+								onClick={ ( value ) => {
+									setAttributes( { rowGap: parseInt( value ) } );
+								} }
+								id="wppic-row-gap"
+							/>
+						</PanelRow>
+					</>
+				) }
 			</PanelBody>
 			<PanelBody
 				title={ __( 'Options', 'wp-plugin-info-card' ) }
@@ -336,19 +439,27 @@ const WPPluginInfoCard = ( props ) => {
 		</InspectorControls>
 	);
 
+	const styles = `
+		#${ attributes.uniqueId } {
+			display: grid;
+			column-gap: ${ colGap }px;
+			row-gap: ${ rowGap }px;
+		}
+	`;
+
 	const blockProps = useBlockProps( {
 		className: classnames( `wp-plugin-info-card align${ align }` ),
 	} );
 
 	if ( preview ) {
 		return (
-			<Fragment>
+			<div style={ { textAlign: 'center' } }>
 				<img
 					src={ wppic.wppic_preview }
 					alt=""
-					style={ { width: '100%', height: 'auto' } }
+					style={ { height: '415px', width: 'auto', textAlign: 'center' } }
 				/>
-			</Fragment>
+			</div>
 		);
 	}
 	if ( cardLoading ) {
@@ -398,7 +509,7 @@ const WPPluginInfoCard = ( props ) => {
 								let tabContent;
 								if ( 'slug' === tab.name ) {
 									tabContent = (
-										<Fragment>
+										<>
 											<SelectControl
 												label={ __(
 													'Select a Plugin or Theme',
@@ -430,7 +541,18 @@ const WPPluginInfoCard = ( props ) => {
 													'wp-plugin-info-card'
 												) }
 											/>
-										</Fragment>
+											{ noData && (
+												<Notice
+													status="error"
+													isDismissible={ false }
+												>
+													{ __(
+														'No data found for the given slug.',
+														'wp-plugin-info-card'
+													) }
+												</Notice>
+											) }
+										</>
 									);
 								} else if ( 'layout' === tab.name ) {
 									tabContent = (
@@ -600,12 +722,22 @@ const WPPluginInfoCard = ( props ) => {
 							</ToolbarItem>
 						</ToolbarGroup>
 					</BlockControls>
+					{ hasMultipleAssets && (
+						<style>
+							{ styles }
+						</style>
+					) }
 					<div
+						id={ attributes.uniqueId }
 						className={ classnames(
 							'is-placeholder',
 							layoutClass,
 							'wp-block-plugin-info-card',
-							`align${ align }`
+							`align${ align }`,
+							`cols-${ cols }`,
+							{
+								'has-grid': hasMultipleAssets,
+							}
 						) }
 					>
 						{ outputInfoCards( data ) }

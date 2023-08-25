@@ -16,7 +16,8 @@ const {
 	Spinner,
 	TextControl,
 	Button,
-	Toolbar,
+	ToolbarGroup,
+	Notice,
 } = wp.components;
 
 const {
@@ -43,6 +44,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 
 	const [ loading, setLoading ] = useState( false );
 	const [ cardLoading, setCardLoading ] = useState( false );
+	const [ noData, setNoData ] = useState( false );
 
 	const {
 		assetData,
@@ -102,10 +104,19 @@ const WP_Plugin_Card_Query = ( props ) => {
 					// Now Set State
 					setLoading( false );
 					setCardLoading( false );
-					setAttributes( {
-						assetData: response.data.data.api_response,
-					} );
-					setAttributes( { html: response.data.data.html } );
+					if ( response.data.success ) {
+						setAttributes( {
+							assetData: response.data.data.api_response,
+							html: response.data.data.html,
+						} );
+					} else {
+						setAttributes( {
+							assetData: [],
+							html: '',
+						} );
+						setNoData( true );
+						setLoading( true );
+					}
 				} );
 		}
 	};
@@ -403,7 +414,20 @@ const WP_Plugin_Card_Query = ( props ) => {
 						<div className="wppic-block-svg">
 							<Logo size="75" />
 						</div>
-						<div className="wp-pic-tab-panel">
+						<div className="wp-pic-tabs-panel">
+							{ noData && (
+								<div className="wppic-no-data">
+									<Notice
+										status="error"
+										isDismissible={ false }
+									>
+										{ __(
+											'No data found. Please check your query.',
+											'wp-plugin-info-card'
+										) }
+									</Notice>
+								</div>
+							) }
 							<SelectControl
 								label={ __(
 									'Select a Type',
@@ -660,6 +684,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 								onClick={ ( event ) => {
 									event.preventDefault();
 									setLoading( false );
+									setNoData( false );
 									pluginOnClick( event );
 								} }
 							>
@@ -688,7 +713,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 					<>
 						{ inspectorControls }
 						<BlockControls>
-							<Toolbar controls={ resetSelect } />
+							<ToolbarGroup controls={ resetSelect } />
 							{ 'flex' === layout && (
 								<BlockAlignmentToolbar
 									value={ align }
