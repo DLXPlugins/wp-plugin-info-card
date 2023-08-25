@@ -101,6 +101,24 @@ class Blocks {
 				'render_callback' => array( $this, 'site_plugin_card_grid_render' ),
 			)
 		);
+		register_block_type(
+			Functions::get_plugin_dir( 'build/blocks/PluginScreenshotsInfoCard/block.json' ),
+			array(
+				'render_callback' => array( $this, 'site_plugin_screenshots' ),
+			)
+		);
+	}
+
+	/**
+	 * Render callback for the plugin screenshots block.
+	 *
+	 * @param array $attributes Array of block attributes.
+	 *
+	 * @return string Block rendered.
+	 */
+	public function site_plugin_screenshots( $attributes = array() ) {
+		$attributes = Functions::sanitize_array_recursive( $attributes );
+		return '';
 	}
 
 	/**

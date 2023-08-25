@@ -48,7 +48,7 @@ const {
 	useBlockProps,
 } = wp.blockEditor;
 
-const WPPluginInfoCard = ( props ) => {
+const PluginScreenshotsInfoCard = ( props ) => {
 	const { attributes, setAttributes } = props;
 
 	const [ type, setType ] = useState( attributes.type );
@@ -618,4 +618,4 @@ const WPPluginInfoCard = ( props ) => {
 	return <div { ...blockProps }>{ block }</div>;
 };
 
-export default WPPluginInfoCard;
+export default PluginScreenshotsInfoCard;
