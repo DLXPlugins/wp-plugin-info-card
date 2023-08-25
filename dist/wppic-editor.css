@@ -348,4 +348,8 @@ div[data-type="wp-plugin-info-card/wp-plugin-info-card"] .wp-block {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
+.wp-pic-tab-panel {
+  padding-top: 15px;
+}
+
 /*# sourceMappingURL=wppic-editor.css.map*/

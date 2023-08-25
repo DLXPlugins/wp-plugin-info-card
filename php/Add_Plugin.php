@@ -55,6 +55,7 @@ class Add_Plugin {
 						'banners'           => true,
 						'reviews'           => false,
 						'active_installs'   => true,
+						'screenshots'       => true,
 					),
 				)
 			);
@@ -85,6 +86,7 @@ class Add_Plugin {
 					'donate_link'       => $plugin_info->donate_link,
 					'icons'             => $plugin_info->icons,
 					'banners'           => $plugin_info->banners,
+					'screenshots'       => $plugin_info->screenshots,
 				);
 			}
 		}
