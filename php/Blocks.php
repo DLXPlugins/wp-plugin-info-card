@@ -21,7 +21,7 @@ class Blocks {
 
 		add_action( 'enqueue_block_assets', array( $self, 'register_block_assets' ) );
 		add_action( 'init', array( $self, 'register_blocks' ) );
-		add_filter( 'block_categories', array( $self, 'add_block_category' ), 10, 2 );
+		add_filter( 'block_categories_all', array( $self, 'add_block_category' ), 10, 2 );
 
 		return $self;
 	}

@@ -16,6 +16,10 @@
   "version": "1.0.0",
   "textdomain": "wp-plugin-info-card",
   "attributes": {
+    "screen": {
+      "type": "string",
+      "default": "slug-entry"
+    },
     "assetData": {
       "type": "array",
       "default": []

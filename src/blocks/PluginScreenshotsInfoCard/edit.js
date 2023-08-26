@@ -43,6 +43,8 @@ const {
 	useBlockProps,
 } = wp.blockEditor;
 
+import SlugEntryScreen from './screens/ScreenSlugEntry';
+
 const PluginScreenshotsInfoCard = ( props ) => {
 	const { attributes, setAttributes } = props;
 
@@ -58,8 +60,8 @@ const PluginScreenshotsInfoCard = ( props ) => {
 	const [ preview, setPreview ] = useState( attributes.preview );
 	const [ data, setData ] = useState( attributes.assetData );
 	const [ align, setAlign ] = useState( attributes.align );
-	const [ slugInputRef, setSlugInputRef ] = useState( null );
 	const [ hasScreenshots, setHasScreenshots ] = useState( false );
+	const [ screen, setScreen ] = useState( attributes.screen );
 
 	const loadData = () => {
 		setLoading( false );
@@ -264,6 +266,23 @@ const PluginScreenshotsInfoCard = ( props ) => {
 		className: classnames( `wp-plugin-info-card align${ align }` ),
 	} );
 
+	/**
+	 * Get the screen to display.
+	 *
+	 * @return {Element} The screen to display.
+	 */
+	const getCurrentScreen = () => {
+
+		// Otherwise get the screen based on the current screen.
+		switch ( screen ) {
+			case 'slug-entry':
+				return <SlugEntryScreen attributes={ attributes } setAttributes={ setAttributes } />;
+		}
+		return null;
+	};
+
+	
+
 	if ( preview ) {
 		return (
 			<>
@@ -293,185 +312,113 @@ const PluginScreenshotsInfoCard = ( props ) => {
 
 	const block = (
 		<>
-			{ loading && (
-				<div className="wppic-query-block wppic-query-block-panel">
-					<div className="wppic-block-svg">
-						<Logo size="75" />
-					</div>
-					<div className="wp-pic-tab-panel">
-						<>
-							<TextControl
-								label={ __(
-									'Plugin Slug',
-									'wp-plugin-info-card'
-								) }
-								value={ slug }
-								onChange={ ( value ) => {
-									if ( ! isURL( value ) ) {
-										setAttributes( {
-											slug: value,
-										} );
-										setSlug( value );
-									}
-									
-								} }
-								help={ __(
-									'Please only enter one slug.',
-									'wp-plugin-info-card'
-								) }
-								ref={ setSlugInputRef }
-								onPaste={ ( event ) => {
-									const maybeUrl = event.target.value;
-
-									// Get contents from clipboard.
-									const clipboardData = event.clipboardData
-										.getData( 'text/plain' )
-										.trim();
-
-
-									if ( isURL( clipboardData ) ) {
-										// Extract out the slug from the URL.
-										const urlRegex = /([^\/]*)\/$/g;
-										const newSlug = urlRegex.exec(
-											clipboardData
-										)[ 1 ];
-										setSlug( newSlug )
-										setAttributes( {
-											slug: newSlug,
-										} );
-									}
-								} }
-
-							/>
-						</>
-					</div>
-					<div className="wp-pic-gutenberg-button">
-						<Button
-							iconSize={ 20 }
-							icon={ <Logo size="25" /> }
-							isSecondary
-							id="wppic-input-submit"
-							onClick={ ( event ) => {
-								event.preventDefault();
-								setAttributes( { loading: false } );
-								pluginOnClick( event );
-							} }
-						>
-							{ __(
-								'Preview and Configure',
-								'wp-plugin-info-card'
-							) }
-						</Button>
-					</div>
-				</div>
-			) }
 			{ cardLoading && (
-				<>
-					<div className="wppic-loading-placeholder">
-						<div className="wppic-loading">
-							<Logo size="45" />
-							<br />
-							<div className="wppic-spinner">
-								<Spinner />
-							</div>
+			<>
+				<div className="wppic-loading-placeholder">
+					<div className="wppic-loading">
+						<Logo size="45" />
+						<br />
+						<div className="wppic-spinner">
+							<Spinner />
 						</div>
 					</div>
-				</>
-			) }
-			{ ! loading && ! cardLoading && (
-				<>
-					{ inspectorControls }
-					<BlockControls>
-						<ToolbarGroup>
-							<ToolbarButton
-								icon="edit"
-								title={ __(
-									'Edit and Configure',
-									'wp-plugin-info-card'
-								) }
-								onClick={ () => {
-									setLoading( true )
-									setCardLoading( false )
-								} }
-							/>
-						</ToolbarGroup>
-						<ToolbarGroup>
-							<ToolbarItem as="button">
-								{ ( toolbarItemHTMLProps ) => (
-									<DropdownMenu
-										toggleProps={ toolbarItemHTMLProps }
-										label={ __(
-											'Select Color Scheme',
-											'wp-plugin-info-card'
-										) }
-										icon="admin-customizer"
-									>
-										{ ( { onClose } ) => (
-											<>
-												<MenuItemsChoice
-													choices={ schemeOptions }
-													onSelect={ ( value ) => {
-														setAttributes( {
-															scheme: value,
-														} );
-														setScheme( value );
-														onClose();
-													} }
-													value={ scheme }
-												/>
-											</>
-										) }
-									</DropdownMenu>
-								) }
-							</ToolbarItem>
-						</ToolbarGroup>
-						<ToolbarGroup>
-							<ToolbarItem as="button">
-								{ ( toolbarItemHTMLProps ) => (
-									<DropdownMenu
-										toggleProps={ toolbarItemHTMLProps }
-										label={ __(
-											'Select a Layout',
-											'wp-plugin-info-card'
-										) }
-										icon="layout"
-									>
-										{ ( { onClose } ) => (
-											<>
-												<MenuItemsChoice
-													choices={ layoutOptions }
-													onSelect={ ( value ) => {
-														setAttributes( {
-															layout: value,
-														} );
-														setLayout( value );
-														onClose();
-													} }
-													value={ layout }
-												/>
-											</>
-										) }
-									</DropdownMenu>
-								) }
-							</ToolbarItem>
-						</ToolbarGroup>
-					</BlockControls>
-					<div
-						className={ classnames(
-							'is-placeholder',
-							layoutClass,
-							'wp-block-plugin-info-card',
-							`align${ align }`
-						) }
-					>
-						{ outputInfoCards( data ) }
-					</div>
-				</>
-			) }
+				</div>
+			</>
+		) }
+		{ ! loading && ! cardLoading && (
+			<>
+				{ inspectorControls }
+				<BlockControls>
+					<ToolbarGroup>
+						<ToolbarButton
+							icon="edit"
+							title={ __(
+								'Edit and Configure',
+								'wp-plugin-info-card'
+							) }
+							onClick={ () => {
+								setLoading( true )
+								setCardLoading( false )
+							} }
+						/>
+					</ToolbarGroup>
+					<ToolbarGroup>
+						<ToolbarItem as="button">
+							{ ( toolbarItemHTMLProps ) => (
+								<DropdownMenu
+									toggleProps={ toolbarItemHTMLProps }
+									label={ __(
+										'Select Color Scheme',
+										'wp-plugin-info-card'
+									) }
+									icon="admin-customizer"
+								>
+									{ ( { onClose } ) => (
+										<>
+											<MenuItemsChoice
+												choices={ schemeOptions }
+												onSelect={ ( value ) => {
+													setAttributes( {
+														scheme: value,
+													} );
+													setScheme( value );
+													onClose();
+												} }
+												value={ scheme }
+											/>
+										</>
+									) }
+								</DropdownMenu>
+							) }
+						</ToolbarItem>
+					</ToolbarGroup>
+					<ToolbarGroup>
+						<ToolbarItem as="button">
+							{ ( toolbarItemHTMLProps ) => (
+								<DropdownMenu
+									toggleProps={ toolbarItemHTMLProps }
+									label={ __(
+										'Select a Layout',
+										'wp-plugin-info-card'
+									) }
+									icon="layout"
+								>
+									{ ( { onClose } ) => (
+										<>
+											<MenuItemsChoice
+												choices={ layoutOptions }
+												onSelect={ ( value ) => {
+													setAttributes( {
+														layout: value,
+													} );
+													setLayout( value );
+													onClose();
+												} }
+												value={ layout }
+											/>
+										</>
+									) }
+								</DropdownMenu>
+							) }
+						</ToolbarItem>
+					</ToolbarGroup>
+				</BlockControls>
+				<div
+					className={ classnames(
+						'is-placeholder',
+						layoutClass,
+						'wp-block-plugin-info-card',
+						`align${ align }`
+					) }
+				>
+					{ outputInfoCards( data ) }
+				</div>
+			</>
+		) }
 		</>
 	);
 
-	return <div { ...blockProps }>{ block }</div>;
+	return <div { ...blockProps }>{block}{ getCurrentScreen() }</div>;
 };
 
 export default PluginScreenshotsInfoCard;

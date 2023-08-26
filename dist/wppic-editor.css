@@ -170,6 +170,7 @@
   padding: 20px;
   max-width: 400px;
   margin: 0 auto;
+  border: 1px solid #DDD;
 }
 
 .wppic-loading {
@@ -183,8 +184,9 @@
 .wppic-loading svg {
   width: 100%;
 }
-.wppic-loading .wppic-spinner svg {
-  margin-top: 8px;
+.wppic-loading .wppic-spinner > span {
+  display: inline-block;
+  margin-top: 25px;
   width: 18px;
   height: 18px;
 }
