@@ -9,7 +9,7 @@ const LoadingScreen = ( props ) => {
 			<div className="wppic-loading-placeholder">
 				<div className="wppic-loading">
 					<Logo size="45" />
-					<br />
+					<h2>{ props.label }</h2>
 					<div className="wppic-spinner">
 						<BarLoader
 							color={ '#DB3939' }

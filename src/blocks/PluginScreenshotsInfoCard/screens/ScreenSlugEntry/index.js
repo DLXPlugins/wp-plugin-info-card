@@ -15,6 +15,7 @@ import {
 	TextareaControl,
 	ButtonGroup,
 	Button,
+	Modal,
 	ToggleControl,
 	Toolbar,
 	ToolbarItem,
@@ -26,7 +27,9 @@ import {
 	MenuGroup,
 	MenuItem,
 } from '@wordpress/components';
+import axios from 'axios';
 import { __ } from '@wordpress/i18n';
+import { isURL } from '@wordpress/url';
 import Logo from '../../../Logo';
 import LoadingScreen from '../../../components/Loading';
 
@@ -40,6 +43,8 @@ import LoadingScreen from '../../../components/Loading';
 const SlugEntryScreen = (props) => {
 
 	const [ loading, setLoading ] = useState( false );
+	const [ showErrorModal, setShowErrorModal ] = useState( false );
+	const [ errorMessage, setErrorMessage ] = useState( '' );
 
 	const { attributes, setAttributes } = props;
 
@@ -47,19 +52,23 @@ const SlugEntryScreen = (props) => {
 
 	const loadData = () => {
 		setLoading( true );
-		return;
 		const restUrl = wppic.rest_url + 'wppic/v2/get_data';
 		axios
 			.get(
-				restUrl + `?type=${ type }&slug=${ encodeURIComponent( slug ) }`
+				restUrl + `?type=plugin&slug=${ encodeURIComponent( slug ) }`
 			)
 			.then( ( response ) => {
 				if ( response.data.success ) {
-					// Now Set State
-					const successData = response.data.data;
-					setAttributes( { assetData: response.data.data } );
+					// Set asset data.
+					setAttributes(
+						{
+							assetData: response.data.data,
+							screen: 'image-loader',
+						}
+					);
 				} else {
-					// todo - launch modal with error message.
+					setErrorMessage( response.data.data.message );
+					setShowErrorModal( true );
 				}
 			} ).catch( ( error ) => {
 			} ).then( () => {
@@ -68,13 +77,37 @@ const SlugEntryScreen = (props) => {
 	};
 
 	if ( loading ) {
-		return ( <LoadingScreen /> );
+		return ( <LoadingScreen label={ __( 'Loading plugin data...', 'wp-plugin-info-card' ) } /> );
 	}
 
 	// Set the local inspector controls.
 	const localInspectorControls = (
 		<InspectorControls />
 	);
+
+	const maybeShowModal = () => {
+		if ( showErrorModal ) {
+			return (
+				<Modal
+					title={ __( 'Error', 'wp-plugin-info-card' ) }
+					onRequestClose={ () => {
+						setShowErrorModal( false );
+					} }
+				>
+					<p>{ errorMessage }</p>
+					<Button
+						variant="primary"
+						onClick={ () => {
+							setShowErrorModal( false );
+						} }
+					>
+						{ __( 'Close', 'wp-plugin-info-card' ) }
+					</Button>
+				</Modal>
+			);
+		}
+		return null;
+	};
 
 	const block = (
 		<>
@@ -150,6 +183,7 @@ const SlugEntryScreen = (props) => {
 
 	return (
 		<>
+			{ maybeShowModal() }
 			{localInspectorControls}
 			{block}
 		</>

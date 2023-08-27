@@ -29,6 +29,14 @@
 		"loading": {
 			"type": "boolean",
 			"default": true
+		},
+		"imageSource": {
+			"type": "string",
+			"default": "local"
+		},
+		"images": {
+			"type": "array",
+			"default": []
 		}
 		
 	},

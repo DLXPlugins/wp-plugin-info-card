@@ -186,9 +186,17 @@
 }
 .wppic-loading .wppic-spinner > span {
   display: inline-block;
-  margin-top: 25px;
   width: 18px;
   height: 18px;
+}
+.wppic-loading h2 {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 18px !important; /* override core styles */
+  line-height: 1.4 !important; /* override core styles */
+  text-align: center;
+  padding: 15px 0;
 }
 
 .wp-pic-full-width {

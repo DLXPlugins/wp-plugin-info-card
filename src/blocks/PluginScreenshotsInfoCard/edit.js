@@ -44,6 +44,8 @@ const {
 } = wp.blockEditor;
 
 import SlugEntryScreen from './screens/ScreenSlugEntry';
+import ScreenImageLoader from './screens/ScreenImageLoader';
+import ScreenNoImages from './screens/ScreenNoImages';
 
 const PluginScreenshotsInfoCard = ( props ) => {
 	const { attributes, setAttributes } = props;
@@ -272,11 +274,16 @@ const PluginScreenshotsInfoCard = ( props ) => {
 	 * @return {Element} The screen to display.
 	 */
 	const getCurrentScreen = () => {
+		//return <ScreenNoImages attributes={ attributes } setAttributes={ setAttributes } />;
 
 		// Otherwise get the screen based on the current screen.
-		switch ( screen ) {
+		switch ( attributes.screen ) {
 			case 'slug-entry':
 				return <SlugEntryScreen attributes={ attributes } setAttributes={ setAttributes } />;
+			case 'image-loader':
+				return <ScreenImageLoader attributes={ attributes } setAttributes={ setAttributes } />;
+			case 'no-images-found':
+				return <ScreenNoImages attributes={ attributes } setAttributes={ setAttributes } />;
 		}
 		return null;
 	};

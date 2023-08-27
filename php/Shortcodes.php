@@ -84,7 +84,7 @@ class Shortcodes {
 	 *
 	 * @since 3.0.0
 	 */
-	function register_rest_routes() {
+	public function register_rest_routes() {
 		register_rest_route(
 			'wppic/v1',
 			'/get_html',
@@ -119,6 +119,38 @@ class Shortcodes {
 				'methods'             => 'GET',
 				'callback'            => array( $this, 'get_site_plugin_data' ),
 				'permission_callback' => array( $this, 'rest_check_permissions' ),
+			)
+		);
+		register_rest_route(
+			'wppic/v2',
+			'/get_plugin_images',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'get_plugin_images' ),
+				'permission_callback' => array( $this, 'rest_image_sideload_permissions' ),
+			)
+		);
+	}
+
+	/**
+	 * Retrieve a list of images for a plugin.
+	 *
+	 * @param WP_Rest $request
+	 */
+	public function get_plugin_images( $request ) {
+		$plugin_slug = $request->get_param( 'slug' );
+		
+		// Read in slug and get from post type.
+		// Get attachments for plugin.
+		// If none exist, get plugin data and calculate images.
+		// If images, return the images.
+		// If having to calculate, return message with image data and calculate.
+		// If no images, return message with no images.
+		wp_send_json_success(
+			array(
+				'images' => array(),
+				'plugin_page_id' => 0,
+				'needs_sideload' => false,
 			)
 		);
 	}
@@ -176,6 +208,13 @@ class Shortcodes {
 	 */
 	public function rest_check_permissions() {
 		return current_user_can( 'edit_posts' );
+	}
+
+	/**
+	 * Check if user has access to REST API for retrieving and sideloading images.
+	 */
+	public function rest_image_sideload_permissions() {
+		return current_user_can( 'publish_posts' );
 	}
 
 	/**
@@ -995,7 +1034,11 @@ class Shortcodes {
 
 		// Return error if no data.
 		if ( empty( $data ) ) {
-			wp_send_json_error();
+			wp_send_json_error(
+				array(
+					'message' => __( 'No plugin could be found with that slug.', 'wp-plugin-info-card' ),
+				)
+			);
 		}
 
 		wp_send_json_success( $data );
