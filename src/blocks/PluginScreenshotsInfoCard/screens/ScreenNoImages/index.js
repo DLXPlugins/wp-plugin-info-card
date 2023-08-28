@@ -70,12 +70,20 @@ const ScreenNoImages = (props) => {
 					
 						<ToggleGroupControl
 							label={ __( 'No plugin screenshots have been found. Please select an option below.', 'wp-plugin-info-card' ) }
-							value={ isProceedPreviewChecked ? 'preview' : 'slug' }
+							value={ null }
 							onChange={ ( value ) => {
-								if ( 'preview' === value ) {
-									setIsProceedPreviewChecked( true );
+								if ( 'preview' !== value ) {
+									setAttributes(
+										{
+											screen: 'slug-entry'
+										}
+									);
 								} else {
-									setIsProceedPreviewChecked( false );
+									setAttributes(
+										{
+											screen: 'plugin-preview'
+										}
+									);
 								}
 								
 							} }

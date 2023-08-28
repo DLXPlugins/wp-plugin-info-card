@@ -4261,12 +4261,16 @@ var ScreenNoImages = function ScreenNoImages(a) {
     className: "wp-pic-tab-panel"
   }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToggleGroupControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('No plugin screenshots have been found. Please select an option below.', 'wp-plugin-info-card'),
-    value: p ? 'preview' : 'slug',
+    value: null,
     onChange: function onChange(a) {
-      if ('preview' === a) {
-        q(true);
+      if ('preview' !== a) {
+        s({
+          screen: 'slug-entry'
+        });
       } else {
-        q(false);
+        s({
+          screen: 'plugin-preview'
+        });
       }
     },
     isBlock: true,
