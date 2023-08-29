@@ -362,4 +362,18 @@ div[data-type="wp-plugin-info-card/wp-plugin-info-card"] .wp-block {
   padding-top: 15px;
 }
 
+.wp-pic-button-row {
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: calc(1em + 10px);
+}
+
+.wp-pic-admin-description {
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+}
+
 /*# sourceMappingURL=wppic-editor.css.map*/

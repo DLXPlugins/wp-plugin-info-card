@@ -274,7 +274,7 @@ const PluginScreenshotsInfoCard = ( props ) => {
 	 * @return {Element} The screen to display.
 	 */
 	const getCurrentScreen = () => {
-		//return <ScreenNoImages attributes={ attributes } setAttributes={ setAttributes } />;
+		return <ScreenNoImages attributes={ attributes } setAttributes={ setAttributes } />;
 
 		// Otherwise get the screen based on the current screen.
 		switch ( attributes.screen ) {

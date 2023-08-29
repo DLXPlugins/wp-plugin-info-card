@@ -30,6 +30,7 @@ import {
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from '@wordpress/components';
+import { Undo, Forward } from 'lucide-react';
 
 import axios from 'axios';
 import { __ } from '@wordpress/i18n';
@@ -66,66 +67,42 @@ const ScreenNoImages = (props) => {
 					<Logo size="75" />
 				</div>
 				<div className="wp-pic-tab-panel">
-					<>
-					
-						<ToggleGroupControl
-							label={ __( 'No plugin screenshots have been found. Please select an option below.', 'wp-plugin-info-card' ) }
-							value={ null }
-							onChange={ ( value ) => {
-								if ( 'preview' !== value ) {
-									setAttributes(
-										{
-											screen: 'slug-entry'
-										}
-									);
-								} else {
-									setAttributes(
-										{
-											screen: 'plugin-preview'
-										}
-									);
-								}
-								
+					<p className="wp-pic-admin-description">
+						{ __( 'No plugin screenshots have been found. Proceed to preview without images, or go back to the plugin slug.', 'wp-plugin-info-card' ) }
+					</p>
+					<div className="wp-pic-button-row">
+						<Button
+							variant="secondary"
+							label={ __( 'Back to Plugin Slug', 'wp-plugin-info-card' ) }
+							onClick={ () => {
+								setAttributes(
+									{
+										screen: 'slug-entry'
+									}
+								);
 							} }
-							isBlock={ true }
-							help={ __( 'No screenshots have been found. You can still proceed with a preview, without images, or go back and enter a new plugin slug.', 'wp-plugin-info-card' ) }
+							className="wp-pic-admin-button wp-pic-admin-button-secondary"
+							icon={ <Undo /> }
 						>
-								<ToggleGroupControlOption
-									label={ __( 'Back to Plugin Slug', 'wp-plugin-info-card' ) }
-									aria-label={ __( 'Start over with a new plugin slug to enter.', 'wp-plugin-info-card' ) }
-									value={ 'slug' }
-									showTooltip={ true }
-								/>
-								<ToggleGroupControlOption
-								variant="primary"
-									label={ __( 'Proceed to Preview', 'wp-plugin-info-card' ) }
-									value={ 'preview' }
-									aria-label={ __( 'Load the plugin layout without any screenshots.', 'wp-plugin-info-card' ) }
-									showTooltip={ true }
-								/>
-						</ToggleGroupControl>
+							{ __( 'Back to Slug', 'wp-plugin-info-card' ) }
+						</Button>
 						<Button
 							variant="primary"
-							label={ isProceedPreviewChecked ? __( 'Proceed to Preview', 'wp-plugin-info-card' ) : __( 'Back to Plugin Slug', 'wp-plugin-info-card' ) }
+							label={ __( 'Proceed to Preview', 'wp-plugin-info-card' ) }
 							onClick={ () => {
-								if ( ! isProceedPreviewChecked ) {
-									setAttributes(
-										{
-											screen: 'slug-entry'
-										}
-									);
-								} else {
-									setAttributes(
-										{
-											screen: 'plugin-preview'
-										}
-									);
-								}
+								setAttributes(
+									{
+										screen: 'plugin-preview'
+									}
+								);
 							} }
+							className="wp-pic-admin-button wp-pic-admin-button-primary"
+							icon={ <Forward /> }
+							iconPosition="right"
 						>
-							{ __( 'Go', 'wp-plugin-info-card' ) }
+							{ __( 'Proceed to Preview', 'wp-plugin-info-card' ) }
 						</Button>
-					</>
+					</div>
 				</div>
 			</div>
 		</>
