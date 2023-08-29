@@ -2609,4 +2609,49 @@ a.wp-pic-credit:focus:after {
   height: auto;
 }
 
+/* Plugin Screenshots styles */
+.wp-pic-plugin-screenshots {
+  position: relative;
+  font-size: 16px;
+  padding: 20px;
+}
+
+.wp-pic-plugin-screenshots-avatar-wrapper img {
+  max-width: 50px;
+}
+
+.wp-pic-plugin-screenshots-title {
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+.wp-pic-plugin-screenshots-title h2 {
+  font-size: 1.8em;
+  line-height: 1.3em;
+  margin: 0;
+  padding: 0;
+}
+
+.wp-pic-plugin-screenshots-rating {
+  margin: 10px 0;
+}
+
+.wp-pic-plugin-screenshots-rating svg {
+  width: 20px;
+  height: 20px;
+}
+
+.wp-pic-plugin-screenshots-description {
+  margin-bottom: 10px;
+}
+
+.wp-pic-plugin-screenshots-meta-item {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  column-gap: 10px;
+  align-items: center;
+}
+.wp-pic-plugin-screenshots-meta-item .wp-pic-plugin-screenshots-meta-item-svg {
+  line-height: 0;
+}
+
 /*# sourceMappingURL=wppic-styles.css.map*/

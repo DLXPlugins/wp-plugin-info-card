@@ -2,8 +2,9 @@ import classnames from 'classnames';
 import isNumeric from 'validator/lib/isNumeric';
 import { useState } from 'react';
 import { Rating } from 'react-simple-star-rating'
-import BannerWrapper from '../components/BannerWrapper';
+import { Code, DownloadCloud } from 'lucide-react';
 const HtmlToReactParser = require( 'html-to-react' ).Parser;
+import WordPressIcon from '../components/WordPressIcon';
 
 const { __ } = wp.i18n;
 
@@ -51,11 +52,11 @@ const PluginScreenshots = ( props ) => {
 	const ratingOneToFive = rating / 20;
 
 	return (
-		<div className={ wrapperClasses }>
+		<div className={ wrapperClasses } style={ { maxWidth: '400px' } }>
 			<div className={ classes }>
 				<div className="wp-pic-plugin-screenshots-card">
 					<div className="wp-pic-plugin-screenshots-avatar-wrapper">
-						<a href={ props.url } target="_blank" rel="noopener noreferrer" className="wp-pic-plugin-screenshots-avatar">
+						<a href={ props.url } onClick={ ( e ) => e.preventDefault() } target="_blank" rel="noopener noreferrer" className="wp-pic-plugin-screenshots-avatar">
 							<img src={ icon } width="125" height="125" alt={ props.name } />
 						</a>
 					</div>
@@ -64,7 +65,7 @@ const PluginScreenshots = ( props ) => {
 					</div>
 					<div className="wp-pic-plugin-screenshots-author">
 						{
-							`${ __( 'By:', 'wp-plugin-info-card' ) } ${ props.author } | ${ __( 'Last Updated:', 'wp-plugin-info-card' ) } ${ props.last_updated }`
+							`${ __( 'By:', 'wp-plugin-info-card' ) } ${ props.author }`
 						}
 					</div>
 					<div className="wp-pic-plugin-screenshots-rating">
@@ -81,19 +82,25 @@ const PluginScreenshots = ( props ) => {
 					</div>
 					<div className="wp-pic-plugin-screenshots-meta">
 						<div className="wp-pic-plugin-screenshots-meta-item">
-							<div className="this-is-where-an-icon-would-be..."></div>
+							<div className="wp-pic-plugin-screenshots-meta-item-svg">
+								<Code />
+							</div>
 							<div className="wp-pic-plugin-screenshots-meta-item-label">
 								v{ props.version}
 							</div>
 						</div>
 						<div className="wp-pic-plugin-screenshots-meta-item">
-							<div className="this-is-where-an-icon-would-be..."></div>
+							<div className="wp-pic-plugin-screenshots-meta-item-svg">
+								<WordPressIcon />
+							</div>
 							<div className="wp-pic-plugin-screenshots-meta-item-label">
 								{ __( 'Requires', 'wp-plugin-info-card' ) } { `${ requires }` }
 							</div>
 						</div>
 						<div className="wp-pic-plugin-screenshots-meta-item">
-							<div className="this-is-where-an-icon-would-be..."></div>
+							<div className="wp-pic-plugin-screenshots-meta-item-svg">
+								<DownloadCloud />
+							</div>
 							<div className="wp-pic-plugin-screenshots-meta-item-label">
 								{ props.active_installs.toLocaleString('en') } { __( 'Installs', 'wp-plugin-info-card' ) }
 							</div>
