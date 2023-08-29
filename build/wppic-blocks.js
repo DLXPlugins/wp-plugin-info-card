@@ -5941,7 +5941,9 @@ var PluginScreenshots = function PluginScreenshots(a) {
     allowFraction: true,
     allowHover: false,
     disableFillHover: true
-  })), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "wp-pic-plugin-screenshots-rating-count"
+  }, a.num_ratings.toLocaleString('en'), " ", __('Ratings', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-description"
   }, o.parse(a.short_description)), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-meta"

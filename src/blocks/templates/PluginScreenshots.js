@@ -76,6 +76,7 @@ const PluginScreenshots = ( props ) => {
 							allowHover={ false }
 							disableFillHover={ true }
 						/>
+						<span className="wp-pic-plugin-screenshots-rating-count">{ props.num_ratings.toLocaleString('en') } { __( 'Ratings', 'wp-plugin-info-card' ) }</span>
 					</div>
 					<div className="wp-pic-plugin-screenshots-description">
 						{ htmlToReactParser.parse( props.short_description ) }

@@ -2644,6 +2644,16 @@ a.wp-pic-credit:focus:after {
   margin-bottom: 10px;
 }
 
+.wp-pic-plugin-screenshots-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 10px;
+}
+
+.wp-pic-plugin-screenshots-rating-count {
+  margin-left: 10px;
+}
+
 .wp-pic-plugin-screenshots-meta-item {
   display: grid;
   grid-template-columns: 24px 1fr;
