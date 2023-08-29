@@ -28,7 +28,41 @@ class Shortcodes {
 		add_shortcode( 'wp-pic-site-plugins', array( static::class, 'shortcode_active_site_plugins_function' ) );
 		add_action( 'wp_ajax_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
 		add_action( 'wp_ajax_nopriv_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
+		add_action( 'init', array( static::class, 'register_screenshots_post_type' ) );
 		return $self;
+	}
+
+	public static function register_screenshots_post_type() {
+		$labels = array(
+			'name'               => __( 'Plugins', 'wp-plugin-info-card' ),
+			'singular_name'      => __( 'Plugins', 'wp-plugin-info-card' ),
+			'add_new'            => __( 'Add New', 'wp-plugin-info-card' ),
+			'add_new_item'       => __( 'Add New Plugin', 'wp-plugin-info-card' ),
+			'edit_item'          => __( 'Edit Plugin', 'wp-plugin-info-card' ),
+			'new_item'           => __( 'New Plugin', 'wp-plugin-info-card' ),
+			'all_items'          => __( 'All Plugins', 'wp-plugin-info-card' ),
+			'view_item'          => __( 'View Plugin', 'wp-plugin-info-card' ),
+			'search_items'       => __( 'Search Plugins', 'wp-plugin-info-card' ),
+			'not_found'          => __( 'No Plugins found', 'wp-plugin-info-card' ),
+			'not_found_in_trash' => __( 'No Plugins found in Trash', 'wp-plugin-info-card' ),
+			'parent_item_colon'  => '',
+			'menu_name'          => __( 'Plugins', 'wp-plugin-info-card' ),
+		);
+
+		$args = array(
+			'labels'                  => $labels,
+			'public'                  => false,
+			'publicly_queryable'      => false,
+			'show_ui'                 => false,
+			'show_in_menu'            => false,
+			'query_var'               => false,
+			'rewrite'                 => false,
+			'dlx_photo_block_archive' => false,
+			'hierarchical'            => false,
+		);
+
+		register_post_type( 'wppic_plugins', $args );
+	}
 	}
 
 	/**
