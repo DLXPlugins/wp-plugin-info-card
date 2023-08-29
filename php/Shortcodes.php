@@ -63,7 +63,6 @@ class Shortcodes {
 
 		register_post_type( 'wppic_plugins', $args );
 	}
-	}
 
 	/**
 	 * Enqueue scripts on the frontend.
