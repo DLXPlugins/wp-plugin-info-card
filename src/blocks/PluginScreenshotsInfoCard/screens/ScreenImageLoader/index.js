@@ -53,11 +53,35 @@ const ScreenImageLoader = (props) => {
 
 	const { slug, assetData } = attributes;
 
-	console.log( assetData );
+	const processImage = ( images ) => {
+		const restUrl = wppic.rest_url + 'wppic/v2/process_images';
+		axios
+			.post(
+				restUrl,
+				{
+					images,
+				},
+				{
+					headers: {
+						'X-WP-Nonce': wppic.rest_nonce,
+					},
+				}
+			).then( ( response ) => {
+				const data = response.data.data;
+				if ( response.data.success ) {
+					if ( data.images.length > 0 ) {
+						processImage( data.images );
+					}
+				} else {
+				}
+			} ).catch( ( error ) => {
+			} ).then( () => {
+			} );
+	}
 
 	const loadImages = () => {
 		setLoading( true );
-		const restUrl = wppic.rest_url + 'wppic/v2/get_plugin_images';
+		const restUrl = wppic.rest_url + 'wppic/v2/get_images_to_process';
 		axios
 			.get(
 				restUrl + `?type=plugin&slug=${ encodeURIComponent( slug ) }`,
@@ -71,23 +95,9 @@ const ScreenImageLoader = (props) => {
 				if ( response.data.success ) {
 					const images = data.images;
 					const needsSideload = data.needs_sideload;
-					console.log( images, needsSideload );
-					setAttributes(
-						{
-							images,
-						}
-					);
-
-					// Check if any images are available.
+					console.log( images );
 					if ( images.length > 0 ) {
-						// Go to the next screen.
-						if ( needsSideload ) {
-							setAttributes( { screen: 'sideload-images' } );
-						} else {
-							setAttributes( { screen: 'plugin-preview'});
-						}
-					} else {
-						setAttributes( { screen: 'no-images-found' } )
+						// processImage( images );
 					}
 				} else {
 					setErrorMessage( response.data.data.message );
@@ -104,7 +114,7 @@ const ScreenImageLoader = (props) => {
 	}, [] );
 
 	if ( loading ) {
-		return ( <LoadingScreen label={ __( 'Gathering image data...', 'wp-plugin-info-card' ) } /> );
+		return ( <LoadingScreen label={ __( 'Determining if there are images to process...', 'wp-plugin-info-card' ) } /> );
 	}
 
 	// Set the local inspector controls.

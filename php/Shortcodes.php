@@ -156,29 +156,94 @@ class Shortcodes {
 		);
 		register_rest_route(
 			'wppic/v2',
-			'/get_plugin_images',
+			'/get_images_to_process',
 			array(
 				'methods'             => 'GET',
-				'callback'            => array( $this, 'get_plugin_images' ),
+				'callback'            => array( $this, 'get_images_to_process' ),
 				'permission_callback' => array( $this, 'rest_image_sideload_permissions' ),
 			)
 		);
 	}
 
 	/**
-	 * Retrieve a list of images for a plugin.
+	 * Process a list of images for a plugin.
 	 *
 	 * @param WP_Rest $request
 	 */
-	public function get_plugin_images( $request ) {
+	public function get_images_to_process( $request ) {
 		$plugin_slug = $request->get_param( 'slug' );
+
+		$plugin_data = wppic_api_parser( 'plugin', $plugin_slug );
 		
 		// Read in slug and get from post type.
+		$plugin_page = Functions::get_plugin_page( $plugin_slug );
+
+		if ( null === $plugin_page ) {
+			return wp_send_json_error(
+				array(
+					'message' => __( 'No plugin could be found.', 'wp-plugin-info-card' ),
+				)
+			);
+		}
+
 		// Get attachments for plugin.
-		// If none exist, get plugin data and calculate images.
-		// If images, return the images.
-		// If having to calculate, return message with image data and calculate.
-		// If no images, return message with no images.
+		$attachments = get_posts(
+			array(
+				'post_type'      => 'attachment',
+				'posts_per_page' => 50, /* max of 50 total screenshots */
+				'post_parent'    => $plugin_page->ID,
+				'orderby' => 'menu_order',
+				'order' => 'ASC',
+			)
+		);
+
+		// Get screenshots for plugin.
+		$screenshots = $plugin_data->screenshots ?? array();
+
+		// Screenshots to add.
+		$screenshots_to_process = array();
+
+		// Find any attachments missing.
+		foreach ( $screenshots as $order => $screenshot ) {
+			$attachment_found = false;
+			foreach ( $attachments as $attachment ) {
+				if ( $order === $attachment->menu_order  ) {
+					if ( $screenshot->src === $attachment->post_excerpt ) {
+						$attachment_found = true;
+						break;
+					} else {
+						$screenshots_to_process[] = array(
+							'id' => $attachment->ID,
+							'image' => $screenshot['src'],
+							'caption' => $screenshot['caption'],
+							'order' => $order,
+						);
+					}
+					
+				}
+			}
+			if ( ! $attachment_found ) {
+				$screenshots_to_process[] = array(
+					'id' => 0,
+					'image' => $screenshot['src'],
+					'caption' => $screenshot['caption'],
+					'order' => $order,
+				);
+			}
+		}
+
+		// If screenshots to process, return them.
+		if ( ! empty( $screenshots_to_process ) ) {
+			wp_send_json_success(
+				array(
+					'images' => $screenshots_to_process,
+					'plugin_page_id' => $plugin_page->ID,
+					'needs_sideload' => true,
+				)
+			);
+		}
+		
+		// No images to process.
 		wp_send_json_success(
 			array(
 				'images' => array(),

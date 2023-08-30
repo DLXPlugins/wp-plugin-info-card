@@ -4099,10 +4099,26 @@ var ScreenImageLoader = function ScreenImageLoader(a) {
     o = a.setAttributes;
   var p = n.slug,
     q = n.assetData;
-  console.log(q);
-  var r = function loadImages() {
+  var r = function processImage(a) {
+    var b = wppic.rest_url + 'wppic/v2/process_images';
+    axios__WEBPACK_IMPORTED_MODULE_3___default().post(b, {
+      images: a
+    }, {
+      headers: {
+        'X-WP-Nonce': wppic.rest_nonce
+      }
+    }).then(function (a) {
+      var b = a.data.data;
+      if (a.data.success) {
+        if (b.images.length > 0) {
+          r(b.images);
+        }
+      } else {}
+    })["catch"](function (a) {}).then(function () {});
+  };
+  var s = function loadImages() {
     e(true);
-    var a = wppic.rest_url + 'wppic/v2/get_plugin_images';
+    var a = wppic.rest_url + 'wppic/v2/get_images_to_process';
     axios__WEBPACK_IMPORTED_MODULE_3___default().get(a + "?type=plugin&slug=".concat(encodeURIComponent(p)), {
       headers: {
         'X-WP-Nonce': wppic.rest_nonce
@@ -4112,27 +4128,9 @@ var ScreenImageLoader = function ScreenImageLoader(a) {
       if (a.data.success) {
         var c = b.images;
         var d = b.needs_sideload;
-        console.log(c, d);
-        o({
-          images: c
-        });
-
-        // Check if any images are available.
+        console.log(c);
         if (c.length > 0) {
-          // Go to the next screen.
-          if (d) {
-            o({
-              screen: 'sideload-images'
-            });
-          } else {
-            o({
-              screen: 'plugin-preview'
-            });
-          }
-        } else {
-          o({
-            screen: 'no-images-found'
-          });
+          // processImage( images );
         }
       } else {
         m(a.data.data.message);
@@ -4143,17 +4141,17 @@ var ScreenImageLoader = function ScreenImageLoader(a) {
 
   // Load images.
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    r();
+    s();
   }, []);
   if (d) {
     return /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_7__["default"], {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Gathering image data...', 'wp-plugin-info-card')
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Determining if there are images to process...', 'wp-plugin-info-card')
     });
   }
 
   // Set the local inspector controls.
-  var s = /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null);
-  var t = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  var t = /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null);
+  var u = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "wppic-query-block wppic-query-block-panel"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-block-svg"
@@ -4196,7 +4194,7 @@ var ScreenImageLoader = function ScreenImageLoader(a) {
       loadData();
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Preview and Configure', 'wp-plugin-info-card')))));
-  return /*#__PURE__*/React.createElement(React.Fragment, null, s, t);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, t, u);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScreenImageLoader);
 

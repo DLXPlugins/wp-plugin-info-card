@@ -586,6 +586,37 @@ class Functions {
 	}
 
 	/**
+	 * Retrieve a plugin page, which should contain the page object.
+	 *
+	 * @param string $slug The plugin slug.
+	 *
+	 * @return null|WP_Post The plugin page.
+	 */
+	public static function get_plugin_page( $slug ) {
+		$slug = sanitize_title( $slug );
+
+		$maybe_plugin_page = get_page_by_path( $slug, OBJECT, 'wppic_plugins' );
+		if ( null === $maybe_plugin_page ) {
+			$plugin = wppic_api_parser( 'plugin', $slug );
+			if ( ! empty( $plugin ) ) {
+				$plugin_page_id = wp_insert_post(
+					array(
+						'post_title'     => sanitize_text_field( $plugin->name ),
+						'post_name'      => $slug,
+						'post_type'      => 'wppic_plugins',
+						'post_status'    => 'publish',
+						'comment_status' => 'closed',
+						'ping_status'    => 'closed',
+					)
+				);
+				$plugin_page = get_post( $plugin_page_id );
+				return $plugin_page;
+			}
+		}
+		return $maybe_plugin_page;
+	}
+
+	/**
 	 * Get the plugin directory for a path.
 	 *
 	 * @param string $path The path to the file.
