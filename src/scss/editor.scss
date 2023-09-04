@@ -6,6 +6,7 @@
  */
 
  @import './style.scss';
+@import '@splidejs/splide/dist/css/splide.min.css';
 
  @keyframes wppicspin {
 	0% {
@@ -363,4 +364,10 @@ div[data-type="wp-plugin-info-card/wp-plugin-info-card"] .wp-block {
 	font-size: 18px;
 	line-height: 22px;
 	text-align: center;
+}
+
+.wp-pic-plugin-screenshots-image {
+	img {
+		border: 1px solid #ddd;
+	}
 }

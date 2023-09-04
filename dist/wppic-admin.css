@@ -2669,6 +2669,18 @@ a.wp-pic-credit:focus:after {
   line-height: 0;
 }
 
+.wp-pic-plugin-screenshots-images {
+  border-top: 1px solid #ddd;
+  padding-top: 15px;
+  margin-top: 15px;
+}
+.wp-pic-plugin-screenshots-images .splide__arrow--prev {
+  left: 0;
+}
+.wp-pic-plugin-screenshots-images .splide__arrow--next {
+  right: 0;
+}
+
 @-moz-keyframes wppic-spin {
   from {
     -moz-transform: rotate(0deg);

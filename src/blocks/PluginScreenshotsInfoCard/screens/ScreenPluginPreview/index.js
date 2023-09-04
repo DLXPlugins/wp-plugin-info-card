@@ -48,8 +48,6 @@ const ScreenPluginPreview = (props) => {
 		assetData,
 	} = attributes;
 
-	console.log( assetData );
-
 	// Set the local inspector controls.
 	const localInspectorControls = (
 		<InspectorControls />

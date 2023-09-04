@@ -2317,3 +2317,15 @@ a.wp-pic-credit:focus:after {
 		line-height: 0;
 	}
 }
+.wp-pic-plugin-screenshots-images {
+	border-top: 1px solid #ddd;
+	padding-top: 15px;
+	margin-top: 15px;
+
+	.splide__arrow--prev {
+		left: 0;
+	}
+	.splide__arrow--next {
+		right: 0;
+	}
+}

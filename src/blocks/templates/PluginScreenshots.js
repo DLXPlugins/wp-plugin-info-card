@@ -3,6 +3,7 @@ import isNumeric from 'validator/lib/isNumeric';
 import { useState } from 'react';
 import { Rating } from 'react-simple-star-rating'
 import { Code, DownloadCloud } from 'lucide-react';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 const HtmlToReactParser = require( 'html-to-react' ).Parser;
 import WordPressIcon from '../components/WordPressIcon';
 
@@ -43,8 +44,10 @@ const PluginScreenshots = ( props ) => {
 			icon = props.defaultIcon;
 		}
 	}
-	
 
+	const pluginScreenshots = props?.local_screenshots ?? [];
+	
+console.log( Object.values( pluginScreenshots ) );
 	const bgImageStyles = {
 		backgroundImage: `url(${ icon })`,
 		backgroundRepeat: 'no-repeat',
@@ -110,6 +113,53 @@ const PluginScreenshots = ( props ) => {
 							</div>
 						</div>
 					</div>
+					{
+						Object.values( pluginScreenshots ).length > 0 && (
+							<div className="wp-pic-plugin-screenshots-images">
+								<Splide
+									options={
+										{
+											type: 'loop',
+											width:  '100%',
+											gap: '20px',
+											rewind: true,
+											perPage: ( Object.values( pluginScreenshots ).length > 3 ) ? 3 : Object.values( pluginScreenshots ).length,
+											perMove: 1,
+											arrows: ( Object.values( pluginScreenshots ).length > 3 ) ? true : false,
+											pagination: false,
+											drag: true,
+											autoplay: false,
+											lazyload: true,
+											breakpoints: {
+												'400': {
+													perPage: 1,
+													width: '100%',
+													fixedWidth: '33.33333%',
+												},
+												'800': {
+													perPage: 3,
+													width: '33.3333%',
+												},
+											}
+										}
+									}
+								>
+								{
+									Object.values( pluginScreenshots ).map( ( screenshot, index ) => {
+										console.log( screenshot );
+										return (
+											<SplideSlide className="wp-pic-plugin-screenshots-image" key={ index }>
+												<a href={ screenshot.full } data-fancybox data-caption={ screenshot.caption }>
+													<img src={ screenshot.thumbnail } alt={ screenshot.alt } />
+												</a>
+											</SplideSlide>
+										);
+									} )
+								}
+								</Splide>
+							</div>
+						)
+					}
 				</div>
 			</div>
 		</div>

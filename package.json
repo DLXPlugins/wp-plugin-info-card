@@ -24,6 +24,7 @@
     "build": "wp-scripts build wppic-blocks=./src/index.js --env mode=production"
   },
   "dependencies": {
+    "@splidejs/react-splide": "^0.7.12",
     "babel-loader": "^8.2.2",
     "react-content-loader": "^6.2.1",
     "react-simple-star-rating": "^5.1.7",
