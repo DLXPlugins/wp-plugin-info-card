@@ -18,7 +18,7 @@ class Add_Plugin {
 	public function run() {
 		$self = new self();
 
-		add_filter( 'wppic_add_api_parser', array( $self, 'api_parser' ), 9, 3 );
+		add_filter( 'wppic_add_api_parser', array( $self, 'api_parser' ), 9, 5 );
 		add_filter( 'wppic_add_template', array( $self, 'plugin_template' ), 9, 2 );
 		add_filter( 'wppic_add_mce_type', array( $self, 'mce_type' ) );
 		add_filter( 'wppic_add_list_form', array( $self, 'list_form' ) );
@@ -32,13 +32,15 @@ class Add_Plugin {
 	/**
 	 * Parse the API for WordPress Plugins.
 	 *
-	 * @param object $wppic_data The data object.
-	 * @param string $type       plugin or theme.
-	 * @param string $slug       Slug of the plugin.
+	 * @param object $wppic_data       The data object.
+	 * @param string $type             plugin or theme.
+	 * @param string $slug             Slug of the plugin.
+	 * @param bool   $load_attachments Load attachments.
+	 * @param bool   $force            Force refresh.
 	 *
 	 * @return object $wppic_data The data object.
 	 */
-	public function api_parser( $wppic_data, $type, $slug ) {
+	public function api_parser( $wppic_data, $type, $slug, $load_attachments = false, $force = false ) {
 		if ( 'plugin' === $type ) {
 
 			require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
@@ -66,9 +68,9 @@ class Add_Plugin {
 					'name'              => $plugin_info->name,
 					'slug'              => $slug,
 					'version'           => $plugin_info->version,
-					'author'            => $plugin_info->author,
+					'author'            => wp_strip_all_tags( $plugin_info->author ),
 					'author_profile'    => $plugin_info->author_profile,
-					'contributors'      => $plugin_info->contributors,
+					'contributors'      => wp_strip_all_tags( $plugin_info->contributors ),
 					'requires'          => $plugin_info->requires,
 					'tested'            => $plugin_info->tested,
 					'requires'          => $plugin_info->requires,
@@ -87,6 +89,7 @@ class Add_Plugin {
 					'icons'             => $plugin_info->icons,
 					'banners'           => $plugin_info->banners,
 					'screenshots'       => $plugin_info->screenshots,
+					'local_screenshots' => $load_attachments ? Functions::get_plugin_screenshots( $slug, $force ) : array(),
 				);
 			}
 		}

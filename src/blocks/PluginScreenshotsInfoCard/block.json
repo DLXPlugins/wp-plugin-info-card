@@ -15,8 +15,8 @@
 			"default": "slug-entry"
 		},
 		"assetData": {
-			"type": "array",
-			"default": []
+			"type": "object",
+			"default": {}
 		},
 		"type": {
 			"type": "string",

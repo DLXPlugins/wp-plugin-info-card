@@ -58,7 +58,7 @@ const ScreenPluginPreview = (props) => {
 	const block = (
 		<>
 			<PluginScreenshots
-				{ ...assetData[0] }
+				{ ...assetData }
 			/>
 		</>
 	);

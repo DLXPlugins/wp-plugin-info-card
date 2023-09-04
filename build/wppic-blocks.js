@@ -3600,9 +3600,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _screens_ScreenSlugEntry__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./screens/ScreenSlugEntry */ "./src/blocks/PluginScreenshotsInfoCard/screens/ScreenSlugEntry/index.js");
-/* harmony import */ var _screens_ScreenImageLoader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./screens/ScreenImageLoader */ "./src/blocks/PluginScreenshotsInfoCard/screens/ScreenImageLoader/index.js");
-/* harmony import */ var _screens_ScreenNoImages__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./screens/ScreenNoImages */ "./src/blocks/PluginScreenshotsInfoCard/screens/ScreenNoImages/index.js");
-/* harmony import */ var _screens_ScreenPluginPreview__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./screens/ScreenPluginPreview */ "./src/blocks/PluginScreenshotsInfoCard/screens/ScreenPluginPreview/index.js");
+/* harmony import */ var _screens_ScreenImageProcessor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./screens/ScreenImageProcessor */ "./src/blocks/PluginScreenshotsInfoCard/screens/ScreenImageProcessor/index.js");
+/* harmony import */ var _screens_ScreenImageLoader__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./screens/ScreenImageLoader */ "./src/blocks/PluginScreenshotsInfoCard/screens/ScreenImageLoader/index.js");
+/* harmony import */ var _screens_ScreenNoImages__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./screens/ScreenNoImages */ "./src/blocks/PluginScreenshotsInfoCard/screens/ScreenNoImages/index.js");
+/* harmony import */ var _screens_ScreenPluginPreview__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./screens/ScreenPluginPreview */ "./src/blocks/PluginScreenshotsInfoCard/screens/ScreenPluginPreview/index.js");
 function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(a, b) { if (!a) return; if (typeof a === "string") return _arrayLikeToArray(a, b); var c = Object.prototype.toString.call(a).slice(8, -1); if (c === "Object" && a.constructor) c = a.constructor.name; if (c === "Map" || c === "Set") return Array.from(a); if (c === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(c)) return _arrayLikeToArray(a, b); }
@@ -3647,6 +3648,7 @@ var _wp$blockEditor = wp.blockEditor,
   MediaUpload = _wp$blockEditor.MediaUpload,
   BlockControls = _wp$blockEditor.BlockControls,
   useBlockProps = _wp$blockEditor.useBlockProps;
+
 
 
 
@@ -3727,34 +3729,27 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
   var ga = function pluginOnClick(a, b) {
     fa();
   };
-  var ha = function outputInfoCards(a) {
-    if (T.length <= 0) {
-      return null;
-    }
-    var b = T[0];
-    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_templates_PluginScreenshots__WEBPACK_IMPORTED_MODULE_3__["default"], b));
-  };
   (0,react__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
     if (T.length <= 0) {
       return;
     }
     s(false);
   }, [T]);
-  var ia = [{
+  var ha = [{
     icon: 'edit',
     title: __('Edit and Configure', 'wp-plugin-info-card'),
     onClick: function onClick() {
       return o(true);
     }
   }];
-  var ja = [{
+  var ia = [{
     value: 'plugin',
     label: __('Plugin', 'wp-plugin-info-card')
   }, {
     value: 'theme',
     label: __('Theme', 'wp-plugin-info-card')
   }];
-  var ka = [{
+  var ja = [{
     value: 'none',
     label: __('None', 'wp-plugin-info-card')
   }, {
@@ -3764,14 +3759,14 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
     value: 'after',
     label: __('After', 'wp-plugin-info-card')
   }];
-  var la = [{
+  var ka = [{
     value: 'false',
     label: __('No', 'wp-plugin-info-card')
   }, {
     value: 'true',
     label: __('Yes', 'wp-plugin-info-card')
   }];
-  var ma = [{
+  var la = [{
     value: 'default',
     label: __('Default', 'wp-plugin-info-card')
   }, {
@@ -3817,7 +3812,7 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
     value: 'scheme14',
     label: __('Scheme 14', 'wp-plugin-info-card')
   }];
-  var na = [{
+  var ma = [{
     value: 'card',
     label: __('Card', 'wp-plugin-info-card')
   }, {
@@ -3830,13 +3825,13 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
     value: 'flex',
     label: __('Flex', 'wp-plugin-info-card')
   }];
-  var oa = 'card' === H ? 'wp-pic-card' : H;
-  var pa = r ? 'wp-pic-spin' : '';
-  var qa = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
+  var na = 'card' === H ? 'wp-pic-card' : H;
+  var oa = r ? 'wp-pic-spin' : '';
+  var pa = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Layout', 'wp-plugin-info-card')
   }, /*#__PURE__*/React.createElement(PanelRow, null, /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Scheme', 'wp-plugin-info-card'),
-    options: ma,
+    options: la,
     value: D,
     onChange: function onChange(a) {
       c({
@@ -3846,7 +3841,7 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
     }
   })), /*#__PURE__*/React.createElement(PanelRow, null, /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Layout', 'wp-plugin-info-card'),
-    options: na,
+    options: ma,
     value: H,
     onChange: function onChange(a) {
       if ('flex' === a) {
@@ -3908,7 +3903,7 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
       A(a);
     }
   }))));
-  var ra = useBlockProps({
+  var qa = useBlockProps({
     className: classnames__WEBPACK_IMPORTED_MODULE_1___default()("wp-plugin-info-card align".concat(X))
   });
 
@@ -3917,7 +3912,7 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
    *
    * @return {Element} The screen to display.
    */
-  var sa = function getCurrentScreen() {
+  var ra = function getCurrentScreen() {
     //return <ScreenNoImages attributes={ attributes } setAttributes={ setAttributes } />;
 
     // Otherwise get the screen based on the current screen.
@@ -3928,17 +3923,22 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
           setAttributes: c
         });
       case 'image-loader':
-        return /*#__PURE__*/React.createElement(_screens_ScreenImageLoader__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        return /*#__PURE__*/React.createElement(_screens_ScreenImageLoader__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          attributes: b,
+          setAttributes: c
+        });
+      case 'image-processor':
+        return /*#__PURE__*/React.createElement(_screens_ScreenImageProcessor__WEBPACK_IMPORTED_MODULE_7__["default"], {
           attributes: b,
           setAttributes: c
         });
       case 'no-images-found':
-        return /*#__PURE__*/React.createElement(_screens_ScreenNoImages__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        return /*#__PURE__*/React.createElement(_screens_ScreenNoImages__WEBPACK_IMPORTED_MODULE_9__["default"], {
           attributes: b,
           setAttributes: c
         });
       case 'plugin-preview':
-        return /*#__PURE__*/React.createElement(_screens_ScreenPluginPreview__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        return /*#__PURE__*/React.createElement(_screens_ScreenPluginPreview__WEBPACK_IMPORTED_MODULE_10__["default"], {
           attributes: b,
           setAttributes: c
         });
@@ -3956,7 +3956,7 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
     }));
   }
   if (r) {
-    return /*#__PURE__*/React.createElement("div", ra, /*#__PURE__*/React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", qa, /*#__PURE__*/React.createElement("div", {
       className: "wppic-loading-placeholder"
     }, /*#__PURE__*/React.createElement("div", {
       className: "wppic-loading"
@@ -3966,7 +3966,7 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
       className: "wppic-spinner"
     }, /*#__PURE__*/React.createElement(Spinner, null)))));
   }
-  var ta = /*#__PURE__*/React.createElement(React.Fragment, null, r && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  var sa = /*#__PURE__*/React.createElement(React.Fragment, null, r && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "wppic-loading-placeholder"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-loading"
@@ -3974,7 +3974,7 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
     size: "45"
   }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
     className: "wppic-spinner"
-  }, /*#__PURE__*/React.createElement(Spinner, null))))), !n && !r && /*#__PURE__*/React.createElement(React.Fragment, null, qa, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
+  }, /*#__PURE__*/React.createElement(Spinner, null))))), !n && !r && /*#__PURE__*/React.createElement(React.Fragment, null, pa, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
     icon: "edit",
     title: __('Edit and Configure', 'wp-plugin-info-card'),
     onClick: function onClick() {
@@ -3991,7 +3991,7 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
     }, function (a) {
       var b = a.onClose;
       return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(MenuItemsChoice, {
-        choices: ma,
+        choices: la,
         onSelect: function onSelect(a) {
           c({
             scheme: a
@@ -4012,7 +4012,7 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
     }, function (a) {
       var b = a.onClose;
       return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(MenuItemsChoice, {
-        choices: na,
+        choices: ma,
         onSelect: function onSelect(a) {
           c({
             layout: a
@@ -4024,9 +4024,9 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
       }));
     });
   }))), /*#__PURE__*/React.createElement("div", {
-    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('is-placeholder', oa, 'wp-block-plugin-info-card', "align".concat(X))
-  }, ha(T))));
-  return /*#__PURE__*/React.createElement("div", ra, ta, sa());
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('is-placeholder', na, 'wp-block-plugin-info-card', "align".concat(X))
+  }, outputInfoCards(T))));
+  return /*#__PURE__*/React.createElement("div", qa, sa, ra());
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PluginScreenshotsInfoCard);
 
@@ -4057,6 +4057,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../Logo */ "./src/blocks/Logo.js");
 /* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../components/Loading */ "./src/blocks/components/Loading.js");
+/* harmony import */ var _components_LoadingImageProgress__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../components/LoadingImageProgress */ "./src/blocks/components/LoadingImageProgress.js");
 function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(a, b) { if (!a) return; if (typeof a === "string") return _arrayLikeToArray(a, b); var c = Object.prototype.toString.call(a).slice(8, -1); if (c === "Object" && a.constructor) c = a.constructor.name; if (c === "Map" || c === "Set") return Array.from(a); if (c === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(c)) return _arrayLikeToArray(a, b); }
@@ -4076,8 +4077,9 @@ function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
 
 
 
+
 /**
- * InitialScreen component.
+ * ScreenImageLoader component.
  *
  * @param {Object} props - Component props.
  * @return {Function} Component.
@@ -4099,39 +4101,34 @@ var ScreenImageLoader = function ScreenImageLoader(a) {
     o = a.setAttributes;
   var p = n.slug,
     q = n.assetData;
-  var r = function processImage(a) {
-    var b = wppic.rest_url + 'wppic/v2/process_images';
-    axios__WEBPACK_IMPORTED_MODULE_3___default().post(b, {
-      images: a
-    }, {
-      headers: {
-        'X-WP-Nonce': wppic.rest_nonce
-      }
-    }).then(function (a) {
-      var b = a.data.data;
-      if (a.data.success) {
-        if (b.images.length > 0) {
-          r(b.images);
-        }
-      } else {}
-    })["catch"](function (a) {}).then(function () {});
-  };
-  var s = function loadImages() {
+  var r = function loadImages(a) {
     e(true);
-    var a = wppic.rest_url + 'wppic/v2/get_images_to_process';
-    axios__WEBPACK_IMPORTED_MODULE_3___default().get(a + "?type=plugin&slug=".concat(encodeURIComponent(p)), {
+    var b = wppic.rest_url + 'wppic/v2/get_plugin_images';
+    axios__WEBPACK_IMPORTED_MODULE_3___default().get(b + "?type=plugin&slug=".concat(encodeURIComponent(a)), {
       headers: {
         'X-WP-Nonce': wppic.rest_nonce
       }
     }).then(function (a) {
       var b = a.data.data;
       if (a.data.success) {
-        var c = b.images;
-        var d = b.needs_sideload;
-        console.log(c);
-        if (c.length > 0) {
-          // processImage( images );
+        if (!b.hasScreenshots) {
+          o({
+            screen: 'no-images'
+          });
+          return;
         }
+        if (b.hasPluginScreenshots) {
+          o({
+            assetData: b.pluginData
+          });
+          o({
+            screen: 'plugin-preview'
+          });
+          return;
+        }
+        o({
+          screen: 'image-processor'
+        });
       } else {
         m(a.data.data.message);
         i(true);
@@ -4141,62 +4138,152 @@ var ScreenImageLoader = function ScreenImageLoader(a) {
 
   // Load images.
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    s();
+    r(p);
   }, []);
+  if (d) {
+    return /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Gathering plugin images...', 'wp-plugin-info-card')
+    });
+  }
+  return null;
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScreenImageLoader);
+
+/***/ }),
+
+/***/ "./src/blocks/PluginScreenshotsInfoCard/screens/ScreenImageProcessor/index.js":
+/*!************************************************************************************!*\
+  !*** ./src/blocks/PluginScreenshotsInfoCard/screens/ScreenImageProcessor/index.js ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../Logo */ "./src/blocks/Logo.js");
+/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../components/Loading */ "./src/blocks/components/Loading.js");
+/* harmony import */ var _components_LoadingImageProgress__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../components/LoadingImageProgress */ "./src/blocks/components/LoadingImageProgress.js");
+function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(a, b) { if (!a) return; if (typeof a === "string") return _arrayLikeToArray(a, b); var c = Object.prototype.toString.call(a).slice(8, -1); if (c === "Object" && a.constructor) c = a.constructor.name; if (c === "Map" || c === "Set") return Array.from(a); if (c === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(c)) return _arrayLikeToArray(a, b); }
+function _arrayLikeToArray(a, b) { if (b == null || b > a.length) b = a.length; for (var c = 0, d = new Array(b); c < b; c++) d[c] = a[c]; return d; }
+function _iterableToArrayLimit(a, b) { var c = null == a ? null : "undefined" != typeof Symbol && a[Symbol.iterator] || a["@@iterator"]; if (null != c) { var d, e, _x, f, g = [], _n = !0, h = !1; try { if (_x = (c = c.call(a)).next, 0 === b) { if (Object(c) !== c) return; _n = !1; } else for (; !(_n = (d = _x.call(c)).done) && (g.push(d.value), g.length !== b); _n = !0); } catch (a) { h = !0, e = a; } finally { try { if (!_n && null != c["return"] && (f = c["return"](), Object(f) !== f)) return; } finally { if (h) throw e; } } return g; } }
+function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
+/**
+ * This is the initial screen of the block. It is the first screen that the user sees when they add the block to the editor.
+ */
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * ScreenImageProcessor component.
+ *
+ * @param {Object} props - Component props.
+ * @return {Function} Component.
+ */
+var ScreenImageProcessor = function ScreenImageProcessor(a) {
+  var b = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    c = _slicedToArray(b, 2),
+    d = c[0],
+    e = c[1];
+  var f = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    g = _slicedToArray(f, 2),
+    h = g[0],
+    i = g[1];
+  var j = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    k = _slicedToArray(j, 2),
+    l = k[0],
+    m = k[1];
+  var n = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    o = _slicedToArray(n, 2),
+    p = o[0],
+    q = o[1];
+  var r = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    s = _slicedToArray(r, 2),
+    t = s[0],
+    u = s[1];
+  var v = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    w = _slicedToArray(v, 2),
+    x = w[0],
+    y = w[1];
+  var z = a.attributes,
+    A = a.setAttributes;
+  var B = z.slug,
+    C = z.assetData;
+  var D = function loadImages(a) {
+    var b = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -1;
+    var c = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    e(true);
+    var d = wppic.rest_url + 'wppic/v2/get_plugin_images_to_process';
+    axios__WEBPACK_IMPORTED_MODULE_3___default().get(d + "?type=plugin&slug=".concat(encodeURIComponent(a), "&order=").concat(b, "&needsSideload=").concat(c), {
+      headers: {
+        'X-WP-Nonce': wppic.rest_nonce
+      }
+    }).then(function (b) {
+      var c = b.data.data;
+      if (b.data.success) {
+        var d = c.sideloadOrder;
+        var e = c.needsSideload;
+        var f = c.totalScreenshots;
+        q(f);
+        if (f >= d) {
+          m(d);
+          i(true);
+          D(a, d, e);
+        } else {
+          A({
+            assetData: c.pluginData,
+            screen: 'plugin-preview'
+          });
+        }
+      } else {
+        y(b.data.data.message);
+        u(true);
+      }
+    })["catch"](function (a) {}).then(function () {});
+  };
+
+  // Load images.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    D(B);
+  }, []);
+  if (h || d) {
+    return /*#__PURE__*/React.createElement(_components_LoadingImageProgress__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      totalImageCount: p,
+      currentCount: l,
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Processing images...', 'wp-plugin-info-card')
+    });
+  }
   if (d) {
     return /*#__PURE__*/React.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_7__["default"], {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Determining if there are images to process...', 'wp-plugin-info-card')
     });
   }
-
-  // Set the local inspector controls.
-  var t = /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null);
-  var u = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "wppic-query-block wppic-query-block-panel"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "wppic-block-svg"
-  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    size: "75"
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "wp-pic-tab-panel"
-  }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToggleGroupControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Download the images locally, or load them from WordPress.org.', 'wp-plugin-info-card'),
-    value: 'local',
-    onChange: function onChange(a) {
-      o({
-        imageSource: a
-      }); // can be local or remote. `local` means the images are sideloaded into WordPress.
-    },
-
-    isBlock: true,
-    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Choose local to have the screenshots downloaded locally to your server.', 'wp-plugin-info-card')
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToggleGroupControlOption, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Local', 'wp-plugin-info-card'),
-    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Choose local to have the screenshots downloaded locally to your server.', 'wp-plugin-info-card'),
-    value: 'local',
-    showTooltip: true
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToggleGroupControlOption, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Remote', 'wp-plugin-info-card'),
-    value: 'remote',
-    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Choose remote to load images from WordPress.org directly.', 'wp-plugin-info-card'),
-    showTooltip: true
-  })))), /*#__PURE__*/React.createElement("div", {
-    className: "wp-pic-gutenberg-button"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-    iconSize: 20,
-    icon: /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      size: "25"
-    }),
-    variant: "secondary",
-    id: "wppic-input-submit",
-    onClick: function onClick(a) {
-      a.preventDefault();
-      loadData();
-    }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Preview and Configure', 'wp-plugin-info-card')))));
-  return /*#__PURE__*/React.createElement(React.Fragment, null, t, u);
+  return null;
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScreenImageLoader);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScreenImageProcessor);
 
 /***/ }),
 
@@ -4371,7 +4458,7 @@ var ScreenPluginPreview = function ScreenPluginPreview(a) {
 
   // Set the local inspector controls.
   var e = /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null);
-  var f = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_templates_PluginScreenshots__WEBPACK_IMPORTED_MODULE_8__["default"], d[0]));
+  var f = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_templates_PluginScreenshots__WEBPACK_IMPORTED_MODULE_8__["default"], d));
   return /*#__PURE__*/React.createElement(React.Fragment, null, e, f);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScreenPluginPreview);
@@ -4451,7 +4538,6 @@ var SlugEntryScreen = function SlugEntryScreen(a) {
       if (a.data.success) {
         // Set asset data.
         o({
-          assetData: a.data.data,
           screen: 'image-loader'
         });
       } else {
@@ -5254,6 +5340,70 @@ var LoadingScreen = function LoadingScreen(a) {
 
 /***/ }),
 
+/***/ "./src/blocks/components/LoadingImageProgress.js":
+/*!*******************************************************!*\
+  !*** ./src/blocks/components/LoadingImageProgress.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Logo */ "./src/blocks/Logo.js");
+
+
+var LoadingImageProgressScreen = function LoadingImageProgressScreen(a) {
+  var b = a.totalImageCount,
+    c = a.currentCount,
+    d = a.label;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-loading-placeholder"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-loading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Logo__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    size: "45"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, d), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "progress-bar-wrapper",
+    style: {
+      width: '100%'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "progress-bar",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      width: '100%',
+      height: '8px',
+      background: '#DDDDDD',
+      borderRadius: '10px',
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "progress-bar-inner",
+    style: {
+      borderRadius: '10px',
+      display: 'block',
+      height: '4px',
+      background: '#44873F',
+      transition: "width 0.5s ease-in-out",
+      width: "".concat(c / b * 100, "%")
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "progress-bar-label",
+    style: {
+      textAlign: 'center',
+      marginTop: '15px'
+    }
+  }, c, " / ", b)))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LoadingImageProgressScreen);
+
+/***/ }),
+
 /***/ "./src/blocks/components/Numbers.js":
 /*!******************************************!*\
   !*** ./src/blocks/components/Numbers.js ***!
@@ -5887,14 +6037,16 @@ var PluginScreenshots = function PluginScreenshots(a) {
     l = a.tested;
   }
   var m = '';
-  if (a.icons.svg) {
-    m = a.icons.svg;
-  } else if (a.icons['2x']) {
-    m = a.icons['2x'];
-  } else if (a.icons['1x']) {
-    m = a.icons['1x'];
-  } else {
-    m = a.defaultIcon;
+  if (a.hasOwnProperty('icons')) {
+    if (a.icons.hasOwnProperty('svg')) {
+      m = a.icons.svg;
+    } else if (a.icons.hasOwnProperty('2x')) {
+      m = a.icons['2x'];
+    } else if (a.icons.hasOwnProperty('1x')) {
+      m = a.icons['1x'];
+    } else {
+      m = a.defaultIcon;
+    }
   }
   var n = {
     backgroundImage: "url(".concat(m, ")"),
@@ -16359,7 +16511,7 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Plugin Screenshots Info Card","apiVersion":2,"name":"wp-plugin-info-card/plugin-screenshots-info-card","category":"wp-plugin-info-card","icon":"<svg viewBox=\'0 0 80 80\'><path d=\'M47,41.5c0,3.9-3.1,7-7,7s-7-3.1-7-7s3.1-7,7-7S47,37.6,47,41.5z M59,31.5v20c0,1.7-1.3,3-3,3H24c-1.7,0-3-1.3-3-3v-20 c0-1.7,1.3-3,3-3h8c0.4,0,0.8-0.3,0.9-0.7l1.8-5.3h10.6l1.8,5.3c0.1,0.4,0.5,0.7,0.9,0.7h8C57.7,28.5,59,29.8,59,31.5z M49,41.5 c0-5-4-9-9-9s-9,4-9,9s4,9,9,9S49,46.5,49,41.5z M76,40c0,19.9-16.1,36-36,36S4,59.9,4,40S20.1,4,40,4S76,20.1,76,40z M61,31.5 c0-2.8-2.2-5-5-5h-7.3l-1.8-5.3c-0.1-0.4-0.5-0.7-0.9-0.7H34c-0.4,0-0.8,0.3-0.9,0.7l-1.8,5.3H24c-2.8,0-5,2.2-5,5v20 c0,2.8,2.2,5,5,5h32c2.8,0,5-2.2,5-5V31.5z\'/></svg>","description":"Add a beautiful plugin card with screenshots.","keywords":["wp plugin","plugin","card","theme","screenshot"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"screen":{"type":"string","default":"slug-entry"},"assetData":{"type":"array","default":[]},"type":{"type":"string","default":"plugin"},"slug":{"type":"string","default":"wp-plugin-info-card"},"loading":{"type":"boolean","default":true},"imageSource":{"type":"string","default":"local"},"images":{"type":"array","default":[]}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["wide","center","full"],"className":true},"editorScript":"wp_plugin_info_card-cgb-block-js","editorStyle":["wp_plugin_info_card-cgb-block-editor-css","wp_plugin_info_card-cgb-style-css"],"style":"has-style-frontend-css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Plugin Screenshots Info Card","apiVersion":2,"name":"wp-plugin-info-card/plugin-screenshots-info-card","category":"wp-plugin-info-card","icon":"<svg viewBox=\'0 0 80 80\'><path d=\'M47,41.5c0,3.9-3.1,7-7,7s-7-3.1-7-7s3.1-7,7-7S47,37.6,47,41.5z M59,31.5v20c0,1.7-1.3,3-3,3H24c-1.7,0-3-1.3-3-3v-20 c0-1.7,1.3-3,3-3h8c0.4,0,0.8-0.3,0.9-0.7l1.8-5.3h10.6l1.8,5.3c0.1,0.4,0.5,0.7,0.9,0.7h8C57.7,28.5,59,29.8,59,31.5z M49,41.5 c0-5-4-9-9-9s-9,4-9,9s4,9,9,9S49,46.5,49,41.5z M76,40c0,19.9-16.1,36-36,36S4,59.9,4,40S20.1,4,40,4S76,20.1,76,40z M61,31.5 c0-2.8-2.2-5-5-5h-7.3l-1.8-5.3c-0.1-0.4-0.5-0.7-0.9-0.7H34c-0.4,0-0.8,0.3-0.9,0.7l-1.8,5.3H24c-2.8,0-5,2.2-5,5v20 c0,2.8,2.2,5,5,5h32c2.8,0,5-2.2,5-5V31.5z\'/></svg>","description":"Add a beautiful plugin card with screenshots.","keywords":["wp plugin","plugin","card","theme","screenshot"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"screen":{"type":"string","default":"slug-entry"},"assetData":{"type":"object","default":{}},"type":{"type":"string","default":"plugin"},"slug":{"type":"string","default":"wp-plugin-info-card"},"loading":{"type":"boolean","default":true},"imageSource":{"type":"string","default":"local"},"images":{"type":"array","default":[]}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["wide","center","full"],"className":true},"editorScript":"wp_plugin_info_card-cgb-block-js","editorStyle":["wp_plugin_info_card-cgb-block-editor-css","wp_plugin_info_card-cgb-style-css"],"style":"has-style-frontend-css"}');
 
 /***/ }),
 

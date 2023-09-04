@@ -44,6 +44,7 @@ const {
 } = wp.blockEditor;
 
 import SlugEntryScreen from './screens/ScreenSlugEntry';
+import ScreenImageProcessor from './screens/ScreenImageProcessor';
 import ScreenImageLoader from './screens/ScreenImageLoader';
 import ScreenNoImages from './screens/ScreenNoImages';
 import ScreenPluginPreview from './screens/ScreenPluginPreview';
@@ -86,17 +87,7 @@ const PluginScreenshotsInfoCard = ( props ) => {
 		loadData();
 	};
 
-	const outputInfoCards = ( cardDataArray ) => {
-		if ( data.length <= 0 ) {
-			return null;
-		}
-		const dataSet = data[0];
-		return (
-			<>
-				{ <PluginScreenshotsCard { ...dataSet } /> }
-			</>
-		);
-	};
+	
 
 	useEffect( () => {
 		if ( data.length <= 0 ) {
@@ -283,6 +274,8 @@ const PluginScreenshotsInfoCard = ( props ) => {
 				return <SlugEntryScreen attributes={ attributes } setAttributes={ setAttributes } />;
 			case 'image-loader':
 				return <ScreenImageLoader attributes={ attributes } setAttributes={ setAttributes } />;
+			case 'image-processor':
+				return <ScreenImageProcessor attributes={ attributes } setAttributes={ setAttributes } />;
 			case 'no-images-found':
 				return <ScreenNoImages attributes={ attributes } setAttributes={ setAttributes } />;
 			case 'plugin-preview':

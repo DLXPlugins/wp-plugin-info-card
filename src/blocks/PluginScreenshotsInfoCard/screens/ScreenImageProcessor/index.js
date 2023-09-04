@@ -39,14 +39,17 @@ import LoadingScreen from '../../../components/Loading';
 import LoadingImageProgressScreen from '../../../components/LoadingImageProgress';
 
 /**
- * ScreenImageLoader component.
+ * ScreenImageProcessor component.
  *
  * @param {Object} props - Component props.
  * @return {Function} Component.
  */
-const ScreenImageLoader = (props) => {
+const ScreenImageProcessor = (props) => {
 
 	const [ loading, setLoading ] = useState( true );
+	const [ isImageProcessing, setIsImageProcessing ] = useState( false );
+	const [ currentImageOrder, setCurrentImageOrder ] = useState( 0 );
+	const [ totalImageCount, setTotalImageCount ] = useState( 0 );
 	const [ showErrorModal, setShowErrorModal ] = useState( false );
 	const [ errorMessage, setErrorMessage ] = useState( '' );
 
@@ -54,12 +57,12 @@ const ScreenImageLoader = (props) => {
 
 	const { slug, assetData } = attributes;
 
-	const loadImages = ( pluginSlug ) => {
+	const loadImages = ( pluginSlug, screenshotOrder = -1, needsSideload = false ) => {
 		setLoading( true );
-		const restUrl = wppic.rest_url + 'wppic/v2/get_plugin_images';
+		const restUrl = wppic.rest_url + 'wppic/v2/get_plugin_images_to_process';
 		axios
 			.get(
-				restUrl + `?type=plugin&slug=${ encodeURIComponent( pluginSlug ) }`,
+				restUrl + `?type=plugin&slug=${ encodeURIComponent( pluginSlug ) }&order=${ screenshotOrder }&needsSideload=${ needsSideload}`,
 				{
 					headers: {
 						'X-WP-Nonce': wppic.rest_nonce,
@@ -68,32 +71,17 @@ const ScreenImageLoader = (props) => {
 			).then( ( response ) => {
 				const data = response.data.data;
 				if ( response.data.success ) {
-					if ( ! data.hasScreenshots ) {
-						setAttributes(
-							{
-								screen: 'no-images',
-							}
-						);
-						return;
+					const newOrder = data.sideloadOrder;
+					const needsSideload = data.needsSideload;
+					const imageCount = data.totalScreenshots;
+					setTotalImageCount( imageCount );
+					if ( imageCount >= newOrder ) {
+						setCurrentImageOrder( newOrder );
+						setIsImageProcessing( true );
+						loadImages( pluginSlug, newOrder, needsSideload );
+					} else {
+						setAttributes( { assetData: data.pluginData, screen: 'plugin-preview' } );
 					}
-					if ( data.hasPluginScreenshots ) {
-						setAttributes(
-							{
-								assetData: data.pluginData,
-							}
-						);
-						setAttributes(
-							{
-								screen: 'plugin-preview',
-							}
-						);
-						return;
-					}
-					setAttributes(
-						{
-							screen: 'image-processor',
-						}
-					);
 				} else {
 					setErrorMessage( response.data.data.message );
 					setShowErrorModal( true );
@@ -108,10 +96,20 @@ const ScreenImageLoader = (props) => {
 		loadImages( slug );
 	}, [] );
 
+	if ( isImageProcessing || loading ) {
+		return (
+			<LoadingImageProgressScreen
+				totalImageCount={ totalImageCount }
+				currentCount={ currentImageOrder }
+				label={ __( 'Processing images...', 'wp-plugin-info-card' ) }
+			/>
+		);
+	}
+
 	if ( loading ) {
-		return ( <LoadingScreen label={ __( 'Gathering plugin images...', 'wp-plugin-info-card' ) } /> );
+		return ( <LoadingScreen label={ __( 'Determining if there are images to process...', 'wp-plugin-info-card' ) } /> );
 	}
 
 	return null;
 };
-export default ScreenImageLoader;
+export default ScreenImageProcessor;

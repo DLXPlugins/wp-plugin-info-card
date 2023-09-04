@@ -62,7 +62,6 @@ const SlugEntryScreen = (props) => {
 					// Set asset data.
 					setAttributes(
 						{
-							assetData: response.data.data,
 							screen: 'image-loader',
 						}
 					);

@@ -609,11 +609,113 @@ class Functions {
 						'ping_status'    => 'closed',
 					)
 				);
-				$plugin_page = get_post( $plugin_page_id );
+				$plugin_page    = get_post( $plugin_page_id );
 				return $plugin_page;
 			}
 		}
 		return $maybe_plugin_page;
+	}
+
+	/**
+	 * Retrieve plugin screenshots, while checking if they exist locally.
+	 *
+	 * @param string $slug  Plugin slug to retrieve screenshots for.
+	 * @param bool   $force Whether to force retrieve (no caching) the plugin data.
+	 */
+	public static function get_plugin_screenshots( $slug, $force = false, $replace_with_org = false ) {
+		// Get the plugin.
+		$plugin_data        = wppic_api_parser( 'plugin', $slug, 720, '', false, $force );
+		$plugin_screenshots = $plugin_data->screenshots ?? array();
+
+		if ( empty( $plugin_screenshots ) ) {
+			return array();
+		}
+
+		// Get the plugin attachments.
+		$plugin_page = Functions::get_plugin_page( $slug );
+		if ( ! empty( $plugin_page ) ) {
+			$args   = array(
+				'post_parent'    => $plugin_page->ID,
+				'post_type'      => 'attachment',
+				'post_mime_type' => 'image',
+				'orderby'        => 'menu_order',
+				'order'          => 'ASC',
+				'posts_per_page' => 50, /* max get 50 images */
+			);
+			$images = get_children( $args );
+
+			// Get thumbnail, and then the full size image.
+			$images_array = array();
+			foreach ( $images as $image ) {
+				$images_array[ $image->menu_order ] = array(
+					'thumbnail' => wp_get_attachment_image_src( $image->ID, 'thumbnail' )[0],
+					'full'      => wp_get_attachment_image_src( $image->ID, 'full' )[0],
+					'caption'   => $image->post_excerpt,
+					'alt'       => $image->post_excerpt,
+				);
+			}
+
+			if ( ! $replace_with_org ) {
+				return $images_array;
+			}
+
+			// Loop through plugin screenshots, see if order and excerpt match (image URL), and mark any that don't exist.
+			foreach ( $plugin_screenshots as $screenshot_order => $screenshot ) {
+				$found = false;
+				foreach ( $images as $image ) {
+					if ( $screenshot_order === $image->menu_order ) {
+						if ( $image->post_content === $screenshot['src'] ) {
+							$found = true;
+						}
+					}
+				}
+				if ( ! $found ) {
+					// Add in any missing images with .org version.
+					$images_array[ $screenshot_order ] = array(
+						'thumbnail' => $screenshot['src'],
+						'full'      => $screenshot['src'],
+						'caption'   => $screenshot['caption'],
+						'alt'       => $screenshot['caption'],
+					);
+					/**
+					 * Action if an image isn't found. Others can hook into the passed data to sideload the image.
+					 *
+					 * @param string  $slug             The plugin slug.
+					 * @param WP_Post $plugin_page      The plugin page object.
+					 * @param object  $screenshot       The screenshot object (image and caption object keys)
+					 * @param int     $screenshot_order The screenshot order.
+					 */
+					do_action( 'wppic_no_plugin_screenshot_found', $slug, $plugin_page, $screenshot, $screenshot_order );
+				}
+			}
+
+			return $images_array;
+		}
+		return array();
+	}
+
+	/**
+	 * Get the plugin's supported file extensions.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array The supported file extensions.
+	 */
+	public static function get_supported_file_extensions() {
+		$file_extensions = array(
+			'jpeg',
+			'jpg',
+			'gif',
+			'png',
+		);
+		/**
+		 * Filter the valid file extensions for the photo block.
+		 *
+		 * @param array $file_extensions The valid mime types.
+		 */
+		$file_extensions = apply_filters( 'wppic_block_file_extensions', $file_extensions );
+
+		return $file_extensions;
 	}
 
 	/**
@@ -664,4 +766,3 @@ class Functions {
 		return $highest_priority;
 	}
 }
-

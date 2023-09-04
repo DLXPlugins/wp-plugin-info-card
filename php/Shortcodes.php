@@ -156,10 +156,19 @@ class Shortcodes {
 		);
 		register_rest_route(
 			'wppic/v2',
-			'/get_images_to_process',
+			'/get_plugin_images',
 			array(
 				'methods'             => 'GET',
-				'callback'            => array( $this, 'get_images_to_process' ),
+				'callback'            => array( $this, 'get_plugin_images' ),
+				'permission_callback' => array( $this, 'rest_image_sideload_permissions' ),
+			)
+		);
+		register_rest_route(
+			'wppic/v2',
+			'/get_plugin_images_to_process',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'get_plugin_images_to_process' ),
 				'permission_callback' => array( $this, 'rest_image_sideload_permissions' ),
 			)
 		);
@@ -168,13 +177,21 @@ class Shortcodes {
 	/**
 	 * Process a list of images for a plugin.
 	 *
-	 * @param WP_Rest $request
+	 * @param WP_Rest $request REST request.
 	 */
-	public function get_images_to_process( $request ) {
-		$plugin_slug = $request->get_param( 'slug' );
+	public function get_plugin_images_to_process( $request ) {
+		$plugin_slug    = $request->get_param( 'slug' );
+		$needs_sideload = (bool) $request->get_param( 'needsSideload' );
+		$sideload_order = (int) $request->get_param( 'order' );
 
-		$plugin_data = wppic_api_parser( 'plugin', $plugin_slug );
-		
+		$maybe_plugin_data = wp_cache_get( 'wppic_plugin_data_' . $plugin_slug, 'wppic' );
+		if ( false !== $maybe_plugin_data ) {
+			$plugin_data = $maybe_plugin_data;
+		} else {
+			$plugin_data = wppic_api_parser( 'plugin', $plugin_slug, 720, '', true, true );
+			wp_cache_set( 'wppic_plugin_data_' . $plugin_slug, $plugin_data, 'wppic', 3 * HOUR_IN_SECONDS );
+		}
+
 		// Read in slug and get from post type.
 		$plugin_page = Functions::get_plugin_page( $plugin_slug );
 
@@ -186,69 +203,103 @@ class Shortcodes {
 			);
 		}
 
-		// Get attachments for plugin.
-		$attachments = get_posts(
-			array(
-				'post_type'      => 'attachment',
-				'posts_per_page' => 50, /* max of 50 total screenshots */
-				'post_parent'    => $plugin_page->ID,
-				'orderby' => 'menu_order',
-				'order' => 'ASC',
-			)
-		);
-
 		// Get screenshots for plugin.
 		$screenshots = $plugin_data->screenshots ?? array();
 
-		// Screenshots to add.
-		$screenshots_to_process = array();
+		// If needs sideload, process the first image.
+		if ( $needs_sideload && ! empty( $screenshots ) && isset( $screenshots[ $sideload_order ] ) ) {
+			// Loop through the first image, unset, and process.
+			$screenshot_to_process = $screenshots[ $sideload_order ];
+			$image_order           = absint( $sideload_order );
+			$image_caption         = sanitize_text_field( $screenshot_to_process['caption'] );
+			$image_url             = filter_var( $screenshot_to_process['src'], FILTER_VALIDATE_URL );
 
-		// Find any attachments missing.
-		foreach ( $screenshots as $order => $screenshot ) {
-			$attachment_found = false;
-			foreach ( $attachments as $attachment ) {
-				if ( $order === $attachment->menu_order  ) {
-					if ( $screenshot->src === $attachment->post_excerpt ) {
-						$attachment_found = true;
-						break;
-					} else {
-						$screenshots_to_process[] = array(
-							'id' => $attachment->ID,
-							'image' => $screenshot['src'],
-							'caption' => $screenshot['caption'],
-							'order' => $order,
-						);
-					}
-					
+			if ( $image_url ) {
+				// Check file extension.
+				$extension = pathinfo( $image_url, PATHINFO_EXTENSION );
+
+				// Strip query vars from extension.
+				$extension = preg_replace( '/\?.*/', '', $extension );
+
+				if ( ! $extension ) {
+					return new \WP_Error( 'invalid_url', __( 'File extension not found.', 'wp-plugin-info-card' ), array( 'status' => 400 ) );
+				}
+				$valid_extensions = Functions::get_supported_file_extensions();
+				if ( ! in_array( $extension, $valid_extensions, true ) ) {
+					return new \WP_Error( 'invalid_url', __( 'Invalid file extension.', 'wp-plugin-info-card' ), array( 'status' => 400 ) );
+				}
+
+				// Save the image to the media library.
+				if ( ! function_exists( 'media_sideload_image' ) ) {
+					require_once ABSPATH . 'wp-admin/includes/image.php';
+					require_once ABSPATH . 'wp-admin/includes/file.php';
+					require_once ABSPATH . 'wp-admin/includes/media.php';
+				}
+				$attachment_id = media_sideload_image( $image_url, $plugin_page->ID, $image_caption, 'id' );
+
+				// Add order to attachment.
+				if ( ! is_wp_error( $attachment_id ) ) {
+					wp_update_post(
+						array(
+							'ID'           => $attachment_id,
+							'menu_order'   => $image_order,
+							'post_content' => $image_url,
+							'post_excerpt' => $image_caption,
+						)
+					);
+
+					// Update alt attribute.
+					update_post_meta( $attachment_id, '_wp_attachment_image_alt', $image_caption );
 				}
 			}
-			if ( ! $attachment_found ) {
-				$screenshots_to_process[] = array(
-					'id' => 0,
-					'image' => $screenshot['src'],
-					'caption' => $screenshot['caption'],
-					'order' => $order,
-				);
-			}
 		}
 
-		// If screenshots to process, return them.
-		if ( ! empty( $screenshots_to_process ) ) {
-			wp_send_json_success(
-				array(
-					'images' => $screenshots_to_process,
-					'plugin_page_id' => $plugin_page->ID,
-					'needs_sideload' => true,
-				)
-			);
+		// Set sideload flag.
+		$needs_sideload = $sideload_order < count( $screenshots );
+
+		// Return plugin data if no sideload needed.
+		$plugin_data = array();
+		if ( ! $needs_sideload ) {
+			$plugin_data = wppic_api_parser( 'plugin', $plugin_slug, 720, '', true, true );
 		}
-		
-		// No images to process.
+
 		wp_send_json_success(
 			array(
-				'images' => array(),
-				'plugin_page_id' => 0,
-				'needs_sideload' => false,
+				'sideloadOrder'    => absint( $sideload_order + 1 ),
+				'pluginPageId'     => $plugin_page->ID,
+				'needsSideload'    => $needs_sideload,
+				'totalScreenshots' => count( $screenshots ),
+				'pluginData'       => $plugin_data,
+			)
+		);
+	}
+
+	/**
+	 * Get a list of images for the plugin.
+	 *
+	 * @param WP_Rest $request REST request.
+	 */
+	public function get_plugin_images( $request ) {
+		$plugin_slug = $request->get_param( 'slug' );
+
+		$maybe_plugin_data = wp_cache_get( 'wppic_plugin_data_' . $plugin_slug, 'wppic' );
+		if ( false !== $maybe_plugin_data ) {
+			$plugin_data = $maybe_plugin_data;
+		} else {
+			$plugin_data = wppic_api_parser( 'plugin', $plugin_slug, 720, '', true, true );
+			wp_cache_set( 'wppic_plugin_data_' . $plugin_slug, $plugin_data, 'wppic', 3 * HOUR_IN_SECONDS );
+		}
+
+		$plugin_screenshots = Functions::get_plugin_screenshots( $plugin_slug );
+		$org_screenshots    = $plugin_data->screenshots ?? array();
+
+		$plugin_data->local_screenshots = $plugin_screenshots;
+
+		wp_send_json_success(
+			array(
+				'pluginData'           => $plugin_data,
+				'hasPluginScreenshots' => ! empty( $plugin_screenshots ),
+				'hasScreenshots'       => ! empty( $org_screenshots ),
 			)
 		);
 	}

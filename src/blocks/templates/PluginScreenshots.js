@@ -32,15 +32,18 @@ const PluginScreenshots = ( props ) => {
 		requires = props.tested;
 	}
 	let icon = '';
-	if ( props.icons.svg ) {
-		icon = props.icons.svg;
-	} else if ( props.icons[ '2x' ] ) {
-		icon = props.icons[ '2x' ];
-	} else if ( props.icons[ '1x' ] ) {
-		icon = props.icons[ '1x' ];
-	} else {
-		icon = props.defaultIcon;
+	if ( props.hasOwnProperty( 'icons' ) ) {
+		if ( props.icons.hasOwnProperty( 'svg' ) ) {
+			icon = props.icons.svg;
+		} else if ( props.icons.hasOwnProperty( '2x' ) ) {
+			icon = props.icons[ '2x' ];
+		} else if ( props.icons.hasOwnProperty( '1x' ) ) {
+			icon = props.icons[ '1x' ];
+		} else {
+			icon = props.defaultIcon;
+		}
 	}
+	
 
 	const bgImageStyles = {
 		backgroundImage: `url(${ icon })`,
