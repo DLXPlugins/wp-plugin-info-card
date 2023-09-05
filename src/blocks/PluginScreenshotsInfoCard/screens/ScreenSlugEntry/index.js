@@ -144,11 +144,10 @@ const SlugEntryScreen = (props) => {
 
 								if (isURL(clipboardData)) {
 									// Extract out the slug from the URL.
-									const urlRegex = /([^\/]*)\/$/g;
+									const urlRegex = /([^\/]*)\/$/;
 									const newSlug = urlRegex.exec(
 										clipboardData
 									)[1];
-									setSlug(newSlug)
 									setAttributes({
 										slug: newSlug,
 									});

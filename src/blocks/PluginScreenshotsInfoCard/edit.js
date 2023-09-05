@@ -276,7 +276,7 @@ const PluginScreenshotsInfoCard = ( props ) => {
 				return <ScreenImageLoader attributes={ attributes } setAttributes={ setAttributes } />;
 			case 'image-processor':
 				return <ScreenImageProcessor attributes={ attributes } setAttributes={ setAttributes } />;
-			case 'no-images-found':
+			case 'no-images':
 				return <ScreenNoImages attributes={ attributes } setAttributes={ setAttributes } />;
 			case 'plugin-preview':
 				return <ScreenPluginPreview attributes={ attributes } setAttributes={ setAttributes } />;
@@ -313,115 +313,7 @@ const PluginScreenshotsInfoCard = ( props ) => {
 		);
 	}
 
-	const block = (
-		<>
-			{ cardLoading && (
-			<>
-				<div className="wppic-loading-placeholder">
-					<div className="wppic-loading">
-						<Logo size="45" />
-						<br />
-						<div className="wppic-spinner">
-							<Spinner />
-						</div>
-					</div>
-				</div>
-			</>
-		) }
-		{ ! loading && ! cardLoading && (
-			<>
-				{ inspectorControls }
-				<BlockControls>
-					<ToolbarGroup>
-						<ToolbarButton
-							icon="edit"
-							title={ __(
-								'Edit and Configure',
-								'wp-plugin-info-card'
-							) }
-							onClick={ () => {
-								setLoading( true )
-								setCardLoading( false )
-							} }
-						/>
-					</ToolbarGroup>
-					<ToolbarGroup>
-						<ToolbarItem as="button">
-							{ ( toolbarItemHTMLProps ) => (
-								<DropdownMenu
-									toggleProps={ toolbarItemHTMLProps }
-									label={ __(
-										'Select Color Scheme',
-										'wp-plugin-info-card'
-									) }
-									icon="admin-customizer"
-								>
-									{ ( { onClose } ) => (
-										<>
-											<MenuItemsChoice
-												choices={ schemeOptions }
-												onSelect={ ( value ) => {
-													setAttributes( {
-														scheme: value,
-													} );
-													setScheme( value );
-													onClose();
-												} }
-												value={ scheme }
-											/>
-										</>
-									) }
-								</DropdownMenu>
-							) }
-						</ToolbarItem>
-					</ToolbarGroup>
-					<ToolbarGroup>
-						<ToolbarItem as="button">
-							{ ( toolbarItemHTMLProps ) => (
-								<DropdownMenu
-									toggleProps={ toolbarItemHTMLProps }
-									label={ __(
-										'Select a Layout',
-										'wp-plugin-info-card'
-									) }
-									icon="layout"
-								>
-									{ ( { onClose } ) => (
-										<>
-											<MenuItemsChoice
-												choices={ layoutOptions }
-												onSelect={ ( value ) => {
-													setAttributes( {
-														layout: value,
-													} );
-													setLayout( value );
-													onClose();
-												} }
-												value={ layout }
-											/>
-										</>
-									) }
-								</DropdownMenu>
-							) }
-						</ToolbarItem>
-					</ToolbarGroup>
-				</BlockControls>
-				<div
-					className={ classnames(
-						'is-placeholder',
-						layoutClass,
-						'wp-block-plugin-info-card',
-						`align${ align }`
-					) }
-				>
-					{ outputInfoCards( data ) }
-				</div>
-			</>
-		) }
-		</>
-	);
-
-	return <div { ...blockProps }>{block}{ getCurrentScreen() }</div>;
+	return <div { ...blockProps }>{ getCurrentScreen() }</div>;
 };
 
 export default PluginScreenshotsInfoCard;

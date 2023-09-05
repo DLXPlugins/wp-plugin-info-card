@@ -69,6 +69,9 @@ const ScreenImageLoader = (props) => {
 				const data = response.data.data;
 				if ( response.data.success ) {
 					if ( ! data.hasScreenshots ) {
+						setAttributes( {
+							assetData: data.pluginData,
+						} );
 						setAttributes(
 							{
 								screen: 'no-images',

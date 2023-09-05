@@ -38,7 +38,27 @@
     },
     "imageSize": {
       "type": "string",
-      "default": "medium"
+      "default": "thumbnail"
+    },
+    "iconStyle": {
+      "type": "string",
+      "default": "border"
+    },
+    "enableRoundedIcon": {
+      "type": "boolean",
+      "default": true
+    },
+    "colorTheme": {
+      "type": "string",
+      "default": "default"
+    },
+    "pluginTitle": {
+      "type": "string",
+      "default": ""
+    },
+    "enableContextMenu": {
+      "type": "boolean",
+      "default": true
     },
     "enableScreenshots": {
       "type": "boolean",
