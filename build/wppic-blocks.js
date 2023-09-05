@@ -7251,12 +7251,49 @@ __webpack_require__.r(__webpack_exports__);
 var ScreenPluginPreview = function ScreenPluginPreview(a) {
   var b = a.attributes,
     c = a.setAttributes;
-  var d = b.assetData;
+  var d = b.assetData,
+    e = b.enableScreenshots,
+    f = b.maxHeight,
+    g = b.imageSize;
 
   // Set the local inspector controls.
-  var e = /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null);
-  var f = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_templates_PluginScreenshots__WEBPACK_IMPORTED_MODULE_8__["default"], d));
-  return /*#__PURE__*/React.createElement(React.Fragment, null, e, f);
+  var h = /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Screenshot Customization', 'wp-plugin-info-card'),
+    initialOpen: true
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Enable Screenshots', 'wp-plugin-info-card'),
+    checked: e,
+    onChange: function onChange(a) {
+      c({
+        enableScreenshots: a
+      });
+    },
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Enable or disable screenshots.', 'wp-plugin-info-card')
+  })), e && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Image Size', 'wp-plugin-info-card'),
+    value: g,
+    onChange: function onChange(a) {
+      c({
+        imageSize: a
+      });
+    },
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Set the image size of the screenshots.', 'wp-plugin-info-card'),
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Thumbnail', 'wp-plugin-info-card'),
+      value: 'thumbnail'
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Medium', 'wp-plugin-info-card'),
+      value: 'medium'
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Large', 'wp-plugin-info-card'),
+      value: 'large'
+    }]
+  }))));
+  var i = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_templates_PluginScreenshots__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    assetData: d,
+    attributes: b
+  }));
+  return /*#__PURE__*/React.createElement(React.Fragment, null, h, i);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScreenPluginPreview);
 
@@ -8792,6 +8829,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/download-cloud.js");
 /* harmony import */ var _splidejs_react_splide__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @splidejs/react-splide */ "./node_modules/@splidejs/react-splide/dist/js/react-splide.esm.js");
 /* harmony import */ var _components_WordPressIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/WordPressIcon */ "./src/blocks/components/WordPressIcon.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _defineProperty(a, b, c) { b = _toPropertyKey(b); if (b in a) { Object.defineProperty(a, b, { value: c, enumerable: true, configurable: true, writable: true }); } else { a[b] = c; } return a; }
+function _toPropertyKey(a) { var b = _toPrimitive(a, "string"); return (typeof b === "undefined" ? "undefined" : _typeof(b)) === "symbol" ? b : String(b); }
+function _toPrimitive(a, b) { if ((typeof a === "undefined" ? "undefined" : _typeof(a)) !== "object" || a === null) return a; var c = a[Symbol.toPrimitive]; if (c !== undefined) { var d = c.call(a, b || "default"); if ((typeof d === "undefined" ? "undefined" : _typeof(d)) !== "object") return d; throw new TypeError("@@toPrimitive must return a primitive value."); } return (b === "string" ? String : Number)(a); }
 function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(a, b) { if (!a) return; if (typeof a === "string") return _arrayLikeToArray(a, b); var c = Object.prototype.toString.call(a).slice(8, -1); if (c === "Object" && a.constructor) c = a.constructor.name; if (c === "Map" || c === "Set") return Array.from(a); if (c === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(c)) return _arrayLikeToArray(a, b); }
@@ -8808,68 +8849,67 @@ var HtmlToReactParser = (__webpack_require__(/*! html-to-react */ "./node_module
 
 var __ = wp.i18n.__;
 var PluginScreenshots = function PluginScreenshots(a) {
-  var b;
-  var c = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
-    d = _slicedToArray(c, 2),
-    e = d[0],
-    f = d[1];
-  var g = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(a.rating),
+  var b, c;
+  var d = a.assetData,
+    e = a.attributes;
+  var f = e.maxHeight;
+  var g = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
     h = _slicedToArray(g, 2),
     i = h[0],
     j = h[1];
-  var k = classnames__WEBPACK_IMPORTED_MODULE_0___default()({
+  var k = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(d.rating),
+    l = _slicedToArray(k, 2),
+    m = l[0],
+    n = l[1];
+  var o = classnames__WEBPACK_IMPORTED_MODULE_0___default()({
     large: true,
     'wp-pic-plugin-screenshots-wrapper': true,
     'wp-pic-card': true
   });
-  var l = classnames__WEBPACK_IMPORTED_MODULE_0___default()('scheme', {
+  var p = classnames__WEBPACK_IMPORTED_MODULE_0___default()('scheme', {
     'wp-pic-plugin-screenshots': true,
     'wp-pic-screenshots': true,
     large: true,
     plugin: true,
-    'wp-pic-has-screenshots': null !== e && e.length > 0 ? true : false
+    'wp-pic-has-screenshots': null !== i && i.length > 0 ? true : false
   });
   // WordPress Requires.
-  var m = a.requires;
-  if (m && validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_5___default()(m)) {
-    m = 'WP ' + m + '+';
+  var q = d.requires;
+  if (q && validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_5___default()(q)) {
+    q = 'WP ' + q + '+';
   } else {
-    m = a.tested;
+    q = d.tested;
   }
-  var n = '';
-  if (a.hasOwnProperty('icons')) {
-    if (a.icons.hasOwnProperty('svg')) {
-      n = a.icons.svg;
-    } else if (a.icons.hasOwnProperty('2x')) {
-      n = a.icons['2x'];
-    } else if (a.icons.hasOwnProperty('1x')) {
-      n = a.icons['1x'];
+  var r = '';
+  if (d.hasOwnProperty('icons')) {
+    if (d.icons.hasOwnProperty('svg')) {
+      r = d.icons.svg;
+    } else if (d.icons.hasOwnProperty('2x')) {
+      r = d.icons['2x'];
+    } else if (d.icons.hasOwnProperty('1x')) {
+      r = d.icons['1x'];
     } else {
-      n = a.defaultIcon;
+      r = d.defaultIcon;
     }
   }
-  var o = (b = a === null || a === void 0 ? void 0 : a.local_screenshots) !== null && b !== void 0 ? b : [];
-  console.log(Object.values(o));
-  var p = {
-    backgroundImage: "url(".concat(n, ")"),
+  var s = (b = d === null || d === void 0 ? void 0 : d.local_screenshots) !== null && b !== void 0 ? b : [];
+  var t = {
+    backgroundImage: "url(".concat(r, ")"),
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover'
   };
-  var q = new HtmlToReactParser();
-  var r = i / 20;
+  var u = new HtmlToReactParser();
+  var v = m / 20;
   return /*#__PURE__*/React.createElement("div", {
-    className: k,
-    style: {
-      maxWidth: '400px'
-    }
+    className: o
   }, /*#__PURE__*/React.createElement("div", {
-    className: l
+    className: p
   }, /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-card"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-avatar-wrapper"
   }, /*#__PURE__*/React.createElement("a", {
-    href: a.url,
+    href: d.url,
     onClick: function onClick(a) {
       return a.preventDefault();
     },
@@ -8877,27 +8917,27 @@ var PluginScreenshots = function PluginScreenshots(a) {
     rel: "noopener noreferrer",
     className: "wp-pic-plugin-screenshots-avatar"
   }, /*#__PURE__*/React.createElement("img", {
-    src: n,
+    src: r,
     width: "125",
     height: "125",
-    alt: a.name
+    alt: d.name
   }))), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-title"
-  }, /*#__PURE__*/React.createElement("h2", null, a.name)), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h2", null, d.name)), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-author"
-  }, "".concat(__('By:', 'wp-plugin-info-card'), " ").concat(a.author)), /*#__PURE__*/React.createElement("div", {
+  }, "".concat(__('By:', 'wp-plugin-info-card'), " ").concat(d.author)), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-rating"
   }, /*#__PURE__*/React.createElement(react_simple_star_rating__WEBPACK_IMPORTED_MODULE_2__.Rating, {
-    initialValue: r,
+    initialValue: v,
     readonly: true,
     allowFraction: true,
     allowHover: false,
     disableFillHover: true
   }), /*#__PURE__*/React.createElement("span", {
     className: "wp-pic-plugin-screenshots-rating-count"
-  }, a.num_ratings.toLocaleString('en'), " ", __('Ratings', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("div", {
+  }, d.num_ratings.toLocaleString('en'), " ", __('Ratings', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-description"
-  }, q.parse(a.short_description)), /*#__PURE__*/React.createElement("div", {
+  }, u.parse(d.short_description)), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-meta"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-meta-item"
@@ -8905,47 +8945,42 @@ var PluginScreenshots = function PluginScreenshots(a) {
     className: "wp-pic-plugin-screenshots-meta-item-svg"
   }, /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], null)), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-meta-item-label"
-  }, "v", a.version)), /*#__PURE__*/React.createElement("div", {
+  }, "v", d.version)), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-meta-item"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-meta-item-svg"
   }, /*#__PURE__*/React.createElement(_components_WordPressIcon__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-meta-item-label"
-  }, __('Requires', 'wp-plugin-info-card'), " ", "".concat(m))), /*#__PURE__*/React.createElement("div", {
+  }, __('Requires', 'wp-plugin-info-card'), " ", "".concat(q))), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-meta-item"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-meta-item-svg"
   }, /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-meta-item-label"
-  }, a.active_installs.toLocaleString('en'), " ", __('Installs', 'wp-plugin-info-card')))), Object.values(o).length > 0 && /*#__PURE__*/React.createElement("div", {
+  }, d.active_installs.toLocaleString('en'), " ", __('Installs', 'wp-plugin-info-card')))), Object.values(s).length > 0 && e.enableScreenshots && /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-images"
   }, /*#__PURE__*/React.createElement(_splidejs_react_splide__WEBPACK_IMPORTED_MODULE_3__.Splide, {
-    options: {
+    options: (c = {
       type: 'loop',
       width: '100%',
       gap: '20px',
       rewind: true,
-      perPage: Object.values(o).length > 3 ? 3 : Object.values(o).length,
+      perPage: Object.values(s).length > 3 ? 3 : Object.values(s).length,
       perMove: 1,
-      arrows: Object.values(o).length > 3 ? true : false,
+      arrows: Object.values(s).length > 3 ? true : false,
       pagination: false,
       drag: true,
       autoplay: false,
-      lazyload: true,
-      breakpoints: {
-        '400': {
-          perPage: 1,
-          width: '100%',
-          fixedWidth: '33.33333%'
-        },
-        '800': {
-          perPage: 3,
-          width: '33.3333%'
-        }
+      lazyload: true
+    }, _defineProperty(c, "perPage", 2), _defineProperty(c, "mediaQuery", 'min'), _defineProperty(c, "breakpoints", {
+      '500': {
+        perPage: 3
+      },
+      '625': {
+        perPage: 4
       }
-    }
-  }, Object.values(o).map(function (a, b) {
-    console.log(a);
+    }), c)
+  }, Object.values(s).map(function (a, b) {
     return /*#__PURE__*/React.createElement(_splidejs_react_splide__WEBPACK_IMPORTED_MODULE_3__.SplideSlide, {
       className: "wp-pic-plugin-screenshots-image",
       key: b
@@ -8954,7 +8989,7 @@ var PluginScreenshots = function PluginScreenshots(a) {
       "data-fancybox": true,
       "data-caption": a.caption
     }, /*#__PURE__*/React.createElement("img", {
-      src: a.thumbnail,
+      src: a[e.imageSize],
       alt: a.alt
     })));
   }))))));
@@ -19353,7 +19388,7 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Plugin Screenshots Info Card","apiVersion":2,"name":"wp-plugin-info-card/plugin-screenshots-info-card","category":"wp-plugin-info-card","icon":"<svg viewBox=\'0 0 80 80\'><path d=\'M47,41.5c0,3.9-3.1,7-7,7s-7-3.1-7-7s3.1-7,7-7S47,37.6,47,41.5z M59,31.5v20c0,1.7-1.3,3-3,3H24c-1.7,0-3-1.3-3-3v-20 c0-1.7,1.3-3,3-3h8c0.4,0,0.8-0.3,0.9-0.7l1.8-5.3h10.6l1.8,5.3c0.1,0.4,0.5,0.7,0.9,0.7h8C57.7,28.5,59,29.8,59,31.5z M49,41.5 c0-5-4-9-9-9s-9,4-9,9s4,9,9,9S49,46.5,49,41.5z M76,40c0,19.9-16.1,36-36,36S4,59.9,4,40S20.1,4,40,4S76,20.1,76,40z M61,31.5 c0-2.8-2.2-5-5-5h-7.3l-1.8-5.3c-0.1-0.4-0.5-0.7-0.9-0.7H34c-0.4,0-0.8,0.3-0.9,0.7l-1.8,5.3H24c-2.8,0-5,2.2-5,5v20 c0,2.8,2.2,5,5,5h32c2.8,0,5-2.2,5-5V31.5z\'/></svg>","description":"Add a beautiful plugin card with screenshots.","keywords":["wp plugin","plugin","card","theme","screenshot"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"screen":{"type":"string","default":"slug-entry"},"assetData":{"type":"object","default":{}},"type":{"type":"string","default":"plugin"},"slug":{"type":"string","default":"wp-plugin-info-card"},"loading":{"type":"boolean","default":true},"imageSource":{"type":"string","default":"local"},"images":{"type":"array","default":[]}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["wide","center","full"],"className":true},"editorScript":"wp_plugin_info_card-cgb-block-js","editorStyle":["wp_plugin_info_card-cgb-block-editor-css","wp_plugin_info_card-cgb-style-css"],"style":"has-style-frontend-css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Plugin Screenshots Info Card","apiVersion":2,"name":"wp-plugin-info-card/plugin-screenshots-info-card","category":"wp-plugin-info-card","icon":"<svg viewBox=\'0 0 80 80\'><path d=\'M47,41.5c0,3.9-3.1,7-7,7s-7-3.1-7-7s3.1-7,7-7S47,37.6,47,41.5z M59,31.5v20c0,1.7-1.3,3-3,3H24c-1.7,0-3-1.3-3-3v-20 c0-1.7,1.3-3,3-3h8c0.4,0,0.8-0.3,0.9-0.7l1.8-5.3h10.6l1.8,5.3c0.1,0.4,0.5,0.7,0.9,0.7h8C57.7,28.5,59,29.8,59,31.5z M49,41.5 c0-5-4-9-9-9s-9,4-9,9s4,9,9,9S49,46.5,49,41.5z M76,40c0,19.9-16.1,36-36,36S4,59.9,4,40S20.1,4,40,4S76,20.1,76,40z M61,31.5 c0-2.8-2.2-5-5-5h-7.3l-1.8-5.3c-0.1-0.4-0.5-0.7-0.9-0.7H34c-0.4,0-0.8,0.3-0.9,0.7l-1.8,5.3H24c-2.8,0-5,2.2-5,5v20 c0,2.8,2.2,5,5,5h32c2.8,0,5-2.2,5-5V31.5z\'/></svg>","description":"Add a beautiful plugin card with screenshots.","keywords":["wp plugin","plugin","card","theme","screenshot"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"screen":{"type":"string","default":"slug-entry"},"assetData":{"type":"object","default":{}},"type":{"type":"string","default":"plugin"},"slug":{"type":"string","default":"highlight-and-share"},"loading":{"type":"boolean","default":true},"imageSize":{"type":"string","default":"medium"},"enableScreenshots":{"type":"boolean","default":true},"imageSource":{"type":"string","default":"local"},"images":{"type":"array","default":[]},"align":{"type":"string","default":"center"}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["wide","center","full"],"className":true},"editorScript":"wp_plugin_info_card-cgb-block-js","editorStyle":["wp_plugin_info_card-cgb-block-editor-css","wp_plugin_info_card-cgb-style-css"],"style":"has-style-frontend-css"}');
 
 /***/ }),
 

@@ -16,6 +16,7 @@ import {
 	ButtonGroup,
 	Button,
 	Modal,
+	SelectControl,
 	ToggleControl,
 	Toolbar,
 	ToolbarItem,
@@ -46,17 +47,58 @@ const ScreenPluginPreview = (props) => {
 
 	const {
 		assetData,
+		enableScreenshots,
+		maxHeight,
+		imageSize,
 	} = attributes;
 
 	// Set the local inspector controls.
 	const localInspectorControls = (
-		<InspectorControls />
+		<InspectorControls>
+			<PanelBody
+				title={ __( 'Screenshot Customization', 'wp-plugin-info-card' ) }
+				initialOpen={ true }
+			>
+				<PanelRow>
+					<ToggleControl
+						label={ __( 'Enable Screenshots', 'wp-plugin-info-card' ) }
+						checked={ enableScreenshots }
+						onChange={ ( value ) => {
+							setAttributes( { enableScreenshots: value } );
+						} }
+						help={ __( 'Enable or disable screenshots.', 'wp-plugin-info-card' ) }
+					/>
+				</PanelRow>
+				{
+					enableScreenshots &&
+					<>
+							<SelectControl
+								label={ __( 'Image Size', 'wp-plugin-info-card' ) }
+								value={ imageSize }
+								onChange={ ( value ) => {
+									setAttributes( { imageSize: value } );
+								} }
+								help={ __( 'Set the image size of the screenshots.', 'wp-plugin-info-card' ) }
+								options={
+									[
+										{ label: __( 'Thumbnail', 'wp-plugin-info-card' ), value: 'thumbnail' },
+										{ label: __( 'Medium', 'wp-plugin-info-card' ), value: 'medium' },
+										{ label: __( 'Large', 'wp-plugin-info-card' ), value: 'large' },
+									]
+								}
+							/>
+					</>
+				}
+				
+			</PanelBody>
+		</InspectorControls>
 	);
 
 	const block = (
 		<>
 			<PluginScreenshots
-				{ ...assetData }
+				assetData={ assetData }
+				attributes={ attributes }
 			/>
 		</>
 	);

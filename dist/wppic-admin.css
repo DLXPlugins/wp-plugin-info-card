@@ -2650,9 +2650,9 @@ a.wp-pic-credit:focus:after {
 }
 
 .wp-pic-plugin-screenshots-meta {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .wp-pic-plugin-screenshots-rating-count {
@@ -2667,6 +2667,10 @@ a.wp-pic-credit:focus:after {
 }
 .wp-pic-plugin-screenshots-meta-item .wp-pic-plugin-screenshots-meta-item-svg {
   line-height: 0;
+}
+
+.wp-pic-plugin-screenshots-wrapper {
+  max-width: 625px;
 }
 
 .wp-pic-plugin-screenshots-images {

@@ -24,9 +24,17 @@
 		},
 		"slug": {
 			"type": "string",
-			"default": "wp-plugin-info-card"
+			"default": "highlight-and-share"
 		},
 		"loading": {
+			"type": "boolean",
+			"default": true
+		},
+		"imageSize": {
+			"type": "string",
+			"default": "medium"
+		},
+		"enableScreenshots": {
 			"type": "boolean",
 			"default": true
 		},
@@ -37,6 +45,10 @@
 		"images": {
 			"type": "array",
 			"default": []
+		},
+		"align": {
+			"type": "string",
+			"default": "center"
 		}
 		
 	},

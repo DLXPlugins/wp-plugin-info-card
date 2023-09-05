@@ -649,6 +649,8 @@ class Functions {
 			foreach ( $images as $image ) {
 				$images_array[ $image->menu_order ] = array(
 					'thumbnail' => wp_get_attachment_image_src( $image->ID, 'thumbnail' )[0],
+					'medium'    => wp_get_attachment_image_src( $image->ID, 'medium' )[0],
+					'large'     => wp_get_attachment_image_src( $image->ID, 'large' )[0],
 					'full'      => wp_get_attachment_image_src( $image->ID, 'full' )[0],
 					'caption'   => $image->post_excerpt,
 					'alt'       => $image->post_excerpt,
@@ -673,6 +675,8 @@ class Functions {
 					// Add in any missing images with .org version.
 					$images_array[ $screenshot_order ] = array(
 						'thumbnail' => $screenshot['src'],
+						'medium'    => $screenshot['src'],
+						'large'     => $screenshot['src'],
 						'full'      => $screenshot['src'],
 						'caption'   => $screenshot['caption'],
 						'alt'       => $screenshot['caption'],
