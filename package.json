@@ -24,7 +24,6 @@
     "build": "wp-scripts build wppic-blocks=./src/index.js --env mode=production"
   },
   "dependencies": {
-    "@splidejs/react-splide": "^0.7.12",
     "babel-loader": "^8.2.2",
     "react-content-loader": "^6.2.1",
     "react-simple-star-rating": "^5.1.7",
@@ -37,6 +36,7 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@splidejs/react-splide": "^0.7.12",
     "@wordpress/date": "^4.41.0",
     "@wordpress/eslint-plugin": "^14.3.0",
     "@wordpress/prettier-config": "^2.7.0",
