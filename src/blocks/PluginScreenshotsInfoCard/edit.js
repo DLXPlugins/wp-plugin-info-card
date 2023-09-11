@@ -312,7 +312,7 @@ const PluginScreenshotsInfoCard = ( props ) => {
 			case 'no-images':
 				return <ScreenNoImages attributes={ attributes } setAttributes={ setAttributes } />;
 			case 'plugin-preview':
-				return <ScreenPluginPreview attributes={ attributes } setAttributes={ setAttributes } />;
+				return <ScreenPluginPreview attributes={ attributes } setAttributes={ setAttributes } clientId={ clientId } />;
 		}
 		return null;
 	};

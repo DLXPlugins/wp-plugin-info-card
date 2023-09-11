@@ -83,6 +83,10 @@
     "align": {
       "type": "string",
       "default": "center"
+    },
+    "colorBackground": {
+      "type": "string",
+      "default": "#FFFFFF"
     }
   },
   "example": {
@@ -102,7 +106,8 @@
   "editorScript": "wp_plugin_info_card-cgb-block-js",
   "editorStyle": [
     "wp_plugin_info_card-cgb-block-editor-css",
-    "wp_plugin_info_card-cgb-style-css"
+    "wp_plugin_info_card-cgb-style-css",
+    "wp-plugin-info-card-block-editor-css-inline"
   ],
   "style": "has-style-frontend-css"
 }

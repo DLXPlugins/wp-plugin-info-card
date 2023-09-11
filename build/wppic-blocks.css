@@ -1,0 +1,129 @@
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/@wordpress/scripts/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/components/PresetButton/editor.scss ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.wppic-screenshot-popover-wrapper {
+  min-width: 625px;
+}
+
+.wppic-screenshot-presets-button-group {
+  padding-right: 25px;
+}
+.wppic-screenshot-presets-button-group .components-button-group {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-gap: 15px;
+  row-gap: 15px;
+}
+.wppic-screenshot-presets-button-group .components-button-group button {
+  text-align: center;
+  justify-content: center;
+}
+
+.wppic-preset-popover {
+  position: absolute !important;
+}
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/@wordpress/scripts/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/components/ColorPicker/editor.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/* Color Component (forked from @GenerateBlocks) */
+.wppic-component-color-picker-wrapper,
+.wppic-admin__tabs--content-inner .components-base-control.wppic-component-color-picker-wrapper {
+  text-align: left;
+  margin-bottom: 16px;
+  margin-top: 2px;
+}
+.wppic-component-color-picker-wrapper > .components-base-control__field,
+.wppic-admin__tabs--content-inner .components-base-control.wppic-component-color-picker-wrapper > .components-base-control__field {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 30px;
+  row-gap: 2;
+  margin: 0 auto;
+  justify-content: space-between;
+  text-align: left;
+  font-weight: 600;
+  align-items: center;
+}
+.wppic-component-color-picker-wrapper > .components-base-control__field .components-color-palette__item-wrapper,
+.wppic-admin__tabs--content-inner .components-base-control.wppic-component-color-picker-wrapper > .components-base-control__field .components-color-palette__item-wrapper {
+  margin: 0;
+}
+.wppic-component-color-picker-wrapper .wppic-color-component-label,
+.wppic-admin__tabs--content-inner .components-base-control.wppic-component-color-picker-wrapper .wppic-color-component-label {
+  line-height: 1.2;
+  padding: 0;
+  margin: 0;
+}
+
+.components-popover.wppic-component-color-picker .wppic-component-color-picker-palette {
+  padding: 0 16px;
+}
+.components-popover.wppic-component-color-picker .wppic-component-color-picker-palette button.components-circular-option-picker__option {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+}
+.components-popover.wppic-component-color-picker .wppic-component-color-picker-palette button.components-circular-option-picker__option .components-popover {
+  display: none;
+}
+.components-popover.wppic-component-color-picker .wppic-component-color-picker-palette .components-circular-option-picker__swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.components-popover.wppic-component-color-picker .wppic-component-color-picker-palette .components-circular-option-picker__option-wrapper {
+  display: inline-block;
+  height: 28px;
+  width: 28px;
+  vertical-align: top;
+  transition: 100ms transform ease;
+}
+.components-popover.wppic-component-color-picker .components-base-control__field,
+.components-popover.wppic-component-color-picker .components-color-palette {
+  margin: 0;
+}
+.components-popover.wppic-component-color-picker .react-colorful {
+  width: unset !important; /* Override inline style */
+}
+.components-popover.wppic-component-color-picker .components-color-picker {
+  padding: 5px;
+  width: unset !important; /* Override inline style */
+}
+.components-popover.wppic-component-color-picker .components-color-picker__inputs-toggle {
+  display: none;
+}
+.components-popover.wppic-component-color-picker .components-color-picker__body {
+  padding-bottom: 0;
+}
+.components-popover.wppic-component-color-picker .components-popover__content {
+  padding: 10px;
+  width: 300px;
+}
+.components-popover.wppic-component-color-picker .components-color-picker__inputs-fields {
+  margin-right: 0;
+}
+.components-popover.wppic-component-color-picker .components-color-clear-color {
+  text-align: right;
+  padding: 0 16px;
+  color: var(--quotes-dlx-admin--color-dark);
+}
+
+.components-circular-option-picker__option.is-pressed {
+  box-shadow: inset 0 0 0 4px !important;
+}
+
+.wppic-component-color-opacity {
+  display: flex;
+  padding: 0 16px;
+  margin: 10px 0;
+}
+.wppic-component-color-opacity svg {
+  width: 28px;
+  height: 28px;
+}
+.wppic-component-color-opacity .components-range-control {
+  flex-grow: 1;
+  padding-left: 5px;
+}
+
+/*# sourceMappingURL=wppic-blocks.css.map*/

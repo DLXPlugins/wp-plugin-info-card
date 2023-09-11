@@ -29,6 +29,7 @@ class Shortcodes {
 		add_action( 'wp_ajax_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
 		add_action( 'wp_ajax_nopriv_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
 		add_action( 'init', array( static::class, 'register_screenshots_post_type' ) );
+		add_action( 'init', array( static::class, 'register_screenshots_presets_post_type' ) );
 		return $self;
 	}
 
@@ -62,6 +63,38 @@ class Shortcodes {
 		);
 
 		register_post_type( 'wppic_plugins', $args );
+	}
+
+	public static function register_screenshots__presets_post_type() {
+		$labels = array(
+			'name'               => __( 'Presets', 'wp-plugin-info-card' ),
+			'singular_name'      => __( 'Presets', 'wp-plugin-info-card' ),
+			'add_new'            => __( 'Add New', 'wp-plugin-info-card' ),
+			'add_new_item'       => __( 'Add New Preset', 'wp-plugin-info-card' ),
+			'edit_item'          => __( 'Edit Preset', 'wp-plugin-info-card' ),
+			'new_item'           => __( 'New Preset', 'wp-plugin-info-card' ),
+			'all_items'          => __( 'All Presets', 'wp-plugin-info-card' ),
+			'view_item'          => __( 'View Preset', 'wp-plugin-info-card' ),
+			'search_items'       => __( 'Search Presets', 'wp-plugin-info-card' ),
+			'not_found'          => __( 'No Presets found', 'wp-plugin-info-card' ),
+			'not_found_in_trash' => __( 'No Presets found in Trash', 'wp-plugin-info-card' ),
+			'parent_item_colon'  => '',
+			'menu_name'          => __( 'Presets', 'wp-plugin-info-card' ),
+		);
+
+		$args = array(
+			'labels'                  => $labels,
+			'public'                  => false,
+			'publicly_queryable'      => false,
+			'show_ui'                 => false,
+			'show_in_menu'            => false,
+			'query_var'               => false,
+			'rewrite'                 => false,
+			'dlx_photo_block_archive' => false,
+			'hierarchical'            => false,
+		);
+
+		register_post_type( 'wppic_screenshot_presets', $args );
 	}
 
 	/**

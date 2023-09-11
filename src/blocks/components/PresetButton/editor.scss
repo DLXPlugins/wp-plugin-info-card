@@ -1,0 +1,19 @@
+.wppic-screenshot-popover-wrapper {
+	min-width: 625px;
+}
+.wppic-screenshot-presets-button-group {
+	padding-right: 25px;
+	.components-button-group {
+		display: grid;
+		grid-template-columns: 50% 50%;
+		grid-gap: 15px;
+		row-gap: 15px;
+		button {
+			text-align: center;
+			justify-content: center;
+		}
+	}
+}
+.wppic-preset-popover {
+	position: absolute !important;
+}
