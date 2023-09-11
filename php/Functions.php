@@ -425,6 +425,43 @@ class Functions {
 	}
 
 	/**
+	 * Retrieve a theme's color palette.
+	 *
+	 * @return array {
+	 *   @type string $name  The color name.
+	 *   @type string $slug  The color slug.
+	 *   @type string $color The color hex value.
+	 * }
+	 */
+	public static function get_theme_color_palette() {
+		$color_palette = array();
+		$settings      = \WP_Theme_JSON_Resolver::get_theme_data()->get_settings();
+		if ( isset( $settings['color']['palette']['theme'] ) ) {
+			$color_palette = $settings['color']['palette']['theme'];
+		}
+
+		// If empty color palette, try to get from theme supports.
+		if ( empty( $color_palette ) ) {
+			$color_palette = get_theme_support( 'editor-color-palette' );
+			if ( ! empty( $color_palette ) ) {
+				$color_palette = $color_palette[0];
+			}
+		}
+
+		/**
+		 * Filter the color palette used by the plugin.
+		 *
+		 * @param array $color_palette {
+		 *   @type string $name  The color name.
+		 *   @type string $slug  The color slug.
+		 *   @type string $color The color hex value.
+		 * }
+		 */
+		$color_palette = apply_filters( 'wppic_theme_color_palette', $color_palette );
+		return $color_palette;
+	}
+
+	/**
 	 * Returns appropriate html for KSES.
 	 *
 	 * @param bool $svg         Whether to add SVG data to KSES.

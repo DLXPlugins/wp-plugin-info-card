@@ -16,6 +16,14 @@
   "version": "1.0.0",
   "textdomain": "wp-plugin-info-card",
   "attributes": {
+    "uniqueId": {
+      "type": "string",
+      "default": ""
+    },
+    "preview": {
+      "type": "boolean",
+      "default": false
+    },
     "screen": {
       "type": "string",
       "default": "slug-entry"

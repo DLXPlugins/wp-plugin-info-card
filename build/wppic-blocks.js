@@ -5467,9 +5467,8 @@ var WPPluginInfoCard = function WPPluginInfoCard(a) {
       src: wppic.wppic_preview,
       alt: "",
       style: {
-        height: '415px',
-        width: 'auto',
-        textAlign: 'center'
+        width: '100%',
+        height: 'auto'
       }
     }));
   }
@@ -6439,103 +6438,134 @@ var _wp$blockEditor = wp.blockEditor,
 
 
 
+
+// For storing unique IDs.
+var uniqueIds = [];
 var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
   var b = a.attributes,
-    c = a.setAttributes;
-  var d = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(b.type),
-    e = _slicedToArray(d, 2),
-    f = e[0],
-    g = e[1];
-  var h = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(b.slug),
-    i = _slicedToArray(h, 2),
-    j = i[0],
-    k = i[1];
-  var l = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(true),
-    m = _slicedToArray(l, 2),
-    n = m[0],
-    o = m[1];
-  var p = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false),
-    q = _slicedToArray(p, 2),
-    r = q[0],
-    s = q[1];
-  var t = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(b.image),
-    u = _slicedToArray(t, 2),
-    v = u[0],
-    w = u[1];
-  var x = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(b.containerid),
-    y = _slicedToArray(x, 2),
-    z = y[0],
-    A = y[1];
-  var B = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(b.scheme),
-    C = _slicedToArray(B, 2),
-    D = C[0],
-    E = C[1];
-  var F = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(b.layout),
-    G = _slicedToArray(F, 2),
-    H = G[0],
-    I = G[1];
-  var J = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(true),
-    K = _slicedToArray(J, 2),
-    L = K[0],
-    M = K[1];
-  var N = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(b.preview),
-    O = _slicedToArray(N, 2),
-    P = O[0],
-    Q = O[1];
-  var R = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(b.assetData),
-    S = _slicedToArray(R, 2),
-    T = S[0],
-    U = S[1];
-  var V = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(b.align),
-    W = _slicedToArray(V, 2),
-    X = W[0],
-    Y = W[1];
-  var Z = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false),
-    $ = _slicedToArray(Z, 2),
-    _ = $[0],
-    aa = $[1];
-  var ba = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(b.screen),
-    ca = _slicedToArray(ba, 2),
-    da = ca[0],
-    ea = ca[1];
-  var fa = function loadData() {
-    o(false);
-    s(true);
+    c = a.setAttributes,
+    d = a.clientId;
+  var e = b.uniqueId;
+  var f = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(b.type),
+    g = _slicedToArray(f, 2),
+    h = g[0],
+    i = g[1];
+  var j = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(b.slug),
+    k = _slicedToArray(j, 2),
+    l = k[0],
+    m = k[1];
+  var n = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(true),
+    o = _slicedToArray(n, 2),
+    p = o[0],
+    q = o[1];
+  var r = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false),
+    s = _slicedToArray(r, 2),
+    t = s[0],
+    u = s[1];
+  var v = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(b.image),
+    w = _slicedToArray(v, 2),
+    x = w[0],
+    y = w[1];
+  var z = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(b.containerid),
+    A = _slicedToArray(z, 2),
+    B = A[0],
+    C = A[1];
+  var D = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(b.scheme),
+    E = _slicedToArray(D, 2),
+    F = E[0],
+    G = E[1];
+  var H = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(b.layout),
+    I = _slicedToArray(H, 2),
+    J = I[0],
+    K = I[1];
+  var L = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(true),
+    M = _slicedToArray(L, 2),
+    N = M[0],
+    O = M[1];
+  var P = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(b.preview),
+    Q = _slicedToArray(P, 2),
+    R = Q[0],
+    S = Q[1];
+  var T = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(b.assetData),
+    U = _slicedToArray(T, 2),
+    V = U[0],
+    W = U[1];
+  var X = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(b.align),
+    Y = _slicedToArray(X, 2),
+    Z = Y[0],
+    $ = Y[1];
+  var _ = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false),
+    aa = _slicedToArray(_, 2),
+    ba = aa[0],
+    ca = aa[1];
+  var da = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(b.screen),
+    ea = _slicedToArray(da, 2),
+    fa = ea[0],
+    ga = ea[1];
+  if (R) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: 'center'
+      }
+    }, /*#__PURE__*/React.createElement("img", {
+      src: wppic.screenshots_card_preview,
+      alt: "",
+      style: {
+        width: '100%',
+        height: 'auto'
+      }
+    }));
+  }
+  var ha = function loadData() {
+    q(false);
+    u(true);
     var a = wppic.rest_url + 'wppic/v2/get_data';
-    axios__WEBPACK_IMPORTED_MODULE_0___default().get(a + "?type=".concat(f, "&slug=").concat(encodeURIComponent(j))).then(function (a) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get(a + "?type=".concat(h, "&slug=").concat(encodeURIComponent(l))).then(function (a) {
       // Now Set State
       c({
         assetData: a.data.data
       });
-      U(a.data.data);
-      aa(a.data.data.hasOwnProperty('screenshots'));
-      s(false);
+      W(a.data.data);
+      ca(a.data.data.hasOwnProperty('screenshots'));
+      u(false);
     });
   };
-  var ga = function pluginOnClick(a, b) {
-    fa();
-  };
+
+  /**
+   * Get a unique ID for the block for inline styling if necessary.
+   */
   (0,react__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
-    if (T.length <= 0) {
+    if (null === e || '' === e || uniqueIds.includes(e)) {
+      var a = 'wppic-' + d.substr(2, 9).replace('-', '');
+      c({
+        uniqueId: a
+      });
+      uniqueIds.push(a);
+    } else {
+      uniqueIds.push(e);
+    }
+  }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
+    if (V.length <= 0) {
       return;
     }
-    s(false);
-  }, [T]);
-  var ha = [{
+    u(false);
+  }, [V]);
+  var ia = [{
     icon: 'edit',
     title: __('Edit and Configure', 'wp-plugin-info-card'),
     onClick: function onClick() {
-      return o(true);
+      return q(true);
     }
   }];
-  var ia = [{
+  var ja = [{
     value: 'plugin',
     label: __('Plugin', 'wp-plugin-info-card')
   }, {
     value: 'theme',
     label: __('Theme', 'wp-plugin-info-card')
   }];
-  var ja = [{
+  var ka = [{
     value: 'none',
     label: __('None', 'wp-plugin-info-card')
   }, {
@@ -6545,14 +6575,14 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
     value: 'after',
     label: __('After', 'wp-plugin-info-card')
   }];
-  var ka = [{
+  var la = [{
     value: 'false',
     label: __('No', 'wp-plugin-info-card')
   }, {
     value: 'true',
     label: __('Yes', 'wp-plugin-info-card')
   }];
-  var la = [{
+  var ma = [{
     value: 'default',
     label: __('Default', 'wp-plugin-info-card')
   }, {
@@ -6598,7 +6628,7 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
     value: 'scheme14',
     label: __('Scheme 14', 'wp-plugin-info-card')
   }];
-  var ma = [{
+  var na = [{
     value: 'card',
     label: __('Card', 'wp-plugin-info-card')
   }, {
@@ -6611,39 +6641,39 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
     value: 'flex',
     label: __('Flex', 'wp-plugin-info-card')
   }];
-  var na = 'card' === H ? 'wp-pic-card' : H;
-  var oa = r ? 'wp-pic-spin' : '';
-  var pa = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
+  var oa = 'card' === J ? 'wp-pic-card' : J;
+  var pa = t ? 'wp-pic-spin' : '';
+  var qa = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Layout', 'wp-plugin-info-card')
   }, /*#__PURE__*/React.createElement(PanelRow, null, /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Scheme', 'wp-plugin-info-card'),
-    options: la,
-    value: D,
+    options: ma,
+    value: F,
     onChange: function onChange(a) {
       c({
         scheme: a
       });
-      E(a);
+      G(a);
     }
   })), /*#__PURE__*/React.createElement(PanelRow, null, /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Layout', 'wp-plugin-info-card'),
-    options: ma,
-    value: H,
+    options: na,
+    value: J,
     onChange: function onChange(a) {
       if ('flex' === a) {
         c({
           layout: a,
           align: 'full'
         });
-        I(a);
-        Y('full');
+        K(a);
+        $('full');
       } else {
         c({
           layout: a,
           align: 'center'
         });
-        I(a);
-        Y('center');
+        K(a);
+        $('center');
       }
     }
   }))), /*#__PURE__*/React.createElement(PanelBody, {
@@ -6654,17 +6684,17 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
       c({
         image: a.url
       });
-      w(a.url);
+      y(a.url);
     },
     type: "image",
-    value: v,
+    value: x,
     render: function render(a) {
       var b = a.open;
       return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
         className: "components-button is-button",
         onClick: b
-      }, __('Upload Image!', 'wp-plugin-info-card')), v && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("img", {
-        src: v,
+      }, __('Upload Image!', 'wp-plugin-info-card')), x && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("img", {
+        src: x,
         alt: __('Plugin Card Image', 'wp-plugin-info-card'),
         width: "250",
         height: "250"
@@ -6674,23 +6704,24 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
           c({
             image: ''
           });
-          w('');
+          y('');
         }
       }, __('Reset Image', 'wp-plugin-info-card')))));
     }
   })), /*#__PURE__*/React.createElement(PanelRow, null, /*#__PURE__*/React.createElement(TextControl, {
     label: __('Container ID', 'wp-plugin-info-card'),
     type: "text",
-    value: z,
+    value: B,
     onChange: function onChange(a) {
       c({
         containerid: a
       });
-      A(a);
+      C(a);
     }
   }))));
-  var qa = useBlockProps({
-    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()("wp-plugin-info-card align".concat(X))
+  var ra = useBlockProps({
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()("wp-plugin-info-card align".concat(Z)),
+    id: e
   });
 
   /**
@@ -6698,7 +6729,7 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
    *
    * @return {Element} The screen to display.
    */
-  var ra = function getCurrentScreen() {
+  var sa = function getCurrentScreen() {
     //return <ScreenNoImages attributes={ attributes } setAttributes={ setAttributes } />;
 
     // Otherwise get the screen based on the current screen.
@@ -6731,7 +6762,7 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
     }
     return null;
   };
-  if (P) {
+  if (R) {
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("img", {
       src: wppic.wppic_preview,
       alt: "",
@@ -6741,8 +6772,8 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
       }
     }));
   }
-  if (r) {
-    return /*#__PURE__*/React.createElement("div", qa, /*#__PURE__*/React.createElement("div", {
+  if (t) {
+    return /*#__PURE__*/React.createElement("div", ra, /*#__PURE__*/React.createElement("div", {
       className: "wppic-loading-placeholder"
     }, /*#__PURE__*/React.createElement("div", {
       className: "wppic-loading"
@@ -6752,7 +6783,9 @@ var PluginScreenshotsInfoCard = function PluginScreenshotsInfoCard(a) {
       className: "wppic-spinner"
     }, /*#__PURE__*/React.createElement(Spinner, null)))));
   }
-  return /*#__PURE__*/React.createElement("div", qa, ra());
+  return /*#__PURE__*/React.createElement("div", ra, /*#__PURE__*/React.createElement("div", {
+    id: e
+  }, sa()));
 };
 /* harmony default export */ __webpack_exports__["default"] = (PluginScreenshotsInfoCard);
 
@@ -19252,7 +19285,7 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Plugin Screenshots Info Card","apiVersion":2,"name":"wp-plugin-info-card/plugin-screenshots-info-card","category":"wp-plugin-info-card","icon":"<svg viewBox=\'0 0 80 80\'><path d=\'M47,41.5c0,3.9-3.1,7-7,7s-7-3.1-7-7s3.1-7,7-7S47,37.6,47,41.5z M59,31.5v20c0,1.7-1.3,3-3,3H24c-1.7,0-3-1.3-3-3v-20 c0-1.7,1.3-3,3-3h8c0.4,0,0.8-0.3,0.9-0.7l1.8-5.3h10.6l1.8,5.3c0.1,0.4,0.5,0.7,0.9,0.7h8C57.7,28.5,59,29.8,59,31.5z M49,41.5 c0-5-4-9-9-9s-9,4-9,9s4,9,9,9S49,46.5,49,41.5z M76,40c0,19.9-16.1,36-36,36S4,59.9,4,40S20.1,4,40,4S76,20.1,76,40z M61,31.5 c0-2.8-2.2-5-5-5h-7.3l-1.8-5.3c-0.1-0.4-0.5-0.7-0.9-0.7H34c-0.4,0-0.8,0.3-0.9,0.7l-1.8,5.3H24c-2.8,0-5,2.2-5,5v20 c0,2.8,2.2,5,5,5h32c2.8,0,5-2.2,5-5V31.5z\'/></svg>","description":"Add a beautiful plugin card with screenshots.","keywords":["wp plugin","plugin","card","theme","screenshot"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"screen":{"type":"string","default":"slug-entry"},"assetData":{"type":"object","default":{}},"type":{"type":"string","default":"plugin"},"slug":{"type":"string","default":"highlight-and-share"},"loading":{"type":"boolean","default":true},"imageSize":{"type":"string","default":"thumbnail"},"iconStyle":{"type":"string","default":"border"},"enableRoundedIcon":{"type":"boolean","default":true},"colorTheme":{"type":"string","default":"default"},"pluginTitle":{"type":"string","default":""},"enableContextMenu":{"type":"boolean","default":true},"enableScreenshots":{"type":"boolean","default":true},"imageSource":{"type":"string","default":"local"},"images":{"type":"array","default":[]},"align":{"type":"string","default":"center"}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["wide","center","full"],"className":true},"editorScript":"wp_plugin_info_card-cgb-block-js","editorStyle":["wp_plugin_info_card-cgb-block-editor-css","wp_plugin_info_card-cgb-style-css"],"style":"has-style-frontend-css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Plugin Screenshots Info Card","apiVersion":2,"name":"wp-plugin-info-card/plugin-screenshots-info-card","category":"wp-plugin-info-card","icon":"<svg viewBox=\'0 0 80 80\'><path d=\'M47,41.5c0,3.9-3.1,7-7,7s-7-3.1-7-7s3.1-7,7-7S47,37.6,47,41.5z M59,31.5v20c0,1.7-1.3,3-3,3H24c-1.7,0-3-1.3-3-3v-20 c0-1.7,1.3-3,3-3h8c0.4,0,0.8-0.3,0.9-0.7l1.8-5.3h10.6l1.8,5.3c0.1,0.4,0.5,0.7,0.9,0.7h8C57.7,28.5,59,29.8,59,31.5z M49,41.5 c0-5-4-9-9-9s-9,4-9,9s4,9,9,9S49,46.5,49,41.5z M76,40c0,19.9-16.1,36-36,36S4,59.9,4,40S20.1,4,40,4S76,20.1,76,40z M61,31.5 c0-2.8-2.2-5-5-5h-7.3l-1.8-5.3c-0.1-0.4-0.5-0.7-0.9-0.7H34c-0.4,0-0.8,0.3-0.9,0.7l-1.8,5.3H24c-2.8,0-5,2.2-5,5v20 c0,2.8,2.2,5,5,5h32c2.8,0,5-2.2,5-5V31.5z\'/></svg>","description":"Add a beautiful plugin card with screenshots.","keywords":["wp plugin","plugin","card","theme","screenshot"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"uniqueId":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"screen":{"type":"string","default":"slug-entry"},"assetData":{"type":"object","default":{}},"type":{"type":"string","default":"plugin"},"slug":{"type":"string","default":"highlight-and-share"},"loading":{"type":"boolean","default":true},"imageSize":{"type":"string","default":"thumbnail"},"iconStyle":{"type":"string","default":"border"},"enableRoundedIcon":{"type":"boolean","default":true},"colorTheme":{"type":"string","default":"default"},"pluginTitle":{"type":"string","default":""},"enableContextMenu":{"type":"boolean","default":true},"enableScreenshots":{"type":"boolean","default":true},"imageSource":{"type":"string","default":"local"},"images":{"type":"array","default":[]},"align":{"type":"string","default":"center"}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["wide","center","full"],"className":true},"editorScript":"wp_plugin_info_card-cgb-block-js","editorStyle":["wp_plugin_info_card-cgb-block-editor-css","wp_plugin_info_card-cgb-style-css"],"style":"has-style-frontend-css"}');
 
 /***/ }),
 

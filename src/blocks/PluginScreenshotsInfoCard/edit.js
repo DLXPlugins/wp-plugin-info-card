@@ -49,8 +49,15 @@ import ScreenImageLoader from './screens/ScreenImageLoader';
 import ScreenNoImages from './screens/ScreenNoImages';
 import ScreenPluginPreview from './screens/ScreenPluginPreview';
 
+// For storing unique IDs.
+const uniqueIds = [];
+
 const PluginScreenshotsInfoCard = ( props ) => {
-	const { attributes, setAttributes } = props;
+	const { attributes, setAttributes, clientId } = props;
+
+	const {
+		uniqueId,
+	} = attributes;
 
 	const [ type, setType ] = useState( attributes.type );
 	const [ slug, setSlug ] = useState( attributes.slug );
@@ -66,6 +73,18 @@ const PluginScreenshotsInfoCard = ( props ) => {
 	const [ align, setAlign ] = useState( attributes.align );
 	const [ hasScreenshots, setHasScreenshots ] = useState( false );
 	const [ screen, setScreen ] = useState( attributes.screen );
+
+	if ( preview ) {
+		return (
+			<div style={ { textAlign: 'center' } }>
+				<img
+					src={ wppic.screenshots_card_preview }
+					alt=""
+					style={ { width: '100%', height: 'auto' } }
+				/>
+			</div>
+		);
+	}
 
 	const loadData = () => {
 		setLoading( false );
@@ -83,9 +102,22 @@ const PluginScreenshotsInfoCard = ( props ) => {
 				setCardLoading( false );
 			} );
 	};
-	const pluginOnClick = ( assetSlug, assetType ) => {
-		loadData();
-	};
+	
+	/**
+	 * Get a unique ID for the block for inline styling if necessary.
+	 */
+	useEffect( () => {
+		
+		if ( ( null === uniqueId || '' === uniqueId ) || uniqueIds.includes( uniqueId ) ) {
+			const newUniqueId = 'wppic-' + clientId.substr( 2, 9 ).replace( '-', '' );
+
+			setAttributes( { uniqueId: newUniqueId } );
+			uniqueIds.push( newUniqueId );
+		} else {
+			uniqueIds.push( uniqueId );
+		}
+	}, [] );
+
 
 	
 
@@ -258,6 +290,7 @@ const PluginScreenshotsInfoCard = ( props ) => {
 
 	const blockProps = useBlockProps( {
 		className: classnames( `wp-plugin-info-card align${ align }` ),
+		id: uniqueId,
 	} );
 
 	/**
@@ -313,7 +346,7 @@ const PluginScreenshotsInfoCard = ( props ) => {
 		);
 	}
 
-	return <div { ...blockProps }>{ getCurrentScreen() }</div>;
+	return <div { ...blockProps }><div id={ uniqueId }>{ getCurrentScreen() }</div></div>;
 };
 
 export default PluginScreenshotsInfoCard;
