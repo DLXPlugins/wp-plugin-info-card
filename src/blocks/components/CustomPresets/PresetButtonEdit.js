@@ -16,9 +16,10 @@ const PresetButtonEdit = ( props ) => {
 		clientId,
 		saveNonce,
 		deleteNonce,
+		theme,
+		customFormData = {}
 	} = props;
-	const uniqueIdAttribute = { uniqueId: slug };
-	const blockAttributes = { ...attributes, ...uniqueIdAttribute };
+	const blockAttributes = { ...attributes };
 	const { editPresets, setShowEditModal, setShowDeleteModal } = useContext( CustomPresetsContext );
 
 	return (
@@ -70,6 +71,9 @@ const PresetButtonEdit = ( props ) => {
 					clientId={ clientId }
 					attributes={ blockAttributes }
 					disabled={ editPresets }
+					theme={ theme }
+					customFormData={ customFormData ?? {} }
+					{ ...props }
 				/>
 			</div>
 		</>

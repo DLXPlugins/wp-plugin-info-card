@@ -94,7 +94,7 @@ class Shortcodes {
 			'hierarchical'            => false,
 		);
 
-		register_post_type( 'wppic_screenshot_presets', $args );
+		register_post_type( 'wppic_screen_presets', $args );
 	}
 
 	/**

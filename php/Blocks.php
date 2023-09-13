@@ -28,6 +28,9 @@ class Blocks {
 		// Ajax for retrieving screenshot presets.
 		add_action( 'wp_ajax_wppic_load_screenshot_presets', array( $self, 'ajax_load_screenshot_presets' ) );
 
+		// Ajax for saving screenshot presets.
+		add_action( 'wp_ajax_wppic_save_screenshot_presets', array( $self, 'ajax_save_screenshot_presets' ) );
+
 		return $self;
 	}
 
@@ -46,6 +49,41 @@ class Blocks {
 	}
 
 	/**
+	 * Load screenshot presets via ajax.
+	 */
+	public function ajax_save_screenshot_presets() {
+		// Verify nonce.
+		if ( ! wp_verify_nonce( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ), 'wppic_screenshot_preset_save' ) || ! current_user_can( 'edit_others_posts' ) ) {
+			wp_send_json_error( array() );
+		}
+
+		// Get form data in array form.
+		$form_data = json_decode( filter_input( INPUT_POST, 'formData', FILTER_DEFAULT ), true );
+		if ( ! empty( $form_data ) ) {
+			$form_data = Functions::sanitize_array_recursive( $form_data );
+		}
+
+		// Get the preset title.
+		$title           = isset( $form_data['presetTitle'] ) ? sanitize_text_field( $form_data['presetTitle'] ) : '';
+		$title_sanitized = sanitize_title( $title );
+
+		// Insert new post with preset data.
+		$post_id = wp_insert_post(
+			array(
+				'post_title'   => $title,
+				'post_name'    => $title_sanitized,
+				'post_content' => wp_json_encode( array( 'formData' => $form_data ), 1048 ),
+				'post_status'  => 'publish',
+				'post_type'    => 'wppic_screen_presets',
+			)
+		);
+
+		// Get the presets.
+		$return = self::return_saved_presets();
+		wp_send_json_success( array( 'presets' => $return ) );
+	}
+
+	/**
 	 * Return saved presets.
 	 *
 	 * @return array $return The saved presets.
@@ -53,7 +91,7 @@ class Blocks {
 	private static function return_saved_presets() {
 		// Get the presets.
 		$args    = array(
-			'post_type'      => 'wppic_screenshot_presets',
+			'post_type'      => 'wppic_screen_presets',
 			'post_status'    => 'publish',
 			'posts_per_page' => 100,
 			'order'          => 'ASC',

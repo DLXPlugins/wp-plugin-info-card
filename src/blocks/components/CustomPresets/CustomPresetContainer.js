@@ -140,6 +140,7 @@ const CustomPresetContainer = ( props ) => {
 				<div className="wppic-presets">
 					<ButtonGroup>
 						{ savedPresets.map( ( preset ) => {
+							const newAttributes = { ...attributes, ...preset.content.formData, colorTheme: `custom-${ preset.slug }` };
 							return (
 								<PresetButtonEdit
 									key={ preset.id }
@@ -149,9 +150,12 @@ const CustomPresetContainer = ( props ) => {
 									uniqueId={ uniqueId }
 									clientId={ clientId }
 									slug={ preset.slug }
-									attributes={ preset.content.attributes }
+									isPressed={ attributes.colorTheme === `custom-${ preset.slug }` }
+									attributes={ newAttributes }
 									saveNonce={ preset.save_nonce }
 									deleteNonce={ preset.delete_nonce }
+									theme={ `custom-${ preset.slug }` }
+									customFormData={ preset.content.formData ?? {} }
 								/>
 							);
 						} ) }
@@ -171,7 +175,6 @@ const CustomPresetContainer = ( props ) => {
 	// Read in localized var and determine if user can save or edit presets.
 	const canSavePresets = wppic.can_edit_others_posts;
 
-	console.log( Object.values( colorKeysWithLabel ) );
 	return (
 		<>
 			{ showEditModal && (

@@ -6,6 +6,7 @@ import { Code, DownloadCloud, Star, LineChart, Download } from 'lucide-react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 const HtmlToReactParser = require( 'html-to-react' ).Parser;
 import WordPressIcon from '../components/WordPressIcon';
+import { uniqueId } from 'lodash';
 
 const { __, sprintf } = wp.i18n;
 
@@ -58,9 +59,34 @@ const PluginScreenshots = ( props ) => {
 
 	const ratingOneToFive = rating / 20;
 
+	let blockStyles = '';
+	let customMatch = false;
+	// Check to see if color theme has `custom` in the name.
+	if ( attributes.colorTheme.match( /^custom\-/ ) ) {
+		customMatch = true;
+		blockStyles = `
+			#${ attributes.uniqueId } {
+				--wppic-plugin-screenshots-card-background: ${ attributes.colorBackground };
+				--wppic-plugin-screenshots-card-text-color: ${ attributes.colorText };
+				--wppic-plugin-screenshots-card-border-color: ${ attributes.colorBorder };
+				--wppic-plugin-screenshots-card-menu-border-color: ${ attributes.colorMenuBorder };
+				--wppic-plugin-screenshots-card-menu-color: ${ attributes.colorMenu };
+				--wppic-plugin-screenshots-card-menu-color-hover: ${ attributes.colorMenuHover };
+				--wppic-plugin-screenshots-card-menu-text-color: ${ attributes.colorMenuText };
+				--wppic-plugin-screenshots-card-menu-text-color-hover: ${ attributes.colorMenuTextHover };
+				--wppic-plugin-screenshots-card-screenshots-background: ${ attributes.colorScreenshotsBackground };
+				--wppic-plugin-screenshots-card-screenshots-border-color: ${ attributes.colorScreenshotsBorder };
+				--wppic-plugin-screenshots-card-screenshots-star-color: ${ attributes.colorStar };
+				--wppic-plugin-screenshots-card-meta-background-color: ${ attributes.colorMetaBackground };
+				--wppic-plugin-screenshots-card-meta-text-color: ${ attributes.colorMetaText };
+			}
+		`;
+	}
+
 	return (
 		<div className={ wrapperClasses }>
-			<div className={ classes }>
+			<style>{ blockStyles }</style>
+			<div className={ classes } id={ customMatch ? attributes.uniqueId : null }>
 				<div className="wp-pic-plugin-screenshots-card">
 					<div className="wp-pic-plugin-screenshots-avatar-wrapper">
 						<a href={ assetData.url } onClick={ ( e ) => e.preventDefault() } target="_blank" rel="noopener noreferrer" className={

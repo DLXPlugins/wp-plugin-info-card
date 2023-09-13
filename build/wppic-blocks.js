@@ -7394,15 +7394,11 @@ var ScreenPluginPreview = function ScreenPluginPreview(a) {
       }));
     });
   })));
-  var q = '';
-  if ('custom' === m) {
-    q = "\n\t\t\t#".concat(n, " .wppic-plugin-screenshot-theme-custom {\n\t\t\t\t--wppic-plugin-screenshots-card-background: ").concat(b.colorBackground, ";\n\t\t\t\t--wppic-plugin-screenshots-card-text-color: ").concat(b.colorText, ";\n\t\t\t\t--wppic-plugin-screenshots-card-border-color: ").concat(b.colorBorder, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-border-color: ").concat(b.colorMenuBorder, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-color: ").concat(b.colorMenu, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-color-hover: ").concat(b.colorMenuHover, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-text-color: ").concat(b.colorMenuText, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-text-color-hover: ").concat(b.colorMenuTextHover, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-background: ").concat(b.colorScreenshotsBackground, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-border-color: ").concat(b.colorScreenshotsBorder, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-star-color: ").concat(b.colorStar, ";\n\t\t\t\t--wppic-plugin-screenshots-card-meta-background-color: ").concat(b.colorMetaBackground, ";\n\t\t\t\t--wppic-plugin-screenshots-card-meta-text-color: ").concat(b.colorMetaText, ";\n\t\t\t}\n\t\t");
-  }
-  var r = /*#__PURE__*/React.createElement(React.Fragment, null, p, /*#__PURE__*/React.createElement("style", null, q), /*#__PURE__*/React.createElement(_templates_PluginScreenshots__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  var q = /*#__PURE__*/React.createElement(React.Fragment, null, p, /*#__PURE__*/React.createElement(_templates_PluginScreenshots__WEBPACK_IMPORTED_MODULE_8__["default"], {
     assetData: e,
     attributes: b
   }));
-  return /*#__PURE__*/React.createElement(React.Fragment, null, o, r);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, o, q);
 };
 /* harmony default export */ __webpack_exports__["default"] = (ScreenPluginPreview);
 
@@ -8552,6 +8548,10 @@ var CustomPresetContainer = function CustomPresetContainer(a) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "wppic-presets"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ButtonGroup, null, s.map(function (a) {
+        var b;
+        var c = _objectSpread(_objectSpread(_objectSpread({}, n), a.content.formData), {}, {
+          colorTheme: "custom-".concat(a.slug)
+        });
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_PresetButtonEdit__WEBPACK_IMPORTED_MODULE_5__["default"], {
           key: a.id,
           editId: a.id,
@@ -8560,9 +8560,12 @@ var CustomPresetContainer = function CustomPresetContainer(a) {
           uniqueId: q,
           clientId: p,
           slug: a.slug,
-          attributes: a.content.attributes,
+          isPressed: n.colorTheme === "custom-".concat(a.slug),
+          attributes: c,
           saveNonce: a.save_nonce,
-          deleteNonce: a.delete_nonce
+          deleteNonce: a.delete_nonce,
+          theme: "custom-".concat(a.slug),
+          customFormData: (b = a.content.formData) !== null && b !== void 0 ? b : {}
         });
       })));
     }
@@ -8571,7 +8574,6 @@ var CustomPresetContainer = function CustomPresetContainer(a) {
 
   // Read in localized var and determine if user can save or edit presets.
   var D = wppic.can_edit_others_posts;
-  console.log(Object.values(colorKeysWithLabel));
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, y && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CustomPresetEditModal__WEBPACK_IMPORTED_MODULE_6__["default"], {
     editId: y.editId,
     title: y.title,
@@ -8953,9 +8955,23 @@ var CustomPresetSaveModal = function CustomPresetSaveModal(a) {
     t = q.savingPreset,
     u = q.setSavingPreset;
   var v = function getDefaultValues() {
+    var a, b, c, d, e, f, g, h, i, j, k, l, m;
     return {
       presetTitle: '',
-      selectedPreset: null
+      selectedPreset: null,
+      colorBackground: (a = n.colorBackground) !== null && a !== void 0 ? a : 'transparent',
+      colorText: (b = n.colorText) !== null && b !== void 0 ? b : 'transparent',
+      colorBorder: (c = n.colorBorder) !== null && c !== void 0 ? c : 'transparent',
+      colorMenu: (d = n.colorMenu) !== null && d !== void 0 ? d : 'transparent',
+      colorMenuBorder: (e = n.colorMenuBorder) !== null && e !== void 0 ? e : 'transparent',
+      colorMenuHover: (f = n.colorMenuHover) !== null && f !== void 0 ? f : 'transparent',
+      colorMenuText: (g = n.colorMenuText) !== null && g !== void 0 ? g : 'transparent',
+      colorMenuTextHover: (h = n.colorMenuTextHover) !== null && h !== void 0 ? h : 'transparent',
+      colorScreenshotsBackground: (i = n.colorScreenshotsBackground) !== null && i !== void 0 ? i : 'transparent',
+      colorScreenshotsBorder: (j = n.colorScreenshotsBorder) !== null && j !== void 0 ? j : 'transparent',
+      colorStar: (k = n.colorStar) !== null && k !== void 0 ? k : 'transparent',
+      colorMetaBackground: (l = n.colorMetaBackground) !== null && l !== void 0 ? l : 'transparent',
+      colorMetaText: (m = n.colorMetaText) !== null && m !== void 0 ? m : 'transparent'
     };
   };
   var w = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useForm)({
@@ -8985,9 +9001,8 @@ var CustomPresetSaveModal = function CustomPresetSaveModal(a) {
     l(true);
     var b = "".concat(ajaxurl); // eslint-disable-line no-undef
     var c = new FormData();
-    c.append('action', 'has_save_presets');
-    c.append('nonce', has_gutenberg.blockPresetsNonceSave);
-    c.append('attributes', JSON.stringify(n));
+    c.append('action', 'wppic_save_screenshot_presets');
+    c.append('nonce', wppic.screenshot_preset_save_nonce);
     c.append('formData', JSON.stringify(a));
     fetch(b, {
       method: 'POST',
@@ -9139,7 +9154,7 @@ var CustomPresetSaveModal = function CustomPresetSaveModal(a) {
     message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.'),
     status: "error",
     politeness: "assertive",
-    icon: CircularExclamationIcon
+    icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], null)
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "has-preset-modal-button-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
@@ -9179,6 +9194,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../PresetButton/PresetButton */ "./src/blocks/components/PresetButton/PresetButton.js");
 /* harmony import */ var _context__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./context */ "./src/blocks/components/CustomPresets/context.js");
 function _typeof(a) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (a) { return typeof a; } : function (a) { return a && "function" == typeof Symbol && a.constructor === Symbol && a !== Symbol.prototype ? "symbol" : typeof a; }, _typeof(a); }
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (a) { for (var b = 1; b < arguments.length; b++) { var c = arguments[b]; for (var d in c) { if (Object.prototype.hasOwnProperty.call(c, d)) { a[d] = c[d]; } } } return a; }; return _extends.apply(this, arguments); }
 function ownKeys(a, b) { var c = Object.keys(a); if (Object.getOwnPropertySymbols) { var d = Object.getOwnPropertySymbols(a); b && (d = d.filter(function (b) { return Object.getOwnPropertyDescriptor(a, b).enumerable; })), c.push.apply(c, d); } return c; }
 function _objectSpread(a) { for (var b = 1; b < arguments.length; b++) { var c = null != arguments[b] ? arguments[b] : {}; b % 2 ? ownKeys(Object(c), !0).forEach(function (b) { _defineProperty(a, b, c[b]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(a, Object.getOwnPropertyDescriptors(c)) : ownKeys(Object(c)).forEach(function (b) { Object.defineProperty(a, b, Object.getOwnPropertyDescriptor(c, b)); }); } return a; }
 function _defineProperty(a, b, c) { b = _toPropertyKey(b); if (b in a) { Object.defineProperty(a, b, { value: c, enumerable: true, configurable: true, writable: true }); } else { a[b] = c; } return a; }
@@ -9199,25 +9215,25 @@ var PresetButtonEdit = function PresetButtonEdit(a) {
     g = a.editId,
     h = a.clientId,
     i = a.saveNonce,
-    j = a.deleteNonce;
-  var k = {
-    uniqueId: c
-  };
-  var l = _objectSpread(_objectSpread({}, e), k);
-  var m = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_context__WEBPACK_IMPORTED_MODULE_5__["default"]),
-    n = m.editPresets,
-    o = m.setShowEditModal,
-    p = m.setShowDeleteModal;
+    j = a.deleteNonce,
+    k = a.theme,
+    l = a.customFormData,
+    m = l === void 0 ? {} : l;
+  var n = _objectSpread({}, e);
+  var o = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_context__WEBPACK_IMPORTED_MODULE_5__["default"]),
+    p = o.editPresets,
+    q = o.setShowEditModal,
+    r = o.setShowDeleteModal;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('has-preset-edit-container', {
-      'has-preset-edit-container--edit': n
+      'has-preset-edit-container--edit': p
     })
-  }, n && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, p && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "has-preset-edit-buttons"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     variant: 'secondary',
     onClick: function onClick(a) {
-      o({
+      q({
         show: true,
         editId: g,
         title: b,
@@ -9230,7 +9246,7 @@ var PresetButtonEdit = function PresetButtonEdit(a) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     variant: 'secondary',
     onClick: function onClick(a) {
-      p({
+      r({
         show: true,
         editId: g,
         deleteNonce: j
@@ -9239,16 +9255,18 @@ var PresetButtonEdit = function PresetButtonEdit(a) {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Delete Preset', 'wp-plugin-info-card'),
     icon: "trash",
     className: "has-preset-delete-button"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({
     key: g,
     label: '' === b ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Untitled Preset', 'wp-plugin-info-card') : b,
     setAttributes: d,
     uniqueId: f,
     className: "has-preset-button",
     clientId: h,
-    attributes: l,
-    disabled: n
-  })));
+    attributes: n,
+    disabled: p,
+    theme: k,
+    customFormData: m !== null && m !== void 0 ? m : {}
+  }, a))));
 };
 /* harmony default export */ __webpack_exports__["default"] = (PresetButtonEdit);
 
@@ -9809,6 +9827,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _templates_PluginScreenshots__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../templates/PluginScreenshots */ "./src/blocks/templates/PluginScreenshots.js");
 /* harmony import */ var _BlockPreview__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../BlockPreview */ "./src/blocks/components/BlockPreview.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (a) { for (var b = 1; b < arguments.length; b++) { var c = arguments[b]; for (var d in c) { if (Object.prototype.hasOwnProperty.call(c, d)) { a[d] = c[d]; } } } return a; }; return _extends.apply(this, arguments); }
 function ownKeys(a, b) { var c = Object.keys(a); if (Object.getOwnPropertySymbols) { var d = Object.getOwnPropertySymbols(a); b && (d = d.filter(function (b) { return Object.getOwnPropertyDescriptor(a, b).enumerable; })), c.push.apply(c, d); } return c; }
 function _objectSpread(a) { for (var b = 1; b < arguments.length; b++) { var c = null != arguments[b] ? arguments[b] : {}; b % 2 ? ownKeys(Object(c), !0).forEach(function (b) { _defineProperty(a, b, c[b]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(a, Object.getOwnPropertyDescriptors(c)) : ownKeys(Object(c)).forEach(function (b) { Object.defineProperty(a, b, Object.getOwnPropertyDescriptor(c, b)); }); } return a; }
 function _defineProperty(a, b, c) { b = _toPropertyKey(b); if (b in a) { Object.defineProperty(a, b, { value: c, enumerable: true, configurable: true, writable: true }); } else { a[b] = c; } return a; }
@@ -9831,90 +9850,102 @@ var PresetButton = function PresetButton(a) {
   var b;
   var c = a.setAttributes,
     d = a.label,
-    e = a.attributes,
-    f = a.uniqueId,
-    g = a.theme;
+    f = a.attributes,
+    g = a.uniqueId,
+    h = a.theme,
+    i = a.customFormData,
+    j = i === void 0 ? {} : i,
+    k = a.isPresssed,
+    l = k === void 0 ? false : k;
 
   // Define state for the popover visibility
-  var h = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-    i = _slicedToArray(h, 2),
-    j = i[0],
-    k = i[1];
-  var l = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
-    m = _slicedToArray(l, 2),
-    n = m[0],
-    o = m[1];
+  var m = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+    n = _slicedToArray(m, 2),
+    o = n[0],
+    p = n[1];
+  var q = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+    r = _slicedToArray(q, 2),
+    s = r[0],
+    t = r[1];
 
   // Define state for modal options.
-  var p = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-    q = _slicedToArray(p, 2),
-    r = q[0],
-    s = q[1];
-  var t = function handlePopoverOpen() {
-    k(true);
+  var u = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+    v = _slicedToArray(u, 2),
+    w = v[0],
+    x = v[1];
+  var y = function handlePopoverOpen() {
+    p(true);
   };
-  var u = function handlePopoverClose() {
-    k(false);
+  var z = function handlePopoverClose() {
+    p(false);
   };
-  var v = function popoverContent() {
-    var a = _objectSpread({}, e);
-    a.enableScreenshots = false;
-    a.colorTheme = g;
+  var A = function popoverContent() {
+    var a = _objectSpread({}, f.formData);
+    var b = _objectSpread(_objectSpread({}, f), a);
+    b.enableScreenshots = false;
+    b.colorTheme = h;
+    b.uniqueId = "".concat(g, "-preview");
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
       className: "wppic-screenshot-popover-wrapper"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_templates_PluginScreenshots__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      assetData: e.assetData,
-      attributes: a
+      assetData: f.assetData,
+      attributes: b
     }));
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, _extends({
     variant: 'secondary',
     onClick: function onClick(a) {
       a.preventDefault();
-      s(true);
+      var b = _objectSpread(_objectSpread(_objectSpread({}, f), j), {
+        uniqueId: g,
+        colorTheme: h
+      });
+      c(b);
     },
     className: "wppic-preset-button",
     onMouseEnter: function onMouseEnter() {
-      return t(true);
-    },
-    onMouseLeave: function onMouseLeave() {
-      return u(false);
-    },
+      return y(true);
+    }
+    //onMouseLeave={ () => handlePopoverClose( false ) }
+    ,
     label: d,
-    ref: o,
+    ref: t,
     disabled: (b = a.disabled) !== null && b !== void 0 ? b : false
-  }, d), r && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Modal, {
+  }, a), d), w && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Modal, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Apply Preset?', 'wp-plugin-info-card'),
     onRequestClose: function onRequestClose() {
-      return s(false);
+      return x(false);
     },
     className: "wppic-preset-modal"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Are you sure you want to apply this preset?', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     variant: "primary",
     onClick: function onClick() {
       var b = {
-        uniqueId: f
+        uniqueId: g
       };
-      var d = _objectSpread(_objectSpread({}, a.attributes), b);
+      var d = _objectSpread(_objectSpread({}, a.attributes), {}, {
+        customFormData: j,
+        uniqueIdAttribute: b
+      });
       c(d);
-      s(false);
+      x(false);
     },
     className: "wppic-preset-modal-apply-button"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Apply Preset', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     variant: "secondary",
     onClick: function onClick() {
-      s(false);
+      x(false);
     }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Cancel', 'wp-plugin-info-card')))), j && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Popover, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Cancel', 'wp-plugin-info-card')))), o && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Popover, {
     className: "wppic-preset-popover",
     placement: "left",
     onClose: function onClose() {
-      return u(false);
+      return z(false);
     },
     noArrow: false,
     offset: 30,
-    anchor: n
-  }, v())));
+    anchor: s
+  }, A())));
 };
 PresetButton.propTypes = {
   previewBlock: (prop_types__WEBPACK_IMPORTED_MODULE_6___default().element).isRequired,
@@ -10342,18 +10373,20 @@ var PluginLarge = function PluginLarge(a) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! validator/lib/isNumeric */ "./node_modules/validator/lib/isNumeric.js");
-/* harmony import */ var validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! validator/lib/isNumeric */ "./node_modules/validator/lib/isNumeric.js");
+/* harmony import */ var validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_simple_star_rating__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-simple-star-rating */ "./node_modules/react-simple-star-rating/dist/index.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/star.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/line-chart.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/download.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/code.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/download-cloud.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/star.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/line-chart.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/download.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/code.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/download-cloud.js");
 /* harmony import */ var _splidejs_react_splide__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @splidejs/react-splide */ "./node_modules/@splidejs/react-splide/dist/js/react-splide.esm.js");
 /* harmony import */ var _components_WordPressIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/WordPressIcon */ "./src/blocks/components/WordPressIcon.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_5__);
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _defineProperty(a, b, c) { b = _toPropertyKey(b); if (b in a) { Object.defineProperty(a, b, { value: c, enumerable: true, configurable: true, writable: true }); } else { a[b] = c; } return a; }
 function _toPropertyKey(a) { var b = _toPrimitive(a, "string"); return (typeof b === "undefined" ? "undefined" : _typeof(b)) === "symbol" ? b : String(b); }
@@ -10371,6 +10404,7 @@ function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
 
 
 var HtmlToReactParser = (__webpack_require__(/*! html-to-react */ "./node_modules/html-to-react/index.js").Parser);
+
 
 var _wp$i18n = wp.i18n,
   __ = _wp$i18n.__,
@@ -10401,7 +10435,7 @@ var PluginScreenshots = function PluginScreenshots(a) {
   });
   // WordPress Requires.
   var p = d.requires;
-  if (p && validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_5___default()(p)) {
+  if (p && validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_6___default()(p)) {
     p = 'WP ' + p + '+';
   } else {
     p = d.tested;
@@ -10426,10 +10460,18 @@ var PluginScreenshots = function PluginScreenshots(a) {
   };
   var t = new HtmlToReactParser();
   var u = l / 20;
+  var v = '';
+  var w = false;
+  // Check to see if color theme has `custom` in the name.
+  if (e.colorTheme.match(/^custom\-/)) {
+    w = true;
+    v = "\n\t\t\t#".concat(e.uniqueId, " {\n\t\t\t\t--wppic-plugin-screenshots-card-background: ").concat(e.colorBackground, ";\n\t\t\t\t--wppic-plugin-screenshots-card-text-color: ").concat(e.colorText, ";\n\t\t\t\t--wppic-plugin-screenshots-card-border-color: ").concat(e.colorBorder, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-border-color: ").concat(e.colorMenuBorder, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-color: ").concat(e.colorMenu, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-color-hover: ").concat(e.colorMenuHover, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-text-color: ").concat(e.colorMenuText, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-text-color-hover: ").concat(e.colorMenuTextHover, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-background: ").concat(e.colorScreenshotsBackground, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-border-color: ").concat(e.colorScreenshotsBorder, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-star-color: ").concat(e.colorStar, ";\n\t\t\t\t--wppic-plugin-screenshots-card-meta-background-color: ").concat(e.colorMetaBackground, ";\n\t\t\t\t--wppic-plugin-screenshots-card-meta-text-color: ").concat(e.colorMetaText, ";\n\t\t\t}\n\t\t");
+  }
   return /*#__PURE__*/React.createElement("div", {
     className: n
-  }, /*#__PURE__*/React.createElement("div", {
-    className: o
+  }, /*#__PURE__*/React.createElement("style", null, v), /*#__PURE__*/React.createElement("div", {
+    className: o,
+    id: w ? e.uniqueId : null
   }, /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-card"
   }, /*#__PURE__*/React.createElement("div", {
@@ -10483,7 +10525,7 @@ var PluginScreenshots = function PluginScreenshots(a) {
     }
   }, /*#__PURE__*/React.createElement("span", {
     className: "wppic-meatball-menu-icon"
-  }, /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], null)), /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/React.createElement("span", {
     className: "wppic-meatball-menu-label"
   }, __('View Ratings', 'wp-plugin-info-card')))), /*#__PURE__*/React.createElement("li", {
     className: "wppic-meatball-menu-item wppic-meatball-menu-item-approve-comment",
@@ -10496,7 +10538,7 @@ var PluginScreenshots = function PluginScreenshots(a) {
     }
   }, /*#__PURE__*/React.createElement("span", {
     className: "wppic-meatball-menu-icon"
-  }, /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/React.createElement("span", {
     className: "wppic-meatball-menu-label"
   }, __('View Plugin Stats', 'wp-plugin-info-card')))), /*#__PURE__*/React.createElement("li", {
     className: "wppic-meatball-menu-item wppic-meatball-menu-item-moderate-comment",
@@ -10509,7 +10551,7 @@ var PluginScreenshots = function PluginScreenshots(a) {
     }
   }, /*#__PURE__*/React.createElement("span", {
     className: "wppic-meatball-menu-icon"
-  }, /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], null)), /*#__PURE__*/React.createElement("span", {
     className: "wppic-meatball-menu-label"
   }, __('Download Plugin', 'wp-plugin-info-card'))))), /*#__PURE__*/React.createElement("div", {
     className: "wppic-meatball-icon-wrapper",
@@ -10581,7 +10623,7 @@ var PluginScreenshots = function PluginScreenshots(a) {
     className: "wp-pic-plugin-screenshots-meta-item"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-meta-item-svg"
-  }, /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], null)), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], null)), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-meta-item-label"
   }, "v", d.version)), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-meta-item"
@@ -10593,7 +10635,7 @@ var PluginScreenshots = function PluginScreenshots(a) {
     className: "wp-pic-plugin-screenshots-meta-item"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-meta-item-svg"
-  }, /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], null)), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_11__["default"], null)), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-meta-item-label"
   }, d.active_installs.toLocaleString('en'), " ", __('Installs', 'wp-plugin-info-card')))))));
 };

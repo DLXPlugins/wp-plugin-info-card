@@ -262,31 +262,9 @@ const ScreenPluginPreview = ( props ) => {
 		</BlockControls>
 	);
 
-	let blockStyles = '';
-	if ( 'custom' === colorTheme ) {
-		blockStyles = `
-			#${ uniqueId } .wppic-plugin-screenshot-theme-custom {
-				--wppic-plugin-screenshots-card-background: ${ attributes.colorBackground };
-				--wppic-plugin-screenshots-card-text-color: ${ attributes.colorText };
-				--wppic-plugin-screenshots-card-border-color: ${ attributes.colorBorder };
-				--wppic-plugin-screenshots-card-menu-border-color: ${ attributes.colorMenuBorder };
-				--wppic-plugin-screenshots-card-menu-color: ${ attributes.colorMenu };
-				--wppic-plugin-screenshots-card-menu-color-hover: ${ attributes.colorMenuHover };
-				--wppic-plugin-screenshots-card-menu-text-color: ${ attributes.colorMenuText };
-				--wppic-plugin-screenshots-card-menu-text-color-hover: ${ attributes.colorMenuTextHover };
-				--wppic-plugin-screenshots-card-screenshots-background: ${ attributes.colorScreenshotsBackground };
-				--wppic-plugin-screenshots-card-screenshots-border-color: ${ attributes.colorScreenshotsBorder };
-				--wppic-plugin-screenshots-card-screenshots-star-color: ${ attributes.colorStar };
-				--wppic-plugin-screenshots-card-meta-background-color: ${ attributes.colorMetaBackground };
-				--wppic-plugin-screenshots-card-meta-text-color: ${ attributes.colorMetaText };
-			}
-		`;
-	}
-
 	const block = (
 		<>
 			{ blockToolbar }
-			<style>{ blockStyles }</style>
 			<PluginScreenshots
 				assetData={ assetData }
 				attributes={ attributes }

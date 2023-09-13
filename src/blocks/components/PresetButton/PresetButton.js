@@ -7,7 +7,7 @@ import PluginScreenshots from '../../templates/PluginScreenshots';
 import BlockPreview from '../BlockPreview';
 
 const PresetButton = ( props ) => {
-	const { setAttributes, label, attributes, uniqueId, theme } = props;
+	const { setAttributes, label, attributes, uniqueId, theme, customFormData = {}, isPresssed = false } = props;
 
 	// Define state for the popover visibility
 	const [ showPopover, setShowPopover ] = useState( false );
@@ -25,9 +25,11 @@ const PresetButton = ( props ) => {
 	};
 
 	const popoverContent = () => {
-		const attributesOverride = { ...attributes };
+		const attributesFormData = { ...attributes.formData };
+		const attributesOverride = { ...attributes, ...attributesFormData };
 		attributesOverride.enableScreenshots = false;
 		attributesOverride.colorTheme = theme;
+		attributesOverride.uniqueId = `${ uniqueId }-preview`;
 
 		return (
 			<div className="wppic-screenshot-popover-wrapper">
@@ -44,14 +46,23 @@ const PresetButton = ( props ) => {
 				variant={ 'secondary' }
 				onClick={ ( e ) => {
 					e.preventDefault();
-					setShowModal( true );
+					const newAttributes = {
+						...attributes,
+						...customFormData,
+						...{
+							uniqueId,
+							colorTheme: theme,
+						},
+					};
+					setAttributes( newAttributes );
 				} }
 				className="wppic-preset-button"
 				onMouseEnter={ () => handlePopoverOpen( true ) }
-				onMouseLeave={ () => handlePopoverClose( false ) }
+				//onMouseLeave={ () => handlePopoverClose( false ) }
 				label={ label }
 				ref={ setPopoverAnchor }
 				disabled={ props.disabled ?? false }
+				{ ...props }
 			>
 				{ label }
 			</Button>
@@ -67,7 +78,7 @@ const PresetButton = ( props ) => {
 							variant="primary"
 							onClick={ () => {
 								const uniqueIdAttribute = { uniqueId };
-								const blockAttributes = { ...props.attributes, ...uniqueIdAttribute };
+								const blockAttributes = { ...props.attributes, customFormData, uniqueIdAttribute };
 								setAttributes( blockAttributes );
 								setShowModal( false );
 							} }

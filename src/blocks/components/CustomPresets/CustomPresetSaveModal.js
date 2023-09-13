@@ -24,6 +24,19 @@ const CustomPresetSaveModal = ( props ) => {
 		return {
 			presetTitle: '',
 			selectedPreset: null,
+			colorBackground: attributes.colorBackground ?? 'transparent',
+			colorText: attributes.colorText ?? 'transparent',
+			colorBorder: attributes.colorBorder ?? 'transparent',
+			colorMenu: attributes.colorMenu ?? 'transparent',
+			colorMenuBorder: attributes.colorMenuBorder ?? 'transparent',
+			colorMenuHover: attributes.colorMenuHover ?? 'transparent',
+			colorMenuText: attributes.colorMenuText ?? 'transparent',
+			colorMenuTextHover: attributes.colorMenuTextHover ?? 'transparent',
+			colorScreenshotsBackground: attributes.colorScreenshotsBackground ?? 'transparent',
+			colorScreenshotsBorder: attributes.colorScreenshotsBorder ?? 'transparent',
+			colorStar: attributes.colorStar ?? 'transparent',
+			colorMetaBackground: attributes.colorMetaBackground ?? 'transparent',
+			colorMetaText: attributes.colorMetaText ?? 'transparent',
 		};
 	};
 	const { control, handleSubmit, setValue } = useForm( {
@@ -51,9 +64,8 @@ const CustomPresetSaveModal = ( props ) => {
 		setIsSaving( true );
 		const ajaxUrl = `${ ajaxurl }`; // eslint-disable-line no-undef
 		const data = new FormData();
-		data.append( 'action', 'has_save_presets' );
-		data.append( 'nonce', has_gutenberg.blockPresetsNonceSave );
-		data.append( 'attributes', JSON.stringify( attributes ) );
+		data.append( 'action', 'wppic_save_screenshot_presets' );
+		data.append( 'nonce', wppic.screenshot_preset_save_nonce );
 		data.append( 'formData', JSON.stringify( formData ) );
 		fetch( ajaxUrl, {
 			method: 'POST',
@@ -230,7 +242,7 @@ const CustomPresetSaveModal = ( props ) => {
 											message={ __( 'This field is required.' ) }
 											status="error"
 											politeness="assertive"
-											icon={ CircularExclamationIcon }
+											icon={ <AlertCircle /> }
 										/>
 									) }
 								</div>
