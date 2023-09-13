@@ -81,6 +81,54 @@
 		"colorBackground": {
 			"type": "string",
 			"default": "#FFFFFF"
+		},
+		"colorText": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"colorBorder": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"colorMenuBorder": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"colorMenu": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"colorMenuHover": {
+			"type": "string",
+			"default": "#DDD"
+		},
+		"colorMenuText": {
+			"type": "string",
+			"default": "#FFFFFF"
+		},
+		"colorMenuTextHover": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"colorScreenshotsBackground": {
+			"type": "string",
+			"default": "#DDD"
+		},
+		"colorScreenshotsBorder": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"colorStar": {
+			"type": "string",
+			"default": "#FF9529"
+		},
+		"colorMetaBackground": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"colorMetaText": {
+			"type": "string",
+			"default": "#FFFFFF"
 		}
 		
 	},
