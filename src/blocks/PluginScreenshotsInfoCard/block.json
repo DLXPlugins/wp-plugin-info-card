@@ -100,7 +100,7 @@
 		},
 		"colorMenuHover": {
 			"type": "string",
-			"default": "#DDD"
+			"default": "#DDDDDD"
 		},
 		"colorMenuText": {
 			"type": "string",
@@ -112,11 +112,27 @@
 		},
 		"colorScreenshotsBackground": {
 			"type": "string",
-			"default": "#DDD"
+			"default": "#DDDDDD"
 		},
 		"colorScreenshotsBorder": {
 			"type": "string",
 			"default": "#000000"
+		},
+		"colorScreenshotsArrowBackground": {
+			"type": "string",
+			"default": "#333333"
+		},
+		"colorScreenshotsArrowBackgroundHover": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"colorScreenshotsArrow": {
+			"type": "string",
+			"default": "#EEEEEE"
+		},
+		"colorScreenshotsArrowHover": {
+			"type": "string",
+			"default": "#FFFFFF"
 		},
 		"colorStar": {
 			"type": "string",

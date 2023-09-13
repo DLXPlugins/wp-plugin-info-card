@@ -32,6 +32,10 @@ const colorKeysWithLabel = [
 		label: __( 'Border Color', 'wp-plugin-info-card' ),
 	},
 	{
+		key: 'colorStar',
+		label: __( 'Star Color', 'wp-plugin-info-card' ),
+	},
+	{
 		key: 'colorMenu',
 		label: __( 'Menu Background Color', 'wp-plugin-info-card' ),
 	},
@@ -60,8 +64,20 @@ const colorKeysWithLabel = [
 		label: __( 'Screenshots Border Color', 'wp-plugin-info-card' ),
 	},
 	{
-		key: 'colorStar',
-		label: __( 'Star Color', 'wp-plugin-info-card' ),
+		key: 'colorScreenshotsArrowBackground',
+		label: __( 'Arrow Background Color', 'wp-plugin-info-card' ),
+	},
+	{
+		key: 'colorScreenshotsArrowBackgroundHover',
+		label: __( 'Arrow Hover Background Color', 'wp-plugin-info-card' ),
+	},
+	{
+		key: 'colorScreenshotsArrow',
+		label: __( 'Arrow Color', 'wp-plugin-info-card' ),
+	},
+	{
+		key: 'colorScreenshotsArrowHover',
+		label: __( 'Arrow Hover Color', 'wp-plugin-info-card' ),
 	},
 	{
 		key: 'colorMetaBackground',

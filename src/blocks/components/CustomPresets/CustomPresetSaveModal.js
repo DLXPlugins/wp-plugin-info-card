@@ -37,6 +37,10 @@ const CustomPresetSaveModal = ( props ) => {
 			colorStar: attributes.colorStar ?? 'transparent',
 			colorMetaBackground: attributes.colorMetaBackground ?? 'transparent',
 			colorMetaText: attributes.colorMetaText ?? 'transparent',
+			colorScreenshotsArrowBackground: attributes.colorScreenshotsArrowBackground ?? 'transparent',
+			colorScreenshotsArrowBackgroundHover: attributes.colorScreenshotsArrowBackgroundHover ?? 'transparent',
+			colorScreenshotsArrow: attributes.colorScreenshotsArrow ?? 'transparent',
+			colorScreenshotsArrowHover: attributes.colorScreenshotsArrowHover ?? 'transparent',
 		};
 	};
 	const { control, handleSubmit, setValue } = useForm( {

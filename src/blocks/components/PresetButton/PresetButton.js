@@ -58,7 +58,7 @@ const PresetButton = ( props ) => {
 				} }
 				className="wppic-preset-button"
 				onMouseEnter={ () => handlePopoverOpen( true ) }
-				//onMouseLeave={ () => handlePopoverClose( false ) }
+				onMouseLeave={ () => handlePopoverClose( false ) }
 				label={ label }
 				ref={ setPopoverAnchor }
 				disabled={ props.disabled ?? false }

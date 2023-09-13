@@ -62,7 +62,7 @@ const PluginScreenshots = ( props ) => {
 	let blockStyles = '';
 	let customMatch = false;
 	// Check to see if color theme has `custom` in the name.
-	if ( attributes.colorTheme.match( /^custom\-/ ) ) {
+	if ( attributes.colorTheme.match( /^custom\-?/ ) ) {
 		customMatch = true;
 		blockStyles = `
 			#${ attributes.uniqueId } {
@@ -79,6 +79,10 @@ const PluginScreenshots = ( props ) => {
 				--wppic-plugin-screenshots-card-screenshots-star-color: ${ attributes.colorStar };
 				--wppic-plugin-screenshots-card-meta-background-color: ${ attributes.colorMetaBackground };
 				--wppic-plugin-screenshots-card-meta-text-color: ${ attributes.colorMetaText };
+				--wppic-plugin-screenshots-card-screenshots-arrow-background-color: ${ attributes.colorScreenshotsArrowBackground };
+				--wppic-plugin-screenshots-card-screenshots-arrow-background-color-hover: ${ attributes.colorScreenshotsArrowBackgroundHover };
+				--wppic-plugin-screenshots-card-screenshots-arrow-color: ${ attributes.colorScreenshotsArrow };
+				--wppic-plugin-screenshots-card-screenshots-arrow-color-hover: ${ attributes.colorScreenshotsArrowHover };
 			}
 		`;
 	}
