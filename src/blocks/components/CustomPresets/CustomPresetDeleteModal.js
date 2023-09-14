@@ -32,7 +32,7 @@ const CustomPresetDeleteModal = ( props ) => {
 		setIsDeleting( true );
 		const ajaxUrl = `${ ajaxurl }`; // eslint-disable-line no-undef
 		const data = new FormData();
-		data.append( 'action', 'has_delete_preset' );
+		data.append( 'action', 'wppic_delete_screenshot_preset' );
 		data.append( 'nonce', deleteNonce );
 		data.append( 'editId', formData.editId );
 		fetch( ajaxUrl, {

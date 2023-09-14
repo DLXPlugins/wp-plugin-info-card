@@ -31,6 +31,9 @@ class Blocks {
 		// Ajax for saving screenshot presets.
 		add_action( 'wp_ajax_wppic_save_screenshot_presets', array( $self, 'ajax_save_screenshot_presets' ) );
 
+		// Ajax for deleting a preset.
+		add_action( 'wp_ajax_wppic_delete_screenshot_preset', array( $self, 'ajax_delete_preset' ) );
+
 		return $self;
 	}
 
@@ -117,6 +120,28 @@ class Blocks {
 			}
 		}
 		return $return;
+	}
+
+	/**
+	 * Delete a preset and return all via Ajax.
+	 */
+	public static function ajax_delete_preset() {
+		// Get preset post ID.
+		$preset_id = absint( filter_input( INPUT_POST, 'editId', FILTER_DEFAULT ) );
+
+		// Verify nonce.
+		if ( ! wp_verify_nonce( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ), 'wppic_delete_screenshot_preset_' . $preset_id ) || ! current_user_can( 'edit_others_posts' ) ) {
+			wp_send_json_error( array() );
+		}
+
+		// Remove the post.
+		wp_delete_post( $preset_id, true );
+
+		// Retrieve all presets.
+		$return = self::return_saved_presets();
+
+		// Send json response.
+		wp_send_json_success( array( 'presets' => $return ) );
 	}
 
 	/**

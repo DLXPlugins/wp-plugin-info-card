@@ -212,6 +212,30 @@ const CustomPresetContainer = ( props ) => {
 				{ ! loading && (
 					<>
 						{ getSavedPresets() }
+						{ ! editPresets && ! savingPreset && (
+							<Button
+								variant={ 'secondary' }
+								onClick={ ( e ) => {
+									e.preventDefault();
+									setEditPresets( true );
+								} }
+								label={ __( 'Edit Presets', 'wp-plugin-info-card' ) }
+							>
+								{ __( 'Edit Presets', 'wp-plugin-info-card' ) }
+							</Button>
+						) }
+						{ editPresets && ! savingPreset && (
+							<Button
+								variant={ 'primary' }
+								onClick={ ( e ) => {
+									e.preventDefault();
+									setEditPresets( false );
+								} }
+								label={ __( 'Exit Edit Mode', 'wp-plugin-info-card' ) }
+							>
+								{ __( 'Exit Edit Mode', 'wp-plugin-info-card' ) }
+							</Button>
+						) }
 						{ ( canSavePresets && 'custom' === attributes.colorTheme ) && (
 							<>
 								<div className="wppic-custom-preset-colors">
@@ -250,30 +274,6 @@ const CustomPresetContainer = ( props ) => {
 											label={ __( 'Save New Preset', 'wp-plugin-info-card' ) }
 										>
 											{ __( 'Save New Preset', 'wp-plugin-info-card' ) }
-										</Button>
-									) }
-									{ ! editPresets && ! savingPreset && (
-										<Button
-											variant={ 'secondary' }
-											onClick={ ( e ) => {
-												e.preventDefault();
-												setEditPresets( true );
-											} }
-											label={ __( 'Edit Presets', 'wp-plugin-info-card' ) }
-										>
-											{ __( 'Edit Presets', 'wp-plugin-info-card' ) }
-										</Button>
-									) }
-									{ editPresets && ! savingPreset && (
-										<Button
-											variant={ 'primary' }
-											onClick={ ( e ) => {
-												e.preventDefault();
-												setEditPresets( false );
-											} }
-											label={ __( 'Exit Edit Mode', 'wp-plugin-info-card' ) }
-										>
-											{ __( 'Exit Edit Mode', 'wp-plugin-info-card' ) }
 										</Button>
 									) }
 								</div>

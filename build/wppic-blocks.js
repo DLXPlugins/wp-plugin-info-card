@@ -8597,7 +8597,21 @@ var CustomPresetContainer = function CustomPresetContainer(a) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-custom-preset-container",
     ref: A
-  }, d && B('Loading Presets'), !d && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, C(), D && 'custom' === n.colorTheme && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, d && B('Loading Presets'), !d && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, C(), !w && !u && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+    variant: 'secondary',
+    onClick: function onClick(a) {
+      a.preventDefault();
+      x(true);
+    },
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Edit Presets', 'wp-plugin-info-card')
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Edit Presets', 'wp-plugin-info-card')), w && !u && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+    variant: 'primary',
+    onClick: function onClick(a) {
+      a.preventDefault();
+      x(false);
+    },
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Exit Edit Mode', 'wp-plugin-info-card')
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Exit Edit Mode', 'wp-plugin-info-card')), D && 'custom' === n.colorTheme && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-custom-preset-colors"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Customize the Colors', 'wp-plugin-info-card')), Object.values(colorKeysWithLabel).map(function (a, b) {
     var c;
@@ -8626,21 +8640,7 @@ var CustomPresetContainer = function CustomPresetContainer(a) {
       v(true);
     },
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Save New Preset', 'wp-plugin-info-card')
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Save New Preset', 'wp-plugin-info-card')), !w && !u && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-    variant: 'secondary',
-    onClick: function onClick(a) {
-      a.preventDefault();
-      x(true);
-    },
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Edit Presets', 'wp-plugin-info-card')
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Edit Presets', 'wp-plugin-info-card')), w && !u && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-    variant: 'primary',
-    onClick: function onClick(a) {
-      a.preventDefault();
-      x(false);
-    },
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Exit Edit Mode', 'wp-plugin-info-card')
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Exit Edit Mode', 'wp-plugin-info-card'))))), u && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CustomPresetSaveModal__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Save New Preset', 'wp-plugin-info-card'))))), u && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CustomPresetSaveModal__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Save Preset', 'wp-plugin-info-card')
   }, a))));
 };
@@ -8706,7 +8706,7 @@ var CustomPresetDeleteModal = function CustomPresetDeleteModal(a) {
     h(true);
     var b = "".concat(ajaxurl); // eslint-disable-line no-undef
     var c = new FormData();
-    c.append('action', 'has_delete_preset');
+    c.append('action', 'wppic_delete_screenshot_preset');
     c.append('nonce', d);
     c.append('editId', a.editId);
     fetch(b, {
@@ -9961,7 +9961,8 @@ var PresetButton = function PresetButton(a) {
     },
     noArrow: false,
     offset: 30,
-    anchor: s
+    anchor: s,
+    expandOnMobile: true
   }, A())));
 };
 PresetButton.propTypes = {

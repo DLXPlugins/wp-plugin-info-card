@@ -106,6 +106,7 @@ const PresetButton = ( props ) => {
 						noArrow={ false }
 						offset={ 30 }
 						anchor={ popoverAnchor }
+						expandOnMobile={ true }
 					>
 						{ popoverContent() }
 					</Popover>
