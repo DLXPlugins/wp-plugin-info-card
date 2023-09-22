@@ -65,7 +65,7 @@ class Shortcodes {
 		register_post_type( 'wppic_plugins', $args );
 	}
 
-	public static function register_screenshots__presets_post_type() {
+	public static function register_screenshots_presets_post_type() {
 		$labels = array(
 			'name'               => __( 'Presets', 'wp-plugin-info-card' ),
 			'singular_name'      => __( 'Presets', 'wp-plugin-info-card' ),
