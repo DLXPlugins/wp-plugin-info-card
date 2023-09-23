@@ -11,7 +11,7 @@ import { uniqueId } from 'lodash';
 const { __, sprintf } = wp.i18n;
 
 const PluginScreenshots = ( props ) => {
-	const { assetData, attributes } = props;
+	const { assetData, attributes, isPreview = false } = props;
 
 	const [ screenshots, setScreenshots ] = useState( null );
 	const [ rating, setRating ] = useState( assetData.rating );
@@ -62,7 +62,7 @@ const PluginScreenshots = ( props ) => {
 	let blockStyles = '';
 	let customMatch = false;
 	// Check to see if color theme has `custom` in the name.
-	if ( attributes.colorTheme.match( /^custom\-?/ ) ) {
+	if ( attributes.customColors && ! isPreview ) {
 		customMatch = true;
 		blockStyles = `
 			#${ attributes.uniqueId } {

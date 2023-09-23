@@ -116,17 +116,8 @@ const ScreenPluginPreview = ( props ) => {
 				icon="admin-customizer"
 			>
 				<div className="wppic-screenshot-presets-button-group">
-					<h3>{ __( 'Select a Color Theme', 'wp-plugin-info-card' ) }</h3>
+					<h3>{ __( 'Select a color theme', 'wp-plugin-info-card' ) }</h3>
 					<ButtonGroup>
-						<Button
-							variant="secondary"
-							onClick={ () => {
-								setAttributes( { colorTheme: 'custom' } );
-							} }
-							isPressed={ 'custom' === colorTheme }
-						>
-							{ __( 'Custom', 'wp-plugin-info-card' ) }
-						</Button>
 						<PresetButton
 							label={ __( 'Default', 'wp-plugin-info-card' ) }
 							setAttributes={ setAttributes }
@@ -161,15 +152,12 @@ const ScreenPluginPreview = ( props ) => {
 						/>
 					</ButtonGroup>
 				</div>
-				<div className="wppic-screenshot-presets-button-group">
-					<h3>{ __( 'Custom Color Themes', 'wp-plugin-info-card' ) }</h3>
-					<CustomPresets
-						clientId={ clientId }
-						uniqueId={ uniqueId }
-						attributes={ attributes }
-						setAttributes={ setAttributes }
-					/>
-				</div>
+				<CustomPresets
+					clientId={ clientId }
+					uniqueId={ uniqueId }
+					attributes={ attributes }
+					setAttributes={ setAttributes }
+				/>
 			</PanelBody>
 			<PanelBody
 				title={ __( 'Screenshot Customization', 'wp-plugin-info-card' ) }

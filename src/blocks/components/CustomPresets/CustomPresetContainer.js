@@ -7,6 +7,7 @@ import {
 	RadioControl,
 	Tooltip,
 	TextControl,
+	ToggleControl,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { HelpCircle } from 'lucide-react';
@@ -106,10 +107,10 @@ const CustomPresetContainer = ( props ) => {
 		showDeleteModal,
 	} = useContext( CustomPresetsContext );
 
-	const presetContainer = useRef( null );
+	const [ presetContainer, setPresetContainer ] = useState( null );
 
 	useEffect( () => {
-		if ( presetContainer.current ) {
+		if ( presetContainer ) {
 			// Perform fetch request to ajax endpoint.
 			const ajaxUrl = `${ ajaxurl }`; // eslint-disable-line no-undef
 			const data = new FormData();
@@ -191,6 +192,14 @@ const CustomPresetContainer = ( props ) => {
 	// Read in localized var and determine if user can save or edit presets.
 	const canSavePresets = wppic.can_edit_others_posts;
 
+	if ( loading ) {
+		return (
+			<div className="wppic-screenshot-presets-button-group" ref={ setPresetContainer }>
+				{ showLoading( __( 'Loading Custom Color Themes', 'wp-plugin-info-card' ) ) }
+			</div>
+		);
+	}
+
 	return (
 		<>
 			{ showEditModal && (
@@ -207,87 +216,106 @@ const CustomPresetContainer = ( props ) => {
 					deleteNonce={ showDeleteModal.deleteNonce }
 				/>
 			) }
-			<div className="wppic-custom-preset-container" ref={ presetContainer }>
-				{ loading && showLoading( 'Loading Presets' ) }
-				{ ! loading && (
-					<>
-						{ getSavedPresets() }
-						{ ! editPresets && ! savingPreset && (
-							<Button
-								variant={ 'secondary' }
-								onClick={ ( e ) => {
-									e.preventDefault();
-									setEditPresets( true );
-								} }
-								label={ __( 'Edit Presets', 'wp-plugin-info-card' ) }
-							>
-								{ __( 'Edit Presets', 'wp-plugin-info-card' ) }
-							</Button>
-						) }
-						{ editPresets && ! savingPreset && (
-							<Button
-								variant={ 'primary' }
-								onClick={ ( e ) => {
-									e.preventDefault();
-									setEditPresets( false );
-								} }
-								label={ __( 'Exit Edit Mode', 'wp-plugin-info-card' ) }
-							>
-								{ __( 'Exit Edit Mode', 'wp-plugin-info-card' ) }
-							</Button>
-						) }
-						{ ( canSavePresets && 'custom' === attributes.colorTheme ) && (
-							<>
-								<div className="wppic-custom-preset-colors">
-									<h3>
-										{ __( 'Customize the Colors', 'wp-plugin-info-card' ) }
-									</h3>
-									{ Object.values( colorKeysWithLabel ).map( ( objValues, index ) => {
-										return (
-											<div className="wppic-custom-preset-color" key={ index }>
-												<ColorPickerControl
-													value={ attributes[ objValues.key ] ?? 'transparent' }
-													key={ index }
-													onChange={ ( oldSlug, newValue ) => {
-														const newAttributes = { ...attributes };
-														newAttributes[ objValues.key ] = newValue;
-														setAttributes( newAttributes );
-													} }
-													label={ objValues.label }
-													defaultColors={ wppic.palette }
-													defaultColor={ '#FFFFFF' }
-													slug={ objValues.key }
-												/>
-											</div>
-										);
-									} ) }
+			{ ( ! loading && savedPresets.length > 0 ) && (
+				<div className="wppic-screenshot-presets-button-group">
+					<h3>{ __( 'Custom Color Themes', 'wp-plugin-info-card' ) }</h3>
+					<div className="wppic-custom-preset-container">
+
+						<>
+							{ getSavedPresets() }
+							{ ! editPresets && ! savingPreset && (
+								<Button
+									variant={ 'secondary' }
+									onClick={ ( e ) => {
+										e.preventDefault();
+										setEditPresets( true );
+									} }
+									label={ __( 'Edit Presets', 'wp-plugin-info-card' ) }
+								>
+									{ __( 'Edit Presets', 'wp-plugin-info-card' ) }
+								</Button>
+							) }
+							{ editPresets && ! savingPreset && (
+								<Button
+									variant={ 'primary' }
+									onClick={ ( e ) => {
+										e.preventDefault();
+										setEditPresets( false );
+									} }
+									label={ __( 'Exit Edit Mode', 'wp-plugin-info-card' ) }
+								>
+									{ __( 'Exit Edit Mode', 'wp-plugin-info-card' ) }
+								</Button>
+							) }
+						</>
+
+					</div>
+				</div>
+			) }
+			<ToggleControl
+				label={ __( 'Customize the colors', 'wp-plugin-info-card' ) }
+				checked={ attributes.customColors }
+				onChange={ ( value ) => {
+					setAttributes(
+						{
+							customColors: value,
+						},
+					);
+				} }
+				help={ canSavePresets ? __( 'Customize the colors of the plugin info card. You can save your customizations as a color theme.', 'wp-plugin-info-card' ) : __( 'Customize the colors of the plugin info card.', 'wp-plugin-info-card' ) }
+			/>
+			{ ( canSavePresets && attributes.customColors ) && (
+				<>
+					<div className="wppic-custom-preset-colors">
+						<h3>
+							{ __( 'Customize the Colors', 'wp-plugin-info-card' ) }
+						</h3>
+						{ Object.values( colorKeysWithLabel ).map( ( objValues, index ) => {
+							return (
+								<div className="wppic-custom-preset-color" key={ index }>
+									<ColorPickerControl
+										value={ attributes[ objValues.key ] ?? 'transparent' }
+										key={ index }
+										onChange={ ( oldSlug, newValue ) => {
+											const newAttributes = { ...attributes };
+											newAttributes[ objValues.key ] = newValue;
+											setAttributes( newAttributes );
+										} }
+										label={ objValues.label }
+										defaultColors={ wppic.palette }
+										defaultColor={ '#FFFFFF' }
+										slug={ objValues.key }
+									/>
 								</div>
-								<div className="wppic-custom-preset-actions">
-									<h3>{ __( 'Preset Actions', 'wp-plugin-info-card' ) }</h3>
-									{ ! editPresets && (
-										<Button
-											variant={ 'primary' }
-											onClick={ ( e ) => {
-												e.preventDefault();
-												setSavingPreset( true );
-											} }
-											label={ __( 'Save New Preset', 'wp-plugin-info-card' ) }
-										>
-											{ __( 'Save New Preset', 'wp-plugin-info-card' ) }
-										</Button>
-									) }
-								</div>
-							</>
-						) }
-					</>
-				) }
-				{ savingPreset && (
-					<CustomPresetSaveModal
-						title={ __( 'Save Preset', 'wp-plugin-info-card' ) }
-						{ ...props }
-					/>
-				) }
-			</div>
+							);
+						} ) }
+					</div>
+					{
+						canSavePresets && (
+							<div className="wppic-custom-preset-actions">
+								{ ! editPresets && (
+									<Button
+										variant={ 'primary' }
+										onClick={ ( e ) => {
+											e.preventDefault();
+											setSavingPreset( true );
+										} }
+										label={ __( 'Save Colors as a New Theme', 'wp-plugin-info-card' ) }
+									>
+										{ __( 'Save Colors as a New Theme', 'wp-plugin-info-card' ) }
+									</Button>
+								) }
+							</div>
+						)
+					}
+				</>
+			) }
+			{ savingPreset && (
+				<CustomPresetSaveModal
+					title={ __( 'Save Color Theme?', 'wp-plugin-info-card' ) }
+					{ ...props }
+				/>
+			) }
 		</>
 	);
 };

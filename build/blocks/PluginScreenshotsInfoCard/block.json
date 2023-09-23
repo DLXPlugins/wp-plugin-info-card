@@ -60,6 +60,10 @@
       "type": "string",
       "default": "default"
     },
+    "customColors": {
+      "type": "boolean",
+      "default": false
+    },
     "pluginTitle": {
       "type": "string",
       "default": ""

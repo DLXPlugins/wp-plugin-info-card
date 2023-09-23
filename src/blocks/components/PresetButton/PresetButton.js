@@ -36,6 +36,7 @@ const PresetButton = ( props ) => {
 				<PluginScreenshots
 					assetData={ attributes.assetData }
 					attributes={ attributesOverride }
+					isPreview={ true }
 				/>
 			</div>
 		);

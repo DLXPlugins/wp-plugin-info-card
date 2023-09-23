@@ -7,6 +7,11 @@
 
 .wppic-screenshot-presets-button-group {
   padding-right: 25px;
+  margin-bottom: 15px;
+}
+.wppic-screenshot-presets-button-group h3 {
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 .wppic-screenshot-presets-button-group .components-button-group {
   display: grid;

@@ -7277,15 +7277,7 @@ var ScreenPluginPreview = function ScreenPluginPreview(a) {
     icon: "admin-customizer"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-screenshot-presets-button-group"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Select a Color Theme', 'wp-plugin-info-card')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-    variant: "secondary",
-    onClick: function onClick() {
-      c({
-        colorTheme: 'custom'
-      });
-    },
-    isPressed: 'custom' === m
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Custom', 'wp-plugin-info-card')), /*#__PURE__*/React.createElement(_components_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Select a color theme', 'wp-plugin-info-card')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, null, /*#__PURE__*/React.createElement(_components_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_10__["default"], {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Default', 'wp-plugin-info-card'),
     setAttributes: c,
     attributes: b,
@@ -7313,14 +7305,12 @@ var ScreenPluginPreview = function ScreenPluginPreview(a) {
     uniqueId: n,
     isPressed: 'velvet' === m,
     theme: "velvet"
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "wppic-screenshot-presets-button-group"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Custom Color Themes', 'wp-plugin-info-card')), /*#__PURE__*/React.createElement(_components_CustomPresets__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }))), /*#__PURE__*/React.createElement(_components_CustomPresets__WEBPACK_IMPORTED_MODULE_9__["default"], {
     clientId: d,
     uniqueId: n,
     attributes: b,
     setAttributes: c
-  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Screenshot Customization', 'wp-plugin-info-card'),
     initialOpen: true
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
@@ -8514,9 +8504,12 @@ var CustomPresetContainer = function CustomPresetContainer(a) {
     x = r.setEditPresets,
     y = r.showEditModal,
     z = r.showDeleteModal;
-  var A = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var A = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    B = _slicedToArray(A, 2),
+    C = B[0],
+    D = B[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (A.current) {
+    if (C) {
       // Perform fetch request to ajax endpoint.
       var a = "".concat(ajaxurl); // eslint-disable-line no-undef
       var b = new FormData();
@@ -8539,7 +8532,7 @@ var CustomPresetContainer = function CustomPresetContainer(a) {
         e(false);
       });
     }
-  }, [A]);
+  }, [C]);
 
   /**
    * Show a loading spinner.
@@ -8547,14 +8540,14 @@ var CustomPresetContainer = function CustomPresetContainer(a) {
    * @param {string} label Label of the loading spinner.
    * @return {JSX} Loading spinner.
    */
-  var B = function showLoading(a) {
+  var E = function showLoading(a) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "wppic-custom-preset-loading-container"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
       className: "wppic-custom-preset-loading-label"
     }, a), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Spinner, null));
   };
-  var C = function getSavedPresets() {
+  var F = function getSavedPresets() {
     if (s.length > 0) {
       // Map to preset buttons.
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -8585,7 +8578,13 @@ var CustomPresetContainer = function CustomPresetContainer(a) {
   };
 
   // Read in localized var and determine if user can save or edit presets.
-  var D = wppic.can_edit_others_posts;
+  var G = wppic.can_edit_others_posts;
+  if (d) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "wppic-screenshot-presets-button-group",
+      ref: D
+    }, E((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Loading Custom Color Themes', 'wp-plugin-info-card')));
+  }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, y && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CustomPresetEditModal__WEBPACK_IMPORTED_MODULE_6__["default"], {
     editId: y.editId,
     title: y.title,
@@ -8594,10 +8593,11 @@ var CustomPresetContainer = function CustomPresetContainer(a) {
     editId: z.editId,
     title: z.title,
     deleteNonce: z.deleteNonce
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "wppic-custom-preset-container",
-    ref: A
-  }, d && B('Loading Presets'), !d && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, C(), !w && !u && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+  }), !d && s.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-screenshot-presets-button-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Custom Color Themes', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-custom-preset-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, F(), !w && !u && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     variant: 'secondary',
     onClick: function onClick(a) {
       a.preventDefault();
@@ -8611,7 +8611,16 @@ var CustomPresetContainer = function CustomPresetContainer(a) {
       x(false);
     },
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Exit Edit Mode', 'wp-plugin-info-card')
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Exit Edit Mode', 'wp-plugin-info-card')), D && 'custom' === n.colorTheme && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Exit Edit Mode', 'wp-plugin-info-card'))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Customize the colors', 'wp-plugin-info-card'),
+    checked: n.customColors,
+    onChange: function onChange(a) {
+      o({
+        customColors: a
+      });
+    },
+    help: G ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Customize the colors of the plugin info card. You can save your customizations as a color theme.', 'wp-plugin-info-card') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Customize the colors of the plugin info card.', 'wp-plugin-info-card')
+  }), G && n.customColors && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-custom-preset-colors"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Customize the Colors', 'wp-plugin-info-card')), Object.values(colorKeysWithLabel).map(function (a, b) {
     var c;
@@ -8631,18 +8640,18 @@ var CustomPresetContainer = function CustomPresetContainer(a) {
       defaultColor: '#FFFFFF',
       slug: a.key
     }));
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  })), G && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-custom-preset-actions"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Preset Actions', 'wp-plugin-info-card')), !w && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+  }, !w && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     variant: 'primary',
     onClick: function onClick(a) {
       a.preventDefault();
       v(true);
     },
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Save New Preset', 'wp-plugin-info-card')
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Save New Preset', 'wp-plugin-info-card'))))), u && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CustomPresetSaveModal__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Save Preset', 'wp-plugin-info-card')
-  }, a))));
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Save Colors as a New Theme', 'wp-plugin-info-card')
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Save Colors as a New Theme', 'wp-plugin-info-card')))), u && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CustomPresetSaveModal__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Save Color Theme?', 'wp-plugin-info-card')
+  }, a)));
 };
 /* harmony default export */ __webpack_exports__["default"] = (CustomPresetContainer);
 
@@ -9905,7 +9914,8 @@ var PresetButton = function PresetButton(a) {
       className: "wppic-screenshot-popover-wrapper"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_templates_PluginScreenshots__WEBPACK_IMPORTED_MODULE_4__["default"], {
       assetData: f.assetData,
-      attributes: b
+      attributes: b,
+      isPreview: true
     }));
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, _extends({
@@ -10430,66 +10440,68 @@ var _wp$i18n = wp.i18n,
 var PluginScreenshots = function PluginScreenshots(a) {
   var b, c;
   var d = a.assetData,
-    e = a.attributes;
-  var f = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
-    g = _slicedToArray(f, 2),
-    h = g[0],
-    i = g[1];
-  var j = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(d.rating),
-    k = _slicedToArray(j, 2),
-    l = k[0],
-    m = k[1];
-  var n = classnames__WEBPACK_IMPORTED_MODULE_0___default()({
+    e = a.attributes,
+    f = a.isPreview,
+    g = f === void 0 ? false : f;
+  var h = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+    i = _slicedToArray(h, 2),
+    j = i[0],
+    k = i[1];
+  var l = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(d.rating),
+    m = _slicedToArray(l, 2),
+    n = m[0],
+    o = m[1];
+  var p = classnames__WEBPACK_IMPORTED_MODULE_0___default()({
     large: true,
     'wp-pic-plugin-screenshots-wrapper': true,
     'wp-pic-card': true
   });
-  var o = classnames__WEBPACK_IMPORTED_MODULE_0___default()("wppic-plugin-screenshot-theme-".concat(e.colorTheme), {
+  var q = classnames__WEBPACK_IMPORTED_MODULE_0___default()("wppic-plugin-screenshot-theme-".concat(e.colorTheme), {
     'wp-pic-plugin-screenshots': true,
     'wp-pic-screenshots': true,
     large: true,
     plugin: true,
-    'wp-pic-has-screenshots': null !== h && h.length > 0 ? true : false
+    'wp-pic-has-screenshots': null !== j && j.length > 0 ? true : false
   });
   // WordPress Requires.
-  var p = d.requires;
-  if (p && validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_6___default()(p)) {
-    p = 'WP ' + p + '+';
+  var r = d.requires;
+  if (r && validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_6___default()(r)) {
+    r = 'WP ' + r + '+';
   } else {
-    p = d.tested;
+    r = d.tested;
   }
-  var q = '';
+  var s = '';
   if (d.hasOwnProperty('icons')) {
     if (d.icons.hasOwnProperty('svg')) {
-      q = d.icons.svg;
+      s = d.icons.svg;
     } else if (d.icons.hasOwnProperty('2x')) {
-      q = d.icons['2x'];
+      s = d.icons['2x'];
     } else if (d.icons.hasOwnProperty('1x')) {
-      q = d.icons['1x'];
+      s = d.icons['1x'];
     } else {
-      q = wppic.wppic_plugin_icon_default;
+      s = wppic.wppic_plugin_icon_default;
     }
   }
-  var r = (b = d === null || d === void 0 ? void 0 : d.local_screenshots) !== null && b !== void 0 ? b : [];
-  var s = {
-    backgroundImage: "url(".concat(q, ")"),
+  var t = (b = d === null || d === void 0 ? void 0 : d.local_screenshots) !== null && b !== void 0 ? b : [];
+  var u = {
+    backgroundImage: "url(".concat(s, ")"),
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover'
   };
-  var t = new HtmlToReactParser();
-  var u = l / 20;
-  var v = '';
-  var w = false;
+  var v = new HtmlToReactParser();
+  var w = n / 20;
+  var x = '';
+  var y = false;
   // Check to see if color theme has `custom` in the name.
-  if (e.colorTheme.match(/^custom\-?/)) {
-    w = true;
-    v = "\n\t\t\t#".concat(e.uniqueId, " {\n\t\t\t\t--wppic-plugin-screenshots-card-background: ").concat(e.colorBackground, ";\n\t\t\t\t--wppic-plugin-screenshots-card-text-color: ").concat(e.colorText, ";\n\t\t\t\t--wppic-plugin-screenshots-card-border-color: ").concat(e.colorBorder, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-border-color: ").concat(e.colorMenuBorder, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-color: ").concat(e.colorMenu, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-color-hover: ").concat(e.colorMenuHover, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-text-color: ").concat(e.colorMenuText, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-text-color-hover: ").concat(e.colorMenuTextHover, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-background: ").concat(e.colorScreenshotsBackground, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-border-color: ").concat(e.colorScreenshotsBorder, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-star-color: ").concat(e.colorStar, ";\n\t\t\t\t--wppic-plugin-screenshots-card-meta-background-color: ").concat(e.colorMetaBackground, ";\n\t\t\t\t--wppic-plugin-screenshots-card-meta-text-color: ").concat(e.colorMetaText, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-arrow-background-color: ").concat(e.colorScreenshotsArrowBackground, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-arrow-background-color-hover: ").concat(e.colorScreenshotsArrowBackgroundHover, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-arrow-color: ").concat(e.colorScreenshotsArrow, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-arrow-color-hover: ").concat(e.colorScreenshotsArrowHover, ";\n\t\t\t}\n\t\t");
+  if (e.customColors && !g) {
+    y = true;
+    x = "\n\t\t\t#".concat(e.uniqueId, " {\n\t\t\t\t--wppic-plugin-screenshots-card-background: ").concat(e.colorBackground, ";\n\t\t\t\t--wppic-plugin-screenshots-card-text-color: ").concat(e.colorText, ";\n\t\t\t\t--wppic-plugin-screenshots-card-border-color: ").concat(e.colorBorder, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-border-color: ").concat(e.colorMenuBorder, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-color: ").concat(e.colorMenu, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-color-hover: ").concat(e.colorMenuHover, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-text-color: ").concat(e.colorMenuText, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-text-color-hover: ").concat(e.colorMenuTextHover, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-background: ").concat(e.colorScreenshotsBackground, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-border-color: ").concat(e.colorScreenshotsBorder, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-star-color: ").concat(e.colorStar, ";\n\t\t\t\t--wppic-plugin-screenshots-card-meta-background-color: ").concat(e.colorMetaBackground, ";\n\t\t\t\t--wppic-plugin-screenshots-card-meta-text-color: ").concat(e.colorMetaText, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-arrow-background-color: ").concat(e.colorScreenshotsArrowBackground, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-arrow-background-color-hover: ").concat(e.colorScreenshotsArrowBackgroundHover, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-arrow-color: ").concat(e.colorScreenshotsArrow, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-arrow-color-hover: ").concat(e.colorScreenshotsArrowHover, ";\n\t\t\t}\n\t\t");
   }
   return /*#__PURE__*/React.createElement("div", {
-    className: n
-  }, /*#__PURE__*/React.createElement("style", null, v), /*#__PURE__*/React.createElement("div", {
-    className: o,
-    id: w ? e.uniqueId : null
+    className: p
+  }, /*#__PURE__*/React.createElement("style", null, x), /*#__PURE__*/React.createElement("div", {
+    className: q,
+    id: y ? e.uniqueId : null
   }, /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-card"
   }, /*#__PURE__*/React.createElement("div", {
@@ -10505,7 +10517,7 @@ var PluginScreenshots = function PluginScreenshots(a) {
       'is-rounded': e.enableRoundedIcon
     })
   }, /*#__PURE__*/React.createElement("img", {
-    src: q,
+    src: s,
     width: "125",
     height: "125",
     alt: d.name
@@ -10583,7 +10595,7 @@ var PluginScreenshots = function PluginScreenshots(a) {
   }, "".concat(__('By:', 'wp-plugin-info-card'), " ").concat(d.author)), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-rating"
   }, /*#__PURE__*/React.createElement(react_simple_star_rating__WEBPACK_IMPORTED_MODULE_2__.Rating, {
-    initialValue: u,
+    initialValue: w,
     readonly: true,
     allowFraction: true,
     allowHover: false,
@@ -10595,9 +10607,9 @@ var PluginScreenshots = function PluginScreenshots(a) {
     className: "wp-pic-plugin-screenshots-last-updated"
   }, sprintf(__('Last Updated: %s ago', 'wp-plugin-info-card'), d.last_updated_human_time)), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-description"
-  }, t.parse(d.short_description))), /*#__PURE__*/React.createElement("footer", {
+  }, v.parse(d.short_description))), /*#__PURE__*/React.createElement("footer", {
     className: "wp-pic-plugin-screenshots-footer"
-  }, Object.values(r).length > 0 && e.enableScreenshots && /*#__PURE__*/React.createElement("div", {
+  }, Object.values(t).length > 0 && e.enableScreenshots && /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-images"
   }, /*#__PURE__*/React.createElement(_splidejs_react_splide__WEBPACK_IMPORTED_MODULE_3__.Splide, {
     options: (c = {
@@ -10605,22 +10617,22 @@ var PluginScreenshots = function PluginScreenshots(a) {
       width: '100%',
       gap: '20px',
       rewind: true,
-      perPage: Object.values(r).length > 3 ? 3 : Object.values(r).length,
+      perPage: Object.values(t).length > 3 ? 3 : Object.values(t).length,
       perMove: 1,
-      arrows: Object.values(r).length > 3 ? true : false,
+      arrows: Object.values(t).length > 3 ? true : false,
       pagination: false,
       drag: true,
       autoplay: false,
       lazyload: 'nearby'
-    }, _defineProperty(c, "perPage", Object.values(r).length < 2 ? 1 : 2), _defineProperty(c, "mediaQuery", 'min'), _defineProperty(c, "breakpoints", {
+    }, _defineProperty(c, "perPage", Object.values(t).length < 2 ? 1 : 2), _defineProperty(c, "mediaQuery", 'min'), _defineProperty(c, "breakpoints", {
       500: {
-        perPage: Object.values(r).length < 3 ? Object.values(r).length : 3
+        perPage: Object.values(t).length < 3 ? Object.values(t).length : 3
       },
       625: {
-        perPage: Object.values(r).length < 4 ? Object.values(r).length : 4
+        perPage: Object.values(t).length < 4 ? Object.values(t).length : 4
       }
     }), c)
-  }, Object.values(r).map(function (a, b) {
+  }, Object.values(t).map(function (a, b) {
     return /*#__PURE__*/React.createElement(_splidejs_react_splide__WEBPACK_IMPORTED_MODULE_3__.SplideSlide, {
       className: "wp-pic-plugin-screenshots-image",
       key: b
@@ -10649,7 +10661,7 @@ var PluginScreenshots = function PluginScreenshots(a) {
     className: "wp-pic-plugin-screenshots-meta-item-svg"
   }, /*#__PURE__*/React.createElement(_components_WordPressIcon__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-meta-item-label"
-  }, __('Requires', 'wp-plugin-info-card'), " ", "".concat(p))), /*#__PURE__*/React.createElement("div", {
+  }, __('Requires', 'wp-plugin-info-card'), " ", "".concat(r))), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-meta-item"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-plugin-screenshots-meta-item-svg"
@@ -23574,7 +23586,7 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Plugin Screenshots Info Card","apiVersion":2,"name":"wp-plugin-info-card/plugin-screenshots-info-card","category":"wp-plugin-info-card","icon":"<svg viewBox=\'0 0 80 80\'><path d=\'M47,41.5c0,3.9-3.1,7-7,7s-7-3.1-7-7s3.1-7,7-7S47,37.6,47,41.5z M59,31.5v20c0,1.7-1.3,3-3,3H24c-1.7,0-3-1.3-3-3v-20 c0-1.7,1.3-3,3-3h8c0.4,0,0.8-0.3,0.9-0.7l1.8-5.3h10.6l1.8,5.3c0.1,0.4,0.5,0.7,0.9,0.7h8C57.7,28.5,59,29.8,59,31.5z M49,41.5 c0-5-4-9-9-9s-9,4-9,9s4,9,9,9S49,46.5,49,41.5z M76,40c0,19.9-16.1,36-36,36S4,59.9,4,40S20.1,4,40,4S76,20.1,76,40z M61,31.5 c0-2.8-2.2-5-5-5h-7.3l-1.8-5.3c-0.1-0.4-0.5-0.7-0.9-0.7H34c-0.4,0-0.8,0.3-0.9,0.7l-1.8,5.3H24c-2.8,0-5,2.2-5,5v20 c0,2.8,2.2,5,5,5h32c2.8,0,5-2.2,5-5V31.5z\'/></svg>","description":"Add a beautiful plugin card with screenshots.","keywords":["wp plugin","plugin","card","theme","screenshot"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"uniqueId":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"screen":{"type":"string","default":"slug-entry"},"assetData":{"type":"object","default":{}},"type":{"type":"string","default":"plugin"},"slug":{"type":"string","default":"highlight-and-share"},"loading":{"type":"boolean","default":true},"imageSize":{"type":"string","default":"thumbnail"},"iconStyle":{"type":"string","default":"border"},"enableRoundedIcon":{"type":"boolean","default":true},"colorTheme":{"type":"string","default":"default"},"pluginTitle":{"type":"string","default":""},"enableContextMenu":{"type":"boolean","default":true},"enableScreenshots":{"type":"boolean","default":true},"imageSource":{"type":"string","default":"local"},"images":{"type":"array","default":[]},"align":{"type":"string","default":"center"},"colorBackground":{"type":"string","default":"#FFFFFF"},"colorText":{"type":"string","default":"#000000"},"colorBorder":{"type":"string","default":"#000000"},"colorMenuBorder":{"type":"string","default":"#000000"},"colorMenu":{"type":"string","default":"#000000"},"colorMenuHover":{"type":"string","default":"#DDDDDD"},"colorMenuText":{"type":"string","default":"#FFFFFF"},"colorMenuTextHover":{"type":"string","default":"#000000"},"colorScreenshotsBackground":{"type":"string","default":"#DDDDDD"},"colorScreenshotsBorder":{"type":"string","default":"#000000"},"colorScreenshotsArrowBackground":{"type":"string","default":"#333333"},"colorScreenshotsArrowBackgroundHover":{"type":"string","default":"#000000"},"colorScreenshotsArrow":{"type":"string","default":"#EEEEEE"},"colorScreenshotsArrowHover":{"type":"string","default":"#FFFFFF"},"colorStar":{"type":"string","default":"#FF9529"},"colorMetaBackground":{"type":"string","default":"#000000"},"colorMetaText":{"type":"string","default":"#FFFFFF"}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["wide","center","full"],"className":true},"editorScript":"wp_plugin_info_card-cgb-block-js","editorStyle":["wp_plugin_info_card-cgb-block-editor-css","wp_plugin_info_card-cgb-style-css","wp-plugin-info-card-block-editor-css-inline"],"style":"has-style-frontend-css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Plugin Screenshots Info Card","apiVersion":2,"name":"wp-plugin-info-card/plugin-screenshots-info-card","category":"wp-plugin-info-card","icon":"<svg viewBox=\'0 0 80 80\'><path d=\'M47,41.5c0,3.9-3.1,7-7,7s-7-3.1-7-7s3.1-7,7-7S47,37.6,47,41.5z M59,31.5v20c0,1.7-1.3,3-3,3H24c-1.7,0-3-1.3-3-3v-20 c0-1.7,1.3-3,3-3h8c0.4,0,0.8-0.3,0.9-0.7l1.8-5.3h10.6l1.8,5.3c0.1,0.4,0.5,0.7,0.9,0.7h8C57.7,28.5,59,29.8,59,31.5z M49,41.5 c0-5-4-9-9-9s-9,4-9,9s4,9,9,9S49,46.5,49,41.5z M76,40c0,19.9-16.1,36-36,36S4,59.9,4,40S20.1,4,40,4S76,20.1,76,40z M61,31.5 c0-2.8-2.2-5-5-5h-7.3l-1.8-5.3c-0.1-0.4-0.5-0.7-0.9-0.7H34c-0.4,0-0.8,0.3-0.9,0.7l-1.8,5.3H24c-2.8,0-5,2.2-5,5v20 c0,2.8,2.2,5,5,5h32c2.8,0,5-2.2,5-5V31.5z\'/></svg>","description":"Add a beautiful plugin card with screenshots.","keywords":["wp plugin","plugin","card","theme","screenshot"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"uniqueId":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"screen":{"type":"string","default":"slug-entry"},"assetData":{"type":"object","default":{}},"type":{"type":"string","default":"plugin"},"slug":{"type":"string","default":"highlight-and-share"},"loading":{"type":"boolean","default":true},"imageSize":{"type":"string","default":"thumbnail"},"iconStyle":{"type":"string","default":"border"},"enableRoundedIcon":{"type":"boolean","default":true},"colorTheme":{"type":"string","default":"default"},"customColors":{"type":"boolean","default":false},"pluginTitle":{"type":"string","default":""},"enableContextMenu":{"type":"boolean","default":true},"enableScreenshots":{"type":"boolean","default":true},"imageSource":{"type":"string","default":"local"},"images":{"type":"array","default":[]},"align":{"type":"string","default":"center"},"colorBackground":{"type":"string","default":"#FFFFFF"},"colorText":{"type":"string","default":"#000000"},"colorBorder":{"type":"string","default":"#000000"},"colorMenuBorder":{"type":"string","default":"#000000"},"colorMenu":{"type":"string","default":"#000000"},"colorMenuHover":{"type":"string","default":"#DDDDDD"},"colorMenuText":{"type":"string","default":"#FFFFFF"},"colorMenuTextHover":{"type":"string","default":"#000000"},"colorScreenshotsBackground":{"type":"string","default":"#DDDDDD"},"colorScreenshotsBorder":{"type":"string","default":"#000000"},"colorScreenshotsArrowBackground":{"type":"string","default":"#333333"},"colorScreenshotsArrowBackgroundHover":{"type":"string","default":"#000000"},"colorScreenshotsArrow":{"type":"string","default":"#EEEEEE"},"colorScreenshotsArrowHover":{"type":"string","default":"#FFFFFF"},"colorStar":{"type":"string","default":"#FF9529"},"colorMetaBackground":{"type":"string","default":"#000000"},"colorMetaText":{"type":"string","default":"#FFFFFF"}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["wide","center","full"],"className":true},"editorScript":"wp_plugin_info_card-cgb-block-js","editorStyle":["wp_plugin_info_card-cgb-block-editor-css","wp_plugin_info_card-cgb-style-css","wp-plugin-info-card-block-editor-css-inline"],"style":"has-style-frontend-css"}');
 
 /***/ }),
 
