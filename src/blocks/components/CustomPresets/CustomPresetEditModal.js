@@ -35,8 +35,8 @@ const CustomPresetEditModal = ( props ) => {
 		setIsSaving( true );
 		const ajaxUrl = `${ ajaxurl }`; // eslint-disable-line no-undef
 		const data = new FormData();
-		data.append( 'action', 'has_save_preset' );
-		data.append( 'nonce', saveNonce );
+		data.append( 'action', 'wppic_edit_screenshot_preset' );
+		data.append( 'nonce', wppic.screenshot_preset_save_nonce );
 		data.append( 'editId', formData.editId );
 		data.append( 'title', formData.title );
 		fetch( ajaxUrl, {
@@ -66,7 +66,7 @@ const CustomPresetEditModal = ( props ) => {
 
 	return (
 		<Modal
-			title={ __( 'Update Preset', 'wp-plugin-info-card' ) }
+			title={ __( 'Update Color Theme', 'wp-plugin-info-card' ) }
 			onRequestClose={ () => setShowEditModal( false ) }
 			className="has-preset-modal"
 			shouldCloseOnClickOutside={ false }
@@ -82,7 +82,7 @@ const CustomPresetEditModal = ( props ) => {
 					render={ ( { field } ) => (
 						<TextControl
 							{ ...field }
-							label={ __( 'Preset Name', 'wp-plugin-info-card' ) }
+							label={ __( 'Color Theme Name', 'wp-plugin-info-card' ) }
 							className="is-required"
 						/>
 					) }
@@ -92,7 +92,7 @@ const CustomPresetEditModal = ( props ) => {
 						message={ __( 'This field is required.' ) }
 						status="error"
 						politeness="assertive"
-						icon={ <AlertCircle /> }
+						icon={ () => <AlertCircle style={ { color: 'currentColor' } } /> }
 					/>
 				) }
 				{ 'pattern' === errors.title?.type && (
@@ -100,7 +100,7 @@ const CustomPresetEditModal = ( props ) => {
 						message={ __( 'This field contains invalid characters.' ) }
 						status="error"
 						politeness="assertive"
-						icon={ <AlertCircle /> }
+						icon={ () => <AlertCircle style={ { color: 'currentColor' } } /> }
 					/>
 				) }
 				<Controller

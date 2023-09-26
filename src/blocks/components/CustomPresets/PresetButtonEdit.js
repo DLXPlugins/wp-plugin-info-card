@@ -25,7 +25,7 @@ const PresetButtonEdit = ( props ) => {
 	return (
 		<>
 			<div
-				className={ classNames( 'has-preset-edit-container', {
+				className={ classNames( 'wppic-preset-edit-container', {
 					'has-preset-edit-container--edit': editPresets,
 				} ) }
 			>
@@ -41,7 +41,7 @@ const PresetButtonEdit = ( props ) => {
 									saveNonce,
 								} );
 							} }
-							label={ __( 'Edit Preset', 'wp-plugin-info-card' ) }
+							label={ __( 'Edit Color Theme', 'wp-plugin-info-card' ) }
 							icon="edit"
 							className="has-preset-edit-button"
 						/>
@@ -54,7 +54,7 @@ const PresetButtonEdit = ( props ) => {
 									deleteNonce,
 								} );
 							} }
-							label={ __( 'Delete Preset', 'wp-plugin-info-card' ) }
+							label={ __( 'Delete Color Theme', 'wp-plugin-info-card' ) }
 							icon="trash"
 							className="has-preset-delete-button"
 						/>
@@ -63,7 +63,7 @@ const PresetButtonEdit = ( props ) => {
 				<PresetButton
 					key={ editId }
 					label={
-						'' === title ? __( 'Untitled Preset', 'wp-plugin-info-card' ) : title
+						'' === title ? __( 'Untitled Color Theme', 'wp-plugin-info-card' ) : title
 					}
 					setAttributes={ setAttributes }
 					uniqueId={ uniqueId }

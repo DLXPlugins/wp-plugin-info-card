@@ -61,8 +61,10 @@ const PluginScreenshots = ( props ) => {
 
 	let blockStyles = '';
 	let customMatch = false;
+	console.log( attributes.colorTheme.includes( 'custom' ) );
+	console.log( attributes.colorTheme );
 	// Check to see if color theme has `custom` in the name.
-	if ( attributes.customColors && ! isPreview ) {
+	if ( ( attributes.customColors && ! isPreview ) || ( ! attributes.customColors && attributes.colorTheme.includes( 'custom' ) ) ) {
 		customMatch = true;
 		blockStyles = `
 			#${ attributes.uniqueId } {

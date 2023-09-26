@@ -111,7 +111,7 @@ const ScreenPluginPreview = ( props ) => {
 			</PanelBody>
 			<PanelBody
 				title={ __( 'Color Themes', 'wp-plugin-info-card' ) }
-				initialOpen={ false }
+				initialOpen={ true }
 				className="wppic-presets-panel"
 				icon="admin-customizer"
 			>

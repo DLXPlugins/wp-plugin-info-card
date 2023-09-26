@@ -100,9 +100,9 @@ const CustomPresetSaveModal = ( props ) => {
 		setIsSaving( true );
 		const ajaxUrl = `${ ajaxurl }`; // eslint-disable-line no-undef
 		const data = new FormData();
-		data.append( 'action', 'has_override_preset' );
-		data.append( 'nonce', has_gutenberg.blockPresetsNonceSave );
-		data.append( 'attributes', JSON.stringify( attributes ) );
+		data.append( 'action', 'wppic_override_screenshot_preset' );
+		data.append( 'nonce', wppic.screenshot_preset_save_nonce );
+		data.append( 'formData', JSON.stringify( formData ) );
 		data.append( 'editId', formData.selectedPreset );
 		fetch( ajaxUrl, {
 			method: 'POST',
@@ -142,18 +142,18 @@ const CustomPresetSaveModal = ( props ) => {
 
 	let radioOptions = [
 		{
-			label: __( 'Save Preset', 'wp-plugin-info-card' ),
+			label: __( 'Save Color Theme', 'wp-plugin-info-card' ),
 			value: 'new',
 		},
 		{
-			label: __( 'Override Preset', 'wp-plugin-info-card' ),
+			label: __( 'Override Color Theme', 'wp-plugin-info-card' ),
 			value: 'override',
 		},
 	];
 	if ( savedPresets.length === 0 ) {
 		radioOptions = [
 			{
-				label: __( 'Save Preset', 'wp-plugin-info-card' ),
+				label: __( 'Save Color Theme', 'wp-plugin-info-card' ),
 				value: 'new',
 			},
 		];
@@ -170,7 +170,7 @@ const CustomPresetSaveModal = ( props ) => {
 			>
 				<RadioControl
 					label={ __(
-						'Save a new preset or override an existing one.',
+						'Save a new color theme or override an existing one.',
 						'wp-plugin-info-card'
 					) }
 					className="has-preset-modal-radio-control"
@@ -194,7 +194,7 @@ const CustomPresetSaveModal = ( props ) => {
 									render={ ( { field } ) => (
 										<TextControl
 											{ ...field }
-											label={ __( 'Preset Name', 'wp-plugin-info-card' ) }
+											label={ __( 'Color Theme Name', 'wp-plugin-info-card' ) }
 											className="is-required"
 										/>
 									) }
@@ -204,7 +204,8 @@ const CustomPresetSaveModal = ( props ) => {
 										message={ __( 'This field is required.' ) }
 										status="error"
 										politeness="assertive"
-										icon={ <AlertCircle /> }
+										icon={ () => <AlertCircle style={ { color: 'currentColor' } } /> }
+										inline={ false }
 									/>
 								) }
 								{ 'pattern' === errors.presetTitle?.type && (
@@ -212,7 +213,8 @@ const CustomPresetSaveModal = ( props ) => {
 										message={ __( 'This field contains invalid characters.' ) }
 										status="error"
 										politeness="assertive"
-										icon={ <AlertCircle /> }
+										icon={ () => <AlertCircle style={ { color: 'currentColor' } } /> }
+										inline={ false }
 									/>
 								) }
 							</div>
@@ -231,7 +233,7 @@ const CustomPresetSaveModal = ( props ) => {
 										render={ ( { field: { onChange, value } } ) => (
 											<RadioControl
 												label={ __(
-													'Select a preset to override',
+													'Select a color theme to override',
 													'wp-plugin-info-card'
 												) }
 												className="is-required"
@@ -243,10 +245,10 @@ const CustomPresetSaveModal = ( props ) => {
 									/>
 									{ 'required' === errors.selectedPreset?.type && (
 										<Notice
-											message={ __( 'This field is required.' ) }
+											message={ __( 'Please select a theme to override.' ) }
 											status="error"
 											politeness="assertive"
-											icon={ <AlertCircle /> }
+											icon={ () => <AlertCircle style={ { color: 'currentColor' } } /> }
 										/>
 									) }
 								</div>
@@ -262,7 +264,7 @@ const CustomPresetSaveModal = ( props ) => {
 						>
 							{ isSaving
 								? __( 'Saving…', 'wp-plugin-info-card' )
-								: __( 'Save Preset', 'wp-plugin-info-card' ) }
+								: __( 'Save Color Theme', 'wp-plugin-info-card' ) }
 						</Button>
 						<Button
 							variant="secondary"

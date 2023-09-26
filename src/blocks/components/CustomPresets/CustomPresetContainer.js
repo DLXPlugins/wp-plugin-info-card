@@ -10,7 +10,7 @@ import {
 	ToggleControl,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { HelpCircle } from 'lucide-react';
+import { Settings2, ArrowBigLeft } from 'lucide-react';
 import CustomPresetsContext from './context';
 import CustomPresetSaveModal from './CustomPresetSaveModal';
 import PresetButtonEdit from './PresetButtonEdit';
@@ -173,6 +173,7 @@ const CustomPresetContainer = ( props ) => {
 									deleteNonce={ preset.delete_nonce }
 									theme={ `custom-${ preset.slug }` }
 									customFormData={ preset.content.formData ?? {} }
+									className="wppic-preset-button"
 								/>
 							);
 						} ) }
@@ -225,14 +226,16 @@ const CustomPresetContainer = ( props ) => {
 							{ getSavedPresets() }
 							{ ! editPresets && ! savingPreset && (
 								<Button
-									variant={ 'secondary' }
+									variant={ 'primary' }
 									onClick={ ( e ) => {
 										e.preventDefault();
 										setEditPresets( true );
 									} }
-									label={ __( 'Edit Presets', 'wp-plugin-info-card' ) }
+									className="wppic-custom-preset-edit-button"
+									icon={ <Settings2 style={{ color: 'currentColor', fill: 'none' } } /> }
+									label={ __( 'Edit Color Themes', 'wp-plugin-info-card' ) }
 								>
-									{ __( 'Edit Presets', 'wp-plugin-info-card' ) }
+									{ __( 'Edit Color Themes', 'wp-plugin-info-card' ) }
 								</Button>
 							) }
 							{ editPresets && ! savingPreset && (
@@ -242,7 +245,9 @@ const CustomPresetContainer = ( props ) => {
 										e.preventDefault();
 										setEditPresets( false );
 									} }
+									className="wppic-custom-preset-edit-button"
 									label={ __( 'Exit Edit Mode', 'wp-plugin-info-card' ) }
+									icon={ <ArrowBigLeft style={{ color: 'currentColor', fill: 'none' } } /> }
 								>
 									{ __( 'Exit Edit Mode', 'wp-plugin-info-card' ) }
 								</Button>

@@ -7272,7 +7272,7 @@ var ScreenPluginPreview = function ScreenPluginPreview(a) {
     }
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Color Themes', 'wp-plugin-info-card'),
-    initialOpen: false,
+    initialOpen: true,
     className: "wppic-presets-panel",
     icon: "admin-customizer"
   }, /*#__PURE__*/React.createElement("div", {
@@ -8395,6 +8395,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/settings-2.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/arrow-big-left.js");
 /* harmony import */ var _context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./context */ "./src/blocks/components/CustomPresets/context.js");
 /* harmony import */ var _CustomPresetSaveModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CustomPresetSaveModal */ "./src/blocks/components/CustomPresets/CustomPresetSaveModal.js");
 /* harmony import */ var _PresetButtonEdit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PresetButtonEdit */ "./src/blocks/components/CustomPresets/PresetButtonEdit.js");
@@ -8570,7 +8572,8 @@ var CustomPresetContainer = function CustomPresetContainer(a) {
           saveNonce: a.save_nonce,
           deleteNonce: a.delete_nonce,
           theme: "custom-".concat(a.slug),
-          customFormData: (b = a.content.formData) !== null && b !== void 0 ? b : {}
+          customFormData: (b = a.content.formData) !== null && b !== void 0 ? b : {},
+          className: "wppic-preset-button"
         });
       })));
     }
@@ -8598,19 +8601,33 @@ var CustomPresetContainer = function CustomPresetContainer(a) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Custom Color Themes', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-custom-preset-container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, F(), !w && !u && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-    variant: 'secondary',
+    variant: 'primary',
     onClick: function onClick(a) {
       a.preventDefault();
       x(true);
     },
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Edit Presets', 'wp-plugin-info-card')
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Edit Presets', 'wp-plugin-info-card')), w && !u && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+    className: "wppic-custom-preset-edit-button",
+    icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      style: {
+        color: 'currentColor',
+        fill: 'none'
+      }
+    }),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Edit Color Themes', 'wp-plugin-info-card')
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Edit Color Themes', 'wp-plugin-info-card')), w && !u && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     variant: 'primary',
     onClick: function onClick(a) {
       a.preventDefault();
       x(false);
     },
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Exit Edit Mode', 'wp-plugin-info-card')
+    className: "wppic-custom-preset-edit-button",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Exit Edit Mode', 'wp-plugin-info-card'),
+    icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      style: {
+        color: 'currentColor',
+        fill: 'none'
+      }
+    })
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Exit Edit Mode', 'wp-plugin-info-card'))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Customize the colors', 'wp-plugin-info-card'),
     checked: n.customColors,
@@ -8839,8 +8856,8 @@ var CustomPresetEditModal = function CustomPresetEditModal(a) {
     j(true);
     var b = "".concat(ajaxurl); // eslint-disable-line no-undef
     var c = new FormData();
-    c.append('action', 'has_save_preset');
-    c.append('nonce', f);
+    c.append('action', 'wppic_edit_screenshot_preset');
+    c.append('nonce', wppic.screenshot_preset_save_nonce);
     c.append('editId', a.editId);
     c.append('title', a.title);
     fetch(b, {
@@ -8867,7 +8884,7 @@ var CustomPresetEditModal = function CustomPresetEditModal(a) {
     return null;
   }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Modal, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Update Preset', 'wp-plugin-info-card'),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Update Color Theme', 'wp-plugin-info-card'),
     onRequestClose: function onRequestClose() {
       return n(false);
     },
@@ -8885,7 +8902,7 @@ var CustomPresetEditModal = function CustomPresetEditModal(a) {
     render: function render(a) {
       var b = a.field;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, _extends({}, b, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Preset Name', 'wp-plugin-info-card'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Color Theme Name', 'wp-plugin-info-card'),
         className: "is-required"
       }));
     }
@@ -8893,12 +8910,24 @@ var CustomPresetEditModal = function CustomPresetEditModal(a) {
     message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.'),
     status: "error",
     politeness: "assertive",
-    icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], null)
+    icon: function icon() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        style: {
+          color: 'currentColor'
+        }
+      });
+    }
   }), 'pattern' === ((c = t.title) === null || c === void 0 ? void 0 : c.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Notice__WEBPACK_IMPORTED_MODULE_3__["default"], {
     message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field contains invalid characters.'),
     status: "error",
     politeness: "assertive",
-    icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], null)
+    icon: function icon() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        style: {
+          color: 'currentColor'
+        }
+      });
+    }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_5__.Controller, {
     name: "editId",
     control: q,
@@ -9057,9 +9086,9 @@ var CustomPresetSaveModal = function CustomPresetSaveModal(a) {
     l(true);
     var b = "".concat(ajaxurl); // eslint-disable-line no-undef
     var c = new FormData();
-    c.append('action', 'has_override_preset');
-    c.append('nonce', has_gutenberg.blockPresetsNonceSave);
-    c.append('attributes', JSON.stringify(n));
+    c.append('action', 'wppic_override_screenshot_preset');
+    c.append('nonce', wppic.screenshot_preset_save_nonce);
+    c.append('formData', JSON.stringify(a));
     c.append('editId', a.selectedPreset);
     fetch(b, {
       method: 'POST',
@@ -9096,15 +9125,15 @@ var CustomPresetSaveModal = function CustomPresetSaveModal(a) {
     return a;
   };
   var G = [{
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Save Preset', 'wp-plugin-info-card'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Save Color Theme', 'wp-plugin-info-card'),
     value: 'new'
   }, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Override Preset', 'wp-plugin-info-card'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Override Color Theme', 'wp-plugin-info-card'),
     value: 'override'
   }];
   if (r.length === 0) {
     G = [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Save Preset', 'wp-plugin-info-card'),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Save Color Theme', 'wp-plugin-info-card'),
       value: 'new'
     }];
   }
@@ -9118,7 +9147,7 @@ var CustomPresetSaveModal = function CustomPresetSaveModal(a) {
     className: "has-preset-modal",
     shouldCloseOnClickOutside: false
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RadioControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Save a new preset or override an existing one.', 'wp-plugin-info-card'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Save a new color theme or override an existing one.', 'wp-plugin-info-card'),
     className: "has-preset-modal-radio-control",
     selected: g,
     options: G,
@@ -9139,7 +9168,7 @@ var CustomPresetSaveModal = function CustomPresetSaveModal(a) {
     render: function render(a) {
       var b = a.field;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, _extends({}, b, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Preset Name', 'wp-plugin-info-card'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Color Theme Name', 'wp-plugin-info-card'),
         className: "is-required"
       }));
     }
@@ -9147,12 +9176,26 @@ var CustomPresetSaveModal = function CustomPresetSaveModal(a) {
     message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.'),
     status: "error",
     politeness: "assertive",
-    icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], null)
+    icon: function icon() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        style: {
+          color: 'currentColor'
+        }
+      });
+    },
+    inline: false
   }), 'pattern' === ((c = B.presetTitle) === null || c === void 0 ? void 0 : c.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Notice__WEBPACK_IMPORTED_MODULE_4__["default"], {
     message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field contains invalid characters.'),
     status: "error",
     politeness: "assertive",
-    icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], null)
+    icon: function icon() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        style: {
+          color: 'currentColor'
+        }
+      });
+    },
+    inline: false
   }))), 'override' === g && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, r.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "has-preset-modal-override-preset"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_5__.Controller, {
@@ -9166,7 +9209,7 @@ var CustomPresetSaveModal = function CustomPresetSaveModal(a) {
         c = b.onChange,
         d = b.value;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RadioControl, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select a preset to override', 'wp-plugin-info-card'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select a color theme to override', 'wp-plugin-info-card'),
         className: "is-required",
         selected: d,
         options: F(),
@@ -9176,10 +9219,16 @@ var CustomPresetSaveModal = function CustomPresetSaveModal(a) {
       });
     }
   }), 'required' === ((d = B.selectedPreset) === null || d === void 0 ? void 0 : d.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Notice__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.'),
+    message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Please select a theme to override.'),
     status: "error",
     politeness: "assertive",
-    icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], null)
+    icon: function icon() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        style: {
+          color: 'currentColor'
+        }
+      });
+    }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "has-preset-modal-button-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
@@ -9187,7 +9236,7 @@ var CustomPresetSaveModal = function CustomPresetSaveModal(a) {
     variant: "primary",
     className: "has-preset-modal-apply-button",
     disabled: k
-  }, k ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Saving…', 'wp-plugin-info-card') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Save Preset', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+  }, k ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Saving…', 'wp-plugin-info-card') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Save Color Theme', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     variant: "secondary",
     onClick: function onClick() {
       u(false);
@@ -9250,7 +9299,7 @@ var PresetButtonEdit = function PresetButtonEdit(a) {
     q = o.setShowEditModal,
     r = o.setShowDeleteModal;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('has-preset-edit-container', {
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wppic-preset-edit-container', {
       'has-preset-edit-container--edit': p
     })
   }, p && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -9265,7 +9314,7 @@ var PresetButtonEdit = function PresetButtonEdit(a) {
         saveNonce: i
       });
     },
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Edit Preset', 'wp-plugin-info-card'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Edit Color Theme', 'wp-plugin-info-card'),
     icon: "edit",
     className: "has-preset-edit-button"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
@@ -9277,12 +9326,12 @@ var PresetButtonEdit = function PresetButtonEdit(a) {
         deleteNonce: j
       });
     },
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Delete Preset', 'wp-plugin-info-card'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Delete Color Theme', 'wp-plugin-info-card'),
     icon: "trash",
     className: "has-preset-delete-button"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({
     key: g,
-    label: '' === b ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Untitled Preset', 'wp-plugin-info-card') : b,
+    label: '' === b ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Untitled Color Theme', 'wp-plugin-info-card') : b,
     setAttributes: d,
     uniqueId: f,
     className: "has-preset-button",
@@ -10492,8 +10541,10 @@ var PluginScreenshots = function PluginScreenshots(a) {
   var w = n / 20;
   var x = '';
   var y = false;
+  console.log(e.colorTheme.includes('custom'));
+  console.log(e.colorTheme);
   // Check to see if color theme has `custom` in the name.
-  if (e.customColors && !g) {
+  if (e.customColors && !g || !e.customColors && e.colorTheme.includes('custom')) {
     y = true;
     x = "\n\t\t\t#".concat(e.uniqueId, " {\n\t\t\t\t--wppic-plugin-screenshots-card-background: ").concat(e.colorBackground, ";\n\t\t\t\t--wppic-plugin-screenshots-card-text-color: ").concat(e.colorText, ";\n\t\t\t\t--wppic-plugin-screenshots-card-border-color: ").concat(e.colorBorder, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-border-color: ").concat(e.colorMenuBorder, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-color: ").concat(e.colorMenu, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-color-hover: ").concat(e.colorMenuHover, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-text-color: ").concat(e.colorMenuText, ";\n\t\t\t\t--wppic-plugin-screenshots-card-menu-text-color-hover: ").concat(e.colorMenuTextHover, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-background: ").concat(e.colorScreenshotsBackground, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-border-color: ").concat(e.colorScreenshotsBorder, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-star-color: ").concat(e.colorStar, ";\n\t\t\t\t--wppic-plugin-screenshots-card-meta-background-color: ").concat(e.colorMetaBackground, ";\n\t\t\t\t--wppic-plugin-screenshots-card-meta-text-color: ").concat(e.colorMetaText, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-arrow-background-color: ").concat(e.colorScreenshotsArrowBackground, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-arrow-background-color-hover: ").concat(e.colorScreenshotsArrowBackgroundHover, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-arrow-color: ").concat(e.colorScreenshotsArrow, ";\n\t\t\t\t--wppic-plugin-screenshots-card-screenshots-arrow-color-hover: ").concat(e.colorScreenshotsArrowHover, ";\n\t\t\t}\n\t\t");
   }
@@ -17224,6 +17275,34 @@ const AlertCircle = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["defaul
 
 /***/ }),
 
+/***/ "./node_modules/lucide-react/dist/esm/icons/arrow-big-left.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/arrow-big-left.js ***!
+  \********************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ ArrowBigLeft; }
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * lucide-react v0.271.0 - ISC
+ */
+
+
+
+const ArrowBigLeft = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("ArrowBigLeft", [
+  ["path", { d: "M18 15h-6v4l-7-7 7-7v4h6v6z", key: "lbrdak" }]
+]);
+
+
+//# sourceMappingURL=arrow-big-left.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/lucide-react/dist/esm/icons/code.js":
 /*!**********************************************************!*\
   !*** ./node_modules/lucide-react/dist/esm/icons/code.js ***!
@@ -17373,6 +17452,37 @@ const LineChart = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"
 
 
 //# sourceMappingURL=line-chart.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/settings-2.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/settings-2.js ***!
+  \****************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ Settings2; }
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * lucide-react v0.271.0 - ISC
+ */
+
+
+
+const Settings2 = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Settings2", [
+  ["path", { d: "M20 7h-9", key: "3s1dr2" }],
+  ["path", { d: "M14 17H5", key: "gfn3mx" }],
+  ["circle", { cx: "17", cy: "17", r: "3", key: "18b49y" }],
+  ["circle", { cx: "7", cy: "7", r: "3", key: "dfmy0x" }]
+]);
+
+
+//# sourceMappingURL=settings-2.js.map
 
 
 /***/ }),

@@ -31,12 +31,47 @@ class Blocks {
 		// Ajax for saving screenshot presets.
 		add_action( 'wp_ajax_wppic_save_screenshot_presets', array( $self, 'ajax_save_screenshot_presets' ) );
 
+		// Ajax for overriding a screenshot preset.
+		add_action( 'wp_ajax_wppic_override_screenshot_preset', array( $self, 'ajax_override_screenshot_preset' ) );
+
+		// Ajax for editing a preset.
+		add_action( 'wp_ajax_wppic_edit_screenshot_preset', array( $self, 'ajax_edit_screenshot_preset' ) );
+
 		// Ajax for deleting a preset.
 		add_action( 'wp_ajax_wppic_delete_screenshot_preset', array( $self, 'ajax_delete_preset' ) );
 
 		return $self;
 	}
 
+	/**
+	 * Edits a preset name.
+	 */
+	public function ajax_edit_screenshot_preset() {
+		// Get preset post ID.
+		$preset_id = absint( filter_input( INPUT_POST, 'editId', FILTER_DEFAULT ) );
+
+		// Verify nonce.
+		if ( ! wp_verify_nonce( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ), 'wppic_screenshot_preset_save' ) || ! current_user_can( 'edit_others_posts' ) ) {
+			wp_send_json_error( array() );
+		}
+
+		// Get the preset title.
+		$title = sanitize_text_field( filter_input( INPUT_POST, 'title', FILTER_DEFAULT ) );
+
+		// Update the post title.
+		wp_update_post(
+			array(
+				'ID'         => $preset_id,
+				'post_title' => $title,
+			)
+		);
+
+		// Retrieve all presets.
+		$return = self::return_saved_presets();
+
+		// Send json response.
+		wp_send_json_success( array( 'presets' => $return ) );
+	}
 	/**
 	 * Load screenshot presets via ajax.
 	 */
@@ -77,6 +112,38 @@ class Blocks {
 				'post_name'    => $title_sanitized,
 				'post_content' => wp_json_encode( array( 'formData' => $form_data ), 1048 ),
 				'post_status'  => 'publish',
+				'post_type'    => 'wppic_screen_presets',
+			)
+		);
+
+		// Get the presets.
+		$return = self::return_saved_presets();
+		wp_send_json_success( array( 'presets' => $return ) );
+	}
+
+	/**
+	 * Load screenshot presets via ajax.
+	 */
+	public function ajax_override_screenshot_preset() {
+		// Verify nonce.
+		if ( ! wp_verify_nonce( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ), 'wppic_screenshot_preset_save' ) || ! current_user_can( 'edit_others_posts' ) ) {
+			wp_send_json_error( array() );
+		}
+
+		// Get form data in array form.
+		$form_data = json_decode( filter_input( INPUT_POST, 'formData', FILTER_DEFAULT ), true );
+		if ( ! empty( $form_data ) ) {
+			$form_data = Functions::sanitize_array_recursive( $form_data );
+		}
+
+		// Get the preset ID.
+		$preset_id = absint( filter_input( INPUT_POST, 'editId', FILTER_DEFAULT, FILTER_VALIDATE_INT ) );
+
+		// Insert new post with preset data.
+		wp_update_post(
+			array(
+				'id'           => $preset_id,
+				'post_content' => wp_json_encode( array( 'formData' => $form_data ), 1048 ),
 				'post_type'    => 'wppic_screen_presets',
 			)
 		);

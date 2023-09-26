@@ -6,20 +6,23 @@
 }
 
 .wppic-screenshot-presets-button-group {
-  padding-right: 25px;
   margin-bottom: 15px;
 }
 .wppic-screenshot-presets-button-group h3 {
   margin-bottom: 8px;
   font-weight: 600;
 }
-.wppic-screenshot-presets-button-group .components-button-group {
+.wppic-screenshot-presets-button-group .components-button-group:has(> button),
+.wppic-screenshot-presets-button-group .components-button-group:has(> .wppic-preset-edit-container) {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 15px;
   row-gap: 15px;
 }
-.wppic-screenshot-presets-button-group .components-button-group button {
+.wppic-screenshot-presets-button-group .components-button-group:has(> button) button,
+.wppic-screenshot-presets-button-group .components-button-group:has(> .wppic-preset-edit-container) button {
+  display: block;
+  width: 100%;
   text-align: center;
   justify-content: center;
 }
