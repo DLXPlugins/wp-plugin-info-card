@@ -44,7 +44,7 @@
 		},
 		"iconStyle": {
 			"type": "string",
-			"default": "border"
+			"default": "none"
 		},
 		"enableRoundedIcon": {
 			"type": "boolean",

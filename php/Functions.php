@@ -475,6 +475,10 @@ class Functions {
 		);
 		$allowed_tags['a']['class'] = array();
 
+		$allowed_tags['style'] = array(
+			'type' => array(),
+		);
+
 		// Add form input fields.
 		$allowed_tags['input'] = array(
 			'type'        => array(),

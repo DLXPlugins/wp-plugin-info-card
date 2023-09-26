@@ -317,8 +317,20 @@ class Blocks {
 	 * @return string Block rendered.
 	 */
 	public function site_plugin_screenshots( $attributes = array() ) {
+		if ( is_admin() ) {
+			return;
+		}
 		$attributes = Functions::sanitize_array_recursive( $attributes );
-		return '';
+
+		// Convert to underline case.
+		$new_atts = array();
+		foreach ( $attributes as $key => $value ) {
+			$new_atts[ Functions::to_underlines( $key ) ] = $value;
+		}
+
+		add_action( 'wp_footer', array( static::class, 'footer_svgs' ) );
+
+		return Shortcodes::shortcode_plugin_screenshots_info_card( $new_atts );
 	}
 
 	/**
@@ -452,5 +464,16 @@ class Blocks {
 			'layout' => $attributes['layout'],
 		);
 		return Shortcodes::shortcode_active_site_plugins_function( $shortcode_atts );
+	}
+
+	public static function footer_svgs() {
+		?>
+		<svg xmlns="http://www.w3.org/2000/svg" style="display:none; width: 0px; height: 0px; overflow: hidden;">
+			<symbol id="lucide-code" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+			<symbol id="lucide-download-cloud xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download-cloud"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m8 17 4 4 4-4"/></symbol>
+			<symbol id="lucide-star" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+			<symbol id="lucide-line-chart" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-line-chart"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></symbol>
+			<sybmol id="lucide-download" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></symbol>
+		<?php
 	}
 }
