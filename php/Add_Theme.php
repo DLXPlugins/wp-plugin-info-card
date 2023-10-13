@@ -41,6 +41,9 @@ class Add_Theme {
 	public function api_parser( $wppic_data, $type, $slug ) {
 		if ( 'theme' === $type ) {
 
+			// Trip forward and trailing slashes from slug.
+			$slug = trim( $slug, '/' );
+
 			require_once ABSPATH . 'wp-admin/includes/theme.php';
 			$theme_info = themes_api(
 				'theme_information',
