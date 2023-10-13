@@ -2206,8 +2206,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _templates_ThemeCard__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../templates/ThemeCard */ "./src/blocks/templates/ThemeCard.js");
 /* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../Logo */ "./src/blocks/Logo.js");
 /* harmony import */ var _components_Numbers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/Numbers */ "./src/blocks/components/Numbers.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_12__);
 function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(a, b) { if (!a) return; if (typeof a === "string") return _arrayLikeToArray(a, b); var c = Object.prototype.toString.call(a).slice(8, -1); if (c === "Object" && a.constructor) c = a.constructor.name; if (c === "Map" || c === "Set") return Array.from(a); if (c === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(c)) return _arrayLikeToArray(a, b); }
@@ -2723,12 +2723,49 @@ var WPPluginInfoCard = function WPPluginInfoCard(a) {
         label: __('Plugin or Theme Slug', 'wp-plugin-info-card'),
         value: n,
         onChange: function onChange(a) {
+          // Check for URL so we don't paste in the slug AND url.
+          if ((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_12__.isURL)(a)) {
+            return;
+          }
           c({
             slug: a
           });
           o(a);
         },
-        help: __('Comma separated slugs are supported.', 'wp-plugin-info-card')
+        help: __('Comma separated slugs are supported.', 'wp-plugin-info-card'),
+        onPaste: function onPaste(a) {
+          // Get contents from clipboard.
+          var b = a.clipboardData.getData('text/plain').trim();
+          if ((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_12__.isURL)(b)) {
+            // Extract out the slug from the URL.
+            var d = /([^\/]*)\/$/;
+            var e = d.exec(b)[1];
+            c({
+              slug: e
+            });
+            o(e);
+          }
+        },
+        onBlur: function onBlur() {
+          // If the slug is a URL, extract out the slug.
+          if ((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_12__.isURL)(n)) {
+            // Extract out the slug from the URL.
+            var a = /([^\/]*)\/$/;
+            var b = a.exec(n)[1];
+            c({
+              slug: b
+            });
+            o(b);
+            return;
+          }
+          var d = n.replace(/\//g, '');
+          if (d !== n) {
+            c({
+              slug: d
+            });
+            o(d);
+          }
+        }
       }), ha && /*#__PURE__*/React.createElement(Notice, {
         status: "error",
         isDismissible: false
@@ -12936,6 +12973,17 @@ module.exports = window["wp"]["blocks"];
 
 "use strict";
 module.exports = window["wp"]["element"];
+
+/***/ }),
+
+/***/ "@wordpress/url":
+/*!*****************************!*\
+  !*** external ["wp","url"] ***!
+  \*****************************/
+/***/ (function(module) {
+
+"use strict";
+module.exports = window["wp"]["url"];
 
 /***/ }),
 

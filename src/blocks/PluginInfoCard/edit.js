@@ -17,7 +17,7 @@ import ThemeLarge from '../templates/ThemeLarge';
 import ThemeCard from '../templates/ThemeCard';
 import Logo from '../Logo';
 import NumbersComponent from '../components/Numbers';
-import { uniqueId } from 'lodash';
+import { isURL } from '@wordpress/url';
 const { Fragment, useEffect, useState } = wp.element;
 
 const { __ } = wp.i18n;
@@ -531,6 +531,10 @@ const WPPluginInfoCard = ( props ) => {
 												) }
 												value={ slug }
 												onChange={ ( value ) => {
+													// Check for URL so we don't paste in the slug AND url.
+													if ( isURL ( value ) ) {
+														return;
+													}
 													setAttributes( {
 														slug: value,
 													} );
@@ -540,6 +544,46 @@ const WPPluginInfoCard = ( props ) => {
 													'Comma separated slugs are supported.',
 													'wp-plugin-info-card'
 												) }
+												onPaste={ ( event ) => {
+													// Get contents from clipboard.
+													const clipboardData = event.clipboardData
+														.getData( 'text/plain' )
+														.trim();
+
+													if ( isURL( clipboardData ) ) {
+														// Extract out the slug from the URL.
+														const urlRegex = /([^\/]*)\/$/;
+														const newSlug = urlRegex.exec(
+															clipboardData,
+														)[ 1 ];
+														setAttributes( {
+															slug: newSlug,
+														} );
+														setSlug( newSlug );
+													}
+												} }
+												onBlur={ () => {
+													// If the slug is a URL, extract out the slug.
+													if ( isURL( slug ) ) {
+														// Extract out the slug from the URL.
+														const urlRegex = /([^\/]*)\/$/;
+														const newSlug = urlRegex.exec(
+															slug,
+														)[ 1 ];
+														setAttributes( {
+															slug: newSlug,
+														} );
+														setSlug( newSlug );
+														return;
+													}
+													const slugSlashesRemoved = slug.replace( /\//g, '' );
+													if ( slugSlashesRemoved !== slug ) {
+														setAttributes( {
+															slug: slugSlashesRemoved,
+														} );
+														setSlug( slugSlashesRemoved );
+													}
+												} }
 											/>
 											{ noData && (
 												<Notice
