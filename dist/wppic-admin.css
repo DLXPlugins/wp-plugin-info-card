@@ -16,6 +16,75 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+/* Responsive styles - In hindsight, should've used mobile-first */
+/* Mixin from: https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/ */
+/* It's only used here, so no external file for mixin? */
+.wp-site-plugin-info-card {
+  display: grid;
+  margin: 25px auto;
+}
+.wp-site-plugin-info-card .wp-pic-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.wp-site-plugin-info-card.cols-1 {
+  grid-template-columns: 1fr;
+}
+.wp-site-plugin-info-card.cols-2 {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .wp-site-plugin-info-card.cols-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.wp-site-plugin-info-card.cols-3 {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .wp-site-plugin-info-card.cols-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 1024px) {
+  .wp-site-plugin-info-card.cols-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.wp-block-plugin-info-card.has-grid {
+  display: grid;
+  margin: 25px auto;
+}
+.wp-block-plugin-info-card.has-grid .wp-pic-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.wp-block-plugin-info-card.has-grid.cols-1 {
+  grid-template-columns: 1fr;
+}
+.wp-block-plugin-info-card.has-grid.cols-2 {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .wp-block-plugin-info-card.has-grid.cols-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.wp-block-plugin-info-card.has-grid.cols-3 {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .wp-block-plugin-info-card.has-grid.cols-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 1024px) {
+  .wp-block-plugin-info-card.has-grid.cols-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
 .wp-pic-center {
   text-align: center;
   clear: both;
@@ -113,7 +182,7 @@ p.wp-pic-author,
   margin: 35px 0 0;
   -webkit-border-radius: 50% 50%;
   border-radius: 50% 50%;
-  background-image: url(../src/img/wp-pic-sprite.png);
+  background-image: url(../assets/img/wp-pic-sprite.png);
   background-repeat: no-repeat;
   background-position: 0 0;
   background-size: cover;
@@ -165,7 +234,7 @@ p.wp-pic-author,
   height: 32px;
   left: 50%;
   margin-left: -16px;
-  background-image: url(../src/img/wp-pic-sprite.png);
+  background-image: url(../assets/img/wp-pic-sprite.png);
   background-repeat: no-repeat;
 }
 
@@ -419,7 +488,7 @@ p.wp-pic-author,
   margin: 110px 0 -4px 0;
   width: 98px;
   height: 98px;
-  background-image: url(../src/img/wp-pic-sprite.png);
+  background-image: url(../assets/img/wp-pic-sprite.png);
   background-repeat: no-repeat;
   background-position: 0px -203px;
   position: relative;
@@ -458,7 +527,7 @@ p.wp-pic-author,
   height: 26px;
   margin-top: 11px;
   background-color: transparent;
-  background-image: url(../src/img/wp-pic-sprite.png);
+  background-image: url(../assets/img/wp-pic-sprite.png);
   background-repeat: no-repeat;
   background-position: -100px -237px;
 }
@@ -771,7 +840,7 @@ p.wp-pic-author,
   overflow: hidden;
   -webkit-border-radius: 50% 50%;
   border-radius: 50% 50%;
-  background-image: url(../src/img/wp-pic-sprite.png);
+  background-image: url(../assets/img/wp-pic-sprite.png);
   background-repeat: no-repeat;
   background-position: 0 0;
   background-size: cover;
@@ -1635,13 +1704,13 @@ p.wp-pic-author,
 }
 
 /*Color Scheme 11*/
-.wp-pic.scheme11 .wp-pic-no-plugin,
-.entry .wp-pic.scheme11 p,
-.wp-pic.scheme11 p,
+.wp-pic.scheme11:not(.wordpress) .wp-pic-no-plugin,
+.entry .wp-pic.scheme11:not(.wordpress) p,
+.wp-pic.scheme11:not(.wordpress) p,
 .wp-pic.scheme11 .wp-pic-back a:not(.wp-pic-page):hover,
-.wp-pic.scheme11 .wp-pic-back p,
+.wp-pic.scheme11:not(.wordpress) .wp-pic-back p,
 .wp-pic.scheme11:not(.wordpress) .wp-pic-author a,
-.wp-pic.scheme11 .wp-pic-dl-link {
+.wp-pic.scheme11:not(.wordpress) .wp-pic-dl-link {
   color: #FFF;
 }
 
@@ -2233,7 +2302,7 @@ a.wp-pic-credit {
   position: absolute;
   bottom: 15px;
   right: 10px;
-  background-image: url(../img/wppic.svg);
+  background-image: url(../assets/img/wppic.svg);
   background-size: cover;
 }
 
@@ -2570,8 +2639,8 @@ a.wp-pic-credit:focus:after {
   }
 }
 i.mce-i-wppic-icon {
-  background-image: url("../img/wppic.png");
-  background-image: none, url("../img/wppic.svg"), url("../img/wppic.png");
+  background-image: url("../assets/img/wppic.png");
+  background-image: none, url("../assets/img/wppic.svg"), url("../assets/img/wppic.png");
 }
 
 .mce-wppic-media {

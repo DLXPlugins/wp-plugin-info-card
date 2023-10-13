@@ -41,6 +41,9 @@ class Add_Plugin {
 	public function api_parser( $wppic_data, $type, $slug ) {
 		if ( 'plugin' === $type ) {
 
+			// Format slug to strip forward and trailing slashes.
+			$slug = trim( $slug, '/' );
+
 			require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
 			$plugin_info = plugins_api(
 				'plugin_information',
