@@ -7,6 +7,8 @@
 
 namespace MediaRon\WPPIC;
 
+use MediaRon\WPPIC\Admin\Settings as Settings;
+
 /**
  * Helper class for for admin functionality.
  */
@@ -22,7 +24,7 @@ class Admin {
 
 		add_action( 'admin_enqueue_scripts', array( $self, 'enqueue_admin_scripts' ) );
 		add_action( 'admin_menu', array( $self, 'add_options_page' ) );
-		add_action( 'admin_init', array( $self, 'register_settings' ) );
+		//add_action( 'admin_init', array( $self, 'register_settings' ) );
 		add_action( 'wp_ajax_async_wppic_clear_cache', array( $self, 'ajax_clear_cache' ) );
 		add_action( 'wp_ajax_wppic_widget_render', array( $self, 'ajax_dashboard_widget_render' ) );
 		add_action( 'wp_dashboard_setup', array( $self, 'add_dashboard_widgets' ) );
@@ -84,7 +86,7 @@ class Admin {
 	 * Add the options page to the admin menu.
 	 */
 	public function add_options_page() {
-		add_options_page(
+		\add_options_page(
 			Functions::get_plugin_name(),
 			Functions::get_plugin_name(),
 			'manage_options',
@@ -98,6 +100,8 @@ class Admin {
 	 */
 	public function output_options() {
 		$options = Options::get_options();
+		Settings::settings_page();
+		return;
 
 		// Get default color scheme.
 		$scheme = $options['colorscheme'] ?? 'default';

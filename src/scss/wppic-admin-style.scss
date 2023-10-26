@@ -4,6 +4,8 @@
  * Author: Brice CAPOBIANCO - b*web
  */
 @import "./wppic-style.scss";
+@import '../../node_modules/@wordpress/components/build-style/style.css';
+
 @-moz-keyframes wppic-spin {
     from { -moz-transform: rotate(0deg); }
     to { -moz-transform: rotate(360deg); }
@@ -15,6 +17,54 @@
 @keyframes wppic-spin {
     from {transform:rotate(0deg);}
     to {transform:rotate(360deg);}
+}
+
+
+#wpcontent {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	position: relative;
+
+	#wppic-admin-header {
+		margin: 0 !important;
+		padding: 0 40px 0.6875rem 40px;
+
+		.wppic-admin-header-logo {
+			text-align: center;
+			img {
+				max-width: 375px;
+				height: auto;
+			}
+		}
+	}
+
+	header {
+		background: #F5F7FE;
+		padding: 1.1rem;
+		overflow: hidden;
+		margin: 0 !important;
+		border-bottom: 2px solid #333;
+		color: #687c93;
+	}
+
+	.nav-tab-wrapper .wppic-icon-tab {
+		color: lighten(#9c68b0, 15%);
+	}
+
+	.nav-tab-wrapper .nav-tab-active .wppic-icon-tab {
+		color: #873F49;
+	}
+
+	.wppic-panel-row h2 {
+		font-size: 24px;
+		color: #9c68b0;
+		margin-top: 0;
+		line-height: 1.3;
+	}
+}
+
+#wpfooter {
+	display: none;
 }
 
 
@@ -336,4 +386,16 @@ h3.wp-pic-title {
 }
 #wppic-about-list .wppic-button:hover:after {
 	opacity: 1;
+}
+
+/* New Admin styles */
+#wppic-admin-header-content {
+	text-align: center;
+	max-width: 450px;
+	margin: 0 auto;
+	padding: 48px 0;
+}
+#wppic-admin-header-content,
+p.wppic-admin-header-description {
+	font-size: 18px;
 }

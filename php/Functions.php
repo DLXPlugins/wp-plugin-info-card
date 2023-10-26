@@ -167,6 +167,22 @@ class Functions {
 	}
 
 	/**
+	 * Get the current admin sub-tab.
+	 *
+	 * @return null|string Current admin sub-tab.
+	 */
+	public static function get_admin_sub_tab() {
+		$tab = filter_input( INPUT_GET, 'tab', FILTER_DEFAULT );
+		if ( $tab && is_string( $tab ) ) {
+			$subtab = filter_input( INPUT_GET, 'subtab', FILTER_DEFAULT );
+			if ( $subtab && is_string( $subtab ) ) {
+				return sanitize_text_field( sanitize_title( $subtab ) );
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Return the URL to the admin screen
 	 *
 	 * @param string $tab     Tab path to load.

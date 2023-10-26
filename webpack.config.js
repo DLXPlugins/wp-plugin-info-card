@@ -18,6 +18,7 @@ module.exports = ( env ) => {
 				'wppic-admin': [ './src/scss/wppic-admin-style.scss' ],
 				'wppic-styles': [ './src/scss/wppic-style.scss' ],
 				'wppic-editor': [ './src/scss/editor.scss' ],
+				'wppic-admin-react': [ './src/react/views/main/index.js']
 			},
 			mode: env.mode,
 			devtool: 'production' === env.mode ? false : 'source-map',
