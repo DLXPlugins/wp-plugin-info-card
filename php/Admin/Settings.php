@@ -63,7 +63,7 @@ class Settings {
 			<div id="wppic-admin-header-content">
 				<div class="wppic-admin-header-logo">
 					<h1>
-						<a href="<?php echo esc_url( Functions::get_settings_url() ); ?>" class="wppic-admin-logo"><img src="<?php echo esc_url( Functions::get_plugin_url( 'assets/img/plugin-info-card-logo.png' ) ); ?>" alt="WP Plugin Info Card" /></a>
+						<a href="<?php echo esc_url( Functions::get_settings_url() ); ?>" class="wppic-admin-logo"><img src="<?php echo esc_url( Functions::get_plugin_url( 'assets/img/wppic-square.png' ) ); ?>" alt="WP Plugin Info Card" /></a>
 					</h1>
 				</div>
 				<p class="wppic-admin-header-description">

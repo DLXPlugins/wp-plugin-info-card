@@ -7,6 +7,8 @@
 
 namespace MediaRon\WPPIC\Admin;
 
+use MediaRon\WPPIC\Functions;
+
 /**
  * Init admin class for WPPIC.
  */
@@ -25,7 +27,7 @@ class Init {
 	 * Main constructor.
 	 */
 	public function __construct() {
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
+		//add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 		// Init tabs.
 		new Tabs\Main();
 		// new Tabs\Advanced();
@@ -43,6 +45,7 @@ class Init {
 	 * Output admin scripts/styles.
 	 */
 	public function admin_scripts() {
+		return;
 		$screen = get_current_screen();
 		if ( isset( $screen->base ) && 'settings_page_ajaxify-comments' === $screen->base ) {
 			wp_enqueue_style(

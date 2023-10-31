@@ -41,6 +41,7 @@ class Admin {
 		if ( 'settings_page_wp-plugin-info-card' !== $hook && 'index.php' !== $hook ) {
 			return;
 		}
+		return;
 
 		// Enqueue the admin scripts.
 		wp_register_script(
