@@ -116,7 +116,7 @@ class Add_Theme {
 	 */
 	public function mce_type( $parameters ) {
 		$parameters['types'][] = array(
-			'text'  => 'Theme',
+			'text'  => __( 'Theme', 'wp-plugin-info-card' ),
 			'value' => 'Theme',
 		);
 		return $parameters;
@@ -186,7 +186,7 @@ class Add_Theme {
 			$content .= '<a class="wp-pic-widget-name" href="' . esc_url( $wppic_data->url ) . '" target="_blank" title="' . __( 'WordPress.org Theme Page', 'wp-plugin-info-card' ) . '">' . esc_html( $wppic_data->name ) . '</a>';
 			$content .= '<span class="wp-pic-widget-rating"><span>' . __( 'Ratings:', 'wp-plugin-info-card' ) . '</span> ' . esc_html( $wppic_data->rating ) . '%';
 			if ( ! empty( $wppic_data->num_ratings ) ) {
-				$content .= ' ( ' . esc_html( $wppic_data->num_ratings ) . ' votes)';
+				$content .= ' (' . esc_html( $wppic_data->num_ratings ) . esc_html__( ' votes', 'wp-plugin-info-card' ) . ')';
 			}
 			$content .= '</span>';
 			$content .= '<span class="wp-pic-widget-downloaded"><span>' . __( 'Downloads:', 'wp-plugin-info-card' ) . '</span> ' . esc_html( $wppic_data->downloaded ) . '</span>';

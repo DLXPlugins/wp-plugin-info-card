@@ -186,7 +186,7 @@ class Admin {
 				<p>
 					<code class="wppic-admin-shortcode">[wp-pic type="plugin" slug="adblock-notify-by-bweb" layout="large" scheme="scheme13"]</code>
 				</p>
-				<p class="description">' . esc_html__( 'Select a default layout and scheme and you can just write it like:', 'wp-plugin-info-card' ) . '</p>
+				<p class="description"><?php esc_html_e( 'Select a default layout and scheme and you can just write it like:', 'wp-plugin-info-card' ); ?></p>
 				<p>
 					<code class="wppic-admin-shortcode">[wp-pic type="plugin" slug="adblock-notify-by-bweb"]</code>
 				</p>
@@ -387,21 +387,21 @@ class Admin {
 
 		$content  = '<td>';
 		$content .= '<select id="wppic-color-scheme" name="wppic_settings[colorscheme]">';
-		$content .= '<option value="default"  ' . selected( $scheme, 'default', false ) . ' >Default</option>';
-		$content .= '<option value="scheme1"  ' . selected( $scheme, 'scheme1', false ) . ' >Color scheme 1</option>';
-		$content .= '<option value="scheme2"  ' . selected( $scheme, 'scheme2', false ) . ' >Color scheme 2</option>';
-		$content .= '<option value="scheme3"  ' . selected( $scheme, 'scheme3', false ) . ' >Color scheme 3</option>';
-		$content .= '<option value="scheme4"  ' . selected( $scheme, 'scheme4', false ) . ' >Color scheme 4</option>';
-		$content .= '<option value="scheme5"  ' . selected( $scheme, 'scheme5', false ) . ' >Color scheme 5</option>';
-		$content .= '<option value="scheme6"  ' . selected( $scheme, 'scheme6', false ) . ' >Color scheme 6</option>';
-		$content .= '<option value="scheme7"  ' . selected( $scheme, 'scheme7', false ) . ' >Color scheme 7</option>';
-		$content .= '<option value="scheme8"  ' . selected( $scheme, 'scheme8', false ) . ' >Color scheme 8</option>';
-		$content .= '<option value="scheme9"  ' . selected( $scheme, 'scheme9', false ) . ' >Color scheme 9</option>';
-		$content .= '<option value="scheme10" ' . selected( $scheme, 'scheme10', false ) . '>Color scheme 10</option>';
-		$content .= '<option value="scheme11" ' . selected( $scheme, 'scheme11', false ) . '>Color scheme 11</option>';
-		$content .= '<option value="scheme12" ' . selected( $scheme, 'scheme12', false ) . '>Color scheme 12</option>';
-		$content .= '<option value="scheme13" ' . selected( $scheme, 'scheme13', false ) . '>Color scheme 13</option>';
-		$content .= '<option value="scheme14" ' . selected( $scheme, 'scheme14', false ) . '>Color scheme 14</option>';
+		$content .= '<option value="default"  ' . selected( $scheme, 'default', false ) . ' >' . esc_html__( 'Default', 'wp-plugin-info-card' ) . '</option>';
+		$content .= '<option value="scheme1"  ' . selected( $scheme, 'scheme1', false ) . ' >' . esc_html__( 'Color scheme 1', 'wp-plugin-info-card' ) . '</option>';
+		$content .= '<option value="scheme2"  ' . selected( $scheme, 'scheme2', false ) . ' >' . esc_html__( 'Color scheme 2', 'wp-plugin-info-card' ) . '</option>';
+		$content .= '<option value="scheme3"  ' . selected( $scheme, 'scheme3', false ) . ' >' . esc_html__( 'Color scheme 3', 'wp-plugin-info-card' ) . '</option>';
+		$content .= '<option value="scheme4"  ' . selected( $scheme, 'scheme4', false ) . ' >' . esc_html__( 'Color scheme 4', 'wp-plugin-info-card' ) . '</option>';
+		$content .= '<option value="scheme5"  ' . selected( $scheme, 'scheme5', false ) . ' >' . esc_html__( 'Color scheme 5', 'wp-plugin-info-card' ) . '</option>';
+		$content .= '<option value="scheme6"  ' . selected( $scheme, 'scheme6', false ) . ' >' . esc_html__( 'Color scheme 6', 'wp-plugin-info-card' ) . '</option>';
+		$content .= '<option value="scheme7"  ' . selected( $scheme, 'scheme7', false ) . ' >' . esc_html__( 'Color scheme 7', 'wp-plugin-info-card' ) . '</option>';
+		$content .= '<option value="scheme8"  ' . selected( $scheme, 'scheme8', false ) . ' >' . esc_html__( 'Color scheme 8', 'wp-plugin-info-card' ) . '</option>';
+		$content .= '<option value="scheme9"  ' . selected( $scheme, 'scheme9', false ) . ' >' . esc_html__( 'Color scheme 9', 'wp-plugin-info-card' ) . '</option>';
+		$content .= '<option value="scheme10" ' . selected( $scheme, 'scheme10', false ) . '>' . esc_html__( 'Color scheme 10', 'wp-plugin-info-card' ) . '</option>';
+		$content .= '<option value="scheme11" ' . selected( $scheme, 'scheme11', false ) . '>' . esc_html__( 'Color scheme 11', 'wp-plugin-info-card' ) . '</option>';
+		$content .= '<option value="scheme12" ' . selected( $scheme, 'scheme12', false ) . '>' . esc_html__( 'Color scheme 12', 'wp-plugin-info-card' ) . '</option>';
+		$content .= '<option value="scheme13" ' . selected( $scheme, 'scheme13', false ) . '>' . esc_html__( 'Color scheme 13', 'wp-plugin-info-card' ) . '</option>';
+		$content .= '<option value="scheme14" ' . selected( $scheme, 'scheme14', false ) . '>' . esc_html__( 'Color scheme 14', 'wp-plugin-info-card' ) . '</option>';
 		$content .= '</select>';
 		$content .= '<label for="wppic-color-scheme">' . esc_html__( 'Default color scheme for your cards.', 'wp-plugin-info-card' ) . '</label>';
 		$content .= '</td>';
@@ -499,7 +499,7 @@ class Admin {
 		if ( true === $options_widget ) {
 			wp_add_dashboard_widget(
 				'wppic-dashboard-widget',
-				'<img src="' . esc_url( $wppic_svg ) . '" class="wppic-logo" alt="b*web" style="display:none"/>&nbsp;&nbsp;' . Functions::get_plugin_name() . ' board',
+				'<img src="' . esc_url( $wppic_svg ) . '" class="wppic-logo" alt="b*web" style="display:none"/>&nbsp;&nbsp;' . Functions::get_plugin_name() . esc_html__( ' board', 'wp-plugin-info-card' ),
 				array( $this, 'output_dashboard_widgets' )
 			);
 		}

@@ -31,7 +31,7 @@ if( !empty( $image ) ){
 
 //Active installs
 if ( $wppic_data->active_installs >= 1000000 ) {
-	$active_installs_text = _x( '1+ Million', 'Active plugin installs' );
+	$active_installs_text = _x( '1+ Million', 'Active plugin installs', 'wp-plugin-info-card' );
 } else {
 	$active_installs_text = number_format_i18n( $wppic_data->active_installs ) . '+';
 }
@@ -45,31 +45,31 @@ if ( $wppic_data->active_installs >= 1000000 ) {
 		<div class="wp-pic-plugin-card-top">
 			<div class="wp-pic-column-name">
 				<h3>
-					<a href="<?php echo $wppic_data->url; ?>"  title="<?php printf( __( 'More information about %s' ), $wppic_data->name ); ?>">
+					<a href="<?php echo $wppic_data->url; ?>"  title="<?php printf( __( 'More information about %s', 'wp-plugin-info-card' ), $wppic_data->name ); ?>">
 						<?php echo $wppic_data->name ?>
 						<?php echo $logo ?>
 					</a>
 				</h3>
 			</div>
 			<div class="wp-pic-action-links">
-				<a class="wp-pic-action-buttons" href="<?php echo $wppic_data->download_link ?>" title="<?php _e( 'Download', 'wp-plugin-info-card' ) ?>" target="_blank"><?php _e( 'Download' ) ?></a>
+				<a class="wp-pic-action-buttons" href="<?php echo $wppic_data->download_link ?>" title="<?php _e( 'Download', 'wp-plugin-info-card' ) ?>" target="_blank"><?php _e( 'Download', 'wp-plugin-info-card' ) ?></a>
 			</div>
 			<div class="wp-pic-column-description">
 				<p><?php echo strip_tags( $wppic_data->short_description ); ?></p>
-				<p class="authors"><cite><?php printf( __( 'By %s' ), $wppic_data->author ) ?></cite></p>
+				<p class="authors"><cite><?php printf( __( 'By %s', 'wp-plugin-info-card' ), $wppic_data->author ) ?></cite></p>
 			</div>
 			<?php echo $wppic_data->credit ?>
 		</div>
 		<div class="wp-pic-plugin-card-bottom">
-			<div class="wp-pic-column-rating" title="<?php printf( _n( '(based on %s rating)', '(based on %s ratings)', $wppic_data->num_ratings ), number_format_i18n( $wppic_data->num_ratings ) ); ?>">
+			<div class="wp-pic-column-rating" title="<?php printf( _n( '(based on %s rating)', '(based on %s ratings)', $wppic_data->num_ratings, 'wp-plugin-info-card' ), number_format_i18n( $wppic_data->num_ratings ) ); ?>">
 				<?php wp_star_rating( array( 'rating' => $wppic_data->rating, 'type' => 'percent', 'number' => $wppic_data->num_ratings ) ); ?>
 				<span class="wp-pic-num-ratings" aria-hidden="true">(<?php echo number_format_i18n( $wppic_data->num_ratings ); ?>)</span>
 			</div>
 			<div class="wp-pic-column-updated">
-				<strong><?php _e( 'Last Updated:', 'wp-plugin-info-card' ) ?></strong> <?php printf( __( '%s ago' ), human_time_diff( strtotime( $wppic_data->last_updated_mk ) ) ); ?>
+				<strong><?php _e( 'Last Updated:', 'wp-plugin-info-card' ) ?></strong> <?php printf( __( '%s ago', 'wp-plugin-info-card' ), human_time_diff( strtotime( $wppic_data->last_updated_mk ) ) ); ?>
 			</div>
 			<div class="wp-pic-column-downloaded">
-				<?php printf( __( '%s Active Installs' ), $active_installs_text ); ?>
+				<?php printf( __( '%s Active Installs', 'wp-plugin-info-card' ), $active_installs_text ); ?>
 			</div>
 			<div class="wp-pic-column-compatibility">
 				<span class="wp-pic-compatibility-compatible"><?php _e( 'Compatible with WordPress', 'wp-plugin-info-card' ) ?> <?php echo $wppic_data->requires ?></span>
