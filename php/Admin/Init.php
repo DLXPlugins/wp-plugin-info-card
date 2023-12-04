@@ -27,7 +27,7 @@ class Init {
 	 * Main constructor.
 	 */
 	public function __construct() {
-		//add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 		// Init tabs.
 		new Tabs\Main();
 		// new Tabs\Advanced();
@@ -45,12 +45,11 @@ class Init {
 	 * Output admin scripts/styles.
 	 */
 	public function admin_scripts() {
-		return;
 		$screen = get_current_screen();
-		if ( isset( $screen->base ) && 'settings_page_ajaxify-comments' === $screen->base ) {
+		if ( isset( $screen->base ) && 'settings_page_wp-plugin-info-card' === $screen->base ) {
 			wp_enqueue_style(
-				'wpac-styles-admin',
-				Functions::get_plugin_url( 'dist/wpac-admin-css.css' ),
+				'wppic-styles-admin',
+				Functions::get_plugin_url( 'dist/wppic-admin.css' ),
 				array(),
 				Functions::get_plugin_version(),
 				'all'
@@ -61,7 +60,7 @@ class Init {
 			if ( empty( $current_tab ) ) {
 				$current_tab = 'home';
 			}
-			do_action( 'wpac_admin_enqueue_scripts_' . $current_tab );
+			do_action( 'wppic_admin_enqueue_scripts_' . $current_tab );
 		}
 	}
 }

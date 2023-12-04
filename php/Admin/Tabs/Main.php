@@ -119,7 +119,7 @@ class Main {
 	public function output_home_content( $tab, $sub_tab = '' ) {
 		if ( 'home' === $tab ) {
 			if ( empty( $sub_tab ) || 'home' === $sub_tab ) {
-				?>
+				?>ssadfsadf
 				<div id="wppic-tab-home"></div>
 				<?php
 			}

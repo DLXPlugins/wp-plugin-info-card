@@ -22,17 +22,33 @@ class Settings {
 		self::get_settings_header();
 		?>
 		<div class="wppic-settings-wrapper">
-			<div class="wppic-settings-tabs">
-				<?php
-				self::get_settings_tabs();
-				?>
-				<span aria-hidden="true"></span>
-			</div>
+			<?php
+			self::get_tab_content();
+			?>
 		</div>
 		<?php
+		self::get_admin_header();
 		self::get_settings_footer();
 		?>
 		<?php
+	}
+
+	/**
+	 * Get the content for the selected tab.
+	 */
+	public static function get_tab_content() {
+		$current_tab = Functions::get_admin_tab();
+		if ( empty( $current_tab ) ) {
+			$current_tab = 'home';
+		}
+		/**
+		 * Output the tab's content via hook.
+		 *
+		 * @since 4.1.0
+		 *
+		 * @param string $current_tab The current tab.
+		 */
+		do_action( 'wppic_comments_output_' . $current_tab, $current_tab, '' );
 	}
 
 	/**
@@ -63,14 +79,11 @@ class Settings {
 			<div id="wppic-admin-header-content">
 				<div class="wppic-admin-header-logo">
 					<h1>
-						<a href="<?php echo esc_url( Functions::get_settings_url() ); ?>" class="wppic-admin-logo"><img src="<?php echo esc_url( Functions::get_plugin_url( 'assets/img/wppic-square.png' ) ); ?>" alt="WP Plugin Info Card" /></a>
+						<a href="<?php echo esc_url( Functions::get_settings_url() ); ?>" class="wppic-admin-logo"><img src="<?php echo esc_url( Functions::get_plugin_url( 'assets/img/wppic-horizontal.png' ) ); ?>" alt="WP Plugin Info Card" /></a>
 					</h1>
 				</div>
-				<p class="wppic-admin-header-description">
-					<?php esc_html_e( 'Show off WordPress Plugin and Theme directory items in beautiful card layouts.', 'wp-plugin-info-card' ); ?>
-				</p>
-				<div class="wppic-admin-header-quick-links">
-					<a href="https://wppic.dlxplugins.com/"><?php esc_html_e( 'Documentation', 'wp-plugin-info-card' ); ?></a> | <a href="https://dlxplugins.com/support/"><?php esc_html_e( 'Support', 'wp-plugin-info-card' ); ?></a>
+				<div class="wppic-admin-header-tabs">
+					<?php self::get_settings_tabs(); ?>
 				</div>
 			</div>
 		</header>
@@ -259,48 +272,10 @@ class Settings {
 				if ( ! empty( $sub_tab_html_array ) ) {
 					echo '<nav class="wppic-sub-links">' . wp_kses_post( rtrim( implode( ' | ', $sub_tab_html_array ), ' | ' ) ) . '</nav>';
 				}
-				if ( $do_subtab_action ) {
-					/**
-					 * Perform a sub tab action.
-					 *
-					 * Perform a sub tab action. Useful for loading scripts or inline styles as necessary.
-					 *
-					 * @since 1.0.0
-					 *
-					 * eff_admin_sub_tab_{current_tab}_{current_sub_tab}
-					 * @param string Sub Tab
-					 */
-					do_action(
-						sprintf( // phpcs:ignore
-							'wppic_comments_admin_sub_tab_%s_%s',
-							sanitize_title( $current_tab ),
-							sanitize_title( $current_sub_tab )
-						)
-					);
-				}
 			}
 			$subtab_content = ob_get_clean();
 
-			if ( $do_action ) {
-				echo '<div class="wppic-admin-tab-content">';
-				if ( ! empty( $subtab_content ) ) {
-					echo wp_kses( $subtab_content, Functions::get_kses_allowed_html() );
-				}
-				/**
-				 * Perform a tab action.
-				 *
-				 * Perform a tab action.
-				 *
-				 * @since 1.0.0
-				 *
-				 * @param string $action Can be any action.
-				 * @param string Tab
-				 * @param string Sub Tab
-				 */
-				do_action( $do_action, $current_tab, $current_sub_tab );
-
-				echo '</div>';
-			}
+			
 		}
 	}
 
