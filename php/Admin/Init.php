@@ -30,6 +30,7 @@ class Init {
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 		// Init tabs.
 		new Tabs\Main();
+		new Tabs\Plugin_Screenshots();
 		// new Tabs\Advanced();
 		// new Tabs\Appearance();
 		// new Tabs\Callbacks();

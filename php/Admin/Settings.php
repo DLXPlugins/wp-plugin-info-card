@@ -48,7 +48,7 @@ class Settings {
 		 *
 		 * @param string $current_tab The current tab.
 		 */
-		do_action( 'wppic_comments_output_' . $current_tab, $current_tab, '' );
+		do_action( 'wppic_output_' . $current_tab, $current_tab, '' );
 	}
 
 	/**
@@ -134,6 +134,9 @@ class Settings {
 			<symbol aria-hidden="true" data-prefix="fad" data-icon="plug-plus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="plug-plus">
 				<path fill="currentColor" class="fa-primary" d="M288 368a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-80c-8.8 0-16 7.2-16 16v48H368c-8.8 0-16 7.2-16 16s7.2 16 16 16h48v48c0 8.8 7.2 16 16 16s16-7.2 16-16V384h48c8.8 0 16-7.2 16-16s-7.2-16-16-16H448V304c0-8.8-7.2-16-16-16z"/><path fill="currentColor" class="fa-secondary" d="M128 32v96H64V32C64 14.3 78.3 0 96 0s32 14.3 32 32zm192 0v96H256V32c0-17.7 14.3-32 32-32s32 14.3 32 32zM0 192c0-17.7 14.3-32 32-32H352c17.7 0 32 14.3 32 32c0 2.3-.3 4.6-.7 6.8C309.8 220 256 287.7 256 368c0 11.4 1.1 22.5 3.1 33.3c-11.1 5.1-22.9 9-35.1 11.5V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V412.8C87 398 32 333.4 32 256V224c-17.7 0-32-14.3-32-32z" opacity="0.4"/>
 			</symbol>
+			<symbol aria-hidden="true" data-prefix="fad" data-icon="image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="wppic-image">
+				<path d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6h96 32H424c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/>
+			</symbol>
 		</svg>
 		<?php do_action( 'dlxplugins/ajaxify/admin/header_content' ); ?>
 		<?php
@@ -155,7 +158,7 @@ class Settings {
 		 *
 		 * @param array $tabs Associative array of tabs.
 		 */
-		$tabs       = apply_filters( 'wppic_comments_admin_tabs', $tabs );
+		$tabs       = apply_filters( 'wppic_admin_tabs', $tabs );
 		$tab_html   = '<nav class="wppic-admin-options">';
 		$tabs_count = count( $tabs );
 		if ( $tabs && ! empty( $tabs ) && is_array( $tabs ) ) {
@@ -218,7 +221,7 @@ class Settings {
 			 * @param string Tab
 			 * @param string Sub Tab
 			 */
-			$sub_tabs = apply_filters( 'wppic_comments_admin_sub_tabs', array(), $current_tab, $current_sub_tab );
+			$sub_tabs = apply_filters( 'wppic_admin_sub_tabs', array(), $current_tab, $current_sub_tab );
 
 			// Check to see if no tabs are available for this view.
 			if ( null === $current_tab && null === $current_sub_tab ) {

@@ -27,7 +27,7 @@
 
 	#wppic-admin-header {
 		margin: 0 !important;
-
+		padding: 0 35px;
 		.wppic-admin-header-logo {
 			img {
 				max-width: 375px;
@@ -37,14 +37,14 @@
 	}
 
 	nav svg {
-		width: 16px;
-		height: 16px;
+		width: 20px;
+		height: 20px;
 		fill: #333;
 		line-height: 1;
 	}
 	nav a span {
 		display: inline-block;
-		font-size: 12px;
+		font-size: 14px;
 		line-height: 1;
 		margin-left: 8px;
 	}
@@ -55,12 +55,37 @@
 		background: transparent;
 		border-bottom: 2px solid transparent;
 		padding: 32px 16px;
+		color: #53627C;
+		transition: all 0.3s ease-in-out;
+		margin-right: 16px;
+		&:last-child {
+			margin-right: 0;
+		}
+
+		svg {
+			transition: all 0.3s ease-in-out;
+		}
+
+		&:hover {
+			color: #53627C;
+			border-bottom-color: #53627C;
+			transition: all 0.3s ease-in-out;
+			svg {
+				fill: #53627C;
+				transition: all 0.3s ease-in-out;
+			}
+			&.nav-tab-active {
+				color: #DB3939;
+			}
+		}
 
 		&.nav-tab-active {
 			color: #DB3939;
 			border-bottom-color: #DB3939;
+			transition: all 0.3s ease-in-out;
 			svg {
 				fill: #DB3939;
+				transition: all 0.3s ease-in-out;
 			}
 		}
 	}

@@ -6098,20 +6098,21 @@ a.wp-pic-credit:focus:after {
 }
 #wpcontent #wppic-admin-header {
   margin: 0 !important;
+  padding: 0 35px;
 }
 #wpcontent #wppic-admin-header .wppic-admin-header-logo img {
   max-width: 375px;
   height: auto;
 }
 #wpcontent nav svg {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   fill: #333;
   line-height: 1;
 }
 #wpcontent nav a span {
   display: inline-block;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1;
   margin-left: 8px;
 }
@@ -6122,13 +6123,36 @@ a.wp-pic-credit:focus:after {
   background: transparent;
   border-bottom: 2px solid transparent;
   padding: 32px 16px;
+  color: #53627C;
+  transition: all 0.3s ease-in-out;
+  margin-right: 16px;
+}
+#wpcontent nav a:last-child {
+  margin-right: 0;
+}
+#wpcontent nav a svg {
+  transition: all 0.3s ease-in-out;
+}
+#wpcontent nav a:hover {
+  color: #53627C;
+  border-bottom-color: #53627C;
+  transition: all 0.3s ease-in-out;
+}
+#wpcontent nav a:hover svg {
+  fill: #53627C;
+  transition: all 0.3s ease-in-out;
+}
+#wpcontent nav a:hover.nav-tab-active {
+  color: #DB3939;
 }
 #wpcontent nav a.nav-tab-active {
   color: #DB3939;
   border-bottom-color: #DB3939;
+  transition: all 0.3s ease-in-out;
 }
 #wpcontent nav a.nav-tab-active svg {
   fill: #DB3939;
+  transition: all 0.3s ease-in-out;
 }
 #wpcontent header {
   background: #FFFFFF;
