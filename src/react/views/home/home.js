@@ -12,7 +12,7 @@ import {
 	ToggleControl,
 	SelectControl,
 } from '@wordpress/components';
-import { AlertCircle, Info, FileCode2, ExternalLink } from 'lucide-react';
+import { AlertCircle, Info, FileCode2, ExternalLink, DatabaseZap, Cog, BookText } from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
@@ -47,14 +47,16 @@ const HomeScreen = ( props ) => {
 			<Suspense
 				fallback={
 					<>
-						<h2>{ __( 'Loading Options', 'wp-plugin-info-card' ) }</h2>
-						<BeatLoader
-							color={ '#873F49' }
-							loading={ true }
-							cssOverride={ true }
-							size={ 25 }
-							speedMultiplier={ 0.65 }
-						/>
+						<div className="wppic-admin-panel-loading">
+							<h2>{ __( 'Loading Options', 'wp-plugin-info-card' ) }</h2>
+							<BeatLoader
+								color={ '#DB3939' }
+								loading={ true }
+								cssOverride={ true }
+								size={ 25 }
+								speedMultiplier={ 0.65 }
+							/>
+						</div>
 					</>
 				}
 			>
@@ -84,6 +86,7 @@ const Interface = ( props ) => {
 			ajax: data.ajax,
 			enqueue: data.enqueue,
 			credit: wppicAdminHome.credit,
+			cache_expiration: data.cache_expiration,
 		},
 	} );
 	const formValues = useWatch( { control } );
@@ -108,6 +111,7 @@ const Interface = ( props ) => {
 					<div className="wppic-admin-panel-area">
 						<div className="wppic-admin-panel-area__section">
 							<h2>
+								<Cog />
 								{ __( 'Settings', 'wp-plugin-info-card' ) }
 							</h2>
 							<p className="description">
@@ -253,6 +257,40 @@ const Interface = ( props ) => {
 												</div>
 											</td>
 										</tr>
+										<tr>
+											<th scope="row">{ __( 'Cache', 'wp-plugin-info-card' ) }</th>
+											<td>
+												<div className="wppic-admin-row">
+													<Controller
+														name="cache_expiration"
+														control={ control }
+														rules={ { required: true } }
+														render={ ( { field: { onChange, value } } ) => (
+															<TextControl
+																label={ __( 'Cache Expiration', 'wp-plugin-info-card' ) }
+																value={ value }
+																onChange={ onChange }
+																help={
+																	__( 'Set the cache expiration in seconds. Default is 3600 seconds (1 hour).', 'wp-plugin-info-card' )
+																}
+															/>
+														) }
+													/>
+													{ 'required' === errors.cache_expiration?.type && (
+														<Notice
+															message={ __(
+																'This is a required field.',
+																'wp-plugin-info-card',
+															) }
+															status="error"
+															politeness="assertive"
+															inline={ false }
+															icon={ () => ( <AlertCircle /> ) }
+														/>
+													) }
+												</div>
+											</td>
+										</tr>
 									</tbody>
 								</table>
 								<SaveResetButtons
@@ -269,7 +307,56 @@ const Interface = ( props ) => {
 					</div>
 				</div>
 				<div className="wppic-admin-panel-sidebar">
-					Sidebar here
+					<div className="wppic-admin-panel-sidebar-card">
+						<h3><DatabaseZap />{ __( 'Cache Options', 'wp-plugin-info-card' ) }</h3>
+						<p>
+							{ __(
+								'WP Plugin Info Card uses a cache system to improve performance. You can clear the cache manually by clicking the button below.',
+								'wp-plugin-info-card',
+							) }
+						</p>
+						<Button
+							variant="primary"
+							onClick={ () => {
+								console.log( 'clicked' );
+							} }
+							className="wppic-btn"
+							label={ __( 'Clear Cache', 'wp-plugin-info-card' ) }
+						>
+							{ __( 'Clear Cache', 'wp-plugin-info-card' ) }
+						</Button>
+					</div>
+					<div className="wppic-admin-panel-sidebar-card">
+						<h3><BookText />{ __( 'Documentation', 'wp-plugin-info-card' ) }</h3>
+						<p>
+							{ __(
+								'Find out how to use WP Plugin Info Card, its blocks, and its shortcodes.',
+								'wp-plugin-info-card',
+							) }
+						</p>
+						<Button
+							variant="primary"
+							onClick={ () => {
+								console.log( 'clicked' );
+							} }
+							className="wppic-btn has-icon-right btn-full-width"
+							icon={ () => ( <ExternalLink /> ) }
+							iconPosition='right'
+						>
+							{ __( 'English Documentation', 'wp-plugin-info-card' ) }
+						</Button>
+						<Button
+							variant="primary"
+							onClick={ () => {
+								console.log( 'clicked' );
+							} }
+							className="wppic-btn has-icon-right btn-full-width"
+							icon={ () => ( <ExternalLink /> ) }
+							iconPosition='right'
+						>
+							{ __( 'French Documentation', 'wp-plugin-info-card' ) }
+						</Button>
+					</div>
 				</div>
 			</div>
 

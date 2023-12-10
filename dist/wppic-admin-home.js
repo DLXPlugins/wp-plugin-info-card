@@ -7275,6 +7275,97 @@ function StyleProvider(props) {
 
 /***/ }),
 
+/***/ "./node_modules/@wordpress/components/build-module/text-control/index.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/@wordpress/components/build-module/text-control/index.js ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   TextControl: () => (/* binding */ TextControl),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/compose */ "./node_modules/@wordpress/compose/build-module/hooks/use-instance-id/index.js");
+/* harmony import */ var _base_control__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../base-control */ "./node_modules/@wordpress/components/build-module/base-control/index.js");
+
+/**
+ * External dependencies
+ */
+
+/**
+ * WordPress dependencies
+ */
+
+
+
+/**
+ * Internal dependencies
+ */
+
+function UnforwardedTextControl(props, ref) {
+  const {
+    __nextHasNoMarginBottom,
+    label,
+    hideLabelFromVision,
+    value,
+    help,
+    id: idProp,
+    className,
+    onChange,
+    type = 'text',
+    ...additionalProps
+  } = props;
+  const id = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_1__["default"])(TextControl, 'inspector-text-control', idProp);
+  const onChangeValue = event => onChange(event.target.value);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_base_control__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    __nextHasNoMarginBottom: __nextHasNoMarginBottom,
+    label: label,
+    hideLabelFromVision: hideLabelFromVision,
+    id: id,
+    help: help,
+    className: className
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    className: "components-text-control__input",
+    type: type,
+    id: id,
+    value: value,
+    onChange: onChangeValue,
+    "aria-describedby": !!help ? id + '__help' : undefined,
+    ref: ref,
+    ...additionalProps
+  }));
+}
+
+/**
+ * TextControl components let users enter and edit text.
+ *
+ * ```jsx
+ * import { TextControl } from '@wordpress/components';
+ * import { useState } from '@wordpress/element';
+ *
+ * const MyTextControl = () => {
+ *   const [ className, setClassName ] = useState( '' );
+ *
+ *   return (
+ *     <TextControl
+ *       label="Additional CSS Class"
+ *       value={ className }
+ *       onChange={ ( value ) => setClassName( value ) }
+ *     />
+ *   );
+ * };
+ * ```
+ */
+const TextControl = (0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(UnforwardedTextControl);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TextControl);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
 /***/ "./node_modules/@wordpress/components/build-module/text/component.js":
 /*!***************************************************************************!*\
   !*** ./node_modules/@wordpress/components/build-module/text/component.js ***!
@@ -18818,8 +18909,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-spinners/BeatLoader */ "./node_modules/react-spinners/BeatLoader.js");
 /* harmony import */ var react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/SaveResetButtons */ "./src/react/components/SaveResetButtons/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/select-control/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/toggle-control/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/select-control/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/toggle-control/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/text-control/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @wordpress/components */ "./node_modules/@wordpress/components/build-module/button/index.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/cog.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/alert-circle.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/database-zap.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/book-text.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/external-link.js");
 /* harmony import */ var _components_ErrorBoundary__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/ErrorBoundary */ "./src/react/components/ErrorBoundary/index.js");
 /* harmony import */ var _utils_SendCommand__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/SendCommand */ "./src/react/utils/SendCommand.js");
 /* harmony import */ var _components_Notice__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/Notice */ "./src/react/components/Notice/index.js");
@@ -18859,55 +18957,59 @@ var HomeScreen = function HomeScreen(a) {
       rel: "noopener noreferrer"
     }, "DLX Plugins Support"))
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
-    fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Loading Options', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_8___default()), {
-      color: '#873F49',
+    fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "wppic-admin-panel-loading"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Loading Options', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_8___default()), {
+      color: '#DB3939',
       loading: true,
       cssOverride: true,
       size: 25,
       speedMultiplier: 0.65
-    }))
+    })))
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Interface, _extends({
     defaults: d
   }, a))));
 };
 var Interface = function Interface(a) {
-  var b = a.defaults;
-  var c = b();
-  var d = c.data,
-    e = d.data,
-    f = d.success;
-  var g = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_9__.useForm)({
+  var b;
+  var c = a.defaults;
+  var d = c();
+  var e = d.data,
+    f = e.data,
+    g = e.success;
+  var h = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_9__.useForm)({
       defaultValues: {
-        default_layout: e.default_layout,
-        colorscheme: e.colorscheme,
-        widget: e.widget,
-        ajax: e.ajax,
-        enqueue: e.enqueue,
-        credit: wppicAdminHome.credit
+        default_layout: f.default_layout,
+        colorscheme: f.colorscheme,
+        widget: f.widget,
+        ajax: f.ajax,
+        enqueue: f.enqueue,
+        credit: wppicAdminHome.credit,
+        cache_expiration: f.cache_expiration
       }
     }),
-    h = g.control,
-    i = g.handleSubmit,
-    j = g.getValues,
-    k = g.reset,
-    l = g.setError,
-    m = g.trigger;
-  var n = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_9__.useWatch)({
-    control: h
+    i = h.control,
+    j = h.handleSubmit,
+    k = h.getValues,
+    l = h.reset,
+    m = h.setError,
+    n = h.trigger;
+  var o = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_9__.useWatch)({
+    control: i
   });
-  var o = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_9__.useFormState)({
-      control: h
+  var p = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_9__.useFormState)({
+      control: i
     }),
-    p = o.errors,
-    q = o.isDirty,
-    r = o.dirtyFields;
+    q = p.errors,
+    r = p.isDirty,
+    s = p.dirtyFields;
 
   /**
    * Placeholder for submit event.
    *
    * @param {Object} formData contains the form data.
    */
-  var s = function onSubmit(a) {};
+  var t = function onSubmit(a) {};
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-container with-sidebar"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -18916,10 +19018,10 @@ var Interface = function Interface(a) {
     className: "wppic-admin-panel-area"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-area__section"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Settings', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Settings', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
     className: "description"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Set the defaults for WP Plugin Info Card.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
-    onSubmit: i(s)
+    onSubmit: j(t)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", {
     className: "form-table form-table-row-sections"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
@@ -18928,12 +19030,12 @@ var Interface = function Interface(a) {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
     name: "default_layout",
-    control: h,
+    control: i,
     render: function render(a) {
       var b = a.field,
         c = b.onChange,
         d = b.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Default Layout', 'wp-plugin-info-card'),
         value: d,
         options: [{
@@ -18956,12 +19058,12 @@ var Interface = function Interface(a) {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
     name: "colorscheme",
-    control: h,
+    control: i,
     render: function render(a) {
       var b = a.field,
         c = b.onChange,
         d = b.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Color Scheme', 'wp-plugin-info-card'),
         value: d,
         options: [/* Color Schemes 1-14 */
@@ -19020,29 +19122,89 @@ var Interface = function Interface(a) {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
     name: "widget",
-    control: h,
+    control: i,
     render: function render(a) {
       var b = a.field,
         c = b.onChange,
         d = b.value;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Force Enqueue Scripts and Styles', 'wp-plugin-info-card'),
         checked: d,
         onChange: c,
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('By default the plugin enqueues scripts (JS & CSS) only for pages containing the shortcode. If you wish to force scripts enqueuing, check this box.', 'wp-plugin-info-card')
       });
     }
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    scope: "row"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Cache', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_9__.Controller, {
+    name: "cache_expiration",
+    control: i,
+    rules: {
+      required: true
+    },
+    render: function render(a) {
+      var b = a.field,
+        c = b.onChange,
+        d = b.value;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__["default"], {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Cache Expiration', 'wp-plugin-info-card'),
+        value: d,
+        onChange: c,
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Set the cache expiration in seconds. Default is 3600 seconds (1 hour).', 'wp-plugin-info-card')
+      });
+    }
+  }), 'required' === ((b = q.cache_expiration) === null || b === void 0 ? void 0 : b.type) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is a required field.', 'wp-plugin-info-card'),
+    status: "error",
+    politeness: "assertive",
+    inline: false,
+    icon: function icon() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_14__["default"], null);
+    }
   })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    formValues: n,
-    setError: l,
-    reset: k,
-    errors: p,
-    isDirty: q,
-    dirtyFields: r,
-    trigger: m
+    formValues: o,
+    setError: m,
+    reset: l,
+    errors: q,
+    isDirty: r,
+    dirtyFields: s,
+    trigger: n
   }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar"
-  }, "Sidebar here")));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-panel-sidebar-card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_15__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Cache Options', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('WP Plugin Info Card uses a cache system to improve performance. You can clear the cache manually by clicking the button below.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    variant: "primary",
+    onClick: function onClick() {
+      console.log('clicked');
+    },
+    className: "wppic-btn",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Clear Cache', 'wp-plugin-info-card')
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Clear Cache', 'wp-plugin-info-card'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-panel-sidebar-card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_17__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Find out how to use WP Plugin Info Card, its blocks, and its shortcodes.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    variant: "primary",
+    onClick: function onClick() {
+      console.log('clicked');
+    },
+    className: "wppic-btn has-icon-right btn-full-width",
+    icon: function icon() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_18__["default"], null);
+    },
+    iconPosition: "right"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('English Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    variant: "primary",
+    onClick: function onClick() {
+      console.log('clicked');
+    },
+    className: "wppic-btn has-icon-right btn-full-width",
+    icon: function icon() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_18__["default"], null);
+    },
+    iconPosition: "right"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('French Documentation', 'wp-plugin-info-card'))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HomeScreen);
 
@@ -20811,6 +20973,39 @@ const AlertCircle = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["defaul
 
 /***/ }),
 
+/***/ "./node_modules/lucide-react/dist/esm/icons/book-text.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/book-text.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ BookText)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.294.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const BookText = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("BookText", [
+  ["path", { d: "M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20", key: "t4utmx" }],
+  ["path", { d: "M8 7h6", key: "1f0q6e" }],
+  ["path", { d: "M8 11h8", key: "vwpz6n" }]
+]);
+
+
+//# sourceMappingURL=book-text.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/lucide-react/dist/esm/icons/check-circle-2.js":
 /*!********************************************************************!*\
   !*** ./node_modules/lucide-react/dist/esm/icons/check-circle-2.js ***!
@@ -20878,6 +21073,118 @@ const ClipboardCheck = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["def
 
 
 //# sourceMappingURL=clipboard-check.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/cog.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/cog.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Cog)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.294.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const Cog = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Cog", [
+  ["path", { d: "M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z", key: "sobvz5" }],
+  ["path", { d: "M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z", key: "11i496" }],
+  ["path", { d: "M12 2v2", key: "tus03m" }],
+  ["path", { d: "M12 22v-2", key: "1osdcq" }],
+  ["path", { d: "m17 20.66-1-1.73", key: "eq3orb" }],
+  ["path", { d: "M11 10.27 7 3.34", key: "16pf9h" }],
+  ["path", { d: "m20.66 17-1.73-1", key: "sg0v6f" }],
+  ["path", { d: "m3.34 7 1.73 1", key: "1ulond" }],
+  ["path", { d: "M14 12h8", key: "4f43i9" }],
+  ["path", { d: "M2 12h2", key: "1t8f8n" }],
+  ["path", { d: "m20.66 7-1.73 1", key: "1ow05n" }],
+  ["path", { d: "m3.34 17 1.73-1", key: "nuk764" }],
+  ["path", { d: "m17 3.34-1 1.73", key: "2wel8s" }],
+  ["path", { d: "m11 13.73-4 6.93", key: "794ttg" }]
+]);
+
+
+//# sourceMappingURL=cog.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/database-zap.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/database-zap.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ DatabaseZap)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.294.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const DatabaseZap = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("DatabaseZap", [
+  ["ellipse", { cx: "12", cy: "5", rx: "9", ry: "3", key: "msslwz" }],
+  ["path", { d: "M3 5V19A9 3 0 0 0 15 21.84", key: "14ibmq" }],
+  ["path", { d: "M21 5V8", key: "1marbg" }],
+  ["path", { d: "M21 12L18 17H22L19 22", key: "zafso" }],
+  ["path", { d: "M3 12A9 3 0 0 0 14.59 14.87", key: "1y4wr8" }]
+]);
+
+
+//# sourceMappingURL=database-zap.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/external-link.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/external-link.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ExternalLink)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.294.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const ExternalLink = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("ExternalLink", [
+  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }],
+  ["polyline", { points: "15 3 21 3 21 9", key: "mznyad" }],
+  ["line", { x1: "10", x2: "21", y1: "14", y2: "3", key: "18c3s4" }]
+]);
+
+
+//# sourceMappingURL=external-link.js.map
 
 
 /***/ }),

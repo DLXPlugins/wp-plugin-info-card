@@ -138,6 +138,7 @@ class Options {
 			'ajax'           => false,
 			'enqueue'        => false,
 			'credit'         => false,
+			'cache_expiration' => 3600,
 		);
 		return $defaults;
 	}
