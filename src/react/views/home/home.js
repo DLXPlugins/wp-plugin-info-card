@@ -10,6 +10,7 @@ import {
 	TextControl,
 	Button,
 	ToggleControl,
+	SelectControl,
 } from '@wordpress/components';
 import { AlertCircle, Info, FileCode2, ExternalLink } from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
@@ -77,36 +78,18 @@ const Interface = ( props ) => {
 		trigger,
 	} = useForm( {
 		defaultValues: {
-			enable: data.enable,
-			debug: data.debug,
-			menuHelper: data.menuHelper,
-			scrollSpeed: data.scrollSpeed,
-			autoUpdateIdleTime: data.autoUpdateIdleTime,
-			saveNonce: wppicAdminHome.saveNonce,
-			resetNonce: wppicAdminHome.resetNonce,
-			caller: 'home',
+			default_layout: data.default_layout,
+			colorscheme: data.colorscheme,
+			widget: data.widget,
+			ajax: data.ajax,
+			enqueue: data.enqueue,
+			credit: wppicAdminHome.credit,
 		},
 	} );
 	const formValues = useWatch( { control } );
 	const { errors, isDirty, dirtyFields } = useFormState( {
 		control,
 	} );
-
-	const getCommentEditingHeader = () => {
-		return (
-			<>
-				<h2>
-					{ __( 'Ajaxify Settings Home', 'wp-plugin-info-card' ) }
-				</h2>
-				<p className="description">
-					{ __(
-						'Enable or disable Ajaxify comments, or place into debug mode.',
-						'wp-plugin-info-card',
-					) }
-				</p>
-			</>
-		);
-	};
 
 	/**
 	 * Placeholder for submit event.
@@ -116,223 +99,178 @@ const Interface = ( props ) => {
 	const onSubmit = ( formData ) => {
 	};
 
-	const getFirstTimeInstallNotification = () => {
-		// See if first time install by checking `first_time_install` query var.
-		// Get URL.
-		const url = new URL( window.location.href );
-		// Get query vars.
-		const queryVars = new URLSearchParams( url.search );
-		// Get first time install query var.
-		const firstTimeInstall = queryVars.get( 'first_time_install' );
-		// If first time install, show notification.
-		if ( ! firstTimeInstall ) {
-			return null;
-		}
-		return (
-			<div className="ajaxify-admin-panel-area">
-				<h2>
-					{ __( 'Welcome to Ajaxify Comments', 'wp-plugin-info-card' ) }
-				</h2>
-				<p className="description">
-					{ __(
-						'Let\'s help you get started.',
-						'wp-plugin-info-card',
-					) }
-				</p>
-				<Notice
-					message={ __(
-						'When first activated, Ajaxify Comments is not enabled by default. This is so you can set up any necessary selectors and set the appearance before enabling the Ajax functionality. To get started, please start with setting the selectors.', 'wp-plugin-info-card' ) }
-					status="info"
-					politeness="assertive"
-					inline={ false }
-					icon={ () => <Info /> }
-				>
-					<div className="ajaxify-admin-component-row ajaxify-admin-component-row-button" style={ { marginTop: '15px' } }>
-						<Button
-							href={ wppicAdminHome.selectorsUrl }
-							className="ajaxify-button ajaxify__btn-secondary"
-							icon={ <FileCode2 style={ { color: 'currentColor' } } /> }
-						>
-							{ __( 'Set Selectors', 'wp-plugin-info-card' ) }
-						</Button>
-						<Button
-							href="https://docs.dlxplugins.com/v/ajaxify-comments/first-time-users/getting-started"
-							className="ajaxify-button ajaxify__btn-secondary"
-							icon={ <ExternalLink style={ { color: 'currentColor' } } /> }
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							{ __( 'Getting Started Guide', 'wp-plugin-info-card' ) }
-						</Button>
-					</div>
-
-				</Notice>
-			</div>
-		);
-	};
+	
 
 	return (
 		<>
-			{ getFirstTimeInstallNotification() }
-			<div className="ajaxify-admin-panel-area">
-				{ getCommentEditingHeader() }
-				<form onSubmit={ handleSubmit( onSubmit ) }>
-					<div className="ajaxify-panel-row">
-						<table className="form-table form-table-row-sections">
-							<tbody>
-								<tr>
-									<th scope="row">{ __( 'Ajaxify Status', 'wp-plugin-info-card' ) }</th>
-									<td>
-										<Controller
-											name="enable"
-											control={ control }
-											render={ ( { field: { onChange, value } } ) => (
-												<ToggleControl
-													label={ __( 'Enable Ajaxify Comments', 'wp-plugin-info-card' ) }
-													checked={ value }
-													onChange={ ( boolValue ) => {
-														onChange( boolValue );
-													} }
-													help={ __(
-														'Configure whether to enable or disable Ajaxify Comments.',
-														'wp-plugin-info-card',
-													) }
-												/>
-											) }
-										/>
-										{
-											getValues( 'enable' ) && (
-												<>
+			<div className="wppic-admin-panel-container with-sidebar">
+				<div className="wppic-admin-panel-options-wrapper">
+					<div className="wppic-admin-panel-area">
+						<div className="wppic-admin-panel-area__section">
+							<h2>
+								{ __( 'Settings', 'wp-plugin-info-card' ) }
+							</h2>
+							<p className="description">
+								{ __(
+									'Set the defaults for WP Plugin Info Card.',
+									'wp-plugin-info-card',
+								) }
+							</p>
+							<form onSubmit={ handleSubmit( onSubmit ) }>
+								<table className="form-table form-table-row-sections">
+									<tbody>
+										<tr>
+											<th scope="row">{ __( 'Layout and Colors', 'wp-plugin-info-card' ) }</th>
+											<td>
+												<div className="wppic-admin-row">
 													<Controller
-														name="debug"
+														name="default_layout"
 														control={ control }
 														render={ ( { field: { onChange, value } } ) => (
-															<ToggleControl
-																label={ __( 'Enable Debug Mode', 'wp-plugin-info-card' ) }
-																checked={ value }
-																onChange={ ( boolValue ) => {
-																	onChange( boolValue );
-																} }
-																help={ __(
-																	'Debug mode will show you the Ajaxify Comments debug log in the browser console.',
-																	'wp-plugin-info-card',
-																) }
+															<SelectControl
+																label={ __( 'Default Layout', 'wp-plugin-info-card' ) }
+																value={ value }
+																options={ [
+																	{
+																		label: __( 'Card', 'wp-plugin-info-card' ),
+																		value: 'default',
+																	},
+																	{
+																		label: __( 'WordPress Appearance', 'wp-plugin-info-card' ),
+																		value: 'wordpress',
+																	},
+																	{
+																		label: __( 'Large Card Layout', 'wp-plugin-info-card' ),
+																		value: 'large',
+																	},
+																	{
+																		label: __( 'Flex Layout', 'wp-plugin-info-card' ),
+																		value: 'flex',
+																	},
+																] }
+																onChange={ onChange }
 															/>
 														) }
 													/>
-												</>
-											)
-										}
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">{ __( 'Menu Helper', 'wp-plugin-info-card' ) }</th>
-									<td>
-										<Controller
-											name="menuHelper"
-											control={ control }
-											render={ ( { field: { onChange, value } } ) => (
-												<ToggleControl
-													label={ __( 'Enable Menu Helper', 'wp-plugin-info-card' ) }
-													checked={ value }
-													onChange={ ( boolValue ) => {
-														onChange( boolValue );
-													} }
-													help={ __(
-														'Turn on some menu shortcuts when viewing a post with comments. You can force Ajaxify comments to load, and check the page for selectors.',
-														'wp-plugin-info-card',
-													) }
-												/>
-											) }
-										/>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">{ __( 'Miscellaneous', 'wp-plugin-info-card' ) }</th>
-									<td>
-										<Controller
-											name="scrollSpeed"
-											control={ control }
-											rules={ { required: true, pattern: '\d+' } }
-											render={ ( { field: { onChange, value } } ) => (
-												<TextControl
-													label={ __( 'Scroll speed (ms)', 'wp-plugin-info-card' ) }
-													type="number"
-													className={ classNames( 'ajaxify-admin__text-control', {
-														'has-error': 'required' === errors.scrollSpeed?.type,
-														'is-required': true,
-													} ) }
-													help={ __(
-														'The scroll speed is the time it takes to scroll to the comment after successful submission.',
-														'wp-plugin-info-card',
-													) }
-													aria-required="true"
-													value={ value }
-													onChange={ onChange }
-												/>
-											) }
-										/>
-										{ errors.scrollSpeed && (
-											<Notice
-												message={ __(
-													'The value for the scroll speed is invalid.',
-													'wp-plugin-info-card',
-												) }
-												status="error"
-												politeness="assertive"
-												inline={ false }
-												icon={ () => <AlertCircle /> }
-											/>
-										) }
-										<Controller
-											name="autoUpdateIdleTime"
-											control={ control }
-											rules={ { required: true, pattern: '\d+' } }
-											render={ ( { field: { onChange, value } } ) => (
-												<TextControl
-													label={ __( 'Auto update idle time (ms)', 'wp-plugin-info-card' ) }
-													type="number"
-													className={ classNames( 'ajaxify-admin__text-control', {
-														'has-error': 'required' === errors.autoUpdateIdleTime?.type,
-														'is-required': true,
-													} ) }
-													help={ __(
-														'Leave empty or set to 0 to disable the auto update feature.',
-														'wp-plugin-info-card',
-													) }
-													aria-required="true"
-													value={ value }
-													onChange={ onChange }
-												/>
-											) }
-										/>
-										{ errors.autoUpdateIdleTime && (
-											<Notice
-												message={ __(
-													'The value for the idle time is invalid.',
-													'wp-plugin-info-card',
-												) }
-												status="error"
-												politeness="assertive"
-												inline={ false }
-												icon={ () => <AlertCircle /> }
-											/>
-										) }
-									</td>
-								</tr>
-							</tbody>
-						</table>
+												</div>
+												<div className="wppic-admin-row">
+													<Controller
+														name="colorscheme"
+														control={ control }
+														render={ ( { field: { onChange, value } } ) => (
+															<SelectControl
+																label={ __( 'Color Scheme', 'wp-plugin-info-card' ) }
+																value={ value }
+																options={ [
+																	/* Color Schemes 1-14 */
+																	{
+																		label: __( 'Default', 'wp-plugin-info-card' ),
+																		value: 'default',
+																	},
+																	{
+																		label: __( 'Color Scheme 1', 'wp-plugin-info-card' ),
+																		value: 'scheme1',
+																	},
+																	{
+																		label: __( 'Color Scheme 2', 'wp-plugin-info-card' ),
+																		value: 'scheme2',
+																	},
+																	{
+																		label: __( 'Color Scheme 3', 'wp-plugin-info-card' ),
+																		value: 'scheme3',
+																	},
+																	{
+																		label: __( 'Color Scheme 4', 'wp-plugin-info-card' ),
+																		value: 'scheme4',
+																	},
+																	{
+																		label: __( 'Color Scheme 5', 'wp-plugin-info-card' ),
+																		value: 'scheme5',
+																	},
+																	{
+																		label: __( 'Color Scheme 6', 'wp-plugin-info-card' ),
+																		value: 'scheme6',
+																	},
+																	{
+																		label: __( 'Color Scheme 7', 'wp-plugin-info-card' ),
+																		value: 'scheme7',
+																	},
+																	{
+																		label: __( 'Color Scheme 8', 'wp-plugin-info-card' ),
+																		value: 'scheme8',
+																	},
+																	{
+																		label: __( 'Color Scheme 9', 'wp-plugin-info-card' ),
+																		value: 'scheme9',
+																	},
+																	{
+																		label: __( 'Color Scheme 10', 'wp-plugin-info-card' ),
+																		value: 'scheme10',
+																	},
+																	{
+																		label: __( 'Color Scheme 11', 'wp-plugin-info-card' ),
+																		value: 'scheme11',
+																	},
+																	{
+																		label: __( 'Color Scheme 12', 'wp-plugin-info-card' ),
+																		value: 'scheme12',
+																	},
+																	{
+																		label: __( 'Color Scheme 13', 'wp-plugin-info-card' ),
+																		value: 'scheme13',
+																	},
+																	{
+																		label: __( 'Color Scheme 14', 'wp-plugin-info-card' ),
+																		value: 'scheme14',
+																	},
+
+																] }
+																onChange={ onChange }
+															/>
+														) }
+													/>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row">{ __( 'Scripts and Styles', 'wp-plugin-info-card' ) }</th>
+											<td>
+												<div className="wppic-admin-row">
+													<Controller
+														name="widget"
+														control={ control }
+														render={ ( { field: { onChange, value } } ) => (
+															<ToggleControl
+																label={ __( 'Force Enqueue Scripts and Styles', 'wp-plugin-info-card' ) }
+																checked={ value }
+																onChange={ onChange }
+																help={
+																	__( 'By default the plugin enqueues scripts (JS & CSS) only for pages containing the shortcode. If you wish to force scripts enqueuing, check this box.', 'wp-plugin-info-card' )
+																}
+															/>
+														) }
+													/>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<SaveResetButtons
+									formValues={ formValues }
+									setError={ setError }
+									reset={ reset }
+									errors={ errors }
+									isDirty={ isDirty }
+									dirtyFields={ dirtyFields }
+									trigger={ trigger }
+								/>
+							</form>
+						</div>
 					</div>
-					<SaveResetButtons
-						formValues={ formValues }
-						setError={ setError }
-						reset={ reset }
-						errors={ errors }
-						isDirty={ isDirty }
-						dirtyFields={ dirtyFields }
-						trigger={ trigger }
-					/>
-				</form>
+				</div>
+				<div className="wppic-admin-panel-sidebar">
+					Sidebar here
+				</div>
 			</div>
 
 		</>
