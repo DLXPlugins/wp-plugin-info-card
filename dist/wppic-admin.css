@@ -6100,6 +6100,14 @@ a.wp-pic-credit:focus:after {
   margin: 0 !important;
   padding: 0 35px;
 }
+#wpcontent #wppic-admin-header h1 {
+  margin: 0;
+  padding: 0;
+}
+#wpcontent #wppic-admin-header .wppic-admin-header-logo {
+  display: flex;
+  align-items: center;
+}
 #wpcontent #wppic-admin-header .wppic-admin-header-logo img {
   max-width: 375px;
   height: auto;

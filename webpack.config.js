@@ -18,7 +18,7 @@ module.exports = ( env ) => {
 				'wppic-admin': [ './src/scss/wppic-admin-style.scss' ],
 				'wppic-styles': [ './src/scss/wppic-style.scss' ],
 				'wppic-editor': [ './src/scss/editor.scss' ],
-				'wppic-admin-react': [ './src/react/views/main/index.js']
+				'wppic-admin-home': [ './src/react/views/home/index.js']
 			},
 			mode: env.mode,
 			devtool: 'production' === env.mode ? false : 'source-map',
@@ -46,6 +46,19 @@ module.exports = ( env ) => {
 							},
 							'sass-loader',
 						],
+					},
+					{
+						test: /\.(js|jsx)$/,
+						exclude: /(node_modules|bower_components)/,
+						loader: 'babel-loader',
+						options: {
+							presets: [ '@babel/preset-env', '@babel/preset-react' ],
+							plugins: [
+								'@babel/plugin-proposal-class-properties',
+								'@babel/plugin-transform-arrow-functions',
+								'lodash',
+							],
+						},
 					},
 				],
 			},

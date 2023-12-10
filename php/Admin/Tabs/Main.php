@@ -17,6 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use MediaRon\WPPIC\Functions;
+use MediaRon\WPPIC\Options;
+
 
 /**
  * Output the home tab and content.
@@ -40,7 +42,7 @@ class Main {
 	public function admin_scripts() {
 		wp_enqueue_script(
 			'wppic-admin-home',
-			Functions::get_plugin_url( 'dist/wppic-admin-home-js.js' ),
+			Functions::get_plugin_url( 'dist/wppic-admin-home.js' ),
 			array(),
 			Functions::get_plugin_version(),
 			true
