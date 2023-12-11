@@ -58,7 +58,13 @@ class Init {
 		$nonce          = sanitize_text_field( $posted_options['saveNonce'] );
 
 		if ( ! wp_verify_nonce( $nonce, 'wppic-save-options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Nonce verification failed', 'wp-plugin-info-card' ) ) );
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce verification failed', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
 		}
 
 		// Validate options.
@@ -67,7 +73,16 @@ class Init {
 		// Save options.
 		Options::update_options( $validated_options );
 
-		wp_send_json_success( array( 'message' => __( 'Options saved', 'wp-plugin-info-card' ) ) );
+		wp_send_json_success(
+			array(
+				'message'     => __(
+					'Options saved',
+					'wp-plugin-info-card'
+				),
+				'type'        => 'success',
+				'dismissable' => true,
+			)
+		);
 	}
 
 	/**
@@ -81,14 +96,26 @@ class Init {
 		$nonce   = sanitize_text_field( filter_input( INPUT_POST, 'resetNonce', FILTER_DEFAULT ) );
 
 		if ( ! wp_verify_nonce( $nonce, 'wppic-reset-options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Nonce verification failed', 'wp-plugin-info-card' ) ) );
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce verification failed', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
 		}
 
 		// Reset options.
 		$defaults = Options::get_defaults();
 		Options::update_options( $defaults );
 
-		wp_send_json_success( array( 'message' => __( 'Options reset', 'wp-plugin-info-card' ) ) );
+		wp_send_json_success(
+			array(
+				'message'     => __( 'Options reset', 'wp-plugin-info-card' ),
+				'type'        => 'success',
+				'dismissable' => true,
+			)
+		);
 	}
 
 	/**

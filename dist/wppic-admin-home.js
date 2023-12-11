@@ -18444,17 +18444,17 @@ var SnackPop = function SnackPop(a) {
     if (g.type === 'success') {
       a.push({
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Back to Top', 'wp-plugin-info-card'),
-        url: '#ajaxify-admin-header',
+        url: '#wppic-admin-header',
         variant: 'link',
-        className: 'ajaxify-admin__notice-action ajaxify-admin__notice-action--to-top'
+        className: 'wppic-admin__notice-action wppic-admin__notice-action--to-top'
       });
     }
     return a;
   };
   var A = function getSnackBar() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__["default"], {
-      className: classnames__WEBPACK_IMPORTED_MODULE_1___default()("ajaxify-snackbar ajaxify-snackbar-".concat(g.type), {
-        'ajaxify-snackbar-loading': k
+      className: classnames__WEBPACK_IMPORTED_MODULE_1___default()("wppic-snackbar wppic-snackbar-".concat(g.type), {
+        'wppic-snackbar-loading': k
       }),
       actions: z(),
       icon: y(),
@@ -18467,10 +18467,10 @@ var SnackPop = function SnackPop(a) {
   var B = function getModal() {
     if ('critical' === g.type) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()("ajaxify-modal ajaxify-modal-".concat(g.type), {
-          'ajaxify-modal-loading': k
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()("wppic-modal wppic-modal-".concat(g.type), {
+          'wppic-modal-loading': k
         }),
-        bodyOpenClassName: 'ajaxify-modal-body-open',
+        bodyOpenClassName: 'wppic-modal-body-open',
         title: g.title,
         onRequestClose: function onRequestClose() {
           p(false);
@@ -18485,7 +18485,7 @@ var SnackPop = function SnackPop(a) {
         icon: y,
         inline: false
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "ajaxify-modal-button-group"
+        className: "wppic-modal-button-group"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
         className: "button button-error",
         variant: "secondary",

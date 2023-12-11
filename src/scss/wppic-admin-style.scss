@@ -22,6 +22,10 @@
 
 $wppic-admin-primary-color: #DB3939;
 
+/* Enable Smooth Scroll */
+html {
+	scroll-behavior: smooth;
+}
 #wpcontent {
 	padding-left: 0 !important;
 	padding-right: 0 !important;
@@ -309,6 +313,225 @@ $wppic-admin-primary-color: #DB3939;
 		box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 	}
 }
+
+/* Admin Buttons */
+.wppic-admin-buttons {
+	margin-top: 30px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	&.no-flex {
+		display: block;
+	}
+
+	&.wppic-admin-buttons-flex-right {
+		justify-content: flex-end;
+	}
+
+	svg.lucide path {
+		fill: none !important;
+	}
+
+	button {
+		background: #fff;
+		color: #017e01;
+		border-style: solid;
+		border-color: #017e01;
+		padding: 10px 20px;
+		cursor: pointer;
+		border-radius: 5px;
+		transition: all 0.4s ease-in-out;
+		border-width: 1px;
+
+		&:hover {
+			border-radius: 5px;
+			background: #e9ece6;
+			color: #005200;
+			border-color: #006400;
+		}
+
+		&.has-error {
+			border: 1px solid #bc2b2c;
+			box-shadow: none !important; /* override core style */
+
+			&:hover {
+				cursor: not-allowed;
+			}
+		}
+
+		&.wppic__btn-white {
+			background: #fff;
+			color: #333;
+			border-color: #111;
+
+			&:hover {
+				background: darken(#fff, 10%);
+				color: #111;
+				border-color: #000;
+			}
+		}
+
+		&.wppic__btn-secondary {
+			background: #333;
+			color: #ffffff;
+			border-color: #111;
+
+			&:hover {
+				background: lighten(#333, 10%);
+				color: #ffffff;
+				border-color: lighten(#111, 10%);
+			}
+		}
+
+		&.wppic__btn-link {
+			all: unset;
+			cursor: pointer;
+			color: #9949cf;
+			font-weight: 600;
+			text-decoration: underline;
+		}
+
+		&.wppic__btn-danger {
+			background: #fff;
+			color: #822700;
+			border-color: #822700;
+
+			&:hover {
+				background: #ece6e6;
+				color: #822700;
+				border-color: #822700;
+			}
+		}
+
+		&.sce__btn-action {
+			display: flex;
+			align-items: center;
+			background: #fff;
+			color: #9949cf;
+			border-color: #9949cf;
+			font-weight: 600;
+
+			&:hover {
+				background: rgb(248, 247, 254);
+				color: #8019c4;
+				border-color: #6f6f6f;
+
+				svg path {
+					fill: #8019c4;
+				}
+			}
+
+			svg {
+				display: inline-block;
+				margin-right: 8px;
+
+				path {
+					fill: #9949cf;
+				}
+			}
+		}
+
+		&.wppic__btn--icon-right {
+			&.is-saving {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				svg {
+					width: 24px;
+					height: 24px;
+					margin-left: 8px;
+					animation: wppic-spin 1s linear infinite;
+
+					path {
+						fill: currentColor;
+					}
+				}
+			}
+
+			&.is-saved {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				svg {
+					width: 24px;
+					height: 24px;
+					margin-left: 14px;
+
+					path {
+						fill: #017e01;
+					}
+				}
+			}
+
+			&.is-resetting {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+
+				svg {
+					width: 24px;
+					height: 24px;
+					animation: wppic-spin 1s linear infinite;
+
+					path {
+						fill: #822700;
+					}
+				}
+			}
+		}
+	}
+}
+
+/**
+ * Snackbar styles.
+ */
+ .wppic-snackbar.components-snackbar {
+	position: fixed;
+	top: 32px;
+	right: 0;
+	z-index: 10000;
+	background: #0D3172;
+	color: #FFF;
+
+	.components-snackbar__content {
+		display: flex;
+		align-items: center;
+	}
+	.components-snackbar__icon {
+		position: absolute;
+		top: 24px;
+		left: 28px;
+		left: 14px;
+		top: auto;
+		bottom: auto;
+		line-height: 0;
+	}
+
+	&.wppic-snackbar-loading {
+		svg {
+			animation: wppic-spin;
+			animation-duration: 1.2s;
+			animation-iteration-count: infinite;
+			animation-timing-function: linear;
+		}
+	}
+	&.wppic-snackbar-success {
+		background: #14720D;
+		color: #FFF;
+	}
+	&.wppic-snackbar-error,
+	&.wppic-snackbar-critical {
+		background: #820000;
+		color: #FFF;
+	}
+	&.wppic-snackbar-warning {
+		background: #FFC107;
+		color: #000;
+	}
+ }
 
 .wppic-admin-row {
 	margin-bottom: 15px;

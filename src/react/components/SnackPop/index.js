@@ -142,9 +142,9 @@ const SnackPop = ( props ) => {
 		if ( notificationOptions.type === 'success' ) {
 			actions.push( {
 				label: __( 'Back to Top', 'wp-plugin-info-card' ),
-				url: '#ajaxify-admin-header',
+				url: '#wppic-admin-header',
 				variant: 'link',
-				className: 'ajaxify-admin__notice-action ajaxify-admin__notice-action--to-top',
+				className: 'wppic-admin__notice-action wppic-admin__notice-action--to-top',
 			} );
 		}
 		return actions;
@@ -155,9 +155,9 @@ const SnackPop = ( props ) => {
 			<WPSnackBar
 				className={
 					classnames(
-						`ajaxify-snackbar ajaxify-snackbar-${ notificationOptions.type }`,
+						`wppic-snackbar wppic-snackbar-${ notificationOptions.type }`,
 						{
-							'ajaxify-snackbar-loading': isBusy,
+							'wppic-snackbar-loading': isBusy,
 						}
 					)
 				}
@@ -177,13 +177,13 @@ const SnackPop = ( props ) => {
 				<Modal
 					className={
 						classnames(
-							`ajaxify-modal ajaxify-modal-${ notificationOptions.type }`,
+							`wppic-modal wppic-modal-${ notificationOptions.type }`,
 							{
-								'ajaxify-modal-loading': isBusy,
+								'wppic-modal-loading': isBusy,
 							}
 						)
 					}
-					bodyOpenClassName={ 'ajaxify-modal-body-open' }
+					bodyOpenClassName={ 'wppic-modal-body-open' }
 					title={ notificationOptions.title }
 					onRequestClose={ () => {
 						setIsModalVisible( false );
@@ -199,7 +199,7 @@ const SnackPop = ( props ) => {
 						icon={ getIcon }
 						inline={ false }
 					/>
-					<div className="ajaxify-modal-button-group">
+					<div className="wppic-modal-button-group">
 						<Button
 							className="button button-error"
 							variant="secondary"
