@@ -70,6 +70,9 @@ class Init {
 		// Validate options.
 		$validated_options = Functions::sanitize_array_recursive( $posted_options );
 
+		// Merge options.
+		$validated_options = wp_parse_args( $validated_options, $options );
+
 		// Save options.
 		Options::update_options( $validated_options );
 
@@ -92,8 +95,9 @@ class Init {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
-		$options = Options::get_options();
-		$nonce   = sanitize_text_field( filter_input( INPUT_POST, 'resetNonce', FILTER_DEFAULT ) );
+		$options        = Options::get_options();
+		$posted_options = filter_input( INPUT_POST, 'wppicFormData', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+		$nonce          = sanitize_text_field( $posted_options['resetNonce'] );
 
 		if ( ! wp_verify_nonce( $nonce, 'wppic-reset-options' ) ) {
 			wp_send_json_error(
@@ -104,16 +108,39 @@ class Init {
 				)
 			);
 		}
+		// Loop through form data, replace with defaults.
+		$options_defaults = Options::get_defaults();
+		foreach ( $posted_options as $key => $option_value ) {
+			if ( ! isset( $options_defaults[ $key ] ) ) {
+				$posted_options[ $key ] = $option_value;
+			} else {
+				$posted_options[ $key ] = $options_defaults[ $key ];
+			}
+			if ( 'list' === $key || 'theme-list' === $key ) {
+				$posted_options[ $key ] = array();
+			}
+		}
 
-		// Reset options.
-		$defaults = Options::get_defaults();
-		Options::update_options( $defaults );
+		// Gather existing options.
+		$options = Options::get_options();
+
+		// Loop through form data and update options. Keys must exist in $options.
+		foreach ( $posted_options as $key => $option_value ) {
+			if ( ! isset( $options[ $key ] ) ) {
+				continue;
+			}
+			$options[ $key ] = $option_value;
+		}
+
+		// Lastly, update options.
+		//Options::update_options( $options );
 
 		wp_send_json_success(
 			array(
 				'message'     => __( 'Options reset', 'wp-plugin-info-card' ),
 				'type'        => 'success',
 				'dismissable' => true,
+				'formData'    => $posted_options,
 			)
 		);
 	}
