@@ -5,7 +5,8 @@ module.exports = {
 	},
 	globals: {
 		ajaxurl: 'readonly',
-		wwppic: 'readonly',
+		wppic: 'readonly',
+		wppicAdminHome: 'readonly',
 	},
 	extends: [
 		'eslint:recommended',

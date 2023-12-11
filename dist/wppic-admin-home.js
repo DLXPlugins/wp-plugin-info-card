@@ -18077,8 +18077,8 @@ var SaveResetButtons = function SaveResetButtons(a) {
       return _regeneratorRuntime().wrap(function d(a) {
         while (1) switch (a.prev = a.next) {
           case 0:
-            c = (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_4__["default"])('wpac_save_options', {
-              ajaxifyFormData: b
+            c = (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_4__["default"])('wppic_save_options', {
+              wppicFormData: b
             });
             B(c);
             l(true);
@@ -18106,8 +18106,8 @@ var SaveResetButtons = function SaveResetButtons(a) {
       return _regeneratorRuntime().wrap(function f(a) {
         while (1) switch (a.prev = a.next) {
           case 0:
-            c = (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_4__["default"])('wpac_reset_options', {
-              ajaxifyFormData: b
+            c = (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_4__["default"])('wppic_reset_options', {
+              wppicFormData: b
             });
             F(c);
             p(true);
@@ -18165,9 +18165,9 @@ var SaveResetButtons = function SaveResetButtons(a) {
     return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Reset to Defaults', 'wp-plugin-info-card');
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "ajaxify-admin-buttons"
+    className: "wppic-admin-buttons"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ajaxify__btn ajaxify__btn-primary ajaxify__btn--icon-right', {
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wppic__btn wppic__btn-primary wppic__btn--icon-right', {
       'has-error': I()
     }, {
       'has-icon': k || s
@@ -18207,7 +18207,7 @@ var SaveResetButtons = function SaveResetButtons(a) {
       };
     }())
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('ajaxify__btn ajaxify__btn-danger ajaxify__btn--icon-right', {
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wppic__btn wppic__btn-danger wppic__btn--icon-right', {
       'has-icon': o
     }, {
       'is-resetting': {
@@ -18225,7 +18225,7 @@ var SaveResetButtons = function SaveResetButtons(a) {
       H();
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "ajaxify-admin-notices-bottom"
+    className: "wppic-admin-notices-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SnackPop__WEBPACK_IMPORTED_MODULE_5__["default"], {
     ajaxOptions: A,
     loadingMessage: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Saving Options…', 'wp-plugin-info-card')
@@ -18889,10 +18889,12 @@ var Interface = function Interface(a) {
         widget: h.widget,
         ajax: h.ajax,
         enqueue: h.enqueue,
-        credit: wppicAdminHome.credit,
+        credit: DataTransferItem.credit,
         cache_expiration: h.cache_expiration,
         list: (b = h.list) !== null && b !== void 0 ? b : [],
-        'theme-list': (c = h['theme-list']) !== null && c !== void 0 ? c : []
+        'theme-list': (c = h['theme-list']) !== null && c !== void 0 ? c : [],
+        saveNonce: wppicAdminHome.saveNonce,
+        resetNonce: wppicAdminHome.resetNonce
       }
     }),
     k = j.control,

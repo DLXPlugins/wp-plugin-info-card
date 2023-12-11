@@ -38,7 +38,7 @@ const SaveResetButtons = ( props ) => {
 	 * Save the options by setting promise as state.
 	 */
 	const saveOptions = async () => {
-		const saveOptionsPromise = SendCommand( 'wpac_save_options', { ajaxifyFormData: formValues } );
+		const saveOptionsPromise = SendCommand( 'wppic_save_options', { wppicFormData: formValues } );
 		setSavePromise( saveOptionsPromise );
 		setSaving( true );
 		await saveOptionsPromise;
@@ -49,7 +49,7 @@ const SaveResetButtons = ( props ) => {
 	 * Reset the options by setting promise as state.
 	 */
 	const resetOptions = async () => {
-		const resetOptionsPromise = SendCommand( 'wpac_reset_options', { ajaxifyFormData: formValues } );
+		const resetOptionsPromise = SendCommand( 'wppic_reset_options', { wppicFormData: formValues } );
 		setResetPromise( resetOptionsPromise );
 		setResetting( true );
 		const resetResponse = await resetOptionsPromise;
@@ -99,10 +99,10 @@ const SaveResetButtons = ( props ) => {
 
 	return (
 		<>
-			<div className="ajaxify-admin-buttons">
+			<div className="wppic-admin-buttons">
 				<Button
 					className={ classNames(
-						'ajaxify__btn ajaxify__btn-primary ajaxify__btn--icon-right',
+						'wppic__btn wppic__btn-primary wppic__btn--icon-right',
 						{ 'has-error': hasErrors() },
 						{ 'has-icon': saving || isSaved },
 						{ 'is-saving': saving && ! isSaved },
@@ -124,7 +124,7 @@ const SaveResetButtons = ( props ) => {
 				/>
 				<Button
 					className={ classNames(
-						'ajaxify__btn ajaxify__btn-danger ajaxify__btn--icon-right',
+						'wppic__btn wppic__btn-danger wppic__btn--icon-right',
 						{ 'has-icon': resetting },
 						{ 'is-resetting': { resetting } },
 					) }
@@ -140,7 +140,7 @@ const SaveResetButtons = ( props ) => {
 					} }
 				/>
 			</div>
-			<div className="ajaxify-admin-notices-bottom">
+			<div className="wppic-admin-notices-bottom">
 				<SnackPop
 					ajaxOptions={ savePromise }
 					loadingMessage={ __( 'Saving Options…', 'wp-plugin-info-card' ) }

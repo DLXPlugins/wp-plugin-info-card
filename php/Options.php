@@ -53,20 +53,10 @@ class Options {
 		$current_options = $merge_options ? self::get_options( $force, true ) : array();
 		foreach ( $options as $key => &$option ) {
 			switch ( $key ) {
-				case 'enable':
-				case 'debug':
-				case 'menuHelper':
-				case 'disableUrlUpdate':
-				case 'disableScrollToAnchor':
-				case 'useUncompressedScripts':
-				case 'placeScriptsInFooter':
-				case 'optimizeAjaxResponse':
-				case 'disableCache':
-				case 'enableByQuery':
-				case 'lazyLoadEnabled':
-				case 'lazyLoadPaginationEnabled':
-				case 'lazyLoadUseThemePagination':
-				case 'lazyLoadingPaginationScrollToTop':
+				case 'widget':
+				case 'ajax':
+				case 'enqueue':
+				case 'credit':
 					$option = filter_var( $options[ $key ], FILTER_VALIDATE_BOOLEAN );
 					break;
 				default:
@@ -80,9 +70,9 @@ class Options {
 		}
 		$options = wp_parse_args( $options, $current_options );
 		if ( Functions::is_multisite() ) {
-			update_site_option( WPAC_OPTION_KEY, $options );
+			update_site_option( 'wppic_settings', $options );
 		} else {
-			update_option( WPAC_OPTION_KEY, $options );
+			update_option( 'wppic_settings', $options );
 		}
 		self::$options = $options;
 		return $options;

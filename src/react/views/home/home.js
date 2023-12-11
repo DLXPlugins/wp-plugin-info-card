@@ -308,10 +308,12 @@ const Interface = ( props ) => {
 			widget: data.widget,
 			ajax: data.ajax,
 			enqueue: data.enqueue,
-			credit: wppicAdminHome.credit,
+			credit: DataTransferItem.credit,
 			cache_expiration: data.cache_expiration,
 			list: data.list ?? [],
 			'theme-list': data[ 'theme-list' ] ?? [],
+			saveNonce: wppicAdminHome.saveNonce,
+			resetNonce: wppicAdminHome.resetNonce,
 		},
 	} );
 	const formValues = useWatch( { control } );

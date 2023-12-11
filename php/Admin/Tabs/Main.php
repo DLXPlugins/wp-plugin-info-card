@@ -51,10 +51,9 @@ class Main {
 			'wppic-admin-home',
 			'wppicAdminHome',
 			array(
-				'getNonce'     => wp_create_nonce( 'wppic-admin-home-retrieve-options' ),
-				'saveNonce'    => wp_create_nonce( 'wppic-admin-home-save-options' ),
-				'resetNonce'   => wp_create_nonce( 'wppic-admin-home-reset-options' ),
-				'selectorsUrl' => esc_url( add_query_arg( array( 'first_time_install' => '1' ), Functions::get_settings_url( 'selectors' ) ) ),
+				'getNonce'   => wp_create_nonce( 'wppic-admin-home-retrieve-options' ),
+				'saveNonce'  => wp_create_nonce( 'wppic-save-options' ),
+				'resetNonce' => wp_create_nonce( 'wppic-reset-options' ),
 			)
 		);
 	}
