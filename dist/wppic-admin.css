@@ -6403,6 +6403,14 @@ html {
 .wppic-btn.components-button.btn-full-width:last-child {
   margin-bottom: 0;
 }
+.wppic-btn.components-button.is-saving {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wppic-btn.components-button.is-saving svg {
+  animation: wppic-spin 1s linear infinite;
+}
 .wppic-btn.components-button .lucide path,
 .wppic-btn.components-button .lucide circle {
   color: inherit;

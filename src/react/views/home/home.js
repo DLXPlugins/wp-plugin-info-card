@@ -24,10 +24,14 @@ import {
 	Cog,
 	BookText,
 	XCircle,
+	Loader2,
+	Database,
+	ClipboardCheck,
 } from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
+import SnackPop from '../../components/SnackPop';
 
 const OrgAsset = ( { type, slug, index, moveCallback, removeCallback } ) => {
 	const ref = useRef( null );
@@ -239,6 +243,68 @@ const AddTheme = ( props ) => {
 				{ __( 'Add Theme', 'wp-plugin-info-card' ) }
 			</Button>
 		</div>
+	);
+};
+
+const CacheButton = ( props ) => {
+
+	const [ clearing, setClearing ] = useState( false );
+	const [ isCleared, setIsCleared ] = useState( false );
+	const [ clearPromise, setClearPromise ] = useState( null );
+
+	const getCacheText = () => {
+		if ( clearing ) {
+			return __( 'Clearing…', 'wp-plugin-info-card' );
+		}
+		if ( isCleared ) {
+			return __( 'Cache Cleared', 'wp-plugin-info-card' );
+		}
+		return __( 'Clear Cache', 'wp-plugin-info-card' );
+	};
+
+	const clearCache = async () => {
+		const clearOptionsPromise = SendCommand( 'wppic_clear_cache', { nonce: wppicAdminHome.clearCacheNonce } );
+		setClearPromise( clearOptionsPromise );
+		setClearing( true );
+		await clearOptionsPromise;
+		setClearing( false );
+	}
+
+	const getCacheIcon = () => {
+		if ( clearing ) {
+			return () => <Loader2 />;
+		}
+		if ( isCleared ) {
+			return () => <ClipboardCheck />;
+		}
+		return <Database />;
+	};
+
+	return (
+		<>
+			<Button
+				variant="primary"
+				onClick={ () => {
+					clearCache();
+				} }
+				icon={ getCacheIcon() }
+				iconSize="18"
+				iconPosition="right"
+				disabled={ clearing }
+				className={
+					classNames( 'wppic-btn wppic-btn-cache has-icon-right', {
+						'is-saving': clearing && ! isCleared,
+						'is-saved': isCleared,
+					} ) }
+				label={ getCacheText() }
+			>
+				{ getCacheText() }
+			</Button>
+			<SnackPop
+				ajaxOptions={ clearPromise }
+				loadingMessage={ __( 'Clearing Cache…', 'wp-plugin-info-card' ) }
+			/>
+		</>
 	);
 };
 
@@ -846,16 +912,7 @@ const Interface = ( props ) => {
 								'wp-plugin-info-card',
 							) }
 						</p>
-						<Button
-							variant="primary"
-							onClick={ () => {
-								console.log( 'clicked' );
-							} }
-							className="wppic-btn"
-							label={ __( 'Clear Cache', 'wp-plugin-info-card' ) }
-						>
-							{ __( 'Clear Cache', 'wp-plugin-info-card' ) }
-						</Button>
+						<CacheButton />
 					</div>
 					<div className="wppic-admin-panel-sidebar-card">
 						<h3>
@@ -870,23 +927,23 @@ const Interface = ( props ) => {
 						</p>
 						<Button
 							variant="primary"
-							onClick={ () => {
-								console.log( 'clicked' );
-							} }
+							href="https://wppic.dlxplugins.com/"
 							className="wppic-btn has-icon-right btn-full-width"
 							icon={ () => <ExternalLink /> }
 							iconPosition="right"
+							target="_blank"
+							rel="noopener noreferrer"
 						>
 							{ __( 'English Documentation', 'wp-plugin-info-card' ) }
 						</Button>
 						<Button
 							variant="primary"
-							onClick={ () => {
-								console.log( 'clicked' );
-							} }
+							href="https://www.b-website.com/wp-plugin-info-card-plugin-base-plugin-api-wordpress-org"
 							className="wppic-btn has-icon-right btn-full-width"
 							icon={ () => <ExternalLink /> }
 							iconPosition="right"
+							target="_blank"
+							rel="noopener noreferrer"
 						>
 							{ __( 'French Documentation', 'wp-plugin-info-card' ) }
 						</Button>

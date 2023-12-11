@@ -264,6 +264,15 @@ html {
 			margin-bottom: 0;
 		}
 	}
+	&.is-saving {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		svg {
+			animation: wppic-spin 1s linear infinite;
+		}
+	}
 	.lucide path,
 	.lucide circle {
 		color: inherit;

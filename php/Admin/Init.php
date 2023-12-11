@@ -31,6 +31,7 @@ class Init {
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 		add_action( 'wp_ajax_wppic_save_options', array( $this, 'ajax_save_options' ) );
 		add_action( 'wp_ajax_wppic_reset_options', array( $this, 'ajax_reset_options' ) );
+		add_action( 'wp_ajax_wppic_clear_cache', array( $this, 'ajax_clear_cache' ) );
 		// Init tabs.
 		new Tabs\Main();
 		new Tabs\Plugin_Screenshots();
@@ -43,6 +44,35 @@ class Init {
 		// //new Tabs\Pagination();
 		// new Tabs\Selectors();
 		// new Tabs\Support();
+	}
+
+	/**
+	 * Clear Cache.
+	 */
+	public function ajax_clear_cache() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+		if ( ! wp_verify_nonce( $nonce, 'wppic-clear-cache' ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce verification failed', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+		// Clear cache.
+		wppic_delete_transients();
+
+		wp_send_json_success(
+			array(
+				'message'     => __( 'Cache cleared', 'wp-plugin-info-card' ),
+				'type'        => 'success',
+				'dismissable' => true,
+			)
+		);
 	}
 
 	/**

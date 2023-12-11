@@ -23,7 +23,6 @@ class Admin {
 		$self = new self();
 
 		add_action( 'admin_menu', array( $self, 'add_options_page' ) );
-		add_action( 'wp_ajax_async_wppic_clear_cache', array( $self, 'ajax_clear_cache' ) );
 		add_action( 'wp_ajax_wppic_widget_render', array( $self, 'ajax_dashboard_widget_render' ) );
 		add_action( 'wp_dashboard_setup', array( $self, 'add_dashboard_widgets' ) );
 		return $self;
@@ -51,16 +50,6 @@ class Admin {
 		$options = Options::get_options();
 		Settings::settings_page();
 		return;
-	}
-
-	/**
-	 * Clear Plugin cache.
-	 */
-	public function ajax_clear_cache() {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
-		wppic_delete_transients();
 	}
 
 	/**
