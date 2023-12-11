@@ -29,14 +29,14 @@ import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
 
-const Plugin = ( { slug, index, movePlugin } ) => {
+const OrgAsset = ( { type, slug, index, moveCallback, removeCallback } ) => {
 	const ref = useRef( null );
 	const [ spec, dropRef ] = useDrop( {
-		accept: 'plugin',
+		accept: type,
 		drop: ( item, monitor ) => {
 			if ( ! monitor.didDrop() ) {
 				if ( item.index !== index ) {
-					movePlugin( item.index, index );
+					moveCallback( item.index, index );
 				}
 			}
 		},
@@ -76,7 +76,7 @@ const Plugin = ( { slug, index, movePlugin } ) => {
 				return;
 			}
 			// Time to actually perform the action
-			movePlugin( dragIndex, hoverIndex );
+			moveCallback( dragIndex, hoverIndex );
 			// Note: we're mutating the monitor item here!
 			// Generally it's better to avoid mutations,
 			// but it's good here for the sake of performance
@@ -85,7 +85,7 @@ const Plugin = ( { slug, index, movePlugin } ) => {
 		},
 	} );
 	const [ { opacity, isDragging }, dragRef ] = useDrag( {
-		type: 'plugin',
+		type,
 		item: () => {
 			return { index };
 		},
@@ -100,6 +100,21 @@ const Plugin = ( { slug, index, movePlugin } ) => {
 		'can-drop': spec.canDrop,
 		'is-over': spec.isOver,
 	} );
+
+	/**
+	 * Get the label for the remove button.
+	 *
+	 * @return {string} The label for the remove button.
+	 */
+	const getRemoveLabel = () => {
+		switch ( type ) {
+			case 'plugin':
+				return __( 'Remove Plugin', 'wp-plugin-info-card' );
+			case 'theme':
+				return __( 'Remove Theme', 'wp-plugin-info-card' );
+		}
+		return '';
+	};
 	return (
 		<div
 			className={ classes }
@@ -111,9 +126,9 @@ const Plugin = ( { slug, index, movePlugin } ) => {
 			<Button
 				className="button-reset wppic-close-btn"
 				variant="secondary"
-				label={ __( 'Remove Plugin', 'wp-plugin-info-card' ) }
+				label={ getRemoveLabel() }
 				onClick={ () => {
-					console.log( 'remove ' + slug );
+					removeCallback( slug );
 				} }
 				icon={ () => <XCircle /> }
 			/>
@@ -160,12 +175,68 @@ const AddPlugin = ( props ) => {
 				label={ __( 'Add Plugin', 'wp-plugin-info-card' ) }
 				onClick={ () => {
 					const sanitizedSlug = cleanForSlug( value );
+					if ( '' === sanitizedSlug ) {
+						return;
+					}
 					props.onChange( sanitizedSlug );
 					setValue( '' );
 				} }
 				icon={ () => <PlusCircle /> }
 			>
 				{ __( 'Add Plugin', 'wp-plugin-info-card' ) }
+			</Button>
+		</div>
+	);
+};
+
+const AddTheme = ( props ) => {
+	const [ value, setValue ] = useState( '' );
+	return (
+		<div className="wppic-add-plugin-wrapper">
+			<TextControl
+				label={ __( 'Theme Slug', 'wp-plugin-info-card' ) }
+				value={ value }
+				onChange={ ( newValue ) => {
+					if ( isURL( newValue ) ) {
+						return;
+					}
+					setValue( newValue );
+				} }
+				onPaste={ ( event ) => {
+					// Get contents from clipboard.
+					const clipboardData = event.clipboardData
+						.getData( 'text/plain' )
+						.trim();
+
+					if ( isURL( clipboardData ) ) {
+						// Extract out the slug from the URL.
+						const urlRegex = /([^/]*)\/$/;
+						const newSlug = urlRegex.exec(
+							clipboardData,
+						)[ 1 ];
+						setValue( newSlug );
+					}
+				} }
+				help={ __(
+					'Enter the theme slug. Example: "astra".',
+					'wp-plugin-info-card',
+				) }
+			/>
+			<Button
+				className="wppic-btn has-icon-right "
+				variant="secondary"
+				label={ __( 'Add Theme', 'wp-plugin-info-card' ) }
+				onClick={ () => {
+					const sanitizedSlug = cleanForSlug( value );
+					if ( '' === sanitizedSlug ) {
+						return;
+					}
+					props.onChange( sanitizedSlug );
+					setValue( '' );
+				} }
+				icon={ () => <PlusCircle /> }
+			>
+				{ __( 'Add Theme', 'wp-plugin-info-card' ) }
 			</Button>
 		</div>
 	);
@@ -248,12 +319,17 @@ const Interface = ( props ) => {
 		control,
 	} );
 
+	/**
+	 * Move a plugin in the list.
+	 *
+	 * @param {number} dragIndex  The index of the plugin being dragged.
+	 * @param {number} hoverIndex The index of the plugin being hovered.
+	 */
 	const movePlugin = useCallback( ( dragIndex, hoverIndex ) => {
 		const prevPlugins = getValues( 'list' );
 		const dragItem = prevPlugins[ dragIndex ];
 		const hoverItem = prevPlugins[ hoverIndex ];
 		const newPlugins = [];
-		console.log( prevPlugins );
 		prevPlugins.forEach( ( plugin, index ) => {
 			if ( index !== dragIndex && index !== hoverIndex ) {
 				newPlugins.push( plugin );
@@ -272,12 +348,69 @@ const Interface = ( props ) => {
 	}, [] );
 
 	/**
+	 * Remove a plugin from the list.
+	 *
+	 * @param {string} slug The slug of the plugin to remove.
+	 */
+	const removePlugin = useCallback( ( slug ) => {
+		const prevPlugins = getValues( 'list' );
+		const newPlugins = prevPlugins.filter( ( plugin ) => {
+			return plugin !== slug;
+		} );
+		setValue( 'list', newPlugins );
+	}, [] );
+
+	/**
+	 * Move a theme in the list.
+	 *
+	 * @param {number} dragIndex  The index of the theme being dragged.
+	 * @param {number} hoverIndex The index of the theme being hovered.
+	 */
+	const moveTheme = useCallback( ( dragIndex, hoverIndex ) => {
+		const prevThemes = getValues( 'theme-list' );
+		const dragItem = prevThemes[ dragIndex ];
+		const hoverItem = prevThemes[ hoverIndex ];
+		const newThemes = [];
+		prevThemes.forEach( ( theme, index ) => {
+			if ( index !== dragIndex && index !== hoverIndex ) {
+				newThemes.push( theme );
+			} else {
+				if ( index === hoverIndex && dragIndex < hoverIndex ) {
+					newThemes.push( hoverItem );
+					newThemes.push( dragItem );
+				}
+				if ( index === hoverIndex && dragIndex > hoverIndex ) {
+					newThemes.push( dragItem );
+					newThemes.push( hoverItem );
+				}
+			}
+		} );
+		setValue( 'theme-list', newThemes );
+	}, [] );
+
+	/**
+	 * Remove a plugin from the list.
+	 *
+	 * @param {string} slug The slug of the plugin to remove.
+	 */
+	const removeTheme = useCallback( ( slug ) => {
+		const themePlugins = getValues( 'theme-list' );
+		const newThemes = themePlugins.filter( ( plugin ) => {
+			return plugin !== slug;
+		} );
+		setValue( 'theme-list', newThemes );
+	}, [] );
+
+	/**
 	 * Placeholder for submit event.
 	 *
 	 * @param {Object} formData contains the form data.
 	 */
 	const onSubmit = ( formData ) => { };
 
+	/**
+	 * Get the plugins.
+	 */
 	const getPlugins = () => {
 		const { list } = formValues;
 		if ( list.length > 0 ) {
@@ -300,7 +433,42 @@ const Interface = ( props ) => {
 									) }
 								/>
 								<div className="wppic-org-asset-row__actions">
-									<Plugin slug={ item } index={ index } movePlugin={ movePlugin } />
+									<OrgAsset type="plugin" slug={ item } index={ index } removeCallback={ removePlugin } moveCallback={ movePlugin } />
+								</div>
+							</div>
+						);
+					} ) }
+				</>
+			);
+		}
+	};
+
+	/**
+	 * Get the themes.
+	 */
+	const getThemes = () => {
+		const themeList = getValues( 'theme-list' );
+		if ( themeList.length > 0 ) {
+			return (
+				<>
+					{ themeList.map( ( item, index ) => {
+						return (
+							<div className="wppic-org-asset-row" key={ index }>
+								<Controller
+									name={ `theme-list[${ index }]` }
+									key={ index }
+									control={ control }
+									rules={ { required: true } }
+									render={ ( { field: { onChange, value } } ) => (
+										<TextControl
+											value={ value }
+											onChange={ onChange }
+											type="hidden"
+										/>
+									) }
+								/>
+								<div className="wppic-org-asset-row__actions">
+									<OrgAsset type="theme" slug={ item } index={ index } removeCallback={ removeTheme } moveCallback={ moveTheme } />
 								</div>
 							</div>
 						);
@@ -583,7 +751,7 @@ const Interface = ( props ) => {
 																checked={ value }
 																onChange={ onChange }
 																help={ __(
-																	'Check this box to enable the Dashboard Widget.',
+																	'Check this box to enable the Dashboard Widget. Be sure to show the widget in the WordPress dashboard settings by enabling it in screen options.',
 																	'wp-plugin-info-card',
 																) }
 															/>
@@ -610,6 +778,16 @@ const Interface = ( props ) => {
 														) }
 													/>
 												</div>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row">
+												{ __( 'Plugins', 'wp-plugin-info-card' ) }
+											</th>
+											<td>
+												<div className="wppic-admin-row">
+													<p className="wppic-admin-description">{ __( 'Add or remove plugins that will display in the WordPress Dashboard.', 'wp-plugin-info-card' ) }</p>
+												</div>
 												<div className="wppic-admin-row">
 													<AddPlugin
 														onChange={ ( value ) => {
@@ -620,6 +798,23 @@ const Interface = ( props ) => {
 													/>
 												</div>
 												<div className="wppic-admin-row">{ getPlugins() }</div>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row">
+												{ __( 'Themes', 'wp-plugin-info-card' ) }
+											</th>
+											<td>
+												<div className="wppic-admin-row">
+													<AddTheme
+														onChange={ ( value ) => {
+															const oldThemes = getValues( 'theme-list' );
+															const newThemes = [ ...oldThemes, value ];
+															setValue( 'theme-list', newThemes );
+														} }
+													/>
+												</div>
+												<div className="wppic-admin-row">{ getThemes() }</div>
 											</td>
 										</tr>
 									</tbody>

@@ -6413,6 +6413,9 @@ button.button-reset.show-cursor {
   color: #FFF;
   fill: unset;
 }
+.wppic-close-btn .lucide circle {
+  color: #000;
+}
 
 /** Drag and Drop */
 .wppic-plugin-drag {
@@ -6425,6 +6428,7 @@ button.button-reset.show-cursor {
   justify-content: center;
   margin-right: 8px;
   transition: all 0.3s ease-in-out;
+  background: #DEDEDE;
 }
 .wppic-plugin-drag:hover {
   cursor: move;
@@ -6436,9 +6440,77 @@ button.button-reset.show-cursor {
 }
 .wppic-plugin-drag.is-over {
   border: 1px dashed #000;
-  background: #db8a39 !important;
+  background: #2E872C !important;
   color: #FFF !important;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.wppic-admin-row {
+  margin-bottom: 15px;
+}
+.wppic-admin-row:last-child {
+  margin-bottom: 0;
+}
+.wppic-admin-row p.components-base-control__help,
+.wppic-admin-row p.components-form-token-field__help {
+  font-size: 13px;
+  font-style: italic;
+}
+.wppic-admin-row p.wppic-admin-description {
+  font-size: 13px;
+  font-style: italic;
+  margin: 0;
+  padding: 0;
+}
+.wppic-admin-row .components-select-control label,
+.wppic-admin-row .components-radio-control label {
+  font-weight: 700 !important; /* override core styles */
+  font-size: 0.8125rem !important;
+}
+.wppic-admin-row .components-base-control:not(.components-range-control__number),
+.wppic-admin-row .components-form-token-field {
+  margin-bottom: 15px;
+}
+.wppic-admin-row .components-base-control:not(.components-range-control__number).has-error,
+.wppic-admin-row .components-form-token-field.has-error {
+  margin-bottom: 5px;
+}
+.wppic-admin-row .components-base-control:not(.components-range-control__number):last-child,
+.wppic-admin-row .components-form-token-field:last-child {
+  margin-bottom: 0;
+}
+.wppic-admin-row .components-base-control:not(.components-range-control__number) label,
+.wppic-admin-row .components-base-control:not(.components-range-control__number) label.components-base-control__label,
+.wppic-admin-row .components-form-token-field label,
+.wppic-admin-row .components-form-token-field label.components-base-control__label {
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+.wppic-admin-row .components-base-control:not(.components-range-control__number) input[type=text],
+.wppic-admin-row .components-base-control:not(.components-range-control__number) input[type=number],
+.wppic-admin-row .components-form-token-field input[type=text],
+.wppic-admin-row .components-form-token-field input[type=number] {
+  position: relative;
+  display: block;
+  min-width: 200px;
+  width: 100%;
+  font-size: 14px;
+  padding: 8px 14px 8px 12px;
+}
+.wppic-admin-row label.components-base-control__label {
+  position: relative;
+}
+.wppic-admin-row .is-required label:after {
+  position: absolute;
+  display: inline-block;
+  vertical-align: middle;
+  content: "*";
+  top: -3px;
+  right: -12px;
+  color: #b53b07;
+  font-size: 1.4em;
+  line-height: 1.3;
 }
 
 .mce-i-wppic-icon {

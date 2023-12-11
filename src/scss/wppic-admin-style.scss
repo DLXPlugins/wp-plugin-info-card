@@ -277,6 +277,9 @@ $wppic-admin-primary-color: #DB3939;
 		color: #FFF;
 		fill: unset;
 	}
+	.lucide circle {
+		color: #000;
+	}
 }
 
 /** Drag and Drop */
@@ -290,6 +293,7 @@ $wppic-admin-primary-color: #DB3939;
 	justify-content: center;
 	margin-right: 8px;
 	transition: all 0.3s ease-in-out;
+	background: #DEDEDE;
 	&:hover {
 		cursor: move;
 		background: #f4f4f4 !important;
@@ -300,9 +304,84 @@ $wppic-admin-primary-color: #DB3939;
 	}
 	&.is-over {
 		border: 1px dashed #000;
-		background: #db8a39 !important;
+		background: #2E872C !important;
 		color: #FFF !important;
 		box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+	}
+}
+
+.wppic-admin-row {
+	margin-bottom: 15px;
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	p.components-base-control__help,
+	p.components-form-token-field__help {
+		font-size: 13px;
+		font-style: italic;
+	}
+	p.wppic-admin-description {
+		font-size: 13px;
+		font-style: italic;
+		margin: 0;
+		padding: 0;
+	}
+
+	// Select control styles.
+	.components-select-control,
+	.components-radio-control {
+		label {
+			font-weight: 700 !important; /* override core styles */
+			font-size: 0.8125rem !important /* override core styles */
+		}
+	}
+
+	// Text control styles.
+	.components-base-control:not(.components-range-control__number),
+	.components-form-token-field {
+		margin-bottom: 15px;
+
+		&.has-error {
+			margin-bottom: 5px;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		label,
+		label.components-base-control__label {
+			font-weight: 600;
+			font-size: 14px;
+			text-transform: capitalize;
+		}
+
+		input[type='text'],
+		input[type='number'] {
+			position: relative;
+			display: block;
+			min-width: 200px;
+			width: 100%;
+			font-size: 14px;
+			padding: 8px 14px 8px 12px;
+		}
+	}
+
+	label.components-base-control__label {
+		position: relative;
+	}
+
+	.is-required label:after {
+		position: absolute;
+		display: inline-block;
+		vertical-align: middle;
+		content: '*';
+		top: -3px;
+		right: -12px;
+		color: #b53b07;
+		font-size: 1.4em;
+		line-height: 1.3;
 	}
 }
 

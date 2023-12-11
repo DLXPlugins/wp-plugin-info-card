@@ -18631,17 +18631,19 @@ function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
 
 
 
-var Plugin = function Plugin(a) {
-  var b = a.slug,
-    c = a.index,
-    d = a.movePlugin;
-  var e = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
-  var f = (0,react_dnd__WEBPACK_IMPORTED_MODULE_9__.useDrop)({
-      accept: 'plugin',
+var OrgAsset = function OrgAsset(a) {
+  var b = a.type,
+    c = a.slug,
+    d = a.index,
+    e = a.moveCallback,
+    f = a.removeCallback;
+  var g = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var h = (0,react_dnd__WEBPACK_IMPORTED_MODULE_9__.useDrop)({
+      accept: b,
       drop: function drop(a, b) {
         if (!b.didDrop()) {
-          if (a.index !== c) {
-            d(a.index, c);
+          if (a.index !== d) {
+            e(a.index, d);
           }
         }
       },
@@ -18653,18 +18655,18 @@ var Plugin = function Plugin(a) {
         };
       },
       hover: function hover(a, b) {
-        var f;
-        if (!e.current) {
+        var c;
+        if (!g.current) {
           return;
         }
-        var g = a.index;
-        var h = c;
+        var f = a.index;
+        var h = d;
         // Don't replace items with themselves
-        if (g === h) {
+        if (f === h) {
           return;
         }
         // Determine rectangle on screen
-        var i = (f = e.current) === null || f === void 0 ? void 0 : f.getBoundingClientRect();
+        var i = (c = g.current) === null || c === void 0 ? void 0 : c.getBoundingClientRect();
         // Get vertical middle
         var j = (i.bottom - i.top) / 2;
         // Determine mouse position
@@ -18675,15 +18677,15 @@ var Plugin = function Plugin(a) {
         // When dragging downwards, only move when the cursor is below 50%
         // When dragging upwards, only move when the cursor is above 50%
         // Dragging downwards
-        if (g < h && l < j) {
+        if (f < h && l < j) {
           return;
         }
         // Dragging upwards
-        if (g > h && l > j) {
+        if (f > h && l > j) {
           return;
         }
         // Time to actually perform the action
-        d(g, h);
+        e(f, h);
         // Note: we're mutating the monitor item here!
         // Generally it's better to avoid mutations,
         // but it's good here for the sake of performance
@@ -18691,14 +18693,14 @@ var Plugin = function Plugin(a) {
         a.index = h;
       }
     }),
-    g = _slicedToArray(f, 2),
-    h = g[0],
-    i = g[1];
-  var j = (0,react_dnd__WEBPACK_IMPORTED_MODULE_10__.useDrag)({
-      type: 'plugin',
+    i = _slicedToArray(h, 2),
+    j = i[0],
+    k = i[1];
+  var l = (0,react_dnd__WEBPACK_IMPORTED_MODULE_10__.useDrag)({
+      type: b,
       item: function item() {
         return {
-          index: c
+          index: d
         };
       },
       collect: function collect(a) {
@@ -18708,32 +18710,47 @@ var Plugin = function Plugin(a) {
         };
       }
     }),
-    k = _slicedToArray(j, 2),
-    l = k[0],
-    m = l.opacity,
-    n = l.isDragging,
-    o = k[1];
-  var p = o(i(e));
-  var q = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wppic-plugin-drag', {
-    'is-dragging': n,
-    'can-drop': h.canDrop,
-    'is-over': h.isOver
+    m = _slicedToArray(l, 2),
+    n = m[0],
+    o = n.opacity,
+    p = n.isDragging,
+    q = m[1];
+  var r = q(k(g));
+  var s = classnames__WEBPACK_IMPORTED_MODULE_2___default()('wppic-plugin-drag', {
+    'is-dragging': p,
+    'can-drop': j.canDrop,
+    'is-over': j.isOver
   });
+
+  /**
+   * Get the label for the remove button.
+   *
+   * @return {string} The label for the remove button.
+   */
+  var t = function getRemoveLabel() {
+    switch (b) {
+      case 'plugin':
+        return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Remove Plugin', 'wp-plugin-info-card');
+      case 'theme':
+        return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Remove Theme', 'wp-plugin-info-card');
+    }
+    return '';
+  };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: q,
-    ref: p,
+    className: s,
+    ref: r,
     style: {
-      opacity: m
+      opacity: o
     },
-    "data-handler-id": h.handlerId
+    "data-handler-id": j.handlerId
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-org-asset-label"
-  }, b), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  }, c), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
     className: "button-reset wppic-close-btn",
     variant: "secondary",
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Remove Plugin', 'wp-plugin-info-card'),
+    label: t(),
     onClick: function onClick() {
-      console.log('remove ' + b);
+      f(c);
     },
     icon: function icon() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_12__["default"], null);
@@ -18773,6 +18790,9 @@ var AddPlugin = function AddPlugin(a) {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Add Plugin', 'wp-plugin-info-card'),
     onClick: function onClick() {
       var b = (0,_wordpress_url__WEBPACK_IMPORTED_MODULE_15__.cleanForSlug)(d);
+      if ('' === b) {
+        return;
+      }
       a.onChange(b);
       e('');
     },
@@ -18780,6 +18800,50 @@ var AddPlugin = function AddPlugin(a) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_16__["default"], null);
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Add Plugin', 'wp-plugin-info-card')));
+};
+var AddTheme = function AddTheme(a) {
+  var b = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    c = _slicedToArray(b, 2),
+    d = c[0],
+    e = c[1];
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-add-plugin-wrapper"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Theme Slug', 'wp-plugin-info-card'),
+    value: d,
+    onChange: function onChange(a) {
+      if ((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_14__.isURL)(a)) {
+        return;
+      }
+      e(a);
+    },
+    onPaste: function onPaste(a) {
+      // Get contents from clipboard.
+      var b = a.clipboardData.getData('text/plain').trim();
+      if ((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_14__.isURL)(b)) {
+        // Extract out the slug from the URL.
+        var c = /([^/]*)\/$/;
+        var d = c.exec(b)[1];
+        e(d);
+      }
+    },
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Enter the theme slug. Example: "astra".', 'wp-plugin-info-card')
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    className: "wppic-btn has-icon-right ",
+    variant: "secondary",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Add Theme', 'wp-plugin-info-card'),
+    onClick: function onClick() {
+      var b = (0,_wordpress_url__WEBPACK_IMPORTED_MODULE_15__.cleanForSlug)(d);
+      if ('' === b) {
+        return;
+      }
+      a.onChange(b);
+      e('');
+    },
+    icon: function icon() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_16__["default"], null);
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Add Theme', 'wp-plugin-info-card')));
 };
 var retrieveHomeOptions = function retrieveHomeOptions() {
   return (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_7__["default"])('wppic_get_home_options', {
@@ -18847,12 +18911,18 @@ var Interface = function Interface(a) {
     t = s.errors,
     u = s.isDirty,
     v = s.dirtyFields;
+
+  /**
+   * Move a plugin in the list.
+   *
+   * @param {number} dragIndex  The index of the plugin being dragged.
+   * @param {number} hoverIndex The index of the plugin being hovered.
+   */
   var w = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (a, b) {
     var c = m('list');
     var d = c[a];
     var e = c[b];
     var f = [];
-    console.log(c);
     c.forEach(function (c, g) {
       if (g !== a && g !== b) {
         f.push(c);
@@ -18871,12 +18941,70 @@ var Interface = function Interface(a) {
   }, []);
 
   /**
+   * Remove a plugin from the list.
+   *
+   * @param {string} slug The slug of the plugin to remove.
+   */
+  var x = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (a) {
+    var b = m('list');
+    var c = b.filter(function (b) {
+      return b !== a;
+    });
+    o('list', c);
+  }, []);
+
+  /**
+   * Move a theme in the list.
+   *
+   * @param {number} dragIndex  The index of the theme being dragged.
+   * @param {number} hoverIndex The index of the theme being hovered.
+   */
+  var y = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (a, b) {
+    var c = m('theme-list');
+    var d = c[a];
+    var e = c[b];
+    var f = [];
+    c.forEach(function (c, g) {
+      if (g !== a && g !== b) {
+        f.push(c);
+      } else {
+        if (g === b && a < b) {
+          f.push(e);
+          f.push(d);
+        }
+        if (g === b && a > b) {
+          f.push(d);
+          f.push(e);
+        }
+      }
+    });
+    o('theme-list', f);
+  }, []);
+
+  /**
+   * Remove a plugin from the list.
+   *
+   * @param {string} slug The slug of the plugin to remove.
+   */
+  var z = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (a) {
+    var b = m('theme-list');
+    var c = b.filter(function (b) {
+      return b !== a;
+    });
+    o('theme-list', c);
+  }, []);
+
+  /**
    * Placeholder for submit event.
    *
    * @param {Object} formData contains the form data.
    */
-  var x = function onSubmit(a) {};
-  var y = function getPlugins() {
+  var A = function onSubmit(a) {};
+
+  /**
+   * Get the plugins.
+   */
+  var B = function getPlugins() {
     var a = r.list;
     if (a.length > 0) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, a.map(function (a, b) {
@@ -18902,10 +19030,52 @@ var Interface = function Interface(a) {
           }
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "wppic-org-asset-row__actions"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Plugin, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(OrgAsset, {
+          type: "plugin",
           slug: a,
           index: b,
-          movePlugin: w
+          removeCallback: x,
+          moveCallback: w
+        })));
+      }));
+    }
+  };
+
+  /**
+   * Get the themes.
+   */
+  var C = function getThemes() {
+    var a = m('theme-list');
+    if (a.length > 0) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, a.map(function (a, b) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "wppic-org-asset-row",
+          key: b
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_18__.Controller, {
+          name: "theme-list[".concat(b, "]"),
+          key: b,
+          control: k,
+          rules: {
+            required: true
+          },
+          render: function render(a) {
+            var b = a.field,
+              c = b.onChange,
+              d = b.value;
+            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__["default"], {
+              value: d,
+              onChange: c,
+              type: "hidden"
+            });
+          }
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "wppic-org-asset-row__actions"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(OrgAsset, {
+          type: "theme",
+          slug: a,
+          index: b,
+          removeCallback: z,
+          moveCallback: y
         })));
       }));
     }
@@ -18921,7 +19091,7 @@ var Interface = function Interface(a) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_19__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Settings', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
     className: "description"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Set the defaults for WP Plugin Info Card.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
-    onSubmit: l(x)
+    onSubmit: l(A)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", {
     className: "form-table form-table-row-sections"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
@@ -19078,7 +19248,7 @@ var Interface = function Interface(a) {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Enable Dashboard Widget', 'wp-plugin-info-card'),
         checked: d,
         onChange: c,
-        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Check this box to enable the Dashboard Widget.', 'wp-plugin-info-card')
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Check this box to enable the Dashboard Widget. Be sure to show the widget in the WordPress dashboard settings by enabling it in screen options.', 'wp-plugin-info-card')
       });
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -19097,7 +19267,13 @@ var Interface = function Interface(a) {
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Check this box to enable the Ajax loading of the Dashboard Widget.', 'wp-plugin-info-card')
       });
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    scope: "row"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Plugins', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    className: "wppic-admin-description"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Add or remove plugins that will display in the WordPress Dashboard.', 'wp-plugin-info-card'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(AddPlugin, {
     onChange: function onChange(a) {
@@ -19107,7 +19283,19 @@ var Interface = function Interface(a) {
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
-  }, y()))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, B()))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    scope: "row"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Themes', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(AddTheme, {
+    onChange: function onChange(a) {
+      var b = m('theme-list');
+      var c = [].concat(_toConsumableArray(b), [a]);
+      o('theme-list', c);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-row"
+  }, C()))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_5__["default"], {
     formValues: r,
     setError: p,
     reset: n,
