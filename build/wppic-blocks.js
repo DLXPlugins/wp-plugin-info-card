@@ -1,11 +1,11 @@
-/******/ (function() { // webpackBootstrap
+/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
   \*************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 module.exports = __webpack_require__(/*! ./lib/axios */ "./node_modules/axios/lib/axios.js");
 
@@ -15,7 +15,7 @@ module.exports = __webpack_require__(/*! ./lib/axios */ "./node_modules/axios/li
 /*!************************************************!*\
   !*** ./node_modules/axios/lib/adapters/xhr.js ***!
   \************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -215,7 +215,7 @@ module.exports = function xhrAdapter(config) {
 /*!*****************************************!*\
   !*** ./node_modules/axios/lib/axios.js ***!
   \*****************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -282,7 +282,7 @@ module.exports["default"] = axios;
 /*!*************************************************!*\
   !*** ./node_modules/axios/lib/cancel/Cancel.js ***!
   \*************************************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 
@@ -312,7 +312,7 @@ module.exports = Cancel;
 /*!******************************************************!*\
   !*** ./node_modules/axios/lib/cancel/CancelToken.js ***!
   \******************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -380,7 +380,7 @@ module.exports = CancelToken;
 /*!***************************************************!*\
   !*** ./node_modules/axios/lib/cancel/isCancel.js ***!
   \***************************************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 
@@ -396,7 +396,7 @@ module.exports = function isCancel(value) {
 /*!**********************************************!*\
   !*** ./node_modules/axios/lib/core/Axios.js ***!
   \**********************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -555,7 +555,7 @@ module.exports = Axios;
 /*!***********************************************************!*\
   !*** ./node_modules/axios/lib/core/InterceptorManager.js ***!
   \***********************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -620,7 +620,7 @@ module.exports = InterceptorManager;
 /*!******************************************************!*\
   !*** ./node_modules/axios/lib/core/buildFullPath.js ***!
   \******************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -651,7 +651,7 @@ module.exports = function buildFullPath(baseURL, requestedURL) {
 /*!****************************************************!*\
   !*** ./node_modules/axios/lib/core/createError.js ***!
   \****************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -680,7 +680,7 @@ module.exports = function createError(message, config, code, request, response) 
 /*!********************************************************!*\
   !*** ./node_modules/axios/lib/core/dispatchRequest.js ***!
   \********************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -773,7 +773,7 @@ module.exports = function dispatchRequest(config) {
 /*!*****************************************************!*\
   !*** ./node_modules/axios/lib/core/enhanceError.js ***!
   \*****************************************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 
@@ -826,7 +826,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 /*!****************************************************!*\
   !*** ./node_modules/axios/lib/core/mergeConfig.js ***!
   \****************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -924,7 +924,7 @@ module.exports = function mergeConfig(config1, config2) {
 /*!***********************************************!*\
   !*** ./node_modules/axios/lib/core/settle.js ***!
   \***********************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -960,7 +960,7 @@ module.exports = function settle(resolve, reject, response) {
 /*!******************************************************!*\
   !*** ./node_modules/axios/lib/core/transformData.js ***!
   \******************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -993,7 +993,7 @@ module.exports = function transformData(data, headers, fns) {
 /*!********************************************!*\
   !*** ./node_modules/axios/lib/defaults.js ***!
   \********************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -1138,7 +1138,7 @@ module.exports = defaults;
 /*!************************************************!*\
   !*** ./node_modules/axios/lib/helpers/bind.js ***!
   \************************************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 
@@ -1160,7 +1160,7 @@ module.exports = function bind(fn, thisArg) {
 /*!****************************************************!*\
   !*** ./node_modules/axios/lib/helpers/buildURL.js ***!
   \****************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -1241,7 +1241,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 /*!*******************************************************!*\
   !*** ./node_modules/axios/lib/helpers/combineURLs.js ***!
   \*******************************************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 
@@ -1266,7 +1266,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 /*!***************************************************!*\
   !*** ./node_modules/axios/lib/helpers/cookies.js ***!
   \***************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -1330,7 +1330,7 @@ module.exports = (
 /*!*********************************************************!*\
   !*** ./node_modules/axios/lib/helpers/isAbsoluteURL.js ***!
   \*********************************************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 
@@ -1355,7 +1355,7 @@ module.exports = function isAbsoluteURL(url) {
 /*!********************************************************!*\
   !*** ./node_modules/axios/lib/helpers/isAxiosError.js ***!
   \********************************************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 
@@ -1377,7 +1377,7 @@ module.exports = function isAxiosError(payload) {
 /*!***********************************************************!*\
   !*** ./node_modules/axios/lib/helpers/isURLSameOrigin.js ***!
   \***********************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -1456,7 +1456,7 @@ module.exports = (
 /*!***************************************************************!*\
   !*** ./node_modules/axios/lib/helpers/normalizeHeaderName.js ***!
   \***************************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -1479,7 +1479,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 /*!********************************************************!*\
   !*** ./node_modules/axios/lib/helpers/parseHeaders.js ***!
   \********************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -1543,7 +1543,7 @@ module.exports = function parseHeaders(headers) {
 /*!**************************************************!*\
   !*** ./node_modules/axios/lib/helpers/spread.js ***!
   \**************************************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 
@@ -1581,7 +1581,7 @@ module.exports = function spread(callback) {
 /*!*****************************************************!*\
   !*** ./node_modules/axios/lib/helpers/validator.js ***!
   \*****************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -1697,7 +1697,7 @@ module.exports = {
 /*!*****************************************!*\
   !*** ./node_modules/axios/lib/utils.js ***!
   \*****************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -2057,10 +2057,13 @@ module.exports = {
 /*!****************************!*\
   !*** ./src/blocks/Logo.js ***!
   \****************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 var Logo = function Logo(a) {
   return /*#__PURE__*/React.createElement("svg", {
     version: "1.1",
@@ -2081,7 +2084,7 @@ Logo.defaultProps = {
   size: '75',
   fill: '#DB3939'
 };
-/* harmony default export */ __webpack_exports__["default"] = (Logo);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Logo);
 
 /***/ }),
 
@@ -2089,7 +2092,7 @@ Logo.defaultProps = {
 /*!********************************************!*\
   !*** ./src/blocks/PluginInfoCard/block.js ***!
   \********************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -2188,10 +2191,13 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__, {
 /*!*******************************************!*\
   !*** ./src/blocks/PluginInfoCard/edit.js ***!
   \*******************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
@@ -2887,7 +2893,7 @@ var WPPluginInfoCard = function WPPluginInfoCard(a) {
   }, la(_))));
   return /*#__PURE__*/React.createElement("div", xa, ya);
 };
-/* harmony default export */ __webpack_exports__["default"] = (WPPluginInfoCard);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WPPluginInfoCard);
 
 /***/ }),
 
@@ -2895,10 +2901,13 @@ var WPPluginInfoCard = function WPPluginInfoCard(a) {
 /*!******************************************************!*\
   !*** ./src/blocks/PluginInfoCardQuery/edit-query.js ***!
   \******************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
@@ -3535,7 +3544,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
   }
   return /*#__PURE__*/React.createElement("div", Z, Y);
 };
-/* harmony default export */ __webpack_exports__["default"] = (WP_Plugin_Card_Query);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WP_Plugin_Card_Query);
 
 /***/ }),
 
@@ -3543,7 +3552,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
 /*!*******************************************************!*\
   !*** ./src/blocks/PluginInfoCardQuery/wppic-query.js ***!
   \*******************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -3571,7 +3580,7 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_2__, {
 /*!*************************************************!*\
   !*** ./src/blocks/SitePluginsCardGrid/block.js ***!
   \*************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -3600,10 +3609,13 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__, {
 /*!************************************************!*\
   !*** ./src/blocks/SitePluginsCardGrid/edit.js ***!
   \************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
@@ -4069,7 +4081,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
   }, M(e))));
   return /*#__PURE__*/React.createElement("div", T, V);
 };
-/* harmony default export */ __webpack_exports__["default"] = (SitePluginsCardGrid);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SitePluginsCardGrid);
 
 /***/ }),
 
@@ -4077,10 +4089,13 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
 /*!************************************************!*\
   !*** ./src/blocks/components/BannerWrapper.js ***!
   \************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 var Fragment = wp.element.Fragment;
 var BannerWrapper = function BannerWrapper(a) {
   var b = a.defaultBanner;
@@ -4108,7 +4123,7 @@ BannerWrapper.defaultProps = {
   defaultBanner: wppic.wppic_banner_default,
   image: false
 };
-/* harmony default export */ __webpack_exports__["default"] = (BannerWrapper);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BannerWrapper);
 
 /***/ }),
 
@@ -4116,10 +4131,13 @@ BannerWrapper.defaultProps = {
 /*!*******************************************!*\
   !*** ./src/blocks/components/GearIcon.js ***!
   \*******************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
  // ES6
@@ -4148,7 +4166,7 @@ GearIcon.propTypes = {
   height: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().number),
   fill: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string)
 };
-/* harmony default export */ __webpack_exports__["default"] = (GearIcon);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GearIcon);
 
 /***/ }),
 
@@ -4156,10 +4174,13 @@ GearIcon.propTypes = {
 /*!*******************************************!*\
   !*** ./src/blocks/components/GridIcon.js ***!
   \*******************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
  // ES6
@@ -4185,7 +4206,7 @@ GridIcon.propTypes = {
   height: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().number),
   fill: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string)
 };
-/* harmony default export */ __webpack_exports__["default"] = (GridIcon);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GridIcon);
 
 /***/ }),
 
@@ -4193,10 +4214,13 @@ GridIcon.propTypes = {
 /*!***********************************************!*\
   !*** ./src/blocks/components/InfoCardIcon.js ***!
   \***********************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
  // ES6
@@ -4227,7 +4251,7 @@ InfoCardIcon.propTypes = {
   height: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().number),
   fill: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string)
 };
-/* harmony default export */ __webpack_exports__["default"] = (InfoCardIcon);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (InfoCardIcon);
 
 /***/ }),
 
@@ -4235,10 +4259,13 @@ InfoCardIcon.propTypes = {
 /*!******************************************!*\
   !*** ./src/blocks/components/Numbers.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var _SwitchIcon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SwitchIcon */ "./src/blocks/components/SwitchIcon.js");
 function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -4338,7 +4365,7 @@ var NumbersComponent = function NumbersComponent(a) {
     icon: _SwitchIcon__WEBPACK_IMPORTED_MODULE_0__["default"]
   })))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (NumbersComponent);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NumbersComponent);
 
 /***/ }),
 
@@ -4346,10 +4373,13 @@ var NumbersComponent = function NumbersComponent(a) {
 /*!******************************************!*\
   !*** ./src/blocks/components/PicIcon.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 var Fragment = wp.element.Fragment;
 var PicIcon = function PicIcon(a) {
   var b = a.defaultIcon;
@@ -4372,7 +4402,7 @@ PicIcon.defaultProps = {
   name: '',
   image: false
 };
-/* harmony default export */ __webpack_exports__["default"] = (PicIcon);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PicIcon);
 
 /***/ }),
 
@@ -4380,10 +4410,13 @@ PicIcon.defaultProps = {
 /*!**********************************************!*\
   !*** ./src/blocks/components/ProgressBar.js ***!
   \**********************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
@@ -4431,7 +4464,7 @@ ProgressBar.defaultProps = {
 ProgressBar.propTypes = {
   percentage: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().number)
 };
-/* harmony default export */ __webpack_exports__["default"] = (ProgressBar);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProgressBar);
 
 /***/ }),
 
@@ -4439,10 +4472,13 @@ ProgressBar.propTypes = {
 /*!*********************************************!*\
   !*** ./src/blocks/components/SwitchIcon.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
  // ES6
@@ -4468,7 +4504,7 @@ SwitchIcon.propTypes = {
   height: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().number),
   fill: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string)
 };
-/* harmony default export */ __webpack_exports__["default"] = (SwitchIcon);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SwitchIcon);
 
 /***/ }),
 
@@ -4476,10 +4512,13 @@ SwitchIcon.propTypes = {
 /*!********************************************!*\
   !*** ./src/blocks/templates/PluginCard.js ***!
   \********************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! validator/lib/isNumeric */ "./node_modules/validator/lib/isNumeric.js");
@@ -4553,7 +4592,7 @@ var PluginCard = function PluginCard(a) {
     className: "wp-pic-download"
   }, /*#__PURE__*/React.createElement("span", null, __('More info', 'wp-plugin-info-card'))))))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (PluginCard);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PluginCard);
 
 /***/ }),
 
@@ -4561,10 +4600,13 @@ var PluginCard = function PluginCard(a) {
 /*!********************************************!*\
   !*** ./src/blocks/templates/PluginFlex.js ***!
   \********************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_BannerWrapper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/BannerWrapper */ "./src/blocks/components/BannerWrapper.js");
@@ -4634,7 +4676,7 @@ var PluginFlex = function PluginFlex(a) {
     className: "wp-pic-download-link"
   }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", null, __('Download', 'wp-plugin-info-card'), ' ', d.parse(a.data.name)))))))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (PluginFlex);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PluginFlex);
 
 /***/ }),
 
@@ -4642,10 +4684,13 @@ var PluginFlex = function PluginFlex(a) {
 /*!*********************************************!*\
   !*** ./src/blocks/templates/PluginLarge.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! validator/lib/isNumeric */ "./node_modules/validator/lib/isNumeric.js");
@@ -4735,7 +4780,7 @@ var PluginLarge = function PluginLarge(a) {
     className: "wp-pic-requires"
   }, d, /*#__PURE__*/React.createElement("em", null, __('Requires', 'wp-plugin-info-card'))))))))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (PluginLarge);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PluginLarge);
 
 /***/ }),
 
@@ -4743,10 +4788,13 @@ var PluginLarge = function PluginLarge(a) {
 /*!*************************************************!*\
   !*** ./src/blocks/templates/PluginWordPress.js ***!
   \*************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! validator/lib/isNumeric */ "./node_modules/validator/lib/isNumeric.js");
@@ -4835,7 +4883,7 @@ var PluginWordPress = function PluginWordPress(a) {
     className: "wp-pic-compatibility-compatible"
   }, __('Compatible with WordPress', 'wp-plugin-info-card'), ' ', d)))))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (PluginWordPress);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PluginWordPress);
 
 /***/ }),
 
@@ -4843,10 +4891,13 @@ var PluginWordPress = function PluginWordPress(a) {
 /*!*******************************************!*\
   !*** ./src/blocks/templates/ThemeCard.js ***!
   \*******************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -4905,7 +4956,7 @@ var ThemeCard = function ThemeCard(a) {
     className: "wp-pic-download"
   }, /*#__PURE__*/React.createElement("span", null, __('More info', 'wp-plugin-info-card'))))))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (ThemeCard);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ThemeCard);
 
 /***/ }),
 
@@ -4913,10 +4964,13 @@ var ThemeCard = function ThemeCard(a) {
 /*!*******************************************!*\
   !*** ./src/blocks/templates/ThemeFlex.js ***!
   \*******************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_BannerWrapper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/BannerWrapper */ "./src/blocks/components/BannerWrapper.js");
@@ -4986,7 +5040,7 @@ var PluginFlex = function PluginFlex(a) {
     className: "wp-pic-download-link"
   }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", null, __('Download', 'wp-plugin-info-card'), ' ', a.data.name)))))))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (PluginFlex);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PluginFlex);
 
 /***/ }),
 
@@ -4994,10 +5048,13 @@ var PluginFlex = function PluginFlex(a) {
 /*!********************************************!*\
   !*** ./src/blocks/templates/ThemeLarge.js ***!
   \********************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_BannerWrapper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/BannerWrapper */ "./src/blocks/components/BannerWrapper.js");
@@ -5066,7 +5123,7 @@ var PluginLarge = function PluginLarge(a) {
     className: "wp-pic-requires"
   }, a.data.version, /*#__PURE__*/React.createElement("em", null, __('Version', 'wp-plugin-info-card'))))))))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (PluginLarge);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PluginLarge);
 
 /***/ }),
 
@@ -5074,10 +5131,13 @@ var PluginLarge = function PluginLarge(a) {
 /*!************************************************!*\
   !*** ./src/blocks/templates/ThemeWordPress.js ***!
   \************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_star_ratings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-star-ratings */ "./node_modules/react-star-ratings/build/index.js");
@@ -5152,7 +5212,7 @@ var ThemeWordPress = function ThemeWordPress(a) {
     className: "wp-pic-column-version"
   }, /*#__PURE__*/React.createElement("span", null, __('Version', 'wp-plugin-info-card'), ' ', a.data.version))))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (ThemeWordPress);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ThemeWordPress);
 
 /***/ }),
 
@@ -5160,7 +5220,7 @@ var ThemeWordPress = function ThemeWordPress(a) {
 /*!******************************************!*\
   !*** ./node_modules/classnames/index.js ***!
   \******************************************/
-/***/ (function(module, exports) {
+/***/ ((module, exports) => {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	Copyright (c) 2018 Jed Watson.
@@ -5229,7 +5289,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /*!*********************************************************!*\
   !*** ./node_modules/dom-serializer/lib/foreignNames.js ***!
   \*********************************************************/
-/***/ (function(__unused_webpack_module, exports) {
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
@@ -5583,7 +5643,7 @@ function renderComment(elem) {
 /*!**************************************************!*\
   !*** ./node_modules/domelementtype/lib/index.js ***!
   \**************************************************/
-/***/ (function(__unused_webpack_module, exports) {
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
@@ -6310,7 +6370,7 @@ function cloneChildren(childs) {
 /*!********************************************!*\
   !*** ./node_modules/domutils/lib/feeds.js ***!
   \********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
@@ -6511,7 +6571,7 @@ function isValidFeed(value) {
 /*!**********************************************!*\
   !*** ./node_modules/domutils/lib/helpers.js ***!
   \**********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
@@ -6706,7 +6766,7 @@ Object.defineProperty(exports, "hasChildren", ({ enumerable: true, get: function
 /*!*********************************************!*\
   !*** ./node_modules/domutils/lib/legacy.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
@@ -6869,7 +6929,7 @@ exports.getElementsByTagType = getElementsByTagType;
 /*!***************************************************!*\
   !*** ./node_modules/domutils/lib/manipulation.js ***!
   \***************************************************/
-/***/ (function(__unused_webpack_module, exports) {
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
@@ -7022,7 +7082,7 @@ exports.prepend = prepend;
 /*!***********************************************!*\
   !*** ./node_modules/domutils/lib/querying.js ***!
   \***********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
@@ -7293,7 +7353,7 @@ exports.innerText = innerText;
 /*!************************************************!*\
   !*** ./node_modules/domutils/lib/traversal.js ***!
   \************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
@@ -7975,7 +8035,7 @@ exports.decodeXML = decodeXML;
 /*!*******************************************************!*\
   !*** ./node_modules/entities/lib/decode_codepoint.js ***!
   \*******************************************************/
-/***/ (function(__unused_webpack_module, exports) {
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
@@ -8148,7 +8208,7 @@ function encodeHTMLTrieRe(regExp, str) {
 /*!*********************************************!*\
   !*** ./node_modules/entities/lib/escape.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, exports) {
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
@@ -8280,7 +8340,7 @@ exports.escapeText = getEscaper(/[&<>\u00A0]/g, new Map([
 /*!*****************************************************************!*\
   !*** ./node_modules/entities/lib/generated/decode-data-html.js ***!
   \*****************************************************************/
-/***/ (function(__unused_webpack_module, exports) {
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
@@ -8299,7 +8359,7 @@ exports["default"] = new Uint16Array(
 /*!****************************************************************!*\
   !*** ./node_modules/entities/lib/generated/decode-data-xml.js ***!
   \****************************************************************/
-/***/ (function(__unused_webpack_module, exports) {
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
@@ -8318,7 +8378,7 @@ exports["default"] = new Uint16Array(
 /*!************************************************************!*\
   !*** ./node_modules/entities/lib/generated/encode-html.js ***!
   \************************************************************/
-/***/ (function(__unused_webpack_module, exports) {
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
@@ -8340,7 +8400,7 @@ exports["default"] = new Map(/* #__PURE__ */ restoreDiff([[9, "&Tab;"], [0, "&Ne
 /*!********************************************!*\
   !*** ./node_modules/entities/lib/index.js ***!
   \********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
@@ -8476,7 +8536,7 @@ Object.defineProperty(exports, "decodeXMLStrict", ({ enumerable: true, get: func
 /*!*********************************************!*\
   !*** ./node_modules/html-to-react/index.js ***!
   \*********************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -8500,7 +8560,7 @@ module.exports = {
 /*!**********************************************************************!*\
   !*** ./node_modules/html-to-react/lib/camel-case-attribute-names.js ***!
   \**********************************************************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 // These are all sourced from https://facebook.github.io/react/docs/tags-and-attributes.html -
@@ -8592,7 +8652,7 @@ module.exports = camelCaseMap;
 /*!*********************************************************************!*\
   !*** ./node_modules/html-to-react/lib/is-valid-node-definitions.js ***!
   \*********************************************************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 
@@ -8611,7 +8671,7 @@ module.exports = {
 /*!**************************************************!*\
   !*** ./node_modules/html-to-react/lib/parser.js ***!
   \**************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -8700,7 +8760,7 @@ module.exports = Html2ReactParser;
 /*!********************************************************************!*\
   !*** ./node_modules/html-to-react/lib/process-node-definitions.js ***!
   \********************************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -8745,7 +8805,7 @@ module.exports = ProcessNodeDefinitions;
 /*!*******************************************************************!*\
   !*** ./node_modules/html-to-react/lib/processing-instructions.js ***!
   \*******************************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -8772,7 +8832,7 @@ module.exports = ProcessingInstructions;
 /*!***************************************************************************!*\
   !*** ./node_modules/html-to-react/lib/should-process-node-definitions.js ***!
   \***************************************************************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 
@@ -8791,7 +8851,7 @@ module.exports = {
 /*!*************************************************!*\
   !*** ./node_modules/html-to-react/lib/utils.js ***!
   \*************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -8811,7 +8871,7 @@ function createStyleJsonFromString(styleString) {
 
     key = singleStyle[0];
     value = singleStyle[1];
-    if (typeof value === 'string'){
+    if (typeof value === 'string') {
       value = value.trim();
     }
 
@@ -8863,21 +8923,29 @@ function createElement(node, index, data, children) {
   let elementProps = {
     key: index,
   };
+  // The Custom Elements specification explicitly states that;
+  // custom element names must contain a hyphen.
+  // src: https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name
+  const isCustomElementNode = node.name.includes('-');
+
   if (node.attribs) {
     elementProps = Object.entries(node.attribs).reduce((result, [key, value,]) => {
-      key = camelCaseAttrMap[key.replace(/[-:]/, '')] || key;
-      if (key === 'style') {
-        value = createStyleJsonFromString(value);
-      } else if (key === 'class') {
-        key = 'className';
-      } else if (key === 'for') {
-        key = 'htmlFor';
-      } else if (key.startsWith('on')) {
-        value = Function(value);
-      }
+      // if it's a custom element, we leave its attributes as is
+      if (!isCustomElementNode) {
+        key = camelCaseAttrMap[key.replace(/[-:]/, '')] || key;
+        if (key === 'style') {
+          value = createStyleJsonFromString(value);
+        } else if (key === 'class') {
+          key = 'className';
+        } else if (key === 'for') {
+          key = 'htmlFor';
+        } else if (key.startsWith('on')) {
+          value = Function(value);
+        }
 
-      if (booleanAttrs.includes(key) && (value || '') === '') {
-        value = key;
+        if (booleanAttrs.includes(key) && (value || '') === '') {
+          value = key;
+        }
       }
 
       result[key] = value;
@@ -9049,7 +9117,6 @@ var Parser = /** @class */ (function () {
         this.attribvalue = "";
         this.attribs = null;
         this.stack = [];
-        this.foreignContext = [];
         this.buffers = [];
         this.bufferOffset = 0;
         /** The index of the last written buffer. Used when resuming after a `pause()`. */
@@ -9057,10 +9124,12 @@ var Parser = /** @class */ (function () {
         /** Indicates whether the parser has finished running / `.end` has been called. */
         this.ended = false;
         this.cbs = cbs !== null && cbs !== void 0 ? cbs : {};
-        this.lowerCaseTagNames = (_a = options.lowerCaseTags) !== null && _a !== void 0 ? _a : !options.xmlMode;
+        this.htmlMode = !this.options.xmlMode;
+        this.lowerCaseTagNames = (_a = options.lowerCaseTags) !== null && _a !== void 0 ? _a : this.htmlMode;
         this.lowerCaseAttributeNames =
-            (_b = options.lowerCaseAttributeNames) !== null && _b !== void 0 ? _b : !options.xmlMode;
+            (_b = options.lowerCaseAttributeNames) !== null && _b !== void 0 ? _b : this.htmlMode;
         this.tokenizer = new ((_c = options.Tokenizer) !== null && _c !== void 0 ? _c : Tokenizer_js_1.default)(this.options, this);
+        this.foreignContext = [!this.htmlMode];
         (_e = (_d = this.cbs).onparserinit) === null || _e === void 0 ? void 0 : _e.call(_d, this);
     }
     // Tokenizer event handlers
@@ -9073,19 +9142,18 @@ var Parser = /** @class */ (function () {
         this.startIndex = endIndex;
     };
     /** @internal */
-    Parser.prototype.ontextentity = function (cp) {
+    Parser.prototype.ontextentity = function (cp, endIndex) {
         var _a, _b;
-        /*
-         * Entities can be emitted on the character, or directly after.
-         * We use the section start here to get accurate indices.
-         */
-        var index = this.tokenizer.getSectionStart();
-        this.endIndex = index - 1;
+        this.endIndex = endIndex - 1;
         (_b = (_a = this.cbs).ontext) === null || _b === void 0 ? void 0 : _b.call(_a, (0, decode_js_1.fromCodePoint)(cp));
-        this.startIndex = index;
+        this.startIndex = endIndex;
     };
+    /**
+     * Checks if the current tag is a void element. Override this if you want
+     * to specify your own additional void elements.
+     */
     Parser.prototype.isVoidElement = function (name) {
-        return !this.options.xmlMode && voidElements.has(name);
+        return this.htmlMode && voidElements.has(name);
     };
     /** @internal */
     Parser.prototype.onopentagname = function (start, endIndex) {
@@ -9100,21 +9168,22 @@ var Parser = /** @class */ (function () {
         var _a, _b, _c, _d;
         this.openTagStart = this.startIndex;
         this.tagname = name;
-        var impliesClose = !this.options.xmlMode && openImpliesClose.get(name);
+        var impliesClose = this.htmlMode && openImpliesClose.get(name);
         if (impliesClose) {
-            while (this.stack.length > 0 &&
-                impliesClose.has(this.stack[this.stack.length - 1])) {
-                var element = this.stack.pop();
+            while (this.stack.length > 0 && impliesClose.has(this.stack[0])) {
+                var element = this.stack.shift();
                 (_b = (_a = this.cbs).onclosetag) === null || _b === void 0 ? void 0 : _b.call(_a, element, true);
             }
         }
         if (!this.isVoidElement(name)) {
-            this.stack.push(name);
-            if (foreignContextElements.has(name)) {
-                this.foreignContext.push(true);
-            }
-            else if (htmlIntegrationElements.has(name)) {
-                this.foreignContext.push(false);
+            this.stack.unshift(name);
+            if (this.htmlMode) {
+                if (foreignContextElements.has(name)) {
+                    this.foreignContext.unshift(true);
+                }
+                else if (htmlIntegrationElements.has(name)) {
+                    this.foreignContext.unshift(false);
+                }
             }
         }
         (_d = (_c = this.cbs).onopentagname) === null || _d === void 0 ? void 0 : _d.call(_c, name);
@@ -9142,40 +9211,37 @@ var Parser = /** @class */ (function () {
     };
     /** @internal */
     Parser.prototype.onclosetag = function (start, endIndex) {
-        var _a, _b, _c, _d, _e, _f;
+        var _a, _b, _c, _d, _e, _f, _g, _h;
         this.endIndex = endIndex;
         var name = this.getSlice(start, endIndex);
         if (this.lowerCaseTagNames) {
             name = name.toLowerCase();
         }
-        if (foreignContextElements.has(name) ||
-            htmlIntegrationElements.has(name)) {
-            this.foreignContext.pop();
+        if (this.htmlMode &&
+            (foreignContextElements.has(name) ||
+                htmlIntegrationElements.has(name))) {
+            this.foreignContext.shift();
         }
         if (!this.isVoidElement(name)) {
-            var pos = this.stack.lastIndexOf(name);
+            var pos = this.stack.indexOf(name);
             if (pos !== -1) {
-                if (this.cbs.onclosetag) {
-                    var count = this.stack.length - pos;
-                    while (count--) {
-                        // We know the stack has sufficient elements.
-                        this.cbs.onclosetag(this.stack.pop(), count !== 0);
-                    }
+                for (var index = 0; index <= pos; index++) {
+                    var element = this.stack.shift();
+                    // We know the stack has sufficient elements.
+                    (_b = (_a = this.cbs).onclosetag) === null || _b === void 0 ? void 0 : _b.call(_a, element, index !== pos);
                 }
-                else
-                    this.stack.length = pos;
             }
-            else if (!this.options.xmlMode && name === "p") {
+            else if (this.htmlMode && name === "p") {
                 // Implicit open before close
                 this.emitOpenTag("p");
                 this.closeCurrentTag(true);
             }
         }
-        else if (!this.options.xmlMode && name === "br") {
+        else if (this.htmlMode && name === "br") {
             // We can't use `emitOpenTag` for implicit open, as `br` would be implicitly closed.
-            (_b = (_a = this.cbs).onopentagname) === null || _b === void 0 ? void 0 : _b.call(_a, "br");
-            (_d = (_c = this.cbs).onopentag) === null || _d === void 0 ? void 0 : _d.call(_c, "br", {}, true);
-            (_f = (_e = this.cbs).onclosetag) === null || _f === void 0 ? void 0 : _f.call(_e, "br", false);
+            (_d = (_c = this.cbs).onopentagname) === null || _d === void 0 ? void 0 : _d.call(_c, "br");
+            (_f = (_e = this.cbs).onopentag) === null || _f === void 0 ? void 0 : _f.call(_e, "br", {}, true);
+            (_h = (_g = this.cbs).onclosetag) === null || _h === void 0 ? void 0 : _h.call(_g, "br", false);
         }
         // Set `startIndex` for next node
         this.startIndex = endIndex + 1;
@@ -9183,9 +9249,7 @@ var Parser = /** @class */ (function () {
     /** @internal */
     Parser.prototype.onselfclosingtag = function (endIndex) {
         this.endIndex = endIndex;
-        if (this.options.xmlMode ||
-            this.options.recognizeSelfClosing ||
-            this.foreignContext[this.foreignContext.length - 1]) {
+        if (this.options.recognizeSelfClosing || this.foreignContext[0]) {
             this.closeCurrentTag(false);
             // Set `startIndex` for next node
             this.startIndex = endIndex + 1;
@@ -9200,10 +9264,10 @@ var Parser = /** @class */ (function () {
         var name = this.tagname;
         this.endOpenTag(isOpenImplied);
         // Self-closing tags will be on the top of the stack
-        if (this.stack[this.stack.length - 1] === name) {
+        if (this.stack[0] === name) {
             // If the opening tag isn't implied, the closing tag has to be implied.
             (_b = (_a = this.cbs).onclosetag) === null || _b === void 0 ? void 0 : _b.call(_a, name, !isOpenImplied);
-            this.stack.pop();
+            this.stack.shift();
         }
     };
     /** @internal */
@@ -9283,7 +9347,7 @@ var Parser = /** @class */ (function () {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
         this.endIndex = endIndex;
         var value = this.getSlice(start, endIndex - offset);
-        if (this.options.xmlMode || this.options.recognizeCDATA) {
+        if (!this.htmlMode || this.options.recognizeCDATA) {
             (_b = (_a = this.cbs).oncdatastart) === null || _b === void 0 ? void 0 : _b.call(_a);
             (_d = (_c = this.cbs).ontext) === null || _d === void 0 ? void 0 : _d.call(_c, value);
             (_f = (_e = this.cbs).oncdataend) === null || _f === void 0 ? void 0 : _f.call(_e);
@@ -9301,8 +9365,9 @@ var Parser = /** @class */ (function () {
         if (this.cbs.onclosetag) {
             // Set the end index for all remaining tags
             this.endIndex = this.startIndex;
-            for (var index = this.stack.length; index > 0; this.cbs.onclosetag(this.stack[--index], true))
-                ;
+            for (var index = 0; index < this.stack.length; index++) {
+                this.cbs.onclosetag(this.stack[index], true);
+            }
         }
         (_b = (_a = this.cbs).onend) === null || _b === void 0 ? void 0 : _b.call(_a);
     };
@@ -9321,6 +9386,8 @@ var Parser = /** @class */ (function () {
         this.endIndex = 0;
         (_d = (_c = this.cbs).onparserinit) === null || _d === void 0 ? void 0 : _d.call(_c, this);
         this.buffers.length = 0;
+        this.foreignContext.length = 0;
+        this.foreignContext.unshift(!this.htmlMode);
         this.bufferOffset = 0;
         this.writeIndex = 0;
         this.ended = false;
@@ -9431,7 +9498,7 @@ exports.Parser = Parser;
 /*!***************************************************!*\
   !*** ./node_modules/htmlparser2/lib/Tokenizer.js ***!
   \***************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
@@ -9500,11 +9567,7 @@ var State;
     State[State["BeforeSpecialS"] = 22] = "BeforeSpecialS";
     State[State["SpecialStartSequence"] = 23] = "SpecialStartSequence";
     State[State["InSpecialTag"] = 24] = "InSpecialTag";
-    State[State["BeforeEntity"] = 25] = "BeforeEntity";
-    State[State["BeforeNumericEntity"] = 26] = "BeforeNumericEntity";
-    State[State["InNamedEntity"] = 27] = "InNamedEntity";
-    State[State["InNumericEntity"] = 28] = "InNumericEntity";
-    State[State["InHexEntity"] = 29] = "InHexEntity";
+    State[State["InEntity"] = 25] = "InEntity";
 })(State || (State = {}));
 function isWhitespace(c) {
     return (c === CharCodes.Space ||
@@ -9516,16 +9579,9 @@ function isWhitespace(c) {
 function isEndOfTagSection(c) {
     return c === CharCodes.Slash || c === CharCodes.Gt || isWhitespace(c);
 }
-function isNumber(c) {
-    return c >= CharCodes.Zero && c <= CharCodes.Nine;
-}
 function isASCIIAlpha(c) {
     return ((c >= CharCodes.LowerA && c <= CharCodes.LowerZ) ||
         (c >= CharCodes.UpperA && c <= CharCodes.UpperZ));
-}
-function isHexDigit(c) {
-    return ((c >= CharCodes.UpperA && c <= CharCodes.UpperF) ||
-        (c >= CharCodes.LowerA && c <= CharCodes.LowerF));
 }
 var QuoteType;
 (function (QuoteType) {
@@ -9551,6 +9607,7 @@ var Sequences = {
 var Tokenizer = /** @class */ (function () {
     function Tokenizer(_a, cbs) {
         var _b = _a.xmlMode, xmlMode = _b === void 0 ? false : _b, _c = _a.decodeEntities, decodeEntities = _c === void 0 ? true : _c;
+        var _this = this;
         this.cbs = cbs;
         /** The current state the tokenizer is in. */
         this.state = State.Text;
@@ -9560,6 +9617,8 @@ var Tokenizer = /** @class */ (function () {
         this.sectionStart = 0;
         /** The index within the buffer that we are currently looking at. */
         this.index = 0;
+        /** The start of the last entity. */
+        this.entityStart = 0;
         /** Some behavior, eg. when decoding entities, is done while we are in another state. This keeps track of the other state type. */
         this.baseState = State.Text;
         /** For special parsing behavior inside of script and style tags. */
@@ -9570,14 +9629,9 @@ var Tokenizer = /** @class */ (function () {
         this.offset = 0;
         this.currentSequence = undefined;
         this.sequenceIndex = 0;
-        this.trieIndex = 0;
-        this.trieCurrent = 0;
-        /** For named entities, the index of the value. For numeric entities, the code point. */
-        this.entityResult = 0;
-        this.entityExcess = 0;
         this.xmlMode = xmlMode;
         this.decodeEntities = decodeEntities;
-        this.entityTrie = xmlMode ? decode_js_1.xmlDecodeTree : decode_js_1.htmlDecodeTree;
+        this.entityDecoder = new decode_js_1.EntityDecoder(xmlMode ? decode_js_1.xmlDecodeTree : decode_js_1.htmlDecodeTree, function (cp, consumed) { return _this.emitCodePoint(cp, consumed); });
     }
     Tokenizer.prototype.reset = function () {
         this.state = State.Text;
@@ -9607,18 +9661,6 @@ var Tokenizer = /** @class */ (function () {
             this.parse();
         }
     };
-    /**
-     * The current index within all of the written data.
-     */
-    Tokenizer.prototype.getIndex = function () {
-        return this.index;
-    };
-    /**
-     * The start of the current section.
-     */
-    Tokenizer.prototype.getSectionStart = function () {
-        return this.sectionStart;
-    };
     Tokenizer.prototype.stateText = function (c) {
         if (c === CharCodes.Lt ||
             (!this.decodeEntities && this.fastForwardTo(CharCodes.Lt))) {
@@ -9629,7 +9671,7 @@ var Tokenizer = /** @class */ (function () {
             this.sectionStart = this.index;
         }
         else if (this.decodeEntities && c === CharCodes.Amp) {
-            this.state = State.BeforeEntity;
+            this.startEntity();
         }
     };
     Tokenizer.prototype.stateSpecialStartSequence = function (c) {
@@ -9676,7 +9718,7 @@ var Tokenizer = /** @class */ (function () {
             if (this.currentSequence === Sequences.TitleEnd) {
                 // We have to parse entities in <title> tags.
                 if (this.decodeEntities && c === CharCodes.Amp) {
-                    this.state = State.BeforeEntity;
+                    this.startEntity();
                 }
             }
             else if (this.fastForwardTo(CharCodes.Lt)) {
@@ -9837,7 +9879,6 @@ var Tokenizer = /** @class */ (function () {
         // Skip everything until ">"
         if (c === CharCodes.Gt || this.fastForwardTo(CharCodes.Gt)) {
             this.state = State.Text;
-            this.baseState = State.Text;
             this.sectionStart = this.index + 1;
         }
     };
@@ -9851,7 +9892,6 @@ var Tokenizer = /** @class */ (function () {
             else {
                 this.state = State.Text;
             }
-            this.baseState = this.state;
             this.sectionStart = this.index + 1;
         }
         else if (c === CharCodes.Slash) {
@@ -9866,7 +9906,6 @@ var Tokenizer = /** @class */ (function () {
         if (c === CharCodes.Gt) {
             this.cbs.onselfclosingtag(this.index);
             this.state = State.Text;
-            this.baseState = State.Text;
             this.sectionStart = this.index + 1;
             this.isSpecial = false; // Reset special state, in case of self-closing special tags
         }
@@ -9924,8 +9963,7 @@ var Tokenizer = /** @class */ (function () {
             this.state = State.BeforeAttributeName;
         }
         else if (this.decodeEntities && c === CharCodes.Amp) {
-            this.baseState = this.state;
-            this.state = State.BeforeEntity;
+            this.startEntity();
         }
     };
     Tokenizer.prototype.stateInAttributeValueDoubleQuotes = function (c) {
@@ -9943,8 +9981,7 @@ var Tokenizer = /** @class */ (function () {
             this.stateBeforeAttributeName(c);
         }
         else if (this.decodeEntities && c === CharCodes.Amp) {
-            this.baseState = this.state;
-            this.state = State.BeforeEntity;
+            this.startEntity();
         }
     };
     Tokenizer.prototype.stateBeforeDeclaration = function (c) {
@@ -10005,149 +10042,30 @@ var Tokenizer = /** @class */ (function () {
             this.stateInTagName(c); // Consume the token again
         }
     };
-    Tokenizer.prototype.stateBeforeEntity = function (c) {
-        // Start excess with 1 to include the '&'
-        this.entityExcess = 1;
-        this.entityResult = 0;
-        if (c === CharCodes.Number) {
-            this.state = State.BeforeNumericEntity;
-        }
-        else if (c === CharCodes.Amp) {
-            // We have two `&` characters in a row. Stay in the current state.
+    Tokenizer.prototype.startEntity = function () {
+        this.baseState = this.state;
+        this.state = State.InEntity;
+        this.entityStart = this.index;
+        this.entityDecoder.startEntity(this.xmlMode
+            ? decode_js_1.DecodingMode.Strict
+            : this.baseState === State.Text ||
+                this.baseState === State.InSpecialTag
+                ? decode_js_1.DecodingMode.Legacy
+                : decode_js_1.DecodingMode.Attribute);
+    };
+    Tokenizer.prototype.stateInEntity = function () {
+        var length = this.entityDecoder.write(this.buffer, this.index - this.offset);
+        // If `length` is positive, we are done with the entity.
+        if (length >= 0) {
+            this.state = this.baseState;
+            if (length === 0) {
+                this.index = this.entityStart;
+            }
         }
         else {
-            this.trieIndex = 0;
-            this.trieCurrent = this.entityTrie[0];
-            this.state = State.InNamedEntity;
-            this.stateInNamedEntity(c);
+            // Mark buffer as consumed.
+            this.index = this.offset + this.buffer.length - 1;
         }
-    };
-    Tokenizer.prototype.stateInNamedEntity = function (c) {
-        this.entityExcess += 1;
-        this.trieIndex = (0, decode_js_1.determineBranch)(this.entityTrie, this.trieCurrent, this.trieIndex + 1, c);
-        if (this.trieIndex < 0) {
-            this.emitNamedEntity();
-            this.index--;
-            return;
-        }
-        this.trieCurrent = this.entityTrie[this.trieIndex];
-        var masked = this.trieCurrent & decode_js_1.BinTrieFlags.VALUE_LENGTH;
-        // If the branch is a value, store it and continue
-        if (masked) {
-            // The mask is the number of bytes of the value, including the current byte.
-            var valueLength = (masked >> 14) - 1;
-            // If we have a legacy entity while parsing strictly, just skip the number of bytes
-            if (!this.allowLegacyEntity() && c !== CharCodes.Semi) {
-                this.trieIndex += valueLength;
-            }
-            else {
-                // Add 1 as we have already incremented the excess
-                var entityStart = this.index - this.entityExcess + 1;
-                if (entityStart > this.sectionStart) {
-                    this.emitPartial(this.sectionStart, entityStart);
-                }
-                // If this is a surrogate pair, consume the next two bytes
-                this.entityResult = this.trieIndex;
-                this.trieIndex += valueLength;
-                this.entityExcess = 0;
-                this.sectionStart = this.index + 1;
-                if (valueLength === 0) {
-                    this.emitNamedEntity();
-                }
-            }
-        }
-    };
-    Tokenizer.prototype.emitNamedEntity = function () {
-        this.state = this.baseState;
-        if (this.entityResult === 0) {
-            return;
-        }
-        var valueLength = (this.entityTrie[this.entityResult] & decode_js_1.BinTrieFlags.VALUE_LENGTH) >>
-            14;
-        switch (valueLength) {
-            case 1: {
-                this.emitCodePoint(this.entityTrie[this.entityResult] &
-                    ~decode_js_1.BinTrieFlags.VALUE_LENGTH);
-                break;
-            }
-            case 2: {
-                this.emitCodePoint(this.entityTrie[this.entityResult + 1]);
-                break;
-            }
-            case 3: {
-                this.emitCodePoint(this.entityTrie[this.entityResult + 1]);
-                this.emitCodePoint(this.entityTrie[this.entityResult + 2]);
-            }
-        }
-    };
-    Tokenizer.prototype.stateBeforeNumericEntity = function (c) {
-        if ((c | 0x20) === CharCodes.LowerX) {
-            this.entityExcess++;
-            this.state = State.InHexEntity;
-        }
-        else {
-            this.state = State.InNumericEntity;
-            this.stateInNumericEntity(c);
-        }
-    };
-    Tokenizer.prototype.emitNumericEntity = function (strict) {
-        var entityStart = this.index - this.entityExcess - 1;
-        var numberStart = entityStart + 2 + Number(this.state === State.InHexEntity);
-        if (numberStart !== this.index) {
-            // Emit leading data if any
-            if (entityStart > this.sectionStart) {
-                this.emitPartial(this.sectionStart, entityStart);
-            }
-            this.sectionStart = this.index + Number(strict);
-            this.emitCodePoint((0, decode_js_1.replaceCodePoint)(this.entityResult));
-        }
-        this.state = this.baseState;
-    };
-    Tokenizer.prototype.stateInNumericEntity = function (c) {
-        if (c === CharCodes.Semi) {
-            this.emitNumericEntity(true);
-        }
-        else if (isNumber(c)) {
-            this.entityResult = this.entityResult * 10 + (c - CharCodes.Zero);
-            this.entityExcess++;
-        }
-        else {
-            if (this.allowLegacyEntity()) {
-                this.emitNumericEntity(false);
-            }
-            else {
-                this.state = this.baseState;
-            }
-            this.index--;
-        }
-    };
-    Tokenizer.prototype.stateInHexEntity = function (c) {
-        if (c === CharCodes.Semi) {
-            this.emitNumericEntity(true);
-        }
-        else if (isNumber(c)) {
-            this.entityResult = this.entityResult * 16 + (c - CharCodes.Zero);
-            this.entityExcess++;
-        }
-        else if (isHexDigit(c)) {
-            this.entityResult =
-                this.entityResult * 16 + ((c | 0x20) - CharCodes.LowerA + 10);
-            this.entityExcess++;
-        }
-        else {
-            if (this.allowLegacyEntity()) {
-                this.emitNumericEntity(false);
-            }
-            else {
-                this.state = this.baseState;
-            }
-            this.index--;
-        }
-    };
-    Tokenizer.prototype.allowLegacyEntity = function () {
-        return (!this.xmlMode &&
-            (this.baseState === State.Text ||
-                this.baseState === State.InSpecialTag));
     };
     /**
      * Remove data that has already been consumed from the buffer.
@@ -10276,25 +10194,9 @@ var Tokenizer = /** @class */ (function () {
                     this.stateInProcessingInstruction(c);
                     break;
                 }
-                case State.InNamedEntity: {
-                    this.stateInNamedEntity(c);
+                case State.InEntity: {
+                    this.stateInEntity();
                     break;
-                }
-                case State.BeforeEntity: {
-                    this.stateBeforeEntity(c);
-                    break;
-                }
-                case State.InHexEntity: {
-                    this.stateInHexEntity(c);
-                    break;
-                }
-                case State.InNumericEntity: {
-                    this.stateInNumericEntity(c);
-                    break;
-                }
-                default: {
-                    // `this._state === State.BeforeNumericEntity`
-                    this.stateBeforeNumericEntity(c);
                 }
             }
             this.index++;
@@ -10302,18 +10204,20 @@ var Tokenizer = /** @class */ (function () {
         this.cleanup();
     };
     Tokenizer.prototype.finish = function () {
-        if (this.state === State.InNamedEntity) {
-            this.emitNamedEntity();
+        if (this.state === State.InEntity) {
+            this.entityDecoder.end();
+            this.state = this.baseState;
         }
-        // If there is remaining data, emit it in a reasonable way
-        if (this.sectionStart < this.index) {
-            this.handleTrailingData();
-        }
+        this.handleTrailingData();
         this.cbs.onend();
     };
     /** Handle any trailing data. */
     Tokenizer.prototype.handleTrailingData = function () {
         var endIndex = this.buffer.length + this.offset;
+        // If there is no remaining data, we are done.
+        if (this.sectionStart >= endIndex) {
+            return;
+        }
         if (this.state === State.InCommentLike) {
             if (this.currentSequence === Sequences.CdataEnd) {
                 this.cbs.oncdata(this.sectionStart, endIndex, 0);
@@ -10321,16 +10225,6 @@ var Tokenizer = /** @class */ (function () {
             else {
                 this.cbs.oncomment(this.sectionStart, endIndex, 0);
             }
-        }
-        else if (this.state === State.InNumericEntity &&
-            this.allowLegacyEntity()) {
-            this.emitNumericEntity(false);
-            // All trailing data will have been consumed
-        }
-        else if (this.state === State.InHexEntity &&
-            this.allowLegacyEntity()) {
-            this.emitNumericEntity(false);
-            // All trailing data will have been consumed
         }
         else if (this.state === State.InTagName ||
             this.state === State.BeforeAttributeName ||
@@ -10350,22 +10244,23 @@ var Tokenizer = /** @class */ (function () {
             this.cbs.ontext(this.sectionStart, endIndex);
         }
     };
-    Tokenizer.prototype.emitPartial = function (start, endIndex) {
+    Tokenizer.prototype.emitCodePoint = function (cp, consumed) {
         if (this.baseState !== State.Text &&
             this.baseState !== State.InSpecialTag) {
-            this.cbs.onattribdata(start, endIndex);
-        }
-        else {
-            this.cbs.ontext(start, endIndex);
-        }
-    };
-    Tokenizer.prototype.emitCodePoint = function (cp) {
-        if (this.baseState !== State.Text &&
-            this.baseState !== State.InSpecialTag) {
+            if (this.sectionStart < this.entityStart) {
+                this.cbs.onattribdata(this.sectionStart, this.entityStart);
+            }
+            this.sectionStart = this.entityStart + consumed;
+            this.index = this.sectionStart - 1;
             this.cbs.onattribentity(cp);
         }
         else {
-            this.cbs.ontextentity(cp);
+            if (this.sectionStart < this.entityStart) {
+                this.cbs.ontext(this.sectionStart, this.entityStart);
+            }
+            this.sectionStart = this.entityStart + consumed;
+            this.index = this.sectionStart - 1;
+            this.cbs.ontextentity(cp, this.sectionStart);
         }
     };
     return Tokenizer;
@@ -10410,7 +10305,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DomUtils = exports.parseFeed = exports.getFeed = exports.ElementType = exports.Tokenizer = exports.createDomStream = exports.parseDOM = exports.parseDocument = exports.DefaultHandler = exports.DomHandler = exports.Parser = void 0;
+exports.DomUtils = exports.parseFeed = exports.getFeed = exports.ElementType = exports.Tokenizer = exports.createDomStream = exports.createDocumentStream = exports.parseDOM = exports.parseDocument = exports.DefaultHandler = exports.DomHandler = exports.Parser = void 0;
 var Parser_js_1 = __webpack_require__(/*! ./Parser.js */ "./node_modules/htmlparser2/lib/Parser.js");
 var Parser_js_2 = __webpack_require__(/*! ./Parser.js */ "./node_modules/htmlparser2/lib/Parser.js");
 Object.defineProperty(exports, "Parser", ({ enumerable: true, get: function () { return Parser_js_2.Parser; } }));
@@ -10424,7 +10319,7 @@ Object.defineProperty(exports, "DefaultHandler", ({ enumerable: true, get: funct
  * Parses the data, returns the resulting document.
  *
  * @param data The data that should be parsed.
- * @param options Optional options for the parser and DOM builder.
+ * @param options Optional options for the parser and DOM handler.
  */
 function parseDocument(data, options) {
     var handler = new domhandler_1.DomHandler(undefined, options);
@@ -10439,7 +10334,7 @@ exports.parseDocument = parseDocument;
  * Use `parseDocument` to get the `Document` node instead.
  *
  * @param data The data that should be parsed.
- * @param options Optional options for the parser and DOM builder.
+ * @param options Optional options for the parser and DOM handler.
  * @deprecated Use `parseDocument` instead.
  */
 function parseDOM(data, options) {
@@ -10449,9 +10344,22 @@ exports.parseDOM = parseDOM;
 /**
  * Creates a parser instance, with an attached DOM handler.
  *
- * @param callback A callback that will be called once parsing has been completed.
- * @param options Optional options for the parser and DOM builder.
+ * @param callback A callback that will be called once parsing has been completed, with the resulting document.
+ * @param options Optional options for the parser and DOM handler.
  * @param elementCallback An optional callback that will be called every time a tag has been completed inside of the DOM.
+ */
+function createDocumentStream(callback, options, elementCallback) {
+    var handler = new domhandler_1.DomHandler(function (error) { return callback(error, handler.root); }, options, elementCallback);
+    return new Parser_js_1.Parser(handler, options);
+}
+exports.createDocumentStream = createDocumentStream;
+/**
+ * Creates a parser instance, with an attached DOM handler.
+ *
+ * @param callback A callback that will be called once parsing has been completed, with an array of root nodes.
+ * @param options Optional options for the parser and DOM handler.
+ * @param elementCallback An optional callback that will be called every time a tag has been completed inside of the DOM.
+ * @deprecated Use `createDocumentStream` instead.
  */
 function createDomStream(callback, options, elementCallback) {
     var handler = new domhandler_1.DomHandler(callback, options, elementCallback);
@@ -10489,7 +10397,7 @@ exports.DomUtils = __importStar(__webpack_require__(/*! domutils */ "./node_modu
 /*!************************************************!*\
   !*** ./node_modules/lodash.camelcase/index.js ***!
   \************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /**
  * lodash (Custom Build) <https://lodash.com/>
@@ -11098,7 +11006,7 @@ module.exports = camelCase;
 /*!*********************************************!*\
   !*** ./node_modules/object-assign/index.js ***!
   \*********************************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 /*
@@ -11199,7 +11107,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 /*!***************************************************!*\
   !*** ./node_modules/prop-types/checkPropTypes.js ***!
   \***************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 /**
@@ -11313,7 +11221,7 @@ module.exports = checkPropTypes;
 /*!************************************************************!*\
   !*** ./node_modules/prop-types/factoryWithTypeCheckers.js ***!
   \************************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 /**
@@ -11934,7 +11842,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 /*!******************************************!*\
   !*** ./node_modules/prop-types/index.js ***!
   \******************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -11959,7 +11867,7 @@ if (true) {
 /*!*************************************************************!*\
   !*** ./node_modules/prop-types/lib/ReactPropTypesSecret.js ***!
   \*************************************************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 /**
@@ -11982,7 +11890,7 @@ module.exports = ReactPropTypesSecret;
 /*!********************************************!*\
   !*** ./node_modules/prop-types/lib/has.js ***!
   \********************************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 module.exports = Function.call.bind(Object.prototype.hasOwnProperty);
 
@@ -11993,7 +11901,7 @@ module.exports = Function.call.bind(Object.prototype.hasOwnProperty);
 /*!***********************************************************************************!*\
   !*** ./node_modules/prop-types/node_modules/react-is/cjs/react-is.development.js ***!
   \***********************************************************************************/
-/***/ (function(__unused_webpack_module, exports) {
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 /** @license React v16.13.1
@@ -12185,7 +12093,7 @@ exports.typeOf = typeOf;
 /*!****************************************************************!*\
   !*** ./node_modules/prop-types/node_modules/react-is/index.js ***!
   \****************************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
@@ -12201,7 +12109,7 @@ if (false) {} else {
 /*!********************************************************!*\
   !*** ./node_modules/react-star-ratings/build/index.js ***!
   \********************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
@@ -12229,7 +12137,7 @@ exports["default"] = _starRatings2.default;
 /*!***************************************************************!*\
   !*** ./node_modules/react-star-ratings/build/star-ratings.js ***!
   \***************************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
@@ -12501,7 +12409,7 @@ exports["default"] = StarRatings;
 /*!*******************************************************!*\
   !*** ./node_modules/react-star-ratings/build/star.js ***!
   \*******************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
@@ -12700,7 +12608,7 @@ exports["default"] = Star;
 /*!*********************************************!*\
   !*** ./node_modules/validator/lib/alpha.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, exports) {
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
@@ -12867,7 +12775,7 @@ alpha['fa-AF'] = alpha.fa;
 /*!*************************************************!*\
   !*** ./node_modules/validator/lib/isNumeric.js ***!
   \*************************************************/
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module, exports, __webpack_require__) => {
 
 "use strict";
 
@@ -12904,7 +12812,7 @@ module.exports["default"] = exports.default;
 /*!*********************************************************!*\
   !*** ./node_modules/validator/lib/util/assertString.js ***!
   \*********************************************************/
-/***/ (function(module, exports) {
+/***/ ((module, exports) => {
 
 "use strict";
 
@@ -12936,7 +12844,7 @@ module.exports["default"] = exports.default;
 /*!************************!*\
   !*** external "React" ***!
   \************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 module.exports = window["React"];
@@ -12947,7 +12855,7 @@ module.exports = window["React"];
 /*!*************************!*\
   !*** external "lodash" ***!
   \*************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 module.exports = window["lodash"];
@@ -12958,7 +12866,7 @@ module.exports = window["lodash"];
 /*!********************************!*\
   !*** external ["wp","blocks"] ***!
   \********************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 module.exports = window["wp"]["blocks"];
@@ -12969,7 +12877,7 @@ module.exports = window["wp"]["blocks"];
 /*!*********************************!*\
   !*** external ["wp","element"] ***!
   \*********************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 module.exports = window["wp"]["element"];
@@ -12980,7 +12888,7 @@ module.exports = window["wp"]["element"];
 /*!*****************************!*\
   !*** external ["wp","url"] ***!
   \*****************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 module.exports = window["wp"]["url"];
@@ -12991,7 +12899,7 @@ module.exports = window["wp"]["url"];
 /*!*****************************************!*\
   !*** ./node_modules/axios/package.json ***!
   \*****************************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}');
@@ -13002,7 +12910,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /*!**********************************************!*\
   !*** ./src/blocks/PluginInfoCard/block.json ***!
   \**********************************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"WP Plugin Info Card","apiVersion":2,"name":"wp-plugin-info-card/wp-plugin-info-card","category":"wp-plugin-info-card","icon":"<svg version=\'1.1\' id=\'Calque_1\' xmlns=\'http://www.w3.org/2000/svg\' x=\'0px\' y=\'0px\' width=\'24\' height=\'24\' viewBox=\'0 0 850.39 850.39\' enable-background=\'new 0 0 850.39 850.39\'><path fill=\'#333\' d=\'M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39 c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451 l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07 h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887 l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z\'></path></svg>","description":"Add a beautiful plugin or theme info card to your site.","keywords":["wp plugin","plugin","card","theme"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"assetData":{"type":"array","default":[]},"type":{"type":"string","default":"plugin"},"slug":{"type":"string","default":"wp-plugin-info-card"},"loading":{"type":"boolean","default":true},"html":{"type":"string","default":""},"align":{"type":"string","default":"full"},"image":{"type":"string","default":""},"containerid":{"type":"string","default":""},"margin":{"type":"string","default":""},"clear":{"type":"string","default":"none"},"expiration":{"type":"number","default":0},"ajax":{"type":"string","default":"false"},"scheme":{"type":"string","default":"default"},"layout":{"type":"string","default":"card"},"custom":{"type":"string","default":""},"width":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"multi":{"type":"boolean","default":false},"defaultsApplied":{"type":"boolean","default":false},"cols":{"type":"number","default":1},"colGap":{"type":"number","default":20},"rowGap":{"type":"number","default":20},"uniqueId":{"type":"string","default":""}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["left","center","right","full"],"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"]}');
@@ -13013,7 +12921,7 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /*!***************************************************!*\
   !*** ./src/blocks/PluginInfoCardQuery/block.json ***!
   \***************************************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"WP Plugin Info Card Query","apiVersion":2,"name":"wp-plugin-info-card/wp-plugin-info-card-query","category":"wp-plugin-info-card","icon":"<svg height=\'24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 512 512\'><path fill=\'#333\' d=\'M256 140c-63.962 0-116 52.038-116 116s52.038 116 116 116 116-52.038 116-116-52.038-116-116-116zm-60.25 59.875h86.635l-4.578-5.045c-5.566-6.135-5.106-15.622 1.029-21.188 6.136-5.567 15.621-5.106 21.188 1.029l27.333 30.125c5.188 5.718 5.188 14.441 0 20.159l-27.333 30.125a14.958 14.958 0 0 1-11.113 4.92 14.945 14.945 0 0 1-10.075-3.891c-6.135-5.567-6.596-15.053-1.029-21.188l4.578-5.045H195.75c-8.284 0-15-6.716-15-15s6.716-15.001 15-15.001zm120.5 112.25h-86.635l4.578 5.045c5.566 6.135 5.106 15.622-1.029 21.188a14.948 14.948 0 0 1-10.075 3.891 14.964 14.964 0 0 1-11.113-4.92l-27.333-30.125c-5.188-5.718-5.188-14.441 0-20.159l27.333-30.125c5.567-6.135 15.054-6.596 21.188-1.029 6.135 5.567 6.596 15.053 1.029 21.188l-4.578 5.045h86.635c8.284 0 15 6.716 15 15s-6.716 15.001-15 15.001z\'></path><path fill=\'#333\' d=\'M497 199.92h-33.479a212.647 212.647 0 0 0-21.142-50.991l23.688-23.688c5.858-5.858 5.858-15.355 0-21.213l-58.095-58.095c-5.857-5.858-15.355-5.858-21.213 0L363.07 69.621a212.647 212.647 0 0 0-50.991-21.142V15c0-8.284-6.716-15-15-15H214.92c-8.284 0-15 6.716-15 15v33.479a212.664 212.664 0 0 0-50.991 21.142l-23.688-23.688c-5.857-5.858-15.355-5.858-21.213 0l-58.095 58.095c-5.858 5.858-5.858 15.355 0 21.213l23.688 23.688a212.647 212.647 0 0 0-21.142 50.991H15c-8.284 0-15 6.716-15 15v82.159c0 8.284 6.716 15 15 15h33.479a212.664 212.664 0 0 0 21.142 50.991l-23.688 23.688c-5.858 5.858-5.858 15.355 0 21.213l58.095 58.095c5.857 5.858 15.355 5.858 21.213 0l23.688-23.688a212.633 212.633 0 0 0 50.991 21.143V497c0 8.284 6.716 15 15 15h82.159c8.284 0 15-6.716 15-15v-33.479a212.568 212.568 0 0 0 50.991-21.143l23.688 23.688c5.857 5.858 15.355 5.858 21.213 0l58.095-58.095c5.858-5.858 5.858-15.355 0-21.213l-23.688-23.688a212.647 212.647 0 0 0 21.142-50.991H497c8.284 0 15-6.716 15-15V214.92c0-8.284-6.716-15-15-15zM256 402c-80.505 0-146-65.495-146-146s65.495-146 146-146 146 65.495 146 146-65.495 146-146 146z\'></path></svg>","description":"Query and display a list of plugins or themes in a beautiful card format.","keywords":["wp plugin","plugin","card","theme","query"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"assetData":{"type":"array","default":[]},"search":{"type":"string","default":""},"tag":{"type":"string","default":""},"author":{"type":"string","default":""},"user":{"type":"string","default":""},"browse":{"type":"string","default":""},"per_page":{"type":"string","default":"8"},"cols":{"type":"number","default":2},"type":{"type":"string","default":"plugin"},"slug":{"type":"string","default":""},"loading":{"type":"boolean","default":false},"html":{"type":"string","default":""},"align":{"type":"string","default":"full"},"image":{"type":"string","default":""},"containerid":{"type":"string","default":""},"margin":{"type":"string","default":""},"clear":{"type":"string","default":"none"},"expiration":{"type":"number","default":0},"ajax":{"type":"string","default":"false"},"scheme":{"type":"string","default":"default"},"layout":{"type":"string","default":"card"},"custom":{"type":"string","default":""},"width":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"defaultsApplied":{"type":"boolean","default":false},"sortby":{"type":"string","default":"none"},"sort":{"type":"string","default":"ASC"}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":false,"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"]}');
@@ -13024,7 +12932,7 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /*!***************************************************!*\
   !*** ./src/blocks/SitePluginsCardGrid/block.json ***!
   \***************************************************/
-/***/ (function(module) {
+/***/ ((module) => {
 
 "use strict";
 module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Site Plugins Card Grid","apiVersion":2,"name":"wp-plugin-info-card/site-plugins-card-grid","category":"wp-plugin-info-card","icon":"<svg height=\'24\' viewBox=\'0 0 122.88 122.88\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\'><path fill=\'#333\' d=\'M0 0v122.88h122.88V0zm115.2 38.4H84.479V7.68H115.2zM46.08 76.8V46.08H76.8V76.8zm30.72 7.68v30.72H46.08V84.48zM38.4 76.8H7.68V46.08H38.4zm7.68-38.4V7.68H76.8V38.4zm38.399 7.68H115.2V76.8H84.479zM38.4 7.68V38.4H7.68V7.68zM7.68 84.48H38.4v30.72H7.68zm76.799 30.72V84.48H115.2v30.72z\'></path></svg>","description":"Display all your active plugins in a grid layout.","keywords":["wp plugin","site","grid","plugin","card","active"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"assetData":{"type":"array","default":[]},"uniqueId":{"type":"string","default":""},"align":{"type":"string","default":"center"},"loading":{"type":"boolean","default":true},"scheme":{"type":"string","default":"default"},"layout":{"type":"string","default":"card"},"preview":{"type":"boolean","default":false},"defaultsApplied":{"type":"boolean","default":false},"sortby":{"type":"string","default":"none"},"sort":{"type":"string","default":"ASC"},"cols":{"type":"number","default":2},"colGap":{"type":"number","default":20},"rowGap":{"type":"number","default":20}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":false,"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"]}');
@@ -13059,31 +12967,31 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
-/******/ 	!function() {
+/******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = function(module) {
+/******/ 		__webpack_require__.n = (module) => {
 /******/ 			var getter = module && module.__esModule ?
-/******/ 				function() { return module['default']; } :
-/******/ 				function() { return module; };
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
 /******/ 			__webpack_require__.d(getter, { a: getter });
 /******/ 			return getter;
 /******/ 		};
-/******/ 	}();
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/define property getters */
-/******/ 	!function() {
+/******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = function(exports, definition) {
+/******/ 		__webpack_require__.d = (exports, definition) => {
 /******/ 			for(var key in definition) {
 /******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
 /******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
 /******/ 				}
 /******/ 			}
 /******/ 		};
-/******/ 	}();
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
-/******/ 	!function() {
+/******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
 /******/ 			if (typeof globalThis === 'object') return globalThis;
 /******/ 			try {
@@ -13092,28 +13000,28 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /******/ 				if (typeof window === 'object') return window;
 /******/ 			}
 /******/ 		})();
-/******/ 	}();
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	!function() {
-/******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
-/******/ 	}();
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
-/******/ 	!function() {
+/******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = function(exports) {
+/******/ 		__webpack_require__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
-/******/ 	}();
+/******/ 	})();
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
-!function() {
+(() => {
 "use strict";
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -13149,7 +13057,8 @@ __webpack_require__.r(__webpack_exports__);
     icon: a
   });
 })();
-}();
+})();
+
 /******/ })()
 ;
 //# sourceMappingURL=wppic-blocks.js.map

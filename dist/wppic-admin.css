@@ -320,6 +320,8 @@
   background: transparent;
   transform: none;
   opacity: 1;
+}
+.components-button.is-secondary:disabled:not(:focus), .components-button.is-secondary[aria-disabled=true]:not(:focus), .components-button.is-secondary[aria-disabled=true]:hover:not(:focus), .components-button.is-tertiary:disabled:not(:focus), .components-button.is-tertiary[aria-disabled=true]:not(:focus), .components-button.is-tertiary[aria-disabled=true]:hover:not(:focus) {
   box-shadow: none;
   outline: none;
 }
@@ -403,6 +405,11 @@ p + .components-button.is-tertiary {
   /* stylelint-disable */
   background-image: linear-gradient(-45deg, #fafafa 33%, #e0e0e0 33%, #e0e0e0 70%, #fafafa 70%);
   /* stylelint-enable */
+}
+@media (prefers-reduced-motion: reduce) {
+  .components-button.is-busy, .components-button.is-secondary.is-busy, .components-button.is-secondary.is-busy:disabled, .components-button.is-secondary.is-busy[aria-disabled=true] {
+    animation-duration: 0s;
+  }
 }
 .components-button.is-compact {
   height: 32px;
@@ -1195,6 +1202,10 @@ body.is-dragging-components-draggable {
   white-space: nowrap;
 }
 
+.components-dropdown-menu__toggle {
+  vertical-align: top;
+}
+
 .components-dropdown-menu__menu {
   width: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
@@ -1308,6 +1319,7 @@ body.is-dragging-components-draggable {
   display: inline-block;
 }
 .components-form-toggle .components-form-toggle__track {
+  position: relative;
   content: "";
   display: inline-block;
   box-sizing: border-box;
@@ -1317,10 +1329,26 @@ body.is-dragging-components-draggable {
   width: 36px;
   height: 18px;
   border-radius: 9px;
-  transition: 0.2s background ease;
+  transition: 0.2s background-color ease, 0.2s border-color ease;
+  overflow: hidden;
 }
 @media (prefers-reduced-motion: reduce) {
   .components-form-toggle .components-form-toggle__track {
+    transition-duration: 0s;
+    transition-delay: 0s;
+  }
+}
+.components-form-toggle .components-form-toggle__track::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  border-top: 18px solid transparent;
+  transition: 0.2s opacity ease;
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .components-form-toggle .components-form-toggle__track::after {
     transition-duration: 0s;
     transition-delay: 0s;
   }
@@ -1334,9 +1362,9 @@ body.is-dragging-components-draggable {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  transition: 0.1s transform ease;
+  transition: 0.2s transform ease, 0.2s background-color ease-out;
   background-color: #1e1e1e;
-  border: 5px solid #1e1e1e;
+  border: 6px solid transparent;
 }
 @media (prefers-reduced-motion: reduce) {
   .components-form-toggle .components-form-toggle__thumb {
@@ -1346,8 +1374,10 @@ body.is-dragging-components-draggable {
 }
 .components-form-toggle.is-checked .components-form-toggle__track {
   background-color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
-  border: 1px solid var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
-  border: 9px solid transparent;
+  border-color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+}
+.components-form-toggle.is-checked .components-form-toggle__track::after {
+  opacity: 1;
 }
 .components-form-toggle .components-form-toggle__input:focus + .components-form-toggle__track {
   box-shadow: 0 0 0 var(--wp-admin-border-width-focus) #fff, 0 0 0 calc(2 * var(--wp-admin-border-width-focus)) var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
@@ -3113,6 +3143,7 @@ body.lockscroll {
 .components-text-control__input[type=month],
 .components-text-control__input[type=number] {
   width: 100%;
+  height: 32px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   padding: 6px 8px;
   box-shadow: 0 0 0 transparent;
@@ -3230,6 +3261,22 @@ body.lockscroll {
 .components-text-control__input[type=number]:-ms-input-placeholder {
   color: rgba(30, 30, 30, 0.62);
 }
+.components-text-control__input.is-next-40px-default-size,
+.components-text-control__input[type=text].is-next-40px-default-size,
+.components-text-control__input[type=tel].is-next-40px-default-size,
+.components-text-control__input[type=time].is-next-40px-default-size,
+.components-text-control__input[type=url].is-next-40px-default-size,
+.components-text-control__input[type=week].is-next-40px-default-size,
+.components-text-control__input[type=password].is-next-40px-default-size,
+.components-text-control__input[type=color].is-next-40px-default-size,
+.components-text-control__input[type=date].is-next-40px-default-size,
+.components-text-control__input[type=datetime].is-next-40px-default-size,
+.components-text-control__input[type=datetime-local].is-next-40px-default-size,
+.components-text-control__input[type=email].is-next-40px-default-size,
+.components-text-control__input[type=month].is-next-40px-default-size,
+.components-text-control__input[type=number].is-next-40px-default-size {
+  height: 40px;
+}
 
 .components-tip {
   display: flex;
@@ -3314,7 +3361,7 @@ body.lockscroll {
 }
 .components-accessible-toolbar .components-button:focus::before,
 .components-toolbar .components-button:focus::before {
-  box-shadow: inset 0 0 0 var(--wp-admin-border-width-focus) var(--wp-admin-theme-color), inset 0 0 0 4px #fff;
+  box-shadow: inset 0 0 0 1px var(--wp-components-color-background, #fff), 0 0 0 var(--wp-admin-border-width-focus) var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
   outline: 2px solid transparent;
 }
 .components-accessible-toolbar .components-button.has-icon.has-icon,
@@ -3358,9 +3405,6 @@ body.lockscroll {
   position: absolute;
   right: 8px;
   bottom: 10px;
-}
-.components-toolbar__control.components-button:active::before {
-  display: none;
 }
 .components-toolbar__control.components-button:not(:disabled).is-pressed[data-subscript]::after {
   color: #fff;
@@ -6067,6 +6111,37 @@ a.wp-pic-credit:focus:after {
   height: auto;
 }
 
+button.button-reset.components-button, button.button-reset.components-button:focus, button.button-reset.components-button:hover, button.button-reset.components-button.is-secondary, button.button-reset.components-button.is-secondary:focus, button.button-reset.components-button.is-secondary:hover, button.button-reset, button.button-reset:focus, button.button-reset:hover {
+  display: inline-block;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: inherit;
+  text-transform: unset;
+  box-shadow: none;
+  min-width: unset;
+}
+button.button-reset.show-cursor {
+  cursor: pointer;
+}
+
+.button-reset button,
+.button-reset:focus button,
+.button-reset:hover button {
+  display: inline-block;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: inherit;
+  text-transform: unset;
+  box-shadow: none;
+  min-width: unset;
+}
+
 @-moz-keyframes wppic-spin {
   from {
     -moz-transform: rotate(0deg);
@@ -6294,6 +6369,16 @@ a.wp-pic-credit:focus:after {
 .wppic-btn.components-button.is-primary:hover {
   background: #af6e2d;
 }
+.wppic-btn.components-button.is-secondary {
+  color: #000;
+  background: #FFF;
+  box-shadow: none;
+  outline: #000 solid 1px;
+}
+.wppic-btn.components-button.is-secondary:hover {
+  color: #000;
+  background: #EEE;
+}
 .wppic-btn.components-button.has-icon-right {
   display: flex;
   align-items: center;
@@ -6312,6 +6397,48 @@ a.wp-pic-credit:focus:after {
 }
 .wppic-btn.components-button.btn-full-width:last-child {
   margin-bottom: 0;
+}
+.wppic-btn.components-button .lucide path,
+.wppic-btn.components-button .lucide circle {
+  color: inherit;
+  fill: none;
+}
+
+.wppic-close-btn svg {
+  color: #FFF;
+  fill: unset;
+}
+.wppic-close-btn .lucide path,
+.wppic-close-btn .lucide circle {
+  color: #FFF;
+  fill: unset;
+}
+
+/** Drag and Drop */
+.wppic-plugin-drag {
+  display: grid;
+  grid-template-columns: 1fr 30px;
+  position: relative;
+  padding: 8px 20px;
+  border: 1px solid #333;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  transition: all 0.3s ease-in-out;
+}
+.wppic-plugin-drag:hover {
+  cursor: move;
+  background: #f4f4f4 !important;
+}
+.wppic-plugin-drag.is-dragging {
+  opacity: 0.4;
+  border: 1px dashed #333;
+}
+.wppic-plugin-drag.is-over {
+  border: 1px dashed #000;
+  background: #db8a39 !important;
+  color: #FFF !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .mce-i-wppic-icon {

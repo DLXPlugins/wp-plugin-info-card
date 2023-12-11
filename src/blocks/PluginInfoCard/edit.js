@@ -532,7 +532,7 @@ const WPPluginInfoCard = ( props ) => {
 												value={ slug }
 												onChange={ ( value ) => {
 													// Check for URL so we don't paste in the slug AND url.
-													if ( isURL ( value ) ) {
+													if ( isURL( value ) ) {
 														return;
 													}
 													setAttributes( {

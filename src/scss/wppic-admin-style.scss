@@ -4,6 +4,7 @@
  * Author: Brice CAPOBIANCO - b*web
  */
 @import "./wppic-style.scss";
+@import "./button-resets.scss";
 @import '../../node_modules/@wordpress/components/build-style/style.css';
 
 @-moz-keyframes wppic-spin {
@@ -230,6 +231,16 @@ $wppic-admin-primary-color: #DB3939;
 	&.is-primary:hover {
 		background: #af6e2d;
 	}
+	&.is-secondary {
+		color: #000;
+		background: #FFF;
+		box-shadow: none;
+		outline: #000 solid 1px;
+	}
+	&.is-secondary:hover {
+		color: #000;
+		background: #EEE;
+	}
 	&.has-icon-right {
 		display: flex;
 		align-items: center;
@@ -248,6 +259,50 @@ $wppic-admin-primary-color: #DB3939;
 		&:last-child {
 			margin-bottom: 0;
 		}
+	}
+	.lucide path,
+	.lucide circle {
+		color: inherit;
+		fill: none;
+	}
+}
+
+.wppic-close-btn {
+	svg {
+		color: #FFF;
+		fill: unset;
+	}
+	.lucide path,
+	.lucide circle {
+		color: #FFF;
+		fill: unset;
+	}
+}
+
+/** Drag and Drop */
+.wppic-plugin-drag {
+	display: grid;
+	grid-template-columns: 1fr 30px;
+	position: relative;
+	padding: 8px 20px;
+	border: 1px solid #333;
+	align-items: center;
+	justify-content: center;
+	margin-right: 8px;
+	transition: all 0.3s ease-in-out;
+	&:hover {
+		cursor: move;
+		background: #f4f4f4 !important;
+	}
+	&.is-dragging {
+		opacity: 0.4;
+		border: 1px dashed #333;
+	}
+	&.is-over {
+		border: 1px dashed #000;
+		background: #db8a39 !important;
+		color: #FFF !important;
+		box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 	}
 }
 
