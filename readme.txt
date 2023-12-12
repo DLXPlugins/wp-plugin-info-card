@@ -39,7 +39,7 @@ The dashboard widget is very easy to set up: you simply add as many plugins and 
 It is perfect to keep track of your own plugins and themes!
 
 
-[CHECK OUT THE DEMO](https://mediaron.com/wp-plugin-info-card/ "Try It!")
+[CHECK OUT THE DEMO](https://dlxplugins.com/plugins/plugin-info-card/ "Try It!")
 
 = Quick Links (Shortcode Documentation) =
 
@@ -53,7 +53,7 @@ It is perfect to keep track of your own plugins and themes!
 * <a href="https://wppic.mediaron.com/blocks/wp-plugin-info-card-query-block">WP Plugin Info Card Query block</a>.
 * <a href="https://wppic.mediaron.com/blocks/site-plugins-card-grid">Site Plugins Card Grid block</a>.
 
-[CHECK OUT MORE EXAMPLES](https://mediaron.com/wp-plugin-info-card/ "More documentation")
+[CHECK OUT MORE EXAMPLES](https://dlxplugins.com/plugins/plugin-info-card/ "More documentation")
 
 [PREMIUM ADD-ON - WP Envato Affiliate Card](http://b-website.com/wp-envato-affiliate-card-powered-envato-market-api "WP Envato Affiliate Card")
 
@@ -63,7 +63,7 @@ Please <a href="https://translate.wordpress.org/projects/wp-plugins/wp-plugin-in
 
 = GitHub =
 
-Feel free to make pull requests or issues on the <a href="https://github.com/mediaron/wp-plugin-info-card">WP Plugin Info Card GitHub account</a>.
+Feel free to make pull requests or issues on the <a href="https://github.com/dlxplugins/wp-plugin-info-card">WP Plugin Info Card GitHub account</a>.
 
 
 == Installation ==
