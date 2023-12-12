@@ -15,6 +15,7 @@ import {
 	Button,
 	ToggleControl,
 	SelectControl,
+	BaseControl,
 } from '@wordpress/components';
 import {
 	AlertCircle,
@@ -27,6 +28,8 @@ import {
 	Loader2,
 	Database,
 	ClipboardCheck,
+	Plug2,
+	Paintbrush2,
 } from 'lucide-react';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
@@ -126,6 +129,18 @@ const OrgAsset = ( { type, slug, index, moveCallback, removeCallback } ) => {
 			style={ { opacity } }
 			data-handler-id={ spec.handlerId }
 		>
+			<div className="wppic-org-asset-icon">
+				{ 'plugin' === type && (
+					<>
+						<Plug2 />
+					</>
+				) }
+				{ 'theme' === type && (
+					<>
+						<Paintbrush2 />
+					</>
+				) }
+			</div>
 			<div className="wppic-org-asset-label">{ slug }</div>
 			<Button
 				className="button-reset wppic-close-btn"
@@ -142,12 +157,48 @@ const OrgAsset = ( { type, slug, index, moveCallback, removeCallback } ) => {
 
 const AddPlugin = ( props ) => {
 	const [ value, setValue ] = useState( '' );
+	const [ isChecking, setIsChecking ] = useState( false );
+	const [ isError, setIsError ] = useState( false );
+	const [ pluginInput, setPluginInput ] = useState( null );
+	const [ errorMessage, setErrorMessage ] = useState( '' );
+
+	const checkPlugin = async ( slug ) => {
+		setIsChecking( true );
+		const checkPluginPromise = SendCommand( 'wppic_check_plugin', { slug, nonce: wppicAdminHome.checkPluginNonce } );
+		checkPluginPromise.catch( () => {
+			setErrorMessage( __( 'There has been an error communicating with the server. Please try again.', 'wp-plugin-info-card' ) );
+			setIsError( true );
+			setIsChecking( false );
+			pluginInput.focus();
+		} );
+		const response = await checkPluginPromise;
+
+		setIsChecking( false );
+		const { success } = response.data;
+		if ( success ) {
+			setValue( '' );
+			pluginInput.focus();
+			props.onChange( slug );
+		} else {
+			setErrorMessage( __( 'Could not find plugin. Please try again with a different slug.', 'wp-plugin-info-card' ) );
+			setIsError( true );
+			pluginInput.focus();
+		}
+	};
+
+	const getPluginLabel = () => {
+		if ( isChecking ) {
+			return __( 'Checking plugin…', 'wp-plugin-info-card' );
+		}
+		return __( 'Add Plugin', 'wp-plugin-info-card' );
+	}
 	return (
 		<div className="wppic-add-plugin-wrapper">
 			<TextControl
 				label={ __( 'Plugin Slug', 'wp-plugin-info-card' ) }
 				value={ value }
 				onChange={ ( newValue ) => {
+					setIsError( false );
 					if ( isURL( newValue ) ) {
 						return;
 					}
@@ -172,35 +223,88 @@ const AddPlugin = ( props ) => {
 					'Enter the plugin slug. Example: "wp-plugin-info-card".',
 					'wp-plugin-info-card',
 				) }
+				ref={ setPluginInput }
 			/>
 			<Button
 				className="wppic-btn has-icon-right "
 				variant="primary"
-				label={ __( 'Add Plugin', 'wp-plugin-info-card' ) }
+				label={ getPluginLabel() }
+				disabled={ isChecking || value === '' }
 				onClick={ () => {
 					const sanitizedSlug = cleanForSlug( value );
 					if ( '' === sanitizedSlug ) {
 						return;
 					}
-					props.onChange( sanitizedSlug );
-					setValue( '' );
+					// Check for duplicates.
+					const { list } = props.formValues;
+					if ( list.includes( sanitizedSlug ) ) {
+						setErrorMessage( __( 'This plugin is already listed.', 'wp-plugin-info-card' ) );
+						setIsError( true );
+						return;
+					}
+					checkPlugin( sanitizedSlug );
 				} }
 				icon={ () => <PlusCircle /> }
 			>
-				{ __( 'Add Plugin', 'wp-plugin-info-card' ) }
+				{ getPluginLabel() }
 			</Button>
+			{ isError && (
+				<Notice
+					message={ errorMessage }
+					status="error"
+					politeness="assertive"
+					inline={ false }
+					icon={ () => <AlertCircle /> }
+				/>
+			) }
 		</div>
 	);
 };
 
 const AddTheme = ( props ) => {
 	const [ value, setValue ] = useState( '' );
+	const [ isChecking, setIsChecking ] = useState( false );
+	const [ isError, setIsError ] = useState( false );
+	const [ themeInput, setThemeInput ] = useState( null );
+	const [ errorMessage, setErrorMessage ] = useState( '' );
+
+	const checkPlugin = async ( slug ) => {
+		setIsChecking( true );
+		const checkThemePromise = SendCommand( 'wppic_check_theme', { slug, nonce: wppicAdminHome.checkThemeNonce } );
+		checkThemePromise.catch( () => {
+			setErrorMessage( __( 'There has been an error communicating with the server. Please try again.', 'wp-plugin-info-card' ) );
+			setIsError( true );
+			setIsChecking( false );
+			pluginInput.focus();
+		} );
+		const response = await checkThemePromise;
+
+		setIsChecking( false );
+		const { success } = response.data;
+		if ( success ) {
+			setValue( '' );
+			themeInput.focus();
+			props.onChange( slug );
+		} else {
+			setErrorMessage( __( 'Could not find this theme. Please try again with a different slug.', 'wp-plugin-info-card' ) );
+			setIsError( true );
+			themeInput.focus();
+		}
+	};
+
+	const getThemeLabel = () => {
+		if ( isChecking ) {
+			return __( 'Checking theme…', 'wp-plugin-info-card' );
+		}
+		return __( 'Add Theme', 'wp-plugin-info-card' );
+	}
 	return (
 		<div className="wppic-add-plugin-wrapper">
 			<TextControl
 				label={ __( 'Theme Slug', 'wp-plugin-info-card' ) }
 				value={ value }
 				onChange={ ( newValue ) => {
+					setIsError( false );
 					if ( isURL( newValue ) ) {
 						return;
 					}
@@ -222,26 +326,43 @@ const AddTheme = ( props ) => {
 					}
 				} }
 				help={ __(
-					'Enter the theme slug. Example: "astra".',
+					'Enter the theme slug. Example: "wp-plugin-info-card".',
 					'wp-plugin-info-card',
 				) }
+				ref={ setThemeInput }
 			/>
 			<Button
 				className="wppic-btn has-icon-right "
 				variant="primary"
-				label={ __( 'Add Theme', 'wp-plugin-info-card' ) }
+				label={ getThemeLabel() }
+				disabled={ isChecking || value === '' }
 				onClick={ () => {
 					const sanitizedSlug = cleanForSlug( value );
 					if ( '' === sanitizedSlug ) {
 						return;
 					}
-					props.onChange( sanitizedSlug );
-					setValue( '' );
+					// Check for duplicates.
+					const { list } = props.formValues;
+					if ( list.includes( sanitizedSlug ) ) {
+						setErrorMessage( __( 'This theme is already listed.', 'wp-plugin-info-card' ) );
+						setIsError( true );
+						return;
+					}
+					checkPlugin( sanitizedSlug );
 				} }
 				icon={ () => <PlusCircle /> }
 			>
-				{ __( 'Add Theme', 'wp-plugin-info-card' ) }
+				{ getThemeLabel() }
 			</Button>
+			{ isError && (
+				<Notice
+					message={ errorMessage }
+					status="error"
+					politeness="assertive"
+					inline={ false }
+					icon={ () => <AlertCircle /> }
+				/>
+			) }
 		</div>
 	);
 };
@@ -483,7 +604,12 @@ const Interface = ( props ) => {
 		const { list } = formValues;
 		if ( list.length > 0 ) {
 			return (
-				<>
+				<BaseControl
+					label={ __( 'Plugins to Track', 'wp-plugin-info-card' ) }
+					className="wppic-asset-list"
+					id="wppic-asset-list-plugins"
+					help={ __( 'Drag and drop to reorder.', 'wp-plugin-info-card' ) }
+				>
 					{ list.map( ( item, index ) => {
 						return (
 							<div className="wppic-org-asset-row" key={ index }>
@@ -506,7 +632,7 @@ const Interface = ( props ) => {
 							</div>
 						);
 					} ) }
-				</>
+				</BaseControl>
 			);
 		}
 	};
@@ -863,6 +989,7 @@ const Interface = ( props ) => {
 															const newPlugins = [ ...oldPlugins, value ];
 															setValue( 'list', newPlugins );
 														} }
+														formValues={ formValues }
 													/>
 												</div>
 												<div className="wppic-admin-row">{ getPlugins() }</div>
@@ -880,6 +1007,7 @@ const Interface = ( props ) => {
 															const newThemes = [ ...oldThemes, value ];
 															setValue( 'theme-list', newThemes );
 														} }
+														formValues={ formValues }
 													/>
 												</div>
 												<div className="wppic-admin-row">{ getThemes() }</div>

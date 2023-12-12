@@ -6122,6 +6122,7 @@ button.button-reset.components-button, button.button-reset.components-button:foc
   text-transform: unset;
   box-shadow: none;
   min-width: unset;
+  height: unset;
 }
 button.button-reset.show-cursor {
   cursor: pointer;
@@ -6140,6 +6141,7 @@ button.button-reset.show-cursor {
   text-transform: unset;
   box-shadow: none;
   min-width: unset;
+  height: unset;
 }
 
 @-moz-keyframes wppic-spin {
@@ -6367,6 +6369,10 @@ html {
   background-color: #12b76a;
 }
 
+.wppic-asset-list .components-base-control__label {
+  margin-bottom: 0;
+}
+
 /** Buttons */
 .wppic-btn.components-button {
   transition: all 0.3s ease-in-out;
@@ -6424,6 +6430,9 @@ html {
 .wppic-btn.components-button.is-saving svg {
   animation: wppic-spin 1s linear infinite;
 }
+.wppic-btn.components-button:disabled {
+  cursor: not-allowed;
+}
 .wppic-btn.components-button .lucide path,
 .wppic-btn.components-button .lucide circle {
   color: inherit;
@@ -6446,18 +6455,19 @@ html {
 /** Drag and Drop */
 .wppic-plugin-drag {
   display: grid;
-  grid-template-columns: 1fr 30px;
+  grid-template-columns: 30px 1fr 30px;
   position: relative;
   padding: 8px 20px;
-  border: 1px solid #333;
+  border: 2px solid #333;
   align-items: center;
   justify-content: center;
   margin-right: 8px;
   transition: all 0.3s ease-in-out;
-  background: #DEDEDE;
+  background: #FFF;
 }
 .wppic-plugin-drag:hover {
   cursor: move;
+  border-style: dashed;
   background: #f4f4f4 !important;
 }
 .wppic-plugin-drag.is-dragging {
@@ -6469,6 +6479,19 @@ html {
   background: #2E872C !important;
   color: #FFF !important;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.wppic-plugin-drag .wppic-org-asset-icon {
+  display: inline-flex;
+  align-items: center;
+}
+.wppic-plugin-drag .wppic-org-asset-icon svg {
+  width: 20px;
+  height: 20px;
+  color: #333;
+}
+.wppic-plugin-drag .wppic-org-asset-icon svg path {
+  color: #333;
+  fill: unset;
 }
 
 /* Admin Buttons */

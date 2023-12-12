@@ -32,6 +32,8 @@ class Init {
 		add_action( 'wp_ajax_wppic_save_options', array( $this, 'ajax_save_options' ) );
 		add_action( 'wp_ajax_wppic_reset_options', array( $this, 'ajax_reset_options' ) );
 		add_action( 'wp_ajax_wppic_clear_cache', array( $this, 'ajax_clear_cache' ) );
+		add_action( 'wp_ajax_wppic_check_plugin', array( $this, 'ajax_check_plugin' ) );
+		add_action( 'wp_ajax_wppic_check_theme', array( $this, 'ajax_check_theme' ) );
 		// Init tabs.
 		new Tabs\Main();
 		new Tabs\Plugin_Screenshots();
@@ -44,6 +46,104 @@ class Init {
 		// //new Tabs\Pagination();
 		// new Tabs\Selectors();
 		// new Tabs\Support();
+	}
+
+	/**
+	 * Check the plugin slug via Ajax.
+	 */
+	public function ajax_check_plugin() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+		if ( ! wp_verify_nonce( $nonce, 'wppic-check-plugin' ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce verification failed', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+		$plugin_slug = sanitize_text_field( filter_input( INPUT_POST, 'slug', FILTER_DEFAULT ) );
+		
+		if ( ! $plugin_slug ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Plugin not found', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		$plugin_data = wppic_api_parser( 'plugin', $plugin_slug );
+		if ( ! $plugin_data ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Plugin not found', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+		wp_send_json_success(
+			array(
+				'message'     => __( 'Plugin found', 'wp-plugin-info-card' ),
+				'type'        => 'success',
+				'dismissable' => true,
+				'pluginData'  => $plugin_data,
+			)
+		);
+	}
+
+	/**
+	 * Check the plugin slug via Ajax.
+	 */
+	public function ajax_check_theme() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+		if ( ! wp_verify_nonce( $nonce, 'wppic-check-theme' ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce verification failed', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+		$theme_slug = sanitize_text_field( filter_input( INPUT_POST, 'slug', FILTER_DEFAULT ) );
+		
+		if ( ! $theme_slug ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Theme not found', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		$theme_data = wppic_api_parser( 'theme', $theme_slug );
+		if ( ! $theme_data ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Theme not found', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+		wp_send_json_success(
+			array(
+				'message'     => __( 'Plugin found', 'wp-plugin-info-card' ),
+				'type'        => 'success',
+				'dismissable' => true,
+				'pluginData'  => $theme_data,
+			)
+		);
 	}
 
 	/**

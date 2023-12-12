@@ -51,10 +51,12 @@ class Main {
 			'wppic-admin-home',
 			'wppicAdminHome',
 			array(
-				'getNonce'        => wp_create_nonce( 'wppic-admin-home-retrieve-options' ),
-				'saveNonce'       => wp_create_nonce( 'wppic-save-options' ),
-				'resetNonce'      => wp_create_nonce( 'wppic-reset-options' ),
-				'clearCacheNonce' => wp_create_nonce( 'wppic-clear-cache' ),
+				'getNonce'         => wp_create_nonce( 'wppic-admin-home-retrieve-options' ),
+				'saveNonce'        => wp_create_nonce( 'wppic-save-options' ),
+				'resetNonce'       => wp_create_nonce( 'wppic-reset-options' ),
+				'clearCacheNonce'  => wp_create_nonce( 'wppic-clear-cache' ),
+				'checkPluginNonce' => wp_create_nonce( 'wppic-check-plugin' ),
+				'checkThemeNonce'  => wp_create_nonce( 'wppic-check-theme' ),
 			)
 		);
 	}
