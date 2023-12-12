@@ -137,7 +137,7 @@ class Add_Plugin {
 	 */
 	public function mce_type( $parameters ) {
 		$parameters['types'][] = array(
-			'text'  => 'Plugin',
+			'text'  => __( 'Plugin', 'wp-plugin-info-card' ),
 			'value' => 'plugin',
 		);
 		return $parameters;
@@ -211,7 +211,7 @@ class Add_Plugin {
 			$content .= '<a class="wp-pic-widget-name" href="' . esc_url( $wppic_data->url ) . '" target="_blank" title="' . __( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ) . '">' . esc_html( $wppic_data->name ) . '</a>';
 			$content .= '<span class="wp-pic-widget-rating"><span>' . __( 'Ratings:', 'wp-plugin-info-card' ) . '</span> ' . esc_html( $wppic_data->rating ) . '%';
 			if ( ! empty( $wppic_data->num_ratings ) ) {
-				$content .= ' ( ' . esc_html( $wppic_data->num_ratings ) . ' votes)';
+				$content .= ' (' . esc_html( $wppic_data->num_ratings ) . esc_html__( ' votes', 'wp-plugin-info-card' ) . ')';
 			}
 			$content .= '</span>';
 			$content .= '<span class="wp-pic-widget-downloaded"><span>' . __( 'Active Installs:', 'wp-plugin-info-card' ) . '</span> ' . esc_html( number_format_i18n( $wppic_data->active_installs ) ) . '+</span>';

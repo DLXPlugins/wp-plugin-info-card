@@ -89,7 +89,7 @@ function wppic_delete_transients() {
 function wppic_add_weekly( $schedules ) {
 	$schedules['wppic-weekly'] = array(
 		'interval' => 604800,
-		'display'  => __( 'Once Weekly' ),
+		'display'  => __( 'Once Weekly', 'wp-plugin-info-card' ),
 	);
 	return $schedules;
 }
