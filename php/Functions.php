@@ -441,6 +441,43 @@ class Functions {
 	}
 
 	/**
+	 * Retrieve a theme's color palette.
+	 *
+	 * @return array {
+	 *   @type string $name  The color name.
+	 *   @type string $slug  The color slug.
+	 *   @type string $color The color hex value.
+	 * }
+	 */
+	public static function get_theme_color_palette() {
+		$color_palette = array();
+		$settings      = \WP_Theme_JSON_Resolver::get_theme_data()->get_settings();
+		if ( isset( $settings['color']['palette']['theme'] ) ) {
+			$color_palette = $settings['color']['palette']['theme'];
+		}
+
+		// If empty color palette, try to get from theme supports.
+		if ( empty( $color_palette ) ) {
+			$color_palette = get_theme_support( 'editor-color-palette' );
+			if ( ! empty( $color_palette ) ) {
+				$color_palette = $color_palette[0];
+			}
+		}
+
+		/**
+		 * Filter the color palette used by the plugin.
+		 *
+		 * @param array $color_palette {
+		 *   @type string $name  The color name.
+		 *   @type string $slug  The color slug.
+		 *   @type string $color The color hex value.
+		 * }
+		 */
+		$color_palette = apply_filters( 'wppic_theme_color_palette', $color_palette );
+		return $color_palette;
+	}
+
+	/**
 	 * Returns appropriate html for KSES.
 	 *
 	 * @param bool $svg         Whether to add SVG data to KSES.
@@ -453,6 +490,10 @@ class Functions {
 			'class' => array(),
 		);
 		$allowed_tags['a']['class'] = array();
+
+		$allowed_tags['style'] = array(
+			'type' => array(),
+		);
 
 		// Add form input fields.
 		$allowed_tags['input'] = array(
@@ -602,6 +643,143 @@ class Functions {
 	}
 
 	/**
+	 * Retrieve a plugin page, which should contain the page object.
+	 *
+	 * @param string $slug The plugin slug.
+	 *
+	 * @return null|WP_Post The plugin page.
+	 */
+	public static function get_plugin_page( $slug ) {
+		$slug = sanitize_title( $slug );
+
+		$maybe_plugin_page = get_page_by_path( $slug, OBJECT, 'wppic_plugins' );
+		if ( null === $maybe_plugin_page ) {
+			$plugin = wppic_api_parser( 'plugin', $slug );
+			if ( ! empty( $plugin ) ) {
+				$plugin_page_id = wp_insert_post(
+					array(
+						'post_title'     => sanitize_text_field( $plugin->name ),
+						'post_name'      => $slug,
+						'post_type'      => 'wppic_plugins',
+						'post_status'    => 'publish',
+						'comment_status' => 'closed',
+						'ping_status'    => 'closed',
+					)
+				);
+				$plugin_page    = get_post( $plugin_page_id );
+				return $plugin_page;
+			}
+		}
+		return $maybe_plugin_page;
+	}
+
+	/**
+	 * Retrieve plugin screenshots, while checking if they exist locally.
+	 *
+	 * @param string $slug  Plugin slug to retrieve screenshots for.
+	 * @param bool   $force Whether to force retrieve (no caching) the plugin data.
+	 */
+	public static function get_plugin_screenshots( $slug, $force = false, $replace_with_org = false ) {
+		// Get the plugin.
+		$plugin_data        = wppic_api_parser( 'plugin', $slug, 720, '', false, $force );
+		$plugin_screenshots = $plugin_data->screenshots ?? array();
+
+		if ( empty( $plugin_screenshots ) ) {
+			return array();
+		}
+
+		// Get the plugin attachments.
+		$plugin_page = Functions::get_plugin_page( $slug );
+		if ( ! empty( $plugin_page ) ) {
+			$args   = array(
+				'post_parent'    => $plugin_page->ID,
+				'post_type'      => 'attachment',
+				'post_mime_type' => 'image',
+				'orderby'        => 'menu_order',
+				'order'          => 'ASC',
+				'posts_per_page' => 50, /* max get 50 images */
+			);
+			$images = get_children( $args );
+
+			// Get thumbnail, and then the full size image.
+			$images_array = array();
+			foreach ( $images as $image ) {
+				$images_array[ $image->menu_order ] = array(
+					'thumbnail' => wp_get_attachment_image_src( $image->ID, 'thumbnail' )[0],
+					'medium'    => wp_get_attachment_image_src( $image->ID, 'medium' )[0],
+					'large'     => wp_get_attachment_image_src( $image->ID, 'large' )[0],
+					'full'      => wp_get_attachment_image_src( $image->ID, 'full' )[0],
+					'caption'   => $image->post_excerpt,
+					'alt'       => $image->post_excerpt,
+				);
+			}
+
+			if ( ! $replace_with_org ) {
+				return $images_array;
+			}
+
+			// Loop through plugin screenshots, see if order and excerpt match (image URL), and mark any that don't exist.
+			foreach ( $plugin_screenshots as $screenshot_order => $screenshot ) {
+				$found = false;
+				foreach ( $images as $image ) {
+					if ( $screenshot_order === $image->menu_order ) {
+						if ( $image->post_content === $screenshot['src'] ) {
+							$found = true;
+						}
+					}
+				}
+				if ( ! $found ) {
+					// Add in any missing images with .org version.
+					$images_array[ $screenshot_order ] = array(
+						'thumbnail' => $screenshot['src'],
+						'medium'    => $screenshot['src'],
+						'large'     => $screenshot['src'],
+						'full'      => $screenshot['src'],
+						'caption'   => $screenshot['caption'],
+						'alt'       => $screenshot['caption'],
+					);
+					/**
+					 * Action if an image isn't found. Others can hook into the passed data to sideload the image.
+					 *
+					 * @param string  $slug             The plugin slug.
+					 * @param WP_Post $plugin_page      The plugin page object.
+					 * @param object  $screenshot       The screenshot object (image and caption object keys)
+					 * @param int     $screenshot_order The screenshot order.
+					 */
+					do_action( 'wppic_no_plugin_screenshot_found', $slug, $plugin_page, $screenshot, $screenshot_order );
+				}
+			}
+
+			return $images_array;
+		}
+		return array();
+	}
+
+	/**
+	 * Get the plugin's supported file extensions.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array The supported file extensions.
+	 */
+	public static function get_supported_file_extensions() {
+		$file_extensions = array(
+			'jpeg',
+			'jpg',
+			'gif',
+			'png',
+		);
+		/**
+		 * Filter the valid file extensions for the photo block.
+		 *
+		 * @param array $file_extensions The valid mime types.
+		 */
+		$file_extensions = apply_filters( 'wppic_block_file_extensions', $file_extensions );
+
+		return $file_extensions;
+	}
+
+	/**
 	 * Get the plugin directory for a path.
 	 *
 	 * @param string $path The path to the file.
@@ -649,4 +827,3 @@ class Functions {
 		return $highest_priority;
 	}
 }
-

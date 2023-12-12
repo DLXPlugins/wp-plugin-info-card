@@ -457,7 +457,7 @@ const WPPluginInfoCard = ( props ) => {
 				<img
 					src={ wppic.wppic_preview }
 					alt=""
-					style={ { height: '415px', width: 'auto', textAlign: 'center' } }
+					style={ { width: '100%', height: 'auto' } }
 				/>
 			</div>
 		);

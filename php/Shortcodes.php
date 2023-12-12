@@ -20,15 +20,82 @@ class Shortcodes {
 	public function run() {
 		$self = new self();
 
-		add_action( 'wp_footer', array( $self, 'print_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $self, 'print_scripts' ) );
 		add_action( 'wppic_enqueue_scripts', array( $self, 'enqueue_scripts' ) );
 		add_action( 'rest_api_init', array( $self, 'register_rest_routes' ) );
 		add_shortcode( 'wp-pic', array( static::class, 'shortcode_function' ) );
 		add_shortcode( 'wp-pic-query', array( static::class, 'shortcode_query_function' ) );
 		add_shortcode( 'wp-pic-site-plugins', array( static::class, 'shortcode_active_site_plugins_function' ) );
+		add_shortcode( 'wp-pic-plugin-screenshots', array( static::class, 'shortcode_plugin_screenshots_info_card' ) );
 		add_action( 'wp_ajax_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
 		add_action( 'wp_ajax_nopriv_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
+		add_action( 'init', array( static::class, 'register_screenshots_post_type' ) );
+		add_action( 'init', array( static::class, 'register_screenshots_presets_post_type' ) );
 		return $self;
+	}
+
+	public static function register_screenshots_post_type() {
+		$labels = array(
+			'name'               => __( 'Plugins', 'wp-plugin-info-card' ),
+			'singular_name'      => __( 'Plugins', 'wp-plugin-info-card' ),
+			'add_new'            => __( 'Add New', 'wp-plugin-info-card' ),
+			'add_new_item'       => __( 'Add New Plugin', 'wp-plugin-info-card' ),
+			'edit_item'          => __( 'Edit Plugin', 'wp-plugin-info-card' ),
+			'new_item'           => __( 'New Plugin', 'wp-plugin-info-card' ),
+			'all_items'          => __( 'All Plugins', 'wp-plugin-info-card' ),
+			'view_item'          => __( 'View Plugin', 'wp-plugin-info-card' ),
+			'search_items'       => __( 'Search Plugins', 'wp-plugin-info-card' ),
+			'not_found'          => __( 'No Plugins found', 'wp-plugin-info-card' ),
+			'not_found_in_trash' => __( 'No Plugins found in Trash', 'wp-plugin-info-card' ),
+			'parent_item_colon'  => '',
+			'menu_name'          => __( 'Plugins', 'wp-plugin-info-card' ),
+		);
+
+		$args = array(
+			'labels'                  => $labels,
+			'public'                  => false,
+			'publicly_queryable'      => false,
+			'show_ui'                 => false,
+			'show_in_menu'            => false,
+			'query_var'               => false,
+			'rewrite'                 => false,
+			'dlx_photo_block_archive' => false,
+			'hierarchical'            => false,
+		);
+
+		register_post_type( 'wppic_plugins', $args );
+	}
+
+	public static function register_screenshots_presets_post_type() {
+		$labels = array(
+			'name'               => __( 'Presets', 'wp-plugin-info-card' ),
+			'singular_name'      => __( 'Presets', 'wp-plugin-info-card' ),
+			'add_new'            => __( 'Add New', 'wp-plugin-info-card' ),
+			'add_new_item'       => __( 'Add New Preset', 'wp-plugin-info-card' ),
+			'edit_item'          => __( 'Edit Preset', 'wp-plugin-info-card' ),
+			'new_item'           => __( 'New Preset', 'wp-plugin-info-card' ),
+			'all_items'          => __( 'All Presets', 'wp-plugin-info-card' ),
+			'view_item'          => __( 'View Preset', 'wp-plugin-info-card' ),
+			'search_items'       => __( 'Search Presets', 'wp-plugin-info-card' ),
+			'not_found'          => __( 'No Presets found', 'wp-plugin-info-card' ),
+			'not_found_in_trash' => __( 'No Presets found in Trash', 'wp-plugin-info-card' ),
+			'parent_item_colon'  => '',
+			'menu_name'          => __( 'Presets', 'wp-plugin-info-card' ),
+		);
+
+		$args = array(
+			'labels'                  => $labels,
+			'public'                  => false,
+			'publicly_queryable'      => false,
+			'show_ui'                 => false,
+			'show_in_menu'            => false,
+			'query_var'               => false,
+			'rewrite'                 => false,
+			'dlx_photo_block_archive' => false,
+			'hierarchical'            => false,
+		);
+
+		register_post_type( 'wppic_screen_presets', $args );
 	}
 
 	/**
@@ -84,7 +151,7 @@ class Shortcodes {
 	 *
 	 * @since 3.0.0
 	 */
-	function register_rest_routes() {
+	public function register_rest_routes() {
 		register_rest_route(
 			'wppic/v1',
 			'/get_html',
@@ -119,6 +186,154 @@ class Shortcodes {
 				'methods'             => 'GET',
 				'callback'            => array( $this, 'get_site_plugin_data' ),
 				'permission_callback' => array( $this, 'rest_check_permissions' ),
+			)
+		);
+		register_rest_route(
+			'wppic/v2',
+			'/get_plugin_images',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'get_plugin_images' ),
+				'permission_callback' => array( $this, 'rest_image_sideload_permissions' ),
+			)
+		);
+		register_rest_route(
+			'wppic/v2',
+			'/get_plugin_images_to_process',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'get_plugin_images_to_process' ),
+				'permission_callback' => array( $this, 'rest_image_sideload_permissions' ),
+			)
+		);
+	}
+
+	/**
+	 * Process a list of images for a plugin.
+	 *
+	 * @param WP_Rest $request REST request.
+	 */
+	public function get_plugin_images_to_process( $request ) {
+		$plugin_slug    = $request->get_param( 'slug' );
+		$needs_sideload = (bool) $request->get_param( 'needsSideload' );
+		$sideload_order = (int) $request->get_param( 'order' );
+
+		$maybe_plugin_data = wp_cache_get( 'wppic_plugin_data_' . $plugin_slug, 'wppic' );
+		if ( false !== $maybe_plugin_data ) {
+			$plugin_data = $maybe_plugin_data;
+		} else {
+			$plugin_data = wppic_api_parser( 'plugin', $plugin_slug, 720, '', true, true );
+			wp_cache_set( 'wppic_plugin_data_' . $plugin_slug, $plugin_data, 'wppic', 3 * HOUR_IN_SECONDS );
+		}
+
+		// Read in slug and get from post type.
+		$plugin_page = Functions::get_plugin_page( $plugin_slug );
+
+		if ( null === $plugin_page ) {
+			return wp_send_json_error(
+				array(
+					'message' => __( 'No plugin could be found.', 'wp-plugin-info-card' ),
+				)
+			);
+		}
+
+		// Get screenshots for plugin.
+		$screenshots = $plugin_data->screenshots ?? array();
+
+		// If needs sideload, process the first image.
+		if ( $needs_sideload && ! empty( $screenshots ) && isset( $screenshots[ $sideload_order ] ) ) {
+			// Loop through the first image, unset, and process.
+			$screenshot_to_process = $screenshots[ $sideload_order ];
+			$image_order           = absint( $sideload_order );
+			$image_caption         = sanitize_text_field( $screenshot_to_process['caption'] );
+			$image_url             = filter_var( $screenshot_to_process['src'], FILTER_VALIDATE_URL );
+
+			if ( $image_url ) {
+				// Check file extension.
+				$extension = pathinfo( $image_url, PATHINFO_EXTENSION );
+
+				// Strip query vars from extension.
+				$extension = preg_replace( '/\?.*/', '', $extension );
+
+				if ( ! $extension ) {
+					return new \WP_Error( 'invalid_url', __( 'File extension not found.', 'wp-plugin-info-card' ), array( 'status' => 400 ) );
+				}
+				$valid_extensions = Functions::get_supported_file_extensions();
+				if ( ! in_array( $extension, $valid_extensions, true ) ) {
+					return new \WP_Error( 'invalid_url', __( 'Invalid file extension.', 'wp-plugin-info-card' ), array( 'status' => 400 ) );
+				}
+
+				// Save the image to the media library.
+				if ( ! function_exists( 'media_sideload_image' ) ) {
+					require_once ABSPATH . 'wp-admin/includes/image.php';
+					require_once ABSPATH . 'wp-admin/includes/file.php';
+					require_once ABSPATH . 'wp-admin/includes/media.php';
+				}
+				$attachment_id = media_sideload_image( $image_url, $plugin_page->ID, $image_caption, 'id' );
+
+				// Add order to attachment.
+				if ( ! is_wp_error( $attachment_id ) ) {
+					wp_update_post(
+						array(
+							'ID'           => $attachment_id,
+							'menu_order'   => $image_order,
+							'post_content' => $image_url,
+							'post_excerpt' => $image_caption,
+						)
+					);
+
+					// Update alt attribute.
+					update_post_meta( $attachment_id, '_wp_attachment_image_alt', $image_caption );
+				}
+			}
+		}
+
+		// Set sideload flag.
+		$needs_sideload = $sideload_order < count( $screenshots );
+
+		// Return plugin data if no sideload needed.
+		$plugin_data = array();
+		if ( ! $needs_sideload ) {
+			$plugin_data = wppic_api_parser( 'plugin', $plugin_slug, 720, '', true, true );
+		}
+
+		wp_send_json_success(
+			array(
+				'sideloadOrder'    => absint( $sideload_order + 1 ),
+				'pluginPageId'     => $plugin_page->ID,
+				'needsSideload'    => $needs_sideload,
+				'totalScreenshots' => count( $screenshots ),
+				'pluginData'       => $plugin_data,
+			)
+		);
+	}
+
+	/**
+	 * Get a list of images for the plugin.
+	 *
+	 * @param WP_Rest $request REST request.
+	 */
+	public function get_plugin_images( $request ) {
+		$plugin_slug = $request->get_param( 'slug' );
+
+		$maybe_plugin_data = wp_cache_get( 'wppic_plugin_data_' . $plugin_slug, 'wppic' );
+		if ( false !== $maybe_plugin_data ) {
+			$plugin_data = $maybe_plugin_data;
+		} else {
+			$plugin_data = wppic_api_parser( 'plugin', $plugin_slug, 720, '', true, true );
+			wp_cache_set( 'wppic_plugin_data_' . $plugin_slug, $plugin_data, 'wppic', 3 * HOUR_IN_SECONDS );
+		}
+
+		$plugin_screenshots = Functions::get_plugin_screenshots( $plugin_slug );
+		$org_screenshots    = $plugin_data->screenshots ?? array();
+
+		$plugin_data->local_screenshots = $plugin_screenshots;
+
+		wp_send_json_success(
+			array(
+				'pluginData'           => $plugin_data,
+				'hasPluginScreenshots' => ! empty( $plugin_screenshots ),
+				'hasScreenshots'       => ! empty( $org_screenshots ),
 			)
 		);
 	}
@@ -176,6 +391,13 @@ class Shortcodes {
 	 */
 	public function rest_check_permissions() {
 		return current_user_can( 'edit_posts' );
+	}
+
+	/**
+	 * Check if user has access to REST API for retrieving and sideloading images.
+	 */
+	public function rest_image_sideload_permissions() {
+		return current_user_can( 'publish_posts' );
 	}
 
 	/**
@@ -631,7 +853,6 @@ class Shortcodes {
 		}
 
 		return $content;
-
 	}
 
 	/**
@@ -788,7 +1009,7 @@ class Shortcodes {
 						$content .= '</div>';
 						$row      = false;
 					}
-					$count++;
+					++$count;
 				}
 
 				if ( $row ) {
@@ -802,8 +1023,301 @@ class Shortcodes {
 
 			}
 		}
-
 	} //end of wp-pic-query Shortcode
+
+	/**
+	 * Shortcode for retrieving plugin screenshots card.
+	 */
+	public static function shortcode_plugin_screenshots_info_card( $attributes, $content = '' ) {
+
+		$attributes = shortcode_atts(
+			array(
+				'unique_id'                                => 'wppic-' . wp_rand( 0, 1000 ) . wp_generate_password( 6, false, false ),
+				'slug'                                     => '',
+				'icon_style'                               => 'none',
+				'asset_data'                               => array(),
+				'image_size'                               => 'thumbnail',
+				'icon_style'                               => 'none',
+				'enable_rounded_icon'                      => false,
+				'color_theme'                              => 'default',
+				'custom_colors'                            => false,
+				'plugin_title'                             => '',
+				'enable_context_menu'                      => true,
+				'enable_screenshots'                       => true,
+				'image_source'                             => 'local',
+				'images'                                   => array(),
+				'align'                                    => 'center',
+				'color_background'                         => '#FFFFFF',
+				'color_text'                               => '#000000',
+				'color_border'                             => '#000000',
+				'color_menu_border'                        => '#000000',
+				'color_menu'                               => '#000000',
+				'color_menu_hover'                         => '#DDDDDD',
+				'color_menu_text'                          => '#FFFFFF',
+				'color_menu_text_hover'                    => '#000000',
+				'color_screenshots_background'             => '#DDDDDD',
+				'color_screenshots_border'                 => '#000000',
+				'color_screenshots_arrow_background'       => '#333333',
+				'color_screenshots_arrow_background_hover' => '#000000',
+				'color_screenshots_arrow'                  => '#EEEEEE',
+				'color_screenshots_arrow_hover'            => '#FFFFFF',
+				'color_star'                               => '#FF9529',
+				'color_meta_background'                    => '#000000',
+				'color_meta_text'                          => '#FFFFFF',
+			),
+			$attributes,
+			'wp-pic-plugin-screenshots'
+		);
+
+		// Build wrapper classes.
+		$wrapper_classes = array(
+			'wp-pic-plugin-screenshots-wrapper',
+			'wp-pic-card',
+		);
+
+		// Build CSS classes.
+		$classes = array(
+			'wp-pic-plugin-screenshots',
+			'wp-pic-screenshots',
+			'large',
+			'plugin',
+			'wp-pic-has-screenshots',
+		);
+
+		// Get asset data.
+		$asset_data = $attributes['asset_data'];
+
+		// Get requires.
+		$requires       = $asset_data['requires'] ?? false;
+		$requires_label = $asset_data['tested'] ?? 'Unknown';
+		if ( $requires && is_numeric( $requires ) ) {
+			/* Translators: %s is the WP version the plugin supports */
+			$requires_label = sprintf( __( 'WP %s+', 'wp-plugin-info-card' ), $requires );
+		}
+
+		// Get icon.
+		$icon = $asset_data['icons']['svg'] ?? $asset_data['icons']['2x'] ?? $asset_data['icons']['1x'] ?? Functions::get_plugin_url( 'assets/img/default-plugin-icon.png' );
+
+		// Get plugin screenshots.
+		$screenshots = Functions::get_plugin_screenshots( $asset_data['slug'] );
+
+		//Active installs
+		if ( $asset_data['active_installs'] >= 1000000 ) {
+			// Get number of million.
+			$count_in_million = round( $asset_data['active_installs'] / 1000000, 1 );
+
+			$active_installs_text = sprintf(
+				/* Translators: %s is the number of million active installs */
+				_n( '%s+ Million', '%s+ Million', $count_in_million, 'wp-plugin-info-card' ),
+				number_format_i18n( $count_in_million )
+			);
+		} else {
+			$active_installs_text = number_format_i18n( $asset_data['active_installs'] ) . '+';
+		}
+
+		// Build custom color styles.
+		$block_styles = '';
+		if ( $attributes['custom_colors'] || ( ! $attributes['custom_colors'] && strpos( $attributes['color_theme'], 'custom' ) !== false ) ) {
+			$block_styles = sprintf(
+				'#%s {
+					--wppic-plugin-screenshots-card-background: %s;
+					--wppic-plugin-screenshots-card-text-color: %s;
+					--wppic-plugin-screenshots-card-border-color: %s;
+					--wppic-plugin-screenshots-card-menu-border-color: %s;
+					--wppic-plugin-screenshots-card-menu-color: %s;
+					--wppic-plugin-screenshots-card-menu-color-hover: %s;
+					--wppic-plugin-screenshots-card-menu-text-color: %s;
+					--wppic-plugin-screenshots-card-menu-text-color-hover: %s;
+					--wppic-plugin-screenshots-card-screenshots-background: %s;
+					--wppic-plugin-screenshots-card-screenshots-border-color: %s;
+					--wppic-plugin-screenshots-card-screenshots-star-color: %s;
+					--wppic-plugin-screenshots-card-meta-background-color: %s;
+					--wppic-plugin-screenshots-card-meta-text-color: %s;
+					--wppic-plugin-screenshots-card-screenshots-arrow-background-color: %s;
+					--wppic-plugin-screenshots-card-screenshots-arrow-background-color-hover: %s;
+					--wppic-plugin-screenshots-card-screenshots-arrow-color: %s;
+					--wppic-plugin-screenshots-card-screenshots-arrow-color-hover: %s;
+				}',
+				esc_attr( $attributes['unique_id'] ),
+				esc_attr( $attributes['color_background'] ),
+				esc_attr( $attributes['color_text'] ),
+				esc_attr( $attributes['color_border'] ),
+				esc_attr( $attributes['color_menu_border'] ),
+				esc_attr( $attributes['color_menu'] ),
+				esc_attr( $attributes['color_menu_hover'] ),
+				esc_attr( $attributes['color_menu_text'] ),
+				esc_attr( $attributes['color_menu_text_hover'] ),
+				esc_attr( $attributes['color_screenshots_background'] ),
+				esc_attr( $attributes['color_screenshots_border'] ),
+				esc_attr( $attributes['color_star'] ),
+				esc_attr( $attributes['color_meta_background'] ),
+				esc_attr( $attributes['color_meta_text'] ),
+				esc_attr( $attributes['color_screenshots_arrow_background'] ),
+				esc_attr( $attributes['color_screenshots_arrow_background_hover'] ),
+				esc_attr( $attributes['color_screenshots_arrow'] ),
+				esc_attr( $attributes['color_screenshots_arrow_hover'] )
+			);
+		}
+
+		// Begin outputting styles.
+		if ( ! empty( $block_styles ) ) {
+			$block_styles = sprintf( '<style>%s</style>', $block_styles );
+		}
+
+		// Global var to enqueue scripts + ajax param if is set to yes.
+		add_filter( 'wppic_allow_scripts', '__return_true' );
+
+		// Begin the output.
+		ob_start();
+		?>
+			<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>">
+				<?php echo wp_kses( $block_styles, Functions::get_kses_allowed_html() ); ?>
+				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" id="<?php echo esc_attr( $attributes['unique_id'] ); ?>">
+					<div class="wp-pic-plugin-screenshots-card">
+						<div class="wp-pic-plugin-screenshots-avatar-wrapper">
+							<a href="<?php echo esc_url( $asset_data['url'] ); ?>" target="_blank" rel="noopener noreferrer" class="wp-pic-plugin-screenshots-avatar style-<?php echo esc_attr( $attributes['icon_style'] ); ?> <?php echo esc_attr( $attributes['enable_rounded_icon'] ? 'is-rounded' : '' ); ?>">
+								<img src="<?php echo esc_url( $icon ); ?>" width="125" height="125" alt="<?php echo esc_attr( $asset_data['name'] ); ?>" />
+							</a>
+							<?php
+							if ( $attributes['enable_context_menu'] ) :
+								?>
+									<div class="wppic-meatball-menu wppic-meatball-menu-theme-light" style="display: none;">
+									<div class="wppic-meatball-content">
+										<input
+											type="checkbox"
+											aria-label="<?php esc_attr_e( 'Toggle menu', 'wp-plugin-info-card' ); ?>"
+										/>
+										<ul>
+											<li class="wppic-meatball-menu-item wppic-meatball-menu-item-edit-comment" data-comment-action="edit">
+												<a href="#" class="button-reset" onClick={ ( e ) => e.preventDefault() }>
+													<span class="wppic-meatball-menu-icon">
+														<WordPressIcon />
+													</span>
+													<span class="wppic-meatball-menu-label">
+														<?php esc_html_e( 'View Plugin Page', 'wp-plugin-info-card' ); ?>
+													</span>
+												</a>
+											</li>
+											<li class="wppic-meatball-menu-item wppic-meatball-menu-item-approve-comment" data-comment-action="approve">
+												<a href="#" class="button-reset" onClick={ ( e ) => e.preventDefault() }>
+													<span class="wppic-meatball-menu-icon">
+														<Star />
+													</span>
+													<span class="wppic-meatball-menu-label">
+														<?php esc_html_e( 'View Ratings', 'wp-plugin-info-card' ); ?>
+													</span>
+												</a>
+											</li>
+											<li class="wppic-meatball-menu-item wppic-meatball-menu-item-approve-comment" data-comment-action="approve">
+												<a href="#" class="button-reset" onClick={ ( e ) => e.preventDefault() }>
+													<span class="wppic-meatball-menu-icon">
+														<LineChart />
+													</span>
+													<span class="wppic-meatball-menu-label">
+														<?php esc_html_e( 'View Plugin Stats', 'wp-plugin-info-card' ); ?>
+													</span>
+												</a>
+											</li>
+											<li class="wppic-meatball-menu-item wppic-meatball-menu-item-moderate-comment" data-comment-action="pending">
+												<a href="#" class="button-reset" onClick={ ( e ) => e.preventDefault() }>
+													<span class="wppic-meatball-menu-icon">
+														<Download />
+													</span>
+													<span class="wppic-meatball-menu-label">
+														<?php esc_html_e( 'Download Plugin', 'wp-plugin-info-card' ); ?>
+													</span>
+												</a>
+											</li>
+										</ul>
+										<div class="wppic-meatball-icon-wrapper" aria-hidden="true">
+											<div class="wppic-meatball-icon">
+												<span></span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<?php
+							endif;
+							?>
+						</div><!-- .wp-pic-plugin-screenshots-avatar-wrapper -->
+						<div class="wp-pic-plugin-screenshots-title">
+							<h2><?php echo esc_html( '' === $attributes['plugin_title'] ? $asset_data['name'] : $attributes['plugin_title'] ); ?></h2>
+						</div>
+						<div class="wp-pic-plugin-screenshots-author">
+							<?php
+							echo esc_html(
+								sprintf(
+								/* Translators: %s is the plugin author */
+									__( 'By: %s', 'wp-plugin-info-card' ),
+									$asset_data['author']
+								)
+							);
+							?>
+						</div>
+						<div class="wp-pic-plugin-screenshots-rating">
+							Rating
+						</div>
+						<div class="wp-pic-plugin-screenshots-last-updated">
+							<?php
+							echo esc_html(
+								sprintf(
+								/* Translators: %s is the plugin author */
+									__( 'Last Updated: %s ago', 'wp-plugin-info-card' ),
+									$asset_data['last_updated_human_time']
+								)
+							);
+							?>
+						</div>
+						<div class="wp-pic-plugin-screenshots-description">
+							<?php echo wp_kses_post( $asset_data['short_description'] ); ?>
+						</div>
+						<footer class="wp-pic-plugin-screenshots-footer">
+							<div class="wp-pic-plugin-screenshots-images">
+								Screenshots
+							</div>
+							<div class="wp-pic-plugin-screenshots-meta">
+								<div class="wp-pic-plugin-screenshots-meta-item">
+									<div class="wp-pic-plugin-screenshots-meta-item-svg">
+										<svg width="16" height="16"><use xlink:href="#lucide-code"></use></svg>
+									</div>
+									<div class="wp-pic-plugin-screenshots-meta-item-label">
+										<?php
+										echo esc_html(
+											sprintf(
+											/* Translators: %s is the version */
+												__( 'v%s', 'wp-plugin-info-card' ),
+												$asset_data['version']
+											)
+										);
+										?>
+									</div>
+								</div>
+								<div class="wp-pic-plugin-screenshots-meta-item">
+									<div class="wp-pic-plugin-screenshots-meta-item-svg">
+										<svg width="16" height="16"><use xlink:href="#lucide-code"></use></svg>
+									</div>
+									<div class="wp-pic-plugin-screenshots-meta-item-label">
+										<?php echo esc_html( $requires_label ); ?>
+									</div>
+								</div>
+								<div class="wp-pic-plugin-screenshots-meta-item">
+									<div class="wp-pic-plugin-screenshots-meta-item-svg">
+										<svg width="16" height="16"><use xlink:href="#lucide-download-cloud"></use></svg>
+									</div>
+									<div class="wp-pic-plugin-screenshots-meta-item-label">
+										<?php echo esc_html( $active_installs_text ); ?>
+									</div>
+								</div>
+							</div>
+						</footer>
+					</div>
+				</div>
+			</div>
+		<?php
+		$return = ob_get_clean();
+
+		return $return;
+	}
 
 	/**
 	 * Main Shortcode function.
@@ -940,7 +1454,7 @@ class Shortcodes {
 		// Prepare the credit.
 		$credit = '';
 		if ( isset( $options['credit'] ) && true === $options['credit'] ) {
-			$credit .= '<a className="wp-pic-credit" href="https://mediaron.com/wp-plugin-info-card/" target="_blank" data-tooltip="';
+			$credit .= '<a class="wp-pic-credit" href="https://mediaron.com/wp-plugin-info-card/" target="_blank" data-tooltip="';
 			$credit .= esc_html__( 'This card has been generated with WP Plugin Info Card', 'wp-plugin-info-card' );
 			$credit .= '"></a>';
 		}
@@ -956,7 +1470,6 @@ class Shortcodes {
 		} else {
 			return $content;
 		}
-
 	}
 
 	/**
@@ -995,10 +1508,13 @@ class Shortcodes {
 
 		// Return error if no data.
 		if ( empty( $data ) ) {
-			wp_send_json_error();
+			wp_send_json_error(
+				array(
+					'message' => __( 'No plugin could be found with that slug.', 'wp-plugin-info-card' ),
+				)
+			);
 		}
 
 		wp_send_json_success( $data );
 	}
-
 }
