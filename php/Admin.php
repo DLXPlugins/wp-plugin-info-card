@@ -67,7 +67,7 @@ class Admin {
 		if ( true === $options_widget ) {
 			wp_add_dashboard_widget(
 				'wppic-dashboard-widget',
-				'<img src="' . esc_url( $wppic_svg ) . '" class="wppic-logo" alt="b*web" style="display:none"/>&nbsp;&nbsp;' . Functions::get_plugin_name() . ' board',
+				'<img src="' . esc_url( $wppic_svg ) . '" class="wppic-logo" alt="b*web" style="display:none"/>&nbsp;&nbsp;' . Functions::get_plugin_name() . esc_html__( ' board', 'wp-plugin-info-card' ),
 				array( $this, 'output_dashboard_widgets' )
 			);
 		}

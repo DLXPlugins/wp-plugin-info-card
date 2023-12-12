@@ -2,8 +2,8 @@
 Contributors: briKou, ronalfy
 Tags: API, plugin, card, theme, block, blocks, gutenberg
 Requires at least: 3.7
-Tested up to: 6.3
-Stable tag: 4.0.9
+Tested up to: 6.4
+Stable tag: 4.0.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,7 +39,7 @@ The dashboard widget is very easy to set up: you simply add as many plugins and 
 It is perfect to keep track of your own plugins and themes!
 
 
-[CHECK OUT THE DEMO](https://mediaron.com/wp-plugin-info-card/ "Try It!")
+[CHECK OUT THE DEMO](https://dlxplugins.com/plugins/plugin-info-card/ "Try It!")
 
 = Quick Links (Shortcode Documentation) =
 
@@ -53,7 +53,7 @@ It is perfect to keep track of your own plugins and themes!
 * <a href="https://wppic.mediaron.com/blocks/wp-plugin-info-card-query-block">WP Plugin Info Card Query block</a>.
 * <a href="https://wppic.mediaron.com/blocks/site-plugins-card-grid">Site Plugins Card Grid block</a>.
 
-[CHECK OUT MORE EXAMPLES](https://mediaron.com/wp-plugin-info-card/ "More documentation")
+[CHECK OUT MORE EXAMPLES](https://dlxplugins.com/plugins/plugin-info-card/ "More documentation")
 
 [PREMIUM ADD-ON - WP Envato Affiliate Card](http://b-website.com/wp-envato-affiliate-card-powered-envato-market-api "WP Envato Affiliate Card")
 
@@ -63,7 +63,7 @@ Please <a href="https://translate.wordpress.org/projects/wp-plugins/wp-plugin-in
 
 = GitHub =
 
-Feel free to make pull requests or issues on the <a href="https://github.com/mediaron/wp-plugin-info-card">WP Plugin Info Card GitHub account</a>.
+Feel free to make pull requests or issues on the <a href="https://github.com/dlxplugins/wp-plugin-info-card">WP Plugin Info Card GitHub account</a>.
 
 
 == Installation ==
@@ -100,6 +100,10 @@ This video shows you how:
 11. WordPress layout with themes and 2 columns
 
 == Changelog ==
+
+= 4.0.10 =
+* Released 2023-12-12
+* Fixing translations not being set properly with the text domain.
 
 = 4.0.9 =
 * Released 2023-10-13
@@ -424,5 +428,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 4.0.9 =
-Fixing undefined slug when slug has beginning and trailing slashes. Modified the Plugin Info Card block to automatically convert a .org URL to a slug.
+= 4.0.10 =
+Fixing translations not being set properly with the text domain.
