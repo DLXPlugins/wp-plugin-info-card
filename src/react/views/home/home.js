@@ -175,7 +175,7 @@ const AddPlugin = ( props ) => {
 			/>
 			<Button
 				className="wppic-btn has-icon-right "
-				variant="secondary"
+				variant="primary"
 				label={ __( 'Add Plugin', 'wp-plugin-info-card' ) }
 				onClick={ () => {
 					const sanitizedSlug = cleanForSlug( value );
@@ -228,7 +228,7 @@ const AddTheme = ( props ) => {
 			/>
 			<Button
 				className="wppic-btn has-icon-right "
-				variant="secondary"
+				variant="primary"
 				label={ __( 'Add Theme', 'wp-plugin-info-card' ) }
 				onClick={ () => {
 					const sanitizedSlug = cleanForSlug( value );
@@ -928,7 +928,7 @@ const Interface = ( props ) => {
 						<Button
 							variant="primary"
 							href="https://wppic.dlxplugins.com/"
-							className="wppic-btn has-icon-right btn-full-width"
+							className="wppic-btn wppic-btn-alt has-icon-right btn-full-width"
 							icon={ () => <ExternalLink /> }
 							iconPosition="right"
 							target="_blank"
@@ -939,7 +939,7 @@ const Interface = ( props ) => {
 						<Button
 							variant="primary"
 							href="https://www.b-website.com/wp-plugin-info-card-plugin-base-plugin-api-wordpress-org"
-							className="wppic-btn has-icon-right btn-full-width"
+							className="wppic-btn wppic-btn-alt has-icon-right btn-full-width"
 							icon={ () => <ExternalLink /> }
 							iconPosition="right"
 							target="_blank"

@@ -229,11 +229,22 @@ html {
 }
 /** Buttons */
 .wppic-btn.components-button {
+	transition: all 0.3s ease-in-out;
+	&:hover {
+		transition: all 0.3s ease-in-out;
+	}
 	&.is-primary {
 		background: #db8a39;
+		border: 1px solid #cbcbcb;
 	}
 	&.is-primary:hover {
 		background: #af6e2d;
+	}
+	&.wppic-btn-alt {
+		background: #394EDB;
+	}
+	&.wppic-btn-alt:hover {
+		background: #2e3e9c;
 	}
 	&.is-secondary {
 		color: #000;
@@ -349,12 +360,12 @@ html {
 		border-color: #017e01;
 		padding: 10px 20px;
 		cursor: pointer;
-		border-radius: 5px;
+		border-radius: 0;
 		transition: all 0.4s ease-in-out;
 		border-width: 1px;
 
 		&:hover {
-			border-radius: 5px;
+			border-radius: 0;
 			background: #e9ece6;
 			color: #005200;
 			border-color: #006400;

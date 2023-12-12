@@ -18795,7 +18795,7 @@ var AddPlugin = function AddPlugin(a) {
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Enter the plugin slug. Example: "wp-plugin-info-card".', 'wp-plugin-info-card')
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
     className: "wppic-btn has-icon-right ",
-    variant: "secondary",
+    variant: "primary",
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Add Plugin', 'wp-plugin-info-card'),
     onClick: function onClick() {
       var b = (0,_wordpress_url__WEBPACK_IMPORTED_MODULE_16__.cleanForSlug)(d);
@@ -18839,7 +18839,7 @@ var AddTheme = function AddTheme(a) {
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Enter the theme slug. Example: "astra".', 'wp-plugin-info-card')
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
     className: "wppic-btn has-icon-right ",
-    variant: "secondary",
+    variant: "primary",
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Add Theme', 'wp-plugin-info-card'),
     onClick: function onClick() {
       var b = (0,_wordpress_url__WEBPACK_IMPORTED_MODULE_16__.cleanForSlug)(d);
@@ -19402,7 +19402,7 @@ var Interface = function Interface(a) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_28__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Find out how to use WP Plugin Info Card, its blocks, and its shortcodes.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
     variant: "primary",
     href: "https://wppic.dlxplugins.com/",
-    className: "wppic-btn has-icon-right btn-full-width",
+    className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
     icon: function icon() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_29__["default"], null);
     },
@@ -19412,7 +19412,7 @@ var Interface = function Interface(a) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('English Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__["default"], {
     variant: "primary",
     href: "https://www.b-website.com/wp-plugin-info-card-plugin-base-plugin-api-wordpress-org",
-    className: "wppic-btn has-icon-right btn-full-width",
+    className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
     icon: function icon() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_29__["default"], null);
     },
