@@ -194,8 +194,7 @@ const PluginScreenshots = ( props ) => {
 									options={
 										{
 											type: 'loop',
-											width: '100%',
-											gap: '20px',
+											gap: '15px',
 											rewind: true,
 											perPage: ( Object.values( pluginScreenshots ).length > 3 ) ? 3 : Object.values( pluginScreenshots ).length,
 											perMove: 1,
@@ -205,11 +204,18 @@ const PluginScreenshots = ( props ) => {
 											autoplay: false,
 											lazyload: 'nearby',
 											mediaQuery: 'min',
+											padding: {
+												right: 20,
+												left: 20,
+											},
+											trimSpace: false,
 											breakpoints: {
 												500: {
+													focus: 'left',
 													perPage: Object.values( pluginScreenshots ).length < 3 ? Object.values( pluginScreenshots ).length : 3,
 												},
 												625: {
+													focus: 'left',
 													perPage: Object.values( pluginScreenshots ).length < 4 ? Object.values( pluginScreenshots ).length : 4,
 												},
 											},

@@ -10805,8 +10805,7 @@ var PluginScreenshots = function PluginScreenshots(a) {
   }, /*#__PURE__*/React.createElement(_splidejs_react_splide__WEBPACK_IMPORTED_MODULE_3__.Splide, {
     options: {
       type: 'loop',
-      width: '100%',
-      gap: '20px',
+      gap: '15px',
       rewind: true,
       perPage: Object.values(s).length > 3 ? 3 : Object.values(s).length,
       perMove: 1,
@@ -10816,11 +10815,18 @@ var PluginScreenshots = function PluginScreenshots(a) {
       autoplay: false,
       lazyload: 'nearby',
       mediaQuery: 'min',
+      padding: {
+        right: 20,
+        left: 20
+      },
+      trimSpace: false,
       breakpoints: {
         500: {
+          focus: 'left',
           perPage: Object.values(s).length < 3 ? Object.values(s).length : 3
         },
         625: {
+          focus: 'left',
           perPage: Object.values(s).length < 4 ? Object.values(s).length : 4
         }
       }

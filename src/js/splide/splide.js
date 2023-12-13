@@ -6,8 +6,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 		{
 			type: 'loop',
 			gap: '20px',
-			rewind: true,
+			width: '100%',
 			focus: 'left',
+			rewind: true,
 			trimSpace: false,
 			perPage: 3,
 			perMove: 1,
@@ -18,18 +19,15 @@ document.addEventListener( 'DOMContentLoaded', function() {
 			lazyload: 'nearby',
 			mediaQuery: 'min',
 			padding: {
-				right: '10px',
-				left: '10px',
+				right: 30,
+				left: 30,
 			},
-			fixedWidth: '33%',
 			breakpoints: {
 				500: {
 					perPage: 3,
-					focus: 'center',
 				},
 				625: {
 					perPage: 4,
-					fixedWidth: '25%',
 					focus: 'left',
 				},
 			},
