@@ -1333,6 +1333,24 @@ class Shortcodes {
 								Functions::get_plugin_version(),
 								true
 							);
+							// Enqueue the modal script.
+							if ( ! wp_script_is( 'fancybox', 'enqueued' ) ) {
+								wp_register_script(
+									'wppic-fancybox-js',
+									Functions::get_plugin_url( '/assets/lightbox/fancybox.umd.js' ),
+									array(),
+									Functions::get_plugin_version(),
+									true
+								);
+
+								wp_register_style(
+									'wppic-fancybox-css',
+									Functions::get_plugin_url( '/assets/lightbox/fancybox.css' ),
+									array(),
+									Functions::get_plugin_version(),
+									'all'
+								);
+							}
 							add_action( 'wp_footer', array( __CLASS__, 'add_splide_to_footer' ) );
 							?>
 								<div class="wp-pic-plugin-screenshots-images">
@@ -1345,7 +1363,7 @@ class Shortcodes {
 													$display_image        = $screenshot[ $screenshot_size ] ?? $screenshot['thumbnail'] ?? '';
 													?>
 														<li class="splide__slide">
-															<a href="<?php echo esc_url( $full_screenshot_size ); ?>" data-fancybox data-caption="<?php esc_attr( $screenshot['caption'] ); ?>">
+															<a href="<?php echo esc_url( $full_screenshot_size ); ?>" data-fancybox data-caption="<?php echo esc_attr( $screenshot['caption'] ); ?>">
 																<img src="<?php echo esc_url( $display_image ); ?>" alt="<?php echo esc_attr( $screenshot['caption'] ); ?>" />
 															</a>
 														</li>
@@ -1641,6 +1659,15 @@ class Shortcodes {
 				Functions::get_plugin_version()
 			);
 			wp_print_styles( 'wp-plugin-info-card-splide' );
+		}
+		// Enqueue / print fancybox styles.
+		if ( wp_script_is( 'wppic-fancybox-js', 'registered' ) && ! wp_script_is( 'wppic-fancybox-js', 'done' ) ) {
+			\wp_add_inline_style(
+				'wppic-fancybox-css',
+				'.fancybox__container{z-index:99999 !important}'
+			);
+			wp_print_scripts( 'wppic-fancybox-js' );
+			wp_print_styles( 'wppic-fancybox-css' );
 		}
 	}
 }

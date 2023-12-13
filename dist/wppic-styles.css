@@ -2741,8 +2741,8 @@ a.wp-pic-credit:focus:after {
 .wp-pic-plugin-screenshots-images .splide {
   position: relative;
   background: var(--wppic-plugin-screenshots-card-screenshots-background);
-  padding-top: 0;
-  padding-bottom: 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 .wp-pic-plugin-screenshots-images .splide__slide img {
   max-width: 100%;

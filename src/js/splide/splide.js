@@ -27,11 +27,27 @@ document.addEventListener( 'DOMContentLoaded', function() {
 					perPage: 3,
 				},
 				625: {
-					perPage: 4,
+					perPage: 3,
 					focus: 'left',
 				},
 			},
 		},
 	);
 	splide.mount();
+
+	// Init Fancybox.
+	// Check if Fancybox exists.
+	if ( typeof Fancybox !== 'undefined' ) {
+		// eslint-disable-next-line no-undef
+		Fancybox.bind( 'li.splide__slide:not(.splide__slide--clone) [data-fancybox]', {
+			Thumbs: {
+				type: "classic",
+			  },
+		} );
+		Fancybox.bind( 'li.splide__slide.splide__slide--clone [data-fancybox]', {
+			Thumbs: {
+				type: "none",
+			  },
+		} );
+	}
 } );
