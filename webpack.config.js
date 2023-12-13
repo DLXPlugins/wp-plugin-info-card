@@ -18,7 +18,8 @@ module.exports = ( env ) => {
 				'wppic-admin': [ './src/scss/wppic-admin-style.scss' ],
 				'wppic-styles': [ './src/scss/wppic-style.scss' ],
 				'wppic-editor': [ './src/scss/editor.scss' ],
-				'wppic-admin-home': [ './src/react/views/home/index.js']
+				'wppic-admin-home': [ './src/react/views/home/index.js' ],
+				'wppic-splide': [ './src/js/splide/splide.js', './src/scss/splide.scss' ],
 			},
 			mode: env.mode,
 			devtool: 'production' === env.mode ? false : 'source-map',

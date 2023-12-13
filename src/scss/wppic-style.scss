@@ -2385,20 +2385,35 @@ a.wp-pic-credit:focus:after {
 
 /* Set card text color */
 .wp-pic-plugin-screenshots-card {
-	.wp-pic-plugin-screenshots-title > h2,
+	.wp-pic-plugin-screenshots-title h2,
 	.wp-pic-plugin-screenshots-author,
 	.wp-pic-plugin-screenshots-rating,
 	.wp-pic-plugin-screenshots-last-updated,
 	.wp-pic-plugin-screenshots-description {
+		position: relative;
 		color: var( --wppic-plugin-screenshots-card-text-color );
+		font-size: 20px;
+	}
+}
+
+/* Set star rating color and size. */
+.wp-pic-plugin-screenshots-rating {
+	.wp-pic-plugin-screenshots-rating-count:before {
+		color: var( --wppic-plugin-screenshots-card-screenshots-star-color );
+
 	}
 }
 
 .wp-pic-plugin-screenshots-images {
 	.splide {
+		position: relative;
 		background: var( --wppic-plugin-screenshots-card-screenshots-background );
 		padding: 14px;
 		padding-top: 0;
+	}
+	.splide__slide img {
+		max-width: 100%;
+		height: auto;
 	}
 	.splide__arrow {
 		background: var( --wppic-plugin-screenshots-card-screenshots-arrow-background-color );
@@ -2429,9 +2444,11 @@ a.wp-pic-credit:focus:after {
 	position: relative;
 	img {
 		max-width: 65px;
+		height: auto;
 	}
 }
-.wp-pic-plugin-screenshots-title {
+.wp-pic-plugin-screenshots-card .wp-pic-plugin-screenshots-title,
+.editor-styles-wrapper .wp-pic-plugin-screenshots-card .wp-pic-plugin-screenshots-title {
 	padding-top: 15px;
 	padding-bottom: 10px;
 	h2 {
@@ -2477,7 +2494,10 @@ a.wp-pic-credit:focus:after {
 		line-height: 0;
 	}
 }
-.wp-pic-plugin-screenshots-wrapper {
+
+.wp-pic-plugin-screenshots-wrapper,
+body .wp-pic-plugin-screenshots-wrapper,
+.is-layout-contrained .wp-pic-plugin-screenshots-wrapper {
 	max-width: 625px;
 	width: 100%;
 }

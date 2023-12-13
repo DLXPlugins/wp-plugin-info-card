@@ -161,7 +161,7 @@ const PluginScreenshots = ( props ) => {
 						) }
 					</div>
 					<div className="wp-pic-plugin-screenshots-title">
-						<h2>{ '' === attributes.pluginTitle ? assetData.name : attributes.pluginTitle }</h2>
+						<h2>{ '' === attributes.pluginTitle ? htmlToReactParser.parse( assetData.name ) : htmlToReactParser.parse( attributes.pluginTitle ) }</h2>
 					</div>
 					<div className="wp-pic-plugin-screenshots-author">
 						{
@@ -204,7 +204,6 @@ const PluginScreenshots = ( props ) => {
 											drag: true,
 											autoplay: false,
 											lazyload: 'nearby',
-											perPage: Object.values( pluginScreenshots ).length < 2 ? 1 : 2,
 											mediaQuery: 'min',
 											breakpoints: {
 												500: {

@@ -1037,7 +1037,6 @@ class Shortcodes {
 				'icon_style'                               => 'none',
 				'asset_data'                               => array(),
 				'image_size'                               => 'thumbnail',
-				'icon_style'                               => 'none',
 				'enable_rounded_icon'                      => false,
 				'color_theme'                              => 'default',
 				'custom_colors'                            => false,
@@ -1083,6 +1082,14 @@ class Shortcodes {
 			'plugin',
 			'wp-pic-has-screenshots',
 		);
+
+		// Check for the color theme.
+		if ( ! $attributes['custom_colors'] && strpos( $attributes['color_theme'], 'custom' ) === false ) {
+			$classes[] = sprintf(
+				'wppic-plugin-screenshot-theme-%s',
+				esc_attr( $attributes['color_theme'] )
+			);
+		}
 
 		// Get asset data.
 		$asset_data = $attributes['asset_data'];
@@ -1159,6 +1166,31 @@ class Shortcodes {
 			);
 		}
 
+		$block_styles .= sprintf(
+			'
+			#%1$s .wp-pic-plugin-screenshots-rating-count {
+				position: relative;
+				display: block;
+				vertical-align: baseline;
+				margin-left: 0 !important;
+			}
+			#%1$s .wp-pic-plugin-screenshots-rating-count::before {
+				--percent: %2$s;
+				content: \'★★★★★\';
+				display: inline-block;
+				position: relative;
+				top: 0;
+				left: 0;
+				color: rgba(0,0,0,0.2);
+				background:
+					linear-gradient(90deg, var( --wppic-plugin-screenshots-card-screenshots-star-color ) var(--percent), rgba(0,0,0,0.2) var(--percent));
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}',
+			esc_attr( $attributes['unique_id'] ),
+			round( $asset_data['rating'] ) . '%'
+		);
+
 		// Begin outputting styles.
 		if ( ! empty( $block_styles ) ) {
 			$block_styles = sprintf( '<style>%s</style>', $block_styles );
@@ -1166,6 +1198,11 @@ class Shortcodes {
 
 		// Global var to enqueue scripts + ajax param if is set to yes.
 		add_filter( 'wppic_allow_scripts', '__return_true' );
+
+		/**
+		 * Add icons to footer for plugin card.
+		 */
+		add_action( 'wp_footer', array( __CLASS__, 'add_screenshots_icons_to_footer' ) );
 
 		// Begin the output.
 		ob_start();
@@ -1189,39 +1226,39 @@ class Shortcodes {
 										/>
 										<ul>
 											<li class="wppic-meatball-menu-item wppic-meatball-menu-item-edit-comment" data-comment-action="edit">
-												<a href="#" class="button-reset" onClick={ ( e ) => e.preventDefault() }>
+												<a href="<?php echo esc_url( $asset_data['url'] ); ?>" class="button-reset">
 													<span class="wppic-meatball-menu-icon">
-														<WordPressIcon />
+														<svg width="24" height="24"><use xlink:href="#wppic-icon-wordpress"></use></svg>
 													</span>
 													<span class="wppic-meatball-menu-label">
 														<?php esc_html_e( 'View Plugin Page', 'wp-plugin-info-card' ); ?>
 													</span>
 												</a>
 											</li>
-											<li class="wppic-meatball-menu-item wppic-meatball-menu-item-approve-comment" data-comment-action="approve">
-												<a href="#" class="button-reset" onClick={ ( e ) => e.preventDefault() }>
+											<li class="wppic-meatball-menu-item" data-comment-action="approve">
+												<a href="<?php echo esc_url( sprintf( 'https://wordpress.org/support/plugin/%s/reviews/', $asset_data['slug'] ) ); ?>" class="button-reset">
 													<span class="wppic-meatball-menu-icon">
-														<Star />
+														<svg width="24" height="24"><use xlink:href="#wppic-icon-star"></use></svg>
 													</span>
 													<span class="wppic-meatball-menu-label">
 														<?php esc_html_e( 'View Ratings', 'wp-plugin-info-card' ); ?>
 													</span>
 												</a>
 											</li>
-											<li class="wppic-meatball-menu-item wppic-meatball-menu-item-approve-comment" data-comment-action="approve">
-												<a href="#" class="button-reset" onClick={ ( e ) => e.preventDefault() }>
+											<li class="wppic-meatball-menu-item">
+												<a href="<?php echo esc_url( sprintf( 'https://wordpress.org/plugins/%s/advanced/', $asset_data['slug'] ) ); ?>" class="button-reset">
 													<span class="wppic-meatball-menu-icon">
-														<LineChart />
+														<svg width="24" height="24"><use xlink:href="#wppic-icon-line-chart"></use></svg>
 													</span>
 													<span class="wppic-meatball-menu-label">
 														<?php esc_html_e( 'View Plugin Stats', 'wp-plugin-info-card' ); ?>
 													</span>
 												</a>
 											</li>
-											<li class="wppic-meatball-menu-item wppic-meatball-menu-item-moderate-comment" data-comment-action="pending">
-												<a href="#" class="button-reset" onClick={ ( e ) => e.preventDefault() }>
+											<li class="wppic-meatball-menu-item">
+											<a href="<?php echo esc_url( $asset_data['download_link'] ); ?>" class="button-reset">
 													<span class="wppic-meatball-menu-icon">
-														<Download />
+														<svg width="24" height="24"><use xlink:href="#wppic-icon-download"></use></svg>
 													</span>
 													<span class="wppic-meatball-menu-label">
 														<?php esc_html_e( 'Download Plugin', 'wp-plugin-info-card' ); ?>
@@ -1255,7 +1292,17 @@ class Shortcodes {
 							?>
 						</div>
 						<div class="wp-pic-plugin-screenshots-rating">
-							Rating
+							<span class="wp-pic-plugin-screenshots-rating-count">
+								<?php
+								echo esc_html(
+									sprintf(
+									/* Translators: %s is the number of ratings */
+										_n( '%s Rating', '%s Ratings', $asset_data['num_ratings'], 'wp-plugin-info-card' ),
+										number_format_i18n( $asset_data['num_ratings'] )
+									)
+								);
+								?>
+							</span>
 						</div>
 						<div class="wp-pic-plugin-screenshots-last-updated">
 							<?php
@@ -1271,46 +1318,82 @@ class Shortcodes {
 						<div class="wp-pic-plugin-screenshots-description">
 							<?php echo wp_kses_post( $asset_data['short_description'] ); ?>
 						</div>
-						<footer class="wp-pic-plugin-screenshots-footer">
-							<div class="wp-pic-plugin-screenshots-images">
-								Screenshots
+					</div><!-- .wp-pic-plugin-screenshots-card -->
+					<footer class="wp-pic-plugin-screenshots-footer">
+						<?php
+						$local_screenshots   = $asset_data['local_screenshots'] ?? array();
+						$screenshots_enabled = $attributes['enable_screenshots'] && ! empty( $screenshots ) && ! empty( $local_screenshots );
+						$screenshot_size     = $attributes['image_size'] ?? 'thumbnail';
+						if ( $screenshots_enabled ) {
+							// Add Splide to footer.
+							wp_enqueue_script(
+								'wp-plugin-info-card-splide',
+								Functions::get_plugin_url( 'dist/wppic-splide.js' ),
+								array(),
+								Functions::get_plugin_version(),
+								true
+							);
+							add_action( 'wp_footer', array( __CLASS__, 'add_splide_to_footer' ) );
+							?>
+								<div class="wp-pic-plugin-screenshots-images">
+									<section class="splide">
+										<div class="splide__track">
+											<ul class="splide__list">
+												<?php
+												foreach ( $local_screenshots as $screenshot ) {
+													$full_screenshot_size = $screenshot['full'] ?? $screenshot['thumbnail'] ?? '';
+													$display_image        = $screenshot[ $screenshot_size ] ?? $screenshot['thumbnail'] ?? '';
+													?>
+														<li class="splide__slide">
+															<a href="<?php echo esc_url( $full_screenshot_size ); ?>" data-fancybox data-caption="<?php esc_attr( $screenshot['caption'] ); ?>">
+																<img src="<?php echo esc_url( $display_image ); ?>" alt="<?php echo esc_attr( $screenshot['caption'] ); ?>" />
+															</a>
+														</li>
+														<?php
+												}
+												?>
+											</ul>
+										</div><!-- .splide__track -->
+									</section><!-- .splide -->
+								</div>
+							<?php
+						}
+						?>
+						<div class="wp-pic-plugin-screenshots-meta">
+							<div class="wp-pic-plugin-screenshots-meta-item">
+								<div class="wp-pic-plugin-screenshots-meta-item-svg">
+									<svg width="24" height="24"><use xlink:href="#wppic-icon-code"></use></svg>
+								</div>
+								<div class="wp-pic-plugin-screenshots-meta-item-label">
+									<?php
+									echo esc_html(
+										sprintf(
+										/* Translators: %s is the version */
+											__( 'v%s', 'wp-plugin-info-card' ),
+											$asset_data['version']
+										)
+									);
+									?>
+								</div>
 							</div>
-							<div class="wp-pic-plugin-screenshots-meta">
-								<div class="wp-pic-plugin-screenshots-meta-item">
-									<div class="wp-pic-plugin-screenshots-meta-item-svg">
-										<svg width="16" height="16"><use xlink:href="#lucide-code"></use></svg>
-									</div>
-									<div class="wp-pic-plugin-screenshots-meta-item-label">
-										<?php
-										echo esc_html(
-											sprintf(
-											/* Translators: %s is the version */
-												__( 'v%s', 'wp-plugin-info-card' ),
-												$asset_data['version']
-											)
-										);
-										?>
-									</div>
+							<div class="wp-pic-plugin-screenshots-meta-item">
+								<div class="wp-pic-plugin-screenshots-meta-item-svg">
+									<svg width="24" height="24"><use xlink:href="#wppic-icon-wordpress"></use></svg>
 								</div>
-								<div class="wp-pic-plugin-screenshots-meta-item">
-									<div class="wp-pic-plugin-screenshots-meta-item-svg">
-										<svg width="16" height="16"><use xlink:href="#lucide-code"></use></svg>
-									</div>
-									<div class="wp-pic-plugin-screenshots-meta-item-label">
-										<?php echo esc_html( $requires_label ); ?>
-									</div>
-								</div>
-								<div class="wp-pic-plugin-screenshots-meta-item">
-									<div class="wp-pic-plugin-screenshots-meta-item-svg">
-										<svg width="16" height="16"><use xlink:href="#lucide-download-cloud"></use></svg>
-									</div>
-									<div class="wp-pic-plugin-screenshots-meta-item-label">
-										<?php echo esc_html( $active_installs_text ); ?>
-									</div>
+								<div class="wp-pic-plugin-screenshots-meta-item-label">
+									<?php echo esc_html( $requires_label ); ?>
 								</div>
 							</div>
-						</footer>
-					</div>
+							<div class="wp-pic-plugin-screenshots-meta-item">
+								<div class="wp-pic-plugin-screenshots-meta-item-svg">
+									<svg width="24" height="24"><use xlink:href="#wppic-icon-download-cloud"></use></svg>
+								</div>
+								<div class="wp-pic-plugin-screenshots-meta-item-label">
+									<?php echo esc_html( $active_installs_text ); ?>
+								</div>
+							</div>
+						</div>
+					</footer>
 				</div>
 			</div>
 		<?php
@@ -1516,5 +1599,48 @@ class Shortcodes {
 		}
 
 		wp_send_json_success( $data );
+	}
+
+	public static function add_screenshots_icons_to_footer() {
+		?>
+		<div style="display: none; height: 0; width: 0;" aria-hidden="true">
+			<svg width="0" height="0" class="hidden" style="display: none;">
+				<symbol id="wppic-icon-star" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star">
+					<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+				</symbol>
+				<symbol id="wppic-icon-wordpress" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 512 512">
+					<path fill="currentColor" d="M256 8C119.3 8 8 119.2 8 256c0 136.7 111.3 248 248 248s248-111.3 248-248C504 119.2 392.7 8 256 8zM33 256c0-32.3 6.9-63 19.3-90.7l106.4 291.4C84.3 420.5 33 344.2 33 256zm223 223c-21.9 0-43-3.2-63-9.1l66.9-194.4 68.5 187.8c.5 1.1 1 2.1 1.6 3.1-23.1 8.1-48 12.6-74 12.6zm30.7-327.5c13.4-.7 25.5-2.1 25.5-2.1 12-1.4 10.6-19.1-1.4-18.4 0 0-36.1 2.8-59.4 2.8-21.9 0-58.7-2.8-58.7-2.8-12-.7-13.4 17.7-1.4 18.4 0 0 11.4 1.4 23.4 2.1l34.7 95.2L200.6 393l-81.2-241.5c13.4-.7 25.5-2.1 25.5-2.1 12-1.4 10.6-19.1-1.4-18.4 0 0-36.1 2.8-59.4 2.8-4.2 0-9.1-.1-14.4-.3C109.6 73 178.1 33 256 33c58 0 110.9 22.2 150.6 58.5-1-.1-1.9-.2-2.9-.2-21.9 0-37.4 19.1-37.4 39.6 0 18.4 10.6 33.9 21.9 52.3 8.5 14.8 18.4 33.9 18.4 61.5 0 19.1-7.3 41.2-17 72.1l-22.2 74.3-80.7-239.6zm81.4 297.2l68.1-196.9c12.7-31.8 17-57.2 17-79.9 0-8.2-.5-15.8-1.5-22.9 17.4 31.8 27.3 68.2 27.3 107 0 82.3-44.6 154.1-110.9 192.7z"/>
+				</symbol>
+				<symbol id="wppic-icon-line-chart" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-line-chart">
+					<path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>
+				</symbol>
+				<symbol id="wppic-icon-download" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download">
+					<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>
+				</symbol>
+				<symbol id="wppic-icon-code" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code">
+					<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+				</symbol>
+				<symbol id="wppic-icon-download-cloud" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download-cloud">
+					<path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m8 17 4 4 4-4"/>
+				</symbol>
+			</svg>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Add Splide to footer.
+	 */
+	public static function add_splide_to_footer() {
+		// Don't print it twice.
+		if ( ! wp_style_is( 'wp-plugin-info-card-splide', 'registered' ) ) {
+			wp_register_style(
+				'wp-plugin-info-card-splide',
+				Functions::get_plugin_url( 'dist/wppic-splide.css' ),
+				array(),
+				Functions::get_plugin_version()
+			);
+			wp_print_styles( 'wp-plugin-info-card-splide' );
+		}
 	}
 }

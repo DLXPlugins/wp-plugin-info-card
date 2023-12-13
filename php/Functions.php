@@ -573,6 +573,9 @@ class Functions {
 			);
 		}
 
+		// Add support for styles.
+		$allowed_tags['style'] = array();
+
 		// Add HTML table markup.
 		if ( $with_tables ) {
 			$allowed_tags['html']  = array(
@@ -588,7 +591,6 @@ class Functions {
 			$allowed_tags['body']  = array(
 				'style' => array(),
 			);
-			$allowed_tags['style'] = array();
 			$allowed_tags['table'] = array(
 				'class'        => array(),
 				'width'        => array(),
