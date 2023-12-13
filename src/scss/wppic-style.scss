@@ -2477,6 +2477,15 @@ a.wp-pic-credit:focus:after {
 	fill: var( --wppic-plugin-screenshots-card-meta-text-color );
 	padding: 15px 20px;
 
+	a {
+		text-decoration: none !important;
+		color: inherit;
+	}
+	a:hover {
+		text-decoration: none;
+		color: inherit;
+	}
+
 	svg:not(.lucide) path {
 		fill: var( --wppic-plugin-screenshots-card-meta-text-color );
 	}

@@ -6317,6 +6317,14 @@ a.wp-pic-credit:focus:after {
   fill: var(--wppic-plugin-screenshots-card-meta-text-color);
   padding: 15px 20px;
 }
+.wp-pic-plugin-screenshots-meta a {
+  text-decoration: none !important;
+  color: inherit;
+}
+.wp-pic-plugin-screenshots-meta a:hover {
+  text-decoration: none;
+  color: inherit;
+}
 .wp-pic-plugin-screenshots-meta svg:not(.lucide) path {
   fill: var(--wppic-plugin-screenshots-card-meta-text-color);
 }

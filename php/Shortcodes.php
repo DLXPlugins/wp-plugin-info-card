@@ -34,6 +34,9 @@ class Shortcodes {
 		return $self;
 	}
 
+	/**
+	 * Register screenshot post types.
+	 */
 	public static function register_screenshots_post_type() {
 		$labels = array(
 			'name'               => __( 'Plugins', 'wp-plugin-info-card' ),
@@ -66,6 +69,9 @@ class Shortcodes {
 		register_post_type( 'wppic_plugins', $args );
 	}
 
+	/**
+	 * Register plugin screenshots post type.
+	 */
 	public static function register_screenshots_presets_post_type() {
 		$labels = array(
 			'name'               => __( 'Presets', 'wp-plugin-info-card' ),
@@ -1027,6 +1033,9 @@ class Shortcodes {
 
 	/**
 	 * Shortcode for retrieving plugin screenshots card.
+	 *
+	 * @param array  $attributes Shortcode attributes.
+	 * @param string $content    The content of the shortcode.
 	 */
 	public static function shortcode_plugin_screenshots_info_card( $attributes, $content = '' ) {
 
@@ -1106,9 +1115,9 @@ class Shortcodes {
 		$icon = $asset_data['icons']['svg'] ?? $asset_data['icons']['2x'] ?? $asset_data['icons']['1x'] ?? Functions::get_plugin_url( 'assets/img/default-plugin-icon.png' );
 
 		// Get plugin screenshots.
-		$screenshots = Functions::get_plugin_screenshots( $asset_data['slug'] );
+		$screenshots = Functions::get_plugin_screenshots( $asset_data['slug'], false, true );
 
-		//Active installs
+		// Active installs.
 		if ( $asset_data['active_installs'] >= 1000000 ) {
 			// Get number of million.
 			$count_in_million = round( $asset_data['active_installs'] / 1000000, 1 );
@@ -1383,6 +1392,7 @@ class Shortcodes {
 									<svg width="24" height="24"><use xlink:href="#wppic-icon-code"></use></svg>
 								</div>
 								<div class="wp-pic-plugin-screenshots-meta-item-label">
+									<a href="<?php echo esc_url( $asset_data['download_link'] ); ?>">
 									<?php
 									echo esc_html(
 										sprintf(
@@ -1392,6 +1402,7 @@ class Shortcodes {
 										)
 									);
 									?>
+									</a>
 								</div>
 							</div>
 							<div class="wp-pic-plugin-screenshots-meta-item">
@@ -1399,7 +1410,7 @@ class Shortcodes {
 									<svg width="24" height="24"><use xlink:href="#wppic-icon-wordpress"></use></svg>
 								</div>
 								<div class="wp-pic-plugin-screenshots-meta-item-label">
-									<?php echo esc_html( $requires_label ); ?>
+								<a href="<?php echo esc_url( $asset_data['url'] ); ?>"><?php echo esc_html( $requires_label ); ?></a>
 								</div>
 							</div>
 							<div class="wp-pic-plugin-screenshots-meta-item">
@@ -1407,7 +1418,7 @@ class Shortcodes {
 									<svg width="24" height="24"><use xlink:href="#wppic-icon-download-cloud"></use></svg>
 								</div>
 								<div class="wp-pic-plugin-screenshots-meta-item-label">
-									<?php echo esc_html( $active_installs_text ); ?>
+								<a href="<?php echo esc_url( sprintf( 'https://wordpress.org/plugins/%s/advanced/', $asset_data['slug'] ) ); ?>"><?php echo esc_html( $active_installs_text ); ?></a>
 								</div>
 							</div>
 						</div>
@@ -1619,6 +1630,9 @@ class Shortcodes {
 		wp_send_json_success( $data );
 	}
 
+	/**
+	 * Add SVGs to footer.
+	 */
 	public static function add_screenshots_icons_to_footer() {
 		?>
 		<div style="display: none; height: 0; width: 0;" aria-hidden="true">

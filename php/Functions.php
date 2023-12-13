@@ -680,6 +680,7 @@ class Functions {
 	 *
 	 * @param string $slug  Plugin slug to retrieve screenshots for.
 	 * @param bool   $force Whether to force retrieve (no caching) the plugin data.
+	 * @param bool   $replace_with_org Whether to replace missing images with .org images.
 	 */
 	public static function get_plugin_screenshots( $slug, $force = false, $replace_with_org = false ) {
 		// Get the plugin.
@@ -691,7 +692,7 @@ class Functions {
 		}
 
 		// Get the plugin attachments.
-		$plugin_page = Functions::get_plugin_page( $slug );
+		$plugin_page = self::get_plugin_page( $slug );
 		if ( ! empty( $plugin_page ) ) {
 			$args   = array(
 				'post_parent'    => $plugin_page->ID,
