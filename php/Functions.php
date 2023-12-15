@@ -683,6 +683,17 @@ class Functions {
 	 * @param bool   $replace_with_org Whether to replace missing images with .org images.
 	 */
 	public static function get_plugin_screenshots( $slug, $force = false, $replace_with_org = false ) {
+		// Define a unique transient key for caching.
+		$transient_key = 'wppic_screenshots_' . $slug;
+
+		// Check if cached data is available and $force is false.
+		if ( ! $force ) {
+			$cached_data = get_transient( $transient_key );
+			if ( false !== $cached_data ) {
+				return $cached_data;
+			}
+		}
+
 		// Get the plugin.
 		$plugin_data        = wppic_api_parser( 'plugin', $slug, 720, '', false, $force );
 		$plugin_screenshots = $plugin_data->screenshots ?? array();
@@ -718,6 +729,8 @@ class Functions {
 			}
 
 			if ( ! $replace_with_org ) {
+				// Cache the data and return.
+				set_transient( $transient_key, $images_array, HOUR_IN_SECONDS * 12 ); // Adjust the time as needed.
 				return $images_array;
 			}
 
@@ -741,18 +754,12 @@ class Functions {
 						'caption'   => $screenshot['caption'],
 						'alt'       => $screenshot['caption'],
 					);
-					/**
-					 * Action if an image isn't found. Others can hook into the passed data to sideload the image.
-					 *
-					 * @param string  $slug             The plugin slug.
-					 * @param WP_Post $plugin_page      The plugin page object.
-					 * @param object  $screenshot       The screenshot object (image and caption object keys)
-					 * @param int     $screenshot_order The screenshot order.
-					 */
 					do_action( 'wppic_no_plugin_screenshot_found', $slug, $plugin_page, $screenshot, $screenshot_order );
 				}
 			}
 
+			// Cache the data and return.
+			set_transient( $transient_key, $images_array, HOUR_IN_SECONDS * 12 ); // Adjust the time as needed.
 			return $images_array;
 		}
 		return array();
