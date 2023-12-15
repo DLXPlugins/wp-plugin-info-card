@@ -754,6 +754,21 @@ class Functions {
 						'caption'   => $screenshot['caption'],
 						'alt'       => $screenshot['caption'],
 					);
+					/**
+					 * Fires when a plugin screenshot is not found in the local storage.
+					 *
+					 * This action allows other developers to hook into the screenshot retrieval process.
+					 * It can be used to sideload the image from WordPress.org or perform other custom actions
+					 * when a screenshot is missing for a given plugin.
+					 *
+					 * @since 5.0.0
+					 *
+					 * @param string  $slug             The slug of the plugin for which the screenshot is missing.
+					 * @param WP_Post $plugin_page      The WP_Post object representing the plugin page.
+					 * @param array   $screenshot       The screenshot data from WordPress.org API.
+					 *                                  Includes 'src' (URL of the image), 'caption', and other relevant data.
+					 * @param int     $screenshot_order The order of the screenshot as provided by WordPress.org.
+					 */
 					do_action( 'wppic_no_plugin_screenshot_found', $slug, $plugin_page, $screenshot, $screenshot_order );
 				}
 			}

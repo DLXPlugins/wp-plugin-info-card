@@ -70,7 +70,7 @@ class Plugin_Screenshots {
 		if ( 'plugin-screenshots' === $tab ) {
 			if ( empty( $sub_tab ) || 'plugin-screenshots' === $sub_tab ) {
 				?>
-					<div id="wpac-tab-plugin-screenshots"></div>
+					<div id="wppic-tab-plugin-screenshots"></div>
 				<?php
 			}
 		}

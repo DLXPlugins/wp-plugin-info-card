@@ -7,6 +7,7 @@ module.exports = {
 		ajaxurl: 'readonly',
 		wppic: 'readonly',
 		wppicAdminHome: 'readonly',
+		wppicAdminScreenshots: 'readonly',
 	},
 	extends: [
 		'eslint:recommended',

@@ -275,7 +275,7 @@ const AddTheme = ( props ) => {
 			setErrorMessage( __( 'There has been an error communicating with the server. Please try again.', 'wp-plugin-info-card' ) );
 			setIsError( true );
 			setIsChecking( false );
-			pluginInput.focus();
+			themeInput.focus();
 		} );
 		const response = await checkThemePromise;
 
@@ -644,30 +644,37 @@ const Interface = ( props ) => {
 		const themeList = getValues( 'theme-list' );
 		if ( themeList.length > 0 ) {
 			return (
-				<>
-					{ themeList.map( ( item, index ) => {
-						return (
-							<div className="wppic-org-asset-row" key={ index }>
-								<Controller
-									name={ `theme-list[${ index }]` }
-									key={ index }
-									control={ control }
-									rules={ { required: true } }
-									render={ ( { field: { onChange, value } } ) => (
-										<TextControl
-											value={ value }
-											onChange={ onChange }
-											type="hidden"
-										/>
-									) }
-								/>
-								<div className="wppic-org-asset-row__actions">
-									<OrgAsset type="theme" slug={ item } index={ index } removeCallback={ removeTheme } moveCallback={ moveTheme } />
+				<BaseControl
+					label={ __( 'Themes to Track', 'wp-plugin-info-card' ) }
+					className="wppic-asset-list"
+					id="wppic-asset-list-themes"
+					help={ __( 'Drag and drop to reorder.', 'wp-plugin-info-card' ) }
+				>
+					<>
+						{ themeList.map( ( item, index ) => {
+							return (
+								<div className="wppic-org-asset-row" key={ index }>
+									<Controller
+										name={ `theme-list[${ index }]` }
+										key={ index }
+										control={ control }
+										rules={ { required: true } }
+										render={ ( { field: { onChange, value } } ) => (
+											<TextControl
+												value={ value }
+												onChange={ onChange }
+												type="hidden"
+											/>
+										) }
+									/>
+									<div className="wppic-org-asset-row__actions">
+										<OrgAsset type="theme" slug={ item } index={ index } removeCallback={ removeTheme } moveCallback={ moveTheme } />
+									</div>
 								</div>
-							</div>
-						);
-					} ) }
-				</>
+							);
+						} ) }
+					</>
+				</BaseControl>
 			);
 		}
 	};
