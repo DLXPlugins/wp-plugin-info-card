@@ -34,6 +34,8 @@ class Init {
 		add_action( 'wp_ajax_wppic_clear_cache', array( $this, 'ajax_clear_cache' ) );
 		add_action( 'wp_ajax_wppic_check_plugin', array( $this, 'ajax_check_plugin' ) );
 		add_action( 'wp_ajax_wppic_check_theme', array( $this, 'ajax_check_theme' ) );
+		add_action( 'wp_ajax_wppic_get_sample_plugin', array( $this, 'ajax_get_sample_plugin' ) );
+
 		// Init tabs.
 		new Tabs\Main();
 		new Tabs\Plugin_Screenshots();
@@ -66,7 +68,7 @@ class Init {
 			);
 		}
 		$plugin_slug = sanitize_text_field( filter_input( INPUT_POST, 'slug', FILTER_DEFAULT ) );
-		
+
 		if ( ! $plugin_slug ) {
 			wp_send_json_error(
 				array(
@@ -77,6 +79,44 @@ class Init {
 			);
 		}
 
+		$plugin_data = wppic_api_parser( 'plugin', $plugin_slug );
+		if ( ! $plugin_data ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Plugin not found', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+		wp_send_json_success(
+			array(
+				'message'     => __( 'Plugin found', 'wp-plugin-info-card' ),
+				'type'        => 'success',
+				'dismissable' => true,
+				'pluginData'  => $plugin_data,
+			)
+		);
+	}
+
+	/**
+	 * Check a sample plugin via Ajax.
+	 */
+	public function ajax_get_sample_plugin() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+		if ( ! wp_verify_nonce( $nonce, 'wppic-admin-get-sample-plugin' ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce verification failed', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+		$plugin_slug = 'wp-plugin-info-card';
 		$plugin_data = wppic_api_parser( 'plugin', $plugin_slug );
 		if ( ! $plugin_data ) {
 			wp_send_json_error(
@@ -115,7 +155,7 @@ class Init {
 			);
 		}
 		$theme_slug = sanitize_text_field( filter_input( INPUT_POST, 'slug', FILTER_DEFAULT ) );
-		
+
 		if ( ! $theme_slug ) {
 			wp_send_json_error(
 				array(
@@ -263,7 +303,7 @@ class Init {
 		}
 
 		// Lastly, update options.
-		//Options::update_options( $options );
+		// Options::update_options( $options );
 
 		wp_send_json_success(
 			array(
@@ -295,6 +335,28 @@ class Init {
 				$current_tab = 'home';
 			}
 			do_action( 'wppic_admin_enqueue_scripts_' . $current_tab );
+
+			// Register global dummy script.
+			wp_register_script(
+				'wppic-admin-null',
+				''
+			);
+			wp_enqueue_script( 'wppic-admin-null' );
+			wp_localize_script(
+				'wppic-admin-null',
+				'wppicAdmin',
+				array(
+					'getPluginNonce' => wp_create_nonce( 'wppic-admin-get-sample-plugin' ),
+					'wppic_banner_default'           => Functions::get_plugin_url( 'assets/img/default-banner.png' ),
+				)
+			);
+			wp_localize_script(
+				'wppic-admin-null',
+				'wppic',
+				array(
+					'wppic_banner_default'           => Functions::get_plugin_url( 'assets/img/default-banner.png' ),
+				)
+			);
 		}
 	}
 }

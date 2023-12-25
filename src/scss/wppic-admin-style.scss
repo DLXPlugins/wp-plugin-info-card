@@ -6,6 +6,7 @@
 @import "./wppic-style.scss";
 @import "./button-resets.scss";
 @import '../../node_modules/@wordpress/components/build-style/style.css';
+@import '../../node_modules/@fancyapps/ui/dist/fancybox/fancybox.css';
 
 @-moz-keyframes wppic-spin {
     from { -moz-transform: rotate(0deg); }
@@ -986,3 +987,20 @@ h3.wp-pic-title {
 p.wppic-admin-header-description {
 	font-size: 18px;
 }
+
+/**
+ * Block styles.
+ */
+ .wp-pic-flip,
+ .wp-pic-wordpress,
+ .wp-pic-large {
+   display: block !important;
+ }
+ #wppic-preview--clone {
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+ }
+ .fancybox__container {
+	z-index: 10000;
+ }

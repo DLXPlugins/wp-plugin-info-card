@@ -43,7 +43,7 @@ class Main {
 		wp_enqueue_script(
 			'wppic-admin-home',
 			Functions::get_plugin_url( 'dist/wppic-admin-home.js' ),
-			array(),
+			array( 'wp-blocks' ),
 			Functions::get_plugin_version(),
 			true
 		);

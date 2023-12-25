@@ -1,14 +1,13 @@
 import React, { useState, Suspense, useCallback, useRef } from 'react';
-import update from 'immutability-helper'
 import { useForm, Controller, useWatch, useFormState } from 'react-hook-form';
 import classNames from 'classnames';
 import { useAsyncResource } from 'use-async-resource';
 import { __ } from '@wordpress/i18n';
-import { DndProvider, useDrag, useDrop } from 'react-dnd';
+import { useDrag, useDrop } from 'react-dnd';
 import { isURL, cleanForSlug } from '@wordpress/url';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import BeatLoader from 'react-spinners/BeatLoader';
 import SaveResetButtons from '../../components/SaveResetButtons';
+import { Fancybox } from '@fancyapps/ui';
 
 import {
 	TextControl,
@@ -35,6 +34,7 @@ import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
 import SnackPop from '../../components/SnackPop';
+import usePluginPreview from '../../hooks/usePluginPreview';
 
 const OrgAsset = ( { type, slug, index, moveCallback, removeCallback } ) => {
 	const ref = useRef( null );
@@ -429,14 +429,40 @@ const CacheButton = ( props ) => {
 	);
 };
 
-const retrieveHomeOptions = () => {
-	return SendCommand( 'wppic_get_home_options', {
+const retrieveHomeOptions = async () => {
+	// Retrieve from server.
+	const response = await SendCommand( 'wppic_get_home_options', {
 		nonce: wppicAdminHome.getNonce,
 	} );
+	const { success, data } = response.data;
+	if ( success ) {
+		// Save to local storage.
+		localStorage.setItem( 'wppic_home_options', JSON.stringify( data ) );
+		localStorage.setItem( 'wppic_home_options_timestamp', new Date().getTime().toString() );
+
+		return response;
+	}
+	return {};
 };
 
 const HomeScreen = ( props ) => {
-	const [ defaults, getDefaults ] = useAsyncResource( retrieveHomeOptions, [] );
+	const [ defaults ] = useAsyncResource( retrieveHomeOptions, [] );
+
+	const response = defaults();
+
+	// Retrieve from local storage.
+	const cachedOptions = localStorage.getItem( 'wppic_home_options' );
+	const cachedTimestamp = localStorage.getItem( 'wppic_home_options_timestamp' );
+	// Remove local storage.
+	// localStorage.removeItem( 'wppic_home_options' );
+	// localStorage.removeItem( 'wppic_home_options_timestamp' );
+	if ( cachedOptions && cachedTimestamp ) {
+		const currentTime = new Date().getTime();
+		const cacheExpiration = parseInt( cachedTimestamp ) + 3600000;
+		if ( currentTime < cacheExpiration ) {
+			return <Interface data={ JSON.parse( cachedOptions ) } { ...props } />;
+		}
+	}
 	return (
 		<ErrorBoundary
 			fallback={
@@ -469,17 +495,14 @@ const HomeScreen = ( props ) => {
 					</>
 				}
 			>
-				<Interface defaults={ defaults } { ...props } />
+				<Interface data={ response.data } { ...props } />
 			</Suspense>
 		</ErrorBoundary>
 	);
 };
 
 const Interface = ( props ) => {
-	const { defaults } = props;
-	const response = defaults();
-	const { data, success } = response.data;
-
+	const { data } = props;
 	const {
 		control,
 		handleSubmit,
@@ -507,6 +530,8 @@ const Interface = ( props ) => {
 	const { errors, isDirty, dirtyFields } = useFormState( {
 		control,
 	} );
+
+	const { getPreview } = usePluginPreview();
 
 	/**
 	 * Move a plugin in the list.
@@ -866,6 +891,34 @@ const Interface = ( props ) => {
 															/>
 														) }
 													/>
+												</div>
+												<div className="wppic-admin__control-row">
+													<Button
+														label={ __( 'Preview Plugin Card', 'wp-plugin-info-card' ) }
+														className="wppic-btn is-secondary"
+														data-src="#wppic-preview"
+														data-fancybox
+														onClick={ ( e ) => {
+															e.preventDefault();
+															Fancybox.show(
+																[
+																	{
+																		src: '#wppic-preview',
+																		type: 'clone',
+																		autoStart: true,
+																	},
+																],
+															);
+														} }
+													>
+														{ __( 'Preview', 'wp-ajaxify-comments' ) }
+													</Button>
+												</div>
+												<div aria-hidden="true" style={{ display: 'none', width: '80%', height: 'auto', } } id="wppic-preview">
+													<>
+														{ getPreview( getValues( 'default_layout' ), getValues( 'colorscheme' ) ) }
+													</>
+													
 												</div>
 											</td>
 										</tr>
