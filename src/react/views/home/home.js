@@ -1,4 +1,4 @@
-import React, { useState, Suspense, useCallback, useRef } from 'react';
+import React, { useState, useEffect, Suspense, useCallback, useRef } from 'react';
 import { useForm, Controller, useWatch, useFormState } from 'react-hook-form';
 import classNames from 'classnames';
 import { useAsyncResource } from 'use-async-resource';
@@ -97,7 +97,7 @@ const OrgAsset = ( { type, slug, index, moveCallback, removeCallback } ) => {
 			return { index };
 		},
 		collect: ( monitor ) => ( {
-			opacity: monitor.isDragging() ? 0.4 : 1,
+			opacity: monitor.isDragging() ? 1 : 1,
 			isDragging: monitor.isDragging(),
 		} ),
 	} );
@@ -191,7 +191,7 @@ const AddPlugin = ( props ) => {
 			return __( 'Checking plugin…', 'wp-plugin-info-card' );
 		}
 		return __( 'Add Plugin', 'wp-plugin-info-card' );
-	}
+	};
 	return (
 		<div className="wppic-add-plugin-wrapper">
 			<TextControl
@@ -297,7 +297,7 @@ const AddTheme = ( props ) => {
 			return __( 'Checking theme…', 'wp-plugin-info-card' );
 		}
 		return __( 'Add Theme', 'wp-plugin-info-card' );
-	}
+	};
 	return (
 		<div className="wppic-add-plugin-wrapper">
 			<TextControl
@@ -368,7 +368,6 @@ const AddTheme = ( props ) => {
 };
 
 const CacheButton = ( props ) => {
-
 	const [ clearing, setClearing ] = useState( false );
 	const [ isCleared, setIsCleared ] = useState( false );
 	const [ clearPromise, setClearPromise ] = useState( null );
@@ -389,7 +388,7 @@ const CacheButton = ( props ) => {
 		setClearing( true );
 		await clearOptionsPromise;
 		setClearing( false );
-	}
+	};
 
 	const getCacheIcon = () => {
 		if ( clearing ) {
@@ -446,58 +445,55 @@ const retrieveHomeOptions = async () => {
 };
 
 const HomeScreen = ( props ) => {
-	const [ defaults ] = useAsyncResource( retrieveHomeOptions, [] );
+	const [ homeOptions, setHomeOptions ] = useState( null );
 
-	const response = defaults();
-
-	// Retrieve from local storage.
-	const cachedOptions = localStorage.getItem( 'wppic_home_options' );
-	const cachedTimestamp = localStorage.getItem( 'wppic_home_options_timestamp' );
-	// Remove local storage.
-	// localStorage.removeItem( 'wppic_home_options' );
-	// localStorage.removeItem( 'wppic_home_options_timestamp' );
-	if ( cachedOptions && cachedTimestamp ) {
-		const currentTime = new Date().getTime();
-		const cacheExpiration = parseInt( cachedTimestamp ) + 3600000;
-		if ( currentTime < cacheExpiration ) {
-			return <Interface data={ JSON.parse( cachedOptions ) } { ...props } />;
+	useEffect( () => {
+		if ( homeOptions ) {
+			return;
 		}
-	}
-	return (
-		<ErrorBoundary
-			fallback={
-				<p>
-					{ __( 'Could not load Home options.', 'wp-plugin-info-card' ) }
-					<br />
-					<a
-						href="https://dlxplugins.com/support/"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						DLX Plugins Support
-					</a>
-				</p>
+
+
+
+		const cachedOptions = localStorage.getItem( 'wppic_home_options' );
+		const cachedTimestamp = localStorage.getItem( 'wppic_home_options_timestamp' );
+
+		if ( cachedOptions && cachedTimestamp ) {
+			const currentTime = new Date().getTime();
+			const cacheExpiration = parseInt( cachedTimestamp ) + 3600000;
+			if ( currentTime < cacheExpiration ) {
+				setHomeOptions( JSON.parse( cachedOptions ) );
+				return;
 			}
-		>
-			<Suspense
-				fallback={
-					<>
-						<div className="wppic-admin-panel-loading">
-							<h2>{ __( 'Loading Options', 'wp-plugin-info-card' ) }</h2>
-							<BeatLoader
-								color={ '#DB3939' }
-								loading={ true }
-								cssOverride={ true }
-								size={ 25 }
-								speedMultiplier={ 0.65 }
-							/>
-						</div>
-					</>
-				}
-			>
-				<Interface data={ response.data } { ...props } />
-			</Suspense>
-		</ErrorBoundary>
+		}
+
+		const fetchOptions = async () => {
+			const response = await SendCommand( 'wppic_get_home_options', {
+				nonce: wppicAdminHome.getNonce,
+			} );
+			const { success, data } = response.data;
+			if ( success ) {
+				// Save to local storage.
+				localStorage.setItem( 'wppic_home_options', JSON.stringify( data ) );
+				localStorage.setItem( 'wppic_home_options_timestamp', new Date().getTime().toString() );
+
+				setHomeOptions( data );
+			}
+		};
+		// Fetch options.
+		fetchOptions();
+	}, [] );
+
+	if ( ! homeOptions ) {
+		return (
+			<div className="wppic-admin-panel-loading">
+				<h2>{ __( 'Loading Options', 'wp-plugin-info-card' ) }</h2>
+				<BeatLoader color={ '#333' } loading={ true } cssOverride={ true } size={ 25 } speedMultiplier={ 0.65 } />
+			</div>
+		);
+	}
+
+	return (
+		<Interface data={ homeOptions } { ...props } />
 	);
 };
 
@@ -531,7 +527,7 @@ const Interface = ( props ) => {
 		control,
 	} );
 
-	const { getPreview } = usePluginPreview();
+	const { getPreview, previewReady } = usePluginPreview();
 
 	/**
 	 * Move a plugin in the list.
@@ -620,7 +616,11 @@ const Interface = ( props ) => {
 	 *
 	 * @param {Object} formData contains the form data.
 	 */
-	const onSubmit = ( formData ) => { };
+	const onSubmit = ( formData ) => {
+		// Update local storage.
+		localStorage.setItem( 'wppic_home_options', JSON.stringify( formData ) );
+		localStorage.setItem( 'wppic_home_options_timestamp', new Date().getTime().toString() );
+	};
 
 	/**
 	 * Get the plugins.
@@ -892,33 +892,37 @@ const Interface = ( props ) => {
 														) }
 													/>
 												</div>
-												<div className="wppic-admin__control-row">
-													<Button
-														label={ __( 'Preview Plugin Card', 'wp-plugin-info-card' ) }
-														className="wppic-btn is-secondary"
-														data-src="#wppic-preview"
-														data-fancybox
-														onClick={ ( e ) => {
-															e.preventDefault();
-															Fancybox.show(
-																[
-																	{
-																		src: '#wppic-preview',
-																		type: 'clone',
-																		autoStart: true,
-																	},
-																],
-															);
-														} }
-													>
-														{ __( 'Preview', 'wp-ajaxify-comments' ) }
-													</Button>
-												</div>
-												<div aria-hidden="true" style={{ display: 'none', width: '80%', height: 'auto', } } id="wppic-preview">
+												{
+													previewReady && (
+														<div className="wppic-admin__control-row">
+															<Button
+																label={ __( 'Preview Plugin Card', 'wp-plugin-info-card' ) }
+																className="wppic-btn is-secondary"
+																data-src="#wppic-preview"
+																data-fancybox
+																onClick={ ( e ) => {
+																	e.preventDefault();
+																	Fancybox.show(
+																		[
+																			{
+																				src: '#wppic-preview',
+																				type: 'clone',
+																				autoStart: true,
+																			},
+																		],
+																	);
+																} }
+															>
+																{ __( 'Preview', 'wp-ajaxify-comments' ) }
+															</Button>
+														</div>
+													)
+												}
+												<div aria-hidden="true" style={ { display: 'none', width: '80%', height: 'auto' } } id="wppic-preview">
 													<>
 														{ getPreview( getValues( 'default_layout' ), getValues( 'colorscheme' ) ) }
 													</>
-													
+
 												</div>
 											</td>
 										</tr>

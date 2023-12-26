@@ -1,14 +1,9 @@
-
-import { useAsyncResource } from 'use-async-resource';
+import { useState, useEffect } from 'react';
 import SendCommand from '../utils/SendCommand';
 import PluginCard from '../../blocks/templates/PluginCard';
 import PluginFlex from '../../blocks/templates/PluginFlex';
 import PluginLarge from '../../blocks/templates/PluginLarge';
 import PluginWordPress from '../../blocks/templates/PluginWordPress';
-import ThemeCard from '../../blocks/templates/ThemeCard';
-import ThemeFlex from '../../blocks/templates/ThemeFlex';
-import ThemeLarge from '../../blocks/templates/ThemeLarge';
-import ThemeWordPress from '../../blocks/templates/ThemeWordPress';
 
 const retrieveSamplePlugin = async () => {
 	const response = await SendCommand( 'wppic_get_sample_plugin', {
@@ -22,9 +17,37 @@ const retrieveSamplePlugin = async () => {
 };
 
 export default function usePluginPreview( props ) {
-	const [ defaults ] = useAsyncResource( retrieveSamplePlugin, [] );
+	const [ samplePlugin, setSamplePlugin ] = useState( false );
 
-	const response = defaults();
+	useEffect( () => {
+		// Get local storage.
+		const cachedOptions = localStorage.getItem( 'wppic-sample-plugin' );
+		const cachedTimestamp = localStorage.getItem( 'wppic-sample-plugin-timestamp' );
+		if ( cachedOptions && cachedTimestamp ) {
+			const currentTime = new Date().getTime();
+			const cacheExpiration = parseInt( cachedTimestamp ) + 3600000;
+			if ( currentTime < cacheExpiration ) {
+				setSamplePlugin( JSON.parse( cachedOptions ) );
+				return;
+			}
+		}
+
+
+		const fetchPlugin = async () => {
+			const response = await SendCommand( 'wppic_get_sample_plugin', {
+				nonce: wppicAdmin.getPluginNonce,
+			} );
+			const { data, success } = response.data;
+			if ( success ) {
+				// Set local storage.
+				localStorage.setItem( 'wppic-sample-plugin', JSON.stringify( data.pluginData ) );
+				localStorage.setItem( 'wppic-sample-plugin-timestamp', new Date().getTime().toString() );
+				setSamplePlugin( data.pluginData );
+			}
+			return response;
+		};
+		fetchPlugin();
+	}, [] );
 	/**
 	 * Launch a preview of the plugin based on type and size.
 	 *
@@ -32,12 +55,12 @@ export default function usePluginPreview( props ) {
 	 * @param {string} scheme the color scheme.
 	 */
 	const getPreview = ( type, scheme ) => {
-		if ( ! response ) {
+		if ( ! samplePlugin ) {
 			return;
 		}
 
 		const newResponse = {
-			...response,
+			...samplePlugin,
 			scheme,
 		};
 		let preview = '';
@@ -63,5 +86,6 @@ export default function usePluginPreview( props ) {
 
 	return {
 		getPreview,
+		previewReady: samplePlugin ? true : false,
 	};
 }

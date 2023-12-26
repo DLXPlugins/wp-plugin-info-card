@@ -6881,8 +6881,10 @@ html {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   padding-top: 35px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 .wppic-admin-panel-loading h2 {
   font-size: 32px;
@@ -6891,7 +6893,7 @@ html {
   padding: 0;
   margin-bottom: 30px;
   width: 100%;
-  text-align: center;
+  text-align: left;
 }
 
 #wpfooter {
@@ -7002,16 +7004,17 @@ html {
   cursor: move;
   border-style: dashed;
   background: #f4f4f4 !important;
+  color: #000;
 }
-.wppic-plugin-drag.is-dragging {
-  opacity: 0.4;
+.wppic-plugin-drag.can-drop {
   border: 1px dashed #333;
+  background: #FFF;
+  color: #333;
 }
 .wppic-plugin-drag.is-over {
   border: 1px dashed #000;
-  background: #2E872C !important;
-  color: #FFF !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  background: #FFF !important;
+  color: #000 !important;
 }
 .wppic-plugin-drag .wppic-org-asset-icon {
   display: inline-flex;
