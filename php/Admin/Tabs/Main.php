@@ -75,8 +75,9 @@ class Main {
 			);
 		}
 
-		$options = Options::get_options();
-		$options = Functions::sanitize_array_recursive( $options );
+		$options            = Options::get_options();
+		$options['version'] = Functions::get_plugin_version(); // Add version for local storage.
+		$options            = Functions::sanitize_array_recursive( $options );
 		wp_send_json_success( $options );
 	}
 

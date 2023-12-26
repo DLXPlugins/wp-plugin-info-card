@@ -348,6 +348,7 @@ class Init {
 				array(
 					'getPluginNonce' => wp_create_nonce( 'wppic-admin-get-sample-plugin' ),
 					'wppic_banner_default'           => Functions::get_plugin_url( 'assets/img/default-banner.png' ),
+					'pluginVersion'  => Functions::get_plugin_version(),
 				)
 			);
 			wp_localize_script(

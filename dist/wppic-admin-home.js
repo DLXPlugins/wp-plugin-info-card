@@ -19800,14 +19800,23 @@ var HomeScreen = function HomeScreen(a) {
     var a = localStorage.getItem('wppic_home_options');
     var b = localStorage.getItem('wppic_home_options_timestamp');
     if (a && b) {
-      var c = new Date().getTime();
-      var f = parseInt(b) + 3600000;
-      if (c < f) {
-        e(JSON.parse(a));
+      // Do verison check.
+      var c = wppicAdmin.pluginVersion;
+      var f = JSON.parse(a);
+      var g = f.version;
+      if (c !== g) {
+        localStorage.removeItem('wppic_home_options');
+        localStorage.removeItem('wppic_home_options_timestamp');
+        return;
+      }
+      var h = new Date().getTime();
+      var i = parseInt(b) + 3600000;
+      if (h < i) {
+        e(f);
         return;
       }
     }
-    var g = /*#__PURE__*/function () {
+    var j = /*#__PURE__*/function () {
       var a = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function a() {
         var b, c, d, f;
         return _regeneratorRuntime().wrap(function g(a) {
@@ -19837,7 +19846,7 @@ var HomeScreen = function HomeScreen(a) {
       };
     }();
     // Fetch options.
-    g();
+    j();
   }, []);
   if (!d) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {

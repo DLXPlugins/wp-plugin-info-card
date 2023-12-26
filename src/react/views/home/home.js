@@ -452,16 +452,23 @@ const HomeScreen = ( props ) => {
 			return;
 		}
 
-
-
 		const cachedOptions = localStorage.getItem( 'wppic_home_options' );
 		const cachedTimestamp = localStorage.getItem( 'wppic_home_options_timestamp' );
 
 		if ( cachedOptions && cachedTimestamp ) {
+			// Do verison check.
+			const currentVersion = wppicAdmin.pluginVersion;
+			const cachedJson = JSON.parse( cachedOptions );
+			const cachedVersion = cachedJson.version;
+			if ( currentVersion !== cachedVersion ) {
+				localStorage.removeItem( 'wppic_home_options' );
+				localStorage.removeItem( 'wppic_home_options_timestamp' );
+				return;
+			}
 			const currentTime = new Date().getTime();
 			const cacheExpiration = parseInt( cachedTimestamp ) + 3600000;
 			if ( currentTime < cacheExpiration ) {
-				setHomeOptions( JSON.parse( cachedOptions ) );
+				setHomeOptions( cachedJson );
 				return;
 			}
 		}
