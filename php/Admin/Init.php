@@ -116,7 +116,20 @@ class Init {
 				)
 			);
 		}
-		$plugin_slug = 'wp-plugin-info-card';
+		// Some free plugins.
+		$plugin_slugs = array(
+			'wp-ajaxify-comments',
+			'wp-plugin-info-card',
+			'simple-comment-editing',
+			'highlight-and-share',
+		);
+		$plugin_slug  = $plugin_slugs[ array_rand( $plugin_slugs ) ];
+		/**
+		 * Filter the plugin slug to get.
+		 *
+		 * @param string $plugin_slug The plugin slug to get.
+		 */
+		$plugin_slug = apply_filters( 'wppic_admin_sample_plugin_slug', $plugin_slug );
 		$plugin_data = wppic_api_parser( 'plugin', $plugin_slug );
 		if ( ! $plugin_data ) {
 			wp_send_json_error(

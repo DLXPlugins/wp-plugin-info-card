@@ -129,7 +129,8 @@ class Options {
 			'enqueue'                   => false,
 			'credit'                    => false,
 			'cache_expiration'          => 3600,
-			'enable_plugin_screenshots' => false,
+			'enable_plugin_screenshots' => true,
+			'enable_theme_screenshots'  => true,
 			'sync_plugin_screenshots'   => false,
 			'screenshots_table_version' => '1.0.0',
 		);
