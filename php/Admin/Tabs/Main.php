@@ -94,7 +94,7 @@ class Main {
 			'action' => 'wppic_output_home',
 			'url'    => Functions::get_settings_url( 'home' ),
 			'label'  => _x( 'Home', 'Tab label as Home', 'wp-wppic-comments' ),
-			'icon'   => 'home-heart',
+			'icon'   => 'wppic-flaticon-home',
 		);
 		return $tabs;
 	}

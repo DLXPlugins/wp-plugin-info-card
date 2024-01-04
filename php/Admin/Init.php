@@ -38,7 +38,7 @@ class Init {
 
 		// Init tabs.
 		new Tabs\Main();
-		new Tabs\Plugin_Screenshots();
+		new Tabs\Screenshots();
 		// new Tabs\Advanced();
 		// new Tabs\Appearance();
 		// new Tabs\Callbacks();
