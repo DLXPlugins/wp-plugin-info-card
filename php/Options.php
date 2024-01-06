@@ -130,6 +130,10 @@ class Options {
 			'credit'                    => false,
 			'cache_expiration'          => 3600,
 			'enable_screenshots'        => false,
+			'enable_local_screenshots'  => false,
+			'enable_local_screenshots_download_missing' => false,
+			'enable_local_screenshots_keep_current' => false,
+			'enable_local_screenshots_cli_command' => false,
 			'screenshots_installed'     => false,
 			'screenshots_table_version' => '1.0.0',
 		);

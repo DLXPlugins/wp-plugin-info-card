@@ -18419,14 +18419,14 @@ var Notice = function Notice(a) {
       fill: "#6c757d"
     });
   };
-  var m = classnames__WEBPACK_IMPORTED_MODULE_3___default()(f, 'ajaxify-admin__notice', _defineProperty(_defineProperty(_defineProperty({
-    'ajaxify-admin__notice--has-icon': k()
-  }, "ajaxify-admin__notice-type--".concat(c), true), "ajaxify-admin__notice-appearance--inline", g), "ajaxify-admin__notice-appearance--block", !g));
+  var m = classnames__WEBPACK_IMPORTED_MODULE_3___default()(f, 'wppic-admin__notice', _defineProperty(_defineProperty(_defineProperty({
+    'wppic-admin__notice--has-icon': k()
+  }, "wppic-admin__notice-type--".concat(c), true), "wppic-admin__notice-appearance--inline", g), "wppic-admin__notice-appearance--block", !g));
   var n = [{
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Back to Top', 'wp-plugin-info-card'),
-    url: '#ajaxify-admin-header',
+    url: '#wppic-admin-header',
     variant: 'link',
-    className: 'ajaxify-admin__notice-action ajaxify-admin__notice-action--to-top'
+    className: 'wppic-admin__notice-action wppic-admin__notice-action--to-top'
   }];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: m
@@ -18435,9 +18435,9 @@ var Notice = function Notice(a) {
     spokenMessage: b,
     actions: j ? n : []
   }, a), k() && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "ajaxify-admin__notice-icon"
+    className: "wppic-admin__notice-icon"
   }, l(e)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "ajaxify-admin__notice-message"
+    className: "wppic-admin__notice-message"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, b, " ", h, " "))));
 };
 Notice.defaultProps = {

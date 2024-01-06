@@ -74,6 +74,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.49.0",
+    "react-router-dom": "^6.21.1",
     "react-spinners": "^0.13.8",
     "rgb2hex": "^0.2.5",
     "sass-loader": "^10.0.5",
