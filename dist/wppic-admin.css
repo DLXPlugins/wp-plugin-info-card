@@ -6852,6 +6852,17 @@ html {
   max-height: 40px;
 }
 
+.wppic-admin-panel-area__section-centered {
+  text-align: center;
+}
+.wppic-admin-panel-area__section-centered h2 {
+  display: block;
+}
+.wppic-admin-panel-area__section-centered p {
+  font-size: 22px;
+  margin-bottom: 24px;
+}
+
 .wppic-admin-panel-sidebar h3 {
   margin: 0;
   padding: 0;
@@ -6913,6 +6924,10 @@ html {
   margin-bottom: 0;
 }
 
+.wppic-screenshot-placeholder {
+  margin: 24px 0;
+}
+
 /** Buttons */
 .wppic-btn.components-button {
   transition: all 0.3s ease-in-out;
@@ -6954,6 +6969,10 @@ html {
 }
 .wppic-btn.components-button.has-icon-right svg {
   margin-left: 8px;
+}
+.wppic-btn.components-button.btn-large {
+  padding: 20px 24px;
+  font-size: 18px;
 }
 .wppic-btn.components-button.btn-full-width {
   width: 100%;

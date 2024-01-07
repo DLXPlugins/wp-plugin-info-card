@@ -12,6 +12,7 @@ const DEFAULT_STATE = {
 		enable_local_screenshots_keep_current: false,
 		enable_local_screenshots_cli_command: false,
 	},
+	wpCronEnabled: false,
 };
 
 const actions = {
@@ -25,6 +26,12 @@ const actions = {
 		return {
 			type: 'SET_FORM_DATA',
 			formData,
+		};
+	},
+	setWPCronStatus( enabled ) {
+		return {
+			type: 'SET_WP_CRON_STATUS',
+			enabled,
 		};
 	},
 	// setModalClosed() {
@@ -47,6 +54,11 @@ const store = createReduxStore( 'dlxplugins/pluginScreenshots', {
 					...state,
 					formData: action.formData,
 				};
+			case 'SET_WP_CRON_STATUS':
+				return {
+					...state,
+					wpCronEnabled: action.enabled,
+				};
 			// case 'SET_MODAL_STATUS_OPEN':
 			// 	return {
 			// 		...state,
@@ -68,6 +80,9 @@ const store = createReduxStore( 'dlxplugins/pluginScreenshots', {
 		},
 		getFormData( state ) {
 			return state.formData;
+		},
+		getWPCronStatus( state ) {
+			return state.wpCronEnabled;
 		},
 	},
 } );

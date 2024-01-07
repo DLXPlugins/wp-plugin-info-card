@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button, ToggleControl, CheckboxControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,8 +6,9 @@ import { useForm, Controller, useWatch, useFormState } from 'react-hook-form';
 import { useDispatch, useSelect } from '@wordpress/data';
 import './store.js';
 import { Check, Wand2, AlertCircle } from 'lucide-react';
-import Notice from '../../../../components/Notice';
-const StepOne = ( props ) => {
+import Notice from '../../../../components/Notice/index.js';
+const StepOne 
+= ( props ) => {
 	const { go, nextStep, prevStep } = props;
 
 	const { setFormData } = useDispatch( 'dlxplugins/pluginScreenshots' );
@@ -30,21 +31,15 @@ const StepOne = ( props ) => {
 		control,
 	} );
 
-	useEffect( () => {
-		if ( ! getValues( 'enable_table_creation' ) ) {
-			navigate( '/' );
-		}
-	}
-	, [] );
-
 	const onSubmit = ( data ) => {
 		setFormData( data );
-		// Go to last step in wizard if missing images or local screenshots sync is enabled.
-		if ( getValues( 'enable_local_screenshots_download_missing' ) || getValues( 'enable_local_screenshots_keep_current' ) ) {
-			navigate( '/cron' );
-		} else {
+		// Go to last step if table is disabled.
+		if ( ! getValues( 'enable_local_screenshots' ) ) {
 			navigate( '/finish' );
+			return;
 		}
+		// Go to next step if table is enabled.
+		navigate( '/setup' );
 	};
 
 	return (
@@ -54,110 +49,107 @@ const StepOne = ( props ) => {
 					<div className="wppic-admin-panel-area__section">
 						<h2>
 							<Wand2 />
-							{ __( 'Local Screenshot Setup', 'wp-plugin-info-card' ) }
+							{ __( 'Screenshots Wizard', 'wp-plugin-info-card' ) }
 						</h2>
 						<p className="description">
 							{ __(
-								'Here are some settings to fine-tune how local screenshots are handled.',
+								'In order to enable the screenshot blocks and shortcodes, some settings need to be configured first.',
 								'wp-plugin-info-card',
 							) }
 						</p>
 						<form onSubmit={ handleSubmit( onSubmit ) }>
 							<div className="wppic-admin-row">
 								<Controller
-									name="exclude_animated_gifs"
+									name="enable_screenshots"
 									control={ control }
 									render={ ( { field: { onChange, value } } ) => (
-										<CheckboxControl
+										<ToggleControl
 											label={ __(
-												'Exclude Animated Gifs',
+												'Enable the Screenshots Blocks and Shortcodes',
 												'wp-plugin-info-card',
 											) }
 											checked={ value }
 											onChange={ onChange }
 											help={ __(
-												'Animated Gifs can be quite large and slow down the page load. If you do not need them, you can disable them here.',
+												'Check this toggle to enable the screenshots blocks and shortcodes.',
 												'wp-plugin-info-card',
 											) }
 										/>
 									) }
 								/>
 							</div>
-							<div className="wppic-admin-row">
-								<Controller
-									name="enable_local_screenshots_download_missing"
-									control={ control }
-									render={ ( { field: { onChange, value } } ) => (
-										<CheckboxControl
-											label={ __(
-												'Download any Missing Images',
-												'wp-plugin-info-card',
-											) }
-											checked={ value }
-											onChange={ onChange }
-											help={ __(
-												'When using local screenshots, this option will download any missing screenshots from .org to your server.',
-												'wp-plugin-info-card',
-											) }
-										/>
-									) }
-								/>
-							</div>
-							<div className="wppic-admin-row">
-								<Controller
-									name="enable_local_screenshots_keep_current"
-									control={ control }
-									render={ ( { field: { onChange, value } } ) => (
-										<CheckboxControl
-											label={ __(
-												'Keep Local Screenshots Up to Date',
-												'wp-plugin-info-card',
-											) }
-											checked={ value }
-											onChange={ onChange }
-											help={ __(
-												'Screenshots get stale. This option will keep your local screenshots up to date with .org.',
-												'wp-plugin-info-card',
-											) }
-										/>
-									) }
-								/>
-							</div>
-							<div className="wppic-admin-row">
-								<Controller
-									name="enable_local_screenshots_cli_command"
-									control={ control }
-									render={ ( { field: { onChange, value } } ) => (
-										<CheckboxControl
-											label={ __(
-												'Enable Local Screenshots CLI Command',
-												'wp-plugin-info-card',
-											) }
-											checked={ value }
-											onChange={ onChange }
-											help={ __(
-												'Enable a CLI command that you can run using WP-CLI to download and update any missing or out-of-date screenshots.',
-												'wp-plugin-info-card',
-											) }
-										/>
-									) }
-								/>
-							</div>
+							{
+								getValues( 'enable_screenshots' ) && (
+									<>
+										<div className="wppic-admin-row">
+											<Controller
+												name="enable_local_screenshots"
+												control={ control }
+												render={ ( { field: { onChange, value } } ) => (
+													<ToggleControl
+														label={ __(
+															'Enable Local Screenshots',
+															'wp-plugin-info-card',
+														) }
+														checked={ value }
+														onChange={ onChange }
+														help={ __(
+															'Check this option to download .org screenshots to your server for faster and native loading.',
+															'wp-plugin-info-card',
+														) }
+													/>
+												) }
+											/>
+										</div>
+										{
+											getValues( 'enable_local_screenshots' ) && (
+												<>
+													<div className="wppic-admin-row">
+														<Controller
+															name="enable_table_creation"
+															control={ control }
+															render={ ( { field: { onChange, value } } ) => (
+																<CheckboxControl
+																	label={ __(
+																		'Enable Table Creation',
+																		'wp-plugin-info-card',
+																	) }
+																	checked={ value }
+																	onChange={ onChange }
+																	help={ __(
+																		'Check this option to enable the creation of the screenshots tables, which are required for local screenshots.',
+																		'wp-plugin-info-card',
+																	) }
+																/>
+															) }
+														/>
+													</div>
+												</>
+											)
+										}
+									</>
+								)
+							}
+							{
+								( getValues( 'enable_screenshots' ) && getValues( 'enable_local_screenshots' ) && ! getValues( 'enable_table_creation' ) ) && (
+									<Notice
+										message={ __(
+											'You must enable table creation in order to enable local screenshots.',
+											'wp-plugin-info-card',
+										) }
+										status="warning"
+										politeness="assertive"
+										inline={ false }
+										icon={ () => <AlertCircle /> }
+									/>
+								)
+							}
 							<div className="wppic-admin-button-row">
-								<Button
-									variant="secondary"
-									className="wppic-btn wppic-btn--primary"
-									onClick={ () => {
-										prevStep();
-										navigate( '/' );
-									} }
-								>
-									{ __( 'Previous', 'wp-plugin-info-card' ) }
-								</Button>
 								<Button
 									variant="primary"
 									className="wppic-btn wppic-btn--primary"
 									type="submit"
+									disabled={ getValues( 'enable_screenshots' ) && getValues( 'enable_local_screenshots' ) && ! getValues( 'enable_table_creation' ) }
 								>
 									{ __( 'Next', 'wp-plugin-info-card' ) }
 								</Button>

@@ -29,6 +29,82 @@ class Screenshots {
 		add_filter( 'wppic_output_screenshots', array( $this, 'output_screenshots_content' ), 1, 3 );
 		add_action( 'wp_ajax_wppic_get_screenshot_options', array( $this, 'ajax_get_options' ) );
 		add_action( 'wppic_admin_enqueue_scripts_screenshots', array( $this, 'admin_scripts' ) );
+		add_action( 'wp_ajax_wppic_check_org_connection', array( $this, 'ajax_check_org_connection' ) );
+		add_action( 'wp_ajax_wppic_check_cron', array( $this, 'ajax_check_cron' ) );
+	}
+
+	/**
+	 * Check the cron.
+	 */
+	public function ajax_check_cron() {
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+		// Security.
+		if ( ! wp_verify_nonce( $nonce, 'wppic-check-cron' ) || ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error(
+				array(
+					'message' => __( 'Could not verify nonce.', 'wp-wppic-comments' ),
+				)
+			);
+		}
+
+		// Get WP site Health object.
+		if ( ! class_exists( 'WP_Site_Health' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/class-wp-site-health.php';
+		}
+		$site_health     = new \WP_Site_Health();
+		$cron_test       = $site_health->get_test_scheduled_events();
+		$cron_test_value = $cron_test['value'];
+
+		if ( 'good' === $cron_test_value ) {
+			wp_send_json_success(
+				array(
+					'message' => __( 'Cron is working.', 'wp-wppic-comments' ),
+				)
+			);
+		} else {
+			wp_send_json_error(
+				array(
+					'message' => __( 'Cron is not working.', 'wp-wppic-comments' ),
+				)
+			);
+		}
+	}
+
+	/**
+	 * Check the connection to the org.
+	 */
+	public function ajax_check_org_connection() {
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+		// Security.
+		if ( ! wp_verify_nonce( $nonce, 'wppic-check-org' ) || ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error(
+				array(
+					'message' => __( 'Could not verify nonce.', 'wp-wppic-comments' ),
+				)
+			);
+		}
+
+		// Get WP site Health object.
+		if ( ! class_exists( 'WP_Site_Health' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/class-wp-site-health.php';
+		}
+		$site_health           = new \WP_Site_Health();
+		$org_connection_result = $site_health->get_test_dotorg_communication();
+		$result_status         = $org_connection_result['status'];
+
+		if ( 'good' === $result_status ) {
+			wp_send_json_success(
+				array(
+					'message' => __( 'Connection to WordPress.org successful.', 'wp-wppic-comments' ),
+				)
+			);
+		} else {
+			wp_send_json_error(
+				array(
+					'message' => __( 'Connection to WordPress.org failed.', 'wp-wppic-comments' ),
+				)
+			);
+		}
 	}
 
 	/**
@@ -59,10 +135,13 @@ class Screenshots {
 			'wppic-admin-screenshots',
 			'wppicAdminScreenshots',
 			array(
-				'getNonce'             => wp_create_nonce( 'wppic-admin-screenshots-retrieve-options' ),
-				'saveNonce'            => wp_create_nonce( 'wppic-save-options' ),
-				'resetNonce'           => wp_create_nonce( 'wppic-reset-options' ),
-				'screenshotsInstalled' => $screenshots_installed,
+				'getNonce'                => wp_create_nonce( 'wppic-admin-screenshots-retrieve-options' ),
+				'saveNonce'               => wp_create_nonce( 'wppic-save-options' ),
+				'resetNonce'              => wp_create_nonce( 'wppic-reset-options' ),
+				'screenshotsInstalled'    => $screenshots_installed,
+				'screenshotsExampleImage' => Functions::get_plugin_url( 'assets/img/screenshots-example.webp' ),
+				'checkOrgNonce'           => wp_create_nonce( 'wppic-check-org' ),
+				'checkCronNonce'          => wp_create_nonce( 'wppic-check-cron' ),
 			)
 		);
 	}

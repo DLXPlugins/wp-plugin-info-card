@@ -179,6 +179,17 @@ html {
 		}
 	}
 }
+.wppic-admin-panel-area__section-centered {
+	text-align: center;
+
+	h2 {
+		display: block;
+	}
+	p {
+		font-size: 22px;
+		margin-bottom: 24px;
+	}
+}
 .wppic-admin-panel-sidebar {
 	h3 {
 		margin: 0;
@@ -240,6 +251,9 @@ html {
 		margin-bottom: 0;
 	}
 }
+.wppic-screenshot-placeholder {
+	margin: 24px 0;
+}
 /** Buttons */
 .wppic-btn.components-button {
 	transition: all 0.3s ease-in-out;
@@ -280,6 +294,10 @@ html {
 		svg {
 			margin-left: 8px;
 		}
+	}
+	&.btn-large {
+		padding: 20px 24px;
+		font-size: 18px;
 	}
 	&.btn-full-width {
 		width: 100%;

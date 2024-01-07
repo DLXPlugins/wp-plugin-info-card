@@ -4,6 +4,7 @@ import { useDispatch, useSelect } from '@wordpress/data';
 import './store.js';
 import StepZero from './step-zero.js';
 import StepOne from './step-one.js';
+import StepTwo from './step-two.js';
 import StepThree from './step-three.js';
 
 const stepOne = () => {
@@ -24,9 +25,10 @@ const stepTwo = () => {
 
 const defaultSteps = [
 	{ id: 0, path: '/', element: StepZero },
-	{ id: 1, path: '/setup/', element: StepOne },
-	{ id: 2, path: '/step-two', element: stepTwo },
-	{ id: 3, path: '/finish', element: StepThree },
+	{ id: 1, path: '/config', element: StepOne },
+	{ id: 2, path: '/setup/', element: StepTwo },
+	{ id: 3, path: '/cron/', element: StepTwo },
+	{ id: 4, path: '/finish', element: StepThree },
 ];
 
 const useStep = ( initialStep = 0, steps ) => {

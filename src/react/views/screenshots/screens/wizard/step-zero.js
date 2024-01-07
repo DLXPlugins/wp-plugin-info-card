@@ -1,12 +1,12 @@
-import React from 'react';
-import { Button, ToggleControl, CheckboxControl } from '@wordpress/components';
+import React, { useState } from 'react';
+import { Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { Link, useNavigate } from 'react-router-dom';
-import { useForm, Controller, useWatch, useFormState } from 'react-hook-form';
+import BeatLoader from 'react-spinners/BeatLoader';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelect } from '@wordpress/data';
 import './store.js';
-import { Check, Wand2, AlertCircle } from 'lucide-react';
-import Notice from '../../../../components/Notice';
+import SendCommand from '../../../../utils/SendCommand.js';
+
 const StepZero 
 = ( props ) => {
 	const { go, nextStep, prevStep } = props;
@@ -14,147 +14,69 @@ const StepZero
 	const { setFormData } = useDispatch( 'dlxplugins/pluginScreenshots' );
 	const { getFormData } = useSelect( 'dlxplugins/pluginScreenshots' );
 
-	const navigate = useNavigate();
-	const {
-		control,
-		handleSubmit,
-		getValues,
-		reset,
-		setValue,
-		setError,
-		trigger,
-	} = useForm( {
-		defaultValues: getFormData(),
-	} );
-	const formValues = useWatch( { control } );
-	const { errors, isDirty, dirtyFields } = useFormState( {
-		control,
-	} );
+	const [ enablingScreenshots, setEnablingScreenshots ] = useState( false );
+	const [ statusText, setStatusText ] = useState( '' );
 
-	const onSubmit = ( data ) => {
-		setFormData( data );
-		// Go to last step if table is disabled.
-		if ( ! getValues( 'enable_local_screenshots' ) ) {
-			navigate( '/finish' );
-			return;
+	const navigate = useNavigate();
+
+	const checkOrgConnection = async () => {
+		setEnablingScreenshots( true );
+		setStatusText( __( 'Checking connection to WordPress.org…', 'wp-plugin-info-card' ) );
+		const response = await SendCommand( 'wppic_check_org_connection', { nonce: wppicAdminScreenshots.checkOrgNonce } );
+		const { data, success } = response.data;
+		if ( ! success ) {
+			setEnablingScreenshots( false );
+			setStatusText( __( 'Could not connect to WordPress.org. Please try again later.', 'wp-plugin-info-card' ) );
+		} else {
+			// Now let's check if cron is enabled.
+			setStatusText( __( 'Connection to WordPress.org successful. Checking cron status…', 'wp-plugin-info-card' ) );
+			const cronResponse = await SendCommand( 'wppic_check_cron', { nonce: wppicAdminScreenshots.checkCronNonce } );
+			console.log( cronResponse );
 		}
-		// Go to next step if table is enabled.
-		navigate( '/setup' );
-	};
+	}
 
 	return (
 		<div className="wppic-admin-panel-container is-narrow">
 			<div className="wppic-admin-panel-options-wrapper">
 				<div className="wppic-admin-panel-area">
-					<div className="wppic-admin-panel-area__section">
+					<div className="wppic-admin-panel-area__section-centered">
 						<h2>
-							<Wand2 />
-							{ __( 'Screenshots Wizard', 'wp-plugin-info-card' ) }
+							{ __( 'Welcome to Screenshots', 'wp-plugin-info-card' ) }
 						</h2>
 						<p className="description">
 							{ __(
-								'In order to enable the screenshot blocks and shortcodes, some settings need to be configured first.',
+								'With two blocks and two shortcodes, you can easily display a fully featured plugin and theme card with screenshots. This makes for a stylish way to display plugins and themes.',
 								'wp-plugin-info-card',
 							) }
 						</p>
-						<form onSubmit={ handleSubmit( onSubmit ) }>
-							<div className="wppic-admin-row">
-								<Controller
-									name="enable_screenshots"
-									control={ control }
-									render={ ( { field: { onChange, value } } ) => (
-										<ToggleControl
-											label={ __(
-												'Enable the Screenshots Blocks and Shortcodes',
-												'wp-plugin-info-card',
-											) }
-											checked={ value }
-											onChange={ onChange }
-											help={ __(
-												'Check this toggle to enable the screenshots blocks and shortcodes.',
-												'wp-plugin-info-card',
-											) }
-										/>
-									) }
-								/>
-							</div>
-							{
-								getValues( 'enable_screenshots' ) && (
-									<>
-										<div className="wppic-admin-row">
-											<Controller
-												name="enable_local_screenshots"
-												control={ control }
-												render={ ( { field: { onChange, value } } ) => (
-													<ToggleControl
-														label={ __(
-															'Enable Local Screenshots',
-															'wp-plugin-info-card',
-														) }
-														checked={ value }
-														onChange={ onChange }
-														help={ __(
-															'Check this option to download .org screenshots to your server for faster and native loading.',
-															'wp-plugin-info-card',
-														) }
-													/>
-												) }
-											/>
-										</div>
-										{
-											getValues( 'enable_local_screenshots' ) && (
-												<>
-													<div className="wppic-admin-row">
-														<Controller
-															name="enable_table_creation"
-															control={ control }
-															render={ ( { field: { onChange, value } } ) => (
-																<CheckboxControl
-																	label={ __(
-																		'Enable Table Creation',
-																		'wp-plugin-info-card',
-																	) }
-																	checked={ value }
-																	onChange={ onChange }
-																	help={ __(
-																		'Check this option to enable the creation of the screenshots tables, which are required for local screenshots.',
-																		'wp-plugin-info-card',
-																	) }
-																/>
-															) }
-														/>
-													</div>
-												</>
-											)
-										}
-									</>
-								)
-							}
-							{
-								( getValues( 'enable_screenshots' ) && getValues( 'enable_local_screenshots' ) && ! getValues( 'enable_table_creation' ) ) && (
-									<Notice
-										message={ __(
-											'You must enable table creation in order to enable local screenshots.',
-											'wp-plugin-info-card',
-										) }
-										status="warning"
-										politeness="assertive"
-										inline={ false }
-										icon={ () => <AlertCircle /> }
-									/>
-								)
-							}
-							<div className="wppic-admin-button-row">
-								<Button
-									variant="primary"
-									className="wppic-btn wppic-btn--primary"
-									type="submit"
-									disabled={ getValues( 'enable_screenshots' ) && getValues( 'enable_local_screenshots' ) && ! getValues( 'enable_table_creation' ) }
-								>
-									{ __( 'Next', 'wp-plugin-info-card' ) }
-								</Button>
-							</div>
-						</form>
+						<div className="wppic-screenshot-placeholder">
+							<img src={ wppicAdminScreenshots.screenshotsExampleImage } width="400" height="433" style={ { width: '400px', height: '433px' } } alt={ __( 'Plugin Screenshots Example', 'wp-plugin-info-card' ) } />
+						</div>
+						<div className="wppic-admin-button-row">
+							<Button
+								variant="primary"
+								className="wppic-btn wppic-btn--primary btn-large"
+								onClick={ () => {
+									checkOrgConnection();
+								} }
+								disabled={ enablingScreenshots }
+							>
+								{ __( 'Enable Screenshots and Start the Wizard', 'wp-plugin-info-card' ) }
+							</Button>
+						</div>
+						{
+							enablingScreenshots && (
+								<>
+									<BeatLoader color={ '#333' } loading={ true } cssOverride={ true } size={ 25 } speedMultiplier={ 0.65 } />
+									<div className="wppic-wizard-status-message">
+										<span className="wppic-wizard-status-message__text">{ statusText }</span>
+									</div>
+								</>
+								
+							)
+							
+						}
+						
 					</div>
 				</div>
 			</div>
