@@ -31,6 +31,32 @@ class Screenshots {
 		add_action( 'wppic_admin_enqueue_scripts_screenshots', array( $this, 'admin_scripts' ) );
 		add_action( 'wp_ajax_wppic_check_org_connection', array( $this, 'ajax_check_org_connection' ) );
 		add_action( 'wp_ajax_wppic_check_cron', array( $this, 'ajax_check_cron' ) );
+		add_action( 'wp_ajax_wppic_enable_screenshots', array( $this, 'ajax_enable_screenshots' ) );
+	}
+
+	/**
+	 * Enable screenshots.
+	 */
+	public function ajax_enable_screenshots() {
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+		// Security.
+		if ( ! wp_verify_nonce( $nonce, 'wppic-enable-screenshots' ) || ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error(
+				array(
+					'message' => __( 'Could not verify nonce.', 'wp-wppic-comments' ),
+				)
+			);
+		}
+
+		$options = Options::get_options();
+		$options['enable_screenshots'] = true;
+		Options::update_options( $options );
+
+		wp_send_json_success(
+			array(
+				'message' => __( 'Screenshots enabled.', 'wp-wppic-comments' ),
+			)
+		);
 	}
 
 	/**
@@ -142,6 +168,7 @@ class Screenshots {
 				'screenshotsExampleImage' => Functions::get_plugin_url( 'assets/img/screenshots-example.webp' ),
 				'checkOrgNonce'           => wp_create_nonce( 'wppic-check-org' ),
 				'checkCronNonce'          => wp_create_nonce( 'wppic-check-cron' ),
+				'enableScreenshotsNonce' => wp_create_nonce( 'wppic-enable-screenshots' ),
 			)
 		);
 	}

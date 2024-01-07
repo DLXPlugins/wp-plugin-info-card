@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import BeatLoader from 'react-spinners/BeatLoader';
+import classnames from 'classnames';
 import { useNavigate } from 'react-router-dom';
+import { Loader2 } from 'lucide-react';
 import { useDispatch, useSelect } from '@wordpress/data';
 import './store.js';
 import SendCommand from '../../../../utils/SendCommand.js';
@@ -11,7 +13,7 @@ const StepZero
 = ( props ) => {
 	const { go, nextStep, prevStep } = props;
 
-	const { setFormData } = useDispatch( 'dlxplugins/pluginScreenshots' );
+	const { setFormData, setWPCronStatus } = useDispatch( 'dlxplugins/pluginScreenshots' );
 	const { getFormData } = useSelect( 'dlxplugins/pluginScreenshots' );
 
 	const [ enablingScreenshots, setEnablingScreenshots ] = useState( false );
@@ -19,21 +21,15 @@ const StepZero
 
 	const navigate = useNavigate();
 
-	const checkOrgConnection = async () => {
+	/**
+	 * Enable screenshots and redirect programmatically.
+	 */
+	const enableScreenshots = async () => {
 		setEnablingScreenshots( true );
-		setStatusText( __( 'Checking connection to WordPress.org…', 'wp-plugin-info-card' ) );
-		const response = await SendCommand( 'wppic_check_org_connection', { nonce: wppicAdminScreenshots.checkOrgNonce } );
-		const { data, success } = response.data;
-		if ( ! success ) {
-			setEnablingScreenshots( false );
-			setStatusText( __( 'Could not connect to WordPress.org. Please try again later.', 'wp-plugin-info-card' ) );
-		} else {
-			// Now let's check if cron is enabled.
-			setStatusText( __( 'Connection to WordPress.org successful. Checking cron status…', 'wp-plugin-info-card' ) );
-			const cronResponse = await SendCommand( 'wppic_check_cron', { nonce: wppicAdminScreenshots.checkCronNonce } );
-			console.log( cronResponse );
-		}
-	}
+		setStatusText( __( 'Enabling Screenshots', 'wp-plugin-info-card' ) );
+		const response = await SendCommand( 'enableScreenshots', { nonce: wppicAdminScreenshots.enableScreenshotsNonce } );
+		console.log( response );
+	};
 
 	return (
 		<div className="wppic-admin-panel-container is-narrow">
@@ -55,10 +51,15 @@ const StepZero
 						<div className="wppic-admin-button-row">
 							<Button
 								variant="primary"
-								className="wppic-btn wppic-btn--primary btn-large"
+								className={
+									classnames( 'wppic-btn components-button wppic-btn--primary btn-large', {
+										'is-saving': enablingScreenshots,
+									} )
+								}
 								onClick={ () => {
-									checkOrgConnection();
+									enableScreenshots();
 								} }
+								icon={ enablingScreenshots ? <Loader2 /> : null }
 								disabled={ enablingScreenshots }
 							>
 								{ __( 'Enable Screenshots and Start the Wizard', 'wp-plugin-info-card' ) }

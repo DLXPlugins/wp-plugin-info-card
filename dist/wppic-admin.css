@@ -6982,7 +6982,7 @@ html {
   margin-bottom: 0;
 }
 .wppic-btn.components-button.is-saving {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
 }
