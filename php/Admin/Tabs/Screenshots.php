@@ -48,7 +48,7 @@ class Screenshots {
 			);
 		}
 
-		$options = Options::get_options();
+		$options                       = Options::get_options();
 		$options['enable_screenshots'] = true;
 		Options::update_options( $options );
 
@@ -137,24 +137,16 @@ class Screenshots {
 	 * Include admin scripts for the home screen.
 	 */
 	public function admin_scripts() {
-		$options               = Options::get_options();
-		$screenshots_installed = (bool) $options['screenshots_installed'];
+		$options = Options::get_options();
 
 		// Get screenshot build URL and add cache buster if not installed.
 		$screenshots_script_url = Functions::get_plugin_url( 'dist/wppic-admin-screenshots.js' );
-		if ( ! $screenshots_installed ) {
-			$screenshots_script_url = add_query_arg(
-				array(
-					'screenshots_installed' => 0,
-				),
-				$screenshots_script_url
-			);
-		}
+		$deps                   = require_once Functions::get_plugin_dir( 'dist/wppic-admin-screenshots.asset.php' );
 		wp_enqueue_script(
 			'wppic-admin-screenshots',
 			esc_url_raw( $screenshots_script_url ),
-			array(),
-			Functions::get_plugin_version(),
+			$deps['dependencies'],
+			$deps['version'],
 			true
 		);
 		wp_localize_script(
@@ -164,11 +156,10 @@ class Screenshots {
 				'getNonce'                => wp_create_nonce( 'wppic-admin-screenshots-retrieve-options' ),
 				'saveNonce'               => wp_create_nonce( 'wppic-save-options' ),
 				'resetNonce'              => wp_create_nonce( 'wppic-reset-options' ),
-				'screenshotsInstalled'    => $screenshots_installed,
 				'screenshotsExampleImage' => Functions::get_plugin_url( 'assets/img/screenshots-example.webp' ),
 				'checkOrgNonce'           => wp_create_nonce( 'wppic-check-org' ),
 				'checkCronNonce'          => wp_create_nonce( 'wppic-check-cron' ),
-				'enableScreenshotsNonce' => wp_create_nonce( 'wppic-enable-screenshots' ),
+				'enableScreenshotsNonce'  => wp_create_nonce( 'wppic-enable-screenshots' ),
 			)
 		);
 	}

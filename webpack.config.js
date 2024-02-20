@@ -2,6 +2,8 @@ const path = require( 'path' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
 const RemoveEmptyScriptsPlugin = require( 'webpack-remove-empty-scripts' );
+const DependencyExtractionWebpackPlugin = require( '@wordpress/dependency-extraction-webpack-plugin' );
+
 module.exports = ( env ) => {
 	return [
 		{
@@ -29,6 +31,11 @@ module.exports = ( env ) => {
 				sourceMapFilename: '[file].map[query]',
 				assetModuleFilename: 'fonts/[name][ext]',
 				clean: true,
+			},
+			resolve: {
+				alias: {
+					react: path.resolve( 'node_modules/react' ),
+				},
 			},
 			module: {
 				rules: [
@@ -67,6 +74,7 @@ module.exports = ( env ) => {
 			plugins: [
 				new RemoveEmptyScriptsPlugin(),
 				new MiniCssExtractPlugin(),
+				new DependencyExtractionWebpackPlugin(),
 			],
 		},
 	];

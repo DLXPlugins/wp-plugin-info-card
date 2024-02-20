@@ -122,20 +122,20 @@ class Options {
 	 */
 	public static function get_defaults() {
 		$defaults = array(
-			'default_layout'            => 'card',
-			'colorscheme'               => 'default',
-			'widget'                    => false,
-			'ajax'                      => false,
-			'enqueue'                   => false,
-			'credit'                    => false,
-			'cache_expiration'          => 3600,
-			'enable_screenshots'        => false,
-			'enable_local_screenshots'  => false,
+			'default_layout'                            => 'card',
+			'colorscheme'                               => 'default',
+			'widget'                                    => false,
+			'ajax'                                      => false,
+			'enqueue'                                   => false,
+			'credit'                                    => false,
+			'cache_expiration'                          => 3600,
+			'enable_screenshots'                        => true,
+			'enable_local_screenshots'                  => false,
+			'skip_animated_gifs'                        => true,
 			'enable_local_screenshots_download_missing' => false,
-			'enable_local_screenshots_keep_current' => false,
-			'enable_local_screenshots_cli_command' => false,
-			'screenshots_installed'     => false,
-			'screenshots_table_version' => '1.0.0',
+			'enable_local_screenshots_keep_current'     => false,
+			'enable_local_screenshots_cli_command'      => false,
+			'screenshots_table_version'                 => '1.0.0',
 		);
 		return $defaults;
 	}
