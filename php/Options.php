@@ -135,7 +135,7 @@ class Options {
 			'enable_local_screenshots_download_missing' => false,
 			'enable_local_screenshots_keep_current'     => false,
 			'enable_local_screenshots_cli_command'      => false,
-			'screenshots_table_version'                 => '1.0.0',
+			'screenshots_table_version'                 => '0.0.0',
 		);
 		return $defaults;
 	}

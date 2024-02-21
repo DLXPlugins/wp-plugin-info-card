@@ -59,7 +59,7 @@ if ( ! defined( 'WPPIC_ID' ) ) {
 if ( ! defined( 'WPPIC_FILE' ) ) {
 	define( 'WPPIC_FILE', __FILE__ );
 }
-define( 'WPPIC_PLUGIN_SCREENSHOTS_TABLE_VERSION', '1.0.0' );
+define( 'WPPIC_PLUGIN_SCREENSHOTS_TABLE_VERSION', '1.0.1' );
 
 /**
  * Include global functions and variables.

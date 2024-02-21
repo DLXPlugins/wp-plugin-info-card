@@ -9,6 +9,7 @@ namespace MediaRon\WPPIC\Admin;
 
 use MediaRon\WPPIC\Functions;
 use MediaRon\WPPIC\Options;
+use MediaRon\WPPIC\Screenshots_Table;
 
 /**
  * Init admin class for WPPIC.
@@ -256,6 +257,22 @@ class Init {
 		// Merge options.
 		$validated_options = wp_parse_args( $validated_options, $options );
 
+		// Get options for table creation.
+		$download_missing = (bool) $validated_options['enable_local_screenshots_download_missing'];
+		$keep_current     = (bool) $validated_options['enable_local_screenshots_keep_current'];
+		if ( $download_missing || $keep_current ) {
+			// Get current table version.
+			$current_version = $validated_options['screenshots_table_version'];
+
+			// If table version is not set or a previous version, create table.
+			if ( version_compare( $current_version, WPPIC_PLUGIN_SCREENSHOTS_TABLE_VERSION, '<' ) ) {
+				Screenshots_Table::create();
+			}
+
+			// Update option with current version.
+			$validated_options['screenshots_table_version'] = sanitize_text_field( WPPIC_PLUGIN_SCREENSHOTS_TABLE_VERSION );
+		}
+
 		// Save options.
 		Options::update_options( $validated_options );
 
@@ -315,9 +332,6 @@ class Init {
 			$options[ $key ] = $option_value;
 		}
 
-		// Lastly, update options.
-		// Options::update_options( $options );
-
 		wp_send_json_success(
 			array(
 				'message'     => __( 'Options reset', 'wp-plugin-info-card' ),
@@ -359,16 +373,16 @@ class Init {
 				'wppic-admin-null',
 				'wppicAdmin',
 				array(
-					'getPluginNonce' => wp_create_nonce( 'wppic-admin-get-sample-plugin' ),
-					'wppic_banner_default'           => Functions::get_plugin_url( 'assets/img/default-banner.png' ),
-					'pluginVersion'  => Functions::get_plugin_version(),
+					'getPluginNonce'       => wp_create_nonce( 'wppic-admin-get-sample-plugin' ),
+					'wppic_banner_default' => Functions::get_plugin_url( 'assets/img/default-banner.png' ),
+					'pluginVersion'        => Functions::get_plugin_version(),
 				)
 			);
 			wp_localize_script(
 				'wppic-admin-null',
 				'wppic',
 				array(
-					'wppic_banner_default'           => Functions::get_plugin_url( 'assets/img/default-banner.png' ),
+					'wppic_banner_default' => Functions::get_plugin_url( 'assets/img/default-banner.png' ),
 				)
 			);
 		}
