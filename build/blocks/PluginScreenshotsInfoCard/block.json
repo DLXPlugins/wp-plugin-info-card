@@ -44,10 +44,6 @@
       "type": "boolean",
       "default": true
     },
-    "imageSize": {
-      "type": "string",
-      "default": "thumbnail"
-    },
     "iconStyle": {
       "type": "string",
       "default": "none"

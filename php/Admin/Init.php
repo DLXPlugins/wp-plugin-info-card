@@ -257,22 +257,6 @@ class Init {
 		// Merge options.
 		$validated_options = wp_parse_args( $validated_options, $options );
 
-		// Get options for table creation.
-		$download_missing = (bool) $validated_options['enable_local_screenshots_download_missing'];
-		$keep_current     = (bool) $validated_options['enable_local_screenshots_keep_current'];
-		if ( $download_missing || $keep_current ) {
-			// Get current table version.
-			$current_version = $validated_options['screenshots_table_version'];
-
-			// If table version is not set or a previous version, create table.
-			if ( version_compare( $current_version, WPPIC_PLUGIN_SCREENSHOTS_TABLE_VERSION, '<' ) ) {
-				Screenshots_Table::create();
-			}
-
-			// Update option with current version.
-			$validated_options['screenshots_table_version'] = sanitize_text_field( WPPIC_PLUGIN_SCREENSHOTS_TABLE_VERSION );
-		}
-
 		// Save options.
 		Options::update_options( $validated_options );
 

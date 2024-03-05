@@ -93,7 +93,6 @@ class Add_Plugin {
 					'icons'                   => $plugin_info->icons,
 					'banners'                 => $plugin_info->banners,
 					'screenshots'             => $plugin_info->screenshots,
-					'local_screenshots'       => $load_attachments ? Functions::get_plugin_screenshots( $slug, $force ) : array(),
 				);
 			}
 		}

@@ -3,10 +3,13 @@ import isNumeric from 'validator/lib/isNumeric';
 import { useState, useEffect, useRef } from 'react';
 import { Rating } from 'react-simple-star-rating';
 import { Code, DownloadCloud, Star, LineChart, Download } from 'lucide-react';
-import { Splide, SplideSlide } from '@splidejs/react-splide';
+import { Fancybox, Carousel } from '@fancyapps/ui';
 const HtmlToReactParser = require( 'html-to-react' ).Parser;
 import WordPressIcon from '../components/WordPressIcon';
 import { uniqueId } from 'lodash';
+import '@fancyapps/ui/dist/fancybox/fancybox.css';
+import '@fancyapps/ui/dist/carousel/carousel.css';
+
 
 const { __, sprintf } = wp.i18n;
 
@@ -15,6 +18,7 @@ const PluginScreenshots = ( props ) => {
 
 	const [ screenshots, setScreenshots ] = useState( null );
 	const [ rating, setRating ] = useState( assetData.rating );
+	const [ screenshotsWrapper, setScreenshotsWrapper ] = useState( null );
 
 	const wrapperClasses = classnames( {
 		large: true,
@@ -48,7 +52,7 @@ const PluginScreenshots = ( props ) => {
 		}
 	}
 
-	const pluginScreenshots = assetData?.local_screenshots ?? [];
+	const pluginScreenshots = assetData?.screenshots ?? [];
 
 	const bgImageStyles = {
 		backgroundImage: `url(${ icon })`,
@@ -61,8 +65,7 @@ const PluginScreenshots = ( props ) => {
 
 	let blockStyles = '';
 	let customMatch = false;
-	console.log( attributes.colorTheme.includes( 'custom' ) );
-	console.log( attributes.colorTheme );
+	
 	// Check to see if color theme has `custom` in the name.
 	if ( ( attributes.customColors && ! isPreview ) || ( ! attributes.customColors && attributes.colorTheme.includes( 'custom' ) ) ) {
 		customMatch = true;
@@ -88,6 +91,18 @@ const PluginScreenshots = ( props ) => {
 			}
 		`;
 	}
+
+	useEffect( () => {
+		if ( null !== screenshotsWrapper ) {
+			Fancybox.bind( screenshotsWrapper, {} );
+			new Carousel( screenshotsWrapper, {
+				slidesPerPage: 1,
+				Dots: false,
+				infinite: false,
+				adaptiveHeight: false,
+			} );
+		}
+	}, [ screenshotsWrapper ] );
 
 	return (
 		<div className={ wrapperClasses }>
@@ -190,50 +205,22 @@ const PluginScreenshots = ( props ) => {
 					{
 						( Object.values( pluginScreenshots ).length > 0 && attributes.enableScreenshots ) && (
 							<div className="wp-pic-plugin-screenshots-images">
-								<Splide
-									options={
-										{
-											type: 'loop',
-											gap: '15px',
-											rewind: true,
-											perPage: ( Object.values( pluginScreenshots ).length > 3 ) ? 3 : Object.values( pluginScreenshots ).length,
-											perMove: 1,
-											arrows: ( Object.values( pluginScreenshots ).length > 3 ) ? true : false,
-											pagination: false,
-											drag: true,
-											autoplay: false,
-											lazyload: 'nearby',
-											mediaQuery: 'min',
-											padding: {
-												right: 20,
-												left: 20,
-											},
-											trimSpace: false,
-											breakpoints: {
-												500: {
-													focus: 'left',
-													perPage: Object.values( pluginScreenshots ).length < 3 ? Object.values( pluginScreenshots ).length : 3,
-												},
-												625: {
-													focus: 'left',
-													perPage: Object.values( pluginScreenshots ).length < 4 ? Object.values( pluginScreenshots ).length : 4,
-												},
-											},
-										}
-									}
+								<ul
+									className="wppic-screenshot-fancyapps f-carousel"
+									ref={ setScreenshotsWrapper }
 								>
 									{
 										Object.values( pluginScreenshots ).map( ( screenshot, index ) => {
 											return (
-												<SplideSlide className="wp-pic-plugin-screenshots-image" key={ index }>
-													<a href={ screenshot.full } data-fancybox data-caption={ screenshot.caption } onClick={ ( e ) => e.preventDefault() }>
-														<img src={ screenshot[ attributes.imageSize ] } alt={ screenshot.alt } />
+												<li key={ index } className="f-carousel__slide">
+													<a href={ screenshot.src } data-fancybox data-caption={ screenshot.caption } onClick={ ( e ) => e.preventDefault() }>
+														<img data-lazy-src={ screenshot.src } alt={ screenshot.caption } />
 													</a>
-												</SplideSlide>
+												</li>
 											);
 										} )
 									}
-								</Splide>
+								</ul>
 							</div>
 						)
 					}

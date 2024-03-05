@@ -53,7 +53,6 @@ const ScreenPluginPreview = ( props ) => {
 		assetData,
 		enableScreenshots,
 		maxHeight,
-		imageSize,
 		enableRoundedIcon,
 		iconStyle,
 		enableContextMenu,
@@ -173,26 +172,6 @@ const ScreenPluginPreview = ( props ) => {
 						help={ __( 'Enable or disable screenshots.', 'wp-plugin-info-card' ) }
 					/>
 				</PanelRow>
-				{
-					enableScreenshots &&
-					<>
-						<SelectControl
-							label={ __( 'Image Size', 'wp-plugin-info-card' ) }
-							value={ imageSize }
-							onChange={ ( value ) => {
-								setAttributes( { imageSize: value } );
-							} }
-							help={ __( 'Set the image size of the screenshots.', 'wp-plugin-info-card' ) }
-							options={
-								[
-									{ label: __( 'Thumbnail', 'wp-plugin-info-card' ), value: 'thumbnail' },
-									{ label: __( 'Medium', 'wp-plugin-info-card' ), value: 'medium' },
-									{ label: __( 'Large', 'wp-plugin-info-card' ), value: 'large' },
-								]
-							}
-						/>
-					</>
-				}
 
 			</PanelBody>
 		</InspectorControls>

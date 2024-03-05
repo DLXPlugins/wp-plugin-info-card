@@ -29,44 +29,8 @@ class Shortcodes {
 		add_shortcode( 'wp-pic-plugin-screenshots', array( static::class, 'shortcode_plugin_screenshots_info_card' ) );
 		add_action( 'wp_ajax_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
 		add_action( 'wp_ajax_nopriv_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
-		add_action( 'init', array( static::class, 'register_screenshots_post_type' ) );
 		add_action( 'init', array( static::class, 'register_screenshots_presets_post_type' ) );
 		return $self;
-	}
-
-	/**
-	 * Register screenshot post types.
-	 */
-	public static function register_screenshots_post_type() {
-		$labels = array(
-			'name'               => __( 'Plugins', 'wp-plugin-info-card' ),
-			'singular_name'      => __( 'Plugins', 'wp-plugin-info-card' ),
-			'add_new'            => __( 'Add New', 'wp-plugin-info-card' ),
-			'add_new_item'       => __( 'Add New Plugin', 'wp-plugin-info-card' ),
-			'edit_item'          => __( 'Edit Plugin', 'wp-plugin-info-card' ),
-			'new_item'           => __( 'New Plugin', 'wp-plugin-info-card' ),
-			'all_items'          => __( 'All Plugins', 'wp-plugin-info-card' ),
-			'view_item'          => __( 'View Plugin', 'wp-plugin-info-card' ),
-			'search_items'       => __( 'Search Plugins', 'wp-plugin-info-card' ),
-			'not_found'          => __( 'No Plugins found', 'wp-plugin-info-card' ),
-			'not_found_in_trash' => __( 'No Plugins found in Trash', 'wp-plugin-info-card' ),
-			'parent_item_colon'  => '',
-			'menu_name'          => __( 'Plugins', 'wp-plugin-info-card' ),
-		);
-
-		$args = array(
-			'labels'                  => $labels,
-			'public'                  => false,
-			'publicly_queryable'      => false,
-			'show_ui'                 => false,
-			'show_in_menu'            => false,
-			'query_var'               => false,
-			'rewrite'                 => false,
-			'dlx_photo_block_archive' => false,
-			'hierarchical'            => false,
-		);
-
-		register_post_type( 'wppic_plugins', $args );
 	}
 
 	/**
@@ -141,14 +105,6 @@ class Shortcodes {
 
 		if ( isset( $options['enqueue'] ) && true === $options['enqueue'] ) {
 			do_action( 'wppic_enqueue_scripts' );
-		} else {
-			// Enqueue Scripts when shortcode is in page.
-
-			$allow_scripts = apply_filters( 'wppic_allow_scripts', false );
-			if ( ! $allow_scripts ) {
-				return;
-			}
-			do_action( 'wppic_enqueue_scripts' );
 		}
 	}
 
@@ -192,154 +148,6 @@ class Shortcodes {
 				'methods'             => 'GET',
 				'callback'            => array( $this, 'get_site_plugin_data' ),
 				'permission_callback' => array( $this, 'rest_check_permissions' ),
-			)
-		);
-		register_rest_route(
-			'wppic/v2',
-			'/get_plugin_images',
-			array(
-				'methods'             => 'GET',
-				'callback'            => array( $this, 'get_plugin_images' ),
-				'permission_callback' => array( $this, 'rest_image_sideload_permissions' ),
-			)
-		);
-		register_rest_route(
-			'wppic/v2',
-			'/get_plugin_images_to_process',
-			array(
-				'methods'             => 'GET',
-				'callback'            => array( $this, 'get_plugin_images_to_process' ),
-				'permission_callback' => array( $this, 'rest_image_sideload_permissions' ),
-			)
-		);
-	}
-
-	/**
-	 * Process a list of images for a plugin.
-	 *
-	 * @param WP_Rest $request REST request.
-	 */
-	public function get_plugin_images_to_process( $request ) {
-		$plugin_slug    = $request->get_param( 'slug' );
-		$needs_sideload = (bool) $request->get_param( 'needsSideload' );
-		$sideload_order = (int) $request->get_param( 'order' );
-
-		$maybe_plugin_data = wp_cache_get( 'wppic_plugin_data_' . $plugin_slug, 'wppic' );
-		if ( false !== $maybe_plugin_data ) {
-			$plugin_data = $maybe_plugin_data;
-		} else {
-			$plugin_data = wppic_api_parser( 'plugin', $plugin_slug, 720, '', true, true );
-			wp_cache_set( 'wppic_plugin_data_' . $plugin_slug, $plugin_data, 'wppic', 3 * HOUR_IN_SECONDS );
-		}
-
-		// Read in slug and get from post type.
-		$plugin_page = Functions::get_plugin_page( $plugin_slug );
-
-		if ( null === $plugin_page ) {
-			return wp_send_json_error(
-				array(
-					'message' => __( 'No plugin could be found.', 'wp-plugin-info-card' ),
-				)
-			);
-		}
-
-		// Get screenshots for plugin.
-		$screenshots = $plugin_data->screenshots ?? array();
-
-		// If needs sideload, process the first image.
-		if ( $needs_sideload && ! empty( $screenshots ) && isset( $screenshots[ $sideload_order ] ) ) {
-			// Loop through the first image, unset, and process.
-			$screenshot_to_process = $screenshots[ $sideload_order ];
-			$image_order           = absint( $sideload_order );
-			$image_caption         = sanitize_text_field( $screenshot_to_process['caption'] );
-			$image_url             = filter_var( $screenshot_to_process['src'], FILTER_VALIDATE_URL );
-
-			if ( $image_url ) {
-				// Check file extension.
-				$extension = pathinfo( $image_url, PATHINFO_EXTENSION );
-
-				// Strip query vars from extension.
-				$extension = preg_replace( '/\?.*/', '', $extension );
-
-				if ( ! $extension ) {
-					return new \WP_Error( 'invalid_url', __( 'File extension not found.', 'wp-plugin-info-card' ), array( 'status' => 400 ) );
-				}
-				$valid_extensions = Functions::get_supported_file_extensions();
-				if ( ! in_array( $extension, $valid_extensions, true ) ) {
-					return new \WP_Error( 'invalid_url', __( 'Invalid file extension.', 'wp-plugin-info-card' ), array( 'status' => 400 ) );
-				}
-
-				// Save the image to the media library.
-				if ( ! function_exists( 'media_sideload_image' ) ) {
-					require_once ABSPATH . 'wp-admin/includes/image.php';
-					require_once ABSPATH . 'wp-admin/includes/file.php';
-					require_once ABSPATH . 'wp-admin/includes/media.php';
-				}
-				$attachment_id = media_sideload_image( $image_url, $plugin_page->ID, $image_caption, 'id' );
-
-				// Add order to attachment.
-				if ( ! is_wp_error( $attachment_id ) ) {
-					wp_update_post(
-						array(
-							'ID'           => $attachment_id,
-							'menu_order'   => $image_order,
-							'post_content' => $image_url,
-							'post_excerpt' => $image_caption,
-						)
-					);
-
-					// Update alt attribute.
-					update_post_meta( $attachment_id, '_wp_attachment_image_alt', $image_caption );
-				}
-			}
-		}
-
-		// Set sideload flag.
-		$needs_sideload = $sideload_order < count( $screenshots );
-
-		// Return plugin data if no sideload needed.
-		$plugin_data = array();
-		if ( ! $needs_sideload ) {
-			$plugin_data = wppic_api_parser( 'plugin', $plugin_slug, 720, '', true, true );
-		}
-
-		wp_send_json_success(
-			array(
-				'sideloadOrder'    => absint( $sideload_order + 1 ),
-				'pluginPageId'     => $plugin_page->ID,
-				'needsSideload'    => $needs_sideload,
-				'totalScreenshots' => count( $screenshots ),
-				'pluginData'       => $plugin_data,
-			)
-		);
-	}
-
-	/**
-	 * Get a list of images for the plugin.
-	 *
-	 * @param WP_Rest $request REST request.
-	 */
-	public function get_plugin_images( $request ) {
-		$plugin_slug = $request->get_param( 'slug' );
-
-		$maybe_plugin_data = wp_cache_get( 'wppic_plugin_data_' . $plugin_slug, 'wppic' );
-		if ( false !== $maybe_plugin_data ) {
-			$plugin_data = $maybe_plugin_data;
-		} else {
-			$plugin_data = wppic_api_parser( 'plugin', $plugin_slug, 720, '', true, true );
-			wp_cache_set( 'wppic_plugin_data_' . $plugin_slug, $plugin_data, 'wppic', 3 * HOUR_IN_SECONDS );
-		}
-
-		$plugin_screenshots = Functions::get_plugin_screenshots( $plugin_slug );
-		$org_screenshots    = $plugin_data->screenshots ?? array();
-
-		$plugin_data->local_screenshots = $plugin_screenshots;
-
-		wp_send_json_success(
-			array(
-				'pluginData'           => $plugin_data,
-				'hasPluginScreenshots' => ! empty( $plugin_screenshots ),
-				'hasScreenshots'       => ! empty( $org_screenshots ),
 			)
 		);
 	}
@@ -858,6 +666,7 @@ class Shortcodes {
 			}
 		}
 
+		do_action( 'wppic_enqueue_scripts' );
 		return $content;
 	}
 
@@ -1025,6 +834,8 @@ class Shortcodes {
 					$content .= '</div>'; // end of grid.
 				}
 
+				do_action( 'wppic_enqueue_scripts' );
+
 				return apply_filters( 'wppic_query_content', $content, $type, $atts );
 
 			}
@@ -1101,7 +912,10 @@ class Shortcodes {
 		}
 
 		// Get asset data.
-		$asset_data = $attributes['asset_data'];
+		$asset_data = wppic_api_parser( 'plugin', $attributes['slug'] );
+		if ( $asset_data ) {
+			$asset_data = json_decode( json_encode( $asset_data ), true );
+		}
 
 		// Get requires.
 		$requires       = $asset_data['requires'] ?? false;
@@ -1330,23 +1144,15 @@ class Shortcodes {
 					</div><!-- .wp-pic-plugin-screenshots-card -->
 					<footer class="wp-pic-plugin-screenshots-footer">
 						<?php
-						$local_screenshots   = $asset_data['local_screenshots'] ?? array();
+						$local_screenshots   = $asset_data['screenshots'] ?? array();
 						$screenshots_enabled = $attributes['enable_screenshots'] && ! empty( $screenshots ) && ! empty( $local_screenshots );
 						$screenshot_size     = $attributes['image_size'] ?? 'thumbnail';
 						if ( $screenshots_enabled ) {
-							// Add Splide to footer.
-							wp_enqueue_script(
-								'wp-plugin-info-card-splide',
-								Functions::get_plugin_url( 'dist/wppic-splide.js' ),
-								array(),
-								Functions::get_plugin_version(),
-								true
-							);
 							// Enqueue the modal script.
 							if ( ! wp_script_is( 'fancybox', 'enqueued' ) ) {
 								wp_register_script(
 									'wppic-fancybox-js',
-									Functions::get_plugin_url( '/assets/lightbox/fancybox.umd.js' ),
+									Functions::get_plugin_url( '/dist/wppic-fancybox.js' ),
 									array(),
 									Functions::get_plugin_version(),
 									true
@@ -1354,34 +1160,28 @@ class Shortcodes {
 
 								wp_register_style(
 									'wppic-fancybox-css',
-									Functions::get_plugin_url( '/assets/lightbox/fancybox.css' ),
+									Functions::get_plugin_url( '/dist/wppic-fancybox.css' ),
 									array(),
 									Functions::get_plugin_version(),
 									'all'
 								);
 							}
-							add_action( 'wp_footer', array( __CLASS__, 'add_splide_to_footer' ) );
+							add_action( 'wp_footer', array( __CLASS__, 'add_carousel_to_footer' ) );
 							?>
 								<div class="wp-pic-plugin-screenshots-images">
-									<section class="splide">
-										<div class="splide__track">
-											<ul class="splide__list">
+									<ul class="wppic-screenshot-fancyapps f-carousel">
+										<?php
+										foreach ( $local_screenshots as $screenshot ) {
+											?>
+												<li class="f-carousel__slide">
+													<a href="<?php echo esc_url( $screenshot['src'] ); ?>" data-fancybox="<?php echo esc_attr( $attributes['unique_id'] ); ?>" data-caption="<?php echo esc_attr( $screenshot['caption'] ); ?>">
+														<img data-lazy-src="<?php echo esc_url( $screenshot['src'] ); ?>" alt="<?php echo esc_attr( $screenshot['caption'] ); ?>" />
+													</a>
+												</li>
 												<?php
-												foreach ( $local_screenshots as $screenshot ) {
-													$full_screenshot_size = $screenshot['full'] ?? $screenshot['thumbnail'] ?? '';
-													$display_image        = $screenshot[ $screenshot_size ] ?? $screenshot['thumbnail'] ?? '';
-													?>
-														<li class="splide__slide">
-															<a href="<?php echo esc_url( $full_screenshot_size ); ?>" data-fancybox data-caption="<?php echo esc_attr( $screenshot['caption'] ); ?>">
-																<img src="<?php echo esc_url( $display_image ); ?>" alt="<?php echo esc_attr( $screenshot['caption'] ); ?>" />
-															</a>
-														</li>
-														<?php
-												}
-												?>
-											</ul>
-										</div><!-- .splide__track -->
-									</section><!-- .splide -->
+										}
+										?>
+									</ul>
 								</div>
 							<?php
 						}
@@ -1427,7 +1227,7 @@ class Shortcodes {
 			</div>
 		<?php
 		$return = ob_get_clean();
-
+		do_action( 'wppic_enqueue_scripts' );
 		return $return;
 	}
 
@@ -1491,6 +1291,7 @@ class Shortcodes {
 			?>
 		</div>
 		<?php
+		do_action( 'wppic_enqueue_scripts' );
 		$content = ob_get_clean();
 		return $content;
 	}
@@ -1610,7 +1411,8 @@ class Shortcodes {
 				$slug_data->author = wp_strip_all_tags( $slug_data->author );
 			}
 			if ( isset( $slug_data->active_installs ) ) {
-				$slug_data->active_installs = number_format_i18n( $slug_data->active_installs );
+				$slug_data->active_installs_raw = $slug_data->active_installs;
+				$slug_data->active_installs     = number_format_i18n( $slug_data->active_installs );
 			}
 			if ( isset( $slug_data->last_updated ) ) {
 				$slug_data->last_updated = human_time_diff( strtotime( $slug_data->last_updated ), time() ) . ' ' . _x( 'ago', 'Last time updated', 'wp-plugin-info-card' );
@@ -1663,17 +1465,7 @@ class Shortcodes {
 	/**
 	 * Add Splide to footer.
 	 */
-	public static function add_splide_to_footer() {
-		// Don't print it twice.
-		if ( ! wp_style_is( 'wp-plugin-info-card-splide', 'registered' ) ) {
-			wp_register_style(
-				'wp-plugin-info-card-splide',
-				Functions::get_plugin_url( 'dist/wppic-splide.css' ),
-				array(),
-				Functions::get_plugin_version()
-			);
-			wp_print_styles( 'wp-plugin-info-card-splide' );
-		}
+	public static function add_carousel_to_footer() {
 		// Enqueue / print fancybox styles.
 		if ( wp_script_is( 'wppic-fancybox-js', 'registered' ) && ! wp_script_is( 'wppic-fancybox-js', 'done' ) ) {
 			\wp_add_inline_style(

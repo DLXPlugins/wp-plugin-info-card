@@ -2,30 +2,14 @@
  * This is the initial screen of the block. It is the first screen that the user sees when they add the block to the editor.
  */
 
-import { useContext, useState } from '@wordpress/element';
+import { useState } from '@wordpress/element';
 import {
 	InspectorControls,
 } from '@wordpress/block-editor';
 import {
-	Spinner,
-	PanelBody,
-	PanelRow,
-	RangeControl,
 	TextControl,
-	TextareaControl,
-	ButtonGroup,
 	Button,
 	Modal,
-	ToggleControl,
-	Toolbar,
-	ToolbarItem,
-	ToolbarButton,
-	ToolbarGroup,
-	ToolbarDropdownMenu,
-	Popover,
-	PlaceHolder,
-	MenuGroup,
-	MenuItem,
 } from '@wordpress/components';
 import axios from 'axios';
 import { __ } from '@wordpress/i18n';
@@ -33,15 +17,13 @@ import { isURL } from '@wordpress/url';
 import Logo from '../../../Logo';
 import LoadingScreen from '../../../components/Loading';
 
-
 /**
  * InitialScreen component.
  *
  * @param {Object} props - Component props.
  * @return {Function} Component.
  */
-const SlugEntryScreen = (props) => {
-
+const SlugEntryScreen = ( props ) => {
 	const [ loading, setLoading ] = useState( false );
 	const [ showErrorModal, setShowErrorModal ] = useState( false );
 	const [ errorMessage, setErrorMessage ] = useState( '' );
@@ -55,15 +37,16 @@ const SlugEntryScreen = (props) => {
 		const restUrl = wppic.rest_url + 'wppic/v2/get_data';
 		axios
 			.get(
-				restUrl + `?type=plugin&slug=${ encodeURIComponent( slug ) }`
+				restUrl + `?type=plugin&slug=${ encodeURIComponent( slug ) }`,
 			)
 			.then( ( response ) => {
 				if ( response.data.success ) {
 					// Set asset data.
 					setAttributes(
 						{
-							screen: 'image-loader',
-						}
+							assetData: response.data.data[ 0 ] || {},
+							screen: 'plugin-preview',
+						},
 					);
 				} else {
 					setErrorMessage( response.data.data.message );
@@ -76,7 +59,7 @@ const SlugEntryScreen = (props) => {
 	};
 
 	if ( loading ) {
-		return ( <LoadingScreen label={ __( 'Loading plugin data...', 'wp-plugin-info-card' ) } /> );
+		return ( <LoadingScreen label={ __( 'Loading plugin data…', 'wp-plugin-info-card' ) } /> );
 	}
 
 	// Set the local inspector controls.
@@ -117,62 +100,58 @@ const SlugEntryScreen = (props) => {
 				<div className="wp-pic-tab-panel">
 					<>
 						<TextControl
-							label={__(
+							label={ __(
 								'Plugin Slug',
-								'wp-plugin-info-card'
-							)}
-							value={attributes.slug}
-							onChange={(value) => {
-								if (!isURL(value)) {
-									setAttributes({
+								'wp-plugin-info-card',
+							) }
+							value={ attributes.slug }
+							onChange={ ( value ) => {
+								if ( ! isURL( value ) ) {
+									setAttributes( {
 										slug: value,
-									});
+									} );
 								}
-
-							}}
-							help={__(
+							} }
+							help={ __(
 								'Please only enter one slug.',
-								'wp-plugin-info-card'
-							)}
-							onPaste={(event) => {
-
+								'wp-plugin-info-card',
+							) }
+							onPaste={ ( event ) => {
 								// Get contents from clipboard.
 								const clipboardData = event.clipboardData
-									.getData('text/plain')
+									.getData( 'text/plain' )
 									.trim();
 
-
-								if (isURL(clipboardData)) {
+								if ( isURL( clipboardData ) ) {
 									// Extract out the slug from the URL.
 									const urlRegex = /([^\/]*)\/$/;
 									const newSlug = urlRegex.exec(
-										clipboardData
-									)[1];
-									setAttributes({
+										clipboardData,
+									)[ 1 ];
+									setAttributes( {
 										slug: newSlug,
-									});
+									} );
 								}
-							}}
+							} }
 
 						/>
 					</>
 				</div>
 				<div className="wp-pic-gutenberg-button">
 					<Button
-						iconSize={20}
-						icon={<Logo size="25" />}
+						iconSize={ 20 }
+						icon={ <Logo size="25" /> }
 						variant="secondary"
 						id="wppic-input-submit"
-						onClick={(event) => {
+						onClick={ ( event ) => {
 							event.preventDefault();
 							loadData();
-							
-						}}
+						} }
 					>
-						{__(
+						{ __(
 							'Preview and Configure',
-							'wp-plugin-info-card'
-						)}
+							'wp-plugin-info-card',
+						) }
 					</Button>
 				</div>
 			</div>
@@ -182,8 +161,8 @@ const SlugEntryScreen = (props) => {
 	return (
 		<>
 			{ maybeShowModal() }
-			{localInspectorControls}
-			{block}
+			{ localInspectorControls }
+			{ block }
 		</>
 	);
 };

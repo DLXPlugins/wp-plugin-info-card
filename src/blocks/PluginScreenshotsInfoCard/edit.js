@@ -44,9 +44,6 @@ const {
 } = wp.blockEditor;
 
 import SlugEntryScreen from './screens/ScreenSlugEntry';
-import ScreenImageProcessor from './screens/ScreenImageProcessor';
-import ScreenImageLoader from './screens/ScreenImageLoader';
-import ScreenNoImages from './screens/ScreenNoImages';
 import ScreenPluginPreview from './screens/ScreenPluginPreview';
 
 // For storing unique IDs.
@@ -305,12 +302,6 @@ const PluginScreenshotsInfoCard = ( props ) => {
 		switch ( attributes.screen ) {
 			case 'slug-entry':
 				return <SlugEntryScreen attributes={ attributes } setAttributes={ setAttributes } />;
-			case 'image-loader':
-				return <ScreenImageLoader attributes={ attributes } setAttributes={ setAttributes } />;
-			case 'image-processor':
-				return <ScreenImageProcessor attributes={ attributes } setAttributes={ setAttributes } />;
-			case 'no-images':
-				return <ScreenNoImages attributes={ attributes } setAttributes={ setAttributes } />;
 			case 'plugin-preview':
 				return <ScreenPluginPreview attributes={ attributes } setAttributes={ setAttributes } clientId={ clientId } />;
 		}

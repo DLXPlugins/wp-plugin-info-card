@@ -22,7 +22,7 @@ module.exports = ( env ) => {
 				'wppic-editor': [ './src/scss/editor.scss' ],
 				'wppic-admin-home': [ './src/react/views/home/index.js' ],
 				'wppic-admin-screenshots': [ './src/react/views/screenshots/index.js' ],
-				'wppic-splide': [ './src/js/splide/splide.js', './src/scss/splide.scss' ],
+				'wppic-fancybox': [ './src/js/fancyapps/carousel.js', './src/scss/carousel.scss' ],
 			},
 			mode: env.mode,
 			devtool: 'production' === env.mode ? false : 'source-map',
