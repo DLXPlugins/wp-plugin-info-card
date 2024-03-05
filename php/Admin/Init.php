@@ -39,16 +39,6 @@ class Init {
 
 		// Init tabs.
 		new Tabs\Main();
-		new Tabs\Screenshots();
-		// new Tabs\Advanced();
-		// new Tabs\Appearance();
-		// new Tabs\Callbacks();
-		// new Tabs\Integrations();
-		// new Tabs\Labels();
-		// new Tabs\Lazy_Load();
-		// //new Tabs\Pagination();
-		// new Tabs\Selectors();
-		// new Tabs\Support();
 	}
 
 	/**
