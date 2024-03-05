@@ -2346,6 +2346,88 @@ a.wp-pic-credit:focus:after {
 	--wppic-plugin-screenshots-card-screenshots-arrow-color: #9168A0;
 	--wppic-plugin-screenshots-card-screenshots-arrow-color-hover: #341948;
 }
+.wppic-plugin-screenshot-theme-dark {
+	/* From: https://www.canva.com/colors/color-palettes/dark-velvet/ */
+	--wppic-plugin-screenshots-card-background: #1E1E1E;
+	--wppic-plugin-screenshots-card-text-color: #FFF;
+	--wppic-plugin-screenshots-card-border-color: #1E1E1E;
+	--wppic-plugin-screenshots-card-menu-border-color: #9168A0;
+	--wppic-plugin-screenshots-card-menu-color: #FFF;
+	--wppic-plugin-screenshots-card-menu-color-hover: #1E1E1E;
+	--wppic-plugin-screenshots-card-menu-text-color: #1E1E1E;
+	--wppic-plugin-screenshots-card-menu-text-color-hover: #FFF;
+	--wppic-plugin-screenshots-card-screenshots-background: #1E1E1E;
+	--wppic-plugin-screenshots-card-screenshots-border-color: #0E050F;
+	--wppic-plugin-screenshots-card-screenshots-star-color: #FF9529;
+	--wppic-plugin-screenshots-card-meta-background-color: #1E1E1E;
+	--wppic-plugin-screenshots-card-meta-text-color: #FFF;
+	--wppic-plugin-screenshots-card-screenshots-arrow-background-color: #FFF;
+	--wppic-plugin-screenshots-card-screenshots-arrow-background-color-hover: #FFF;
+	--wppic-plugin-screenshots-card-screenshots-arrow-color: #9168A0;
+	--wppic-plugin-screenshots-card-screenshots-arrow-color-hover: #341948;
+
+}
+.wppic-plugin-screenshot-theme-light {
+	/* From:https://www.canva.com/colors/color-palettes/makeshift-slumber/ */
+	--wppic-plugin-screenshots-card-background: #FDFDFD;
+	--wppic-plugin-screenshots-card-text-color: #050606;
+	--wppic-plugin-screenshots-card-border-color: #D8D7D5;
+	--wppic-plugin-screenshots-card-menu-border-color: #D8D7D5;
+	--wppic-plugin-screenshots-card-menu-color: #050606;
+	--wppic-plugin-screenshots-card-menu-color-hover: rgb(78, 78, 78);
+	--wppic-plugin-screenshots-card-menu-text-color: #FDFDFD;
+	--wppic-plugin-screenshots-card-menu-text-color-hover: #FDFDFD;
+	--wppic-plugin-screenshots-card-screenshots-background: #D8D7D5;
+	--wppic-plugin-screenshots-card-screenshots-border-color: #050606;
+	--wppic-plugin-screenshots-card-screenshots-star-color: #FF9529;
+	--wppic-plugin-screenshots-card-meta-background-color: #050606;
+	--wppic-plugin-screenshots-card-meta-text-color: #FFF;
+	--wppic-plugin-screenshots-card-screenshots-arrow-background-color: #ADB3BC;
+	--wppic-plugin-screenshots-card-screenshots-arrow-background-color-hover: #9197a1;
+	--wppic-plugin-screenshots-card-screenshots-arrow-color: #333;
+	--wppic-plugin-screenshots-card-screenshots-arrow-color-hover: #333;
+}
+.wppic-plugin-screenshot-theme-feathers {
+	/* From:https://www.canva.com/colors/color-palettes/soft-as-feathers/ */
+	--wppic-plugin-screenshots-card-background: #003A64;
+	--wppic-plugin-screenshots-card-text-color: #FFF;
+	--wppic-plugin-screenshots-card-border-color: #003A64;
+	--wppic-plugin-screenshots-card-menu-border-color: #D8D7D5;
+	--wppic-plugin-screenshots-card-menu-color: #E1ECF0;
+	--wppic-plugin-screenshots-card-menu-color-hover: #b5c9d1;
+	--wppic-plugin-screenshots-card-menu-text-color: #003A64;
+	--wppic-plugin-screenshots-card-menu-text-color-hover: #003A64;
+	--wppic-plugin-screenshots-card-screenshots-background: #003A64;
+	--wppic-plugin-screenshots-card-screenshots-border-color: #FFF;
+	--wppic-plugin-screenshots-card-screenshots-star-color: #d97410;
+	--wppic-plugin-screenshots-card-meta-background-color: #003A64;
+	--wppic-plugin-screenshots-card-meta-text-color: #FFF;
+	--wppic-plugin-screenshots-card-screenshots-arrow-background-color: #ADB3BC;
+	--wppic-plugin-screenshots-card-screenshots-arrow-background-color-hover: #9197a1;
+	--wppic-plugin-screenshots-card-screenshots-arrow-color: #333;
+	--wppic-plugin-screenshots-card-screenshots-arrow-color-hover: #333;
+}
+.wppic-plugin-screenshot-theme-caramel {
+	/* From:https://www.canva.com/colors/color-palettes/scooping-ice-cream/*/
+	--wppic-plugin-screenshots-card-background: #523A28;
+	--wppic-plugin-screenshots-card-text-color: #FFF;
+	--wppic-plugin-screenshots-card-border-color: #523A28;
+	--wppic-plugin-screenshots-card-menu-border-color: #D8D7D5;
+	--wppic-plugin-screenshots-card-menu-color: #E4D4C8;
+	--wppic-plugin-screenshots-card-menu-color-hover: #644831;
+	--wppic-plugin-screenshots-card-menu-text-color: #644831;
+	--wppic-plugin-screenshots-card-menu-text-color-hover: #FFF;
+	--wppic-plugin-screenshots-card-screenshots-background: #A47551;
+	--wppic-plugin-screenshots-card-screenshots-border-color: #A47551;
+	--wppic-plugin-screenshots-card-screenshots-star-color: #d97410;
+	--wppic-plugin-screenshots-card-meta-background-color: #523A28;
+	--wppic-plugin-screenshots-card-meta-text-color: #FFF;
+	--wppic-plugin-screenshots-card-screenshots-arrow-background-color: #A47551;
+	--wppic-plugin-screenshots-card-screenshots-arrow-background-color-hover: #523A28;
+	--wppic-plugin-screenshots-card-screenshots-arrow-color: #523A28;
+	--wppic-plugin-screenshots-card-screenshots-arrow-color-hover: #FFF;
+}
+
 
 /* Begin Plugin Screenshot themes */
 .wp-pic-plugin-screenshots-card {
@@ -2415,6 +2497,7 @@ a.wp-pic-credit:focus:after {
 		padding: 0;
 		padding: 0;
 		text-align: center;
+		align-items: center;
 
 		.f-carousel__track {
 			column-gap: 12px;
@@ -2429,9 +2512,10 @@ a.wp-pic-credit:focus:after {
 	.wppic-screenshot-fancyapps {
 		position: relative;
 		background: var( --wppic-plugin-screenshots-card-screenshots-background );
-		padding-top: 0;
-		padding-bottom: 24px;
-	}.wppic-screenshot-fancyapps img {
+		padding-top: 12px;
+		padding-bottom: 12px;
+	}
+	.wppic-screenshot-fancyapps img {
 		max-width: 100%;
 		height: auto;
 	}
@@ -2528,7 +2612,7 @@ a.wp-pic-credit:focus:after {
 .wp-pic-plugin-screenshots-wrapper,
 body .wp-pic-plugin-screenshots-wrapper,
 .is-layout-contrained .wp-pic-plugin-screenshots-wrapper {
-	max-width: 625px;
+	max-width: 725px !important;
 	width: 100%;
 }
 

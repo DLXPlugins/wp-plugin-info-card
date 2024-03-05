@@ -86,13 +86,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fancyapps_ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fancyapps/ui */ "./node_modules/@fancyapps/ui/dist/index.esm.js");
 
 document.addEventListener('DOMContentLoaded', function () {
-  new _fancyapps_ui__WEBPACK_IMPORTED_MODULE_0__.Carousel('.wppic-screenshot-fancyapps', {
-    slidesPerPage: 1,
-    Dots: false,
-    infinite: false,
-    adaptiveHeight: false
+  var a = document.querySelectorAll('.wppic-screenshot-fancyapps');
+  if (null === a) {
+    return;
+  }
+  a.forEach(function (a) {
+    new _fancyapps_ui__WEBPACK_IMPORTED_MODULE_0__.Carousel(a, {
+      slidesPerPage: 1,
+      Dots: false,
+      infinite: false,
+      adaptiveHeight: false
+    });
   });
-  _fancyapps_ui__WEBPACK_IMPORTED_MODULE_0__.Fancybox.bind('.wppic-screenshot-fancyapps a', {});
+  _fancyapps_ui__WEBPACK_IMPORTED_MODULE_0__.Fancybox.bind('[data-fancybox]', {});
 });
 })();
 

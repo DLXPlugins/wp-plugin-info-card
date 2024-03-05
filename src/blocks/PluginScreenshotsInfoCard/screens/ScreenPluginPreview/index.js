@@ -107,6 +107,16 @@ const ScreenPluginPreview = ( props ) => {
 						setAttributes( { pluginTitle: value } );
 					} }
 				/>
+				<PanelRow>
+					<ToggleControl
+						label={ __( 'Enable Screenshots', 'wp-plugin-info-card' ) }
+						checked={ enableScreenshots }
+						onChange={ ( value ) => {
+							setAttributes( { enableScreenshots: value } );
+						} }
+						help={ __( 'Enable or disable screenshots.', 'wp-plugin-info-card' ) }
+					/>
+				</PanelRow>
 			</PanelBody>
 			<PanelBody
 				title={ __( 'Color Themes', 'wp-plugin-info-card' ) }
@@ -149,6 +159,38 @@ const ScreenPluginPreview = ( props ) => {
 							isPressed={ 'velvet' === colorTheme }
 							theme="velvet"
 						/>
+						<PresetButton
+							label={ __( 'Dark', 'wp-plugin-info-card' ) }
+							setAttributes={ setAttributes }
+							attributes={ attributes }
+							uniqueId={ uniqueId }
+							isPressed={ 'dark' === colorTheme }
+							theme="dark"
+						/>
+						<PresetButton
+							label={ __( 'Light', 'wp-plugin-info-card' ) }
+							setAttributes={ setAttributes }
+							attributes={ attributes }
+							uniqueId={ uniqueId }
+							isPressed={ 'light' === colorTheme }
+							theme="light"
+						/>
+						<PresetButton
+							label={ __( 'Soft as Feathers', 'wp-plugin-info-card' ) }
+							setAttributes={ setAttributes }
+							attributes={ attributes }
+							uniqueId={ uniqueId }
+							isPressed={ 'feathers' === colorTheme }
+							theme="feathers"
+						/>
+						<PresetButton
+							label={ __( 'Caramel', 'wp-plugin-info-card' ) }
+							setAttributes={ setAttributes }
+							attributes={ attributes }
+							uniqueId={ uniqueId }
+							isPressed={ 'caramel' === colorTheme }
+							theme="caramel"
+						/>
 					</ButtonGroup>
 				</div>
 				<CustomPresets
@@ -157,22 +199,6 @@ const ScreenPluginPreview = ( props ) => {
 					attributes={ attributes }
 					setAttributes={ setAttributes }
 				/>
-			</PanelBody>
-			<PanelBody
-				title={ __( 'Screenshot Customization', 'wp-plugin-info-card' ) }
-				initialOpen={ true }
-			>
-				<PanelRow>
-					<ToggleControl
-						label={ __( 'Enable Screenshots', 'wp-plugin-info-card' ) }
-						checked={ enableScreenshots }
-						onChange={ ( value ) => {
-							setAttributes( { enableScreenshots: value } );
-						} }
-						help={ __( 'Enable or disable screenshots.', 'wp-plugin-info-card' ) }
-					/>
-				</PanelRow>
-
 			</PanelBody>
 		</InspectorControls>
 	);
