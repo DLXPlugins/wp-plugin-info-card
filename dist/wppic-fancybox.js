@@ -92,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   a.forEach(function (a) {
     new _fancyapps_ui__WEBPACK_IMPORTED_MODULE_0__.Carousel(a, {
-      slidesPerPage: 1,
       Dots: false,
       infinite: false,
       adaptiveHeight: false

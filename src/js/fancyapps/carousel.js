@@ -7,10 +7,10 @@ document.addEventListener( 'DOMContentLoaded', function() {
 	}
 	carousels.forEach( ( carousel ) => {
 		new Carousel( carousel, {
-			slidesPerPage: 1,
 			Dots: false,
 			infinite: false,
 			adaptiveHeight: false,
+			
 		} );
 	} );
 	Fancybox.bind( '[data-fancybox]', {
