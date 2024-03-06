@@ -1,4 +1,5 @@
 /******/ (() => { // webpackBootstrap
+<<<<<<< Updated upstream
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./node_modules/@fancyapps/ui/dist/index.esm.js":
@@ -25715,3 +25716,10 @@ root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createEle
 /******/ })()
 ;
 //# sourceMappingURL=wppic-admin-home.js.map
+=======
+/******/ 	"use strict";
+/******/ 	
+/******/ 	
+/******/ })()
+;
+>>>>>>> Stashed changes

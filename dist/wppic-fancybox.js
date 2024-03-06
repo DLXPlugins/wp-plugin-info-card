@@ -1,5 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
+<<<<<<< Updated upstream
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./node_modules/@fancyapps/ui/dist/index.esm.js":
@@ -114,3 +115,9 @@ __webpack_require__.r(__webpack_exports__);
 /******/ })()
 ;
 //# sourceMappingURL=wppic-fancybox.js.map
+=======
+/******/ 	
+/******/ 	
+/******/ })()
+;
+>>>>>>> Stashed changes

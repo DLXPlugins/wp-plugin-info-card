@@ -1,4 +1,5 @@
 /******/ (() => { // webpackBootstrap
+<<<<<<< Updated upstream
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./node_modules/@remix-run/router/dist/router.js":
@@ -18359,3 +18360,10 @@ root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createEle
 /******/ })()
 ;
 //# sourceMappingURL=wppic-admin-screenshots.js.map
+=======
+/******/ 	"use strict";
+/******/ 	
+/******/ 	
+/******/ })()
+;
+>>>>>>> Stashed changes
