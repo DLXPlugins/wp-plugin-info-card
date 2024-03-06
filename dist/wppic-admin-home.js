@@ -3762,7 +3762,7 @@ var AddPlugin = function AddPlugin(a) {
       }
       // Check for duplicates.
       var c = a.formValues.list;
-      if (c.includes(b)) {
+      if (typeof c !== 'undefined' && c.includes(b)) {
         u((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This plugin is already listed.', 'wp-plugin-info-card'));
         m(true);
         return;
@@ -3886,8 +3886,8 @@ var AddTheme = function AddTheme(a) {
         return;
       }
       // Check for duplicates.
-      var c = a.formValues.list;
-      if (c.includes(b)) {
+      var c = a.formValues['theme-list'];
+      if (typeof c !== 'undefined' && c.includes(b)) {
         u((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This theme is already listed.', 'wp-plugin-info-card'));
         m(true);
         return;
@@ -4230,7 +4230,7 @@ var Interface = function Interface(a) {
    */
   var A = function getPlugins() {
     var a = n.list;
-    if (a.length > 0) {
+    if (typeof a !== 'undefined' && a.length > 0) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.BaseControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Plugins to Track', 'wp-plugin-info-card'),
         className: "wppic-asset-list",
@@ -4275,7 +4275,7 @@ var Interface = function Interface(a) {
    */
   var B = function getThemes() {
     var a = i('theme-list');
-    if (a.length > 0) {
+    if (typeof a !== 'undefined' && a.length > 0) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.BaseControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Themes to Track', 'wp-plugin-info-card'),
         className: "wppic-asset-list",

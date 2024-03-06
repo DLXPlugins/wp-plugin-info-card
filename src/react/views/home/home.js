@@ -237,7 +237,7 @@ const AddPlugin = ( props ) => {
 					}
 					// Check for duplicates.
 					const { list } = props.formValues;
-					if ( list.includes( sanitizedSlug ) ) {
+					if ( typeof list !== 'undefined' && list.includes( sanitizedSlug ) ) {
 						setErrorMessage( __( 'This plugin is already listed.', 'wp-plugin-info-card' ) );
 						setIsError( true );
 						return;
@@ -342,8 +342,8 @@ const AddTheme = ( props ) => {
 						return;
 					}
 					// Check for duplicates.
-					const { list } = props.formValues;
-					if ( list.includes( sanitizedSlug ) ) {
+					const themeList = props.formValues[ 'theme-list' ];
+					if ( typeof themeList !== 'undefined' && themeList.includes( sanitizedSlug ) ) {
 						setErrorMessage( __( 'This theme is already listed.', 'wp-plugin-info-card' ) );
 						setIsError( true );
 						return;
@@ -634,7 +634,7 @@ const Interface = ( props ) => {
 	 */
 	const getPlugins = () => {
 		const { list } = formValues;
-		if ( list.length > 0 ) {
+		if ( typeof list !== 'undefined' && list.length > 0 ) {
 			return (
 				<BaseControl
 					label={ __( 'Plugins to Track', 'wp-plugin-info-card' ) }
@@ -674,7 +674,7 @@ const Interface = ( props ) => {
 	 */
 	const getThemes = () => {
 		const themeList = getValues( 'theme-list' );
-		if ( themeList.length > 0 ) {
+		if ( typeof themeList !== 'undefined' && themeList.length > 0 ) {
 			return (
 				<BaseControl
 					label={ __( 'Themes to Track', 'wp-plugin-info-card' ) }
