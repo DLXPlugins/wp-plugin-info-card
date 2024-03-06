@@ -18,7 +18,7 @@ class Add_Plugin {
 	public function run() {
 		$self = new self();
 
-		add_filter( 'wppic_add_api_parser', array( $self, 'api_parser' ), 9, 3 );
+		add_filter( 'wppic_add_api_parser', array( $self, 'api_parser' ), 9, 5 );
 		add_filter( 'wppic_add_template', array( $self, 'plugin_template' ), 9, 2 );
 		add_filter( 'wppic_add_mce_type', array( $self, 'mce_type' ) );
 		add_filter( 'wppic_add_list_form', array( $self, 'list_form' ) );
@@ -32,13 +32,15 @@ class Add_Plugin {
 	/**
 	 * Parse the API for WordPress Plugins.
 	 *
-	 * @param object $wppic_data The data object.
-	 * @param string $type       plugin or theme.
-	 * @param string $slug       Slug of the plugin.
+	 * @param object $wppic_data       The data object.
+	 * @param string $type             plugin or theme.
+	 * @param string $slug             Slug of the plugin.
+	 * @param bool   $load_attachments Load attachments.
+	 * @param bool   $force            Force refresh.
 	 *
 	 * @return object $wppic_data The data object.
 	 */
-	public function api_parser( $wppic_data, $type, $slug ) {
+	public function api_parser( $wppic_data, $type, $slug, $load_attachments = false, $force = false ) {
 		if ( 'plugin' === $type ) {
 
 			// Format slug to strip forward and trailing slashes.
@@ -58,36 +60,39 @@ class Add_Plugin {
 						'banners'           => true,
 						'reviews'           => false,
 						'active_installs'   => true,
+						'screenshots'       => true,
 					),
 				)
 			);
 
 			if ( ! is_wp_error( $plugin_info ) ) {
 				$wppic_data = (object) array(
-					'url'               => 'https://wordpress.org/plugins/' . $slug . '/',
-					'name'              => $plugin_info->name,
-					'slug'              => $slug,
-					'version'           => $plugin_info->version,
-					'author'            => $plugin_info->author,
-					'author_profile'    => $plugin_info->author_profile,
-					'contributors'      => $plugin_info->contributors,
-					'requires'          => $plugin_info->requires,
-					'tested'            => $plugin_info->tested,
-					'requires'          => $plugin_info->requires,
-					'rating'            => $plugin_info->rating,
-					'num_ratings'       => $plugin_info->num_ratings,
-					'ratings'           => $plugin_info->ratings,
-					'downloaded'        => $plugin_info->active_installs,
-					'active_installs'   => $plugin_info->active_installs,
-					'last_updated'      => $plugin_info->last_updated,
-					'last_updated_mk'   => $plugin_info->last_updated,
-					'added'             => $plugin_info->added,
-					'homepage'          => $plugin_info->homepage,
-					'short_description' => $plugin_info->short_description,
-					'download_link'     => $plugin_info->download_link,
-					'donate_link'       => $plugin_info->donate_link,
-					'icons'             => $plugin_info->icons,
-					'banners'           => $plugin_info->banners,
+					'url'                     => 'https://wordpress.org/plugins/' . $slug . '/',
+					'name'                    => $plugin_info->name,
+					'slug'                    => $slug,
+					'version'                 => $plugin_info->version,
+					'author'                  => wp_strip_all_tags( $plugin_info->author ),
+					'author_profile'          => $plugin_info->author_profile,
+					'contributors'            => wp_strip_all_tags( $plugin_info->contributors ),
+					'requires'                => $plugin_info->requires,
+					'tested'                  => $plugin_info->tested,
+					'requires'                => $plugin_info->requires,
+					'rating'                  => $plugin_info->rating,
+					'num_ratings'             => $plugin_info->num_ratings,
+					'ratings'                 => $plugin_info->ratings,
+					'downloaded'              => $plugin_info->active_installs,
+					'active_installs'         => $plugin_info->active_installs,
+					'last_updated_human_time' => human_time_diff( strtotime( $plugin_info->last_updated ), current_time( 'timestamp' ) ),
+					'last_updated'            => $plugin_info->last_updated,
+					'last_updated_mk'         => $plugin_info->last_updated,
+					'added'                   => $plugin_info->added,
+					'homepage'                => $plugin_info->homepage,
+					'short_description'       => $plugin_info->short_description,
+					'download_link'           => $plugin_info->download_link,
+					'donate_link'             => $plugin_info->donate_link,
+					'icons'                   => $plugin_info->icons,
+					'banners'                 => $plugin_info->banners,
+					'screenshots'             => $plugin_info->screenshots,
 				);
 			}
 		}

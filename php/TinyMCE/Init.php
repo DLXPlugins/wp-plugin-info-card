@@ -52,7 +52,7 @@ class Init {
 
 			add_filter( 'mce_external_plugins', array( $this, 'add_tinymce_button' ) );
 			add_filter( 'mce_buttons', array( $this, 'register_mce_button' ) );
-
+return;
 			// Load stylesheet for tinyMCE button only.
 			wp_enqueue_style(
 				'wppic-admin-css',

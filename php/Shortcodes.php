@@ -20,15 +20,52 @@ class Shortcodes {
 	public function run() {
 		$self = new self();
 
-		add_action( 'wp_footer', array( $self, 'print_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $self, 'print_scripts' ) );
 		add_action( 'wppic_enqueue_scripts', array( $self, 'enqueue_scripts' ) );
 		add_action( 'rest_api_init', array( $self, 'register_rest_routes' ) );
 		add_shortcode( 'wp-pic', array( static::class, 'shortcode_function' ) );
 		add_shortcode( 'wp-pic-query', array( static::class, 'shortcode_query_function' ) );
 		add_shortcode( 'wp-pic-site-plugins', array( static::class, 'shortcode_active_site_plugins_function' ) );
+		add_shortcode( 'wp-pic-plugin-screenshots', array( static::class, 'shortcode_plugin_screenshots_info_card' ) );
 		add_action( 'wp_ajax_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
 		add_action( 'wp_ajax_nopriv_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
+		add_action( 'init', array( static::class, 'register_screenshots_presets_post_type' ) );
 		return $self;
+	}
+
+	/**
+	 * Register plugin screenshots post type.
+	 */
+	public static function register_screenshots_presets_post_type() {
+		$labels = array(
+			'name'               => __( 'Presets', 'wp-plugin-info-card' ),
+			'singular_name'      => __( 'Presets', 'wp-plugin-info-card' ),
+			'add_new'            => __( 'Add New', 'wp-plugin-info-card' ),
+			'add_new_item'       => __( 'Add New Preset', 'wp-plugin-info-card' ),
+			'edit_item'          => __( 'Edit Preset', 'wp-plugin-info-card' ),
+			'new_item'           => __( 'New Preset', 'wp-plugin-info-card' ),
+			'all_items'          => __( 'All Presets', 'wp-plugin-info-card' ),
+			'view_item'          => __( 'View Preset', 'wp-plugin-info-card' ),
+			'search_items'       => __( 'Search Presets', 'wp-plugin-info-card' ),
+			'not_found'          => __( 'No Presets found', 'wp-plugin-info-card' ),
+			'not_found_in_trash' => __( 'No Presets found in Trash', 'wp-plugin-info-card' ),
+			'parent_item_colon'  => '',
+			'menu_name'          => __( 'Presets', 'wp-plugin-info-card' ),
+		);
+
+		$args = array(
+			'labels'                  => $labels,
+			'public'                  => false,
+			'publicly_queryable'      => false,
+			'show_ui'                 => false,
+			'show_in_menu'            => false,
+			'query_var'               => false,
+			'rewrite'                 => false,
+			'dlx_photo_block_archive' => false,
+			'hierarchical'            => false,
+		);
+
+		register_post_type( 'wppic_screen_presets', $args );
 	}
 
 	/**
@@ -68,14 +105,6 @@ class Shortcodes {
 
 		if ( isset( $options['enqueue'] ) && true === $options['enqueue'] ) {
 			do_action( 'wppic_enqueue_scripts' );
-		} else {
-			// Enqueue Scripts when shortcode is in page.
-
-			$allow_scripts = apply_filters( 'wppic_allow_scripts', false );
-			if ( ! $allow_scripts ) {
-				return;
-			}
-			do_action( 'wppic_enqueue_scripts' );
 		}
 	}
 
@@ -84,7 +113,7 @@ class Shortcodes {
 	 *
 	 * @since 3.0.0
 	 */
-	function register_rest_routes() {
+	public function register_rest_routes() {
 		register_rest_route(
 			'wppic/v1',
 			'/get_html',
@@ -176,6 +205,13 @@ class Shortcodes {
 	 */
 	public function rest_check_permissions() {
 		return current_user_can( 'edit_posts' );
+	}
+
+	/**
+	 * Check if user has access to REST API for retrieving and sideloading images.
+	 */
+	public function rest_image_sideload_permissions() {
+		return current_user_can( 'publish_posts' );
 	}
 
 	/**
@@ -630,8 +666,8 @@ class Shortcodes {
 			}
 		}
 
+		do_action( 'wppic_enqueue_scripts' );
 		return $content;
-
 	}
 
 	/**
@@ -788,7 +824,7 @@ class Shortcodes {
 						$content .= '</div>';
 						$row      = false;
 					}
-					$count++;
+					++$count;
 				}
 
 				if ( $row ) {
@@ -798,12 +834,402 @@ class Shortcodes {
 					$content .= '</div>'; // end of grid.
 				}
 
+				do_action( 'wppic_enqueue_scripts' );
+
 				return apply_filters( 'wppic_query_content', $content, $type, $atts );
 
 			}
 		}
-
 	} //end of wp-pic-query Shortcode
+
+	/**
+	 * Shortcode for retrieving plugin screenshots card.
+	 *
+	 * @param array  $attributes Shortcode attributes.
+	 * @param string $content    The content of the shortcode.
+	 */
+	public static function shortcode_plugin_screenshots_info_card( $attributes, $content = '' ) {
+
+		$attributes = shortcode_atts(
+			array(
+				'unique_id'                                => 'wppic-' . wp_rand( 0, 1000 ) . wp_generate_password( 6, false, false ),
+				'slug'                                     => '',
+				'icon_style'                               => 'none',
+				'asset_data'                               => array(),
+				'image_size'                               => 'thumbnail',
+				'enable_rounded_icon'                      => false,
+				'color_theme'                              => 'default',
+				'custom_colors'                            => false,
+				'plugin_title'                             => '',
+				'enable_context_menu'                      => true,
+				'enable_screenshots'                       => true,
+				'image_source'                             => 'local',
+				'images'                                   => array(),
+				'align'                                    => 'center',
+				'color_background'                         => '#FFFFFF',
+				'color_text'                               => '#000000',
+				'color_border'                             => '#000000',
+				'color_menu_border'                        => '#000000',
+				'color_menu'                               => '#000000',
+				'color_menu_hover'                         => '#DDDDDD',
+				'color_menu_text'                          => '#FFFFFF',
+				'color_menu_text_hover'                    => '#000000',
+				'color_screenshots_background'             => '#DDDDDD',
+				'color_screenshots_border'                 => '#000000',
+				'color_screenshots_arrow_background'       => '#333333',
+				'color_screenshots_arrow_background_hover' => '#000000',
+				'color_screenshots_arrow'                  => '#EEEEEE',
+				'color_screenshots_arrow_hover'            => '#FFFFFF',
+				'color_star'                               => '#FF9529',
+				'color_meta_background'                    => '#000000',
+				'color_meta_text'                          => '#FFFFFF',
+			),
+			$attributes,
+			'wp-pic-plugin-screenshots'
+		);
+
+		// Build wrapper classes.
+		$wrapper_classes = array(
+			'wp-pic-plugin-screenshots-wrapper',
+			'wp-pic-card',
+		);
+
+		// Build CSS classes.
+		$classes = array(
+			'wp-pic-plugin-screenshots',
+			'wp-pic-screenshots',
+			'large',
+			'plugin',
+			'wp-pic-has-screenshots',
+		);
+
+		// Check for the color theme.
+		if ( ! $attributes['custom_colors'] && strpos( $attributes['color_theme'], 'custom' ) === false ) {
+			$classes[] = sprintf(
+				'wppic-plugin-screenshot-theme-%s',
+				esc_attr( $attributes['color_theme'] )
+			);
+		}
+
+		// Get asset data.
+		$asset_data = wppic_api_parser( 'plugin', $attributes['slug'] );
+		if ( $asset_data ) {
+			$asset_data = json_decode( json_encode( $asset_data ), true );
+		}
+
+		// Get requires.
+		$requires       = $asset_data['requires'] ?? false;
+		$requires_label = $asset_data['tested'] ?? 'Unknown';
+		if ( $requires && is_numeric( $requires ) ) {
+			/* Translators: %s is the WP version the plugin supports */
+			$requires_label = sprintf( __( 'WP %s+', 'wp-plugin-info-card' ), $requires );
+		}
+
+		// Get icon.
+		$icon = $asset_data['icons']['svg'] ?? $asset_data['icons']['2x'] ?? $asset_data['icons']['1x'] ?? Functions::get_plugin_url( 'assets/img/default-plugin-icon.png' );
+
+		// Get plugin screenshots.
+		$screenshots = Functions::get_plugin_screenshots( $asset_data['slug'], false, true );
+
+		// Active installs.
+		if ( $asset_data['active_installs'] >= 1000000 ) {
+			// Get number of million.
+			$count_in_million = round( $asset_data['active_installs'] / 1000000, 1 );
+
+			$active_installs_text = sprintf(
+				/* Translators: %s is the number of million active installs */
+				_n( '%s+ Million', '%s+ Million', $count_in_million, 'wp-plugin-info-card' ),
+				number_format_i18n( $count_in_million )
+			);
+		} else {
+			$active_installs_text = number_format_i18n( $asset_data['active_installs'] ) . '+';
+		}
+
+		// Build custom color styles.
+		$block_styles = '';
+		if ( $attributes['custom_colors'] || ( ! $attributes['custom_colors'] && strpos( $attributes['color_theme'], 'custom' ) !== false ) ) {
+			$block_styles = sprintf(
+				'#%s {
+					--wppic-plugin-screenshots-card-background: %s;
+					--wppic-plugin-screenshots-card-text-color: %s;
+					--wppic-plugin-screenshots-card-border-color: %s;
+					--wppic-plugin-screenshots-card-menu-border-color: %s;
+					--wppic-plugin-screenshots-card-menu-color: %s;
+					--wppic-plugin-screenshots-card-menu-color-hover: %s;
+					--wppic-plugin-screenshots-card-menu-text-color: %s;
+					--wppic-plugin-screenshots-card-menu-text-color-hover: %s;
+					--wppic-plugin-screenshots-card-screenshots-background: %s;
+					--wppic-plugin-screenshots-card-screenshots-border-color: %s;
+					--wppic-plugin-screenshots-card-screenshots-star-color: %s;
+					--wppic-plugin-screenshots-card-meta-background-color: %s;
+					--wppic-plugin-screenshots-card-meta-text-color: %s;
+					--wppic-plugin-screenshots-card-screenshots-arrow-background-color: %s;
+					--wppic-plugin-screenshots-card-screenshots-arrow-background-color-hover: %s;
+					--wppic-plugin-screenshots-card-screenshots-arrow-color: %s;
+					--wppic-plugin-screenshots-card-screenshots-arrow-color-hover: %s;
+				}',
+				esc_attr( $attributes['unique_id'] ),
+				esc_attr( $attributes['color_background'] ),
+				esc_attr( $attributes['color_text'] ),
+				esc_attr( $attributes['color_border'] ),
+				esc_attr( $attributes['color_menu_border'] ),
+				esc_attr( $attributes['color_menu'] ),
+				esc_attr( $attributes['color_menu_hover'] ),
+				esc_attr( $attributes['color_menu_text'] ),
+				esc_attr( $attributes['color_menu_text_hover'] ),
+				esc_attr( $attributes['color_screenshots_background'] ),
+				esc_attr( $attributes['color_screenshots_border'] ),
+				esc_attr( $attributes['color_star'] ),
+				esc_attr( $attributes['color_meta_background'] ),
+				esc_attr( $attributes['color_meta_text'] ),
+				esc_attr( $attributes['color_screenshots_arrow_background'] ),
+				esc_attr( $attributes['color_screenshots_arrow_background_hover'] ),
+				esc_attr( $attributes['color_screenshots_arrow'] ),
+				esc_attr( $attributes['color_screenshots_arrow_hover'] )
+			);
+		}
+
+		$block_styles .= sprintf(
+			'
+			#%1$s .wp-pic-plugin-screenshots-rating-count {
+				position: relative;
+				display: block;
+				vertical-align: baseline;
+				margin-left: 0 !important;
+			}
+			#%1$s .wp-pic-plugin-screenshots-rating-count::before {
+				--percent: %2$s;
+				content: \'★★★★★\';
+				display: inline-block;
+				position: relative;
+				top: 0;
+				left: 0;
+				color: rgba(0,0,0,0.2);
+				background:
+					linear-gradient(90deg, var( --wppic-plugin-screenshots-card-screenshots-star-color ) var(--percent), rgba(0,0,0,0.2) var(--percent));
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}',
+			esc_attr( $attributes['unique_id'] ),
+			round( $asset_data['rating'] ) . '%'
+		);
+
+		// Begin outputting styles.
+		if ( ! empty( $block_styles ) ) {
+			$block_styles = sprintf( '<style>%s</style>', $block_styles );
+		}
+
+		// Global var to enqueue scripts + ajax param if is set to yes.
+		add_filter( 'wppic_allow_scripts', '__return_true' );
+
+		/**
+		 * Add icons to footer for plugin card.
+		 */
+		add_action( 'wp_footer', array( __CLASS__, 'add_screenshots_icons_to_footer' ) );
+
+		// Begin the output.
+		ob_start();
+		?>
+			<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>">
+				<?php echo wp_kses( $block_styles, Functions::get_kses_allowed_html() ); ?>
+				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" id="<?php echo esc_attr( $attributes['unique_id'] ); ?>">
+					<div class="wp-pic-plugin-screenshots-card">
+						<div class="wp-pic-plugin-screenshots-avatar-wrapper">
+							<a href="<?php echo esc_url( $asset_data['url'] ); ?>" target="_blank" rel="noopener noreferrer" class="wp-pic-plugin-screenshots-avatar style-<?php echo esc_attr( $attributes['icon_style'] ); ?> <?php echo esc_attr( $attributes['enable_rounded_icon'] ? 'is-rounded' : '' ); ?>">
+								<img src="<?php echo esc_url( $icon ); ?>" width="125" height="125" alt="<?php echo esc_attr( $asset_data['name'] ); ?>" />
+							</a>
+							<?php
+							if ( $attributes['enable_context_menu'] ) :
+								?>
+									<div class="wppic-meatball-menu wppic-meatball-menu-theme-light" style="display: none;">
+									<div class="wppic-meatball-content">
+										<input
+											type="checkbox"
+											aria-label="<?php esc_attr_e( 'Toggle menu', 'wp-plugin-info-card' ); ?>"
+										/>
+										<ul>
+											<li class="wppic-meatball-menu-item wppic-meatball-menu-item-edit-comment" data-comment-action="edit">
+												<a href="<?php echo esc_url( $asset_data['url'] ); ?>" class="button-reset">
+													<span class="wppic-meatball-menu-icon">
+														<svg width="24" height="24"><use xlink:href="#wppic-icon-wordpress"></use></svg>
+													</span>
+													<span class="wppic-meatball-menu-label">
+														<?php esc_html_e( 'View Plugin Page', 'wp-plugin-info-card' ); ?>
+													</span>
+												</a>
+											</li>
+											<li class="wppic-meatball-menu-item" data-comment-action="approve">
+												<a href="<?php echo esc_url( sprintf( 'https://wordpress.org/support/plugin/%s/reviews/', $asset_data['slug'] ) ); ?>" class="button-reset">
+													<span class="wppic-meatball-menu-icon">
+														<svg width="24" height="24"><use xlink:href="#wppic-icon-star"></use></svg>
+													</span>
+													<span class="wppic-meatball-menu-label">
+														<?php esc_html_e( 'View Ratings', 'wp-plugin-info-card' ); ?>
+													</span>
+												</a>
+											</li>
+											<li class="wppic-meatball-menu-item">
+												<a href="<?php echo esc_url( sprintf( 'https://wordpress.org/plugins/%s/advanced/', $asset_data['slug'] ) ); ?>" class="button-reset">
+													<span class="wppic-meatball-menu-icon">
+														<svg width="24" height="24"><use xlink:href="#wppic-icon-line-chart"></use></svg>
+													</span>
+													<span class="wppic-meatball-menu-label">
+														<?php esc_html_e( 'View Plugin Stats', 'wp-plugin-info-card' ); ?>
+													</span>
+												</a>
+											</li>
+											<li class="wppic-meatball-menu-item">
+											<a href="<?php echo esc_url( $asset_data['download_link'] ); ?>" class="button-reset">
+													<span class="wppic-meatball-menu-icon">
+														<svg width="24" height="24"><use xlink:href="#wppic-icon-download"></use></svg>
+													</span>
+													<span class="wppic-meatball-menu-label">
+														<?php esc_html_e( 'Download Plugin', 'wp-plugin-info-card' ); ?>
+													</span>
+												</a>
+											</li>
+										</ul>
+										<div class="wppic-meatball-icon-wrapper" aria-hidden="true">
+											<div class="wppic-meatball-icon">
+												<span></span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<?php
+							endif;
+							?>
+						</div><!-- .wp-pic-plugin-screenshots-avatar-wrapper -->
+						<div class="wp-pic-plugin-screenshots-title">
+							<h2><?php echo esc_html( '' === $attributes['plugin_title'] ? $asset_data['name'] : $attributes['plugin_title'] ); ?></h2>
+						</div>
+						<div class="wp-pic-plugin-screenshots-author">
+							<?php
+							echo esc_html(
+								sprintf(
+								/* Translators: %s is the plugin author */
+									__( 'By: %s', 'wp-plugin-info-card' ),
+									$asset_data['author']
+								)
+							);
+							?>
+						</div>
+						<div class="wp-pic-plugin-screenshots-rating">
+							<span class="wp-pic-plugin-screenshots-rating-count">
+								<?php
+								echo esc_html(
+									sprintf(
+									/* Translators: %s is the number of ratings */
+										_n( '%s Rating', '%s Ratings', $asset_data['num_ratings'], 'wp-plugin-info-card' ),
+										number_format_i18n( $asset_data['num_ratings'] )
+									)
+								);
+								?>
+							</span>
+						</div>
+						<div class="wp-pic-plugin-screenshots-last-updated">
+							<?php
+							echo esc_html(
+								sprintf(
+								/* Translators: %s is the plugin author */
+									__( 'Last Updated: %s ago', 'wp-plugin-info-card' ),
+									$asset_data['last_updated_human_time']
+								)
+							);
+							?>
+						</div>
+						<div class="wp-pic-plugin-screenshots-description">
+							<?php echo wp_kses_post( $asset_data['short_description'] ); ?>
+						</div>
+					</div><!-- .wp-pic-plugin-screenshots-card -->
+					<footer class="wp-pic-plugin-screenshots-footer">
+						<?php
+						$local_screenshots   = $asset_data['screenshots'] ?? array();
+						$screenshots_enabled = $attributes['enable_screenshots'] && ! empty( $screenshots ) && ! empty( $local_screenshots );
+						$screenshot_size     = $attributes['image_size'] ?? 'thumbnail';
+						if ( $screenshots_enabled ) {
+							// Enqueue the modal script.
+							if ( ! wp_script_is( 'fancybox', 'enqueued' ) ) {
+								wp_register_script(
+									'wppic-fancybox-js',
+									Functions::get_plugin_url( '/dist/wppic-fancybox.js' ),
+									array(),
+									Functions::get_plugin_version(),
+									true
+								);
+
+								wp_register_style(
+									'wppic-fancybox-css',
+									Functions::get_plugin_url( '/dist/wppic-fancybox.css' ),
+									array(),
+									Functions::get_plugin_version(),
+									'all'
+								);
+							}
+							add_action( 'wp_footer', array( __CLASS__, 'add_carousel_to_footer' ) );
+							?>
+								<div class="wp-pic-plugin-screenshots-images">
+									<ul class="wppic-screenshot-fancyapps f-carousel">
+										<?php
+										foreach ( $local_screenshots as $screenshot ) {
+											?>
+												<li class="f-carousel__slide">
+													<a href="<?php echo esc_url( $screenshot['src'] ); ?>" data-fancybox="<?php echo esc_attr( $attributes['unique_id'] ); ?>" data-caption="<?php echo esc_attr( $screenshot['caption'] ); ?>">
+														<img data-lazy-src="<?php echo esc_url( $screenshot['src'] ); ?>" alt="<?php echo esc_attr( $screenshot['caption'] ); ?>" />
+													</a>
+												</li>
+												<?php
+										}
+										?>
+									</ul>
+								</div>
+							<?php
+						}
+						?>
+						<div class="wp-pic-plugin-screenshots-meta">
+							<div class="wp-pic-plugin-screenshots-meta-item">
+								<div class="wp-pic-plugin-screenshots-meta-item-svg">
+									<svg width="24" height="24"><use xlink:href="#wppic-icon-code"></use></svg>
+								</div>
+								<div class="wp-pic-plugin-screenshots-meta-item-label">
+									<a href="<?php echo esc_url( $asset_data['download_link'] ); ?>">
+									<?php
+									echo esc_html(
+										sprintf(
+										/* Translators: %s is the version */
+											__( 'v%s', 'wp-plugin-info-card' ),
+											$asset_data['version']
+										)
+									);
+									?>
+									</a>
+								</div>
+							</div>
+							<div class="wp-pic-plugin-screenshots-meta-item">
+								<div class="wp-pic-plugin-screenshots-meta-item-svg">
+									<svg width="24" height="24"><use xlink:href="#wppic-icon-wordpress"></use></svg>
+								</div>
+								<div class="wp-pic-plugin-screenshots-meta-item-label">
+								<a href="<?php echo esc_url( $asset_data['url'] ); ?>"><?php echo esc_html( $requires_label ); ?></a>
+								</div>
+							</div>
+							<div class="wp-pic-plugin-screenshots-meta-item">
+								<div class="wp-pic-plugin-screenshots-meta-item-svg">
+									<svg width="24" height="24"><use xlink:href="#wppic-icon-download-cloud"></use></svg>
+								</div>
+								<div class="wp-pic-plugin-screenshots-meta-item-label">
+								<a href="<?php echo esc_url( sprintf( 'https://wordpress.org/plugins/%s/advanced/', $asset_data['slug'] ) ); ?>"><?php echo esc_html( $active_installs_text ); ?></a>
+								</div>
+							</div>
+						</div>
+					</footer>
+				</div>
+			</div>
+		<?php
+		$return = ob_get_clean();
+		do_action( 'wppic_enqueue_scripts' );
+		return $return;
+	}
 
 	/**
 	 * Main Shortcode function.
@@ -865,6 +1291,7 @@ class Shortcodes {
 			?>
 		</div>
 		<?php
+		do_action( 'wppic_enqueue_scripts' );
 		$content = ob_get_clean();
 		return $content;
 	}
@@ -940,7 +1367,7 @@ class Shortcodes {
 		// Prepare the credit.
 		$credit = '';
 		if ( isset( $options['credit'] ) && true === $options['credit'] ) {
-			$credit .= '<a className="wp-pic-credit" href="https://mediaron.com/wp-plugin-info-card/" target="_blank" data-tooltip="';
+			$credit .= '<a class="wp-pic-credit" href="https://mediaron.com/wp-plugin-info-card/" target="_blank" data-tooltip="';
 			$credit .= esc_html__( 'This card has been generated with WP Plugin Info Card', 'wp-plugin-info-card' );
 			$credit .= '"></a>';
 		}
@@ -956,7 +1383,6 @@ class Shortcodes {
 		} else {
 			return $content;
 		}
-
 	}
 
 	/**
@@ -985,7 +1411,8 @@ class Shortcodes {
 				$slug_data->author = wp_strip_all_tags( $slug_data->author );
 			}
 			if ( isset( $slug_data->active_installs ) ) {
-				$slug_data->active_installs = number_format_i18n( $slug_data->active_installs );
+				$slug_data->active_installs_raw = $slug_data->active_installs;
+				$slug_data->active_installs     = number_format_i18n( $slug_data->active_installs );
 			}
 			if ( isset( $slug_data->last_updated ) ) {
 				$slug_data->last_updated = human_time_diff( strtotime( $slug_data->last_updated ), time() ) . ' ' . _x( 'ago', 'Last time updated', 'wp-plugin-info-card' );
@@ -995,10 +1422,58 @@ class Shortcodes {
 
 		// Return error if no data.
 		if ( empty( $data ) ) {
-			wp_send_json_error();
+			wp_send_json_error(
+				array(
+					'message' => __( 'No plugin could be found with that slug.', 'wp-plugin-info-card' ),
+				)
+			);
 		}
 
 		wp_send_json_success( $data );
 	}
 
+	/**
+	 * Add SVGs to footer.
+	 */
+	public static function add_screenshots_icons_to_footer() {
+		?>
+		<div style="display: none; height: 0; width: 0;" aria-hidden="true">
+			<svg width="0" height="0" class="hidden" style="display: none;">
+				<symbol id="wppic-icon-star" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star">
+					<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+				</symbol>
+				<symbol id="wppic-icon-wordpress" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 512 512">
+					<path fill="currentColor" d="M256 8C119.3 8 8 119.2 8 256c0 136.7 111.3 248 248 248s248-111.3 248-248C504 119.2 392.7 8 256 8zM33 256c0-32.3 6.9-63 19.3-90.7l106.4 291.4C84.3 420.5 33 344.2 33 256zm223 223c-21.9 0-43-3.2-63-9.1l66.9-194.4 68.5 187.8c.5 1.1 1 2.1 1.6 3.1-23.1 8.1-48 12.6-74 12.6zm30.7-327.5c13.4-.7 25.5-2.1 25.5-2.1 12-1.4 10.6-19.1-1.4-18.4 0 0-36.1 2.8-59.4 2.8-21.9 0-58.7-2.8-58.7-2.8-12-.7-13.4 17.7-1.4 18.4 0 0 11.4 1.4 23.4 2.1l34.7 95.2L200.6 393l-81.2-241.5c13.4-.7 25.5-2.1 25.5-2.1 12-1.4 10.6-19.1-1.4-18.4 0 0-36.1 2.8-59.4 2.8-4.2 0-9.1-.1-14.4-.3C109.6 73 178.1 33 256 33c58 0 110.9 22.2 150.6 58.5-1-.1-1.9-.2-2.9-.2-21.9 0-37.4 19.1-37.4 39.6 0 18.4 10.6 33.9 21.9 52.3 8.5 14.8 18.4 33.9 18.4 61.5 0 19.1-7.3 41.2-17 72.1l-22.2 74.3-80.7-239.6zm81.4 297.2l68.1-196.9c12.7-31.8 17-57.2 17-79.9 0-8.2-.5-15.8-1.5-22.9 17.4 31.8 27.3 68.2 27.3 107 0 82.3-44.6 154.1-110.9 192.7z"/>
+				</symbol>
+				<symbol id="wppic-icon-line-chart" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-line-chart">
+					<path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>
+				</symbol>
+				<symbol id="wppic-icon-download" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download">
+					<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>
+				</symbol>
+				<symbol id="wppic-icon-code" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code">
+					<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+				</symbol>
+				<symbol id="wppic-icon-download-cloud" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download-cloud">
+					<path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m8 17 4 4 4-4"/>
+				</symbol>
+			</svg>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Add Splide to footer.
+	 */
+	public static function add_carousel_to_footer() {
+		// Enqueue / print fancybox styles.
+		if ( wp_script_is( 'wppic-fancybox-js', 'registered' ) && ! wp_script_is( 'wppic-fancybox-js', 'done' ) ) {
+			\wp_add_inline_style(
+				'wppic-fancybox-css',
+				'.fancybox__container{z-index:99999 !important}'
+			);
+			wp_print_scripts( 'wppic-fancybox-js' );
+			wp_print_styles( 'wppic-fancybox-css' );
+		}
+	}
 }

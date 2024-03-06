@@ -457,7 +457,7 @@ const WPPluginInfoCard = ( props ) => {
 				<img
 					src={ wppic.wppic_preview }
 					alt=""
-					style={ { height: '415px', width: 'auto', textAlign: 'center' } }
+					style={ { width: '100%', height: 'auto' } }
 				/>
 			</div>
 		);
@@ -532,7 +532,7 @@ const WPPluginInfoCard = ( props ) => {
 												value={ slug }
 												onChange={ ( value ) => {
 													// Check for URL so we don't paste in the slug AND url.
-													if ( isURL ( value ) ) {
+													if ( isURL( value ) ) {
 														return;
 													}
 													setAttributes( {

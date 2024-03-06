@@ -1,0 +1,45 @@
+button {
+	&.button-reset.components-button,
+	&.button-reset.components-button:focus,
+	&.button-reset.components-button:hover,
+	&.button-reset.components-button.is-secondary,
+	&.button-reset.components-button.is-secondary:focus,
+	&.button-reset.components-button.is-secondary:hover,
+	&.button-reset,
+	&.button-reset:focus,
+	&.button-reset:hover {
+		display: inline-block;
+		background: none;
+		color: inherit;
+		border: none;
+		padding: 0;
+		cursor: pointer;
+		outline: inherit;
+		text-transform: unset;
+		box-shadow: none;
+		min-width: unset;
+		height: unset;
+
+		
+	}
+	&.button-reset.show-cursor {
+		cursor: pointer;
+	}
+}
+.button-reset,
+.button-reset:focus,
+.button-reset:hover {
+	button {
+		display: inline-block;
+		background: none;
+		color: inherit;
+		border: none;
+		padding: 0;
+		cursor: pointer;
+		outline: inherit;
+		text-transform: unset;
+		box-shadow: none;
+		min-width: unset;
+		height: unset;
+	}
+}

@@ -13,6 +13,7 @@ import InfoCardIcon from './blocks/components/InfoCardIcon';
 import './blocks/PluginInfoCard/block';
 import './blocks/PluginInfoCardQuery/wppic-query';
 import './blocks/SitePluginsCardGrid/block';
+import './blocks/PluginScreenshotsInfoCard/block';
 
 /**
  * Add Block Category Icon.

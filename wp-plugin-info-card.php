@@ -135,6 +135,11 @@ class WP_Plugin_Info_Card {
 		$shortcodes = new Shortcodes();
 		$shortcodes->run();
 
+		// For the admin.
+		if ( is_admin() ) {
+			// Set up admin.
+			new Admin\Init();
+		}
 	}
 }
 
