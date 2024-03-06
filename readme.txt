@@ -8,15 +8,11 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 
-WP Plugin Info Card displays plugins & themes data in a beautiful box with a smooth rotation effect using WP Plugin & Theme APIs. Dashboard widget included.
+WP Plugin Info Card displays plugins & themes data in beautiful cards using WP Plugin & Theme APIs. Dashboard widget included.
 
 == Description ==
 
-> Credits: Originally developed and maintained by <a href="https://www.b-website.com/">Brice CAPOBIANCO</a>.
-
-WPPIC displays plugins & themes data in a beautiful box with a smooth rotation effect using WP Plugin & Theme APIs. Dashboard widget included.
-
-> Please rate the plugin if you like it. <a href="https://wordpress.org/support/plugin/wp-plugin-info-card/reviews/#new-post">Leave a review</a>!
+Plugin Info Card displays plugins & themes data in beautiful cards using WP Plugin & Theme APIs. Dashboard widget included.
 
 [youtube https://www.youtube.com/watch?v=8eKDCEoXGKU&rel=0]
 
@@ -65,6 +61,7 @@ Please <a href="https://translate.wordpress.org/projects/wp-plugins/wp-plugin-in
 
 Feel free to make pull requests or issues on the <a href="https://github.com/dlxplugins/wp-plugin-info-card">WP Plugin Info Card GitHub account</a>.
 
+> Credits: Originally developed and maintained by <a href="https://www.b-website.com/">Brice CAPOBIANCO</a>.
 
 == Installation ==
 
@@ -100,6 +97,11 @@ This video shows you how:
 11. WordPress layout with themes and 2 columns
 
 == Changelog ==
+
+= 5.0.0 =
+* Released 2024-03-06
+* New admin panel look and feel.
+* New Plugin Screenshots block and shortcode allows you to display plugin screenshots.
 
 = 4.0.10 =
 * Released 2023-12-12
@@ -428,5 +430,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 4.0.10 =
-Fixing translations not being set properly with the text domain.
+= 5.0.0 =
+New admin appearance look and feel. New Plugin Screenshots block and shortcode allows you to display plugin screenshots.
