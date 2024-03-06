@@ -1160,7 +1160,7 @@ class Shortcodes {
 
 								wp_register_style(
 									'wppic-fancybox-css',
-									Functions::get_plugin_url( '/dist/wppic-fancybox.css' ),
+									Functions::get_plugin_url( '/dist/wppic-fancybox-css.css' ),
 									array(),
 									Functions::get_plugin_version(),
 									'all'

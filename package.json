@@ -19,9 +19,9 @@
     "url": "https://github.com/sponsors/MediaRon"
   },
   "scripts": {
-    "start": "wp-scripts start wppic-blocks=./src/index.js --env mode=development",
-    "dev": "wp-scripts start wppic-blocks=./src/index.js --env mode=development",
-    "build": "wp-scripts build wppic-blocks=./src/index.js --env mode=production"
+    "start": "wp-scripts start --env mode=development",
+    "dev": "wp-scripts start --env mode=development",
+    "build": "wp-scripts build --env mode=production"
   },
   "dependencies": {
     "babel-loader": "^8.2.2",
