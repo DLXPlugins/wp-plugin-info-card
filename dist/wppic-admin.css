@@ -6953,8 +6953,15 @@ html {
 }
 .wppic-admin-panel-container.with-sidebar {
   display: grid;
-  grid-template-columns: 1fr 300px;
-  column-gap: 60px;
+  grid-template-columns: 1fr;
+  row-gap: 30px;
+  column-gap: 30px;
+}
+@media (min-width: 1024px) {
+  .wppic-admin-panel-container.with-sidebar {
+    grid-template-columns: 1fr 300px;
+    column-gap: 60px;
+  }
 }
 .wppic-admin-panel-container.is-narrow {
   max-width: 900px;
