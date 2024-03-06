@@ -2834,13 +2834,15 @@ a.wp-pic-credit:focus:after {
   align-items: center;
 }
 .wp-pic-plugin-screenshots-images .wppic-screenshot-fancyapps .f-carousel__track {
-  column-gap: 12px;
   align-items: center;
 }
 .wp-pic-plugin-screenshots-images .wppic-screenshot-fancyapps li {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  display: block;
+  padding-left: 6px;
+  padding-right: 6px;
 }
 .wp-pic-plugin-screenshots-images .wppic-screenshot-fancyapps {
   position: relative;

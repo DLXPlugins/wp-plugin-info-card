@@ -2500,14 +2500,16 @@ a.wp-pic-credit:focus:after {
 		align-items: center;
 
 		.f-carousel__track {
-			column-gap: 12px;
+			
 			align-items: center;
 		}
 		li {
 			list-style-type: none;
 			margin: 0;
 			padding: 0;
-			// max-width: 33.33%;
+			display: block;
+			padding-left: 6px;
+			padding-right: 6px;
 		}
 	}
 	.wppic-screenshot-fancyapps {
