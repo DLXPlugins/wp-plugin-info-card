@@ -2868,6 +2868,7 @@ a.wp-pic-credit:focus:after {
 .wp-pic-plugin-screenshots-images .wppic-screenshot-fancyapps img {
   max-width: 100%;
   height: auto;
+  max-height: 175px;
 }
 .wp-pic-plugin-screenshots-images .f-button {
   background: var(--wppic-plugin-screenshots-card-screenshots-arrow-background-color);

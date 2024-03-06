@@ -389,6 +389,10 @@ div[data-type="wp-plugin-info-card/wp-plugin-info-card"] .wp-block {
   margin-right: 8px;
 }
 
+.wppic-custom-preset-notice {
+  margin-bottom: 15px;
+}
+
 /* Preset Modal */
 .has-preset-modal-radio-control {
   margin-bottom: 15px;

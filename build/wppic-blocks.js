@@ -4051,30 +4051,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
-/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../Logo */ "./src/blocks/Logo.js");
-/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../components/Loading */ "./src/blocks/components/Loading.js");
-/* harmony import */ var _templates_PluginScreenshots__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../templates/PluginScreenshots */ "./src/blocks/templates/PluginScreenshots.js");
-/* harmony import */ var _components_CustomPresets__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../components/CustomPresets */ "./src/blocks/components/CustomPresets/index.js");
-/* harmony import */ var _components_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../components/PresetButton/PresetButton */ "./src/blocks/components/PresetButton/PresetButton.js");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _templates_PluginScreenshots__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../templates/PluginScreenshots */ "./src/blocks/templates/PluginScreenshots.js");
+/* harmony import */ var _components_CustomPresets__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../components/CustomPresets */ "./src/blocks/components/CustomPresets/index.js");
+/* harmony import */ var _components_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../components/PresetButton/PresetButton */ "./src/blocks/components/PresetButton/PresetButton.js");
+/* harmony import */ var _components_Notice__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../components/Notice */ "./src/blocks/components/Notice/index.js");
 /**
  * This is the initial screen of the block. It is the first screen that the user sees when they add the block to the editor.
  */
-
-
-
-
 
 
 
@@ -4096,189 +4085,203 @@ var ScreenPluginPreview = function ScreenPluginPreview(a) {
     d = a.clientId;
   var e = b.assetData,
     f = b.enableScreenshots,
-    g = b.maxHeight,
-    h = b.enableRoundedIcon,
-    i = b.iconStyle,
-    j = b.enableContextMenu,
-    k = b.pluginTitle,
-    l = b.colorTheme,
-    m = b.uniqueId;
+    g = b.enableRoundedIcon,
+    h = b.iconStyle,
+    i = b.enableContextMenu,
+    j = b.pluginTitle,
+    k = b.colorTheme,
+    l = b.uniqueId;
 
   // Set the local inspector controls.
-  var n = /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Block Customization', 'wp-plugin-info-card'),
+  var m = /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Block Customization', 'wp-plugin-info-card'),
     initialOpen: true
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Rounded Icon', 'wp-plugin-info-card'),
-    checked: h,
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Rounded Icon', 'wp-plugin-info-card'),
+    checked: g,
     onChange: function onChange(a) {
       c({
         enableRoundedIcon: a
       });
     },
-    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Make the icon rounded.', 'wp-plugin-info-card')
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Icon Style', 'wp-plugin-info-card'),
-    value: i,
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Make the icon rounded.', 'wp-plugin-info-card')
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Icon Style', 'wp-plugin-info-card'),
+    value: h,
     onChange: function onChange(a) {
       c({
         iconStyle: a
       });
     },
-    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Set the style of the icon.', 'wp-plugin-info-card'),
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Set the style of the icon.', 'wp-plugin-info-card'),
     options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('None', 'wp-plugin-info-card'),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('None', 'wp-plugin-info-card'),
       value: 'none'
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Border', 'wp-plugin-info-card'),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Border', 'wp-plugin-info-card'),
       value: 'border'
     }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('B&W With Border', 'wp-plugin-info-card'),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('B&W With Border', 'wp-plugin-info-card'),
       value: 'bw'
     }]
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Enable Context Menu', 'wp-plugin-info-card'),
-    checked: j,
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable Context Menu', 'wp-plugin-info-card'),
+    checked: i,
     onChange: function onChange(a) {
       c({
         enableContextMenu: a
       });
     },
-    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Make the icon rounded.', 'wp-plugin-info-card')
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Override Plugin Title', 'wp-plugin-info-card'),
-    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Leave blank for no override. Otherwise enter a custom title for the plugin.', 'wp-plugin-info-card'),
-    value: k,
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Make the icon rounded.', 'wp-plugin-info-card')
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Override Plugin Title', 'wp-plugin-info-card'),
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Leave blank for no override. Otherwise enter a custom title for the plugin.', 'wp-plugin-info-card'),
+    value: j,
     onChange: function onChange(a) {
       c({
         pluginTitle: a
       });
     }
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Enable Screenshots', 'wp-plugin-info-card'),
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable Screenshots', 'wp-plugin-info-card'),
     checked: f,
     onChange: function onChange(a) {
       c({
         enableScreenshots: a
       });
     },
-    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Enable or disable screenshots.', 'wp-plugin-info-card')
-  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Color Themes', 'wp-plugin-info-card'),
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable or disable screenshots.', 'wp-plugin-info-card')
+  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Color Themes', 'wp-plugin-info-card'),
     initialOpen: true,
     className: "wppic-presets-panel",
     icon: "admin-customizer"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-screenshot-presets-button-group"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Select a color theme', 'wp-plugin-info-card')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, null, /*#__PURE__*/React.createElement(_components_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Default', 'wp-plugin-info-card'),
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select a color theme', 'wp-plugin-info-card')), b.customColors && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    status: "warning",
+    isDismissible: false,
+    className: "wppic-custom-preset-notice"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Custom colors are enabled, so these themes will have no effect.', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ButtonGroup, null, /*#__PURE__*/React.createElement(_components_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Default', 'wp-plugin-info-card'),
     setAttributes: c,
     attributes: b,
-    uniqueId: m,
-    isPressed: 'default' === l,
+    uniqueId: l,
+    isPressed: 'default' === k,
     theme: "default"
-  }), /*#__PURE__*/React.createElement(_components_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Blossom', 'wp-plugin-info-card'),
+  }), /*#__PURE__*/React.createElement(_components_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Blossom', 'wp-plugin-info-card'),
     setAttributes: c,
     attributes: b,
-    uniqueId: m,
-    isPressed: 'blossom' === l,
+    uniqueId: l,
+    isPressed: 'blossom' === k,
     theme: "blossom"
-  }), /*#__PURE__*/React.createElement(_components_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Crimson', 'wp-plugin-info-card'),
+  }), /*#__PURE__*/React.createElement(_components_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Crimson', 'wp-plugin-info-card'),
     setAttributes: c,
     attributes: b,
-    uniqueId: m,
-    isPressed: 'crimson' === l,
+    uniqueId: l,
+    isPressed: 'crimson' === k,
     theme: "crimson"
-  }), /*#__PURE__*/React.createElement(_components_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Velvet', 'wp-plugin-info-card'),
+  }), /*#__PURE__*/React.createElement(_components_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Velvet', 'wp-plugin-info-card'),
     setAttributes: c,
     attributes: b,
-    uniqueId: m,
-    isPressed: 'velvet' === l,
+    uniqueId: l,
+    isPressed: 'velvet' === k,
     theme: "velvet"
-  }), /*#__PURE__*/React.createElement(_components_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Dark', 'wp-plugin-info-card'),
+  }), /*#__PURE__*/React.createElement(_components_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Dark', 'wp-plugin-info-card'),
     setAttributes: c,
     attributes: b,
-    uniqueId: m,
-    isPressed: 'dark' === l,
+    uniqueId: l,
+    isPressed: 'dark' === k,
     theme: "dark"
-  }), /*#__PURE__*/React.createElement(_components_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Light', 'wp-plugin-info-card'),
+  }), /*#__PURE__*/React.createElement(_components_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Light', 'wp-plugin-info-card'),
     setAttributes: c,
     attributes: b,
-    uniqueId: m,
-    isPressed: 'light' === l,
+    uniqueId: l,
+    isPressed: 'light' === k,
     theme: "light"
-  }), /*#__PURE__*/React.createElement(_components_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Soft as Feathers', 'wp-plugin-info-card'),
+  }), /*#__PURE__*/React.createElement(_components_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Soft as Feathers', 'wp-plugin-info-card'),
     setAttributes: c,
     attributes: b,
-    uniqueId: m,
-    isPressed: 'feathers' === l,
+    uniqueId: l,
+    isPressed: 'feathers' === k,
     theme: "feathers"
-  }), /*#__PURE__*/React.createElement(_components_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Caramel', 'wp-plugin-info-card'),
+  }), /*#__PURE__*/React.createElement(_components_PresetButton_PresetButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Caramel', 'wp-plugin-info-card'),
     setAttributes: c,
     attributes: b,
-    uniqueId: m,
-    isPressed: 'caramel' === l,
+    uniqueId: l,
+    isPressed: 'caramel' === k,
     theme: "caramel"
-  }))), /*#__PURE__*/React.createElement(_components_CustomPresets__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }))), /*#__PURE__*/React.createElement(_components_CustomPresets__WEBPACK_IMPORTED_MODULE_4__["default"], {
     clientId: d,
-    uniqueId: m,
+    uniqueId: l,
     attributes: b,
     setAttributes: c
   })));
-  var o = /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
+  var n = /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.BlockControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarButton, {
     icon: "edit",
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Edit Plugin Slug', 'wp-plugin-info-card'),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Edit Plugin Slug', 'wp-plugin-info-card'),
     onClick: function onClick() {
       return c({
         screen: 'slug-entry'
       });
     }
-  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarItem, {
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarItem, {
     as: "button"
   }, function (a) {
-    return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.DropdownMenu, {
+    return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.DropdownMenu, {
       toggleProps: a,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Select a Color Theme', 'wp-plugin-info-card'),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select a Color Theme', 'wp-plugin-info-card'),
       icon: "admin-customizer"
     }, function (a) {
       var b = a.onClose;
-      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuItemsChoice, {
+      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.MenuItemsChoice, {
         choices: [{
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Default', 'wp-plugin-info-card'),
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Default', 'wp-plugin-info-card'),
           value: 'default'
         }, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Blossom', 'wp-plugin-info-card'),
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Blossom', 'wp-plugin-info-card'),
           value: 'blossom'
         }, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Crimson', 'wp-plugin-info-card'),
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Crimson', 'wp-plugin-info-card'),
           value: 'crimson'
         }, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Velvet', 'wp-plugin-info-card'),
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Velvet', 'wp-plugin-info-card'),
           value: 'velvet'
+        }, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Dark', 'wp-plugin-info-card'),
+          value: 'dark'
+        }, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Light', 'wp-plugin-info-card'),
+          value: 'light'
+        }, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Soft as Feathers', 'wp-plugin-info-card'),
+          value: 'feathers'
+        }, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Caramel', 'wp-plugin-info-card'),
+          value: 'caramel'
         }],
         onSelect: function onSelect(a) {
           c({
             colorTheme: a
           });
-          setScheme(a);
           b();
         },
-        value: l
+        value: k
       }));
     });
   })));
-  var p = /*#__PURE__*/React.createElement(React.Fragment, null, o, /*#__PURE__*/React.createElement(_templates_PluginScreenshots__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  var o = /*#__PURE__*/React.createElement(React.Fragment, null, n, /*#__PURE__*/React.createElement(_templates_PluginScreenshots__WEBPACK_IMPORTED_MODULE_3__["default"], {
     assetData: e,
     attributes: b
   }));
-  return /*#__PURE__*/React.createElement(React.Fragment, null, n, p);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, m, o);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScreenPluginPreview);
 

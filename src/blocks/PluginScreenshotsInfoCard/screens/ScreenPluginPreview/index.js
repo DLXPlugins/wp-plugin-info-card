@@ -2,43 +2,28 @@
  * This is the initial screen of the block. It is the first screen that the user sees when they add the block to the editor.
  */
 
-import { useContext, useState } from '@wordpress/element';
 import {
 	InspectorControls,
 	BlockControls,
 } from '@wordpress/block-editor';
 import {
-	Spinner,
 	PanelBody,
 	PanelRow,
-	RangeControl,
 	TextControl,
-	TextareaControl,
 	ButtonGroup,
-	Button,
-	Modal,
 	SelectControl,
 	ToggleControl,
-	Toolbar,
 	ToolbarItem,
 	ToolbarButton,
 	DropdownMenu,
 	ToolbarGroup,
 	MenuItemsChoice,
-	ToolbarDropdownMenu,
-	Popover,
-	PlaceHolder,
-	MenuGroup,
-	MenuItem,
 } from '@wordpress/components';
-import axios from 'axios';
 import { __ } from '@wordpress/i18n';
-import { isURL } from '@wordpress/url';
-import Logo from '../../../Logo';
-import LoadingScreen from '../../../components/Loading';
 import PluginScreenshots from '../../../templates/PluginScreenshots';
 import CustomPresets from '../../../components/CustomPresets';
 import PresetButton from '../../../components/PresetButton/PresetButton';
+import Notice from '../../../components/Notice';
 
 /**
  * InitialScreen component.
@@ -52,7 +37,6 @@ const ScreenPluginPreview = ( props ) => {
 	const {
 		assetData,
 		enableScreenshots,
-		maxHeight,
 		enableRoundedIcon,
 		iconStyle,
 		enableContextMenu,
@@ -126,6 +110,19 @@ const ScreenPluginPreview = ( props ) => {
 			>
 				<div className="wppic-screenshot-presets-button-group">
 					<h3>{ __( 'Select a color theme', 'wp-plugin-info-card' ) }</h3>
+					{
+						attributes.customColors && (
+							<>
+								<Notice
+									status="warning"
+									isDismissible={ false }
+									className="wppic-custom-preset-notice"
+								>
+									{ __( 'Custom colors are enabled, so these themes will have no effect.', 'wp-plugin-info-card' ) }
+								</Notice>
+							</>
+						)
+					}
 					<ButtonGroup>
 						<PresetButton
 							label={ __( 'Default', 'wp-plugin-info-card' ) }
@@ -235,13 +232,16 @@ const ScreenPluginPreview = ( props ) => {
 												{ label: __( 'Blossom', 'wp-plugin-info-card' ), value: 'blossom' },
 												{ label: __( 'Crimson', 'wp-plugin-info-card' ), value: 'crimson' },
 												{ label: __( 'Velvet', 'wp-plugin-info-card' ), value: 'velvet' },
+												{ label: __( 'Dark', 'wp-plugin-info-card' ), value: 'dark' },
+												{ label: __( 'Light', 'wp-plugin-info-card' ), value: 'light' },
+												{ label: __( 'Soft as Feathers', 'wp-plugin-info-card' ), value: 'feathers' },
+												{ label: __( 'Caramel', 'wp-plugin-info-card' ), value: 'caramel' },
 											]
 										}
 										onSelect={ ( value ) => {
 											setAttributes( {
 												colorTheme: value,
 											} );
-											setScheme( value );
 											onClose();
 										} }
 										value={ colorTheme }
