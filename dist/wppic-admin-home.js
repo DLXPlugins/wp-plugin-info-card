@@ -2708,9 +2708,7 @@ Notice.propTypes = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   onReset: () => (/* binding */ onReset),
-/* harmony export */   onSave: () => (/* binding */ onSave)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -2743,12 +2741,6 @@ function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
 
 
 
-function onSave(a, b) {}
-function onReset(a) {
-  var b = a.formValues,
-    c = a.setError,
-    d = a.reset;
-}
 var SaveResetButtons = function SaveResetButtons(a) {
   // Gather props.
   var b = a.formValues,
@@ -2757,51 +2749,53 @@ var SaveResetButtons = function SaveResetButtons(a) {
     e = a.errors,
     f = a.isDirty,
     g = a.dirtyFields,
-    h = a.trigger;
-  var i = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    j = _slicedToArray(i, 2),
-    k = j[0],
-    l = j[1];
-  var m = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    n = _slicedToArray(m, 2),
-    o = n[0],
-    p = n[1];
-  var q = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    r = _slicedToArray(q, 2),
-    s = r[0],
-    t = r[1];
-  var u = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    v = _slicedToArray(u, 2),
-    w = v[0],
-    x = v[1];
-  var y = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-    z = _slicedToArray(y, 2),
-    A = z[0],
-    B = z[1];
-  var C = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-    D = _slicedToArray(C, 2),
-    E = D[0],
-    F = D[1];
+    h = a.trigger,
+    i = a.onSave;
+  var j = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    k = _slicedToArray(j, 2),
+    l = k[0],
+    m = k[1];
+  var n = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    o = _slicedToArray(n, 2),
+    p = o[0],
+    q = o[1];
+  var r = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    s = _slicedToArray(r, 2),
+    t = s[0],
+    u = s[1];
+  var v = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    w = _slicedToArray(v, 2),
+    x = w[0],
+    y = w[1];
+  var z = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    A = _slicedToArray(z, 2),
+    B = A[0],
+    C = A[1];
+  var D = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    E = _slicedToArray(D, 2),
+    F = E[0],
+    G = E[1];
 
   /**
    * Save the options by setting promise as state.
    */
-  var G = /*#__PURE__*/function () {
+  var H = /*#__PURE__*/function () {
     var a = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function a() {
-      var c;
-      return _regeneratorRuntime().wrap(function d(a) {
+      var d;
+      return _regeneratorRuntime().wrap(function e(a) {
         while (1) switch (a.prev = a.next) {
           case 0:
-            c = (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__["default"])('wppic_save_options', {
+            d = (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__["default"])('wppic_save_options', {
               wppicFormData: b
             });
-            B(c);
-            l(true);
+            C(d);
+            m(true);
             a.next = 5;
-            return c;
+            return d;
           case 5:
-            l(false);
-          case 6:
+            i(b, c);
+            m(false);
+          case 7:
           case "end":
             return a.stop();
         }
@@ -2815,7 +2809,7 @@ var SaveResetButtons = function SaveResetButtons(a) {
   /**
    * Reset the options by setting promise as state.
    */
-  var H = /*#__PURE__*/function () {
+  var I = /*#__PURE__*/function () {
     var a = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function a() {
       var c, e;
       return _regeneratorRuntime().wrap(function f(a) {
@@ -2824,8 +2818,8 @@ var SaveResetButtons = function SaveResetButtons(a) {
             c = (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__["default"])('wppic_reset_options', {
               wppicFormData: b
             });
-            F(c);
-            p(true);
+            G(c);
+            q(true);
             a.next = 5;
             return c;
           case 5:
@@ -2834,7 +2828,7 @@ var SaveResetButtons = function SaveResetButtons(a) {
               keepErrors: false,
               keepDirty: false
             });
-            p(false);
+            q(false);
           case 8:
           case "end":
             return a.stop();
@@ -2845,36 +2839,36 @@ var SaveResetButtons = function SaveResetButtons(a) {
       return a.apply(this, arguments);
     };
   }();
-  var I = function hasErrors() {
+  var J = function hasErrors() {
     return Object.keys(e).length > 0;
   };
-  var J = function getSaveIcon() {
-    if (k) {
+  var K = function getSaveIcon() {
+    if (l) {
       return function () {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], null);
       };
     }
-    if (s) {
+    if (t) {
       return function () {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], null);
       };
     }
     return false;
   };
-  var K = function getSaveText() {
-    if (k) {
+  var L = function getSaveText() {
+    if (l) {
       return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Saving…', 'wp-plugin-info-card');
     }
-    if (s) {
+    if (t) {
       return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Saved', 'wp-plugin-info-card');
     }
     return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Save Options', 'wp-plugin-info-card');
   };
-  var L = function getResetText() {
-    if (o) {
+  var M = function getResetText() {
+    if (p) {
       return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Resetting to Defaults…', 'wp-plugin-info-card');
     }
-    if (w) {
+    if (x) {
       return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Options Restored to Defaults', 'wp-plugin-info-card');
     }
     return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Reset to Defaults', 'wp-plugin-info-card');
@@ -2883,20 +2877,20 @@ var SaveResetButtons = function SaveResetButtons(a) {
     className: "wppic-admin-buttons"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
     className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wppic__btn wppic__btn-primary wppic__btn--icon-right', {
-      'has-error': I()
+      'has-error': J()
     }, {
-      'has-icon': k || s
+      'has-icon': l || t
     }, {
-      'is-saving': k && !s
+      'is-saving': l && !t
     }, {
-      'is-saved': s
+      'is-saved': t
     }),
     type: "button",
-    text: K(),
-    icon: J(),
+    text: L(),
+    icon: K(),
     iconSize: "18",
     iconPosition: "right",
-    disabled: k,
+    disabled: l,
     onClick: ( /*#__PURE__*/function () {
       var a = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function b(a) {
         var c;
@@ -2909,7 +2903,7 @@ var SaveResetButtons = function SaveResetButtons(a) {
             case 3:
               c = b.sent;
               if (c) {
-                G();
+                H();
               }
             case 5:
             case "end":
@@ -2923,31 +2917,31 @@ var SaveResetButtons = function SaveResetButtons(a) {
     }())
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
     className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wppic__btn wppic__btn-danger wppic__btn--icon-right', {
-      'has-icon': o
+      'has-icon': p
     }, {
       'is-resetting': {
-        resetting: o
+        resetting: p
       }
     }),
     type: "button",
-    text: L(),
-    icon: o ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], null) : false,
+    text: M(),
+    icon: p ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], null) : false,
     iconSize: "18",
     iconPosition: "right",
-    disabled: k || o,
+    disabled: l || p,
     onClick: function onClick(a) {
       a.preventDefault();
-      H();
+      I();
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-notices-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SnackPop__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    ajaxOptions: A,
+    ajaxOptions: B,
     loadingMessage: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Saving Options…', 'wp-plugin-info-card')
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SnackPop__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    ajaxOptions: E,
+    ajaxOptions: F,
     loadingMessage: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Resetting to defaults…', 'wp-plugin-info-card')
-  }), I() && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Notice__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }), J() && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Notice__WEBPACK_IMPORTED_MODULE_4__["default"], {
     message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('There are form validation errors. Please correct them above.', 'wp-plugin-info-card'),
     status: "error",
     politeness: "polite"
@@ -3879,7 +3873,7 @@ var AddTheme = function AddTheme(a) {
         e(d);
       }
     },
-    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enter the theme slug. Example: "wp-plugin-info-card".', 'wp-plugin-info-card'),
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enter the theme slug. Example: "twentytwentyfour".', 'wp-plugin-info-card'),
     ref: q
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
     className: "wppic-btn has-icon-right ",
@@ -4226,9 +4220,9 @@ var Interface = function Interface(a) {
    * @param {Object} formData contains the form data.
    */
   var z = function onSubmit(a) {
-    // Update local storage.
-    localStorage.setItem('wppic_home_options', JSON.stringify(a));
-    localStorage.setItem('wppic_home_options_timestamp', new Date().getTime().toString());
+    // Update local storage by clearing it.
+    localStorage.removeItem('wppic_home_options');
+    localStorage.removeItem('wppic_home_options_timestamp');
   };
 
   /**
@@ -4454,7 +4448,7 @@ var Interface = function Interface(a) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Scripts and Styles', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_24__.Controller, {
-    name: "widget",
+    name: "enqueue",
     control: g,
     render: function render(a) {
       var b = a.field,
@@ -4567,7 +4561,10 @@ var Interface = function Interface(a) {
     errors: p,
     isDirty: q,
     dirtyFields: r,
-    trigger: m
+    trigger: m,
+    onSave: function onSave(a) {
+      z(a);
+    }
   }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {

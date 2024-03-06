@@ -24,7 +24,7 @@ function wppic_api_parser( $type, $slug, $expiration = 720, $extra = '', $load_a
 	$wppic_data = $force ? false : get_transient( 'wppic_' . $extra . $type . '_' . preg_replace( '/\-/', '_', $slug ) );
 
 	// check if $expiration is numeric, only digit char.
-	if ( empty( $expiration ) || ! ctype_digit( $expiration ) ) {
+	if ( empty( $expiration ) || ! is_numeric( $expiration ) ) {
 		$expiration = 720;
 	}
 

@@ -326,7 +326,7 @@ const AddTheme = ( props ) => {
 					}
 				} }
 				help={ __(
-					'Enter the theme slug. Example: "wp-plugin-info-card".',
+					'Enter the theme slug. Example: "twentytwentyfour".',
 					'wp-plugin-info-card',
 				) }
 				ref={ setThemeInput }
@@ -624,9 +624,9 @@ const Interface = ( props ) => {
 	 * @param {Object} formData contains the form data.
 	 */
 	const onSubmit = ( formData ) => {
-		// Update local storage.
-		localStorage.setItem( 'wppic_home_options', JSON.stringify( formData ) );
-		localStorage.setItem( 'wppic_home_options_timestamp', new Date().getTime().toString() );
+		// Update local storage by clearing it.
+		localStorage.removeItem( 'wppic_home_options' );
+		localStorage.removeItem( 'wppic_home_options_timestamp' );
 	};
 
 	/**
@@ -940,7 +940,7 @@ const Interface = ( props ) => {
 											<td>
 												<div className="wppic-admin-row">
 													<Controller
-														name="widget"
+														name="enqueue"
 														control={ control }
 														render={ ( { field: { onChange, value } } ) => (
 															<ToggleControl
@@ -1094,6 +1094,9 @@ const Interface = ( props ) => {
 									isDirty={ isDirty }
 									dirtyFields={ dirtyFields }
 									trigger={ trigger }
+									onSave={ ( values ) => {
+										onSubmit( values );
+									} }
 								/>
 							</form>
 						</div>

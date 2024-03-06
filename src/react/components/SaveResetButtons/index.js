@@ -7,14 +7,6 @@ import Notice from '../Notice';
 import SendCommand from '../../utils/SendCommand';
 import SnackPop from '../SnackPop';
 
-export function onSave( formData, setError ) {
-
-}
-
-export function onReset( { formValues, setError, reset } ) {
-
-}
-
 const SaveResetButtons = ( props ) => {
 	// Gather props.
 	const {
@@ -25,6 +17,7 @@ const SaveResetButtons = ( props ) => {
 		isDirty,
 		dirtyFields,
 		trigger,
+		onSave,
 	} = props;
 
 	const [ saving, setSaving ] = useState( false );
@@ -42,6 +35,7 @@ const SaveResetButtons = ( props ) => {
 		setSavePromise( saveOptionsPromise );
 		setSaving( true );
 		await saveOptionsPromise;
+		onSave( formValues, setError );
 		setSaving( false );
 	};
 

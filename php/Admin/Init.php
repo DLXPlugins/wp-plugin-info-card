@@ -241,6 +241,14 @@ class Init {
 			);
 		}
 
+		// Make sure `list` and `theme-list` vars are set.
+		if ( ! isset( $posted_options['list'] ) ) {
+			$posted_options['list'] = array();
+		}
+		if ( ! isset( $posted_options['theme-list'] ) ) {
+			$posted_options['theme-list'] = array();
+		}
+
 		// Validate options.
 		$validated_options = Functions::sanitize_array_recursive( $posted_options );
 
