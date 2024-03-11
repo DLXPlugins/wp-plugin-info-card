@@ -298,18 +298,16 @@ const CustomPresetContainer = ( props ) => {
 					{
 						canSavePresets && (
 							<div className="wppic-custom-preset-actions">
-								{ ! editPresets && (
-									<Button
-										variant={ 'primary' }
-										onClick={ ( e ) => {
-											e.preventDefault();
-											setSavingPreset( true );
-										} }
-										label={ __( 'Save Colors as a New Theme', 'wp-plugin-info-card' ) }
-									>
-										{ __( 'Save Colors as a New Theme', 'wp-plugin-info-card' ) }
-									</Button>
-								) }
+								<Button
+									variant={ 'primary' }
+									onClick={ ( e ) => {
+										e.preventDefault();
+										setSavingPreset( true );
+									} }
+									label={ __( 'Save Colors as a New Theme', 'wp-plugin-info-card' ) }
+								>
+									{ __( 'Save Colors as a New Theme', 'wp-plugin-info-card' ) }
+								</Button>
 							</div>
 						)
 					}

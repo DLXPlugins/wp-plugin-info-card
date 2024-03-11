@@ -66,6 +66,15 @@ class Add_Plugin {
 			);
 
 			if ( ! is_wp_error( $plugin_info ) ) {
+				// Get contributors and format them.
+				$contributors = array();
+				if ( is_array( $plugin_info->contributors ) ) {
+					foreach ( $plugin_info->contributors as $contributor => $contributor_info ) {
+						$contributors[] = $contributor;
+					}
+				} else {
+					$contributors[] = $plugin_info->contributors;
+				}
 				$wppic_data = (object) array(
 					'url'                     => 'https://wordpress.org/plugins/' . $slug . '/',
 					'name'                    => $plugin_info->name,
@@ -73,7 +82,7 @@ class Add_Plugin {
 					'version'                 => $plugin_info->version,
 					'author'                  => wp_strip_all_tags( $plugin_info->author ),
 					'author_profile'          => $plugin_info->author_profile,
-					'contributors'            => wp_strip_all_tags( $plugin_info->contributors ),
+					'contributors'            => implode( ', ', $contributors ),
 					'requires'                => $plugin_info->requires,
 					'tested'                  => $plugin_info->tested,
 					'requires'                => $plugin_info->requires,
