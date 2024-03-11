@@ -856,15 +856,12 @@ class Shortcodes {
 				'slug'                                     => '',
 				'icon_style'                               => 'none',
 				'asset_data'                               => array(),
-				'image_size'                               => 'thumbnail',
 				'enable_rounded_icon'                      => false,
 				'color_theme'                              => 'default',
 				'custom_colors'                            => false,
 				'plugin_title'                             => '',
 				'enable_context_menu'                      => true,
 				'enable_screenshots'                       => true,
-				'image_source'                             => 'local',
-				'images'                                   => array(),
 				'align'                                    => 'center',
 				'color_background'                         => '#FFFFFF',
 				'color_text'                               => '#000000',
@@ -915,6 +912,8 @@ class Shortcodes {
 		$asset_data = wppic_api_parser( 'plugin', $attributes['slug'] );
 		if ( $asset_data ) {
 			$asset_data = json_decode( json_encode( $asset_data ), true );
+		} else {
+			return ''; // Exit silently.
 		}
 
 		// Get requires.
@@ -1146,7 +1145,6 @@ class Shortcodes {
 						<?php
 						$local_screenshots   = $asset_data['screenshots'] ?? array();
 						$screenshots_enabled = $attributes['enable_screenshots'] && ! empty( $screenshots ) && ! empty( $local_screenshots );
-						$screenshot_size     = $attributes['image_size'] ?? 'thumbnail';
 						if ( $screenshots_enabled ) {
 							// Enqueue the modal script.
 							if ( ! wp_script_is( 'fancybox', 'enqueued' ) ) {
