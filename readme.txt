@@ -39,15 +39,15 @@ It is perfect to keep track of your own plugins and themes!
 
 = Quick Links (Shortcode Documentation) =
 
-* <a href="https://wppic.mediaron.com/shortcodes/wp-pic">[wp-pic] shortcode and parameters</a>.
-* <a href="https://wppic.mediaron.com/shortcodes/wp-pic-query">[wp-pic-query] shortcode and parameters</a>.
-* <a href="https://wppic.mediaron.com/shortcodes/wp-pic-site-plugins">[wp-pic-site-plugins] shortcode and parameters</a>.
+* <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic">[wp-pic] shortcode and parameters</a>.
+* <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic-query">[wp-pic-query] shortcode and parameters</a>.
+* <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic-site-plugins">[wp-pic-site-plugins] shortcode and parameters</a>.
 
 = Quick Links (Block Documentation) =
 
-* <a href="https://wppic.mediaron.com/blocks/wp-plugin-info-card-block">WP Plugin Info Card block</a>.
-* <a href="https://wppic.mediaron.com/blocks/wp-plugin-info-card-query-block">WP Plugin Info Card Query block</a>.
-* <a href="https://wppic.mediaron.com/blocks/site-plugins-card-grid">Site Plugins Card Grid block</a>.
+* <a href="https://wppic.dlxplugins.com/blocks/wp-plugin-info-card-block">WP Plugin Info Card block</a>.
+* <a href="https://wppic.dlxplugins.com/blocks/wp-plugin-info-card-query-block">WP Plugin Info Card Query block</a>.
+* <a href="https://wppic.dlxplugins.com/blocks/site-plugins-card-grid">Site Plugins Card Grid block</a>.
 
 [CHECK OUT MORE EXAMPLES](https://dlxplugins.com/plugins/plugin-info-card/ "More documentation")
 
@@ -131,7 +131,7 @@ This video shows you how:
 
 = 4.0.0 =
 * Released 2023-01-20
-* New shortcode and block: <a href="https://wppic.mediaron.com/blocks/site-plugins-card-grid">Site Plugins Card Grid</a>.
+* New shortcode and block: <a href="https://wppic.dlxplugins.com/blocks/site-plugins-card-grid">Site Plugins Card Grid</a>.
 * The plugin's code and build scripts have been updated to the latest standards.
 
 = 3.4.6 =
