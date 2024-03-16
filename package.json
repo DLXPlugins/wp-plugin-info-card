@@ -21,8 +21,22 @@
   "scripts": {
     "start": "wp-scripts start wppic-blocks=./src/index.js --env mode=development",
     "dev": "wp-scripts start wppic-blocks=./src/index.js --env mode=development",
-    "build": "wp-scripts build wppic-blocks=./src/index.js --env mode=production"
+    "build": "wp-scripts build wppic-blocks=./src/index.js --env mode=production",
+	"zip": "wp-scripts plugin-zip"
   },
+  "files": [
+	"assets",
+	"build",
+	"dist",
+	"langs",
+	"lib",
+	"php",
+	"templates",
+	"readme.txt",
+	"functions.php",
+	"uninstall.php",
+	"wp-plugin-info-card.php"
+  ],
   "dependencies": {
     "babel-loader": "^8.2.2",
     "react-content-loader": "^6.2.1",
