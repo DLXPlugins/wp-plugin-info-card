@@ -111,7 +111,8 @@
                 "admin_email": "dev@test.local",
 				"permalink_structure": "/%postname%/",
                 "template": "astra",
-                "stylesheet": "astra"
+                "stylesheet": "astra",
+				"comment-edit-lite-activate": "noredirect"
             }
         },
 		{
