@@ -101,7 +101,7 @@
             "step": "importWxr",
             "file": {
                 "resource": "url",
-                "url": "http://wp-plugin-info-card.local/wp-json/blueprint-builder/v1/wxr-Wj2EJP5LNOyi.xml"
+                "url": "https://raw.githubusercontent.com/DLXPlugins/wp-plugin-info-card/dev/blueprint-content.xml"
             }
         },
         {
