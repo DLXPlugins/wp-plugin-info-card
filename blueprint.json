@@ -1,0 +1,123 @@
+{
+    "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+    "preferredVersions": {
+        "php": "8.1",
+        "wp": "latest"
+    },
+    "features": {
+        "networking": true
+    },
+    "phpExtensionBundles": [
+        "kitchen-sink"
+    ],
+    "landingPage": "/demo/",
+    "steps": [
+        {
+            "step": "login",
+            "username": "admin",
+            "password": "password"
+        },
+        {
+            "step": "installTheme",
+            "themeZipFile": {
+                "resource": "wordpress.org/themes",
+                "slug": "astra"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "wordpress.org/plugins",
+                "slug": "alerts-dlx"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+		{
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "wordpress.org/plugins",
+                "slug": "slash-edit"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "wordpress.org/plugins",
+                "slug": "highlight-and-share"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "wordpress.org/plugins",
+                "slug": "pattern-wrangler"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "wordpress.org/plugins",
+                "slug": "slash-edit"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "wordpress.org/plugins",
+                "slug": "wp-plugin-info-card"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+		{
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "wordpress.org/plugins",
+                "slug": "simple-comment-editing"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "importWxr",
+            "file": {
+                "resource": "url",
+                "url": "http://wp-plugin-info-card.local/wp-json/blueprint-builder/v1/wxr-Wj2EJP5LNOyi.xml"
+            }
+        },
+        {
+            "step": "setSiteOptions",
+            "options": {
+                "blogname": "WP Plugin Info Card Demo",
+                "admin_email": "dev@test.local",
+				"permalink_structure": "/%postname%/",
+                "template": "astra",
+                "stylesheet": "astra"
+            }
+        },
+		{
+			"step": "runPHP",
+			"code": "<?php require_once 'wordpress/wp-load.php'; update_option( 'wppic_settings', maybe_unserialize( 'a:18:{s:14:\"default_layout\";s:4:\"card\";s:11:\"colorscheme\";s:7:\"default\";s:6:\"widget\";b:0;s:4:\"ajax\";b:0;s:7:\"enqueue\";b:0;s:6:\"credit\";b:0;s:16:\"cache_expiration\";s:4:\"3600\";s:18:\"enable_screenshots\";s:1:\"1\";s:24:\"enable_local_screenshots\";s:0:\"\";s:18:\"skip_animated_gifs\";s:1:\"1\";s:41:\"enable_local_screenshots_download_missing\";s:0:\"\";s:37:\"enable_local_screenshots_keep_current\";s:0:\"\";s:36:\"enable_local_screenshots_cli_command\";s:0:\"\";s:25:\"screenshots_table_version\";s:5:\"0.0.0\";s:9:\"saveNonce\";s:10:\"d9f5901be7\";s:10:\"resetNonce\";s:10:\"cfbb070da3\";s:4:\"list\";a:0:{}s:10:\"theme-list\";a:0:{}}' ) ); ?>"
+
+		}
+    ]
+}
