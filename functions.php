@@ -21,21 +21,49 @@ function wppic_api_parser( $type, $slug, $expiration = 720, $extra = '', $load_a
 		$extra = $extra . '_';
 	}
 
-	$wppic_data = $force ? false : get_transient( 'wppic_' . $extra . $type . '_' . preg_replace( '/\-/', '_', $slug ) );
+	// Get option key name.
+	$option_key = sanitize_key( 'wppic_' . $extra . $type . '_' . preg_replace( '/\-/', '_', $slug ) );
+
+	$wppic_data = false;
+
+	// Determine if we're getting data from cache.
+	if ( ! $force ) {
+		$maybe_wppic_data = get_transient( $option_key );
+		if ( false !== $maybe_wppic_data ) {
+			// We have data, but need to check for any errors.
+			if ( is_wp_error( $maybe_wppic_data ) ) {
+				// Try to get the data from option.
+				$maybe_wppic_data = get_option( $option_key, false );
+				if ( false !== $maybe_wppic_data && ! is_wp_error( $maybe_wppic_data ) ) {
+					$wppic_data = $maybe_wppic_data;
+				}
+			} else {
+				$wppic_data = $maybe_wppic_data;
+			}
+		}
+	}
 
 	// check if $expiration is numeric, only digit char.
 	if ( empty( $expiration ) || ! is_numeric( $expiration ) ) {
 		$expiration = 720;
 	}
 
-	if ( false === $wppic_data || empty( $wppic_data ) ) {
+	if ( false === $wppic_data || empty( $wppic_data ) || $force ) {
 
 		$wppic_data = false;
 		$wppic_data = apply_filters( 'wppic_add_api_parser', $wppic_data, $type, $slug, $load_attachments, $force );
-
-		// Transient duration  def:12houres.
-		set_transient( 'wppic_' . $extra . $type . '_' . preg_replace( '/\-/', '_', $slug ), $wppic_data, $expiration * 60 );
 	}
+
+	// If we have data, store it as an option and a transient.
+	if ( false !== $wppic_data && ! empty( $wppic_data ) ) {
+		// Remove old option.
+		delete_option( $option_key );
+
+		// Re-add option.
+		add_option( $option_key, $wppic_data, '', 'no' );
+		set_transient( $option_key, $wppic_data, $expiration * 60 );
+	}
+
 	return $wppic_data;
 }
 
