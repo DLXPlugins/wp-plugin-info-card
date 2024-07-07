@@ -7389,7 +7389,9 @@ function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
 
 
 var HtmlToReactParser = (__webpack_require__(/*! html-to-react */ "./node_modules/html-to-react/index.js").Parser);
-var __ = wp.i18n.__;
+var _wp$i18n = wp.i18n,
+  __ = _wp$i18n.__,
+  sprintf = _wp$i18n.sprintf;
 var PluginRatingsCard = function PluginRatingsCard(a) {
   var b = a.data,
     c = a.scheme,
@@ -7456,7 +7458,9 @@ var PluginRatingsCard = function PluginRatingsCard(a) {
     className: "wp-pic-name"
   }, p.parse(a.data.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wp-pic-rating-stats"
-  }, "Rating based on ".concat(a.data.num_ratings, " ratings")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, "Based on ".concat(a.data.num_ratings.toLocaleString('en'), " ratings")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wp-pic-ratings-last-updated"
+  }, sprintf(__('Last Updated: %s ago', 'wp-plugin-info-card'), b.last_updated_human_time)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wp-pic-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wp-pic-bar"

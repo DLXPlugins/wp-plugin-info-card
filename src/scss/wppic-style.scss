@@ -413,6 +413,10 @@ p.wp-pic-author,
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
+
+	&.wp-pic-ratings-front .wp-pic-bottom {
+		position: relative;
+	}
 }
 .wp-pic-rating-row {
 	width: 100%;

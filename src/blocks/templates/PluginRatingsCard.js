@@ -4,7 +4,7 @@ import isNumeric from 'validator/lib/isNumeric';
 import { Rating } from 'react-simple-star-rating';
 const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
-const { __ } = wp.i18n;
+const { __, sprintf } = wp.i18n;
 
 const PluginRatingsCard = ( props ) => {
 	const { data, scheme, image, align } = props;
@@ -65,7 +65,10 @@ const PluginRatingsCard = ( props ) => {
 						</div>
 						<div className="wp-pic-name">{ htmlToReactParser.parse( props.data.name ) }</div>
 						<div className="wp-pic-rating-stats">
-							{ `Rating based on ${ props.data.num_ratings } ratings` }
+							{ `Based on ${ props.data.num_ratings.toLocaleString( 'en' ) } ratings` }
+						</div>
+						<div className="wp-pic-ratings-last-updated">
+							{ sprintf( __( 'Last Updated: %s ago', 'wp-plugin-info-card' ), data.last_updated_human_time ) }
 						</div>
 						<div className="wp-pic-bottom">
 							<div className="wp-pic-bar">
@@ -74,16 +77,16 @@ const PluginRatingsCard = ( props ) => {
 									<em>
 										{ __(
 											'Ratings',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										) }
 									</em>
 								</span>
 								<span className="wp-pic-downloaded">
-									{ props.data.active_installs.toLocaleString('en') }+
+									{ props.data.active_installs.toLocaleString( 'en' ) }+
 									<em>
 										{ __(
 											'Installs',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										) }
 									</em>
 								</span>
@@ -92,7 +95,7 @@ const PluginRatingsCard = ( props ) => {
 									<em>
 										{ __(
 											'Requires',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										) }
 									</em>
 								</span>

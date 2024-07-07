@@ -540,6 +540,9 @@ p.wp-pic-author,
   justify-content: center;
   flex-wrap: wrap;
 }
+.wp-pic-ratings.wp-pic-ratings-front .wp-pic-bottom {
+  position: relative;
+}
 
 .wp-pic-rating-row {
   width: 100%;
