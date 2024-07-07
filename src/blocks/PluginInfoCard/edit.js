@@ -11,6 +11,7 @@ import PluginFlex from '../templates/PluginFlex';
 import PluginCard from '../templates/PluginCard';
 import PluginLarge from '../templates/PluginLarge';
 import PluginWordPress from '../templates/PluginWordPress';
+import PluginRatingsCard from '../templates/PluginRatingsCard';
 import ThemeFlex from '../templates/ThemeFlex';
 import ThemeWordPress from '../templates/ThemeWordPress';
 import ThemeLarge from '../templates/ThemeLarge';
@@ -166,6 +167,14 @@ const WPPluginInfoCard = ( props ) => {
 							align={ align }
 						/>
 					) }
+					{ 'ratings' === layout && 'plugin' === type && (
+						<PluginRatingsCard
+							scheme={ scheme }
+							image={ image }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
 					{ 'flex' === layout && 'theme' === type && (
 						<ThemeFlex
 							scheme={ scheme }
@@ -292,6 +301,7 @@ const WPPluginInfoCard = ( props ) => {
 		{ value: 'card', label: __( 'Card', 'wp-plugin-info-card' ) },
 		{ value: 'large', label: __( 'Large', 'wp-plugin-info-card' ) },
 		{ value: 'wordpress', label: __( 'WordPress', 'wp-plugin-info-card' ) },
+		{ value: 'ratings', label: __( 'Ratings', 'wp-plugin-info-card' ) },
 		{ value: 'flex', label: __( 'Flex', 'wp-plugin-info-card' ) },
 	];
 
