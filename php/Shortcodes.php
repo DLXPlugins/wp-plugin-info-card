@@ -1167,21 +1167,16 @@ class Shortcodes {
 							add_action( 'wp_footer', array( __CLASS__, 'add_carousel_to_footer' ) );
 							?>
 								<div class="wp-pic-plugin-screenshots-images">
-									<ul class="wppic-screenshot-fancyapps f-carousel" style="display: none;">
+									<div class="wppic-screenshots-lazy" style="display: none;">
 										<?php
-										foreach ( $local_screenshots as $screenshot ) {
+										foreach ( $screenshots as $screenshot ) {
 											?>
-												<li class="f-carousel__slide">
-													<a href="<?php echo esc_url( $screenshot['src'] ); ?>" data-fancybox="<?php echo esc_attr( $attributes['unique_id'] ); ?>" data-caption="<?php echo esc_attr( $screenshot['caption'] ); ?>">
-														<div class="wppic-screenshot-lazy" data-src="<?php echo esc_url( $screenshot['src'] ); ?>" data-alt="<?php echo esc_attr( $screenshot['caption'] ); ?>"></div>
-														<noscript>
-															<img src="<?php echo esc_url( $screenshot['src'] ); ?>" alt="<?php echo esc_attr( $screenshot['caption'] ); ?>" />
-														</noscript>
-													</a>
-												</li>
-												<?php
+											<div class="wppic-screenshot-lazy" data-src="<?php echo esc_url( $screenshot['full'] ); ?>" data-alt="<?php echo esc_attr( $screenshot['caption'] ); ?>"></div>
+											<?php
 										}
 										?>
+									</div>
+									<ul class="wppic-screenshot-fancyapps f-carousel" style="display: none;">
 									</ul>
 								</div>
 							<?php

@@ -1,36 +1,95 @@
 import { Fancybox, Carousel } from '@fancyapps/ui';
 
 document.addEventListener( 'DOMContentLoaded', function() {
-	// Load screenshot images in.
-	const wppicScreenshotCarousels = document.querySelectorAll( '.wppic-screenshot-fancyapps' );
+
+	const buildSlide = function( anchor, caption ) {
+		const liSlide = document.createElement( 'li' );
+		liSlide.classList.add( 'f-carousel__slide' );
+
+		const aSlide = document.createElement( 'a' );
+		aSlide.href = anchor;
+
+		// Fancybox attributes.
+		aSlide.setAttribute( 'data-fancybox', '' );
+		aSlide.setAttribute( 'data-caption', caption );
+
+		const imgSlide = document.createElement( 'img' );
+		imgSlide.src = anchor;
+		imgSlide.alt = caption;
+
+		aSlide.appendChild( imgSlide );
+		liSlide.appendChild( aSlide );
+
+		return liSlide;
+	};
+
+	const buildSlideNoLi = function( anchor, caption ) {
+		const aSlide = document.createElement( 'a' );
+		aSlide.href = anchor;
+
+		// Fancybox attributes.
+		aSlide.setAttribute( 'data-fancybox', '' );
+		aSlide.setAttribute( 'data-caption', caption );
+
+		const imgSlide = document.createElement( 'img' );
+		imgSlide.src = anchor;
+		imgSlide.alt = caption;
+
+		aSlide.appendChild( imgSlide );
+		return aSlide;
+	};
+
+	// Load the screenshots in.
+	const wppicScreenshotCarousels = document.querySelectorAll( '.wp-pic-plugin-screenshots-images' );
 	if ( null === wppicScreenshotCarousels ) {
 		return;
 	}
 
-	// Find all carousels, loop through them, and preload all the images.
-	wppicScreenshotCarousels.forEach( function( carousel ) {
-		const images = carousel.querySelectorAll( '.wppic-screenshot-lazy' );
-		let imageCount = 0;
-		images.forEach( function( image ) {
-			const src = image.getAttribute( 'data-src' );
-			if ( src ) {
-				const img = new Image();
-				img.src = src;
-				img.alt = image.getAttribute( 'data-alt' );
+	// Get all the internal images for the carousel.
+	wppicScreenshotCarousels.forEach( function( carouselWrapper ) {
+		const carouselImageWrapper = carouselWrapper.querySelector( '.wppic-screenshots-lazy' );
+		const carouselImages = carouselImageWrapper.querySelectorAll( '.wppic-screenshot-lazy' );
 
-				// Replace div with image after it's done loading.
-				img.onload = async function() {
-					image.parentNode.replaceChild( img, image );
-					imageCount++;
-					if ( imageCount === images.length ) {
-						// Set carousel to display block.
-						carousel.style.display = 'block';
+		if ( null === carouselImages ) {
+			return;
+		}
 
-						// All images are loaded, so init Fancybox.
-						new Carousel( carousel, {
+		const deferredImages = [];
+		let countImage = 0;
+		const carouselUl = carouselWrapper.querySelector( '.wppic-screenshot-fancyapps' );
+		// Loop through the first three images and preload them.
+		carouselImages.forEach( function( image, index ) {
+			if ( index > 2 ) {
+				deferredImages.push( {
+					src: image.getAttribute( 'data-src' ),
+					alt: image.getAttribute( 'data-alt' ),
+				} );
+			} else {
+				const newImg = new Image();
+				newImg.src = image.getAttribute( 'data-src' );
+				newImg.alt = image.getAttribute( 'data-alt' );
+				newImg.onload = async function() {
+					carouselUl.appendChild( buildSlide( image.getAttribute( 'data-src' ), image.getAttribute( 'data-alt' ) ) );
+					countImage++;
+					if ( countImage === 3 || countImage === carouselImages.length ) {
+						// Show carouselUL.
+						carouselUl.style.display = 'block';
+						// Remove all carousel images from the dom.
+						carouselImageWrapper.remove();
+						// Let's init the slider.
+						const newCarousel = new Carousel( carouselUl, {
 							Dots: false,
 							infinite: false,
 							adaptiveHeight: false,
+						} );
+						// Let's go for the deferred images and load them in.
+						deferredImages.forEach( function( deferredImage ) {
+							const newDeferredImage = new Image();
+							newDeferredImage.src = deferredImage.src;
+							newDeferredImage.alt = deferredImage.alt;
+							newDeferredImage.onload = async function() {
+								newCarousel.appendSlide( buildSlideNoLi( deferredImage.src, deferredImage.alt ) );
+							};
 						} );
 					}
 				};

@@ -87,46 +87,103 @@ function asyncGeneratorStep(b, d, f, e, g, h, a) { try { var c = b[h](a), i = c.
 function _asyncToGenerator(b) { return function () { var c = this, d = arguments; return new Promise(function (e, f) { var g = b.apply(c, d); function a(b) { asyncGeneratorStep(g, e, f, a, h, "next", b); } function h(b) { asyncGeneratorStep(g, e, f, a, h, "throw", b); } a(void 0); }); }; }
 
 document.addEventListener('DOMContentLoaded', function () {
-  // Load screenshot images in.
-  var a = document.querySelectorAll('.wppic-screenshot-fancyapps');
-  if (null === a) {
+  var a = function buildSlide(a, b) {
+    var c = document.createElement('li');
+    c.classList.add('f-carousel__slide');
+    var d = document.createElement('a');
+    d.href = a;
+
+    // Fancybox attributes.
+    d.setAttribute('data-fancybox', '');
+    d.setAttribute('data-caption', b);
+    var e = document.createElement('img');
+    e.src = a;
+    e.alt = b;
+    d.appendChild(e);
+    c.appendChild(d);
+    return c;
+  };
+  var b = function buildSlideNoLi(a, b) {
+    var c = document.createElement('a');
+    c.href = a;
+
+    // Fancybox attributes.
+    c.setAttribute('data-fancybox', '');
+    c.setAttribute('data-caption', b);
+    var d = document.createElement('img');
+    d.src = a;
+    d.alt = b;
+    c.appendChild(d);
+    return c;
+  };
+
+  // Load the screenshots in.
+  var c = document.querySelectorAll('.wp-pic-plugin-screenshots-images');
+  if (null === c) {
     return;
   }
 
-  // Find all carousels, loop through them, and preload all the images.
-  a.forEach(function (a) {
-    var b = a.querySelectorAll('.wppic-screenshot-lazy');
-    var c = 0;
-    b.forEach(function (d) {
-      var e = d.getAttribute('data-src');
-      if (e) {
-        var f = new Image();
-        f.src = e;
-        f.alt = d.getAttribute('data-alt');
-
-        // Replace div with image after it's done loading.
-        f.onload = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function e() {
-          return _regeneratorRuntime().wrap(function g(e) {
-            while (1) switch (e.prev = e.next) {
+  // Get all the internal images for the carousel.
+  c.forEach(function (c) {
+    var d = c.querySelector('.wppic-screenshots-lazy');
+    var e = d.querySelectorAll('.wppic-screenshot-lazy');
+    if (null === e) {
+      return;
+    }
+    var f = [];
+    var g = 0;
+    var h = c.querySelector('.wppic-screenshot-fancyapps');
+    // Loop through the first three images and preload them.
+    e.forEach(function (c, i) {
+      if (i > 2) {
+        f.push({
+          src: c.getAttribute('data-src'),
+          alt: c.getAttribute('data-alt')
+        });
+      } else {
+        var j = new Image();
+        j.src = c.getAttribute('data-src');
+        j.alt = c.getAttribute('data-alt');
+        j.onload = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function i() {
+          var j;
+          return _regeneratorRuntime().wrap(function k(i) {
+            while (1) switch (i.prev = i.next) {
               case 0:
-                d.parentNode.replaceChild(f, d);
-                c++;
-                if (c === b.length) {
-                  // Set carousel to display block.
-                  a.style.display = 'block';
-
-                  // All images are loaded, so init Fancybox.
-                  new _fancyapps_ui__WEBPACK_IMPORTED_MODULE_0__.Carousel(a, {
+                h.appendChild(a(c.getAttribute('data-src'), c.getAttribute('data-alt')));
+                g++;
+                if (g === 3 || g === e.length) {
+                  // Show carouselUL.
+                  h.style.display = 'block';
+                  // Remove all carousel images from the dom.
+                  d.remove();
+                  // Let's init the slider.
+                  j = new _fancyapps_ui__WEBPACK_IMPORTED_MODULE_0__.Carousel(h, {
                     Dots: false,
                     infinite: false,
                     adaptiveHeight: false
+                  }); // Let's go for the deferred images and load them in.
+                  f.forEach(function (a) {
+                    var c = new Image();
+                    c.src = a.src;
+                    c.alt = a.alt;
+                    c.onload = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function c() {
+                      return _regeneratorRuntime().wrap(function d(c) {
+                        while (1) switch (c.prev = c.next) {
+                          case 0:
+                            j.appendSlide(b(a.src, a.alt));
+                          case 1:
+                          case "end":
+                            return c.stop();
+                        }
+                      }, c);
+                    }));
                   });
                 }
               case 3:
               case "end":
-                return e.stop();
+                return i.stop();
             }
-          }, e);
+          }, i);
         }));
       }
     });
