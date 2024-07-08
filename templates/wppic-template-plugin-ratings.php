@@ -43,41 +43,54 @@ if ( !empty( $wppic_data->banners[ 'low' ] ) ) {
 <div class="wp-pic-ratings wp-pic-plugin-ratings wp-pic-card" style="display: none;">
 	<div class="wp-pic-ratings wp-pic-ratings-front">
 		<div class="wp-pic-logo"><a class="wp-pic-logo-anchor" href="<?php echo esc_url( $wppic_data->url ) ?>" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ) ?>"><img src="<?php echo esc_url_raw( $bgImage ); ?>" width="85" height="85" alt="WordPress plugin logo" /></a></div>
-		<div class="wp-pic-rating-row">*****</div>
+		<div class="wp-pic-rating-row">
+			<svg width="40" height="40"><use xlink:href="#wppic-icon-star-filled"></use></svg>
+			<svg width="40" height="40"><use xlink:href="#wppic-icon-star-filled"></use></svg>
+			<svg width="40" height="40"><use xlink:href="#wppic-icon-star-filled"></use></svg>
+			<svg width="40" height="40"><use xlink:href="#wppic-icon-star-filled"></use></svg>
+			<svg width="40" height="40"><use xlink:href="#wppic-icon-star-filled"></use></svg>
+		</div>
 		<div class="wp-pic-name"><?php echo esc_html( $wppic_data->name ); ?></div>
-		<div class="wp-pic-rating-stats">test</div>
-		<div class="wp-pic-bottom">
+		<?php /* Translators: %d is the number of ratings for a plugin */ ?>
+		<div class="wp-pic-rating-stats"><?php echo esc_html( round( $wppic_data->rating / 20, 1 ) ); ?> <?php printf( __( 'stars based on %d ratings</div>', 'wp-plugin-info-card' ), absint( $wppic_data->num_ratings ) ); ?></div>
+		<div class="wp-pic-bottom wp-pic-bottom-ratings">
 			<div class="wp-pic-bar">
-				<div class="wp-pic-bar-item">
-					<div class="wp-pic-plugin-screenshots-meta-item-svg">
-						<svg width="24" height="24">
-							<use xlink:href="#wppic-icon-code"></use>
-						</svg>
+				<a href="<?php echo esc_url( $wppic_data->download_link ); ?>">
+					<div class="wp-pic-bar-item">
+						<div class="wp-pic-plugin-screenshots-meta-item-svg">
+							<svg width="24" height="24">
+								<use xlink:href="#wppic-icon-code"></use>
+							</svg>
+						</div>
+						<div class="wp-pic-plugin-screenshots-meta-item-label">
+							v<?php echo esc_html( $wppic_data->version ); ?>
+						</div>
 					</div>
-					<div class="wp-pic-plugin-screenshots-meta-item-label">
-						v<?php echo esc_html( $wppic_data->version ); ?>
+				</a>
+				<a href="<?php echo esc_url( $wppic_data->url ); ?>">
+					<div class="wp-pic-bar-item">
+						<div class="wp-pic-plugin-screenshots-meta-item-svg">
+							<svg width="24" height="24">
+								<use xlink:href="#wppic-icon-wordpress"></use>
+							</svg>
+						</div>
+						<div class="wp-pic-plugin-screenshots-meta-item-label">
+							<?php echo esc_html( $wppic_data->requires ); ?>
+						</div>
 					</div>
-				</div>
-				<div class="wp-pic-bar-item">
-					<div class="wp-pic-plugin-screenshots-meta-item-svg">
-						<svg width="24" height="24">
-							<use xlink:href="#wppic-icon-wordpress"></use>
-						</svg>
+				</a>
+				<a href="<?php echo esc_url( sprintf( 'https://wordpress.org/plugins/%s/advanced/', $wppic_data->slug ) ); ?>">
+					<div class="wp-pic-bar-item">
+						<div class="wp-pic-plugin-screenshots-meta-item-svg">
+							<svg width="24" height="24">
+								<use xlink:href="#wppic-icon-download-cloud"></use>
+							</svg>
+						</div>
+						<div class="wp-pic-plugin-screenshots-meta-item-label">
+							<?php echo esc_html( number_format_i18n( $wppic_data->active_installs ) ); ?>+<em><?php esc_html_e( 'Installs', 'wp-plugin-info-card' ); ?>
+						</div>
 					</div>
-					<div class="wp-pic-plugin-screenshots-meta-item-label">
-						<?php echo esc_html( $wppic_data->requires ); ?>
-					</div>
-				</div>
-				<div class="wp-pic-bar-item">
-					<div class="wp-pic-plugin-screenshots-meta-item-svg">
-						<svg width="24" height="24">
-							<use xlink:href="#wppic-icon-download-cloud"></use>
-						</svg>
-					</div>
-					<div class="wp-pic-plugin-screenshots-meta-item-label">
-						<?php echo esc_html( number_format_i18n( $wppic_data->active_installs ) ); ?>
-					</div>
-				</div>
+				</a>
 			</div>
 			<div class="wp-pic-download">
 				<span><a href="<?php echo esc_url_raw( $wppic_data->download_link ); ?>"><?php _e( 'Download', 'wp-plugin-info-card' ); ?></a></span>

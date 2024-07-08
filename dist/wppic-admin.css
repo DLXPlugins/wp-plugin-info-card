@@ -3745,6 +3745,10 @@ p.wp-pic-author,
   background-color: #d54e21;
 }
 
+.wp-pic-bottom.wp-pic-bottom-ratings .wp-pic-bar {
+  margin: 0;
+}
+
 .wp-pic .wp-pic-bar span,
 .wp-pic .wp-pic-bar a {
   float: left;
@@ -3833,6 +3837,18 @@ p.wp-pic-author,
   text-transform: uppercase;
   cursor: pointer;
   line-height: 18px;
+}
+
+.wp-pic .wp-pic-bottom-ratings .wp-pic-download {
+  font-style: normal;
+  color: #FFF;
+}
+.wp-pic .wp-pic-bottom-ratings .wp-pic-download a {
+  color: #FFF;
+}
+
+.wp-pic .wp-pic-bottom-ratings .wp-pic-bar a:last-child {
+  border-right: 0;
 }
 
 .wp-pic .wp-pic-back a:not(.wp-pic-page) {
@@ -4017,6 +4033,10 @@ p.wp-pic-author,
   bottom: 0;
 }
 
+.wp-pic-card.wp-pic .wp-pic-bottom.wp-pic-bottom-ratings {
+  position: relative;
+}
+
 .wp-pic-card.wp-pic .wp-pic-dl-ico {
   display: inline-block;
   margin: 110px 0 -4px 0;
@@ -4085,7 +4105,6 @@ p.wp-pic-author,
 .wp-pic-ratings .wp-pic-bar {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  column-gap: 1.5rem;
   justify-content: center;
 }
 .wp-pic-ratings .wp-pic-plugin-screenshots-meta-item-svg {
@@ -4104,11 +4123,28 @@ p.wp-pic-author,
   align-items: center;
   justify-content: center;
 }
+.wp-pic-ratings .wp-pic-bar a {
+  float: unset;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0;
+  border-right: 1px solid transparent;
+}
+.wp-pic-ratings .wp-pic-bar a:last-child {
+  border-right: none;
+}
+.wp-pic-ratings .wp-pic-bar a:before, .wp-pic-ratings .wp-pic-bar a:after {
+  display: none;
+}
 .wp-pic-ratings .wp-pic-download {
   text-align: center;
 }
 .wp-pic-ratings .wp-pic-rating-stats {
   font-size: 14px;
+  margin-bottom: 12px;
 }
 .wp-pic-ratings .wp-pic-name {
   padding: 0 15px;
@@ -4118,7 +4154,11 @@ p.wp-pic-author,
 .wp-pic-rating-row {
   width: 100%;
   text-align: center;
-  margin-top: 12px;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+.wp-pic-rating-row svg {
+  color: var(--wppic-plugin-ratings-card-star-color, #f7b731);
 }
 
 .wp-pic-ratings .wp-pic-name {

@@ -70,7 +70,7 @@ const PluginRatingsCard = ( props ) => {
 						<div className="wp-pic-rating-stats">
 							{ `${ Number( ratingOneToFive ).toFixed( 1 ) } stars based on ${ props.data.num_ratings.toLocaleString( 'en' ) } ratings` }
 						</div>
-						<div className="wp-pic-bottom">
+						<div className="wp-pic-bottom wp-pic-botton-ratings">
 							<div className="wp-pic-bar">
 								<div className="wp-pic-bar-item">
 									<div className="wp-pic-plugin-screenshots-meta-item-svg">

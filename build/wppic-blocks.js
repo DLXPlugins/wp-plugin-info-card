@@ -7464,7 +7464,7 @@ var PluginRatingsCard = function PluginRatingsCard(a) {
   }, p.parse(a.data.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wp-pic-rating-stats"
   }, "".concat(Number(j).toFixed(1), " stars based on ").concat(a.data.num_ratings.toLocaleString('en'), " ratings")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "wp-pic-bottom"
+    className: "wp-pic-bottom wp-pic-botton-ratings"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wp-pic-bar"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
