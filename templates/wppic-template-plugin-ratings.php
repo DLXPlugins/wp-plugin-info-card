@@ -5,50 +5,64 @@
  * active_installs, downloaded, last_updated, last_updated_mk, added, homepage, short_description, download_link, donate_link, icons, banners
  ***************************************************************/
 
-//Fix for requiered version with extra info. EG: WP 3.9, BP 2.1+
-if( is_numeric( $wppic_data->requires ) ){
+// Fix for requiered version with extra info. EG: WP 3.9, BP 2.1+
+if ( is_numeric( $wppic_data->requires ) ) {
 	$wppic_data->requires = 'WP ' . $wppic_data->requires . '+';
 }
 
-//Icon URL
-if ( !empty( $wppic_data->icons[ 'svg' ] ) ) {
-	$icon = $wppic_data->icons[ 'svg' ];
-} elseif ( !empty( $wppic_data->icons[ '2x' ] ) ) {
-	$icon = $wppic_data->icons[ '2x' ];
-} elseif ( !empty( $wppic_data->icons[ '1x' ] ) ) {
-	$icon = $wppic_data->icons[ '1x' ];
+// Icon URL
+if ( ! empty( $wppic_data->icons['svg'] ) ) {
+	$icon = $wppic_data->icons['svg'];
+} elseif ( ! empty( $wppic_data->icons['2x'] ) ) {
+	$icon = $wppic_data->icons['2x'];
+} elseif ( ! empty( $wppic_data->icons['1x'] ) ) {
+	$icon = $wppic_data->icons['1x'];
 }
 
-//Define card image
-//$image is the custom image URL if you provided it
-if( !empty( $image ) ){
+// Define card image
+// $image is the custom image URL if you provided it
+if ( ! empty( $image ) ) {
 	$bgImage = esc_url( $image );
-} else if( isset( $icon ) ) {
+} elseif ( isset( $icon ) ) {
 	$bgImage = esc_url( $icon );
 } else {
 	$bgImage = '#';
 }
 
-//Plugin banner
+// Plugin banner
 $banner = '';
-if ( !empty( $wppic_data->banners[ 'low' ] ) ) {
-	$banner = 'style="background-image: url(' . esc_attr( $wppic_data->banners[ 'low' ] ) . ' );"';
+if ( ! empty( $wppic_data->banners['low'] ) ) {
+	$banner = 'style="background-image: url(' . esc_attr( $wppic_data->banners['low'] ) . ' );"';
 }
 
 
 /***************************************************************
  * Start template
- ***************************************************************/
+ */
 ?>
 <div class="wp-pic-ratings wp-pic-plugin-ratings wp-pic-card" style="display: none;">
 	<div class="wp-pic-ratings wp-pic-ratings-front">
-		<div class="wp-pic-logo"><a class="wp-pic-logo-anchor" href="<?php echo esc_url( $wppic_data->url ) ?>" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ) ?>"><img src="<?php echo esc_url_raw( $bgImage ); ?>" width="85" height="85" alt="WordPress plugin logo" /></a></div>
+		<div class="wp-pic-logo"><a class="wp-pic-logo-anchor" href="<?php echo esc_url( $wppic_data->url ); ?>" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ); ?>"><img src="<?php echo esc_url_raw( $bgImage ); ?>" width="85" height="85" alt="WordPress plugin logo" /></a></div>
 		<div class="wp-pic-rating-row">
-			<svg width="40" height="40"><use xlink:href="#wppic-icon-star-filled"></use></svg>
-			<svg width="40" height="40"><use xlink:href="#wppic-icon-star-filled"></use></svg>
-			<svg width="40" height="40"><use xlink:href="#wppic-icon-star-filled"></use></svg>
-			<svg width="40" height="40"><use xlink:href="#wppic-icon-star-filled"></use></svg>
-			<svg width="40" height="40"><use xlink:href="#wppic-icon-star-filled"></use></svg>
+			<?php
+			$rating = round( $wppic_data->rating / 20, 1 );
+
+			// If less than 5, determine the remainder for a fill gradient.
+			$remainder = 5 - $rating;
+			if ( $remainder > 0 ) {
+				$remainder = $remainder * 20; // Gets in percentage.
+
+				$gradient = 'linear-gradient(90deg, var(--wppic-plugin-ratings-card-star-color, #f7b731 ) ' . $remainder . '%, transparent 100%)';
+			}
+			?>
+			<div class="wp-pic-rating">
+				<?php
+					$percentage = round( $wppic_data->rating / 20, 1 ) * 20;
+				?>
+				<span class="wp-pic-rating-background" style="display: inline-block; letter-spacing: 5px; background: linear-gradient(90deg, var(--wppic-plugin-ratings-card-star-color) <?php echo esc_attr( $percentage ); ?>%, #FFFFFF <?php echo esc_attr( $percentage ); ?>%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+					★★★★★
+				</span>
+			</div>
 		</div>
 		<div class="wp-pic-name"><?php echo esc_html( $wppic_data->name ); ?></div>
 		<?php /* Translators: %d is the number of ratings for a plugin */ ?>
@@ -98,4 +112,5 @@ if ( !empty( $wppic_data->banners[ 'low' ] ) ) {
 		</div>
 	</div>
 </div>
-<?php //end of template
+<?php
+// end of template

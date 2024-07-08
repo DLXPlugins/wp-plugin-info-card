@@ -16,6 +16,7 @@ import ThemeFlex from '../templates/ThemeFlex';
 import ThemeWordPress from '../templates/ThemeWordPress';
 import ThemeLarge from '../templates/ThemeLarge';
 import ThemeCard from '../templates/ThemeCard';
+import ThemesRatingCard from '../templates/ThemeRatingsCard';
 import Logo from '../Logo';
 import NumbersComponent from '../components/Numbers';
 import { isURL } from '@wordpress/url';
@@ -201,6 +202,14 @@ const WPPluginInfoCard = ( props ) => {
 					) }
 					{ 'card' === layout && 'theme' === type && (
 						<ThemeCard
+							scheme={ scheme }
+							image={ image }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
+					{ 'ratings' === layout && 'theme' === type && (
+						<ThemesRatingCard
 							scheme={ scheme }
 							image={ image }
 							data={ cardData }

@@ -4150,15 +4150,15 @@ p.wp-pic-author,
   padding: 0 15px;
   text-align: center;
 }
+.wp-pic-ratings .wp-pic-rating-background {
+  font-size: 36px;
+}
 
 .wp-pic-rating-row {
   width: 100%;
   text-align: center;
   margin-top: 16px;
   margin-bottom: 8px;
-}
-.wp-pic-rating-row svg {
-  color: var(--wppic-plugin-ratings-card-star-color, #f7b731);
 }
 
 .wp-pic-ratings .wp-pic-name {
