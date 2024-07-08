@@ -47,13 +47,6 @@ if ( ! empty( $wppic_data->banners['low'] ) ) {
 			<?php
 			$rating = round( $wppic_data->rating / 20, 1 );
 
-			// If less than 5, determine the remainder for a fill gradient.
-			$remainder = 5 - $rating;
-			if ( $remainder > 0 ) {
-				$remainder = $remainder * 20; // Gets in percentage.
-
-				$gradient = 'linear-gradient(90deg, var(--wppic-plugin-ratings-card-star-color, #f7b731 ) ' . $remainder . '%, transparent 100%)';
-			}
 			?>
 			<div class="wp-pic-rating">
 				<?php
@@ -66,7 +59,7 @@ if ( ! empty( $wppic_data->banners['low'] ) ) {
 		</div>
 		<div class="wp-pic-name"><?php echo esc_html( $wppic_data->name ); ?></div>
 		<?php /* Translators: %d is the number of ratings for a plugin */ ?>
-		<div class="wp-pic-rating-stats"><?php echo esc_html( round( $wppic_data->rating / 20, 1 ) ); ?> <?php printf( __( 'stars based on %d ratings</div>', 'wp-plugin-info-card' ), absint( $wppic_data->num_ratings ) ); ?></div>
+		<div class="wp-pic-rating-stats"><?php echo esc_html( round( $wppic_data->rating / 20, 1 ) ); ?> <?php printf( __( 'stars based on %s ratings</div>', 'wp-plugin-info-card' ), number_format_i18n( absint( $wppic_data->num_ratings ) ) ); ?></div>
 		<div class="wp-pic-bottom wp-pic-bottom-ratings">
 			<div class="wp-pic-bar">
 				<a href="<?php echo esc_url( $wppic_data->download_link ); ?>">
