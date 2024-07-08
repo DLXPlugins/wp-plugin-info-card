@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import classnames from 'classnames';
 import isNumeric from 'validator/lib/isNumeric';
 import { Rating } from 'react-simple-star-rating';
+import { Code, DownloadCloud, Star, LineChart, Download } from 'lucide-react';
+import WordPressIcon from '../components/WordPressIcon';
+
 const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
 const { __, sprintf } = wp.i18n;
@@ -72,33 +75,30 @@ const PluginRatingsCard = ( props ) => {
 						</div>
 						<div className="wp-pic-bottom">
 							<div className="wp-pic-bar">
-								<span className="wp-pic-rating">
-									{ props.data.rating }%
-									<em>
-										{ __(
-											'Ratings',
-											'wp-plugin-info-card',
-										) }
-									</em>
-								</span>
-								<span className="wp-pic-downloaded">
-									{ props.data.active_installs.toLocaleString( 'en' ) }+
-									<em>
-										{ __(
-											'Installs',
-											'wp-plugin-info-card',
-										) }
-									</em>
-								</span>
-								<span className="wp-pic-requires">
-									{ requires }
-									<em>
-										{ __(
-											'Requires',
-											'wp-plugin-info-card',
-										) }
-									</em>
-								</span>
+								<div className="wp-pic-bar-item">
+									<div className="wp-pic-plugin-screenshots-meta-item-svg">
+										<Code />
+									</div>
+									<div className="wp-pic-plugin-screenshots-meta-item-label">
+										v{ data.version }
+									</div>
+								</div>
+								<div className="wp-pic-bar-item">
+									<div className="wp-pic-plugin-screenshots-meta-item-svg">
+										<WordPressIcon fill="currentColor" />
+									</div>
+									<div className="wp-pic-plugin-screenshots-meta-item-label">
+										{ `${ requires }` }
+									</div>
+								</div>
+								<div className="wp-pic-bar-item">
+									<div className="wp-pic-plugin-screenshots-meta-item-svg">
+										<DownloadCloud />
+									</div>
+									<div className="wp-pic-plugin-screenshots-meta-item-label">
+										{ data.active_installs.toLocaleString( 'en' ) } { __( 'Installs', 'wp-plugin-info-card' ) }
+									</div>
+								</div>
 							</div>
 							<div className="wp-pic-download">
 								<span>

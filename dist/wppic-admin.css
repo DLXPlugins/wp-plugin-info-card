@@ -4071,9 +4071,44 @@ p.wp-pic-author,
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  --wppic-plugin-ratings-card-star-color: #f7b731;
 }
 .wp-pic-ratings.wp-pic-ratings-front .wp-pic-bottom {
   position: relative;
+}
+.wp-pic-ratings .wp-pic-bar {
+  color: #FFF;
+}
+.wp-pic-ratings .wp-pic-bar svg {
+  color: #FFF;
+}
+.wp-pic-ratings .wp-pic-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 1.5rem;
+  justify-content: center;
+}
+.wp-pic-ratings .wp-pic-plugin-screenshots-meta-item-svg {
+  line-height: 0;
+  width: 28px;
+  height: 28px;
+}
+.wp-pic-ratings .wp-pic-plugin-screenshots-meta-item-label {
+  font-size: 12px;
+  text-align: center;
+}
+.wp-pic-ratings .wp-pic-bar-item {
+  padding: 12px 0 12px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.wp-pic-ratings .wp-pic-download {
+  text-align: center;
+}
+.wp-pic-ratings .wp-pic-rating-stats {
+  font-size: 14px;
 }
 
 .wp-pic-rating-row {
