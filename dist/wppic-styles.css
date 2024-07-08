@@ -578,6 +578,10 @@ p.wp-pic-author,
 .wp-pic-ratings .wp-pic-rating-stats {
   font-size: 14px;
 }
+.wp-pic-ratings .wp-pic-name {
+  padding: 0 15px;
+  text-align: center;
+}
 
 .wp-pic-rating-row {
   width: 100%;
@@ -1365,6 +1369,10 @@ p.wp-pic-author,
   background-color: #BDC3C7;
 }
 
+.wp-pic.scheme1 .wp-pic-download a {
+  color: #FFF;
+}
+
 .wp-pic.scheme2 .wp-pic-back a:not(.wp-pic-page) {
   color: #ccc;
 }
@@ -1399,6 +1407,10 @@ p.wp-pic-author,
 
 .wp-pic.scheme2 .wp-pic-back p {
   color: #777;
+}
+
+.wp-pic.scheme2 .wp-pic-download a {
+  color: #FFF;
 }
 
 /*Color Scheme 3*/
@@ -1448,6 +1460,10 @@ p.wp-pic-author,
   color: #888;
 }
 
+.wp-pic.scheme3 .wp-pic-download a {
+  color: #FFF;
+}
+
 /*Color Scheme 4*/
 .wp-pic.scheme4 .wp-pic-no-plugin,
 .entry .wp-pic.scheme4 p,
@@ -1490,6 +1506,10 @@ p.wp-pic-author,
 .wp-pic.scheme4 .wp-pic-back a:not(.wp-pic-page):hover,
 .wp-pic.scheme4 .wp-pic-back p {
   color: #888;
+}
+
+.wp-pic.scheme4 .wp-pic-download a {
+  color: #FFF;
 }
 
 /*Color Scheme 5*/
@@ -1536,6 +1556,10 @@ p.wp-pic-author,
   color: #888;
 }
 
+.wp-pic.scheme5 .wp-pic-download a {
+  color: #FFF;
+}
+
 /*Color Scheme 6*/
 .wp-pic.scheme6 .wp-pic-no-plugin,
 .entry .wp-pic.scheme6 p,
@@ -1578,6 +1602,10 @@ p.wp-pic-author,
 .wp-pic.scheme6 .wp-pic-back a:not(.wp-pic-page):hover,
 .wp-pic.scheme6 .wp-pic-back p {
   color: #888;
+}
+
+.wp-pic.scheme6 .wp-pic-download a {
+  color: #FFF;
 }
 
 /*Color Scheme 7*/
@@ -1627,6 +1655,10 @@ p.wp-pic-author,
   color: #555;
 }
 
+.wp-pic.scheme7 .wp-pic-download a {
+  color: #FFF;
+}
+
 /*Color Scheme 8*/
 .wp-pic.scheme8 .wp-pic-no-plugin,
 .entry .wp-pic.scheme8 p,
@@ -1669,6 +1701,10 @@ p.wp-pic-author,
 .wp-pic.scheme8 .wp-pic-back a:not(.wp-pic-page):hover,
 .wp-pic.scheme8 .wp-pic-back p {
   color: #555;
+}
+
+.wp-pic.scheme8 .wp-pic-download a {
+  color: #FFF;
 }
 
 /*Color Scheme 9*/
@@ -1720,6 +1756,10 @@ p.wp-pic-author,
   color: #999;
 }
 
+.wp-pic.scheme9 .wp-pic-download a {
+  color: #FFF;
+}
+
 /*Color Scheme 10*/
 .wp-pic.scheme10 .wp-pic-no-plugin,
 .entry .wp-pic.scheme10 p,
@@ -1758,6 +1798,10 @@ p.wp-pic-author,
 .wp-pic.scheme10 a.wp-pic-page,
 .wp-pic.scheme10.flex .wp-pic-download-link span {
   background-color: #19B5FE;
+}
+
+.wp-pic.scheme10 .wp-pic-download a {
+  color: #FFF;
 }
 
 /*Color Scheme 11*/
@@ -1799,6 +1843,8 @@ p.wp-pic-author,
 .wp-pic.scheme11 .wp-pic-download-link span,
 .wp-pic.scheme11 .wp-pic-download,
 .wp-pic.scheme11 .wp-pic-page,
+.wp-pic.scheme11 .wp-pic-name,
+.wp-pic.scheme11 .wp-pic-rating-stats,
 .wp-pic.scheme11 a.wp-pic-page {
   color: #fff;
 }
@@ -1808,6 +1854,11 @@ p.wp-pic-author,
 .wp-pic.scheme11 a.wp-pic-page,
 .wp-pic.scheme11.flex .wp-pic-download-link span {
   background-color: #000000;
+}
+
+.wp-pic.scheme11 .wp-pic-download {
+  background: #f7b731;
+  color: #333;
 }
 
 /*Color Scheme 12*/
@@ -1820,6 +1871,14 @@ p.wp-pic-author,
 .wp-pic.scheme12 .wp-pic-dl-link,
 .wp-pic.scheme12 a.wp-pic-name {
   color: #000;
+}
+
+.wp-pic.scheme12 .wp-pic-download a {
+  color: #FFF;
+}
+
+body .wp-pic.scheme12 .wp-pic-ratings {
+  --wppic-plugin-ratings-card-star-color: #be01be;
 }
 
 .wp-pic.scheme12 .wp-pic-front a.wp-pic-name {
@@ -1942,6 +2001,10 @@ p.wp-pic-author,
   color: #FFF;
 }
 
+.wp-pic.scheme13 .wp-pic-download a {
+  color: #FFF;
+}
+
 /*Color Scheme 14*/
 .wp-pic.scheme14 .wp-pic-no-plugin,
 .entry .wp-pic.scheme14 p,
@@ -2001,6 +2064,10 @@ p.wp-pic-author,
 .wp-pic.scheme14 .wp-pic-download,
 .wp-pic.scheme14 a.wp-pic-page {
   background-color: rgb(70, 174, 247);
+}
+
+.wp-pic.scheme14 .wp-pic-download a {
+  color: #FFF;
 }
 
 /*DL effect*/

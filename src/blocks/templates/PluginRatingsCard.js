@@ -68,10 +68,7 @@ const PluginRatingsCard = ( props ) => {
 						</div>
 						<div className="wp-pic-name">{ htmlToReactParser.parse( props.data.name ) }</div>
 						<div className="wp-pic-rating-stats">
-							{ `Based on ${ props.data.num_ratings.toLocaleString( 'en' ) } ratings` }
-						</div>
-						<div className="wp-pic-ratings-last-updated">
-							{ sprintf( __( 'Last Updated: %s ago', 'wp-plugin-info-card' ), data.last_updated_human_time ) }
+							{ `${ Number( ratingOneToFive ).toFixed( 1 ) } stars based on ${ props.data.num_ratings.toLocaleString( 'en' ) } ratings` }
 						</div>
 						<div className="wp-pic-bottom">
 							<div className="wp-pic-bar">

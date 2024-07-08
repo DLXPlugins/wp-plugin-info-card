@@ -440,6 +440,8 @@ class Shortcodes {
 		} elseif ( 'card' === $layout ) {
 			$layout      = 'wp-pic-card';
 			$add_class[] = 'wp-pic-card';
+		} elseif ( 'ratings' === $layout ) {
+			$add_class[] = 'wp-pic-card';
 		} else {
 			$add_class[] = $layout;
 		}
