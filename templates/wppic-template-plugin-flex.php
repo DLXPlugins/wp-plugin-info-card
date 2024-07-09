@@ -36,7 +36,7 @@ if ( empty( $banner_image ) ) {
 	if ( isset( $wppic_data->banners['low'] ) ) {
 		$banner_image = $wppic_data->banners['low'];
 	} else {
-		$banner_image = WPPIC_URL . 'img/default-banner.png';
+		$banner_image = plugins_url( 'assets/img/default-banner.png', WPPIC_FILE );
 	}
 }
 $wppic_data->name = wp_trim_words( $wppic_data->name, 6 );
