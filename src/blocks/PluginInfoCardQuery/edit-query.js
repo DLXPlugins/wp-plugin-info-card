@@ -37,6 +37,8 @@ import ThemeFlex from '../templates/ThemeFlex';
 import ThemeWordPress from '../templates/ThemeWordPress';
 import ThemeLarge from '../templates/ThemeLarge';
 import ThemeCard from '../templates/ThemeCard';
+import PluginRatingsCard from '../templates/PluginRatingsCard';
+import ThemeRatingsCard from '../templates/ThemeRatingsCard';
 import Logo from '../Logo';
 
 const WP_Plugin_Card_Query = ( props ) => {
@@ -157,6 +159,14 @@ const WP_Plugin_Card_Query = ( props ) => {
 							align={ align }
 						/>
 					) }
+					{ 'ratings' === layout && 'plugin' === type && (
+						<PluginRatingsCard
+							scheme={ scheme }
+							image={ image }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
 					{ 'flex' === layout && 'theme' === type && (
 						<ThemeFlex
 							scheme={ scheme }
@@ -183,6 +193,14 @@ const WP_Plugin_Card_Query = ( props ) => {
 					) }
 					{ 'card' === layout && 'theme' === type && (
 						<ThemeCard
+							scheme={ scheme }
+							image={ image }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
+					{ 'ratings' === layout && 'theme' === type && (
+						<ThemeRatingsCard
 							scheme={ scheme }
 							image={ image }
 							data={ cardData }
@@ -234,6 +252,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 		{ value: 'large', label: __( 'Large', 'wp-plugin-info-card' ) },
 		{ value: 'wordpress', label: __( 'WordPress', 'wp-plugin-info-card' ) },
 		{ value: 'flex', label: __( 'Flex', 'wp-plugin-info-card' ) },
+		{ value: 'ratings', label: __( 'Ratings', 'wp-plugin-info-card' ) },
 	];
 	const customThemeOptions = [
 		{ value: '', label: __( 'None', 'wp-plugin-info-card' ) },

@@ -3744,6 +3744,14 @@ p.wp-pic-author,
   margin: 15px 0 0 0;
   background-color: #d54e21;
 }
+.wp-pic .wp-pic-bar a {
+  background: transparent;
+  transition: all 0.35s ease-in-out;
+}
+.wp-pic .wp-pic-bar a:hover {
+  background-color: #ea5726;
+  transition: all 0.35s ease-in-out;
+}
 
 .wp-pic-bottom.wp-pic-bottom-ratings .wp-pic-bar {
   margin: 0;
@@ -3837,6 +3845,12 @@ p.wp-pic-author,
   text-transform: uppercase;
   cursor: pointer;
   line-height: 18px;
+  transition: all 0.35s ease-in-out;
+}
+.wp-pic .wp-pic-download:hover,
+.wp-pic .wp-pic-page:hover {
+  background-color: #2687b4;
+  transition: all 0.35s ease-in-out;
 }
 
 .wp-pic .wp-pic-bottom-ratings .wp-pic-download {
@@ -3952,6 +3966,7 @@ p.wp-pic-author,
 .wp-pic-card.wp-pic {
   width: 280px;
   height: 420px;
+  max-height: 420px;
   position: relative;
   display: inline-block;
 }
@@ -4091,6 +4106,7 @@ p.wp-pic-author,
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  min-height: 268px;
   --wppic-plugin-ratings-card-star-color: #f7b731;
 }
 .wp-pic-ratings.wp-pic-ratings-front .wp-pic-bottom {
@@ -4122,6 +4138,9 @@ p.wp-pic-author,
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-right: 1px solid #b23030;
 }
 .wp-pic-ratings .wp-pic-bar a {
   float: unset;
@@ -4134,6 +4153,9 @@ p.wp-pic-author,
   border-right: 1px solid transparent;
 }
 .wp-pic-ratings .wp-pic-bar a:last-child {
+  border-right: none;
+}
+.wp-pic-ratings .wp-pic-bar a:last-child .wp-pic-bar-item {
   border-right: none;
 }
 .wp-pic-ratings .wp-pic-bar a:before, .wp-pic-ratings .wp-pic-bar a:after {
@@ -4958,6 +4980,14 @@ p.wp-pic-author,
 .wp-pic.scheme2 .wp-pic-bar {
   background-color: #52B3D9;
 }
+.wp-pic.scheme2 .wp-pic-bar a {
+  background: transparent;
+  transition: all 0.35s ease-in-out;
+}
+.wp-pic.scheme2 .wp-pic-bar a:hover {
+  background-color: #62c1e6;
+  transition: all 0.35s ease-in-out;
+}
 
 .wp-pic.scheme2 .wp-pic-download,
 .wp-pic.scheme2 .wp-pic-asset-bg,
@@ -4985,6 +5015,10 @@ p.wp-pic-author,
   color: #FFF;
 }
 
+.wp-pic.scheme2 .wp-pic-bar-item {
+  border-right: 1px solid #4395b5;
+}
+
 /*Color Scheme 3*/
 .wp-pic.scheme3 .wp-pic-no-plugin,
 .entry .wp-pic.scheme3 p,
@@ -5002,6 +5036,18 @@ p.wp-pic-author,
 
 .wp-pic.scheme3 .wp-pic-bar {
   background-color: #2980b9;
+}
+.wp-pic.scheme3 .wp-pic-bar a {
+  background: transparent;
+  transition: all 0.35s ease-in-out;
+}
+.wp-pic.scheme3 .wp-pic-bar a:hover {
+  background-color: #3293d4;
+  transition: all 0.35s ease-in-out;
+}
+
+.wp-pic.scheme3 .wp-pic-bar-item {
+  border-right: 1px solid #2575aa;
 }
 
 .wp-pic.scheme3 .wp-pic-flip .wp-pic-face.wp-pic-back,
@@ -5051,6 +5097,18 @@ p.wp-pic-author,
 .wp-pic.scheme4 .wp-pic-bar {
   background-color: #674172;
 }
+.wp-pic.scheme4 .wp-pic-bar a {
+  background: transparent;
+  transition: all 0.35s ease-in-out;
+}
+.wp-pic.scheme4 .wp-pic-bar a:hover {
+  background-color: #744d7e;
+  transition: all 0.35s ease-in-out;
+}
+
+.wp-pic.scheme4 .wp-pic-bar-item {
+  border-right: 1px solid #815d8a;
+}
 
 .wp-pic.scheme4 .wp-pic-flip .wp-pic-face.wp-pic-back,
 .wp-pic.scheme4 .wp-pic-bar span,
@@ -5096,10 +5154,6 @@ p.wp-pic-author,
   background-color: #fefefe;
 }
 
-.wp-pic.scheme5 .wp-pic-bar {
-  background-color: #019875;
-}
-
 .wp-pic.scheme5 .wp-pic-flip .wp-pic-face.wp-pic-back,
 .wp-pic.scheme5 .wp-pic-bar span,
 .wp-pic.scheme5 .wp-pic-bar a,
@@ -5132,6 +5186,22 @@ p.wp-pic-author,
   color: #FFF;
 }
 
+.wp-pic.scheme5 .wp-pic-bar {
+  background-color: #019875;
+}
+.wp-pic.scheme5 .wp-pic-bar a {
+  background: transparent;
+  transition: all 0.35s ease-in-out;
+}
+.wp-pic.scheme5 .wp-pic-bar a:hover {
+  background-color: #03af87;
+  transition: all 0.35s ease-in-out;
+}
+
+.wp-pic.scheme5 .wp-pic-bar-item {
+  border-right: 1px solid #028264;
+}
+
 /*Color Scheme 6*/
 .wp-pic.scheme6 .wp-pic-no-plugin,
 .entry .wp-pic.scheme6 p,
@@ -5146,6 +5216,18 @@ p.wp-pic-author,
 
 .wp-pic.scheme6 .wp-pic-bar {
   background-color: #674172;
+}
+.wp-pic.scheme6 .wp-pic-bar a {
+  background: transparent;
+  transition: all 0.35s ease-in-out;
+}
+.wp-pic.scheme6 .wp-pic-bar a:hover {
+  background-color: #784985;
+  transition: all 0.35s ease-in-out;
+}
+
+.wp-pic.scheme6 .wp-pic-bar-item {
+  border-right: 1px solid #814d8e;
 }
 
 .wp-pic.scheme6 .wp-pic-flip .wp-pic-face.wp-pic-back,
@@ -5198,6 +5280,18 @@ p.wp-pic-author,
 .wp-pic.scheme7 .wp-pic-bar {
   background-color: #6C7A89;
 }
+.wp-pic.scheme7 .wp-pic-bar a {
+  background: transparent;
+  transition: all 0.35s ease-in-out;
+}
+.wp-pic.scheme7 .wp-pic-bar a:hover {
+  background-color: #8494a6;
+  transition: all 0.35s ease-in-out;
+}
+
+.wp-pic.scheme7 .wp-pic-bar-item {
+  border-right: 1px solid #b1becd;
+}
 
 .wp-pic.scheme7 .wp-pic-flip .wp-pic-face.wp-pic-back,
 .wp-pic.scheme7 .wp-pic-bar span,
@@ -5246,6 +5340,18 @@ p.wp-pic-author,
 .wp-pic.scheme8 .wp-pic-bar {
   background-color: #F62459;
 }
+.wp-pic.scheme8 .wp-pic-bar a {
+  background: transparent;
+  transition: all 0.35s ease-in-out;
+}
+.wp-pic.scheme8 .wp-pic-bar a:hover {
+  background-color: #ff557f;
+  transition: all 0.35s ease-in-out;
+}
+
+.wp-pic.scheme8 .wp-pic-bar-item {
+  border-right: 1px solid #ffb5c8;
+}
 
 .wp-pic.scheme8 .wp-pic-flip .wp-pic-face.wp-pic-back,
 .wp-pic.scheme8 .wp-pic-bar span,
@@ -5293,6 +5399,18 @@ p.wp-pic-author,
 
 .wp-pic.scheme9 .wp-pic-bar {
   background-color: #36D7B7;
+}
+.wp-pic.scheme9 .wp-pic-bar a {
+  background: transparent;
+  transition: all 0.35s ease-in-out;
+}
+.wp-pic.scheme9 .wp-pic-bar a:hover {
+  background-color: #3ef5d1;
+  transition: all 0.35s ease-in-out;
+}
+
+.wp-pic.scheme9 .wp-pic-bar-item {
+  border-right: 1px solid #29a38a;
 }
 
 .wp-pic.scheme9 .wp-pic-bar span:after,
@@ -5344,6 +5462,18 @@ p.wp-pic-author,
 .wp-pic.scheme10 .wp-pic-bar {
   background-color: #22313F;
 }
+.wp-pic.scheme10 .wp-pic-bar a {
+  background: transparent;
+  transition: all 0.35s ease-in-out;
+}
+.wp-pic.scheme10 .wp-pic-bar a:hover {
+  background-color: #32485d;
+  transition: all 0.35s ease-in-out;
+}
+
+.wp-pic.scheme10 .wp-pic-bar-item {
+  border-right: 1px solid #606d79;
+}
 
 .wp-pic.scheme10 .wp-pic-bar span:after .wp-pic.scheme10 .wp-pic-bar a:after {
   background-color: rgba(0, 0, 0, 0.15);
@@ -5390,6 +5520,18 @@ p.wp-pic-author,
 .wp-pic.scheme11 .wp-pic-bar {
   background-color: #000000;
 }
+.wp-pic.scheme11 .wp-pic-bar a {
+  background: transparent;
+  transition: all 0.35s ease-in-out;
+}
+.wp-pic.scheme11 .wp-pic-bar a:hover {
+  background-color: #333;
+  transition: all 0.35s ease-in-out;
+}
+
+.wp-pic.scheme11 .wp-pic-bar-item {
+  border-right: 1px solid #dedede;
+}
 
 .wp-pic.scheme11 .wp-pic-bar span:after .wp-pic.scheme11 .wp-pic-bar a:after {
   background-color: rgba(0, 0, 0, 0.9);
@@ -5429,7 +5571,7 @@ p.wp-pic-author,
 }
 
 .wp-pic.scheme11 .wp-pic-download {
-  background: #f7b731;
+  background: #d54e21;
   color: #333;
 }
 
@@ -5459,6 +5601,18 @@ body .wp-pic.scheme12 .wp-pic-ratings {
 
 .wp-pic.scheme12 .wp-pic-bar {
   background-color: #FF00FF;
+}
+.wp-pic.scheme12 .wp-pic-bar a {
+  background: transparent;
+  transition: all 0.35s ease-in-out;
+}
+.wp-pic.scheme12 .wp-pic-bar a:hover {
+  background-color: #ff63ff;
+  transition: all 0.35s ease-in-out;
+}
+
+.wp-pic.scheme12 .wp-pic-bar-item {
+  border-right: 1px solid #fe80fe;
 }
 
 .wp-pic.scheme12 .wp-pic-bar span:after .wp-pic.scheme12 .wp-pic-bar a:after {
@@ -5525,6 +5679,18 @@ body .wp-pic.scheme12 .wp-pic-ratings {
 
 .wp-pic.scheme13 .wp-pic-bar {
   background-image: linear-gradient(to top, rgb(30, 60, 114) 0%, rgb(30, 60, 114) 1%, rgb(42, 82, 152) 100%);
+}
+.wp-pic.scheme13 .wp-pic-bar a {
+  background: transparent;
+  transition: all 0.35s ease-in-out;
+}
+.wp-pic.scheme13 .wp-pic-bar a:hover {
+  background-image: linear-gradient(to top, rgb(39, 77, 148) 0%, rgb(35, 69, 133) 1%, rgb(46, 91, 167) 100%);
+  transition: all 0.35s ease-in-out;
+}
+
+.wp-pic.scheme13 .wp-pic-bar-item {
+  border-right: 1px solid rgb(68, 108, 182);
 }
 
 .wp-pic.scheme13 .wp-pic-bar span:after .wp-pic.scheme13 .wp-pic-bar a:after {

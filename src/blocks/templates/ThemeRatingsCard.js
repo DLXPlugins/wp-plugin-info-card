@@ -35,7 +35,6 @@ const ThemeRatingsCard = ( props ) => {
 		backgroundRepeat: 'no-repeat',
 		backgroundSize: 'cover',
 	};
-	console.log( ratingOneToFive );
 	const htmlToReactParser = new HtmlToReactParser();
 	return (
 		<div className={ wrapperClasses }>
@@ -75,7 +74,7 @@ const ThemeRatingsCard = ( props ) => {
 										<WordPressIcon fill="currentColor" />
 									</div>
 									<div className="wp-pic-plugin-screenshots-meta-item-label">
-										{ `${ requires }` }
+										{ __( 'Preview', 'wp-plugin-info-card' ) }
 									</div>
 								</div>
 								<div className="wp-pic-bar-item">

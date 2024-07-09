@@ -2954,7 +2954,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _templates_ThemeWordPress__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../templates/ThemeWordPress */ "./src/blocks/templates/ThemeWordPress.js");
 /* harmony import */ var _templates_ThemeLarge__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../templates/ThemeLarge */ "./src/blocks/templates/ThemeLarge.js");
 /* harmony import */ var _templates_ThemeCard__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../templates/ThemeCard */ "./src/blocks/templates/ThemeCard.js");
-/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../Logo */ "./src/blocks/Logo.js");
+/* harmony import */ var _templates_PluginRatingsCard__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../templates/PluginRatingsCard */ "./src/blocks/templates/PluginRatingsCard.js");
+/* harmony import */ var _templates_ThemeRatingsCard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../templates/ThemeRatingsCard */ "./src/blocks/templates/ThemeRatingsCard.js");
+/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../Logo */ "./src/blocks/Logo.js");
 function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) return _arrayLikeToArray(b, c); var a = {}.toString.call(b).slice(8, -1); return "Object" === a && b.constructor && (a = b.constructor.name), "Map" === a || "Set" === a ? Array.from(b) : "Arguments" === a || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a) ? _arrayLikeToArray(b, c) : void 0; } }
@@ -2988,6 +2990,8 @@ var _wp$blockEditor = wp.blockEditor,
   AlignmentToolbar = _wp$blockEditor.AlignmentToolbar,
   BlockAlignmentToolbar = _wp$blockEditor.BlockAlignmentToolbar,
   useBlockProps = _wp$blockEditor.useBlockProps;
+
+
 
 
 
@@ -3101,6 +3105,11 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
         image: u,
         data: a,
         align: t
+      }), 'ratings' === B && 'plugin' === q && /*#__PURE__*/React.createElement(_templates_PluginRatingsCard__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        scheme: A,
+        image: u,
+        data: a,
+        align: t
       }), 'flex' === B && 'theme' === q && /*#__PURE__*/React.createElement(_templates_ThemeFlex__WEBPACK_IMPORTED_MODULE_6__["default"], {
         scheme: A,
         image: u,
@@ -3117,6 +3126,11 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
         data: a,
         align: t
       }), 'card' === B && 'theme' === q && /*#__PURE__*/React.createElement(_templates_ThemeCard__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        scheme: A,
+        image: u,
+        data: a,
+        align: t
+      }), 'ratings' === B && 'theme' === q && /*#__PURE__*/React.createElement(_templates_ThemeRatingsCard__WEBPACK_IMPORTED_MODULE_11__["default"], {
         scheme: A,
         image: u,
         data: a,
@@ -3207,6 +3221,9 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
   }, {
     value: 'flex',
     label: __('Flex', 'wp-plugin-info-card')
+  }, {
+    value: 'ratings',
+    label: __('Ratings', 'wp-plugin-info-card')
   }];
   var V = [{
     value: '',
@@ -3370,7 +3387,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
     className: "wppic-query-block wppic-query-block-panel"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-block-svg"
-  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_12__["default"], {
     size: "75"
   })), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-tabs-panel"
@@ -3520,7 +3537,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
     className: "wp-pic-gutenberg-button"
   }, /*#__PURE__*/React.createElement(Button, {
     iconSize: 20,
-    icon: /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    icon: /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_12__["default"], {
       size: "25"
     }),
     isSecondary: true,
@@ -3535,7 +3552,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
     className: "wppic-loading-placeholder"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-loading"
-  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_12__["default"], {
     size: "45"
   }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
     className: "wppic-spinner"
@@ -8197,7 +8214,6 @@ var ThemeRatingsCard = function ThemeRatingsCard(a) {
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover'
   };
-  console.log(k);
   var p = new HtmlToReactParser();
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: l
@@ -8241,7 +8257,7 @@ var ThemeRatingsCard = function ThemeRatingsCard(a) {
     fill: "currentColor"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wp-pic-plugin-screenshots-meta-item-label"
-  }, "".concat(n))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, __('Preview', 'wp-plugin-info-card'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wp-pic-bar-item"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wp-pic-plugin-screenshots-meta-item-svg"

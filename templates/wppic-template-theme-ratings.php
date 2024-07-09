@@ -5,35 +5,9 @@
  * active_installs, downloaded, last_updated, last_updated_mk, added, homepage, short_description, download_link, donate_link, icons, banners
  ***************************************************************/
 
-// Fix for requiered version with extra info. EG: WP 3.9, BP 2.1+
-if ( is_numeric( $wppic_data->requires ) ) {
-	$wppic_data->requires = 'WP ' . $wppic_data->requires . '+';
-}
-
-// Icon URL
-if ( ! empty( $wppic_data->icons['svg'] ) ) {
-	$icon = $wppic_data->icons['svg'];
-} elseif ( ! empty( $wppic_data->icons['2x'] ) ) {
-	$icon = $wppic_data->icons['2x'];
-} elseif ( ! empty( $wppic_data->icons['1x'] ) ) {
-	$icon = $wppic_data->icons['1x'];
-}
-
 // Define card image
 // $image is the custom image URL if you provided it
-if ( ! empty( $image ) ) {
-	$bgImage = esc_url( $image );
-} elseif ( isset( $icon ) ) {
-	$bgImage = esc_url( $icon );
-} else {
-	$bgImage = '#';
-}
-
-// Plugin banner
-$banner = '';
-if ( ! empty( $wppic_data->banners['low'] ) ) {
-	$banner = 'style="background-image: url(' . esc_attr( $wppic_data->banners['low'] ) . ' );"';
-}
+$bgImage = esc_url( $wppic_data->screenshot_url);
 
 
 /***************************************************************
@@ -74,7 +48,7 @@ if ( ! empty( $wppic_data->banners['low'] ) ) {
 						</div>
 					</div>
 				</a>
-				<a href="<?php echo esc_url( $wppic_data->url ); ?>">
+				<a href="<?php echo esc_url( $wppic_data->preview_url); ?>">
 					<div class="wp-pic-bar-item">
 						<div class="wp-pic-plugin-screenshots-meta-item-svg">
 							<svg width="24" height="24">
@@ -82,11 +56,11 @@ if ( ! empty( $wppic_data->banners['low'] ) ) {
 							</svg>
 						</div>
 						<div class="wp-pic-plugin-screenshots-meta-item-label">
-							<?php echo esc_html( $wppic_data->requires ); ?>
+							<?php esc_html_e( 'Preview', 'wp-plugin-info-card' ); ?>
 						</div>
 					</div>
 				</a>
-				<a href="<?php echo esc_url( sprintf( 'https://wordpress.org/plugins/%s/advanced/', $wppic_data->slug ) ); ?>">
+				<a href="<?php echo esc_url( sprintf( 'https://wordpress.org/themes/%s/', $wppic_data->slug ) ); ?>">
 					<div class="wp-pic-bar-item">
 						<div class="wp-pic-plugin-screenshots-meta-item-svg">
 							<svg width="24" height="24">
@@ -94,7 +68,7 @@ if ( ! empty( $wppic_data->banners['low'] ) ) {
 							</svg>
 						</div>
 						<div class="wp-pic-plugin-screenshots-meta-item-label">
-							<?php echo esc_html( number_format_i18n( $wppic_data->active_installs ) ); ?>+ <?php esc_html_e( 'Installs', 'wp-plugin-info-card' ); ?>
+							<?php echo esc_html( $wppic_data->downloaded ); ?>+ <?php esc_html_e( 'Downloads', 'wp-plugin-info-card' ); ?>
 						</div>
 					</div>
 				</a>
