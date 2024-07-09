@@ -42,39 +42,41 @@ if ( ! empty( $wppic_data->banners['low'] ) ) {
 ?>
 <div class="wp-pic-ratings wp-pic-plugin-ratings wp-pic-card" style="display: none;">
 	<div class="wp-pic-ratings wp-pic-ratings-front">
-		<div class="wp-pic-logo"><a class="wp-pic-logo-anchor" href="<?php echo esc_url( $wppic_data->url ); ?>" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ); ?>"><img src="<?php echo esc_url_raw( $bgImage ); ?>" width="85" height="85" alt="WordPress plugin logo" /></a></div>
-		<div class="wp-pic-rating-row">
-			<?php
-			$rating = round( $wppic_data->rating / 20, 1 );
-
-			?>
-			<div class="wp-pic-rating">
+		<div class="wp-pic-ratings-content">
+			<div class="wp-pic-logo wp-pic-rating-logo"><a class="wp-pic-logo-anchor" href="<?php echo esc_url( $wppic_data->url ); ?>" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ); ?>"><img src="<?php echo esc_url_raw( $bgImage ); ?>" width="85" height="85" alt="WordPress plugin logo" /></a></div>
+			<div class="wp-pic-rating-row">
 				<?php
-				$percentage     = round( $wppic_data->rating / 20, 1 ) * 20;
-				$alt_percentage = absint( $percentage );
-				if ( 100 === $percentage ) {
-					$percentage = 0;
-				}
+				$rating = round( $wppic_data->rating / 20, 1 );
+
 				?>
-				<span class="wp-pic-rating-background" style="display: inline-block; letter-spacing: 5px; background: linear-gradient(90deg, var(--wppic-plugin-ratings-card-star-color) <?php echo esc_attr( $percentage ); ?>%, #cccccc <?php echo esc_attr( $alt_percentage ); ?>%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-					★★★★★
-				</span>
+				<div class="wp-pic-rating">
+					<?php
+					$percentage     = round( $wppic_data->rating / 20, 1 ) * 20;
+					$alt_percentage = absint( $percentage );
+					if ( 100 === $percentage ) {
+						$percentage = 0;
+					}
+					?>
+					<span class="wp-pic-rating-background" style="display: inline-block; letter-spacing: 5px; background: linear-gradient(90deg, var(--wppic-plugin-ratings-card-star-color) <?php echo esc_attr( $percentage ); ?>%, #cccccc <?php echo esc_attr( $alt_percentage ); ?>%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+						★★★★★
+					</span>
+				</div>
 			</div>
+			<?php
+			/**
+			 * Filter the number of words to trim in the plugin name.
+			 *
+			 * @param int $plugin_trim_words Number of words to trim the plugin name.
+			 * @param object $wppic_data Plugin data.
+			 *
+			 * @since 5.1.0
+			 */
+			$plugin_trim_words = apply_filters( 'wppic_plugin_title_trim_words', 7, $wppic_data );
+			?>
+			<div class="wp-pic-name"><?php echo esc_html( wp_trim_words( $wppic_data->name, $plugin_trim_words ) ); ?></div>
+			<?php /* Translators: %d is the number of ratings for a plugin */ ?>
+			<div class="wp-pic-rating-stats"><?php echo esc_html( round( $wppic_data->rating / 20, 1 ) ); ?> <?php printf( __( 'stars based on %s ratings', 'wp-plugin-info-card' ), number_format_i18n( absint( $wppic_data->num_ratings ) ) ); ?></div>
 		</div>
-		<?php
-		/**
-		 * Filter the number of words to trim in the plugin name.
-		 *
-		 * @param int $plugin_trim_words Number of words to trim the plugin name.
-		 * @param object $wppic_data Plugin data.
-		 *
-		 * @since 5.1.0
-		 */
-		$plugin_trim_words = apply_filters( 'wppic_plugin_title_trim_words', 7, $wppic_data );
-		?>
-		<div class="wp-pic-name"><?php echo esc_html( wp_trim_words( $wppic_data->name, $plugin_trim_words ) ); ?></div>
-		<?php /* Translators: %d is the number of ratings for a plugin */ ?>
-		<div class="wp-pic-rating-stats"><?php echo esc_html( round( $wppic_data->rating / 20, 1 ) ); ?> <?php printf( __( 'stars based on %s ratings', 'wp-plugin-info-card' ), number_format_i18n( absint( $wppic_data->num_ratings ) ) ); ?></div>
 		<div class="wp-pic-bottom wp-pic-bottom-ratings">
 			<div class="wp-pic-bar">
 				<a href="<?php echo esc_url( $wppic_data->download_link ); ?>">

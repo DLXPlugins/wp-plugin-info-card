@@ -98,9 +98,14 @@ p.wp-pic-author,
 	box-shadow: 0 0 20px 1px rgba(0,0,0,0.04);
 }
 .wp-pic div.wp-pic-logo {
+	background-image: unset;
 	width: 80px;
 	height: 80px;
 	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 35px;
 }
 .wp-pic:not(.plugin) a.wp-pic-logo:not([data="no-image"]) {
 	width: 100%;
@@ -321,9 +326,6 @@ p.wp-pic-author,
 /*Card layout*/
 .wp-pic-card.wp-pic:not(.flex) {
 	width: 280px;
-	height: 420px;
-	min-height: 420px;
-	max-height: 420px;
 	position: relative;
 	display: inline-block;
 }
@@ -449,8 +451,8 @@ p.wp-pic-author,
 .wp-pic-ratings {
 	display: flex;
 	justify-content: center;
-	flex-wrap: wrap;
-	min-height: 268px;
+	flex-direction: column;
+	height: 100%;
 
 	&.wp-pic-ratings-front .wp-pic-bottom {
 		position: relative;
@@ -463,8 +465,12 @@ p.wp-pic-author,
 			color: #FFF;
 		}
 	}
+	.wp-pic-ratings-content {
+		flex: 1;
+	}
 	.wp-pic-name {
 		font-size: 1.15rem;
+		line-height: 1.35;
 	}
 	.wp-pic-bar {
 		display: grid;

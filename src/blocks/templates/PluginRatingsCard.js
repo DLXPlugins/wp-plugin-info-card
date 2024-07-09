@@ -52,23 +52,25 @@ const PluginRatingsCard = ( props ) => {
 			<div className={ classes }>
 				<div className="wp-pic-ratings wp-pic-plugin-ratings">
 					<div className="wp-pic-ratings wp-pic-ratings-front">
-						<div
-							className="wp-pic-logo"
-							style={ bgImageStyles }
-						></div>
-						<div className="wp-pic-rating-row">
-							<Rating
-								initialValue={ ratingOneToFive }
-								readonly={ true }
-								allowFraction={ true }
-								allowHover={ false }
-								disableFillHover={ true }
-								fillColor="var( --wppic-plugin-ratings-card-star-color )"
-							/>
-						</div>
-						<div className="wp-pic-name">{ htmlToReactParser.parse( props.data.name ) }</div>
-						<div className="wp-pic-rating-stats">
-							{ `${ Number( ratingOneToFive ).toFixed( 1 ) } stars based on ${ props.data.num_ratings.toLocaleString( 'en' ) } ratings` }
+						<div className="wp-pic-ratings-content">
+							<div
+								className="wp-pic-logo wp-pic-rating-logo"
+								style={ bgImageStyles }
+							></div>
+							<div className="wp-pic-rating-row">
+								<Rating
+									initialValue={ ratingOneToFive }
+									readonly={ true }
+									allowFraction={ true }
+									allowHover={ false }
+									disableFillHover={ true }
+									fillColor="var( --wppic-plugin-ratings-card-star-color )"
+								/>
+							</div>
+							<div className="wp-pic-name">{ htmlToReactParser.parse( props.data.name ) }</div>
+							<div className="wp-pic-rating-stats">
+								{ `${ Number( ratingOneToFive ).toFixed( 1 ) } stars based on ${ props.data.num_ratings.toLocaleString( 'en' ) } ratings` }
+							</div>
 						</div>
 						<div className="wp-pic-bottom wp-pic-botton-ratings">
 							<div className="wp-pic-bar">
