@@ -100,7 +100,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 			axios
 				.get(
 					rest_url +
-						`?type=${ attributes.type }&slug=${ attributes.slug }&align=${ attributes.align }&image=${ attributes.image }&containerid=${ attributes.containerid }&margin=${ attributes.margin }&clear=${ attributes.clear }&expiration=${ attributes.expiration }&ajax=${ attributes.ajax }&scheme=${ attributes.scheme }&layout=${ attributes.layout }&search=${ attributes.search }&tag=${ attributes.tag }&author=${ attributes.author }&user=${ attributes.user }&browse=${ attributes.browse }&per_page=${ attributes.per_page }&cols=${ attributes.cols }}&sortby=${ attributes.sortby }&sort=${ attributes.sort }`
+						`?type=${ attributes.type }&slug=${ attributes.slug }&align=${ attributes.align }&image=${ attributes.image }&containerid=${ attributes.containerid }&margin=${ attributes.margin }&clear=${ attributes.clear }&expiration=${ attributes.expiration }&ajax=${ attributes.ajax }&scheme=${ attributes.scheme }&layout=${ attributes.layout }&search=${ attributes.search }&tag=${ attributes.tag }&author=${ attributes.author }&user=${ attributes.user }&browse=${ attributes.browse }&per_page=${ attributes.per_page }&cols=${ attributes.cols }}&sortby=${ attributes.sortby }&sort=${ attributes.sort }`,
 				)
 				.then( ( response ) => {
 					// Now Set State
@@ -342,7 +342,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 											src={ image }
 											alt={ __(
 												'Plugin Card Image',
-												'wp-plugin-info-card'
+												'wp-plugin-info-card',
 											) }
 											width="250"
 											height="250"
@@ -361,7 +361,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 										>
 											{ __(
 												'Reset Image',
-												'wp-plugin-info-card'
+												'wp-plugin-info-card',
 											) }
 										</button>
 									</div>
@@ -405,7 +405,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 				<TextControl
 					label={ __(
 						'Expiration in minutes',
-						'wp-plugin-info-card'
+						'wp-plugin-info-card',
 					) }
 					type="number"
 					value={ expiration }
@@ -442,7 +442,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 									>
 										{ __(
 											'No data found. Please check your query.',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										) }
 									</Notice>
 								</div>
@@ -450,20 +450,20 @@ const WP_Plugin_Card_Query = ( props ) => {
 							<SelectControl
 								label={ __(
 									'Select a Type',
-									'wp-plugin-info-card'
+									'wp-plugin-info-card',
 								) }
 								options={ [
 									{
 										label: __(
 											'Plugin',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										),
 										value: 'plugin',
 									},
 									{
 										label: __(
 											'Theme',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										),
 										value: 'theme',
 									},
@@ -478,7 +478,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 							<TextControl
 								label={ __(
 									'Search',
-									'wp-plugin-info-card'
+									'wp-plugin-info-card',
 								) }
 								value={ search }
 								onChange={ ( value ) => {
@@ -490,7 +490,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 							<TextControl
 								label={ __(
 									'Tags',
-									'wp-plugin-info-card'
+									'wp-plugin-info-card',
 								) }
 								value={ tag }
 								onChange={ ( value ) => {
@@ -503,7 +503,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 							<TextControl
 								label={ __(
 									'Author',
-									'wp-plugin-info-card'
+									'wp-plugin-info-card',
 								) }
 								value={ author }
 								onChange={ ( value ) => {
@@ -515,7 +515,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 							<TextControl
 								label={ __(
 									'User (Username)',
-									'wp-plugin-info-card'
+									'wp-plugin-info-card',
 								) }
 								value={ user }
 								onChange={ ( value ) => {
@@ -528,41 +528,41 @@ const WP_Plugin_Card_Query = ( props ) => {
 							<SelectControl
 								label={ __(
 									'Browse',
-									'wp-plugin-info-card'
+									'wp-plugin-info-card',
 								) }
 								options={ [
 									{
 										label: __(
 											'None',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										),
 										value: '',
 									},
 									{
 										label: __(
 											'Featured',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										),
 										value: 'featured',
 									},
 									{
 										label: __(
 											'Updated',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										),
 										value: 'updated',
 									},
 									{
 										label: __(
 											'Favorites',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										),
 										value: 'favorites',
 									},
 									{
 										label: __(
 											'Popular',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										),
 										value: 'popular',
 									},
@@ -578,7 +578,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 								type="number"
 								label={ __(
 									'Per Page',
-									'wp-plugin-info-card'
+									'wp-plugin-info-card',
 								) }
 								value={ per_page }
 								onChange={ ( value ) => {
@@ -591,27 +591,27 @@ const WP_Plugin_Card_Query = ( props ) => {
 							<SelectControl
 								label={ __(
 									'Columns',
-									'wp-plugin-info-card'
+									'wp-plugin-info-card',
 								) }
 								options={ [
 									{
 										label: __(
 											'1',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										),
 										value: '1',
 									},
 									{
 										label: __(
 											'2',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										),
 										value: '2',
 									},
 									{
 										label: __(
 											'3',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										),
 										value: '3',
 									},
@@ -626,36 +626,43 @@ const WP_Plugin_Card_Query = ( props ) => {
 							<SelectControl
 								label={ __(
 									'Sort results by:',
-									'wp-plugin-info-card'
+									'wp-plugin-info-card',
 								) }
 								options={ [
 									{
 										label: __(
 											'None',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										),
 										value: 'none',
 									},
 									{
 										label: __(
 											'Active Installs (Plugins only)',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										),
 										value: 'active_installs',
 									},
 									{
 										label: __(
 											'Downloads',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										),
 										value: 'downloaded',
 									},
 									{
 										label: __(
 											'Last Updated',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										),
 										value: 'last_updated',
+									},
+									{
+										label: __(
+											'Rating',
+											'wp-plugin-info-card',
+										),
+										value: 'rating',
 									},
 								] }
 								value={ sortby }
@@ -668,20 +675,20 @@ const WP_Plugin_Card_Query = ( props ) => {
 							<SelectControl
 								label={ __(
 									'Sort Order:',
-									'wp-plugin-info-card'
+									'wp-plugin-info-card',
 								) }
 								options={ [
 									{
 										label: __(
 											'ASC',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										),
 										value: 'ASC',
 									},
 									{
 										label: __(
 											'DESC',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										),
 										value: 'DESC',
 									},
@@ -709,7 +716,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 							>
 								{ __(
 									'Query and Configure',
-									'wp-plugin-info-card'
+									'wp-plugin-info-card',
 								) }
 							</Button>
 						</div>

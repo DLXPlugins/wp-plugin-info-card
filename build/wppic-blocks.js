@@ -3511,6 +3511,9 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
     }, {
       label: __('Last Updated', 'wp-plugin-info-card'),
       value: 'last_updated'
+    }, {
+      label: __('Rating', 'wp-plugin-info-card'),
+      value: 'rating'
     }],
     value: L,
     onChange: function onChange(a) {

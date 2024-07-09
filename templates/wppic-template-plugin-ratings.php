@@ -63,14 +63,14 @@ if ( ! empty( $wppic_data->banners['low'] ) ) {
 		</div>
 		<?php
 		/**
-		 * Filter the number of words to trim the plugin name.
+		 * Filter the number of words to trim in the plugin name.
 		 *
 		 * @param int $plugin_trim_words Number of words to trim the plugin name.
 		 * @param object $wppic_data Plugin data.
 		 *
 		 * @since 5.1.0
 		 */
-		$plugin_trim_words = apply_filters( 'wppic_plugin_trim_words', 7, $wppic_data );
+		$plugin_trim_words = apply_filters( 'wppic_plugin_title_trim_words', 7, $wppic_data );
 		?>
 		<div class="wp-pic-name"><?php echo esc_html( wp_trim_words( $wppic_data->name, $plugin_trim_words ) ); ?></div>
 		<?php /* Translators: %d is the number of ratings for a plugin */ ?>
