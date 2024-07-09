@@ -471,7 +471,7 @@ class Shortcodes {
 				$block_alignment = 'alignright';
 				break;
 			case 'center':
-				$block_alignment = 'align_center';
+				$block_alignment = 'aligncenter';
 				break;
 			case 'wide':
 				$block_alignment = 'alignwide';
@@ -659,7 +659,6 @@ class Shortcodes {
 					$content .= '<div class="wp-pic-body-loading"><div class="signal"></div></div>';
 				}
 
-				$content .= '</div>';
 
 				// Align center.
 				if ( $align_center ) {
