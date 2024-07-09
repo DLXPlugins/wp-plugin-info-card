@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Tags: API, plugin, card, theme, block, blocks, gutenberg
 Requires at least: 3.7
 Tested up to: 6.6
-Stable tag: 5.1.1
+Stable tag: 5.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -443,5 +443,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 5.1.1 =
+= 5.1.2 =
 New layout: Ratings. Display plugin or theme ratings in a card format. Numerous bug fixes.

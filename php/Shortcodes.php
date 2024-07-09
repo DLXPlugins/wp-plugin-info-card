@@ -588,9 +588,11 @@ class Shortcodes {
 				}
 			}
 			$content .= '</div>';
+			ob_start();
 			if ( 0 === did_action( 'wppic_enqueue_scripts' ) ) {
 				do_action( 'wppic_enqueue_scripts' );
 			}
+			$content .= ob_get_clean();
 			return $content;
 		} else {
 			// For old plugin versions.
@@ -681,9 +683,11 @@ class Shortcodes {
 			}
 		}
 
+		ob_start();
 		if ( 0 === did_action( 'wppic_enqueue_scripts' ) ) {
 			do_action( 'wppic_enqueue_scripts' );
 		}
+		$content .= ob_get_clean();
 		return $content;
 	}
 
@@ -851,9 +855,11 @@ class Shortcodes {
 					$content .= '</div>'; // end of grid.
 				}
 
+				ob_start();
 				if ( 0 === did_action( 'wppic_enqueue_scripts' ) ) {
 					do_action( 'wppic_enqueue_scripts' );
 				}
+				$content .= ob_get_clean();
 
 				return apply_filters( 'wppic_query_content', $content, $type, $atts );
 
