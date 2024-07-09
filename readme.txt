@@ -2,8 +2,8 @@
 Contributors: briKou, ronalfy
 Tags: API, plugin, card, theme, block, blocks, gutenberg
 Requires at least: 3.7
-Tested up to: 6.5
-Stable tag: 5.0.0
+Tested up to: 6.6
+Stable tag: 5.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ WP Plugin Info Card displays plugins & themes data in beautiful cards using WP P
 
 == Description ==
 
-Plugin Info Card displays plugins & themes data in beautiful cards using WP Plugin & Theme APIs. Dashboard widget included.
+Plugin Info Card displays plugins & themes data in beautiful cards using WP Plugin & Theme APIs. With four blocks, four shortcodes, and several layouts and schemes, you can display your plugins and themes in a variety of ways.
 
 [youtube https://www.youtube.com/watch?v=8eKDCEoXGKU&rel=0]
 
@@ -100,6 +100,15 @@ This video shows you how:
 11. WordPress layout with themes and 2 columns
 
 == Changelog ==
+
+= 5.1.0 =
+* Released 2024-07-09
+* New layout: Ratings. Display plugin or theme ratings in a card format.
+* New feature: data is stored as options for redundancy and performance.
+* Bug fix: Lazy loading the screenshots block was causing layout inconsistencies, so it has been reworked.
+* New feature: can clear the backup options from the admin panel.
+* Bug fix: Flex layout now has a max-width of 772px to match the smaller banner sizes.
+* Bug fix: Fixed broken HTML tag, which was causing columns to invalidate.
 
 = 5.0.0 =
 * Released 2024-03-06
@@ -434,5 +443,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 5.0.0 =
-New admin appearance look and feel. New Plugin Screenshots block and shortcode allows you to display plugin screenshots.
+= 5.1.0 =
+New layout: Ratings. Display plugin or theme ratings in a card format. Numerous bug fixes.
