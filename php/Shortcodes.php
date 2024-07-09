@@ -1152,7 +1152,7 @@ class Shortcodes {
 						if ( $screenshots_enabled ) {
 							// Enqueue the modal script.
 							if ( ! wp_script_is( 'fancybox', 'enqueued' ) ) {
-								wp_register_script(
+								wp_enqueue_script(
 									'wppic-fancybox-js',
 									Functions::get_plugin_url( '/dist/wppic-fancybox.js' ),
 									array(),
@@ -1167,6 +1167,7 @@ class Shortcodes {
 									Functions::get_plugin_version(),
 									'all'
 								);
+								wp_print_styles( 'wppic-fancybox-css' );
 							}
 							add_action( 'wp_footer', array( __CLASS__, 'add_carousel_to_footer' ) );
 							?>
@@ -1496,8 +1497,7 @@ class Shortcodes {
 				'wppic-fancybox-css',
 				'.fancybox__container{z-index:99999 !important}'
 			);
-			wp_print_scripts( 'wppic-fancybox-js' );
-			wp_print_styles( 'wppic-fancybox-css' );
+			wp_print_styles( array( 'wppic-fancybox-css' ) );
 		}
 	}
 }
