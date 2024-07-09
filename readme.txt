@@ -103,7 +103,7 @@ This video shows you how:
 
 = 5.1.0 =
 * Released 2024-07-09
-* New layout: Ratings. Display plugin or theme ratings in a card format.
+* New layout: Ratings. Display plugin or theme ratings in a card format. <a href="https://dlxplugins.com/announcements/plugin-info-card-5-1-released-with-new-ratings-layout/">Read the announcement post</a> for more details.
 * New feature: data is stored as options for redundancy and performance.
 * Bug fix: Lazy loading the screenshots block was causing layout inconsistencies, so it has been reworked.
 * New feature: can clear the backup options from the admin panel.
