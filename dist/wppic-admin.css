@@ -7867,9 +7867,7 @@ html {
 }
 .wppic-snackbar.components-snackbar .components-snackbar__icon {
   position: absolute;
-  top: 24px;
-  left: 28px;
-  left: 14px;
+  left: -6px;
   top: auto;
   bottom: auto;
   line-height: 0;
