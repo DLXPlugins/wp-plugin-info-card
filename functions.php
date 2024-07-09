@@ -110,6 +110,9 @@ function wppic_delete_transients() {
 	}
 }
 
+/***************************************************************
+ * Purge all plugin options cache function
+ ***************************************************************/
 function wppic_delete_options_cache() {
 	global $wpdb;
 	$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'wppic_plugin%'" );
