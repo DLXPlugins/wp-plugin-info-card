@@ -101,7 +101,7 @@ class Functions {
 			// Check for plugins hosted on .org.
 			$plugins_on_org = array();
 			foreach ( $all_plugins_with_info as $plugin_file => $plugin_data ) {
-				if ( strstr( $plugin_data['id'], 'w.org' ) ) {
+				if ( isset( $plugin_data['id'] ) && strstr( $plugin_data['id'], 'w.org' ) ) {
 					$plugins_on_org[ $plugin_file ] = $plugin_data;
 				}
 			}
@@ -493,6 +493,10 @@ class Functions {
 
 		$allowed_tags['style'] = array(
 			'type' => array(),
+		);
+		$allowed_tags['span']  = array(
+			'class' => array(),
+			'style' => array(),
 		);
 
 		// Add form input fields.

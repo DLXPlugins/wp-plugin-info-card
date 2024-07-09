@@ -659,6 +659,7 @@ class Shortcodes {
 					$content .= '<div class="wp-pic-body-loading"><div class="signal"></div></div>';
 				}
 
+				$content .= '</div>';
 
 				// Align center.
 				if ( $align_center ) {
@@ -1282,8 +1283,13 @@ class Shortcodes {
 					'scheme' => $attributes['scheme'],
 					'type'   => 'plugin',
 				);
+				// Strip safe CSS.
+				add_filter( 'safe_style_css', array( static::class, 'safe_css' ) );
+				add_filter( 'safecss_filter_attr_allow_css', '__return_true' );
 				// Use the WPPIC shorcode to generate cards.
 				echo wp_kses( self::shortcode_function( $atts ), Functions::get_kses_allowed_html() );
+				remove_filter( 'safecss_filter_attr_allow_css', '__return_true' );
+				remove_filter( 'safe_style_css', array( static::class, 'safe_css' ) );
 			}
 			?>
 		</div>
@@ -1291,6 +1297,22 @@ class Shortcodes {
 		do_action( 'wppic_enqueue_scripts' );
 		$content = ob_get_clean();
 		return $content;
+	}
+
+	/**
+	 * Allows some CSS properties.
+	 *
+	 * @param array $css Array of allowed CSS properties.
+	 *
+	 * @return array Array of allowed CSS properties.
+	 */
+	public static function safe_css( $css ) {
+		$css[] = 'display';
+		$css[] = 'background';
+		$css[] = 'linear-gradient';
+		$css[] = '-webkit-background-clip';
+		$css[] = '-webkit-text-fill-color';
+		return $css;
 	}
 
 	/**

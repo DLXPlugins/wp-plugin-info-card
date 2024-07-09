@@ -11,6 +11,7 @@ import PluginFlex from '../templates/PluginFlex';
 import PluginCard from '../templates/PluginCard';
 import PluginLarge from '../templates/PluginLarge';
 import PluginWordPress from '../templates/PluginWordPress';
+import PluginRatingsCard from '../templates/PluginRatingsCard';
 import Logo from '../Logo';
 import ProgressBar from '../components/ProgressBar';
 import NumbersComponent from '../components/Numbers';
@@ -179,6 +180,13 @@ const SitePluginsCardGrid = ( props ) => {
 							align={ align }
 						/>
 					) }
+					{ 'ratings' === layout && (
+						<PluginRatingsCard
+							scheme={ scheme }
+							data={ cardData }
+							align={ align }
+						/>
+					) }
 				</Fragment>
 			);
 		} );
@@ -254,6 +262,7 @@ const SitePluginsCardGrid = ( props ) => {
 		{ value: 'large', label: __( 'Large', 'wp-plugin-info-card' ) },
 		{ value: 'wordpress', label: __( 'WordPress', 'wp-plugin-info-card' ) },
 		{ value: 'flex', label: __( 'Flex', 'wp-plugin-info-card' ) },
+		{ value: 'ratings', label: __( 'Ratings', 'wp-plugin-info-card' ) },
 	];
 
 	const layoutClass = 'card' === layout ? 'wp-pic-card' : layout;

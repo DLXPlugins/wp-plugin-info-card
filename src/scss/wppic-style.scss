@@ -322,6 +322,7 @@ p.wp-pic-author,
 .wp-pic-card.wp-pic {
 	width: 280px;
 	height: 420px;
+	min-height: 420px;
 	max-height: 420px;
 	position: relative;
 	display: inline-block;
@@ -515,6 +516,8 @@ p.wp-pic-author,
 	.wp-pic-rating-stats {
 		font-size: 14px;
 		margin-bottom: 12px;
+		width: 100%;
+		text-align: center;
 	}
 	.wp-pic-name {
 		padding: 0 15px;

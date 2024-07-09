@@ -50,16 +50,20 @@ if ( ! empty( $wppic_data->banners['low'] ) ) {
 			?>
 			<div class="wp-pic-rating">
 				<?php
-					$percentage = round( $wppic_data->rating / 20, 1 ) * 20;
+				$percentage     = round( $wppic_data->rating / 20, 1 ) * 20;
+				$alt_percentage = absint( $percentage );
+				if ( 100 === $percentage ) {
+					$percentage = 0;
+				}
 				?>
-				<span class="wp-pic-rating-background" style="display: inline-block; letter-spacing: 5px; background: linear-gradient(90deg, var(--wppic-plugin-ratings-card-star-color) <?php echo esc_attr( $percentage ); ?>%, #cccccc <?php echo esc_attr( $percentage ); ?>%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+				<span class="wp-pic-rating-background" style="display: inline-block; letter-spacing: 5px; background: linear-gradient(90deg, var(--wppic-plugin-ratings-card-star-color) <?php echo esc_attr( $percentage ); ?>%, #cccccc <?php echo esc_attr( $alt_percentage ); ?>%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
 					★★★★★
 				</span>
 			</div>
 		</div>
 		<div class="wp-pic-name"><?php echo esc_html( $wppic_data->name ); ?></div>
 		<?php /* Translators: %d is the number of ratings for a plugin */ ?>
-		<div class="wp-pic-rating-stats"><?php echo esc_html( round( $wppic_data->rating / 20, 1 ) ); ?> <?php printf( __( 'stars based on %s ratings</div>', 'wp-plugin-info-card' ), number_format_i18n( absint( $wppic_data->num_ratings ) ) ); ?></div>
+		<div class="wp-pic-rating-stats"><?php echo esc_html( round( $wppic_data->rating / 20, 1 ) ); ?> <?php printf( __( 'stars based on %s ratings', 'wp-plugin-info-card' ), number_format_i18n( absint( $wppic_data->num_ratings ) ) ); ?></div>
 		<div class="wp-pic-bottom wp-pic-bottom-ratings">
 			<div class="wp-pic-bar">
 				<a href="<?php echo esc_url( $wppic_data->download_link ); ?>">

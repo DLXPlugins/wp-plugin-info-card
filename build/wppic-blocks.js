@@ -4528,11 +4528,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _templates_PluginCard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../templates/PluginCard */ "./src/blocks/templates/PluginCard.js");
 /* harmony import */ var _templates_PluginLarge__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../templates/PluginLarge */ "./src/blocks/templates/PluginLarge.js");
 /* harmony import */ var _templates_PluginWordPress__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../templates/PluginWordPress */ "./src/blocks/templates/PluginWordPress.js");
-/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Logo */ "./src/blocks/Logo.js");
-/* harmony import */ var _components_ProgressBar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/ProgressBar */ "./src/blocks/components/ProgressBar.js");
-/* harmony import */ var _components_Numbers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Numbers */ "./src/blocks/components/Numbers.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _templates_PluginRatingsCard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../templates/PluginRatingsCard */ "./src/blocks/templates/PluginRatingsCard.js");
+/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Logo */ "./src/blocks/Logo.js");
+/* harmony import */ var _components_ProgressBar__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/ProgressBar */ "./src/blocks/components/ProgressBar.js");
+/* harmony import */ var _components_Numbers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/Numbers */ "./src/blocks/components/Numbers.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_10__);
 function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) return _arrayLikeToArray(b, c); var a = {}.toString.call(b).slice(8, -1); return "Object" === a && b.constructor && (a = b.constructor.name), "Map" === a || "Set" === a ? Array.from(b) : "Arguments" === a || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a) ? _arrayLikeToArray(b, c) : void 0; } }
@@ -4546,6 +4547,7 @@ function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
 /**
  * External dependencies
  */
+
 
 
 
@@ -4712,6 +4714,10 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
         scheme: f,
         data: a,
         align: o
+      }), 'ratings' === g && /*#__PURE__*/React.createElement(_templates_PluginRatingsCard__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        scheme: f,
+        data: a,
+        align: o
       }));
     });
   };
@@ -4809,6 +4815,9 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
   }, {
     value: 'flex',
     label: __('Flex', 'wp-plugin-info-card')
+  }, {
+    value: 'ratings',
+    label: __('Ratings', 'wp-plugin-info-card')
   }];
   var Q = 'card' === g ? 'wp-pic-card' : g;
   var R = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
@@ -4843,7 +4852,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     className: "wppic-panel-rows-cols"
   }, N()), /*#__PURE__*/React.createElement(PanelRow, {
     className: "wppic-panel-rows-numbers"
-  }, /*#__PURE__*/React.createElement(_components_Numbers__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, /*#__PURE__*/React.createElement(_components_Numbers__WEBPACK_IMPORTED_MODULE_9__["default"], {
     value: m,
     label: __('Column Gap (in px)', 'wp-plugin-info-card'),
     numbers: [20, 40, 60, 80],
@@ -4855,7 +4864,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     id: "wppic-col-gap"
   })), /*#__PURE__*/React.createElement(PanelRow, {
     className: "wppic-panel-rows-numbers"
-  }, /*#__PURE__*/React.createElement(_components_Numbers__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, /*#__PURE__*/React.createElement(_components_Numbers__WEBPACK_IMPORTED_MODULE_9__["default"], {
     value: n,
     label: __('Row Gap (in px)', 'wp-plugin-info-card'),
     numbers: [20, 40, 60, 80],
@@ -4889,7 +4898,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     className: "wp-pic-gutenberg-button"
   }, /*#__PURE__*/React.createElement(Button, {
     iconSize: 20,
-    icon: !w ? /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    icon: !w ? /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_7__["default"], {
       size: "25"
     }) : /*#__PURE__*/React.createElement(Spinner, null),
     isSecondary: true,
@@ -4899,7 +4908,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
       F(0);
       L(a);
     }
-  }, !w ? __('Load Plugins', 'wp-plugin-info-card') : __('Loading…', 'wp-plugin-info-card'))), w && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_ProgressBar__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, !w ? __('Load Plugins', 'wp-plugin-info-card') : __('Loading…', 'wp-plugin-info-card'))), w && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_ProgressBar__WEBPACK_IMPORTED_MODULE_8__["default"], {
     percentage: E
   })));
   var V = /*#__PURE__*/React.createElement(React.Fragment, null, s && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
@@ -4912,7 +4921,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     className: "wppic-site-plugins-block wppic-site-plugins-panel"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-block-svg"
-  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_7__["default"], {
     size: "75"
   })), /*#__PURE__*/React.createElement("div", {
     className: "wppic-site-plugins-description"
@@ -4920,7 +4929,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     className: "wppic-site-plugins-block wppic-site-plugins-panel"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-block-svg"
-  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_7__["default"], {
     size: "75"
   })), /*#__PURE__*/React.createElement("div", {
     className: "wppic-site-plugins-description"
