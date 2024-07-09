@@ -81,6 +81,7 @@ class Shortcodes {
 			Functions::get_plugin_version(),
 			'all'
 		);
+		wp_print_styles( array( 'dashicons', 'wppic-style' ) );
 		wp_enqueue_script(
 			'wppic-script',
 			Functions::get_plugin_url( 'assets/js/wppic-script' . $min_or_not . '.js' ),
@@ -95,6 +96,7 @@ class Shortcodes {
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 			)
 		);
+		wp_print_scripts( 'wppic-script' );
 
 		/**
 		 * Add icons to footer for plugin card.
@@ -109,7 +111,9 @@ class Shortcodes {
 		$options = Options::get_options();
 
 		if ( isset( $options['enqueue'] ) && true === $options['enqueue'] ) {
-			do_action( 'wppic_enqueue_scripts' );
+			if ( 0 === did_action( 'wppic_enqueue_scripts' ) ) {
+				do_action( 'wppic_enqueue_scripts' );
+			}
 		}
 	}
 
@@ -584,7 +588,9 @@ class Shortcodes {
 				}
 			}
 			$content .= '</div>';
-			do_action( 'wppic_enqueue_scripts' );
+			if ( 0 === did_action( 'wppic_enqueue_scripts' ) ) {
+				do_action( 'wppic_enqueue_scripts' );
+			}
 			return $content;
 		} else {
 			// For old plugin versions.
@@ -675,7 +681,9 @@ class Shortcodes {
 			}
 		}
 
-		do_action( 'wppic_enqueue_scripts' );
+		if ( 0 === did_action( 'wppic_enqueue_scripts' ) ) {
+			do_action( 'wppic_enqueue_scripts' );
+		}
 		return $content;
 	}
 
@@ -843,7 +851,9 @@ class Shortcodes {
 					$content .= '</div>'; // end of grid.
 				}
 
-				do_action( 'wppic_enqueue_scripts' );
+				if ( 0 === did_action( 'wppic_enqueue_scripts' ) ) {
+					do_action( 'wppic_enqueue_scripts' );
+				}
 
 				return apply_filters( 'wppic_query_content', $content, $type, $atts );
 
@@ -1167,6 +1177,7 @@ class Shortcodes {
 									Functions::get_plugin_version(),
 									'all'
 								);
+								wp_print_scripts( 'wppic-fancybox-js' );
 								wp_print_styles( 'wppic-fancybox-css' );
 							}
 							add_action( 'wp_footer', array( __CLASS__, 'add_carousel_to_footer' ) );
@@ -1227,8 +1238,10 @@ class Shortcodes {
 				</div>
 			</div>
 		<?php
+		if ( 0 === did_action( 'wppic_enqueue_scripts' ) ) {
+			do_action( 'wppic_enqueue_scripts' );
+		}
 		$return = ob_get_clean();
-		do_action( 'wppic_enqueue_scripts' );
 		return $return;
 	}
 
@@ -1297,7 +1310,9 @@ class Shortcodes {
 			?>
 		</div>
 		<?php
-		do_action( 'wppic_enqueue_scripts' );
+		if ( 0 === did_action( 'wppic_enqueue_scripts' ) ) {
+			do_action( 'wppic_enqueue_scripts' );
+		}
 		$content = ob_get_clean();
 		return $content;
 	}

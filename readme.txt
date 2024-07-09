@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Tags: API, plugin, card, theme, block, blocks, gutenberg
 Requires at least: 3.7
 Tested up to: 6.6
-Stable tag: 5.1.0
+Stable tag: 5.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,7 +101,7 @@ This video shows you how:
 
 == Changelog ==
 
-= 5.1.0 =
+= 5.1.1 =
 * Released 2024-07-09
 * New layout: Ratings. Display plugin or theme ratings in a card format. <a href="https://dlxplugins.com/announcements/plugin-info-card-5-1-released-with-new-ratings-layout/">Read the announcement post</a> for more details.
 * New feature: data is stored as options for redundancy and performance.
@@ -443,5 +443,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 5.1.0 =
+= 5.1.1 =
 New layout: Ratings. Display plugin or theme ratings in a card format. Numerous bug fixes.
