@@ -61,7 +61,7 @@ if ( ! empty( $wppic_data->banners['low'] ) ) {
 				</span>
 			</div>
 		</div>
-		<div class="wp-pic-name"><?php echo esc_html( $wppic_data->name ); ?></div>
+		<div class="wp-pic-name"><?php echo esc_html( wp_trim_words( $wppic_data->name, 7 ) ); ?></div>
 		<?php /* Translators: %d is the number of ratings for a plugin */ ?>
 		<div class="wp-pic-rating-stats"><?php echo esc_html( round( $wppic_data->rating / 20, 1 ) ); ?> <?php printf( __( 'stars based on %s ratings', 'wp-plugin-info-card' ), number_format_i18n( absint( $wppic_data->num_ratings ) ) ); ?></div>
 		<div class="wp-pic-bottom wp-pic-bottom-ratings">
