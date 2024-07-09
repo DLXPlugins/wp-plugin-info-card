@@ -33,6 +33,7 @@ class Init {
 		add_action( 'wp_ajax_wppic_save_options', array( $this, 'ajax_save_options' ) );
 		add_action( 'wp_ajax_wppic_reset_options', array( $this, 'ajax_reset_options' ) );
 		add_action( 'wp_ajax_wppic_clear_cache', array( $this, 'ajax_clear_cache' ) );
+		add_action( 'wp_ajax_wppic_clear_cache_options', array( $this, 'ajax_clear_cache_options' ) );
 		add_action( 'wp_ajax_wppic_check_plugin', array( $this, 'ajax_check_plugin' ) );
 		add_action( 'wp_ajax_wppic_check_theme', array( $this, 'ajax_check_theme' ) );
 		add_action( 'wp_ajax_wppic_get_sample_plugin', array( $this, 'ajax_get_sample_plugin' ) );
@@ -218,6 +219,36 @@ class Init {
 			)
 		);
 	}
+
+	/**
+	 * Clear Cache Options
+	 */
+	public function ajax_clear_cache_options() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+		if ( ! wp_verify_nonce( $nonce, 'wppic-clear-cache' ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce verification failed', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+		// Clear cache.
+		\wppic_delete_options_cache();
+
+		wp_send_json_success(
+			array(
+				'message'     => __( 'Cache cleared', 'wp-plugin-info-card' ),
+				'type'        => 'success',
+				'dismissable' => true,
+			)
+		);
+	}
+
 
 	/**
 	 * Save options via Ajax.

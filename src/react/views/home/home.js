@@ -367,6 +367,67 @@ const AddTheme = ( props ) => {
 	);
 };
 
+const CacheOptionsButton = ( props ) => {
+	const [ clearing, setClearing ] = useState( false );
+	const [ isCleared, setIsCleared ] = useState( false );
+	const [ clearPromise, setClearPromise ] = useState( null );
+
+	const getCacheText = () => {
+		if ( clearing ) {
+			return __( 'Clearing…', 'wp-plugin-info-card' );
+		}
+		if ( isCleared ) {
+			return __( 'Cache Cleared', 'wp-plugin-info-card' );
+		}
+		return __( 'Clear Options Cache', 'wp-plugin-info-card' );
+	};
+
+	const clearCache = async () => {
+		const clearOptionsPromise = SendCommand( 'wppic_clear_cache_options', { nonce: wppicAdminHome.clearCacheNonce } );
+		setClearPromise( clearOptionsPromise );
+		setClearing( true );
+		await clearOptionsPromise;
+		setClearing( false );
+	};
+
+	const getCacheIcon = () => {
+		if ( clearing ) {
+			return () => <Loader2 />;
+		}
+		if ( isCleared ) {
+			return () => <ClipboardCheck />;
+		}
+		return <Database />;
+	};
+
+	return (
+		<>
+			<Button
+				variant="primary"
+				onClick={ () => {
+					clearCache();
+				} }
+				icon={ getCacheIcon() }
+				iconSize="18"
+				iconPosition="right"
+				disabled={ clearing }
+				className={
+					classNames( 'wppic-btn wppic-btn-cache has-icon-right', {
+						'is-saving': clearing && ! isCleared,
+						'is-saved': isCleared,
+					} ) }
+				label={ getCacheText() }
+			>
+				{ getCacheText() }
+			</Button>
+			<SnackPop
+				ajaxOptions={ clearPromise }
+				loadingMessage={ __( 'Clearing Cache…', 'wp-plugin-info-card' ) }
+			/>
+		</>
+	);
+};
+
 const CacheButton = ( props ) => {
 	const [ clearing, setClearing ] = useState( false );
 	const [ isCleared, setIsCleared ] = useState( false );
@@ -772,6 +833,13 @@ const Interface = ( props ) => {
 																		),
 																		value: 'flex',
 																	},
+																	{
+																		label: __(
+																			'Ratings',
+																			'wp-plugin-info-card',
+																		),
+																		value: 'ratings',
+																	}
 																] }
 																onChange={ onChange }
 															/>
@@ -1115,6 +1183,13 @@ const Interface = ( props ) => {
 							) }
 						</p>
 						<CacheButton />
+						<p>
+							{ __(
+								'WP Plugin Info Card stores plugin and theme data as options in case the transient cache fails to update or errors out. You can remove these options by clicking the button below.',
+								'wp-plugin-info-card',
+							) }
+						</p>
+						<CacheOptionsButton />
 					</div>
 					<div className="wppic-admin-panel-sidebar-card">
 						<h3>

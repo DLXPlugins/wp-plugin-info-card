@@ -463,6 +463,9 @@ p.wp-pic-author,
 			color: #FFF;
 		}
 	}
+	.wp-pic-name {
+		font-size: 1.15rem;
+	}
 	.wp-pic-bar {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);

@@ -587,6 +587,9 @@ p.wp-pic-author,
 .wp-pic-ratings .wp-pic-bar svg {
   color: #FFF;
 }
+.wp-pic-ratings .wp-pic-name {
+  font-size: 1.15rem;
+}
 .wp-pic-ratings .wp-pic-bar {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

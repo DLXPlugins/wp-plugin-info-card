@@ -4,6 +4,7 @@ import PluginCard from '../../blocks/templates/PluginCard';
 import PluginFlex from '../../blocks/templates/PluginFlex';
 import PluginLarge from '../../blocks/templates/PluginLarge';
 import PluginWordPress from '../../blocks/templates/PluginWordPress';
+import PluginRatingsCard from '../../blocks/templates/PluginRatingsCard';
 
 const retrieveSamplePlugin = async () => {
 	const response = await SendCommand( 'wppic_get_sample_plugin', {
@@ -76,6 +77,9 @@ export default function usePluginPreview( props ) {
 				break;
 			case 'wordpress':
 				preview = <PluginWordPress data={ newResponse } scheme={ scheme } align="wide" />;
+				break;
+			case 'ratings':
+				preview = <PluginRatingsCard data={ newResponse } scheme={ scheme } align="center" />;
 				break;
 			default:
 				preview = <PluginCard data={ newResponse } scheme={ scheme } align="wide" />;

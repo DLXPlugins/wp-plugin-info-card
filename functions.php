@@ -110,6 +110,12 @@ function wppic_delete_transients() {
 	}
 }
 
+function wppic_delete_options_cache() {
+	global $wpdb;
+	$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'wppic_plugin%'" );
+	$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'wppic_theme%'" );
+}
+
 
 /***************************************************************
  * Cron to purge all plugin transients every weeks
