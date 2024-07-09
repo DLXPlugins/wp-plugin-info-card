@@ -3703,8 +3703,8 @@ p.wp-pic-author,
 .wp-pic a.wp-pic-logo,
 .wp-pic span.wp-pic-logo,
 .wp-pic div.wp-pic-logo {
-  width: 175px;
-  height: 175px;
+  width: 125px;
+  height: 125px;
   display: inline-block;
   overflow: hidden;
   margin: 35px 0 0;
@@ -3972,6 +3972,10 @@ p.wp-pic-author,
   width: 280px;
   position: relative;
   display: inline-block;
+}
+
+.wp-pic-card.wp-pic:not(.flex):not(:has(.wp-pic-ratings)) {
+  height: 420px;
 }
 
 .wp-pic-card.wp-pic .wp-pic-flip {
@@ -4793,6 +4797,14 @@ p.wp-pic-author,
 /* Block Layout */
 .wp-block .wp-pic-back {
   display: none;
+}
+
+.wp-block-columns :has(.wp-pic-wrapper) {
+  display: flex;
+}
+
+.wp-pic-wrapper.ratings {
+  display: flex;
 }
 
 /* Flex Card Layout */
