@@ -33,7 +33,7 @@ $bgImage = esc_url( $wppic_data->screenshot_url);
 		</div>
 		<div class="wp-pic-name"><?php echo esc_html( $wppic_data->name ); ?></div>
 		<?php /* Translators: %d is the number of ratings for a plugin */ ?>
-		<div class="wp-pic-rating-stats"><?php echo esc_html( round( $wppic_data->rating / 20, 1 ) ); ?> <?php printf( __( 'stars based on %s ratings</div>', 'wp-plugin-info-card' ), number_format_i18n( absint( $wppic_data->num_ratings ) ) ); ?></div>
+		<div class="wp-pic-rating-stats"><?php echo esc_html( round( $wppic_data->rating / 20, 1 ) ); ?> <?php printf( __( 'stars based on %s ratings', 'wp-plugin-info-card' ), number_format_i18n( absint( $wppic_data->num_ratings ) ) ); ?></div>
 		<div class="wp-pic-bottom wp-pic-bottom-ratings">
 			<div class="wp-pic-bar">
 				<a href="<?php echo esc_url( $wppic_data->download_link ); ?>">
@@ -79,5 +79,3 @@ $bgImage = esc_url( $wppic_data->screenshot_url);
 		</div>
 	</div>
 </div>
-<?php
-// end of template

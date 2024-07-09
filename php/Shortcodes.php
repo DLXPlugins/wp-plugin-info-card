@@ -584,6 +584,8 @@ class Shortcodes {
 				}
 			}
 			$content .= '</div>';
+			do_action( 'wppic_enqueue_scripts' );
+			return $content;
 		} else {
 			// For old plugin versions.
 			if ( empty( $type ) ) {
@@ -667,7 +669,7 @@ class Shortcodes {
 				}
 
 				$content .= '</div><!-- .wp-pic-wrapper-->';
-				if ( 'after' === $clear ) {
+					if ( 'after' === $clear ) {
 					$content .= '<div style="clear:both"></div>';
 				}
 			}
