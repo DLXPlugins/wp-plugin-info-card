@@ -324,7 +324,7 @@ p.wp-pic-author,
 }
 
 /*Card layout*/
-.wp-pic-card.wp-pic:not(.flex) {
+.wp-pic-card.wp-pic:not(.flex,.large) {
 	width: 280px;
 	position: relative;
 	display: inline-block;
