@@ -40,6 +40,7 @@ class Init {
 
 		// Init tabs.
 		new Tabs\Main();
+		new Tabs\EDD();
 	}
 
 	/**

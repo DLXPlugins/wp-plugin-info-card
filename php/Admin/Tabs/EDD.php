@@ -21,19 +21,22 @@ use MediaRon\WPPIC\Options;
 
 
 /**
- * Output the home tab and content.
+ * Output the EDD tab and content.
  */
-class Main {
+class EDD {
 
 	/**
 	 * Constructor.
 	 */
 	public function __construct() {
-		add_filter( 'wppic_admin_tabs', array( $this, 'add_home_tab' ), 1, 1 );
-		add_filter( 'wppic_admin_sub_tabs', array( $this, 'add_home_home_sub_tab' ), 1, 3 );
-		add_action( 'wppic_output_home', array( $this, 'output_home_content' ), 1, 3 );
-		add_action( 'wppic_admin_enqueue_scripts_home', array( $this, 'admin_scripts' ) );
-		add_action( 'wp_ajax_wppic_get_home_options', array( $this, 'ajax_get_options' ) );
+		// Check if EDD or EDD pro is active.
+		if ( Functions::is_activated( 'easy-digital-downloads/easy-digital-downloads.php' ) || Functions::is_activated( 'easy-digital-downloads-pro/easy-digital-downloads.php' ) ) {
+			add_filter( 'wppic_admin_tabs', array( $this, 'add_edd_tab' ), 1, 1 );
+			add_filter( 'wppic_admin_sub_tabs', array( $this, 'add_edd_sub_tab' ), 1, 3 );
+			add_action( 'wppic_output_edd', array( $this, 'output_edd_tab' ), 1, 3 );
+			add_action( 'wppic_admin_enqueue_scripts_home', array( $this, 'admin_scripts' ) );
+			add_action( 'wp_ajax_wppic_get_home_options', array( $this, 'ajax_get_options' ) );
+		}
 	}
 
 	/**
@@ -89,13 +92,13 @@ class Main {
 	 *
 	 * @return array of tabs.
 	 */
-	public function add_home_tab( $tabs ) {
+	public function add_edd_tab( $tabs ) {
 		$tabs[] = array(
-			'get'    => 'home',
-			'action' => 'wppic_output_home',
-			'url'    => Functions::get_settings_url( 'home' ),
-			'label'  => _x( 'Home', 'Tab label as Home', 'wp-wppic-comments' ),
-			'icon'   => 'wppic-flaticon-home',
+			'get'    => 'edd',
+			'action' => 'wppic_output_edd',
+			'url'    => Functions::get_settings_url( 'edd' ),
+			'label'  => _x( 'EDD', 'Tab label as Easy digital downloads', 'wp-wppic-comments' ),
+			'icon'   => 'wppic-edd',
 		);
 		return $tabs;
 	}
@@ -109,8 +112,8 @@ class Main {
 	 *
 	 * @return array of tabs.
 	 */
-	public function add_home_home_sub_tab( $tabs, $current_tab, $sub_tab ) {
-		if ( ( ! empty( $current_tab ) || ! empty( $sub_tab ) ) && 'home' !== $current_tab ) {
+	public function add_edd_sub_tab( $tabs, $current_tab, $sub_tab ) {
+		if ( ( ! empty( $current_tab ) || ! empty( $sub_tab ) ) && 'edd' !== $current_tab ) {
 			return $tabs;
 		}
 		return $tabs;
@@ -122,11 +125,11 @@ class Main {
 	 * @param string $tab     Main tab.
 	 * @param string $sub_tab Sub tab.
 	 */
-	public function output_home_content( $tab, $sub_tab = '' ) {
-		if ( 'home' === $tab ) {
-			if ( empty( $sub_tab ) || 'home' === $sub_tab ) {
+	public function output_edd_tab( $tab, $sub_tab = '' ) {
+		if ( 'edd' === $tab ) {
+			if ( empty( $sub_tab ) || 'edd' === $sub_tab ) {
 				?>
-				<div id="wppic-tab-home"></div>
+				<div id="wppic-tab-edd"></div>
 				<?php
 			}
 		}
