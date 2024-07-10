@@ -14,6 +14,8 @@
  * Version: 5.1.2
  * Domain Path: /langs
  * Text Domain: wp-plugin-info-card
+ * License: GPL v2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 
 namespace MediaRon\WPPIC;
