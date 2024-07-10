@@ -86,6 +86,7 @@ class Add_Plugin {
 			$maybe_plugin_info = apply_filters( 'wppic_plugin_info', false, $slug, $type, $force );
 			if ( false !== $maybe_plugin_info ) {
 				$wppic_data = (object) $maybe_plugin_info;
+				return $wppic_data;
 			}
 
 			require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
