@@ -516,6 +516,7 @@ const HomeScreen = ( props ) => {
 		const cachedOptions = localStorage.getItem( 'wppic_home_options' );
 		const cachedTimestamp = localStorage.getItem( 'wppic_home_options_timestamp' );
 
+		console.log( cachedOptions, cachedTimestamp );
 		if ( cachedOptions && cachedTimestamp ) {
 			// Do verison check.
 			const currentVersion = wppicAdmin.pluginVersion;
@@ -524,7 +525,6 @@ const HomeScreen = ( props ) => {
 			if ( currentVersion !== cachedVersion ) {
 				localStorage.removeItem( 'wppic_home_options' );
 				localStorage.removeItem( 'wppic_home_options_timestamp' );
-				return;
 			}
 			const currentTime = new Date().getTime();
 			const cacheExpiration = parseInt( cachedTimestamp ) + 3600000;
@@ -539,6 +539,7 @@ const HomeScreen = ( props ) => {
 				nonce: wppicAdminHome.getNonce,
 			} );
 			const { success, data } = response.data;
+			console.log( response );
 			if ( success ) {
 				// Save to local storage.
 				localStorage.setItem( 'wppic_home_options', JSON.stringify( data ) );

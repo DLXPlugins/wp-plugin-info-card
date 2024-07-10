@@ -46,6 +46,48 @@ class Add_Plugin {
 			// Format slug to strip forward and trailing slashes.
 			$slug = trim( $slug, '/' );
 
+			/**
+			 * Allow for custom plugin info.
+			 *
+			 * @param bool   $maybe_plugin_info The plugin info.
+			 * @param string $slug              The plugin slug.
+			 * @param string $type              The plugin type.
+			 * @param bool   $force             Force refresh.
+			 *
+			 * @return bool|array {
+			 *      @type string $name                The plugin name.
+			 *      @type string $slug                The plugin slug.
+			 *      @type string $version             The plugin version.
+			 *      @type string $author              The plugin author.
+			 *      @type string $author_profile      The plugin author profile.
+			 *      @type string $contributors        Comma-separated contributors.
+			 *      @type string $requires            The plugin requires.
+			 *      @type string $tested              The plugin tested.
+			 *      @type string $requires            The plugin requires.
+			 *      @type string $rating              The plugin rating in percentage.
+			 *      @type string $num_ratings         The plugin number of ratings.
+			 *      @type string $ratings             The plugin ratings.
+			 *      @type string $downloaded          The plugin downloaded.
+			 *      @type string $active_installs     The plugin active installs.
+			 *      @type string $last_updated        The plugin last updated.
+			 *      @type string $last_updated_mk     The plugin last updated.
+			 *      @type string $added               The plugin added.
+			 *      @type string $homepage            The plugin homepage.
+			 *      @type string $short_description   The plugin short description.
+			 *      @type string $download_link       The plugin download link.
+			 *      @type string $donate_link         The plugin donate link.
+			 *      @type array  $icons               The plugin icons.
+			 *      @type array  $banners             The plugin banners.
+			 *      @type array  $screenshots         The plugin screenshots.
+			 * }
+			 *
+			 * @since 5.2.0
+			 */
+			$maybe_plugin_info = apply_filters( 'wppic_plugin_info', false, $slug, $type, $force );
+			if ( false !== $maybe_plugin_info ) {
+				$wppic_data = (object) $maybe_plugin_info;
+			}
+
 			require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
 			$plugin_info = plugins_api(
 				'plugin_information',
@@ -139,7 +181,6 @@ class Add_Plugin {
 		}
 
 		return $content;
-
 	}
 
 	/**

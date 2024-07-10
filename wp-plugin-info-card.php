@@ -110,6 +110,12 @@ class WP_Plugin_Info_Card {
 	 * Run when plugins have finished loading. Begin main initialization.
 	 */
 	public function plugins_loaded() {
+		/**
+		 * Fires before the plugin has been loaded and initialized.
+		 *
+		 * @since 5.2.0
+		 */
+		do_action( 'pre_wppic_loaded' );
 
 		// Register block related hooks.
 		$blocks = new Blocks();
@@ -140,6 +146,13 @@ class WP_Plugin_Info_Card {
 			// Set up admin.
 			new Admin\Init();
 		}
+
+		/**
+		 * Fires after the plugin has been loaded and initialized.
+		 *
+		 * @since 5.2.0
+		 */
+		do_action( 'wppic_loaded' );
 	}
 }
 
