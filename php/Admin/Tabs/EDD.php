@@ -34,33 +34,34 @@ class EDD {
 			add_filter( 'wppic_admin_tabs', array( $this, 'add_edd_tab' ), 1, 1 );
 			add_filter( 'wppic_admin_sub_tabs', array( $this, 'add_edd_sub_tab' ), 1, 3 );
 			add_action( 'wppic_output_edd', array( $this, 'output_edd_tab' ), 1, 3 );
-			add_action( 'wppic_admin_enqueue_scripts_home', array( $this, 'admin_scripts' ) );
-			add_action( 'wp_ajax_wppic_get_home_options', array( $this, 'ajax_get_options' ) );
+			add_action( 'wppic_admin_enqueue_scripts_edd', array( $this, 'admin_scripts' ) );
+			add_action( 'wp_ajax_wppic_get_edd_options', array( $this, 'ajax_get_options' ) );
 		}
 	}
 
 	/**
-	 * Include admin scripts for the home screen.
+	 * Include admin scripts for the edd screen.
 	 */
 	public function admin_scripts() {
-		$deps = require Functions::get_plugin_dir( 'dist/wppic-admin-home.asset.php' );
+		$deps = require Functions::get_plugin_dir( 'dist/wppic-admin-edd.asset.php' );
 		wp_enqueue_script(
-			'wppic-admin-home',
-			Functions::get_plugin_url( 'dist/wppic-admin-home.js' ),
+			'wppic-admin-edd',
+			Functions::get_plugin_url( 'dist/wppic-admin-edd.js' ),
 			$deps['dependencies'],
 			$deps['version'],
 			true
 		);
 		wp_localize_script(
-			'wppic-admin-home',
-			'wppicAdminHome',
+			'wppic-admin-edd',
+			'wppicAdminEDD',
 			array(
-				'getNonce'         => wp_create_nonce( 'wppic-admin-home-retrieve-options' ),
-				'saveNonce'        => wp_create_nonce( 'wppic-save-options' ),
-				'resetNonce'       => wp_create_nonce( 'wppic-reset-options' ),
-				'clearCacheNonce'  => wp_create_nonce( 'wppic-clear-cache' ),
-				'checkPluginNonce' => wp_create_nonce( 'wppic-check-plugin' ),
-				'checkThemeNonce'  => wp_create_nonce( 'wppic-check-theme' ),
+				'getNonce'                      => wp_create_nonce( 'wppic-admin-edd-retrieve-options' ),
+				'saveNonce'                     => wp_create_nonce( 'wppic-save-options' ),
+				'resetNonce'                    => wp_create_nonce( 'wppic-reset-options' ),
+				'softwareLicensingInstalled'    => Functions::is_activated( 'edd-software-licensing/edd-software-licenses.php' ),
+				'eddReviewsInstalled'           => Functions::is_activated( 'edd-reviews/edd-reviews.php' ),
+				'reviewsProductImage'           => Functions::get_plugin_url( 'assets/img/reviews-product-download-image.png' ),
+				'softwareLicensingProductImage' => Functions::get_plugin_url( 'assets/img/software-licensing-product-image.png' ),
 			)
 		);
 	}
@@ -71,7 +72,7 @@ class EDD {
 	public function ajax_get_options() {
 		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
 		// Security.
-		if ( ! wp_verify_nonce( $nonce, 'wppic-admin-home-retrieve-options' ) || ! current_user_can( 'manage_options' ) ) {
+		if ( ! wp_verify_nonce( $nonce, 'wppic-admin-edd-retrieve-options' ) || ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error(
 				array(
 					'message' => __( 'Could not verify nonce.', 'wp-wppic-comments' ),
@@ -79,9 +80,8 @@ class EDD {
 			);
 		}
 
-		$options            = Options::get_options();
-		$options['version'] = Functions::get_plugin_version(); // Add version for local storage.
-		$options            = Functions::sanitize_array_recursive( $options );
+		$options = Options::get_options();
+		$options = Functions::sanitize_array_recursive( $options );
 		wp_send_json_success( $options );
 	}
 

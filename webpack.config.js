@@ -21,6 +21,7 @@ module.exports = ( env ) => {
 				'wppic-styles': [ './src/scss/wppic-style.scss' ],
 				'wppic-editor': [ './src/scss/editor.scss' ],
 				'wppic-admin-home': [ './src/react/views/home/index.js' ],
+				'wppic-admin-edd': [ './src/react/views/edd/index.js' ],
 				'wppic-fancybox': './src/js/fancyapps/carousel.js',
 				'wppic-fancybox-css': './src/scss/carousel.scss',
 			},
