@@ -3955,7 +3955,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _hooks_useMediaUploader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../hooks/useMediaUploader */ "./src/react/hooks/useMediaUploader.js");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/database-zap.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plug-2.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/book-text.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/external-link.js");
 /* harmony import */ var _components_ErrorBoundary__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/ErrorBoundary */ "./src/react/components/ErrorBoundary/index.js");
@@ -4245,7 +4245,24 @@ var Interface = function Interface(a) {
     }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-edd-extension__status"
-  }, wppicAdminEDD.softwareLicensingInstalled && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Installed and Activated', 'wp-plugin-info-card')), !wppicAdminEDD.softwareLicensingInstalled && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Add-on Not Acivated', 'wp-plugin-info-card'))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, wppicAdminEDD.softwareLicensingInstalled && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Installed and Activated', 'wp-plugin-info-card')), !wppicAdminEDD.softwareLicensingInstalled && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Add-on Not Acivated', 'wp-plugin-info-card')))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-edd-extension"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Reviews', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-edd-extension__image"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    href: "https://easydigitaldownloads.com/downloads/product-reviews/",
+    target: "_blank",
+    rel: "noopener noreferrer"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+    src: wppicAdminEDD.reviewsProductImage,
+    alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Software Licensing', 'wp-plugin-info-card'),
+    style: {
+      width: '100%',
+      height: 'auto'
+    }
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-edd-extension__status"
+  }, wppicAdminEDD.eddReviewsInstalled && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Installed and Activated', 'wp-plugin-info-card')), !wppicAdminEDD.eddReviewsInstalled && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Add-on Not Acivated', 'wp-plugin-info-card'))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_18__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Find out how to display your EDD plugins with WP Plugin Info Card.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
     variant: "primary",
@@ -11203,41 +11220,6 @@ const Code = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("C
 
 /***/ }),
 
-/***/ "./node_modules/lucide-react/dist/esm/icons/database-zap.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/lucide-react/dist/esm/icons/database-zap.js ***!
-  \******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ DatabaseZap)
-/* harmony export */ });
-/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
-/**
- * @license lucide-react v0.294.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-const DatabaseZap = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("DatabaseZap", [
-  ["ellipse", { cx: "12", cy: "5", rx: "9", ry: "3", key: "msslwz" }],
-  ["path", { d: "M3 5V19A9 3 0 0 0 15 21.84", key: "14ibmq" }],
-  ["path", { d: "M21 5V8", key: "1marbg" }],
-  ["path", { d: "M21 12L18 17H22L19 22", key: "zafso" }],
-  ["path", { d: "M3 12A9 3 0 0 0 14.59 14.87", key: "1y4wr8" }]
-]);
-
-
-//# sourceMappingURL=database-zap.js.map
-
-
-/***/ }),
-
 /***/ "./node_modules/lucide-react/dist/esm/icons/download-cloud.js":
 /*!********************************************************************!*\
   !*** ./node_modules/lucide-react/dist/esm/icons/download-cloud.js ***!
@@ -11331,6 +11313,41 @@ const Loader2 = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 
 
 //# sourceMappingURL=loader-2.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/plug-2.js":
+/*!************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/plug-2.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Plug2)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.294.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const Plug2 = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Plug2", [
+  ["path", { d: "M9 2v6", key: "17ngun" }],
+  ["path", { d: "M15 2v6", key: "s7yy2p" }],
+  ["path", { d: "M12 17v5", key: "bb1du9" }],
+  ["path", { d: "M5 8h14", key: "pcz4l3" }],
+  ["path", { d: "M6 11V8h12v3a6 6 0 1 1-12 0v0Z", key: "nd4hoy" }]
+]);
+
+
+//# sourceMappingURL=plug-2.js.map
 
 
 /***/ }),

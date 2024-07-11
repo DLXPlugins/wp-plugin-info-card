@@ -4293,7 +4293,6 @@ var HomeScreen = function HomeScreen(a) {
     }
     var a = localStorage.getItem('wppic_home_options');
     var b = localStorage.getItem('wppic_home_options_timestamp');
-    console.log(a, b);
     if (a && b) {
       // Do verison check.
       var c = wppicAdmin.pluginVersion;

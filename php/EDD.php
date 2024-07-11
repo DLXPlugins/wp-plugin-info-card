@@ -171,6 +171,8 @@ class EDD {
 			return $existing_data;
 		}
 
+		$options = Options::get_options();
+
 		$existing_data = array();
 
 		// Get plugin name.
@@ -202,6 +204,12 @@ class EDD {
 
 		// Get the author and link to the download page for the plugin.
 		$existing_data['author'] = get_the_author_meta( 'display_name', $maybe_download->post_author );
+
+		// Try to get author from meta and override if set.
+		$maybe_author = get_post_meta( $maybe_download->ID, '_wppic_plugin_author', true );
+		if ( $maybe_author ) {
+			$existing_data['author'] = $maybe_author;
+		}
 
 		// Author/Download URL.
 		$readme_homepage = get_post_meta( $maybe_download->ID, '_edd_readme_plugin_homepage', true );
@@ -271,7 +279,15 @@ class EDD {
 		}
 
 		// Get the featured image URL which will be used for the icons. Format in array is 1x, 2x.
-		$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $maybe_download->ID ), 'full' );
+		$post_thumbnail_id = get_post_thumbnail_id( $maybe_download->ID );
+		if ( ! $post_thumbnail_id ) {
+			// Try to get from options.
+			$icon_id = (int) $options['edd_default_icon_id'];
+			if ( 0 !== $icon_id ) {
+				$post_thumbnail_id = $icon_id;
+			}
+		}
+		$featured_image = wp_get_attachment_image_src( $post_thumbnail_id );
 		if ( $featured_image ) {
 			$existing_data['icons'] = array(
 				'1x' => $featured_image[0],
@@ -290,20 +306,42 @@ class EDD {
 				'low'  => $banner_low,
 			);
 		} else {
-			$existing_data['banners'] = array();
+			// Try to get from options.
+			$banner_id = (int) $options['edd_default_banner_id'];
+			if ( 0 !== $banner_id ) {
+				$banner = wp_get_attachment_image_src( $banner_id );
+				if ( $banner ) {
+					$existing_data['banners'] = array(
+						'high' => $banner[0],
+						'low'  => $banner[0],
+					);
+				}
+			}
+			if ( ! isset( $existing_data['banners'] ) ) {
+				$existing_data['banners'] = array();
+			}
+			
 		}
 
 		// Set screenshots.
 		$existing_data['screenshots'] = array();
 
-		// Get rating from meta.
-		$maybe_rating = get_post_meta( $maybe_download->ID, 'edd_reviews_average_rating', true );
-		if ( $maybe_rating ) {
-			$existing_data['rating'] = round( $maybe_rating * 20, 2 );
+		// Check post meta to see if we're overriding a rating.
+		$override_rating = (bool) get_post_meta( $maybe_download->ID, '_wppic_override_ratings', true );
+		if ( $override_rating ) {
+			$existing_data['rating'] = get_post_meta( $maybe_download->ID, '_wppic_rating_percentage', true );
+			$existing_data['num_ratings'] = get_post_meta( $maybe_download->ID, '_wppic_num_ratings', true );
+			$existing_data['ratings'] = array();
+		} else {
+			// Get rating from meta.
+			$maybe_rating = get_post_meta( $maybe_download->ID, 'edd_reviews_average_rating', true );
+			if ( $maybe_rating ) {
+				$existing_data['rating'] = round( $maybe_rating * 20, 2 );
 
-			// Reviews are comments, so get the number of comments.
-			$existing_data['num_ratings'] = get_comments_number( $maybe_download->ID );
-			$existing_data['ratings']     = array();
+				// Reviews are comments, so get the number of comments.
+				$existing_data['num_ratings'] = get_comments_number( $maybe_download->ID );
+				$existing_data['ratings']     = array();
+			}
 		}
 
 		return $existing_data;

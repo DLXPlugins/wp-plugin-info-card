@@ -306,7 +306,7 @@ const Interface = ( props ) => {
 				<div className="wppic-admin-panel-sidebar">
 					<div className="wppic-admin-panel-sidebar-card">
 						<h3>
-							<DatabaseZap />
+							<Plug2 />
 							{ __( 'Required Extensions', 'wp-plugin-info-card' ) }
 						</h3>
 						<p>
@@ -336,6 +336,33 @@ const Interface = ( props ) => {
 									</>
 								) }
 								{ ! wppicAdminEDD.softwareLicensingInstalled && (
+									<>
+										{ __( 'Add-on Not Acivated', 'wp-plugin-info-card' ) }
+									</>
+								) }
+							</div>
+						</div>
+						<div className="wppic-edd-extension">
+							<h4>{ __( 'Reviews', 'wp-plugin-info-card' ) }</h4>
+							<div className="wppic-edd-extension__image">
+								<a href="https://easydigitaldownloads.com/downloads/product-reviews/" target="_blank" rel="noopener noreferrer">
+									<img
+										src={ wppicAdminEDD.reviewsProductImage }
+										alt={ __( 'Software Licensing', 'wp-plugin-info-card' ) }
+										style={ {
+											width: '100%',
+											height: 'auto',
+										} }
+									/>
+								</a>
+							</div>
+							<div className="wppic-edd-extension__status">
+								{ wppicAdminEDD.eddReviewsInstalled && (
+									<>
+										{ __( 'Installed and Activated', 'wp-plugin-info-card' ) }
+									</>
+								) }
+								{ ! wppicAdminEDD.eddReviewsInstalled && (
 									<>
 										{ __( 'Add-on Not Acivated', 'wp-plugin-info-card' ) }
 									</>

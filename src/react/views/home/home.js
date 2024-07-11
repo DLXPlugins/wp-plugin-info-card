@@ -516,7 +516,6 @@ const HomeScreen = ( props ) => {
 		const cachedOptions = localStorage.getItem( 'wppic_home_options' );
 		const cachedTimestamp = localStorage.getItem( 'wppic_home_options_timestamp' );
 
-		console.log( cachedOptions, cachedTimestamp );
 		if ( cachedOptions && cachedTimestamp ) {
 			// Do verison check.
 			const currentVersion = wppicAdmin.pluginVersion;
