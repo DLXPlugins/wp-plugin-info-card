@@ -4074,11 +4074,11 @@ var Interface = function Interface(a) {
       defaultValues: {
         saveNonce: wppicAdminEDD.saveNonce,
         resetNonce: wppicAdminEDD.resetNonce,
-        enableEDD: b.enable_edd,
-        defaultIconId: b.default_icon_id,
-        defaultBannerId: b.default_banner_id,
-        defaultIconUrl: b.default_icon_url,
-        defaultBannerUrl: b.default_banner_url
+        enable_edd: b.enable_edd,
+        edd_default_icon_id: b.edd_default_icon_id,
+        edd_default_banner_id: b.edd_default_banner_id,
+        edd_default_icon_url: b.edd_default_icon_url,
+        edd_default_banner_url: b.edd_default_banner_url
       }
     }),
     d = c.control,
@@ -4131,7 +4131,7 @@ var Interface = function Interface(a) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Configuration', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_16__.Controller, {
-    name: "enableEDD",
+    name: "enable_edd",
     control: d,
     render: function render(a) {
       var b = a.field;
@@ -4148,10 +4148,10 @@ var Interface = function Interface(a) {
     scope: "row"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Default Icon', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
-  }, f('defaultIconUrl') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, f('edd_default_icon_url') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-image-preview"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-    src: f('defaultIconUrl'),
+    src: f('edd_default_icon_url'),
     alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Default Icon', 'wp-plugin-info-card'),
     width: "125",
     height: "125"
@@ -4160,31 +4160,31 @@ var Interface = function Interface(a) {
     className: "wppic-btn wppic-btn-alt",
     onClick: function onClick() {
       q({
-        attachmentId: f('defaultIconId') || 0,
+        attachmentId: f('edd_default_icon_id') || 0,
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Select Default Plugin Icon', 'wp-plugin-info-card'),
         suggestedWidth: 512,
         suggestedHeight: 512
       }, function (a) {
-        h('defaultIconId', a.id);
-        h('defaultIconUrl', a.url);
+        h('edd_default_icon_id', a.id);
+        h('edd_default_icon_url', a.url);
       });
     }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Select Icon', 'wp-plugin-info-card')), f('defaultIconUrl') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Select Icon', 'wp-plugin-info-card')), f('edd_default_icon_url') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
     variant: "secondary",
     className: "wppic-btn wppic-btn-alt",
     onClick: function onClick() {
-      h('defaultIconId', 0);
-      h('defaultIconUrl', '');
+      h('edd_default_icon_id', 0);
+      h('edd_default_icon_url', '');
     },
     isDestructive: true
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Remove Icon', 'wp-plugin-info-card'))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
     scope: "row"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Default Banner', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
-  }, f('defaultBannerUrl') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, f('edd_default_banner_url') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-image-preview"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-    src: f('defaultBannerUrl'),
+    src: f('edd_default_banner_url'),
     alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Default Icon', 'wp-plugin-info-card'),
     style: {
       width: '400px',
@@ -4195,22 +4195,22 @@ var Interface = function Interface(a) {
     className: "wppic-btn wppic-btn-alt",
     onClick: function onClick() {
       q({
-        attachmentId: f('defaultBannerId') || 0,
+        attachmentId: f('edd_default_banner_id') || 0,
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Select Default Plugin Banner', 'wp-plugin-info-card'),
         suggestedWidth: 1544,
         suggestedHeight: 500,
         aspectRatio: '386:125'
       }, function (a) {
-        h('defaultBannerId', a.id);
-        h('defaultBannerUrl', a.url);
+        h('edd_default_banner_id', a.id);
+        h('edd_default_banner_url', a.url);
       });
     }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Select Banner Image', 'wp-plugin-info-card')), f('defaultBannerUrl') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Select Banner Image', 'wp-plugin-info-card')), f('edd_default_banner_url') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
     variant: "secondary",
     className: "wppic-btn wppic-btn-alt",
     onClick: function onClick() {
-      h('defaultBannerId', 0);
-      h('defaultBannerUrl', '');
+      h('edd_default_banner_id', 0);
+      h('edd_default_banner_url', '');
     },
     isDestructive: true
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Remove Banner', 'wp-plugin-info-card'))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_5__["default"], {

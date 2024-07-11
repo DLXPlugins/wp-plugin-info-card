@@ -111,11 +111,11 @@ const Interface = ( props ) => {
 		defaultValues: {
 			saveNonce: wppicAdminEDD.saveNonce,
 			resetNonce: wppicAdminEDD.resetNonce,
-			enableEDD: data.enable_edd,
-			defaultIconId: data.default_icon_id,
-			defaultBannerId: data.default_banner_id,
-			defaultIconUrl: data.default_icon_url,
-			defaultBannerUrl: data.default_banner_url,
+			enable_edd: data.enable_edd,
+			edd_default_icon_id: data.edd_default_icon_id,
+			edd_default_banner_id: data.edd_default_banner_id,
+			edd_default_icon_url: data.edd_default_icon_url,
+			edd_default_banner_url: data.edd_default_banner_url,
 		},
 	} );
 	const formValues = useWatch( { control } );
@@ -136,7 +136,6 @@ const Interface = ( props ) => {
 		localStorage.removeItem( 'wppic_edd_options' );
 		localStorage.removeItem( 'wppic_edd_options_timestamp' );
 	};
-
 	return (
 		<>
 			<div className="wppic-admin-panel-container with-sidebar">
@@ -163,7 +162,7 @@ const Interface = ( props ) => {
 											<td>
 												<div className="wppic-admin-row">
 													<Controller
-														name="enableEDD"
+														name="enable_edd"
 														control={ control }
 														render={ ( { field } ) => (
 															<ToggleControl
@@ -184,10 +183,10 @@ const Interface = ( props ) => {
 											<td>
 												<div className="wppic-admin-row">
 													{
-														getValues( 'defaultIconUrl' ) && (
+														getValues( 'edd_default_icon_url' ) && (
 															<div className="wppic-admin-image-preview">
 																<img
-																	src={ getValues( 'defaultIconUrl' ) }
+																	src={ getValues( 'edd_default_icon_url' ) }
 																	alt={ __( 'Default Icon', 'wp-plugin-info-card' ) }
 																	width="125"
 																	height="125"
@@ -200,26 +199,26 @@ const Interface = ( props ) => {
 														className="wppic-btn wppic-btn-alt"
 														onClick={ () => {
 															openMediaUploader( {
-																attachmentId: getValues( 'defaultIconId' ) || 0,
+																attachmentId: getValues( 'edd_default_icon_id' ) || 0,
 																title: __( 'Select Default Plugin Icon', 'wp-plugin-info-card' ),
 																suggestedWidth: 512,
 																suggestedHeight: 512,
 															}, ( media ) => {
-																setValue( 'defaultIconId', media.id );
-																setValue( 'defaultIconUrl', media.url );
+																setValue( 'edd_default_icon_id', media.id );
+																setValue( 'edd_default_icon_url', media.url );
 															} );
 														} }
 													>
 														{ __( 'Select Icon', 'wp-plugin-info-card' ) }
 													</Button>
 													{
-														getValues( 'defaultIconUrl' ) && (
+														getValues( 'edd_default_icon_url' ) && (
 															<Button
 																variant="secondary"
 																className="wppic-btn wppic-btn-alt"
 																onClick={ () => {
-																	setValue( 'defaultIconId', 0 );
-																	setValue( 'defaultIconUrl', '' );
+																	setValue( 'edd_default_icon_id', 0 );
+																	setValue( 'edd_default_icon_url', '' );
 																} }
 																isDestructive={ true }
 															>
@@ -237,10 +236,10 @@ const Interface = ( props ) => {
 											<td>
 												<div className="wppic-admin-row">
 													{
-														getValues( 'defaultBannerUrl' ) && (
+														getValues( 'edd_default_banner_url' ) && (
 															<div className="wppic-admin-image-preview">
 																<img
-																	src={ getValues( 'defaultBannerUrl' ) }
+																	src={ getValues( 'edd_default_banner_url' ) }
 																	alt={ __( 'Default Icon', 'wp-plugin-info-card' ) }
 																	style={ {
 																		width: '400px',
@@ -255,27 +254,27 @@ const Interface = ( props ) => {
 														className="wppic-btn wppic-btn-alt"
 														onClick={ () => {
 															openMediaUploader( {
-																attachmentId: getValues( 'defaultBannerId' ) || 0,
+																attachmentId: getValues( 'edd_default_banner_id' ) || 0,
 																title: __( 'Select Default Plugin Banner', 'wp-plugin-info-card' ),
 																suggestedWidth: 1544,
 																suggestedHeight: 500,
 																aspectRatio: '386:125',
 															}, ( media ) => {
-																setValue( 'defaultBannerId', media.id );
-																setValue( 'defaultBannerUrl', media.url );
+																setValue( 'edd_default_banner_id', media.id );
+																setValue( 'edd_default_banner_url', media.url );
 															} );
 														} }
 													>
 														{ __( 'Select Banner Image', 'wp-plugin-info-card' ) }
 													</Button>
 													{
-														getValues( 'defaultBannerUrl' ) && (
+														getValues( 'edd_default_banner_url' ) && (
 															<Button
 																variant="secondary"
 																className="wppic-btn wppic-btn-alt"
 																onClick={ () => {
-																	setValue( 'defaultBannerId', 0 );
-																	setValue( 'defaultBannerUrl', '' );
+																	setValue( 'edd_default_banner_id', 0 );
+																	setValue( 'edd_default_banner_url', '' );
 																} }
 																isDestructive={ true }
 															>
