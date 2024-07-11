@@ -44,6 +44,7 @@ class EDD {
 	 */
 	public function admin_scripts() {
 		$deps = require Functions::get_plugin_dir( 'dist/wppic-admin-edd.asset.php' );
+		wp_enqueue_media();
 		wp_enqueue_script(
 			'wppic-admin-edd',
 			Functions::get_plugin_url( 'dist/wppic-admin-edd.js' ),
@@ -80,8 +81,9 @@ class EDD {
 			);
 		}
 
-		$options = Options::get_options();
-		$options = Functions::sanitize_array_recursive( $options );
+		$options            = Options::get_options();
+		$options['version'] = Functions::get_plugin_version(); // Add version for local storage.
+		$options            = Functions::sanitize_array_recursive( $options );
 		wp_send_json_success( $options );
 	}
 

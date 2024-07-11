@@ -8,6 +8,7 @@ import { isURL, cleanForSlug } from '@wordpress/url';
 import BeatLoader from 'react-spinners/BeatLoader';
 import SaveResetButtons from '../../components/SaveResetButtons';
 import { Fancybox } from '@fancyapps/ui';
+import useMediaUploader from '../../hooks/useMediaUploader';
 
 import {
 	TextControl,
@@ -70,7 +71,6 @@ const EDD = ( props ) => {
 				nonce: wppicAdminEDD.getNonce,
 			} );
 			const { success, data } = response.data;
-			console.log( response );
 			if ( success ) {
 				// Save to local storage.
 				localStorage.setItem( 'wppic_edd_options', JSON.stringify( data ) );
@@ -111,12 +111,20 @@ const Interface = ( props ) => {
 		defaultValues: {
 			saveNonce: wppicAdminEDD.saveNonce,
 			resetNonce: wppicAdminEDD.resetNonce,
+			enableEDD: data.enable_edd,
+			defaultIconId: data.default_icon_id,
+			defaultBannerId: data.default_banner_id,
+			defaultIconUrl: data.default_icon_url,
+			defaultBannerUrl: data.default_banner_url,
 		},
 	} );
 	const formValues = useWatch( { control } );
 	const { errors, isDirty, dirtyFields } = useFormState( {
 		control,
 	} );
+
+	// Media uploader for citation image upload.
+	const { openMediaUploader } = useMediaUploader();
 
 	/**
 	 * Placeholder for submit event.
@@ -154,7 +162,71 @@ const Interface = ( props ) => {
 											</th>
 											<td>
 												<div className="wppic-admin-row">
-													test
+													<Controller
+														name="enableEDD"
+														control={ control }
+														render={ ( { field } ) => (
+															<ToggleControl
+																label={ __( 'Enable Easy Digital Downloads', 'wp-plugin-info-card' ) }
+																checked={ field.value }
+																onChange={ ( value ) => field.onChange( value ) }
+																help={ __( 'Enable this to allow Plugin Info Card to pull data from EDD downloads.', 'wp-plugin-info-card' ) }
+															/>
+														) }
+													/>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row">
+												{ __( 'Default Icon', 'wp-plugin-info-card' ) }
+											</th>
+											<td>
+												<div className="wppic-admin-row">
+													{
+														getValues( 'defaultIconUrl' ) && (
+															<div className="wppic-admin-image-preview">
+																<img
+																	src={ getValues( 'defaultIconUrl' ) }
+																	alt={ __( 'Default Icon', 'wp-plugin-info-card' ) }
+																	width="125"
+																	height="125"
+																/>
+															</div>
+														)
+													}
+													<Button
+														variant="secondary"
+														className="wppic-btn wppic-btn-alt"
+														onClick={ () => {
+															openMediaUploader( {
+																attachmentId: getValues( 'defaultIconId' ) || 0,
+																title: __( 'Select Default Plugin Icon', 'wp-plugin-info-card' ),
+																suggestedWidth: 512,
+																suggestedHeight: 512,
+															}, ( media ) => {
+																setValue( 'defaultIconId', media.id );
+																setValue( 'defaultIconUrl', media.url );
+															} );
+														} }
+													>
+														{ __( 'Select Icon', 'wp-plugin-info-card' ) }
+													</Button>
+													{
+														getValues( 'defaultIconUrl' ) && (
+															<Button
+																variant="secondary"
+																className="wppic-btn wppic-btn-alt"
+																onClick={ () => {
+																	setValue( 'defaultIconId', 0 );
+																	setValue( 'defaultIconUrl', '' );
+																} }
+																isDestructive={ true }
+															>
+																{ __( 'Remove Icon', 'wp-plugin-info-card' ) }
+															</Button>
+														)
+													}
 												</div>
 											</td>
 										</tr>

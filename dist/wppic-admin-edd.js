@@ -3429,6 +3429,243 @@ var SnackPop = function SnackPop(a) {
 
 /***/ }),
 
+/***/ "./src/react/hooks/useMediaUploader.js":
+/*!*********************************************!*\
+  !*** ./src/react/hooks/useMediaUploader.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+var _this = undefined;
+function ownKeys(a, b) { var c = Object.keys(a); if (Object.getOwnPropertySymbols) { var d = Object.getOwnPropertySymbols(a); b && (d = d.filter(function (b) { return Object.getOwnPropertyDescriptor(a, b).enumerable; })), c.push.apply(c, d); } return c; }
+function _objectSpread(a) { for (var b = 1; b < arguments.length; b++) { var c = null != arguments[b] ? arguments[b] : {}; b % 2 ? ownKeys(Object(c), !0).forEach(function (b) { _defineProperty(a, b, c[b]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(a, Object.getOwnPropertyDescriptors(c)) : ownKeys(Object(c)).forEach(function (b) { Object.defineProperty(a, b, Object.getOwnPropertyDescriptor(c, b)); }); } return a; }
+function _defineProperty(a, b, c) { return (b = _toPropertyKey(b)) in a ? Object.defineProperty(a, b, { value: c, enumerable: !0, configurable: !0, writable: !0 }) : a[b] = c, a; }
+function _toPropertyKey(a) { var b = _toPrimitive(a, "string"); return "symbol" == (typeof b === "undefined" ? "undefined" : _typeof(b)) ? b : b + ""; }
+function _toPrimitive(a, b) { if ("object" != (typeof a === "undefined" ? "undefined" : _typeof(a)) || !a) return a; var c = a[Symbol.toPrimitive]; if (void 0 !== c) { var d = c.call(a, b || "default"); if ("object" != (typeof d === "undefined" ? "undefined" : _typeof(d))) return d; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === b ? String : Number)(a); }
+
+
+var getCropSettings = function getCropSettings() {
+  var a = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  // Set the settings for the media uploader and cropper.
+  var b = {
+    id: '',
+    attachmentId: 0,
+    aspectRatio: '1:1',
+    suggestedWidth: '500',
+    suggestedHeight: '500',
+    nonce: '',
+    postId: 0,
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Image', 'wp-plugin-info-card'),
+    buttonLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add Image', 'wp-plugin-info-card'),
+    main: _this
+  };
+  b = _objectSpread(_objectSpread({}, b), a);
+  return b;
+};
+var getCropControl = function getCropControl() {
+  var a = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var b = getCropSettings(a);
+  var c = {
+    id: 'control-id',
+    params: {
+      flex_width: false,
+      // set to true if the width of the cropped image can be different to the width defined here
+      flex_height: false,
+      // set to true if the height of the cropped image can be different to the height defined here
+      width: b.suggestedWidth,
+      // set the desired width of the destination image here
+      height: b.suggestedHeight // set the desired height of the destination image here
+    }
+  };
+  return c;
+};
+
+/**
+ * Retrieve crop options for an attachment.
+ *
+ * @param {Object} attachment Attachment image object.
+ * @param {Object} controller Media controller object.
+ * @return {Object} Cropping options.
+ */
+var cropOptions = function cropOptions(a, b) {
+  var c = getCropSettings();
+  var d = b.get('control');
+  var e = a.get('width');
+  var f = a.get('height');
+  var g = parseInt(d.params.width, 10);
+  var h = parseInt(d.params.height, 10);
+  var i = g / h;
+  var j = e / f;
+
+  // Determine if user can skip crop.
+  var k = false;
+
+  // If ratios match, can skip crop.
+  if (i === j) {
+    k = true;
+  }
+  b.set('canSkipCrop', k);
+  var l = g;
+  var m = h;
+  if (e / f > i) {
+    if (m > f) {
+      m = f;
+    }
+    h = m;
+    g = h * i;
+  } else {
+    if (l > e) {
+      l = e;
+    }
+    g = l;
+    h = g / i;
+  }
+  var n = (e - g) / 2;
+  var o = (f - h) / 2;
+  if (n === 0) {
+    if (i > 0) {
+      n = o * i;
+    } else {
+      n = o / i;
+    }
+  }
+  if (o === 0) {
+    if (i > 0) {
+      o = n * i;
+    } else {
+      o = n / i;
+    }
+  }
+  var p = 0;
+  var q = 0;
+  if (g + n > e) {
+    p = g - 1;
+  } else {
+    p = g + n;
+  }
+  if (h + o > f) {
+    q = h - 1;
+  } else {
+    q = h + o;
+  }
+  var r = {
+    handles: true,
+    keys: true,
+    instance: true,
+    persistent: true,
+    imageWidth: e,
+    imageHeight: f,
+    x1: n,
+    y1: o,
+    x2: p,
+    y2: q,
+    aspectRatio: c.aspectRatio
+  };
+  return r;
+};
+var useMediaUploader = function useMediaUploader(a) {
+  return {
+    openMediaUploader: function openMediaUploader(a, b) {
+      var c = getCropSettings(a);
+      var d = getCropControl(a);
+      var e = wp.media({
+        states: [new wp.media.controller.Library({
+          title: a.title || c.title,
+          library: wp.media.query({
+            type: 'image'
+          }),
+          multiple: false,
+          date: false,
+          priority: 20,
+          suggestedWidth: c.suggestedWidth,
+          suggestedHeight: c.suggestedHeight
+        }), new wp.media.controller.CustomizeImageCropper({
+          control: d,
+          imgSelectOptions: cropOptions
+        })]
+      });
+
+      // Set the toolbar.
+      e.on('toolbar:create', function (a) {
+        var b = {};
+        b.items = {};
+        b.items.select = {
+          text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Save Image', 'wp-plugin-info-card'),
+          style: 'primary',
+          click: wp.media.view.Toolbar.Select.prototype.clickSelect,
+          requires: {
+            selection: true
+          },
+          event: 'select',
+          reset: false,
+          close: false,
+          state: false,
+          syncSelection: true
+        };
+        this.createSelectToolbar(a, b);
+      }, e);
+
+      //For when the Add Profile Image is clicked
+      var f = 0;
+      e.on('select', function () {
+        // Get avatar attributes.
+        var a = e.state().get('selection').first().toJSON();
+
+        // Get original attachment ID.
+        f = a.id;
+
+        // Calculate ratio.
+        var c = a.width / a.height;
+        var g = d.params.width / d.params.height;
+        if (c === g) {
+          var h = e.state().get('selection').single();
+          b(h.attributes);
+          e.close();
+        } else {
+          e.setState('cropper');
+        }
+      });
+      //When the remove buttons is clicked
+      e.on('remove', function () {
+        console.log('remove');
+      });
+
+      //For when the window is closed (update the thumbnail)
+      e.on('escape', function () {
+        console.log('escape');
+      });
+
+      // When image is cropped.
+      e.on('cropped', function (a) {
+        b(a);
+      });
+
+      // When image cropping is skipped.
+      e.on('skippedcrop', function (a) {
+        b(a.attributes);
+      });
+      e.on('open', function () {
+        var a = wp.media.attachment(c.attachmentId);
+        var b = e.state('library').get('selection');
+        b.add(a);
+      });
+      e.open();
+    }
+  };
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (useMediaUploader);
+
+/***/ }),
+
 /***/ "./src/react/hooks/usePluginPreview.js":
 /*!*********************************************!*\
   !*** ./src/react/hooks/usePluginPreview.js ***!
@@ -3691,7 +3928,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var use_async_resource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! use-async-resource */ "./node_modules/use-async-resource/lib/index.js");
@@ -3700,21 +3937,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
 /* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react-spinners/BeatLoader */ "./node_modules/react-spinners/BeatLoader.js");
-/* harmony import */ var react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! react-spinners/BeatLoader */ "./node_modules/react-spinners/BeatLoader.js");
+/* harmony import */ var react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_15__);
 /* harmony import */ var _components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/SaveResetButtons */ "./src/react/components/SaveResetButtons/index.js");
 /* harmony import */ var _fancyapps_ui__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fancyapps/ui */ "./node_modules/@fancyapps/ui/dist/index.esm.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/database-zap.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/book-text.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/external-link.js");
-/* harmony import */ var _components_ErrorBoundary__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/ErrorBoundary */ "./src/react/components/ErrorBoundary/index.js");
-/* harmony import */ var _utils_SendCommand__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../utils/SendCommand */ "./src/react/utils/SendCommand.js");
-/* harmony import */ var _components_Notice__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/Notice */ "./src/react/components/Notice/index.js");
-/* harmony import */ var _components_SnackPop__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/SnackPop */ "./src/react/components/SnackPop/index.js");
-/* harmony import */ var _hooks_usePluginPreview__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../hooks/usePluginPreview */ "./src/react/hooks/usePluginPreview.js");
-/* harmony import */ var _components_EDDIcon__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/EDDIcon */ "./src/react/components/EDDIcon/index.js");
+/* harmony import */ var _hooks_useMediaUploader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../hooks/useMediaUploader */ "./src/react/hooks/useMediaUploader.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/database-zap.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/book-text.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/external-link.js");
+/* harmony import */ var _components_ErrorBoundary__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/ErrorBoundary */ "./src/react/components/ErrorBoundary/index.js");
+/* harmony import */ var _utils_SendCommand__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utils/SendCommand */ "./src/react/utils/SendCommand.js");
+/* harmony import */ var _components_Notice__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/Notice */ "./src/react/components/Notice/index.js");
+/* harmony import */ var _components_SnackPop__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/SnackPop */ "./src/react/components/SnackPop/index.js");
+/* harmony import */ var _hooks_usePluginPreview__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../hooks/usePluginPreview */ "./src/react/hooks/usePluginPreview.js");
+/* harmony import */ var _components_EDDIcon__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/EDDIcon */ "./src/react/components/EDDIcon/index.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (a) { for (var b = 1; b < arguments.length; b++) { var c = arguments[b]; for (var d in c) ({}).hasOwnProperty.call(c, d) && (a[d] = c[d]); } return a; }, _extends.apply(null, arguments); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return j; }; var b, j = {}, e = Object.prototype, k = e.hasOwnProperty, m = Object.defineProperty || function (a, b, c) { a[b] = c.value; }, n = "function" == typeof Symbol ? Symbol : {}, q = n.iterator || "@@iterator", a = n.asyncIterator || "@@asyncIterator", c = n.toStringTag || "@@toStringTag"; function i(a, b, c) { return Object.defineProperty(a, b, { value: c, enumerable: !0, configurable: !0, writable: !0 }), a[b]; } try { i({}, ""); } catch (a) { i = function i(a, b, c) { return a[b] = c; }; } function u(b, d, e, f) { var g = d && d.prototype instanceof o ? d : o, h = Object.create(g.prototype), a = new F(f || []); return m(h, "_invoke", { value: B(b, e, a) }), h; } function w(a, b, c) { try { return { type: "normal", arg: a.call(b, c) }; } catch (a) { return { type: "throw", arg: a }; } } j.wrap = u; var x = "suspendedStart", h = "suspendedYield", l = "executing", f = "completed", s = {}; function o() {} function r() {} function y() {} var z = {}; i(z, q, function () { return this; }); var t = Object.getPrototypeOf, d = t && t(t(G([]))); d && d !== e && k.call(d, q) && (z = d); var v = y.prototype = o.prototype = Object.create(z); function g(a) { ["next", "throw", "return"].forEach(function (b) { i(a, b, function (a) { return this._invoke(b, a); }); }); } function A(b, d) { function c(e, f, g, i) { var a = w(b[e], b, f); if ("throw" !== a.type) { var j = a.arg, l = j.value; return l && "object" == _typeof(l) && k.call(l, "__await") ? d.resolve(l.__await).then(function (a) { c("next", a, g, i); }, function (a) { c("throw", a, g, i); }) : d.resolve(l).then(function (a) { j.value = a, g(j); }, function (a) { return c("throw", a, g, i); }); } i(a.arg); } var e; m(this, "_invoke", { value: function value(a, b) { function f() { return new d(function (d, e) { c(a, b, d, e); }); } return e = e ? e.then(f, f) : f(); } }); } function B(a, d, e) { var g = x; return function (j, i) { if (g === l) throw Error("Generator is already running"); if (g === f) { if ("throw" === j) throw i; return { value: b, done: !0 }; } for (e.method = j, e.arg = i;;) { var k = e.delegate; if (k) { var m = C(k, e); if (m) { if (m === s) continue; return m; } } if ("next" === e.method) e.sent = e._sent = e.arg;else if ("throw" === e.method) { if (g === x) throw g = f, e.arg; e.dispatchException(e.arg); } else "return" === e.method && e.abrupt("return", e.arg); g = l; var n = w(a, d, e); if ("normal" === n.type) { if (g = e.done ? f : h, n.arg === s) continue; return { value: n.arg, done: e.done }; } "throw" === n.type && (g = f, e.method = "throw", e.arg = n.arg); } }; } function C(c, d) { var e = d.method, f = c.iterator[e]; if (f === b) return d.delegate = null, "throw" === e && c.iterator["return"] && (d.method = "return", d.arg = b, C(c, d), "throw" === d.method) || "return" !== e && (d.method = "throw", d.arg = new TypeError("The iterator does not provide a '" + e + "' method")), s; var g = w(f, c.iterator, d.arg); if ("throw" === g.type) return d.method = "throw", d.arg = g.arg, d.delegate = null, s; var h = g.arg; return h ? h.done ? (d[c.resultName] = h.value, d.next = c.nextLoc, "return" !== d.method && (d.method = "next", d.arg = b), d.delegate = null, s) : h : (d.method = "throw", d.arg = new TypeError("iterator result is not an object"), d.delegate = null, s); } function D(a) { var b = { tryLoc: a[0] }; 1 in a && (b.catchLoc = a[1]), 2 in a && (b.finallyLoc = a[2], b.afterLoc = a[3]), this.tryEntries.push(b); } function E(a) { var b = a.completion || {}; b.type = "normal", delete b.arg, a.completion = b; } function F(a) { this.tryEntries = [{ tryLoc: "root" }], a.forEach(D, this), this.reset(!0); } function G(a) { if (a || "" === a) { var c = a[q]; if (c) return c.call(a); if ("function" == typeof a.next) return a; if (!isNaN(a.length)) { var d = -1, e = function c() { for (; ++d < a.length;) if (k.call(a, d)) return c.value = a[d], c.done = !1, c; return c.value = b, c.done = !0, c; }; return e.next = e; } } throw new TypeError(_typeof(a) + " is not iterable"); } return r.prototype = y, m(v, "constructor", { value: y, configurable: !0 }), m(y, "constructor", { value: r, configurable: !0 }), r.displayName = i(y, c, "GeneratorFunction"), j.isGeneratorFunction = function (a) { var b = "function" == typeof a && a.constructor; return !!b && (b === r || "GeneratorFunction" === (b.displayName || b.name)); }, j.mark = function (a) { return Object.setPrototypeOf ? Object.setPrototypeOf(a, y) : (a.__proto__ = y, i(a, c, "GeneratorFunction")), a.prototype = Object.create(v), a; }, j.awrap = function (a) { return { __await: a }; }, g(A.prototype), i(A.prototype, a, function () { return this; }), j.AsyncIterator = A, j.async = function (b, c, d, e, f) { void 0 === f && (f = Promise); var g = new A(u(b, c, d, e), f); return j.isGeneratorFunction(c) ? g : g.next().then(function (a) { return a.done ? a.value : g.next(); }); }, g(v), i(v, c, "Generator"), i(v, q, function () { return this; }), i(v, "toString", function () { return "[object Generator]"; }), j.keys = function (a) { var b = Object(a), c = []; for (var d in b) c.push(d); return c.reverse(), function a() { for (; c.length;) { var d = c.pop(); if (d in b) return a.value = d, a.done = !1, a; } return a.done = !0, a; }; }, j.values = G, F.prototype = { constructor: F, reset: function reset(a) { if (this.prev = 0, this.next = 0, this.sent = this._sent = b, this.done = !1, this.delegate = null, this.method = "next", this.arg = b, this.tryEntries.forEach(E), !a) for (var c in this) "t" === c.charAt(0) && k.call(this, c) && !isNaN(+c.slice(1)) && (this[c] = b); }, stop: function stop() { this.done = !0; var a = this.tryEntries[0].completion; if ("throw" === a.type) throw a.arg; return this.rval; }, dispatchException: function dispatchException(d) { if (this.done) throw d; var e = this; function f(a, c) { return j.type = "throw", j.arg = d, e.next = a, c && (e.method = "next", e.arg = b), !!c; } for (var g = this.tryEntries.length - 1; g >= 0; --g) { var h = this.tryEntries[g], j = h.completion; if ("root" === h.tryLoc) return f("end"); if (h.tryLoc <= this.prev) { var l = k.call(h, "catchLoc"), m = k.call(h, "finallyLoc"); if (l && m) { if (this.prev < h.catchLoc) return f(h.catchLoc, !0); if (this.prev < h.finallyLoc) return f(h.finallyLoc); } else if (l) { if (this.prev < h.catchLoc) return f(h.catchLoc, !0); } else { if (!m) throw Error("try statement without catch or finally"); if (this.prev < h.finallyLoc) return f(h.finallyLoc); } } } }, abrupt: function abrupt(b, c) { for (var d = this.tryEntries.length - 1; d >= 0; --d) { var e = this.tryEntries[d]; if (e.tryLoc <= this.prev && k.call(e, "finallyLoc") && this.prev < e.finallyLoc) { var f = e; break; } } f && ("break" === b || "continue" === b) && f.tryLoc <= c && c <= f.finallyLoc && (f = null); var g = f ? f.completion : {}; return g.type = b, g.arg = c, f ? (this.method = "next", this.next = f.finallyLoc, s) : this.complete(g); }, complete: function complete(a, b) { if ("throw" === a.type) throw a.arg; return "break" === a.type || "continue" === a.type ? this.next = a.arg : "return" === a.type ? (this.rval = this.arg = a.arg, this.method = "return", this.next = "end") : "normal" === a.type && b && (this.next = b), s; }, finish: function finish(a) { for (var b = this.tryEntries.length - 1; b >= 0; --b) { var c = this.tryEntries[b]; if (c.finallyLoc === a) return this.complete(c.completion, c.afterLoc), E(c), s; } }, "catch": function _catch(a) { for (var b = this.tryEntries.length - 1; b >= 0; --b) { var c = this.tryEntries[b]; if (c.tryLoc === a) { var d = c.completion; if ("throw" === d.type) { var f = d.arg; E(c); } return f; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(a, c, d) { return this.delegate = { iterator: G(a), resultName: c, nextLoc: d }, "next" === this.method && (this.arg = b), s; } }, j; }
@@ -3726,6 +3964,7 @@ function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) 
 function _arrayLikeToArray(b, c) { (null == c || c > b.length) && (c = b.length); for (var d = 0, f = Array(c); d < c; d++) f[d] = b[d]; return f; }
 function _iterableToArrayLimit(b, c) { var d = null == b ? null : "undefined" != typeof Symbol && b[Symbol.iterator] || b["@@iterator"]; if (null != d) { var g, h, j, k, l = [], a = !0, m = !1; try { if (j = (d = d.call(b)).next, 0 === c) { if (Object(d) !== d) return; a = !1; } else for (; !(a = (g = j.call(d)).done) && (l.push(g.value), l.length !== c); a = !0); } catch (a) { m = !0, h = a; } finally { try { if (!a && null != d["return"] && (k = d["return"](), Object(k) !== k)) return; } finally { if (m) throw h; } } return l; } }
 function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
+
 
 
 
@@ -3778,20 +4017,19 @@ var EDD = function EDD(a) {
           while (1) switch (a.prev = a.next) {
             case 0:
               a.next = 2;
-              return (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_9__["default"])('wppic_get_edd_options', {
+              return (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_10__["default"])('wppic_get_edd_options', {
                 nonce: wppicAdminEDD.getNonce
               });
             case 2:
               b = a.sent;
               c = b.data, d = c.success, f = c.data;
-              console.log(b);
               if (d) {
                 // Save to local storage.
                 localStorage.setItem('wppic_edd_options', JSON.stringify(f));
                 localStorage.setItem('wppic_edd_options_timestamp', new Date().getTime().toString());
                 e(f);
               }
-            case 6:
+            case 5:
             case "end":
               return a.stop();
           }
@@ -3807,7 +4045,7 @@ var EDD = function EDD(a) {
   if (!d) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "wppic-admin-panel-loading"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Loading Options', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_14___default()), {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Loading Options', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_15___default()), {
       color: '#333',
       loading: true,
       cssOverride: true,
@@ -3821,10 +4059,15 @@ var EDD = function EDD(a) {
 };
 var Interface = function Interface(a) {
   var b = a.data;
-  var c = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_15__.useForm)({
+  var c = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_16__.useForm)({
       defaultValues: {
         saveNonce: wppicAdminEDD.saveNonce,
-        resetNonce: wppicAdminEDD.resetNonce
+        resetNonce: wppicAdminEDD.resetNonce,
+        enableEDD: b.enable_edd,
+        defaultIconId: b.default_icon_id,
+        defaultBannerId: b.default_banner_id,
+        defaultIconUrl: b.default_icon_url,
+        defaultBannerUrl: b.default_banner_url
       }
     }),
     d = c.control,
@@ -3834,22 +4077,26 @@ var Interface = function Interface(a) {
     h = c.setValue,
     i = c.setError,
     j = c.trigger;
-  var k = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_15__.useWatch)({
+  var k = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_16__.useWatch)({
     control: d
   });
-  var l = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_15__.useFormState)({
+  var l = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_16__.useFormState)({
       control: d
     }),
     m = l.errors,
     n = l.isDirty,
     o = l.dirtyFields;
 
+  // Media uploader for citation image upload.
+  var p = (0,_hooks_useMediaUploader__WEBPACK_IMPORTED_MODULE_7__["default"])(),
+    q = p.openMediaUploader;
+
   /**
    * Placeholder for submit event.
    *
    * @param {Object} formData contains the form data.
    */
-  var p = function onSubmit(a) {
+  var r = function onSubmit(a) {
     // Update local storage by clearing it.
     localStorage.removeItem('wppic_edd_options');
     localStorage.removeItem('wppic_edd_options_timestamp');
@@ -3862,17 +4109,64 @@ var Interface = function Interface(a) {
     className: "wppic-admin-panel-area"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-area__section"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_EDDIcon__WEBPACK_IMPORTED_MODULE_13__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Easy Digital Downloads', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_EDDIcon__WEBPACK_IMPORTED_MODULE_14__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Easy Digital Downloads', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
     className: "description"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Set the options for retrieving and displaying EDD products.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
-    onSubmit: e(p)
+    onSubmit: e(r)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", {
     className: "form-table form-table-row-sections"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
     scope: "row"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Configuration', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
-  }, "test"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_16__.Controller, {
+    name: "enableEDD",
+    control: d,
+    render: function render(a) {
+      var b = a.field;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.ToggleControl, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable Easy Digital Downloads', 'wp-plugin-info-card'),
+        checked: b.value,
+        onChange: function onChange(a) {
+          return b.onChange(a);
+        },
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable this to allow Plugin Info Card to pull data from EDD downloads.', 'wp-plugin-info-card')
+      });
+    }
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    scope: "row"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Default Icon', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-row"
+  }, f('defaultIconUrl') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-image-preview"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+    src: f('defaultIconUrl'),
+    alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Default Icon', 'wp-plugin-info-card'),
+    width: "125",
+    height: "125"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
+    variant: "secondary",
+    className: "wppic-btn wppic-btn-alt",
+    onClick: function onClick() {
+      q({
+        attachmentId: f('defaultIconId') || 0,
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Select Default Plugin Icon', 'wp-plugin-info-card'),
+        suggestedWidth: 512,
+        suggestedHeight: 512
+      }, function (a) {
+        h('defaultIconId', a.id);
+        h('defaultIconUrl', a.url);
+      });
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Select Icon', 'wp-plugin-info-card')), f('defaultIconUrl') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
+    variant: "secondary",
+    className: "wppic-btn wppic-btn-alt",
+    onClick: function onClick() {
+      h('defaultIconId', 0);
+      h('defaultIconUrl', '');
+    },
+    isDestructive: true
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Remove Icon', 'wp-plugin-info-card'))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_5__["default"], {
     formValues: k,
     setError: i,
     reset: g,
@@ -3881,13 +4175,13 @@ var Interface = function Interface(a) {
     dirtyFields: o,
     trigger: j,
     onSave: function onSave(a) {
-      p(a);
+      r(a);
     }
   }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_16__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Required Extensions', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('These extensions are required for the EDD integration to work properly.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_17__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Required Extensions', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('These extensions are required for the EDD integration to work properly.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-edd-extension"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Software Licensing', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-edd-extension__image"
@@ -3906,12 +4200,12 @@ var Interface = function Interface(a) {
     className: "wppic-edd-extension__status"
   }, wppicAdminEDD.softwareLicensingInstalled && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Installed and Activated', 'wp-plugin-info-card')), !wppicAdminEDD.softwareLicensingInstalled && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Add-on Not Acivated', 'wp-plugin-info-card'))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_17__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Find out how to display your EDD plugins with WP Plugin Info Card.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_18__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Find out how to display your EDD plugins with WP Plugin Info Card.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
     variant: "primary",
     href: "https://wppic.dlxplugins.com/",
     className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
     icon: function icon() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_18__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_19__["default"], null);
     },
     iconPosition: "right",
     target: "_blank",
