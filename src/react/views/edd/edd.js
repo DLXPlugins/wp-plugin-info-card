@@ -35,8 +35,9 @@ import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
 import SnackPop from '../../components/SnackPop';
 import usePluginPreview from '../../hooks/usePluginPreview';
+import EDDIcon from '../../components/EDDIcon';
 
-const HomeScreen = ( props ) => {
+const EDD = ( props ) => {
 	const [ eddOptions, setEddOptions ] = useState( null );
 
 	useEffect( () => {
@@ -135,7 +136,7 @@ const Interface = ( props ) => {
 					<div className="wppic-admin-panel-area">
 						<div className="wppic-admin-panel-area__section">
 							<h2>
-								<Cog />
+								<EDDIcon />
 								{ __( 'Easy Digital Downloads', 'wp-plugin-info-card' ) }
 							</h2>
 							<p className="description">
@@ -243,4 +244,4 @@ const Interface = ( props ) => {
 		</>
 	);
 };
-export default HomeScreen;
+export default EDD;

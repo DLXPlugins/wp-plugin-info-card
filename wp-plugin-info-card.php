@@ -143,6 +143,11 @@ class WP_Plugin_Info_Card {
 		$shortcodes = new Shortcodes();
 		$shortcodes->run();
 
+		if ( Functions::is_edd_installed() ) {
+			$edd = new EDD();
+			$edd->run();
+		}
+
 		// For the admin.
 		if ( is_admin() ) {
 			// Set up admin.

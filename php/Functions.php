@@ -83,6 +83,17 @@ class Functions {
 	}
 
 	/**
+	 * Checks to see if EDD is installed.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool true if installed, false if not.
+	 */
+	public static function is_edd_installed() {
+		return Functions::is_activated( 'easy-digital-downloads/easy-digital-downloads.php' ) || Functions::is_activated( 'easy-digital-downloads-pro/easy-digital-downloads.php' );
+	}
+
+	/**
 	 * Gets an array of plugins active on either the current site, or site-wide
 	 *
 	 * @since 1.0.0
