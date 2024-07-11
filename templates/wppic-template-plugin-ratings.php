@@ -35,6 +35,16 @@ if ( ! empty( $wppic_data->banners['low'] ) ) {
 	$banner = 'style="background-image: url(' . esc_attr( $wppic_data->banners['low'] ) . ' );"';
 }
 
+$download_label = __( 'Download', 'wp-plugin-info-card' );
+if ( isset( $wppic_data->is_edd ) && $wppic_data->is_edd ) {
+	$download_label = __( 'More Details', 'wp-plugin-info-card' );
+}
+
+$installs_url = sprintf( 'https://wordpress.org/plugins/%s/advanced/', $wppic_data->slug );
+if ( isset( $wppic_data->is_edd ) && $wppic_data->is_edd ) {
+	$installs_url = $wppic_data->download_link;
+}
+
 
 /***************************************************************
  * Start template
@@ -103,7 +113,7 @@ if ( ! empty( $wppic_data->banners['low'] ) ) {
 						</div>
 					</div>
 				</a>
-				<a href="<?php echo esc_url( sprintf( 'https://wordpress.org/plugins/%s/advanced/', $wppic_data->slug ) ); ?>">
+				<a href="<?php echo esc_url( $installs_url ); ?>">
 					<div class="wp-pic-bar-item">
 						<div class="wp-pic-plugin-screenshots-meta-item-svg">
 							<svg width="24" height="24">
@@ -117,7 +127,7 @@ if ( ! empty( $wppic_data->banners['low'] ) ) {
 				</a>
 			</div>
 			<div class="wp-pic-download">
-				<span><a href="<?php echo esc_url_raw( $wppic_data->download_link ); ?>"><?php _e( 'Download', 'wp-plugin-info-card' ); ?></a></span>
+				<span><a href="<?php echo esc_url_raw( $wppic_data->download_link ); ?>"><?php echo esc_html( $download_label ); ?></a></span>
 			</div>
 		</div>
 	</div>

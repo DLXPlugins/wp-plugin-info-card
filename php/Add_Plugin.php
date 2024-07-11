@@ -145,6 +145,8 @@ class Add_Plugin {
 					'icons'                   => $plugin_info->icons,
 					'banners'                 => $plugin_info->banners,
 					'screenshots'             => $plugin_info->screenshots,
+					'is_edd'                  => false,
+					'review_url'              => '',
 				);
 			}
 		}

@@ -43,9 +43,42 @@ class EDD {
 
 			// For clearing plugin cache when a download is updated.
 			add_action( 'save_post', array( $this, 'clear_plugin_cache' ), 10 );
+
+			// Filter the plugin data before it is output.
+			add_filter( 'wppic_data_pre_display', array( $this, 'modify_wppic_data' ), 10, 2 );
 		}
 
 		return $self;
+	}
+
+	/**
+	 * Modify the plugin data before it is output.
+	 *
+	 * @param object $existing_data Existing plugin data.
+	 * @param string $slug          Plugin slug.
+	 *
+	 * @return array
+	 */
+	public function modify_wppic_data( $existing_data, $slug ) {
+		if ( ! function_exists( 'edd_get_download' ) ) {
+			return $existing_data;
+		}
+		if ( isset( $existing_data->is_edd ) && $existing_data->is_edd ) {
+			$maybe_download = edd_get_download( $slug );
+			if ( ! $maybe_download ) {
+				return $existing_data;
+			}
+
+			// Get review URL.
+			$reviews_url = get_post_meta( $maybe_download->ID, '_wppic_reviews_url', true );
+			if ( $reviews_url ) {
+				$existing_data->reviews_url = esc_url_raw( $reviews_url );
+			} else {
+				$existing_data->reviews_url = get_permalink( $maybe_download->ID );
+			}
+		}
+
+		return $existing_data;
 	}
 
 	/**
@@ -97,6 +130,34 @@ class EDD {
 		register_post_meta(
 			'download',
 			'_wppic_plugin_author', /* true or false */
+			array(
+				'sanitize_callback' => 'sanitize_text_field',
+				'show_in_rest'      => true,
+				'type'              => 'string',
+				'auth_callback'     => function () {
+					return current_user_can( 'edit_posts' );
+				},
+				'single'            => true,
+				'default'           => '',
+			)
+		);
+		register_post_meta(
+			'download',
+			'_wppic_reviews_url',
+			array(
+				'sanitize_callback' => 'sanitize_text_field',
+				'show_in_rest'      => true,
+				'type'              => 'string',
+				'auth_callback'     => function () {
+					return current_user_can( 'edit_posts' );
+				},
+				'single'            => true,
+				'default'           => '',
+			)
+		);
+		register_post_meta(
+			'download',
+			'_wppic_downloads_url',
 			array(
 				'sanitize_callback' => 'sanitize_text_field',
 				'show_in_rest'      => true,
@@ -195,6 +256,10 @@ class EDD {
 			}
 		}
 
+		// Get custom EDD Purchase URL, or use the default.
+		$maybe_download_url = get_post_meta( $maybe_download->ID, '_wppic_downloads_url', true );
+		$download_url 	 = $maybe_download_url ? $maybe_download_url : get_permalink( $maybe_download->ID );
+
 		// Get the short description from excerpt. Overwrite with readme later if needed.
 		$existing_data['short_description'] = get_the_excerpt( $maybe_download->ID );
 
@@ -216,18 +281,18 @@ class EDD {
 		if ( $readme_homepage ) {
 			$existing_data['homepage'] = $readme_homepage;
 		} else {
-			$existing_data['homepage'] = get_permalink( $maybe_download->ID );
+			$existing_data['homepage'] = $download_url;
 		}
 
 		// Set the download link to the download page.
-		$existing_data['download_link'] = get_permalink( $maybe_download->ID );
+		$existing_data['download_link'] = $download_url;
 
 		// Get the URL for the download.
-		$existing_data['url'] = get_permalink( $maybe_download->ID );
+		$existing_data['url'] = $download_url;
 
 		// Set last updated and mk.
 		$existing_data['last_updated']    = get_the_modified_date( 'Y-m-d', $maybe_download->ID );
-		$existing_data['last_updated_mk'] = strtotime( get_the_modified_date( 'Y-m-d', $maybe_download->ID ) );
+		$existing_data['last_updated_mk'] = get_the_modified_date( 'Y-m-d', $maybe_download->ID );
 
 		// Set the plugin added date.
 		$existing_data['added'] = get_the_date( 'Y-m-d', $maybe_download->ID );
@@ -309,7 +374,7 @@ class EDD {
 			// Try to get from options.
 			$banner_id = (int) $options['edd_default_banner_id'];
 			if ( 0 !== $banner_id ) {
-				$banner = wp_get_attachment_image_src( $banner_id );
+				$banner = wp_get_attachment_image_src( $banner_id, 'full' );
 				if ( $banner ) {
 					$existing_data['banners'] = array(
 						'high' => $banner[0],
@@ -320,7 +385,6 @@ class EDD {
 			if ( ! isset( $existing_data['banners'] ) ) {
 				$existing_data['banners'] = array();
 			}
-			
 		}
 
 		// Set screenshots.
@@ -329,9 +393,9 @@ class EDD {
 		// Check post meta to see if we're overriding a rating.
 		$override_rating = (bool) get_post_meta( $maybe_download->ID, '_wppic_override_ratings', true );
 		if ( $override_rating ) {
-			$existing_data['rating'] = get_post_meta( $maybe_download->ID, '_wppic_rating_percentage', true );
+			$existing_data['rating']      = get_post_meta( $maybe_download->ID, '_wppic_rating_percentage', true );
 			$existing_data['num_ratings'] = get_post_meta( $maybe_download->ID, '_wppic_num_ratings', true );
-			$existing_data['ratings'] = array();
+			$existing_data['ratings']     = array();
 		} else {
 			// Get rating from meta.
 			$maybe_rating = get_post_meta( $maybe_download->ID, 'edd_reviews_average_rating', true );
@@ -343,6 +407,17 @@ class EDD {
 				$existing_data['ratings']     = array();
 			}
 		}
+
+		// Set the review URL from meta, or download.
+		$reviews_url = get_post_meta( $maybe_download->ID, '_wppic_reviews_url', true );
+		if ( $reviews_url ) {
+			$existing_data['reviews_url'] = esc_url_raw( $reviews_url );
+		} else {
+			$existing_data['reviews_url'] = get_permalink( $maybe_download->ID );
+		}
+
+		// Set EDD flag.
+		$existing_data['is_edd'] = true;
 
 		return $existing_data;
 	}

@@ -2,13 +2,14 @@ import { __ } from '@wordpress/i18n';
 import { useState, useEffect } from 'react';
 import { ToggleControl, TextControl, PanelRow } from '@wordpress/components';
 import { useDispatch, select } from '@wordpress/data';
-import { over } from 'lodash';
 
 const Sidebar = ( props ) => {
 	const [ pluginAuthor, setPluginAuthor ] = useState( '' );
 	const [ overrideRatings, setOverrideRatings ] = useState( false );
 	const [ numRatings, setNumRatings ] = useState( 0 );
 	const [ ratingPercentage, setRatingPercentage ] = useState( 0 );
+	const [ reviewsUrl, setReviewsUrl ] = useState( '' );
+	const [ downloadsUrl, setDownloadsUrl ] = useState( '' );
 
 	const { editPost } = useDispatch( 'core/editor' );
 
@@ -22,7 +23,9 @@ const Sidebar = ( props ) => {
 			_wppic_plugin_author,
 			_wppic_override_ratings,
 			_wppic_num_ratings,
-			_wppic_rating_percentage
+			_wppic_rating_percentage,
+			_wppic_reviews_url,
+			_wppic_downloads_url,
 		} = select( 'core/editor' )
 			.getEditedPostAttribute( 'meta' );
 
@@ -47,6 +50,16 @@ const Sidebar = ( props ) => {
 		if ( _wppic_rating_percentage !== null || typeof _wppic_rating_percentage !== 'undefined' ) {
 			setRatingPercentage( _wppic_rating_percentage );
 		}
+
+		// Get reviews URL.
+		if ( _wppic_reviews_url !== null || typeof _wppic_reviews_url !== 'undefined' ) {
+			setReviewsUrl( _wppic_reviews_url );
+		}
+
+		// Get the downloads URL.
+		if ( _wppic_downloads_url !== null || typeof _wppic_downloads_url !== 'undefined' ) {
+			setDownloadsUrl( _wppic_downloads_url );
+		}
 	}, [] );
 	return (
 		<>
@@ -59,6 +72,28 @@ const Sidebar = ( props ) => {
 						setMetaFieldValue( '_wppic_plugin_author', value );
 					} }
 					help={ __( 'Enter the plugin author name, or the author of the plugin. If this is blank, the post author will be used.', 'wp-plugin-info-card' ) }
+				/>
+			</PanelRow>
+			<PanelRow>
+				<TextControl
+					label={ __( 'Reviews URL', 'wp-plugin-info-card' ) }
+					value={ reviewsUrl }
+					onChange={ ( value ) => {
+						setReviewsUrl( value );
+						setMetaFieldValue( '_wppic_reviews_url', value );
+					} }
+					help={ __( 'Enter the URL that will be used to link to reviews. Otherwise, it will link to the download page.', 'wp-plugin-info-card' ) }
+				/>
+			</PanelRow>
+			<PanelRow>
+				<TextControl
+					label={ __( 'Downloads URL', 'wp-plugin-info-card' ) }
+					value={ downloadsUrl }
+					onChange={ ( value ) => {
+						setDownloadsUrl( value );
+						setMetaFieldValue( '_wppic_downloads_url', value );
+					} }
+					help={ __( 'Enter the URL that will be used to link to your download. Otherwise, it will link to the EDD download page.', 'wp-plugin-info-card' ) }
 				/>
 			</PanelRow>
 			<PanelRow>

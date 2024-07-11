@@ -35,6 +35,14 @@ if ( !empty( $wppic_data->banners[ 'low' ] ) ) {
 	$banner = '<img src="' . esc_attr( $wppic_data->banners[ 'low' ] ) . '" alt="' . $wppic_data->name . '" />';
 }
 
+$reviews_url = sprintf(
+	'https://wordpress.org/support/view/plugin-reviews/%s',
+	$wppic_data->slug
+);
+if ( isset( $wppic_data->reviews_url ) && ! empty( $wppic_data->reviews_url ) ) {
+	$reviews_url = $wppic_data->reviews_url;
+}
+
 
 /***************************************************************
  * Start template
@@ -57,7 +65,7 @@ if ( !empty( $wppic_data->banners[ 'low' ] ) ) {
 		<div class="wp-pic-half-last">
 			<div class="wp-pic-bottom">
 				<div class="wp-pic-bar">
-					<a href="https://wordpress.org/support/view/plugin-reviews/<?php echo $wppic_data->slug ?>" class="wp-pic-rating" target="_blank" title="<?php _e( 'Ratings', 'wp-plugin-info-card' ) ?>">
+					<a href="<?php echo esc_url( $reviews_url ); ?>" class="wp-pic-rating" target="_blank" title="<?php _e( 'Ratings', 'wp-plugin-info-card' ) ?>">
 						<?php echo round( $wppic_data->rating ) ?>%<em><?php _e( 'Ratings', 'wp-plugin-info-card' ) ?></em>
 					</a>
 					<a href="<?php echo $wppic_data->download_link ?>" class="wp-pic-downloaded" target="_blank" title="<?php _e( 'Direct download', 'wp-plugin-info-card' ) ?>">

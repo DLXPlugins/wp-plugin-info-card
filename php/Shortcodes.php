@@ -1416,6 +1416,18 @@ class Shortcodes {
 		}
 		$wppic_data->credit = $credit;
 
+		/**
+		 * Filter the plugin data before it is displayed.
+		 *
+		 * @param object $wppic_data The plugin data.
+		 * @param string $type The type of asset (plugin, theme).
+		 * @param string $slug The asset slug.
+		 * @param string $layout The layout being used.
+		 *
+		 * @since 5.2.0
+		 */
+		$wppic_data = apply_filters( 'wppic_data_pre_display', $wppic_data, $type, $slug, $layout );
+
 		// Load theme or plugin template.
 		$content = '';
 		$content = apply_filters( 'wppic_add_template', $content, array( $type, $wppic_data, $image, $layout ) );

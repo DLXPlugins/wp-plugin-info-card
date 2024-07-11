@@ -547,4 +547,8 @@ div[data-type="wp-plugin-info-card/wp-plugin-info-card"] .wp-block {
   border-bottom: 1px solid #ddd;
 }
 
+.wppic-edd-sidebar svg {
+  margin-left: 12px;
+}
+
 /*# sourceMappingURL=wppic-editor.css.map*/
