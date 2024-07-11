@@ -230,6 +230,62 @@ const Interface = ( props ) => {
 												</div>
 											</td>
 										</tr>
+										<tr>
+											<th scope="row">
+												{ __( 'Default Banner', 'wp-plugin-info-card' ) }
+											</th>
+											<td>
+												<div className="wppic-admin-row">
+													{
+														getValues( 'defaultBannerUrl' ) && (
+															<div className="wppic-admin-image-preview">
+																<img
+																	src={ getValues( 'defaultBannerUrl' ) }
+																	alt={ __( 'Default Icon', 'wp-plugin-info-card' ) }
+																	style={ {
+																		width: '400px',
+																		height: 'auto',
+																	} }
+																/>
+															</div>
+														)
+													}
+													<Button
+														variant="secondary"
+														className="wppic-btn wppic-btn-alt"
+														onClick={ () => {
+															openMediaUploader( {
+																attachmentId: getValues( 'defaultBannerId' ) || 0,
+																title: __( 'Select Default Plugin Banner', 'wp-plugin-info-card' ),
+																suggestedWidth: 1544,
+																suggestedHeight: 500,
+																aspectRatio: '386:125',
+															}, ( media ) => {
+																setValue( 'defaultBannerId', media.id );
+																setValue( 'defaultBannerUrl', media.url );
+															} );
+														} }
+													>
+														{ __( 'Select Banner Image', 'wp-plugin-info-card' ) }
+													</Button>
+													{
+														getValues( 'defaultBannerUrl' ) && (
+															<Button
+																variant="secondary"
+																className="wppic-btn wppic-btn-alt"
+																onClick={ () => {
+																	setValue( 'defaultBannerId', 0 );
+																	setValue( 'defaultBannerUrl', '' );
+																} }
+																isDestructive={ true }
+															>
+																{ __( 'Remove Banner', 'wp-plugin-info-card' ) }
+															</Button>
+														)
+													}
+												</div>
+											</td>
+										</tr>
 									</tbody>
 								</table>
 								<SaveResetButtons

@@ -3446,6 +3446,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 var _this = undefined;
+function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) return _arrayLikeToArray(b, c); var a = {}.toString.call(b).slice(8, -1); return "Object" === a && b.constructor && (a = b.constructor.name), "Map" === a || "Set" === a ? Array.from(b) : "Arguments" === a || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a) ? _arrayLikeToArray(b, c) : void 0; } }
+function _arrayLikeToArray(b, c) { (null == c || c > b.length) && (c = b.length); for (var d = 0, f = Array(c); d < c; d++) f[d] = b[d]; return f; }
+function _iterableToArrayLimit(b, c) { var d = null == b ? null : "undefined" != typeof Symbol && b[Symbol.iterator] || b["@@iterator"]; if (null != d) { var g, h, j, k, l = [], a = !0, m = !1; try { if (j = (d = d.call(b)).next, 0 === c) { if (Object(d) !== d) return; a = !1; } else for (; !(a = (g = j.call(d)).done) && (l.push(g.value), l.length !== c); a = !0); } catch (a) { m = !0, h = a; } finally { try { if (!a && null != d["return"] && (k = d["return"](), Object(k) !== k)) return; } finally { if (m) throw h; } } return l; } }
+function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
 function ownKeys(a, b) { var c = Object.keys(a); if (Object.getOwnPropertySymbols) { var d = Object.getOwnPropertySymbols(a); b && (d = d.filter(function (b) { return Object.getOwnPropertyDescriptor(a, b).enumerable; })), c.push.apply(c, d); } return c; }
 function _objectSpread(a) { for (var b = 1; b < arguments.length; b++) { var c = null != arguments[b] ? arguments[b] : {}; b % 2 ? ownKeys(Object(c), !0).forEach(function (b) { _defineProperty(a, b, c[b]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(a, Object.getOwnPropertyDescriptors(c)) : ownKeys(Object(c)).forEach(function (b) { Object.defineProperty(a, b, Object.getOwnPropertyDescriptor(c, b)); }); } return a; }
 function _defineProperty(a, b, c) { return (b = _toPropertyKey(b)) in a ? Object.defineProperty(a, b, { value: c, enumerable: !0, configurable: !0, writable: !0 }) : a[b] = c, a; }
@@ -3488,96 +3494,103 @@ var getCropControl = function getCropControl() {
   };
   return c;
 };
-
-/**
- * Retrieve crop options for an attachment.
- *
- * @param {Object} attachment Attachment image object.
- * @param {Object} controller Media controller object.
- * @return {Object} Cropping options.
- */
-var cropOptions = function cropOptions(a, b) {
-  var c = getCropSettings();
-  var d = b.get('control');
-  var e = a.get('width');
-  var f = a.get('height');
-  var g = parseInt(d.params.width, 10);
-  var h = parseInt(d.params.height, 10);
-  var i = g / h;
-  var j = e / f;
-
-  // Determine if user can skip crop.
-  var k = false;
-
-  // If ratios match, can skip crop.
-  if (i === j) {
-    k = true;
-  }
-  b.set('canSkipCrop', k);
-  var l = g;
-  var m = h;
-  if (e / f > i) {
-    if (m > f) {
-      m = f;
-    }
-    h = m;
-    g = h * i;
-  } else {
-    if (l > e) {
-      l = e;
-    }
-    g = l;
-    h = g / i;
-  }
-  var n = (e - g) / 2;
-  var o = (f - h) / 2;
-  if (n === 0) {
-    if (i > 0) {
-      n = o * i;
-    } else {
-      n = o / i;
-    }
-  }
-  if (o === 0) {
-    if (i > 0) {
-      o = n * i;
-    } else {
-      o = n / i;
-    }
-  }
-  var p = 0;
-  var q = 0;
-  if (g + n > e) {
-    p = g - 1;
-  } else {
-    p = g + n;
-  }
-  if (h + o > f) {
-    q = h - 1;
-  } else {
-    q = h + o;
-  }
-  var r = {
-    handles: true,
-    keys: true,
-    instance: true,
-    persistent: true,
-    imageWidth: e,
-    imageHeight: f,
-    x1: n,
-    y1: o,
-    x2: p,
-    y2: q,
-    aspectRatio: c.aspectRatio
-  };
-  return r;
-};
 var useMediaUploader = function useMediaUploader(a) {
+  var b = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+    c = _slicedToArray(b, 2),
+    d = c[0],
+    e = c[1];
+
+  /**
+   * Retrieve crop options for an attachment.
+   *
+   * @param {Object} attachment Attachment image object.
+   * @param {Object} controller Media controller object.
+   * @param {Object} cropSettings Crop settings.
+   *
+   * @return {Object} Cropping options.
+   */
+  var f = function cropOptions(a, b, c) {
+    var d = getCropSettings(c);
+    var e = b.get('control');
+    var f = a.get('width');
+    var g = a.get('height');
+    var h = parseInt(e.params.width, 10);
+    var i = parseInt(e.params.height, 10);
+    var j = h / i;
+    var k = f / g;
+
+    // Determine if user can skip crop.
+    var l = false;
+
+    // If ratios match, can skip crop.
+    if (j === k) {
+      l = true;
+    }
+    b.set('canSkipCrop', l);
+    var m = h;
+    var n = i;
+    if (f / g > j) {
+      if (n > g) {
+        n = g;
+      }
+      i = n;
+      h = i * j;
+    } else {
+      if (m > f) {
+        m = f;
+      }
+      h = m;
+      i = h / j;
+    }
+    var o = (f - h) / 2;
+    var p = (g - i) / 2;
+    if (o === 0) {
+      if (j > 0) {
+        o = p * j;
+      } else {
+        o = p / j;
+      }
+    }
+    if (p === 0) {
+      if (j > 0) {
+        p = o * j;
+      } else {
+        p = o / j;
+      }
+    }
+    var q = 0;
+    var r = 0;
+    if (h + o > f) {
+      q = h - 1;
+    } else {
+      q = h + o;
+    }
+    if (i + p > g) {
+      r = i - 1;
+    } else {
+      r = i + p;
+    }
+    var s = {
+      handles: true,
+      keys: true,
+      instance: true,
+      persistent: true,
+      imageWidth: f,
+      imageHeight: g,
+      x1: o,
+      y1: p,
+      x2: q,
+      y2: r,
+      aspectRatio: d.aspectRatio
+    };
+    return s;
+  };
   return {
     openMediaUploader: function openMediaUploader(a, b) {
+      e(a);
       var c = getCropSettings(a);
       var d = getCropControl(a);
-      var e = wp.media({
+      var g = wp.media({
         states: [new wp.media.controller.Library({
           title: a.title || c.title,
           library: wp.media.query({
@@ -3590,12 +3603,14 @@ var useMediaUploader = function useMediaUploader(a) {
           suggestedHeight: c.suggestedHeight
         }), new wp.media.controller.CustomizeImageCropper({
           control: d,
-          imgSelectOptions: cropOptions
+          imgSelectOptions: function imgSelectOptions(b, c) {
+            return f(b, c, a);
+          }
         })]
       });
 
       // Set the toolbar.
-      e.on('toolbar:create', function (a) {
+      g.on('toolbar:create', function (a) {
         var b = {};
         b.items = {};
         b.items.select = {
@@ -3612,53 +3627,49 @@ var useMediaUploader = function useMediaUploader(a) {
           syncSelection: true
         };
         this.createSelectToolbar(a, b);
-      }, e);
+      }, g);
 
       //For when the Add Profile Image is clicked
-      var f = 0;
-      e.on('select', function () {
+      var h = 0;
+      g.on('select', function () {
         // Get avatar attributes.
-        var a = e.state().get('selection').first().toJSON();
+        var a = g.state().get('selection').first().toJSON();
 
         // Get original attachment ID.
-        f = a.id;
+        h = a.id;
 
         // Calculate ratio.
         var c = a.width / a.height;
-        var g = d.params.width / d.params.height;
-        if (c === g) {
-          var h = e.state().get('selection').single();
-          b(h.attributes);
-          e.close();
+        var e = d.params.width / d.params.height;
+        if (c === e) {
+          var f = g.state().get('selection').single();
+          b(f.attributes);
+          g.close();
         } else {
-          e.setState('cropper');
+          g.setState('cropper');
         }
       });
       //When the remove buttons is clicked
-      e.on('remove', function () {
-        console.log('remove');
-      });
+      g.on('remove', function () {});
 
       //For when the window is closed (update the thumbnail)
-      e.on('escape', function () {
-        console.log('escape');
-      });
+      g.on('escape', function () {});
 
       // When image is cropped.
-      e.on('cropped', function (a) {
+      g.on('cropped', function (a) {
         b(a);
       });
 
       // When image cropping is skipped.
-      e.on('skippedcrop', function (a) {
+      g.on('skippedcrop', function (a) {
         b(a.attributes);
       });
-      e.on('open', function () {
+      g.on('open', function () {
         var a = wp.media.attachment(c.attachmentId);
-        var b = e.state('library').get('selection');
+        var b = g.state('library').get('selection');
         b.add(a);
       });
-      e.open();
+      g.open();
     }
   };
 };
@@ -4166,7 +4177,43 @@ var Interface = function Interface(a) {
       h('defaultIconUrl', '');
     },
     isDestructive: true
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Remove Icon', 'wp-plugin-info-card'))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Remove Icon', 'wp-plugin-info-card'))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    scope: "row"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Default Banner', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-row"
+  }, f('defaultBannerUrl') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-image-preview"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+    src: f('defaultBannerUrl'),
+    alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Default Icon', 'wp-plugin-info-card'),
+    style: {
+      width: '400px',
+      height: 'auto'
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
+    variant: "secondary",
+    className: "wppic-btn wppic-btn-alt",
+    onClick: function onClick() {
+      q({
+        attachmentId: f('defaultBannerId') || 0,
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Select Default Plugin Banner', 'wp-plugin-info-card'),
+        suggestedWidth: 1544,
+        suggestedHeight: 500,
+        aspectRatio: '386:125'
+      }, function (a) {
+        h('defaultBannerId', a.id);
+        h('defaultBannerUrl', a.url);
+      });
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Select Banner Image', 'wp-plugin-info-card')), f('defaultBannerUrl') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
+    variant: "secondary",
+    className: "wppic-btn wppic-btn-alt",
+    onClick: function onClick() {
+      h('defaultBannerId', 0);
+      h('defaultBannerUrl', '');
+    },
+    isDestructive: true
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Remove Banner', 'wp-plugin-info-card'))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_5__["default"], {
     formValues: k,
     setError: i,
     reset: g,

@@ -32,103 +32,107 @@ const getCropControl = ( overrides = {} ) => {
 	return cropControl;
 };
 
-/**
- * Retrieve crop options for an attachment.
- *
- * @param {Object} attachment Attachment image object.
- * @param {Object} controller Media controller object.
- * @return {Object} Cropping options.
- */
-const cropOptions = ( attachment, controller ) => {
-	const settings = getCropSettings();
-	const control = controller.get( 'control' );
-	const realWidth = attachment.get( 'width' );
-	const realHeight = attachment.get( 'height' );
-
-	let xInit = parseInt( control.params.width, 10 );
-	let yInit = parseInt( control.params.height, 10 );
-
-	const ratio = xInit / yInit;
-	const ratioReal = realWidth / realHeight;
-
-	// Determine if user can skip crop.
-	let canSkipCrop = false;
-
-	// If ratios match, can skip crop.
-	if ( ratio === ratioReal ) {
-		canSkipCrop = true;
-	}
-	controller.set( 'canSkipCrop', canSkipCrop );
-
-	let xImg = xInit;
-	let yImg = yInit;
-
-	if ( realWidth / realHeight > ratio ) {
-		if ( yImg > realHeight ) {
-			yImg = realHeight;
-		}
-		yInit = yImg;
-		xInit = yInit * ratio;
-	} else {
-		if ( xImg > realWidth ) {
-			xImg = realWidth;
-		}
-		xInit = xImg;
-		yInit = xInit / ratio;
-	}
-
-	let x1 = ( realWidth - xInit ) / 2;
-	let y1 = ( realHeight - yInit ) / 2;
-
-	if ( x1 === 0 ) {
-		if ( ratio > 0 ) {
-			x1 = y1 * ratio;
-		} else {
-			x1 = y1 / ratio;
-		}
-	}
-	if ( y1 === 0 ) {
-		if ( ratio > 0 ) {
-			y1 = x1 * ratio;
-		} else {
-			y1 = x1 / ratio;
-		}
-	}
-
-	let cropWidthX2 = 0;
-	let cropHeightY2 = 0;
-	if ( xInit + x1 > realWidth ) {
-		cropWidthX2 = xInit - 1;
-	} else {
-		cropWidthX2 = xInit + x1;
-	}
-	if ( yInit + y1 > realHeight ) {
-		cropHeightY2 = yInit - 1;
-	} else {
-		cropHeightY2 = yInit + y1;
-	}
-
-	const imgSelectOptions = {
-		handles: true,
-		keys: true,
-		instance: true,
-		persistent: true,
-		imageWidth: realWidth,
-		imageHeight: realHeight,
-		x1,
-		y1,
-		x2: cropWidthX2,
-		y2: cropHeightY2,
-		aspectRatio: settings.aspectRatio,
-	};
-	return imgSelectOptions;
-};
-
 const useMediaUploader = ( props ) => {
 
+	const [ cropDefaults, setCropDefaults ] = useState( {} );
+
+	/**
+	 * Retrieve crop options for an attachment.
+	 *
+	 * @param {Object} attachment Attachment image object.
+	 * @param {Object} controller Media controller object.
+	 * @param {Object} cropSettings Crop settings.
+	 *
+	 * @return {Object} Cropping options.
+	 */
+	const cropOptions = ( attachment, controller, cropSettings ) => {
+		const settings = getCropSettings( cropSettings );
+		const control = controller.get( 'control' );
+		const realWidth = attachment.get( 'width' );
+		const realHeight = attachment.get( 'height' );
+
+		let xInit = parseInt( control.params.width, 10 );
+		let yInit = parseInt( control.params.height, 10 );
+
+		const ratio = xInit / yInit;
+		const ratioReal = realWidth / realHeight;
+
+		// Determine if user can skip crop.
+		let canSkipCrop = false;
+
+		// If ratios match, can skip crop.
+		if ( ratio === ratioReal ) {
+			canSkipCrop = true;
+		}
+		controller.set( 'canSkipCrop', canSkipCrop );
+
+		let xImg = xInit;
+		let yImg = yInit;
+
+		if ( realWidth / realHeight > ratio ) {
+			if ( yImg > realHeight ) {
+				yImg = realHeight;
+			}
+			yInit = yImg;
+			xInit = yInit * ratio;
+		} else {
+			if ( xImg > realWidth ) {
+				xImg = realWidth;
+			}
+			xInit = xImg;
+			yInit = xInit / ratio;
+		}
+
+		let x1 = ( realWidth - xInit ) / 2;
+		let y1 = ( realHeight - yInit ) / 2;
+
+		if ( x1 === 0 ) {
+			if ( ratio > 0 ) {
+				x1 = y1 * ratio;
+			} else {
+				x1 = y1 / ratio;
+			}
+		}
+		if ( y1 === 0 ) {
+			if ( ratio > 0 ) {
+				y1 = x1 * ratio;
+			} else {
+				y1 = x1 / ratio;
+			}
+		}
+
+		let cropWidthX2 = 0;
+		let cropHeightY2 = 0;
+		if ( xInit + x1 > realWidth ) {
+			cropWidthX2 = xInit - 1;
+		} else {
+			cropWidthX2 = xInit + x1;
+		}
+		if ( yInit + y1 > realHeight ) {
+			cropHeightY2 = yInit - 1;
+		} else {
+			cropHeightY2 = yInit + y1;
+		}
+
+		const imgSelectOptions = {
+			handles: true,
+			keys: true,
+			instance: true,
+			persistent: true,
+			imageWidth: realWidth,
+			imageHeight: realHeight,
+			x1,
+			y1,
+			x2: cropWidthX2,
+			y2: cropHeightY2,
+			aspectRatio: settings.aspectRatio,
+		};
+		return imgSelectOptions;
+	};
 	return {
 		openMediaUploader: ( cropSettings, callback ) => {
-			const settings = getCropSettings( cropSettings);
+			setCropDefaults( cropSettings );
+			const settings = getCropSettings( cropSettings );
 			const cropControl = getCropControl( cropSettings );
 			const uploader = wp.media( {
 				states: [
@@ -143,7 +147,7 @@ const useMediaUploader = ( props ) => {
 					} ),
 					new wp.media.controller.CustomizeImageCropper( {
 						control: cropControl,
-						imgSelectOptions: cropOptions,
+						imgSelectOptions: ( attachment, controller ) => cropOptions( attachment, controller, cropSettings ),
 					} ),
 				],
 			} );
@@ -192,12 +196,10 @@ const useMediaUploader = ( props ) => {
 			} );
 			//When the remove buttons is clicked
 			uploader.on( 'remove', function() {
-				console.log( 'remove' );
 			} );
 
 			//For when the window is closed (update the thumbnail)
 			uploader.on( 'escape', function() {
-				console.log( 'escape' );
 			} );
 
 			// When image is cropped.
