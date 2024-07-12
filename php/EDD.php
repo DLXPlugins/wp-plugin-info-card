@@ -38,6 +38,10 @@ class EDD {
 			// Modify downloads post type to support custom fields.
 			add_action( 'init', array( $this, 'add_custom_fields_to_downloads' ), 100 );
 
+			// Add EDD block registration.
+			// Commented it out as a placeholder for future block.
+			// add_action( 'init', array( $this, 'init_edd_block' ) );
+
 			// Enqueue the sidebar for EDD post type.
 			add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_block_editor_assets' ) );
 
@@ -49,6 +53,43 @@ class EDD {
 		}
 
 		return $self;
+	}
+
+	/**
+	 * Registers the EDD block.
+	 */
+	public function init_edd_block() {
+		register_block_type(
+			Functions::get_plugin_dir( 'build/blocks/EDDCardGrid/block.json' ),
+			array(
+				'render_callback' => array( $this, 'edd_card_grid_output' ),
+			)
+		);
+	}
+
+	/**
+	 * Render the main info card block for EDD.
+	 *
+	 * @param array $attributes Array of block attributes.
+	 *
+	 * @return string Block rendered.
+	 */
+	public function edd_card_grid_output( $attributes ) {
+		if ( is_admin() ) {
+			return;
+		}
+
+		$shortcode_atts = array(
+			'id'     => $attributes['uniqueId'],
+			'cols'   => $attributes['cols'],
+			'colGap' => $attributes['colGap'],
+			'rowGap' => $attributes['rowGap'],
+			'scheme' => $attributes['scheme'],
+			'align'  => $attributes['align'],
+			'layout' => $attributes['layout'],
+		);
+		return '';
+		//return Shortcodes::shortcode_active_site_plugins_function( $shortcode_atts );
 	}
 
 	/**

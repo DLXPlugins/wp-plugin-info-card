@@ -14,6 +14,7 @@ import './blocks/PluginInfoCard/block';
 import './blocks/PluginInfoCardQuery/wppic-query';
 import './blocks/SitePluginsCardGrid/block';
 import './blocks/PluginScreenshotsInfoCard/block';
+//import './blocks/EDDCardGrid/block';
 
 /**
  * Add Block Category Icon.
