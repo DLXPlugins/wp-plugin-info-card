@@ -4155,7 +4155,9 @@ var Interface = function Interface(a) {
     alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Default Icon', 'wp-plugin-info-card'),
     width: "125",
     height: "125"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-button-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
     variant: "secondary",
     className: "wppic-btn wppic-btn-alt",
     onClick: function onClick() {
@@ -4177,7 +4179,7 @@ var Interface = function Interface(a) {
       h('edd_default_icon_url', '');
     },
     isDestructive: true
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Remove Icon', 'wp-plugin-info-card'))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Remove Icon', 'wp-plugin-info-card')))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
     scope: "row"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Default Banner', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
@@ -4190,7 +4192,9 @@ var Interface = function Interface(a) {
       width: '400px',
       height: 'auto'
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-button-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
     variant: "secondary",
     className: "wppic-btn wppic-btn-alt",
     onClick: function onClick() {
@@ -4213,7 +4217,7 @@ var Interface = function Interface(a) {
       h('edd_default_banner_url', '');
     },
     isDestructive: true
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Remove Banner', 'wp-plugin-info-card'))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Remove Banner', 'wp-plugin-info-card')))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_5__["default"], {
     formValues: k,
     setError: i,
     reset: g,

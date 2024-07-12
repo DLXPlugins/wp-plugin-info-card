@@ -3657,4 +3657,18 @@ body .wp-pic-plugin-screenshots-wrapper,
   text-decoration: none;
 }
 
+.wppic-admin-image-preview {
+  margin-bottom: 16px;
+}
+.wppic-admin-image-preview img {
+  border: 1px solid #ddd;
+}
+
+.wppic-admin-button-row button {
+  margin-right: 16px;
+}
+.wppic-admin-button-row button:last-child {
+  margin-right: 0;
+}
+
 /*# sourceMappingURL=wppic-styles.css.map*/

@@ -194,38 +194,40 @@ const Interface = ( props ) => {
 															</div>
 														)
 													}
-													<Button
-														variant="secondary"
-														className="wppic-btn wppic-btn-alt"
-														onClick={ () => {
-															openMediaUploader( {
-																attachmentId: getValues( 'edd_default_icon_id' ) || 0,
-																title: __( 'Select Default Plugin Icon', 'wp-plugin-info-card' ),
-																suggestedWidth: 512,
-																suggestedHeight: 512,
-															}, ( media ) => {
-																setValue( 'edd_default_icon_id', media.id );
-																setValue( 'edd_default_icon_url', media.url );
-															} );
-														} }
-													>
-														{ __( 'Select Icon', 'wp-plugin-info-card' ) }
-													</Button>
-													{
-														getValues( 'edd_default_icon_url' ) && (
-															<Button
-																variant="secondary"
-																className="wppic-btn wppic-btn-alt"
-																onClick={ () => {
-																	setValue( 'edd_default_icon_id', 0 );
-																	setValue( 'edd_default_icon_url', '' );
-																} }
-																isDestructive={ true }
-															>
-																{ __( 'Remove Icon', 'wp-plugin-info-card' ) }
-															</Button>
-														)
-													}
+													<div className="wppic-admin-button-row">
+														<Button
+															variant="secondary"
+															className="wppic-btn wppic-btn-alt"
+															onClick={ () => {
+																openMediaUploader( {
+																	attachmentId: getValues( 'edd_default_icon_id' ) || 0,
+																	title: __( 'Select Default Plugin Icon', 'wp-plugin-info-card' ),
+																	suggestedWidth: 512,
+																	suggestedHeight: 512,
+																}, ( media ) => {
+																	setValue( 'edd_default_icon_id', media.id );
+																	setValue( 'edd_default_icon_url', media.url );
+																} );
+															} }
+														>
+															{ __( 'Select Icon', 'wp-plugin-info-card' ) }
+														</Button>
+														{
+															getValues( 'edd_default_icon_url' ) && (
+																<Button
+																	variant="secondary"
+																	className="wppic-btn wppic-btn-alt"
+																	onClick={ () => {
+																		setValue( 'edd_default_icon_id', 0 );
+																		setValue( 'edd_default_icon_url', '' );
+																	} }
+																	isDestructive={ true }
+																>
+																	{ __( 'Remove Icon', 'wp-plugin-info-card' ) }
+																</Button>
+															)
+														}
+													</div>
 												</div>
 											</td>
 										</tr>
@@ -249,39 +251,41 @@ const Interface = ( props ) => {
 															</div>
 														)
 													}
-													<Button
-														variant="secondary"
-														className="wppic-btn wppic-btn-alt"
-														onClick={ () => {
-															openMediaUploader( {
-																attachmentId: getValues( 'edd_default_banner_id' ) || 0,
-																title: __( 'Select Default Plugin Banner', 'wp-plugin-info-card' ),
-																suggestedWidth: 1544,
-																suggestedHeight: 500,
-																aspectRatio: '386:125',
-															}, ( media ) => {
-																setValue( 'edd_default_banner_id', media.id );
-																setValue( 'edd_default_banner_url', media.url );
-															} );
-														} }
-													>
-														{ __( 'Select Banner Image', 'wp-plugin-info-card' ) }
-													</Button>
-													{
-														getValues( 'edd_default_banner_url' ) && (
-															<Button
-																variant="secondary"
-																className="wppic-btn wppic-btn-alt"
-																onClick={ () => {
-																	setValue( 'edd_default_banner_id', 0 );
-																	setValue( 'edd_default_banner_url', '' );
-																} }
-																isDestructive={ true }
-															>
-																{ __( 'Remove Banner', 'wp-plugin-info-card' ) }
-															</Button>
-														)
-													}
+													<div className="wppic-admin-button-row">
+														<Button
+															variant="secondary"
+															className="wppic-btn wppic-btn-alt"
+															onClick={ () => {
+																openMediaUploader( {
+																	attachmentId: getValues( 'edd_default_banner_id' ) || 0,
+																	title: __( 'Select Default Plugin Banner', 'wp-plugin-info-card' ),
+																	suggestedWidth: 1544,
+																	suggestedHeight: 500,
+																	aspectRatio: '386:125',
+																}, ( media ) => {
+																	setValue( 'edd_default_banner_id', media.id );
+																	setValue( 'edd_default_banner_url', media.url );
+																} );
+															} }
+														>
+															{ __( 'Select Banner Image', 'wp-plugin-info-card' ) }
+														</Button>
+														{
+															getValues( 'edd_default_banner_url' ) && (
+																<Button
+																	variant="secondary"
+																	className="wppic-btn wppic-btn-alt"
+																	onClick={ () => {
+																		setValue( 'edd_default_banner_id', 0 );
+																		setValue( 'edd_default_banner_url', '' );
+																	} }
+																	isDestructive={ true }
+																>
+																	{ __( 'Remove Banner', 'wp-plugin-info-card' ) }
+																</Button>
+															)
+														}
+													</div>
 												</div>
 											</td>
 										</tr>
