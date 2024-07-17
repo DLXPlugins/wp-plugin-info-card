@@ -29,7 +29,11 @@ class EDD {
 	public function run() {
 		$self = new self();
 
-		$edd_enabled = true; // todo option.
+		$edd_enabled = false;
+		$options    = Options::get_options();
+		if ( isset( $options['enable_edd'] ) && (bool) $options['enable_edd'] ) {
+			$edd_enabled = true;
+		}
 
 		if ( $edd_enabled ) {
 			add_filter( 'wppic_plugin_info', array( $this, 'add_edd_data' ), 10, 4 );

@@ -79,7 +79,7 @@ class Settings {
 			<div id="wppic-admin-header-content">
 				<div class="wppic-admin-header-logo">
 					<h1>
-						<a href="<?php echo esc_url( Functions::get_settings_url() ); ?>" class="wppic-admin-logo"><img src="<?php echo esc_url( Functions::get_plugin_url( 'assets/img/wppic-horizontal.png' ) ); ?>" alt="WP Plugin Info Card" /></a>
+						<a href="<?php echo esc_url( Functions::get_settings_url() ); ?>" class="wppic-admin-logo"><img src="<?php echo esc_url( Functions::get_plugin_url( 'assets/img/wppic-horizontal.png' ) ); ?>" alt="WP Plugin Info Card" class="desktop-logo" /><img src="<?php echo esc_url( Functions::get_plugin_url( 'assets/img/wppic.png' ) ); ?>" alt="WP Plugin Info Card" aria-hidden="true" class="mobile-logo" width="125" heigh="125" /></a>
 					</h1>
 				</div>
 				<div class="wppic-admin-header-tabs">
