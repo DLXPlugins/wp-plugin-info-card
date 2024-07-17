@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Tags: API, plugin, card, theme, block, blocks, gutenberg
 Requires at least: 3.7
 Tested up to: 6.6
-Stable tag: 5.1.3
+Stable tag: 5.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,6 +100,12 @@ This video shows you how:
 11. WordPress layout with themes and 2 columns
 
 == Changelog ==
+
+= 5.2.0 =
+* Released 2024-07-17
+* New Feature: Added Easy Digital Downloads integration.
+* Bug fix: Fixing large layout in the block editor.
+* Bug fix: Fixing mobile styling in the admin options.
 
 = 5.1.1 =
 * Released 2024-07-09
@@ -443,5 +449,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 5.1.2 =
-New layout: Ratings. Display plugin or theme ratings in a card format. Numerous bug fixes.
+= 5.2.0 =
+New feature: Easy Digital Downloads integration. Fixing the large layout in the block editor. Fixing mobile styling for CSS.
