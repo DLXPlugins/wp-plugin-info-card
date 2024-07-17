@@ -11,9 +11,11 @@
  * Description: WP Plugin Info Card displays plugins & themes identity cards in a beautiful box with a smooth rotation effect using WordPress.org Plugin API & WordPress.org Theme API. Dashboard widget included.
  * Author: Brice CAPOBIANCO, Ronald Huereca
  * Author URI: https://dlxplugins.com/plugins/plugin-info-card/
- * Version: 5.1.2
+ * Version: 5.1.3
  * Domain Path: /langs
  * Text Domain: wp-plugin-info-card
+ * License: GPL v2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 
 namespace MediaRon\WPPIC;
@@ -36,7 +38,7 @@ if ( file_exists( __DIR__ . '/lib/autoload.php' ) ) {
  * Define Constants.
  */
 if ( ! defined( 'WPPIC_VERSION' ) ) {
-	define( 'WPPIC_VERSION', '5.1.2' );
+	define( 'WPPIC_VERSION', '5.1.3' );
 }
 if ( ! defined( 'WPPIC_PATH' ) ) {
 	define( 'WPPIC_PATH', plugin_dir_path( __FILE__ ) . '/src/' );
@@ -110,6 +112,12 @@ class WP_Plugin_Info_Card {
 	 * Run when plugins have finished loading. Begin main initialization.
 	 */
 	public function plugins_loaded() {
+		/**
+		 * Fires before the plugin has been loaded and initialized.
+		 *
+		 * @since 5.2.0
+		 */
+		do_action( 'pre_wppic_loaded' );
 
 		// Register block related hooks.
 		$blocks = new Blocks();
@@ -135,11 +143,23 @@ class WP_Plugin_Info_Card {
 		$shortcodes = new Shortcodes();
 		$shortcodes->run();
 
+		if ( Functions::is_edd_installed() ) {
+			$edd = new EDD();
+			$edd->run();
+		}
+
 		// For the admin.
 		if ( is_admin() ) {
 			// Set up admin.
 			new Admin\Init();
 		}
+
+		/**
+		 * Fires after the plugin has been loaded and initialized.
+		 *
+		 * @since 5.2.0
+		 */
+		do_action( 'wppic_loaded' );
 	}
 }
 

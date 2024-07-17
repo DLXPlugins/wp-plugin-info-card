@@ -210,6 +210,94 @@ class Shortcodes {
 	}
 
 	/**
+	 * Get EDD plugin data for return.
+	 *
+	 * @param array $request Request data.
+	 */
+	protected function get_edd_plugin_downloads( $request ) {
+		// Get plugin data for active plugins.
+		if ( ! Functions::is_edd_installed() || ! function_exists( 'edd_get_download' ) ) {
+			wp_send_json_error( array( 'message' => 'No plugins found.' ) );
+		}
+
+		// Get options and check if EDD is enabled.
+		$options = Options::get_options();
+
+		// Check if EDD is enabled.
+		if ( ! (bool) $options['enable_edd'] ) {
+			wp_send_json_error( array( 'message' => 'No plugins found.' ) );
+		}
+
+		// Get pagination.
+		$per_page = 5;
+		$page     = isset( $request['page'] ) ? absint( $request['page'] ) : 1;
+		$order_by = isset( $request['orderby'] ) ? sanitize_text_field( $request['orderby'] ) : 'title';
+		$order    = isset( $request['order'] ) ? sanitize_text_field( $request['order'] ) : 'ASC';
+
+		$edd_query_args = array(
+			'post_type'      => 'download',
+			'posts_per_page' => $per_page,
+			'paged'          => $page,
+			'meta_query'	 => array(
+				array(
+					'key'     => '_edd_sl_enabled',
+					'value'   => '1',
+					'compare' => '=',
+				),
+			),
+			'orderby'        => $order_by,
+			'order'          => $order,
+		);
+
+		$edd_query = new \WP_Query( $edd_query_args );
+
+		// Return early if no posts found.
+		if ( ! $edd_query->have_posts() ) {
+			\wp_send_json_success(
+				array(
+					'page'                => 1,
+					'more_results'        => false,
+					'plugins'             => array(),
+					'num_plugins'         => 0,
+					'percentage_complete' => 100,
+				)
+			);
+		}
+
+		// Get download IDs.
+		$download_ids = wp_list_pluck( $edd_query->posts, 'ID' );
+
+		// Gather downloads.
+		$downloads = array();
+		foreach ( $download_ids as $download_id ) {
+			$download = \edd_get_download( $download_id );
+			$downloads[ $download->post_name ] = wppic_api_parser( 'plugin', $download->post_name, HOUR_IN_SECONDS );
+		}
+
+		// Get next page.
+		$next_page = $page + 1;
+
+		// Get percentage processed with page and per_page calculation.
+		$percentage = ( ( $page * $per_page ) / $edd_query->max_num_pages ) * 100;
+		if ( $percentage > 100 ) {
+			$percentage = 100;
+		}
+
+		$return_plugins = json_decode( json_encode( $downloads ) );
+
+		// Get .org plugins.
+		wp_send_json_success(
+			array(
+				'page'                => absint( $next_page ),
+				'more_results'        => true,
+				'plugins'             => $return_plugins,
+				'num_plugins'         => $edd_query->max_num_pages,
+				'percentage_complete' => $percentage,
+			)
+		);
+	}
+
+	/**
 	 * Check if user has access to REST API.
 	 */
 	public function rest_check_permissions() {
@@ -1152,7 +1240,7 @@ class Shortcodes {
 								sprintf(
 								/* Translators: %s is the plugin author */
 									__( 'Last Updated: %s ago', 'wp-plugin-info-card' ),
-									$asset_data['last_updated_human_time']
+									\human_time_diff( strtotime( $asset_data['last_updated'] ) )
 								)
 							);
 							?>
@@ -1415,6 +1503,18 @@ class Shortcodes {
 			$credit .= '"></a>';
 		}
 		$wppic_data->credit = $credit;
+
+		/**
+		 * Filter the plugin data before it is displayed.
+		 *
+		 * @param object $wppic_data The plugin data.
+		 * @param string $type The type of asset (plugin, theme).
+		 * @param string $slug The asset slug.
+		 * @param string $layout The layout being used.
+		 *
+		 * @since 5.2.0
+		 */
+		$wppic_data = apply_filters( 'wppic_data_pre_display', $wppic_data, $type, $slug, $layout );
 
 		// Load theme or plugin template.
 		$content = '';

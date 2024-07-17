@@ -35,6 +35,18 @@ if ( !empty( $wppic_data->banners[ 'low' ] ) ) {
 	$banner = 'style="background-image: url(' . esc_attr( $wppic_data->banners[ 'low' ] ) . ' );"';
 }
 
+$reviews_url = sprintf(
+	'https://wordpress.org/support/view/plugin-reviews/%s',
+	$wppic_data->slug
+);
+if ( isset( $wppic_data->reviews_url ) && ! empty( $wppic_data->reviews_url ) ) {
+	$reviews_url = $wppic_data->reviews_url;
+}
+
+$flip_label = __( 'WordPress.org Plugin Page', 'wp-plugin-info-card' );
+if ( isset( $wppic_data->is_edd ) && $wppic_data->is_edd ) {
+	$flip_label = __( 'More Details', 'wp-plugin-info-card' );
+}
 
 /***************************************************************
  * Start template
@@ -47,7 +59,7 @@ if ( !empty( $wppic_data->banners[ 'low' ] ) ) {
 		<p class="wp-pic-author"><?php _e( 'Author(s):', 'wp-plugin-info-card' ) ?> <?php echo $wppic_data->author ?></p>
 		<div class="wp-pic-bottom">
 			<div class="wp-pic-bar">
-				<a href="https://wordpress.org/support/view/plugin-reviews/<?php echo $wppic_data->slug ?>" class="wp-pic-rating" target="_blank" title="<?php _e( 'Ratings', 'wp-plugin-info-card' ) ?>">
+				<a href="<?php echo esc_url( $reviews_url ); ?>" class="wp-pic-rating" target="_blank" title="<?php _e( 'Ratings', 'wp-plugin-info-card' ) ?>">
 					<?php echo round( $wppic_data->rating ) ?>%<em><?php _e( 'Ratings', 'wp-plugin-info-card' ) ?></em>
 				</a>
 				<a href="<?php echo $wppic_data->download_link ?>" class="wp-pic-downloaded" target="_blank" title="<?php _e( 'Direct download', 'wp-plugin-info-card' ) ?>">
@@ -69,7 +81,7 @@ if ( !empty( $wppic_data->banners[ 'low' ] ) ) {
 		<p class="wp-pic-updated"><span><?php _e( 'Last Updated:', 'wp-plugin-info-card' ) ?></span> <?php echo $wppic_data->last_updated ?></p>
 		<div class="wp-pic-bottom">
 			<div class="wp-pic-bar">
-				<a href="https://wordpress.org/support/view/plugin-reviews/<?php echo $wppic_data->slug ?>" class="wp-pic-rating" target="_blank" title="<?php _e( 'Ratings', 'wp-plugin-info-card' ) ?>">
+				<a href="<?php echo esc_url( $reviews_url ); ?>" class="wp-pic-rating" target="_blank" title="<?php _e( 'Ratings', 'wp-plugin-info-card' ) ?>">
 					<?php echo round( $wppic_data->rating ) ?>%<em><?php _e( 'Ratings', 'wp-plugin-info-card' ) ?></em>
 				</a>
 				<a href="<?php echo $wppic_data->download_link ?>" class="wp-pic-downloaded" target="_blank" title="<?php _e( 'Direct download', 'wp-plugin-info-card' ) ?>">
@@ -79,9 +91,9 @@ if ( !empty( $wppic_data->banners[ 'low' ] ) ) {
 					<?php echo $wppic_data->requires ?><em><?php _e( 'Requires', 'wp-plugin-info-card' ) ?></em>
 				</a>
 			</div>
-			<a class="wp-pic-page" href="<?php echo $wppic_data->url ?>" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ) ?>"><?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ) ?></a>
+			<a class="wp-pic-page" href="<?php echo $wppic_data->url ?>" target="_blank" title="<?php echo esc_attr( $flip_label ); ?>"><?php echo esc_html( $flip_label ); ?></a>
 		</div>
-		<a class="wp-pic-asset-bg" <?php echo $banner ?> href="<?php echo $wppic_data->url ?>" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ) ?>">
+		<a class="wp-pic-asset-bg" <?php echo $banner ?> href="<?php echo $wppic_data->url ?>" target="_blank" title="<?php echo esc_attr( $flip_label ); ?>">
 			<span class="wp-pic-asset-bg-title"><span><?php echo $wppic_data->name ?></span></span>
 		</a>
 		<div class="wp-pic-goback" title="<?php _e( 'Back', 'wp-plugin-info-card' ) ?>"><span></span></div>

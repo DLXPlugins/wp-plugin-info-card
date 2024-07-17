@@ -16,11 +16,28 @@ module.exports = ( env ) => {
 			devtool: 'production' === env.mode ? false : 'source-map',
 		},
 		{
+			...defaultConfig,
+			module: {
+				...defaultConfig.module,
+				rules: [ ...defaultConfig.module.rules ],
+			},
+			mode: env.mode,
+			devtool: 'production' === env.mode ? false : 'source-map',
+			entry: {
+				'edd-sidebar': './src/plugins/EDD/index.js',
+			},
+			output: {
+				path: path.resolve( 'build' ),
+				filename: 'edd-sidebar.js',
+			},
+		},
+		{
 			entry: {
 				'wppic-admin': [ './src/scss/wppic-admin-style.scss' ],
 				'wppic-styles': [ './src/scss/wppic-style.scss' ],
 				'wppic-editor': [ './src/scss/editor.scss' ],
 				'wppic-admin-home': [ './src/react/views/home/index.js' ],
+				'wppic-admin-edd': [ './src/react/views/edd/index.js' ],
 				'wppic-fancybox': './src/js/fancyapps/carousel.js',
 				'wppic-fancybox-css': './src/scss/carousel.scss',
 			},

@@ -40,7 +40,7 @@ class Main {
 	 * Include admin scripts for the home screen.
 	 */
 	public function admin_scripts() {
-		$deps = require_once Functions::get_plugin_dir( 'dist/wppic-admin-home.asset.php' );
+		$deps = require Functions::get_plugin_dir( 'dist/wppic-admin-home.asset.php' );
 		wp_enqueue_script(
 			'wppic-admin-home',
 			Functions::get_plugin_url( 'dist/wppic-admin-home.js' ),

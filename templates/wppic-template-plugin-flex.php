@@ -41,6 +41,23 @@ if ( empty( $banner_image ) ) {
 }
 $wppic_data->name = wp_trim_words( $wppic_data->name, 6 );
 
+$reviews_url = sprintf(
+	'https://wordpress.org/support/view/plugin-reviews/%s',
+	$wppic_data->slug
+);
+if ( isset( $wppic_data->reviews_url ) && ! empty( $wppic_data->reviews_url ) ) {
+	$reviews_url = $wppic_data->reviews_url;
+}
+
+$download_label = sprintf(
+	/* translators: %s: Plugin Name */
+	__( 'Download: %s', 'wp-plugin-info-card' ),
+	$wppic_data->name
+);
+if ( isset( $wppic_data->is_edd ) && $wppic_data->is_edd ) {
+	$download_label = __( 'More Details', 'wp-plugin-info-card' );
+}
+
 /***************************************************************
  * Start template
  ***************************************************************/
@@ -71,7 +88,7 @@ $wppic_data->name = wp_trim_words( $wppic_data->name, 6 );
 		</div>
 		<div class="wp-pic-bottom">
 			<div class="wp-pic-bar">
-				<a href="https://wordpress.org/support/view/plugin-reviews/<?php echo $wppic_data->slug ?>" class="wp-pic-rating" target="_blank" title="<?php _e( 'Ratings', 'wp-plugin-info-card' ) ?>">
+				<a href="<?php echo esc_url( $reviews_url ); ?>" class="wp-pic-rating" target="_blank" title="<?php _e( 'Ratings', 'wp-plugin-info-card' ) ?>">
 					<?php echo round( $wppic_data->rating ); ?>%<em><?php _e( 'Ratings', 'wp-plugin-info-card' ) ?></em>
 				</a>
 				<a href="<?php echo $wppic_data->download_link ?>" class="wp-pic-downloaded" target="_blank" title="<?php _e( 'Direct download', 'wp-plugin-info-card' ) ?>">
@@ -83,7 +100,7 @@ $wppic_data->name = wp_trim_words( $wppic_data->name, 6 );
 			</div>
 			<div class="wp-pic-download-link">
 				<a href="<?php echo esc_url( $wppic_data->download_link ) ?>" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ) ?>">
-				<span><?php _e( 'Download:', 'wp-plugin-info-card' ); ?> <?php echo esc_html( $wppic_data->name ); ?></span>
+				<span><?php echo esc_html( $download_label ); ?></span>
 				</a>
 			</div>
 		</div>

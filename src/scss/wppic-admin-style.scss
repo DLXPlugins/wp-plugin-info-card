@@ -51,6 +51,22 @@ html {
 				height: auto;
 			}
 		}
+		img.desktop-logo {
+			display: none;
+		}
+		img.mobile-logo {
+			display: block;
+			max-width: 50px;
+			height: auto;
+		}
+		@include respond-to('medium') {
+			img.desktop-logo {
+				display: block;
+			}
+			img.mobile-logo {
+				display: none;
+			}
+		}
 	}
 
 	nav svg {
@@ -1157,7 +1173,10 @@ h3.wp-pic-title {
 /* New Admin styles */
 #wppic-admin-header-content {
 	display: grid;
-	grid-template-columns: 370px 1fr;
+	grid-template-columns: 100px 1fr;
+	@include respond-to ('medium') {
+		grid-template-columns: 370px 1fr;
+	}
 	padding: 5px 20px;
 	padding-bottom: 0;
 }
@@ -1187,3 +1206,40 @@ p.wppic-admin-header-description {
  .fancybox__container {
 	z-index: 10000;
  }
+
+.wppic-admin-image-preview {
+	margin-bottom: 16px;
+	img {
+		border: 1px solid #ddd;
+	}
+}
+.wppic-admin-button-row {
+	button {
+		margin-right: 16px;
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}
+.wppic-edd-extension {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+
+}
+.wppic-edd-extension__image {
+	line-height: 0;
+}
+.wppic-edd-extension-status {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 16px 12px;
+	background: #49a939;
+	color: #FFF;
+
+	&.not-installed {
+		background: #bc2b2c;
+		color: #FFF;
+	}
+}

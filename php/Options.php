@@ -57,6 +57,7 @@ class Options {
 				case 'ajax':
 				case 'enqueue':
 				case 'credit':
+				case 'enable_edd':
 					$option = filter_var( $options[ $key ], FILTER_VALIDATE_BOOLEAN );
 					break;
 				default:
@@ -136,6 +137,11 @@ class Options {
 			'enable_local_screenshots_keep_current'     => false,
 			'enable_local_screenshots_cli_command'      => false,
 			'screenshots_table_version'                 => '0.0.0',
+			'enable_edd'                                => false,
+			'edd_default_icon_id'                       => 0,
+			'edd_default_banner_id'                     => 0,
+			'edd_default_icon_url'                      => '',
+			'edd_default_banner_url'                    => '',
 		);
 		return $defaults;
 	}
