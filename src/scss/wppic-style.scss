@@ -3366,25 +3366,3 @@ body .wp-pic-plugin-screenshots-wrapper,
 		}
 	}
 }
-.wppic-admin-image-preview {
-	margin-bottom: 16px;
-	img {
-		border: 1px solid #ddd;
-	}
-}
-.wppic-admin-button-row {
-	button {
-		margin-right: 16px;
-		&:last-child {
-			margin-right: 0;
-		}
-	}
-}
-.wppic-edd-extension-status {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 16px 12px;
-	background: #f9f9f9;
-	color: #333;
-}

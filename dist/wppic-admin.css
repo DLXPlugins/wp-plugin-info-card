@@ -7189,29 +7189,6 @@ body .wp-pic-plugin-screenshots-wrapper,
   text-decoration: none;
 }
 
-.wppic-admin-image-preview {
-  margin-bottom: 16px;
-}
-.wppic-admin-image-preview img {
-  border: 1px solid #ddd;
-}
-
-.wppic-admin-button-row button {
-  margin-right: 16px;
-}
-.wppic-admin-button-row button:last-child {
-  margin-right: 0;
-}
-
-.wppic-edd-extension-status {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px 12px;
-  background: #f9f9f9;
-  color: #333;
-}
-
 button.button-reset.components-button, button.button-reset.components-button:focus, button.button-reset.components-button:hover, button.button-reset.components-button.is-secondary, button.button-reset.components-button.is-secondary:focus, button.button-reset.components-button.is-secondary:hover, button.button-reset, button.button-reset:focus, button.button-reset:hover {
   display: inline-block;
   background: none;
@@ -8428,6 +8405,43 @@ p.wppic-admin-header-description {
 
 .fancybox__container {
   z-index: 10000;
+}
+
+.wppic-admin-image-preview {
+  margin-bottom: 16px;
+}
+.wppic-admin-image-preview img {
+  border: 1px solid #ddd;
+}
+
+.wppic-admin-button-row button {
+  margin-right: 16px;
+}
+.wppic-admin-button-row button:last-child {
+  margin-right: 0;
+}
+
+.wppic-edd-extension {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.wppic-edd-extension__image {
+  line-height: 0;
+}
+
+.wppic-edd-extension-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 12px;
+  background: #49a939;
+  color: #FFF;
+}
+.wppic-edd-extension-status.not-installed {
+  background: #bc2b2c;
+  color: #FFF;
 }
 
 /*# sourceMappingURL=wppic-admin.css.map*/

@@ -1206,3 +1206,40 @@ p.wppic-admin-header-description {
  .fancybox__container {
 	z-index: 10000;
  }
+
+.wppic-admin-image-preview {
+	margin-bottom: 16px;
+	img {
+		border: 1px solid #ddd;
+	}
+}
+.wppic-admin-button-row {
+	button {
+		margin-right: 16px;
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}
+.wppic-edd-extension {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+
+}
+.wppic-edd-extension__image {
+	line-height: 0;
+}
+.wppic-edd-extension-status {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 16px 12px;
+	background: #49a939;
+	color: #FFF;
+
+	&.not-installed {
+		background: #bc2b2c;
+		color: #FFF;
+	}
+}

@@ -30,12 +30,13 @@ class EDD {
 		$self = new self();
 
 		$edd_enabled = false;
-		$options    = Options::get_options();
+		$options     = Options::get_options();
 		if ( isset( $options['enable_edd'] ) && (bool) $options['enable_edd'] ) {
 			$edd_enabled = true;
 		}
 
-		if ( $edd_enabled ) {
+		// Only if EDD is enabled and software licensing is active.
+		if ( $edd_enabled && Functions::is_activated( 'edd-software-licensing/edd-software-licenses.php' ) ) {
 			add_filter( 'wppic_plugin_info', array( $this, 'add_edd_data' ), 10, 4 );
 			add_action( 'init', array( $this, 'init' ) );
 
