@@ -333,7 +333,11 @@ const Interface = ( props ) => {
 									/>
 								</a>
 							</div>
-							<div className="wppic-edd-extension__status">
+							<div className={
+								classNames( 'wppic-edd-extension-status', {
+									'not-installed': ! wppicAdminEDD.softwareLicensingInstalled,
+								} )
+							}>
 								{ wppicAdminEDD.softwareLicensingInstalled && (
 									<>
 										{ __( 'Installed and Activated', 'wp-plugin-info-card' ) }
@@ -360,7 +364,10 @@ const Interface = ( props ) => {
 									/>
 								</a>
 							</div>
-							<div className="wppic-edd-extension__status">
+							<div className={
+								classNames( 'wppic-edd-extension-status', {
+									'not-installed': ! wppicAdminEDD.eddReviewsInstalled,
+								} ) }>
 								{ wppicAdminEDD.eddReviewsInstalled && (
 									<>
 										{ __( 'Installed and Activated', 'wp-plugin-info-card' ) }

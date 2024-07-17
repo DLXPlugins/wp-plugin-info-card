@@ -48,11 +48,57 @@ class EDD {
 			// For clearing plugin cache when a download is updated.
 			add_action( 'save_post', array( $this, 'clear_plugin_cache' ), 10 );
 
+			// For saving the classic editor meta data.
+			add_action( 'save_post', array( $this, 'save_meta_data' ), 10, 3 );
+
 			// Filter the plugin data before it is output.
 			add_filter( 'wppic_data_pre_display', array( $this, 'modify_wppic_data' ), 10, 2 );
 		}
 
 		return $self;
+	}
+
+	/**
+	 * Save the meta box data for the classic editor.
+	 *
+	 * @param int $post_id Post ID.
+	 */
+	public function save_meta_data( $post_id ) {
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+		if ( ! isset( $_POST['wppic-plugin-author'] ) ) {
+			return;
+		}
+		if ( ! isset( $_POST['wppic-reviews-url'] ) ) {
+			return;
+		}
+		if ( ! isset( $_POST['wppic-downloads-url'] ) ) {
+			return;
+		}
+		if ( ! isset( $_POST['wppic-override-ratings'] ) ) {
+			return;
+		}
+		if ( ! isset( $_POST['wppic-num-ratings'] ) ) {
+			return;
+		}
+		if ( ! isset( $_POST['wppic-rating-percentage'] ) ) {
+			return;
+		}
+
+		$author            = sanitize_text_field( wp_unslash( $_POST['wppic-plugin-author'] ) );
+		$reviews_url       = sanitize_text_field( wp_unslash( $_POST['wppic-reviews-url'] ) );
+		$downloads_url     = sanitize_text_field( wp_unslash( $_POST['wppic-downloads-url'] ) );
+		$override_ratings  = filter_var( wp_unslash( $_POST['wppic-override-ratings'] ), FILTER_VALIDATE_BOOLEAN );
+		$num_ratings       = absint( wp_unslash( $_POST['wppic-num-ratings'] ) );
+		$rating_percentage = absint( wp_unslash( $_POST['wppic-rating-percentage'] ) );
+
+		update_post_meta( $post_id, '_wppic_plugin_author', $author );
+		update_post_meta( $post_id, '_wppic_reviews_url', $reviews_url );
+		update_post_meta( $post_id, '_wppic_downloads_url', $downloads_url );
+		update_post_meta( $post_id, '_wppic_override_ratings', $override_ratings );
+		update_post_meta( $post_id, '_wppic_num_ratings', $num_ratings );
+		update_post_meta( $post_id, '_wppic_rating_percentage', $rating_percentage );
 	}
 
 	/**
@@ -89,7 +135,7 @@ class EDD {
 			'layout' => $attributes['layout'],
 		);
 		return '';
-		//return Shortcodes::shortcode_active_site_plugins_function( $shortcode_atts );
+		// return Shortcodes::shortcode_active_site_plugins_function( $shortcode_atts );
 	}
 
 	/**
@@ -252,6 +298,70 @@ class EDD {
 				'default'           => 0,
 			)
 		);
+
+		// Add the meta boxes for classic editor.
+		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
+	}
+
+	/**
+	 * Add the meta boxes for the classic editor.
+	 */
+	public function add_meta_boxes() {
+		// Only show if the classic editor is enabled for the download.
+		if ( use_block_editor_for_post_type( 'download' ) ) {
+			return;
+		}
+		add_meta_box(
+			'wppic-edd-meta-box',
+			__( 'Plugin Info Card', 'wp-plugin-info-card' ),
+			array( $this, 'classic_editor_meta_box_output' ),
+			'download',
+			'side',
+			'high'
+		);
+	}
+
+	/**
+	 * Output the meta box for the classic editor.
+	 *
+	 * @param object $post Post object.
+	 */
+	public function classic_editor_meta_box_output( $post ) {
+		$author            = get_post_meta( $post->ID, '_wppic_plugin_author', true );
+		$reviews_url       = get_post_meta( $post->ID, '_wppic_reviews_url', true );
+		$downloads_url     = get_post_meta( $post->ID, '_wppic_downloads_url', true );
+		$override_ratings  = (bool) get_post_meta( $post->ID, '_wppic_override_ratings', true );
+		$num_ratings       = get_post_meta( $post->ID, '_wppic_num_ratings', true );
+		$rating_percentage = get_post_meta( $post->ID, '_wppic_rating_percentage', true );
+
+		?>
+		<div class="wppic-edd-meta-box">
+			<p>
+				<label for="wppic-plugin-author"><?php esc_html_e( 'Plugin Author', 'wp-plugin-info-card' ); ?></label>
+				<input type="text" id="wppic-plugin-author" name="wppic-plugin-author" value="<?php echo esc_attr( $author ); ?>" class="widefat">
+			</p>
+			<p>
+				<label for="wppic-reviews-url"><?php esc_html_e( 'Reviews URL', 'wp-plugin-info-card' ); ?></label>
+				<input type="text" id="wppic-reviews-url" name="wppic-reviews-url" value="<?php echo esc_attr( $reviews_url ); ?>" class="widefat">
+			</p>
+			<p>
+				<label for="wppic-downloads-url"><?php esc_html_e( 'Downloads URL', 'wp-plugin-info-card' ); ?></label>
+				<input type="text" id="wppic-downloads-url" name="wppic-downloads-url" value="<?php echo esc_attr( $downloads_url ); ?>" class="widefat">
+			</p>
+			<p>
+				<label for="wppic-override-ratings"><?php esc_html_e( 'Override Ratings', 'wp-plugin-info-card' ); ?></label>
+				<input type="checkbox" id="wppic-override-ratings" name="wppic-override-ratings" value="1" <?php checked( $override_ratings, true ); ?>>
+			</p>
+			<p>
+				<label for="wppic-num-ratings"><?php esc_html_e( 'Number of Ratings', 'wp-plugin-info-card' ); ?></label>
+				<input type="number" id="wppic-num-ratings" name="wppic-num-ratings" value="<?php echo esc_attr( $num_ratings ); ?>" class="widefat">
+			</p>
+			<p>
+				<label for="wppic-rating-percentage"><?php esc_html_e( 'Rating Percentage', 'wp-plugin-info-card' ); ?></label>
+				<input type="number" id="wppic-rating-percentage" name="wppic-rating-percentage" value="<?php echo esc_attr( $rating_percentage ); ?>" class="widefat">
+			</p>
+		</div>
+		<?php
 	}
 
 	/**
@@ -299,7 +409,7 @@ class EDD {
 
 		// Get custom EDD Purchase URL, or use the default.
 		$maybe_download_url = get_post_meta( $maybe_download->ID, '_wppic_downloads_url', true );
-		$download_url 	 = $maybe_download_url ? $maybe_download_url : get_permalink( $maybe_download->ID );
+		$download_url       = $maybe_download_url ? $maybe_download_url : get_permalink( $maybe_download->ID );
 
 		// Get the short description from excerpt. Overwrite with readme later if needed.
 		$existing_data['short_description'] = get_the_excerpt( $maybe_download->ID );

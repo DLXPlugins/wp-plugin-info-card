@@ -4248,7 +4248,9 @@ var Interface = function Interface(a) {
       height: 'auto'
     }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "wppic-edd-extension__status"
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-edd-extension-status', {
+      'not-installed': !wppicAdminEDD.softwareLicensingInstalled
+    })
   }, wppicAdminEDD.softwareLicensingInstalled && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Installed and Activated', 'wp-plugin-info-card')), !wppicAdminEDD.softwareLicensingInstalled && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Add-on Not Acivated', 'wp-plugin-info-card')))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-edd-extension"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Reviews', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -4265,7 +4267,9 @@ var Interface = function Interface(a) {
       height: 'auto'
     }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "wppic-edd-extension__status"
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-edd-extension-status', {
+      'not-installed': !wppicAdminEDD.eddReviewsInstalled
+    })
   }, wppicAdminEDD.eddReviewsInstalled && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Installed and Activated', 'wp-plugin-info-card')), !wppicAdminEDD.eddReviewsInstalled && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Add-on Not Acivated', 'wp-plugin-info-card'))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_18__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Find out how to display your EDD plugins with WP Plugin Info Card.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {

@@ -7203,6 +7203,15 @@ body .wp-pic-plugin-screenshots-wrapper,
   margin-right: 0;
 }
 
+.wppic-edd-extension-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 12px;
+  background: #f9f9f9;
+  color: #333;
+}
+
 button.button-reset.components-button, button.button-reset.components-button:focus, button.button-reset.components-button:hover, button.button-reset.components-button.is-secondary, button.button-reset.components-button.is-secondary:focus, button.button-reset.components-button.is-secondary:hover, button.button-reset, button.button-reset:focus, button.button-reset:hover {
   display: inline-block;
   background: none;
