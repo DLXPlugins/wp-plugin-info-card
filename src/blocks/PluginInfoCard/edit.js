@@ -73,6 +73,7 @@ const WPPluginInfoCard = ( props ) => {
 	const [ data, setData ] = useState( attributes.assetData );
 	const [ align, setAlign ] = useState( attributes.align );
 	const [ noData, setNoData ] = useState( false );
+	const [ pluginThemeSearchInput, setPluginThemeSearchInput ] = useState( '' );
 
 	useEffect( () => {
 		setAttributes( { uniqueId: generatedUniqueId } );
@@ -131,6 +132,18 @@ const WPPluginInfoCard = ( props ) => {
 			setLayout( wppic.default_layout );
 		}
 	}, [] );
+
+	/**
+	 * Select the search input field.
+	 */
+	useEffect( () => {
+		if ( pluginThemeSearchInput ) {
+			pluginThemeSearchInput.focus();
+
+			// Select the text in the input field.
+			pluginThemeSearchInput.select();
+		}
+	}, [ pluginThemeSearchInput ] );
 
 	const outputInfoCards = ( cardDataArray ) => {
 		return cardDataArray.map( ( cardData, key ) => {
@@ -603,6 +616,7 @@ const WPPluginInfoCard = ( props ) => {
 														setSlug( slugSlashesRemoved );
 													}
 												} }
+												ref={ setPluginThemeSearchInput }
 											/>
 											{ noData && (
 												<Notice
