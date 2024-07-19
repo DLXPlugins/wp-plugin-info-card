@@ -412,8 +412,9 @@ class Blocks {
 			'cols'        => $attributes['cols'],
 			'col_gap'     => $attributes['colGap'],
 			'row_gap'     => $attributes['rowGap'],
-			'itemSlugs'  => $attributes['itemSlugs'],
+			'itemSlugs'   => $attributes['itemSlugs'],
 		);
+
 		$html = '';
 		if ( '' !== $attributes['width'] ) {
 			$html = sprintf( '<div class="wp-pic-full-width">%s</div>', Shortcodes::shortcode_function( $args ) );

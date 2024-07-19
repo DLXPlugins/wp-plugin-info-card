@@ -16,15 +16,21 @@
 		grid-template-columns: 1fr;
 		@include respond-to('medium') {
 			grid-template-columns: 1fr 1fr;
+			justify-content: center;
 		}
 	}
 	&.cols-3 {
 		grid-template-columns: 1fr;
 		@include respond-to('medium') {
 			grid-template-columns: 1fr 1fr;
+			justify-content: center;
+			.wp-pic-wrapper {
+				align-self: end;
+			}
 		}
 		@include respond-to('large') {
 			grid-template-columns: 1fr 1fr 1fr;
+			justify-content: center;
 		}
 		
 	}
@@ -48,14 +54,37 @@
 			@include respond-to('medium') {
 				grid-template-columns: 1fr 1fr;
 			}
+			.wp-pic-wrapper:nth-child(odd) {
+				justify-content: flex-end;
+			}
+			.wp-pic-wrapper:nth-child(even) {
+				justify-content: flex-start;
+			}
 		}
 		&.cols-3 {
 			grid-template-columns: 1fr;
 			@include respond-to('medium') {
 				grid-template-columns: 1fr 1fr;
+
+				&:nth-child(odd) {
+					.wp-pic-wrapper {
+						justify-content: flex-end;
+					}
+				}
+				&:nth-child(even) {
+					.wp-pic-wrapper {
+						justify-content: flex-start;
+					}
+				}
 			}
 			@include respond-to('large') {
 				grid-template-columns: 1fr 1fr 1fr;
+
+				&:nth-child( 3n + 1 ) {
+					.wp-pic-wrapper {
+						justify-content: flex-start;
+					}
+				}
 			}
 		}
 	}

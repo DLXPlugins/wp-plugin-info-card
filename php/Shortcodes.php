@@ -476,7 +476,8 @@ class Shortcodes {
 	 */
 	public static function shortcode_function( $atts, $content = '' ) {
 
-		$attributes = shortcode_atts(
+		$attributes = wp_parse_args(
+			$atts,
 			array(
 				'id'          => '',  // custom Div ID (could be use for anchor).
 				'type'        => '',  // plugin | theme.
@@ -495,11 +496,9 @@ class Shortcodes {
 				'cols'        => 2,
 				'col_gap'     => 20,
 				'row_gap'     => 20,
-				'itemSlugs'   => new \stdClass(),
+				'itemSlugs'   => array(),
 
 			),
-			$atts,
-			'wppic_default'
 		);
 		// Use "shortcode_atts_wppic_default" filter to edit shortcode parameters default values or add your owns.
 
@@ -600,6 +599,12 @@ class Shortcodes {
 				$add_class[] = $type;
 				$add_class[] = 'multi';
 
+				// Add custom shortcode slugs to itemslugs if it exists.
+				if ( isset( $attributes[ $asset_slug ] ) ) {
+					// Add to itemSlugs.
+					$attributes['itemSlugs'][ $asset_slug ] = $attributes[ $asset_slug ];
+				}
+
 				if ( ! empty( $custom ) ) {
 
 					$wppic_data = wppic_api_parser( $type, $asset_slug, $expiration );
@@ -690,8 +695,13 @@ class Shortcodes {
 			}
 			$add_class[] = $type;
 
-			if ( ! empty( $custom ) ) {
+			// Check to see if slug exists in attributes.
+			if ( isset( $attributes[ $slug ] ) ) {
+				// Add to itemSlugs.
+				$attributes['itemSlugs'][ $slug ] = $attributes[ $slug ];
+			}
 
+			if ( ! empty( $custom ) ) {
 				$wppic_data = wppic_api_parser( $type, $slug, $expiration );
 
 				if ( ! $wppic_data ) {
