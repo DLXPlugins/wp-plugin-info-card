@@ -153,10 +153,11 @@ const WPPluginInfoCard = ( props ) => {
 
 			// Check to see if slug is in the itemSlugs array.
 			if ( cardData.slug in itemSlugs ) {
-				textValue = itemSlugs[ cardData.slug ];
-
-				// Merge with card data.
-				cardData = { ...cardData, name: textValue };
+				if ( '' !== itemSlugs[ cardData.slug ] ) {
+					textValue = itemSlugs[ cardData.slug ];
+					// Merge with card data.
+					cardData = { ...cardData, name: textValue };
+				}
 			}
 			return (
 				<Fragment key={ key }>

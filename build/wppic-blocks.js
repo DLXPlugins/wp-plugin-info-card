@@ -2442,12 +2442,13 @@ var WPPluginInfoCard = function WPPluginInfoCard(a) {
 
       // Check to see if slug is in the itemSlugs array.
       if (a.slug in pa) {
-        c = pa[a.slug];
-
-        // Merge with card data.
-        a = _objectSpread(_objectSpread({}, a), {}, {
-          name: c
-        });
+        if ('' !== pa[a.slug]) {
+          c = pa[a.slug];
+          // Merge with card data.
+          a = _objectSpread(_objectSpread({}, a), {}, {
+            name: c
+          });
+        }
       }
       return /*#__PURE__*/React.createElement(Fragment, {
         key: b

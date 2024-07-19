@@ -495,6 +495,7 @@ class Shortcodes {
 				'cols'        => 2,
 				'col_gap'     => 20,
 				'row_gap'     => 20,
+				'itemSlugs'   => new \stdClass(),
 
 			),
 			$atts,
@@ -502,7 +503,7 @@ class Shortcodes {
 		);
 		// Use "shortcode_atts_wppic_default" filter to edit shortcode parameters default values or add your owns.
 
-		// Get admin settings.
+		// Get admin settingsr.
 		$options = Options::get_options();
 
 		// Global var to enqueue scripts + ajax param if is set to yes.
@@ -658,7 +659,7 @@ class Shortcodes {
 					// Data attribute for ajax call.
 					$content .= '<div class="wp-pic ' . esc_html( implode( ' ', $add_class ) ) . '" ' . esc_html( $containerid ) . $ajax_data . ' >';
 					if ( 'yes' !== $ajax ) {
-						$content .= self::shortcode_content( $type, $asset_slug, $image, $expiration, $layout );
+						$content .= self::shortcode_content( $type, $asset_slug, $image, $expiration, $layout, $attributes['itemSlugs'] );
 					} else {
 						$content .= '<div class="wp-pic-body-loading"><div class="signal"></div></div>';
 					}
@@ -752,7 +753,7 @@ class Shortcodes {
 				// Data attribute for ajax call.
 				$content .= '<div class="wp-pic ' . esc_html( implode( ' ', $add_class ) ) . '" ' . $containerid . $ajax_data . ' >';
 				if ( 'yes' !== $ajax ) {
-					$content .= self::shortcode_content( $type, $slug, $image, $expiration, $layout );
+					$content .= self::shortcode_content( $type, $slug, $image, $expiration, $layout, $attributes['itemSlugs']);
 				} else {
 					$content .= '<div class="wp-pic-body-loading"><div class="signal"></div></div>';
 				}
@@ -1435,8 +1436,9 @@ class Shortcodes {
 	 * @param string $image Image override.
 	 * @param string $expiration Expiration in seconds.
 	 * @param string $layout What layout is being used.
+	 * @param object $item_slugs Key separated slugs with overriding titles.
 	 */
-	public static function shortcode_content( $type = null, $slug = null, $image = null, $expiration = null, $layout = null ) {
+	public static function shortcode_content( $type = null, $slug = null, $image = null, $expiration = null, $layout = null, $item_slugs = null ) {
 
 		if ( ! empty( $_POST['type'] ) ) {
 			$type = $_POST['type'];
@@ -1515,6 +1517,11 @@ class Shortcodes {
 		 * @since 5.2.0
 		 */
 		$wppic_data = apply_filters( 'wppic_data_pre_display', $wppic_data, $type, $slug, $layout );
+
+		// Override the title if applicable.
+		if ( is_array( $item_slugs ) && isset( $item_slugs[ $slug ] ) && '' !== $item_slugs[ $slug ] ) {
+			$wppic_data->name = $item_slugs[ $slug ];
+		}
 
 		// Load theme or plugin template.
 		$content = '';

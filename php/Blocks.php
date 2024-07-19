@@ -412,6 +412,7 @@ class Blocks {
 			'cols'        => $attributes['cols'],
 			'col_gap'     => $attributes['colGap'],
 			'row_gap'     => $attributes['rowGap'],
+			'itemSlugs'  => $attributes['itemSlugs'],
 		);
 		$html = '';
 		if ( '' !== $attributes['width'] ) {
