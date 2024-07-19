@@ -33,6 +33,12 @@
     grid-template-columns: 1fr 1fr;
     justify-content: center;
   }
+  .wp-site-plugin-info-card.cols-2 .wp-pic-wrapper:nth-child(odd) {
+    justify-content: flex-end;
+  }
+  .wp-site-plugin-info-card.cols-2 .wp-pic-wrapper:nth-child(even) {
+    justify-content: flex-start;
+  }
 }
 .wp-site-plugin-info-card.cols-3 {
   grid-template-columns: 1fr;
@@ -44,6 +50,12 @@
   }
   .wp-site-plugin-info-card.cols-3 .wp-pic-wrapper {
     align-self: end;
+  }
+  .wp-site-plugin-info-card.cols-3 .wp-pic-wrapper:nth-child(odd) {
+    justify-content: flex-end;
+  }
+  .wp-site-plugin-info-card.cols-3 .wp-pic-wrapper:nth-child(even) {
+    justify-content: flex-start;
   }
 }
 @media (min-width: 1024px) {

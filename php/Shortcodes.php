@@ -1540,7 +1540,12 @@ class Shortcodes {
 				grid-row-gap: <?php echo esc_attr( $attributes['row_gap'] ); ?>px;
 			}
 
-		</style>	
+		</style>
+		<?php
+		if ( 0 === did_action( 'wppic_enqueue_scripts' ) ) {
+			do_action( 'wppic_enqueue_scripts' );
+		}
+		?>	
 		<div id="<?php echo esc_attr( $attributes['id'] ); ?>" class="wp-site-plugin-info-card cols-<?php echo esc_attr( $attributes['cols'] ); ?>">
 			<?php
 			$content = ob_get_clean();
@@ -1563,9 +1568,6 @@ class Shortcodes {
 			?>
 		</div>
 		<?php
-		if ( 0 === did_action( 'wppic_enqueue_scripts' ) ) {
-			do_action( 'wppic_enqueue_scripts' );
-		}
 		$content .= ob_get_clean();
 		return $content;
 	}
