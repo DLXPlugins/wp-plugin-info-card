@@ -106,6 +106,10 @@
     "uniqueId": {
       "type": "string",
       "default": ""
+    },
+    "itemSlugs": {
+      "type": "object",
+      "default": {}
     }
   },
   "example": {
