@@ -1,6 +1,7 @@
 @import 'breakpoints-mixin.scss';
 
-.wp-site-plugin-info-card {
+.wp-site-plugin-info-card,
+.wp-query-plugin-info-card {
 	display: grid;
 	margin: 25px auto;
 

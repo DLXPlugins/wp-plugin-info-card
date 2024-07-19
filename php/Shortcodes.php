@@ -970,6 +970,8 @@ class Shortcodes {
 					'custom'      => '',  // value to print : url|name|version|author|requires|rating|num_ratings|downloaded|last_updated|download_link.
 					'sortby'      => 'none', // none|active_installs (plugins only)|downloaded|last_updated.
 					'sort'        => 'ASC', // ASC|DESC.
+					'row_gap'     => 20,
+					'col_gap'     => 20,
 				),
 				$atts,
 				'wppic_default'
@@ -1062,52 +1064,43 @@ class Shortcodes {
 		 */
 		$sort_results = apply_filters( 'wppic_query_results', $sort_results, $type, $sortby, $sort );
 
+		// If container ID is blank, generate a random one.
+		if ( empty( $containerid ) ) {
+			$containerid = 'wppic-' . wp_rand( 0, 1000 ) . wp_generate_password( 6, false, false );
+		}
+
 		// Get the query result to build the content.
+		$content = '';
 		if ( ! is_wp_error( $sort_results ) && ! empty( $sort_results ) ) {
+			ob_start();
+			if ( 0 === did_action( 'wppic_enqueue_scripts' ) ) {
+				do_action( 'wppic_enqueue_scripts' );
+			}
+			$content .= ob_get_clean();
 			if ( is_array( $sort_results ) ) {
-
-				$content = $row = $open = $close = ''; // phpcs:ignore
-				$count   = 1;
-				if ( $column ) {
-					$open     = '<div class="wp-pic-1-' . $cols . '">';
-					$close    = '</div>';
-					$content .= '<div class="wp-pic-grid">';
-				}
-
-				// Creat the loop wp-pic-1-.
-				foreach ( $sort_results as $item ) {
-					$item = json_decode( json_encode( $item ) );
-					if ( $column && ( $count ) % $cols === 1 && $cols > 1 ) { // phpcs:ignore
-						$row      = true;
-						$content .= '<div class="wp-pic-row">';
-					}
-					$content     .= $open;
-					$atts['slug'] = $item->slug;
-					// Use the WPPIC shorcode to generate cards.
-					$content .= self::shortcode_function( $atts );
-					$content .= $close;
-					if ( $column && ( $count ) % $cols == 0 && $cols > 1 ) { // phpcs:ignore
-						$content .= '</div>';
-						$row      = false;
-					}
-					++$count;
-				}
-
-				if ( $row ) {
-					$content .= '</div>'; // end of row.
-				}
-				if ( $column ) {
-					$content .= '</div>'; // end of grid.
-				}
-
 				ob_start();
-				if ( 0 === did_action( 'wppic_enqueue_scripts' ) ) {
-					do_action( 'wppic_enqueue_scripts' );
-				}
+				?>
+				<style>
+					#<?php echo esc_attr( $containerid ); ?> {
+						grid-column-gap: <?php echo esc_attr( $col_gap ); ?>px;
+						grid-row-gap: <?php echo esc_attr( $row_gap ); ?>px;
+					}
+
+				</style>
+				<div id="<?php echo esc_attr( $containerid ); ?>" class="wp-query-plugin-info-card cols-<?php echo esc_attr( $cols ); ?>">
+					<?php
+					// Creat the loop wp-pic-1-.
+					foreach ( $sort_results as $item ) {
+						$atts['slug'] = $item['slug'];
+						// Use the WPPIC shorcode to generate cards.
+						echo self::shortcode_function( $atts );
+					}
+					?>
+				</div>
+				<?php
 				$content .= ob_get_clean();
 
 				return apply_filters( 'wppic_query_content', $content, $type, $atts );
-
 			}
 		}
 	} //end of wp-pic-query Shortcode

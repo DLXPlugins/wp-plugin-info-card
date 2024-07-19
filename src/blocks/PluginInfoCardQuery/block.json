@@ -14,9 +14,9 @@
 			"type": "array",
 			"default": []
 		},
-		"newGrid": {
-			"type": "boolean",
-			"default": false
+		"uniqueId": {
+			"type": "string",
+			"default": ""
 		},
 		"search": {
 			"type": "string",

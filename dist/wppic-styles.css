@@ -14,46 +14,57 @@
 /* Responsive styles - In hindsight, should've used mobile-first */
 /* Mixin from: https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/ */
 /* It's only used here, so no external file for mixin? */
-.wp-site-plugin-info-card {
+.wp-site-plugin-info-card,
+.wp-query-plugin-info-card {
   display: grid;
   margin: 25px auto;
 }
-.wp-site-plugin-info-card .wp-pic-wrapper {
+.wp-site-plugin-info-card .wp-pic-wrapper,
+.wp-query-plugin-info-card .wp-pic-wrapper {
   display: flex;
   justify-content: center;
 }
-.wp-site-plugin-info-card.cols-1 {
+.wp-site-plugin-info-card.cols-1,
+.wp-query-plugin-info-card.cols-1 {
   grid-template-columns: 1fr;
 }
-.wp-site-plugin-info-card.cols-2 {
+.wp-site-plugin-info-card.cols-2,
+.wp-query-plugin-info-card.cols-2 {
   grid-template-columns: 1fr;
 }
 @media (min-width: 768px) {
-  .wp-site-plugin-info-card.cols-2 {
+  .wp-site-plugin-info-card.cols-2,
+  .wp-query-plugin-info-card.cols-2 {
     grid-template-columns: 1fr 1fr;
     justify-content: center;
   }
-  .wp-site-plugin-info-card.cols-2 .wp-pic-wrapper:nth-child(odd) {
+  .wp-site-plugin-info-card.cols-2 .wp-pic-wrapper:nth-child(odd),
+  .wp-query-plugin-info-card.cols-2 .wp-pic-wrapper:nth-child(odd) {
     justify-content: flex-end;
   }
-  .wp-site-plugin-info-card.cols-2 .wp-pic-wrapper:nth-child(even) {
+  .wp-site-plugin-info-card.cols-2 .wp-pic-wrapper:nth-child(even),
+  .wp-query-plugin-info-card.cols-2 .wp-pic-wrapper:nth-child(even) {
     justify-content: flex-start;
   }
 }
-.wp-site-plugin-info-card.cols-3 {
+.wp-site-plugin-info-card.cols-3,
+.wp-query-plugin-info-card.cols-3 {
   grid-template-columns: 1fr;
 }
 @media (min-width: 768px) {
-  .wp-site-plugin-info-card.cols-3 {
+  .wp-site-plugin-info-card.cols-3,
+  .wp-query-plugin-info-card.cols-3 {
     grid-template-columns: 1fr 1fr;
   }
 }
 @media (min-width: 1024px) {
-  .wp-site-plugin-info-card.cols-3 {
+  .wp-site-plugin-info-card.cols-3,
+  .wp-query-plugin-info-card.cols-3 {
     grid-template-columns: 1fr 1fr 1fr;
     justify-content: center;
   }
-  .wp-site-plugin-info-card.cols-3 .wp-pic-wrapper {
+  .wp-site-plugin-info-card.cols-3 .wp-pic-wrapper,
+  .wp-query-plugin-info-card.cols-3 .wp-pic-wrapper {
     justify-content: center;
   }
 }

@@ -3134,9 +3134,8 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
     Q = c.cols,
     R = c.sortby,
     S = c.sort,
-    T = c.newGrid,
-    U = c.colGap,
-    V = c.rowGap;
+    T = c.colGap,
+    U = c.rowGap;
   useEffect(function () {
     // If we have HTML, then we don't need to load it.
     if (!y) {
@@ -3159,7 +3158,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
       uniqueId: e
     });
   }, []);
-  var W = function pluginOnClick(a) {
+  var V = function pluginOnClick(a) {
     if ('' !== w) {
       m(true);
       var b = wppic.rest_url + 'wppic/v2/get_query/';
@@ -3183,7 +3182,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
       });
     }
   };
-  var X = function outputInfoCards() {
+  var W = function outputInfoCards() {
     return v.map(function (a, b) {
       return /*#__PURE__*/React.createElement(Fragment, {
         key: b
@@ -3240,15 +3239,15 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
       }));
     });
   };
-  var Y = new HtmlToReactParser();
-  var Z = [{
+  var X = new HtmlToReactParser();
+  var Y = [{
     icon: 'edit',
     title: __('Reset', 'wp-plugin-info-card'),
     onClick: function onClick() {
       return i(true);
     }
   }];
-  var $ = [{
+  var Z = [{
     value: 'none',
     label: __('None', 'wp-plugin-info-card')
   }, {
@@ -3258,14 +3257,14 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
     value: 'after',
     label: __('After', 'wp-plugin-info-card')
   }];
-  var _ = [{
+  var $ = [{
     value: 'false',
     label: __('No', 'wp-plugin-info-card')
   }, {
     value: 'true',
     label: __('Yes', 'wp-plugin-info-card')
   }];
-  var aa = [{
+  var _ = [{
     value: 'default',
     label: __('Default', 'wp-plugin-info-card')
   }, {
@@ -3311,7 +3310,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
     value: 'scheme14',
     label: __('Scheme 14', 'wp-plugin-info-card')
   }];
-  var ba = [{
+  var aa = [{
     value: 'card',
     label: __('Card', 'wp-plugin-info-card')
   }, {
@@ -3327,7 +3326,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
     value: 'ratings',
     label: __('Ratings', 'wp-plugin-info-card')
   }];
-  var ca = [{
+  var ba = [{
     value: '',
     label: __('None', 'wp-plugin-info-card')
   }, {
@@ -3364,17 +3363,17 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
     value: 'download_link',
     label: __('Download Link', 'wp-plugin-info-card')
   }];
-  var da = [{
+  var ca = [{
     value: 'none',
     label: __('Default', 'wp-plugin-info-card')
   }, {
     value: 'full',
     label: __('Full Width', 'wp-plugin-info-card')
   }];
-  var ea = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__.debounce)(function (a) {
-    W(a);
+  var da = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__.debounce)(function (a) {
+    V(a);
   }, 1100);
-  var fa = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
+  var ea = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Query Options', 'wp-plugin-info-card')
   }, /*#__PURE__*/React.createElement(TextControl, {
     type: "number",
@@ -3385,27 +3384,9 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
         per_page: a
       });
       c.per_page = a;
-      ea();
+      da();
     },
     help: __('Set how many cards to return.', 'wp-plugin-info-card')
-  }), false === T && /*#__PURE__*/React.createElement(SelectControl, {
-    label: __('Columns', 'wp-plugin-info-card'),
-    options: [{
-      label: __('1', 'wp-plugin-info-card'),
-      value: '1'
-    }, {
-      label: __('2', 'wp-plugin-info-card'),
-      value: '2'
-    }, {
-      label: __('3', 'wp-plugin-info-card'),
-      value: '3'
-    }],
-    value: Q,
-    onChange: function onChange(a) {
-      d({
-        cols: a
-      });
-    }
   }), /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Sort results by:', 'wp-plugin-info-card'),
     options: [{
@@ -3445,15 +3426,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
         sort: a
       });
     }
-  }), /*#__PURE__*/React.createElement(ToggleControl, {
-    label: __('Use CSS Grid Layout', 'wp-plugin-info-card'),
-    checked: true === T,
-    onChange: function onChange(a) {
-      d({
-        newGrid: a
-      });
-    }
-  }), true === T && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(SelectControl, {
+  }), /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Columns', 'wp-plugin-info-card'),
     options: [{
       label: __('1', 'wp-plugin-info-card'),
@@ -3474,7 +3447,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
   }), /*#__PURE__*/React.createElement(PanelRow, {
     className: "wppic-panel-rows-numbers"
   }, /*#__PURE__*/React.createElement(_components_Numbers__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    value: U,
+    value: T,
     label: __('Column Gap (in px)', 'wp-plugin-info-card'),
     numbers: [20, 40, 60, 80],
     onClick: function onClick(a) {
@@ -3486,7 +3459,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
   })), /*#__PURE__*/React.createElement(PanelRow, {
     className: "wppic-panel-rows-numbers"
   }, /*#__PURE__*/React.createElement(_components_Numbers__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    value: V,
+    value: U,
     label: __('Row Gap (in px)', 'wp-plugin-info-card'),
     numbers: [20, 40, 60, 80],
     onClick: function onClick(a) {
@@ -3499,7 +3472,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
     title: __('WP Plugin Info Card', 'wp-plugin-info-card')
   }, /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Scheme', 'wp-plugin-info-card'),
-    options: aa,
+    options: _,
     value: G,
     onChange: function onChange(a) {
       d({
@@ -3508,7 +3481,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
     }
   }), /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Layout', 'wp-plugin-info-card'),
-    options: ba,
+    options: aa,
     value: H,
     onChange: function onChange(a) {
       d({
@@ -3521,7 +3494,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
         image: a.url
       });
       c.image = a.url;
-      W();
+      V();
     },
     type: "image",
     value: A,
@@ -3542,7 +3515,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
             image: ''
           });
           c.image = '';
-          W();
+          V();
         }
       }, __('Reset Image', 'wp-plugin-info-card')))));
     }
@@ -3556,7 +3529,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
       });
       c.containerId = a;
       setTimeout(function () {
-        W();
+        V();
       }, 5000);
     }
   }), /*#__PURE__*/React.createElement(TextControl, {
@@ -3569,12 +3542,12 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
       });
       c.margin = a;
       setTimeout(function () {
-        W();
+        V();
       }, 5000);
     }
   }), /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Clear', 'wp-plugin-info-card'),
-    options: $,
+    options: Z,
     value: D,
     onChange: function onChange(a) {
       d({
@@ -3592,7 +3565,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
     }
   }), /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Load card via Ajax?', 'wp-plugin-info-card'),
-    options: _,
+    options: $,
     value: F,
     onChange: function onChange(a) {
       d({
@@ -3600,7 +3573,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
       });
     }
   })));
-  var ga = [{
+  var fa = [{
     value: 'featured',
     label: __('Featured', 'wp-plugin-info-card')
   }, {
@@ -3613,7 +3586,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
     value: 'favorites',
     label: __('Favorites', 'wp-plugin-info-card')
   }];
-  var ha = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(React.Fragment, null, h && /*#__PURE__*/React.createElement("div", {
+  var ga = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(React.Fragment, null, h && /*#__PURE__*/React.createElement("div", {
     className: "wppic-query-block wppic-query-block-panel"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-block-svg"
@@ -3760,7 +3733,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
           c.search = J;
           break;
       }
-      W(a);
+      V(a);
     }
   }, __('Query and Configure', 'wp-plugin-info-card')))), l && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "wppic-loading-placeholder"
@@ -3770,15 +3743,15 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
     size: "45"
   }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
     className: "wppic-spinner"
-  }, /*#__PURE__*/React.createElement(Spinner, null))))), !h && !l && /*#__PURE__*/React.createElement(React.Fragment, null, fa, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, {
-    controls: Z
+  }, /*#__PURE__*/React.createElement(Spinner, null))))), !h && !l && /*#__PURE__*/React.createElement(React.Fragment, null, ea, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, {
+    controls: Y
   }), 'flex' === H && /*#__PURE__*/React.createElement(BlockAlignmentToolbar, {
     value: z,
     onChange: function onChange(a) {
       d({
         align: a
       });
-      W(a);
+      V(a);
     }
   }), 'card' === H && /*#__PURE__*/React.createElement(AlignmentToolbar, {
     value: z,
@@ -3786,18 +3759,16 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
       d({
         align: a
       });
-      W(a);
+      V(a);
     }
   })), /*#__PURE__*/React.createElement("div", {
     className: '' !== I ? 'wp-pic-full-width' : ''
   }, /*#__PURE__*/React.createElement("div", {
-    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(false === T ? "wp-pic-1-".concat(Q) : '', {
-      'has-grid-layout': T
-    })
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('has-grid-layout')
   }, /*#__PURE__*/React.createElement("div", {
-    className: "wp-pic-grid cols-".concat(Q)
-  }, X()))))));
-  var ia = useBlockProps({
+    className: "wp-query-plugin-info-card cols-".concat(Q)
+  }, W()))))));
+  var ha = useBlockProps({
     className: classnames__WEBPACK_IMPORTED_MODULE_1___default()("wp-plugin-info-card-query align".concat(z))
   });
   if (P) {
@@ -3809,10 +3780,10 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
       }
     }));
   }
-  var ja = "\n\t\t#".concat(c.uniqueId, " {\n\t\t\tdisplay: grid;\n\t\t\tcolumn-gap: ").concat(U, "px;\n\t\t\trow-gap: ").concat(V, "px;\n\t\t}\n\t");
-  return /*#__PURE__*/React.createElement("div", _extends({}, ia, {
+  var ia = "\n\t\t#".concat(c.uniqueId, " .wp-query-plugin-info-card {\n\t\t\tdisplay: grid;\n\t\t\tcolumn-gap: ").concat(T, "px;\n\t\t\trow-gap: ").concat(U, "px;\n\t\t}\n\t");
+  return /*#__PURE__*/React.createElement("div", _extends({}, ha, {
     id: c.uniqueId
-  }), /*#__PURE__*/React.createElement("style", null, ja), ha);
+  }), /*#__PURE__*/React.createElement("style", null, ia), ga);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WP_Plugin_Card_Query);
 
@@ -21185,7 +21156,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"WP Plugin Info Card Query","apiVersion":2,"name":"wp-plugin-info-card/wp-plugin-info-card-query","category":"wp-plugin-info-card","icon":"<svg height=\'24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 512 512\'><path fill=\'#333\' d=\'M256 140c-63.962 0-116 52.038-116 116s52.038 116 116 116 116-52.038 116-116-52.038-116-116-116zm-60.25 59.875h86.635l-4.578-5.045c-5.566-6.135-5.106-15.622 1.029-21.188 6.136-5.567 15.621-5.106 21.188 1.029l27.333 30.125c5.188 5.718 5.188 14.441 0 20.159l-27.333 30.125a14.958 14.958 0 0 1-11.113 4.92 14.945 14.945 0 0 1-10.075-3.891c-6.135-5.567-6.596-15.053-1.029-21.188l4.578-5.045H195.75c-8.284 0-15-6.716-15-15s6.716-15.001 15-15.001zm120.5 112.25h-86.635l4.578 5.045c5.566 6.135 5.106 15.622-1.029 21.188a14.948 14.948 0 0 1-10.075 3.891 14.964 14.964 0 0 1-11.113-4.92l-27.333-30.125c-5.188-5.718-5.188-14.441 0-20.159l27.333-30.125c5.567-6.135 15.054-6.596 21.188-1.029 6.135 5.567 6.596 15.053 1.029 21.188l-4.578 5.045h86.635c8.284 0 15 6.716 15 15s-6.716 15.001-15 15.001z\'></path><path fill=\'#333\' d=\'M497 199.92h-33.479a212.647 212.647 0 0 0-21.142-50.991l23.688-23.688c5.858-5.858 5.858-15.355 0-21.213l-58.095-58.095c-5.857-5.858-15.355-5.858-21.213 0L363.07 69.621a212.647 212.647 0 0 0-50.991-21.142V15c0-8.284-6.716-15-15-15H214.92c-8.284 0-15 6.716-15 15v33.479a212.664 212.664 0 0 0-50.991 21.142l-23.688-23.688c-5.857-5.858-15.355-5.858-21.213 0l-58.095 58.095c-5.858 5.858-5.858 15.355 0 21.213l23.688 23.688a212.647 212.647 0 0 0-21.142 50.991H15c-8.284 0-15 6.716-15 15v82.159c0 8.284 6.716 15 15 15h33.479a212.664 212.664 0 0 0 21.142 50.991l-23.688 23.688c-5.858 5.858-5.858 15.355 0 21.213l58.095 58.095c5.857 5.858 15.355 5.858 21.213 0l23.688-23.688a212.633 212.633 0 0 0 50.991 21.143V497c0 8.284 6.716 15 15 15h82.159c8.284 0 15-6.716 15-15v-33.479a212.568 212.568 0 0 0 50.991-21.143l23.688 23.688c5.857 5.858 15.355 5.858 21.213 0l58.095-58.095c5.858-5.858 5.858-15.355 0-21.213l-23.688-23.688a212.647 212.647 0 0 0 21.142-50.991H497c8.284 0 15-6.716 15-15V214.92c0-8.284-6.716-15-15-15zM256 402c-80.505 0-146-65.495-146-146s65.495-146 146-146 146 65.495 146 146-65.495 146-146 146z\'></path></svg>","description":"Query and display a list of plugins or themes in a beautiful card format.","keywords":["wp plugin","plugin","card","theme","query"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"assetData":{"type":"array","default":[]},"newGrid":{"type":"boolean","default":false},"search":{"type":"string","default":""},"tag":{"type":"string","default":""},"author":{"type":"string","default":""},"user":{"type":"string","default":""},"browse":{"type":"string","default":""},"per_page":{"type":"string","default":"8"},"cols":{"type":"string","default":2},"colGap":{"type":"number","default":20},"rowGap":{"type":"number","default":20},"type":{"type":"string","default":"plugin"},"slug":{"type":"string","default":""},"loading":{"type":"boolean","default":false},"html":{"type":"string","default":""},"align":{"type":"string","default":"full"},"image":{"type":"string","default":""},"containerid":{"type":"string","default":""},"margin":{"type":"string","default":""},"clear":{"type":"string","default":"none"},"expiration":{"type":"number","default":0},"ajax":{"type":"string","default":"false"},"scheme":{"type":"string","default":"default"},"layout":{"type":"string","default":"card"},"custom":{"type":"string","default":""},"width":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"defaultsApplied":{"type":"boolean","default":false},"sortby":{"type":"string","default":"none"},"sort":{"type":"string","default":"ASC"}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":false,"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"]}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"WP Plugin Info Card Query","apiVersion":2,"name":"wp-plugin-info-card/wp-plugin-info-card-query","category":"wp-plugin-info-card","icon":"<svg height=\'24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 512 512\'><path fill=\'#333\' d=\'M256 140c-63.962 0-116 52.038-116 116s52.038 116 116 116 116-52.038 116-116-52.038-116-116-116zm-60.25 59.875h86.635l-4.578-5.045c-5.566-6.135-5.106-15.622 1.029-21.188 6.136-5.567 15.621-5.106 21.188 1.029l27.333 30.125c5.188 5.718 5.188 14.441 0 20.159l-27.333 30.125a14.958 14.958 0 0 1-11.113 4.92 14.945 14.945 0 0 1-10.075-3.891c-6.135-5.567-6.596-15.053-1.029-21.188l4.578-5.045H195.75c-8.284 0-15-6.716-15-15s6.716-15.001 15-15.001zm120.5 112.25h-86.635l4.578 5.045c5.566 6.135 5.106 15.622-1.029 21.188a14.948 14.948 0 0 1-10.075 3.891 14.964 14.964 0 0 1-11.113-4.92l-27.333-30.125c-5.188-5.718-5.188-14.441 0-20.159l27.333-30.125c5.567-6.135 15.054-6.596 21.188-1.029 6.135 5.567 6.596 15.053 1.029 21.188l-4.578 5.045h86.635c8.284 0 15 6.716 15 15s-6.716 15.001-15 15.001z\'></path><path fill=\'#333\' d=\'M497 199.92h-33.479a212.647 212.647 0 0 0-21.142-50.991l23.688-23.688c5.858-5.858 5.858-15.355 0-21.213l-58.095-58.095c-5.857-5.858-15.355-5.858-21.213 0L363.07 69.621a212.647 212.647 0 0 0-50.991-21.142V15c0-8.284-6.716-15-15-15H214.92c-8.284 0-15 6.716-15 15v33.479a212.664 212.664 0 0 0-50.991 21.142l-23.688-23.688c-5.857-5.858-15.355-5.858-21.213 0l-58.095 58.095c-5.858 5.858-5.858 15.355 0 21.213l23.688 23.688a212.647 212.647 0 0 0-21.142 50.991H15c-8.284 0-15 6.716-15 15v82.159c0 8.284 6.716 15 15 15h33.479a212.664 212.664 0 0 0 21.142 50.991l-23.688 23.688c-5.858 5.858-5.858 15.355 0 21.213l58.095 58.095c5.857 5.858 15.355 5.858 21.213 0l23.688-23.688a212.633 212.633 0 0 0 50.991 21.143V497c0 8.284 6.716 15 15 15h82.159c8.284 0 15-6.716 15-15v-33.479a212.568 212.568 0 0 0 50.991-21.143l23.688 23.688c5.857 5.858 15.355 5.858 21.213 0l58.095-58.095c5.858-5.858 5.858-15.355 0-21.213l-23.688-23.688a212.647 212.647 0 0 0 21.142-50.991H497c8.284 0 15-6.716 15-15V214.92c0-8.284-6.716-15-15-15zM256 402c-80.505 0-146-65.495-146-146s65.495-146 146-146 146 65.495 146 146-65.495 146-146 146z\'></path></svg>","description":"Query and display a list of plugins or themes in a beautiful card format.","keywords":["wp plugin","plugin","card","theme","query"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"assetData":{"type":"array","default":[]},"uniqueId":{"type":"string","default":""},"search":{"type":"string","default":""},"tag":{"type":"string","default":""},"author":{"type":"string","default":""},"user":{"type":"string","default":""},"browse":{"type":"string","default":""},"per_page":{"type":"string","default":"8"},"cols":{"type":"string","default":2},"colGap":{"type":"number","default":20},"rowGap":{"type":"number","default":20},"type":{"type":"string","default":"plugin"},"slug":{"type":"string","default":""},"loading":{"type":"boolean","default":false},"html":{"type":"string","default":""},"align":{"type":"string","default":"full"},"image":{"type":"string","default":""},"containerid":{"type":"string","default":""},"margin":{"type":"string","default":""},"clear":{"type":"string","default":"none"},"expiration":{"type":"number","default":0},"ajax":{"type":"string","default":"false"},"scheme":{"type":"string","default":"default"},"layout":{"type":"string","default":"card"},"custom":{"type":"string","default":""},"width":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"defaultsApplied":{"type":"boolean","default":false},"sortby":{"type":"string","default":"none"},"sort":{"type":"string","default":"ASC"}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":false,"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"]}');
 
 /***/ }),
 

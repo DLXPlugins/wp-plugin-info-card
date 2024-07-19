@@ -84,7 +84,6 @@ const WP_Plugin_Card_Query = ( props ) => {
 		cols,
 		sortby,
 		sort,
-		newGrid,
 		colGap,
 		rowGap,
 	} = attributes;
@@ -332,43 +331,6 @@ const WP_Plugin_Card_Query = ( props ) => {
 					} }
 					help={ __( 'Set how many cards to return.', 'wp-plugin-info-card' ) }
 				/>
-				{ false === newGrid && (
-					<SelectControl
-						label={ __(
-							'Columns',
-							'wp-plugin-info-card',
-						) }
-						options={ [
-							{
-								label: __(
-									'1',
-									'wp-plugin-info-card',
-								),
-								value: '1',
-							},
-							{
-								label: __(
-									'2',
-									'wp-plugin-info-card',
-								),
-								value: '2',
-							},
-							{
-								label: __(
-									'3',
-									'wp-plugin-info-card',
-								),
-								value: '3',
-							},
-						] }
-						value={ cols }
-						onChange={ ( value ) => {
-							setAttributes( {
-								cols: value,
-							} );
-						} }
-					/>
-				) }
 				<SelectControl
 					label={ __(
 						'Sort results by:',
@@ -446,74 +408,65 @@ const WP_Plugin_Card_Query = ( props ) => {
 						} );
 					} }
 				/>
-				<ToggleControl
-					label={ __( 'Use CSS Grid Layout', 'wp-plugin-info-card' ) }
-					checked={ true === newGrid }
-					onChange={ ( value ) => {
-						setAttributes( { newGrid: value } );
-					} }
-				/>
-				{ true === newGrid && (
-					<>
-						<SelectControl
-							label={ __(
-								'Columns',
-								'wp-plugin-info-card',
-							) }
-							options={ [
-								{
-									label: __(
-										'1',
-										'wp-plugin-info-card',
-									),
-									value: '1',
-								},
-								{
-									label: __(
-										'2',
-										'wp-plugin-info-card',
-									),
-									value: '2',
-								},
-								{
-									label: __(
-										'3',
-										'wp-plugin-info-card',
-									),
-									value: '3',
-								},
-							] }
-							value={ cols }
-							onChange={ ( value ) => {
-								setAttributes( {
-									cols: value,
-								} );
+				<>
+					<SelectControl
+						label={ __(
+							'Columns',
+							'wp-plugin-info-card',
+						) }
+						options={ [
+							{
+								label: __(
+									'1',
+									'wp-plugin-info-card',
+								),
+								value: '1',
+							},
+							{
+								label: __(
+									'2',
+									'wp-plugin-info-card',
+								),
+								value: '2',
+							},
+							{
+								label: __(
+									'3',
+									'wp-plugin-info-card',
+								),
+								value: '3',
+							},
+						] }
+						value={ cols }
+						onChange={ ( value ) => {
+							setAttributes( {
+								cols: value,
+							} );
+						} }
+					/>
+					<PanelRow className="wppic-panel-rows-numbers">
+						<NumbersComponent
+							value={ colGap }
+							label={ __( 'Column Gap (in px)', 'wp-plugin-info-card' ) }
+							numbers={ [ 20, 40, 60, 80 ] }
+							onClick={ ( value ) => {
+								setAttributes( { colGap: parseInt( value ) } );
 							} }
+							id="wppic-col-gap"
 						/>
-						<PanelRow className="wppic-panel-rows-numbers">
-							<NumbersComponent
-								value={ colGap }
-								label={ __( 'Column Gap (in px)', 'wp-plugin-info-card' ) }
-								numbers={ [ 20, 40, 60, 80 ] }
-								onClick={ ( value ) => {
-									setAttributes( { colGap: parseInt( value ) } );
-								} }
-								id="wppic-col-gap"
-							/>
-						</PanelRow>
-						<PanelRow className="wppic-panel-rows-numbers">
-							<NumbersComponent
-								value={ rowGap }
-								label={ __( 'Row Gap (in px)', 'wp-plugin-info-card' ) }
-								numbers={ [ 20, 40, 60, 80 ] }
-								onClick={ ( value ) => {
-									setAttributes( { rowGap: parseInt( value ) } );
-								} }
-								id="wppic-row-gap"
-							/>
-						</PanelRow>
-					</>
-				) }
+					</PanelRow>
+					<PanelRow className="wppic-panel-rows-numbers">
+						<NumbersComponent
+							value={ rowGap }
+							label={ __( 'Row Gap (in px)', 'wp-plugin-info-card' ) }
+							numbers={ [ 20, 40, 60, 80 ] }
+							onClick={ ( value ) => {
+								setAttributes( { rowGap: parseInt( value ) } );
+							} }
+							id="wppic-row-gap"
+						/>
+					</PanelRow>
+				</>
 			</PanelBody>
 			<PanelBody
 				title={ __( 'WP Plugin Info Card', 'wp-plugin-info-card' ) }
@@ -931,13 +884,10 @@ const WP_Plugin_Card_Query = ( props ) => {
 							<div
 								className={
 									classnames(
-										false === newGrid ? `wp-pic-1-${ cols }` : '',
-										{
-											'has-grid-layout': newGrid,
-										},
+										'has-grid-layout',
 									) }
 							>
-								<div className={ `wp-pic-grid cols-${ cols }` }>
+								<div className={ `wp-query-plugin-info-card cols-${ cols }` }>
 									{ outputInfoCards() }
 								</div>
 							</div>
@@ -963,7 +913,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 	}
 
 	const styles = `
-		#${ attributes.uniqueId } {
+		#${ attributes.uniqueId } .wp-query-plugin-info-card {
 			display: grid;
 			column-gap: ${ colGap }px;
 			row-gap: ${ rowGap }px;
