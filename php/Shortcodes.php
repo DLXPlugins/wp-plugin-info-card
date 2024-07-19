@@ -1540,9 +1540,10 @@ class Shortcodes {
 				grid-row-gap: <?php echo esc_attr( $attributes['row_gap'] ); ?>px;
 			}
 
-		</style>
+		</style>	
 		<div id="<?php echo esc_attr( $attributes['id'] ); ?>" class="wp-site-plugin-info-card cols-<?php echo esc_attr( $attributes['cols'] ); ?>">
 			<?php
+			$content = ob_get_clean();
 			foreach ( $plugins_on_org as $plugin ) {
 				$atts = array(
 					'slug'   => $plugin['slug'],
@@ -1554,17 +1555,18 @@ class Shortcodes {
 				add_filter( 'safe_style_css', array( static::class, 'safe_css' ) );
 				add_filter( 'safecss_filter_attr_allow_css', '__return_true' );
 				// Use the WPPIC shorcode to generate cards.
-				echo wp_kses( self::shortcode_function( $atts ), Functions::get_kses_allowed_html() );
+				$content .= self::shortcode_function( $atts );
 				remove_filter( 'safecss_filter_attr_allow_css', '__return_true' );
 				remove_filter( 'safe_style_css', array( static::class, 'safe_css' ) );
 			}
+			ob_start();
 			?>
 		</div>
 		<?php
 		if ( 0 === did_action( 'wppic_enqueue_scripts' ) ) {
 			do_action( 'wppic_enqueue_scripts' );
 		}
-		$content = ob_get_clean();
+		$content .= ob_get_clean();
 		return $content;
 	}
 
@@ -1581,6 +1583,7 @@ class Shortcodes {
 		$css[] = 'linear-gradient';
 		$css[] = '-webkit-background-clip';
 		$css[] = '-webkit-text-fill-color';
+		$css[] = 'background-image';
 		return $css;
 	}
 
