@@ -113,7 +113,8 @@
   margin-bottom: 20px;
 }
 .wp-pic-tab-panel .components-tab-panel__tabs .wppic-tab-layout,
-.wp-pic-tab-panel .components-tab-panel__tabs .wppic-tab-slug {
+.wp-pic-tab-panel .components-tab-panel__tabs .wppic-tab-slug,
+.wp-pic-tab-panel .components-tab-panel__tabs .wppic-tab-theme {
   border-radius: 0;
   background: transparent;
   border: none;
@@ -125,7 +126,8 @@
   font-weight: 500;
 }
 .wp-pic-tab-panel .components-tab-panel__tabs .wppic-tab-layout.active-tab,
-.wp-pic-tab-panel .components-tab-panel__tabs .wppic-tab-slug.active-tab {
+.wp-pic-tab-panel .components-tab-panel__tabs .wppic-tab-slug.active-tab,
+.wp-pic-tab-panel .components-tab-panel__tabs .wppic-tab-theme.active-tab {
   font-weight: 700;
   border-bottom: 2px solid #cb212b;
 }

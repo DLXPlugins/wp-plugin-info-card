@@ -152,6 +152,15 @@ class Shortcodes {
 		);
 		register_rest_route(
 			'wppic/v2',
+			'/get_query',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'get_query_shortcode_v2' ),
+				'permission_callback' => '__return_true',
+			)
+		);
+		register_rest_route(
+			'wppic/v2',
 			'/get_site_plugins',
 			array(
 				'methods'             => 'GET',
@@ -378,6 +387,143 @@ class Shortcodes {
 			'author'   => $attrs['author'],
 			'user'     => $attrs['user'],
 			'browse'   => $attrs['browse'],
+			'per_page' => $attrs['per_page'],
+			'fields'   => array(
+				'name'              => true,
+				'requires'          => true,
+				'tested'            => true,
+				'compatibility'     => true,
+				'screenshot_url'    => true,
+				'ratings'           => true,
+				'rating'            => true,
+				'num_ratings'       => true,
+				'homepage'          => true,
+				'sections'          => true,
+				'description'       => true,
+				'short_description' => true,
+				'banners'           => true,
+				'downloaded'        => true,
+				'last_updated'      => true,
+				'downloadlink'      => true,
+			),
+		);
+		$type       = $attrs['type'];
+		$query_args = apply_filters( 'wppic_api_query', $query_args, $type, $attrs );
+
+		$api = '';
+
+		// Plugins query.
+		if ( 'plugin' === $type ) {
+			$type = 'plugins';
+			require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+			$api = plugins_api( 'query_plugins', $query_args );
+		}
+
+		// Themes query.
+		if ( 'theme' === $type ) {
+			$type = 'themes';
+			require_once ABSPATH . 'wp-admin/includes/theme.php';
+			$api = themes_api( 'query_themes', $query_args );
+		}
+
+		// Begin sort.
+		$sort_results = array();
+		if ( 'plugins' === $type ) {
+			$sort_results = $api->plugins ?? null;
+		} elseif ( 'themes' === $type ) {
+			$sort_results = $api->themes ?? null;
+		}
+		if ( 'plugins' === $type && ! is_wp_error( $api ) && ! empty( $api ) && 'none' !== $sortby ) {
+			$plugins = $api->plugins;
+			array_multisort(
+				array_column( $plugins, $sortby ),
+				'DESC' === $sort ? SORT_DESC : SORT_ASC,
+				$plugins
+			);
+			$sort_results = $plugins;
+		}
+		if ( 'themes' === $type && ! is_wp_error( $api ) && ! empty( $api ) && 'none' !== $sortby ) {
+			$themes = $api->themes;
+			array_multisort(
+				array_column( $themes, $sortby ),
+				'DESC' === $sort ? SORT_DESC : SORT_ASC,
+				$themes
+			);
+			$sort_results = $themes;
+		}
+
+		/**
+		 * Filter: wppic_query_results
+		 *
+		 * Sorted results ready for display.
+		 *
+		 * @param array $sort_results The sorted results.
+		 * @param string $type The type of query (plugins, themes).
+		 * @param string $sortby The field to sort by.
+		 * @param string $sort The sort order (ASC, DESC).
+		 */
+		$sort_results = apply_filters( 'wppic_query_results', $sort_results, $type, $sortby, $sort );
+
+		if ( ! is_wp_error( $sort_results ) && ! empty( $sort_results ) ) {
+
+			wp_send_json_success(
+				array(
+					'api_response' => json_decode( json_encode( $sort_results ) ),
+					'html'         => self::shortcode_query_function( $attrs ),
+				)
+			);
+		}
+		wp_send_json_error( array( 'message' => 'No data found' ) );
+		die( '' );
+	}
+
+	/**
+	 * Retrieve the query shortcode.
+	 */
+	public function get_query_shortcode_v2() {
+		$attrs = array(
+			'cols'        => $_GET['cols'],
+			'per_page'    => $_GET['per_page'],
+			'type'        => $_GET['type'],
+			'image'       => isset( $_GET['image'] ) ? $_GET['image'] : '',
+			'align'       => isset( $_GET['align'] ) ? $_GET['align'] : '',
+			'containerid' => isset( $_GET['containerid'] ) ? $_GET['containerid'] : '',
+			'margin'      => isset( $_GET['margin'] ) ? $_GET['margin'] : '',
+			'clear'       => isset( $_GET['clear'] ) ? $_GET['clear'] : '',
+			'expiration'  => isset( $_GET['expiration'] ) ? $_GET['expiration'] : '',
+			'ajax'        => isset( $_GET['ajax'] ) ? $_GET['ajax'] : '',
+			'scheme'      => isset( $_GET['scheme'] ) ? $_GET['scheme'] : '',
+			'layout'      => isset( $_GET['layout'] ) ? $_GET['layout'] : '',
+			'sortby'      => isset( $_GET['sortby'] ) ? $_GET['sortby'] : '',
+			'sort'        => isset( $_GET['sort'] ) ? $_GET['sort'] : '',
+			'searchBy'	=> isset( $_GET['searchBy'] ) ? $_GET['searchBy'] : '',
+		);
+		if ( ! empty( $_GET['browse'] && 'category' === $attrs['searchBy' ] ) ) {
+			$attrs['browse'] = $_GET['browse'];
+		}
+		if ( ! empty( $_GET['search'] ) && 'general' === $attrs['searchBy' ] ) {
+			$attrs['search'] = $_GET['search'];
+		}
+		if ( ! empty( $_GET['tag'] ) && 'tag' === $attrs['searchBy' ] ) {
+			$attrs['tag'] = $_GET['tag'];
+		}
+		if ( ! empty( $_GET['user'] ) && 'favorites' === $attrs['searchBy' ] ) {
+			$attrs['user'] = $_GET['user'];
+		}
+		if ( ! empty( $_GET['author'] ) && 'author' === $attrs['searchBy' ] ) {
+			$attrs['author'] = $_GET['author'];
+		}
+
+		$sortby = isset( $_GET['sortby'] ) ? $_GET['sortby'] : '';
+		$sort   = isset( $_GET['sort'] ) ? $_GET['sort'] : '';
+
+		// Build the query.
+		$query_args = array(
+			'search'   => $attrs['search'] ?? '',
+			'tag'      => $attrs['tag'] ?? '',
+			'author'   => $attrs['author'] ?? '',
+			'user'     => $attrs['user'] ?? '',
+			'browse'   => $attrs['browse'] ?? '',
 			'per_page' => $attrs['per_page'],
 			'fields'   => array(
 				'name'              => true,

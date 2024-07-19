@@ -8,7 +8,7 @@ const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
 const { __ } = wp.i18n;
 
-const { useState, useEffect, Fragment } = wp.element;
+const { useState, useEffect, Fragment, useCallback } = wp.element;
 
 const {
 	PanelBody,
@@ -17,8 +17,13 @@ const {
 	TextControl,
 	Button,
 	ToolbarGroup,
+	ToggleControl,
 	Notice,
+	TabPanel,
+	PanelRow,
 } = wp.components;
+
+import { debounce, useInstanceId } from '@wordpress/compose';
 
 const {
 	InspectorControls,
@@ -40,13 +45,19 @@ import ThemeCard from '../templates/ThemeCard';
 import PluginRatingsCard from '../templates/PluginRatingsCard';
 import ThemeRatingsCard from '../templates/ThemeRatingsCard';
 import Logo from '../Logo';
+import { Radio } from 'lucide-react';
+import NumbersComponent from '../components/Numbers';
+import { uniqueId } from 'lodash';
 
 const WP_Plugin_Card_Query = ( props ) => {
 	const { attributes, setAttributes } = props;
 
+	const generatedUniqueId = useInstanceId( WP_Plugin_Card_Query, 'wp-plugin-info-card-query' );
+
 	const [ loading, setLoading ] = useState( false );
 	const [ cardLoading, setCardLoading ] = useState( false );
 	const [ noData, setNoData ] = useState( false );
+	const [ searchBy, setSearchBy ] = useState( attributes.searchBy ?? 'general' );
 
 	const {
 		assetData,
@@ -73,6 +84,9 @@ const WP_Plugin_Card_Query = ( props ) => {
 		cols,
 		sortby,
 		sort,
+		newGrid,
+		colGap,
+		rowGap,
 	} = attributes;
 
 	useEffect( () => {
@@ -93,14 +107,18 @@ const WP_Plugin_Card_Query = ( props ) => {
 		}
 	}, [] );
 
+	useEffect( () => {
+		setAttributes( { uniqueId: generatedUniqueId } );
+	}, [] );
+
 	const pluginOnClick = ( event ) => {
 		if ( '' !== type ) {
 			setCardLoading( true );
-			const rest_url = wppic.rest_url + 'wppic/v1/get_query/';
+			const rest_url = wppic.rest_url + 'wppic/v2/get_query/';
 			axios
 				.get(
 					rest_url +
-						`?type=${ attributes.type }&slug=${ attributes.slug }&align=${ attributes.align }&image=${ attributes.image }&containerid=${ attributes.containerid }&margin=${ attributes.margin }&clear=${ attributes.clear }&expiration=${ attributes.expiration }&ajax=${ attributes.ajax }&scheme=${ attributes.scheme }&layout=${ attributes.layout }&search=${ attributes.search }&tag=${ attributes.tag }&author=${ attributes.author }&user=${ attributes.user }&browse=${ attributes.browse }&per_page=${ attributes.per_page }&cols=${ attributes.cols }}&sortby=${ attributes.sortby }&sort=${ attributes.sort }`,
+						`?type=${ attributes.type }&slug=${ attributes.slug }&align=${ attributes.align }&image=${ attributes.image }&containerid=${ attributes.containerid }&margin=${ attributes.margin }&clear=${ attributes.clear }&expiration=${ attributes.expiration }&ajax=${ attributes.ajax }&scheme=${ attributes.scheme }&layout=${ attributes.layout }&search=${ attributes.search }&tag=${ attributes.tag }&author=${ attributes.author }&user=${ attributes.user }&browse=${ attributes.browse }&per_page=${ attributes.per_page }&cols=${ attributes.cols }}&sortby=${ attributes.sortby }&sort=${ attributes.sort }&searchBy=${ searchBy }`,
 				)
 				.then( ( response ) => {
 					// Now Set State
@@ -288,8 +306,215 @@ const WP_Plugin_Card_Query = ( props ) => {
 		{ value: 'full', label: __( 'Full Width', 'wp-plugin-info-card' ) },
 	];
 
+	const triggerPluginClick = debounce( ( event ) => {
+		pluginOnClick( event );
+	}, 1100 );
+
 	const inspectorControls = (
 		<InspectorControls>
+			<PanelBody
+				title={ __( 'Query Options', 'wp-plugin-info-card' ) }
+			>
+				<TextControl
+					type="number"
+					label={ __(
+						'Per Page',
+						'wp-plugin-info-card',
+					) }
+					value={ per_page }
+					onChange={ ( value ) => {
+						setAttributes( {
+							per_page: value,
+						} );
+						attributes.per_page = value;
+
+						triggerPluginClick();
+					} }
+					help={ __( 'Set how many cards to return.', 'wp-plugin-info-card' ) }
+				/>
+				{ false === newGrid && (
+					<SelectControl
+						label={ __(
+							'Columns',
+							'wp-plugin-info-card',
+						) }
+						options={ [
+							{
+								label: __(
+									'1',
+									'wp-plugin-info-card',
+								),
+								value: '1',
+							},
+							{
+								label: __(
+									'2',
+									'wp-plugin-info-card',
+								),
+								value: '2',
+							},
+							{
+								label: __(
+									'3',
+									'wp-plugin-info-card',
+								),
+								value: '3',
+							},
+						] }
+						value={ cols }
+						onChange={ ( value ) => {
+							setAttributes( {
+								cols: value,
+							} );
+						} }
+					/>
+				) }
+				<SelectControl
+					label={ __(
+						'Sort results by:',
+						'wp-plugin-info-card',
+					) }
+					options={ [
+						{
+							label: __(
+								'None',
+								'wp-plugin-info-card',
+							),
+							value: 'none',
+						},
+						{
+							label: __(
+								'Active Installs (Plugins only)',
+								'wp-plugin-info-card',
+							),
+							value: 'active_installs',
+						},
+						{
+							label: __(
+								'Downloads',
+								'wp-plugin-info-card',
+							),
+							value: 'downloaded',
+						},
+						{
+							label: __(
+								'Last Updated',
+								'wp-plugin-info-card',
+							),
+							value: 'last_updated',
+						},
+						{
+							label: __(
+								'Rating',
+								'wp-plugin-info-card',
+							),
+							value: 'rating',
+						},
+					] }
+					value={ sortby }
+					onChange={ ( value ) => {
+						setAttributes( {
+							sortby: value,
+						} );
+					} }
+				/>
+				<SelectControl
+					label={ __(
+						'Sort Order:',
+						'wp-plugin-info-card',
+					) }
+					options={ [
+						{
+							label: __(
+								'ASC',
+								'wp-plugin-info-card',
+							),
+							value: 'ASC',
+						},
+						{
+							label: __(
+								'DESC',
+								'wp-plugin-info-card',
+							),
+							value: 'DESC',
+						},
+					] }
+					value={ sort }
+					onChange={ ( value ) => {
+						setAttributes( {
+							sort: value,
+						} );
+					} }
+				/>
+				<ToggleControl
+					label={ __( 'Use CSS Grid Layout', 'wp-plugin-info-card' ) }
+					checked={ true === newGrid }
+					onChange={ ( value ) => {
+						setAttributes( { newGrid: value } );
+					} }
+				/>
+				{ true === newGrid && (
+					<>
+						<SelectControl
+							label={ __(
+								'Columns',
+								'wp-plugin-info-card',
+							) }
+							options={ [
+								{
+									label: __(
+										'1',
+										'wp-plugin-info-card',
+									),
+									value: '1',
+								},
+								{
+									label: __(
+										'2',
+										'wp-plugin-info-card',
+									),
+									value: '2',
+								},
+								{
+									label: __(
+										'3',
+										'wp-plugin-info-card',
+									),
+									value: '3',
+								},
+							] }
+							value={ cols }
+							onChange={ ( value ) => {
+								setAttributes( {
+									cols: value,
+								} );
+							} }
+						/>
+						<PanelRow className="wppic-panel-rows-numbers">
+							<NumbersComponent
+								value={ colGap }
+								label={ __( 'Column Gap (in px)', 'wp-plugin-info-card' ) }
+								numbers={ [ 20, 40, 60, 80 ] }
+								onClick={ ( value ) => {
+									setAttributes( { colGap: parseInt( value ) } );
+								} }
+								id="wppic-col-gap"
+							/>
+						</PanelRow>
+						<PanelRow className="wppic-panel-rows-numbers">
+							<NumbersComponent
+								value={ rowGap }
+								label={ __( 'Row Gap (in px)', 'wp-plugin-info-card' ) }
+								numbers={ [ 20, 40, 60, 80 ] }
+								onClick={ ( value ) => {
+									setAttributes( { rowGap: parseInt( value ) } );
+								} }
+								id="wppic-row-gap"
+							/>
+						</PanelRow>
+					</>
+				) }
+			</PanelBody>
 			<PanelBody
 				title={ __( 'WP Plugin Info Card', 'wp-plugin-info-card' ) }
 			>
@@ -307,14 +532,6 @@ const WP_Plugin_Card_Query = ( props ) => {
 					value={ layout }
 					onChange={ ( value ) => {
 						setAttributes( { layout: value } );
-					} }
-				/>
-				<SelectControl
-					label={ __( 'Width', 'wp-plugin-info-card' ) }
-					options={ widthOptions }
-					value={ width }
-					onChange={ ( value ) => {
-						setAttributes( { width: value } );
 					} }
 				/>
 				<MediaUpload
@@ -425,6 +642,25 @@ const WP_Plugin_Card_Query = ( props ) => {
 		</InspectorControls>
 	);
 
+	const categories = [
+		{
+			value: 'featured',
+			label: __( 'Featured', 'wp-plugin-info-card' ),
+		},
+		{
+			value: 'popular',
+			label: __( 'Popular', 'wp-plugin-info-card' ),
+		},
+		{
+			value: 'updated',
+			label: __( 'Updated', 'wp-plugin-info-card' ),
+		},
+		{
+			value: 'favorites',
+			label: __( 'Favorites', 'wp-plugin-info-card' ),
+		},
+	];
+
 	const block = (
 		<>
 			<>
@@ -433,7 +669,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 						<div className="wppic-block-svg">
 							<Logo size="75" />
 						</div>
-						<div className="wp-pic-tabs-panel">
+						<div className="wp-pic-tab-panel">
 							{ noData && (
 								<div className="wppic-no-data">
 									<Notice
@@ -447,259 +683,140 @@ const WP_Plugin_Card_Query = ( props ) => {
 									</Notice>
 								</div>
 							) }
-							<SelectControl
-								label={ __(
-									'Select a Type',
-									'wp-plugin-info-card',
-								) }
-								options={ [
+							<TabPanel
+								activeClass="active-tab"
+								initialTabName={ type }
+								tabs={ [
 									{
-										label: __(
-											'Plugin',
-											'wp-plugin-info-card',
-										),
-										value: 'plugin',
+										title: __( 'Plugin', 'wp-plugin-info-card' ),
+										name: 'plugin',
+										className: 'wppic-tab-plugin wppic-tab-slug',
 									},
 									{
-										label: __(
+										title: __(
 											'Theme',
 											'wp-plugin-info-card',
 										),
-										value: 'theme',
+										name: 'theme',
+										className: 'wppic-tab-theme',
 									},
 								] }
-								value={ type }
-								onChange={ ( value ) => {
+								onSelect={ ( tabName ) => {
 									setAttributes( {
-										type: value,
+										type: tabName,
 									} );
 								} }
-							/>
-							<TextControl
-								label={ __(
-									'Search',
-									'wp-plugin-info-card',
-								) }
-								value={ search }
-								onChange={ ( value ) => {
-									setAttributes( {
-										search: value,
-									} );
+							>
+								{ ( tab ) => {
+									let tabContent;
+									if ( 'plugin' === tab.name || 'theme' === tab.name ) {
+										tabContent = (
+											<>
+												<SelectControl
+													label={ __( 'Search by:', 'wp-plugin-info-card' ) }
+													value={ searchBy }
+													options={ [
+														{
+															label: __( 'General', 'wp-plugin-info-card' ),
+															value: 'general',
+														},
+														{
+															label: __( 'Plugin or Theme Author', 'wp-plugin-info-card' ),
+															value: 'author',
+														},
+														{
+															label: __( 'An Author\'s Favorites', 'wp-plugin-info-card' ),
+															value: 'favorites',
+														},
+														{
+															label: __( 'By Category', 'wp-plugin-info-card' ),
+															value: 'category',
+														},
+														{
+															label: __( 'By Tag', 'wp-plugin-info-card' ),
+															value: 'tag',
+														},
+													] }
+													onChange={ ( value ) => {
+														setSearchBy( value );
+													} }
+												/>
+											</>
+										);
+										return tabContent;
+									}
 								} }
-							/>
-							<TextControl
-								label={ __(
-									'Tags',
-									'wp-plugin-info-card',
-								) }
-								value={ tag }
-								onChange={ ( value ) => {
-									setAttributes( {
-										tag: value,
-									} );
-								} }
-								help={ __( 'Comma separated', 'wp-plugin-info-card' ) }
-							/>
-							<TextControl
-								label={ __(
-									'Author',
-									'wp-plugin-info-card',
-								) }
-								value={ author }
-								onChange={ ( value ) => {
-									setAttributes( {
-										author: value,
-									} );
-								} }
-							/>
-							<TextControl
-								label={ __(
-									'User (Username)',
-									'wp-plugin-info-card',
-								) }
-								value={ user }
-								onChange={ ( value ) => {
-									setAttributes( {
-										user: value,
-									} );
-								} }
-								help={ __( 'See the favorites from this username', 'wp-plugin-info-card' ) }
-							/>
-							<SelectControl
-								label={ __(
-									'Browse',
-									'wp-plugin-info-card',
-								) }
-								options={ [
-									{
-										label: __(
-											'None',
-											'wp-plugin-info-card',
-										),
-										value: '',
-									},
-									{
-										label: __(
-											'Featured',
-											'wp-plugin-info-card',
-										),
-										value: 'featured',
-									},
-									{
-										label: __(
-											'Updated',
-											'wp-plugin-info-card',
-										),
-										value: 'updated',
-									},
-									{
-										label: __(
-											'Favorites',
-											'wp-plugin-info-card',
-										),
-										value: 'favorites',
-									},
-									{
-										label: __(
-											'Popular',
-											'wp-plugin-info-card',
-										),
-										value: 'popular',
-									},
-								] }
-								value={ browse }
-								onChange={ ( value ) => {
-									setAttributes( {
-										browse: value,
-									} );
-								} }
-							/>
-							<TextControl
-								type="number"
-								label={ __(
-									'Per Page',
-									'wp-plugin-info-card',
-								) }
-								value={ per_page }
-								onChange={ ( value ) => {
-									setAttributes( {
-										per_page: value,
-									} );
-								} }
-								help={ __( 'Set how many cards to return.', 'wp-plugin-info-card' ) }
-							/>
-							<SelectControl
-								label={ __(
-									'Columns',
-									'wp-plugin-info-card',
-								) }
-								options={ [
-									{
-										label: __(
-											'1',
-											'wp-plugin-info-card',
-										),
-										value: '1',
-									},
-									{
-										label: __(
-											'2',
-											'wp-plugin-info-card',
-										),
-										value: '2',
-									},
-									{
-										label: __(
-											'3',
-											'wp-plugin-info-card',
-										),
-										value: '3',
-									},
-								] }
-								value={ cols }
-								onChange={ ( value ) => {
-									setAttributes( {
-										cols: value,
-									} );
-								} }
-							/>
-							<SelectControl
-								label={ __(
-									'Sort results by:',
-									'wp-plugin-info-card',
-								) }
-								options={ [
-									{
-										label: __(
-											'None',
-											'wp-plugin-info-card',
-										),
-										value: 'none',
-									},
-									{
-										label: __(
-											'Active Installs (Plugins only)',
-											'wp-plugin-info-card',
-										),
-										value: 'active_installs',
-									},
-									{
-										label: __(
-											'Downloads',
-											'wp-plugin-info-card',
-										),
-										value: 'downloaded',
-									},
-									{
-										label: __(
-											'Last Updated',
-											'wp-plugin-info-card',
-										),
-										value: 'last_updated',
-									},
-									{
-										label: __(
-											'Rating',
-											'wp-plugin-info-card',
-										),
-										value: 'rating',
-									},
-								] }
-								value={ sortby }
-								onChange={ ( value ) => {
-									setAttributes( {
-										sortby: value,
-									} );
-								} }
-							/>
-							<SelectControl
-								label={ __(
-									'Sort Order:',
-									'wp-plugin-info-card',
-								) }
-								options={ [
-									{
-										label: __(
-											'ASC',
-											'wp-plugin-info-card',
-										),
-										value: 'ASC',
-									},
-									{
-										label: __(
-											'DESC',
-											'wp-plugin-info-card',
-										),
-										value: 'DESC',
-									},
-								] }
-								value={ sort }
-								onChange={ ( value ) => {
-									setAttributes( {
-										sort: value,
-									} );
-								} }
-							/>
+							</TabPanel>
+							{ 'category' !== searchBy && (
+								<TextControl
+									label={ __(
+										'Search',
+										'wp-plugin-info-card',
+									) }
+									value={ search }
+									onChange={ ( value ) => {
+										setAttributes( {
+											search: value,
+										} );
+									} }
+									placeholder={ __( 'Enter your search…', 'wp-plugin-info-card' ) }
+								/>
+							) }
+							{
+								'category' === searchBy && (
+									<>
+										<SelectControl
+											label={ __(
+												'Browse',
+												'wp-plugin-info-card',
+											) }
+											options={ [
+												{
+													label: __(
+														'None',
+														'wp-plugin-info-card',
+													),
+													value: '',
+												},
+												{
+													label: __(
+														'Featured',
+														'wp-plugin-info-card',
+													),
+													value: 'featured',
+												},
+												{
+													label: __(
+														'Updated',
+														'wp-plugin-info-card',
+													),
+													value: 'updated',
+												},
+												{
+													label: __(
+														'Favorites',
+														'wp-plugin-info-card',
+													),
+													value: 'favorites',
+												},
+												{
+													label: __(
+														'Popular',
+														'wp-plugin-info-card',
+													),
+													value: 'popular',
+												},
+											] }
+											value={ browse }
+											onChange={ ( value ) => {
+												setAttributes( {
+													browse: value,
+												} );
+											} }
+										/>
+									</>
+								)
+							}
 						</div>
 						<div className="wp-pic-gutenberg-button">
 							<Button
@@ -711,6 +828,49 @@ const WP_Plugin_Card_Query = ( props ) => {
 									event.preventDefault();
 									setLoading( false );
 									setNoData( false );
+
+									// Clear attributes.
+									setAttributes( {
+										browse: '',
+										tag: '',
+										author: '',
+										user: '',
+									} );
+
+									// Set attributes on search.
+									switch ( searchBy ) {
+										case 'category':
+											setAttributes( {
+												browse,
+											} );
+											attributes.browse = browse;
+											break;
+										case 'tag':
+											setAttributes( {
+												tag: search,
+											} );
+											attributes.tag = search;
+											break;
+										case 'author':
+											setAttributes( {
+												author: search,
+											} );
+											attributes.author = search;
+											break;
+										case 'favorites':
+											setAttributes( {
+												user: search,
+											} );
+											attributes.user = search;
+											break;
+										case 'general':
+										default:
+											setAttributes( {
+												search,
+											} );
+											attributes.search = search;
+											break;
+									}
 									pluginOnClick( event );
 								} }
 							>
@@ -768,7 +928,15 @@ const WP_Plugin_Card_Query = ( props ) => {
 								'' !== width ? 'wp-pic-full-width' : ''
 							}
 						>
-							<div className={ `wp-pic-1-${ cols }` }>
+							<div
+								className={
+									classnames(
+										false === newGrid ? `wp-pic-1-${ cols }` : '',
+										{
+											'has-grid-layout': newGrid,
+										},
+									) }
+							>
 								<div className={ `wp-pic-grid cols-${ cols }` }>
 									{ outputInfoCards() }
 								</div>
@@ -793,7 +961,20 @@ const WP_Plugin_Card_Query = ( props ) => {
 			</>
 		);
 	}
-	return <div { ...blockProps }>{ block }</div>;
+
+	const styles = `
+		#${ attributes.uniqueId } {
+			display: grid;
+			column-gap: ${ colGap }px;
+			row-gap: ${ rowGap }px;
+		}
+	`;
+	return (
+		<div { ...blockProps } id={ attributes.uniqueId }>
+			<style>{ styles }</style>
+			{ block }
+		</div>
+	);
 };
 
 export default WP_Plugin_Card_Query;

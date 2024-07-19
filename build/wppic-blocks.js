@@ -3020,17 +3020,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _templates_PluginFlex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../templates/PluginFlex */ "./src/blocks/templates/PluginFlex.js");
-/* harmony import */ var _templates_PluginCard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../templates/PluginCard */ "./src/blocks/templates/PluginCard.js");
-/* harmony import */ var _templates_PluginLarge__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../templates/PluginLarge */ "./src/blocks/templates/PluginLarge.js");
-/* harmony import */ var _templates_PluginWordPress__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../templates/PluginWordPress */ "./src/blocks/templates/PluginWordPress.js");
-/* harmony import */ var _templates_ThemeFlex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../templates/ThemeFlex */ "./src/blocks/templates/ThemeFlex.js");
-/* harmony import */ var _templates_ThemeWordPress__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../templates/ThemeWordPress */ "./src/blocks/templates/ThemeWordPress.js");
-/* harmony import */ var _templates_ThemeLarge__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../templates/ThemeLarge */ "./src/blocks/templates/ThemeLarge.js");
-/* harmony import */ var _templates_ThemeCard__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../templates/ThemeCard */ "./src/blocks/templates/ThemeCard.js");
-/* harmony import */ var _templates_PluginRatingsCard__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../templates/PluginRatingsCard */ "./src/blocks/templates/PluginRatingsCard.js");
-/* harmony import */ var _templates_ThemeRatingsCard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../templates/ThemeRatingsCard */ "./src/blocks/templates/ThemeRatingsCard.js");
-/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../Logo */ "./src/blocks/Logo.js");
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _templates_PluginFlex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../templates/PluginFlex */ "./src/blocks/templates/PluginFlex.js");
+/* harmony import */ var _templates_PluginCard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../templates/PluginCard */ "./src/blocks/templates/PluginCard.js");
+/* harmony import */ var _templates_PluginLarge__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../templates/PluginLarge */ "./src/blocks/templates/PluginLarge.js");
+/* harmony import */ var _templates_PluginWordPress__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../templates/PluginWordPress */ "./src/blocks/templates/PluginWordPress.js");
+/* harmony import */ var _templates_ThemeFlex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../templates/ThemeFlex */ "./src/blocks/templates/ThemeFlex.js");
+/* harmony import */ var _templates_ThemeWordPress__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../templates/ThemeWordPress */ "./src/blocks/templates/ThemeWordPress.js");
+/* harmony import */ var _templates_ThemeLarge__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../templates/ThemeLarge */ "./src/blocks/templates/ThemeLarge.js");
+/* harmony import */ var _templates_ThemeCard__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../templates/ThemeCard */ "./src/blocks/templates/ThemeCard.js");
+/* harmony import */ var _templates_PluginRatingsCard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../templates/PluginRatingsCard */ "./src/blocks/templates/PluginRatingsCard.js");
+/* harmony import */ var _templates_ThemeRatingsCard__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../templates/ThemeRatingsCard */ "./src/blocks/templates/ThemeRatingsCard.js");
+/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../Logo */ "./src/blocks/Logo.js");
+/* harmony import */ var _components_Numbers__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/Numbers */ "./src/blocks/components/Numbers.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_15__);
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (a) { for (var b = 1; b < arguments.length; b++) { var c = arguments[b]; for (var d in c) ({}).hasOwnProperty.call(c, d) && (a[d] = c[d]); } return a; }, _extends.apply(null, arguments); }
 function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) return _arrayLikeToArray(b, c); var a = {}.toString.call(b).slice(8, -1); return "Object" === a && b.constructor && (a = b.constructor.name), "Map" === a || "Set" === a ? Array.from(b) : "Arguments" === a || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a) ? _arrayLikeToArray(b, c) : void 0; } }
@@ -3048,7 +3054,8 @@ var __ = wp.i18n.__;
 var _wp$element = wp.element,
   useState = _wp$element.useState,
   useEffect = _wp$element.useEffect,
-  Fragment = _wp$element.Fragment;
+  Fragment = _wp$element.Fragment,
+  useCallback = _wp$element.useCallback;
 var _wp$components = wp.components,
   PanelBody = _wp$components.PanelBody,
   SelectControl = _wp$components.SelectControl,
@@ -3056,7 +3063,11 @@ var _wp$components = wp.components,
   TextControl = _wp$components.TextControl,
   Button = _wp$components.Button,
   ToolbarGroup = _wp$components.ToolbarGroup,
-  Notice = _wp$components.Notice;
+  ToggleControl = _wp$components.ToggleControl,
+  Notice = _wp$components.Notice,
+  TabPanel = _wp$components.TabPanel,
+  PanelRow = _wp$components.PanelRow;
+
 var _wp$blockEditor = wp.blockEditor,
   InspectorControls = _wp$blockEditor.InspectorControls,
   BlockControls = _wp$blockEditor.BlockControls,
@@ -3075,152 +3086,169 @@ var _wp$blockEditor = wp.blockEditor,
 
 
 
+
+
+
 var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
-  var b = a.attributes,
-    c = a.setAttributes;
-  var d = useState(false),
-    e = _slicedToArray(d, 2),
-    f = e[0],
-    g = e[1];
-  var h = useState(false),
-    i = _slicedToArray(h, 2),
-    j = i[0],
-    k = i[1];
-  var l = useState(false),
-    m = _slicedToArray(l, 2),
-    n = m[0],
-    o = m[1];
-  var p = b.assetData,
-    q = b.type,
-    r = b.slug,
-    s = b.html,
-    t = b.align,
-    u = b.image,
-    v = b.containerid,
-    w = b.margin,
-    x = b.clear,
-    y = b.expiration,
-    z = b.ajax,
-    A = b.scheme,
-    B = b.layout,
-    C = b.width,
-    D = b.search,
-    E = b.tag,
-    F = b.author,
-    G = b.user,
-    H = b.browse,
-    I = b.per_page,
-    J = b.preview,
-    K = b.cols,
-    L = b.sortby,
-    M = b.sort;
+  var b;
+  var c = a.attributes,
+    d = a.setAttributes;
+  var e = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__.useInstanceId)(WP_Plugin_Card_Query, 'wp-plugin-info-card-query');
+  var f = useState(false),
+    g = _slicedToArray(f, 2),
+    h = g[0],
+    i = g[1];
+  var j = useState(false),
+    k = _slicedToArray(j, 2),
+    l = k[0],
+    m = k[1];
+  var n = useState(false),
+    o = _slicedToArray(n, 2),
+    p = o[0],
+    q = o[1];
+  var r = useState((b = c.searchBy) !== null && b !== void 0 ? b : 'general'),
+    s = _slicedToArray(r, 2),
+    t = s[0],
+    u = s[1];
+  var v = c.assetData,
+    w = c.type,
+    x = c.slug,
+    y = c.html,
+    z = c.align,
+    A = c.image,
+    B = c.containerid,
+    C = c.margin,
+    D = c.clear,
+    E = c.expiration,
+    F = c.ajax,
+    G = c.scheme,
+    H = c.layout,
+    I = c.width,
+    J = c.search,
+    K = c.tag,
+    L = c.author,
+    M = c.user,
+    N = c.browse,
+    O = c.per_page,
+    P = c.preview,
+    Q = c.cols,
+    R = c.sortby,
+    S = c.sort,
+    T = c.newGrid,
+    U = c.colGap,
+    V = c.rowGap;
   useEffect(function () {
     // If we have HTML, then we don't need to load it.
-    if (!s) {
-      g(true);
+    if (!y) {
+      i(true);
     } else {
-      g(false);
+      i(false);
     }
 
     // Apply defaults.
-    if (!b.defaultsApplied && 'default' === b.scheme) {
-      c({
+    if (!c.defaultsApplied && 'default' === c.scheme) {
+      d({
         defaultsApplied: true,
         scheme: wppic.default_scheme,
         layout: wppic.default_layout
       });
     }
   }, []);
-  var N = function pluginOnClick(a) {
-    if ('' !== q) {
-      k(true);
-      var d = wppic.rest_url + 'wppic/v1/get_query/';
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get(d + "?type=".concat(b.type, "&slug=").concat(b.slug, "&align=").concat(b.align, "&image=").concat(b.image, "&containerid=").concat(b.containerid, "&margin=").concat(b.margin, "&clear=").concat(b.clear, "&expiration=").concat(b.expiration, "&ajax=").concat(b.ajax, "&scheme=").concat(b.scheme, "&layout=").concat(b.layout, "&search=").concat(b.search, "&tag=").concat(b.tag, "&author=").concat(b.author, "&user=").concat(b.user, "&browse=").concat(b.browse, "&per_page=").concat(b.per_page, "&cols=").concat(b.cols, "}&sortby=").concat(b.sortby, "&sort=").concat(b.sort)).then(function (a) {
+  useEffect(function () {
+    d({
+      uniqueId: e
+    });
+  }, []);
+  var W = function pluginOnClick(a) {
+    if ('' !== w) {
+      m(true);
+      var b = wppic.rest_url + 'wppic/v2/get_query/';
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get(b + "?type=".concat(c.type, "&slug=").concat(c.slug, "&align=").concat(c.align, "&image=").concat(c.image, "&containerid=").concat(c.containerid, "&margin=").concat(c.margin, "&clear=").concat(c.clear, "&expiration=").concat(c.expiration, "&ajax=").concat(c.ajax, "&scheme=").concat(c.scheme, "&layout=").concat(c.layout, "&search=").concat(c.search, "&tag=").concat(c.tag, "&author=").concat(c.author, "&user=").concat(c.user, "&browse=").concat(c.browse, "&per_page=").concat(c.per_page, "&cols=").concat(c.cols, "}&sortby=").concat(c.sortby, "&sort=").concat(c.sort, "&searchBy=").concat(t)).then(function (a) {
         // Now Set State
-        g(false);
-        k(false);
+        i(false);
+        m(false);
         if (a.data.success) {
-          c({
+          d({
             assetData: a.data.data.api_response,
             html: a.data.data.html
           });
         } else {
-          c({
+          d({
             assetData: [],
             html: ''
           });
-          o(true);
-          g(true);
+          q(true);
+          i(true);
         }
       });
     }
   };
-  var O = function outputInfoCards() {
-    return p.map(function (a, b) {
+  var X = function outputInfoCards() {
+    return v.map(function (a, b) {
       return /*#__PURE__*/React.createElement(Fragment, {
         key: b
-      }, 'flex' === B && 'plugin' === q && /*#__PURE__*/React.createElement(_templates_PluginFlex__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        scheme: A,
-        image: u,
+      }, 'flex' === H && 'plugin' === w && /*#__PURE__*/React.createElement(_templates_PluginFlex__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        scheme: G,
+        image: A,
         data: a,
-        align: t
-      }), 'card' === B && 'plugin' === q && /*#__PURE__*/React.createElement(_templates_PluginCard__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        scheme: A,
-        image: u,
+        align: z
+      }), 'card' === H && 'plugin' === w && /*#__PURE__*/React.createElement(_templates_PluginCard__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        scheme: G,
+        image: A,
         data: a,
-        align: t
-      }), 'large' === B && 'plugin' === q && /*#__PURE__*/React.createElement(_templates_PluginLarge__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        scheme: A,
-        image: u,
+        align: z
+      }), 'large' === H && 'plugin' === w && /*#__PURE__*/React.createElement(_templates_PluginLarge__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        scheme: G,
+        image: A,
         data: a,
-        align: t
-      }), 'wordpress' === B && 'plugin' === q && /*#__PURE__*/React.createElement(_templates_PluginWordPress__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        scheme: A,
-        image: u,
+        align: z
+      }), 'wordpress' === H && 'plugin' === w && /*#__PURE__*/React.createElement(_templates_PluginWordPress__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        scheme: G,
+        image: A,
         data: a,
-        align: t
-      }), 'ratings' === B && 'plugin' === q && /*#__PURE__*/React.createElement(_templates_PluginRatingsCard__WEBPACK_IMPORTED_MODULE_10__["default"], {
-        scheme: A,
-        image: u,
+        align: z
+      }), 'ratings' === H && 'plugin' === w && /*#__PURE__*/React.createElement(_templates_PluginRatingsCard__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        scheme: G,
+        image: A,
         data: a,
-        align: t
-      }), 'flex' === B && 'theme' === q && /*#__PURE__*/React.createElement(_templates_ThemeFlex__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        scheme: A,
-        image: u,
+        align: z
+      }), 'flex' === H && 'theme' === w && /*#__PURE__*/React.createElement(_templates_ThemeFlex__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        scheme: G,
+        image: A,
         data: a,
-        align: t
-      }), 'wordpress' === B && 'theme' === q && /*#__PURE__*/React.createElement(_templates_ThemeWordPress__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        scheme: A,
-        image: u,
+        align: z
+      }), 'wordpress' === H && 'theme' === w && /*#__PURE__*/React.createElement(_templates_ThemeWordPress__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        scheme: G,
+        image: A,
         data: a,
-        align: t
-      }), 'large' === B && 'theme' === q && /*#__PURE__*/React.createElement(_templates_ThemeLarge__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        scheme: A,
-        image: u,
+        align: z
+      }), 'large' === H && 'theme' === w && /*#__PURE__*/React.createElement(_templates_ThemeLarge__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        scheme: G,
+        image: A,
         data: a,
-        align: t
-      }), 'card' === B && 'theme' === q && /*#__PURE__*/React.createElement(_templates_ThemeCard__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        scheme: A,
-        image: u,
+        align: z
+      }), 'card' === H && 'theme' === w && /*#__PURE__*/React.createElement(_templates_ThemeCard__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        scheme: G,
+        image: A,
         data: a,
-        align: t
-      }), 'ratings' === B && 'theme' === q && /*#__PURE__*/React.createElement(_templates_ThemeRatingsCard__WEBPACK_IMPORTED_MODULE_11__["default"], {
-        scheme: A,
-        image: u,
+        align: z
+      }), 'ratings' === H && 'theme' === w && /*#__PURE__*/React.createElement(_templates_ThemeRatingsCard__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        scheme: G,
+        image: A,
         data: a,
-        align: t
+        align: z
       }));
     });
   };
-  var P = new HtmlToReactParser();
-  var Q = [{
+  var Y = new HtmlToReactParser();
+  var Z = [{
     icon: 'edit',
     title: __('Reset', 'wp-plugin-info-card'),
     onClick: function onClick() {
-      return g(true);
+      return i(true);
     }
   }];
-  var R = [{
+  var $ = [{
     value: 'none',
     label: __('None', 'wp-plugin-info-card')
   }, {
@@ -3230,14 +3258,14 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
     value: 'after',
     label: __('After', 'wp-plugin-info-card')
   }];
-  var S = [{
+  var _ = [{
     value: 'false',
     label: __('No', 'wp-plugin-info-card')
   }, {
     value: 'true',
     label: __('Yes', 'wp-plugin-info-card')
   }];
-  var T = [{
+  var aa = [{
     value: 'default',
     label: __('Default', 'wp-plugin-info-card')
   }, {
@@ -3283,7 +3311,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
     value: 'scheme14',
     label: __('Scheme 14', 'wp-plugin-info-card')
   }];
-  var U = [{
+  var ba = [{
     value: 'card',
     label: __('Card', 'wp-plugin-info-card')
   }, {
@@ -3299,7 +3327,7 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
     value: 'ratings',
     label: __('Ratings', 'wp-plugin-info-card')
   }];
-  var V = [{
+  var ca = [{
     value: '',
     label: __('None', 'wp-plugin-info-card')
   }, {
@@ -3336,224 +3364,31 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
     value: 'download_link',
     label: __('Download Link', 'wp-plugin-info-card')
   }];
-  var W = [{
+  var da = [{
     value: 'none',
     label: __('Default', 'wp-plugin-info-card')
   }, {
     value: 'full',
     label: __('Full Width', 'wp-plugin-info-card')
   }];
-  var X = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
-    title: __('WP Plugin Info Card', 'wp-plugin-info-card')
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    label: __('Scheme', 'wp-plugin-info-card'),
-    options: T,
-    value: A,
-    onChange: function onChange(a) {
-      c({
-        scheme: a
-      });
-    }
-  }), /*#__PURE__*/React.createElement(SelectControl, {
-    label: __('Layout', 'wp-plugin-info-card'),
-    options: U,
-    value: B,
-    onChange: function onChange(a) {
-      c({
-        layout: a
-      });
-    }
-  }), /*#__PURE__*/React.createElement(SelectControl, {
-    label: __('Width', 'wp-plugin-info-card'),
-    options: W,
-    value: C,
-    onChange: function onChange(a) {
-      c({
-        width: a
-      });
-    }
-  }), /*#__PURE__*/React.createElement(MediaUpload, {
-    onSelect: function onSelect(a) {
-      c({
-        image: a.url
-      });
-      b.image = a.url;
-      N();
-    },
-    type: "image",
-    value: u,
-    render: function render(a) {
-      var d = a.open;
-      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
-        className: "components-button is-button",
-        onClick: d
-      }, __('Upload Image!', 'wp-plugin-info-card')), u && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("img", {
-        src: u,
-        alt: __('Plugin Card Image', 'wp-plugin-info-card'),
-        width: "250",
-        height: "250"
-      })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
-        className: "components-button is-button",
-        onClick: function onClick(a) {
-          c({
-            image: ''
-          });
-          b.image = '';
-          N();
-        }
-      }, __('Reset Image', 'wp-plugin-info-card')))));
-    }
-  }), /*#__PURE__*/React.createElement(TextControl, {
-    label: __('Container ID', 'wp-plugin-info-card'),
-    type: "text",
-    value: v,
-    onChange: function onChange(a) {
-      c({
-        containerid: a
-      });
-      b.containerId = a;
-      setTimeout(function () {
-        N();
-      }, 5000);
-    }
-  }), /*#__PURE__*/React.createElement(TextControl, {
-    label: __('Margin', 'wp-plugin-info-card'),
-    type: "text",
-    value: w,
-    onChange: function onChange(a) {
-      c({
-        margin: a
-      });
-      b.margin = a;
-      setTimeout(function () {
-        N();
-      }, 5000);
-    }
-  }), /*#__PURE__*/React.createElement(SelectControl, {
-    label: __('Clear', 'wp-plugin-info-card'),
-    options: R,
-    value: x,
-    onChange: function onChange(a) {
-      c({
-        clear: a
-      });
-    }
-  }), /*#__PURE__*/React.createElement(TextControl, {
-    label: __('Expiration in minutes', 'wp-plugin-info-card'),
-    type: "number",
-    value: y,
-    onChange: function onChange(a) {
-      c({
-        expiration: a
-      });
-    }
-  }), /*#__PURE__*/React.createElement(SelectControl, {
-    label: __('Load card via Ajax?', 'wp-plugin-info-card'),
-    options: S,
-    value: z,
-    onChange: function onChange(a) {
-      c({
-        ajax: a
-      });
-    }
-  })));
-  var Y = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(React.Fragment, null, f && /*#__PURE__*/React.createElement("div", {
-    className: "wppic-query-block wppic-query-block-panel"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "wppic-block-svg"
-  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    size: "75"
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "wp-pic-tabs-panel"
-  }, n && /*#__PURE__*/React.createElement("div", {
-    className: "wppic-no-data"
-  }, /*#__PURE__*/React.createElement(Notice, {
-    status: "error",
-    isDismissible: false
-  }, __('No data found. Please check your query.', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement(SelectControl, {
-    label: __('Select a Type', 'wp-plugin-info-card'),
-    options: [{
-      label: __('Plugin', 'wp-plugin-info-card'),
-      value: 'plugin'
-    }, {
-      label: __('Theme', 'wp-plugin-info-card'),
-      value: 'theme'
-    }],
-    value: q,
-    onChange: function onChange(a) {
-      c({
-        type: a
-      });
-    }
-  }), /*#__PURE__*/React.createElement(TextControl, {
-    label: __('Search', 'wp-plugin-info-card'),
-    value: D,
-    onChange: function onChange(a) {
-      c({
-        search: a
-      });
-    }
-  }), /*#__PURE__*/React.createElement(TextControl, {
-    label: __('Tags', 'wp-plugin-info-card'),
-    value: E,
-    onChange: function onChange(a) {
-      c({
-        tag: a
-      });
-    },
-    help: __('Comma separated', 'wp-plugin-info-card')
-  }), /*#__PURE__*/React.createElement(TextControl, {
-    label: __('Author', 'wp-plugin-info-card'),
-    value: F,
-    onChange: function onChange(a) {
-      c({
-        author: a
-      });
-    }
-  }), /*#__PURE__*/React.createElement(TextControl, {
-    label: __('User (Username)', 'wp-plugin-info-card'),
-    value: G,
-    onChange: function onChange(a) {
-      c({
-        user: a
-      });
-    },
-    help: __('See the favorites from this username', 'wp-plugin-info-card')
-  }), /*#__PURE__*/React.createElement(SelectControl, {
-    label: __('Browse', 'wp-plugin-info-card'),
-    options: [{
-      label: __('None', 'wp-plugin-info-card'),
-      value: ''
-    }, {
-      label: __('Featured', 'wp-plugin-info-card'),
-      value: 'featured'
-    }, {
-      label: __('Updated', 'wp-plugin-info-card'),
-      value: 'updated'
-    }, {
-      label: __('Favorites', 'wp-plugin-info-card'),
-      value: 'favorites'
-    }, {
-      label: __('Popular', 'wp-plugin-info-card'),
-      value: 'popular'
-    }],
-    value: H,
-    onChange: function onChange(a) {
-      c({
-        browse: a
-      });
-    }
-  }), /*#__PURE__*/React.createElement(TextControl, {
+  var ea = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__.debounce)(function (a) {
+    W(a);
+  }, 1100);
+  var fa = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
+    title: __('Query Options', 'wp-plugin-info-card')
+  }, /*#__PURE__*/React.createElement(TextControl, {
     type: "number",
     label: __('Per Page', 'wp-plugin-info-card'),
-    value: I,
+    value: O,
     onChange: function onChange(a) {
-      c({
+      d({
         per_page: a
       });
+      c.per_page = a;
+      ea();
     },
     help: __('Set how many cards to return.', 'wp-plugin-info-card')
-  }), /*#__PURE__*/React.createElement(SelectControl, {
+  }), false === T && /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Columns', 'wp-plugin-info-card'),
     options: [{
       label: __('1', 'wp-plugin-info-card'),
@@ -3565,9 +3400,9 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
       label: __('3', 'wp-plugin-info-card'),
       value: '3'
     }],
-    value: K,
+    value: Q,
     onChange: function onChange(a) {
-      c({
+      d({
         cols: a
       });
     }
@@ -3589,9 +3424,9 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
       label: __('Rating', 'wp-plugin-info-card'),
       value: 'rating'
     }],
-    value: L,
+    value: R,
     onChange: function onChange(a) {
-      c({
+      d({
         sortby: a
       });
     }
@@ -3604,64 +3439,368 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
       label: __('DESC', 'wp-plugin-info-card'),
       value: 'DESC'
     }],
-    value: M,
+    value: S,
     onChange: function onChange(a) {
-      c({
+      d({
         sort: a
       });
     }
+  }), /*#__PURE__*/React.createElement(ToggleControl, {
+    label: __('Use CSS Grid Layout', 'wp-plugin-info-card'),
+    checked: true === T,
+    onChange: function onChange(a) {
+      d({
+        newGrid: a
+      });
+    }
+  }), true === T && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Columns', 'wp-plugin-info-card'),
+    options: [{
+      label: __('1', 'wp-plugin-info-card'),
+      value: '1'
+    }, {
+      label: __('2', 'wp-plugin-info-card'),
+      value: '2'
+    }, {
+      label: __('3', 'wp-plugin-info-card'),
+      value: '3'
+    }],
+    value: Q,
+    onChange: function onChange(a) {
+      d({
+        cols: a
+      });
+    }
+  }), /*#__PURE__*/React.createElement(PanelRow, {
+    className: "wppic-panel-rows-numbers"
+  }, /*#__PURE__*/React.createElement(_components_Numbers__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    value: U,
+    label: __('Column Gap (in px)', 'wp-plugin-info-card'),
+    numbers: [20, 40, 60, 80],
+    onClick: function onClick(a) {
+      d({
+        colGap: parseInt(a)
+      });
+    },
+    id: "wppic-col-gap"
+  })), /*#__PURE__*/React.createElement(PanelRow, {
+    className: "wppic-panel-rows-numbers"
+  }, /*#__PURE__*/React.createElement(_components_Numbers__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    value: V,
+    label: __('Row Gap (in px)', 'wp-plugin-info-card'),
+    numbers: [20, 40, 60, 80],
+    onClick: function onClick(a) {
+      d({
+        rowGap: parseInt(a)
+      });
+    },
+    id: "wppic-row-gap"
+  })))), /*#__PURE__*/React.createElement(PanelBody, {
+    title: __('WP Plugin Info Card', 'wp-plugin-info-card')
+  }, /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Scheme', 'wp-plugin-info-card'),
+    options: aa,
+    value: G,
+    onChange: function onChange(a) {
+      d({
+        scheme: a
+      });
+    }
+  }), /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Layout', 'wp-plugin-info-card'),
+    options: ba,
+    value: H,
+    onChange: function onChange(a) {
+      d({
+        layout: a
+      });
+    }
+  }), /*#__PURE__*/React.createElement(MediaUpload, {
+    onSelect: function onSelect(a) {
+      d({
+        image: a.url
+      });
+      c.image = a.url;
+      W();
+    },
+    type: "image",
+    value: A,
+    render: function render(a) {
+      var b = a.open;
+      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
+        className: "components-button is-button",
+        onClick: b
+      }, __('Upload Image!', 'wp-plugin-info-card')), A && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("img", {
+        src: A,
+        alt: __('Plugin Card Image', 'wp-plugin-info-card'),
+        width: "250",
+        height: "250"
+      })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
+        className: "components-button is-button",
+        onClick: function onClick(a) {
+          d({
+            image: ''
+          });
+          c.image = '';
+          W();
+        }
+      }, __('Reset Image', 'wp-plugin-info-card')))));
+    }
+  }), /*#__PURE__*/React.createElement(TextControl, {
+    label: __('Container ID', 'wp-plugin-info-card'),
+    type: "text",
+    value: B,
+    onChange: function onChange(a) {
+      d({
+        containerid: a
+      });
+      c.containerId = a;
+      setTimeout(function () {
+        W();
+      }, 5000);
+    }
+  }), /*#__PURE__*/React.createElement(TextControl, {
+    label: __('Margin', 'wp-plugin-info-card'),
+    type: "text",
+    value: C,
+    onChange: function onChange(a) {
+      d({
+        margin: a
+      });
+      c.margin = a;
+      setTimeout(function () {
+        W();
+      }, 5000);
+    }
+  }), /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Clear', 'wp-plugin-info-card'),
+    options: $,
+    value: D,
+    onChange: function onChange(a) {
+      d({
+        clear: a
+      });
+    }
+  }), /*#__PURE__*/React.createElement(TextControl, {
+    label: __('Expiration in minutes', 'wp-plugin-info-card'),
+    type: "number",
+    value: E,
+    onChange: function onChange(a) {
+      d({
+        expiration: a
+      });
+    }
+  }), /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Load card via Ajax?', 'wp-plugin-info-card'),
+    options: _,
+    value: F,
+    onChange: function onChange(a) {
+      d({
+        ajax: a
+      });
+    }
+  })));
+  var ga = [{
+    value: 'featured',
+    label: __('Featured', 'wp-plugin-info-card')
+  }, {
+    value: 'popular',
+    label: __('Popular', 'wp-plugin-info-card')
+  }, {
+    value: 'updated',
+    label: __('Updated', 'wp-plugin-info-card')
+  }, {
+    value: 'favorites',
+    label: __('Favorites', 'wp-plugin-info-card')
+  }];
+  var ha = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(React.Fragment, null, h && /*#__PURE__*/React.createElement("div", {
+    className: "wppic-query-block wppic-query-block-panel"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-block-svg"
+  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    size: "75"
   })), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-tab-panel"
+  }, p && /*#__PURE__*/React.createElement("div", {
+    className: "wppic-no-data"
+  }, /*#__PURE__*/React.createElement(Notice, {
+    status: "error",
+    isDismissible: false
+  }, __('No data found. Please check your query.', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement(TabPanel, {
+    activeClass: "active-tab",
+    initialTabName: w,
+    tabs: [{
+      title: __('Plugin', 'wp-plugin-info-card'),
+      name: 'plugin',
+      className: 'wppic-tab-plugin wppic-tab-slug'
+    }, {
+      title: __('Theme', 'wp-plugin-info-card'),
+      name: 'theme',
+      className: 'wppic-tab-theme'
+    }],
+    onSelect: function onSelect(a) {
+      d({
+        type: a
+      });
+    }
+  }, function (a) {
+    var b;
+    if ('plugin' === a.name || 'theme' === a.name) {
+      b = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(SelectControl, {
+        label: __('Search by:', 'wp-plugin-info-card'),
+        value: t,
+        options: [{
+          label: __('General', 'wp-plugin-info-card'),
+          value: 'general'
+        }, {
+          label: __('Plugin or Theme Author', 'wp-plugin-info-card'),
+          value: 'author'
+        }, {
+          label: __('An Author\'s Favorites', 'wp-plugin-info-card'),
+          value: 'favorites'
+        }, {
+          label: __('By Category', 'wp-plugin-info-card'),
+          value: 'category'
+        }, {
+          label: __('By Tag', 'wp-plugin-info-card'),
+          value: 'tag'
+        }],
+        onChange: function onChange(a) {
+          u(a);
+        }
+      }));
+      return b;
+    }
+  }), 'category' !== t && /*#__PURE__*/React.createElement(TextControl, {
+    label: __('Search', 'wp-plugin-info-card'),
+    value: J,
+    onChange: function onChange(a) {
+      d({
+        search: a
+      });
+    },
+    placeholder: __('Enter your search…', 'wp-plugin-info-card')
+  }), 'category' === t && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Browse', 'wp-plugin-info-card'),
+    options: [{
+      label: __('None', 'wp-plugin-info-card'),
+      value: ''
+    }, {
+      label: __('Featured', 'wp-plugin-info-card'),
+      value: 'featured'
+    }, {
+      label: __('Updated', 'wp-plugin-info-card'),
+      value: 'updated'
+    }, {
+      label: __('Favorites', 'wp-plugin-info-card'),
+      value: 'favorites'
+    }, {
+      label: __('Popular', 'wp-plugin-info-card'),
+      value: 'popular'
+    }],
+    value: N,
+    onChange: function onChange(a) {
+      d({
+        browse: a
+      });
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-gutenberg-button"
   }, /*#__PURE__*/React.createElement(Button, {
     iconSize: 20,
-    icon: /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    icon: /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_13__["default"], {
       size: "25"
     }),
     isSecondary: true,
     id: "wppic-input-submit",
     onClick: function onClick(a) {
       a.preventDefault();
-      g(false);
-      o(false);
-      N(a);
+      i(false);
+      q(false);
+
+      // Clear attributes.
+      d({
+        browse: '',
+        tag: '',
+        author: '',
+        user: ''
+      });
+
+      // Set attributes on search.
+      switch (t) {
+        case 'category':
+          d({
+            browse: N
+          });
+          c.browse = N;
+          break;
+        case 'tag':
+          d({
+            tag: J
+          });
+          c.tag = J;
+          break;
+        case 'author':
+          d({
+            author: J
+          });
+          c.author = J;
+          break;
+        case 'favorites':
+          d({
+            user: J
+          });
+          c.user = J;
+          break;
+        case 'general':
+        default:
+          d({
+            search: J
+          });
+          c.search = J;
+          break;
+      }
+      W(a);
     }
-  }, __('Query and Configure', 'wp-plugin-info-card')))), j && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }, __('Query and Configure', 'wp-plugin-info-card')))), l && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "wppic-loading-placeholder"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-loading"
-  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_12__["default"], {
+  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_13__["default"], {
     size: "45"
   }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
     className: "wppic-spinner"
-  }, /*#__PURE__*/React.createElement(Spinner, null))))), !f && !j && /*#__PURE__*/React.createElement(React.Fragment, null, X, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, {
-    controls: Q
-  }), 'flex' === B && /*#__PURE__*/React.createElement(BlockAlignmentToolbar, {
-    value: t,
+  }, /*#__PURE__*/React.createElement(Spinner, null))))), !h && !l && /*#__PURE__*/React.createElement(React.Fragment, null, fa, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, {
+    controls: Z
+  }), 'flex' === H && /*#__PURE__*/React.createElement(BlockAlignmentToolbar, {
+    value: z,
     onChange: function onChange(a) {
-      c({
+      d({
         align: a
       });
-      N(a);
+      W(a);
     }
-  }), 'card' === B && /*#__PURE__*/React.createElement(AlignmentToolbar, {
-    value: t,
+  }), 'card' === H && /*#__PURE__*/React.createElement(AlignmentToolbar, {
+    value: z,
     onChange: function onChange(a) {
-      c({
+      d({
         align: a
       });
-      N(a);
+      W(a);
     }
   })), /*#__PURE__*/React.createElement("div", {
-    className: '' !== C ? 'wp-pic-full-width' : ''
+    className: '' !== I ? 'wp-pic-full-width' : ''
   }, /*#__PURE__*/React.createElement("div", {
-    className: "wp-pic-1-".concat(K)
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(false === T ? "wp-pic-1-".concat(Q) : '', {
+      'has-grid-layout': T
+    })
   }, /*#__PURE__*/React.createElement("div", {
-    className: "wp-pic-grid cols-".concat(K)
-  }, O()))))));
-  var Z = useBlockProps({
-    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()("wp-plugin-info-card-query align".concat(t))
+    className: "wp-pic-grid cols-".concat(Q)
+  }, X()))))));
+  var ia = useBlockProps({
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()("wp-plugin-info-card-query align".concat(z))
   });
-  if (J) {
+  if (P) {
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("img", {
       src: wppic.query_preview,
       style: {
@@ -3670,7 +3809,10 @@ var WP_Plugin_Card_Query = function WP_Plugin_Card_Query(a) {
       }
     }));
   }
-  return /*#__PURE__*/React.createElement("div", Z, Y);
+  var ja = "\n\t\t#".concat(c.uniqueId, " {\n\t\t\tdisplay: grid;\n\t\t\tcolumn-gap: ").concat(U, "px;\n\t\t\trow-gap: ").concat(V, "px;\n\t\t}\n\t");
+  return /*#__PURE__*/React.createElement("div", _extends({}, ia, {
+    id: c.uniqueId
+  }), /*#__PURE__*/React.createElement("style", null, ja), ha);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WP_Plugin_Card_Query);
 
@@ -18244,6 +18386,17 @@ module.exports = window["wp"]["components"];
 
 /***/ }),
 
+/***/ "@wordpress/compose":
+/*!*********************************!*\
+  !*** external ["wp","compose"] ***!
+  \*********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["compose"];
+
+/***/ }),
+
 /***/ "@wordpress/element":
 /*!*********************************!*\
   !*** external ["wp","element"] ***!
@@ -21032,7 +21185,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"WP Plugin Info Card Query","apiVersion":2,"name":"wp-plugin-info-card/wp-plugin-info-card-query","category":"wp-plugin-info-card","icon":"<svg height=\'24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 512 512\'><path fill=\'#333\' d=\'M256 140c-63.962 0-116 52.038-116 116s52.038 116 116 116 116-52.038 116-116-52.038-116-116-116zm-60.25 59.875h86.635l-4.578-5.045c-5.566-6.135-5.106-15.622 1.029-21.188 6.136-5.567 15.621-5.106 21.188 1.029l27.333 30.125c5.188 5.718 5.188 14.441 0 20.159l-27.333 30.125a14.958 14.958 0 0 1-11.113 4.92 14.945 14.945 0 0 1-10.075-3.891c-6.135-5.567-6.596-15.053-1.029-21.188l4.578-5.045H195.75c-8.284 0-15-6.716-15-15s6.716-15.001 15-15.001zm120.5 112.25h-86.635l4.578 5.045c5.566 6.135 5.106 15.622-1.029 21.188a14.948 14.948 0 0 1-10.075 3.891 14.964 14.964 0 0 1-11.113-4.92l-27.333-30.125c-5.188-5.718-5.188-14.441 0-20.159l27.333-30.125c5.567-6.135 15.054-6.596 21.188-1.029 6.135 5.567 6.596 15.053 1.029 21.188l-4.578 5.045h86.635c8.284 0 15 6.716 15 15s-6.716 15.001-15 15.001z\'></path><path fill=\'#333\' d=\'M497 199.92h-33.479a212.647 212.647 0 0 0-21.142-50.991l23.688-23.688c5.858-5.858 5.858-15.355 0-21.213l-58.095-58.095c-5.857-5.858-15.355-5.858-21.213 0L363.07 69.621a212.647 212.647 0 0 0-50.991-21.142V15c0-8.284-6.716-15-15-15H214.92c-8.284 0-15 6.716-15 15v33.479a212.664 212.664 0 0 0-50.991 21.142l-23.688-23.688c-5.857-5.858-15.355-5.858-21.213 0l-58.095 58.095c-5.858 5.858-5.858 15.355 0 21.213l23.688 23.688a212.647 212.647 0 0 0-21.142 50.991H15c-8.284 0-15 6.716-15 15v82.159c0 8.284 6.716 15 15 15h33.479a212.664 212.664 0 0 0 21.142 50.991l-23.688 23.688c-5.858 5.858-5.858 15.355 0 21.213l58.095 58.095c5.857 5.858 15.355 5.858 21.213 0l23.688-23.688a212.633 212.633 0 0 0 50.991 21.143V497c0 8.284 6.716 15 15 15h82.159c8.284 0 15-6.716 15-15v-33.479a212.568 212.568 0 0 0 50.991-21.143l23.688 23.688c5.857 5.858 15.355 5.858 21.213 0l58.095-58.095c5.858-5.858 5.858-15.355 0-21.213l-23.688-23.688a212.647 212.647 0 0 0 21.142-50.991H497c8.284 0 15-6.716 15-15V214.92c0-8.284-6.716-15-15-15zM256 402c-80.505 0-146-65.495-146-146s65.495-146 146-146 146 65.495 146 146-65.495 146-146 146z\'></path></svg>","description":"Query and display a list of plugins or themes in a beautiful card format.","keywords":["wp plugin","plugin","card","theme","query"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"assetData":{"type":"array","default":[]},"search":{"type":"string","default":""},"tag":{"type":"string","default":""},"author":{"type":"string","default":""},"user":{"type":"string","default":""},"browse":{"type":"string","default":""},"per_page":{"type":"string","default":"8"},"cols":{"type":"number","default":2},"type":{"type":"string","default":"plugin"},"slug":{"type":"string","default":""},"loading":{"type":"boolean","default":false},"html":{"type":"string","default":""},"align":{"type":"string","default":"full"},"image":{"type":"string","default":""},"containerid":{"type":"string","default":""},"margin":{"type":"string","default":""},"clear":{"type":"string","default":"none"},"expiration":{"type":"number","default":0},"ajax":{"type":"string","default":"false"},"scheme":{"type":"string","default":"default"},"layout":{"type":"string","default":"card"},"custom":{"type":"string","default":""},"width":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"defaultsApplied":{"type":"boolean","default":false},"sortby":{"type":"string","default":"none"},"sort":{"type":"string","default":"ASC"}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":false,"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"]}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"WP Plugin Info Card Query","apiVersion":2,"name":"wp-plugin-info-card/wp-plugin-info-card-query","category":"wp-plugin-info-card","icon":"<svg height=\'24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 512 512\'><path fill=\'#333\' d=\'M256 140c-63.962 0-116 52.038-116 116s52.038 116 116 116 116-52.038 116-116-52.038-116-116-116zm-60.25 59.875h86.635l-4.578-5.045c-5.566-6.135-5.106-15.622 1.029-21.188 6.136-5.567 15.621-5.106 21.188 1.029l27.333 30.125c5.188 5.718 5.188 14.441 0 20.159l-27.333 30.125a14.958 14.958 0 0 1-11.113 4.92 14.945 14.945 0 0 1-10.075-3.891c-6.135-5.567-6.596-15.053-1.029-21.188l4.578-5.045H195.75c-8.284 0-15-6.716-15-15s6.716-15.001 15-15.001zm120.5 112.25h-86.635l4.578 5.045c5.566 6.135 5.106 15.622-1.029 21.188a14.948 14.948 0 0 1-10.075 3.891 14.964 14.964 0 0 1-11.113-4.92l-27.333-30.125c-5.188-5.718-5.188-14.441 0-20.159l27.333-30.125c5.567-6.135 15.054-6.596 21.188-1.029 6.135 5.567 6.596 15.053 1.029 21.188l-4.578 5.045h86.635c8.284 0 15 6.716 15 15s-6.716 15.001-15 15.001z\'></path><path fill=\'#333\' d=\'M497 199.92h-33.479a212.647 212.647 0 0 0-21.142-50.991l23.688-23.688c5.858-5.858 5.858-15.355 0-21.213l-58.095-58.095c-5.857-5.858-15.355-5.858-21.213 0L363.07 69.621a212.647 212.647 0 0 0-50.991-21.142V15c0-8.284-6.716-15-15-15H214.92c-8.284 0-15 6.716-15 15v33.479a212.664 212.664 0 0 0-50.991 21.142l-23.688-23.688c-5.857-5.858-15.355-5.858-21.213 0l-58.095 58.095c-5.858 5.858-5.858 15.355 0 21.213l23.688 23.688a212.647 212.647 0 0 0-21.142 50.991H15c-8.284 0-15 6.716-15 15v82.159c0 8.284 6.716 15 15 15h33.479a212.664 212.664 0 0 0 21.142 50.991l-23.688 23.688c-5.858 5.858-5.858 15.355 0 21.213l58.095 58.095c5.857 5.858 15.355 5.858 21.213 0l23.688-23.688a212.633 212.633 0 0 0 50.991 21.143V497c0 8.284 6.716 15 15 15h82.159c8.284 0 15-6.716 15-15v-33.479a212.568 212.568 0 0 0 50.991-21.143l23.688 23.688c5.857 5.858 15.355 5.858 21.213 0l58.095-58.095c5.858-5.858 5.858-15.355 0-21.213l-23.688-23.688a212.647 212.647 0 0 0 21.142-50.991H497c8.284 0 15-6.716 15-15V214.92c0-8.284-6.716-15-15-15zM256 402c-80.505 0-146-65.495-146-146s65.495-146 146-146 146 65.495 146 146-65.495 146-146 146z\'></path></svg>","description":"Query and display a list of plugins or themes in a beautiful card format.","keywords":["wp plugin","plugin","card","theme","query"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"assetData":{"type":"array","default":[]},"newGrid":{"type":"boolean","default":false},"search":{"type":"string","default":""},"tag":{"type":"string","default":""},"author":{"type":"string","default":""},"user":{"type":"string","default":""},"browse":{"type":"string","default":""},"per_page":{"type":"string","default":"8"},"cols":{"type":"string","default":2},"colGap":{"type":"number","default":20},"rowGap":{"type":"number","default":20},"type":{"type":"string","default":"plugin"},"slug":{"type":"string","default":""},"loading":{"type":"boolean","default":false},"html":{"type":"string","default":""},"align":{"type":"string","default":"full"},"image":{"type":"string","default":""},"containerid":{"type":"string","default":""},"margin":{"type":"string","default":""},"clear":{"type":"string","default":"none"},"expiration":{"type":"number","default":0},"ajax":{"type":"string","default":"false"},"scheme":{"type":"string","default":"default"},"layout":{"type":"string","default":"card"},"custom":{"type":"string","default":""},"width":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"defaultsApplied":{"type":"boolean","default":false},"sortby":{"type":"string","default":"none"},"sort":{"type":"string","default":"ASC"}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":false,"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"]}');
 
 /***/ }),
 
