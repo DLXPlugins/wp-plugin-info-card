@@ -30,20 +30,13 @@
 		grid-template-columns: 1fr;
 		@include respond-to('medium') {
 			grid-template-columns: 1fr 1fr;
-			justify-content: center;
-			.wp-pic-wrapper {
-				align-self: end;
-			}
-			.wp-pic-wrapper:nth-child(odd) {
-				justify-content: flex-end;
-			}
-			.wp-pic-wrapper:nth-child(even) {
-				justify-content: flex-start;
-			}
 		}
 		@include respond-to('large') {
 			grid-template-columns: 1fr 1fr 1fr;
 			justify-content: center;
+			.wp-pic-wrapper {
+				justify-content: center;
+			}
 		}
 		
 	}
