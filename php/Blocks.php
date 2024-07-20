@@ -359,6 +359,9 @@ class Blocks {
 			'layout'      => $attributes['layout'],
 			'sortby'      => $attributes['sortby'],
 			'sort'        => $attributes['sort'],
+			'row_gap'     => $attributes['rowGap'],
+			'col_gap'     => $attributes['colGap'],
+			'itemSlugs'   => $attributes['itemSlugs'],
 		);
 		if ( ! empty( $attributes['browse'] ) ) {
 			$args['browse'] = $attributes['browse'];
@@ -412,7 +415,9 @@ class Blocks {
 			'cols'        => $attributes['cols'],
 			'col_gap'     => $attributes['colGap'],
 			'row_gap'     => $attributes['rowGap'],
+			'itemSlugs'   => $attributes['itemSlugs'],
 		);
+
 		$html = '';
 		if ( '' !== $attributes['width'] ) {
 			$html = sprintf( '<div class="wp-pic-full-width">%s</div>', Shortcodes::shortcode_function( $args ) );
@@ -455,13 +460,14 @@ class Blocks {
 		}
 
 		$shortcode_atts = array(
-			'id'     => $attributes['uniqueId'],
-			'cols'   => $attributes['cols'],
-			'colGap' => $attributes['colGap'],
-			'rowGap' => $attributes['rowGap'],
-			'scheme' => $attributes['scheme'],
-			'align'  => $attributes['align'],
-			'layout' => $attributes['layout'],
+			'id'        => $attributes['uniqueId'],
+			'cols'      => $attributes['cols'],
+			'col_gap'   => $attributes['colGap'],
+			'row_gap'   => $attributes['rowGap'],
+			'scheme'    => $attributes['scheme'],
+			'align'     => $attributes['align'],
+			'layout'    => $attributes['layout'],
+			'itemSlugs' => $attributes['itemSlugs'],
 		);
 		return Shortcodes::shortcode_active_site_plugins_function( $shortcode_atts );
 	}

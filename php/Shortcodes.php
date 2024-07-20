@@ -152,6 +152,15 @@ class Shortcodes {
 		);
 		register_rest_route(
 			'wppic/v2',
+			'/get_query',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'get_query_shortcode_v2' ),
+				'permission_callback' => '__return_true',
+			)
+		);
+		register_rest_route(
+			'wppic/v2',
 			'/get_site_plugins',
 			array(
 				'methods'             => 'GET',
@@ -238,7 +247,7 @@ class Shortcodes {
 			'post_type'      => 'download',
 			'posts_per_page' => $per_page,
 			'paged'          => $page,
-			'meta_query'	 => array(
+			'meta_query'     => array(
 				array(
 					'key'     => '_edd_sl_enabled',
 					'value'   => '1',
@@ -270,7 +279,7 @@ class Shortcodes {
 		// Gather downloads.
 		$downloads = array();
 		foreach ( $download_ids as $download_id ) {
-			$download = \edd_get_download( $download_id );
+			$download                          = \edd_get_download( $download_id );
 			$downloads[ $download->post_name ] = wppic_api_parser( 'plugin', $download->post_name, HOUR_IN_SECONDS );
 		}
 
@@ -469,6 +478,143 @@ class Shortcodes {
 	}
 
 	/**
+	 * Retrieve the query shortcode.
+	 */
+	public function get_query_shortcode_v2() {
+		$attrs = array(
+			'cols'        => $_GET['cols'],
+			'per_page'    => $_GET['per_page'],
+			'type'        => $_GET['type'],
+			'image'       => isset( $_GET['image'] ) ? $_GET['image'] : '',
+			'align'       => isset( $_GET['align'] ) ? $_GET['align'] : '',
+			'containerid' => isset( $_GET['containerid'] ) ? $_GET['containerid'] : '',
+			'margin'      => isset( $_GET['margin'] ) ? $_GET['margin'] : '',
+			'clear'       => isset( $_GET['clear'] ) ? $_GET['clear'] : '',
+			'expiration'  => isset( $_GET['expiration'] ) ? $_GET['expiration'] : '',
+			'ajax'        => isset( $_GET['ajax'] ) ? $_GET['ajax'] : '',
+			'scheme'      => isset( $_GET['scheme'] ) ? $_GET['scheme'] : '',
+			'layout'      => isset( $_GET['layout'] ) ? $_GET['layout'] : '',
+			'sortby'      => isset( $_GET['sortby'] ) ? $_GET['sortby'] : '',
+			'sort'        => isset( $_GET['sort'] ) ? $_GET['sort'] : '',
+			'searchBy'    => isset( $_GET['searchBy'] ) ? $_GET['searchBy'] : '',
+		);
+		if ( ! empty( $_GET['browse'] && 'category' === $attrs['searchBy'] ) ) {
+			$attrs['browse'] = $_GET['browse'];
+		}
+		if ( ! empty( $_GET['search'] ) && 'general' === $attrs['searchBy'] ) {
+			$attrs['search'] = $_GET['search'];
+		}
+		if ( ! empty( $_GET['tag'] ) && 'tag' === $attrs['searchBy'] ) {
+			$attrs['tag'] = $_GET['tag'];
+		}
+		if ( ! empty( $_GET['user'] ) && 'favorites' === $attrs['searchBy'] ) {
+			$attrs['user'] = $_GET['user'];
+		}
+		if ( ! empty( $_GET['author'] ) && 'author' === $attrs['searchBy'] ) {
+			$attrs['author'] = $_GET['author'];
+		}
+
+		$sortby = isset( $_GET['sortby'] ) ? $_GET['sortby'] : '';
+		$sort   = isset( $_GET['sort'] ) ? $_GET['sort'] : '';
+
+		// Build the query.
+		$query_args = array(
+			'search'   => $attrs['search'] ?? '',
+			'tag'      => $attrs['tag'] ?? '',
+			'author'   => $attrs['author'] ?? '',
+			'user'     => $attrs['user'] ?? '',
+			'browse'   => $attrs['browse'] ?? '',
+			'per_page' => $attrs['per_page'],
+			'fields'   => array(
+				'name'              => true,
+				'requires'          => true,
+				'tested'            => true,
+				'compatibility'     => true,
+				'screenshot_url'    => true,
+				'ratings'           => true,
+				'rating'            => true,
+				'num_ratings'       => true,
+				'homepage'          => true,
+				'sections'          => true,
+				'description'       => true,
+				'short_description' => true,
+				'banners'           => true,
+				'downloaded'        => true,
+				'last_updated'      => true,
+				'downloadlink'      => true,
+			),
+		);
+		$type       = $attrs['type'];
+		$query_args = apply_filters( 'wppic_api_query', $query_args, $type, $attrs );
+
+		$api = '';
+
+		// Plugins query.
+		if ( 'plugin' === $type ) {
+			$type = 'plugins';
+			require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+			$api = plugins_api( 'query_plugins', $query_args );
+		}
+
+		// Themes query.
+		if ( 'theme' === $type ) {
+			$type = 'themes';
+			require_once ABSPATH . 'wp-admin/includes/theme.php';
+			$api = themes_api( 'query_themes', $query_args );
+		}
+
+		// Begin sort.
+		$sort_results = array();
+		if ( 'plugins' === $type ) {
+			$sort_results = $api->plugins ?? null;
+		} elseif ( 'themes' === $type ) {
+			$sort_results = $api->themes ?? null;
+		}
+		if ( 'plugins' === $type && ! is_wp_error( $api ) && ! empty( $api ) && 'none' !== $sortby ) {
+			$plugins = $api->plugins;
+			array_multisort(
+				array_column( $plugins, $sortby ),
+				'DESC' === $sort ? SORT_DESC : SORT_ASC,
+				$plugins
+			);
+			$sort_results = $plugins;
+		}
+		if ( 'themes' === $type && ! is_wp_error( $api ) && ! empty( $api ) && 'none' !== $sortby ) {
+			$themes = $api->themes;
+			array_multisort(
+				array_column( $themes, $sortby ),
+				'DESC' === $sort ? SORT_DESC : SORT_ASC,
+				$themes
+			);
+			$sort_results = $themes;
+		}
+
+		/**
+		 * Filter: wppic_query_results
+		 *
+		 * Sorted results ready for display.
+		 *
+		 * @param array $sort_results The sorted results.
+		 * @param string $type The type of query (plugins, themes).
+		 * @param string $sortby The field to sort by.
+		 * @param string $sort The sort order (ASC, DESC).
+		 */
+		$sort_results = apply_filters( 'wppic_query_results', $sort_results, $type, $sortby, $sort );
+
+		if ( ! is_wp_error( $sort_results ) && ! empty( $sort_results ) ) {
+
+			wp_send_json_success(
+				array(
+					'api_response' => json_decode( json_encode( $sort_results ) ),
+					'html'         => self::shortcode_query_function( $attrs ),
+				)
+			);
+		}
+		wp_send_json_error( array( 'message' => 'No data found' ) );
+		die( '' );
+	}
+
+	/**
 	 * Main Shortcode function.
 	 *
 	 * @param array  $atts    Shortcode attributes.
@@ -476,7 +622,8 @@ class Shortcodes {
 	 */
 	public static function shortcode_function( $atts, $content = '' ) {
 
-		$attributes = shortcode_atts(
+		$attributes = wp_parse_args(
+			$atts,
 			array(
 				'id'          => '',  // custom Div ID (could be use for anchor).
 				'type'        => '',  // plugin | theme.
@@ -495,14 +642,13 @@ class Shortcodes {
 				'cols'        => 2,
 				'col_gap'     => 20,
 				'row_gap'     => 20,
+				'itemSlugs'   => array(),
 
 			),
-			$atts,
-			'wppic_default'
 		);
 		// Use "shortcode_atts_wppic_default" filter to edit shortcode parameters default values or add your owns.
 
-		// Get admin settings.
+		// Get admin settingsr.
 		$options = Options::get_options();
 
 		// Global var to enqueue scripts + ajax param if is set to yes.
@@ -541,6 +687,25 @@ class Shortcodes {
 			$add_class[] = 'wp-pic-card';
 		} else {
 			$add_class[] = $layout;
+		}
+
+		// Check to see if slug exists and if it is false, else we should skip this.
+		if ( isset( $attributes[ $slug ] ) ) {
+			// If false, that means don't show the plugin.
+			// Slug can be string false, boolean false, and and a string for a custom title.
+			if ( false === $attributes[ $slug ] || 'false' === $attributes[ $slug ] ) {
+				return '';
+			} else {
+				$attributes['itemSlugs'][ $slug ] = $attributes[ $slug ];
+			}
+		}
+
+		// Check to see if itemSlugs value is false too.
+		if ( isset( $attributes['itemSlugs'][ $slug ] ) ) {
+			// If false, that means don't show the plugin.
+			if ( false === $attributes['itemSlugs'][ $slug ] || 'false' === $attributes['itemSlugs'][ $slug ] ) {
+				return '';
+			}
 		}
 
 		// Random slug: comma-separated list.
@@ -599,6 +764,12 @@ class Shortcodes {
 				$add_class[] = $type;
 				$add_class[] = 'multi';
 
+				// Add custom shortcode slugs to itemslugs if it exists.
+				if ( isset( $attributes[ $asset_slug ] ) ) {
+					// Add to itemSlugs.
+					$attributes['itemSlugs'][ $asset_slug ] = $attributes[ $asset_slug ];
+				}
+
 				if ( ! empty( $custom ) ) {
 
 					$wppic_data = wppic_api_parser( $type, $asset_slug, $expiration );
@@ -616,7 +787,7 @@ class Shortcodes {
 					$ajax_data = '';
 					if ( 'yes' === $ajax ) {
 						$add_class[] = 'wp-pic-ajax';
-						$ajax_data   = 'data-type="' . $type . '" data-slug="' . $asset_slug . '" data-image="' . $image . '" data-expiration="' . $expiration . '"  data-layout="' . $layout . '" ';
+						$ajax_data   = 'data-type="' . $type . '" data-slug="' . $asset_slug . '" data-image="' . $image . '" data-expiration="' . $expiration . '"  data-layout="' . $layout . '" data-slugs="' . esc_attr( wp_json_encode( $attributes['itemSlugs'] ) ) . '"';
 					}
 
 					// Align card.
@@ -658,7 +829,7 @@ class Shortcodes {
 					// Data attribute for ajax call.
 					$content .= '<div class="wp-pic ' . esc_html( implode( ' ', $add_class ) ) . '" ' . esc_html( $containerid ) . $ajax_data . ' >';
 					if ( 'yes' !== $ajax ) {
-						$content .= self::shortcode_content( $type, $asset_slug, $image, $expiration, $layout );
+						$content .= self::shortcode_content( $type, $asset_slug, $image, $expiration, $layout, $attributes['itemSlugs'] );
 					} else {
 						$content .= '<div class="wp-pic-body-loading"><div class="signal"></div></div>';
 					}
@@ -689,8 +860,13 @@ class Shortcodes {
 			}
 			$add_class[] = $type;
 
-			if ( ! empty( $custom ) ) {
+			// Check to see if slug exists in attributes.
+			if ( isset( $attributes[ $slug ] ) ) {
+				// Add to itemSlugs.
+				$attributes['itemSlugs'][ $slug ] = $attributes[ $slug ];
+			}
 
+			if ( ! empty( $custom ) ) {
 				$wppic_data = wppic_api_parser( $type, $slug, $expiration );
 
 				if ( ! $wppic_data ) {
@@ -706,7 +882,7 @@ class Shortcodes {
 				$ajax_data = '';
 				if ( 'yes' === $ajax ) {
 					$add_class[] = 'wp-pic-ajax';
-					$ajax_data   = 'data-type="' . $type . '" data-slug="' . $slug . '" data-image="' . $image . '" data-expiration="' . $expiration . '"  data-layout="' . $layout . '" ';
+					$ajax_data   = 'data-type="' . $type . '" data-slug="' . $slug . '" data-image="' . $image . '" data-expiration="' . $expiration . '"  data-layout="' . $layout . '" data-slugs="' . esc_attr( wp_json_encode( $attributes['itemSlugs'] ) ) . '"';
 				}
 
 				// Align card.
@@ -752,7 +928,7 @@ class Shortcodes {
 				// Data attribute for ajax call.
 				$content .= '<div class="wp-pic ' . esc_html( implode( ' ', $add_class ) ) . '" ' . $containerid . $ajax_data . ' >';
 				if ( 'yes' !== $ajax ) {
-					$content .= self::shortcode_content( $type, $slug, $image, $expiration, $layout );
+					$content .= self::shortcode_content( $type, $slug, $image, $expiration, $layout, $attributes['itemSlugs'] );
 				} else {
 					$content .= '<div class="wp-pic-body-loading"><div class="signal"></div></div>';
 				}
@@ -765,7 +941,7 @@ class Shortcodes {
 				}
 
 				$content .= '</div><!-- .wp-pic-wrapper-->';
-					if ( 'after' === $clear ) {
+				if ( 'after' === $clear ) {
 					$content .= '<div style="clear:both"></div>';
 				}
 			}
@@ -789,33 +965,33 @@ class Shortcodes {
 		add_filter( 'wppic_allow_scripts', '__return_true' );
 		// Retrieve & extract shorcode parameters.
 		extract( // phpcs:ignore
-			shortcode_atts(
-				array(
-					'search'      => '',  // A search term. Default empty.
-					'tag'         => '',  // Tag to filter themes. Comma separated list. Default empty.
-					'author'      => '',  // Username of an author to filter themes. Default empty.
-					'user'        => '',  // Username to query for their favorites. Default empty.
-					'browse'      => '',  // Browse view: 'featured', 'popular', 'updated', 'favorites'.
-					'per_page'    => '',  // Number of themes per query (page). Default 24.
-					'cols'        => '',  // Columns layout to use: '2', '3'. Default empty (none).
-				// Default wppic shortcode attributs.
-					'type'        => '',  // plugin | theme.
-					'slug'        => '',  // plugin slug name.
-					'image'       => '',  // image url to replace WP logo (175px X 175px).
-					'align'       => '',  // center|left|right.
-					'containerid' => '',  // custom Div ID (could be use for anchor).
-					'margin'      => '',  // custom container margin - eg: "15px 0".
-					'clear'       => '',  // clear float before or after the card: before|after.
-					'expiration'  => '',  // transient duration in minutes - 0 for never expires.
-					'ajax'        => '',  // load plugin data async whith ajax: yes|no (default: no).
-					'scheme'      => '',  // color scheme : default|scheme1->scheme10 (default: empty).
-					'layout'      => '',  // card|flat|wordpress.
-					'custom'      => '',  // value to print : url|name|version|author|requires|rating|num_ratings|downloaded|last_updated|download_link.
-					'sortby'      => 'none', // none|active_installs (plugins only)|downloaded|last_updated.
-					'sort'        => 'ASC', // ASC|DESC.
-				),
+			wp_parse_args(
 				$atts,
-				'wppic_default'
+				array(
+					'cols'        => 2,
+					'per_page'    => 24,
+					'type'        => '',
+					'image'       => '',
+					'align'       => '',
+					'containerid' => '',
+					'margin'      => '',
+					'clear'       => '',
+					'expiration'  => '',
+					'ajax'        => '',
+					'scheme'      => '',
+					'layout'      => '',
+					'custom'      => '',
+					'sortby'      => 'none',
+					'sort'        => 'ASC',
+					'search'      => '',
+					'tag'         => '',
+					'user'        => '',
+					'browse'      => '',
+					'row_gap'     => 20,
+					'col_gap'     => 20,
+					'searchBy'    => 'general',
+					'itemSlugs'   => array(),
+				)
 			)
 		);
 
@@ -905,52 +1081,49 @@ class Shortcodes {
 		 */
 		$sort_results = apply_filters( 'wppic_query_results', $sort_results, $type, $sortby, $sort );
 
+		// If container ID is blank, generate a random one.
+		if ( empty( $containerid ) ) {
+			$containerid = 'wppic-' . wp_rand( 0, 1000 ) . wp_generate_password( 6, false, false );
+		}
+
 		// Get the query result to build the content.
+		$content = '';
 		if ( ! is_wp_error( $sort_results ) && ! empty( $sort_results ) ) {
+			ob_start();
+			if ( 0 === did_action( 'wppic_enqueue_scripts' ) ) {
+				do_action( 'wppic_enqueue_scripts' );
+			}
+			$content .= ob_get_clean();
 			if ( is_array( $sort_results ) ) {
-
-				$content = $row = $open = $close = ''; // phpcs:ignore
-				$count   = 1;
-				if ( $column ) {
-					$open     = '<div class="wp-pic-1-' . $cols . '">';
-					$close    = '</div>';
-					$content .= '<div class="wp-pic-grid">';
-				}
-
-				// Creat the loop wp-pic-1-.
-				foreach ( $sort_results as $item ) {
-					$item = json_decode( json_encode( $item ) );
-					if ( $column && ( $count ) % $cols === 1 && $cols > 1 ) { // phpcs:ignore
-						$row      = true;
-						$content .= '<div class="wp-pic-row">';
-					}
-					$content     .= $open;
-					$atts['slug'] = $item->slug;
-					// Use the WPPIC shorcode to generate cards.
-					$content .= self::shortcode_function( $atts );
-					$content .= $close;
-					if ( $column && ( $count ) % $cols == 0 && $cols > 1 ) { // phpcs:ignore
-						$content .= '</div>';
-						$row      = false;
-					}
-					++$count;
-				}
-
-				if ( $row ) {
-					$content .= '</div>'; // end of row.
-				}
-				if ( $column ) {
-					$content .= '</div>'; // end of grid.
-				}
-
 				ob_start();
-				if ( 0 === did_action( 'wppic_enqueue_scripts' ) ) {
-					do_action( 'wppic_enqueue_scripts' );
-				}
+				?>
+				<style>
+					#<?php echo esc_attr( $containerid ); ?> {
+						grid-column-gap: <?php echo esc_attr( $col_gap ); ?>px;
+						grid-row-gap: <?php echo esc_attr( $row_gap ); ?>px;
+					}
+
+				</style>
+				<div id="<?php echo esc_attr( $containerid ); ?>" class="wp-query-plugin-info-card cols-<?php echo esc_attr( $cols ); ?>">
+					<?php
+					$sort_results = \json_decode( wp_json_encode( $sort_results ), true );
+					// Creat the loop wp-pic-1-.
+					foreach ( $sort_results as $item ) {
+						// Add custom shortcode slugs to itemslugs if it exists.
+						if ( isset( $atts[ $item['slug'] ] ) ) {
+							// Add to itemSlugs.
+							$atts['itemSlugs'][ $item['slug'] ] = $atts[ $item['slug'] ];
+						}
+						$atts['slug'] = $item['slug'];
+						// Use the WPPIC shorcode to generate cards.
+						echo self::shortcode_function( $atts );
+					}
+					?>
+				</div>
+				<?php
 				$content .= ob_get_clean();
 
 				return apply_filters( 'wppic_query_content', $content, $type, $atts );
-
 			}
 		}
 	} //end of wp-pic-query Shortcode
@@ -993,6 +1166,7 @@ class Shortcodes {
 				'color_star'                               => '#FF9529',
 				'color_meta_background'                    => '#000000',
 				'color_meta_text'                          => '#FFFFFF',
+				'skip_animated_gifs'					   => false,
 			),
 			$attributes,
 			'wp-pic-plugin-screenshots'
@@ -1042,6 +1216,20 @@ class Shortcodes {
 
 		// Get plugin screenshots.
 		$screenshots = Functions::get_plugin_screenshots( $asset_data['slug'], false, true );
+
+		// If animated gif is not allowed, remove them from the screenshots.
+		$attributes['skip_animated_gifs'] = filter_var( $attributes['skip_animated_gifs'], FILTER_VALIDATE_BOOLEAN );
+		if ( (bool) $attributes['skip_animated_gifs'] ) {
+			$new_screenshots = array();
+			foreach ( $screenshots as $screenshot ) {
+				$full_screenshot = $screenshot['full'] ?? '';
+				// If it does not have a gif extension, add it.
+				if ( ! preg_match( '/\.gif/', $full_screenshot ) ) {
+					$new_screenshots[] = $screenshot;
+				}
+			}
+			$screenshots = $new_screenshots;
+		}
 
 		// Active installs.
 		if ( $asset_data['active_installs'] >= 1000000 ) {
@@ -1348,17 +1536,17 @@ class Shortcodes {
 	public static function shortcode_active_site_plugins_function( $atts, $content = '' ) {
 
 		$options    = Options::get_options();
-		$attributes = shortcode_atts(
-			array(
-				'id'      => 'wppic-plugin-site-grid',
-				'cols'    => 2,
-				'col_gap' => 20,
-				'row_gap' => 20,
-				'scheme'  => '',
-				'layout'  => '',
-			),
+		$attributes = wp_parse_args(
 			$atts,
-			'wppic_default'
+			array(
+				'id'        => 'wppic-plugin-site-grid',
+				'cols'      => 2,
+				'col_gap'   => 20,
+				'row_gap'   => 20,
+				'scheme'    => '',
+				'layout'    => '',
+				'itemSlugs' => array(),
+			)
 		);
 
 		// Color scheme.
@@ -1384,30 +1572,40 @@ class Shortcodes {
 			}
 
 		</style>
-		<div id="<?php echo esc_attr( $attributes['id'] ); ?>" class="wp-site-plugin-info-card cols-<?php echo esc_attr( $attributes['cols'] ); ?>">
-			<?php
-			foreach ( $plugins_on_org as $plugin ) {
-				$atts = array(
-					'slug'   => $plugin['slug'],
-					'layout' => $attributes['layout'],
-					'scheme' => $attributes['scheme'],
-					'type'   => 'plugin',
-				);
-				// Strip safe CSS.
-				add_filter( 'safe_style_css', array( static::class, 'safe_css' ) );
-				add_filter( 'safecss_filter_attr_allow_css', '__return_true' );
-				// Use the WPPIC shorcode to generate cards.
-				echo wp_kses( self::shortcode_function( $atts ), Functions::get_kses_allowed_html() );
-				remove_filter( 'safecss_filter_attr_allow_css', '__return_true' );
-				remove_filter( 'safe_style_css', array( static::class, 'safe_css' ) );
-			}
-			?>
-		</div>
 		<?php
 		if ( 0 === did_action( 'wppic_enqueue_scripts' ) ) {
 			do_action( 'wppic_enqueue_scripts' );
 		}
-		$content = ob_get_clean();
+		?>
+			
+		<div id="<?php echo esc_attr( $attributes['id'] ); ?>" class="wp-site-plugin-info-card cols-<?php echo esc_attr( $attributes['cols'] ); ?>">
+			<?php
+			$content = ob_get_clean();
+			foreach ( $plugins_on_org as $plugin ) {
+				$atts = array(
+					'slug'      => $plugin['slug'],
+					'layout'    => $attributes['layout'],
+					'scheme'    => $attributes['scheme'],
+					'type'      => 'plugin',
+					'itemSlugs' => $attributes['itemSlugs'],
+				);
+				if ( isset( $attributes[ $plugin['slug'] ] ) ) {
+					// Add to itemSlugs.
+					$atts['itemSlugs'][ $plugin['slug'] ] = $attributes[ $plugin['slug'] ];
+				}
+				// Strip safe CSS.
+				add_filter( 'safe_style_css', array( static::class, 'safe_css' ) );
+				add_filter( 'safecss_filter_attr_allow_css', '__return_true' );
+				// Use the WPPIC shorcode to generate cards.
+				$content .= self::shortcode_function( $atts );
+				remove_filter( 'safecss_filter_attr_allow_css', '__return_true' );
+				remove_filter( 'safe_style_css', array( static::class, 'safe_css' ) );
+			}
+			ob_start();
+			?>
+		</div>
+		<?php
+		$content .= ob_get_clean();
 		return $content;
 	}
 
@@ -1424,6 +1622,7 @@ class Shortcodes {
 		$css[] = 'linear-gradient';
 		$css[] = '-webkit-background-clip';
 		$css[] = '-webkit-text-fill-color';
+		$css[] = 'background-image';
 		return $css;
 	}
 
@@ -1435,8 +1634,9 @@ class Shortcodes {
 	 * @param string $image Image override.
 	 * @param string $expiration Expiration in seconds.
 	 * @param string $layout What layout is being used.
+	 * @param object $item_slugs Key separated slugs with overriding titles.
 	 */
-	public static function shortcode_content( $type = null, $slug = null, $image = null, $expiration = null, $layout = null ) {
+	public static function shortcode_content( $type = null, $slug = null, $image = null, $expiration = null, $layout = null, $item_slugs = null ) {
 
 		if ( ! empty( $_POST['type'] ) ) {
 			$type = $_POST['type'];
@@ -1459,6 +1659,11 @@ class Shortcodes {
 		$image      = esc_html( $image );
 		$expiration = esc_html( $expiration );
 		$layout     = esc_html( $layout );
+
+		// Get item slugs.
+		if ( isset( $_POST['itemSlugs'] ) && is_array( $_POST['itemSlugs'] ) ) {
+			$item_slugs = Functions::sanitize_array_recursive( wp_unslash( $_POST['itemSlugs'] ) );
+		}
 
 		$wppic_data = wppic_api_parser( $type, $slug, $expiration );
 
@@ -1515,6 +1720,11 @@ class Shortcodes {
 		 * @since 5.2.0
 		 */
 		$wppic_data = apply_filters( 'wppic_data_pre_display', $wppic_data, $type, $slug, $layout );
+
+		// Override the title if applicable.
+		if ( is_array( $item_slugs ) && isset( $item_slugs[ $slug ] ) && '' !== $item_slugs[ $slug ] ) {
+			$wppic_data->name = $item_slugs[ $slug ];
+		}
 
 		// Load theme or plugin template.
 		$content = '';

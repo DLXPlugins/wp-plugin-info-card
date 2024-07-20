@@ -99,7 +99,7 @@ const PluginScreenshotsInfoCard = ( props ) => {
 				setCardLoading( false );
 			} );
 	};
-	
+
 	/**
 	 * Get a unique ID for the block for inline styling if necessary.
 	 */

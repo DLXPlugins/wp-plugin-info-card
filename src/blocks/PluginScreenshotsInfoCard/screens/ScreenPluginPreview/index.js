@@ -1,7 +1,7 @@
 /**
  * This is the initial screen of the block. It is the first screen that the user sees when they add the block to the editor.
  */
-
+import { useState } from '@wordpress/element';
 import {
 	InspectorControls,
 	BlockControls,
@@ -19,11 +19,13 @@ import {
 	ToolbarGroup,
 	MenuItemsChoice,
 } from '@wordpress/components';
+import axios from 'axios';
 import { __ } from '@wordpress/i18n';
 import PluginScreenshots from '../../../templates/PluginScreenshots';
 import CustomPresets from '../../../components/CustomPresets';
 import PresetButton from '../../../components/PresetButton/PresetButton';
 import Notice from '../../../components/Notice';
+import LoadingScreen from '../../../components/Loading';
 
 /**
  * InitialScreen component.
@@ -33,6 +35,32 @@ import Notice from '../../../components/Notice';
  */
 const ScreenPluginPreview = ( props ) => {
 	const { attributes, setAttributes, clientId } = props;
+	const [ loading, setLoading ] = useState( false );
+
+	const loadData = () => {
+		setLoading( true );
+		const restUrl = wppic.rest_url + 'wppic/v2/get_data';
+		axios
+			.get(
+				restUrl + `?type=plugin&slug=${ encodeURIComponent( attributes.slug ) }`,
+			)
+			.then( ( response ) => {
+				if ( response.data.success ) {
+					console.log( response.data.data[ 0 ] );
+					// Set asset data.
+					setAttributes(
+						{
+							assetData: response.data.data[ 0 ] || {},
+						},
+					);
+				} else {
+					// todo - error messages
+				}
+			} ).catch( ( error ) => {
+			} ).then( () => {
+				setLoading( false );
+			} );
+	};
 
 	const {
 		assetData,
@@ -101,6 +129,23 @@ const ScreenPluginPreview = ( props ) => {
 						help={ __( 'Enable or disable screenshots.', 'wp-plugin-info-card' ) }
 					/>
 				</PanelRow>
+				{
+					enableScreenshots && (
+						<>
+							<PanelRow>
+								<ToggleControl
+									label={ __( 'Skip Animated Gifs', 'wp-plugin-info-card' ) }
+									checked={ attributes.skipAnimatedGifs }
+									onChange={ ( value ) => {
+										setAttributes( { skipAnimatedGifs: value } );
+										loadData();
+									} }
+									help={ __( 'Skip animated gifs in the screenshot carousel to speed up loading.', 'wp-plugin-info-card' ) }
+								/>
+							</PanelRow>
+						</>
+					)
+				}
 			</PanelBody>
 			<PanelBody
 				title={ __( 'Color Themes', 'wp-plugin-info-card' ) }
@@ -254,6 +299,10 @@ const ScreenPluginPreview = ( props ) => {
 			</ToolbarGroup>
 		</BlockControls>
 	);
+
+	if ( loading ) {
+		return ( <LoadingScreen label={ __( 'Loading plugin data…', 'wp-plugin-info-card' ) } /> );
+	}
 
 	const block = (
 		<>

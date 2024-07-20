@@ -2,7 +2,7 @@
  * This is the initial screen of the block. It is the first screen that the user sees when they add the block to the editor.
  */
 
-import { useState } from '@wordpress/element';
+import { useState, useContext, useEffect } from '@wordpress/element';
 import {
 	InspectorControls,
 } from '@wordpress/block-editor';
@@ -16,6 +16,7 @@ import { __ } from '@wordpress/i18n';
 import { isURL } from '@wordpress/url';
 import Logo from '../../../Logo';
 import LoadingScreen from '../../../components/Loading';
+import ScreenshotContext from '../../context';
 
 /**
  * InitialScreen component.
@@ -27,6 +28,10 @@ const SlugEntryScreen = ( props ) => {
 	const [ loading, setLoading ] = useState( false );
 	const [ showErrorModal, setShowErrorModal ] = useState( false );
 	const [ errorMessage, setErrorMessage ] = useState( '' );
+
+	const {
+		canSkipAnimatedGifs,
+	} = useContext( ScreenshotContext );
 
 	const { attributes, setAttributes } = props;
 

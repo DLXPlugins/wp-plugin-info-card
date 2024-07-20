@@ -54,6 +54,7 @@ jQuery(document).ready(function($) {
 				'image': $this.data('image'),
 				'expiration': $this.data('expiration'),
 				'layout': $this.data('layout'),
+				'itemSlugs': $this.data('slugs'),
 			};
 			$.post(wppicAjax.ajaxurl, data, function(response) {
 				$this.append(response);

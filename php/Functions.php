@@ -551,6 +551,11 @@ class Functions {
 			'style' => array(),
 		);
 
+		$allowed_tags['script'] = array(
+			'type' => array(),
+			'src'  => array(),
+		);
+
 		// Add form input fields.
 		$allowed_tags['input'] = array(
 			'type'        => array(),
@@ -676,6 +681,7 @@ class Functions {
 					'style' => array(),
 					'align' => array(),
 					'class' => array(),
+					'id'    => array(),
 				);
 			} else {
 				$allowed_tags['div']['style'] = array();

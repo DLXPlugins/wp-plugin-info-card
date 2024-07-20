@@ -34,6 +34,8 @@ const {
 	Notice,
 	MenuItemsChoice,
 	BaseControl,
+	ToggleControl,
+	TextControl,
 } = wp.components;
 
 const {
@@ -65,18 +67,27 @@ const SitePluginsCardGrid = ( props ) => {
 		uniqueId,
 	} = attributes;
 
-	const [ loading, setLoading ] = useState( attributes.loading );
+	const [ loading, setLoading ] = useState( false );
 	const [ loadingPlugins, setLoadingPlugins ] = useState( false );
 	const [ statusMessage, setStatusMessage ] = useState( '' );
 	const [ progress, setProgress ] = useState( 0 );
 	const [ plugins, setPlugins ] = useState( [] );
+	const [ itemSlugs, setItemSlugs ] = useState( attributes.itemSlugs );
+
+	// Load plugins if no asset data.
+	useEffect( () => {
+		if ( Object.keys( assetData ).length <= 0 ) {
+			loadPlugins();
+		}
+	}, [] );
 
 	/**
 	 * Load plugins recursively until all plugins are processed.
 	 *
-	 * @param {number} page The page to retrieve.
+	 * @param {number} page       The page to retrieve.
+	 * @param {Array}  pluginList The list of plugins.
 	 */
-	const loadPlugins = ( page = 1 ) => {
+	const loadPlugins = ( page = 1, pluginList = [] ) => {
 		setLoadingPlugins( true );
 		setLoading( true );
 		const restUrl = wppic.rest_url + 'wppic/v2/get_site_plugins';
@@ -90,7 +101,7 @@ const SitePluginsCardGrid = ( props ) => {
 					headers: {
 						'X-WP-Nonce': wppic.rest_nonce,
 					},
-				}
+				},
 			)
 			.then( ( response ) => {
 				if ( response.data.success ) {
@@ -104,14 +115,13 @@ const SitePluginsCardGrid = ( props ) => {
 					setProgress( percentageComplete );
 
 					// Merge arrays assetData and pluginData.
-					const pluginAssetData = plugins;
+					const pluginAssetData = pluginList;
 					Object.values( pluginData ).forEach( ( plugin ) => {
 						pluginAssetData.push( plugin );
 					} );
-					setPlugins( pluginAssetData );
 
 					if ( morePlugins ) {
-						loadPlugins( nextPage );
+						loadPlugins( nextPage, pluginAssetData );
 					} else {
 						// Set plugins and update status.
 						setLoading( false );
@@ -120,8 +130,9 @@ const SitePluginsCardGrid = ( props ) => {
 						} );
 						setLoadingPlugins( false );
 						setAttributes( {
-							assetData: plugins,
+							assetData: pluginAssetData,
 						} );
+						setPlugins( pluginAssetData );
 					}
 				}
 			} );
@@ -131,11 +142,12 @@ const SitePluginsCardGrid = ( props ) => {
 		setLoading( false );
 		setAttributes( {
 			loading: false,
+			assetData: [],
 		} );
 		setLoadingPlugins( true );
 
 		// Do ajax request to get activeplugins.
-		loadPlugins();
+		loadPlugins( 1, [] );
 	};
 	useEffect( () => {
 		setAttributes( { uniqueId: generatedUniqueId } );
@@ -150,6 +162,19 @@ const SitePluginsCardGrid = ( props ) => {
 
 	const outputInfoCards = ( cardDataArray ) => {
 		return Object.values( cardDataArray ).map( ( cardData, key ) => {
+			let textValue = '';
+
+			// Check to see if slug is in the itemSlugs array.
+			if ( cardData.slug in itemSlugs ) {
+				if ( '' !== itemSlugs[ cardData.slug ] && false !== itemSlugs[ cardData.slug ] ) {
+					textValue = itemSlugs[ cardData.slug ];
+					// Merge with card data.
+					cardData = { ...cardData, name: textValue };
+				} else if ( false === itemSlugs[ cardData.slug ] ) {
+					return null;
+				}
+			}
+
 			return (
 				<Fragment key={ key }>
 					{ 'flex' === layout && (
@@ -188,6 +213,68 @@ const SitePluginsCardGrid = ( props ) => {
 						/>
 					) }
 				</Fragment>
+			);
+		} );
+	};
+
+	/**
+	 * Output slug options for overriding the plugin title per plugin.
+	 *
+	 * @param {Array} cardDataArray The card data array.
+	 * @param {Array} oldItemSlugs  The old item slugs.
+	 */
+	const outputSlugs = ( cardDataArray, oldItemSlugs ) => {
+		return cardDataArray.map( ( cardData, key ) => {
+			let textValue = '';
+			// Check to see if slug is in the itemSlugs array.
+			if ( cardData.slug in oldItemSlugs ) {
+				textValue = oldItemSlugs[ cardData.slug ];
+			}
+
+			// Determine if plugin is displaying or not.
+			let displayPlugin = true;
+			if ( cardData.slug in oldItemSlugs ) {
+				if ( false === oldItemSlugs[ cardData.slug ] ) {
+					displayPlugin = false;
+				}
+			}
+
+			const panelBodyTitle = cardData.name + ' (' + ( displayPlugin ? __( 'Enabled', 'wp-plugin-info-card' ) : __( 'Disabled', 'wp-plugin-info-card' ) ) + ')';
+			return (
+				<PanelBody
+					title={ panelBodyTitle }
+					key={ key }
+					initialOpen={ false }
+				>
+					<ToggleControl
+						label={ __( 'Display Plugin', 'wp-plugin-info-card' ) }
+						checked={ displayPlugin }
+						onChange={ ( value ) => {
+							let newTextValue = '';
+							if ( false === value ) {
+								newTextValue = false;
+							}
+							const itemSlugsTemp = itemSlugs;
+							itemSlugsTemp[ cardData.slug ] = newTextValue; // Slug can be false, or have a title override.
+							setItemSlugs( { ...itemSlugsTemp } );
+							setAttributes( { itemSlugs: { ...itemSlugsTemp } } );
+						} }
+					/>
+					{ displayPlugin && (
+						<>
+							<TextControl
+								label={ __( 'Override Title', 'wp-plugin-info-card' ) }
+								value={ itemSlugs[ cardData.slug ] || textValue }
+								onChange={ ( value ) => {
+									const itemSlugsTemp = itemSlugs;
+									itemSlugsTemp[ cardData.slug ] = value;
+									setItemSlugs( { ...itemSlugsTemp } );
+									setAttributes( { itemSlugs: { ...itemSlugsTemp } } );
+								} }
+							/>
+						</>
+					) }
+				</PanelBody>
 			);
 		} );
 	};
@@ -325,6 +412,7 @@ const SitePluginsCardGrid = ( props ) => {
 					/>
 				</PanelRow>
 			</PanelBody>
+			{ outputSlugs( assetData, itemSlugs ) }
 		</InspectorControls>
 	);
 
@@ -368,7 +456,7 @@ const SitePluginsCardGrid = ( props ) => {
 				>
 					{ ! loadingPlugins ? __(
 						'Load Plugins',
-						'wp-plugin-info-card'
+						'wp-plugin-info-card',
 					) : __( 'Loading…', 'wp-plugin-info-card' ) }
 				</Button>
 			</div>
@@ -390,7 +478,7 @@ const SitePluginsCardGrid = ( props ) => {
 								icon="welcome-view-site"
 								title={ __(
 									'View Preview',
-									'wp-plugin-info-card'
+									'wp-plugin-info-card',
 								) }
 								onClick={ () => setLoading( false ) }
 							>
@@ -404,10 +492,14 @@ const SitePluginsCardGrid = ( props ) => {
 						</div>
 						<div className="wppic-site-plugins-description">
 							<p>
-								{ __( 'Click "Load Plugins" to load your active plugins. Please note that plugins not hosted on the WordPress Plugin Directory will not be displayed.', 'wp-plugin-info-card' ) }
+								{ __( 'Plugins are loading in the background.', 'wp-plugin-info-card' ) }
 							</p>
 						</div>
-						{ getPluginsQueryButton }
+						{ loadingPlugins && (
+							<>
+								<ProgressBar percentage={ progress } />
+							</>
+						) }
 					</div>
 				</>
 			) }
@@ -433,20 +525,10 @@ const SitePluginsCardGrid = ( props ) => {
 					<BlockControls>
 						<ToolbarGroup>
 							<ToolbarButton
-								icon="edit"
-								title={ __(
-									'Edit and Configure',
-									'wp-plugin-info-card'
-								) }
-								onClick={ () => setLoading( true ) }
-							>
-								{ __( 'Edit', 'wp-plugin-info-card' ) }
-							</ToolbarButton>
-							<ToolbarButton
 								icon="image-rotate"
 								title={ __(
 									'Refresh Plugins',
-									'wp-plugin-info-card'
+									'wp-plugin-info-card',
 								) }
 								onClick={ () => pluginOnClick() }
 							>
@@ -460,7 +542,7 @@ const SitePluginsCardGrid = ( props ) => {
 										toggleProps={ toolbarItemHTMLProps }
 										label={ __(
 											'Select Color Scheme',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										) }
 										icon="admin-customizer"
 									>
@@ -489,7 +571,7 @@ const SitePluginsCardGrid = ( props ) => {
 										toggleProps={ toolbarItemHTMLProps }
 										label={ __(
 											'Select a Layout',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										) }
 										icon="layout"
 									>
@@ -521,7 +603,7 @@ const SitePluginsCardGrid = ( props ) => {
 							'wp-block-plugin-info-card',
 							'wp-site-plugin-info-card',
 							`align${ align }`,
-							`cols-${ cols }`
+							`cols-${ cols }`,
 						) }
 					>
 						{ outputInfoCards( assetData ) }
