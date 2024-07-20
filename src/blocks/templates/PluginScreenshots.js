@@ -211,6 +211,9 @@ const PluginScreenshots = ( props ) => {
 								>
 									{
 										Object.values( pluginScreenshots ).map( ( screenshot, index ) => {
+											if ( attributes.skipAnimatedGifs && screenshot.src.includes( '.gif' ) ) {
+												return null;
+											}
 											return (
 												<li key={ index } className="f-carousel__slide">
 													<a href={ screenshot.src } data-fancybox data-caption={ screenshot.caption } onClick={ ( e ) => e.preventDefault() }>

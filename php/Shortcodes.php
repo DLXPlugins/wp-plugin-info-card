@@ -1165,6 +1165,7 @@ class Shortcodes {
 				'color_star'                               => '#FF9529',
 				'color_meta_background'                    => '#000000',
 				'color_meta_text'                          => '#FFFFFF',
+				'skip_animated_gifs'					   => false,
 			),
 			$attributes,
 			'wp-pic-plugin-screenshots'
@@ -1214,6 +1215,20 @@ class Shortcodes {
 
 		// Get plugin screenshots.
 		$screenshots = Functions::get_plugin_screenshots( $asset_data['slug'], false, true );
+
+		// If animated gif is not allowed, remove them from the screenshots.
+		$attributes['skip_animated_gifs'] = filter_var( $attributes['skip_animated_gifs'], FILTER_VALIDATE_BOOLEAN );
+		if ( (bool) $attributes['skip_animated_gifs'] ) {
+			$new_screenshots = array();
+			foreach ( $screenshots as $screenshot ) {
+				$full_screenshot = $screenshot['full'] ?? '';
+				// If it does not have a gif extension, add it.
+				if ( ! preg_match( '/\.gif/', $full_screenshot ) ) {
+					$new_screenshots[] = $screenshot;
+				}
+			}
+			$screenshots = $new_screenshots;
+		}
 
 		// Active installs.
 		if ( $asset_data['active_installs'] >= 1000000 ) {
