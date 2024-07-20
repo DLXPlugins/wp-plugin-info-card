@@ -21,6 +21,9 @@ const {
 	Notice,
 	TabPanel,
 	PanelRow,
+	ToolbarItem,
+	DropdownMenu,
+	MenuItemsChoice,
 } = wp.components;
 
 import { debounce, useInstanceId } from '@wordpress/compose';
@@ -47,7 +50,7 @@ import ThemeRatingsCard from '../templates/ThemeRatingsCard';
 import Logo from '../Logo';
 import { Radio } from 'lucide-react';
 import NumbersComponent from '../components/Numbers';
-import { uniqueId } from 'lodash';
+import { set, uniqueId } from 'lodash';
 
 const WP_Plugin_Card_Query = ( props ) => {
 	const { attributes, setAttributes } = props;
@@ -58,6 +61,11 @@ const WP_Plugin_Card_Query = ( props ) => {
 	const [ cardLoading, setCardLoading ] = useState( false );
 	const [ noData, setNoData ] = useState( false );
 	const [ searchBy, setSearchBy ] = useState( attributes.searchBy ?? 'general' );
+	const [ searchValue, setSearchValue ] = useState( '' );
+	const [ currentScheme, setCurrentScheme ] = useState( attributes.scheme );
+	const [ currentLayout, setCurrentLayout ] = useState( attributes.layout );
+	const [ itemSlugs, setItemSlugs ] = useState( attributes.itemSlugs );
+
 
 	const {
 		assetData,
@@ -142,6 +150,18 @@ const WP_Plugin_Card_Query = ( props ) => {
 
 	const outputInfoCards = () => {
 		return assetData.map( ( cardData, key ) => {
+			let textValue = '';
+
+			// Check to see if slug is in the itemSlugs array.
+			if ( cardData.slug in itemSlugs ) {
+				if ( '' !== itemSlugs[ cardData.slug ] && false !== itemSlugs[ cardData.slug ] ) {
+					textValue = itemSlugs[ cardData.slug ];
+					// Merge with card data.
+					cardData = { ...cardData, name: textValue };
+				} else if ( false === itemSlugs[ cardData.slug ] ) {
+					return null;
+				}
+			}
 			return (
 				<Fragment key={ key }>
 					{ 'flex' === layout && 'plugin' === type && (
@@ -309,6 +329,68 @@ const WP_Plugin_Card_Query = ( props ) => {
 		pluginOnClick( event );
 	}, 1100 );
 
+	/**
+	 * Output slug options for overriding the plugin title per plugin.
+	 *
+	 * @param {Array} cardDataArray The card data array.
+	 * @param {Array} oldItemSlugs  The old item slugs.
+	 */
+	const outputSlugs = ( cardDataArray, oldItemSlugs ) => {
+		return cardDataArray.map( ( cardData, key ) => {
+			let textValue = '';
+			// Check to see if slug is in the itemSlugs array.
+			if ( cardData.slug in oldItemSlugs ) {
+				textValue = oldItemSlugs[ cardData.slug ];
+			}
+
+			// Determine if plugin is displaying or not.
+			let displayPlugin = true;
+			if ( cardData.slug in oldItemSlugs ) {
+				if ( false === oldItemSlugs[ cardData.slug ] ) {
+					displayPlugin = false;
+				}
+			}
+
+			const panelBodyTitle = cardData.name + ' (' + ( displayPlugin ? __( 'Enabled', 'wp-plugin-info-card' ) : __( 'Disabled', 'wp-plugin-info-card' ) ) + ')';
+			return (
+				<PanelBody
+					title={ panelBodyTitle }
+					key={ key }
+					initialOpen={ false }
+				>
+					<ToggleControl
+						label={ __( 'Display Plugin', 'wp-plugin-info-card' ) }
+						checked={ displayPlugin }
+						onChange={ ( value ) => {
+							let newTextValue = '';
+							if ( false === value ) {
+								newTextValue = false;
+							}
+							const itemSlugsTemp = itemSlugs;
+							itemSlugsTemp[ cardData.slug ] = newTextValue; // Slug can be false, or have a title override.
+							setItemSlugs( { ...itemSlugsTemp } );
+							setAttributes( { itemSlugs: { ...itemSlugsTemp } } );
+						} }
+					/>
+					{ displayPlugin && (
+						<>
+							<TextControl
+								label={ __( 'Override Title', 'wp-plugin-info-card' ) }
+								value={ itemSlugs[ cardData.slug ] || textValue }
+								onChange={ ( value ) => {
+									const itemSlugsTemp = itemSlugs;
+									itemSlugsTemp[ cardData.slug ] = value;
+									setItemSlugs( { ...itemSlugsTemp } );
+									setAttributes( { itemSlugs: { ...itemSlugsTemp } } );
+								} }
+							/>
+						</>
+					) }
+				</PanelBody>
+			);
+		} );
+	};
+
 	const inspectorControls = (
 		<InspectorControls>
 			<PanelBody
@@ -378,6 +460,8 @@ const WP_Plugin_Card_Query = ( props ) => {
 						setAttributes( {
 							sortby: value,
 						} );
+						attributes.sortby = value;
+						triggerPluginClick();
 					} }
 				/>
 				<SelectControl
@@ -406,6 +490,8 @@ const WP_Plugin_Card_Query = ( props ) => {
 						setAttributes( {
 							sort: value,
 						} );
+						attributes.sort = value;
+						triggerPluginClick();
 					} }
 				/>
 				<>
@@ -592,6 +678,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 					} }
 				/>
 			</PanelBody>
+			{ outputSlugs( assetData, itemSlugs ) }
 		</InspectorControls>
 	);
 
@@ -706,11 +793,9 @@ const WP_Plugin_Card_Query = ( props ) => {
 										'Search',
 										'wp-plugin-info-card',
 									) }
-									value={ search }
+									value={ searchValue }
 									onChange={ ( value ) => {
-										setAttributes( {
-											search: value,
-										} );
+										setSearchValue( value );
 									} }
 									placeholder={ __( 'Enter your search…', 'wp-plugin-info-card' ) }
 								/>
@@ -788,6 +873,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 										tag: '',
 										author: '',
 										user: '',
+										search: '',
 									} );
 
 									// Set attributes on search.
@@ -800,28 +886,28 @@ const WP_Plugin_Card_Query = ( props ) => {
 											break;
 										case 'tag':
 											setAttributes( {
-												tag: search,
+												tag: searchValue,
 											} );
-											attributes.tag = search;
+											attributes.tag = searchValue;
 											break;
 										case 'author':
 											setAttributes( {
-												author: search,
+												author: searchValue,
 											} );
-											attributes.author = search;
+											attributes.author = searchValue;
 											break;
 										case 'favorites':
 											setAttributes( {
-												user: search,
+												user: searchValue,
 											} );
-											attributes.user = search;
+											attributes.user = searchValue;
 											break;
 										case 'general':
 										default:
 											setAttributes( {
-												search,
+												search: searchValue,
 											} );
-											attributes.search = search;
+											attributes.search = searchValue;
 											break;
 									}
 									pluginOnClick( event );
@@ -875,6 +961,66 @@ const WP_Plugin_Card_Query = ( props ) => {
 									} }
 								></AlignmentToolbar>
 							) }
+							<ToolbarGroup>
+								<ToolbarItem as="button">
+									{ ( toolbarItemHTMLProps ) => (
+										<DropdownMenu
+											toggleProps={ toolbarItemHTMLProps }
+											label={ __(
+												'Select Color Scheme',
+												'wp-plugin-info-card',
+											) }
+											icon="admin-customizer"
+										>
+											{ ( { onClose } ) => (
+												<Fragment>
+													<MenuItemsChoice
+														choices={ schemeOptions }
+														onSelect={ ( value ) => {
+															setAttributes( {
+																scheme: value,
+															} );
+															setCurrentScheme( value );
+															onClose();
+														} }
+														value={ currentScheme }
+													/>
+												</Fragment>
+											) }
+										</DropdownMenu>
+									) }
+								</ToolbarItem>
+							</ToolbarGroup>
+							<ToolbarGroup>
+								<ToolbarItem as="button">
+									{ ( toolbarItemHTMLProps ) => (
+										<DropdownMenu
+											toggleProps={ toolbarItemHTMLProps }
+											label={ __(
+												'Select a Layout',
+												'wp-plugin-info-card',
+											) }
+											icon="layout"
+										>
+											{ ( { onClose } ) => (
+												<Fragment>
+													<MenuItemsChoice
+														choices={ layoutOptions }
+														onSelect={ ( value ) => {
+															setAttributes( {
+																layout: value,
+															} );
+															setCurrentLayout( value );
+															onClose();
+														} }
+														value={ currentLayout }
+													/>
+												</Fragment>
+											) }
+										</DropdownMenu>
+									) }
+								</ToolbarItem>
+							</ToolbarGroup>
 						</BlockControls>
 						<div
 							className={

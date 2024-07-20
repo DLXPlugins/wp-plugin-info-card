@@ -361,6 +361,7 @@ class Blocks {
 			'sort'        => $attributes['sort'],
 			'row_gap'     => $attributes['rowGap'],
 			'col_gap'     => $attributes['colGap'],
+			'itemSlugs'   => $attributes['itemSlugs'],
 		);
 		if ( ! empty( $attributes['browse'] ) ) {
 			$args['browse'] = $attributes['browse'];

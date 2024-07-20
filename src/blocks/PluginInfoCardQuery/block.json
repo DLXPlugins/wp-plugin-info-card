@@ -129,6 +129,10 @@
 		"sort": {
 			"type": "string",
 			"default": "ASC"
+		},
+		"itemSlugs": {
+			"type": "object",
+			"default": {}
 		}
 	},
 	"example": {

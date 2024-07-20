@@ -247,7 +247,7 @@ class Shortcodes {
 			'post_type'      => 'download',
 			'posts_per_page' => $per_page,
 			'paged'          => $page,
-			'meta_query'	 => array(
+			'meta_query'     => array(
 				array(
 					'key'     => '_edd_sl_enabled',
 					'value'   => '1',
@@ -279,7 +279,7 @@ class Shortcodes {
 		// Gather downloads.
 		$downloads = array();
 		foreach ( $download_ids as $download_id ) {
-			$download = \edd_get_download( $download_id );
+			$download                          = \edd_get_download( $download_id );
 			$downloads[ $download->post_name ] = wppic_api_parser( 'plugin', $download->post_name, HOUR_IN_SECONDS );
 		}
 
@@ -496,21 +496,21 @@ class Shortcodes {
 			'layout'      => isset( $_GET['layout'] ) ? $_GET['layout'] : '',
 			'sortby'      => isset( $_GET['sortby'] ) ? $_GET['sortby'] : '',
 			'sort'        => isset( $_GET['sort'] ) ? $_GET['sort'] : '',
-			'searchBy'	=> isset( $_GET['searchBy'] ) ? $_GET['searchBy'] : '',
+			'searchBy'    => isset( $_GET['searchBy'] ) ? $_GET['searchBy'] : '',
 		);
-		if ( ! empty( $_GET['browse'] && 'category' === $attrs['searchBy' ] ) ) {
+		if ( ! empty( $_GET['browse'] && 'category' === $attrs['searchBy'] ) ) {
 			$attrs['browse'] = $_GET['browse'];
 		}
-		if ( ! empty( $_GET['search'] ) && 'general' === $attrs['searchBy' ] ) {
+		if ( ! empty( $_GET['search'] ) && 'general' === $attrs['searchBy'] ) {
 			$attrs['search'] = $_GET['search'];
 		}
-		if ( ! empty( $_GET['tag'] ) && 'tag' === $attrs['searchBy' ] ) {
+		if ( ! empty( $_GET['tag'] ) && 'tag' === $attrs['searchBy'] ) {
 			$attrs['tag'] = $_GET['tag'];
 		}
-		if ( ! empty( $_GET['user'] ) && 'favorites' === $attrs['searchBy' ] ) {
+		if ( ! empty( $_GET['user'] ) && 'favorites' === $attrs['searchBy'] ) {
 			$attrs['user'] = $_GET['user'];
 		}
-		if ( ! empty( $_GET['author'] ) && 'author' === $attrs['searchBy' ] ) {
+		if ( ! empty( $_GET['author'] ) && 'author' === $attrs['searchBy'] ) {
 			$attrs['author'] = $_GET['author'];
 		}
 
@@ -687,6 +687,22 @@ class Shortcodes {
 			$add_class[] = 'wp-pic-card';
 		} else {
 			$add_class[] = $layout;
+		}
+
+		// Check to see if slug exists and if it is false, else we should skip this.
+		if ( isset( $attributes[ $slug ] ) ) {
+			// If false, that means don't show the plugin.
+			if ( false === $attributes[ $slug ] ) {
+				return '';
+			}
+		}
+
+		// Check to see if itemSlugs value is false too.
+		if ( isset( $attributes['itemSlugs'][ $slug ] ) ) {
+			// If false, that means don't show the plugin.
+			if ( false === $attributes['itemSlugs'][ $slug ] ) {
+				return '';
+			}
 		}
 
 		// Random slug: comma-separated list.
@@ -909,7 +925,7 @@ class Shortcodes {
 				// Data attribute for ajax call.
 				$content .= '<div class="wp-pic ' . esc_html( implode( ' ', $add_class ) ) . '" ' . $containerid . $ajax_data . ' >';
 				if ( 'yes' !== $ajax ) {
-					$content .= self::shortcode_content( $type, $slug, $image, $expiration, $layout, $attributes['itemSlugs']);
+					$content .= self::shortcode_content( $type, $slug, $image, $expiration, $layout, $attributes['itemSlugs'] );
 				} else {
 					$content .= '<div class="wp-pic-body-loading"><div class="signal"></div></div>';
 				}
@@ -922,7 +938,7 @@ class Shortcodes {
 				}
 
 				$content .= '</div><!-- .wp-pic-wrapper-->';
-					if ( 'after' === $clear ) {
+				if ( 'after' === $clear ) {
 					$content .= '<div style="clear:both"></div>';
 				}
 			}
@@ -946,35 +962,31 @@ class Shortcodes {
 		add_filter( 'wppic_allow_scripts', '__return_true' );
 		// Retrieve & extract shorcode parameters.
 		extract( // phpcs:ignore
-			shortcode_atts(
-				array(
-					'search'      => '',  // A search term. Default empty.
-					'tag'         => '',  // Tag to filter themes. Comma separated list. Default empty.
-					'author'      => '',  // Username of an author to filter themes. Default empty.
-					'user'        => '',  // Username to query for their favorites. Default empty.
-					'browse'      => '',  // Browse view: 'featured', 'popular', 'updated', 'favorites'.
-					'per_page'    => '',  // Number of themes per query (page). Default 24.
-					'cols'        => '',  // Columns layout to use: '2', '3'. Default empty (none).
-				// Default wppic shortcode attributs.
-					'type'        => '',  // plugin | theme.
-					'slug'        => '',  // plugin slug name.
-					'image'       => '',  // image url to replace WP logo (175px X 175px).
-					'align'       => '',  // center|left|right.
-					'containerid' => '',  // custom Div ID (could be use for anchor).
-					'margin'      => '',  // custom container margin - eg: "15px 0".
-					'clear'       => '',  // clear float before or after the card: before|after.
-					'expiration'  => '',  // transient duration in minutes - 0 for never expires.
-					'ajax'        => '',  // load plugin data async whith ajax: yes|no (default: no).
-					'scheme'      => '',  // color scheme : default|scheme1->scheme10 (default: empty).
-					'layout'      => '',  // card|flat|wordpress.
-					'custom'      => '',  // value to print : url|name|version|author|requires|rating|num_ratings|downloaded|last_updated|download_link.
-					'sortby'      => 'none', // none|active_installs (plugins only)|downloaded|last_updated.
-					'sort'        => 'ASC', // ASC|DESC.
-					'row_gap'     => 20,
-					'col_gap'     => 20,
-				),
+			wp_parse_args(
 				$atts,
-				'wppic_default'
+				array(
+					'cols'        => 2,
+					'per_page'    => 24,
+					'type'        => '',
+					'image'       => '',
+					'align'       => '',
+					'containerid' => '',
+					'margin'      => '',
+					'clear'       => '',
+					'expiration'  => '',
+					'ajax'        => '',
+					'scheme'      => '',
+					'layout'      => '',
+					'custom'      => '',
+					'sortby'      => 'none',
+					'sort'        => 'ASC',
+					'search'      => '',
+					'tag'         => '',
+					'user'        => '',
+					'browse'      => '',
+					'searchBy'    => 'general',
+					'itemSlugs'   => array(),
+				)
 			)
 		);
 
@@ -1091,6 +1103,11 @@ class Shortcodes {
 					<?php
 					// Creat the loop wp-pic-1-.
 					foreach ( $sort_results as $item ) {
+						// Add custom shortcode slugs to itemslugs if it exists.
+						if ( isset( $atts[ $item['slug'] ] ) ) {
+							// Add to itemSlugs.
+							$atts['itemSlugs'][ $item['slug'] ] = $atts[ $item['slug'] ];
+						}
 						$atts['slug'] = $item['slug'];
 						// Use the WPPIC shorcode to generate cards.
 						echo self::shortcode_function( $atts );
@@ -1538,7 +1555,8 @@ class Shortcodes {
 		if ( 0 === did_action( 'wppic_enqueue_scripts' ) ) {
 			do_action( 'wppic_enqueue_scripts' );
 		}
-		?>	
+		?>
+			
 		<div id="<?php echo esc_attr( $attributes['id'] ); ?>" class="wp-site-plugin-info-card cols-<?php echo esc_attr( $attributes['cols'] ); ?>">
 			<?php
 			$content = ob_get_clean();
