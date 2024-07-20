@@ -20,6 +20,10 @@
       "type": "array",
       "default": []
     },
+    "uniqueId": {
+      "type": "string",
+      "default": ""
+    },
     "search": {
       "type": "string",
       "default": ""
@@ -45,8 +49,16 @@
       "default": "8"
     },
     "cols": {
-      "type": "number",
+      "type": "string",
       "default": 2
+    },
+    "colGap": {
+      "type": "number",
+      "default": 20
+    },
+    "rowGap": {
+      "type": "number",
+      "default": 20
     },
     "type": {
       "type": "string",
@@ -123,6 +135,10 @@
     "sort": {
       "type": "string",
       "default": "ASC"
+    },
+    "itemSlugs": {
+      "type": "object",
+      "default": {}
     }
   },
   "example": {

@@ -151,6 +151,10 @@
     "colorMetaText": {
       "type": "string",
       "default": "#FFFFFF"
+    },
+    "skipAnimatedGifs": {
+      "type": "boolean",
+      "default": false
     }
   },
   "example": {

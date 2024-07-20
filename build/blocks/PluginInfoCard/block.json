@@ -93,7 +93,7 @@
     },
     "cols": {
       "type": "number",
-      "default": 1
+      "default": 2
     },
     "colGap": {
       "type": "number",
@@ -106,6 +106,10 @@
     "uniqueId": {
       "type": "string",
       "default": ""
+    },
+    "itemSlugs": {
+      "type": "object",
+      "default": {}
     }
   },
   "example": {

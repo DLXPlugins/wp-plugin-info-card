@@ -20,6 +20,7 @@ import ThemesRatingCard from '../templates/ThemeRatingsCard';
 import Logo from '../Logo';
 import NumbersComponent from '../components/Numbers';
 import { isURL } from '@wordpress/url';
+import { useCallback } from 'react';
 const { Fragment, useEffect, useState } = wp.element;
 
 const { __ } = wp.i18n;
@@ -73,6 +74,8 @@ const WPPluginInfoCard = ( props ) => {
 	const [ data, setData ] = useState( attributes.assetData );
 	const [ align, setAlign ] = useState( attributes.align );
 	const [ noData, setNoData ] = useState( false );
+	const [ pluginThemeSearchInput, setPluginThemeSearchInput ] = useState( '' );
+	const [ itemSlugs, setItemSlugs ] = useState( attributes.itemSlugs );
 
 	useEffect( () => {
 		setAttributes( { uniqueId: generatedUniqueId } );
@@ -93,7 +96,7 @@ const WPPluginInfoCard = ( props ) => {
 		const restUrl = wppic.rest_url + 'wppic/v2/get_data';
 		axios
 			.get(
-				restUrl + `?type=${ type }&slug=${ encodeURIComponent( slug ) }`
+				restUrl + `?type=${ type }&slug=${ encodeURIComponent( slug ) }`,
 			)
 			.then( ( response ) => {
 				if ( response.data.success ) {
@@ -132,8 +135,30 @@ const WPPluginInfoCard = ( props ) => {
 		}
 	}, [] );
 
+	/**
+	 * Select the search input field.
+	 */
+	useEffect( () => {
+		if ( pluginThemeSearchInput ) {
+			pluginThemeSearchInput.focus();
+
+			// Select the text in the input field.
+			pluginThemeSearchInput.select();
+		}
+	}, [ pluginThemeSearchInput ] );
+
 	const outputInfoCards = ( cardDataArray ) => {
 		return cardDataArray.map( ( cardData, key ) => {
+			let textValue = '';
+
+			// Check to see if slug is in the itemSlugs array.
+			if ( cardData.slug in itemSlugs ) {
+				if ( '' !== itemSlugs[ cardData.slug ] ) {
+					textValue = itemSlugs[ cardData.slug ];
+					// Merge with card data.
+					cardData = { ...cardData, name: textValue };
+				}
+			}
 			return (
 				<Fragment key={ key }>
 					{ 'flex' === layout && 'plugin' === type && (
@@ -217,6 +242,40 @@ const WPPluginInfoCard = ( props ) => {
 						/>
 					) }
 				</Fragment>
+			);
+		} );
+	};
+
+	/**
+	 * Output slug options for overriding the plugin title per plugin.
+	 *
+	 * @param {Array} cardDataArray The card data array.
+	 * @param {Array} oldItemSlugs  The old item slugs.
+	 */
+	const outputSlugs = ( cardDataArray, oldItemSlugs ) => {
+		return cardDataArray.map( ( cardData, key ) => {
+			let textValue = '';
+			// Check to see if slug is in the itemSlugs array.
+			if ( cardData.slug in oldItemSlugs ) {
+				textValue = oldItemSlugs[ cardData.slug ];
+			}
+			return (
+				<PanelBody
+					title={ cardData.name }
+					key={ key }
+					initialOpen={ false }
+				>
+					<TextControl
+						label={ __( 'Override Title', 'wp-plugin-info-card' ) }
+						value={ itemSlugs[ cardData.slug ] || textValue }
+						onChange={ ( value ) => {
+							const itemSlugsTemp = itemSlugs;
+							itemSlugsTemp[ cardData.slug ] = value;
+							setItemSlugs( { ...itemSlugsTemp } );
+							setAttributes( { itemSlugs: { ...itemSlugsTemp } } );
+						} }
+					/>
+				</PanelBody>
 			);
 		} );
 	};
@@ -405,7 +464,7 @@ const WPPluginInfoCard = ( props ) => {
 								>
 									{ __(
 										'Upload Image!',
-										'wp-plugin-info-card'
+										'wp-plugin-info-card',
 									) }
 								</button>
 								{ image && (
@@ -415,7 +474,7 @@ const WPPluginInfoCard = ( props ) => {
 												src={ image }
 												alt={ __(
 													'Plugin Card Image',
-													'wp-plugin-info-card'
+													'wp-plugin-info-card',
 												) }
 												width="250"
 												height="250"
@@ -433,7 +492,7 @@ const WPPluginInfoCard = ( props ) => {
 											>
 												{ __(
 													'Reset Image',
-													'wp-plugin-info-card'
+													'wp-plugin-info-card',
 												) }
 											</button>
 										</div>
@@ -455,6 +514,7 @@ const WPPluginInfoCard = ( props ) => {
 					/>
 				</PanelRow>
 			</PanelBody>
+			{ outputSlugs( data, itemSlugs ) }
 		</InspectorControls>
 	);
 
@@ -517,7 +577,7 @@ const WPPluginInfoCard = ( props ) => {
 								{
 									title: __(
 										'Appearance',
-										'wp-plugin-info-card'
+										'wp-plugin-info-card',
 									),
 									name: 'layout',
 									className: 'wppic-tab-layout',
@@ -532,7 +592,7 @@ const WPPluginInfoCard = ( props ) => {
 											<SelectControl
 												label={ __(
 													'Select a Plugin or Theme',
-													'wp-plugin-info-card'
+													'wp-plugin-info-card',
 												) }
 												options={ assetType }
 												value={ type }
@@ -546,7 +606,7 @@ const WPPluginInfoCard = ( props ) => {
 											<TextControl
 												label={ __(
 													'Plugin or Theme Slug',
-													'wp-plugin-info-card'
+													'wp-plugin-info-card',
 												) }
 												value={ slug }
 												onChange={ ( value ) => {
@@ -561,7 +621,7 @@ const WPPluginInfoCard = ( props ) => {
 												} }
 												help={ __(
 													'Comma separated slugs are supported.',
-													'wp-plugin-info-card'
+													'wp-plugin-info-card',
 												) }
 												onPaste={ ( event ) => {
 													// Get contents from clipboard.
@@ -603,6 +663,7 @@ const WPPluginInfoCard = ( props ) => {
 														setSlug( slugSlashesRemoved );
 													}
 												} }
+												ref={ setPluginThemeSearchInput }
 											/>
 											{ noData && (
 												<Notice
@@ -611,7 +672,7 @@ const WPPluginInfoCard = ( props ) => {
 												>
 													{ __(
 														'No data found for the given slug.',
-														'wp-plugin-info-card'
+														'wp-plugin-info-card',
 													) }
 												</Notice>
 											) }
@@ -624,7 +685,7 @@ const WPPluginInfoCard = ( props ) => {
 												<SelectControl
 													label={ __(
 														'Select an initial layout',
-														'wp-plugin-info-card'
+														'wp-plugin-info-card',
 													) }
 													options={ layoutOptions }
 													value={ layout }
@@ -645,7 +706,7 @@ const WPPluginInfoCard = ( props ) => {
 															} );
 															setLayout( value );
 															setAlign(
-																'center'
+																'center',
 															);
 														}
 													} }
@@ -654,7 +715,7 @@ const WPPluginInfoCard = ( props ) => {
 												<SelectControl
 													label={ __(
 														'Scheme',
-														'wp-plugin-info-card'
+														'wp-plugin-info-card',
 													) }
 													options={ schemeOptions }
 													value={ scheme }
@@ -691,7 +752,7 @@ const WPPluginInfoCard = ( props ) => {
 						>
 							{ __(
 								'Preview and Configure',
-								'wp-plugin-info-card'
+								'wp-plugin-info-card',
 							) }
 						</Button>
 					</div>
@@ -719,7 +780,7 @@ const WPPluginInfoCard = ( props ) => {
 								icon="edit"
 								title={ __(
 									'Edit and Configure',
-									'wp-plugin-info-card'
+									'wp-plugin-info-card',
 								) }
 								onClick={ () => setLoading( true ) }
 							/>
@@ -731,7 +792,7 @@ const WPPluginInfoCard = ( props ) => {
 										toggleProps={ toolbarItemHTMLProps }
 										label={ __(
 											'Select Color Scheme',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										) }
 										icon="admin-customizer"
 									>
@@ -761,7 +822,7 @@ const WPPluginInfoCard = ( props ) => {
 										toggleProps={ toolbarItemHTMLProps }
 										label={ __(
 											'Select a Layout',
-											'wp-plugin-info-card'
+											'wp-plugin-info-card',
 										) }
 										icon="layout"
 									>
@@ -800,7 +861,7 @@ const WPPluginInfoCard = ( props ) => {
 							`cols-${ cols }`,
 							{
 								'has-grid': hasMultipleAssets,
-							}
+							},
 						) }
 					>
 						{ outputInfoCards( data ) }
