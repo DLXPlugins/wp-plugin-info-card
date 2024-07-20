@@ -1106,6 +1106,7 @@ class Shortcodes {
 				</style>
 				<div id="<?php echo esc_attr( $containerid ); ?>" class="wp-query-plugin-info-card cols-<?php echo esc_attr( $cols ); ?>">
 					<?php
+					$sort_results = \json_decode( wp_json_encode( $sort_results ), true );
 					// Creat the loop wp-pic-1-.
 					foreach ( $sort_results as $item ) {
 						// Add custom shortcode slugs to itemslugs if it exists.
