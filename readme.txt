@@ -1,9 +1,9 @@
 === WP Plugin Info Card ===
 Contributors: briKou, ronalfy
-Tags: API, plugin, card, theme, block, blocks, gutenberg
+Tags: cards, card, theme cards, plugin cards, plugin list
 Requires at least: 3.7
 Tested up to: 6.6
-Stable tag: 5.2.0
+Stable tag: 5.2.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ WP Plugin Info Card displays plugins & themes data in beautiful cards using WP P
 
 == Description ==
 
-Plugin Info Card displays plugins & themes data in beautiful cards using WP Plugin & Theme APIs. With four blocks, four shortcodes, and several layouts and schemes, you can display your plugins and themes in a variety of ways.
+Plugin Info Card displays plugins & themes data in beautiful cards using WP Plugin & Theme APIs. With four blocks, four shortcodes, and several layouts and 14 schemes, you can display your plugins and themes in a variety of ways.
 
 [youtube https://www.youtube.com/watch?v=8eKDCEoXGKU&rel=0]
 
@@ -34,9 +34,6 @@ The dashboard widget is very easy to set up: you simply add as many plugins and 
 
 It is perfect to keep track of your own plugins and themes!
 
-
-[CHECK OUT THE DEMO](https://dlxplugins.com/plugins/plugin-info-card/ "Try It!")
-
 = Quick Links (Shortcode Documentation) =
 
 * <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic">[wp-pic] shortcode and parameters</a>.
@@ -52,7 +49,7 @@ It is perfect to keep track of your own plugins and themes!
 * <a href="https://wppic.dlxplugins.com/blocks/site-plugins-card-grid">Site Plugins Card Grid block</a>.
 * <a href="https://wppic.dlxplugins.com/blocks/plugin-screenshots-info-card">WP Plugin Info Card Plugin Screenshots block</a>.
 
-[CHECK OUT MORE EXAMPLES](https://dlxplugins.com/plugins/plugin-info-card/ "More documentation")
+> <a href="https://wppic.dlxplugins.com/overview/easy-digital-downloads-integration">Easy Digital Downloads integration</a> is now available as part of the free plugin. Show off your EDD plugins too!
 
 [PREMIUM ADD-ON - WP Envato Affiliate Card](http://b-website.com/wp-envato-affiliate-card-powered-envato-market-api "WP Envato Affiliate Card")
 
@@ -100,6 +97,20 @@ This video shows you how:
 11. WordPress layout with themes and 2 columns
 
 == Changelog ==
+
+= 5.2.5 =
+* Released 2024-07-20
+* New feature: override plugin and theme titles, including in the grid layouts.
+* New feature: hide a plugin or theme from a grid layout.
+* New feature: Query block and shortcode now supports CSS Grid for layout structure.
+* New feature: You can now skip and exclude animated GIFs from the plugin screenshots block for performance reasons.
+* Block tweak: Main plugin info card block has better usability and overridable titles.
+* Block tweak: Query block has been redesigned for more intuitive searching.
+* Block tweak: Site Plugins Grid now loads immediately without requiring an extra button click.
+* Block tweak: Removed the Edit button from the Site Plugins Grid as it was redundant.
+* Bug fix: Lightbox wasn't working on some installs for the screenshots block/shortcode.
+* Bug fix: Stats columns in the screenshots block/shortcode looks much better on mobile devices now.
+
 
 = 5.2.0 =
 * Released 2024-07-17
@@ -449,5 +460,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 5.2.0 =
-New feature: Easy Digital Downloads integration. Fixing the large layout in the block editor. Fixing mobile styling for CSS.
+= 5.2.5 =
+This update introduces title overrides and plugin/theme exclusions, CSS Grid support for the Query layout, and improved performance for the screenshots block, along with several usability tweaks and bug fixes for better mobile and grid layout experience.
