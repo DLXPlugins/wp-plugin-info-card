@@ -100,6 +100,7 @@ This video shows you how:
 
 = 5.2.5 =
 * Released 2024-07-20
+* <a href="https://dlxplugins.com/announcements/plugin-info-card-5-2-5-released-with-plugin-theme-exclusions-and-custom-titles/">Read the full announcement post</a> for this release.
 * New feature: override plugin and theme titles, including in the grid layouts.
 * New feature: hide a plugin or theme from a grid layout.
 * New feature: Query block and shortcode now supports CSS Grid for layout structure.
@@ -114,6 +115,7 @@ This video shows you how:
 
 = 5.2.0 =
 * Released 2024-07-17
+* <a href="https://dlxplugins.com/announcements/plugin-info-card-5-2-introduces-easy-digital-downloads-compatibility/">Read the announcement post</a> for more details.
 * New Feature: Added Easy Digital Downloads integration.
 * Bug fix: Fixing large layout in the block editor.
 * Bug fix: Fixing mobile styling in the admin options.
