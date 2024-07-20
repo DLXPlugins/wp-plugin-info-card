@@ -984,6 +984,8 @@ class Shortcodes {
 					'tag'         => '',
 					'user'        => '',
 					'browse'      => '',
+					'row_gap'     => 20,
+					'col_gap'     => 20,
 					'searchBy'    => 'general',
 					'itemSlugs'   => array(),
 				)
