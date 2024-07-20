@@ -692,15 +692,18 @@ class Shortcodes {
 		// Check to see if slug exists and if it is false, else we should skip this.
 		if ( isset( $attributes[ $slug ] ) ) {
 			// If false, that means don't show the plugin.
-			if ( false === $attributes[ $slug ] ) {
+			// Slug can be string false, boolean false, and and a string for a custom title.
+			if ( false === $attributes[ $slug ] || 'false' === $attributes[ $slug ] ) {
 				return '';
+			} else {
+				$attributes['itemSlugs'][ $slug ] = $attributes[ $slug ];
 			}
 		}
 
 		// Check to see if itemSlugs value is false too.
 		if ( isset( $attributes['itemSlugs'][ $slug ] ) ) {
 			// If false, that means don't show the plugin.
-			if ( false === $attributes['itemSlugs'][ $slug ] ) {
+			if ( false === $attributes['itemSlugs'][ $slug ] || 'false' === $attributes['itemSlugs'][ $slug ] ) {
 				return '';
 			}
 		}
@@ -784,7 +787,7 @@ class Shortcodes {
 					$ajax_data = '';
 					if ( 'yes' === $ajax ) {
 						$add_class[] = 'wp-pic-ajax';
-						$ajax_data   = 'data-type="' . $type . '" data-slug="' . $asset_slug . '" data-image="' . $image . '" data-expiration="' . $expiration . '"  data-layout="' . $layout . '" ';
+						$ajax_data   = 'data-type="' . $type . '" data-slug="' . $asset_slug . '" data-image="' . $image . '" data-expiration="' . $expiration . '"  data-layout="' . $layout . '" data-slugs="' . esc_attr( wp_json_encode( $attributes['itemSlugs'] ) ) . '"';
 					}
 
 					// Align card.
@@ -879,7 +882,7 @@ class Shortcodes {
 				$ajax_data = '';
 				if ( 'yes' === $ajax ) {
 					$add_class[] = 'wp-pic-ajax';
-					$ajax_data   = 'data-type="' . $type . '" data-slug="' . $slug . '" data-image="' . $image . '" data-expiration="' . $expiration . '"  data-layout="' . $layout . '" ';
+					$ajax_data   = 'data-type="' . $type . '" data-slug="' . $slug . '" data-image="' . $image . '" data-expiration="' . $expiration . '"  data-layout="' . $layout . '" data-slugs="' . esc_attr( wp_json_encode( $attributes['itemSlugs'] ) ) . '"';
 				}
 
 				// Align card.
@@ -1635,6 +1638,11 @@ class Shortcodes {
 		$image      = esc_html( $image );
 		$expiration = esc_html( $expiration );
 		$layout     = esc_html( $layout );
+
+		// Get item slugs.
+		if ( isset( $_POST['itemSlugs'] ) && is_array( $_POST['itemSlugs'] ) ) {
+			$item_slugs = Functions::sanitize_array_recursive( wp_unslash( $_POST['itemSlugs'] ) );
+		}
 
 		$wppic_data = wppic_api_parser( $type, $slug, $expiration );
 
