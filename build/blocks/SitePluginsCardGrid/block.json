@@ -68,6 +68,10 @@
     "rowGap": {
       "type": "number",
       "default": 20
+    },
+    "itemSlugs": {
+      "type": "object",
+      "default": {}
     }
   },
   "example": {

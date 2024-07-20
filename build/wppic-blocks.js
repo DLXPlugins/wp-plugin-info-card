@@ -4864,6 +4864,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Numbers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/Numbers */ "./src/blocks/components/Numbers.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lodash */ "lodash");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_10__);
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(a, b) { var c = Object.keys(a); if (Object.getOwnPropertySymbols) { var d = Object.getOwnPropertySymbols(a); b && (d = d.filter(function (b) { return Object.getOwnPropertyDescriptor(a, b).enumerable; })), c.push.apply(c, d); } return c; }
+function _objectSpread(a) { for (var b = 1; b < arguments.length; b++) { var c = null != arguments[b] ? arguments[b] : {}; b % 2 ? ownKeys(Object(c), !0).forEach(function (b) { _defineProperty(a, b, c[b]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(a, Object.getOwnPropertyDescriptors(c)) : ownKeys(Object(c)).forEach(function (b) { Object.defineProperty(a, b, Object.getOwnPropertyDescriptor(c, b)); }); } return a; }
+function _defineProperty(a, b, c) { return (b = _toPropertyKey(b)) in a ? Object.defineProperty(a, b, { value: c, enumerable: !0, configurable: !0, writable: !0 }) : a[b] = c, a; }
+function _toPropertyKey(a) { var b = _toPrimitive(a, "string"); return "symbol" == (typeof b === "undefined" ? "undefined" : _typeof(b)) ? b : b + ""; }
+function _toPrimitive(a, b) { if ("object" != (typeof a === "undefined" ? "undefined" : _typeof(a)) || !a) return a; var c = a[Symbol.toPrimitive]; if (void 0 !== c) { var d = c.call(a, b || "default"); if ("object" != (typeof d === "undefined" ? "undefined" : _typeof(d))) return d; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === b ? String : Number)(a); }
 function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) return _arrayLikeToArray(b, c); var a = {}.toString.call(b).slice(8, -1); return "Object" === a && b.constructor && (a = b.constructor.name), "Map" === a || "Set" === a ? Array.from(b) : "Arguments" === a || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a) ? _arrayLikeToArray(b, c) : void 0; } }
@@ -4906,7 +4912,9 @@ var _wp$components = wp.components,
   Button = _wp$components.Button,
   Notice = _wp$components.Notice,
   MenuItemsChoice = _wp$components.MenuItemsChoice,
-  BaseControl = _wp$components.BaseControl;
+  BaseControl = _wp$components.BaseControl,
+  ToggleControl = _wp$components.ToggleControl,
+  TextControl = _wp$components.TextControl;
 var _wp$blockEditor = wp.blockEditor,
   InspectorControls = _wp$blockEditor.InspectorControls,
   BlockAlignmentToolbar = _wp$blockEditor.BlockAlignmentToolbar,
@@ -4930,7 +4938,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     n = b.rowGap,
     o = b.align,
     p = b.uniqueId;
-  var q = useState(b.loading),
+  var q = useState(false),
     r = _slicedToArray(q, 2),
     s = r[0],
     t = r[1];
@@ -4950,18 +4958,31 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     H = _slicedToArray(G, 2),
     I = H[0],
     J = H[1];
+  var K = useState(b.itemSlugs),
+    L = _slicedToArray(K, 2),
+    M = L[0],
+    N = L[1];
+
+  // Load plugins if no asset data.
+  useEffect(function () {
+    if (Object.keys(e).length <= 0) {
+      O();
+    }
+  }, []);
 
   /**
    * Load plugins recursively until all plugins are processed.
    *
-   * @param {number} page The page to retrieve.
+   * @param {number} page       The page to retrieve.
+   * @param {Array}  pluginList The list of plugins.
    */
-  var K = function loadPlugins() {
+  var O = function loadPlugins() {
     var a = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+    var b = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
     x(true);
     t(true);
-    var b = wppic.rest_url + 'wppic/v2/get_site_plugins';
-    axios__WEBPACK_IMPORTED_MODULE_0___default().get(b, {
+    var d = wppic.rest_url + 'wppic/v2/get_site_plugins';
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get(d, {
       params: {
         page: a
       },
@@ -4970,23 +4991,22 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
       }
     }).then(function (a) {
       if (a.data.success) {
-        var b = a.data.data;
+        var d = a.data.data;
 
         // Calculate percentage.
-        var d = b.percentage_complete;
-        var e = b.more_results;
-        var f = b.page;
-        var g = b.plugins;
-        F(d);
+        var e = d.percentage_complete;
+        var f = d.more_results;
+        var g = d.page;
+        var h = d.plugins;
+        F(e);
 
         // Merge arrays assetData and pluginData.
-        var h = I;
-        Object.values(g).forEach(function (a) {
-          h.push(a);
+        var i = b;
+        Object.values(h).forEach(function (a) {
+          i.push(a);
         });
-        J(h);
-        if (e) {
-          K(f);
+        if (f) {
+          O(g, i);
         } else {
           // Set plugins and update status.
           t(false);
@@ -4995,22 +5015,24 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
           });
           x(false);
           c({
-            assetData: I
+            assetData: i
           });
+          J(i);
         }
       }
     });
   };
-  var L = function pluginOnClick() {
+  var P = function pluginOnClick() {
     J([]);
     t(false);
     c({
-      loading: false
+      loading: false,
+      assetData: []
     });
     x(true);
 
     // Do ajax request to get activeplugins.
-    K();
+    O(1, []);
   };
   useEffect(function () {
     c({
@@ -5024,8 +5046,22 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
       });
     }
   }, []);
-  var M = function outputInfoCards(a) {
+  var Q = function outputInfoCards(a) {
     return Object.values(a).map(function (a, b) {
+      var c = '';
+
+      // Check to see if slug is in the itemSlugs array.
+      if (a.slug in M) {
+        if ('' !== M[a.slug] && false !== M[a.slug]) {
+          c = M[a.slug];
+          // Merge with card data.
+          a = _objectSpread(_objectSpread({}, a), {}, {
+            name: c
+          });
+        } else if (false === M[a.slug]) {
+          return null;
+        }
+      }
       return /*#__PURE__*/React.createElement(Fragment, {
         key: b
       }, 'flex' === g && /*#__PURE__*/React.createElement(_templates_PluginFlex__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -5053,11 +5089,67 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
   };
 
   /**
+   * Output slug options for overriding the plugin title per plugin.
+   *
+   * @param {Array} cardDataArray The card data array.
+   * @param {Array} oldItemSlugs  The old item slugs.
+   */
+  var R = function outputSlugs(a, b) {
+    return a.map(function (a, d) {
+      var e = '';
+      // Check to see if slug is in the itemSlugs array.
+      if (a.slug in b) {
+        e = b[a.slug];
+      }
+
+      // Determine if plugin is displaying or not.
+      var f = true;
+      if (a.slug in b) {
+        if (false === b[a.slug]) {
+          f = false;
+        }
+      }
+      var g = a.name + ' (' + (f ? __('Enabled', 'wp-plugin-info-card') : __('Disabled', 'wp-plugin-info-card')) + ')';
+      return /*#__PURE__*/React.createElement(PanelBody, {
+        title: g,
+        key: d,
+        initialOpen: false
+      }, /*#__PURE__*/React.createElement(ToggleControl, {
+        label: __('Display Plugin', 'wp-plugin-info-card'),
+        checked: f,
+        onChange: function onChange(b) {
+          var d = '';
+          if (false === b) {
+            d = false;
+          }
+          var e = M;
+          e[a.slug] = d; // Slug can be false, or have a title override.
+          N(_objectSpread({}, e));
+          c({
+            itemSlugs: _objectSpread({}, e)
+          });
+        }
+      }), f && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(TextControl, {
+        label: __('Override Title', 'wp-plugin-info-card'),
+        value: M[a.slug] || e,
+        onChange: function onChange(b) {
+          var d = M;
+          d[a.slug] = b;
+          N(_objectSpread({}, d));
+          c({
+            itemSlugs: _objectSpread({}, d)
+          });
+        }
+      })));
+    });
+  };
+
+  /**
    * Retrieve colums interface for sidebar options.
    *
    * @return {Element} The columns interface.
    */
-  var N = function getCols() {
+  var S = function getCols() {
     return /*#__PURE__*/React.createElement(BaseControl, {
       id: "col-count",
       label: __('Select How Many Columns', 'wp-plugin-info-card')
@@ -5087,7 +5179,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
       }
     }, __('Three', 'wp-plugin-info-card'))));
   };
-  var O = [{
+  var T = [{
     value: 'default',
     label: __('Default', 'wp-plugin-info-card')
   }, {
@@ -5133,7 +5225,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     value: 'scheme14',
     label: __('Scheme 14', 'wp-plugin-info-card')
   }];
-  var P = [{
+  var U = [{
     value: 'card',
     label: __('Card', 'wp-plugin-info-card')
   }, {
@@ -5149,12 +5241,12 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     value: 'ratings',
     label: __('Ratings', 'wp-plugin-info-card')
   }];
-  var Q = 'card' === g ? 'wp-pic-card' : g;
-  var R = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
+  var V = 'card' === g ? 'wp-pic-card' : g;
+  var W = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Layout', 'wp-plugin-info-card')
   }, /*#__PURE__*/React.createElement(PanelRow, null, /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Scheme', 'wp-plugin-info-card'),
-    options: O,
+    options: T,
     value: f,
     onChange: function onChange(a) {
       c({
@@ -5163,7 +5255,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     }
   })), /*#__PURE__*/React.createElement(PanelRow, null, /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Layout', 'wp-plugin-info-card'),
-    options: P,
+    options: U,
     value: g,
     onChange: function onChange(a) {
       if ('flex' === a) {
@@ -5180,7 +5272,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     }
   })), /*#__PURE__*/React.createElement(PanelRow, {
     className: "wppic-panel-rows-cols"
-  }, N()), /*#__PURE__*/React.createElement(PanelRow, {
+  }, S()), /*#__PURE__*/React.createElement(PanelRow, {
     className: "wppic-panel-rows-numbers"
   }, /*#__PURE__*/React.createElement(_components_Numbers__WEBPACK_IMPORTED_MODULE_9__["default"], {
     value: m,
@@ -5204,9 +5296,9 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
       });
     },
     id: "wppic-row-gap"
-  }))));
-  var S = "\n\t\t#".concat(p, " {\n\t\t\tdisplay: grid;\n\t\t\tcolumn-gap: ").concat(m, "px;\n\t\t\trow-gap: ").concat(n, "px;\n\t\t}\n\t");
-  var T = useBlockProps({
+  }))), R(e, M));
+  var X = "\n\t\t#".concat(p, " {\n\t\t\tdisplay: grid;\n\t\t\tcolumn-gap: ").concat(m, "px;\n\t\t\trow-gap: ").concat(n, "px;\n\t\t}\n\t");
+  var Y = useBlockProps({
     className: classnames__WEBPACK_IMPORTED_MODULE_1___default()("site-plugins-card-grid align".concat(o))
   });
   if (h) {
@@ -5224,7 +5316,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
       }
     }));
   }
-  var U = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  var Z = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-gutenberg-button"
   }, /*#__PURE__*/React.createElement(Button, {
     iconSize: 20,
@@ -5236,12 +5328,12 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     id: "wppic-input-submit",
     onClick: function onClick(a) {
       F(0);
-      L(a);
+      P(a);
     }
   }, !w ? __('Load Plugins', 'wp-plugin-info-card') : __('Loading…', 'wp-plugin-info-card'))), w && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_ProgressBar__WEBPACK_IMPORTED_MODULE_8__["default"], {
     percentage: E
   })));
-  var V = /*#__PURE__*/React.createElement(React.Fragment, null, s && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
+  var $ = /*#__PURE__*/React.createElement(React.Fragment, null, s && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
     icon: "welcome-view-site",
     title: __('View Preview', 'wp-plugin-info-card'),
     onClick: function onClick() {
@@ -5255,7 +5347,9 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     size: "75"
   })), /*#__PURE__*/React.createElement("div", {
     className: "wppic-site-plugins-description"
-  }, /*#__PURE__*/React.createElement("p", null, __('Click "Load Plugins" to load your active plugins. Please note that plugins not hosted on the WordPress Plugin Directory will not be displayed.', 'wp-plugin-info-card'))), U)), !s && Object.keys(e).length <= 0 && !w && /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("p", null, __('Plugins are loading in the background.', 'wp-plugin-info-card'))), w && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_ProgressBar__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    percentage: E
+  })))), !s && Object.keys(e).length <= 0 && !w && /*#__PURE__*/React.createElement("div", {
     className: "wppic-site-plugins-block wppic-site-plugins-panel"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-block-svg"
@@ -5266,17 +5360,11 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
   }, /*#__PURE__*/React.createElement(Notice, {
     status: "warning",
     isDismissible: false
-  }, __('No plugins have been loaded or found. Please try again.', 'wp-plugin-info-card'))), U), !s && Object.keys(e).length > 0 && !w && /*#__PURE__*/React.createElement(Fragment, null, R, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
-    icon: "edit",
-    title: __('Edit and Configure', 'wp-plugin-info-card'),
-    onClick: function onClick() {
-      return t(true);
-    }
-  }, __('Edit', 'wp-plugin-info-card')), /*#__PURE__*/React.createElement(ToolbarButton, {
+  }, __('No plugins have been loaded or found. Please try again.', 'wp-plugin-info-card'))), Z), !s && Object.keys(e).length > 0 && !w && /*#__PURE__*/React.createElement(Fragment, null, W, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
     icon: "image-rotate",
     title: __('Refresh Plugins', 'wp-plugin-info-card'),
     onClick: function onClick() {
-      return L();
+      return P();
     }
   }, __('Refresh', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarItem, {
     as: "button"
@@ -5288,7 +5376,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     }, function (a) {
       var b = a.onClose;
       return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(MenuItemsChoice, {
-        choices: O,
+        choices: T,
         onSelect: function onSelect(a) {
           c({
             scheme: a
@@ -5308,7 +5396,7 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
     }, function (a) {
       var b = a.onClose;
       return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(MenuItemsChoice, {
-        choices: P,
+        choices: U,
         onSelect: function onSelect(a) {
           c({
             layout: a
@@ -5318,11 +5406,11 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
         value: g
       }));
     });
-  }))), /*#__PURE__*/React.createElement("style", null, S), /*#__PURE__*/React.createElement("div", {
+  }))), /*#__PURE__*/React.createElement("style", null, X), /*#__PURE__*/React.createElement("div", {
     id: p,
-    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('is-placeholder', Q, 'wp-block-plugin-info-card', 'wp-site-plugin-info-card', "align".concat(o), "cols-".concat(l))
-  }, M(e))));
-  return /*#__PURE__*/React.createElement("div", T, V);
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('is-placeholder', V, 'wp-block-plugin-info-card', 'wp-site-plugin-info-card', "align".concat(o), "cols-".concat(l))
+  }, Q(e))));
+  return /*#__PURE__*/React.createElement("div", Y, $);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SitePluginsCardGrid);
 
@@ -21318,7 +21406,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Site Plugins Card Grid","apiVersion":2,"name":"wp-plugin-info-card/site-plugins-card-grid","category":"wp-plugin-info-card","icon":"<svg height=\'24\' viewBox=\'0 0 122.88 122.88\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\'><path fill=\'#333\' d=\'M0 0v122.88h122.88V0zm115.2 38.4H84.479V7.68H115.2zM46.08 76.8V46.08H76.8V76.8zm30.72 7.68v30.72H46.08V84.48zM38.4 76.8H7.68V46.08H38.4zm7.68-38.4V7.68H76.8V38.4zm38.399 7.68H115.2V76.8H84.479zM38.4 7.68V38.4H7.68V7.68zM7.68 84.48H38.4v30.72H7.68zm76.799 30.72V84.48H115.2v30.72z\'></path></svg>","description":"Display all your active plugins in a grid layout.","keywords":["wp plugin","site","grid","plugin","card","active"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"assetData":{"type":"array","default":[]},"uniqueId":{"type":"string","default":""},"align":{"type":"string","default":"center"},"loading":{"type":"boolean","default":true},"scheme":{"type":"string","default":"default"},"layout":{"type":"string","default":"card"},"preview":{"type":"boolean","default":false},"defaultsApplied":{"type":"boolean","default":false},"sortby":{"type":"string","default":"none"},"sort":{"type":"string","default":"ASC"},"cols":{"type":"number","default":2},"colGap":{"type":"number","default":20},"rowGap":{"type":"number","default":20}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":false,"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"]}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Site Plugins Card Grid","apiVersion":2,"name":"wp-plugin-info-card/site-plugins-card-grid","category":"wp-plugin-info-card","icon":"<svg height=\'24\' viewBox=\'0 0 122.88 122.88\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\'><path fill=\'#333\' d=\'M0 0v122.88h122.88V0zm115.2 38.4H84.479V7.68H115.2zM46.08 76.8V46.08H76.8V76.8zm30.72 7.68v30.72H46.08V84.48zM38.4 76.8H7.68V46.08H38.4zm7.68-38.4V7.68H76.8V38.4zm38.399 7.68H115.2V76.8H84.479zM38.4 7.68V38.4H7.68V7.68zM7.68 84.48H38.4v30.72H7.68zm76.799 30.72V84.48H115.2v30.72z\'></path></svg>","description":"Display all your active plugins in a grid layout.","keywords":["wp plugin","site","grid","plugin","card","active"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"assetData":{"type":"array","default":[]},"uniqueId":{"type":"string","default":""},"align":{"type":"string","default":"center"},"loading":{"type":"boolean","default":true},"scheme":{"type":"string","default":"default"},"layout":{"type":"string","default":"card"},"preview":{"type":"boolean","default":false},"defaultsApplied":{"type":"boolean","default":false},"sortby":{"type":"string","default":"none"},"sort":{"type":"string","default":"ASC"},"cols":{"type":"number","default":2},"colGap":{"type":"number","default":20},"rowGap":{"type":"number","default":20},"itemSlugs":{"type":"object","default":{}}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":false,"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"]}');
 
 /***/ })
 

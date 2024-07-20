@@ -1520,17 +1520,17 @@ class Shortcodes {
 	public static function shortcode_active_site_plugins_function( $atts, $content = '' ) {
 
 		$options    = Options::get_options();
-		$attributes = shortcode_atts(
-			array(
-				'id'      => 'wppic-plugin-site-grid',
-				'cols'    => 2,
-				'col_gap' => 20,
-				'row_gap' => 20,
-				'scheme'  => '',
-				'layout'  => '',
-			),
+		$attributes = wp_parse_args(
 			$atts,
-			'wppic_default'
+			array(
+				'id'        => 'wppic-plugin-site-grid',
+				'cols'      => 2,
+				'col_gap'   => 20,
+				'row_gap'   => 20,
+				'scheme'    => '',
+				'layout'    => '',
+				'itemSlugs' => array(),
+			)
 		);
 
 		// Color scheme.
@@ -1567,11 +1567,16 @@ class Shortcodes {
 			$content = ob_get_clean();
 			foreach ( $plugins_on_org as $plugin ) {
 				$atts = array(
-					'slug'   => $plugin['slug'],
-					'layout' => $attributes['layout'],
-					'scheme' => $attributes['scheme'],
-					'type'   => 'plugin',
+					'slug'      => $plugin['slug'],
+					'layout'    => $attributes['layout'],
+					'scheme'    => $attributes['scheme'],
+					'type'      => 'plugin',
+					'itemSlugs' => $attributes['itemSlugs'],
 				);
+				if ( isset( $attributes[ $plugin['slug'] ] ) ) {
+					// Add to itemSlugs.
+					$atts['itemSlugs'][ $plugin['slug'] ] = $attributes[ $plugin['slug'] ];
+				}
 				// Strip safe CSS.
 				add_filter( 'safe_style_css', array( static::class, 'safe_css' ) );
 				add_filter( 'safecss_filter_attr_allow_css', '__return_true' );
