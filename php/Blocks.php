@@ -307,6 +307,27 @@ class Blocks {
 				'render_callback' => array( $this, 'site_plugin_screenshots' ),
 			)
 		);
+		register_block_type(
+			Functions::get_plugin_dir( '/build/blocks/ProfileHighlightsAuthorAvatar/block.json' ),
+			array(
+				'render_callback' => array( $this, 'profile_highlights_author_avatar' ),
+			)
+		);
+	}
+
+	public function profile_highlights_author_avatar( $attributes ) {
+		if ( is_admin() ) {
+			return;
+		}
+		$attributes = Functions::sanitize_array_recursive( $attributes );
+
+		// Convert to underline case.
+		$new_atts = array();
+		foreach ( $attributes as $key => $value ) {
+			$new_atts[ Functions::to_underlines( $key ) ] = $value;
+		}
+
+		return '';
 	}
 
 	/**

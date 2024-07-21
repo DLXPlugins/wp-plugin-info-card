@@ -530,6 +530,82 @@ class Functions {
 	}
 
 	/**
+	 * Retrieve an author's .org profile data.
+	 *
+	 * @param string $org_username The author's WordPress.org username.
+	 *
+	 * @return array Author profile data.
+	 */
+	public static function get_org_profile_data( $org_username ) {
+		$org_username = sanitize_text_field( $org_username );
+		// Get REST endpoint.
+		$profiles_rest_endpoint = sprintf(
+			'https://profiles.wordpress.org/wp-json/wporg/v1/users/%s',
+			sanitize_text_field( $org_username )
+		);
+		$scrape_url = sprintf(
+			'https://profiles.wordpress.org/%s',
+			sanitize_text_field( $org_username )
+		);
+
+		// Let's get .org data first.
+		// $org_profile_data = \get_page_by_path( $org_username, OBJECT, 'wppic_author_profiles' );
+		// if ( $org_profile_data ) {
+		// 	// Let's see if we need to update the data.
+		// 	$last_updated = get_post_meta( $org_profile_data->ID, '_last_updated', true );
+
+		// 	// Data is cached for a week. If time has elapsed, try to get new data.
+
+		// }
+
+		$rest_args = array(
+			'headers' => array(
+				'Accept' => 'application/json',
+				'User-Agent' => 'WP Plugin Info Card',
+			),
+		);
+
+		// Get the data from the REST API.
+		$response = wp_remote_get( $profiles_rest_endpoint, $rest_args );
+		if ( is_wp_error( $response ) ) {
+			\wp_send_json_error( $response->get_error_message() );
+		}
+
+		// Get org profile from REST.
+		$org_profile_data = json_decode( wp_remote_retrieve_body( $response ), true );
+		$author_name = $org_profile_data['name'] ?? '';
+		$author_bio = $org_profile_data['description'] ?? '';
+		$author_avatar = $org_profile_data['avatar_urls']['96'] ?? '';
+
+		// Get org profile from scraping.
+		$scrape_args = array(
+			'headers' => array(
+				'Accept' => 'text/html',
+				'User-Agent' => 'WP Plugin Info Card',
+			),
+		);
+		$scrape_response = wp_remote_get( $scrape_url, $scrape_args );
+		if ( is_wp_error( $scrape_response ) ) {
+			\wp_send_json_error( $scrape_response->get_error_message() );
+		}
+
+		// Get body and begin parsing.
+		$scrape_body = wp_remote_retrieve_body( $scrape_response );
+		$scrape_tags = new \DOMDocument();
+		$scrape_tags->loadHTML( $scrape_body );
+
+		// Get member since data with ID user-member-since.
+		$member_since = '';
+		$member_since_element = $scrape_tags->getElementById( 'user-member-since' );
+		if ( $member_since_element ) {
+			// Get internal <span> tag, which contains member data.
+			$member_since = $member_since_element->getElementsByTagName( 'span' )[0]->textContent;
+		}
+
+		\wp_send_json_success();
+	}
+
+	/**
 	 * Returns appropriate html for KSES.
 	 *
 	 * @param bool $svg         Whether to add SVG data to KSES.

@@ -29,14 +29,16 @@ class Shortcodes {
 		add_shortcode( 'wp-pic-plugin-screenshots', array( static::class, 'shortcode_plugin_screenshots_info_card' ) );
 		add_action( 'wp_ajax_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
 		add_action( 'wp_ajax_nopriv_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
-		add_action( 'init', array( static::class, 'register_screenshots_presets_post_type' ) );
+		add_action( 'init', array( static::class, 'register_post_types' ) );
 		return $self;
 	}
 
 	/**
-	 * Register plugin screenshots post type.
+	 * Register post types for the plugin.
 	 */
-	public static function register_screenshots_presets_post_type() {
+	public static function register_post_types() {
+
+		// Post type for presets.
 		$labels = array(
 			'name'               => __( 'Presets', 'wp-plugin-info-card' ),
 			'singular_name'      => __( 'Presets', 'wp-plugin-info-card' ),
@@ -54,18 +56,47 @@ class Shortcodes {
 		);
 
 		$args = array(
-			'labels'                  => $labels,
-			'public'                  => false,
-			'publicly_queryable'      => false,
-			'show_ui'                 => false,
-			'show_in_menu'            => false,
-			'query_var'               => false,
-			'rewrite'                 => false,
-			'dlx_photo_block_archive' => false,
-			'hierarchical'            => false,
+			'labels'             => $labels,
+			'public'             => false,
+			'publicly_queryable' => false,
+			'show_ui'            => false,
+			'show_in_menu'       => false,
+			'query_var'          => false,
+			'rewrite'            => false,
+			'hierarchical'       => false,
 		);
 
 		register_post_type( 'wppic_screen_presets', $args );
+
+		// Post type for author profiles.
+		$labels = array(
+			'name'               => __( 'Profiles', 'wp-plugin-info-card' ),
+			'singular_name'      => __( 'Profile', 'wp-plugin-info-card' ),
+			'add_new'            => __( 'Add New', 'wp-plugin-info-card' ),
+			'add_new_item'       => __( 'Add New Profile', 'wp-plugin-info-card' ),
+			'edit_item'          => __( 'Edit Profile', 'wp-plugin-info-card' ),
+			'new_item'           => __( 'New Profile', 'wp-plugin-info-card' ),
+			'all_items'          => __( 'All Profiles', 'wp-plugin-info-card' ),
+			'view_item'          => __( 'View Profile', 'wp-plugin-info-card' ),
+			'search_items'       => __( 'Search Profiles', 'wp-plugin-info-card' ),
+			'not_found'          => __( 'No Profiles found', 'wp-plugin-info-card' ),
+			'not_found_in_trash' => __( 'No Profiles found in Trash', 'wp-plugin-info-card' ),
+			'parent_item_colon'  => '',
+			'menu_name'          => __( 'Profiles', 'wp-plugin-info-card' ),
+		);
+
+		$args = array(
+			'labels'             => $labels,
+			'public'             => false,
+			'publicly_queryable' => false,
+			'show_ui'            => false,
+			'show_in_menu'       => false,
+			'query_var'          => false,
+			'rewrite'            => false,
+			'hierarchical'       => false,
+		);
+
+		register_post_type( 'wppic_author_profiles', $args );
 	}
 
 	/**
@@ -168,6 +199,29 @@ class Shortcodes {
 				'permission_callback' => array( $this, 'rest_check_permissions' ),
 			)
 		);
+
+		register_rest_route(
+			'wppic/v2',
+			'/get_profile_data',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'get_profile_data' ),
+				'permission_callback' => array( $this, 'rest_check_permissions' ),
+			)
+		);
+	}
+
+	/**
+	 * Get .org username profile data for return.
+	 *
+	 * @param array $request Request data.
+	 */
+	public function get_profile_data( $request ) {
+		// Get username.
+		$username = isset( $request['author'] ) ? sanitize_text_field( $request['author'] ) : '';
+
+		// Get user profile data from .org.
+		$user_data = Functions::get_org_profile_data( $username );
 	}
 
 	/**
@@ -1166,7 +1220,7 @@ class Shortcodes {
 				'color_star'                               => '#FF9529',
 				'color_meta_background'                    => '#000000',
 				'color_meta_text'                          => '#FFFFFF',
-				'skip_animated_gifs'					   => false,
+				'skip_animated_gifs'                       => false,
 			),
 			$attributes,
 			'wp-pic-plugin-screenshots'

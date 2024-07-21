@@ -1,138 +1,54 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"title": "WP Plugin Info Card Query",
+	"title": "WP Profile Highlights Author Avatar Section",
 	"apiVersion": 3,
-	"name": "wp-plugin-info-card/wp-plugin-info-card-query",
-	"category": "wp-plugin-info-card",
+	"name": "wp-plugin-info-card/profile-highlights-author-avatar",
+	"category": "wp-plugin-info-card-highlights",
 	"icon": "<svg height='24' width='24' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='#333' d='M256 140c-63.962 0-116 52.038-116 116s52.038 116 116 116 116-52.038 116-116-52.038-116-116-116zm-60.25 59.875h86.635l-4.578-5.045c-5.566-6.135-5.106-15.622 1.029-21.188 6.136-5.567 15.621-5.106 21.188 1.029l27.333 30.125c5.188 5.718 5.188 14.441 0 20.159l-27.333 30.125a14.958 14.958 0 0 1-11.113 4.92 14.945 14.945 0 0 1-10.075-3.891c-6.135-5.567-6.596-15.053-1.029-21.188l4.578-5.045H195.75c-8.284 0-15-6.716-15-15s6.716-15.001 15-15.001zm120.5 112.25h-86.635l4.578 5.045c5.566 6.135 5.106 15.622-1.029 21.188a14.948 14.948 0 0 1-10.075 3.891 14.964 14.964 0 0 1-11.113-4.92l-27.333-30.125c-5.188-5.718-5.188-14.441 0-20.159l27.333-30.125c5.567-6.135 15.054-6.596 21.188-1.029 6.135 5.567 6.596 15.053 1.029 21.188l-4.578 5.045h86.635c8.284 0 15 6.716 15 15s-6.716 15.001-15 15.001z'></path><path fill='#333' d='M497 199.92h-33.479a212.647 212.647 0 0 0-21.142-50.991l23.688-23.688c5.858-5.858 5.858-15.355 0-21.213l-58.095-58.095c-5.857-5.858-15.355-5.858-21.213 0L363.07 69.621a212.647 212.647 0 0 0-50.991-21.142V15c0-8.284-6.716-15-15-15H214.92c-8.284 0-15 6.716-15 15v33.479a212.664 212.664 0 0 0-50.991 21.142l-23.688-23.688c-5.857-5.858-15.355-5.858-21.213 0l-58.095 58.095c-5.858 5.858-5.858 15.355 0 21.213l23.688 23.688a212.647 212.647 0 0 0-21.142 50.991H15c-8.284 0-15 6.716-15 15v82.159c0 8.284 6.716 15 15 15h33.479a212.664 212.664 0 0 0 21.142 50.991l-23.688 23.688c-5.858 5.858-5.858 15.355 0 21.213l58.095 58.095c5.857 5.858 15.355 5.858 21.213 0l23.688-23.688a212.633 212.633 0 0 0 50.991 21.143V497c0 8.284 6.716 15 15 15h82.159c8.284 0 15-6.716 15-15v-33.479a212.568 212.568 0 0 0 50.991-21.143l23.688 23.688c5.857 5.858 15.355 5.858 21.213 0l58.095-58.095c5.858-5.858 5.858-15.355 0-21.213l-23.688-23.688a212.647 212.647 0 0 0 21.142-50.991H497c8.284 0 15-6.716 15-15V214.92c0-8.284-6.716-15-15-15zM256 402c-80.505 0-146-65.495-146-146s65.495-146 146-146 146 65.495 146 146-65.495 146-146 146z'></path></svg>",
-	"description": "Query and display a list of plugins or themes in a beautiful card format.",
-	"keywords": ["wp plugin", "plugin", "card", "theme", "query"],
+	"description": "Display your WordPress.org author avatar in a section format.",
+	"keywords": ["highlight", "wp plugin", "profile", "avatar", "author"],
 	"version": "1.0.0",
 	"textdomain": "wp-plugin-info-card",
 	"attributes": {
-		"assetData": {
-			"type": "array",
-			"default": []
-		},
 		"uniqueId": {
-			"type": "string",
-			"default": ""
-		},
-		"search": {
-			"type": "string",
-			"default": ""
-		},
-		"tag": {
-			"type": "string",
-			"default": ""
-		},
-		"author": {
-			"type": "string",
-			"default": ""
-		},
-		"user": {
-			"type": "string",
-			"default": ""
-		},
-		"browse": {
-			"type": "string",
-			"default": ""
-		},
-		"per_page": {
-			"type": "string",
-			"default": "8"
-		},
-		"cols" : {
-			"type": "string",
-			"default": 2
-		},
-		"colGap": {
-			"type": "number",
-			"default": 20
-		},
-		"rowGap": {
-			"type": "number",
-			"default": 20
-		},
-		"type": {
-			"type": "string",
-			"default": "plugin"
-		},
-		"slug": {
-			"type": "string",
-			"default": ""
-		},
-		"loading": {
-			"type": "boolean",
-			"default": false
-		},
-		"html": {
-			"type": "string",
-			"default": ""
-		},
-		"align": {
-			"type": "string",
-			"default": "full"
-		},
-		"image": {
-			"type": "string",
-			"default": ""
-		},
-		"containerid": {
-			"type": "string",
-			"default": ""
-		},
-		"margin": {
-			"type": "string",
-			"default": ""
-		},
-		"clear": {
-			"type": "string",
-			"default": "none"
-		},
-		"expiration": {
-			"type": "number",
-			"default": 0
-		},
-		"ajax": {
-			"type": "string",
-			"default": "false"
-		},
-		"scheme": {
-			"type": "string",
-			"default": "default"
-		},
-		"layout": {
-			"type": "string",
-			"default": "card"
-		},
-		"custom": {
-			"type": "string",
-			"default": ""
-		},
-		"width": {
 			"type": "string",
 			"default": ""
 		},
 		"preview": {
 			"type": "boolean",
-			"default": false
+			"default" : false
 		},
-		"defaultsApplied": {
+		"authorSlug": {
+			"type": "string",
+			"default": ""
+		},
+		"authorId": {
+			"type": "number",
+			"default": 0
+		},
+		"avatarSize": {
+			"type": "string",
+			"default": "large"
+		},
+		"avatarId": {
+			"type": "number",
+			"default": 0
+		},
+		"avatarUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"showAvatar": {
 			"type": "boolean",
-			"default": false
+			"default": true
 		},
-		"sortby": {
-			"type": "string",
-			"default": "none"
+		"showName": {
+			"type": "boolean",
+			"default": true
 		},
-		"sort": {
-			"type": "string",
-			"default": "ASC"
-		},
-		"itemSlugs": {
-			"type": "object",
-			"default": {}
+		"showWebsite": {
+			"type": "boolean",
+			"default": true
 		}
 	},
 	"example": {
