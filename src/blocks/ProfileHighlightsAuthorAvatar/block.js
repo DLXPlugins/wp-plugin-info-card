@@ -1,13 +1,13 @@
 //  Import CSS.
 import edit from './edit';
-import GearIcon from '../components/GearIcon';
+import AvatarIcon from '../components/AvatarIcon';
 
 import metadata from './block.json';
 
 const { registerBlockType } = wp.blocks;
 registerBlockType( metadata, {
 	icon: (
-		<GearIcon fill="#333" />
+		<AvatarIcon fill="#333" />
 	),
 	edit,
 	save() {

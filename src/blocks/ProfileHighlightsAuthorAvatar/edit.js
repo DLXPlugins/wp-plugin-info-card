@@ -60,12 +60,8 @@ const ProfileHighlightsAuthorAvatar = ( props ) => {
 	const [ loading, setLoading ] = useState( false );
 	const [ cardLoading, setCardLoading ] = useState( false );
 	const [ noData, setNoData ] = useState( false );
-	const [ searchBy, setSearchBy ] = useState( attributes.searchBy ?? 'general' );
-	const [ searchValue, setSearchValue ] = useState( '' );
-	const [ currentScheme, setCurrentScheme ] = useState( attributes.scheme );
-	const [ currentLayout, setCurrentLayout ] = useState( attributes.layout );
-	const [ itemSlugs, setItemSlugs ] = useState( attributes.itemSlugs );
 	const [ authorSlugSearchValue, setAuthorSlugSearchValue ] = useState( '' );
+	const [ authorError, setAuthorError ] = useState( false );
 
 
 	const {
@@ -94,7 +90,25 @@ const ProfileHighlightsAuthorAvatar = ( props ) => {
 				},
 			)
 			.then( ( response ) => {
-				console.log( response );
+				const { success, data } = response.data;
+				if ( success ) {
+					const {
+						author_name,
+						author_avatar,
+						member_website
+					} = data;
+					setAttributes( {
+						authorSlug: authorSlugSearchValue,
+						avatarUrl: author_avatar,
+						authorWebsite: member_website,
+						authorName: author_name,
+					} );
+				} else {
+					setAuthorError( true );
+					setNoData( true );
+				}
+			} ).then( () => {
+				setCardLoading( false );
 			} );
 	};
 
@@ -113,10 +127,26 @@ const ProfileHighlightsAuthorAvatar = ( props ) => {
 		</InspectorControls>
 	);
 
+	if ( cardLoading ) {
+		return (
+			<>
+				<div className="wppic-loading-placeholder">
+					<div className="wppic-loading">
+						<Logo size="45" />
+						<br />
+						<div className="wppic-spinner">
+							<Spinner />
+						</div>
+					</div>
+				</div>
+			</>
+		) }
+	}
+
 	const block = (
 		<>
 			<>
-				{ ( '' === authorSlug && 0 === authorId ) && (
+				{ ( '' === authorSlug && ! cardLoading ) && (
 					<div className="wppic-query-block wppic-query-block-panel">
 						<div className="wppic-block-svg">
 							<Logo size="75" />
@@ -150,19 +180,6 @@ const ProfileHighlightsAuthorAvatar = ( props ) => {
 							</Button>
 						</div>
 					</div>
-				) }
-				{ cardLoading && (
-					<>
-						<div className="wppic-loading-placeholder">
-							<div className="wppic-loading">
-								<Logo size="45" />
-								<br />
-								<div className="wppic-spinner">
-									<Spinner />
-								</div>
-							</div>
-						</div>
-					</>
 				) }
 			</>
 		</>

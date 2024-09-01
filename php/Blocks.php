@@ -464,6 +464,10 @@ class Blocks {
 					'slug'  => 'wp-plugin-info-card',
 					'title' => __( 'WP Plugin Info Card', 'wp-plugin-info-card' ),
 				),
+				array(
+					'slug'  => 'wp-plugin-info-card-highlights',
+					'title' => __( 'WordPress.org Profile Highlights', 'wp-plugin-info-card' ),
+				),
 			)
 		);
 	}

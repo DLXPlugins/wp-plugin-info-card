@@ -1,6 +1,6 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"title": "WP Profile Highlights Author Avatar Section",
+	"title": "Author Avatar Section",
 	"apiVersion": 3,
 	"name": "wp-plugin-info-card/profile-highlights-author-avatar",
 	"category": "wp-plugin-info-card-highlights",
@@ -22,17 +22,13 @@
 			"type": "string",
 			"default": ""
 		},
-		"authorId": {
-			"type": "number",
-			"default": 0
-		},
-		"avatarSize": {
+		"authorWebsite": {
 			"type": "string",
-			"default": "large"
+			"default": ""
 		},
-		"avatarId": {
-			"type": "number",
-			"default": 0
+		"authorName": {
+			"type": "string",
+			"default": ""
 		},
 		"avatarUrl": {
 			"type": "string",

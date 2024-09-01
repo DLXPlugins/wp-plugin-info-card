@@ -17,6 +17,7 @@ import './blocks/ProfileHighlightsAuthorAvatar/block';
 ( function() {
 	const InfoCardSVG = <InfoCardIcon fill="#DB3939" />;
 	wp.blocks.updateCategory( 'wp-plugin-info-card', { icon: InfoCardSVG } );
+	wp.blocks.updateCategory( 'wp-plugin-info-card-highlights', { icon: InfoCardSVG } );
 }() );
 
 const WPPicCommands = () => {

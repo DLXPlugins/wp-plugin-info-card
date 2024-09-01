@@ -4913,7 +4913,7 @@ var SlugEntryScreen = function SlugEntryScreen(a) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edit */ "./src/blocks/ProfileHighlightsAuthorAvatar/edit.js");
-/* harmony import */ var _components_GearIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/GearIcon */ "./src/blocks/components/GearIcon.js");
+/* harmony import */ var _components_AvatarIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/AvatarIcon */ "./src/blocks/components/AvatarIcon.js");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./block.json */ "./src/blocks/ProfileHighlightsAuthorAvatar/block.json");
 //  Import CSS.
 
@@ -4921,7 +4921,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var registerBlockType = wp.blocks.registerBlockType;
 registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_2__, {
-  icon: /*#__PURE__*/React.createElement(_components_GearIcon__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  icon: /*#__PURE__*/React.createElement(_components_AvatarIcon__WEBPACK_IMPORTED_MODULE_1__["default"], {
     fill: "#333"
   }),
   edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -4936,209 +4936,9 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_2__, {
 /*!**********************************************************!*\
   !*** ./src/blocks/ProfileHighlightsAuthorAvatar/edit.js ***!
   \**********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _templates_PluginFlex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../templates/PluginFlex */ "./src/blocks/templates/PluginFlex.js");
-/* harmony import */ var _templates_PluginCard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../templates/PluginCard */ "./src/blocks/templates/PluginCard.js");
-/* harmony import */ var _templates_PluginLarge__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../templates/PluginLarge */ "./src/blocks/templates/PluginLarge.js");
-/* harmony import */ var _templates_PluginWordPress__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../templates/PluginWordPress */ "./src/blocks/templates/PluginWordPress.js");
-/* harmony import */ var _templates_ThemeFlex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../templates/ThemeFlex */ "./src/blocks/templates/ThemeFlex.js");
-/* harmony import */ var _templates_ThemeWordPress__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../templates/ThemeWordPress */ "./src/blocks/templates/ThemeWordPress.js");
-/* harmony import */ var _templates_ThemeLarge__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../templates/ThemeLarge */ "./src/blocks/templates/ThemeLarge.js");
-/* harmony import */ var _templates_ThemeCard__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../templates/ThemeCard */ "./src/blocks/templates/ThemeCard.js");
-/* harmony import */ var _templates_PluginRatingsCard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../templates/PluginRatingsCard */ "./src/blocks/templates/PluginRatingsCard.js");
-/* harmony import */ var _templates_ThemeRatingsCard__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../templates/ThemeRatingsCard */ "./src/blocks/templates/ThemeRatingsCard.js");
-/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../Logo */ "./src/blocks/Logo.js");
-/* harmony import */ var _components_Numbers__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/Numbers */ "./src/blocks/components/Numbers.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_15__);
-function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (a) { for (var b = 1; b < arguments.length; b++) { var c = arguments[b]; for (var d in c) ({}).hasOwnProperty.call(c, d) && (a[d] = c[d]); } return a; }, _extends.apply(null, arguments); }
-function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) return _arrayLikeToArray(b, c); var a = {}.toString.call(b).slice(8, -1); return "Object" === a && b.constructor && (a = b.constructor.name), "Map" === a || "Set" === a ? Array.from(b) : "Arguments" === a || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a) ? _arrayLikeToArray(b, c) : void 0; } }
-function _arrayLikeToArray(b, c) { (null == c || c > b.length) && (c = b.length); for (var d = 0, f = Array(c); d < c; d++) f[d] = b[d]; return f; }
-function _iterableToArrayLimit(b, c) { var d = null == b ? null : "undefined" != typeof Symbol && b[Symbol.iterator] || b["@@iterator"]; if (null != d) { var g, h, j, k, l = [], a = !0, m = !1; try { if (j = (d = d.call(b)).next, 0 === c) { if (Object(d) !== d) return; a = !1; } else for (; !(a = (g = j.call(d)).done) && (l.push(g.value), l.length !== c); a = !0); } catch (a) { m = !0, h = a; } finally { try { if (!a && null != d["return"] && (k = d["return"](), Object(k) !== k)) return; } finally { if (m) throw h; } } return l; } }
-function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
-// @ts-nocheck
-/**
- * External dependencies
- */
-
-
-var HtmlToReactParser = (__webpack_require__(/*! html-to-react */ "./node_modules/html-to-react/index.js").Parser);
-var __ = wp.i18n.__;
-var _wp$element = wp.element,
-  useState = _wp$element.useState,
-  useEffect = _wp$element.useEffect,
-  Fragment = _wp$element.Fragment,
-  useCallback = _wp$element.useCallback;
-var _wp$components = wp.components,
-  PanelBody = _wp$components.PanelBody,
-  SelectControl = _wp$components.SelectControl,
-  Spinner = _wp$components.Spinner,
-  TextControl = _wp$components.TextControl,
-  Button = _wp$components.Button,
-  ToolbarGroup = _wp$components.ToolbarGroup,
-  ToggleControl = _wp$components.ToggleControl,
-  Notice = _wp$components.Notice,
-  TabPanel = _wp$components.TabPanel,
-  PanelRow = _wp$components.PanelRow,
-  ToolbarItem = _wp$components.ToolbarItem,
-  DropdownMenu = _wp$components.DropdownMenu,
-  MenuItemsChoice = _wp$components.MenuItemsChoice;
-
-var _wp$blockEditor = wp.blockEditor,
-  InspectorControls = _wp$blockEditor.InspectorControls,
-  BlockControls = _wp$blockEditor.BlockControls,
-  MediaUpload = _wp$blockEditor.MediaUpload,
-  AlignmentToolbar = _wp$blockEditor.AlignmentToolbar,
-  BlockAlignmentToolbar = _wp$blockEditor.BlockAlignmentToolbar,
-  useBlockProps = _wp$blockEditor.useBlockProps;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var ProfileHighlightsAuthorAvatar = function ProfileHighlightsAuthorAvatar(a) {
-  var b;
-  var c = a.attributes,
-    d = a.setAttributes;
-  var e = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__.useInstanceId)(ProfileHighlightsAuthorAvatar, 'wp-plugin-info-card-query');
-  var f = useState(false),
-    g = _slicedToArray(f, 2),
-    h = g[0],
-    i = g[1];
-  var j = useState(false),
-    k = _slicedToArray(j, 2),
-    l = k[0],
-    m = k[1];
-  var n = useState(false),
-    o = _slicedToArray(n, 2),
-    p = o[0],
-    q = o[1];
-  var r = useState((b = c.searchBy) !== null && b !== void 0 ? b : 'general'),
-    s = _slicedToArray(r, 2),
-    t = s[0],
-    u = s[1];
-  var v = useState(''),
-    w = _slicedToArray(v, 2),
-    x = w[0],
-    y = w[1];
-  var z = useState(c.scheme),
-    A = _slicedToArray(z, 2),
-    B = A[0],
-    C = A[1];
-  var D = useState(c.layout),
-    E = _slicedToArray(D, 2),
-    F = E[0],
-    G = E[1];
-  var H = useState(c.itemSlugs),
-    I = _slicedToArray(H, 2),
-    J = I[0],
-    K = I[1];
-  var L = useState(''),
-    M = _slicedToArray(L, 2),
-    N = M[0],
-    O = M[1];
-  var P = c.authorSlug,
-    Q = c.avatarId,
-    R = c.preview,
-    S = c.authorId;
-  useEffect(function () {
-    d({
-      uniqueId: e
-    });
-  }, []);
-  var T = function loadProfileData() {
-    i(false);
-    m(true);
-    q(false);
-    var a = wppic.rest_url + 'wppic/v2/get_profile_data';
-    axios__WEBPACK_IMPORTED_MODULE_0___default().get(a + "?author=".concat(N), {
-      headers: {
-        'X-WP-Nonce': wppic.rest_nonce
-      }
-    }).then(function (a) {
-      console.log(a);
-    });
-  };
-  var U = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
-    title: __('Query Options', 'wp-plugin-info-card')
-  }, "test"), /*#__PURE__*/React.createElement(PanelBody, {
-    title: __('WP Plugin Info Card', 'wp-plugin-info-card')
-  }, "test"));
-  var V = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(React.Fragment, null, '' === P && 0 === S && /*#__PURE__*/React.createElement("div", {
-    className: "wppic-query-block wppic-query-block-panel"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "wppic-block-svg"
-  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_13__["default"], {
-    size: "75"
-  })), /*#__PURE__*/React.createElement(TextControl, {
-    label: __('Enter a WordPress.org Username Slug', 'wp-plugin-info-card'),
-    value: N,
-    onChange: function onChange(a) {
-      O(a);
-    },
-    placeholder: __('Enter a .org username…', 'wp-plugin-info-card')
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "wp-pic-gutenberg-button"
-  }, /*#__PURE__*/React.createElement(Button, {
-    iconSize: 20,
-    icon: /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_13__["default"], {
-      size: "25"
-    }),
-    isSecondary: true,
-    id: "wppic-input-submit",
-    onClick: function onClick(a) {
-      m(true);
-      T();
-    }
-  }, __('Get Author Information', 'wp-plugin-info-card')))), l && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "wppic-loading-placeholder"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "wppic-loading"
-  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_13__["default"], {
-    size: "45"
-  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
-    className: "wppic-spinner"
-  }, /*#__PURE__*/React.createElement(Spinner, null)))))));
-  var W = useBlockProps({
-    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()("profile-highlights-author-avatar")
-  });
-  if (R) {
-    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("img", {
-      src: wppic.query_preview,
-      style: {
-        width: '100%',
-        height: 'auto'
-      }
-    }));
-  }
-  return /*#__PURE__*/React.createElement("div", _extends({}, W, {
-    id: c.uniqueId
-  }), V);
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProfileHighlightsAuthorAvatar);
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/src/blocks/ProfileHighlightsAuthorAvatar/edit.js: 'return' outside of function. (192:2)\n\n\u001b[0m \u001b[90m 190 |\u001b[39m \t} )\u001b[33m;\u001b[39m\n \u001b[90m 191 |\u001b[39m \t\u001b[36mif\u001b[39m ( preview ) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 192 |\u001b[39m \t\t\u001b[36mreturn\u001b[39m (\n \u001b[90m     |\u001b[39m \t\t\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 193 |\u001b[39m \t\t\t\u001b[33m<\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m 194 |\u001b[39m \t\t\t\t\u001b[33m<\u001b[39m\u001b[33mimg\u001b[39m\n \u001b[90m 195 |\u001b[39m \t\t\t\t\tsrc\u001b[33m=\u001b[39m{ wppic\u001b[33m.\u001b[39mquery_preview }\u001b[0m\n    at constructor (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:351:19)\n    at JSXParserMixin.raise (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:3233:19)\n    at JSXParserMixin.parseReturnStatement (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12597:12)\n    at JSXParserMixin.parseStatementContent (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12254:21)\n    at JSXParserMixin.parseStatementLike (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12223:17)\n    at JSXParserMixin.parseStatementListItem (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12203:17)\n    at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12780:61)\n    at JSXParserMixin.parseBlockBody (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12773:10)\n    at JSXParserMixin.parseBlock (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12761:10)\n    at JSXParserMixin.parseStatementContent (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12313:21)\n    at JSXParserMixin.parseStatementLike (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12223:17)\n    at JSXParserMixin.parseStatementOrSloppyAnnexBFunctionDeclaration (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12213:17)\n    at JSXParserMixin.parseIfStatement (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12591:28)\n    at JSXParserMixin.parseStatementContent (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12252:21)\n    at JSXParserMixin.parseStatementLike (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12223:17)\n    at JSXParserMixin.parseModuleItem (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12200:17)\n    at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12780:36)\n    at JSXParserMixin.parseBlockBody (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12773:10)\n    at JSXParserMixin.parseProgram (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12100:10)\n    at JSXParserMixin.parseTopLevel (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12090:25)\n    at JSXParserMixin.parse (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:13904:10)\n    at parse (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:13946:38)\n    at parser (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/core/lib/parser/index.js:41:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)\n    at normalizeFile.next (<anonymous>)\n    at run (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/core/lib/transformation/index.js:21:50)\n    at run.next (<anonymous>)\n    at transform (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/core/lib/transform.js:22:33)\n    at transform.next (<anonymous>)\n    at step (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/gensync/index.js:261:32)\n    at /Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/gensync/index.js:273:13\n    at async.call.result.err.err (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/gensync/index.js:223:11)");
 
 /***/ }),
 
@@ -5745,6 +5545,47 @@ var SitePluginsCardGrid = function SitePluginsCardGrid(a) {
   return /*#__PURE__*/React.createElement("div", Y, $);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SitePluginsCardGrid);
+
+/***/ }),
+
+/***/ "./src/blocks/components/AvatarIcon.js":
+/*!*********************************************!*\
+  !*** ./src/blocks/components/AvatarIcon.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+ // ES6
+
+var AvatarIcon = function AvatarIcon(a) {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: a.width,
+    height: a.height,
+    "data-name": "Layer 1",
+    viewBox: "0 0 24 24"
+  }, /*#__PURE__*/React.createElement("path", {
+    fill: a.fill,
+    d: "M19 2H5C2.24 2 0 4.24 0 7v10c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5Zm-7 4c2.21 0 4 1.79 4 4s-1.79 4-4 4-4-1.79-4-4 1.79-4 4-4ZM7.64 20c-.64 0-1.02-.72-.67-1.26C8.04 17.09 9.89 16 12 16s3.97 1.09 5.03 2.74c.35.54-.03 1.26-.67 1.26H7.64Z"
+  }));
+};
+AvatarIcon.defaultProps = {
+  width: 24,
+  height: 24,
+  fill: '#333333'
+};
+AvatarIcon.propTypes = {
+  width: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().number),
+  height: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().number),
+  fill: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string)
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AvatarIcon);
 
 /***/ }),
 
@@ -21741,7 +21582,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"WP Profile Highlights Author Avatar Section","apiVersion":3,"name":"wp-plugin-info-card/profile-highlights-author-avatar","category":"wp-plugin-info-card-highlights","icon":"<svg height=\'24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 512 512\'><path fill=\'#333\' d=\'M256 140c-63.962 0-116 52.038-116 116s52.038 116 116 116 116-52.038 116-116-52.038-116-116-116zm-60.25 59.875h86.635l-4.578-5.045c-5.566-6.135-5.106-15.622 1.029-21.188 6.136-5.567 15.621-5.106 21.188 1.029l27.333 30.125c5.188 5.718 5.188 14.441 0 20.159l-27.333 30.125a14.958 14.958 0 0 1-11.113 4.92 14.945 14.945 0 0 1-10.075-3.891c-6.135-5.567-6.596-15.053-1.029-21.188l4.578-5.045H195.75c-8.284 0-15-6.716-15-15s6.716-15.001 15-15.001zm120.5 112.25h-86.635l4.578 5.045c5.566 6.135 5.106 15.622-1.029 21.188a14.948 14.948 0 0 1-10.075 3.891 14.964 14.964 0 0 1-11.113-4.92l-27.333-30.125c-5.188-5.718-5.188-14.441 0-20.159l27.333-30.125c5.567-6.135 15.054-6.596 21.188-1.029 6.135 5.567 6.596 15.053 1.029 21.188l-4.578 5.045h86.635c8.284 0 15 6.716 15 15s-6.716 15.001-15 15.001z\'></path><path fill=\'#333\' d=\'M497 199.92h-33.479a212.647 212.647 0 0 0-21.142-50.991l23.688-23.688c5.858-5.858 5.858-15.355 0-21.213l-58.095-58.095c-5.857-5.858-15.355-5.858-21.213 0L363.07 69.621a212.647 212.647 0 0 0-50.991-21.142V15c0-8.284-6.716-15-15-15H214.92c-8.284 0-15 6.716-15 15v33.479a212.664 212.664 0 0 0-50.991 21.142l-23.688-23.688c-5.857-5.858-15.355-5.858-21.213 0l-58.095 58.095c-5.858 5.858-5.858 15.355 0 21.213l23.688 23.688a212.647 212.647 0 0 0-21.142 50.991H15c-8.284 0-15 6.716-15 15v82.159c0 8.284 6.716 15 15 15h33.479a212.664 212.664 0 0 0 21.142 50.991l-23.688 23.688c-5.858 5.858-5.858 15.355 0 21.213l58.095 58.095c5.857 5.858 15.355 5.858 21.213 0l23.688-23.688a212.633 212.633 0 0 0 50.991 21.143V497c0 8.284 6.716 15 15 15h82.159c8.284 0 15-6.716 15-15v-33.479a212.568 212.568 0 0 0 50.991-21.143l23.688 23.688c5.857 5.858 15.355 5.858 21.213 0l58.095-58.095c5.858-5.858 5.858-15.355 0-21.213l-23.688-23.688a212.647 212.647 0 0 0 21.142-50.991H497c8.284 0 15-6.716 15-15V214.92c0-8.284-6.716-15-15-15zM256 402c-80.505 0-146-65.495-146-146s65.495-146 146-146 146 65.495 146 146-65.495 146-146 146z\'></path></svg>","description":"Display your WordPress.org author avatar in a section format.","keywords":["highlight","wp plugin","profile","avatar","author"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"uniqueId":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"authorSlug":{"type":"string","default":""},"authorId":{"type":"number","default":0},"avatarSize":{"type":"string","default":"large"},"avatarId":{"type":"number","default":0},"avatarUrl":{"type":"string","default":""},"showAvatar":{"type":"boolean","default":true},"showName":{"type":"boolean","default":true},"showWebsite":{"type":"boolean","default":true}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":false,"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"]}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Author Avatar Section","apiVersion":3,"name":"wp-plugin-info-card/profile-highlights-author-avatar","category":"wp-plugin-info-card-highlights","icon":"<svg height=\'24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 512 512\'><path fill=\'#333\' d=\'M256 140c-63.962 0-116 52.038-116 116s52.038 116 116 116 116-52.038 116-116-52.038-116-116-116zm-60.25 59.875h86.635l-4.578-5.045c-5.566-6.135-5.106-15.622 1.029-21.188 6.136-5.567 15.621-5.106 21.188 1.029l27.333 30.125c5.188 5.718 5.188 14.441 0 20.159l-27.333 30.125a14.958 14.958 0 0 1-11.113 4.92 14.945 14.945 0 0 1-10.075-3.891c-6.135-5.567-6.596-15.053-1.029-21.188l4.578-5.045H195.75c-8.284 0-15-6.716-15-15s6.716-15.001 15-15.001zm120.5 112.25h-86.635l4.578 5.045c5.566 6.135 5.106 15.622-1.029 21.188a14.948 14.948 0 0 1-10.075 3.891 14.964 14.964 0 0 1-11.113-4.92l-27.333-30.125c-5.188-5.718-5.188-14.441 0-20.159l27.333-30.125c5.567-6.135 15.054-6.596 21.188-1.029 6.135 5.567 6.596 15.053 1.029 21.188l-4.578 5.045h86.635c8.284 0 15 6.716 15 15s-6.716 15.001-15 15.001z\'></path><path fill=\'#333\' d=\'M497 199.92h-33.479a212.647 212.647 0 0 0-21.142-50.991l23.688-23.688c5.858-5.858 5.858-15.355 0-21.213l-58.095-58.095c-5.857-5.858-15.355-5.858-21.213 0L363.07 69.621a212.647 212.647 0 0 0-50.991-21.142V15c0-8.284-6.716-15-15-15H214.92c-8.284 0-15 6.716-15 15v33.479a212.664 212.664 0 0 0-50.991 21.142l-23.688-23.688c-5.857-5.858-15.355-5.858-21.213 0l-58.095 58.095c-5.858 5.858-5.858 15.355 0 21.213l23.688 23.688a212.647 212.647 0 0 0-21.142 50.991H15c-8.284 0-15 6.716-15 15v82.159c0 8.284 6.716 15 15 15h33.479a212.664 212.664 0 0 0 21.142 50.991l-23.688 23.688c-5.858 5.858-5.858 15.355 0 21.213l58.095 58.095c5.857 5.858 15.355 5.858 21.213 0l23.688-23.688a212.633 212.633 0 0 0 50.991 21.143V497c0 8.284 6.716 15 15 15h82.159c8.284 0 15-6.716 15-15v-33.479a212.568 212.568 0 0 0 50.991-21.143l23.688 23.688c5.857 5.858 15.355 5.858 21.213 0l58.095-58.095c5.858-5.858 5.858-15.355 0-21.213l-23.688-23.688a212.647 212.647 0 0 0 21.142-50.991H497c8.284 0 15-6.716 15-15V214.92c0-8.284-6.716-15-15-15zM256 402c-80.505 0-146-65.495-146-146s65.495-146 146-146 146 65.495 146 146-65.495 146-146 146z\'></path></svg>","description":"Display your WordPress.org author avatar in a section format.","keywords":["highlight","wp plugin","profile","avatar","author"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"uniqueId":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"authorSlug":{"type":"string","default":""},"authorWebsite":{"type":"string","default":""},"authorName":{"type":"string","default":""},"avatarUrl":{"type":"string","default":""},"showAvatar":{"type":"boolean","default":true},"showName":{"type":"boolean","default":true},"showWebsite":{"type":"boolean","default":true}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":false,"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"]}');
 
 /***/ }),
 
@@ -21886,6 +21727,9 @@ function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
     fill: "#DB3939"
   });
   wp.blocks.updateCategory('wp-plugin-info-card', {
+    icon: a
+  });
+  wp.blocks.updateCategory('wp-plugin-info-card-highlights', {
     icon: a
   });
 })();

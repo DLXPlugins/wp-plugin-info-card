@@ -220,8 +220,21 @@ class Shortcodes {
 		// Get username.
 		$username = isset( $request['author'] ) ? sanitize_text_field( $request['author'] ) : '';
 
+		// If no username, return error.
+		if ( empty( $username ) ) {
+			wp_send_json_error( array( 'message' => 'No username provided' ) );
+		}
+
 		// Get user profile data from .org.
 		$user_data = Functions::get_org_profile_data( $username );
+
+		// If no error, return data.
+		if ( ! is_wp_error( $user_data ) ) {
+			wp_send_json_success( $user_data );
+		}
+
+		// Return error if no data found.
+		wp_send_json_error( array( 'message' => 'No data found' ) );
 	}
 
 	/**
