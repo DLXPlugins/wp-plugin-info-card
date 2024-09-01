@@ -37,20 +37,11 @@ const {
 	useBlockProps,
 } = wp.blockEditor;
 
-import PluginFlex from '../templates/PluginFlex';
-import PluginCard from '../templates/PluginCard';
-import PluginLarge from '../templates/PluginLarge';
-import PluginWordPress from '../templates/PluginWordPress';
-import ThemeFlex from '../templates/ThemeFlex';
-import ThemeWordPress from '../templates/ThemeWordPress';
-import ThemeLarge from '../templates/ThemeLarge';
-import ThemeCard from '../templates/ThemeCard';
-import PluginRatingsCard from '../templates/PluginRatingsCard';
-import ThemeRatingsCard from '../templates/ThemeRatingsCard';
 import Logo from '../Logo';
 import { Radio } from 'lucide-react';
 import NumbersComponent from '../components/Numbers';
 import { set, uniqueId } from 'lodash';
+import OrgProfile from '../components/OrgProfile';
 
 const ProfileHighlightsAuthorAvatar = ( props ) => {
 	const { attributes, setAttributes } = props;
@@ -66,9 +57,13 @@ const ProfileHighlightsAuthorAvatar = ( props ) => {
 
 	const {
 		authorSlug,
-		avatarId,
+		avatarUrl,
 		preview,
-		authorId,
+		authorName,
+		authorWebsite,
+		showAvatar,
+		showName,
+		showWebsite,
 	} = attributes;
 
 	useEffect( () => {
@@ -127,59 +122,38 @@ const ProfileHighlightsAuthorAvatar = ( props ) => {
 		</InspectorControls>
 	);
 
-	if ( cardLoading ) {
-		return (
-			<>
-				<div className="wppic-loading-placeholder">
-					<div className="wppic-loading">
-						<Logo size="45" />
-						<br />
-						<div className="wppic-spinner">
-							<Spinner />
-						</div>
-					</div>
-				</div>
-			</>
-		) }
-	}
-
 	const block = (
 		<>
 			<>
-				{ ( '' === authorSlug && ! cardLoading ) && (
-					<div className="wppic-query-block wppic-query-block-panel">
-						<div className="wppic-block-svg">
-							<Logo size="75" />
-						</div>
-						<TextControl
-							label={ __(
-								'Enter a WordPress.org Username Slug',
-								'wp-plugin-info-card',
-							) }
-							value={ authorSlugSearchValue }
-							onChange={ ( value ) => {
-								setAuthorSlugSearchValue( value );
+				{ ( '' === authorSlug ) && (
+					<>
+						<OrgProfile
+							profileLoaded={ ( slug, data ) => {
+								console.log( data );
+								const {
+									author_name,
+									author_avatar,
+									member_website
+								} = data;
+								setAttributes( {
+									authorSlug: slug,
+									avatarUrl: author_avatar,
+									authorWebsite: member_website,
+									authorName: author_name,
+								} );
 							} }
-							placeholder={ __( 'Enter a .org username…', 'wp-plugin-info-card' ) }
 						/>
-						<div className="wp-pic-gutenberg-button">
-							<Button
-								iconSize={ 20 }
-								icon={ <Logo size="25" /> }
-								isSecondary
-								id="wppic-input-submit"
-								onClick={ ( event ) => {
-									setCardLoading( true );
-									loadProfileData();
-								} }
-							>
-								{ __(
-									'Get Author Information',
-									'wp-plugin-info-card',
-								) }
-							</Button>
+					</>
+				) }
+				{ ( authorSlug ) && (
+					<>
+						<div className="wppic-author-avatar">
+							<img
+								src={ avatarUrl }
+								alt={ authorName }
+							/>
 						</div>
-					</div>
+					</>
 				) }
 			</>
 		</>

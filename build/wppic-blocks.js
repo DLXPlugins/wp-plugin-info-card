@@ -4936,9 +4936,180 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_2__, {
 /*!**********************************************************!*\
   !*** ./src/blocks/ProfileHighlightsAuthorAvatar/edit.js ***!
   \**********************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/src/blocks/ProfileHighlightsAuthorAvatar/edit.js: 'return' outside of function. (192:2)\n\n\u001b[0m \u001b[90m 190 |\u001b[39m \t} )\u001b[33m;\u001b[39m\n \u001b[90m 191 |\u001b[39m \t\u001b[36mif\u001b[39m ( preview ) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 192 |\u001b[39m \t\t\u001b[36mreturn\u001b[39m (\n \u001b[90m     |\u001b[39m \t\t\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 193 |\u001b[39m \t\t\t\u001b[33m<\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m 194 |\u001b[39m \t\t\t\t\u001b[33m<\u001b[39m\u001b[33mimg\u001b[39m\n \u001b[90m 195 |\u001b[39m \t\t\t\t\tsrc\u001b[33m=\u001b[39m{ wppic\u001b[33m.\u001b[39mquery_preview }\u001b[0m\n    at constructor (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:351:19)\n    at JSXParserMixin.raise (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:3233:19)\n    at JSXParserMixin.parseReturnStatement (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12597:12)\n    at JSXParserMixin.parseStatementContent (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12254:21)\n    at JSXParserMixin.parseStatementLike (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12223:17)\n    at JSXParserMixin.parseStatementListItem (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12203:17)\n    at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12780:61)\n    at JSXParserMixin.parseBlockBody (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12773:10)\n    at JSXParserMixin.parseBlock (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12761:10)\n    at JSXParserMixin.parseStatementContent (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12313:21)\n    at JSXParserMixin.parseStatementLike (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12223:17)\n    at JSXParserMixin.parseStatementOrSloppyAnnexBFunctionDeclaration (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12213:17)\n    at JSXParserMixin.parseIfStatement (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12591:28)\n    at JSXParserMixin.parseStatementContent (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12252:21)\n    at JSXParserMixin.parseStatementLike (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12223:17)\n    at JSXParserMixin.parseModuleItem (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12200:17)\n    at JSXParserMixin.parseBlockOrModuleBlockBody (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12780:36)\n    at JSXParserMixin.parseBlockBody (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12773:10)\n    at JSXParserMixin.parseProgram (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12100:10)\n    at JSXParserMixin.parseTopLevel (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:12090:25)\n    at JSXParserMixin.parse (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:13904:10)\n    at parse (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/parser/lib/index.js:13946:38)\n    at parser (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/core/lib/parser/index.js:41:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/core/lib/transformation/normalize-file.js:64:37)\n    at normalizeFile.next (<anonymous>)\n    at run (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/core/lib/transformation/index.js:21:50)\n    at run.next (<anonymous>)\n    at transform (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/@babel/core/lib/transform.js:22:33)\n    at transform.next (<anonymous>)\n    at step (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/gensync/index.js:261:32)\n    at /Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/gensync/index.js:273:13\n    at async.call.result.err.err (/Users/ronaldhuereca/Sites/localhost/dlx/wp-content/plugins/wp-plugin-info-card/node_modules/gensync/index.js:223:11)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Logo */ "./src/blocks/Logo.js");
+/* harmony import */ var _components_Numbers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Numbers */ "./src/blocks/components/Numbers.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _components_OrgProfile__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/OrgProfile */ "./src/blocks/components/OrgProfile/index.js");
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (a) { for (var b = 1; b < arguments.length; b++) { var c = arguments[b]; for (var d in c) ({}).hasOwnProperty.call(c, d) && (a[d] = c[d]); } return a; }, _extends.apply(null, arguments); }
+function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) return _arrayLikeToArray(b, c); var a = {}.toString.call(b).slice(8, -1); return "Object" === a && b.constructor && (a = b.constructor.name), "Map" === a || "Set" === a ? Array.from(b) : "Arguments" === a || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a) ? _arrayLikeToArray(b, c) : void 0; } }
+function _arrayLikeToArray(b, c) { (null == c || c > b.length) && (c = b.length); for (var d = 0, f = Array(c); d < c; d++) f[d] = b[d]; return f; }
+function _iterableToArrayLimit(b, c) { var d = null == b ? null : "undefined" != typeof Symbol && b[Symbol.iterator] || b["@@iterator"]; if (null != d) { var g, h, j, k, l = [], a = !0, m = !1; try { if (j = (d = d.call(b)).next, 0 === c) { if (Object(d) !== d) return; a = !1; } else for (; !(a = (g = j.call(d)).done) && (l.push(g.value), l.length !== c); a = !0); } catch (a) { m = !0, h = a; } finally { try { if (!a && null != d["return"] && (k = d["return"](), Object(k) !== k)) return; } finally { if (m) throw h; } } return l; } }
+function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
+// @ts-nocheck
+/**
+ * External dependencies
+ */
+
+
+var HtmlToReactParser = (__webpack_require__(/*! html-to-react */ "./node_modules/html-to-react/index.js").Parser);
+var __ = wp.i18n.__;
+var _wp$element = wp.element,
+  useState = _wp$element.useState,
+  useEffect = _wp$element.useEffect,
+  Fragment = _wp$element.Fragment,
+  useCallback = _wp$element.useCallback;
+var _wp$components = wp.components,
+  PanelBody = _wp$components.PanelBody,
+  SelectControl = _wp$components.SelectControl,
+  Spinner = _wp$components.Spinner,
+  TextControl = _wp$components.TextControl,
+  Button = _wp$components.Button,
+  ToolbarGroup = _wp$components.ToolbarGroup,
+  ToggleControl = _wp$components.ToggleControl,
+  Notice = _wp$components.Notice,
+  TabPanel = _wp$components.TabPanel,
+  PanelRow = _wp$components.PanelRow,
+  ToolbarItem = _wp$components.ToolbarItem,
+  DropdownMenu = _wp$components.DropdownMenu,
+  MenuItemsChoice = _wp$components.MenuItemsChoice;
+
+var _wp$blockEditor = wp.blockEditor,
+  InspectorControls = _wp$blockEditor.InspectorControls,
+  BlockControls = _wp$blockEditor.BlockControls,
+  MediaUpload = _wp$blockEditor.MediaUpload,
+  AlignmentToolbar = _wp$blockEditor.AlignmentToolbar,
+  BlockAlignmentToolbar = _wp$blockEditor.BlockAlignmentToolbar,
+  useBlockProps = _wp$blockEditor.useBlockProps;
+
+
+
+
+
+var ProfileHighlightsAuthorAvatar = function ProfileHighlightsAuthorAvatar(a) {
+  var b = a.attributes,
+    c = a.setAttributes;
+  var d = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__.useInstanceId)(ProfileHighlightsAuthorAvatar, 'wp-plugin-info-card-query');
+  var e = useState(false),
+    f = _slicedToArray(e, 2),
+    g = f[0],
+    h = f[1];
+  var i = useState(false),
+    j = _slicedToArray(i, 2),
+    k = j[0],
+    l = j[1];
+  var m = useState(false),
+    n = _slicedToArray(m, 2),
+    o = n[0],
+    p = n[1];
+  var q = useState(''),
+    r = _slicedToArray(q, 2),
+    s = r[0],
+    t = r[1];
+  var u = useState(false),
+    v = _slicedToArray(u, 2),
+    w = v[0],
+    x = v[1];
+  var y = b.authorSlug,
+    z = b.avatarUrl,
+    A = b.preview,
+    B = b.authorName,
+    C = b.authorWebsite,
+    D = b.showAvatar,
+    E = b.showName,
+    F = b.showWebsite;
+  useEffect(function () {
+    c({
+      uniqueId: d
+    });
+  }, []);
+  var G = function loadProfileData() {
+    h(false);
+    l(true);
+    p(false);
+    var a = wppic.rest_url + 'wppic/v2/get_profile_data';
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get(a + "?author=".concat(s), {
+      headers: {
+        'X-WP-Nonce': wppic.rest_nonce
+      }
+    }).then(function (a) {
+      var b = a.data,
+        d = b.success,
+        e = b.data;
+      if (d) {
+        var f = e.author_name,
+          g = e.author_avatar,
+          h = e.member_website;
+        c({
+          authorSlug: s,
+          avatarUrl: g,
+          authorWebsite: h,
+          authorName: f
+        });
+      } else {
+        x(true);
+        p(true);
+      }
+    }).then(function () {
+      l(false);
+    });
+  };
+  var H = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
+    title: __('Query Options', 'wp-plugin-info-card')
+  }, "test"), /*#__PURE__*/React.createElement(PanelBody, {
+    title: __('WP Plugin Info Card', 'wp-plugin-info-card')
+  }, "test"));
+  var I = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(React.Fragment, null, '' === y && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_OrgProfile__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    profileLoaded: function profileLoaded(a, b) {
+      console.log(b);
+      var d = b.author_name,
+        e = b.author_avatar,
+        f = b.member_website;
+      c({
+        authorSlug: a,
+        avatarUrl: e,
+        authorWebsite: f,
+        authorName: d
+      });
+    }
+  })), y && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-author-avatar"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: z,
+    alt: B
+  })))));
+  var J = useBlockProps({
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()("profile-highlights-author-avatar")
+  });
+  if (A) {
+    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("img", {
+      src: wppic.query_preview,
+      style: {
+        width: '100%',
+        height: 'auto'
+      }
+    }));
+  }
+  return /*#__PURE__*/React.createElement("div", _extends({}, J, {
+    id: b.uniqueId
+  }), I);
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProfileHighlightsAuthorAvatar);
 
 /***/ }),
 
@@ -7364,6 +7535,159 @@ var NumbersComponent = function NumbersComponent(a) {
   })))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NumbersComponent);
+
+/***/ }),
+
+/***/ "./src/blocks/components/OrgProfile/index.js":
+/*!***************************************************!*\
+  !*** ./src/blocks/components/OrgProfile/index.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Logo */ "./src/blocks/Logo.js");
+/* harmony import */ var _components_Notice__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/Notice */ "./src/blocks/components/Notice/index.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return j; }; var b, j = {}, e = Object.prototype, k = e.hasOwnProperty, m = Object.defineProperty || function (a, b, c) { a[b] = c.value; }, n = "function" == typeof Symbol ? Symbol : {}, q = n.iterator || "@@iterator", a = n.asyncIterator || "@@asyncIterator", c = n.toStringTag || "@@toStringTag"; function i(a, b, c) { return Object.defineProperty(a, b, { value: c, enumerable: !0, configurable: !0, writable: !0 }), a[b]; } try { i({}, ""); } catch (a) { i = function i(a, b, c) { return a[b] = c; }; } function u(b, d, e, f) { var g = d && d.prototype instanceof o ? d : o, h = Object.create(g.prototype), a = new F(f || []); return m(h, "_invoke", { value: B(b, e, a) }), h; } function w(a, b, c) { try { return { type: "normal", arg: a.call(b, c) }; } catch (a) { return { type: "throw", arg: a }; } } j.wrap = u; var x = "suspendedStart", h = "suspendedYield", l = "executing", f = "completed", s = {}; function o() {} function r() {} function y() {} var z = {}; i(z, q, function () { return this; }); var t = Object.getPrototypeOf, d = t && t(t(G([]))); d && d !== e && k.call(d, q) && (z = d); var v = y.prototype = o.prototype = Object.create(z); function g(a) { ["next", "throw", "return"].forEach(function (b) { i(a, b, function (a) { return this._invoke(b, a); }); }); } function A(b, d) { function c(e, f, g, i) { var a = w(b[e], b, f); if ("throw" !== a.type) { var j = a.arg, l = j.value; return l && "object" == _typeof(l) && k.call(l, "__await") ? d.resolve(l.__await).then(function (a) { c("next", a, g, i); }, function (a) { c("throw", a, g, i); }) : d.resolve(l).then(function (a) { j.value = a, g(j); }, function (a) { return c("throw", a, g, i); }); } i(a.arg); } var e; m(this, "_invoke", { value: function value(a, b) { function f() { return new d(function (d, e) { c(a, b, d, e); }); } return e = e ? e.then(f, f) : f(); } }); } function B(a, d, e) { var g = x; return function (j, i) { if (g === l) throw Error("Generator is already running"); if (g === f) { if ("throw" === j) throw i; return { value: b, done: !0 }; } for (e.method = j, e.arg = i;;) { var k = e.delegate; if (k) { var m = C(k, e); if (m) { if (m === s) continue; return m; } } if ("next" === e.method) e.sent = e._sent = e.arg;else if ("throw" === e.method) { if (g === x) throw g = f, e.arg; e.dispatchException(e.arg); } else "return" === e.method && e.abrupt("return", e.arg); g = l; var n = w(a, d, e); if ("normal" === n.type) { if (g = e.done ? f : h, n.arg === s) continue; return { value: n.arg, done: e.done }; } "throw" === n.type && (g = f, e.method = "throw", e.arg = n.arg); } }; } function C(c, d) { var e = d.method, f = c.iterator[e]; if (f === b) return d.delegate = null, "throw" === e && c.iterator["return"] && (d.method = "return", d.arg = b, C(c, d), "throw" === d.method) || "return" !== e && (d.method = "throw", d.arg = new TypeError("The iterator does not provide a '" + e + "' method")), s; var g = w(f, c.iterator, d.arg); if ("throw" === g.type) return d.method = "throw", d.arg = g.arg, d.delegate = null, s; var h = g.arg; return h ? h.done ? (d[c.resultName] = h.value, d.next = c.nextLoc, "return" !== d.method && (d.method = "next", d.arg = b), d.delegate = null, s) : h : (d.method = "throw", d.arg = new TypeError("iterator result is not an object"), d.delegate = null, s); } function D(a) { var b = { tryLoc: a[0] }; 1 in a && (b.catchLoc = a[1]), 2 in a && (b.finallyLoc = a[2], b.afterLoc = a[3]), this.tryEntries.push(b); } function E(a) { var b = a.completion || {}; b.type = "normal", delete b.arg, a.completion = b; } function F(a) { this.tryEntries = [{ tryLoc: "root" }], a.forEach(D, this), this.reset(!0); } function G(a) { if (a || "" === a) { var c = a[q]; if (c) return c.call(a); if ("function" == typeof a.next) return a; if (!isNaN(a.length)) { var d = -1, e = function c() { for (; ++d < a.length;) if (k.call(a, d)) return c.value = a[d], c.done = !1, c; return c.value = b, c.done = !0, c; }; return e.next = e; } } throw new TypeError(_typeof(a) + " is not iterable"); } return r.prototype = y, m(v, "constructor", { value: y, configurable: !0 }), m(y, "constructor", { value: r, configurable: !0 }), r.displayName = i(y, c, "GeneratorFunction"), j.isGeneratorFunction = function (a) { var b = "function" == typeof a && a.constructor; return !!b && (b === r || "GeneratorFunction" === (b.displayName || b.name)); }, j.mark = function (a) { return Object.setPrototypeOf ? Object.setPrototypeOf(a, y) : (a.__proto__ = y, i(a, c, "GeneratorFunction")), a.prototype = Object.create(v), a; }, j.awrap = function (a) { return { __await: a }; }, g(A.prototype), i(A.prototype, a, function () { return this; }), j.AsyncIterator = A, j.async = function (b, c, d, e, f) { void 0 === f && (f = Promise); var g = new A(u(b, c, d, e), f); return j.isGeneratorFunction(c) ? g : g.next().then(function (a) { return a.done ? a.value : g.next(); }); }, g(v), i(v, c, "Generator"), i(v, q, function () { return this; }), i(v, "toString", function () { return "[object Generator]"; }), j.keys = function (a) { var b = Object(a), c = []; for (var d in b) c.push(d); return c.reverse(), function a() { for (; c.length;) { var d = c.pop(); if (d in b) return a.value = d, a.done = !1, a; } return a.done = !0, a; }; }, j.values = G, F.prototype = { constructor: F, reset: function reset(a) { if (this.prev = 0, this.next = 0, this.sent = this._sent = b, this.done = !1, this.delegate = null, this.method = "next", this.arg = b, this.tryEntries.forEach(E), !a) for (var c in this) "t" === c.charAt(0) && k.call(this, c) && !isNaN(+c.slice(1)) && (this[c] = b); }, stop: function stop() { this.done = !0; var a = this.tryEntries[0].completion; if ("throw" === a.type) throw a.arg; return this.rval; }, dispatchException: function dispatchException(d) { if (this.done) throw d; var e = this; function f(a, c) { return j.type = "throw", j.arg = d, e.next = a, c && (e.method = "next", e.arg = b), !!c; } for (var g = this.tryEntries.length - 1; g >= 0; --g) { var h = this.tryEntries[g], j = h.completion; if ("root" === h.tryLoc) return f("end"); if (h.tryLoc <= this.prev) { var l = k.call(h, "catchLoc"), m = k.call(h, "finallyLoc"); if (l && m) { if (this.prev < h.catchLoc) return f(h.catchLoc, !0); if (this.prev < h.finallyLoc) return f(h.finallyLoc); } else if (l) { if (this.prev < h.catchLoc) return f(h.catchLoc, !0); } else { if (!m) throw Error("try statement without catch or finally"); if (this.prev < h.finallyLoc) return f(h.finallyLoc); } } } }, abrupt: function abrupt(b, c) { for (var d = this.tryEntries.length - 1; d >= 0; --d) { var e = this.tryEntries[d]; if (e.tryLoc <= this.prev && k.call(e, "finallyLoc") && this.prev < e.finallyLoc) { var f = e; break; } } f && ("break" === b || "continue" === b) && f.tryLoc <= c && c <= f.finallyLoc && (f = null); var g = f ? f.completion : {}; return g.type = b, g.arg = c, f ? (this.method = "next", this.next = f.finallyLoc, s) : this.complete(g); }, complete: function complete(a, b) { if ("throw" === a.type) throw a.arg; return "break" === a.type || "continue" === a.type ? this.next = a.arg : "return" === a.type ? (this.rval = this.arg = a.arg, this.method = "return", this.next = "end") : "normal" === a.type && b && (this.next = b), s; }, finish: function finish(a) { for (var b = this.tryEntries.length - 1; b >= 0; --b) { var c = this.tryEntries[b]; if (c.finallyLoc === a) return this.complete(c.completion, c.afterLoc), E(c), s; } }, "catch": function _catch(a) { for (var b = this.tryEntries.length - 1; b >= 0; --b) { var c = this.tryEntries[b]; if (c.tryLoc === a) { var d = c.completion; if ("throw" === d.type) { var f = d.arg; E(c); } return f; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(a, c, d) { return this.delegate = { iterator: G(a), resultName: c, nextLoc: d }, "next" === this.method && (this.arg = b), s; } }, j; }
+function asyncGeneratorStep(b, d, f, e, g, h, a) { try { var c = b[h](a), i = c.value; } catch (a) { return void f(a); } c.done ? d(i) : Promise.resolve(i).then(e, g); }
+function _asyncToGenerator(b) { return function () { var c = this, d = arguments; return new Promise(function (e, f) { var g = b.apply(c, d); function a(b) { asyncGeneratorStep(g, e, f, a, h, "next", b); } function h(b) { asyncGeneratorStep(g, e, f, a, h, "throw", b); } a(void 0); }); }; }
+function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) return _arrayLikeToArray(b, c); var a = {}.toString.call(b).slice(8, -1); return "Object" === a && b.constructor && (a = b.constructor.name), "Map" === a || "Set" === a ? Array.from(b) : "Arguments" === a || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a) ? _arrayLikeToArray(b, c) : void 0; } }
+function _arrayLikeToArray(b, c) { (null == c || c > b.length) && (c = b.length); for (var d = 0, f = Array(c); d < c; d++) f[d] = b[d]; return f; }
+function _iterableToArrayLimit(b, c) { var d = null == b ? null : "undefined" != typeof Symbol && b[Symbol.iterator] || b["@@iterator"]; if (null != d) { var g, h, j, k, l = [], a = !0, m = !1; try { if (j = (d = d.call(b)).next, 0 === c) { if (Object(d) !== d) return; a = !1; } else for (; !(a = (g = j.call(d)).done) && (l.push(g.value), l.length !== c); a = !0); } catch (a) { m = !0, h = a; } finally { try { if (!a && null != d["return"] && (k = d["return"](), Object(k) !== k)) return; } finally { if (m) throw h; } } return l; } }
+function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
+
+
+
+
+
+
+
+var OrgProfile = function OrgProfile(a) {
+  var b = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    c = _slicedToArray(b, 2),
+    d = c[0],
+    e = c[1];
+  var f = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    g = _slicedToArray(f, 2),
+    h = g[0],
+    i = g[1];
+  var j = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    k = _slicedToArray(j, 2),
+    l = k[0],
+    m = k[1];
+  var n = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    o = _slicedToArray(n, 2),
+    p = o[0],
+    q = o[1];
+  var r = /*#__PURE__*/function () {
+    var b = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function c(b) {
+      var d;
+      return _regeneratorRuntime().wrap(function e(c) {
+        while (1) switch (c.prev = c.next) {
+          case 0:
+            if (!('' === b)) {
+              c.next = 5;
+              break;
+            }
+            i(true);
+            m((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Please enter a username.', 'wp-plugin-info-card'));
+            q(false);
+            return c.abrupt("return");
+          case 5:
+            q(true);
+            d = wppic.rest_url + 'wppic/v2/get_profile_data';
+            axios__WEBPACK_IMPORTED_MODULE_1___default().get(d + "?author=".concat(b), {
+              headers: {
+                'X-WP-Nonce': wppic.rest_nonce
+              }
+            }).then(function (c) {
+              var d = c.data,
+                e = d.success,
+                f = d.data;
+              if (e) {
+                a.profileLoaded(b, f);
+              } else {
+                m(f.message);
+                i(true);
+              }
+            }).then(function () {
+              q(false);
+            });
+          case 8:
+          case "end":
+            return c.stop();
+        }
+      }, c);
+    }));
+    return function loadProfileData(_x) {
+      return b.apply(this, arguments);
+    };
+  }();
+  if (p) {
+    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      className: "wppic-loading-placeholder"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "wppic-loading"
+    }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      size: "45"
+    }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
+      className: "wppic-spinner"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, null)))));
+  }
+  var s = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-query-block wppic-query-block-panel"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-block-svg"
+  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    size: "75"
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enter a WordPress.org Username Slug', 'wp-plugin-info-card'),
+    value: d,
+    onChange: function onChange(a) {
+      i(false);
+      e(a);
+    },
+    className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('wppic-input', {
+      'wppic-input-error': h
+    }),
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enter a .org username…', 'wp-plugin-info-card')
+  }), h && /*#__PURE__*/React.createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    status: "error",
+    isDismissible: false,
+    className: "wppic-error-notice"
+  }, l), /*#__PURE__*/React.createElement("div", {
+    className: "wp-pic-gutenberg-button"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    iconSize: 20,
+    icon: /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      size: "25"
+    }),
+    isSecondary: true,
+    id: "wppic-input-submit",
+    onClick: function onClick(a) {
+      q(true);
+      r(d);
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Get Author Information', 'wp-plugin-info-card'))))));
+  return /*#__PURE__*/React.createElement(React.Fragment, null, s);
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (OrgProfile);
 
 /***/ }),
 
