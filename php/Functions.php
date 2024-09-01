@@ -584,7 +584,7 @@ class Functions {
 		$author_bio       = $org_profile_data['description'] ?? '';
 		$author_avatar    = $org_profile_data['avatar_urls']['96'] ?? '';
 
-		$org_profile_scrape_response_body = wp_cache_get( 'wppic_org_profile_scrape_response_body', 'wppic' );
+		$org_profile_scrape_response_body = wp_cache_get( 'wppic_org_profile_scrape_response_body_' . $org_username, 'wppic' );
 		if ( ! $org_profile_scrape_response_body ) {
 			// Get org profile from scraping.
 			$scrape_args     = array(
@@ -608,7 +608,7 @@ class Functions {
 			$org_profile_scrape_response_body = wp_remote_retrieve_body( $scrape_response );
 
 			// Set cache for 12 hours.
-			wp_cache_set( 'wppic_org_profile_scrape_response_body', $org_profile_scrape_response_body, 'wppic', HOUR_IN_SECONDS * 12 );
+			wp_cache_set( 'wppic_org_profile_scrape_response_body_' . $org_username, $org_profile_scrape_response_body, 'wppic', HOUR_IN_SECONDS * 12 );
 		}
 
 		$scrape_tags = new \DOMDocument();
