@@ -4322,14 +4322,13 @@ var HomeScreen = function HomeScreen(a) {
             case 2:
               b = a.sent;
               c = b.data, d = c.success, f = c.data;
-              console.log(b);
               if (d) {
                 // Save to local storage.
                 localStorage.setItem('wppic_home_options', JSON.stringify(f));
                 localStorage.setItem('wppic_home_options_timestamp', new Date().getTime().toString());
                 e(f);
               }
-            case 6:
+            case 5:
             case "end":
               return a.stop();
           }

@@ -538,7 +538,6 @@ const HomeScreen = ( props ) => {
 				nonce: wppicAdminHome.getNonce,
 			} );
 			const { success, data } = response.data;
-			console.log( response );
 			if ( success ) {
 				// Save to local storage.
 				localStorage.setItem( 'wppic_home_options', JSON.stringify( data ) );

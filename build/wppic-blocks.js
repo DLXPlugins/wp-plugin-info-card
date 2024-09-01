@@ -4511,7 +4511,6 @@ var ScreenPluginPreview = function ScreenPluginPreview(a) {
     var a = wppic.rest_url + 'wppic/v2/get_data';
     axios__WEBPACK_IMPORTED_MODULE_3___default().get(a + "?type=plugin&slug=".concat(encodeURIComponent(b.slug))).then(function (a) {
       if (a.data.success) {
-        console.log(a.data.data[0]);
         // Set asset data.
         c({
           assetData: a.data.data[0] || {}
@@ -5075,7 +5074,11 @@ var ProfileHighlightsAuthorAvatar = function ProfileHighlightsAuthorAvatar(a) {
     m(true);
     q(false);
     var a = wppic.rest_url + 'wppic/v2/get_profile_data';
-    axios__WEBPACK_IMPORTED_MODULE_0___default().get(a + "?author=".concat(P)).then(function (a) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get(a + "?author=".concat(N), {
+      headers: {
+        'X-WP-Nonce': wppic.rest_nonce
+      }
+    }).then(function (a) {
       console.log(a);
     });
   };
@@ -5108,7 +5111,7 @@ var ProfileHighlightsAuthorAvatar = function ProfileHighlightsAuthorAvatar(a) {
     id: "wppic-input-submit",
     onClick: function onClick(a) {
       m(true);
-      // todo - search for author slug.
+      T();
     }
   }, __('Get Author Information', 'wp-plugin-info-card')))), l && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "wppic-loading-placeholder"

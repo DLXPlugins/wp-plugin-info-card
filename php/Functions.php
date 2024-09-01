@@ -534,7 +534,7 @@ class Functions {
 	 *
 	 * @param string $org_username The author's WordPress.org username.
 	 *
-	 * @return array Author profile data.
+	 * @return array|WP_Error Author profile data. WP_Error if error.
 	 */
 	public static function get_org_profile_data( $org_username ) {
 		$org_username = sanitize_text_field( $org_username );
@@ -543,24 +543,31 @@ class Functions {
 			'https://profiles.wordpress.org/wp-json/wporg/v1/users/%s',
 			sanitize_text_field( $org_username )
 		);
-		$scrape_url = sprintf(
+		$scrape_url             = sprintf(
 			'https://profiles.wordpress.org/%s',
 			sanitize_text_field( $org_username )
 		);
 
 		// Let's get .org data first.
-		// $org_profile_data = \get_page_by_path( $org_username, OBJECT, 'wppic_author_profiles' );
-		// if ( $org_profile_data ) {
-		// 	// Let's see if we need to update the data.
-		// 	$last_updated = get_post_meta( $org_profile_data->ID, '_last_updated', true );
+		$org_profile_data = \get_page_by_path( $org_username, OBJECT, 'wppic_profiles' );
+		if ( $org_profile_data ) {
+			// Let's see if we need to update the data.
+			$last_updated = get_post_meta( $org_profile_data->ID, '_wppic_last_updated', true );
+			$profile_data = get_post_meta( $org_profile_data->ID, '_wppic_profile_data', true );
 
-		// 	// Data is cached for a week. If time has elapsed, try to get new data.
+			// If data is less than a week old, return it.
+			if ( $last_updated && ( time() - $last_updated ) < WEEK_IN_SECONDS && ! empty( $profile_data ) ) {
+				return $profile_data;
+			}
+		}
+
+		// Data is cached for a week. If time has elapsed, try to get new data.
 
 		// }
 
 		$rest_args = array(
 			'headers' => array(
-				'Accept' => 'application/json',
+				'Accept'     => 'application/json',
 				'User-Agent' => 'WP Plugin Info Card',
 			),
 		);
@@ -568,41 +575,148 @@ class Functions {
 		// Get the data from the REST API.
 		$response = wp_remote_get( $profiles_rest_endpoint, $rest_args );
 		if ( is_wp_error( $response ) ) {
-			\wp_send_json_error( $response->get_error_message() );
+			return $response;
 		}
 
 		// Get org profile from REST.
 		$org_profile_data = json_decode( wp_remote_retrieve_body( $response ), true );
-		$author_name = $org_profile_data['name'] ?? '';
-		$author_bio = $org_profile_data['description'] ?? '';
-		$author_avatar = $org_profile_data['avatar_urls']['96'] ?? '';
+		$author_name      = $org_profile_data['name'] ?? '';
+		$author_bio       = $org_profile_data['description'] ?? '';
+		$author_avatar    = $org_profile_data['avatar_urls']['96'] ?? '';
 
-		// Get org profile from scraping.
-		$scrape_args = array(
-			'headers' => array(
-				'Accept' => 'text/html',
-				'User-Agent' => 'WP Plugin Info Card',
-			),
-		);
-		$scrape_response = wp_remote_get( $scrape_url, $scrape_args );
-		if ( is_wp_error( $scrape_response ) ) {
-			\wp_send_json_error( $scrape_response->get_error_message() );
+		$org_profile_scrape_response_body = wp_cache_get( 'wppic_org_profile_scrape_response_body', 'wppic' );
+		if ( ! $org_profile_scrape_response_body ) {
+			// Get org profile from scraping.
+			$scrape_args     = array(
+				'headers' => array(
+					'Accept'     => 'text/html',
+					'User-Agent' => 'WP Plugin Info Card',
+				),
+			);
+			$scrape_response = wp_remote_get( $scrape_url, $scrape_args );
+			if ( is_wp_error( $scrape_response ) ) {
+				return $scrape_response;
+			}
+
+			// Make sure error code is 200 or 201.
+			$scrape_code = wp_remote_retrieve_response_code( $scrape_response );
+			if ( 200 !== $scrape_code && 201 !== $scrape_code ) {
+				return new \WP_Error( 'wppic_scrape_error', __( 'Error scraping .org profile.', 'wp-plugin-info-card' ) );
+			}
+
+			// Get body and begin parsing.
+			$org_profile_scrape_response_body = wp_remote_retrieve_body( $scrape_response );
+
+			// Set cache for 12 hours.
+			wp_cache_set( 'wppic_org_profile_scrape_response_body', $org_profile_scrape_response_body, 'wppic', HOUR_IN_SECONDS * 12 );
 		}
 
-		// Get body and begin parsing.
-		$scrape_body = wp_remote_retrieve_body( $scrape_response );
 		$scrape_tags = new \DOMDocument();
-		$scrape_tags->loadHTML( $scrape_body );
+		$scrape_tags->loadHTML( $org_profile_scrape_response_body );
 
 		// Get member since data with ID user-member-since.
-		$member_since = '';
-		$member_since_element = $scrape_tags->getElementById( 'user-member-since' );
+		$member_since           = '';
+		$member_since_timestamp = '';
+		$member_since_element   = $scrape_tags->getElementById( 'user-member-since' );
 		if ( $member_since_element ) {
 			// Get internal <span> tag, which contains member data.
-			$member_since = $member_since_element->getElementsByTagName( 'span' )[0]->textContent;
+			$member_since           = $member_since_element->getElementsByTagName( 'strong' )[0]->textContent;
+			$member_since_timestamp = strtotime( $member_since );
 		}
 
-		\wp_send_json_success();
+		// Get member website.
+		$member_website         = '';
+		$member_website_element = $scrape_tags->getElementById( 'user-website' );
+		if ( $member_website_element ) {
+			// Get internal <span> tag, which contains member data.
+			$member_website = $member_website_element->getElementsByTagName( 'a' )[0]->getAttribute( 'href' ); // format: https://profiles.wordpress.org/website-redirect/ronalfy.
+		}
+
+		// Get member GitHub.
+		$member_github         = '';
+		$member_github_element = $scrape_tags->getElementById( 'user-github' );
+		if ( $member_github_element ) {
+			// Get internal <span> tag, which contains member data.
+			$member_github = $member_github_element->getElementsByTagName( 'a' )[0]->getAttribute( 'href' );
+		}
+
+		// Get member location.
+		$member_location         = '';
+		$member_location_element = $scrape_tags->getElementById( 'user-location' );
+		if ( $member_location_element ) {
+			// Get internal <span> tag, which contains member data.
+			$member_location = $member_location_element->getElementsByTagName( 'strong' )[0]->textContent;
+		}
+
+		// Get member occupation.
+		$member_occupation         = '';
+		$member_occupation_element = $scrape_tags->getElementById( 'user-job' );
+		if ( $member_occupation_element ) {
+			// Get internal <span> tag, which contains member data.
+			$member_occupation = $member_occupation_element->getElementsByTagName( 'strong' )[0]->textContent;
+		}
+
+		// Get member employer.
+		$member_employer         = '';
+		$member_employer_element = $scrape_tags->getElementById( 'user-company' );
+		if ( $member_employer_element ) {
+			// Get internal <span> tag, which contains member data.
+			$member_employer = $member_employer_element->getElementsByTagName( 'strong' )[0]->textContent;
+		}
+
+		// Get user badges.
+		$member_badges               = array();
+		$member_badges_element       = $scrape_tags->getElementById( 'user-badges' );
+		$member_badges_list_elements = $member_badges_element->getElementsByTagName( 'li' );
+		foreach ( $member_badges_list_elements as $badge_list ) {
+			$member_badge_wrapper         = $badge_list->getElementsByTagName( 'div' )[0];
+			$member_badge_wrapper_classes = $member_badge_wrapper->getAttribute( 'class' );
+			$member_badge_wrapper_classes = explode( ' ', $member_badge_wrapper_classes );
+
+			// If badge is at the start of a class, store it.
+			foreach ( $member_badge_wrapper_classes as $badge_class ) {
+				// If badge is start of class, store it.
+				if ( 'badge' === substr( $badge_class, 0, 5 ) && 'badge' !== $badge_class ) {
+					$member_badges[] = $badge_class;
+				}
+			}
+		}
+
+		// Form profile data array.
+		$profile_data = array(
+			'author_name'            => $author_name,
+			'author_bio'             => $author_bio,
+			'author_avatar'          => $author_avatar,
+			'member_since'           => $member_since,
+			'member_since_timestamp' => $member_since_timestamp,
+			'member_website'         => $member_website,
+			'member_github'          => $member_github,
+			'member_location'        => $member_location,
+			'member_occupation'      => $member_occupation,
+			'member_employer'        => $member_employer,
+			'member_badges'          => $member_badges,
+		);
+
+		$org_local_profile_data = get_page_by_path( $org_username, OBJECT, 'wppic_profiles' );
+		if ( ! $org_local_profile_data ) {
+			$org_profile_data_id = wp_insert_post(
+				array(
+					'post_title'     => $author_name,
+					'post_name'      => $org_username,
+					'post_type'      => 'wppic_profiles',
+					'post_status'    => 'publish',
+					'comment_status' => 'closed',
+					'ping_status'    => 'closed',
+				)
+			);
+			update_post_meta( $org_profile_data_id, '_wppic_last_updated', time() );
+			update_post_meta( $org_profile_data_id, '_wppic_profile_data', $profile_data );
+		} else {
+			update_post_meta( $org_profile_data->ID, '_wppic_last_updated', time() );
+			update_post_meta( $org_profile_data->ID, '_wppic_profile_data', $profile_data );
+		}
+
+		return $profile_data;
 	}
 
 	/**

@@ -46,7 +46,6 @@ const ScreenPluginPreview = ( props ) => {
 			)
 			.then( ( response ) => {
 				if ( response.data.success ) {
-					console.log( response.data.data[ 0 ] );
 					// Set asset data.
 					setAttributes(
 						{

@@ -96,7 +96,7 @@ class Shortcodes {
 			'hierarchical'       => false,
 		);
 
-		register_post_type( 'wppic_author_profiles', $args );
+		register_post_type( 'wppic_profiles', $args );
 	}
 
 	/**

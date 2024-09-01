@@ -91,7 +91,6 @@ const ScreenshotsScreen = ( props ) => {
 const Interface = ( props ) => {
 	const { data } = props;
 
-	console.log( data );
 	const {
 		control,
 		handleSubmit,

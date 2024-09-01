@@ -86,7 +86,12 @@ const ProfileHighlightsAuthorAvatar = ( props ) => {
 		const restUrl = wppic.rest_url + 'wppic/v2/get_profile_data';
 		axios
 			.get(
-				restUrl + `?author=${ authorSlug }`,
+				restUrl + `?author=${ authorSlugSearchValue }`,
+				{
+					headers: {
+						'X-WP-Nonce': wppic.rest_nonce,
+					},
+				},
 			)
 			.then( ( response ) => {
 				console.log( response );
@@ -135,7 +140,7 @@ const ProfileHighlightsAuthorAvatar = ( props ) => {
 								id="wppic-input-submit"
 								onClick={ ( event ) => {
 									setCardLoading( true );
-									// todo - search for author slug.
+									loadProfileData();
 								} }
 							>
 								{ __(
