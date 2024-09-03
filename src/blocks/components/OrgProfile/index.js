@@ -6,26 +6,22 @@ import {
 	Spinner,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+import { cleanForSlug } from '@wordpress/url';
 import classnames from 'classnames';
 import Logo from '../../Logo';
 import Notice from '../../components/Notice';
+import Loading from '../../components/Loading';
 
 
 const OrgProfile = ( props ) => {
-	const [ authorSlugSearchValue, setAuthorSlugSearchValue ] = useState( '' );
+	const { attributes, setAttributes, Preview } = props;
+	const [ authorSlugSearchValue, setAuthorSlugSearchValue ] = useState( attributes.authorSlug );
 	const [ authorError, setAuthorError ] = useState( false );
 	const [ authorErrorMessage, setAuthorErrorMessage ] = useState( '' );
 	const [ cardLoading, setCardLoading ] = useState( false );
+	const [ isEditing, setIsEditing ] = useState( false );
 
 	const loadProfileData = async ( authorSlug ) => {
-		// Error out if author slug is empty.
-		if ( '' === authorSlug ) {
-			setAuthorError( true );
-			setAuthorErrorMessage( __( 'Please enter a username.', 'wp-plugin-info-card' ) );
-			setCardLoading( false );
-			return;
-		}
-
 		setCardLoading( true );
 		const restUrl = wppic.rest_url + 'wppic/v2/get_profile_data';
 		axios
@@ -40,7 +36,19 @@ const OrgProfile = ( props ) => {
 			.then( ( response ) => {
 				const { success, data } = response.data;
 				if ( success ) {
-					props.profileLoaded( authorSlug, data );
+					const {
+						author_name,
+						author_avatar,
+						member_website
+					} = data;
+					setAuthorSlugSearchValue( authorSlug );
+					setAttributes( {
+						authorSlug,
+						avatarUrl: author_avatar,
+						authorWebsite: member_website,
+						authorName: author_name,
+						lastUpdated: new Date(),
+					} );
 				} else {
 					setAuthorErrorMessage( data.message );
 					setAuthorError( true );
@@ -50,18 +58,27 @@ const OrgProfile = ( props ) => {
 			} );
 	};
 
+	// Show loading if loading.
 	if ( cardLoading ) {
 		return (
+			<Loading />
+		);
+	}
+
+	// If we have an authorSlug and lastUpdated isn't empty, show the preview.
+	if ( authorSlugSearchValue && attributes.lastUpdated && ! isEditing ) {
+		return (
 			<>
-				<div className="wppic-loading-placeholder">
-					<div className="wppic-loading">
-						<Logo size="45" />
-						<br />
-						<div className="wppic-spinner">
-							<Spinner />
-						</div>
-					</div>
-				</div>
+				<Preview
+					attributes={ attributes }
+					setAttributes={ setAttributes }
+					onEdit={ () => {
+						setIsEditing( true );
+					} }
+					onRefresh={ () => {
+						loadProfileData( attributes.authorSlug );
+					} }
+				/>
 			</>
 		);
 	}
@@ -83,6 +100,7 @@ const OrgProfile = ( props ) => {
 							setAuthorError( false );
 							setAuthorSlugSearchValue( value );
 						} }
+						name={ 'searchOrgUsername' }
 						className={
 							classnames( 'wppic-input', {
 								'wppic-input-error': authorError,
@@ -106,8 +124,15 @@ const OrgProfile = ( props ) => {
 							isSecondary
 							id="wppic-input-submit"
 							onClick={ ( event ) => {
-								setCardLoading( true );
-								loadProfileData( authorSlugSearchValue );
+								// Error out if author slug is empty.
+								if ( '' === authorSlugSearchValue ) {
+									setAuthorError( true );
+									setAuthorErrorMessage( __( 'Please enter a username.', 'wp-plugin-info-card' ) );
+									setCardLoading( false );
+									return;
+								}
+								setIsEditing( false );
+								loadProfileData( cleanForSlug( authorSlugSearchValue ) );
 							} }
 						>
 							{ __(

@@ -45,6 +45,10 @@
 		"showWebsite": {
 			"type": "boolean",
 			"default": true
+		},
+		"lastUpdated": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"example": {
