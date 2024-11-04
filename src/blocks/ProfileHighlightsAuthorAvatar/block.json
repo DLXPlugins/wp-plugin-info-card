@@ -14,6 +14,14 @@
 			"type": "string",
 			"default": ""
 		},
+		"layout": {
+			"type": "string",
+			"default": "justified"
+		},
+		"avatarSize": {
+			"type": "number",
+			"default": 96
+		},
 		"preview": {
 			"type": "boolean",
 			"default" : false
@@ -49,6 +57,19 @@
 		"lastUpdated": {
 			"type": "string",
 			"default": ""
+		},
+		"fontSize": {
+			"type": "number",
+			"default": 20
+		},
+		"styles": {
+			"type": "object",
+			"default": {
+				"typography": {
+					"fontSize": 20,
+					"lineHeight": 1.5
+				}
+			}
 		}
 	},
 	"example": {
@@ -59,7 +80,11 @@
 	"supports": {
 		"anchor": true,
 		"align": false,
-		"className": true
+		"className": true,
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		}
 	},
 	"editorScript": "wp-plugin-info-card-block-js",
 	"editorStyle": [ "wp-plugin-info-card-block-editor-css", "wp-plugin-info-card-block-styles-css" ]

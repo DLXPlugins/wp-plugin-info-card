@@ -65,6 +65,7 @@ const ProfileHighlightsAuthorAvatar = ( props ) => {
 
 	const blockProps = useBlockProps( {
 		className: classnames( `profile-highlights-author-avatar` ),
+		style: {},
 	} );
 	if ( preview ) {
 		return (
