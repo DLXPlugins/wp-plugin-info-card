@@ -24,12 +24,38 @@ class Admin {
 
 		add_action( 'admin_menu', array( $self, 'add_options_page' ) );
 		add_action( 'wp_ajax_wppic_widget_render', array( $self, 'ajax_dashboard_widget_render' ) );
+		add_action( 'admin_enqueue_scripts', array( $self, 'enqueue_admin_scripts' ) );
 		add_action( 'wp_dashboard_setup', array( $self, 'add_dashboard_widgets' ) );
 		return $self;
 	}
 
-	
-
+	/**
+	 * Enqueue admin scripts.
+	 */
+	public function enqueue_admin_scripts() {
+		// If current screen is dashboard.
+		if ( 'dashboard' === get_current_screen()->id ) {
+			wp_register_script(
+				'wppic-dashboard-widget',
+				null
+			);
+			wp_localize_script(
+				'wppic-dashboard-widget',
+				'wppic_dashboard_widget',
+				array(
+					'nonce' => wp_create_nonce( 'wppic-dashboard-widget' ),
+				)
+			);
+			wp_enqueue_script(
+				'wppic-dashboard-widget-init',
+				Functions::get_plugin_url( 'assets/js/wppic-admin-script.js' ),
+				array( 'jquery' ),
+				Functions::get_plugin_version(),
+				true
+			);
+			wp_enqueue_script( 'wppic-dashboard-widget' );
+		}
+	}
 	/**
 	 * Add the options page to the admin menu.
 	 */
@@ -144,6 +170,10 @@ class Admin {
 	public function ajax_dashboard_widget_render() {
 		$type  = filter_input( INPUT_POST, 'wppic-type', FILTER_DEFAULT );
 		$list  = filter_input( INPUT_POST, 'wppic-list', FILTER_DEFAULT );
+		$nonce = filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT );
+		if ( ! wp_verify_nonce( $nonce, 'wppic-dashboard-widget' ) ) {
+			wp_send_json_error( 'Invalid nonce' );
+		}
 		$slugs = array( sanitize_text_field( $list ) );
 
 		$content = $this->render_widget( $type, $slugs );
