@@ -2,8 +2,8 @@
 Contributors: briKou, ronalfy
 Tags: cards, card, theme cards, plugin cards, plugin list
 Requires at least: 3.7
-Tested up to: 6.7
-Stable tag: 5.2.5
+Tested up to: 6.8
+Stable tag: 5.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,6 +63,10 @@ Feel free to make pull requests or issues on the <a href="https://github.com/dlx
 
 > Credits: Originally developed and maintained by <a href="https://www.b-website.com/">Brice CAPOBIANCO</a>.
 
+= How can I report security bugs? =
+
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/wp-plugin-info-card)
+
 == Installation ==
 
 1. Upload and activate the plugin (or install it through the WP admin console)
@@ -97,6 +101,11 @@ This video shows you how:
 11. WordPress layout with themes and 2 columns
 
 == Changelog ==
+
+= 5.3.0 =
+* Released 2025-04-21
+* Security fix: Minor CCRF vulnerability reported. This update addresses any non-nonced code.
+* Added security info to readme for better contact availability.
 
 = 5.2.5 =
 * Released 2024-07-20
@@ -462,5 +471,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 5.2.5 =
-This update introduces title overrides and plugin/theme exclusions, CSS Grid support for the Query layout, and improved performance for the screenshots block, along with several usability tweaks and bug fixes for better mobile and grid layout experience.
+= 5.3.0 =
+Security vulnerability addressed for minor CCRF. Added security information to the .org readme.
