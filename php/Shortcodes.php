@@ -656,20 +656,20 @@ class Shortcodes {
 
 		$add_class = array();
 		// Remove unnecessary spaces.
-		$id          = trim( $attributes['id'] );
-		$type        = trim( $attributes['type'] );
-		$slug        = trim( esc_html( $attributes['slug'] ) );
-		$image       = trim( esc_url( $attributes['image'] ) );
-		$containerid = trim( $attributes['containerid'] );
-		$margin      = trim( $attributes['margin'] );
-		$clear       = trim( $attributes['clear'] );
-		$expiration  = trim( $attributes['expiration'] );
-		$ajax        = trim( $attributes['ajax'] );
-		$scheme      = trim( $attributes['scheme'] );
-		$layout      = trim( $attributes['layout'] );
-		$custom      = trim( $attributes['custom'] );
+		$id          = sanitize_text_field( trim( $attributes['id'] ) );
+		$type        = sanitize_text_field( trim( $attributes['type'] ) );
+		$slug        = sanitize_text_field( trim( esc_html( $attributes['slug'] ) ) );
+		$image       = sanitize_text_field( trim( esc_url( $attributes['image'] ) ) );
+		$containerid = sanitize_text_field( trim( $attributes['containerid'] ) );
+		$margin      = esc_attr( trim( $attributes['margin'] ) );
+		$clear       = sanitize_text_field( trim( $attributes['clear'] ) );
+		$expiration  = sanitize_text_field( trim( $attributes['expiration'] ) );
+		$ajax        = sanitize_text_field( trim( $attributes['ajax'] ) );
+		$scheme      = sanitize_text_field( trim( $attributes['scheme'] ) );
+		$layout      = sanitize_text_field( trim( $attributes['layout'] ) );
+		$custom      = sanitize_text_field( trim( $attributes['custom'] ) );
 		$multi       = filter_var( $attributes['multi'], FILTER_VALIDATE_BOOLEAN );
-		$align       = trim( $attributes['align'] );
+		$align       = sanitize_text_field( trim( $attributes['align'] ) );
 		$cols        = absint( $attributes['cols'] );
 		$col_gap     = absint( $attributes['col_gap'] );
 		$row_gap     = absint( $attributes['row_gap'] );
@@ -797,12 +797,12 @@ class Shortcodes {
 					// Custom style.
 					$style = '';
 					if ( ! empty( $margin ) || ! empty( $align_style ) ) {
-						$style = 'style="' . $margin . $align_style . '"';
+						$style = 'style="' . esc_attr( $margin ) . ' ' . esc_attr( $align_style ) . '"';
 					}
 
 					// Extra container ID.
 					if ( ! empty( $containerid ) ) {
-						$containerid = ' id="' . $containerid . '"';
+						$containerid = ' id="' . esc_attr( $containerid ) . '"';
 					} else {
 						$containerid = ' id="wp-pic-' . esc_html( $asset_slug ) . '"';
 					}
