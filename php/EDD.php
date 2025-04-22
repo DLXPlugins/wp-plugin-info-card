@@ -72,6 +72,9 @@ class EDD {
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
 		}
+		if ( wp_is_post_revision( $post_id ) ) {
+			return;
+		}
 		if ( ! isset( $_POST['wppic-plugin-author'] ) ) {
 			return;
 		}
@@ -91,6 +94,9 @@ class EDD {
 			return;
 		}
 
+		// Verify nonce for saving post meta.
+		check_admin_referer( 'update-post_' . $post_id );
+		
 		$author            = sanitize_text_field( wp_unslash( $_POST['wppic-plugin-author'] ) );
 		$reviews_url       = sanitize_text_field( wp_unslash( $_POST['wppic-reviews-url'] ) );
 		$downloads_url     = sanitize_text_field( wp_unslash( $_POST['wppic-downloads-url'] ) );
@@ -182,6 +188,8 @@ class EDD {
 		if ( 'download' !== get_post_type( $post_id ) ) {
 			return;
 		}
+		// Do nonce check.
+		check_admin_referer( 'update-post_' . $post_id );
 		$slug       = get_post_field( 'post_name', $post_id );
 		$option_key = sanitize_key( 'wppic_plugin_' . preg_replace( '/\-/', '_', $slug ) );
 
