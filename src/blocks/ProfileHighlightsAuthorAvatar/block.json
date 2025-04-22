@@ -22,6 +22,10 @@
 			"type": "number",
 			"default": 96
 		},
+		"headlineSize": {
+			"type": "string",
+			"default": "inherit"
+		},
 		"preview": {
 			"type": "boolean",
 			"default" : false

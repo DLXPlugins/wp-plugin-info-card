@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 import {
@@ -11,7 +10,9 @@ import {
 	ToggleControl,
 	RangeControl,
 	Button,
+	SelectControl,
 } from '@wordpress/components';
+import classnames from 'classnames';
 
 import { __ } from '@wordpress/i18n';
 import {
@@ -34,11 +35,10 @@ const Preview = ( props ) => {
 		avatarSize,
 		preview,
 		authorName,
-		authorWebsite,
 		showAvatar,
 		showName,
-		showWebsite,
 		layout,
+		headlineSize,
 	} = attributes;
 
 	const inspectorControls = (
@@ -74,13 +74,30 @@ const Preview = ( props ) => {
 						</ButtonGroup>
 					</BaseControl>
 				</PanelRow>
-				<RangeControl
-					label={ __( 'Avatar Size', 'wp-plugin-info-card' ) }
-					value={ avatarSize }
-					onChange={ ( value ) => setAttributes( { avatarSize: value } ) }
-					min={ 1 }
-					max={ 96 }
-				/>
+				<div className="wppic-panel-row">
+					<RangeControl
+						label={ __( 'Avatar Size', 'wp-plugin-info-card' ) }
+						value={ avatarSize }
+						onChange={ ( value ) => setAttributes( { avatarSize: value } ) }
+						min={ 1 }
+						max={ 96 }
+					/>
+				</div>
+				<div className="wppic-panel-row">
+					<SelectControl
+						label={ __( 'Headline Size', 'wp-plugin-info-card' ) }
+						value={ headlineSize }
+						onChange={ ( value ) => setAttributes( { headlineSize: value } ) }
+						options={ [
+							{ value: 'inherit', label: __( 'Inherit', 'wp-plugin-info-card' ) },
+							{ value: '--wppic-headline-size-xs', label: __( 'Extra Small', 'wp-plugin-info-card' ) },
+							{ value: '--wppic-headline-size-sm', label: __( 'Small', 'wp-plugin-info-card' ) },
+							{ value: '--wppic-headline-size-md', label: __( 'Medium', 'wp-plugin-info-card' ) },
+							{ value: '--wppic-headline-size-lg', label: __( 'Large', 'wp-plugin-info-card' ) },
+							{ value: '--wppic-headline-size-xl', label: __( 'Extra Large', 'wp-plugin-info-card' ) },
+						] }
+					/>
+				</div>
 				<ToggleControl
 					label={ __( 'Show Avatar', 'wp-plugin-info-card' ) }
 					checked={ showAvatar }
@@ -90,11 +107,6 @@ const Preview = ( props ) => {
 					label={ __( 'Show Name', 'wp-plugin-info-card' ) }
 					checked={ showName }
 					onChange={ ( value ) => setAttributes( { showName: value } ) }
-				/>
-				<ToggleControl
-					label={ __( 'Show Website', 'wp-plugin-info-card' ) }
-					checked={ showWebsite }
-					onChange={ ( value ) => setAttributes( { showWebsite: value } ) }
 				/>
 			</PanelBody>
 		</InspectorControls>
@@ -123,19 +135,40 @@ const Preview = ( props ) => {
 		</BlockControls>
 	);
 
+	// Define the wrapper styles.
+	const wrapperStyles = classnames(
+		'wppic-author-avatar-container',
+		{
+			'wppic-author-avatar-container-justified': 'justified' === layout,
+			'wppic-author-avatar-container-centered': 'centered' === layout,
+		},
+	);
+
+	// Define the headline styles.
+	const headlineStyles = {
+		fontSize: headlineSize !== 'inherit' ? `var(${ headlineSize })` : null,
+	};
+
 	return (
 		<>
 			{ inspectorControls }
 			{ toolbar }
-			<div className="wppic-author-avatar">
-				<img
-					src={ avatarUrl }
-					alt={ authorName }
-					style={ {
-						width: avatarSize + 'px',
-						height: avatarSize + 'px',
-					} }
-				/>
+			<div className={ wrapperStyles }>
+				<div className="wppic-author-avatar">
+					<img
+						src={ avatarUrl }
+						alt={ authorName }
+						style={ {
+							width: avatarSize + 'px',
+							height: avatarSize + 'px',
+						} }
+					/>
+				</div>
+				<div className="wppic-author-name">
+					<h2 className="wppic-author-name-text" style={ headlineStyles }>
+						{ authorName }
+					</h2>
+				</div>
 			</div>
 		</>
 	)

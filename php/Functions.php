@@ -624,14 +624,6 @@ class Functions {
 			$member_since_timestamp = strtotime( $member_since );
 		}
 
-		// Get member website.
-		$member_website         = '';
-		$member_website_element = $scrape_tags->getElementById( 'user-website' );
-		if ( $member_website_element ) {
-			// Get internal <span> tag, which contains member data.
-			$member_website = $member_website_element->getElementsByTagName( 'a' )[0]->getAttribute( 'href' ); // format: https://profiles.wordpress.org/website-redirect/ronalfy.
-		}
-
 		// Get member GitHub.
 		$member_github         = '';
 		$member_github_element = $scrape_tags->getElementById( 'user-github' );
@@ -689,7 +681,6 @@ class Functions {
 			'author_avatar'          => $author_avatar,
 			'member_since'           => $member_since,
 			'member_since_timestamp' => $member_since_timestamp,
-			'member_website'         => $member_website,
 			'member_github'          => $member_github,
 			'member_location'        => $member_location,
 			'member_occupation'      => $member_occupation,
