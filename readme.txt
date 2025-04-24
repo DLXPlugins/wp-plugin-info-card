@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Tags: cards, card, theme cards, plugin cards, plugin list
 Requires at least: 3.7
 Tested up to: 6.8
-Stable tag: 5.3.0
+Stable tag: 5.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,9 +102,13 @@ This video shows you how:
 
 == Changelog ==
 
+= 5.3.1 =
+* Released 2025-04-22
+* Security fix: Follow up from last release, there is an additional security fix to resolve CSRF issues.
+
 = 5.3.0 =
 * Released 2025-04-21
-* Security fix: Minor CCRF vulnerability reported. This update addresses any non-nonced code.
+* Security fix: Minor CSRF vulnerability reported. This update addresses any non-nonced code.
 * Added security info to readme for better contact availability.
 
 = 5.2.5 =
@@ -471,5 +475,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 5.3.0 =
-Security vulnerability addressed for minor CCRF. Added security information to the .org readme.
+= 5.3.1 =
+Security fix: Follow up from last release, there is an additional security fix to resolve CSRF issues.
