@@ -313,6 +313,12 @@ class Blocks {
 				'render_callback' => array( $this, 'profile_highlights_author_avatar' ),
 			)
 		);
+		register_block_type(
+			Functions::get_plugin_dir( '/build/blocks/ProfileHighlightsBadges/block.json' ),
+			array(
+				'render_callback' => array( $this, 'profile_highlights_badges' ),
+			)
+		);
 	}
 
 	public function profile_highlights_author_avatar( $attributes ) {
@@ -330,6 +336,19 @@ class Blocks {
 		return '';
 	}
 
+	/**
+	 * Render callback for the plugin badges block.
+	 *
+	 * @param array $attributes Array of block attributes.
+	 *
+	 * @return string Block rendered.
+	 */
+	public function profile_highlights_badges( $attributes ) {
+		if ( is_admin() ) {
+			return;
+		}
+		return '';
+	}
 	/**
 	 * Render callback for the plugin screenshots block.
 	 *

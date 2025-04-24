@@ -10,6 +10,7 @@ import './blocks/PluginInfoCardQuery/wppic-query';
 import './blocks/SitePluginsCardGrid/block';
 import './blocks/PluginScreenshotsInfoCard/block';
 import './blocks/ProfileHighlightsAuthorAvatar/block';
+import './blocks/ProfileHighlightsBadges/block';
 
 /**
  * Add Block Category Icon.
