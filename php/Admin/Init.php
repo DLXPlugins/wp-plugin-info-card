@@ -41,6 +41,7 @@ class Init {
 		// Init tabs.
 		new Tabs\Main();
 		new Tabs\EDD();
+		new Tabs\Custom_Plugin();
 	}
 
 	/**
