@@ -364,6 +364,21 @@ html {
 		outline: #000 solid 1px;
 	}
 
+	&.is-destructive.is-secondary {
+		color: #FFF;
+		background: #DB3939;
+		box-shadow: none;
+		border: 1px solid #DB3939;
+		outline: 1px solid #DB3939;
+	}
+
+	&.is-secondary.is-destructive:hover {
+		color: #FFF;
+		background: #af2d2d;
+		border-color: #af2d2d;
+		outline: 1px solid #af2d2d;
+	}
+
 	&.is-secondary:hover {
 		color: #000;
 		background: #EEE;
@@ -908,9 +923,12 @@ html {
 
 		label,
 		label.components-base-control__label {
+			display: inline-flex;
 			font-weight: 600;
 			font-size: 14px;
 			text-transform: capitalize;
+			align-items: center;
+			column-gap: 4px;
 		}
 
 		input[type='text'],
@@ -933,7 +951,7 @@ html {
 		display: inline-block;
 		vertical-align: middle;
 		content: '*';
-		top: -3px;
+		top: 1px;
 		right: -12px;
 		color: #b53b07;
 		font-size: 1.4em;

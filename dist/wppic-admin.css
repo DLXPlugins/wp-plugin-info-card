@@ -7580,6 +7580,19 @@ html {
   box-shadow: none;
   outline: #000 solid 1px;
 }
+.wppic-btn.components-button.is-destructive.is-secondary {
+  color: #FFF;
+  background: #DB3939;
+  box-shadow: none;
+  border: 1px solid #DB3939;
+  outline: 1px solid #DB3939;
+}
+.wppic-btn.components-button.is-secondary.is-destructive:hover {
+  color: #FFF;
+  background: #af2d2d;
+  border-color: #af2d2d;
+  outline: 1px solid #af2d2d;
+}
 .wppic-btn.components-button.is-secondary:hover {
   color: #000;
   background: #EEE;
@@ -8023,9 +8036,12 @@ html {
 .wppic-admin-row .components-base-control:not(.components-range-control__number) label.components-base-control__label,
 .wppic-admin-row .components-form-token-field label,
 .wppic-admin-row .components-form-token-field label.components-base-control__label {
+  display: inline-flex;
   font-weight: 600;
   font-size: 14px;
   text-transform: capitalize;
+  align-items: center;
+  column-gap: 4px;
 }
 .wppic-admin-row .components-base-control:not(.components-range-control__number) input[type=text],
 .wppic-admin-row .components-base-control:not(.components-range-control__number) input[type=number],
@@ -8046,7 +8062,7 @@ html {
   display: inline-block;
   vertical-align: middle;
   content: "*";
-  top: -3px;
+  top: 1px;
   right: -12px;
   color: #b53b07;
   font-size: 1.4em;

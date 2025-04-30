@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Suspense, useCallback, useRef } from 'react';
 import { useForm, Controller, useWatch, useFormState } from 'react-hook-form';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import { Link, useNavigate } from '@tanstack/react-router';
 import { __ } from '@wordpress/i18n';
 import { isURL, cleanForSlug } from '@wordpress/url';
@@ -15,6 +15,7 @@ import {
 	ToggleControl,
 	SelectControl,
 	BaseControl,
+	TextareaControl,
 } from '@wordpress/components';
 import {
 	CloudDownload,
@@ -95,7 +96,6 @@ const Interface = ( props ) => {
 	const pluginSlugInputRef = useRef();
 
 	const checkPluginSlug = async ( slug ) => {
-		setIsChecking( true );
 		const checkPluginPromise = SendCommand( 'wppic_check_plugin_slug', { slug, nonce: wppicAdminCustomPlugin.checkPluginSlugNonce } );
 		checkPluginPromise.catch( () => {
 			setErrorMessage( __( 'There has been an error communicating with the server. Please try again.', 'wp-plugin-info-card' ) );
@@ -140,8 +140,28 @@ const Interface = ( props ) => {
 			custom_plugin_banner_id: data.custom_plugin_banner_id || 0,
 			custom_plugin_icon_url: data.custom_plugin_icon_url || '',
 			custom_plugin_banner_url: data.custom_plugin_banner_url || '',
-			custom_plugin_name: data.custom_plugin_name || '',
-			custom_plugin_slug: data.custom_plugin_slug || '',
+			name: data.name || '',
+			slug: data.slug || '',
+			short_description: data.short_description || '',
+			url: data.url || '',
+			homepage: data.homepage || '',
+			download_link: data.download_link || '',
+			version: data.version || '',
+			author: data.author || '',
+			author_profile: data.author_profile || '',
+			contributors: data.contributors || '',
+			requires: data.requires || '',
+			tested: data.tested || '',
+			rating: data.rating || '',
+			num_ratings: data.num_ratings || '',
+			downloaded: data.downloaded || '',
+			active_installs: data.active_installs || '',
+			last_updated: data.last_updated || '',
+			ratings: data.ratings || '',
+			added: data.added || '',
+			icons: data.icons || {},
+			banners: data.banners || {},
+			screenshots: data.screenshots || [],
 		},
 	} );
 	const formValues = useWatch( { control } );
@@ -181,7 +201,7 @@ const Interface = ( props ) => {
 										<div className="wppic-admin-row">
 											<Controller
 												control={ control }
-												name="custom_plugin_name"
+												name="name"
 												rules={ { required: true } }
 												render={ ( { field } ) => (
 													<TextControl
@@ -189,6 +209,7 @@ const Interface = ( props ) => {
 														placeholder={ __( 'Enter Plugin Name', 'wp-plugin-info-card' ) }
 														className="wppic-admin-input is-required"
 														help={ __( 'Enter the name of the plugin.', 'wp-plugin-info-card' ) }
+														label={ __( 'Plugin Name', 'wp-plugin-info-card' ) }
 													/>
 												) }
 											/>
@@ -196,7 +217,7 @@ const Interface = ( props ) => {
 										<div className="wppic-admin-row">
 											<Controller
 												control={ control }
-												name="custom_plugin_slug"
+												name="slug"
 												rules={ {
 													required: true,
 													pattern: /^[-_a-z0-9]+$/,
@@ -206,21 +227,20 @@ const Interface = ( props ) => {
 														<TextControl
 															{ ...field }
 															placeholder={ __( 'Enter Plugin Slug', 'wp-plugin-info-card' ) }
-															className="wppic-admin-input is-required"
-															help={ __( 'Enter the slug of the plugin. It must be unique and contain only lowercase letters and underscores.', 'wp-plugin-info-card' ) }
+															className={ classnames( 'wppic-admin-input', { 'is-required': true } ) }
+															help={ __( 'Enter the slug of the plugin. It must be unique and contain only lowercase letters, dashes, and underscores.', 'wp-plugin-info-card' ) }
+															label={ __( 'Plugin Slug', 'wp-plugin-info-card' ) }
 															onChange={ ( value ) => {
-																clearErrors( 'custom_plugin_slug' );
+																clearErrors( 'slug' );
 																field.onChange( value );
 															} }
 															ref={ pluginSlugInputRef }
 															onBlur={ ( value ) => {
-																trigger( 'custom_plugin_slug' );
+																trigger( 'slug' );
 																setIsChecking( true );
 																setErrorMessage( '' );
 																setIsError( false );
-																if ( errors?.custom_plugin_slug ) {
-																	checkPluginSlug( value );
-																}
+																checkPluginSlug( getValues( 'slug' ) ); // todo - possibly exclude when editing.
 															} }
 														/>
 														{ isChecking && (
@@ -232,14 +252,14 @@ const Interface = ( props ) => {
 															<div className="wppic-admin-row">
 																<Notice
 																	message={ warningMessage }
-																	status="error"
+																	status="warning"
 																	politeness="assertive"
 																	icon={ () => <AlertCircle style={ { color: 'currentColor' } } /> }
 																	inline={ false }
 																/>
 															</div>
 														) }
-														{ ( errors?.custom_plugin_slug && errors?.custom_plugin_slug?.type === 'pattern' ) && (
+														{ ( errors?.slug && errors?.slug?.type === 'pattern' ) && (
 															<div className="wppic-admin-row">
 																<Notice
 																	message={ __( 'The slug must contain only lowercase letters and underscores.', 'wp-plugin-info-card' ) }
@@ -251,6 +271,22 @@ const Interface = ( props ) => {
 															</div>
 														) }
 													</>
+												) }
+											/>
+										</div>
+										<div className="wppic-admin-row">
+											<Controller
+												control={ control }
+												name="short_description"
+												rules={ { required: true } }
+												render={ ( { field } ) => (
+													<TextareaControl
+														{ ...field }
+														placeholder={ __( 'Enter a Short Description', 'wp-plugin-info-card' ) }
+														className="wppic-admin-input is-required"
+														help={ __( 'Enter the a short description of the plugin. Max 150 characters.', 'wp-plugin-info-card' ) }
+														label={ __( 'Short Description', 'wp-plugin-info-card' ) }
+													/>
 												) }
 											/>
 										</div>
@@ -310,6 +346,254 @@ const Interface = ( props ) => {
 												) }
 
 											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">
+										{ __( 'Plugin Details', 'wp-plugin-info-card' ) }
+									</th>
+									<td>
+										<div className="wppic-admin-row">
+											<Controller
+												control={ control }
+												name="version"
+												rules={ { required: true } }
+												render={ ( { field } ) => (
+													<TextControl
+														{ ...field }
+														placeholder={ __( 'Enter Plugin Version', 'wp-plugin-info-card' ) }
+														className="wppic-admin-input is-required"
+														help={ __( 'Enter the version of the plugin.', 'wp-plugin-info-card' ) }
+														label={ __( 'Version', 'wp-plugin-info-card' ) }
+													/>
+												) }
+											/>
+										</div>
+										<div className="wppic-admin-row">
+											<Controller
+												control={ control }
+												name="requires"
+												rules={ { required: true } }
+												render={ ( { field } ) => (
+													<TextControl
+														{ ...field }
+														placeholder={ __( 'Enter Required WordPress Version', 'wp-plugin-info-card' ) }
+														className="wppic-admin-input is-required"
+														help={ __( 'Enter the minimum WordPress version required.', 'wp-plugin-info-card' ) }
+														label={ __( 'Required WordPress Version', 'wp-plugin-info-card' ) }
+													/>
+												) }
+											/>
+										</div>
+										<div className="wppic-admin-row">
+											<Controller
+												control={ control }
+												name="tested"
+												rules={ { required: true } }
+												render={ ( { field } ) => (
+													<TextControl
+														{ ...field }
+														placeholder={ __( 'Enter Tested WordPress Version', 'wp-plugin-info-card' ) }
+														className="wppic-admin-input is-required"
+														help={ __( 'Enter the WordPress version this plugin has been tested with.', 'wp-plugin-info-card' ) }
+														label={ __( 'Tested WordPress Version', 'wp-plugin-info-card' ) }
+													/>
+												) }
+											/>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">
+										{ __( 'Plugin Links', 'wp-plugin-info-card' ) }
+									</th>
+									<td>
+										<div className="wppic-admin-row">
+											<Controller
+												control={ control }
+												name="homepage"
+												rules={ {
+													required: true,
+													pattern: /^https?:\/\/.+/,
+												} }
+												render={ ( { field } ) => (
+													<TextControl
+														{ ...field }
+														placeholder={ __( 'Enter Plugin Homepage URL', 'wp-plugin-info-card' ) }
+														className="wppic-admin-input is-required"
+														help={ __( 'Enter the homepage URL for the plugin.', 'wp-plugin-info-card' ) }
+														label={ __( 'Homepage URL', 'wp-plugin-info-card' ) }
+													/>
+												) }
+											/>
+										</div>
+										<div className="wppic-admin-row">
+											<Controller
+												control={ control }
+												name="download_link"
+												rules={ {
+													required: true,
+													pattern: /^https?:\/\/.+/,
+												} }
+												render={ ( { field } ) => (
+													<TextControl
+														{ ...field }
+														placeholder={ __( 'Enter Plugin Download URL', 'wp-plugin-info-card' ) }
+														className="wppic-admin-input is-required"
+														help={ __( 'Enter the download URL for the plugin.', 'wp-plugin-info-card' ) }
+														label={ __( 'Download URL', 'wp-plugin-info-card' ) }
+													/>
+												) }
+											/>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">
+										{ __( 'Plugin Author', 'wp-plugin-info-card' ) }
+									</th>
+									<td>
+										<div className="wppic-admin-row">
+											<Controller
+												control={ control }
+												name="author"
+												rules={ { required: true } }
+												render={ ( { field } ) => (
+													<TextControl
+														{ ...field }
+														placeholder={ __( 'Enter Plugin Author', 'wp-plugin-info-card' ) }
+														className="wppic-admin-input is-required"
+														help={ __( 'Enter the name of the plugin author.', 'wp-plugin-info-card' ) }
+														label={ __( 'Author Name', 'wp-plugin-info-card' ) }
+													/>
+												) }
+											/>
+										</div>
+										<div className="wppic-admin-row">
+											<Controller
+												control={ control }
+												name="author_profile"
+												rules={ {
+													pattern: /^https?:\/\/.+/,
+												} }
+												render={ ( { field } ) => (
+													<TextControl
+														{ ...field }
+														placeholder={ __( 'Enter Author Profile URL', 'wp-plugin-info-card' ) }
+														className="wppic-admin-input"
+														help={ __( 'Enter the URL to the author\'s profile.', 'wp-plugin-info-card' ) }
+														label={ __( 'Author Profile URL', 'wp-plugin-info-card' ) }
+													/>
+												) }
+											/>
+										</div>
+										<div className="wppic-admin-row">
+											<Controller
+												control={ control }
+												name="contributors"
+												render={ ( { field } ) => (
+													<TextControl
+														{ ...field }
+														placeholder={ __( 'Enter Plugin Contributors', 'wp-plugin-info-card' ) }
+														className="wppic-admin-input"
+														help={ __( 'Enter comma-separated WordPress.org usernames of contributors.', 'wp-plugin-info-card' ) }
+														label={ __( 'Contributors', 'wp-plugin-info-card' ) }
+													/>
+												) }
+											/>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">
+										{ __( 'Plugin Stats', 'wp-plugin-info-card' ) }
+									</th>
+									<td>
+										<div className="wppic-admin-row">
+											<Controller
+												control={ control }
+												name="rating"
+												render={ ( { field } ) => (
+													<TextControl
+														{ ...field }
+														type="number"
+														min="0"
+														max="100"
+														placeholder={ __( 'Enter Plugin Rating', 'wp-plugin-info-card' ) }
+														className="wppic-admin-input"
+														help={ __( 'Enter the plugin rating percentage (0-100%).', 'wp-plugin-info-card' ) }
+														label={ __( 'Rating', 'wp-plugin-info-card' ) }
+													/>
+												) }
+											/>
+										</div>
+										<div className="wppic-admin-row">
+											<Controller
+												control={ control }
+												name="num_ratings"
+												render={ ( { field } ) => (
+													<TextControl
+														{ ...field }
+														type="number"
+														min="0"
+														placeholder={ __( 'Enter Number of Ratings', 'wp-plugin-info-card' ) }
+														className="wppic-admin-input"
+														help={ __( 'Enter the total number of ratings.', 'wp-plugin-info-card' ) }
+														label={ __( 'Number of Ratings', 'wp-plugin-info-card' ) }
+													/>
+												) }
+											/>
+										</div>
+										<div className="wppic-admin-row">
+											<Controller
+												control={ control }
+												name="downloaded"
+												render={ ( { field } ) => (
+													<TextControl
+														{ ...field }
+														type="number"
+														min="0"
+														placeholder={ __( 'Enter Download Count', 'wp-plugin-info-card' ) }
+														className="wppic-admin-input"
+														help={ __( 'Enter the total number of downloads.', 'wp-plugin-info-card' ) }
+														label={ __( 'Downloads', 'wp-plugin-info-card' ) }
+													/>
+												) }
+											/>
+										</div>
+										<div className="wppic-admin-row">
+											<Controller
+												control={ control }
+												name="active_installs"
+												render={ ( { field } ) => (
+													<TextControl
+														{ ...field }
+														type="number"
+														min="0"
+														placeholder={ __( 'Enter Active Installs', 'wp-plugin-info-card' ) }
+														className="wppic-admin-input"
+														help={ __( 'Enter the number of active installations.', 'wp-plugin-info-card' ) }
+														label={ __( 'Active Installs', 'wp-plugin-info-card' ) }
+													/>
+												) }
+											/>
+										</div>
+										<div className="wppic-admin-row">
+											<Controller
+												control={ control }
+												name="last_updated"
+												render={ ( { field } ) => (
+													<TextControl
+														{ ...field }
+														type="date"
+														placeholder={ __( 'Enter Last Updated Date', 'wp-plugin-info-card' ) }
+														className="wppic-admin-input"
+														help={ __( 'Enter the date when the plugin was last updated.', 'wp-plugin-info-card' ) }
+														label={ __( 'Last Updated', 'wp-plugin-info-card' ) }
+													/>
+												) }
+											/>
 										</div>
 									</td>
 								</tr>
