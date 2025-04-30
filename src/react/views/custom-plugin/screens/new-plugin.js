@@ -161,7 +161,6 @@ const Interface = ( props ) => {
 			added: data.added || '',
 			icons: data.icons || {},
 			banners: data.banners || {},
-			screenshots: data.screenshots || [],
 		},
 	} );
 	const formValues = useWatch( { control } );
@@ -298,54 +297,123 @@ const Interface = ( props ) => {
 									</th>
 									<td>
 										<div className="wppic-admin-row">
-											{ getValues( 'custom_plugin_icon_url' ) && (
-												<div className="wppic-admin-image-preview">
-													<img
-														src={ getValues( 'custom_plugin_icon_url' ) }
-														alt={ __( 'Default Icon', 'wp-plugin-info-card' ) }
-														width="180"
-														height="180"
-														style={ {
-															width: '180px',
-															height: '180px',
-														} }
-													/>
-												</div>
-											) }
-											<div className="wppic-admin-button-row">
-												<Button
-													variant="secondary"
-													className="wppic-btn wppic-btn-alt"
-													onClick={ () => {
-														openMediaUploader( {
-															attachmentId: 0,
-															title: __( 'Select Default Plugin Icon', 'wp-plugin-info-card' ),
-															suggestedWidth: 256,
-															suggestedHeight: 256,
-														}, ( media ) => {
-															setValue( 'custom_plugin_icon_id', media.id );
-															setValue( 'custom_plugin_icon_url', media.url );
-														} );
-													} }
-													help={ __( 'Select an Icon with dimensions 256x256', 'wp-plugin-info-card' ) }
-												>
-													{ __( 'Upload Icon', 'wp-plugin-info-card' ) }
-												</Button>
-												{ ( getValues( 'custom_plugin_icon_id' ) !== 0 ) && (
+											<BaseControl
+												id="wppic-admin-plugin-icon-control"
+												help={ __( 'Select an Icon with dimensions 256x256', 'wp-plugin-inf	o-card' ) }
+											>
+												{ getValues( 'custom_plugin_icon_url' ) && (
+													<div className="wppic-admin-image-preview">
+														<img
+															src={ getValues( 'custom_plugin_icon_url' ) }
+															alt={ __( 'Default Icon', 'wp-plugin-info-card' ) }
+															width="180"
+															height="180"
+															style={ {
+																width: '180px',
+																height: '180px',
+															} }
+														/>
+													</div>
+												) }
+												<div className="wppic-admin-button-row">
 													<Button
 														variant="secondary"
 														className="wppic-btn wppic-btn-alt"
 														onClick={ () => {
-															setValue( 'custom_plugin_icon_id', 0 );
-															setValue( 'custom_plugin_icon_url', '' );
+															openMediaUploader( {
+																attachmentId: 0,
+																title: __( 'Select Default Plugin Icon', 'wp-plugin-info-card' ),
+																suggestedWidth: 256,
+																suggestedHeight: 256,
+																cropSettings: {
+																	width: 256,
+																	height: 256,
+																},
+																aspectRatio: '1:1',
+															}, ( media ) => {
+																setValue( 'custom_plugin_icon_id', media.id );
+																setValue( 'custom_plugin_icon_url', media.url );
+															} );
 														} }
-														isDestructive={ true }
+														help={ __( 'Select an Icon with dimensions 256x256', 'wp-plugin-info-card' ) }
 													>
-														{ __( 'Remove Icon', 'wp-plugin-info-card' ) }
+														{ __( 'Upload Icon', 'wp-plugin-info-card' ) }
 													</Button>
-												) }
+													{ ( getValues( 'custom_plugin_icon_id' ) !== 0 ) && (
+														<Button
+															variant="secondary"
+															className="wppic-btn wppic-btn-alt"
+															onClick={ () => {
+																setValue( 'custom_plugin_icon_id', 0 );
+																setValue( 'custom_plugin_icon_url', '' );
+															} }
+															isDestructive={ true }
+														>
+															{ __( 'Remove Icon', 'wp-plugin-info-card' ) }
+														</Button>
+													) }
 
-											</div>
+												</div>
+											</BaseControl>
+										</div>
+										<div className="wppic-admin-row">
+											<BaseControl
+												id="wppic-admin-plugin-banner-control"
+												help={ __( 'Select an Icon with dimensions 1544x720', 'wp-plugin-info-card' ) }
+											>
+												{ getValues( 'custom_plugin_banner_url' ) && (
+													<div className="wppic-admin-image-preview">
+														<img
+															src={ getValues( 'custom_plugin_banner_url' ) }
+															alt={ __( 'Default Icon', 'wp-plugin-info-card' ) }
+															width="180"
+															height="180"
+															style={ {
+																width: '772px',
+																height: '250px',
+															} }
+														/>
+													</div>
+												) }
+												<div className="wppic-admin-button-row">
+													<Button
+														variant="secondary"
+														className="wppic-btn wppic-btn-alt"
+														onClick={ () => {
+															openMediaUploader( {
+																attachmentId: 0,
+																title: __( 'Select Plugin Banner', 'wp-plugin-info-card' ),
+																suggestedWidth: 1544,
+																suggestedHeight: 500,
+																cropSettings: {
+																	width: 1544,
+																	height: 500,
+																},
+																aspectRatio: '386:125',
+															}, ( media ) => {
+																setValue( 'custom_plugin_banner_id', media.id );
+																setValue( 'custom_plugin_banner_url', media.url );
+															} );
+														} }
+														help={ __( 'Select an Icon with dimensions 1544x720', 'wp-plugin-info-card' ) }
+													>
+														{ __( 'Upload Banner Image', 'wp-plugin-info-card' ) }
+													</Button>
+													{ ( getValues( 'custom_plugin_banner_id' ) !== 0 ) && (
+														<Button
+															variant="secondary"
+															className="wppic-btn wppic-btn-alt"
+															onClick={ () => {
+																setValue( 'custom_plugin_banner_id', 0 );
+																setValue( 'custom_plugin_banner_url', '' );
+															} }
+															isDestructive={ true }
+														>
+															{ __( 'Remove Banner', 'wp-plugin-info-card' ) }
+														</Button>
+													) }
+												</div>
+											</BaseControl>
 										</div>
 									</td>
 								</tr>

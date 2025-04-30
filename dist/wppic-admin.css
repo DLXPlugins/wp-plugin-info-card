@@ -8487,6 +8487,9 @@ p.wppic-admin-header-description {
   border: 1px solid #ddd;
 }
 
+.wppic-admin-button-row {
+  width: 100%;
+}
 .wppic-admin-button-row button {
   margin-right: 16px;
 }

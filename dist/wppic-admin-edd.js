@@ -21528,24 +21528,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 var _this = undefined;
-function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) return _arrayLikeToArray(b, c); var a = {}.toString.call(b).slice(8, -1); return "Object" === a && b.constructor && (a = b.constructor.name), "Map" === a || "Set" === a ? Array.from(b) : "Arguments" === a || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a) ? _arrayLikeToArray(b, c) : void 0; } }
-function _arrayLikeToArray(b, c) { (null == c || c > b.length) && (c = b.length); for (var d = 0, f = Array(c); d < c; d++) f[d] = b[d]; return f; }
-function _iterableToArrayLimit(b, c) { var d = null == b ? null : "undefined" != typeof Symbol && b[Symbol.iterator] || b["@@iterator"]; if (null != d) { var g, h, j, k, l = [], a = !0, m = !1; try { if (j = (d = d.call(b)).next, 0 === c) { if (Object(d) !== d) return; a = !1; } else for (; !(a = (g = j.call(d)).done) && (l.push(g.value), l.length !== c); a = !0); } catch (a) { m = !0, h = a; } finally { try { if (!a && null != d["return"] && (k = d["return"](), Object(k) !== k)) return; } finally { if (m) throw h; } } return l; } }
-function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
 function ownKeys(a, b) { var c = Object.keys(a); if (Object.getOwnPropertySymbols) { var d = Object.getOwnPropertySymbols(a); b && (d = d.filter(function (b) { return Object.getOwnPropertyDescriptor(a, b).enumerable; })), c.push.apply(c, d); } return c; }
 function _objectSpread(a) { for (var b = 1; b < arguments.length; b++) { var c = null != arguments[b] ? arguments[b] : {}; b % 2 ? ownKeys(Object(c), !0).forEach(function (b) { _defineProperty(a, b, c[b]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(a, Object.getOwnPropertyDescriptors(c)) : ownKeys(Object(c)).forEach(function (b) { Object.defineProperty(a, b, Object.getOwnPropertyDescriptor(c, b)); }); } return a; }
 function _defineProperty(a, b, c) { return (b = _toPropertyKey(b)) in a ? Object.defineProperty(a, b, { value: c, enumerable: !0, configurable: !0, writable: !0 }) : a[b] = c, a; }
 function _toPropertyKey(a) { var b = _toPrimitive(a, "string"); return "symbol" == (typeof b === "undefined" ? "undefined" : _typeof(b)) ? b : b + ""; }
 function _toPrimitive(a, b) { if ("object" != (typeof a === "undefined" ? "undefined" : _typeof(a)) || !a) return a; var c = a[Symbol.toPrimitive]; if (void 0 !== c) { var d = c.call(a, b || "default"); if ("object" != (typeof d === "undefined" ? "undefined" : _typeof(d))) return d; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === b ? String : Number)(a); }
-
 
 var getCropSettings = function a() {
   var b = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -21558,8 +21549,8 @@ var getCropSettings = function a() {
     suggestedHeight: '500',
     nonce: '',
     postId: 0,
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Image', 'wp-plugin-info-card'),
-    buttonLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add Image', 'wp-plugin-info-card'),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Image', 'wp-plugin-info-card'),
+    buttonLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add Image', 'wp-plugin-info-card'),
     main: _this
   };
   c = _objectSpread(_objectSpread({}, c), b);
@@ -21583,21 +21574,16 @@ var getCropControl = function a() {
   return d;
 };
 var useMediaUploader = function b(a) {
-  var c = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
-    d = _slicedToArray(c, 2),
-    e = d[0],
-    f = d[1];
-
   /**
    * Retrieve crop options for an attachment.
    *
-   * @param {Object} attachment Attachment image object.
-   * @param {Object} controller Media controller object.
+   * @param {Object} attachment   Attachment image object.
+   * @param {Object} controller   Media controller object.
    * @param {Object} cropSettings Crop settings.
    *
    * @return {Object} Cropping options.
    */
-  var g = function d(a, b, c) {
+  var c = function d(a, b, c) {
     var e = getCropSettings(c);
     var f = b.get('control');
     var g = a.get('width');
@@ -21674,35 +21660,34 @@ var useMediaUploader = function b(a) {
     return t;
   };
   return {
-    openMediaUploader: function c(a, b) {
-      f(a);
-      var d = getCropSettings(a);
-      var e = getCropControl(a);
-      var h = wp.media({
+    openMediaUploader: function d(a, b) {
+      var e = getCropSettings(a);
+      var f = getCropControl(a);
+      var g = wp.media({
         states: [new wp.media.controller.Library({
-          title: a.title || d.title,
+          title: a.title || e.title,
           library: wp.media.query({
             type: 'image'
           }),
           multiple: false,
           date: false,
           priority: 20,
-          suggestedWidth: d.suggestedWidth,
-          suggestedHeight: d.suggestedHeight
+          suggestedWidth: e.suggestedWidth,
+          suggestedHeight: e.suggestedHeight
         }), new wp.media.controller.CustomizeImageCropper({
-          control: e,
-          imgSelectOptions: function d(b, c) {
-            return g(b, c, a);
+          control: f,
+          imgSelectOptions: function e(b, d) {
+            return c(b, d, a);
           }
         })]
       });
 
       // Set the toolbar.
-      h.on('toolbar:create', function (a) {
+      g.on('toolbar:create', function (a) {
         var b = {};
         b.items = {};
         b.items.select = {
-          text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Save Image', 'wp-plugin-info-card'),
+          text: e.buttonLabel,
           style: 'primary',
           click: wp.media.view.Toolbar.Select.prototype.clickSelect,
           requires: {
@@ -21715,49 +21700,49 @@ var useMediaUploader = function b(a) {
           syncSelection: true
         };
         this.createSelectToolbar(a, b);
-      }, h);
+      }, g);
 
       //For when the Add Profile Image is clicked
-      var i = 0;
-      h.on('select', function () {
+      var h = 0;
+      g.on('select', function () {
         // Get avatar attributes.
-        var a = h.state().get('selection').first().toJSON();
+        var a = g.state().get('selection').first().toJSON();
 
         // Get original attachment ID.
-        i = a.id;
+        h = a.id;
 
         // Calculate ratio.
         var c = a.width / a.height;
-        var d = e.params.width / e.params.height;
+        var d = f.params.width / f.params.height;
         if (c === d) {
-          var f = h.state().get('selection').single();
-          b(f.attributes);
-          h.close();
+          var e = g.state().get('selection').single();
+          b(e.attributes);
+          g.close();
         } else {
-          h.setState('cropper');
+          g.setState('cropper');
         }
       });
       //When the remove buttons is clicked
-      h.on('remove', function () {});
+      g.on('remove', function () {});
 
       //For when the window is closed (update the thumbnail)
-      h.on('escape', function () {});
+      g.on('escape', function () {});
 
       // When image is cropped.
-      h.on('cropped', function (a) {
+      g.on('cropped', function (a) {
         b(a);
       });
 
       // When image cropping is skipped.
-      h.on('skippedcrop', function (a) {
+      g.on('skippedcrop', function (a) {
         b(a.attributes);
       });
-      h.on('open', function () {
-        var a = wp.media.attachment(d.attachmentId);
-        var b = h.state('library').get('selection');
+      g.on('open', function () {
+        var a = wp.media.attachment(e.attachmentId);
+        var b = g.state('library').get('selection');
         b.add(a);
       });
-      h.open();
+      g.open();
     }
   };
 };

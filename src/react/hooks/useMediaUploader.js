@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { __ } from '@wordpress/i18n';
 const getCropSettings = ( overrides = {} ) => {
 	// Set the settings for the media uploader and cropper.
@@ -33,14 +32,11 @@ const getCropControl = ( overrides = {} ) => {
 };
 
 const useMediaUploader = ( props ) => {
-
-	const [ cropDefaults, setCropDefaults ] = useState( {} );
-
 	/**
 	 * Retrieve crop options for an attachment.
 	 *
-	 * @param {Object} attachment Attachment image object.
-	 * @param {Object} controller Media controller object.
+	 * @param {Object} attachment   Attachment image object.
+	 * @param {Object} controller   Media controller object.
 	 * @param {Object} cropSettings Crop settings.
 	 *
 	 * @return {Object} Cropping options.
@@ -131,7 +127,6 @@ const useMediaUploader = ( props ) => {
 	};
 	return {
 		openMediaUploader: ( cropSettings, callback ) => {
-			setCropDefaults( cropSettings );
 			const settings = getCropSettings( cropSettings );
 			const cropControl = getCropControl( cropSettings );
 			const uploader = wp.media( {
@@ -159,7 +154,7 @@ const useMediaUploader = ( props ) => {
 					const options = {};
 					options.items = {};
 					options.items.select = {
-						text: __( 'Save Image', 'wp-plugin-info-card' ),
+						text: settings.buttonLabel,
 						style: 'primary',
 						click: wp.media.view.Toolbar.Select.prototype.clickSelect,
 						requires: { selection: true },
@@ -171,7 +166,7 @@ const useMediaUploader = ( props ) => {
 					};
 					this.createSelectToolbar( toolbar, options );
 				},
-				uploader
+				uploader,
 			);
 
 			//For when the Add Profile Image is clicked
