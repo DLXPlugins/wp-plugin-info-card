@@ -7415,7 +7415,8 @@ html {
   line-height: 1.3;
 }
 
-.notice, .updated {
+.notice,
+.updated {
   display: none;
 }
 
@@ -7594,6 +7595,7 @@ html {
 }
 .wppic-btn.components-button.has-icon-right svg {
   margin-left: 8px;
+  margin-right: 8px;
 }
 .wppic-btn.components-button.btn-large {
   padding: 20px 24px;
@@ -7834,7 +7836,8 @@ html {
 }
 .wppic-admin-buttons button.has-error {
   border: 1px solid #bc2b2c;
-  box-shadow: none !important; /* override core style */
+  box-shadow: none !important;
+  /* override core style */
 }
 .wppic-admin-buttons button.has-error:hover {
   cursor: not-allowed;
@@ -8000,7 +8003,8 @@ html {
 }
 .wppic-admin-row .components-select-control label,
 .wppic-admin-row .components-radio-control label {
-  font-weight: 700 !important; /* override core styles */
+  font-weight: 700 !important;
+  /* override core styles */
   font-size: 0.8125rem !important;
 }
 .wppic-admin-row .components-base-control:not(.components-range-control__number),

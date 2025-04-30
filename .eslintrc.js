@@ -9,6 +9,7 @@ module.exports = {
 		wppicAdminHome: 'readonly',
 		wppicAdminScreenshots: 'readonly',
 		wppic_dashboard_widget: 'readonly',
+		wppicAdminCustomPlugin: 'readonly',
 	},
 	extends: [
 		'eslint:recommended',

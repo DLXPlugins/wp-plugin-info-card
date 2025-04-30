@@ -55,6 +55,7 @@
     "@fancyapps/ui": "^5.0.33",
     "@splidejs/react-splide": "^0.7.12",
     "@splidejs/splide": "^4.1.4",
+    "@tanstack/react-router": "^1.117.1",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@wordpress/components": "^25.10.0",
     "@wordpress/date": "^4.41.0",
