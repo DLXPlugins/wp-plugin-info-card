@@ -52,9 +52,10 @@ class Custom_Plugin {
 			'wppic-admin-custom-plugin',
 			'wppicAdminCustomPlugin',
 			array(
-				'getNonce'   => wp_create_nonce( 'wppic-admin-custom-plugin-retrieve-options' ),
-				'saveNonce'  => wp_create_nonce( 'wppic-save-options' ),
-				'resetNonce' => wp_create_nonce( 'wppic-reset-options' ),
+				'getNonce'             => wp_create_nonce( 'wppic-admin-custom-plugin-retrieve-options' ),
+				'saveNonce'            => wp_create_nonce( 'wppic-save-options' ),
+				'resetNonce'           => wp_create_nonce( 'wppic-reset-options' ),
+				'checkPluginSlugNonce' => wp_create_nonce( 'wppic-check-plugin-slug' ),
 			)
 		);
 	}

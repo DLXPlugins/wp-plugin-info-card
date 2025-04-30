@@ -30,6 +30,7 @@ class Shortcodes {
 		add_action( 'wp_ajax_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
 		add_action( 'wp_ajax_nopriv_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
 		add_action( 'init', array( static::class, 'register_screenshots_presets_post_type' ) );
+		add_action( 'init', array( static::class, 'register_custom_plugin_post_type' ) );
 		return $self;
 	}
 
@@ -66,6 +67,41 @@ class Shortcodes {
 		);
 
 		register_post_type( 'wppic_screen_presets', $args );
+	}
+
+	/**
+	 * Register plugin screenshots post type.
+	 */
+	public static function register_custom_plugin_post_type() {
+		$labels = array(
+			'name'               => __( 'Custom Plugins', 'wp-plugin-info-card' ),
+			'singular_name'      => __( 'Custom Plugin', 'wp-plugin-info-card' ),
+			'add_new'            => __( 'Add New', 'wp-plugin-info-card' ),
+			'add_new_item'       => __( 'Add New Custom Plugin', 'wp-plugin-info-card' ),
+			'edit_item'          => __( 'Edit Custom Plugin', 'wp-plugin-info-card' ),
+			'new_item'           => __( 'New Custom Plugin', 'wp-plugin-info-card' ),
+			'all_items'          => __( 'All Custom Plugins', 'wp-plugin-info-card' ),
+			'view_item'          => __( 'View Custom Plugin', 'wp-plugin-info-card' ),
+			'search_items'       => __( 'Search Custom Plugins', 'wp-plugin-info-card' ),
+			'not_found'          => __( 'No Custom Plugins found', 'wp-plugin-info-card' ),
+			'not_found_in_trash' => __( 'No Custom Plugins found in Trash', 'wp-plugin-info-card' ),
+			'parent_item_colon'  => '',
+			'menu_name'          => __( 'Custom Plugins', 'wp-plugin-info-card' ),
+		);
+
+		$args = array(
+			'labels'                  => $labels,
+			'public'                  => false,
+			'publicly_queryable'      => false,
+			'show_ui'                 => false,
+			'show_in_menu'            => false,
+			'query_var'               => false,
+			'rewrite'                 => false,
+			'dlx_photo_block_archive' => false,
+			'hierarchical'            => false,
+		);
+
+		register_post_type( 'wppic_custom_plugins', $args );
 	}
 
 	/**
@@ -1166,7 +1202,7 @@ class Shortcodes {
 				'color_star'                               => '#FF9529',
 				'color_meta_background'                    => '#000000',
 				'color_meta_text'                          => '#FFFFFF',
-				'skip_animated_gifs'					   => false,
+				'skip_animated_gifs'                       => false,
 			),
 			$attributes,
 			'wp-pic-plugin-screenshots'

@@ -6,9 +6,9 @@ import { useRouterState, useNavigate } from '@tanstack/react-router';
 import { __ } from '@wordpress/i18n';
 import { isURL, cleanForSlug } from '@wordpress/url';
 import BeatLoader from 'react-spinners/BeatLoader';
-import SaveResetButtons from '../../components/SaveResetButtons';
 import useMediaUploader from '../../hooks/useMediaUploader';
-
+import PluginHome from './screens/home';
+import NewPluginScreen from './screens/new-plugin';
 import {
 	TextControl,
 	Button,
@@ -24,6 +24,7 @@ import {
 	Cog,
 	BookText,
 	XCircle,
+	Home,
 	Loader2,
 	Database,
 	ClipboardCheck,
@@ -124,77 +125,22 @@ const Interface = ( props ) => {
 		localStorage.removeItem( 'wppic_edd_options' );
 		localStorage.removeItem( 'wppic_edd_options_timestamp' );
 	};
+
+	const renderScreen = () => {
+		switch (routerState.location.pathname) {
+			case '/':
+				return <PluginHome />;
+			case '/new-plugin':
+				return <NewPluginScreen isEditing={ false } pluginData={ null } />;
+			default:
+				return <div>404</div>;
+		}
+	};
+
 	return (
-		<>
-			<div className="wppic-admin-panel-container with-sidebar">
-				<div className="wppic-admin-panel-options-wrapper">
-					<div className="wppic-admin-panel-area">
-						<div className="wppic-admin-panel-area__section">
-							<h2>
-								<PluginIcon />
-								{ __( 'Custom Plugins', 'wp-plugin-info-card' ) }
-							</h2>
-							<p className="description">
-								{ __(
-									'Add a custom plugin, enable a REST API endpoint, and share the plugin with the world.',
-									'wp-plugin-info-card',
-								) }
-							</p>
-						</div>
-					</div>
-				</div>
-				<div className="wppic-admin-panel-sidebar">
-					<div className="wppic-admin-panel-sidebar-card">
-						<h3>
-							<Plug2 />
-							{ __( 'Add New Plugin', 'wp-plugin-info-card' ) }
-						</h3>
-						<p>
-							{ __(
-								'Add a new plugin to the list of plugins.',
-								'wp-plugin-info-card',
-							) }
-						</p>
-						<Button
-							variant="primary"
-							href="#"
-							onClick={ ( e ) => {
-								e.preventDefault();
-								navigate( { to: '/new-plugin' } );
-							} }
-							iconPosition="left"
-							className="wppic-btn wppic-btn-alt has-icon-right btn-full-width"
-							icon={ () => <Plus /> }
-						>
-							{ __( 'Add New Plugin', 'wp-plugin-info-card' ) }
-						</Button>
-					</div>
-					<div className="wppic-admin-panel-sidebar-card">
-						<h3>
-							<BookText />
-							{ __( 'Documentation', 'wp-plugin-info-card' ) }
-						</h3>
-						<p>
-							{ __(
-								'Find out how to display your custom plugins with WP Plugin Info Card.',
-								'wp-plugin-info-card',
-							) }
-						</p>
-						<Button
-							variant="secondary"
-							href="https://wppic.dlxplugins.com/"
-							className="wppic-btn wppic-btn-alt has-icon-right btn-full-width"
-							icon={ () => <ExternalLink /> }
-							iconPosition="left"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							{ __( 'English Documentation', 'wp-plugin-info-card' ) }
-						</Button>
-					</div>
-				</div>
-			</div>
-		</>
+		<div>
+			{ renderScreen() }
+		</div>
 	);
 };
 export default CustomPlugin;

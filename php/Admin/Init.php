@@ -35,6 +35,7 @@ class Init {
 		add_action( 'wp_ajax_wppic_clear_cache', array( $this, 'ajax_clear_cache' ) );
 		add_action( 'wp_ajax_wppic_clear_cache_options', array( $this, 'ajax_clear_cache_options' ) );
 		add_action( 'wp_ajax_wppic_check_plugin', array( $this, 'ajax_check_plugin' ) );
+		add_action( 'wp_ajax_wppic_check_plugin_slug', array( $this, 'ajax_check_plugin_slug' ) );
 		add_action( 'wp_ajax_wppic_check_theme', array( $this, 'ajax_check_theme' ) );
 		add_action( 'wp_ajax_wppic_get_sample_plugin', array( $this, 'ajax_get_sample_plugin' ) );
 
@@ -89,6 +90,81 @@ class Init {
 				'type'        => 'success',
 				'dismissable' => true,
 				'pluginData'  => $plugin_data,
+			)
+		);
+	}
+
+	/**
+	 * Check the plugin slug for .org and local plugins.
+	 */
+	public function ajax_check_plugin_slug() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+		if ( ! wp_verify_nonce( $nonce, 'wppic-check-plugin-slug' ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce verification failed', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		// Ensure slug is sanitized.
+		$raw_plugin_slug = sanitize_text_field( filter_input( INPUT_POST, 'slug', FILTER_DEFAULT ) );
+		$plugin_slug     = sanitize_title( filter_input( INPUT_POST, 'slug', FILTER_DEFAULT ) );
+		if ( $raw_plugin_slug !== $plugin_slug ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Invalid plugin slug', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		// Try to get local slug from custom plugins post type.
+		$maybe_custom_plugin_post = get_posts(
+			array(
+				'post_type' => 'wppic_custom_plugins',
+				'name'      => $plugin_slug,
+			)
+		);
+		$maybe_custom_slug        = '';
+		if ( $maybe_custom_plugin_post ) {
+			$maybe_custom_slug = $maybe_custom_plugin_post[0]->post_name;
+		}
+
+		if ( $maybe_custom_slug ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Duplicate plugin slug found', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+					'customSlug'  => sanitize_title( $maybe_custom_slug ),
+				)
+			);
+		}
+
+		$plugin_data = wppic_api_parser( 'plugin', sanitize_title( $plugin_slug ) );
+		if ( $plugin_data ) {
+			wp_send_json_success(
+				array(
+					'message'     => __( 'A plugin with this slug already exists on WordPress.org. If left as-is, this plugin will override .org data for the slug.', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+					'display'     => true,
+				)
+			);
+		}
+		wp_send_json_success(
+			array(
+				'message'     => __( 'The plugin slug is available.', 'wp-plugin-info-card' ),
+				'type'        => 'success',
+				'dismissable' => true,
+				'display'     => false,
 			)
 		);
 	}

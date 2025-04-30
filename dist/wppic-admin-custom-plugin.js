@@ -1175,6 +1175,333 @@ function Transitioner() {
 
 /***/ }),
 
+/***/ "./node_modules/@tanstack/react-router/dist/esm/link.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/@tanstack/react-router/dist/esm/link.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Link: () => (/* binding */ Link),
+/* harmony export */   createLink: () => (/* binding */ createLink),
+/* harmony export */   linkOptions: () => (/* binding */ linkOptions),
+/* harmony export */   useLinkProps: () => (/* binding */ useLinkProps)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "react-dom");
+/* harmony import */ var _tanstack_router_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @tanstack/router-core */ "./node_modules/@tanstack/router-core/dist/esm/path.js");
+/* harmony import */ var _tanstack_router_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @tanstack/router-core */ "./node_modules/@tanstack/router-core/dist/esm/utils.js");
+/* harmony import */ var _tanstack_router_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @tanstack/router-core */ "./node_modules/@tanstack/router-core/dist/esm/link.js");
+/* harmony import */ var _useRouterState_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./useRouterState.js */ "./node_modules/@tanstack/react-router/dist/esm/useRouterState.js");
+/* harmony import */ var _useRouter_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./useRouter.js */ "./node_modules/@tanstack/react-router/dist/esm/useRouter.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils.js */ "./node_modules/@tanstack/react-router/dist/esm/utils.js");
+/* harmony import */ var _Matches_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Matches.js */ "./node_modules/@tanstack/react-router/dist/esm/Matches.js");
+
+
+
+
+
+
+
+
+function useLinkProps(options, forwardedRef) {
+  const router = (0,_useRouter_js__WEBPACK_IMPORTED_MODULE_3__.useRouter)();
+  const [isTransitioning, setIsTransitioning] = react__WEBPACK_IMPORTED_MODULE_1__.useState(false);
+  const hasRenderFetched = react__WEBPACK_IMPORTED_MODULE_1__.useRef(false);
+  const innerRef = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.useForwardedRef)(forwardedRef);
+  const {
+    // custom props
+    activeProps = () => ({ className: "active" }),
+    inactiveProps = () => ({}),
+    activeOptions,
+    to,
+    preload: userPreload,
+    preloadDelay: userPreloadDelay,
+    hashScrollIntoView,
+    replace,
+    startTransition,
+    resetScroll,
+    viewTransition,
+    // element props
+    children,
+    target,
+    disabled,
+    style,
+    className,
+    onClick,
+    onFocus,
+    onMouseEnter,
+    onMouseLeave,
+    onTouchStart,
+    ignoreBlocker,
+    ...rest
+  } = options;
+  const {
+    // prevent these from being returned
+    params: _params,
+    search: _search,
+    hash: _hash,
+    state: _state,
+    mask: _mask,
+    reloadDocument: _reloadDocument,
+    ...propsSafeToSpread
+  } = rest;
+  const type = react__WEBPACK_IMPORTED_MODULE_1__.useMemo(() => {
+    try {
+      new URL(`${to}`);
+      return "external";
+    } catch {
+    }
+    return "internal";
+  }, [to]);
+  const currentSearch = (0,_useRouterState_js__WEBPACK_IMPORTED_MODULE_5__.useRouterState)({
+    select: (s) => s.location.search,
+    structuralSharing: true
+  });
+  const from = (0,_Matches_js__WEBPACK_IMPORTED_MODULE_6__.useMatches)({
+    select: (matches) => {
+      var _a;
+      return options.from ?? ((_a = matches[matches.length - 1]) == null ? void 0 : _a.fullPath);
+    }
+  });
+  const _options = react__WEBPACK_IMPORTED_MODULE_1__.useMemo(() => ({ ...options, from }), [options, from]);
+  const next = react__WEBPACK_IMPORTED_MODULE_1__.useMemo(
+    () => router.buildLocation(_options),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [router, _options, currentSearch]
+  );
+  const preload = react__WEBPACK_IMPORTED_MODULE_1__.useMemo(() => {
+    if (_options.reloadDocument) {
+      return false;
+    }
+    return userPreload ?? router.options.defaultPreload;
+  }, [router.options.defaultPreload, userPreload, _options.reloadDocument]);
+  const preloadDelay = userPreloadDelay ?? router.options.defaultPreloadDelay ?? 0;
+  const isActive = (0,_useRouterState_js__WEBPACK_IMPORTED_MODULE_5__.useRouterState)({
+    select: (s) => {
+      if (activeOptions == null ? void 0 : activeOptions.exact) {
+        const testExact = (0,_tanstack_router_core__WEBPACK_IMPORTED_MODULE_7__.exactPathTest)(
+          s.location.pathname,
+          next.pathname,
+          router.basepath
+        );
+        if (!testExact) {
+          return false;
+        }
+      } else {
+        const currentPathSplit = (0,_tanstack_router_core__WEBPACK_IMPORTED_MODULE_7__.removeTrailingSlash)(
+          s.location.pathname,
+          router.basepath
+        ).split("/");
+        const nextPathSplit = (0,_tanstack_router_core__WEBPACK_IMPORTED_MODULE_7__.removeTrailingSlash)(
+          next.pathname,
+          router.basepath
+        ).split("/");
+        const pathIsFuzzyEqual = nextPathSplit.every(
+          (d, i) => d === currentPathSplit[i]
+        );
+        if (!pathIsFuzzyEqual) {
+          return false;
+        }
+      }
+      if ((activeOptions == null ? void 0 : activeOptions.includeSearch) ?? true) {
+        const searchTest = (0,_tanstack_router_core__WEBPACK_IMPORTED_MODULE_8__.deepEqual)(s.location.search, next.search, {
+          partial: !(activeOptions == null ? void 0 : activeOptions.exact),
+          ignoreUndefined: !(activeOptions == null ? void 0 : activeOptions.explicitUndefined)
+        });
+        if (!searchTest) {
+          return false;
+        }
+      }
+      if (activeOptions == null ? void 0 : activeOptions.includeHash) {
+        return s.location.hash === next.hash;
+      }
+      return true;
+    }
+  });
+  const doPreload = react__WEBPACK_IMPORTED_MODULE_1__.useCallback(() => {
+    router.preloadRoute(_options).catch((err) => {
+      console.warn(err);
+      console.warn(_tanstack_router_core__WEBPACK_IMPORTED_MODULE_9__.preloadWarning);
+    });
+  }, [_options, router]);
+  const preloadViewportIoCallback = react__WEBPACK_IMPORTED_MODULE_1__.useCallback(
+    (entry) => {
+      if (entry == null ? void 0 : entry.isIntersecting) {
+        doPreload();
+      }
+    },
+    [doPreload]
+  );
+  (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.useIntersectionObserver)(
+    innerRef,
+    preloadViewportIoCallback,
+    { rootMargin: "100px" },
+    { disabled: !!disabled || !(preload === "viewport") }
+  );
+  (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.useLayoutEffect)(() => {
+    if (hasRenderFetched.current) {
+      return;
+    }
+    if (!disabled && preload === "render") {
+      doPreload();
+      hasRenderFetched.current = true;
+    }
+  }, [disabled, doPreload, preload]);
+  if (type === "external") {
+    return {
+      ...propsSafeToSpread,
+      ref: innerRef,
+      type,
+      href: to,
+      ...children && { children },
+      ...target && { target },
+      ...disabled && { disabled },
+      ...style && { style },
+      ...className && { className },
+      ...onClick && { onClick },
+      ...onFocus && { onFocus },
+      ...onMouseEnter && { onMouseEnter },
+      ...onMouseLeave && { onMouseLeave },
+      ...onTouchStart && { onTouchStart }
+    };
+  }
+  const handleClick = (e) => {
+    if (!disabled && !isCtrlEvent(e) && !e.defaultPrevented && (!target || target === "_self") && e.button === 0) {
+      e.preventDefault();
+      (0,react_dom__WEBPACK_IMPORTED_MODULE_2__.flushSync)(() => {
+        setIsTransitioning(true);
+      });
+      const unsub = router.subscribe("onResolved", () => {
+        unsub();
+        setIsTransitioning(false);
+      });
+      return router.navigate({
+        ..._options,
+        replace,
+        resetScroll,
+        hashScrollIntoView,
+        startTransition,
+        viewTransition,
+        ignoreBlocker
+      });
+    }
+  };
+  const handleFocus = (_) => {
+    if (disabled) return;
+    if (preload) {
+      doPreload();
+    }
+  };
+  const handleTouchStart = handleFocus;
+  const handleEnter = (e) => {
+    if (disabled) return;
+    const eventTarget = e.target || {};
+    if (preload) {
+      if (eventTarget.preloadTimeout) {
+        return;
+      }
+      eventTarget.preloadTimeout = setTimeout(() => {
+        eventTarget.preloadTimeout = null;
+        doPreload();
+      }, preloadDelay);
+    }
+  };
+  const handleLeave = (e) => {
+    if (disabled) return;
+    const eventTarget = e.target || {};
+    if (eventTarget.preloadTimeout) {
+      clearTimeout(eventTarget.preloadTimeout);
+      eventTarget.preloadTimeout = null;
+    }
+  };
+  const composeHandlers = (handlers) => (e) => {
+    var _a;
+    (_a = e.persist) == null ? void 0 : _a.call(e);
+    handlers.filter(Boolean).forEach((handler) => {
+      if (e.defaultPrevented) return;
+      handler(e);
+    });
+  };
+  const resolvedActiveProps = isActive ? (0,_tanstack_router_core__WEBPACK_IMPORTED_MODULE_8__.functionalUpdate)(activeProps, {}) ?? {} : {};
+  const resolvedInactiveProps = isActive ? {} : (0,_tanstack_router_core__WEBPACK_IMPORTED_MODULE_8__.functionalUpdate)(inactiveProps, {});
+  const resolvedClassName = [
+    className,
+    resolvedActiveProps.className,
+    resolvedInactiveProps.className
+  ].filter(Boolean).join(" ");
+  const resolvedStyle = {
+    ...style,
+    ...resolvedActiveProps.style,
+    ...resolvedInactiveProps.style
+  };
+  return {
+    ...propsSafeToSpread,
+    ...resolvedActiveProps,
+    ...resolvedInactiveProps,
+    href: disabled ? void 0 : next.maskedLocation ? router.history.createHref(next.maskedLocation.href) : router.history.createHref(next.href),
+    ref: innerRef,
+    onClick: composeHandlers([onClick, handleClick]),
+    onFocus: composeHandlers([onFocus, handleFocus]),
+    onMouseEnter: composeHandlers([onMouseEnter, handleEnter]),
+    onMouseLeave: composeHandlers([onMouseLeave, handleLeave]),
+    onTouchStart: composeHandlers([onTouchStart, handleTouchStart]),
+    disabled: !!disabled,
+    target,
+    ...Object.keys(resolvedStyle).length && { style: resolvedStyle },
+    ...resolvedClassName && { className: resolvedClassName },
+    ...disabled && {
+      role: "link",
+      "aria-disabled": true
+    },
+    ...isActive && { "data-status": "active", "aria-current": "page" },
+    ...isTransitioning && { "data-transitioning": "transitioning" }
+  };
+}
+function createLink(Comp) {
+  return react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(function CreatedLink(props, ref) {
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Link, { ...props, _asChild: Comp, ref });
+  });
+}
+const Link = react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(
+  (props, ref) => {
+    const { _asChild, ...rest } = props;
+    const {
+      type: _type,
+      ref: innerRef,
+      ...linkProps
+    } = useLinkProps(rest, ref);
+    const children = typeof rest.children === "function" ? rest.children({
+      isActive: linkProps["data-status"] === "active"
+    }) : rest.children;
+    if (typeof _asChild === "undefined") {
+      delete linkProps.disabled;
+    }
+    return react__WEBPACK_IMPORTED_MODULE_1__.createElement(
+      _asChild ? _asChild : "a",
+      {
+        ...linkProps,
+        ref: innerRef
+      },
+      children
+    );
+  }
+);
+function isCtrlEvent(e) {
+  return !!(e.metaKey || e.altKey || e.ctrlKey || e.shiftKey);
+}
+const linkOptions = (options) => {
+  return options;
+};
+
+//# sourceMappingURL=link.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/@tanstack/react-router/dist/esm/matchContext.js":
 /*!**********************************************************************!*\
   !*** ./node_modules/@tanstack/react-router/dist/esm/matchContext.js ***!
@@ -2027,6 +2354,24 @@ function shallow(objA, objB) {
 }
 
 //# sourceMappingURL=index.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/@tanstack/router-core/dist/esm/link.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/@tanstack/router-core/dist/esm/link.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   preloadWarning: () => (/* binding */ preloadWarning)
+/* harmony export */ });
+const preloadWarning = "Error preloading route! ☝️";
+
+//# sourceMappingURL=link.js.map
 
 
 /***/ }),
@@ -11289,6 +11634,70 @@ module.exports = jsesc;
 
 /***/ }),
 
+/***/ "./node_modules/lucide-react/dist/esm/Icon.js":
+/*!****************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/Icon.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Icon)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _defaultAttributes_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./defaultAttributes.js */ "./node_modules/lucide-react/dist/esm/defaultAttributes.js");
+/* harmony import */ var _shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shared/src/utils.js */ "./node_modules/lucide-react/dist/esm/shared/src/utils.js");
+/**
+ * @license lucide-react v0.503.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+
+
+const Icon = (0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(
+  ({
+    color = "currentColor",
+    size = 24,
+    strokeWidth = 2,
+    absoluteStrokeWidth,
+    className = "",
+    children,
+    iconNode,
+    ...rest
+  }, ref) => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(
+      "svg",
+      {
+        ref,
+        ..._defaultAttributes_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+        width: size,
+        height: size,
+        stroke: color,
+        strokeWidth: absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth,
+        className: (0,_shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.mergeClasses)("lucide", className),
+        ...!children && !(0,_shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.hasA11yProp)(rest) && { "aria-hidden": "true" },
+        ...rest
+      },
+      [
+        ...iconNode.map(([tag, attrs]) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(tag, attrs)),
+        ...Array.isArray(children) ? children : [children]
+      ]
+    );
+  }
+);
+
+
+//# sourceMappingURL=Icon.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/lucide-react/dist/esm/createLucideIcon.js":
 /*!****************************************************************!*\
   !*** ./node_modules/lucide-react/dist/esm/createLucideIcon.js ***!
@@ -11298,14 +11707,14 @@ module.exports = jsesc;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ createLucideIcon),
-/* harmony export */   toKebabCase: () => (/* binding */ toKebabCase)
+/* harmony export */   "default": () => (/* binding */ createLucideIcon)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _defaultAttributes_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./defaultAttributes.js */ "./node_modules/lucide-react/dist/esm/defaultAttributes.js");
+/* harmony import */ var _shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shared/src/utils.js */ "./node_modules/lucide-react/dist/esm/shared/src/utils.js");
+/* harmony import */ var _Icon_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Icon.js */ "./node_modules/lucide-react/dist/esm/Icon.js");
 /**
- * @license lucide-react v0.294.0 - ISC
+ * @license lucide-react v0.503.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -11314,28 +11723,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const toKebabCase = (string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase().trim();
+
 const createLucideIcon = (iconName, iconNode) => {
   const Component = (0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(
-    ({ color = "currentColor", size = 24, strokeWidth = 2, absoluteStrokeWidth, className = "", children, ...rest }, ref) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(
-      "svg",
-      {
-        ref,
-        ..._defaultAttributes_js__WEBPACK_IMPORTED_MODULE_1__["default"],
-        width: size,
-        height: size,
-        stroke: color,
-        strokeWidth: absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth,
-        className: ["lucide", `lucide-${toKebabCase(iconName)}`, className].join(" "),
-        ...rest
-      },
-      [
-        ...iconNode.map(([tag, attrs]) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(tag, attrs)),
-        ...Array.isArray(children) ? children : [children]
-      ]
-    )
+    ({ className, ...props }, ref) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Icon_js__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      ref,
+      iconNode,
+      className: (0,_shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.mergeClasses)(
+        `lucide-${(0,_shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.toKebabCase)((0,_shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.toPascalCase)(iconName))}`,
+        `lucide-${iconName}`,
+        className
+      ),
+      ...props
+    })
   );
-  Component.displayName = `${iconName}`;
+  Component.displayName = (0,_shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.toPascalCase)(iconName);
   return Component;
 };
 
@@ -11357,7 +11759,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ defaultAttributes)
 /* harmony export */ });
 /**
- * @license lucide-react v0.294.0 - ISC
+ * @license lucide-react v0.503.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -11381,39 +11783,6 @@ var defaultAttributes = {
 
 /***/ }),
 
-/***/ "./node_modules/lucide-react/dist/esm/icons/alert-circle.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/lucide-react/dist/esm/icons/alert-circle.js ***!
-  \******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ AlertCircle)
-/* harmony export */ });
-/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
-/**
- * @license lucide-react v0.294.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-const AlertCircle = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("AlertCircle", [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
-  ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
-]);
-
-
-//# sourceMappingURL=alert-circle.js.map
-
-
-/***/ }),
-
 /***/ "./node_modules/lucide-react/dist/esm/icons/book-text.js":
 /*!***************************************************************!*\
   !*** ./node_modules/lucide-react/dist/esm/icons/book-text.js ***!
@@ -11423,11 +11792,12 @@ const AlertCircle = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["defaul
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
 /* harmony export */   "default": () => (/* binding */ BookText)
 /* harmony export */ });
 /* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
 /**
- * @license lucide-react v0.294.0 - ISC
+ * @license lucide-react v0.503.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -11435,11 +11805,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const BookText = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("BookText", [
-  ["path", { d: "M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20", key: "t4utmx" }],
-  ["path", { d: "M8 7h6", key: "1f0q6e" }],
-  ["path", { d: "M8 11h8", key: "vwpz6n" }]
-]);
+const __iconNode = [
+  [
+    "path",
+    {
+      d: "M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20",
+      key: "k3hazp"
+    }
+  ],
+  ["path", { d: "M8 11h8", key: "vwpz6n" }],
+  ["path", { d: "M8 7h6", key: "1f0q6e" }]
+];
+const BookText = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("book-text", __iconNode);
 
 
 //# sourceMappingURL=book-text.js.map
@@ -11447,20 +11824,56 @@ const BookText = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"]
 
 /***/ }),
 
-/***/ "./node_modules/lucide-react/dist/esm/icons/check-circle-2.js":
+/***/ "./node_modules/lucide-react/dist/esm/icons/circle-alert.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/circle-alert.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
+/* harmony export */   "default": () => (/* binding */ CircleAlert)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.503.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const __iconNode = [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
+  ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
+];
+const CircleAlert = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("circle-alert", __iconNode);
+
+
+//# sourceMappingURL=circle-alert.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/cloud-download.js":
 /*!********************************************************************!*\
-  !*** ./node_modules/lucide-react/dist/esm/icons/check-circle-2.js ***!
+  !*** ./node_modules/lucide-react/dist/esm/icons/cloud-download.js ***!
   \********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ CheckCircle2)
+/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
+/* harmony export */   "default": () => (/* binding */ CloudDownload)
 /* harmony export */ });
 /* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
 /**
- * @license lucide-react v0.294.0 - ISC
+ * @license lucide-react v0.503.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -11468,31 +11881,34 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const CheckCircle2 = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("CheckCircle2", [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
-]);
+const __iconNode = [
+  ["path", { d: "M12 13v8l-4-4", key: "1f5nwf" }],
+  ["path", { d: "m12 21 4-4", key: "1lfcce" }],
+  ["path", { d: "M4.393 15.269A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.436 8.284", key: "ui1hmy" }]
+];
+const CloudDownload = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("cloud-download", __iconNode);
 
 
-//# sourceMappingURL=check-circle-2.js.map
+//# sourceMappingURL=cloud-download.js.map
 
 
 /***/ }),
 
-/***/ "./node_modules/lucide-react/dist/esm/icons/clipboard-check.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/lucide-react/dist/esm/icons/clipboard-check.js ***!
-  \*********************************************************************/
+/***/ "./node_modules/lucide-react/dist/esm/icons/download.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/download.js ***!
+  \**************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ ClipboardCheck)
+/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
+/* harmony export */   "default": () => (/* binding */ Download)
 /* harmony export */ });
 /* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
 /**
- * @license lucide-react v0.294.0 - ISC
+ * @license lucide-react v0.503.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -11500,20 +11916,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const ClipboardCheck = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("ClipboardCheck", [
-  ["rect", { width: "8", height: "4", x: "8", y: "2", rx: "1", ry: "1", key: "tgr4d6" }],
-  [
-    "path",
-    {
-      d: "M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2",
-      key: "116196"
-    }
-  ],
-  ["path", { d: "m9 14 2 2 4-4", key: "df797q" }]
-]);
+const __iconNode = [
+  ["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4", key: "ih7n3h" }],
+  ["polyline", { points: "7 10 12 15 17 10", key: "2ggqvy" }],
+  ["line", { x1: "12", x2: "12", y1: "15", y2: "3", key: "1vk2je" }]
+];
+const Download = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("download", __iconNode);
 
 
-//# sourceMappingURL=clipboard-check.js.map
+//# sourceMappingURL=download.js.map
 
 
 /***/ }),
@@ -11527,11 +11938,12 @@ const ClipboardCheck = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["def
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
 /* harmony export */   "default": () => (/* binding */ ExternalLink)
 /* harmony export */ });
 /* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
 /**
- * @license lucide-react v0.294.0 - ISC
+ * @license lucide-react v0.503.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -11539,45 +11951,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const ExternalLink = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("ExternalLink", [
-  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }],
-  ["polyline", { points: "15 3 21 3 21 9", key: "mznyad" }],
-  ["line", { x1: "10", x2: "21", y1: "14", y2: "3", key: "18c3s4" }]
-]);
+const __iconNode = [
+  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
+  ["path", { d: "M10 14 21 3", key: "gplh6r" }],
+  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
+];
+const ExternalLink = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("external-link", __iconNode);
 
 
 //# sourceMappingURL=external-link.js.map
-
-
-/***/ }),
-
-/***/ "./node_modules/lucide-react/dist/esm/icons/loader-2.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/lucide-react/dist/esm/icons/loader-2.js ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Loader2)
-/* harmony export */ });
-/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
-/**
- * @license lucide-react v0.294.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-const Loader2 = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Loader2", [
-  ["path", { d: "M21 12a9 9 0 1 1-6.219-8.56", key: "13zald" }]
-]);
-
-
-//# sourceMappingURL=loader-2.js.map
 
 
 /***/ }),
@@ -11591,11 +11973,12 @@ const Loader2 = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
 /* harmony export */   "default": () => (/* binding */ Plug2)
 /* harmony export */ });
 /* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
 /**
- * @license lucide-react v0.294.0 - ISC
+ * @license lucide-react v0.503.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -11603,13 +11986,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const Plug2 = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Plug2", [
+const __iconNode = [
   ["path", { d: "M9 2v6", key: "17ngun" }],
   ["path", { d: "M15 2v6", key: "s7yy2p" }],
   ["path", { d: "M12 17v5", key: "bb1du9" }],
   ["path", { d: "M5 8h14", key: "pcz4l3" }],
-  ["path", { d: "M6 11V8h12v3a6 6 0 1 1-12 0v0Z", key: "nd4hoy" }]
-]);
+  ["path", { d: "M6 11V8h12v3a6 6 0 1 1-12 0Z", key: "wtfw2c" }]
+];
+const Plug2 = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("plug-2", __iconNode);
 
 
 //# sourceMappingURL=plug-2.js.map
@@ -11626,11 +12010,12 @@ const Plug2 = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
 /* harmony export */   "default": () => (/* binding */ Plus)
 /* harmony export */ });
 /* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
 /**
- * @license lucide-react v0.294.0 - ISC
+ * @license lucide-react v0.503.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -11638,13 +12023,62 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const Plus = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Plus", [
+const __iconNode = [
   ["path", { d: "M5 12h14", key: "1ays0h" }],
   ["path", { d: "M12 5v14", key: "s699le" }]
-]);
+];
+const Plus = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("plus", __iconNode);
 
 
 //# sourceMappingURL=plus.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/shared/src/utils.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/shared/src/utils.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   hasA11yProp: () => (/* binding */ hasA11yProp),
+/* harmony export */   mergeClasses: () => (/* binding */ mergeClasses),
+/* harmony export */   toCamelCase: () => (/* binding */ toCamelCase),
+/* harmony export */   toKebabCase: () => (/* binding */ toKebabCase),
+/* harmony export */   toPascalCase: () => (/* binding */ toPascalCase)
+/* harmony export */ });
+/**
+ * @license lucide-react v0.503.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+const toKebabCase = (string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+const toCamelCase = (string) => string.replace(
+  /^([A-Z])|[\s-_]+(\w)/g,
+  (match, p1, p2) => p2 ? p2.toUpperCase() : p1.toLowerCase()
+);
+const toPascalCase = (string) => {
+  const camelCase = toCamelCase(string);
+  return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
+};
+const mergeClasses = (...classes) => classes.filter((className, index, array) => {
+  return Boolean(className) && className.trim() !== "" && array.indexOf(className) === index;
+}).join(" ").trim();
+const hasA11yProp = (props) => {
+  for (const prop in props) {
+    if (prop.startsWith("aria-") || prop === "role" || prop === "title") {
+      return true;
+    }
+  }
+};
+
+
+//# sourceMappingURL=utils.js.map
 
 
 /***/ }),
@@ -16962,6 +17396,201 @@ function useForm(props = {}) {
 
 /***/ }),
 
+/***/ "./node_modules/react-spinners/BeatLoader.js":
+/*!***************************************************!*\
+  !*** ./node_modules/react-spinners/BeatLoader.js ***!
+  \***************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var React = __importStar(__webpack_require__(/*! react */ "react"));
+var unitConverter_1 = __webpack_require__(/*! ./helpers/unitConverter */ "./node_modules/react-spinners/helpers/unitConverter.js");
+var animation_1 = __webpack_require__(/*! ./helpers/animation */ "./node_modules/react-spinners/helpers/animation.js");
+var beat = (0, animation_1.createAnimation)("BeatLoader", "50% {transform: scale(0.75);opacity: 0.2} 100% {transform: scale(1);opacity: 1}", "beat");
+function BeatLoader(_a) {
+    var _b = _a.loading, loading = _b === void 0 ? true : _b, _c = _a.color, color = _c === void 0 ? "#000000" : _c, _d = _a.speedMultiplier, speedMultiplier = _d === void 0 ? 1 : _d, _e = _a.cssOverride, cssOverride = _e === void 0 ? {} : _e, _f = _a.size, size = _f === void 0 ? 15 : _f, _g = _a.margin, margin = _g === void 0 ? 2 : _g, additionalprops = __rest(_a, ["loading", "color", "speedMultiplier", "cssOverride", "size", "margin"]);
+    var wrapper = __assign({ display: "inherit" }, cssOverride);
+    var style = function (i) {
+        return {
+            display: "inline-block",
+            backgroundColor: color,
+            width: (0, unitConverter_1.cssValue)(size),
+            height: (0, unitConverter_1.cssValue)(size),
+            margin: (0, unitConverter_1.cssValue)(margin),
+            borderRadius: "100%",
+            animation: "".concat(beat, " ").concat(0.7 / speedMultiplier, "s ").concat(i % 2 ? "0s" : "".concat(0.35 / speedMultiplier, "s"), " infinite linear"),
+            animationFillMode: "both",
+        };
+    };
+    if (!loading) {
+        return null;
+    }
+    return (React.createElement("span", __assign({ style: wrapper }, additionalprops),
+        React.createElement("span", { style: style(1) }),
+        React.createElement("span", { style: style(2) }),
+        React.createElement("span", { style: style(3) })));
+}
+exports["default"] = BeatLoader;
+
+
+/***/ }),
+
+/***/ "./node_modules/react-spinners/helpers/animation.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/react-spinners/helpers/animation.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.createAnimation = void 0;
+var createAnimation = function (loaderName, frames, suffix) {
+    var animationName = "react-spinners-".concat(loaderName, "-").concat(suffix);
+    if (typeof window == "undefined" || !window.document) {
+        return animationName;
+    }
+    var styleEl = document.createElement("style");
+    document.head.appendChild(styleEl);
+    var styleSheet = styleEl.sheet;
+    var keyFrames = "\n    @keyframes ".concat(animationName, " {\n      ").concat(frames, "\n    }\n  ");
+    if (styleSheet) {
+        styleSheet.insertRule(keyFrames, 0);
+    }
+    return animationName;
+};
+exports.createAnimation = createAnimation;
+
+
+/***/ }),
+
+/***/ "./node_modules/react-spinners/helpers/unitConverter.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/react-spinners/helpers/unitConverter.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.cssValue = exports.parseLengthAndUnit = void 0;
+var cssUnit = {
+    cm: true,
+    mm: true,
+    in: true,
+    px: true,
+    pt: true,
+    pc: true,
+    em: true,
+    ex: true,
+    ch: true,
+    rem: true,
+    vw: true,
+    vh: true,
+    vmin: true,
+    vmax: true,
+    "%": true,
+};
+/**
+ * If size is a number, append px to the value as default unit.
+ * If size is a string, validate against list of valid units.
+ * If unit is valid, return size as is.
+ * If unit is invalid, console warn issue, replace with px as the unit.
+ *
+ * @param {(number | string)} size
+ * @return {LengthObject} LengthObject
+ */
+function parseLengthAndUnit(size) {
+    if (typeof size === "number") {
+        return {
+            value: size,
+            unit: "px",
+        };
+    }
+    var value;
+    var valueString = (size.match(/^[0-9.]*/) || "").toString();
+    if (valueString.includes(".")) {
+        value = parseFloat(valueString);
+    }
+    else {
+        value = parseInt(valueString, 10);
+    }
+    var unit = (size.match(/[^0-9]*$/) || "").toString();
+    if (cssUnit[unit]) {
+        return {
+            value: value,
+            unit: unit,
+        };
+    }
+    console.warn("React Spinners: ".concat(size, " is not a valid css value. Defaulting to ").concat(value, "px."));
+    return {
+        value: value,
+        unit: "px",
+    };
+}
+exports.parseLengthAndUnit = parseLengthAndUnit;
+/**
+ * Take value as an input and return valid css value
+ *
+ * @param {(number | string)} value
+ * @return {string} valid css value
+ */
+function cssValue(value) {
+    var lengthWithunit = parseLengthAndUnit(value);
+    return "".concat(lengthWithunit.value).concat(lengthWithunit.unit);
+}
+exports.cssValue = cssValue;
+
+
+/***/ }),
+
 /***/ "./node_modules/react/cjs/react-jsx-runtime.development.js":
 /*!*****************************************************************!*\
   !*** ./node_modules/react/cjs/react-jsx-runtime.development.js ***!
@@ -19287,517 +19916,6 @@ var PluginIcon = function b(a) {
 
 /***/ }),
 
-/***/ "./src/react/components/SaveResetButtons/index.js":
-/*!********************************************************!*\
-  !*** ./src/react/components/SaveResetButtons/index.js ***!
-  \********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/loader-2.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/clipboard-check.js");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _Notice__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Notice */ "./src/react/components/Notice/index.js");
-/* harmony import */ var _utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/SendCommand */ "./src/react/utils/SendCommand.js");
-/* harmony import */ var _SnackPop__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../SnackPop */ "./src/react/components/SnackPop/index.js");
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return j; }; var b, j = {}, e = Object.prototype, k = e.hasOwnProperty, m = Object.defineProperty || function (a, b, c) { a[b] = c.value; }, n = "function" == typeof Symbol ? Symbol : {}, q = n.iterator || "@@iterator", a = n.asyncIterator || "@@asyncIterator", c = n.toStringTag || "@@toStringTag"; function i(a, b, c) { return Object.defineProperty(a, b, { value: c, enumerable: !0, configurable: !0, writable: !0 }), a[b]; } try { i({}, ""); } catch (a) { i = function i(a, b, c) { return a[b] = c; }; } function u(b, d, e, f) { var g = d && d.prototype instanceof o ? d : o, h = Object.create(g.prototype), a = new F(f || []); return m(h, "_invoke", { value: B(b, e, a) }), h; } function w(a, b, c) { try { return { type: "normal", arg: a.call(b, c) }; } catch (a) { return { type: "throw", arg: a }; } } j.wrap = u; var x = "suspendedStart", h = "suspendedYield", l = "executing", f = "completed", s = {}; function o() {} function r() {} function y() {} var z = {}; i(z, q, function () { return this; }); var t = Object.getPrototypeOf, d = t && t(t(G([]))); d && d !== e && k.call(d, q) && (z = d); var v = y.prototype = o.prototype = Object.create(z); function g(a) { ["next", "throw", "return"].forEach(function (b) { i(a, b, function (a) { return this._invoke(b, a); }); }); } function A(b, d) { function c(e, f, g, i) { var a = w(b[e], b, f); if ("throw" !== a.type) { var j = a.arg, l = j.value; return l && "object" == _typeof(l) && k.call(l, "__await") ? d.resolve(l.__await).then(function (a) { c("next", a, g, i); }, function (a) { c("throw", a, g, i); }) : d.resolve(l).then(function (a) { j.value = a, g(j); }, function (a) { return c("throw", a, g, i); }); } i(a.arg); } var e; m(this, "_invoke", { value: function value(a, b) { function f() { return new d(function (d, e) { c(a, b, d, e); }); } return e = e ? e.then(f, f) : f(); } }); } function B(a, d, e) { var g = x; return function (j, i) { if (g === l) throw Error("Generator is already running"); if (g === f) { if ("throw" === j) throw i; return { value: b, done: !0 }; } for (e.method = j, e.arg = i;;) { var k = e.delegate; if (k) { var m = C(k, e); if (m) { if (m === s) continue; return m; } } if ("next" === e.method) e.sent = e._sent = e.arg;else if ("throw" === e.method) { if (g === x) throw g = f, e.arg; e.dispatchException(e.arg); } else "return" === e.method && e.abrupt("return", e.arg); g = l; var n = w(a, d, e); if ("normal" === n.type) { if (g = e.done ? f : h, n.arg === s) continue; return { value: n.arg, done: e.done }; } "throw" === n.type && (g = f, e.method = "throw", e.arg = n.arg); } }; } function C(c, d) { var e = d.method, f = c.iterator[e]; if (f === b) return d.delegate = null, "throw" === e && c.iterator["return"] && (d.method = "return", d.arg = b, C(c, d), "throw" === d.method) || "return" !== e && (d.method = "throw", d.arg = new TypeError("The iterator does not provide a '" + e + "' method")), s; var g = w(f, c.iterator, d.arg); if ("throw" === g.type) return d.method = "throw", d.arg = g.arg, d.delegate = null, s; var h = g.arg; return h ? h.done ? (d[c.resultName] = h.value, d.next = c.nextLoc, "return" !== d.method && (d.method = "next", d.arg = b), d.delegate = null, s) : h : (d.method = "throw", d.arg = new TypeError("iterator result is not an object"), d.delegate = null, s); } function D(a) { var b = { tryLoc: a[0] }; 1 in a && (b.catchLoc = a[1]), 2 in a && (b.finallyLoc = a[2], b.afterLoc = a[3]), this.tryEntries.push(b); } function E(a) { var b = a.completion || {}; b.type = "normal", delete b.arg, a.completion = b; } function F(a) { this.tryEntries = [{ tryLoc: "root" }], a.forEach(D, this), this.reset(!0); } function G(a) { if (a || "" === a) { var c = a[q]; if (c) return c.call(a); if ("function" == typeof a.next) return a; if (!isNaN(a.length)) { var d = -1, e = function c() { for (; ++d < a.length;) if (k.call(a, d)) return c.value = a[d], c.done = !1, c; return c.value = b, c.done = !0, c; }; return e.next = e; } } throw new TypeError(_typeof(a) + " is not iterable"); } return r.prototype = y, m(v, "constructor", { value: y, configurable: !0 }), m(y, "constructor", { value: r, configurable: !0 }), r.displayName = i(y, c, "GeneratorFunction"), j.isGeneratorFunction = function (a) { var b = "function" == typeof a && a.constructor; return !!b && (b === r || "GeneratorFunction" === (b.displayName || b.name)); }, j.mark = function (a) { return Object.setPrototypeOf ? Object.setPrototypeOf(a, y) : (a.__proto__ = y, i(a, c, "GeneratorFunction")), a.prototype = Object.create(v), a; }, j.awrap = function (a) { return { __await: a }; }, g(A.prototype), i(A.prototype, a, function () { return this; }), j.AsyncIterator = A, j.async = function (b, c, d, e, f) { void 0 === f && (f = Promise); var g = new A(u(b, c, d, e), f); return j.isGeneratorFunction(c) ? g : g.next().then(function (a) { return a.done ? a.value : g.next(); }); }, g(v), i(v, c, "Generator"), i(v, q, function () { return this; }), i(v, "toString", function () { return "[object Generator]"; }), j.keys = function (a) { var b = Object(a), c = []; for (var d in b) c.push(d); return c.reverse(), function a() { for (; c.length;) { var d = c.pop(); if (d in b) return a.value = d, a.done = !1, a; } return a.done = !0, a; }; }, j.values = G, F.prototype = { constructor: F, reset: function reset(a) { if (this.prev = 0, this.next = 0, this.sent = this._sent = b, this.done = !1, this.delegate = null, this.method = "next", this.arg = b, this.tryEntries.forEach(E), !a) for (var c in this) "t" === c.charAt(0) && k.call(this, c) && !isNaN(+c.slice(1)) && (this[c] = b); }, stop: function stop() { this.done = !0; var a = this.tryEntries[0].completion; if ("throw" === a.type) throw a.arg; return this.rval; }, dispatchException: function dispatchException(d) { if (this.done) throw d; var e = this; function f(a, c) { return j.type = "throw", j.arg = d, e.next = a, c && (e.method = "next", e.arg = b), !!c; } for (var g = this.tryEntries.length - 1; g >= 0; --g) { var h = this.tryEntries[g], j = h.completion; if ("root" === h.tryLoc) return f("end"); if (h.tryLoc <= this.prev) { var l = k.call(h, "catchLoc"), m = k.call(h, "finallyLoc"); if (l && m) { if (this.prev < h.catchLoc) return f(h.catchLoc, !0); if (this.prev < h.finallyLoc) return f(h.finallyLoc); } else if (l) { if (this.prev < h.catchLoc) return f(h.catchLoc, !0); } else { if (!m) throw Error("try statement without catch or finally"); if (this.prev < h.finallyLoc) return f(h.finallyLoc); } } } }, abrupt: function abrupt(b, c) { for (var d = this.tryEntries.length - 1; d >= 0; --d) { var e = this.tryEntries[d]; if (e.tryLoc <= this.prev && k.call(e, "finallyLoc") && this.prev < e.finallyLoc) { var f = e; break; } } f && ("break" === b || "continue" === b) && f.tryLoc <= c && c <= f.finallyLoc && (f = null); var g = f ? f.completion : {}; return g.type = b, g.arg = c, f ? (this.method = "next", this.next = f.finallyLoc, s) : this.complete(g); }, complete: function complete(a, b) { if ("throw" === a.type) throw a.arg; return "break" === a.type || "continue" === a.type ? this.next = a.arg : "return" === a.type ? (this.rval = this.arg = a.arg, this.method = "return", this.next = "end") : "normal" === a.type && b && (this.next = b), s; }, finish: function finish(a) { for (var b = this.tryEntries.length - 1; b >= 0; --b) { var c = this.tryEntries[b]; if (c.finallyLoc === a) return this.complete(c.completion, c.afterLoc), E(c), s; } }, "catch": function _catch(a) { for (var b = this.tryEntries.length - 1; b >= 0; --b) { var c = this.tryEntries[b]; if (c.tryLoc === a) { var d = c.completion; if ("throw" === d.type) { var f = d.arg; E(c); } return f; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(a, c, d) { return this.delegate = { iterator: G(a), resultName: c, nextLoc: d }, "next" === this.method && (this.arg = b), s; } }, j; }
-function asyncGeneratorStep(b, d, f, e, g, h, a) { try { var c = b[h](a), i = c.value; } catch (a) { return void f(a); } c.done ? d(i) : Promise.resolve(i).then(e, g); }
-function _asyncToGenerator(b) { return function () { var c = this, d = arguments; return new Promise(function (e, f) { var g = b.apply(c, d); function a(b) { asyncGeneratorStep(g, e, f, a, h, "next", b); } function h(b) { asyncGeneratorStep(g, e, f, a, h, "throw", b); } a(void 0); }); }; }
-function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) return _arrayLikeToArray(b, c); var a = {}.toString.call(b).slice(8, -1); return "Object" === a && b.constructor && (a = b.constructor.name), "Map" === a || "Set" === a ? Array.from(b) : "Arguments" === a || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a) ? _arrayLikeToArray(b, c) : void 0; } }
-function _arrayLikeToArray(b, c) { (null == c || c > b.length) && (c = b.length); for (var d = 0, f = Array(c); d < c; d++) f[d] = b[d]; return f; }
-function _iterableToArrayLimit(b, c) { var d = null == b ? null : "undefined" != typeof Symbol && b[Symbol.iterator] || b["@@iterator"]; if (null != d) { var g, h, j, k, l = [], a = !0, m = !1; try { if (j = (d = d.call(b)).next, 0 === c) { if (Object(d) !== d) return; a = !1; } else for (; !(a = (g = j.call(d)).done) && (l.push(g.value), l.length !== c); a = !0); } catch (a) { m = !0, h = a; } finally { try { if (!a && null != d["return"] && (k = d["return"](), Object(k) !== k)) return; } finally { if (m) throw h; } } return l; } }
-function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
-
-
-
-
-
-
-
-
-var SaveResetButtons = function b(a) {
-  // Gather props.
-  var c = a.formValues,
-    d = a.setError,
-    e = a.reset,
-    f = a.errors,
-    g = a.isDirty,
-    h = a.dirtyFields,
-    i = a.trigger,
-    j = a.onSave;
-  var k = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    l = _slicedToArray(k, 2),
-    m = l[0],
-    n = l[1];
-  var o = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    p = _slicedToArray(o, 2),
-    q = p[0],
-    r = p[1];
-  var s = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    t = _slicedToArray(s, 2),
-    u = t[0],
-    v = t[1];
-  var w = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    x = _slicedToArray(w, 2),
-    y = x[0],
-    z = x[1];
-  var A = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-    B = _slicedToArray(A, 2),
-    C = B[0],
-    D = B[1];
-  var E = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-    F = _slicedToArray(E, 2),
-    G = F[0],
-    H = F[1];
-
-  /**
-   * Save the options by setting promise as state.
-   */
-  var I = /*#__PURE__*/function () {
-    var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function a() {
-      var b;
-      return _regeneratorRuntime().wrap(function e(a) {
-        while (1) switch (a.prev = a.next) {
-          case 0:
-            b = (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__["default"])('wppic_save_options', {
-              wppicFormData: c
-            });
-            D(b);
-            n(true);
-            a.next = 5;
-            return b;
-          case 5:
-            j(c, d);
-            n(false);
-          case 7:
-          case "end":
-            return a.stop();
-        }
-      }, a);
-    }));
-    return function b() {
-      return a.apply(this, arguments);
-    };
-  }();
-
-  /**
-   * Reset the options by setting promise as state.
-   */
-  var J = /*#__PURE__*/function () {
-    var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function a() {
-      var b, d;
-      return _regeneratorRuntime().wrap(function f(a) {
-        while (1) switch (a.prev = a.next) {
-          case 0:
-            b = (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__["default"])('wppic_reset_options', {
-              wppicFormData: c
-            });
-            H(b);
-            r(true);
-            a.next = 5;
-            return b;
-          case 5:
-            d = a.sent;
-            e(d.data.data.formData, {
-              keepErrors: false,
-              keepDirty: false
-            });
-            r(false);
-          case 8:
-          case "end":
-            return a.stop();
-        }
-      }, a);
-    }));
-    return function b() {
-      return a.apply(this, arguments);
-    };
-  }();
-  var K = function a() {
-    return Object.keys(f).length > 0;
-  };
-  var L = function a() {
-    if (m) {
-      return function () {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], null);
-      };
-    }
-    if (u) {
-      return function () {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], null);
-      };
-    }
-    return false;
-  };
-  var M = function a() {
-    if (m) {
-      return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Saving…', 'wp-plugin-info-card');
-    }
-    if (u) {
-      return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Saved', 'wp-plugin-info-card');
-    }
-    return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Save Options', 'wp-plugin-info-card');
-  };
-  var N = function a() {
-    if (q) {
-      return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Resetting to Defaults…', 'wp-plugin-info-card');
-    }
-    if (y) {
-      return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Options Restored to Defaults', 'wp-plugin-info-card');
-    }
-    return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Reset to Defaults', 'wp-plugin-info-card');
-  };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "wppic-admin-buttons"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wppic__btn wppic__btn-primary wppic__btn--icon-right', {
-      'has-error': K()
-    }, {
-      'has-icon': m || u
-    }, {
-      'is-saving': m && !u
-    }, {
-      'is-saved': u
-    }),
-    type: "button",
-    text: M(),
-    icon: L(),
-    iconSize: "18",
-    iconPosition: "right",
-    disabled: m,
-    onClick: (/*#__PURE__*/function () {
-      var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function b(a) {
-        var c;
-        return _regeneratorRuntime().wrap(function d(b) {
-          while (1) switch (b.prev = b.next) {
-            case 0:
-              a.preventDefault();
-              b.next = 3;
-              return i();
-            case 3:
-              c = b.sent;
-              if (c) {
-                I();
-              }
-            case 5:
-            case "end":
-              return b.stop();
-          }
-        }, b);
-      }));
-      return function (_x) {
-        return a.apply(this, arguments);
-      };
-    }())
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wppic__btn wppic__btn-danger wppic__btn--icon-right', {
-      'has-icon': q
-    }, {
-      'is-resetting': {
-        resetting: q
-      }
-    }),
-    type: "button",
-    text: N(),
-    icon: q ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], null) : false,
-    iconSize: "18",
-    iconPosition: "right",
-    disabled: m || q,
-    onClick: function b(a) {
-      a.preventDefault();
-      J();
-    }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "wppic-admin-notices-bottom"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SnackPop__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    ajaxOptions: C,
-    loadingMessage: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Saving Options…', 'wp-plugin-info-card')
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SnackPop__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    ajaxOptions: G,
-    loadingMessage: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Resetting to defaults…', 'wp-plugin-info-card')
-  }), K() && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Notice__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('There are form validation errors. Please correct them above.', 'wp-plugin-info-card'),
-    status: "error",
-    politeness: "polite"
-  })));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SaveResetButtons);
-
-/***/ }),
-
-/***/ "./src/react/components/SnackPop/index.js":
-/*!************************************************!*\
-  !*** ./src/react/components/SnackPop/index.js ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/check-circle-2.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/alert-circle.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/loader-2.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _Notice__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Notice */ "./src/react/components/Notice/index.js");
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return j; }; var b, j = {}, e = Object.prototype, k = e.hasOwnProperty, m = Object.defineProperty || function (a, b, c) { a[b] = c.value; }, n = "function" == typeof Symbol ? Symbol : {}, q = n.iterator || "@@iterator", a = n.asyncIterator || "@@asyncIterator", c = n.toStringTag || "@@toStringTag"; function i(a, b, c) { return Object.defineProperty(a, b, { value: c, enumerable: !0, configurable: !0, writable: !0 }), a[b]; } try { i({}, ""); } catch (a) { i = function i(a, b, c) { return a[b] = c; }; } function u(b, d, e, f) { var g = d && d.prototype instanceof o ? d : o, h = Object.create(g.prototype), a = new F(f || []); return m(h, "_invoke", { value: B(b, e, a) }), h; } function w(a, b, c) { try { return { type: "normal", arg: a.call(b, c) }; } catch (a) { return { type: "throw", arg: a }; } } j.wrap = u; var x = "suspendedStart", h = "suspendedYield", l = "executing", f = "completed", s = {}; function o() {} function r() {} function y() {} var z = {}; i(z, q, function () { return this; }); var t = Object.getPrototypeOf, d = t && t(t(G([]))); d && d !== e && k.call(d, q) && (z = d); var v = y.prototype = o.prototype = Object.create(z); function g(a) { ["next", "throw", "return"].forEach(function (b) { i(a, b, function (a) { return this._invoke(b, a); }); }); } function A(b, d) { function c(e, f, g, i) { var a = w(b[e], b, f); if ("throw" !== a.type) { var j = a.arg, l = j.value; return l && "object" == _typeof(l) && k.call(l, "__await") ? d.resolve(l.__await).then(function (a) { c("next", a, g, i); }, function (a) { c("throw", a, g, i); }) : d.resolve(l).then(function (a) { j.value = a, g(j); }, function (a) { return c("throw", a, g, i); }); } i(a.arg); } var e; m(this, "_invoke", { value: function value(a, b) { function f() { return new d(function (d, e) { c(a, b, d, e); }); } return e = e ? e.then(f, f) : f(); } }); } function B(a, d, e) { var g = x; return function (j, i) { if (g === l) throw Error("Generator is already running"); if (g === f) { if ("throw" === j) throw i; return { value: b, done: !0 }; } for (e.method = j, e.arg = i;;) { var k = e.delegate; if (k) { var m = C(k, e); if (m) { if (m === s) continue; return m; } } if ("next" === e.method) e.sent = e._sent = e.arg;else if ("throw" === e.method) { if (g === x) throw g = f, e.arg; e.dispatchException(e.arg); } else "return" === e.method && e.abrupt("return", e.arg); g = l; var n = w(a, d, e); if ("normal" === n.type) { if (g = e.done ? f : h, n.arg === s) continue; return { value: n.arg, done: e.done }; } "throw" === n.type && (g = f, e.method = "throw", e.arg = n.arg); } }; } function C(c, d) { var e = d.method, f = c.iterator[e]; if (f === b) return d.delegate = null, "throw" === e && c.iterator["return"] && (d.method = "return", d.arg = b, C(c, d), "throw" === d.method) || "return" !== e && (d.method = "throw", d.arg = new TypeError("The iterator does not provide a '" + e + "' method")), s; var g = w(f, c.iterator, d.arg); if ("throw" === g.type) return d.method = "throw", d.arg = g.arg, d.delegate = null, s; var h = g.arg; return h ? h.done ? (d[c.resultName] = h.value, d.next = c.nextLoc, "return" !== d.method && (d.method = "next", d.arg = b), d.delegate = null, s) : h : (d.method = "throw", d.arg = new TypeError("iterator result is not an object"), d.delegate = null, s); } function D(a) { var b = { tryLoc: a[0] }; 1 in a && (b.catchLoc = a[1]), 2 in a && (b.finallyLoc = a[2], b.afterLoc = a[3]), this.tryEntries.push(b); } function E(a) { var b = a.completion || {}; b.type = "normal", delete b.arg, a.completion = b; } function F(a) { this.tryEntries = [{ tryLoc: "root" }], a.forEach(D, this), this.reset(!0); } function G(a) { if (a || "" === a) { var c = a[q]; if (c) return c.call(a); if ("function" == typeof a.next) return a; if (!isNaN(a.length)) { var d = -1, e = function c() { for (; ++d < a.length;) if (k.call(a, d)) return c.value = a[d], c.done = !1, c; return c.value = b, c.done = !0, c; }; return e.next = e; } } throw new TypeError(_typeof(a) + " is not iterable"); } return r.prototype = y, m(v, "constructor", { value: y, configurable: !0 }), m(y, "constructor", { value: r, configurable: !0 }), r.displayName = i(y, c, "GeneratorFunction"), j.isGeneratorFunction = function (a) { var b = "function" == typeof a && a.constructor; return !!b && (b === r || "GeneratorFunction" === (b.displayName || b.name)); }, j.mark = function (a) { return Object.setPrototypeOf ? Object.setPrototypeOf(a, y) : (a.__proto__ = y, i(a, c, "GeneratorFunction")), a.prototype = Object.create(v), a; }, j.awrap = function (a) { return { __await: a }; }, g(A.prototype), i(A.prototype, a, function () { return this; }), j.AsyncIterator = A, j.async = function (b, c, d, e, f) { void 0 === f && (f = Promise); var g = new A(u(b, c, d, e), f); return j.isGeneratorFunction(c) ? g : g.next().then(function (a) { return a.done ? a.value : g.next(); }); }, g(v), i(v, c, "Generator"), i(v, q, function () { return this; }), i(v, "toString", function () { return "[object Generator]"; }), j.keys = function (a) { var b = Object(a), c = []; for (var d in b) c.push(d); return c.reverse(), function a() { for (; c.length;) { var d = c.pop(); if (d in b) return a.value = d, a.done = !1, a; } return a.done = !0, a; }; }, j.values = G, F.prototype = { constructor: F, reset: function reset(a) { if (this.prev = 0, this.next = 0, this.sent = this._sent = b, this.done = !1, this.delegate = null, this.method = "next", this.arg = b, this.tryEntries.forEach(E), !a) for (var c in this) "t" === c.charAt(0) && k.call(this, c) && !isNaN(+c.slice(1)) && (this[c] = b); }, stop: function stop() { this.done = !0; var a = this.tryEntries[0].completion; if ("throw" === a.type) throw a.arg; return this.rval; }, dispatchException: function dispatchException(d) { if (this.done) throw d; var e = this; function f(a, c) { return j.type = "throw", j.arg = d, e.next = a, c && (e.method = "next", e.arg = b), !!c; } for (var g = this.tryEntries.length - 1; g >= 0; --g) { var h = this.tryEntries[g], j = h.completion; if ("root" === h.tryLoc) return f("end"); if (h.tryLoc <= this.prev) { var l = k.call(h, "catchLoc"), m = k.call(h, "finallyLoc"); if (l && m) { if (this.prev < h.catchLoc) return f(h.catchLoc, !0); if (this.prev < h.finallyLoc) return f(h.finallyLoc); } else if (l) { if (this.prev < h.catchLoc) return f(h.catchLoc, !0); } else { if (!m) throw Error("try statement without catch or finally"); if (this.prev < h.finallyLoc) return f(h.finallyLoc); } } } }, abrupt: function abrupt(b, c) { for (var d = this.tryEntries.length - 1; d >= 0; --d) { var e = this.tryEntries[d]; if (e.tryLoc <= this.prev && k.call(e, "finallyLoc") && this.prev < e.finallyLoc) { var f = e; break; } } f && ("break" === b || "continue" === b) && f.tryLoc <= c && c <= f.finallyLoc && (f = null); var g = f ? f.completion : {}; return g.type = b, g.arg = c, f ? (this.method = "next", this.next = f.finallyLoc, s) : this.complete(g); }, complete: function complete(a, b) { if ("throw" === a.type) throw a.arg; return "break" === a.type || "continue" === a.type ? this.next = a.arg : "return" === a.type ? (this.rval = this.arg = a.arg, this.method = "return", this.next = "end") : "normal" === a.type && b && (this.next = b), s; }, finish: function finish(a) { for (var b = this.tryEntries.length - 1; b >= 0; --b) { var c = this.tryEntries[b]; if (c.finallyLoc === a) return this.complete(c.completion, c.afterLoc), E(c), s; } }, "catch": function _catch(a) { for (var b = this.tryEntries.length - 1; b >= 0; --b) { var c = this.tryEntries[b]; if (c.tryLoc === a) { var d = c.completion; if ("throw" === d.type) { var f = d.arg; E(c); } return f; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(a, c, d) { return this.delegate = { iterator: G(a), resultName: c, nextLoc: d }, "next" === this.method && (this.arg = b), s; } }, j; }
-function asyncGeneratorStep(b, d, f, e, g, h, a) { try { var c = b[h](a), i = c.value; } catch (a) { return void f(a); } c.done ? d(i) : Promise.resolve(i).then(e, g); }
-function _asyncToGenerator(b) { return function () { var c = this, d = arguments; return new Promise(function (e, f) { var g = b.apply(c, d); function a(b) { asyncGeneratorStep(g, e, f, a, h, "next", b); } function h(b) { asyncGeneratorStep(g, e, f, a, h, "throw", b); } a(void 0); }); }; }
-function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) return _arrayLikeToArray(b, c); var a = {}.toString.call(b).slice(8, -1); return "Object" === a && b.constructor && (a = b.constructor.name), "Map" === a || "Set" === a ? Array.from(b) : "Arguments" === a || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a) ? _arrayLikeToArray(b, c) : void 0; } }
-function _arrayLikeToArray(b, c) { (null == c || c > b.length) && (c = b.length); for (var d = 0, f = Array(c); d < c; d++) f[d] = b[d]; return f; }
-function _iterableToArrayLimit(b, c) { var d = null == b ? null : "undefined" != typeof Symbol && b[Symbol.iterator] || b["@@iterator"]; if (null != d) { var g, h, j, k, l = [], a = !0, m = !1; try { if (j = (d = d.call(b)).next, 0 === c) { if (Object(d) !== d) return; a = !1; } else for (; !(a = (g = j.call(d)).done) && (l.push(g.value), l.length !== c); a = !0); } catch (a) { m = !0, h = a; } finally { try { if (!a && null != d["return"] && (k = d["return"](), Object(k) !== k)) return; } finally { if (m) throw h; } } return l; } }
-function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
-
-
-
-
-
-
-
-/**
- * SnackPop is a component which handles alerts and notifications for the user.
- * It can handle multiple alerts at once, toggles and forms, and will display the notifications in a queue.
- *
- * @param {Object} props Component props.
- *
- * @return {Element} JSX markup for the component.
- */
-var SnackPop = function b(a) {
-  var c = a.ajaxOptions,
-    d = a.loadingMessage;
-  var e = {
-    type: 'info',
-    message: '',
-    title: '',
-    isDismissable: false,
-    isPersistent: false,
-    isSuccess: false,
-    loadingMessage: d,
-    politeness: 'polite' /* can also be assertive */
-  };
-  var f = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(e),
-    g = _slicedToArray(f, 2),
-    h = g[0],
-    i = g[1];
-  var j = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    k = _slicedToArray(j, 2),
-    l = k[0],
-    m = k[1];
-  var n = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    o = _slicedToArray(n, 2),
-    p = o[0],
-    q = o[1];
-  var r = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    s = _slicedToArray(r, 2),
-    t = s[0],
-    u = s[1];
-  var v = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-    w = _slicedToArray(v, 2),
-    x = w[0],
-    y = w[1];
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var a = /*#__PURE__*/function () {
-      var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function a() {
-        var b;
-        return _regeneratorRuntime().wrap(function d(a) {
-          while (1) switch (a.prev = a.next) {
-            case 0:
-              a.next = 2;
-              return c;
-            case 2:
-              b = a.sent;
-              return a.abrupt("return", b);
-            case 4:
-            case "end":
-              return a.stop();
-          }
-        }, a);
-      }));
-      return function b() {
-        return a.apply(this, arguments);
-      };
-    }();
-    if (c instanceof Promise) {
-      // Set state to busy.
-      i(e);
-      u(true);
-      m(true);
-      a().then(function (a) {
-        var b = a.data;
-        var c = b.success;
-        var d = b.data;
-
-        // Get the type of notification. (error, info, success, warning, critical, confirmation).
-        var f = d.type || 'info';
-
-        // Get the message.
-        var g = d.message || '';
-
-        // Get the title.
-        var h = d.title || ''; /* title of snackbar or modal */
-
-        // Get whether the notification is dismissable.
-        var j = d.dismissable || false; /* whether the snackbar or modal is dismissable */
-
-        // Get whether the notification is persistent.
-        var k = d.persistent || false; /* whether the snackbar or modal is persistent */
-
-        // Get the politeness based on if successful.
-        var l = c ? 'polite' : 'assertive';
-
-        // Set state with the notification.
-        i({
-          type: f,
-          message: g,
-          title: h,
-          isDismissable: j,
-          isBusy: false,
-          isPersistent: k,
-          politeness: l
-        });
-        if (c) {
-          //onSuccess( notificationOptions );
-        } else {
-          //onError( notificationOptions );
-        }
-        if ('critical' === f) {
-          u(false);
-          i(e);
-          q(true);
-        } else {
-          clearTimeout(x);
-          y(setTimeout(function () {
-            u(false);
-            i(e);
-          }, 6000));
-        }
-      })["catch"](function (a) {
-        // Handle error
-        i({
-          type: 'critical',
-          message: a.message,
-          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('An Error Has Occurred', 'wp-plugin-info-card'),
-          isDismissable: false,
-          isBusy: false,
-          isPersistent: true,
-          politeness: 'assertive'
-        });
-        //onError( notificationOptions );
-      }).then(function () {
-        // Set state to not busy.
-        m(false);
-      });
-    }
-  }, [c]);
-
-  // Bail if no promise.
-  if (null === c) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
-  }
-
-  /**
-   * Gets the icon for the notification.
-   *
-   * @return {Element} JSX markup for the icon.
-   */
-  var z = function a() {
-    switch (h.type) {
-      case 'success':
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], null);
-      case 'error':
-      case 'critical':
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], null);
-      default:
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], null);
-    }
-  };
-  var A = function a() {
-    var b = [];
-    if (h.type === 'success') {
-      b.push({
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Back to Top', 'wp-plugin-info-card'),
-        url: '#wppic-admin-header',
-        variant: 'link',
-        className: 'wppic-admin__notice-action wppic-admin__notice-action--to-top'
-      });
-    }
-    return b;
-  };
-  var B = function a() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Snackbar, {
-      className: classnames__WEBPACK_IMPORTED_MODULE_2___default()("wppic-snackbar wppic-snackbar-".concat(h.type), {
-        'wppic-snackbar-loading': l
-      }),
-      actions: A(),
-      icon: z(),
-      onDismiss: function a() {
-        return u(false);
-      },
-      explicitDismiss: h.isDismissable
-    }, l ? d : h.message);
-  };
-  var C = function a() {
-    if ('critical' === h.type) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Modal, {
-        className: classnames__WEBPACK_IMPORTED_MODULE_2___default()("wppic-modal wppic-modal-".concat(h.type), {
-          'wppic-modal-loading': l
-        }),
-        bodyOpenClassName: 'wppic-modal-body-open',
-        title: h.title,
-        onRequestClose: function a() {
-          q(false);
-        },
-        isDismissible: true,
-        shouldCloseOnClickOutside: h.isPersistent,
-        shouldCloseOnEsc: h.isPersistent
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Notice__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        message: h.message,
-        status: h.type,
-        politeness: h.politeness,
-        icon: z,
-        inline: false
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "wppic-modal-button-group"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-        className: "button button-error",
-        variant: "secondary",
-        onClick: function a() {
-          q(false);
-        }
-      }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('OK', 'wp-plugin-info-card'))));
-    }
-  };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, t && B(), " ", p && C(), " ");
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SnackPop);
-
-/***/ }),
-
 /***/ "./src/react/hooks/useMediaUploader.js":
 /*!*********************************************!*\
   !*** ./src/react/hooks/useMediaUploader.js ***!
@@ -20119,27 +20237,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var use_async_resource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! use-async-resource */ "./node_modules/use-async-resource/lib/index.js");
 /* harmony import */ var use_async_resource__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(use_async_resource__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _tanstack_react_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @tanstack/react-router */ "./node_modules/@tanstack/react-router/dist/esm/useRouterState.js");
-/* harmony import */ var _tanstack_react_router__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @tanstack/react-router */ "./node_modules/@tanstack/react-router/dist/esm/useNavigate.js");
+/* harmony import */ var _tanstack_react_router__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @tanstack/react-router */ "./node_modules/@tanstack/react-router/dist/esm/useRouterState.js");
+/* harmony import */ var _tanstack_react_router__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @tanstack/react-router */ "./node_modules/@tanstack/react-router/dist/esm/useNavigate.js");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
 /* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _components_SaveResetButtons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/SaveResetButtons */ "./src/react/components/SaveResetButtons/index.js");
-/* harmony import */ var _hooks_useMediaUploader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../hooks/useMediaUploader */ "./src/react/hooks/useMediaUploader.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plug-2.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plus.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/book-text.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/external-link.js");
-/* harmony import */ var _utils_SendCommand__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../utils/SendCommand */ "./src/react/utils/SendCommand.js");
-/* harmony import */ var _components_PluginIcon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/PluginIcon */ "./src/react/components/PluginIcon/index.js");
+/* harmony import */ var _hooks_useMediaUploader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../hooks/useMediaUploader */ "./src/react/hooks/useMediaUploader.js");
+/* harmony import */ var _screens_home__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./screens/home */ "./src/react/views/custom-plugin/screens/home.js");
+/* harmony import */ var _screens_new_plugin__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./screens/new-plugin */ "./src/react/views/custom-plugin/screens/new-plugin.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _utils_SendCommand__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../utils/SendCommand */ "./src/react/utils/SendCommand.js");
+/* harmony import */ var _components_PluginIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/PluginIcon */ "./src/react/components/PluginIcon/index.js");
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (a) { for (var b = 1; b < arguments.length; b++) { var c = arguments[b]; for (var d in c) ({}).hasOwnProperty.call(c, d) && (a[d] = c[d]); } return a; }, _extends.apply(null, arguments); }
 function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -20147,6 +20262,7 @@ function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) 
 function _arrayLikeToArray(b, c) { (null == c || c > b.length) && (c = b.length); for (var d = 0, f = Array(c); d < c; d++) f[d] = b[d]; return f; }
 function _iterableToArrayLimit(b, c) { var d = null == b ? null : "undefined" != typeof Symbol && b[Symbol.iterator] || b["@@iterator"]; if (null != d) { var g, h, j, k, l = [], a = !0, m = !1; try { if (j = (d = d.call(b)).next, 0 === c) { if (Object(d) !== d) return; a = !1; } else for (; !(a = (g = j.call(d)).done) && (l.push(g.value), l.length !== c); a = !0); } catch (a) { m = !0, h = a; } finally { try { if (!a && null != d["return"] && (k = d["return"](), Object(k) !== k)) return; } finally { if (m) throw h; } } return l; } }
 function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
+
 
 
 
@@ -20215,7 +20331,7 @@ var CustomPlugin = function b(a) {
 };
 var Interface = function b(a) {
   var c = a.data;
-  var d = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_10__.useForm)({
+  var d = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_11__.useForm)({
       defaultValues: {
         saveNonce: wppicAdminCustomPlugin.saveNonce,
         resetNonce: wppicAdminCustomPlugin.resetNonce
@@ -20228,12 +20344,12 @@ var Interface = function b(a) {
     i = d.setValue,
     j = d.setError,
     k = d.trigger;
-  var l = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_11__.useRouterState)();
-  var m = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_12__.useNavigate)();
-  var n = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_10__.useWatch)({
+  var l = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_12__.useRouterState)();
+  var m = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_13__.useNavigate)();
+  var n = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_11__.useWatch)({
     control: e
   });
-  var o = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_10__.useFormState)({
+  var o = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_11__.useFormState)({
       control: e
     }),
     p = o.errors,
@@ -20241,7 +20357,7 @@ var Interface = function b(a) {
     r = o.dirtyFields;
 
   // Media uploader for citation image upload.
-  var s = (0,_hooks_useMediaUploader__WEBPACK_IMPORTED_MODULE_6__["default"])(),
+  var s = (0,_hooks_useMediaUploader__WEBPACK_IMPORTED_MODULE_5__["default"])(),
     t = s.openMediaUploader;
 
   /**
@@ -20254,6 +20370,67 @@ var Interface = function b(a) {
     localStorage.removeItem('wppic_edd_options');
     localStorage.removeItem('wppic_edd_options_timestamp');
   };
+  var v = function a() {
+    switch (l.location.pathname) {
+      case '/':
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_screens_home__WEBPACK_IMPORTED_MODULE_6__["default"], null);
+      case '/new-plugin':
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_screens_new_plugin__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          isEditing: false,
+          pluginData: null
+        });
+      default:
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "404");
+    }
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, v());
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CustomPlugin);
+
+/***/ }),
+
+/***/ "./src/react/views/custom-plugin/screens/home.js":
+/*!*******************************************************!*\
+  !*** ./src/react/views/custom-plugin/screens/home.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var use_async_resource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! use-async-resource */ "./node_modules/use-async-resource/lib/index.js");
+/* harmony import */ var use_async_resource__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(use_async_resource__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _tanstack_react_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @tanstack/react-router */ "./node_modules/@tanstack/react-router/dist/esm/useNavigate.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_PluginIcon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../components/PluginIcon */ "./src/react/components/PluginIcon/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plug-2.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plus.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/book-text.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/external-link.js");
+
+
+
+
+
+
+
+
+
+
+
+var PluginHome = function b(a) {
+  var c = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_7__.useNavigate)();
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-container with-sidebar"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -20262,41 +20439,467 @@ var Interface = function b(a) {
     className: "wppic-admin-panel-area"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-area__section"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_PluginIcon__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Custom Plugins', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_PluginIcon__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Custom Plugins', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
     className: "description"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Add a custom plugin, enable a REST API endpoint, and share the plugin with the world.', 'wp-plugin-info-card'))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Add New Plugin', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Add a new plugin to the list of plugins.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Add New Plugin', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Add a new plugin to the list of plugins.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
     variant: "primary",
     href: "#",
     onClick: function b(a) {
       a.preventDefault();
-      m({
+      c({
         to: '/new-plugin'
       });
     },
     iconPosition: "left",
     className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
     icon: function a() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_14__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], null);
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Add New Plugin', 'wp-plugin-info-card'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_15__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Find out how to display your custom plugins with WP Plugin Info Card.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Find out how to display your custom plugins with WP Plugin Info Card.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
     variant: "secondary",
     href: "https://wppic.dlxplugins.com/",
     className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
     icon: function a() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_16__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_11__["default"], null);
     },
     iconPosition: "left",
     target: "_blank",
     rel: "noopener noreferrer"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('English Documentation', 'wp-plugin-info-card'))))));
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CustomPlugin);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PluginHome);
+
+/***/ }),
+
+/***/ "./src/react/views/custom-plugin/screens/new-plugin.js":
+/*!*************************************************************!*\
+  !*** ./src/react/views/custom-plugin/screens/new-plugin.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _tanstack_react_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @tanstack/react-router */ "./node_modules/@tanstack/react-router/dist/esm/link.js");
+/* harmony import */ var _tanstack_react_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @tanstack/react-router */ "./node_modules/@tanstack/react-router/dist/esm/useNavigate.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-spinners/BeatLoader */ "./node_modules/react-spinners/BeatLoader.js");
+/* harmony import */ var react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _hooks_useMediaUploader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../hooks/useMediaUploader */ "./src/react/hooks/useMediaUploader.js");
+/* harmony import */ var _components_PluginIcon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../components/PluginIcon */ "./src/react/components/PluginIcon/index.js");
+/* harmony import */ var _components_Notice__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../components/Notice */ "./src/react/components/Notice/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-alert.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plug-2.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plus.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/cloud-download.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/download.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/book-text.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/external-link.js");
+/* harmony import */ var _utils_SendCommand__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../utils/SendCommand */ "./src/react/utils/SendCommand.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (a) { for (var b = 1; b < arguments.length; b++) { var c = arguments[b]; for (var d in c) ({}).hasOwnProperty.call(c, d) && (a[d] = c[d]); } return a; }, _extends.apply(null, arguments); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return j; }; var b, j = {}, e = Object.prototype, k = e.hasOwnProperty, m = Object.defineProperty || function (a, b, c) { a[b] = c.value; }, n = "function" == typeof Symbol ? Symbol : {}, q = n.iterator || "@@iterator", a = n.asyncIterator || "@@asyncIterator", c = n.toStringTag || "@@toStringTag"; function i(a, b, c) { return Object.defineProperty(a, b, { value: c, enumerable: !0, configurable: !0, writable: !0 }), a[b]; } try { i({}, ""); } catch (a) { i = function i(a, b, c) { return a[b] = c; }; } function u(b, d, e, f) { var g = d && d.prototype instanceof o ? d : o, h = Object.create(g.prototype), a = new F(f || []); return m(h, "_invoke", { value: B(b, e, a) }), h; } function w(a, b, c) { try { return { type: "normal", arg: a.call(b, c) }; } catch (a) { return { type: "throw", arg: a }; } } j.wrap = u; var x = "suspendedStart", h = "suspendedYield", l = "executing", f = "completed", s = {}; function o() {} function r() {} function y() {} var z = {}; i(z, q, function () { return this; }); var t = Object.getPrototypeOf, d = t && t(t(G([]))); d && d !== e && k.call(d, q) && (z = d); var v = y.prototype = o.prototype = Object.create(z); function g(a) { ["next", "throw", "return"].forEach(function (b) { i(a, b, function (a) { return this._invoke(b, a); }); }); } function A(b, d) { function c(e, f, g, i) { var a = w(b[e], b, f); if ("throw" !== a.type) { var j = a.arg, l = j.value; return l && "object" == _typeof(l) && k.call(l, "__await") ? d.resolve(l.__await).then(function (a) { c("next", a, g, i); }, function (a) { c("throw", a, g, i); }) : d.resolve(l).then(function (a) { j.value = a, g(j); }, function (a) { return c("throw", a, g, i); }); } i(a.arg); } var e; m(this, "_invoke", { value: function value(a, b) { function f() { return new d(function (d, e) { c(a, b, d, e); }); } return e = e ? e.then(f, f) : f(); } }); } function B(a, d, e) { var g = x; return function (j, i) { if (g === l) throw Error("Generator is already running"); if (g === f) { if ("throw" === j) throw i; return { value: b, done: !0 }; } for (e.method = j, e.arg = i;;) { var k = e.delegate; if (k) { var m = C(k, e); if (m) { if (m === s) continue; return m; } } if ("next" === e.method) e.sent = e._sent = e.arg;else if ("throw" === e.method) { if (g === x) throw g = f, e.arg; e.dispatchException(e.arg); } else "return" === e.method && e.abrupt("return", e.arg); g = l; var n = w(a, d, e); if ("normal" === n.type) { if (g = e.done ? f : h, n.arg === s) continue; return { value: n.arg, done: e.done }; } "throw" === n.type && (g = f, e.method = "throw", e.arg = n.arg); } }; } function C(c, d) { var e = d.method, f = c.iterator[e]; if (f === b) return d.delegate = null, "throw" === e && c.iterator["return"] && (d.method = "return", d.arg = b, C(c, d), "throw" === d.method) || "return" !== e && (d.method = "throw", d.arg = new TypeError("The iterator does not provide a '" + e + "' method")), s; var g = w(f, c.iterator, d.arg); if ("throw" === g.type) return d.method = "throw", d.arg = g.arg, d.delegate = null, s; var h = g.arg; return h ? h.done ? (d[c.resultName] = h.value, d.next = c.nextLoc, "return" !== d.method && (d.method = "next", d.arg = b), d.delegate = null, s) : h : (d.method = "throw", d.arg = new TypeError("iterator result is not an object"), d.delegate = null, s); } function D(a) { var b = { tryLoc: a[0] }; 1 in a && (b.catchLoc = a[1]), 2 in a && (b.finallyLoc = a[2], b.afterLoc = a[3]), this.tryEntries.push(b); } function E(a) { var b = a.completion || {}; b.type = "normal", delete b.arg, a.completion = b; } function F(a) { this.tryEntries = [{ tryLoc: "root" }], a.forEach(D, this), this.reset(!0); } function G(a) { if (a || "" === a) { var c = a[q]; if (c) return c.call(a); if ("function" == typeof a.next) return a; if (!isNaN(a.length)) { var d = -1, e = function c() { for (; ++d < a.length;) if (k.call(a, d)) return c.value = a[d], c.done = !1, c; return c.value = b, c.done = !0, c; }; return e.next = e; } } throw new TypeError(_typeof(a) + " is not iterable"); } return r.prototype = y, m(v, "constructor", { value: y, configurable: !0 }), m(y, "constructor", { value: r, configurable: !0 }), r.displayName = i(y, c, "GeneratorFunction"), j.isGeneratorFunction = function (a) { var b = "function" == typeof a && a.constructor; return !!b && (b === r || "GeneratorFunction" === (b.displayName || b.name)); }, j.mark = function (a) { return Object.setPrototypeOf ? Object.setPrototypeOf(a, y) : (a.__proto__ = y, i(a, c, "GeneratorFunction")), a.prototype = Object.create(v), a; }, j.awrap = function (a) { return { __await: a }; }, g(A.prototype), i(A.prototype, a, function () { return this; }), j.AsyncIterator = A, j.async = function (b, c, d, e, f) { void 0 === f && (f = Promise); var g = new A(u(b, c, d, e), f); return j.isGeneratorFunction(c) ? g : g.next().then(function (a) { return a.done ? a.value : g.next(); }); }, g(v), i(v, c, "Generator"), i(v, q, function () { return this; }), i(v, "toString", function () { return "[object Generator]"; }), j.keys = function (a) { var b = Object(a), c = []; for (var d in b) c.push(d); return c.reverse(), function a() { for (; c.length;) { var d = c.pop(); if (d in b) return a.value = d, a.done = !1, a; } return a.done = !0, a; }; }, j.values = G, F.prototype = { constructor: F, reset: function reset(a) { if (this.prev = 0, this.next = 0, this.sent = this._sent = b, this.done = !1, this.delegate = null, this.method = "next", this.arg = b, this.tryEntries.forEach(E), !a) for (var c in this) "t" === c.charAt(0) && k.call(this, c) && !isNaN(+c.slice(1)) && (this[c] = b); }, stop: function stop() { this.done = !0; var a = this.tryEntries[0].completion; if ("throw" === a.type) throw a.arg; return this.rval; }, dispatchException: function dispatchException(d) { if (this.done) throw d; var e = this; function f(a, c) { return j.type = "throw", j.arg = d, e.next = a, c && (e.method = "next", e.arg = b), !!c; } for (var g = this.tryEntries.length - 1; g >= 0; --g) { var h = this.tryEntries[g], j = h.completion; if ("root" === h.tryLoc) return f("end"); if (h.tryLoc <= this.prev) { var l = k.call(h, "catchLoc"), m = k.call(h, "finallyLoc"); if (l && m) { if (this.prev < h.catchLoc) return f(h.catchLoc, !0); if (this.prev < h.finallyLoc) return f(h.finallyLoc); } else if (l) { if (this.prev < h.catchLoc) return f(h.catchLoc, !0); } else { if (!m) throw Error("try statement without catch or finally"); if (this.prev < h.finallyLoc) return f(h.finallyLoc); } } } }, abrupt: function abrupt(b, c) { for (var d = this.tryEntries.length - 1; d >= 0; --d) { var e = this.tryEntries[d]; if (e.tryLoc <= this.prev && k.call(e, "finallyLoc") && this.prev < e.finallyLoc) { var f = e; break; } } f && ("break" === b || "continue" === b) && f.tryLoc <= c && c <= f.finallyLoc && (f = null); var g = f ? f.completion : {}; return g.type = b, g.arg = c, f ? (this.method = "next", this.next = f.finallyLoc, s) : this.complete(g); }, complete: function complete(a, b) { if ("throw" === a.type) throw a.arg; return "break" === a.type || "continue" === a.type ? this.next = a.arg : "return" === a.type ? (this.rval = this.arg = a.arg, this.method = "return", this.next = "end") : "normal" === a.type && b && (this.next = b), s; }, finish: function finish(a) { for (var b = this.tryEntries.length - 1; b >= 0; --b) { var c = this.tryEntries[b]; if (c.finallyLoc === a) return this.complete(c.completion, c.afterLoc), E(c), s; } }, "catch": function _catch(a) { for (var b = this.tryEntries.length - 1; b >= 0; --b) { var c = this.tryEntries[b]; if (c.tryLoc === a) { var d = c.completion; if ("throw" === d.type) { var f = d.arg; E(c); } return f; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(a, c, d) { return this.delegate = { iterator: G(a), resultName: c, nextLoc: d }, "next" === this.method && (this.arg = b), s; } }, j; }
+function asyncGeneratorStep(b, d, f, e, g, h, a) { try { var c = b[h](a), i = c.value; } catch (a) { return void f(a); } c.done ? d(i) : Promise.resolve(i).then(e, g); }
+function _asyncToGenerator(b) { return function () { var c = this, d = arguments; return new Promise(function (e, f) { var g = b.apply(c, d); function a(b) { asyncGeneratorStep(g, e, f, a, h, "next", b); } function h(b) { asyncGeneratorStep(g, e, f, a, h, "throw", b); } a(void 0); }); }; }
+function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) return _arrayLikeToArray(b, c); var a = {}.toString.call(b).slice(8, -1); return "Object" === a && b.constructor && (a = b.constructor.name), "Map" === a || "Set" === a ? Array.from(b) : "Arguments" === a || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a) ? _arrayLikeToArray(b, c) : void 0; } }
+function _arrayLikeToArray(b, c) { (null == c || c > b.length) && (c = b.length); for (var d = 0, f = Array(c); d < c; d++) f[d] = b[d]; return f; }
+function _iterableToArrayLimit(b, c) { var d = null == b ? null : "undefined" != typeof Symbol && b[Symbol.iterator] || b["@@iterator"]; if (null != d) { var g, h, j, k, l = [], a = !0, m = !1; try { if (j = (d = d.call(b)).next, 0 === c) { if (Object(d) !== d) return; a = !1; } else for (; !(a = (g = j.call(d)).done) && (l.push(g.value), l.length !== c); a = !0); } catch (a) { m = !0, h = a; } finally { try { if (!a && null != d["return"] && (k = d["return"](), Object(k) !== k)) return; } finally { if (m) throw h; } } return l; } }
+function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+var Breadcrumbs = function b(a) {
+  var c = a.screen,
+    d = a.isEditing;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-panel-breadcrumbs"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-panel-breadcrumbs__item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_tanstack_react_router__WEBPACK_IMPORTED_MODULE_9__.Link, {
+    href: "/"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Custom Plugins', 'wp-plugin-info-card')), ' > ', !d && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "wppic-admin-panel-breadcrumbs__item-current"
+  }, c), d && ' > ', d && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "wppic-admin-panel-breadcrumbs__item-current"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Edit', 'wp-plugin-info-card'))));
+};
+var Plugin = function b(a) {
+  var c = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+    d = _slicedToArray(c, 2),
+    e = d[0],
+    f = d[1];
+  var g = a.isEditing;
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (e || !g) {
+      return;
+    }
+    var a = /*#__PURE__*/function () {
+      var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function a() {
+        var b, c, d, e;
+        return _regeneratorRuntime().wrap(function g(a) {
+          while (1) switch (a.prev = a.next) {
+            case 0:
+              a.next = 2;
+              return (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_8__["default"])('wppic_get_plugin_data', {
+                nonce: wppicAdminCustomPlugin.getNonce
+              });
+            case 2:
+              b = a.sent;
+              c = b.data, d = c.success, e = c.data;
+              if (d) {
+                // Save to local storage.
+                localStorage.setItem('wppic_edd_options', JSON.stringify(e));
+                localStorage.setItem('wppic_edd_options_timestamp', new Date().getTime().toString());
+                f(e);
+              }
+            case 5:
+            case "end":
+              return a.stop();
+          }
+        }, a);
+      }));
+      return function b() {
+        return a.apply(this, arguments);
+      };
+    }();
+    // Fetch options.
+    a();
+  }, [g, e]);
+  if (!e && g) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "wppic-admin-panel-loading"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Loading Options', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_10___default()), {
+      color: '#333',
+      loading: true,
+      cssOverride: true,
+      size: 25,
+      speedMultiplier: 0.65
+    }));
+  }
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Interface, _extends({
+    data: e
+  }, a));
+};
+var Interface = function b(a) {
+  var c = a.isEditing,
+    d = a.data;
+  var f = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_11__.useNavigate)();
+  var g = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    h = _slicedToArray(g, 2),
+    i = h[0],
+    j = h[1];
+  var k = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    l = _slicedToArray(k, 2),
+    m = l[0],
+    n = l[1];
+  var o = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    p = _slicedToArray(o, 2),
+    q = p[0],
+    r = p[1];
+  var s = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    t = _slicedToArray(s, 2),
+    u = t[0],
+    v = t[1];
+  var w = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    x = _slicedToArray(w, 2),
+    y = x[0],
+    z = x[1];
+  var A = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+  var B = /*#__PURE__*/function () {
+    var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function b(a) {
+      var c, d, e, f, g;
+      return _regeneratorRuntime().wrap(function h(b) {
+        while (1) switch (b.prev = b.next) {
+          case 0:
+            j(true);
+            c = (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_8__["default"])('wppic_check_plugin_slug', {
+              slug: a,
+              nonce: wppicAdminCustomPlugin.checkPluginSlugNonce
+            });
+            c["catch"](function () {
+              v((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('There has been an error communicating with the server. Please try again.', 'wp-plugin-info-card'));
+              n(true);
+              j(false);
+            });
+            b.next = 5;
+            return c;
+          case 5:
+            d = b.sent;
+            j(false);
+            e = d.data.success;
+            if (e) {
+              f = d.data.data;
+              if (f.display) {
+                z(f.message);
+                r(true);
+              } else {
+                z('');
+                r(false);
+              }
+            } else {
+              g = d.data.data;
+              v(g.message);
+              n(true);
+              A.focus();
+            }
+          case 9:
+          case "end":
+            return b.stop();
+        }
+      }, b);
+    }));
+    return function b(_x) {
+      return a.apply(this, arguments);
+    };
+  }();
+  var C = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_12__.useForm)({
+      defaultValues: {
+        saveNonce: wppicAdminCustomPlugin.saveNonce,
+        resetNonce: wppicAdminCustomPlugin.resetNonce,
+        custom_plugin_icon_id: d.custom_plugin_icon_id || 0,
+        custom_plugin_banner_id: d.custom_plugin_banner_id || 0,
+        custom_plugin_icon_url: d.custom_plugin_icon_url || '',
+        custom_plugin_banner_url: d.custom_plugin_banner_url || '',
+        custom_plugin_name: d.custom_plugin_name || '',
+        custom_plugin_slug: d.custom_plugin_slug || ''
+      }
+    }),
+    D = C.control,
+    E = C.handleSubmit,
+    F = C.getValues,
+    G = C.reset,
+    H = C.setValue,
+    I = C.setError,
+    J = C.trigger;
+  var K = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_12__.useWatch)({
+    control: D
+  });
+  var L = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_12__.useFormState)({
+      control: D
+    }),
+    M = L.errors,
+    N = L.isDirty,
+    O = L.dirtyFields;
+
+  // Media uploader for citation image upload.
+  var P = (0,_hooks_useMediaUploader__WEBPACK_IMPORTED_MODULE_4__["default"])(),
+    Q = P.openMediaUploader;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-panel-container with-sidebar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-panel-options-wrapper"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Breadcrumbs, {
+    screen: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('New Plugin', 'wp-plugin-info-card'),
+    isEditing: c
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-panel-area"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-panel-area__section"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_PluginIcon__WEBPACK_IMPORTED_MODULE_5__["default"], null), c && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "wppic-admin-panel-area__section-title-edit"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Edit Plugin', 'wp-plugin-info-card')), !c && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "wppic-admin-panel-area__section-title-new"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('New Plugin', 'wp-plugin-info-card')))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", {
+    className: "form-table form-table-row-sections"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    scope: "row"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Plugin Name', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_12__.Controller, {
+    control: D,
+    name: "custom_plugin_name",
+    rules: {
+      required: true
+    },
+    render: function b(a) {
+      var c = a.field;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.TextControl, _extends({}, c, {
+        placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter Plugin Name', 'wp-plugin-info-card'),
+        className: "wppic-admin-input is-required",
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter the name of the plugin.', 'wp-plugin-info-card')
+      }));
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_12__.Controller, {
+    control: D,
+    name: "custom_plugin_slug",
+    rules: {
+      required: true,
+      pattern: /^[-_a-z0-9]+$/
+    },
+    render: function b(a) {
+      var c;
+      var d = a.field;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.TextControl, _extends({}, d, {
+        placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter Plugin Slug', 'wp-plugin-info-card'),
+        className: "wppic-admin-input is-required",
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter the slug of the plugin. It must be unique and contain only lowercase letters and underscores.', 'wp-plugin-info-card'),
+        onChange: function b(a) {
+          d.onChange(a);
+        },
+        ref: A,
+        onBlur: function b(a) {
+          J('custom_plugin_slug');
+          if (M !== null && M !== void 0 && M.custom_plugin_slug) {
+            B(a);
+          }
+        }
+      })), i && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "wppic-admin-row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_10___default()), {
+        color: '#333',
+        loading: true,
+        cssOverride: true,
+        size: 10,
+        speedMultiplier: 0.65
+      })), q && y && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "wppic-admin-row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        message: y,
+        status: "error",
+        politeness: "assertive",
+        icon: function a() {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], {
+            style: {
+              color: 'currentColor'
+            }
+          });
+        },
+        inline: false
+      })), (M === null || M === void 0 ? void 0 : M.custom_plugin_slug) && (M === null || M === void 0 || (c = M.custom_plugin_slug) === null || c === void 0 ? void 0 : c.type) === 'pattern' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "wppic-admin-row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('The slug must contain only lowercase letters and underscores.', 'wp-plugin-info-card'),
+        status: "error",
+        politeness: "assertive",
+        icon: function a() {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], {
+            style: {
+              color: 'currentColor'
+            }
+          });
+        },
+        inline: false
+      })));
+    }
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    scope: "row"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Icons and Banners', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-row"
+  }, F('custom_plugin_icon_url') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-image-preview"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+    src: F('custom_plugin_icon_url'),
+    alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Default Icon', 'wp-plugin-info-card'),
+    width: "180",
+    height: "180",
+    style: {
+      width: '180px',
+      height: '180px'
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-button-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
+    variant: "secondary",
+    className: "wppic-btn wppic-btn-alt",
+    onClick: function a() {
+      Q({
+        attachmentId: 0,
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select Default Plugin Icon', 'wp-plugin-info-card'),
+        suggestedWidth: 256,
+        suggestedHeight: 256
+      }, function (a) {
+        H('custom_plugin_icon_id', a.id);
+        H('custom_plugin_icon_url', a.url);
+      });
+    },
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select an Icon with dimensions 256x256', 'wp-plugin-info-card')
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Upload Icon', 'wp-plugin-info-card')), F('custom_plugin_icon_id') !== 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
+    variant: "secondary",
+    className: "wppic-btn wppic-btn-alt",
+    onClick: function a() {
+      H('custom_plugin_icon_id', 0);
+      H('custom_plugin_icon_url', '');
+    },
+    isDestructive: true
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Remove Icon', 'wp-plugin-info-card')))))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-panel-sidebar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-panel-sidebar-card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_14__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Add New Plugin', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Add a new plugin to the list of plugins.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
+    variant: "primary",
+    href: "#",
+    onClick: function b(a) {
+      a.preventDefault();
+      f({
+        to: '/new-plugin'
+      });
+    },
+    iconPosition: "left",
+    className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
+    icon: function a() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_15__["default"], null);
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Add New Plugin', 'wp-plugin-info-card'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-panel-sidebar-card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_16__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Import Plugin', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Import a plugin from a REST API endpoint.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
+    variant: "secondary",
+    href: "#",
+    onClick: function b(a) {
+      a.preventDefault();
+      // todo: import modal.
+    },
+    iconPosition: "left",
+    className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
+    icon: function a() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_17__["default"], null);
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Import Plugin', 'wp-plugin-info-card'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-panel-sidebar-card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_18__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Find out how to display your custom plugins with WP Plugin Info Card.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
+    variant: "secondary",
+    href: "https://wppic.dlxplugins.com/",
+    className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
+    icon: function a() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_19__["default"], null);
+    },
+    iconPosition: "left",
+    target: "_blank",
+    rel: "noopener noreferrer"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('English Documentation', 'wp-plugin-info-card'))))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Plugin);
 
 /***/ }),
 

@@ -10698,6 +10698,70 @@ module.exports = camelCase;
 
 /***/ }),
 
+/***/ "./node_modules/lucide-react/dist/esm/Icon.js":
+/*!****************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/Icon.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Icon)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _defaultAttributes_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./defaultAttributes.js */ "./node_modules/lucide-react/dist/esm/defaultAttributes.js");
+/* harmony import */ var _shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shared/src/utils.js */ "./node_modules/lucide-react/dist/esm/shared/src/utils.js");
+/**
+ * @license lucide-react v0.503.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+
+
+const Icon = (0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(
+  ({
+    color = "currentColor",
+    size = 24,
+    strokeWidth = 2,
+    absoluteStrokeWidth,
+    className = "",
+    children,
+    iconNode,
+    ...rest
+  }, ref) => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(
+      "svg",
+      {
+        ref,
+        ..._defaultAttributes_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+        width: size,
+        height: size,
+        stroke: color,
+        strokeWidth: absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth,
+        className: (0,_shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.mergeClasses)("lucide", className),
+        ...!children && !(0,_shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.hasA11yProp)(rest) && { "aria-hidden": "true" },
+        ...rest
+      },
+      [
+        ...iconNode.map(([tag, attrs]) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(tag, attrs)),
+        ...Array.isArray(children) ? children : [children]
+      ]
+    );
+  }
+);
+
+
+//# sourceMappingURL=Icon.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/lucide-react/dist/esm/createLucideIcon.js":
 /*!****************************************************************!*\
   !*** ./node_modules/lucide-react/dist/esm/createLucideIcon.js ***!
@@ -10707,14 +10771,14 @@ module.exports = camelCase;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ createLucideIcon),
-/* harmony export */   toKebabCase: () => (/* binding */ toKebabCase)
+/* harmony export */   "default": () => (/* binding */ createLucideIcon)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _defaultAttributes_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./defaultAttributes.js */ "./node_modules/lucide-react/dist/esm/defaultAttributes.js");
+/* harmony import */ var _shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shared/src/utils.js */ "./node_modules/lucide-react/dist/esm/shared/src/utils.js");
+/* harmony import */ var _Icon_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Icon.js */ "./node_modules/lucide-react/dist/esm/Icon.js");
 /**
- * @license lucide-react v0.294.0 - ISC
+ * @license lucide-react v0.503.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -10723,28 +10787,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const toKebabCase = (string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase().trim();
+
 const createLucideIcon = (iconName, iconNode) => {
   const Component = (0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(
-    ({ color = "currentColor", size = 24, strokeWidth = 2, absoluteStrokeWidth, className = "", children, ...rest }, ref) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(
-      "svg",
-      {
-        ref,
-        ..._defaultAttributes_js__WEBPACK_IMPORTED_MODULE_1__["default"],
-        width: size,
-        height: size,
-        stroke: color,
-        strokeWidth: absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth,
-        className: ["lucide", `lucide-${toKebabCase(iconName)}`, className].join(" "),
-        ...rest
-      },
-      [
-        ...iconNode.map(([tag, attrs]) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(tag, attrs)),
-        ...Array.isArray(children) ? children : [children]
-      ]
-    )
+    ({ className, ...props }, ref) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Icon_js__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      ref,
+      iconNode,
+      className: (0,_shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.mergeClasses)(
+        `lucide-${(0,_shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.toKebabCase)((0,_shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.toPascalCase)(iconName))}`,
+        `lucide-${iconName}`,
+        className
+      ),
+      ...props
+    })
   );
-  Component.displayName = `${iconName}`;
+  Component.displayName = (0,_shared_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.toPascalCase)(iconName);
   return Component;
 };
 
@@ -10766,7 +10823,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ defaultAttributes)
 /* harmony export */ });
 /**
- * @license lucide-react v0.294.0 - ISC
+ * @license lucide-react v0.503.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -10790,39 +10847,6 @@ var defaultAttributes = {
 
 /***/ }),
 
-/***/ "./node_modules/lucide-react/dist/esm/icons/alert-circle.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/lucide-react/dist/esm/icons/alert-circle.js ***!
-  \******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ AlertCircle)
-/* harmony export */ });
-/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
-/**
- * @license lucide-react v0.294.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-const AlertCircle = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("AlertCircle", [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
-  ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
-]);
-
-
-//# sourceMappingURL=alert-circle.js.map
-
-
-/***/ }),
-
 /***/ "./node_modules/lucide-react/dist/esm/icons/arrow-big-left.js":
 /*!********************************************************************!*\
   !*** ./node_modules/lucide-react/dist/esm/icons/arrow-big-left.js ***!
@@ -10832,11 +10856,12 @@ const AlertCircle = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["defaul
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
 /* harmony export */   "default": () => (/* binding */ ArrowBigLeft)
 /* harmony export */ });
 /* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
 /**
- * @license lucide-react v0.294.0 - ISC
+ * @license lucide-react v0.503.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -10844,12 +10869,115 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const ArrowBigLeft = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("ArrowBigLeft", [
-  ["path", { d: "M18 15h-6v4l-7-7 7-7v4h6v6z", key: "lbrdak" }]
-]);
+const __iconNode = [["path", { d: "M18 15h-6v4l-7-7 7-7v4h6v6z", key: "lbrdak" }]];
+const ArrowBigLeft = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("arrow-big-left", __iconNode);
 
 
 //# sourceMappingURL=arrow-big-left.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/chart-line.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/chart-line.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
+/* harmony export */   "default": () => (/* binding */ ChartLine)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.503.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const __iconNode = [
+  ["path", { d: "M3 3v16a2 2 0 0 0 2 2h16", key: "c24i48" }],
+  ["path", { d: "m19 9-5 5-4-4-3 3", key: "2osh9i" }]
+];
+const ChartLine = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("chart-line", __iconNode);
+
+
+//# sourceMappingURL=chart-line.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/circle-alert.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/circle-alert.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
+/* harmony export */   "default": () => (/* binding */ CircleAlert)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.503.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const __iconNode = [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
+  ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
+];
+const CircleAlert = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("circle-alert", __iconNode);
+
+
+//# sourceMappingURL=circle-alert.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/cloud-download.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/cloud-download.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
+/* harmony export */   "default": () => (/* binding */ CloudDownload)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.503.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const __iconNode = [
+  ["path", { d: "M12 13v8l-4-4", key: "1f5nwf" }],
+  ["path", { d: "m12 21 4-4", key: "1lfcce" }],
+  ["path", { d: "M4.393 15.269A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.436 8.284", key: "ui1hmy" }]
+];
+const CloudDownload = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("cloud-download", __iconNode);
+
+
+//# sourceMappingURL=cloud-download.js.map
 
 
 /***/ }),
@@ -10863,11 +10991,12 @@ const ArrowBigLeft = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["defau
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
 /* harmony export */   "default": () => (/* binding */ Code)
 /* harmony export */ });
 /* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
 /**
- * @license lucide-react v0.294.0 - ISC
+ * @license lucide-react v0.503.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -10875,46 +11004,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const Code = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Code", [
+const __iconNode = [
   ["polyline", { points: "16 18 22 12 16 6", key: "z7tu5w" }],
   ["polyline", { points: "8 6 2 12 8 18", key: "1eg1df" }]
-]);
+];
+const Code = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("code", __iconNode);
 
 
 //# sourceMappingURL=code.js.map
-
-
-/***/ }),
-
-/***/ "./node_modules/lucide-react/dist/esm/icons/download-cloud.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/lucide-react/dist/esm/icons/download-cloud.js ***!
-  \********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ DownloadCloud)
-/* harmony export */ });
-/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
-/**
- * @license lucide-react v0.294.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-const DownloadCloud = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("DownloadCloud", [
-  ["path", { d: "M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242", key: "1pljnt" }],
-  ["path", { d: "M12 12v9", key: "192myk" }],
-  ["path", { d: "m8 17 4 4 4-4", key: "1ul180" }]
-]);
-
-
-//# sourceMappingURL=download-cloud.js.map
 
 
 /***/ }),
@@ -10928,11 +11025,12 @@ const DownloadCloud = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["defa
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
 /* harmony export */   "default": () => (/* binding */ Download)
 /* harmony export */ });
 /* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
 /**
- * @license lucide-react v0.294.0 - ISC
+ * @license lucide-react v0.503.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -10940,46 +11038,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const Download = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Download", [
+const __iconNode = [
   ["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4", key: "ih7n3h" }],
   ["polyline", { points: "7 10 12 15 17 10", key: "2ggqvy" }],
   ["line", { x1: "12", x2: "12", y1: "15", y2: "3", key: "1vk2je" }]
-]);
+];
+const Download = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("download", __iconNode);
 
 
 //# sourceMappingURL=download.js.map
-
-
-/***/ }),
-
-/***/ "./node_modules/lucide-react/dist/esm/icons/line-chart.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/lucide-react/dist/esm/icons/line-chart.js ***!
-  \****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ LineChart)
-/* harmony export */ });
-/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
-/**
- * @license lucide-react v0.294.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-const LineChart = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("LineChart", [
-  ["path", { d: "M3 3v18h18", key: "1s2lah" }],
-  ["path", { d: "m19 9-5 5-4-4-3 3", key: "2osh9i" }]
-]);
-
-
-//# sourceMappingURL=line-chart.js.map
 
 
 /***/ }),
@@ -10993,11 +11060,12 @@ const LineChart = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
 /* harmony export */   "default": () => (/* binding */ Settings2)
 /* harmony export */ });
 /* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
 /**
- * @license lucide-react v0.294.0 - ISC
+ * @license lucide-react v0.503.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -11005,12 +11073,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const Settings2 = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Settings2", [
+const __iconNode = [
   ["path", { d: "M20 7h-9", key: "3s1dr2" }],
   ["path", { d: "M14 17H5", key: "gfn3mx" }],
   ["circle", { cx: "17", cy: "17", r: "3", key: "18b49y" }],
   ["circle", { cx: "7", cy: "7", r: "3", key: "dfmy0x" }]
-]);
+];
+const Settings2 = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("settings-2", __iconNode);
 
 
 //# sourceMappingURL=settings-2.js.map
@@ -11027,11 +11096,12 @@ const Settings2 = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
 /* harmony export */   "default": () => (/* binding */ Star)
 /* harmony export */ });
 /* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
 /**
- * @license lucide-react v0.294.0 - ISC
+ * @license lucide-react v0.503.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
@@ -11039,18 +11109,67 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const Star = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Star", [
+const __iconNode = [
   [
-    "polygon",
+    "path",
     {
-      points: "12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2",
-      key: "8f66p6"
+      d: "M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z",
+      key: "r04s7s"
     }
   ]
-]);
+];
+const Star = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("star", __iconNode);
 
 
 //# sourceMappingURL=star.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/shared/src/utils.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/shared/src/utils.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   hasA11yProp: () => (/* binding */ hasA11yProp),
+/* harmony export */   mergeClasses: () => (/* binding */ mergeClasses),
+/* harmony export */   toCamelCase: () => (/* binding */ toCamelCase),
+/* harmony export */   toKebabCase: () => (/* binding */ toKebabCase),
+/* harmony export */   toPascalCase: () => (/* binding */ toPascalCase)
+/* harmony export */ });
+/**
+ * @license lucide-react v0.503.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+const toKebabCase = (string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+const toCamelCase = (string) => string.replace(
+  /^([A-Z])|[\s-_]+(\w)/g,
+  (match, p1, p2) => p2 ? p2.toUpperCase() : p1.toLowerCase()
+);
+const toPascalCase = (string) => {
+  const camelCase = toCamelCase(string);
+  return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
+};
+const mergeClasses = (...classes) => classes.filter((className, index, array) => {
+  return Boolean(className) && className.trim() !== "" && array.indexOf(className) === index;
+}).join(" ").trim();
+const hasA11yProp = (props) => {
+  for (const prop in props) {
+    if (prop.startsWith("aria-") || prop === "role" || prop === "title") {
+      return true;
+    }
+  }
+};
+
+
+//# sourceMappingURL=utils.js.map
 
 
 /***/ }),
@@ -20070,7 +20189,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/alert-circle.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-alert.js");
 /* harmony import */ var _Notice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Notice */ "./src/blocks/components/Notice/index.js");
 /* harmony import */ var _context__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./context */ "./src/blocks/components/CustomPresets/context.js");
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (a) { for (var b = 1; b < arguments.length; b++) { var c = arguments[b]; for (var d in c) ({}).hasOwnProperty.call(c, d) && (a[d] = c[d]); } return a; }, _extends.apply(null, arguments); }
@@ -20234,7 +20353,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/alert-circle.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-alert.js");
 /* harmony import */ var _context__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./context */ "./src/blocks/components/CustomPresets/context.js");
 /* harmony import */ var _Notice__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Notice */ "./src/blocks/components/Notice/index.js");
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (a) { for (var b = 1; b < arguments.length; b++) { var c = arguments[b]; for (var d in c) ({}).hasOwnProperty.call(c, d) && (a[d] = c[d]); } return a; }, _extends.apply(null, arguments); }
@@ -21727,7 +21846,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var react_simple_star_rating__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-simple-star-rating */ "./node_modules/react-simple-star-rating/dist/index.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/code.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/download-cloud.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/cloud-download.js");
 /* harmony import */ var _components_WordPressIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/WordPressIcon */ "./src/blocks/components/WordPressIcon.js");
 function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -21864,10 +21983,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_simple_star_rating__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-simple-star-rating */ "./node_modules/react-simple-star-rating/dist/index.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/star.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/line-chart.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chart-line.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/download.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/code.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/download-cloud.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/cloud-download.js");
 /* harmony import */ var _fancyapps_ui__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fancyapps/ui */ "./node_modules/@fancyapps/ui/dist/index.esm.js");
 /* harmony import */ var _components_WordPressIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/WordPressIcon */ "./src/blocks/components/WordPressIcon.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lodash */ "lodash");
@@ -22493,7 +22612,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(validator_lib_isNumeric__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var react_simple_star_rating__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-simple-star-rating */ "./node_modules/react-simple-star-rating/dist/index.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/code.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/download-cloud.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/cloud-download.js");
 /* harmony import */ var _components_WordPressIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/WordPressIcon */ "./src/blocks/components/WordPressIcon.js");
 function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
