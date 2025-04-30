@@ -130,6 +130,7 @@ const Interface = ( props ) => {
 		reset,
 		setValue,
 		setError,
+		clearErrors,
 		trigger,
 	} = useForm( {
 		defaultValues: {
@@ -208,11 +209,15 @@ const Interface = ( props ) => {
 															className="wppic-admin-input is-required"
 															help={ __( 'Enter the slug of the plugin. It must be unique and contain only lowercase letters and underscores.', 'wp-plugin-info-card' ) }
 															onChange={ ( value ) => {
+																clearErrors( 'custom_plugin_slug' );
 																field.onChange( value );
 															} }
 															ref={ pluginSlugInputRef }
 															onBlur={ ( value ) => {
 																trigger( 'custom_plugin_slug' );
+																setIsChecking( true );
+																setErrorMessage( '' );
+																setIsError( false );
 																if ( errors?.custom_plugin_slug ) {
 																	checkPluginSlug( value );
 																}

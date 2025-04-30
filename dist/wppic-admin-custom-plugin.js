@@ -20700,20 +20700,21 @@ var Interface = function b(a) {
     G = C.reset,
     H = C.setValue,
     I = C.setError,
-    J = C.trigger;
-  var K = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_12__.useWatch)({
+    J = C.clearErrors,
+    K = C.trigger;
+  var L = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_12__.useWatch)({
     control: D
   });
-  var L = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_12__.useFormState)({
+  var M = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_12__.useFormState)({
       control: D
     }),
-    M = L.errors,
-    N = L.isDirty,
-    O = L.dirtyFields;
+    N = M.errors,
+    O = M.isDirty,
+    P = M.dirtyFields;
 
   // Media uploader for citation image upload.
-  var P = (0,_hooks_useMediaUploader__WEBPACK_IMPORTED_MODULE_4__["default"])(),
-    Q = P.openMediaUploader;
+  var Q = (0,_hooks_useMediaUploader__WEBPACK_IMPORTED_MODULE_4__["default"])(),
+    R = Q.openMediaUploader;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-container with-sidebar"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -20766,12 +20767,16 @@ var Interface = function b(a) {
         className: "wppic-admin-input is-required",
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter the slug of the plugin. It must be unique and contain only lowercase letters and underscores.', 'wp-plugin-info-card'),
         onChange: function b(a) {
+          J('custom_plugin_slug');
           d.onChange(a);
         },
         ref: A,
         onBlur: function b(a) {
-          J('custom_plugin_slug');
-          if (M !== null && M !== void 0 && M.custom_plugin_slug) {
+          K('custom_plugin_slug');
+          j(true);
+          v('');
+          n(false);
+          if (N !== null && N !== void 0 && N.custom_plugin_slug) {
             B(a);
           }
         }
@@ -20797,7 +20802,7 @@ var Interface = function b(a) {
           });
         },
         inline: false
-      })), (M === null || M === void 0 ? void 0 : M.custom_plugin_slug) && (M === null || M === void 0 || (c = M.custom_plugin_slug) === null || c === void 0 ? void 0 : c.type) === 'pattern' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      })), (N === null || N === void 0 ? void 0 : N.custom_plugin_slug) && (N === null || N === void 0 || (c = N.custom_plugin_slug) === null || c === void 0 ? void 0 : c.type) === 'pattern' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "wppic-admin-row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('The slug must contain only lowercase letters and underscores.', 'wp-plugin-info-card'),
@@ -20834,7 +20839,7 @@ var Interface = function b(a) {
     variant: "secondary",
     className: "wppic-btn wppic-btn-alt",
     onClick: function a() {
-      Q({
+      R({
         attachmentId: 0,
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select Default Plugin Icon', 'wp-plugin-info-card'),
         suggestedWidth: 256,
