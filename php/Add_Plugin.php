@@ -147,6 +147,7 @@ class Add_Plugin {
 					'screenshots'             => $plugin_info->screenshots,
 					'is_edd'                  => false,
 					'review_url'              => '',
+					'requires_php'            => $plugin_info->requires_php,
 				);
 			}
 		}

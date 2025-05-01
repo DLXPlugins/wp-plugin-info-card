@@ -39,11 +39,80 @@ class Init {
 		add_action( 'wp_ajax_wppic_check_theme', array( $this, 'ajax_check_theme' ) );
 		add_action( 'wp_ajax_wppic_get_sample_plugin', array( $this, 'ajax_get_sample_plugin' ) );
 
+		// Actions for custom plugins.
+		add_action( 'wp_ajax_wppic_save_custom_plugin', array( $this, 'ajax_save_custom_plugin' ) );
+		add_action( 'wp_ajax_wppic_delete_custom_plugin', array( $this, 'ajax_delete_custom_plugin' ) );
 		// Init tabs.
 		new Tabs\Main();
 		new Tabs\EDD();
 		new Tabs\Custom_Plugin();
 	}
+
+	public function ajax_save_custom_plugin() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		$form_data = filter_input( INPUT_POST, 'wppicFormData', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+
+		// Verify nonce from form data.
+		$nonce = sanitize_text_field( $form_data['nonce'] );
+		if ( false && ! wp_verify_nonce( $nonce, 'wppic-save-custom-plugin' ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce verification failed', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+		unset( $form_data['nonce'] );
+
+		$form_data = Functions::sanitize_array_recursive( $form_data );
+
+		$maybe_custom_plugin_post = get_posts(
+			array(
+				'post_type'   => 'wppic_custom_plugins',
+				'name'        => sanitize_title( $form_data['slug'] ),
+				'post_status' => 'publish',
+			)
+		);
+		$maybe_custom_slug        = '';
+		if ( $maybe_custom_plugin_post ) {
+			$maybe_custom_slug = $maybe_custom_plugin_post[0]->post_name;
+		}
+
+		if ( $maybe_custom_slug ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Duplicate plugin slug found', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+					'customSlug'  => sanitize_title( $maybe_custom_slug ),
+				)
+			);
+		}
+
+		// No competing slug found, so we can create the post and save the data within the content.
+		$post_id = wp_insert_post(
+			array(
+				'post_type'    => 'wppic_custom_plugins',
+				'post_title'   => sanitize_text_field( $form_data['name'] ),
+				'post_name'    => sanitize_title( $form_data['slug'] ),
+				'post_content' => wp_json_encode( $form_data ),
+				'post_status'  => 'publish',
+			)
+		);
+		wp_send_json_success(
+			array(
+				'message'     => __( 'Plugin saved', 'wp-plugin-info-card' ),
+				'type'        => 'success',
+				'dismissable' => true,
+				'postId'      => $post_id,
+			)
+		);
+	}
+
+
 
 	/**
 	 * Check the plugin slug via Ajax.

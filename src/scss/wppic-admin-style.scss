@@ -218,6 +218,34 @@ html {
 	}
 }
 
+/* Breadcrumbs Styles */
+.wppic-admin-panel-breadcrumbs {
+	margin-bottom: 24px;
+
+	&__item {
+		font-size: 16px;
+		line-height: 1.4;
+		color: #53627C;
+
+		a {
+			color: #394EDB;
+			text-decoration: none;
+			transition: all 0.3s ease-in-out;
+			font-weight: 500;
+
+			&:hover {
+				color: darken(#394EDB, 15%);
+				text-decoration: underline;
+			}
+		}
+
+		&-current {
+			color: #53627C;
+			font-weight: 600;
+		}
+	}
+}
+
 .wppic-admin-panel-area {
 	padding: 30px;
 	background: #FFF;
@@ -1380,6 +1408,7 @@ p.wppic-admin-header-description {
 
 .wppic-admin-button-row {
 	width: 100%;
+
 	button {
 		margin-right: 16px;
 

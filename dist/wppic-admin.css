@@ -7453,6 +7453,30 @@ html {
   margin-right: auto;
 }
 
+/* Breadcrumbs Styles */
+.wppic-admin-panel-breadcrumbs {
+  margin-bottom: 24px;
+}
+.wppic-admin-panel-breadcrumbs__item {
+  font-size: 16px;
+  line-height: 1.4;
+  color: #53627C;
+}
+.wppic-admin-panel-breadcrumbs__item a {
+  color: #394EDB;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  font-weight: 500;
+}
+.wppic-admin-panel-breadcrumbs__item a:hover {
+  color: #1f31a9;
+  text-decoration: underline;
+}
+.wppic-admin-panel-breadcrumbs__item-current {
+  color: #53627C;
+  font-weight: 600;
+}
+
 .wppic-admin-panel-area {
   padding: 30px;
   background: #FFF;
