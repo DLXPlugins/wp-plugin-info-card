@@ -198,6 +198,8 @@ html {
 	padding: 0 40px;
 	margin: 0 auto;
 	margin-top: 48px;
+	position: relative;
+	min-height: 200px;
 
 	&.with-sidebar {
 		display: grid;
@@ -1441,4 +1443,56 @@ p.wppic-admin-header-description {
 		background: #bc2b2c;
 		color: #FFF;
 	}
+}
+
+/* Screen Transition Styles */
+.screen-transition-wrapper {
+	position: relative;
+	width: 100%;
+	min-height: 400px;
+	opacity: 0;
+	overflow: hidden;
+	transform: translateY(0);
+	/* Split into individual transitions for better control */
+	transition: none;
+	/* Reset any previous transitions */
+	transition: opacity 350ms ease-out;
+	will-change: opacity;
+	animation: wppic-screen-transition 350ms ease-out;
+	opacity: 1;
+}
+
+@keyframes wppic-screen-transition {
+	0% {
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 0.75;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+.screen-transition-content {
+	position: relative;
+	width: 100%;
+	opacity: 1;
+
+
+	&.is-animating {
+		opacity: 0;
+	}
+
+	&.is-pending {
+		opacity: 0.7;
+	}
+}
+
+/* Ensure container maintains height */
+.wppic-admin-panel-container {
+	position: relative;
+	min-height: 400px;
 }

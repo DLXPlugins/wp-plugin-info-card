@@ -20288,6 +20288,102 @@ var SaveResetButtons = function b(a) {
 
 /***/ }),
 
+/***/ "./src/react/components/ScreenTransition.js":
+/*!**************************************************!*\
+  !*** ./src/react/components/ScreenTransition.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _tanstack_react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @tanstack/react-router */ "./node_modules/@tanstack/react-router/dist/esm/useRouter.js");
+function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) return _arrayLikeToArray(b, c); var a = {}.toString.call(b).slice(8, -1); return "Object" === a && b.constructor && (a = b.constructor.name), "Map" === a || "Set" === a ? Array.from(b) : "Arguments" === a || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a) ? _arrayLikeToArray(b, c) : void 0; } }
+function _arrayLikeToArray(b, c) { (null == c || c > b.length) && (c = b.length); for (var d = 0, f = Array(c); d < c; d++) f[d] = b[d]; return f; }
+function _iterableToArrayLimit(b, c) { var d = null == b ? null : "undefined" != typeof Symbol && b[Symbol.iterator] || b["@@iterator"]; if (null != d) { var g, h, j, k, l = [], a = !0, m = !1; try { if (j = (d = d.call(b)).next, 0 === c) { if (Object(d) !== d) return; a = !1; } else for (; !(a = (g = j.call(d)).done) && (l.push(g.value), l.length !== c); a = !0); } catch (a) { m = !0, h = a; } finally { try { if (!a && null != d["return"] && (k = d["return"](), Object(k) !== k)) return; } finally { if (m) throw h; } } return l; } }
+function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
+
+
+var TransitionContent = function b(a) {
+  var c = a.children,
+    d = a.isAnimating,
+    e = a.onTransitionEnd,
+    f = a.currentPath;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "screen-transition-content ".concat(d ? 'is-animating' : ''),
+    "data-path": f,
+    onTransitionEnd: e
+  }, c);
+};
+var ScreenTransition = function b(a) {
+  var c = a.children;
+  var d = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_1__.useRouter)();
+  var e = (0,react__WEBPACK_IMPORTED_MODULE_0__.useTransition)(),
+    f = _slicedToArray(e, 2),
+    g = f[1];
+  var h = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('#' + d.state.location.pathname),
+    i = _slicedToArray(h, 2),
+    j = i[0],
+    k = i[1];
+  var l = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(c),
+    m = _slicedToArray(l, 2),
+    n = m[0],
+    o = m[1];
+  var p = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    q = _slicedToArray(p, 2),
+    r = q[0],
+    s = q[1];
+  var t = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    u = _slicedToArray(t, 2),
+    v = u[0],
+    w = u[1];
+
+  // Handle animation end
+  var x = function b(a) {
+    // Only handle the opacity transition end
+    if (a.propertyName === 'opacity' && r) {
+      if (v) {
+        // Content update phase
+        g(function () {
+          k('#' + d.state.location.pathname);
+          o(c);
+          w(false);
+          // Trigger fade in
+          requestAnimationFrame(function () {
+            s(false);
+          });
+        });
+      } else {
+        // Initial fade out complete, update content
+        w(true);
+      }
+    }
+  };
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    // If the path changed, trigger animation
+    if (j !== '#' + d.state.location.pathname) {
+      // Start fade out
+      s(true);
+    }
+  }, [d.state.location.pathname, j]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "screen-transition-wrapper"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(TransitionContent, {
+    isAnimating: r,
+    onTransitionEnd: x,
+    currentPath: j
+  }, n));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScreenTransition);
+
+/***/ }),
+
 /***/ "./src/react/components/SnackPop/index.js":
 /*!************************************************!*\
   !*** ./src/react/components/SnackPop/index.js ***!
@@ -20853,13 +20949,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var use_async_resource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! use-async-resource */ "./node_modules/use-async-resource/lib/index.js");
 /* harmony import */ var use_async_resource__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(use_async_resource__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _tanstack_react_router__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @tanstack/react-router */ "./node_modules/@tanstack/react-router/dist/esm/useRouterState.js");
-/* harmony import */ var _tanstack_react_router__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @tanstack/react-router */ "./node_modules/@tanstack/react-router/dist/esm/useNavigate.js");
+/* harmony import */ var _tanstack_react_router__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @tanstack/react-router */ "./node_modules/@tanstack/react-router/dist/esm/useRouterState.js");
+/* harmony import */ var _tanstack_react_router__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @tanstack/react-router */ "./node_modules/@tanstack/react-router/dist/esm/useNavigate.js");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
@@ -20871,6 +20967,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _utils_SendCommand__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../utils/SendCommand */ "./src/react/utils/SendCommand.js");
 /* harmony import */ var _components_PluginIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/PluginIcon */ "./src/react/components/PluginIcon/index.js");
+/* harmony import */ var _components_ScreenTransition__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/ScreenTransition */ "./src/react/components/ScreenTransition.js");
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (a) { for (var b = 1; b < arguments.length; b++) { var c = arguments[b]; for (var d in c) ({}).hasOwnProperty.call(c, d) && (a[d] = c[d]); } return a; }, _extends.apply(null, arguments); }
 function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -20878,6 +20975,7 @@ function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) 
 function _arrayLikeToArray(b, c) { (null == c || c > b.length) && (c = b.length); for (var d = 0, f = Array(c); d < c; d++) f[d] = b[d]; return f; }
 function _iterableToArrayLimit(b, c) { var d = null == b ? null : "undefined" != typeof Symbol && b[Symbol.iterator] || b["@@iterator"]; if (null != d) { var g, h, j, k, l = [], a = !0, m = !1; try { if (j = (d = d.call(b)).next, 0 === c) { if (Object(d) !== d) return; a = !1; } else for (; !(a = (g = j.call(d)).done) && (l.push(g.value), l.length !== c); a = !0); } catch (a) { m = !0, h = a; } finally { try { if (!a && null != d["return"] && (k = d["return"](), Object(k) !== k)) return; } finally { if (m) throw h; } } return l; } }
 function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
+
 
 
 
@@ -20947,7 +21045,7 @@ var CustomPlugin = function b(a) {
 };
 var Interface = function b(a) {
   var c = a.data;
-  var d = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_11__.useForm)({
+  var d = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_12__.useForm)({
       defaultValues: {
         saveNonce: wppicAdminCustomPlugin.saveNonce,
         resetNonce: wppicAdminCustomPlugin.resetNonce
@@ -20960,12 +21058,12 @@ var Interface = function b(a) {
     i = d.setValue,
     j = d.setError,
     k = d.trigger;
-  var l = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_12__.useRouterState)();
-  var m = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_13__.useNavigate)();
-  var n = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_11__.useWatch)({
+  var l = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_13__.useRouterState)();
+  var m = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_14__.useNavigate)();
+  var n = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_12__.useWatch)({
     control: e
   });
-  var o = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_11__.useFormState)({
+  var o = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_12__.useFormState)({
       control: e
     }),
     p = o.errors,
@@ -20999,7 +21097,11 @@ var Interface = function b(a) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "404");
     }
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, v());
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-panel-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ScreenTransition__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    location: l.location
+  }, v()));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CustomPlugin);
 

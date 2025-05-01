@@ -34,6 +34,7 @@ import {
 } from 'lucide-react';
 import SendCommand from '../../utils/SendCommand';
 import PluginIcon from '../../components/PluginIcon';
+import ScreenTransition from '../../components/ScreenTransition';
 
 const CustomPlugin = ( props ) => {
 	const [ eddOptions, setEddOptions ] = useState( null );
@@ -138,8 +139,10 @@ const Interface = ( props ) => {
 	};
 
 	return (
-		<div>
-			{ renderScreen() }
+		<div className="wppic-admin-panel-container">
+			<ScreenTransition location={ routerState.location }>
+				{ renderScreen() }
+			</ScreenTransition>
 		</div>
 	);
 };
