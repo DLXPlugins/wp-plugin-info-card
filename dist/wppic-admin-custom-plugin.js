@@ -21442,12 +21442,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-alert.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plug-2.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plus.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/cloud-download.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/download.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/book-text.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/external-link.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/cloud-download.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/download.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/book-text.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/external-link.js");
 /* harmony import */ var _utils_SendCommand__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../utils/SendCommand */ "./src/react/utils/SendCommand.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (a) { for (var b = 1; b < arguments.length; b++) { var c = arguments[b]; for (var d in c) ({}).hasOwnProperty.call(c, d) && (a[d] = c[d]); } return a; }, _extends.apply(null, arguments); }
@@ -21549,32 +21547,32 @@ var Plugin = function b(a) {
 var Interface = function b(a) {
   var c = a.isEditing,
     d = a.data;
-  var f = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_12__.useNavigate)();
-  var g = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    h = _slicedToArray(g, 2),
-    i = h[0],
-    j = h[1];
-  var k = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    l = _slicedToArray(k, 2),
-    m = l[0],
-    n = l[1];
-  var o = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    p = _slicedToArray(o, 2),
-    q = p[0],
-    r = p[1];
-  var s = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-    t = _slicedToArray(s, 2),
-    u = t[0],
-    v = t[1];
-  var w = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-    x = _slicedToArray(w, 2),
-    y = x[0],
-    z = x[1];
-  var A = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-    B = _slicedToArray(A, 2),
-    C = B[0],
-    D = B[1];
-  var E = /*#__PURE__*/function () {
+  var e = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_12__.useNavigate)();
+  var f = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    g = _slicedToArray(f, 2),
+    h = g[0],
+    i = g[1];
+  var j = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    k = _slicedToArray(j, 2),
+    l = k[0],
+    m = k[1];
+  var n = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    o = _slicedToArray(n, 2),
+    p = o[0],
+    q = o[1];
+  var r = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    s = _slicedToArray(r, 2),
+    t = s[0],
+    u = s[1];
+  var v = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    w = _slicedToArray(v, 2),
+    x = w[0],
+    y = w[1];
+  var z = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    A = _slicedToArray(z, 2),
+    B = A[0],
+    C = A[1];
+  var D = /*#__PURE__*/function () {
     var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function b(a) {
       var c, d, e, f, g;
       return _regeneratorRuntime().wrap(function h(b) {
@@ -21585,32 +21583,32 @@ var Interface = function b(a) {
               nonce: wppicAdminCustomPlugin.checkPluginSlugNonce
             });
             c["catch"](function () {
-              v((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('There has been an error communicating with the server. Please try again.', 'wp-plugin-info-card'));
-              n(true);
-              j(false);
+              u((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('There has been an error communicating with the server. Please try again.', 'wp-plugin-info-card'));
+              m(true);
+              i(false);
             });
             b.next = 4;
             return c;
           case 4:
             d = b.sent;
-            j(false);
+            i(false);
             e = d.data.success;
             if (e) {
               f = d.data.data;
               if (f.display) {
-                z(f.message);
-                r(true);
+                y(f.message);
+                q(true);
               } else {
-                z('');
-                r(false);
+                y('');
+                q(false);
               }
             } else {
               g = d.data.data;
-              L('slug', {
+              K('slug', {
                 message: g.message,
                 type: 'custom'
               });
-              C.focus();
+              B.focus();
             }
           case 8:
           case "end":
@@ -21622,7 +21620,7 @@ var Interface = function b(a) {
       return a.apply(this, arguments);
     };
   }();
-  var F = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_13__.useForm)({
+  var E = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_13__.useForm)({
       defaultValues: {
         nonce: wppicAdminCustomPlugin.saveNonce,
         custom_plugin_icon_id: d.custom_plugin_icon_id || 0,
@@ -21654,40 +21652,40 @@ var Interface = function b(a) {
         rest_api_passcode: d.rest_api_passcode || ''
       }
     }),
-    G = F.control,
-    H = F.handleSubmit,
-    I = F.getValues,
-    J = F.reset,
-    K = F.setValue,
-    L = F.setError,
-    M = F.clearErrors,
-    N = F.trigger;
-  var O = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_13__.useWatch)({
-    control: G
+    F = E.control,
+    G = E.handleSubmit,
+    H = E.getValues,
+    I = E.reset,
+    J = E.setValue,
+    K = E.setError,
+    L = E.clearErrors,
+    M = E.trigger;
+  var N = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_13__.useWatch)({
+    control: F
   });
-  var P = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_13__.useFormState)({
-      control: G
+  var O = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_13__.useFormState)({
+      control: F
     }),
-    Q = P.errors,
-    R = P.isDirty,
-    S = P.dirtyFields;
+    P = O.errors,
+    Q = O.isDirty,
+    R = O.dirtyFields;
 
   // Media uploader for citation image upload.
-  var T = (0,_hooks_useMediaUploader__WEBPACK_IMPORTED_MODULE_4__["default"])(),
-    U = T.openMediaUploader;
+  var S = (0,_hooks_useMediaUploader__WEBPACK_IMPORTED_MODULE_4__["default"])(),
+    T = S.openMediaUploader;
 
   /**
    * Placeholder for submit event.
    *
    * @param {Object} formData contains the form data.
    */
-  var V = function b(a) {};
+  var U = function b(a) {};
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-container with-sidebar"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-options-wrapper"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
-    onSubmit: H(V)
+    onSubmit: G(U)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Breadcrumbs, {
     screen: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('New Plugin', 'wp-plugin-info-card'),
     isEditing: c
@@ -21703,10 +21701,10 @@ var Interface = function b(a) {
     className: "form-table form-table-row-sections"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
     scope: "row"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Plugin Name', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Plugin Details', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
-    control: G,
+    control: F,
     name: "name",
     rules: {
       required: true
@@ -21717,14 +21715,14 @@ var Interface = function b(a) {
         placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter Plugin Name', 'wp-plugin-info-card'),
         onChange: function b(a) {
           c.onChange(a);
-          M('name');
+          L('name');
         },
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input is-required', {
-          'has-error': Q === null || Q === void 0 ? void 0 : Q.name
+          'has-error': P === null || P === void 0 ? void 0 : P.name
         }),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter the name of the plugin.', 'wp-plugin-info-card'),
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Plugin Name', 'wp-plugin-info-card')
-      })), (Q === null || Q === void 0 ? void 0 : Q.name) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      })), (P === null || P === void 0 ? void 0 : P.name) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.', 'wp-plugin-info-card'),
         status: "error",
         politeness: "assertive"
@@ -21733,7 +21731,7 @@ var Interface = function b(a) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
-    control: G,
+    control: F,
     name: "slug",
     rules: {
       required: true,
@@ -21745,23 +21743,23 @@ var Interface = function b(a) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.TextControl, _extends({}, g, {
         placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter Plugin Slug', 'wp-plugin-info-card'),
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input is-required', {
-          'has-error': Q === null || Q === void 0 ? void 0 : Q.slug
+          'has-error': P === null || P === void 0 ? void 0 : P.slug
         }),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter the slug of the plugin. It must be unique and contain only lowercase letters, dashes, and underscores.', 'wp-plugin-info-card'),
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Plugin Slug', 'wp-plugin-info-card'),
         onChange: function b(a) {
-          M('slug');
+          L('slug');
           g.onChange(a);
         },
-        ref: D,
+        ref: C,
         onBlur: function b(a) {
-          N('slug');
-          j(true);
-          v('');
-          n(false);
-          E(I('slug'));
+          M('slug');
+          i(true);
+          u('');
+          m(false);
+          D(H('slug'));
         }
-      })), i && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      })), h && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "wppic-admin-row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react_spinners_BeatLoader__WEBPACK_IMPORTED_MODULE_11___default()), {
         color: '#333',
@@ -21769,10 +21767,10 @@ var Interface = function b(a) {
         cssOverride: true,
         size: 10,
         speedMultiplier: 0.65
-      })), q && y && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      })), p && x && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "wppic-admin-row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        message: y,
+        message: x,
         status: "warning",
         politeness: "assertive",
         icon: function a() {
@@ -21783,7 +21781,7 @@ var Interface = function b(a) {
           });
         },
         inline: false
-      })), (Q === null || Q === void 0 ? void 0 : Q.slug) && (Q === null || Q === void 0 || (c = Q.slug) === null || c === void 0 ? void 0 : c.type) === 'pattern' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      })), (P === null || P === void 0 ? void 0 : P.slug) && (P === null || P === void 0 || (c = P.slug) === null || c === void 0 ? void 0 : c.type) === 'pattern' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "wppic-admin-row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('The slug must contain only lowercase letters and underscores.', 'wp-plugin-info-card'),
@@ -21797,16 +21795,16 @@ var Interface = function b(a) {
           });
         },
         inline: false
-      })), (Q === null || Q === void 0 ? void 0 : Q.slug) && (Q === null || Q === void 0 || (d = Q.slug) === null || d === void 0 ? void 0 : d.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      })), (P === null || P === void 0 ? void 0 : P.slug) && (P === null || P === void 0 || (d = P.slug) === null || d === void 0 ? void 0 : d.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "wppic-admin-row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.', 'wp-plugin-info-card'),
         status: "error",
         inline: false
-      })), (Q === null || Q === void 0 ? void 0 : Q.slug) && (Q === null || Q === void 0 || (e = Q.slug) === null || e === void 0 ? void 0 : e.type) === 'custom' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      })), (P === null || P === void 0 ? void 0 : P.slug) && (P === null || P === void 0 || (e = P.slug) === null || e === void 0 ? void 0 : e.type) === 'custom' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "wppic-admin-row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        message: Q === null || Q === void 0 || (f = Q.slug) === null || f === void 0 ? void 0 : f.message,
+        message: P === null || P === void 0 || (f = P.slug) === null || f === void 0 ? void 0 : f.message,
         status: "error",
         inline: false
       })));
@@ -21814,7 +21812,7 @@ var Interface = function b(a) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
-    control: G,
+    control: F,
     name: "short_description",
     rules: {
       required: true
@@ -21826,15 +21824,15 @@ var Interface = function b(a) {
         maxLength: 150,
         placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter a Short Description', 'wp-plugin-info-card'),
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input is-required', {
-          'has-error': Q === null || Q === void 0 ? void 0 : Q.short_description
+          'has-error': P === null || P === void 0 ? void 0 : P.short_description
         }),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter the a short description of the plugin. Max 150 characters.', 'wp-plugin-info-card'),
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Short Description', 'wp-plugin-info-card'),
         onChange: function b(a) {
           d.onChange(a);
-          M('short_description');
+          L('short_description');
         }
-      })), (Q === null || Q === void 0 || (c = Q.short_description) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      })), (P === null || P === void 0 || (c = P.short_description) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.', 'wp-plugin-info-card'),
         status: "error",
         politeness: "assertive"
@@ -21849,12 +21847,12 @@ var Interface = function b(a) {
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select an Icon with dimensions 256x256', 'wp-plugin-infocard'),
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Upload a Plugin Icon', 'wp-plugin-info-card'),
     className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input is-required', {
-      'has-error': Q === null || Q === void 0 ? void 0 : Q.custom_plugin_icon_url
+      'has-error': P === null || P === void 0 ? void 0 : P.custom_plugin_icon_url
     })
-  }, I('custom_plugin_icon_url') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, H('custom_plugin_icon_url') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-image-preview"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-    src: I('custom_plugin_icon_url'),
+    src: H('custom_plugin_icon_url'),
     alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Default Icon', 'wp-plugin-info-card'),
     width: "180",
     height: "180",
@@ -21868,7 +21866,7 @@ var Interface = function b(a) {
     variant: "secondary",
     className: "wppic-btn wppic-btn-alt",
     onClick: function a() {
-      U({
+      T({
         attachmentId: 0,
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select Default Plugin Icon', 'wp-plugin-info-card'),
         suggestedWidth: 256,
@@ -21879,17 +21877,17 @@ var Interface = function b(a) {
         },
         aspectRatio: '1:1'
       }, function (a) {
-        K('custom_plugin_icon_id', a.id);
-        K('custom_plugin_icon_url', a.url);
+        J('custom_plugin_icon_id', a.id);
+        J('custom_plugin_icon_url', a.url);
       });
     },
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select an Icon with dimensions 256x256', 'wp-plugin-info-card')
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Upload Icon', 'wp-plugin-info-card')), I('custom_plugin_icon_id') !== 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Upload Icon', 'wp-plugin-info-card')), H('custom_plugin_icon_id') !== 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
     variant: "secondary",
     className: "wppic-btn wppic-btn-alt",
     onClick: function a() {
-      K('custom_plugin_icon_id', 0);
-      K('custom_plugin_icon_url', '');
+      J('custom_plugin_icon_id', 0);
+      J('custom_plugin_icon_url', '');
     },
     isDestructive: true
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Remove Icon', 'wp-plugin-info-card'))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -21899,12 +21897,12 @@ var Interface = function b(a) {
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select an Icon with dimensions 1544x720', 'wp-plugin-info-card'),
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Upload a Plugin Banner', 'wp-plugin-info-card'),
     className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input is-required', {
-      'has-error': Q === null || Q === void 0 ? void 0 : Q.custom_plugin_icon_url
+      'has-error': P === null || P === void 0 ? void 0 : P.custom_plugin_icon_url
     })
-  }, I('custom_plugin_banner_url') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, H('custom_plugin_banner_url') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-image-preview"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-    src: I('custom_plugin_banner_url'),
+    src: H('custom_plugin_banner_url'),
     alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Default Icon', 'wp-plugin-info-card'),
     width: "180",
     height: "180",
@@ -21918,7 +21916,7 @@ var Interface = function b(a) {
     variant: "secondary",
     className: "wppic-btn wppic-btn-alt",
     onClick: function a() {
-      U({
+      T({
         attachmentId: 0,
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select Plugin Banner', 'wp-plugin-info-card'),
         suggestedWidth: 1544,
@@ -21929,17 +21927,17 @@ var Interface = function b(a) {
         },
         aspectRatio: '386:125'
       }, function (a) {
-        K('custom_plugin_banner_id', a.id);
-        K('custom_plugin_banner_url', a.url);
+        J('custom_plugin_banner_id', a.id);
+        J('custom_plugin_banner_url', a.url);
       });
     },
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select an Icon with dimensions 1544x720', 'wp-plugin-info-card')
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Upload Banner Image', 'wp-plugin-info-card')), I('custom_plugin_banner_id') !== 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Upload Banner Image', 'wp-plugin-info-card')), H('custom_plugin_banner_id') !== 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
     variant: "secondary",
     className: "wppic-btn wppic-btn-alt",
     onClick: function a() {
-      K('custom_plugin_banner_id', 0);
-      K('custom_plugin_banner_url', '');
+      J('custom_plugin_banner_id', 0);
+      J('custom_plugin_banner_url', '');
     },
     isDestructive: true
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Remove Banner', 'wp-plugin-info-card'))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
@@ -21947,7 +21945,7 @@ var Interface = function b(a) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Plugin Details', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
-    control: G,
+    control: F,
     name: "version",
     rules: {
       required: true
@@ -21958,15 +21956,15 @@ var Interface = function b(a) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.TextControl, _extends({}, d, {
         placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter Plugin Version', 'wp-plugin-info-card'),
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input is-required', {
-          'has-error': Q === null || Q === void 0 ? void 0 : Q.version
+          'has-error': P === null || P === void 0 ? void 0 : P.version
         }),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter the version of the plugin.', 'wp-plugin-info-card'),
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Version', 'wp-plugin-info-card'),
         onChange: function b(a) {
           d.onChange(a);
-          M('version');
+          L('version');
         }
-      })), (Q === null || Q === void 0 || (c = Q.version) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      })), (P === null || P === void 0 || (c = P.version) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.', 'wp-plugin-info-card'),
         status: "error",
         politeness: "assertive"
@@ -21975,7 +21973,7 @@ var Interface = function b(a) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
-    control: G,
+    control: F,
     name: "requires",
     rules: {
       required: true
@@ -21986,15 +21984,15 @@ var Interface = function b(a) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.TextControl, _extends({}, d, {
         placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter Required WordPress Version', 'wp-plugin-info-card'),
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input is-required', {
-          'has-error': Q === null || Q === void 0 ? void 0 : Q.requires
+          'has-error': P === null || P === void 0 ? void 0 : P.requires
         }),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter the minimum WordPress version required (e.g., 6.5).', 'wp-plugin-info-card'),
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Required WordPress Version', 'wp-plugin-info-card'),
         onChange: function b(a) {
           d.onChange(a);
-          M('requires');
+          L('requires');
         }
-      })), (Q === null || Q === void 0 || (c = Q.requires) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      })), (P === null || P === void 0 || (c = P.requires) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.', 'wp-plugin-info-card'),
         status: "error",
         politeness: "assertive"
@@ -22003,7 +22001,7 @@ var Interface = function b(a) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
-    control: G,
+    control: F,
     name: "tested",
     rules: {
       required: true
@@ -22014,15 +22012,15 @@ var Interface = function b(a) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.TextControl, _extends({}, d, {
         placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter Tested WordPress Version', 'wp-plugin-info-card'),
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input is-required', {
-          'has-error': Q === null || Q === void 0 ? void 0 : Q.tested
+          'has-error': P === null || P === void 0 ? void 0 : P.tested
         }),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter the WordPress version this plugin has been tested with (e.g., 6.5).', 'wp-plugin-info-card'),
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Tested WordPress Version', 'wp-plugin-info-card'),
         onChange: function b(a) {
           d.onChange(a);
-          M('tested');
+          L('tested');
         }
-      })), (Q === null || Q === void 0 || (c = Q.tested) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      })), (P === null || P === void 0 || (c = P.tested) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.', 'wp-plugin-info-card'),
         status: "error",
         politeness: "assertive"
@@ -22031,7 +22029,7 @@ var Interface = function b(a) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
-    control: G,
+    control: F,
     name: "requires_php",
     render: function b(a) {
       var c;
@@ -22039,15 +22037,15 @@ var Interface = function b(a) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.TextControl, _extends({}, d, {
         placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter Required PHP Version', 'wp-plugin-info-card'),
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input', {
-          'has-error': Q === null || Q === void 0 ? void 0 : Q.requires_php
+          'has-error': P === null || P === void 0 ? void 0 : P.requires_php
         }),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter the minimum PHP version required (e.g., 8.0).', 'wp-plugin-info-card'),
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Required PHP Version', 'wp-plugin-info-card'),
         onChange: function b(a) {
           d.onChange(a);
-          M('requires');
+          L('requires');
         }
-      })), (Q === null || Q === void 0 || (c = Q.requires_php) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      })), (P === null || P === void 0 || (c = P.requires_php) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.', 'wp-plugin-info-card'),
         status: "error",
         politeness: "assertive"
@@ -22058,7 +22056,7 @@ var Interface = function b(a) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Plugin Links', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
-    control: G,
+    control: F,
     name: "homepage",
     rules: {
       required: true,
@@ -22070,15 +22068,15 @@ var Interface = function b(a) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.TextControl, _extends({}, d, {
         placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter Plugin Homepage URL', 'wp-plugin-info-card'),
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input is-required', {
-          'has-error': Q === null || Q === void 0 ? void 0 : Q.homepage
+          'has-error': P === null || P === void 0 ? void 0 : P.homepage
         }),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter the homepage URL for the plugin.', 'wp-plugin-info-card'),
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Homepage URL', 'wp-plugin-info-card'),
         onChange: function b(a) {
           d.onChange(a);
-          M('homepage');
+          L('homepage');
         }
-      })), (Q === null || Q === void 0 || (c = Q.homepage) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      })), (P === null || P === void 0 || (c = P.homepage) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.', 'wp-plugin-info-card'),
         status: "error",
         politeness: "assertive"
@@ -22087,7 +22085,7 @@ var Interface = function b(a) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
-    control: G,
+    control: F,
     name: "download_link",
     rules: {
       required: true,
@@ -22099,15 +22097,15 @@ var Interface = function b(a) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.TextControl, _extends({}, d, {
         placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter Plugin Download URL', 'wp-plugin-info-card'),
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input is-required', {
-          'has-error': Q === null || Q === void 0 ? void 0 : Q.download_link
+          'has-error': P === null || P === void 0 ? void 0 : P.download_link
         }),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter the download URL for the plugin. This can be the same as the homepage URL.', 'wp-plugin-info-card'),
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Download URL', 'wp-plugin-info-card'),
         onChange: function b(a) {
           d.onChange(a);
-          M('download_link');
+          L('download_link');
         }
-      })), (Q === null || Q === void 0 || (c = Q.download_link) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      })), (P === null || P === void 0 || (c = P.download_link) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.', 'wp-plugin-info-card'),
         status: "error",
         politeness: "assertive"
@@ -22118,7 +22116,7 @@ var Interface = function b(a) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Plugin Author', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
-    control: G,
+    control: F,
     name: "author",
     rules: {
       required: true
@@ -22129,15 +22127,15 @@ var Interface = function b(a) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.TextControl, _extends({}, d, {
         placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter Plugin Author', 'wp-plugin-info-card'),
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input is-required', {
-          'has-error': Q === null || Q === void 0 ? void 0 : Q.author
+          'has-error': P === null || P === void 0 ? void 0 : P.author
         }),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter the name of the plugin author.', 'wp-plugin-info-card'),
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Author Name', 'wp-plugin-info-card'),
         onChange: function b(a) {
           d.onChange(a);
-          M('author');
+          L('author');
         }
-      })), (Q === null || Q === void 0 || (c = Q.author) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      })), (P === null || P === void 0 || (c = P.author) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.', 'wp-plugin-info-card'),
         status: "error",
         politeness: "assertive"
@@ -22146,7 +22144,7 @@ var Interface = function b(a) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
-    control: G,
+    control: F,
     name: "author_profile",
     rules: {
       pattern: /^https?:\/\/.+/
@@ -22163,7 +22161,7 @@ var Interface = function b(a) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
-    control: G,
+    control: F,
     name: "contributors",
     render: function b(a) {
       var c = a.field;
@@ -22179,7 +22177,7 @@ var Interface = function b(a) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Plugin Stats', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
-    control: G,
+    control: F,
     name: "rating",
     rules: {
       required: true
@@ -22193,15 +22191,15 @@ var Interface = function b(a) {
         max: "100",
         placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter Plugin Rating', 'wp-plugin-info-card'),
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input is-required', {
-          'has-error': Q === null || Q === void 0 ? void 0 : Q.rating
+          'has-error': P === null || P === void 0 ? void 0 : P.rating
         }),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter the plugin rating percentage (0-100%).', 'wp-plugin-info-card'),
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Rating', 'wp-plugin-info-card'),
         onChange: function b(a) {
           d.onChange(a);
-          M('rating');
+          L('rating');
         }
-      })), (Q === null || Q === void 0 || (c = Q.rating) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      })), (P === null || P === void 0 || (c = P.rating) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.', 'wp-plugin-info-card'),
         status: "error",
         politeness: "assertive",
@@ -22211,7 +22209,7 @@ var Interface = function b(a) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
-    control: G,
+    control: F,
     name: "num_ratings",
     rules: {
       required: true
@@ -22224,15 +22222,15 @@ var Interface = function b(a) {
         min: "0",
         placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter Number of Ratings', 'wp-plugin-info-card'),
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input is-required', {
-          'has-error': Q === null || Q === void 0 ? void 0 : Q.num_ratings
+          'has-error': P === null || P === void 0 ? void 0 : P.num_ratings
         }),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter the total number of ratings.', 'wp-plugin-info-card'),
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Number of Ratings', 'wp-plugin-info-card'),
         onChange: function b(a) {
           d.onChange(a);
-          M('num_ratings');
+          L('num_ratings');
         }
-      })), (Q === null || Q === void 0 || (c = Q.num_ratings) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      })), (P === null || P === void 0 || (c = P.num_ratings) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.', 'wp-plugin-info-card'),
         status: "error",
         politeness: "assertive",
@@ -22242,7 +22240,7 @@ var Interface = function b(a) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
-    control: G,
+    control: F,
     name: "downloaded",
     render: function b(a) {
       var c = a.field;
@@ -22258,7 +22256,7 @@ var Interface = function b(a) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
-    control: G,
+    control: F,
     name: "active_installs",
     rules: {
       required: true
@@ -22271,15 +22269,15 @@ var Interface = function b(a) {
         min: "0",
         placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter Active Installs', 'wp-plugin-info-card'),
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input is-required', {
-          'has-error': Q === null || Q === void 0 ? void 0 : Q.active_installs
+          'has-error': P === null || P === void 0 ? void 0 : P.active_installs
         }),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter the number of active installations.', 'wp-plugin-info-card'),
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Active Installs', 'wp-plugin-info-card'),
         onChange: function b(a) {
           d.onChange(a);
-          M('active_installs');
+          L('active_installs');
         }
-      })), (Q === null || Q === void 0 || (c = Q.active_installs) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      })), (P === null || P === void 0 || (c = P.active_installs) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.', 'wp-plugin-info-card'),
         status: "error",
         politeness: "assertive",
@@ -22289,7 +22287,7 @@ var Interface = function b(a) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
-    control: G,
+    control: F,
     name: "last_updated",
     render: function b(a) {
       var c = a.field;
@@ -22306,7 +22304,7 @@ var Interface = function b(a) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('REST API', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
-    control: G,
+    control: F,
     name: "enable_rest_api",
     render: function b(a) {
       var c = a.field;
@@ -22319,7 +22317,7 @@ var Interface = function b(a) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
-    control: G,
+    control: F,
     name: "rest_api_passcode",
     render: function b(a) {
       var c = a.field;
@@ -22332,23 +22330,23 @@ var Interface = function b(a) {
       }));
     }
   })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SaveCustomPluginButtons__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    formValues: O,
-    setError: L,
-    reset: J,
-    errors: Q,
-    isDirty: R,
-    dirtyFields: S,
-    trigger: N,
+    formValues: N,
+    setError: K,
+    reset: I,
+    errors: P,
+    isDirty: Q,
+    dirtyFields: R,
+    trigger: M,
     onSave: function b(a) {
       setTimeout(function () {
-        f({
+        e({
           to: '/'
         });
       }, 1200);
     },
     isEditing: c,
     onCancel: function a() {
-      f({
+      e({
         to: '/'
       });
     }
@@ -22356,23 +22354,7 @@ var Interface = function b(a) {
     className: "wppic-admin-panel-sidebar"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_15__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Add New Plugin', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Add a new plugin to the list of plugins.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
-    variant: "primary",
-    href: "#",
-    onClick: function b(a) {
-      a.preventDefault();
-      f({
-        to: '/new-plugin'
-      });
-    },
-    iconPosition: "left",
-    className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
-    icon: function a() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_16__["default"], null);
-    }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Add New Plugin', 'wp-plugin-info-card'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "wppic-admin-panel-sidebar-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_17__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Import Plugin', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Import a plugin from a REST API endpoint.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_15__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Import Plugin', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Import a plugin from a REST API endpoint.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
     variant: "secondary",
     href: "#",
     onClick: function b(a) {
@@ -22382,16 +22364,16 @@ var Interface = function b(a) {
     iconPosition: "left",
     className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
     icon: function a() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_18__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_16__["default"], null);
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Import Plugin', 'wp-plugin-info-card'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_19__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Find out how to display your custom plugins with WP Plugin Info Card.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_17__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Find out how to display your custom plugins with WP Plugin Info Card.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Button, {
     variant: "secondary",
     href: "https://wppic.dlxplugins.com/",
     className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
     icon: function a() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_20__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_18__["default"], null);
     },
     iconPosition: "left",
     target: "_blank",

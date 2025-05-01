@@ -204,7 +204,7 @@ const Interface = ( props ) => {
 								<tbody>
 									<tr>
 										<th scope="row">
-											{ __( 'Plugin Name', 'wp-plugin-info-card' ) }
+											{ __( 'Plugin Details', 'wp-plugin-info-card' ) }
 										</th>
 										<td>
 											<div className="wppic-admin-row">
@@ -947,31 +947,6 @@ const Interface = ( props ) => {
 					</form>
 				</div>
 				<div className="wppic-admin-panel-sidebar">
-					<div className="wppic-admin-panel-sidebar-card">
-						<h3>
-							<Plug2 />
-							{ __( 'Add New Plugin', 'wp-plugin-info-card' ) }
-						</h3>
-						<p>
-							{ __(
-								'Add a new plugin to the list of plugins.',
-								'wp-plugin-info-card',
-							) }
-						</p>
-						<Button
-							variant="primary"
-							href="#"
-							onClick={ ( e ) => {
-								e.preventDefault();
-								navigate( { to: '/new-plugin' } );
-							} }
-							iconPosition="left"
-							className="wppic-btn wppic-btn-alt has-icon-right btn-full-width"
-							icon={ () => <Plus /> }
-						>
-							{ __( 'Add New Plugin', 'wp-plugin-info-card' ) }
-						</Button>
-					</div>
 					<div className="wppic-admin-panel-sidebar-card">
 						<h3>
 							<CloudDownload />
