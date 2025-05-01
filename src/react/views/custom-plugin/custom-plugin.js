@@ -9,6 +9,7 @@ import BeatLoader from 'react-spinners/BeatLoader';
 import useMediaUploader from '../../hooks/useMediaUploader';
 import PluginHome from './screens/home';
 import NewPluginScreen from './screens/new-plugin';
+import AdvancedScreen from './screens/advanced';
 import {
 	TextControl,
 	Button,
@@ -133,6 +134,8 @@ const Interface = ( props ) => {
 				return <PluginHome />;
 			case '/new-plugin':
 				return <NewPluginScreen isEditing={ false } pluginData={ null } />;
+			case '/advanced':
+				return <AdvancedScreen isEditing={ false } pluginData={ null } />;
 			default:
 				return <div>404</div>;
 		}

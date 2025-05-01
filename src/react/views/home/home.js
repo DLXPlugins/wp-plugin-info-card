@@ -29,8 +29,8 @@ import {
 	ClipboardCheck,
 	Plug2,
 	Paintbrush2,
+	Globe,
 } from 'lucide-react';
-import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
 import SnackPop from '../../components/SnackPop';
@@ -367,9 +367,9 @@ const AddTheme = ( props ) => {
 	);
 };
 
-const CacheOptionsButton = ( props ) => {
+const CacheOptionsButton = () => {
 	const [ clearing, setClearing ] = useState( false );
-	const [ isCleared, setIsCleared ] = useState( false );
+	const [ isCleared ] = useState( false );
 	const [ clearPromise, setClearPromise ] = useState( null );
 
 	const getCacheText = () => {
@@ -428,9 +428,9 @@ const CacheOptionsButton = ( props ) => {
 	);
 };
 
-const CacheButton = ( props ) => {
+const CacheButton = () => {
 	const [ clearing, setClearing ] = useState( false );
-	const [ isCleared, setIsCleared ] = useState( false );
+	const [ isCleared ] = useState( false );
 	const [ clearPromise, setClearPromise ] = useState( null );
 
 	const getCacheText = () => {
@@ -489,22 +489,6 @@ const CacheButton = ( props ) => {
 	);
 };
 
-const retrieveHomeOptions = async () => {
-	// Retrieve from server.
-	const response = await SendCommand( 'wppic_get_home_options', {
-		nonce: wppicAdminHome.getNonce,
-	} );
-	const { success, data } = response.data;
-	if ( success ) {
-		// Save to local storage.
-		localStorage.setItem( 'wppic_home_options', JSON.stringify( data ) );
-		localStorage.setItem( 'wppic_home_options_timestamp', new Date().getTime().toString() );
-
-		return response;
-	}
-	return {};
-};
-
 const HomeScreen = ( props ) => {
 	const [ homeOptions, setHomeOptions ] = useState( null );
 
@@ -517,8 +501,8 @@ const HomeScreen = ( props ) => {
 		const cachedTimestamp = localStorage.getItem( 'wppic_home_options_timestamp' );
 
 		if ( cachedOptions && cachedTimestamp ) {
-			// Do verison check.
-			const currentVersion = wppicAdmin.pluginVersion;
+			// Do version check.
+			const currentVersion = window?.wppicAdmin?.pluginVersion;
 			const cachedJson = JSON.parse( cachedOptions );
 			const cachedVersion = cachedJson.version;
 			if ( currentVersion !== cachedVersion ) {
@@ -538,7 +522,6 @@ const HomeScreen = ( props ) => {
 				nonce: wppicAdminHome.getNonce,
 			} );
 			const { success, data } = response.data;
-			console.log( response );
 			if ( success ) {
 				// Save to local storage.
 				localStorage.setItem( 'wppic_home_options', JSON.stringify( data ) );
@@ -582,12 +565,15 @@ const Interface = ( props ) => {
 			widget: data.widget,
 			ajax: data.ajax,
 			enqueue: data.enqueue,
-			credit: DataTransferItem.credit,
+			credit: data.credit,
 			cache_expiration: data.cache_expiration,
 			list: data.list ?? [],
 			'theme-list': data[ 'theme-list' ] ?? [],
+			enable_rest_api: data.enable_rest_api ?? false,
+			restrict_rest_api: data.restrict_rest_api ?? false,
 			saveNonce: wppicAdminHome.saveNonce,
 			resetNonce: wppicAdminHome.resetNonce,
+			restEndpointEnabled: wppicAdminHome?.restEndpointEnabled ?? false,
 		},
 	} );
 	const formValues = useWatch( { control } );
@@ -680,11 +666,9 @@ const Interface = ( props ) => {
 	}, [] );
 
 	/**
-	 * Placeholder for submit event.
-	 *
-	 * @param {Object} formData contains the form data.
+	 * Handle form submission.
 	 */
-	const onSubmit = ( formData ) => {
+	const onSubmit = () => {
 		// Update local storage by clearing it.
 		localStorage.removeItem( 'wppic_home_options' );
 		localStorage.removeItem( 'wppic_home_options_timestamp' );
@@ -839,7 +823,7 @@ const Interface = ( props ) => {
 																			'wp-plugin-info-card',
 																		),
 																		value: 'ratings',
-																	}
+																	},
 																] }
 																onChange={ onChange }
 															/>
@@ -1162,8 +1146,8 @@ const Interface = ( props ) => {
 									isDirty={ isDirty }
 									dirtyFields={ dirtyFields }
 									trigger={ trigger }
-									onSave={ ( values ) => {
-										onSubmit( values );
+									onSave={ () => {
+										onSubmit();
 									} }
 								/>
 							</form>
@@ -1230,4 +1214,5 @@ const Interface = ( props ) => {
 		</>
 	);
 };
+
 export default HomeScreen;

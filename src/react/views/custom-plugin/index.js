@@ -33,7 +33,14 @@ const newPluginRoute = createRoute( {
 	getParentRoute: () => rootRoute,
 	component: () => <CustomPlugin />,
 } );
-const routeTree = rootRoute.addChildren( [ customPluginRoute, newPluginRoute ] );
+
+const advancedRoute = createRoute( {
+	path: '/advanced',
+	getParentRoute: () => rootRoute,
+	component: () => <CustomPlugin />,
+} );
+
+const routeTree = rootRoute.addChildren( [ customPluginRoute, newPluginRoute, advancedRoute ] );
 
 // Create a router instance
 const router = createRouter( {

@@ -1,37 +1,17 @@
-import React, { useState, useEffect, Suspense, useCallback, useRef } from 'react';
-import { useForm, Controller, useWatch, useFormState } from 'react-hook-form';
-import classNames from 'classnames';
-import { useAsyncResource } from 'use-async-resource';
-import { useRouterState, useNavigate } from '@tanstack/react-router';
+import React from 'react';
+import { useNavigate } from '@tanstack/react-router';
 import { __ } from '@wordpress/i18n';
-import { isURL, cleanForSlug } from '@wordpress/url';
-import BeatLoader from 'react-spinners/BeatLoader';
-import PluginIcon from '../../../components/PluginIcon';
-
+import { Button } from '@wordpress/components';
 import {
-	TextControl,
-	Button,
-	ToggleControl,
-	SelectControl,
-	BaseControl,
-} from '@wordpress/components';
-import {
-	AlertCircle,
-	PlusCircle,
-	ExternalLink,
-	DatabaseZap,
+	Plug2,
+	Plus,
 	Cog,
 	BookText,
-	XCircle,
-	Loader2,
-	Database,
-	ClipboardCheck,
-	Plug2,
-	Paintbrush2,
-	Plus,
+	ExternalLink,
 } from 'lucide-react';
+import PluginIcon from '../../../components/PluginIcon';
 
-const PluginHome = ( props ) => {
+const PluginHome = () => {
 	const navigate = useNavigate();
 
 	return (
@@ -81,25 +61,49 @@ const PluginHome = ( props ) => {
 					</div>
 					<div className="wppic-admin-panel-sidebar-card">
 						<h3>
-							<BookText />
-							{ __( 'Documentation', 'wp-plugin-info-card' ) }
+							<Cog />
+							{ __( 'Advanced Settings', 'wp-plugin-info-card' ) }
 						</h3>
 						<p>
 							{ __(
-								'Find out how to display your custom plugins with WP Plugin Info Card.',
+								'Configure REST API settings and other advanced options.',
 								'wp-plugin-info-card',
 							) }
 						</p>
 						<Button
 							variant="secondary"
-							href="https://wppic.dlxplugins.com/"
+							href="#"
+							onClick={ ( e ) => {
+								e.preventDefault();
+								navigate( { to: '/advanced' } );
+							} }
+							iconPosition="right"
 							className="wppic-btn wppic-btn-alt has-icon-right btn-full-width"
 							icon={ () => <ExternalLink /> }
-							iconPosition="left"
+						>
+							{ __( 'Configure Settings', 'wp-plugin-info-card' ) }
+						</Button>
+					</div>
+					<div className="wppic-admin-panel-sidebar-card">
+						<h3>
+							<BookText />
+							{ __( 'Documentation', 'wp-plugin-info-card' ) }
+						</h3>
+						<p>
+							{ __(
+								'Learn more about custom plugins and how to use them in WP Plugin Info Card.',
+								'wp-plugin-info-card',
+							) }
+						</p>
+						<Button
+							variant="secondary"
+							src="https://wppic.dlxplugins.com/"
+							className="wppic-btn wppic-btn-alt has-icon-right btn-full-width"
 							target="_blank"
 							rel="noopener noreferrer"
+							icon={ () => <ExternalLink /> }
 						>
-							{ __( 'English Documentation', 'wp-plugin-info-card' ) }
+							{ __( 'View Documentation', 'wp-plugin-info-card' ) }
 						</Button>
 					</div>
 				</div>

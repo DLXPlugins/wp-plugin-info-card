@@ -92,7 +92,7 @@ class Custom_Plugin {
 			'get'    => 'custom_plugin',
 			'action' => 'wppic_output_custom_plugin',
 			'url'    => Functions::get_settings_url( 'custom_plugin' ),
-			'label'  => _x( 'Custom Plugin', 'Tab label as Custom Plugin', 'wp-plugin-info-card' ),
+			'label'  => _x( 'Custom Plugins', 'Tab label as Custom Plugin', 'wp-plugin-info-card' ),
 			'icon'   => 'wppic-flaticon-custom-plugin',
 		);
 		return $tabs;
@@ -122,11 +122,9 @@ class Custom_Plugin {
 	 */
 	public function output_custom_plugin_content( $tab, $sub_tab = '' ) {
 		if ( 'custom_plugin' === $tab ) {
-			if ( empty( $sub_tab ) || 'custom_plugin' === $sub_tab ) {
-				?>
-				<div id="wppic-tab-custom-plugin"></div>
-				<?php
-			}
+			?>
+			<div id="wppic-tab-custom-plugin"></div>
+			<?php
 		}
 	}
 }
