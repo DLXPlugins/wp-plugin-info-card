@@ -99,15 +99,21 @@ const useMediaUploader = ( props ) => {
 
 		let cropWidthX2 = 0;
 		let cropHeightY2 = 0;
-		if ( xInit + x1 > realWidth ) {
+		if ( xInit + x1 >= realWidth ) {
 			cropWidthX2 = xInit - 1;
 		} else {
 			cropWidthX2 = xInit + x1;
 		}
-		if ( yInit + y1 > realHeight ) {
+		if ( yInit + y1 >= realHeight ) {
 			cropHeightY2 = yInit - 1;
 		} else {
 			cropHeightY2 = yInit + y1;
+		}
+		if ( x1 > realWidth ) {
+			x1 = 0;
+		}
+		if ( y1 > realHeight ) {
+			y1 = 0;
 		}
 
 		const imgSelectOptions = {
@@ -123,6 +129,7 @@ const useMediaUploader = ( props ) => {
 			y2: cropHeightY2,
 			aspectRatio: settings.aspectRatio,
 		};
+		console.log( imgSelectOptions );
 		return imgSelectOptions;
 	};
 	return {
