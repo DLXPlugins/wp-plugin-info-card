@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Tags: cards, card, theme cards, plugin cards, plugin list
 Requires at least: 3.7
 Tested up to: 6.8
-Stable tag: 5.3.1
+Stable tag: 5.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,6 +101,16 @@ This video shows you how:
 11. WordPress layout with themes and 2 columns
 
 == Changelog ==
+
+= 5.4.1 =
+* Released 2025-06-02
+* Resolving fatal error when uninstalling the plugin.
+* Fixing typo with unterminated quote in SVG code.
+* Setting false on script instead of null.
+
+= 5.4.0 =
+* Released 2025-05-30
+* Security fix: Container ID in shortcode / block wasn't properly escaped, resulting in a stored Cross-Site Scripting vulnerability. Props Peter Thaleikis from Wordfence for reporting the issue.
 
 = 5.3.1 =
 * Released 2025-04-22
@@ -475,5 +485,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 5.3.1 =
-Security fix: Follow up from last release, there is an additional security fix to resolve CSRF issues.
+= 5.4.1 =
+Resolving fatal on uninstall. Fixing a few typos in SVG and enqueue code.

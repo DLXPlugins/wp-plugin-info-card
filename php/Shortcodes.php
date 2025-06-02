@@ -696,7 +696,7 @@ class Shortcodes {
 		$type        = sanitize_text_field( trim( $attributes['type'] ) );
 		$slug        = sanitize_text_field( trim( esc_html( $attributes['slug'] ) ) );
 		$image       = sanitize_text_field( trim( esc_url( $attributes['image'] ) ) );
-		$containerid = sanitize_text_field( trim( $attributes['containerid'] ) );
+		$containerid = esc_attr( trim( $attributes['containerid'] ) );
 		$margin      = esc_attr( trim( $attributes['margin'] ) );
 		$clear       = sanitize_text_field( trim( $attributes['clear'] ) );
 		$expiration  = sanitize_text_field( trim( $attributes['expiration'] ) );
@@ -840,7 +840,7 @@ class Shortcodes {
 					if ( ! empty( $containerid ) ) {
 						$containerid = ' id="' . esc_attr( $containerid ) . '"';
 					} else {
-						$containerid = ' id="wp-pic-' . esc_html( $asset_slug ) . '"';
+						$containerid = ' id="wp-pic-' . esc_attr( $asset_slug ) . '"';
 					}
 
 					// Color scheme.
@@ -863,7 +863,7 @@ class Shortcodes {
 					}
 
 					// Data attribute for ajax call.
-					$content .= '<div class="wp-pic ' . esc_html( implode( ' ', $add_class ) ) . '" ' . esc_html( $containerid ) . $ajax_data . ' >';
+					$content .= '<div class="wp-pic ' . esc_attr( implode( ' ', $add_class ) ) . '" ' . $containerid . $ajax_data . ' >';
 					if ( 'yes' !== $ajax ) {
 						$content .= self::shortcode_content( $type, $asset_slug, $image, $expiration, $layout, $attributes['itemSlugs'] );
 					} else {
@@ -927,9 +927,9 @@ class Shortcodes {
 
 				// Extra container ID.
 				if ( ! empty( $containerid ) ) {
-					$containerid = ' id="' . $containerid . '"';
+					$containerid = ' id="' . esc_attr( $containerid ) . '"';
 				} else {
-					$containerid = ' id="wp-pic-' . esc_html( $slug ) . '"';
+					$containerid = ' id="wp-pic-' . esc_attr( $slug ) . '"';
 				}
 
 				// Custom container margin.
