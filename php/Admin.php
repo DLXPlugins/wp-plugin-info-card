@@ -37,7 +37,7 @@ class Admin {
 		if ( 'dashboard' === get_current_screen()->id ) {
 			wp_register_script(
 				'wppic-dashboard-widget',
-				null
+				false
 			);
 			wp_localize_script(
 				'wppic-dashboard-widget',
