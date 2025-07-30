@@ -283,29 +283,25 @@ class Blocks {
 	 * Register any blocks.
 	 */
 	public function register_blocks() {
-		register_block_type(
-			Functions::get_plugin_dir( 'build/blocks/PluginInfoCard/block.json' ),
-			array(
-				'render_callback' => array( $this, 'info_card_render' ),
-			)
-		);
-		register_block_type(
-			Functions::get_plugin_dir( 'build/blocks/PluginInfoCardQuery/block.json' ),
-			array(
-				'render_callback' => array( $this, 'info_card_query_render' ),
-			)
-		);
-		register_block_type(
-			Functions::get_plugin_dir( 'build/blocks/SitePluginsCardGrid/block.json' ),
-			array(
-				'render_callback' => array( $this, 'site_plugin_card_grid_render' ),
-			)
-		);
-		register_block_type(
-			Functions::get_plugin_dir( 'build/blocks/PluginScreenshotsInfoCard/block.json' ),
-			array(
-				'render_callback' => array( $this, 'site_plugin_screenshots' ),
-			)
+
+		if ( function_exists( 'wp_register_block_types_from_metadata_collection' ) ) {
+			wp_register_block_types_from_metadata_collection( __DIR__ . '/build', __DIR__ . '/build/blocks-manifest.php' );
+			return;
+		} else {
+			if ( function_exists( 'wp_register_block_metadata_collection' ) ) {
+				wp_register_block_metadata_collection( __DIR__ . '/build', __DIR__ . '/build/blocks-manifest.php' );
+			}
+			$manifest_data = require __DIR__ . '/build/blocks-manifest.php';
+			foreach ( array_keys( $manifest_data ) as $block_type ) {
+				register_block_type( __DIR__ . "/build/{$block_type}" );
+			}
+		}
+
+		$render_callbacks = array(
+			'wp-plugin-info-card/wp-plugin-info-card'   => array( $this, 'info_card_render' ),
+			'wp-plugin-info-card/wp-plugin-info-card-query' => array( $this, 'info_card_query_render' ),
+			'wp-plugin-info-card/site-plugin-card-grid' => array( $this, 'site_plugin_card_grid_render' ),
+			'wp-plugin-info-card/plugin-screenshots-info-card' => array( $this, 'site_plugin_screenshots' ),
 		);
 	}
 

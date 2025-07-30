@@ -1,0 +1,684 @@
+<?php
+// This file is generated. Do not modify it manually.
+return array(
+	'EDDCardGrid' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'title' => 'EDD Plugins Grid',
+		'apiVersion' => 2,
+		'name' => 'wp-plugin-info-card/edd-plugins-grid',
+		'category' => 'wp-plugin-info-card',
+		'icon' => '<svg height=\'24\' viewBox=\'0 0 512 512\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\'><path id=\'background\' d=\'m256 31a225.07 225.07 0 0 1 87.57 432.33 225.07 225.07 0 0 1 -175.14-414.66 223.45 223.45 0 0 1 87.57-17.67m0-31c-141.38 0-256 114.62-256 256s114.62 256 256 256 256-114.62 256-256-114.62-256-256-256z\'/><path d=\'m255.71 396q-34.11 0-68.21 0c-31.18 0-53.68-22.42-53.84-53.59q-.09-16.32 0-32.65c.06-11.22 6.86-18.44 17.26-18.46s17.29 7.15 17.36 18.36 0 22.16 0 33.24c.08 11.62 6.91 18.39 18.57 18.4q69.09 0 138.17 0c11.67 0 18.51-6.78 18.6-18.39.08-11.08 0-22.16 0-33.24s6.91-18.39 17.35-18.37 17.34 7.24 17.25 18.45c-.11 14.17.68 28.49-1.1 42.47-3.26 25.58-25.07 43.64-50.95 43.76-23.43.07-46.95.02-70.46.02z\'/><path d=\'m273.35 248.88c2.64-2.46 4.19-3.81 5.63-5.26 11.08-11.19 22.1-22.45 33.23-33.6 7.9-7.91 18.91-8.5 26.05-1.56s6.86 18.29-.91 26.11q-33.93 34.14-68.08 68.07c-8 7.95-18.46 8-26.46 0q-34.38-34.1-68.48-68.49c-7.48-7.55-7.52-18.9-.57-25.68s18-6.48 25.63 1.1c11.3 11.24 22.43 22.67 33.65 34 1.44 1.46 3 2.82 5.31 5 .15-3.14.33-5.17.33-7.2 0-35.79-.06-71.57 0-107.36 0-13.43 11.82-21.42 24.1-16.63 6.81 2.64 10.49 8.54 10.5 17.18q.06 53.1 0 106.19z\'/></svg>',
+		'description' => 'Display all EDD plugins as cards.',
+		'keywords' => array(
+			'wp plugin',
+			'edd',
+			'grid',
+			'plugin',
+			'card',
+			'active',
+			'download'
+		),
+		'version' => '1.0.0',
+		'textdomain' => 'wp-plugin-info-card',
+		'attributes' => array(
+			'assetData' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
+			),
+			'uniqueId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'align' => array(
+				'type' => 'string',
+				'default' => 'center'
+			),
+			'loading' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'scheme' => array(
+				'type' => 'string',
+				'default' => 'default'
+			),
+			'layout' => array(
+				'type' => 'string',
+				'default' => 'card'
+			),
+			'preview' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'defaultsApplied' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'sortby' => array(
+				'type' => 'string',
+				'default' => 'none'
+			),
+			'sort' => array(
+				'type' => 'string',
+				'default' => 'ASC'
+			),
+			'cols' => array(
+				'type' => 'number',
+				'default' => 2
+			),
+			'colGap' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'rowGap' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'excludedSlugs' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
+			)
+		),
+		'example' => array(
+			'attributes' => array(
+				'preview' => true
+			)
+		),
+		'supports' => array(
+			'anchor' => true,
+			'align' => false,
+			'className' => true
+		),
+		'editorScript' => 'wp-plugin-info-card-block-js',
+		'editorStyle' => array(
+			'wp-plugin-info-card-block-editor-css',
+			'wp-plugin-info-card-block-styles-css'
+		)
+	),
+	'PluginInfoCard' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'title' => 'WP Plugin Info Card',
+		'apiVersion' => 2,
+		'name' => 'wp-plugin-info-card/wp-plugin-info-card',
+		'category' => 'wp-plugin-info-card',
+		'icon' => '<svg version=\'1.1\' id=\'Calque_1\' xmlns=\'http://www.w3.org/2000/svg\' x=\'0px\' y=\'0px\' width=\'24\' height=\'24\' viewBox=\'0 0 850.39 850.39\' enable-background=\'new 0 0 850.39 850.39\'><path fill=\'#333\' d=\'M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39 c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451 l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07 h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887 l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z\'></path></svg>',
+		'description' => 'Add a beautiful plugin or theme info card to your site.',
+		'keywords' => array(
+			'wp plugin',
+			'plugin',
+			'card',
+			'theme'
+		),
+		'version' => '1.0.0',
+		'textdomain' => 'wp-plugin-info-card',
+		'attributes' => array(
+			'assetData' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
+			),
+			'type' => array(
+				'type' => 'string',
+				'default' => 'plugin'
+			),
+			'slug' => array(
+				'type' => 'string',
+				'default' => 'wp-plugin-info-card'
+			),
+			'loading' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'html' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'align' => array(
+				'type' => 'string',
+				'default' => 'full'
+			),
+			'image' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'containerid' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'margin' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'clear' => array(
+				'type' => 'string',
+				'default' => 'none'
+			),
+			'expiration' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'ajax' => array(
+				'type' => 'string',
+				'default' => 'false'
+			),
+			'scheme' => array(
+				'type' => 'string',
+				'default' => 'default'
+			),
+			'layout' => array(
+				'type' => 'string',
+				'default' => 'card'
+			),
+			'custom' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'width' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'preview' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'multi' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'defaultsApplied' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'cols' => array(
+				'type' => 'number',
+				'default' => 2
+			),
+			'colGap' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'rowGap' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'uniqueId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'itemSlugs' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
+			)
+		),
+		'example' => array(
+			'attributes' => array(
+				'preview' => true
+			)
+		),
+		'supports' => array(
+			'anchor' => true,
+			'align' => array(
+				'left',
+				'center',
+				'right',
+				'full'
+			),
+			'className' => true
+		),
+		'editorScript' => 'wp-plugin-info-card-block-js',
+		'editorStyle' => array(
+			'wp-plugin-info-card-block-editor-css',
+			'wp-plugin-info-card-block-styles-css'
+		)
+	),
+	'PluginInfoCardQuery' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'title' => 'WP Plugin Info Card Query',
+		'apiVersion' => 2,
+		'name' => 'wp-plugin-info-card/wp-plugin-info-card-query',
+		'category' => 'wp-plugin-info-card',
+		'icon' => '<svg height=\'24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 512 512\'><path fill=\'#333\' d=\'M256 140c-63.962 0-116 52.038-116 116s52.038 116 116 116 116-52.038 116-116-52.038-116-116-116zm-60.25 59.875h86.635l-4.578-5.045c-5.566-6.135-5.106-15.622 1.029-21.188 6.136-5.567 15.621-5.106 21.188 1.029l27.333 30.125c5.188 5.718 5.188 14.441 0 20.159l-27.333 30.125a14.958 14.958 0 0 1-11.113 4.92 14.945 14.945 0 0 1-10.075-3.891c-6.135-5.567-6.596-15.053-1.029-21.188l4.578-5.045H195.75c-8.284 0-15-6.716-15-15s6.716-15.001 15-15.001zm120.5 112.25h-86.635l4.578 5.045c5.566 6.135 5.106 15.622-1.029 21.188a14.948 14.948 0 0 1-10.075 3.891 14.964 14.964 0 0 1-11.113-4.92l-27.333-30.125c-5.188-5.718-5.188-14.441 0-20.159l27.333-30.125c5.567-6.135 15.054-6.596 21.188-1.029 6.135 5.567 6.596 15.053 1.029 21.188l-4.578 5.045h86.635c8.284 0 15 6.716 15 15s-6.716 15.001-15 15.001z\'></path><path fill=\'#333\' d=\'M497 199.92h-33.479a212.647 212.647 0 0 0-21.142-50.991l23.688-23.688c5.858-5.858 5.858-15.355 0-21.213l-58.095-58.095c-5.857-5.858-15.355-5.858-21.213 0L363.07 69.621a212.647 212.647 0 0 0-50.991-21.142V15c0-8.284-6.716-15-15-15H214.92c-8.284 0-15 6.716-15 15v33.479a212.664 212.664 0 0 0-50.991 21.142l-23.688-23.688c-5.857-5.858-15.355-5.858-21.213 0l-58.095 58.095c-5.858 5.858-5.858 15.355 0 21.213l23.688 23.688a212.647 212.647 0 0 0-21.142 50.991H15c-8.284 0-15 6.716-15 15v82.159c0 8.284 6.716 15 15 15h33.479a212.664 212.664 0 0 0 21.142 50.991l-23.688 23.688c-5.858 5.858-5.858 15.355 0 21.213l58.095 58.095c5.857 5.858 15.355 5.858 21.213 0l23.688-23.688a212.633 212.633 0 0 0 50.991 21.143V497c0 8.284 6.716 15 15 15h82.159c8.284 0 15-6.716 15-15v-33.479a212.568 212.568 0 0 0 50.991-21.143l23.688 23.688c5.857 5.858 15.355 5.858 21.213 0l58.095-58.095c5.858-5.858 5.858-15.355 0-21.213l-23.688-23.688a212.647 212.647 0 0 0 21.142-50.991H497c8.284 0 15-6.716 15-15V214.92c0-8.284-6.716-15-15-15zM256 402c-80.505 0-146-65.495-146-146s65.495-146 146-146 146 65.495 146 146-65.495 146-146 146z\'></path></svg>',
+		'description' => 'Query and display a list of plugins or themes in a beautiful card format.',
+		'keywords' => array(
+			'wp plugin',
+			'plugin',
+			'card',
+			'theme',
+			'query'
+		),
+		'version' => '1.0.0',
+		'textdomain' => 'wp-plugin-info-card',
+		'attributes' => array(
+			'assetData' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
+			),
+			'uniqueId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'search' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'tag' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'author' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'user' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'browse' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'per_page' => array(
+				'type' => 'string',
+				'default' => '8'
+			),
+			'cols' => array(
+				'type' => 'string',
+				'default' => 2
+			),
+			'colGap' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'rowGap' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'type' => array(
+				'type' => 'string',
+				'default' => 'plugin'
+			),
+			'slug' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'loading' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'html' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'align' => array(
+				'type' => 'string',
+				'default' => 'full'
+			),
+			'image' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'containerid' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'margin' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'clear' => array(
+				'type' => 'string',
+				'default' => 'none'
+			),
+			'expiration' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'ajax' => array(
+				'type' => 'string',
+				'default' => 'false'
+			),
+			'scheme' => array(
+				'type' => 'string',
+				'default' => 'default'
+			),
+			'layout' => array(
+				'type' => 'string',
+				'default' => 'card'
+			),
+			'custom' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'width' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'preview' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'defaultsApplied' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'sortby' => array(
+				'type' => 'string',
+				'default' => 'none'
+			),
+			'sort' => array(
+				'type' => 'string',
+				'default' => 'ASC'
+			),
+			'itemSlugs' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
+			)
+		),
+		'example' => array(
+			'attributes' => array(
+				'preview' => true
+			)
+		),
+		'supports' => array(
+			'anchor' => true,
+			'align' => false,
+			'className' => true
+		),
+		'editorScript' => 'wp-plugin-info-card-block-js',
+		'editorStyle' => array(
+			'wp-plugin-info-card-block-editor-css',
+			'wp-plugin-info-card-block-styles-css'
+		)
+	),
+	'PluginScreenshotsInfoCard' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'title' => 'Plugin Screenshots Info Card',
+		'apiVersion' => 2,
+		'name' => 'wp-plugin-info-card/plugin-screenshots-info-card',
+		'category' => 'wp-plugin-info-card',
+		'icon' => '<svg viewBox=\'0 0 7509 6702\' width=\'24\' height=\'24\'><path d=\'M677.904 0h6152.96c186.275 0 356.237 75.859 479.153 198.763 121.94 122.903 198.75 291.901 198.75 479.14v5346.39c0 186.289-76.81 355.273-198.75 478.177-122.916 122.917-292.878 198.776-479.153 198.776H677.904c-187.227 0-356.237-75.859-479.141-198.776C75.872 6379.566 0 6210.582 0 6024.293V677.903c0-187.239 75.872-356.237 198.763-479.14C321.667 75.859 490.677 0 677.904 0Z\' fill=\'currentColor\' /><path d=\'m542.526 5434.75 2021.21-2499.41c49.935-60.507 122.904-96.991 200.69-99.856 78.737-2.891 153.62 27.839 207.396 85.456l1364.44 1447.98 611.654-519.479 15.365-13.437c48.971-38.399 110.416-58.594 173.788-54.753 62.409 2.93 121.94 28.815 166.12 72.044l14.401 14.401 1648.67 1720.68v435.925c0 36.497-15.364 70.104-39.362 95.078-24.987 24.935-58.594 40.312-96.041 40.312H677.897c-37.448 0-71.055-15.377-96.016-40.312-24.01-24.974-39.362-58.581-39.362-95.078v-589.544Z\' fill=\'#FFF\' /><path fill=\'currentColor\' d=\'M4788.52 1254.02c156.497-156.511 373.515-253.49 611.641-253.49 239.101 0 455.156 96.979 612.603 253.49 156.524 156.523 252.552 373.515 252.552 611.64 0 239.102-96.028 455.143-252.552 611.654-157.447 156.51-373.502 253.476-612.603 253.476-238.126 0-455.144-96.966-611.641-253.476-156.498-156.511-252.526-372.552-252.526-611.654 0-238.125 96.028-455.117 252.526-611.64Z\' /></svg>',
+		'description' => 'Add a beautiful plugin card with screenshots.',
+		'keywords' => array(
+			'wp plugin',
+			'plugin',
+			'card',
+			'theme',
+			'screenshot'
+		),
+		'version' => '1.0.0',
+		'textdomain' => 'wp-plugin-info-card',
+		'attributes' => array(
+			'uniqueId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'preview' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'screen' => array(
+				'type' => 'string',
+				'default' => 'slug-entry'
+			),
+			'assetData' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
+			),
+			'type' => array(
+				'type' => 'string',
+				'default' => 'plugin'
+			),
+			'slug' => array(
+				'type' => 'string',
+				'default' => 'highlight-and-share'
+			),
+			'loading' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'iconStyle' => array(
+				'type' => 'string',
+				'default' => 'none'
+			),
+			'enableRoundedIcon' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'colorTheme' => array(
+				'type' => 'string',
+				'default' => 'default'
+			),
+			'customColors' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'pluginTitle' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'enableContextMenu' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'enableScreenshots' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'imageSource' => array(
+				'type' => 'string',
+				'default' => 'local'
+			),
+			'images' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
+			),
+			'align' => array(
+				'type' => 'string',
+				'default' => 'center'
+			),
+			'colorBackground' => array(
+				'type' => 'string',
+				'default' => '#FFFFFF'
+			),
+			'colorText' => array(
+				'type' => 'string',
+				'default' => '#000000'
+			),
+			'colorBorder' => array(
+				'type' => 'string',
+				'default' => '#000000'
+			),
+			'colorMenuBorder' => array(
+				'type' => 'string',
+				'default' => '#000000'
+			),
+			'colorMenu' => array(
+				'type' => 'string',
+				'default' => '#000000'
+			),
+			'colorMenuHover' => array(
+				'type' => 'string',
+				'default' => '#DDDDDD'
+			),
+			'colorMenuText' => array(
+				'type' => 'string',
+				'default' => '#FFFFFF'
+			),
+			'colorMenuTextHover' => array(
+				'type' => 'string',
+				'default' => '#000000'
+			),
+			'colorScreenshotsBackground' => array(
+				'type' => 'string',
+				'default' => '#DDDDDD'
+			),
+			'colorScreenshotsBorder' => array(
+				'type' => 'string',
+				'default' => '#000000'
+			),
+			'colorScreenshotsArrowBackground' => array(
+				'type' => 'string',
+				'default' => '#333333'
+			),
+			'colorScreenshotsArrowBackgroundHover' => array(
+				'type' => 'string',
+				'default' => '#000000'
+			),
+			'colorScreenshotsArrow' => array(
+				'type' => 'string',
+				'default' => '#EEEEEE'
+			),
+			'colorScreenshotsArrowHover' => array(
+				'type' => 'string',
+				'default' => '#FFFFFF'
+			),
+			'colorStar' => array(
+				'type' => 'string',
+				'default' => '#FF9529'
+			),
+			'colorMetaBackground' => array(
+				'type' => 'string',
+				'default' => '#000000'
+			),
+			'colorMetaText' => array(
+				'type' => 'string',
+				'default' => '#FFFFFF'
+			),
+			'skipAnimatedGifs' => array(
+				'type' => 'boolean',
+				'default' => false
+			)
+		),
+		'example' => array(
+			'attributes' => array(
+				'preview' => true
+			)
+		),
+		'supports' => array(
+			'anchor' => true,
+			'align' => array(
+				'wide',
+				'center',
+				'full'
+			),
+			'className' => true
+		),
+		'editorScript' => 'wp_plugin_info_card-cgb-block-js',
+		'editorStyle' => array(
+			'wp_plugin_info_card-cgb-block-editor-css',
+			'wp_plugin_info_card-cgb-style-css',
+			'wp-plugin-info-card-block-editor-css-inline'
+		),
+		'style' => 'has-style-frontend-css'
+	),
+	'SitePluginsCardGrid' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'title' => 'Site Plugins Card Grid',
+		'apiVersion' => 2,
+		'name' => 'wp-plugin-info-card/site-plugins-card-grid',
+		'category' => 'wp-plugin-info-card',
+		'icon' => '<svg height=\'24\' viewBox=\'0 0 122.88 122.88\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\'><path fill=\'#333\' d=\'M0 0v122.88h122.88V0zm115.2 38.4H84.479V7.68H115.2zM46.08 76.8V46.08H76.8V76.8zm30.72 7.68v30.72H46.08V84.48zM38.4 76.8H7.68V46.08H38.4zm7.68-38.4V7.68H76.8V38.4zm38.399 7.68H115.2V76.8H84.479zM38.4 7.68V38.4H7.68V7.68zM7.68 84.48H38.4v30.72H7.68zm76.799 30.72V84.48H115.2v30.72z\'></path></svg>',
+		'description' => 'Display all your active plugins in a grid layout.',
+		'keywords' => array(
+			'wp plugin',
+			'site',
+			'grid',
+			'plugin',
+			'card',
+			'active'
+		),
+		'version' => '1.0.0',
+		'textdomain' => 'wp-plugin-info-card',
+		'attributes' => array(
+			'assetData' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
+			),
+			'uniqueId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'align' => array(
+				'type' => 'string',
+				'default' => 'center'
+			),
+			'loading' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'scheme' => array(
+				'type' => 'string',
+				'default' => 'default'
+			),
+			'layout' => array(
+				'type' => 'string',
+				'default' => 'card'
+			),
+			'preview' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'defaultsApplied' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'sortby' => array(
+				'type' => 'string',
+				'default' => 'none'
+			),
+			'sort' => array(
+				'type' => 'string',
+				'default' => 'ASC'
+			),
+			'cols' => array(
+				'type' => 'number',
+				'default' => 2
+			),
+			'colGap' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'rowGap' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'itemSlugs' => array(
+				'type' => 'object',
+				'default' => array(
+					
+				)
+			)
+		),
+		'example' => array(
+			'attributes' => array(
+				'preview' => true
+			)
+		),
+		'supports' => array(
+			'anchor' => true,
+			'align' => false,
+			'className' => true
+		),
+		'editorScript' => 'wp-plugin-info-card-block-js',
+		'editorStyle' => array(
+			'wp-plugin-info-card-block-editor-css',
+			'wp-plugin-info-card-block-styles-css'
+		)
+	)
+);
