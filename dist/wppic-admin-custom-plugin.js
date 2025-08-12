@@ -40271,18 +40271,17 @@ var defaultLayouts = {
     layout: {
       titleField: 'title',
       mediaField: 'plugin-info',
-      columns: 2,
+      columns: 4,
       columnGap: '24px',
       rowGap: '24px',
       showMedia: true,
       viewConfigOptions: {}
     }
   },
-  list: {
+  table: {
     layout: {
       titleField: 'title',
       mediaField: 'plugin-info',
-      columns: 1,
       showMedia: true,
       viewConfigOptions: {}
     }
@@ -40327,22 +40326,6 @@ var fields = [{
   enableSorting: false,
   enableHiding: false
 }];
-var actions = [{
-  id: 'edit',
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Edit Plugin', 'wp-plugin-info-card'),
-  callback: function b(a) {
-    console.log('Edit', a);
-  },
-  isPrimary: true
-}, {
-  id: 'delete',
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Delete Plugin', 'wp-plugin-info-card'),
-  callback: function b(a) {
-    console.log('Delete', a);
-  },
-  isPrimary: false,
-  isDestructive: true
-}];
 var PluginHome = function b(a) {
   var c = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     d = _slicedToArray(c, 2),
@@ -40352,15 +40335,61 @@ var PluginHome = function b(a) {
     h = _slicedToArray(g, 2),
     i = h[0],
     j = h[1];
-  var k = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var k = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     l = _slicedToArray(k, 2),
     m = l[0],
     n = l[1];
-  var o = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-      type: 'list',
+  var o = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    p = _slicedToArray(o, 2),
+    q = p[0],
+    r = p[1];
+  var s = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    t = _slicedToArray(s, 2),
+    u = t[0],
+    v = t[1];
+  var w = [{
+    id: 'edit',
+    icon: 'edit',
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Edit Plugin', 'wp-plugin-info-card'),
+    callback: function b(a) {
+      console.log('Edit', a);
+    },
+    isPrimary: true
+  }, {
+    id: 'delete',
+    hideModalHeader: true,
+    icon: 'trash',
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Delete Plugin', 'wp-plugin-info-card'),
+    callback: function () {
+      var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function b(a) {
+        return _regeneratorRuntime().wrap(function c(b) {
+          while (1) switch (b.prev = b.next) {
+            case 0:
+              n({
+                display: true,
+                items: a
+              });
+            case 1:
+            case "end":
+              return b.stop();
+          }
+        }, b);
+      }));
+      function b(_x) {
+        return a.apply(this, arguments);
+      }
+      return b;
+    }(),
+    isPrimary: false,
+    isDestructive: true,
+    supportsBulk: true,
+    modalFocusOnMount: 'firstContentElement'
+  }];
+  var x = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      type: 'table',
       previewSize: 'medium',
       paginationInfo: {
-        totalItems: m.length,
+        totalItems: u.length,
         totalPages: 0
       },
       page: 1,
@@ -40374,13 +40403,13 @@ var PluginHome = function b(a) {
       layout: defaultLayouts.grid.layout,
       fields: [].concat(fields)
     }),
-    p = _slicedToArray(o, 2),
-    q = p[0],
-    r = p[1];
-  var s = /*#__PURE__*/function () {
+    y = _slicedToArray(x, 2),
+    z = y[0],
+    A = y[1];
+  var B = /*#__PURE__*/function () {
     var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function b(a) {
-      var c, d, e, f, g, h, i, k, l, m, o, p;
-      return _regeneratorRuntime().wrap(function q(b) {
+      var c, d, e, f, g, h, i, k, l, m, n, o;
+      return _regeneratorRuntime().wrap(function p(b) {
         while (1) switch (b.prev = b.next) {
           case 0:
             c = a.order, d = c === void 0 ? 'ASC' : c, e = a.orderby, f = e === void 0 ? 'title' : e, g = a.page, h = g === void 0 ? 1 : g, i = a.perPage, k = i === void 0 ? 20 : i, l = a.search, m = l === void 0 ? '' : l;
@@ -40395,11 +40424,11 @@ var PluginHome = function b(a) {
               search: m
             });
           case 4:
-            o = b.sent;
+            n = b.sent;
             j(false);
-            p = o.data;
-            if (p.success) {
-              n(p.data.customPlugins);
+            o = n.data;
+            if (o.success) {
+              v(o.data.customPlugins);
             } else {
               // todo - error handling.
             }
@@ -40409,12 +40438,12 @@ var PluginHome = function b(a) {
         }
       }, b);
     }));
-    return function b(_x) {
+    return function c(b) {
       return a.apply(this, arguments);
     };
   }();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    s({});
+    B({});
   }, []);
 
   /**
@@ -40422,15 +40451,15 @@ var PluginHome = function b(a) {
    *
    * @param {Object} newView The new view object.
    */
-  var t = function b(a) {
-    s({
+  var C = function b(a) {
+    B({
       order: a.sort.direction,
       orderby: a.sort.field,
       page: a.page,
       perPage: a.perPage,
       search: a.search
     });
-    r(a);
+    A(a);
     // Create query args object with view state.
     // const changeQueryArgs = {
     // 	page: parseInt( getQueryArgs( window.location.href ).paged ) || 1,
@@ -40466,10 +40495,66 @@ var PluginHome = function b(a) {
     // Update the view state.
     //setView( newView );
   };
-  var u = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_6__.useNavigate)();
+  var D = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_6__.useNavigate)();
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-container with-sidebar"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, m.display && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Modal, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Delete Plugin', 'wp-plugin-info-card'),
+    onRequestClose: function a() {
+      return n({
+        display: false,
+        items: null
+      });
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Are you sure you want to delete this plugin?', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    variant: "primary",
+    onClick: /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function a() {
+      var b, c, d;
+      return _regeneratorRuntime().wrap(function e(a) {
+        while (1) switch (a.prev = a.next) {
+          case 0:
+            j(true);
+            b = [];
+            m.items.forEach(function (a) {
+              b.push(a.id);
+            });
+            a.next = 5;
+            return (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__["default"])('wppic_delete_custom_plugin', {
+              nonce: wppicAdminCustomPlugin.deleteCustomPlugin,
+              pluginIds: b
+            });
+          case 5:
+            c = a.sent;
+            j(false);
+            d = c.data;
+            if (d.success) {
+              n({
+                display: false,
+                items: null
+              });
+              // Now remove from customPlugins array.
+              v(u.filter(function (a) {
+                return !b.includes(a.id);
+              }));
+            } else {
+              // todo - error handling.
+            }
+          case 9:
+          case "end":
+            return a.stop();
+        }
+      }, a);
+    })),
+    isDestructive: true
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Delete', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    variant: "secondary",
+    onClick: function a() {
+      return n({
+        display: false,
+        items: null
+      });
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cancel', 'wp-plugin-info-card'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-options-wrapper"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-area"
@@ -40478,15 +40563,15 @@ var PluginHome = function b(a) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_PluginIcon__WEBPACK_IMPORTED_MODULE_4__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Custom Plugin Cards', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
     className: "description"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add a custom plugin, enable a REST API endpoint, and share the plugin with the world in beautiful cards.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_dataviews__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    data: m,
+    data: u,
     fields: fields,
-    actions: actions,
+    actions: w,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Plugins', 'wp-plugin-info-card'),
-    view: q,
-    onChangeView: t,
+    view: z,
+    onChangeView: C,
     paginationInfo: {
-      totalItems: m.length,
-      totalPages: Math.ceil(m.length / q.perPage)
+      totalItems: u.length,
+      totalPages: Math.ceil(u.length / z.perPage)
     },
     perPageSizes: [10, 25, 50, 100],
     selection: e,
@@ -40502,7 +40587,7 @@ var PluginHome = function b(a) {
     href: "#",
     onClick: function b(a) {
       a.preventDefault();
-      u({
+      D({
         to: '/new-plugin'
       });
     },
@@ -40518,7 +40603,7 @@ var PluginHome = function b(a) {
     href: "#",
     onClick: function b(a) {
       a.preventDefault();
-      u({
+      D({
         to: '/advanced'
       });
     },

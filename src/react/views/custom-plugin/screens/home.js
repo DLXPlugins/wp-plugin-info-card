@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { __ } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
+import { Button, Modal } from '@wordpress/components';
 import { DataViews } from '@wordpress/dataviews';
 import { addQueryArgs, getQueryArgs } from '@wordpress/url';
 import {
@@ -21,18 +21,17 @@ const defaultLayouts = {
 		layout: {
 			titleField: 'title',
 			mediaField: 'plugin-info',
-			columns: 2,
+			columns: 4,
 			columnGap: '24px',
 			rowGap: '24px',
 			showMedia: true,
 			viewConfigOptions: {},
 		},
 	},
-	list: {
+	table: {
 		layout: {
 			titleField: 'title',
 			mediaField: 'plugin-info',
-			columns: 1,
 			showMedia: true,
 			viewConfigOptions: {},
 		},
@@ -74,32 +73,41 @@ const fields = [
 		enableHiding: false,
 	},
 ];
-const actions = [
-	{
-		id: 'edit',
-		label: __( 'Edit Plugin', 'wp-plugin-info-card' ),
-		callback: ( items ) => {
-			console.log( 'Edit', items );
-		},
-		isPrimary: true,
-	},
-	{
-		id: 'delete',
-		label: __( 'Delete Plugin', 'wp-plugin-info-card' ),
-		callback: ( items ) => {
-			console.log( 'Delete', items );
-		},
-		isPrimary: false,
-		isDestructive: true,
-	},
-];
 const PluginHome = ( props ) => {
 	const [ selectedItems, setSelectedItems ] = useState( [] );
 	const [ loading, setLoading ] = useState( true );
+	const [ showDeleteModal, setShowDeleteModal ] = useState( false );
+	const [ deletePluginId, setDeletePluginId ] = useState( null );
 	const [ customPlugins, setCustomPlugins ] = useState( [] );
 
+	const actions = [
+		{
+			id: 'edit',
+			icon: 'edit',
+			label: __( 'Edit Plugin', 'wp-plugin-info-card' ),
+			callback: ( items ) => {
+				console.log( 'Edit', items );
+			},
+			isPrimary: true,
+		},
+		{
+			id: 'delete',
+			hideModalHeader: true,
+			icon: 'trash',
+			label: __( 'Delete Plugin', 'wp-plugin-info-card' ),
+			callback: async ( items ) => {
+				setShowDeleteModal( { display: true, items } );
+			},
+			isPrimary: false,
+			isDestructive: true,
+			supportsBulk: true,
+			modalFocusOnMount: 'firstContentElement',
+
+		},
+	];
+
 	const [ view, setView ] = useState( {
-		type: 'list',
+		type: 'table',
 		previewSize: 'medium',
 		paginationInfo: {
 			totalItems: customPlugins.length,
@@ -193,6 +201,48 @@ const PluginHome = ( props ) => {
 	return (
 		<>
 			<div className="wppic-admin-panel-container with-sidebar">
+				{
+					showDeleteModal.display && (
+						<Modal
+							title={ __( 'Delete Plugin', 'wp-plugin-info-card' ) }
+							onRequestClose={ () => setShowDeleteModal( { display: false, items: null } ) }
+						>
+							<p>{ __( 'Are you sure you want to delete this plugin?', 'wp-plugin-info-card' ) }</p>
+							<Button
+								variant="primary"
+								onClick={ async () => {
+									setLoading( true );
+									const pluginIds = [];
+									showDeleteModal.items.forEach( ( item ) => {
+										pluginIds.push( item.id );
+									} );
+									const response = await sendCommand( 'wppic_delete_custom_plugin', {
+										nonce: wppicAdminCustomPlugin.deleteCustomPlugin,
+										pluginIds,
+									} );
+									setLoading( false );
+									const responseData = response.data;
+									if ( responseData.success ) {
+										setShowDeleteModal( { display: false, items: null } );
+										// Now remove from customPlugins array.
+										setCustomPlugins( customPlugins.filter( ( plugin ) => ! pluginIds.includes( plugin.id ) ) );
+									} else {
+										// todo - error handling.
+									}
+								} }
+								isDestructive={ true }
+							>
+								{ __( 'Delete', 'wp-plugin-info-card' ) }
+							</Button>
+							<Button
+								variant="secondary"
+								onClick={ () => setShowDeleteModal( { display: false, items: null } ) }
+							>
+								{ __( 'Cancel', 'wp-plugin-info-card' ) }
+							</Button>
+						</Modal>
+					)
+				}
 				<div className="wppic-admin-panel-options-wrapper">
 					<div className="wppic-admin-panel-area">
 						<div className="wppic-admin-panel-area__section">

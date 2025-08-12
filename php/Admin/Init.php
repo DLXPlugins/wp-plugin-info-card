@@ -43,10 +43,45 @@ class Init {
 		add_action( 'wp_ajax_wppic_save_custom_plugin', array( $this, 'ajax_save_custom_plugin' ) );
 		add_action( 'wp_ajax_wppic_delete_custom_plugin', array( $this, 'ajax_delete_custom_plugin' ) );
 		add_action( 'wp_ajax_wppic_get_custom_plugins', array( $this, 'ajax_get_custom_plugins' ) );
+		add_action( 'wp_ajax_wppic_delete_custom_plugin', array( $this, 'ajax_delete_custom_plugin' ) );
 		// Init tabs.
 		new Tabs\Main();
 		new Tabs\EDD();
 		new Tabs\Custom_Plugin();
+	}
+
+	/**
+	 * Get custom plugins via Ajax.
+	 */
+	public function ajax_delete_custom_plugin() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+		if ( ! wp_verify_nonce( $nonce, 'wppic-delete-custom-plugin' ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce verification failed', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		$plugin_ids = filter_input( INPUT_POST, 'pluginIds', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+
+		foreach ( $plugin_ids as $plugin_id ) {
+			$plugin_id = absint( $plugin_id );
+			//wp_delete_post( $plugin_id, true );
+		}
+
+		wp_send_json_success(
+			array(
+				'message'     => __( 'Plugin deleted', 'wp-plugin-info-card' ),
+				'type'        => 'success',
+				'dismissable' => true,
+			)
+		);
 	}
 
 	/**
