@@ -21856,6 +21856,7 @@ function _asyncToGenerator(b) { return function () { var c = this, d = arguments
 
 
 
+
 /**
  * Retrieve all the patterns.
  *
@@ -21911,9 +21912,9 @@ var Interface = function a() {
     className: "wppic-admin-panel-area"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-area__section"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_PluginIcon__WEBPACK_IMPORTED_MODULE_4__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Custom Plugins', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_PluginIcon__WEBPACK_IMPORTED_MODULE_4__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Custom Plugin Cards', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add a custom plugin, enable a REST API endpoint, and share the plugin with the world.', 'wp-plugin-info-card'))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add a custom plugin, enable a REST API endpoint, and share the plugin with the world in beautiful cards.', 'wp-plugin-info-card'))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
@@ -22199,8 +22200,6 @@ var Interface = function b(a) {
         last_updated: d.last_updated || '',
         ratings: d.ratings || '',
         added: d.added || '',
-        icons: d.icons || {},
-        banners: d.banners || {},
         enable_rest_api: d.enable_rest_api || false,
         rest_api_passcode: d.rest_api_passcode || ''
       }
@@ -22232,7 +22231,30 @@ var Interface = function b(a) {
    *
    * @param {Object} formData contains the form data.
    */
-  var U = function b(a) {};
+  var U = /*#__PURE__*/function () {
+    var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function b(a) {
+      var c;
+      return _regeneratorRuntime().wrap(function d(b) {
+        while (1) switch (b.prev = b.next) {
+          case 0:
+            b.next = 2;
+            return (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_9__["default"])('wppic_save_custom_plugin', {
+              formData: a,
+              nonce: wppicAdminCustomPlugin.saveNonce
+            });
+          case 2:
+            c = b.sent;
+            console.log(c);
+          case 4:
+          case "end":
+            return b.stop();
+        }
+      }, b);
+    }));
+    return function c(b) {
+      return a.apply(this, arguments);
+    };
+  }();
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-container with-sidebar"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -23150,6 +23172,19 @@ var newPluginRoute = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_7__.crea
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_screens_new_plugin__WEBPACK_IMPORTED_MODULE_4__["default"], null);
   }
 });
+
+/**
+ * Set Path for /edit/2/nonce.
+ */
+var editPluginRoute = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_7__.createRoute)({
+  path: '/edit/$id/$nonce',
+  getParentRoute: function a() {
+    return rootRoute;
+  },
+  component: function a() {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_screens_new_plugin__WEBPACK_IMPORTED_MODULE_4__["default"], null);
+  }
+});
 var advancedRoute = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_7__.createRoute)({
   path: '/advanced',
   getParentRoute: function a() {
@@ -23159,7 +23194,7 @@ var advancedRoute = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_7__.creat
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_screens_advanced__WEBPACK_IMPORTED_MODULE_5__["default"], null);
   }
 });
-var routeTree = rootRoute.addChildren([customPluginRoute, newPluginRoute, advancedRoute]);
+var routeTree = rootRoute.addChildren([customPluginRoute, newPluginRoute, advancedRoute, editPluginRoute]);
 
 // Create a router instance
 var router = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_9__.createRouter)({

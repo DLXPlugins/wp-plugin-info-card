@@ -158,8 +158,6 @@ const Interface = ( props ) => {
 			last_updated: data.last_updated || '',
 			ratings: data.ratings || '',
 			added: data.added || '',
-			icons: data.icons || {},
-			banners: data.banners || {},
 			enable_rest_api: data.enable_rest_api || false,
 			rest_api_passcode: data.rest_api_passcode || '',
 		},
@@ -177,7 +175,12 @@ const Interface = ( props ) => {
 	 *
 	 * @param {Object} formData contains the form data.
 	 */
-	const onSubmit = ( formData ) => {
+	const onSubmit = async ( formData ) => {
+		const response = await SendCommand( 'wppic_save_custom_plugin', {
+			formData,
+			nonce: wppicAdminCustomPlugin.saveNonce,
+		} );
+		console.log( response );
 	};
 
 	return (

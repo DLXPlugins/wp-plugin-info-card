@@ -58,6 +58,9 @@ class Custom_Plugin {
 				'deleteNonce'          => wp_create_nonce( 'wppic-delete-custom-plugin' ),
 			)
 		);
+
+		// Enqueue media library.
+		wp_enqueue_media();
 	}
 
 	/**

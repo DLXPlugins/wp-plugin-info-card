@@ -18,12 +18,12 @@
     "type": "github",
     "url": "https://github.com/sponsors/MediaRon"
   },
-"scripts": {
-"start": "wp-scripts start wppic-blocks=./src/index.js --blocks-manifest --env mode=development",
-"dev": "wp-scripts start wppic-blocks=./src/index.js --blocks-manifest --env mode=development",
-"build": "wp-scripts build wppic-blocks=./src/index.js --blocks-manifest --env mode=production",
-"zip": "wp-scripts plugin-zip"
-},
+  "scripts": {
+    "start": "wp-scripts start wppic-blocks=./src/index.js --blocks-manifest --env mode=development",
+    "dev": "wp-scripts start wppic-blocks=./src/index.js --blocks-manifest --env mode=development",
+    "build": "wp-scripts build wppic-blocks=./src/index.js --blocks-manifest --env mode=production",
+    "zip": "wp-scripts plugin-zip"
+  },
   "files": [
     "assets",
     "build",
@@ -58,6 +58,7 @@
     "@tanstack/react-router": "^1.117.1",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@wordpress/components": "^25.10.0",
+    "@wordpress/dataviews": "^6.0.0",
     "@wordpress/date": "^4.41.0",
     "@wordpress/dependency-extraction-webpack-plugin": "^5.2.0",
     "@wordpress/eslint-plugin": "^14.12.0",

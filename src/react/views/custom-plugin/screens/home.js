@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
+import { DataViews } from '@wordpress/dataviews';
 import { useAsyncResource } from 'use-async-resource';
 import {
 	Plug2,
@@ -64,11 +65,11 @@ const Interface = () => {
 						<div className="wppic-admin-panel-area__section">
 							<h2>
 								<PluginIcon />
-								{ __( 'Custom Plugins', 'wp-plugin-info-card' ) }
+								{ __( 'Custom Plugin Cards', 'wp-plugin-info-card' ) }
 							</h2>
 							<p className="description">
 								{ __(
-									'Add a custom plugin, enable a REST API endpoint, and share the plugin with the world.',
+									'Add a custom plugin, enable a REST API endpoint, and share the plugin with the world in beautiful cards.',
 									'wp-plugin-info-card',
 								) }
 							</p>

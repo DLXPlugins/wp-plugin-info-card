@@ -37,13 +37,22 @@ const newPluginRoute = createRoute( {
 	component: () => <NewPlugin />,
 } );
 
+/**
+ * Set Path for /edit/2/nonce.
+ */
+const editPluginRoute = createRoute( {
+	path: '/edit/$id/$nonce',
+	getParentRoute: () => rootRoute,
+	component: () => <NewPlugin />,
+} );
+
 const advancedRoute = createRoute( {
 	path: '/advanced',
 	getParentRoute: () => rootRoute,
 	component: () => <Advanced />,
 } );
 
-const routeTree = rootRoute.addChildren( [ customPluginRoute, newPluginRoute, advancedRoute ] );
+const routeTree = rootRoute.addChildren( [ customPluginRoute, newPluginRoute, advancedRoute, editPluginRoute ] );
 
 // Create a router instance
 const router = createRouter( {

@@ -48,6 +48,9 @@ class Init {
 		new Tabs\Custom_Plugin();
 	}
 
+	/**
+	 * Save a custom plugin via Ajax.
+	 */
 	public function ajax_save_custom_plugin() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
@@ -67,13 +70,25 @@ class Init {
 		}
 		unset( $form_data['nonce'] );
 
-		$form_data = Functions::sanitize_array_recursive( $form_data );
+		/**
+		 * Filter: wppic_custom_plugin_form_data.
+		 *
+		 * Filters the form data before saving. This is eventually saved in post content.
+		 *
+		 * @param array $form_data The form data.
+		 */
+		$form_data = Functions::sanitize_array_recursive(
+			apply_filters(
+				'wppic_custom_plugin_form_data',
+				$form_data
+			)
+		);
 
 		$maybe_custom_plugin_post = get_posts(
 			array(
-				'post_type'   => 'wppic_custom_plugins',
-				'name'        => sanitize_title( $form_data['slug'] ),
-				'post_status' => 'publish',
+				'post_type'     => 'wppic_custom_plugins',
+				'post_name__in' => array( sanitize_title( $form_data['slug'] ) ),
+				'post_status'   => 'publish',
 			)
 		);
 		$maybe_custom_slug        = '';
@@ -102,6 +117,22 @@ class Init {
 				'post_status'  => 'publish',
 			)
 		);
+
+		// Save icon as featured image.
+		if ( isset( $form_data['custom_plugin_icon_id'] ) && $form_data['custom_plugin_icon_id'] ) {
+			set_post_thumbnail( $post_id, $form_data['custom_plugin_icon_id'] );
+		}
+
+		/**
+		 * Action: wppic_after_save_custom_plugin.
+		 *
+		 * Fires after saving a custom plugin.
+		 *
+		 * @param int   $post_id The post ID.
+		 * @param array $form_data The form data.
+		 */
+		do_action( 'wppic_after_save_custom_plugin', $post_id, $form_data );
+
 		wp_send_json_success(
 			array(
 				'message'     => __( 'Plugin saved', 'wp-plugin-info-card' ),
