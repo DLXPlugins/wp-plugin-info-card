@@ -42,10 +42,69 @@ class Init {
 		// Actions for custom plugins.
 		add_action( 'wp_ajax_wppic_save_custom_plugin', array( $this, 'ajax_save_custom_plugin' ) );
 		add_action( 'wp_ajax_wppic_delete_custom_plugin', array( $this, 'ajax_delete_custom_plugin' ) );
+		add_action( 'wp_ajax_wppic_get_custom_plugins', array( $this, 'ajax_get_custom_plugins' ) );
 		// Init tabs.
 		new Tabs\Main();
 		new Tabs\EDD();
 		new Tabs\Custom_Plugin();
+	}
+
+	/**
+	 * Get custom plugins via Ajax.
+	 */
+	public function ajax_get_custom_plugins() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+		if ( ! wp_verify_nonce( $nonce, 'wppic-get-custom-plugins' ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce verification failed', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		$search  = sanitize_text_field( urldecode( filter_input( INPUT_POST, 'search', FILTER_DEFAULT ) ) );
+		$order   = sanitize_text_field( filter_input( INPUT_POST, 'order', FILTER_DEFAULT ) );
+		$orderby = sanitize_text_field( filter_input( INPUT_POST, 'orderby', FILTER_DEFAULT ) );
+		$paged   = absint( filter_input( INPUT_POST, 'paged', FILTER_DEFAULT ) );
+
+		// Gather post type args.
+		$post_type_args = array(
+			'post_type'      => 'wppic_custom_plugins',
+			'posts_per_page' => 20,
+			'post_status'    => 'publish',
+			'order'          => $order,
+			'orderby'        => $orderby,
+		);
+		if ( $search && ! empty( $search ) ) {
+			$post_type_args['s'] = $search;
+		}
+		if ( $paged && ! empty( $paged ) ) {
+			$post_type_args['paged'] = $paged;
+		}
+
+		$custom_plugins      = get_posts( $post_type_args );
+		$custom_plugins_data = array();
+
+		foreach ( $custom_plugins as $custom_plugin ) {
+			$custom_plugins_data[] = array(
+				'id'      => $custom_plugin->ID,
+				'title'   => $custom_plugin->post_title,
+				'slug'    => $custom_plugin->post_name,
+				'content' => json_decode( $custom_plugin->post_content, true ),
+				'icon'    => get_the_post_thumbnail_url( $custom_plugin->ID, 'full' ),
+			);
+		}
+
+		wp_send_json_success(
+			array(
+				'customPlugins' => $custom_plugins_data,
+			)
+		);
 	}
 
 	/**

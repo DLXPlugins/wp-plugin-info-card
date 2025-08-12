@@ -1,9 +1,9 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
 import { DataViews } from '@wordpress/dataviews';
-import { useAsyncResource } from 'use-async-resource';
+import { addQueryArgs, getQueryArgs } from '@wordpress/url';
 import {
 	Plug2,
 	Plus,
@@ -13,48 +13,156 @@ import {
 } from 'lucide-react';
 import PluginIcon from '../../../components/PluginIcon';
 import sendCommand from '../../../utils/SendCommand';
-import ErrorBoundary from '../../../components/ErrorBoundary';
 
-/**
- * Retrieve all the patterns.
- *
- * @return {Promise<Object>} The patterns.
- */
-const retrievePlugins = async() => {
-	const response = await sendCommand( 'wppic_get_plugins' );
-	return response.data;
+const defaultLayouts = {
+	grid: {
+		layout: {
+			titleField: 'title',
+			mediaField: 'plugin-info',
+			columns: 2,
+			columnGap: '24px',
+			rowGap: '24px',
+			showMedia: true,
+			viewConfigOptions: {},
+		},
+	},
 };
-
+const fields = [
+	{
+		id: 'title',
+		label: __( 'Title', 'wp-plugin-info-card' ),
+		render: ( { item } ) => {
+			return <span>{ item.title }</span>;
+		},
+		enableSorting: true,
+		enableHiding: false,
+		enableGlobalSearch: true,
+	},
+	{
+		id: 'plugin-info',
+		label: __( 'Plugin Info', 'wp-plugin-info-card' ),
+		getValue: ( { item } ) => {
+			return (
+				<>
+					<div className="wppic-plugin-info-card-img">
+						<img src={ item.icon } alt={ item.name } style={ { maxWidth: '512px', height: 'auto' } } />
+					</div>
+				</>
+			);
+		},
+		enableSorting: false,
+		enableHiding: false,
+	},
+];
+const actions = [
+	{
+		id: 'edit',
+		label: __( 'Edit', 'wp-plugin-info-card' ),
+		icon: 'edit',
+		callback: ( items ) => {
+			console.log( 'Edit', items );
+		},
+		isPrimary: true,
+	},
+	{
+		id: 'delete',
+		label: __( 'Delete Pattern', 'wp-plugin-info-card' ),
+		icon: 'trash',
+		isEligible: ( pattern ) => {
+			// Pattern must be local.
+			return pattern.isLocal;
+		},
+		callback: ( items ) => {
+			console.log( 'Delete', items );
+		},
+		isPrimary: false,
+		isDestructive: true,
+	},
+];
 const PluginHome = ( props ) => {
-	const [ defaults, getDefaults ] = useAsyncResource( retrievePlugins, [] );
-	return (
-		<ErrorBoundary
-			fallback={
-				<p>
-					{ __( 'Could not load block patterns.', 'quotes-dlx' ) }
-					<br />
-					<a
-						href="https://dlxplugins.com/support/"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						DLX Plugins Support
-					</a>
-				</p>
-			}
-		>
-			<Suspense
-				fallback={
-					<div className="has-admin-container-body__content">loading...</div>
-				}
-			>
-				<Interface defaults={ defaults } { ...props } />
-			</Suspense>
-		</ErrorBoundary>
-	);
-};
+	const [ selectedItems, setSelectedItems ] = useState( [] );
+	const [ loading, setLoading ] = useState( true );
+	const [ customPlugins, setCustomPlugins ] = useState( [] );
 
-const Interface = () => {
+	const [ view, setView ] = useState( {
+		type: 'grid',
+		previewSize: 'large',
+		paginationInfo: {
+			totalItems: customPlugins.length,
+			totalPages: 0,
+		},
+		page: 1,
+		perPage: 10,
+		sort: {
+			field: 'title',
+			direction: 'asc',
+		},
+		titleField: 'title',
+		mediaField: 'plugin-info',
+		layout: defaultLayouts.grid.layout,
+		fields: [ ...fields ],
+	} );
+	const fetchData = async () => {
+		setLoading( true );
+		const response = await sendCommand( 'wppic_get_custom_plugins', {
+			nonce: wppicAdminCustomPlugin.getCustomPlugins,
+			order: 'ASC',
+			orderby: 'title',
+		} );
+		setLoading( false );
+		const responseData = response.data;
+		if ( responseData.success ) {
+			setCustomPlugins( responseData.data.customPlugins );
+		} else {
+			// todo - error handling.
+		}
+	};
+	useEffect( () => {
+		fetchData();
+	}, [] );
+
+	/**
+	 * When a view is changed, we need to adjust the fields and showMedia based on the view type.
+	 *
+	 * @param {Object} newView The new view object.
+	 */
+	const onChangeView = ( newView ) => {
+		// Create query args object with view state.
+		// const changeQueryArgs = {
+		// 	page: parseInt( getQueryArgs( window.location.href ).paged ) || 1,
+		// 	per_page: newView.perPage,
+		// 	view_type: newView.type,
+		// };
+
+		// setView( {
+		// 	...newView,
+		// 	paginationInfo: {
+		// 		totalItems: customPlugins.length,
+		// 		totalPages: Math.ceil( customPlugins.length / newView.perPage ),
+		// 		page: changeQueryArgs.page + 1,
+		// 		perPage: changeQueryArgs.per_page,
+		// 	},
+		// } );
+
+		// // Only add search if it exists.
+		// if ( newView.search ) {
+		// 	queryArgs.search = newView.search;
+		// }
+
+		// // Add sort parameters if they exist.
+		// if ( newView.sort?.field ) {
+		// 	queryArgs.orderby = newView.sort.field;
+		// 	queryArgs.order = newView.sort.direction;
+		// }
+
+		// // Update URL without page reload using addQueryArgs.
+		// const newUrl = addQueryArgs( window.location.pathname, queryArgs );
+		// window.history.pushState( {}, '', newUrl );
+
+		// Update the view state.
+		//setView( newView );
+	};
+
 	const navigate = useNavigate();
 
 	return (
@@ -73,6 +181,23 @@ const Interface = () => {
 									'wp-plugin-info-card',
 								) }
 							</p>
+							<DataViews
+								data={ customPlugins }
+								fields={ fields }
+								actions={ actions }
+								label={ __( 'Plugins', 'wp-plugin-info-card' ) }
+								view={ view }
+								onChangeView={ onChangeView }
+								paginationInfo={ {
+									totalItems: customPlugins.length,
+									totalPages: Math.ceil( customPlugins.length / view.perPage ),
+								} }
+								perPageSizes={ [ 10, 25, 50, 100 ] }
+								selection={ selectedItems }
+								onChangeSelection={ setSelectedItems }
+								defaultLayouts={ defaultLayouts }
+								searchLabel={ __( 'Search Patterns', 'pattern-wrangler' ) }
+							/>
 						</div>
 					</div>
 				</div>

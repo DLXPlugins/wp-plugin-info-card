@@ -53,6 +53,7 @@ class Custom_Plugin {
 			'wppicAdminCustomPlugin',
 			array(
 				'getNonce'             => wp_create_nonce( 'wppic-admin-custom-plugin-retrieve-options' ),
+				'getCustomPlugins'     => wp_create_nonce( 'wppic-get-custom-plugins' ),
 				'saveNonce'            => wp_create_nonce( 'wppic-save-custom-plugin' ),
 				'checkPluginSlugNonce' => wp_create_nonce( 'wppic-check-plugin-slug' ),
 				'deleteNonce'          => wp_create_nonce( 'wppic-delete-custom-plugin' ),
