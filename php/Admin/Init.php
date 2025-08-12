@@ -67,15 +67,16 @@ class Init {
 			);
 		}
 
-		$search  = sanitize_text_field( urldecode( filter_input( INPUT_POST, 'search', FILTER_DEFAULT ) ) );
-		$order   = sanitize_text_field( filter_input( INPUT_POST, 'order', FILTER_DEFAULT ) );
-		$orderby = sanitize_text_field( filter_input( INPUT_POST, 'orderby', FILTER_DEFAULT ) );
-		$paged   = absint( filter_input( INPUT_POST, 'paged', FILTER_DEFAULT ) );
+		$search         = sanitize_text_field( urldecode( filter_input( INPUT_POST, 'search', FILTER_DEFAULT ) ) );
+		$order          = sanitize_text_field( filter_input( INPUT_POST, 'order', FILTER_DEFAULT ) );
+		$orderby        = sanitize_text_field( filter_input( INPUT_POST, 'orderby', FILTER_DEFAULT ) );
+		$paged          = absint( filter_input( INPUT_POST, 'paged', FILTER_DEFAULT ) );
+		$posts_per_page = absint( filter_input( INPUT_POST, 'perPage', FILTER_DEFAULT ) );
 
 		// Gather post type args.
 		$post_type_args = array(
 			'post_type'      => 'wppic_custom_plugins',
-			'posts_per_page' => 20,
+			'posts_per_page' => $posts_per_page,
 			'post_status'    => 'publish',
 			'order'          => $order,
 			'orderby'        => $orderby,

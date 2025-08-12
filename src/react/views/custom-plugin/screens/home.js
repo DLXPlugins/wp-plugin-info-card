@@ -116,12 +116,15 @@ const PluginHome = ( props ) => {
 		layout: defaultLayouts.grid.layout,
 		fields: [ ...fields ],
 	} );
-	const fetchData = async () => {
+	const fetchData = async ( { order = 'ASC', orderby = 'title', page = 1, perPage = 20, search = '' } ) => {
 		setLoading( true );
 		const response = await sendCommand( 'wppic_get_custom_plugins', {
 			nonce: wppicAdminCustomPlugin.getCustomPlugins,
-			order: 'ASC',
-			orderby: 'title',
+			order,
+			orderby,
+			paged: page,
+			perPage,
+			search,
 		} );
 		setLoading( false );
 		const responseData = response.data;
@@ -132,7 +135,7 @@ const PluginHome = ( props ) => {
 		}
 	};
 	useEffect( () => {
-		fetchData();
+		fetchData( {} );
 	}, [] );
 
 	/**
@@ -141,6 +144,13 @@ const PluginHome = ( props ) => {
 	 * @param {Object} newView The new view object.
 	 */
 	const onChangeView = ( newView ) => {
+		fetchData( {
+			order: newView.sort.direction,
+			orderby: newView.sort.field,
+			page: newView.page,
+			perPage: newView.perPage,
+			search: newView.search,
+		} );
 		setView( newView );
 		// Create query args object with view state.
 		// const changeQueryArgs = {

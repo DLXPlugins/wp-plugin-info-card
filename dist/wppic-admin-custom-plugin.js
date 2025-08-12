@@ -40378,39 +40378,43 @@ var PluginHome = function b(a) {
     q = p[0],
     r = p[1];
   var s = /*#__PURE__*/function () {
-    var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function a() {
-      var b, c;
-      return _regeneratorRuntime().wrap(function d(a) {
-        while (1) switch (a.prev = a.next) {
+    var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function b(a) {
+      var c, d, e, f, g, h, i, k, l, m, o, p;
+      return _regeneratorRuntime().wrap(function q(b) {
+        while (1) switch (b.prev = b.next) {
           case 0:
+            c = a.order, d = c === void 0 ? 'ASC' : c, e = a.orderby, f = e === void 0 ? 'title' : e, g = a.page, h = g === void 0 ? 1 : g, i = a.perPage, k = i === void 0 ? 20 : i, l = a.search, m = l === void 0 ? '' : l;
             j(true);
-            a.next = 3;
+            b.next = 4;
             return (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__["default"])('wppic_get_custom_plugins', {
               nonce: wppicAdminCustomPlugin.getCustomPlugins,
-              order: 'ASC',
-              orderby: 'title'
+              order: d,
+              orderby: f,
+              paged: h,
+              perPage: k,
+              search: m
             });
-          case 3:
-            b = a.sent;
+          case 4:
+            o = b.sent;
             j(false);
-            c = b.data;
-            if (c.success) {
-              n(c.data.customPlugins);
+            p = o.data;
+            if (p.success) {
+              n(p.data.customPlugins);
             } else {
               // todo - error handling.
             }
-          case 7:
+          case 8:
           case "end":
-            return a.stop();
+            return b.stop();
         }
-      }, a);
+      }, b);
     }));
-    return function b() {
+    return function b(_x) {
       return a.apply(this, arguments);
     };
   }();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    s();
+    s({});
   }, []);
 
   /**
@@ -40419,6 +40423,13 @@ var PluginHome = function b(a) {
    * @param {Object} newView The new view object.
    */
   var t = function b(a) {
+    s({
+      order: a.sort.direction,
+      orderby: a.sort.field,
+      page: a.page,
+      perPage: a.perPage,
+      search: a.search
+    });
     r(a);
     // Create query args object with view state.
     // const changeQueryArgs = {
