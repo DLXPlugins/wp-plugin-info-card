@@ -33,7 +33,8 @@ const SaveResetButtons = ( props ) => {
 	 * Save the options by setting promise as state.
 	 */
 	const saveOptions = async () => {
-		const saveOptionsPromise = SendCommand( 'wppic_save_custom_plugin', { wppicFormData: formValues } );
+		console.log( 'saveOptions', formValues, isEditing );
+		const saveOptionsPromise = SendCommand( 'wppic_save_custom_plugin', { wppicFormData: formValues, isEditing } );
 		setSavePromise( saveOptionsPromise );
 		setSaving( true );
 		await saveOptionsPromise;

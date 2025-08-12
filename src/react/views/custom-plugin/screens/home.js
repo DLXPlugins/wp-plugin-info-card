@@ -22,8 +22,8 @@ const defaultLayouts = {
 			titleField: 'title',
 			mediaField: 'plugin-info',
 			columns: 4,
-			columnGap: '24px',
-			rowGap: '24px',
+			columnGap: '32px',
+			rowGap: '232x',
 			showMedia: true,
 			viewConfigOptions: {},
 		},
@@ -80,13 +80,19 @@ const PluginHome = ( props ) => {
 	const [ deletePluginId, setDeletePluginId ] = useState( null );
 	const [ customPlugins, setCustomPlugins ] = useState( [] );
 
+	const navigate = useNavigate();
+
+
 	const actions = [
 		{
 			id: 'edit',
 			icon: 'edit',
 			label: __( 'Edit Plugin', 'wp-plugin-info-card' ),
 			callback: ( items ) => {
-				console.log( 'Edit', items );
+				const item = items[ 0 ];
+				navigate( {
+					to: `/edit/${ item.id }/${ item.editNonce }`,
+				} );
 			},
 			isPrimary: true,
 		},
@@ -98,7 +104,7 @@ const PluginHome = ( props ) => {
 			callback: async ( items ) => {
 				setShowDeleteModal( { display: true, items } );
 			},
-			isPrimary: false,
+			isPrimary: true,
 			isDestructive: true,
 			supportsBulk: true,
 			modalFocusOnMount: 'firstContentElement',
@@ -196,7 +202,6 @@ const PluginHome = ( props ) => {
 		//setView( newView );
 	};
 
-	const navigate = useNavigate();
 
 	return (
 		<>
@@ -271,7 +276,7 @@ const PluginHome = ( props ) => {
 								selection={ selectedItems }
 								onChangeSelection={ setSelectedItems }
 								defaultLayouts={ defaultLayouts }
-								searchLabel={ __( 'Search Patterns', 'pattern-wrangler' ) }
+								searchLabel={ __( 'Search Plugins', 'wp-plugin-info-card' ) }
 							/>
 						</div>
 					</div>

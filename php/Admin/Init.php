@@ -44,6 +44,7 @@ class Init {
 		add_action( 'wp_ajax_wppic_delete_custom_plugin', array( $this, 'ajax_delete_custom_plugin' ) );
 		add_action( 'wp_ajax_wppic_get_custom_plugins', array( $this, 'ajax_get_custom_plugins' ) );
 		add_action( 'wp_ajax_wppic_delete_custom_plugin', array( $this, 'ajax_delete_custom_plugin' ) );
+		add_action( 'wp_ajax_wppic_get_custom_plugin_data', array( $this, 'ajax_get_custom_plugin_data' ) );
 		// Init tabs.
 		new Tabs\Main();
 		new Tabs\EDD();
@@ -72,7 +73,7 @@ class Init {
 
 		foreach ( $plugin_ids as $plugin_id ) {
 			$plugin_id = absint( $plugin_id );
-			//wp_delete_post( $plugin_id, true );
+			wp_delete_post( $plugin_id, true );
 		}
 
 		wp_send_json_success(
@@ -80,6 +81,51 @@ class Init {
 				'message'     => __( 'Plugin deleted', 'wp-plugin-info-card' ),
 				'type'        => 'success',
 				'dismissable' => true,
+			)
+		);
+	}
+
+	/**
+	 * Get custom plugin data via Ajax.
+	 */
+	public function ajax_get_custom_plugin_data() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+		$id    = absint( filter_input( INPUT_POST, 'id', FILTER_DEFAULT ) );
+		if ( ! wp_verify_nonce( $nonce, 'wppic-edit-custom-plugin-' . $id ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce verification failed', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		$custom_plugin = get_post( $id );
+		if ( ! $custom_plugin ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Custom plugin not found', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		$return = array(
+			'id'      => absint( $custom_plugin->ID ),
+			'title'   => sanitize_text_field( $custom_plugin->post_title ),
+			'slug'    => sanitize_title( $custom_plugin->post_name ),
+			'content' => json_decode( $custom_plugin->post_content, true ),
+			'icon'    => get_the_post_thumbnail_url( $custom_plugin->ID, 'full' ),
+		);
+
+		wp_send_json_success(
+			array(
+				'data' => $return,
 			)
 		);
 	}
@@ -128,11 +174,13 @@ class Init {
 
 		foreach ( $custom_plugins as $custom_plugin ) {
 			$custom_plugins_data[] = array(
-				'id'      => $custom_plugin->ID,
-				'title'   => $custom_plugin->post_title,
-				'slug'    => $custom_plugin->post_name,
-				'content' => json_decode( $custom_plugin->post_content, true ),
-				'icon'    => get_the_post_thumbnail_url( $custom_plugin->ID, 'full' ),
+				'id'        => $custom_plugin->ID,
+				'title'     => $custom_plugin->post_title,
+				'slug'      => $custom_plugin->post_name,
+				'content'   => json_decode( $custom_plugin->post_content, true ),
+				'icon'      => get_the_post_thumbnail_url( $custom_plugin->ID, 'full' ),
+				'editNonce' => wp_create_nonce( 'wppic-edit-custom-plugin-' . $custom_plugin->ID ),
+				'saveNonce' => wp_create_nonce( 'wppic-save-custom-plugin-' . $custom_plugin->ID ),
 			);
 		}
 
@@ -151,6 +199,7 @@ class Init {
 			return;
 		}
 		$form_data = filter_input( INPUT_POST, 'wppicFormData', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+		$is_editing = filter_input( INPUT_POST, 'isEditing', FILTER_VALIDATE_BOOLEAN );
 
 		// Verify nonce from form data.
 		$nonce = sanitize_text_field( $form_data['nonce'] );
@@ -163,7 +212,10 @@ class Init {
 				)
 			);
 		}
+		$post_id_to_edit = absint( $form_data['post_id'] ?? 0 );
 		unset( $form_data['nonce'] );
+		unset( $form_data['isEditing'] );
+		unset( $form_data['post_id'] );
 
 		/**
 		 * Filter: wppic_custom_plugin_form_data.
@@ -191,7 +243,7 @@ class Init {
 			$maybe_custom_slug = $maybe_custom_plugin_post[0]->post_name;
 		}
 
-		if ( $maybe_custom_slug ) {
+		if ( $maybe_custom_slug && $maybe_custom_slug !== $form_data['slug'] && ! $is_editing ) {
 			wp_send_json_error(
 				array(
 					'message'     => __( 'Duplicate plugin slug found', 'wp-plugin-info-card' ),
@@ -203,15 +255,27 @@ class Init {
 		}
 
 		// No competing slug found, so we can create the post and save the data within the content.
-		$post_id = wp_insert_post(
-			array(
-				'post_type'    => 'wppic_custom_plugins',
-				'post_title'   => sanitize_text_field( $form_data['name'] ),
-				'post_name'    => sanitize_title( $form_data['slug'] ),
-				'post_content' => wp_json_encode( $form_data ),
-				'post_status'  => 'publish',
-			)
-		);
+		if ( $is_editing && $post_id_to_edit ) {
+			wp_update_post(
+				array(
+					'ID'           => $post_id_to_edit,
+					'post_title'   => sanitize_text_field( $form_data['name'] ),
+					'post_name'    => sanitize_title( $form_data['slug'] ),
+					'post_content' => wp_json_encode( $form_data ),
+				)
+			);
+			$post_id = $post_id_to_edit;
+		} else {
+			$post_id = wp_insert_post(
+				array(
+					'post_type'    => 'wppic_custom_plugins',
+					'post_title'   => sanitize_text_field( $form_data['name'] ),
+					'post_name'    => sanitize_title( $form_data['slug'] ),
+					'post_content' => wp_json_encode( $form_data ),
+					'post_status'  => 'publish',
+				)
+			);
+		}
 
 		// Save icon as featured image.
 		if ( isset( $form_data['custom_plugin_icon_id'] ) && $form_data['custom_plugin_icon_id'] ) {

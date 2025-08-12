@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Suspense, useCallback, useRef } from 'react';
 import { useForm, Controller, useWatch, useFormState } from 'react-hook-form';
 import classnames from 'classnames';
-import { Link, useNavigate } from '@tanstack/react-router';
+import { Link, useNavigate, useParams } from '@tanstack/react-router';
 import { __ } from '@wordpress/i18n';
 import { isURL, cleanForSlug } from '@wordpress/url';
 import BeatLoader from 'react-spinners/BeatLoader';
@@ -48,38 +48,28 @@ const Breadcrumbs = ( { screen, isEditing } ) => (
 const NewPlugin = ( props ) => {
 	const [ pluginData, setPluginData ] = useState( {} );
 
-	const { isEditing } = props;
+	const { id, nonce } = useParams( {
+		shouldThrow: false,
+	} );
 
 	useEffect( () => {
-		if ( pluginData || ! isEditing ) {
+		if ( ! id || ! nonce ) {
 			return;
 		}
 
 		const fetchPlugin = async () => {
-			const response = await SendCommand( 'wppic_get_plugin_data', {
-				nonce: wppicAdminCustomPlugin.getNonce,
+			const response = await SendCommand( 'wppic_get_custom_plugin_data', {
+				nonce,
+				id,
 			} );
 			const { success, data } = response.data;
 			if ( success ) {
-				// Save to local storage.
-				localStorage.setItem( 'wppic_edd_options', JSON.stringify( data ) );
-				localStorage.setItem( 'wppic_edd_options_timestamp', new Date().getTime().toString() );
-
-				setPluginData( data );
+				setPluginData( { ...data.data.content, post_id: id } );
 			}
 		};
 		// Fetch options.
 		fetchPlugin();
-	}, [ isEditing, pluginData ] );
-
-	if ( ! pluginData && isEditing ) {
-		return (
-			<div className="wppic-admin-panel-loading">
-				<h2>{ __( 'Loading Options', 'wp-plugin-info-card' ) }</h2>
-				<BeatLoader color={ '#333' } loading={ true } cssOverride={ true } size={ 25 } speedMultiplier={ 0.65 } />
-			</div>
-		);
-	}
+	}, [ id, nonce ] );
 
 	return (
 		<Interface data={ pluginData } { ...props } />
@@ -87,7 +77,7 @@ const NewPlugin = ( props ) => {
 };
 
 const Interface = ( props ) => {
-	const { isEditing, data } = props;
+	const { data } = props;
 	const navigate = useNavigate();
 	const [ isChecking, setIsChecking ] = useState( false );
 	const [ isError, setIsError ] = useState( false );
@@ -95,8 +85,15 @@ const Interface = ( props ) => {
 	const [ errorMessage, setErrorMessage ] = useState( '' );
 	const [ warningMessage, setWarningMessage ] = useState( '' );
 	const [ pluginSlugInputRef, setPluginSlugInputRef ] = useState( null );
+	const [ isEditing ] = useState( data ? true : false );
 
 	const checkPluginSlug = async ( slug ) => {
+		// If data is set, we're editing, so we don't need to check the slug. Will check on save.
+		if ( Object.keys( data ).length > 0 ) {
+			setIsChecking( false );
+			return;
+		}
+
 		const checkPluginPromise = SendCommand( 'wppic_check_plugin_slug', { slug, nonce: wppicAdminCustomPlugin.checkPluginSlugNonce } );
 		checkPluginPromise.catch( () => {
 			setErrorMessage( __( 'There has been an error communicating with the server. Please try again.', 'wp-plugin-info-card' ) );
@@ -134,6 +131,7 @@ const Interface = ( props ) => {
 		trigger,
 	} = useForm( {
 		defaultValues: {
+			post_id: data.id || 0,
 			nonce: wppicAdminCustomPlugin.saveNonce,
 			custom_plugin_icon_id: data.custom_plugin_icon_id || 0,
 			custom_plugin_banner_id: data.custom_plugin_banner_id || 0,
@@ -175,13 +173,14 @@ const Interface = ( props ) => {
 	 *
 	 * @param {Object} formData contains the form data.
 	 */
-	const onSubmit = async ( formData ) => {
-		const response = await SendCommand( 'wppic_save_custom_plugin', {
-			formData,
-			nonce: wppicAdminCustomPlugin.saveNonce,
-		} );
-		console.log( response );
+	const onSubmit = ( formData ) => {
 	};
+
+	useEffect( () => {
+		if ( data ) {
+			reset( data );
+		}
+	}, [ data, reset ] );
 
 	return (
 		<>
@@ -239,6 +238,13 @@ const Interface = ( props ) => {
 																/>
 															) }
 														</>
+													) }
+												/>
+												<Controller
+													control={ control }
+													name="post_id"
+													render={ ( { field } ) => (
+														<input type="hidden" { ...field } />
 													) }
 												/>
 											</div>
