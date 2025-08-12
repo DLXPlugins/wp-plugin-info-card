@@ -13746,6 +13746,8 @@ p.wppic-admin-header-description {
 }
 .wppic-admin-image-preview img {
   border: 1px solid #ddd;
+  max-width: 400px;
+  height: auto !important;
 }
 
 .wppic-admin-button-row {
