@@ -10,6 +10,8 @@ import {
 	Cog,
 	BookText,
 	ExternalLink,
+	Edit,
+	Trash2,
 } from 'lucide-react';
 import PluginIcon from '../../../components/PluginIcon';
 import sendCommand from '../../../utils/SendCommand';
@@ -26,13 +28,27 @@ const defaultLayouts = {
 			viewConfigOptions: {},
 		},
 	},
+	list: {
+		layout: {
+			titleField: 'title',
+			mediaField: 'plugin-info',
+			columns: 1,
+			showMedia: true,
+			viewConfigOptions: {},
+		},
+	},
 };
 const fields = [
 	{
 		id: 'title',
 		label: __( 'Title', 'wp-plugin-info-card' ),
 		render: ( { item } ) => {
-			return <span>{ item.title }</span>;
+			return (
+				<div className="wppic-custom-plugin-title-wrapper">
+					<div className="wppic-custom-plugin-title">{ item.title }</div>
+					<div className="wppic-custom-plugin-slug">{ item.slug }</div>
+				</div>
+			);
 		},
 		enableSorting: true,
 		enableHiding: false,
@@ -42,10 +58,14 @@ const fields = [
 		id: 'plugin-info',
 		label: __( 'Plugin Info', 'wp-plugin-info-card' ),
 		getValue: ( { item } ) => {
+			let itemIcon = wppicAdminCustomPlugin.defaultPluginIcon;
+			if ( item.icon ) {
+				itemIcon = item.icon;
+			}
 			return (
 				<>
 					<div className="wppic-plugin-info-card-img">
-						<img src={ item.icon } alt={ item.name } style={ { maxWidth: '512px', height: 'auto' } } />
+						<img src={ itemIcon } alt={ item.title } style={ { maxWidth: '512px', height: 'auto' } } />
 					</div>
 				</>
 			);
@@ -57,8 +77,7 @@ const fields = [
 const actions = [
 	{
 		id: 'edit',
-		label: __( 'Edit', 'wp-plugin-info-card' ),
-		icon: 'edit',
+		label: __( 'Edit Plugin', 'wp-plugin-info-card' ),
 		callback: ( items ) => {
 			console.log( 'Edit', items );
 		},
@@ -66,12 +85,7 @@ const actions = [
 	},
 	{
 		id: 'delete',
-		label: __( 'Delete Pattern', 'wp-plugin-info-card' ),
-		icon: 'trash',
-		isEligible: ( pattern ) => {
-			// Pattern must be local.
-			return pattern.isLocal;
-		},
+		label: __( 'Delete Plugin', 'wp-plugin-info-card' ),
 		callback: ( items ) => {
 			console.log( 'Delete', items );
 		},
@@ -85,14 +99,14 @@ const PluginHome = ( props ) => {
 	const [ customPlugins, setCustomPlugins ] = useState( [] );
 
 	const [ view, setView ] = useState( {
-		type: 'grid',
-		previewSize: 'large',
+		type: 'list',
+		previewSize: 'medium',
 		paginationInfo: {
 			totalItems: customPlugins.length,
 			totalPages: 0,
 		},
 		page: 1,
-		perPage: 10,
+		perPage: 20,
 		sort: {
 			field: 'title',
 			direction: 'asc',
@@ -127,6 +141,7 @@ const PluginHome = ( props ) => {
 	 * @param {Object} newView The new view object.
 	 */
 	const onChangeView = ( newView ) => {
+		setView( newView );
 		// Create query args object with view state.
 		// const changeQueryArgs = {
 		// 	page: parseInt( getQueryArgs( window.location.href ).paged ) || 1,
