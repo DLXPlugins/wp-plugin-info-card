@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
+import { useAsyncResource } from 'use-async-resource';
 import {
 	Plug2,
 	Plus,
@@ -10,8 +11,49 @@ import {
 	ExternalLink,
 } from 'lucide-react';
 import PluginIcon from '../../../components/PluginIcon';
+import sendCommand from '../../../utils/SendCommand';
+import ErrorBoundary from '../../../components/ErrorBoundary';
 
-const PluginHome = () => {
+/**
+ * Retrieve all the patterns.
+ *
+ * @return {Promise<Object>} The patterns.
+ */
+const retrievePlugins = async() => {
+	const response = await sendCommand( 'wppic_get_plugins' );
+	return response.data;
+};
+
+const PluginHome = ( props ) => {
+	const [ defaults, getDefaults ] = useAsyncResource( retrievePlugins, [] );
+	return (
+		<ErrorBoundary
+			fallback={
+				<p>
+					{ __( 'Could not load block patterns.', 'quotes-dlx' ) }
+					<br />
+					<a
+						href="https://dlxplugins.com/support/"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						DLX Plugins Support
+					</a>
+				</p>
+			}
+		>
+			<Suspense
+				fallback={
+					<div className="has-admin-container-body__content">loading...</div>
+				}
+			>
+				<Interface defaults={ defaults } { ...props } />
+			</Suspense>
+		</ErrorBoundary>
+	);
+};
+
+const Interface = () => {
 	const navigate = useNavigate();
 
 	return (

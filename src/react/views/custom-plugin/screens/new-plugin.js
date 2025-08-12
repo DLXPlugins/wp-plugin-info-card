@@ -45,7 +45,7 @@ const Breadcrumbs = ( { screen, isEditing } ) => (
 	</div>
 );
 
-const Plugin = ( props ) => {
+const NewPlugin = ( props ) => {
 	const [ pluginData, setPluginData ] = useState( {} );
 
 	const { isEditing } = props;
@@ -1001,4 +1001,4 @@ const Interface = ( props ) => {
 	);
 };
 
-export default Plugin;
+export default NewPlugin;

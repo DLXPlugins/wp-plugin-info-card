@@ -9,6 +9,9 @@ import {
 	createRootRoute,
 } from '@tanstack/react-router';
 import CustomPlugin from './custom-plugin';
+import PluginHome from './screens/home';
+import NewPlugin from './screens/new-plugin';
+import Advanced from './screens/advanced';
 
 const container = document.getElementById( 'wppic-tab-custom-plugin' );
 const root = createRoot( container );
@@ -25,19 +28,19 @@ const rootRoute = createRootRoute( {
 const customPluginRoute = createRoute( {
 	path: '/',
 	getParentRoute: () => rootRoute,
-	component: () => <CustomPlugin />,
+	component: () => <PluginHome />,
 } );
 
 const newPluginRoute = createRoute( {
 	path: '/new-plugin',
 	getParentRoute: () => rootRoute,
-	component: () => <CustomPlugin />,
+	component: () => <NewPlugin />,
 } );
 
 const advancedRoute = createRoute( {
 	path: '/advanced',
 	getParentRoute: () => rootRoute,
-	component: () => <CustomPlugin />,
+	component: () => <Advanced />,
 } );
 
 const routeTree = rootRoute.addChildren( [ customPluginRoute, newPluginRoute, advancedRoute ] );
@@ -54,8 +57,6 @@ const router = createRouter( {
 } );
 root.render(
 	<React.StrictMode>
-		<RouterProvider router={ router }>
-			<CustomPlugin />
-		</RouterProvider>
+		<RouterProvider router={ router } />
 	</React.StrictMode>,
 );
