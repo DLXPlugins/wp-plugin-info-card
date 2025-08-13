@@ -98,8 +98,8 @@
 	  },
 	  "lastUpdated": {
 		"type": "string",
-		"format": "date-time",
-		"description": "Last updated date/time."
+		"format": "date",
+		"description": "Last updated date."
 	  }
 	},
 	"required": [

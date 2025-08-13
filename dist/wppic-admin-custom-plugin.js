@@ -40397,11 +40397,15 @@ var PluginHome = function b(a) {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Export Plugin', 'wp-plugin-info-card'),
     callback: function () {
       var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function b(a) {
-        return _regeneratorRuntime().wrap(function c(b) {
+        var c, d;
+        return _regeneratorRuntime().wrap(function e(b) {
           while (1) switch (b.prev = b.next) {
             case 0:
-              console.log(a);
-            case 1:
+              // Get current item.
+              c = a[0];
+              d = ajaxurl + '?action=wppic_export_custom_plugin&nonce=' + c.exportNonce + '&pluginId=' + c.id;
+              window.open(d, '_blank');
+            case 3:
             case "end":
               return b.stop();
           }
@@ -41316,6 +41320,35 @@ var Interface = function b(a) {
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
     scope: "row"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Plugin Links', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
+    control: N,
+    name: "url",
+    rules: {
+      required: true,
+      pattern: /^https?:\/\/.+/
+    },
+    render: function b(a) {
+      var c;
+      var d = a.field;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.TextControl, _extends({}, d, {
+        placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter Plugin URL', 'wp-plugin-info-card'),
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input is-required', {
+          'has-error': X === null || X === void 0 ? void 0 : X.url
+        }),
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter the URL for the plugin.', 'wp-plugin-info-card'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Plugin URL', 'wp-plugin-info-card'),
+        onChange: function b(a) {
+          d.onChange(a);
+          T('homepage');
+        }
+      })), (X === null || X === void 0 || (c = X.url) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.', 'wp-plugin-info-card'),
+        status: "error",
+        politeness: "assertive"
+      }));
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
     control: N,

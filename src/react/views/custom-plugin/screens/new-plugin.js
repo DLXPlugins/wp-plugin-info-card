@@ -615,6 +615,38 @@ const Interface = ( props ) => {
 						<div className="wppic-admin-row">
 							<Controller
 								control={ control }
+								name="url"
+								rules={ {
+									required: true,
+									pattern: /^https?:\/\/.+/,
+								} }
+								render={ ( { field } ) => (
+									<>
+										<TextControl
+											{ ...field }
+											placeholder={ __( 'Enter Plugin URL', 'wp-plugin-info-card' ) }
+											className={ classnames( 'wppic-admin-input is-required', { 'has-error': errors?.url } ) }
+											help={ __( 'Enter the URL for the plugin.', 'wp-plugin-info-card' ) }
+											label={ __( 'Plugin URL', 'wp-plugin-info-card' ) }
+											onChange={ ( value ) => {
+												field.onChange( value );
+												clearErrors( 'homepage' );
+											} }
+										/>
+										{ errors?.url?.type === 'required' && (
+											<Notice
+												message={ __( 'This field is required.', 'wp-plugin-info-card' ) }
+												status="error"
+												politeness="assertive"
+											/>
+										) }
+									</>
+								) }
+							/>
+						</div>
+						<div className="wppic-admin-row">
+							<Controller
+								control={ control }
 								name="homepage"
 								rules={ {
 									required: true,

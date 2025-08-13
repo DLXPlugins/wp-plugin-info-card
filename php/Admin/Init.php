@@ -45,10 +45,98 @@ class Init {
 		add_action( 'wp_ajax_wppic_get_custom_plugins', array( $this, 'ajax_get_custom_plugins' ) );
 		add_action( 'wp_ajax_wppic_delete_custom_plugin', array( $this, 'ajax_delete_custom_plugin' ) );
 		add_action( 'wp_ajax_wppic_get_custom_plugin_data', array( $this, 'ajax_get_custom_plugin_data' ) );
+		add_action( 'wp_ajax_wppic_export_custom_plugin', array( $this, 'ajax_export_custom_plugin' ) );
+
 		// Init tabs.
 		new Tabs\Main();
 		new Tabs\EDD();
 		new Tabs\Custom_Plugin();
+	}
+
+	/**
+	 * Export a custom plugin via Ajax.
+	 */
+	public function ajax_export_custom_plugin() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		$nonce     = sanitize_text_field( filter_input( INPUT_GET, 'nonce', FILTER_DEFAULT ) );
+		$plugin_id = absint( filter_input( INPUT_GET, 'pluginId', FILTER_VALIDATE_INT ) );
+		if ( ! wp_verify_nonce( $nonce, 'wppic-export-custom-plugin-' . $plugin_id ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce verification failed', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		$fields = array(
+			'pluginIconUrl',
+			'pluginBannerUrl',
+			'name',
+			'slug',
+			'shortDescription',
+			'url',
+			'homepage',
+			'downloadLink',
+			'version',
+			'author',
+			'authorProfile',
+			'contributors',
+			'requires',
+			'tested',
+			'rating',
+			'numRatings',
+			'downloaded',
+			'activeInstalls',
+			'lastUpdated',
+		);
+
+		$custom_plugin = get_post( $plugin_id );
+		if ( ! $custom_plugin ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Custom plugin not found', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		$custom_plugin_data = json_decode( $custom_plugin->post_content, true );
+		if ( ! $custom_plugin_data ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Custom plugin data not found', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		$custom_plugin_data = Functions::sanitize_array_recursive( $custom_plugin_data );
+
+		// Reconcinle with fields.
+		$custom_plugin_data = array_intersect_key( $custom_plugin_data, array_flip( $fields ) );
+
+		$payload = array(
+			'$schema'        => 'https://raw.githubusercontent.com/DLXPlugins/wp-plugin-info-card/refs/heads/dev/plugin-schema.json',
+			'schema_version' => 1,
+			'exported_at'    => gmdate( 'c' ),
+			'items'          => $custom_plugin_data,
+		);
+
+		$payload['checksum'] = 'sha256:' . hash( 'sha256', json_encode( $payload['items'] ) );
+
+		$filename_slug = sanitize_file_name( sanitize_title( $custom_plugin_data['name'] ) . '.json' );
+
+		// Output json filename (prompt save as).
+		header( 'Content-Disposition: attachment; filename="' . $filename_slug . '"' );
+		header( 'Content-Type: application/json; charset=utf-8' );
+		echo json_encode( $payload );
+		exit;
 	}
 
 	/**
@@ -174,13 +262,14 @@ class Init {
 
 		foreach ( $custom_plugins as $custom_plugin ) {
 			$custom_plugins_data[] = array(
-				'id'        => $custom_plugin->ID,
-				'title'     => $custom_plugin->post_title,
-				'slug'      => $custom_plugin->post_name,
-				'content'   => json_decode( $custom_plugin->post_content, true ),
-				'icon'      => get_the_post_thumbnail_url( $custom_plugin->ID, 'full' ),
-				'editNonce' => wp_create_nonce( 'wppic-edit-custom-plugin-' . $custom_plugin->ID ),
-				'saveNonce' => wp_create_nonce( 'wppic-save-custom-plugin-' . $custom_plugin->ID ),
+				'id'          => $custom_plugin->ID,
+				'title'       => $custom_plugin->post_title,
+				'slug'        => $custom_plugin->post_name,
+				'content'     => json_decode( $custom_plugin->post_content, true ),
+				'icon'        => get_the_post_thumbnail_url( $custom_plugin->ID, 'full' ),
+				'editNonce'   => wp_create_nonce( 'wppic-edit-custom-plugin-' . $custom_plugin->ID ),
+				'saveNonce'   => wp_create_nonce( 'wppic-save-custom-plugin-' . $custom_plugin->ID ),
+				'exportNonce' => wp_create_nonce( 'wppic-export-custom-plugin-' . $custom_plugin->ID ),
 			);
 		}
 
