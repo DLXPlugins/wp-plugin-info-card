@@ -110,6 +110,20 @@ const PluginHome = ( props ) => {
 			modalFocusOnMount: 'firstContentElement',
 
 		},
+		{
+			id: 'export',
+			hideModalHeader: true,
+			icon: 'download',
+			label: __( 'Export Plugin', 'wp-plugin-info-card' ),
+			callback: async ( items ) => {
+				console.log( items );
+			},
+			isPrimary: false,
+			isDestructive: false,
+			supportsBulk: false,
+			modalFocusOnMount: 'firstContentElement',
+
+		},
 	];
 
 	const [ view, setView ] = useState( {

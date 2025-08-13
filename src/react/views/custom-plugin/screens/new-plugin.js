@@ -139,31 +139,31 @@ const Interface = ( props ) => {
 		defaultValues: {
 			post_id: data.id || 0,
 			nonce: wppicAdminCustomPlugin.saveNonce,
-			custom_plugin_icon_id: data.custom_plugin_icon_id || 0,
-			custom_plugin_banner_id: data.custom_plugin_banner_id || 0,
-			custom_plugin_icon_url: data.custom_plugin_icon_url || '',
-			custom_plugin_banner_url: data.custom_plugin_banner_url || '',
+			pluginIconId: data.pluginIconId || 0,
+			pluginBannerId: data.pluginBannerId || 0,
+			pluginIconUrl: data.pluginIconUrl || '',
+			pluginBannerUrl: data.pluginBannerUrl || '',
 			name: data.name || '',
 			slug: data.slug || '',
-			short_description: data.short_description || '',
+			shortDescription: data.shortDescription || '',
 			url: data.url || '',
 			homepage: data.homepage || '',
-			download_link: data.download_link || '',
+			downloadLink: data.downloadLink || '',
 			version: data.version || '',
 			author: data.author || '',
-			author_profile: data.author_profile || '',
+			authorProfile: data.authorProfile || '',
 			contributors: data.contributors || '',
 			requires: data.requires || '',
 			tested: data.tested || '',
 			rating: data.rating || '',
-			num_ratings: data.num_ratings || '',
+			numRatings: data.numRatings || '',
 			downloaded: data.downloaded || '',
-			active_installs: data.active_installs || '',
-			last_updated: data.last_updated || '',
+			activeInstalls: data.activeInstalls || '',
+			lastUpdated: data.lastUpdated || '',
 			ratings: data.ratings || '',
 			added: data.added || '',
-			enable_rest_api: data.enable_rest_api || false,
-			rest_api_passcode: data.rest_api_passcode || '',
+			enableRestApi: data.enableRestApi || false,
+			restApiPasscode: data.restApiPasscode || '',
 		},
 	} );
 	const formValues = useWatch( { control } );
@@ -318,7 +318,7 @@ const Interface = ( props ) => {
 						<div className="wppic-admin-row">
 							<Controller
 								control={ control }
-								name="short_description"
+								name="shortDescription"
 								rules={ { required: true } }
 								render={ ( { field } ) => (
 									<>
@@ -326,15 +326,15 @@ const Interface = ( props ) => {
 											{ ...field }
 											maxLength={ 150 }
 											placeholder={ __( 'Enter a Short Description', 'wp-plugin-info-card' ) }
-											className={ classnames( 'wppic-admin-input is-required', { 'has-error': errors?.short_description } ) }
+											className={ classnames( 'wppic-admin-input is-required', { 'has-error': errors?.shortDescription } ) }
 											help={ __( 'Enter the a short description of the plugin. Max 150 characters.', 'wp-plugin-info-card' ) }
 											label={ __( 'Short Description', 'wp-plugin-info-card' ) }
 											onChange={ ( value ) => {
 												field.onChange( value );
-												clearErrors( 'short_description' );
+												clearErrors( 'shortDescription' );
 											} }
 										/>
-										{ errors?.short_description?.type === 'required' && (
+										{ errors?.shortDescription?.type === 'required' && (
 											<Notice
 												message={ __( 'This field is required.', 'wp-plugin-info-card' ) }
 												status="error"
@@ -359,14 +359,14 @@ const Interface = ( props ) => {
 								label={ __( 'Upload a Plugin Icon', 'wp-plugin-info-card' ) }
 								className={
 									classnames( 'wppic-admin-input is-required',
-										{ 'has-error': errors?.custom_plugin_icon_url },
+										{ 'has-error': errors?.pluginIconUrl },
 									)
 								}
 							>
-								{ getValues( 'custom_plugin_icon_url' ) && (
+								{ getValues( 'pluginIconUrl' ) && (
 									<div className="wppic-admin-image-preview">
 										<img
-											src={ getValues( 'custom_plugin_icon_url' ) }
+											src={ getValues( 'pluginIconUrl' ) }
 											alt={ __( 'Default Icon', 'wp-plugin-info-card' ) }
 											width="180"
 											height="180"
@@ -393,21 +393,21 @@ const Interface = ( props ) => {
 												},
 												aspectRatio: '1:1',
 											}, ( media ) => {
-												setValue( 'custom_plugin_icon_id', media.id );
-												setValue( 'custom_plugin_icon_url', media.url );
+												setValue( 'pluginIconId', media.id );
+												setValue( 'pluginIconUrl', media.url );
 											} );
 										} }
 										help={ __( 'Select an Icon with dimensions 256x256', 'wp-plugin-info-card' ) }
 									>
 										{ __( 'Upload Icon', 'wp-plugin-info-card' ) }
 									</Button>
-									{ ( getValues( 'custom_plugin_icon_id' ) !== 0 ) && (
+									{ ( getValues( 'pluginIconId' ) !== 0 ) && (
 										<Button
 											variant="secondary"
 											className="wppic-btn wppic-btn-alt"
 											onClick={ () => {
-												setValue( 'custom_plugin_icon_id', 0 );
-												setValue( 'custom_plugin_icon_url', '' );
+												setValue( 'pluginIconId', 0 );
+												setValue( 'pluginIconUrl', '' );
 											} }
 											isDestructive={ true }
 										>
@@ -425,14 +425,14 @@ const Interface = ( props ) => {
 								label={ __( 'Upload a Plugin Banner', 'wp-plugin-info-card' ) }
 								className={
 									classnames( 'wppic-admin-input is-required',
-										{ 'has-error': errors?.custom_plugin_icon_url },
+										{ 'has-error': errors?.pluginBannerUrl },
 									)
 								}
 							>
-								{ getValues( 'custom_plugin_banner_url' ) && (
+								{ getValues( 'pluginBannerUrl' ) && (
 									<div className="wppic-admin-image-preview">
 										<img
-											src={ getValues( 'custom_plugin_banner_url' ) }
+											src={ getValues( 'pluginBannerUrl' ) }
 											alt={ __( 'Default Icon', 'wp-plugin-info-card' ) }
 											width="180"
 											height="180"
@@ -459,21 +459,21 @@ const Interface = ( props ) => {
 												},
 												aspectRatio: '386:125',
 											}, ( media ) => {
-												setValue( 'custom_plugin_banner_id', media.id );
-												setValue( 'custom_plugin_banner_url', media.url );
+												setValue( 'pluginBannerId', media.id );
+												setValue( 'pluginBannerUrl', media.url );
 											} );
 										} }
 										help={ __( 'Select an Icon with dimensions 1544x720', 'wp-plugin-info-card' ) }
 									>
 										{ __( 'Upload Banner Image', 'wp-plugin-info-card' ) }
 									</Button>
-									{ ( getValues( 'custom_plugin_banner_id' ) !== 0 ) && (
+									{ ( getValues( 'pluginBannerId' ) !== 0 ) && (
 										<Button
 											variant="secondary"
 											className="wppic-btn wppic-btn-alt"
 											onClick={ () => {
-												setValue( 'custom_plugin_banner_id', 0 );
-												setValue( 'custom_plugin_banner_url', '' );
+												setValue( 'pluginBannerId', 0 );
+												setValue( 'pluginBannerUrl', '' );
 											} }
 											isDestructive={ true }
 										>
@@ -647,7 +647,7 @@ const Interface = ( props ) => {
 						<div className="wppic-admin-row">
 							<Controller
 								control={ control }
-								name="download_link"
+								name="downloadLink"
 								rules={ {
 									required: true,
 									pattern: /^https?:\/\/.+/,
@@ -657,15 +657,15 @@ const Interface = ( props ) => {
 										<TextControl
 											{ ...field }
 											placeholder={ __( 'Enter Plugin Download URL', 'wp-plugin-info-card' ) }
-											className={ classnames( 'wppic-admin-input is-required', { 'has-error': errors?.download_link } ) }
+											className={ classnames( 'wppic-admin-input is-required', { 'has-error': errors?.downloadLink } ) }
 											help={ __( 'Enter the download URL for the plugin. This can be the same as the homepage URL.', 'wp-plugin-info-card' ) }
 											label={ __( 'Download URL', 'wp-plugin-info-card' ) }
 											onChange={ ( value ) => {
 												field.onChange( value );
-												clearErrors( 'download_link' );
+												clearErrors( 'downloadLink' );
 											} }
 										/>
-										{ errors?.download_link?.type === 'required' && (
+										{ errors?.downloadLink?.type === 'required' && (
 											<Notice
 												message={ __( 'This field is required.', 'wp-plugin-info-card' ) }
 												status="error"
@@ -715,7 +715,7 @@ const Interface = ( props ) => {
 						<div className="wppic-admin-row">
 							<Controller
 								control={ control }
-								name="author_profile"
+								name="authorProfile"
 								rules={ {
 									pattern: /^https?:\/\/.+/,
 								} }
@@ -788,7 +788,7 @@ const Interface = ( props ) => {
 						<div className="wppic-admin-row">
 							<Controller
 								control={ control }
-								name="num_ratings"
+								name="numRatings"
 								rules={ { required: true } }
 								render={ ( { field } ) => (
 									<>
@@ -797,15 +797,15 @@ const Interface = ( props ) => {
 											type="number"
 											min="0"
 											placeholder={ __( 'Enter Number of Ratings', 'wp-plugin-info-card' ) }
-											className={ classnames( 'wppic-admin-input is-required', { 'has-error': errors?.num_ratings } ) }
+											className={ classnames( 'wppic-admin-input is-required', { 'has-error': errors?.numRatings } ) }
 											help={ __( 'Enter the total number of ratings.', 'wp-plugin-info-card' ) }
 											label={ __( 'Number of Ratings', 'wp-plugin-info-card' ) }
 											onChange={ ( value ) => {
 												field.onChange( value );
-												clearErrors( 'num_ratings' );
+												clearErrors( 'numRatings' );
 											} }
 										/>
-										{ errors?.num_ratings?.type === 'required' && (
+										{ errors?.numRatings?.type === 'required' && (
 											<Notice
 												message={ __( 'This field is required.', 'wp-plugin-info-card' ) }
 												status="error"
@@ -837,7 +837,7 @@ const Interface = ( props ) => {
 						<div className="wppic-admin-row">
 							<Controller
 								control={ control }
-								name="active_installs"
+								name="activeInstalls"
 								rules={ { required: true } }
 								render={ ( { field } ) => (
 									<>
@@ -846,15 +846,15 @@ const Interface = ( props ) => {
 											type="number"
 											min="0"
 											placeholder={ __( 'Enter Active Installs', 'wp-plugin-info-card' ) }
-											className={ classnames( 'wppic-admin-input is-required', { 'has-error': errors?.active_installs } ) }
+											className={ classnames( 'wppic-admin-input is-required', { 'has-error': errors?.activeInstalls } ) }
 											help={ __( 'Enter the number of active installations.', 'wp-plugin-info-card' ) }
 											label={ __( 'Active Installs', 'wp-plugin-info-card' ) }
 											onChange={ ( value ) => {
 												field.onChange( value );
-												clearErrors( 'active_installs' );
+												clearErrors( 'activeInstalls' );
 											} }
 										/>
-										{ errors?.active_installs?.type === 'required' && (
+										{ errors?.activeInstalls?.type === 'required' && (
 											<Notice
 												message={ __( 'This field is required.', 'wp-plugin-info-card' ) }
 												status="error"
@@ -869,7 +869,7 @@ const Interface = ( props ) => {
 						<div className="wppic-admin-row">
 							<Controller
 								control={ control }
-								name="last_updated"
+								name="lastUpdated"
 								render={ ( { field } ) => (
 									<TextControl
 										{ ...field }
@@ -892,7 +892,7 @@ const Interface = ( props ) => {
 						<div className="wppic-admin-row">
 							<Controller
 								control={ control }
-								name="enable_rest_api"
+								name="enableRestApi"
 								render={ ( { field } ) => (
 									<ToggleControl
 										{ ...field }
@@ -906,7 +906,7 @@ const Interface = ( props ) => {
 						<div className="wppic-admin-row">
 							<Controller
 								control={ control }
-								name="rest_api_passcode"
+								name="restApiPasscode"
 								render={ ( { field } ) => (
 									<TextControl
 										{ ...field }

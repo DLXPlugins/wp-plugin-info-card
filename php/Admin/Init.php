@@ -198,7 +198,7 @@ class Init {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
-		$form_data = filter_input( INPUT_POST, 'wppicFormData', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+		$form_data  = filter_input( INPUT_POST, 'wppicFormData', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 		$is_editing = filter_input( INPUT_POST, 'isEditing', FILTER_VALIDATE_BOOLEAN );
 
 		// Verify nonce from form data.
@@ -215,7 +215,7 @@ class Init {
 		$post_id_to_edit = absint( $form_data['post_id'] ?? 0 );
 		unset( $form_data['nonce'] );
 		unset( $form_data['isEditing'] );
-		unset( $form_data['post_id'] );
+		unset( $form_data['postId'] );
 
 		/**
 		 * Filter: wppic_custom_plugin_form_data.
