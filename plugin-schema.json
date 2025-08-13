@@ -1,10 +1,35 @@
 {
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"version": 1,
 	"$id": "https://raw.githubusercontent.com/DLXPlugins/wp-plugin-info-card/refs/heads/dev/plugin-schema.json",
 	"title": "WPPIC Plugin Schema",
-	"description": "Schema for WPPIC Plugin Cards export/import",
+	"description": "Schema for WPPIC Plugin Cards export/import (single item).",
 	"type": "object",
+	"additionalProperties": false,
+  
+	"$defs": {
+	  "intOrStringInt": {
+		"oneOf": [
+		  { "type": "integer", "minimum": 0 },
+		  { "type": "string", "pattern": "^[0-9]+$" }
+		]
+	  },
+	  "percentNumberOrString": {
+		"oneOf": [
+		  { "type": "number", "minimum": 0, "maximum": 100 },
+		  { "type": "string", "pattern": "^(100|[0-9]{1,2})(\\.\\d+)?$" }
+		]
+	  },
+	  "contributorsArray": {
+		"type": "array",
+		"description": "List of contributors.",
+		"items": { "type": "string", "minLength": 1 }
+	  },
+	  "contributorsString": {
+		"type": "string",
+		"description": "Comma-separated list of contributor names."
+	  }
+	},
+  
 	"properties": {
 	  "pluginIconUrl": {
 		"type": "string",
@@ -47,7 +72,7 @@
 	  },
 	  "version": {
 		"type": "string",
-		"pattern": "^[0-9]+(\\.[0-9]+)*(-[A-Za-z0-9]+)?$",
+		"pattern": "^[0-9]+(\\.[0-9]+)*([\\.-][A-Za-z0-9]+)?$",
 		"description": "Plugin version string."
 	  },
 	  "author": {
@@ -60,12 +85,11 @@
 		"description": "URL to the plugin author's profile."
 	  },
 	  "contributors": {
-		"type": "array",
-		"description": "List of contributors to the plugin. Comma separated list of names.",
-		"items": {
-		  "type": "string",
-		  "minLength": 1
-		}
+		"description": "Contributors, either as an array or a comma-separated string.",
+		"oneOf": [
+		  { "$ref": "#/$defs/contributorsArray" },
+		  { "$ref": "#/$defs/contributorsString" }
+		]
 	  },
 	  "requires": {
 		"type": "string",
@@ -76,32 +100,28 @@
 		"description": "Latest WordPress version tested with."
 	  },
 	  "rating": {
-		"type": "number",
-		"minimum": 0,
-		"maximum": 100,
-		"description": "Average plugin rating as a percentage."
+		"description": "Average plugin rating as a percentage.",
+		"$ref": "#/$defs/percentNumberOrString"
 	  },
 	  "numRatings": {
-		"type": "integer",
-		"minimum": 0,
-		"description": "Number of ratings."
+		"description": "Number of ratings.",
+		"$ref": "#/$defs/intOrStringInt"
 	  },
 	  "downloaded": {
-		"type": "integer",
-		"minimum": 0,
-		"description": "Total download count."
+		"description": "Total download count.",
+		"$ref": "#/$defs/intOrStringInt"
 	  },
 	  "activeInstalls": {
-		"type": "integer",
-		"minimum": 0,
-		"description": "Estimated active install count."
+		"description": "Estimated active install count.",
+		"$ref": "#/$defs/intOrStringInt"
 	  },
 	  "lastUpdated": {
 		"type": "string",
 		"format": "date",
-		"description": "Last updated date."
+		"description": "Last updated date (YYYY-MM-DD)."
 	  }
 	},
+  
 	"required": [
 	  "name",
 	  "slug",
@@ -120,7 +140,6 @@
 	  "downloaded",
 	  "activeInstalls",
 	  "lastUpdated"
-	],
-	"additionalProperties": false
+	]
   }
   
