@@ -40404,7 +40404,7 @@ var PluginHome = function b(a) {
               // Get current item.
               c = a[0];
               d = ajaxurl + '?action=wppic_export_custom_plugin&nonce=' + c.exportNonce + '&pluginId=' + c.id;
-              window.open(d, '_blank');
+              window.open(d);
             case 3:
             case "end":
               return b.stop();

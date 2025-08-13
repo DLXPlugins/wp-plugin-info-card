@@ -119,7 +119,7 @@ const PluginHome = ( props ) => {
 				// Get current item.
 				const item = items[ 0 ];
 				const exportUrl = ajaxurl + '?action=wppic_export_custom_plugin&nonce=' + item.exportNonce + '&pluginId=' + item.id;
-				window.open( exportUrl, '_blank' );
+				window.open( exportUrl );
 			},
 			isPrimary: false,
 			isDestructive: false,

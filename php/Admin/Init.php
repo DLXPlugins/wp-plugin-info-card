@@ -118,14 +118,23 @@ class Init {
 
 		$custom_plugin_data = Functions::sanitize_array_recursive( $custom_plugin_data );
 
-		// Reconcinle with fields.
+		// Force fields as strings.
+		$fields_to_ints = array(
+			'numRatings',
+			'downloaded',
+			'activeInstalls',
+		);
+		foreach ( $fields_to_ints as $field ) {
+			$custom_plugin_data[ $field ] = (int) $custom_plugin_data[ $field ];
+		}
+		
+		// Reconcile with fields.
 		$custom_plugin_data = array_intersect_key( $custom_plugin_data, array_flip( $fields ) );
 
 		$payload = array(
-			'$schema'        => 'https://raw.githubusercontent.com/DLXPlugins/wp-plugin-info-card/refs/heads/dev/plugin-schema.json',
 			'schema_version' => 1,
 			'exported_at'    => gmdate( 'c' ),
-			'items'          => $custom_plugin_data,
+			'items'          => array( $custom_plugin_data ),
 		);
 
 		$payload['checksum'] = 'sha256:' . hash( 'sha256', json_encode( $payload['items'] ) );
