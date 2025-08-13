@@ -1,0 +1,126 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"version": 1,
+	"$id": "https://raw.githubusercontent.com/DLXPlugins/wp-plugin-info-card/refs/heads/dev/plugin-schema.json",
+	"title": "WPPIC Plugin Schema",
+	"description": "Schema for WPPIC Plugin Cards export/import",
+	"type": "object",
+	"properties": {
+	  "pluginIconUrl": {
+		"type": "string",
+		"format": "uri",
+		"description": "URL to the plugin icon image."
+	  },
+	  "pluginBannerUrl": {
+		"type": "string",
+		"format": "uri",
+		"description": "URL to the plugin banner image."
+	  },
+	  "name": {
+		"type": "string",
+		"minLength": 1,
+		"description": "Display name of the plugin."
+	  },
+	  "slug": {
+		"type": "string",
+		"pattern": "^[a-z0-9\\-]+$",
+		"description": "Unique plugin slug (lowercase letters, numbers, dashes)."
+	  },
+	  "shortDescription": {
+		"type": "string",
+		"description": "Short description of the plugin."
+	  },
+	  "url": {
+		"type": "string",
+		"format": "uri",
+		"description": "Plugin detail page URL."
+	  },
+	  "homepage": {
+		"type": "string",
+		"format": "uri",
+		"description": "Homepage URL of the plugin."
+	  },
+	  "downloadLink": {
+		"type": "string",
+		"format": "uri",
+		"description": "Direct download link for the plugin ZIP. Can also be the same as the homepage URL."
+	  },
+	  "version": {
+		"type": "string",
+		"pattern": "^[0-9]+(\\.[0-9]+)*(-[A-Za-z0-9]+)?$",
+		"description": "Plugin version string."
+	  },
+	  "author": {
+		"type": "string",
+		"description": "Name of the plugin author."
+	  },
+	  "authorProfile": {
+		"type": "string",
+		"format": "uri",
+		"description": "URL to the plugin author's profile."
+	  },
+	  "contributors": {
+		"type": "array",
+		"description": "List of contributors to the plugin. Comma separated list of names.",
+		"items": {
+		  "type": "string",
+		  "minLength": 1
+		}
+	  },
+	  "requires": {
+		"type": "string",
+		"description": "Minimum required WordPress version."
+	  },
+	  "tested": {
+		"type": "string",
+		"description": "Latest WordPress version tested with."
+	  },
+	  "rating": {
+		"type": "number",
+		"minimum": 0,
+		"maximum": 100,
+		"description": "Average plugin rating as a percentage."
+	  },
+	  "numRatings": {
+		"type": "integer",
+		"minimum": 0,
+		"description": "Number of ratings."
+	  },
+	  "downloaded": {
+		"type": "integer",
+		"minimum": 0,
+		"description": "Total download count."
+	  },
+	  "activeInstalls": {
+		"type": "integer",
+		"minimum": 0,
+		"description": "Estimated active install count."
+	  },
+	  "lastUpdated": {
+		"type": "string",
+		"format": "date-time",
+		"description": "Last updated date/time."
+	  }
+	},
+	"required": [
+	  "name",
+	  "slug",
+	  "shortDescription",
+	  "url",
+	  "homepage",
+	  "downloadLink",
+	  "version",
+	  "author",
+	  "authorProfile",
+	  "contributors",
+	  "requires",
+	  "tested",
+	  "rating",
+	  "numRatings",
+	  "downloaded",
+	  "activeInstalls",
+	  "lastUpdated"
+	],
+	"additionalProperties": false
+  }
+  
