@@ -1,0 +1,44 @@
+import { Modal, TabPanel } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+import ImportPluginFile from './import-plugin-file';
+
+const ImportPluginModal = ( props ) => {
+	return (
+		<Modal
+			title={ __( 'Import Plugin', 'wp-plugin-info-card' ) }
+			onRequestClose={ () => {
+				props.onClose();
+			} }
+		>
+			<TabPanel
+				tabs={ [
+					{
+						name: 'import-file',
+						title: __( 'Import from File', 'wp-plugin-info-card' ),
+						className: 'wppic-import-plugin',
+
+					},
+					{
+						name: 'import-rest',
+						title: __( 'Import from REST API', 'wp-plugin-info-card' ),
+						className: 'wppic-import-plugin',
+					},
+				] }
+				onSelect={ ( tab ) => {
+					console.log( tab );
+				} }
+			>
+				{ ( tab ) => {
+					switch ( tab.name ) {
+						case 'import-file':
+							return <ImportPluginFile />;
+						case 'import-rest':
+							return <div>Import from REST API</div>;
+					}
+				} }
+			</TabPanel>
+		</Modal>
+	);
+};
+
+export default ImportPluginModal;

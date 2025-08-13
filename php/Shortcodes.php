@@ -102,256 +102,35 @@ class Shortcodes {
 		);
 
 		register_post_type( 'wppic_custom_plugins', $args );
-			register_meta(
-				'wppic_custom_plugins',
-				'custom_plugin_icon_id',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'integer',
-					'sanitize_callback' => 'absint',
 
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'custom_plugin_banner_id',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'integer',
-					'sanitize_callback' => 'absint',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'custom_plugin_icon_url',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'string',
-					'sanitize_callback' => 'esc_url_raw',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'custom_plugin_banner_url',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'string',
-					'sanitize_callback' => 'esc_url_raw',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'name',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'string',
-					'sanitize_callback' => 'sanitize_text_field',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'slug',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'string',
-					'sanitize_callback' => 'sanitize_title',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'short_description',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'string',
-					'sanitize_callback' => 'sanitize_text_field',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'url',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'string',
-					'sanitize_callback' => 'esc_url_raw',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'homepage',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'string',
-					'sanitize_callback' => 'esc_url_raw',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'download_link',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'string',
-					'sanitize_callback' => 'esc_url_raw',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'version',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'string',
-					'sanitize_callback' => 'sanitize_text_field',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'author',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'string',
-					'sanitize_callback' => 'sanitize_text_field',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'author_profile',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'string',
-					'sanitize_callback' => 'esc_url_raw',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'contributors',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'string',
-					'sanitize_callback' => 'sanitize_text_field',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'requires',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'string',
-					'sanitize_callback' => 'sanitize_text_field',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'tested',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'string',
-					'sanitize_callback' => 'sanitize_text_field',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'rating',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'string',
-					'sanitize_callback' => 'sanitize_text_field',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'num_ratings',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'integer',
-					'sanitize_callback' => 'absint',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'downloaded',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'integer',
-					'sanitize_callback' => 'absint',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'active_installs',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'integer',
-					'sanitize_callback' => 'absint',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'last_updated',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'string',
-					'sanitize_callback' => 'sanitize_text_field',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'ratings',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'string',
-					'sanitize_callback' => 'sanitize_text_field',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'added',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'string',
-					'sanitize_callback' => 'sanitize_text_field',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'enable_rest_api',
-				array(
-					'show_in_rest' => true,
-					'single'       => true,
-					'type'         => 'boolean',
-				)
-			);
-			register_meta(
-				'wppic_custom_plugins',
-				'rest_api_passcode',
-				array(
-					'show_in_rest'      => true,
-					'single'            => true,
-					'type'              => 'string',
-					'sanitize_callback' => 'sanitize_text_field',
-				)
-			);
+		register_meta(
+			'wppic_custom_plugins',
+			'enable_rest_api',
+			array(
+				'show_in_rest' => true,
+				'single'       => true,
+				'type'         => 'boolean',
+			)
+		);
+		register_meta(
+			'wppic_custom_plugins',
+			'is_from_rest',
+			array(
+				'show_in_rest' => true,
+				'single'       => true,
+				'type'         => 'boolean',
+			)
+		);
+		register_meta(
+			'wppic_custom_plugins',
+			'rest_api_passcode',
+			array(
+				'show_in_rest'      => true,
+				'single'            => true,
+				'type'              => 'string',
+				'sanitize_callback' => 'sanitize_text_field',
+			)
+		);
 	}
 
 	/**

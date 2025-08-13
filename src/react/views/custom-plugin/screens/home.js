@@ -10,22 +10,19 @@ import {
 	Cog,
 	BookText,
 	ExternalLink,
-	Edit,
-	Trash2,
+	Download,
+	CloudDownload,
 } from 'lucide-react';
 import PluginIcon from '../../../components/PluginIcon';
 import sendCommand from '../../../utils/SendCommand';
+import ImportPluginModal from './import-plugin-modal';
 
 const defaultLayouts = {
 	grid: {
 		layout: {
 			titleField: 'title',
 			mediaField: 'plugin-info',
-			columns: 4,
-			columnGap: '32px',
-			rowGap: '232x',
 			showMedia: true,
-			viewConfigOptions: {},
 		},
 	},
 	table: {
@@ -33,7 +30,6 @@ const defaultLayouts = {
 			titleField: 'title',
 			mediaField: 'plugin-info',
 			showMedia: true,
-			viewConfigOptions: {},
 		},
 	},
 };
@@ -79,9 +75,9 @@ const PluginHome = ( props ) => {
 	const [ showDeleteModal, setShowDeleteModal ] = useState( false );
 	const [ deletePluginId, setDeletePluginId ] = useState( null );
 	const [ customPlugins, setCustomPlugins ] = useState( [] );
+	const [ showImportModal, setShowImportModal ] = useState( true );
 
 	const navigate = useNavigate();
-
 
 	const actions = [
 		{
@@ -116,14 +112,14 @@ const PluginHome = ( props ) => {
 			icon: 'download',
 			label: __( 'Export Plugin', 'wp-plugin-info-card' ),
 			callback: async ( items ) => {
+				const pluginIds = items.map( ( item ) => item.id );
 				// Get current item.
-				const item = items[ 0 ];
-				const exportUrl = ajaxurl + '?action=wppic_export_custom_plugin&nonce=' + item.exportNonce + '&pluginId=' + item.id;
+				const exportUrl = ajaxurl + '?action=wppic_export_custom_plugin&nonce=' + wppicAdminCustomPlugin.exportNonce + '&pluginIds=' + pluginIds.join( ',' );
 				window.open( exportUrl );
 			},
 			isPrimary: false,
 			isDestructive: false,
-			supportsBulk: false,
+			supportsBulk: true,
 			modalFocusOnMount: 'firstContentElement',
 
 		},
@@ -326,6 +322,31 @@ const PluginHome = ( props ) => {
 					</div>
 					<div className="wppic-admin-panel-sidebar-card">
 						<h3>
+							<CloudDownload />
+							{ __( 'Import Plugin', 'wp-plugin-info-card' ) }
+						</h3>
+						<p>
+							{ __(
+								'Import a plugin from a REST API endpoint.',
+								'wp-plugin-info-card',
+							) }
+						</p>
+						<Button
+							variant="secondary"
+							href="#"
+							onClick={ ( e ) => {
+								e.preventDefault();
+								setShowImportModal( true );
+							} }
+							iconPosition="left"
+							className="wppic-btn wppic-btn-alt has-icon-right btn-full-width"
+							icon={ () => <Download /> }
+						>
+							{ __( 'Import Plugin', 'wp-plugin-info-card' ) }
+						</Button>
+					</div>
+					<div className="wppic-admin-panel-sidebar-card">
+						<h3>
 							<Cog />
 							{ __( 'Advanced Settings', 'wp-plugin-info-card' ) }
 						</h3>
@@ -373,6 +394,7 @@ const PluginHome = ( props ) => {
 					</div>
 				</div>
 			</div>
+			{ showImportModal && <ImportPluginModal onClose={ () => setShowImportModal( false ) } /> }
 		</>
 	);
 };

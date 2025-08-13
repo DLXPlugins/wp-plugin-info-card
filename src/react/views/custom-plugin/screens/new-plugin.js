@@ -1008,31 +1008,6 @@ const Interface = ( props ) => {
 				<div className="wppic-admin-panel-sidebar">
 					<div className="wppic-admin-panel-sidebar-card">
 						<h3>
-							<CloudDownload />
-							{ __( 'Import Plugin', 'wp-plugin-info-card' ) }
-						</h3>
-						<p>
-							{ __(
-								'Import a plugin from a REST API endpoint.',
-								'wp-plugin-info-card',
-							) }
-						</p>
-						<Button
-							variant="secondary"
-							href="#"
-							onClick={ ( e ) => {
-								e.preventDefault();
-								// todo: import modal.
-							} }
-							iconPosition="left"
-							className="wppic-btn wppic-btn-alt has-icon-right btn-full-width"
-							icon={ () => <Download /> }
-						>
-							{ __( 'Import Plugin', 'wp-plugin-info-card' ) }
-						</Button>
-					</div>
-					<div className="wppic-admin-panel-sidebar-card">
-						<h3>
 							<BookText />
 							{ __( 'Documentation', 'wp-plugin-info-card' ) }
 						</h3>

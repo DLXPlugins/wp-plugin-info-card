@@ -61,8 +61,8 @@ class Init {
 			return;
 		}
 		$nonce     = sanitize_text_field( filter_input( INPUT_GET, 'nonce', FILTER_DEFAULT ) );
-		$plugin_id = absint( filter_input( INPUT_GET, 'pluginId', FILTER_VALIDATE_INT ) );
-		if ( ! wp_verify_nonce( $nonce, 'wppic-export-custom-plugin-' . $plugin_id ) ) {
+		$plugin_ids = filter_input( INPUT_GET, 'pluginIds', FILTER_DEFAULT );
+		if ( ! wp_verify_nonce( $nonce, 'wppic-export-custom-plugins' ) ) {
 			wp_send_json_error(
 				array(
 					'message'     => __( 'Nonce verification failed', 'wp-plugin-info-card' ),
@@ -71,6 +71,19 @@ class Init {
 				)
 			);
 		}
+
+		// Format plugin ids into array.
+		if ( ! $plugin_ids ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'No plugin IDs provided', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+		$plugin_ids = explode( ',', $plugin_ids );
+		$plugin_ids = array_map( 'absint', $plugin_ids );
 
 		$fields = array(
 			'pluginIconUrl',
@@ -94,52 +107,57 @@ class Init {
 			'lastUpdated',
 		);
 
-		$custom_plugin = get_post( $plugin_id );
-		if ( ! $custom_plugin ) {
-			wp_send_json_error(
-				array(
-					'message'     => __( 'Custom plugin not found', 'wp-plugin-info-card' ),
-					'type'        => 'error',
-					'dismissable' => true,
-				)
+		$items_for_export = array();
+		foreach ( $plugin_ids as $plugin_id ) {
+			$custom_plugin = get_post( $plugin_id );
+			if ( ! $custom_plugin ) {
+				wp_send_json_error(
+					array(
+						'message'     => __( 'Custom plugin not found', 'wp-plugin-info-card' ),
+						'type'        => 'error',
+						'dismissable' => true,
+					)
+				);
+			}
+
+			$custom_plugin_data = json_decode( $custom_plugin->post_content, true );
+			if ( ! $custom_plugin_data ) {
+				wp_send_json_error(
+					array(
+						'message'     => __( 'Custom plugin data not found', 'wp-plugin-info-card' ),
+						'type'        => 'error',
+						'dismissable' => true,
+					)
+				);
+			}
+
+			$custom_plugin_data = Functions::sanitize_array_recursive( $custom_plugin_data );
+
+			// Force fields as strings.
+			$fields_to_ints = array(
+				'numRatings',
+				'downloaded',
+				'activeInstalls',
 			);
-		}
+			foreach ( $fields_to_ints as $field ) {
+				$custom_plugin_data[ $field ] = (int) $custom_plugin_data[ $field ];
+			}
 
-		$custom_plugin_data = json_decode( $custom_plugin->post_content, true );
-		if ( ! $custom_plugin_data ) {
-			wp_send_json_error(
-				array(
-					'message'     => __( 'Custom plugin data not found', 'wp-plugin-info-card' ),
-					'type'        => 'error',
-					'dismissable' => true,
-				)
-			);
-		}
+			// Reconcile with fields.
+			$custom_plugin_data = array_intersect_key( $custom_plugin_data, array_flip( $fields ) );
 
-		$custom_plugin_data = Functions::sanitize_array_recursive( $custom_plugin_data );
-
-		// Force fields as strings.
-		$fields_to_ints = array(
-			'numRatings',
-			'downloaded',
-			'activeInstalls',
-		);
-		foreach ( $fields_to_ints as $field ) {
-			$custom_plugin_data[ $field ] = (int) $custom_plugin_data[ $field ];
+			$items_for_export[] = $custom_plugin_data;
 		}
-		
-		// Reconcile with fields.
-		$custom_plugin_data = array_intersect_key( $custom_plugin_data, array_flip( $fields ) );
 
 		$payload = array(
 			'schema_version' => 1,
 			'exported_at'    => gmdate( 'c' ),
-			'items'          => array( $custom_plugin_data ),
+			'items'          => $items_for_export,
 		);
 
 		$payload['checksum'] = 'sha256:' . hash( 'sha256', json_encode( $payload['items'] ) );
 
-		$filename_slug = sanitize_file_name( sanitize_title( $custom_plugin_data['name'] ) . '.json' );
+		$filename_slug = sanitize_file_name( 'wppic-custom-plugins-export.json' );
 
 		// Output json filename (prompt save as).
 		header( 'Content-Disposition: attachment; filename="' . $filename_slug . '"' );
