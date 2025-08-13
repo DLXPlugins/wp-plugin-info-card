@@ -1,6 +1,6 @@
 {
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"version": "1.0.0",
+	"version": 1,
 	"$id": "https://raw.githubusercontent.com/DLXPlugins/wp-plugin-info-card/refs/heads/dev/plugin-schema.json",
 	"title": "WPPIC Plugin Schema",
 	"description": "Schema for WPPIC Plugin Cards export/import",
