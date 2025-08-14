@@ -32,7 +32,7 @@ const ImportPluginFile = ( props ) => {
 	 *
 	 * @param {Object} formData contains the form data.
 	 */
-	const onSubmit = () => {
+	const onSubmit = async () => {
 		setImporting( true );
 		const fileInput = document.getElementById( 'wppic-import-plugin-file-input' );
 		const file = fileInput.files[0];
@@ -42,7 +42,14 @@ const ImportPluginFile = ( props ) => {
 		}
 		const formData = new FormData();
 		formData.append( 'jsonFile', file );
-		console.log( formData );
+		const response = await fetch( wppicAdminCustomPlugin.restUrl, {
+			method: 'POST',
+			body: formData,
+			headers: {
+				'X-WP-Nonce': wppicAdminCustomPlugin.restNonce,
+			},
+		} );
+		console.log( response );
 		setImporting( false );
 	};
 	

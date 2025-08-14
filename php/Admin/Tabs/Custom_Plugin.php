@@ -59,6 +59,8 @@ class Custom_Plugin {
 				'deleteCustomPlugin'   => wp_create_nonce( 'wppic-delete-custom-plugin' ),
 				'defaultPluginIcon'    => Functions::get_plugin_url( 'assets/img/default-plugin-icon.png' ),
 				'exportNonce'          => wp_create_nonce( 'wppic-export-custom-plugins' ),
+				'restNonce'            => wp_create_nonce( 'wp_rest' ),
+				'restUrl'              => get_rest_url( null, 'wppic/v1/custom-plugins/import' ),
 			)
 		);
 

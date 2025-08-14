@@ -143,6 +143,9 @@ class WP_Plugin_Info_Card {
 		$shortcodes = new Shortcodes();
 		$shortcodes->run();
 
+		// Set up import/export.
+		Import_Export::setup_rest_routes();
+
 		if ( Functions::is_edd_installed() ) {
 			$edd = new EDD();
 			$edd->run();
