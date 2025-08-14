@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import classnames from 'classnames';
-import { TextControl, Button } from '@wordpress/components';
+import { TextControl, Button, Spinner } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useForm, Controller, useWatch, useFormState } from 'react-hook-form';
 import Notice from '../../../components/Notice';
-import { Download } from 'lucide-react';
+import { Download, X } from 'lucide-react';
 
 const ImportPluginFile = ( props ) => {
 	const [ importing, setImporting ] = useState( false );
@@ -49,7 +49,19 @@ const ImportPluginFile = ( props ) => {
 				'X-WP-Nonce': wppicAdminCustomPlugin.restNonce,
 			},
 		} );
-		console.log( response );
+		if ( response.ok ) {
+			const data = await response.json();
+			const maybeErrors = data.errors;
+			if ( maybeErrors.length > 0 ) {
+				let errorMessage = '';
+				maybeErrors.forEach( ( error ) => {
+					errorMessage += error + '\n';
+				} );
+				setError( 'jsonFile', { message: errorMessage } );
+			} else {
+				props.onClose();
+			}
+		}
 		setImporting( false );
 	};
 	
@@ -74,9 +86,16 @@ const ImportPluginFile = ( props ) => {
 									help={ __( 'Select a JSON file to import.', 'wp-plugin-info-card' ) }
 									label={ __( 'JSON File', 'wp-plugin-info-card' ) }
 								/>
-								{ errors?.jsonFile && (
+								{ errors?.jsonFile?.required && (
 									<Notice
 										message={ __( 'This field is required.', 'wp-plugin-info-card' ) }
+										status="error"
+										politeness="assertive"
+									/>
+								) }
+								{ errors?.jsonFile?.message && (
+									<Notice
+										message={ errors?.jsonFile?.message }
 										status="error"
 										politeness="assertive"
 									/>
@@ -85,18 +104,38 @@ const ImportPluginFile = ( props ) => {
 						) }
 					/>
 					<div className="wppic-admin-buttons">
-						<Button
-							className={ classnames(
-								'wppic__btn wppic__btn-secondary wppic__btn--icon-right',
-							) }
-							variant="primary"
-							type="submit"
-							text={ __( 'Import', 'wp-plugin-info-card' ) }
-							icon={ <Download /> }
-							iconSize="18"
-							iconPosition="right"
-							disabled={ importing }
-						/>
+						{
+							! errors?.jsonFile?.message && (
+								<Button
+									className={ classnames(
+										'wppic__btn wppic__btn-secondary wppic__btn--icon-right',
+									) }
+									variant="primary"
+									type="submit"
+									text={ importing ? __( 'Importing…', 'wp-plugin-info-card' ) : __( 'Import', 'wp-plugin-info-card' ) }
+									icon={ importing ? <Spinner /> : <Download /> }
+									iconSize="18"
+									iconPosition="right"
+									disabled={ importing }
+								/>
+							)
+						}
+						{
+							errors?.jsonFile?.message && (
+								<Button
+									className={ classnames(
+										'wppic__btn wppic__btn-secondary wppic__btn--icon-right',
+									) }
+									variant="primary"
+									type="button"
+									text={ __( 'Close Modal', 'wp-plugin-info-card' ) }
+									icon={ <X /> }
+									iconSize="18"
+									iconPosition="left"
+									onClick={ props.onClose }
+								/>
+							)
+						}
 					</div>
 				</form>
 			</div>

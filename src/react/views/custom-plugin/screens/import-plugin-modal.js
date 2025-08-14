@@ -31,7 +31,7 @@ const ImportPluginModal = ( props ) => {
 				{ ( tab ) => {
 					switch ( tab.name ) {
 						case 'import-file':
-							return <ImportPluginFile />;
+							return <ImportPluginFile onClose={ props.onClose } />;
 						case 'import-rest':
 							return <div>Import from REST API</div>;
 					}

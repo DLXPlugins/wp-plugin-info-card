@@ -223,14 +223,16 @@ class Init {
 
 		foreach ( $custom_plugins as $custom_plugin ) {
 			$custom_plugins_data[] = array(
-				'id'          => $custom_plugin->ID,
-				'title'       => $custom_plugin->post_title,
-				'slug'        => $custom_plugin->post_name,
-				'content'     => json_decode( $custom_plugin->post_content, true ),
-				'icon'        => get_the_post_thumbnail_url( $custom_plugin->ID, 'full' ),
-				'editNonce'   => wp_create_nonce( 'wppic-edit-custom-plugin-' . $custom_plugin->ID ),
-				'saveNonce'   => wp_create_nonce( 'wppic-save-custom-plugin-' . $custom_plugin->ID ),
-				'exportNonce' => wp_create_nonce( 'wppic-export-custom-plugin-' . $custom_plugin->ID ),
+				'id'              => $custom_plugin->ID,
+				'title'           => $custom_plugin->post_title,
+				'slug'            => $custom_plugin->post_name,
+				'content'         => json_decode( $custom_plugin->post_content, true ),
+				'icon'            => get_the_post_thumbnail_url( $custom_plugin->ID, 'full' ),
+				'editNonce'       => wp_create_nonce( 'wppic-edit-custom-plugin-' . $custom_plugin->ID ),
+				'saveNonce'       => wp_create_nonce( 'wppic-save-custom-plugin-' . $custom_plugin->ID ),
+				'exportNonce'     => wp_create_nonce( 'wppic-export-custom-plugin-' . $custom_plugin->ID ),
+				'enableRestApi'   => sanitize_text_field( get_post_meta( $custom_plugin->ID, 'enableRestApi', true ) ),
+				'restApiPasscode' => sanitize_text_field( get_post_meta( $custom_plugin->ID, 'restApiPasscode', true ) ),
 			);
 		}
 

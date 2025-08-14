@@ -52,15 +52,16 @@ class Custom_Plugin {
 			'wppic-admin-custom-plugin',
 			'wppicAdminCustomPlugin',
 			array(
-				'getNonce'             => wp_create_nonce( 'wppic-admin-custom-plugin-retrieve-options' ),
-				'getCustomPlugins'     => wp_create_nonce( 'wppic-get-custom-plugins' ),
-				'saveNonce'            => wp_create_nonce( 'wppic-save-custom-plugin' ),
-				'checkPluginSlugNonce' => wp_create_nonce( 'wppic-check-plugin-slug' ),
-				'deleteCustomPlugin'   => wp_create_nonce( 'wppic-delete-custom-plugin' ),
-				'defaultPluginIcon'    => Functions::get_plugin_url( 'assets/img/default-plugin-icon.png' ),
-				'exportNonce'          => wp_create_nonce( 'wppic-export-custom-plugins' ),
-				'restNonce'            => wp_create_nonce( 'wp_rest' ),
-				'restUrl'              => get_rest_url( null, 'wppic/v1/custom-plugins/import' ),
+				'getNonce'              => wp_create_nonce( 'wppic-admin-custom-plugin-retrieve-options' ),
+				'getCustomPlugins'      => wp_create_nonce( 'wppic-get-custom-plugins' ),
+				'saveNonce'             => wp_create_nonce( 'wppic-save-custom-plugin' ),
+				'checkPluginSlugNonce'  => wp_create_nonce( 'wppic-check-plugin-slug' ),
+				'deleteCustomPlugin'    => wp_create_nonce( 'wppic-delete-custom-plugin' ),
+				'defaultPluginIcon'     => Functions::get_plugin_url( 'assets/img/default-plugin-icon.png' ),
+				'exportNonce'           => wp_create_nonce( 'wppic-export-custom-plugins' ),
+				'restNonce'             => wp_create_nonce( 'wp_rest' ),
+				'restUrl'               => get_rest_url( null, 'wppic/v1/custom-plugins/import' ),
+				'customPluginsRestBase' => get_rest_url( null, 'wppic/v1/plugins/' ),
 			)
 		);
 

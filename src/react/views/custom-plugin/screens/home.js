@@ -123,6 +123,28 @@ const PluginHome = ( props ) => {
 			modalFocusOnMount: 'firstContentElement',
 
 		},
+		{
+			id: 'copy-rest-url',
+			icon: 'copy',
+			label: __( 'Copy REST URL', 'wp-plugin-info-card' ),
+			callback: async ( items ) => {
+				const item = items[ 0 ];
+				const restUrl = wppicAdminCustomPlugin.customPluginsRestBase + item.slug + '/' + item.restApiPasscode;
+				try {
+					const copyBlob = new Blob( [ restUrl ], { type: 'text/plain' } );
+					const data = [ new ClipboardItem( { [ copyBlob.type ]: copyBlob } ) ];
+					navigator.clipboard.write( data );
+				} catch ( e ) {
+					// Try another method.
+					navigator.clipboard.writeText( restUrl );
+				}
+			},
+			isPrimary: false,
+			supportsBulk: false,
+			isEligible: ( item ) => {
+				return 'true' === item.enableRestApi;
+			},
+		},
 	];
 
 	const [ view, setView ] = useState( {
