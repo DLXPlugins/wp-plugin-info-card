@@ -159,6 +159,7 @@ const Interface = ( props ) => {
 			numRatings: data.numRatings || '',
 			downloaded: data.downloaded || '',
 			activeInstalls: data.activeInstalls || '',
+			requiresPHP: data.requiresPHP || '',
 			lastUpdated: data.lastUpdated || '',
 			ratings: data.ratings || '',
 			added: data.added || '',
@@ -581,21 +582,21 @@ const Interface = ( props ) => {
 						<div className="wppic-admin-row">
 							<Controller
 								control={ control }
-								name="requires_php"
+								name="requiresPHP"
 								render={ ( { field } ) => (
 									<>
 										<TextControl
 											{ ...field }
 											placeholder={ __( 'Enter Required PHP Version', 'wp-plugin-info-card' ) }
-											className={ classnames( 'wppic-admin-input', { 'has-error': errors?.requires_php } ) }
+											className={ classnames( 'wppic-admin-input', { 'has-error': errors?.requiresPHP } ) }
 											help={ __( 'Enter the minimum PHP version required (e.g., 8.0).', 'wp-plugin-info-card' ) }
 											label={ __( 'Required PHP Version', 'wp-plugin-info-card' ) }
 											onChange={ ( value ) => {
 												field.onChange( value );
-												clearErrors( 'requires' );
+												clearErrors( 'requiresPHP' );
 											} }
 										/>
-										{ errors?.requires_php?.type === 'required' && (
+										{ errors?.requiresPHP?.type === 'required' && (
 											<Notice
 												message={ __( 'This field is required.', 'wp-plugin-info-card' ) }
 												status="error"

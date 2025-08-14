@@ -31,6 +31,7 @@ class Import_Export {
 		'authorProfile',
 		'contributors',
 		'requires',
+		'requiresPHP',
 		'tested',
 		'rating',
 		'numRatings',
@@ -96,6 +97,137 @@ class Import_Export {
 				);
 			}
 		);
+	}
+
+	/**
+	 * Setup actions and filters.
+	 */
+	public static function setup_actions_and_filters() {
+		// For adding custom plugin data (if enabled).
+		add_filter( 'wppic_plugin_info', array( __CLASS__, 'maybe_add_custom_plugin_data' ), 10, 4 );
+	}
+
+	/**
+	 * Maybe add custom plugin data.
+	 *
+	 * @param array  $wppic_data The existing plugin data.
+	 * @param string $slug The plugin slug.
+	 * @param string $type The plugin type.
+	 * @param bool   $force Whether to force the plugin data.
+	 * @return array The plugin data.
+	 */
+	public static function maybe_add_custom_plugin_data( $wppic_data, $slug, $type, $force ) {
+		$options = Options::get_options();
+		if ( ! isset( $options['enable_custom_plugins'] ) || ! (bool) $options['enable_custom_plugins'] ) {
+			return $wppic_data;
+		}
+
+		$custom_plugin = get_posts(
+			array(
+				'post_type'     => 'wppic_custom_plugins',
+				'post_name__in' => array( sanitize_title( $slug ) ),
+				'post_status'   => 'publish',
+			)
+		);
+		if ( ! $custom_plugin ) {
+			return $wppic_data;
+		}
+		$custom_plugin = $custom_plugin[0];
+
+		$custom_plugin_data = Functions::sanitize_array_recursive( json_decode( $custom_plugin->post_content, true ) );
+
+		// Get plugin name.
+		$existing_data['name'] = sanitize_text_field( $custom_plugin_data['name'] );
+
+		// Get slug.
+		$existing_data['slug'] = sanitize_title( $slug );
+
+		// Get plugin version.
+		$existing_data['version'] = sanitize_text_field( $custom_plugin_data['version'] );
+
+		// Get the required versions.
+		$existing_data['requires']     = sanitize_text_field( $custom_plugin_data['requires'] );
+		$existing_data['requires_php'] = sanitize_text_field( $custom_plugin_data['requiresPHP'] );
+
+		// Get the short description from excerpt. Overwrite with readme later if needed.
+		$existing_data['short_description'] = wp_kses_post( $custom_plugin_data['shortDescription'] );
+
+		// Get the author and link to the download page for the plugin.
+		$existing_data['author'] = sanitize_text_field( $custom_plugin_data['author'] );
+
+		// Author/Download URL.
+		$existing_data['homepage'] = esc_url_raw( $custom_plugin_data['homepage'] );
+
+		// Set the download link to the download page.
+		$existing_data['download_link'] = esc_url_raw( $custom_plugin_data['downloadLink'] );
+
+		// Get the URL for the download.
+		$existing_data['url'] = esc_url_raw( $custom_plugin_data['url'] );
+
+		// Set last updated and mk.
+		$existing_data['last_updated']    = gmdate( 'Y-m-d', strtotime( $custom_plugin_data['lastUpdated'] ) );
+		$existing_data['last_updated_mk'] = gmdate( 'Y-m-d', strtotime( $custom_plugin_data['lastUpdated'] ) );
+
+		// Set the plugin added date.
+		$existing_data['added'] = gmdate( 'Y-m-d', strtotime( $custom_plugin_data['lastUpdated'] ) );
+
+		// Get total number of downloads for the plugin.
+		$existing_data['downloaded'] = absint( $custom_plugin_data['downloaded'] );
+
+		// Get the total number of active installs (active licenses) for the download.
+		$existing_data['active_installs'] = absint( $custom_plugin_data['activeInstalls'] );
+
+		// Get tested WordPress version.
+		$existing_data['tested'] = sanitize_text_field( $custom_plugin_data['tested'] );
+
+		// Get contributors.
+		$existing_data['contributors'] = sanitize_text_field( $custom_plugin_data['contributors'] );
+
+		// Get rating.
+		$existing_data['rating'] = absint( $custom_plugin_data['rating'] );
+
+		// Get number of ratings.
+		$existing_data['num_ratings'] = absint( $custom_plugin_data['numRatings'] );
+
+		// Get the featured image URL which will be used for the icons. Format in array is 1x, 2x.
+		$existing_data['icons'] = array();
+		$post_thumbnail_id      = get_post_thumbnail_id( $custom_plugin->ID );
+		if ( ! $post_thumbnail_id ) {
+			$existing_data['icons'] = array(
+				'1x' => Functions::get_plugin_url( 'assets/img/default-plugin-icon.png' ),
+				'2x' => Functions::get_plugin_url( 'assets/img/default-plugin-icon.png' ),
+			);
+			return $existing_data;
+		}
+		$featured_image = wp_get_attachment_image_src( $post_thumbnail_id );
+		if ( $featured_image ) {
+			$existing_data['icons'] = array(
+				'1x' => esc_url_raw( $featured_image[0] ),
+				'2x' => esc_url_raw( $featured_image[0] ),
+			);
+		}
+
+		// Get the plugin banners.
+		$banner_high = $custom_plugin_data['pluginBannerUrl'] ?? Functions::get_plugin_url( 'assets/img/default-banner.png' );
+		$banner_low  = $custom_plugin_data['pluginBannerUrl'] ?? Functions::get_plugin_url( 'assets/img/default-banner.png' );
+		if ( $banner_high && $banner_low ) {
+			$existing_data['banners'] = array(
+				'high' => esc_url_raw( $banner_high ),
+				'low'  => esc_url_raw( $banner_low ),
+			);
+		}
+
+		// Set screenshots.
+		$existing_data['screenshots'] = array();
+		$existing_data['ratings']     = array();
+
+		// Set reviews url.
+		$existing_data['reviews_url'] = ''; // todo - do we need this?
+
+		// Set custom plugin flag.
+		$existing_data['is_custom_plugin'] = true;
+
+		return $existing_data;
 	}
 
 	/**

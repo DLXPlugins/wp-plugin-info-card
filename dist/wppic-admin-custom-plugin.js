@@ -41805,6 +41805,7 @@ var Interface = function b(a) {
         numRatings: c.numRatings || '',
         downloaded: c.downloaded || '',
         activeInstalls: c.activeInstalls || '',
+        requiresPHP: c.requiresPHP || '',
         lastUpdated: c.lastUpdated || '',
         ratings: c.ratings || '',
         added: c.added || '',
@@ -42190,22 +42191,22 @@ var Interface = function b(a) {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
     control: N,
-    name: "requires_php",
+    name: "requiresPHP",
     render: function b(a) {
       var c;
       var d = a.field;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.TextControl, _extends({}, d, {
         placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter Required PHP Version', 'wp-plugin-info-card'),
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input', {
-          'has-error': X === null || X === void 0 ? void 0 : X.requires_php
+          'has-error': X === null || X === void 0 ? void 0 : X.requiresPHP
         }),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter the minimum PHP version required (e.g., 8.0).', 'wp-plugin-info-card'),
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Required PHP Version', 'wp-plugin-info-card'),
         onChange: function b(a) {
           d.onChange(a);
-          T('requires');
+          T('requiresPHP');
         }
-      })), (X === null || X === void 0 || (c = X.requires_php) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      })), (X === null || X === void 0 || (c = X.requiresPHP) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.', 'wp-plugin-info-card'),
         status: "error",
         politeness: "assertive"

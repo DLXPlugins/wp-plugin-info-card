@@ -145,6 +145,7 @@ class WP_Plugin_Info_Card {
 
 		// Set up import/export.
 		Import_Export::setup_rest_routes();
+		Import_Export::setup_actions_and_filters();
 
 		if ( Functions::is_edd_installed() ) {
 			$edd = new EDD();
