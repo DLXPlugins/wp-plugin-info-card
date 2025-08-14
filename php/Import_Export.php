@@ -60,13 +60,20 @@ class Import_Export {
 				// Setup rest route for handling of exposing plugin's JSON.
 				register_rest_route(
 					'wppic/v1',
-					'plugins/(?P<slug>[a-zA-Z0-9\-_]+)',
+					'plugins/(?P<slug>[-_a-zA-Z0-9]+)/(?P<passcode>[-_a-zA-Z0-9]+)',
 					array(
 						'methods'             => 'GET',
 						'callback'            => array( __CLASS__, 'rest_handle_get_plugin_json' ),
 						'permission_callback' => array( __CLASS__, 'rest_check_get_plugin_json_permissions' ),
 						'args'                => array(
 							'slug' => array(
+								'required'          => true,
+								'validate_callback' => function ( $param, $request, $key ) {
+									return ! empty( $param ) && preg_match( '/^[a-zA-Z0-9\-_]+$/', $param );
+								},
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'passcode' => array(
 								'required'          => true,
 								'validate_callback' => function ( $param, $request, $key ) {
 									return ! empty( $param ) && preg_match( '/^[a-zA-Z0-9\-_]+$/', $param );
@@ -98,17 +105,25 @@ class Import_Export {
 		);
 
 		if ( ! $plugin ) {
-			return new WP_REST_Response( array( 'message' => 'Plugin not found or not enabled for REST API' ), 404 );
+			return new \WP_REST_Response( array( 'message' => 'Plugin not found or not enabled for REST API' ), 404 );
 		}
 		$plugin            = $plugin[0];
-		$rest_api_passcode = get_post_meta( $plugin->ID, 'restApiPasscode', true );
+
+		// Check if plugi is enabled for REST API.
+		$enabled_for_rest = sanitize_text_field( get_post_meta( $plugin->ID, 'enableRestApi', true ) );
+		if ( 'true' !== $enabled_for_rest ) {
+			return new \WP_REST_Response( array( 'message' => 'Plugin not found or not enabled for REST API' ), 403 );
+		}
+
+		// Check if passcode is correct.
+		$rest_api_passcode = sanitize_text_field( get_post_meta( $plugin->ID, 'restApiPasscode', true ) );
 		if ( $rest_api_passcode !== $passcode ) {
-			return new WP_REST_Response( array( 'message' => 'Invalid passcode' ), 403 );
+			return new \WP_REST_Response( array( 'message' => 'Invalid passcode' ), 403 );
 		}
 
 		$payload = self::generate_export_payload( array( $plugin->ID ) );
 
-		return new WP_REST_Response( $payload );
+		return new \WP_REST_Response( $payload );
 	}
 
 	/**
@@ -128,16 +143,16 @@ class Import_Export {
 		);
 
 		if ( ! $plugin ) {
-			return new WP_REST_Response( array( 'message' => 'Plugin not found or not enabled for REST API' ), 404 );
+			return new \WP_REST_Response( array( 'message' => 'Plugin not found or not enabled for REST API' ), 404 );
 		}
 
 		$plugin           = $plugin[0];
-		$enabled_for_rest = (bool) get_post_meta( $plugin->ID, 'enableRestApi', true );
+		$enabled_for_rest = sanitize_text_field( get_post_meta( $plugin->ID, 'enableRestApi', true ) );
 		if ( ! $enabled_for_rest ) {
-			return new WP_REST_Response( array( 'message' => 'Plugin not found or not enabled for REST API' ), 403 );
+			return new \WP_REST_Response( array( 'message' => 'Plugin not found or not enabled for REST API' ), 403 );
 		}
 
-		$rest_api_passcode = get_post_meta( $plugin->ID, 'restApiPasscode', true );
+		$rest_api_passcode = sanitize_text_field( get_post_meta( $plugin->ID, 'restApiPasscode', true ) );
 		$request_passcode  = $request->get_param( 'passcode' );
 		return $rest_api_passcode === $request_passcode;
 	}
@@ -159,7 +174,7 @@ class Import_Export {
 		$payload_checksum = 'sha256:' . hash( 'sha256', json_encode( $items ) );
 
 		if ( $checksum !== $payload_checksum ) {
-			return new WP_REST_Response( array( 'message' => 'Checksum mismatch' ), 400 );
+			return new \WP_REST_Response( array( 'message' => 'Checksum mismatch' ), 400 );
 		}
 
 		// Store all errors here that are non-fatal and can be returned to the user.
@@ -233,7 +248,7 @@ class Import_Export {
 			}
 		}
 
-		return new WP_REST_Response( array( 'errors' => $errors ) );
+		return new \WP_REST_Response( array( 'errors' => $errors ) );
 	}
 
 	/**
