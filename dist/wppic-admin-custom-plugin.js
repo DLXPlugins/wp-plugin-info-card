@@ -39301,7 +39301,6 @@ var ScreenTransition = function b(a) {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     // If the path changed, trigger animation.
     if (j !== ((d === null || d === void 0 ? void 0 : d.pathname) || '/')) {
-      console.log('Path changed, starting fade out:', j, '->', d === null || d === void 0 ? void 0 : d.pathname);
       // Start fade out.
       s(true);
     }
@@ -40421,7 +40420,6 @@ var Advanced = function a() {
           case 4:
             c = b.sent;
             d = c.data.success;
-            console.log(c);
             if (d) {
               // Show success notice.
               u({
@@ -40431,20 +40429,20 @@ var Advanced = function a() {
                 title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Success', 'wp-plugin-info-card')
               });
             }
-            b.next = 13;
+            b.next = 12;
             break;
-          case 10:
-            b.prev = 10;
+          case 9:
+            b.prev = 9;
             b.t0 = b["catch"](1);
             m(b.t0.message);
             // Show error notice.
-          case 13:
+          case 12:
             q(false);
-          case 14:
+          case 13:
           case "end":
             return b.stop();
         }
-      }, b, null, [[1, 10]]);
+      }, b, null, [[1, 9]]);
     }));
     return function b(_x) {
       return a.apply(this, arguments);
@@ -41327,9 +41325,7 @@ var ImportPluginModal = function b(a) {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Import from REST API', 'wp-plugin-info-card'),
       className: 'wppic-import-plugin'
     }],
-    onSelect: function b(a) {
-      console.log(a);
-    }
+    onSelect: function b(a) {}
   }, function (b) {
     switch (b.name) {
       case 'import-file':

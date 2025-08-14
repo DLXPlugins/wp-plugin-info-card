@@ -18456,7 +18456,6 @@ var ScreenPluginPreview = function b(a) {
     var b = wppic.rest_url + 'wppic/v2/get_data';
     axios__WEBPACK_IMPORTED_MODULE_9__["default"].get(b + "?type=plugin&slug=".concat(encodeURIComponent(c.slug))).then(function (a) {
       if (a.data.success) {
-        console.log(a.data.data[0]);
         // Set asset data.
         d({
           assetData: a.data.data[0] || {}

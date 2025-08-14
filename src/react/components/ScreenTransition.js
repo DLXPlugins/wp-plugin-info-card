@@ -35,7 +35,6 @@ const ScreenTransition = ( { children, location } ) => {
 	useEffect( () => {
 		// If the path changed, trigger animation.
 		if ( currentPath !== ( location?.pathname || '/' ) ) {
-			console.log('Path changed, starting fade out:', currentPath, '->', location?.pathname );
 			// Start fade out.
 			setIsAnimating( true );
 		}

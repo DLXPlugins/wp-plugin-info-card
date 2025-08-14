@@ -90,7 +90,6 @@ const Advanced = () => {
 			} );
 
 			const { success } = response.data;
-			console.log( response );
 			if ( success ) {
 				// Show success notice.
 				setSnackbarOptions( {

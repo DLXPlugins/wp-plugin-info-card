@@ -26,7 +26,6 @@ const ImportPluginModal = ( props ) => {
 					},
 				] }
 				onSelect={ ( tab ) => {
-					console.log( tab );
 				} }
 			>
 				{ ( tab ) => {
