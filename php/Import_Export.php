@@ -71,7 +71,145 @@ class Import_Export {
 
 		$payload = json_decode( file_get_contents( $json_file['tmp_name'] ), true );
 
-		return new WP_REST_Response( $payload );
+		$checksum = $payload['checksum'];
+		$items = $payload['items'];
+		$payload_checksum = 'sha256:' . hash( 'sha256', json_encode( $items ) );
+
+		if ( $checksum !== $payload_checksum ) {
+			return new WP_REST_Response( array( 'message' => 'Checksum mismatch' ), 400 );
+		}
+
+		// Store all errors here that are non-fatal and can be returned to the user.
+		$errors = array();
+
+		foreach ( $items as $item ) {
+			$slug = $item['slug'];
+			if ( self::check_plugin_slug( $slug ) ) {
+				$errors[] = sprintf( __( 'Plugin slug %s already in use', 'wp-plugin-info-card' ), $slug );
+				continue;
+			}
+
+			// Sanitize item fields and get into format.
+			$item = Functions::sanitize_array_recursive( $item );
+
+			// Get the image vars.
+			$plugin_icon_url = $item['pluginIconUrl'];
+			$plugin_banner_url = $item['pluginBannerUrl'];
+
+			// Validate the URLs.
+			$plugin_icon_url = esc_url_raw( wp_http_validate_url( $plugin_icon_url ) );
+			$plugin_banner_url = esc_url_raw( wp_http_validate_url( $plugin_banner_url ) );
+
+			$plugin_icon_url_id = null;
+			if ( $plugin_icon_url ) {
+				$plugin_icon_url_id = self::sideload_image( $plugin_icon_url );
+				if ( ! is_wp_error( $plugin_icon_url_id ) ) {
+					$item['pluginIconUrl'] = wp_get_attachment_url( $plugin_icon_url_id );
+					$item['pluginIconUrlId'] = $plugin_icon_url_id;
+				} else {
+					$item['pluginIconUrl'] = '';
+					$errors[] = sprintf( __( 'Error sideloading plugin icon: %s', 'wp-plugin-info-card' ), $plugin_icon_url_id->get_error_message() );
+				}
+			}
+
+			if ( $plugin_banner_url ) {
+				$plugin_banner_url_id = self::sideload_image( $plugin_banner_url );
+				if ( ! is_wp_error( $plugin_banner_url_id ) ) {
+					$item['pluginBannerUrl'] = wp_get_attachment_url( $plugin_banner_url_id );
+					$item['pluginBannerUrlId'] = $plugin_banner_url_id;
+				} else {
+					$item['pluginBannerUrl'] = '';
+					$errors[] = sprintf( __( 'Error sideloading plugin banner: %s', 'wp-plugin-info-card' ), $plugin_banner_url_id->get_error_message() );
+				}
+			}
+
+			/**
+			 * Begin forming items.
+			 */
+
+			// Reconcile with fields.
+			$item = array_intersect_key( $item, array_flip( self::$fields ) );
+
+			$post_item_args = array(
+				'post_type'   => 'wppic_custom_plugins',
+				'post_title'  => sanitize_text_field( $item['name'] ),
+				'post_name'   => sanitize_title( $item['slug'] ),
+				'post_status' => 'publish',
+				'post_content' => wp_json_encode( $item ),
+			);
+
+			$post_id = wp_insert_post( $post_item_args );
+			if ( is_wp_error( $post_id ) ) {
+				$errors[] = sprintf( __( 'Error creating custom plugin: %s', 'wp-plugin-info-card' ), $post_id->get_error_message() );
+				continue;
+			} else {
+				// Try to set featured image.
+				if ( ! is_wp_error( $plugin_icon_url_id ) && $plugin_icon_url_id ) {
+					set_post_thumbnail( $post_id, $plugin_icon_url_id );
+				}
+			}
+		}
+
+		return new WP_REST_Response( $errors );
+	}
+
+	/**
+	 * Sideload an image from a URL.
+	 *
+	 * @param string $url The URL of the image to sideload.
+	 *
+	 * @return int|WP_Error The attachment ID or WP_Error.
+	 */
+	private static function sideload_image( $url ) {
+		// Check file extension.
+		$extension = pathinfo( $url, PATHINFO_EXTENSION );
+
+		// Strip all query vars from extension.
+		$extension = explode( '?', $extension );
+		$extension = $extension[0];
+
+		// Start testing.
+		if ( ! $extension ) {
+			return new \WP_Error( 'invalid_url', __( 'File extension not found.', 'wp-plugin-info-card' ), array( 'status' => 400 ) );
+		}
+		$valid_extensions = Functions::get_supported_file_extensions();
+		if ( ! in_array( $extension, $valid_extensions, true ) ) {
+			return new \WP_Error( 'invalid_url', __( 'Invalid file extension.', 'wp-plugin-info-card' ), array( 'status' => 400 ) );
+		}
+
+		// Get the file.
+		// Save the image to the media library.
+		if ( ! function_exists( 'media_sideload_image' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/image.php';
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+			require_once ABSPATH . 'wp-admin/includes/media.php';
+		}
+		$attachment_id = media_sideload_image( $url, 0, '', 'id' );
+
+		return $attachment_id; // Returns the attachment ID or WP_Error.
+	}
+
+	/**
+	 * Check if the plugin slug is already in use.
+	 *
+	 * @param string $slug The plugin slug to check.
+	 *
+	 * @return bool True if the plugin slug is already in use, false otherwise.
+	 */
+	private static function check_plugin_slug( $slug ) {
+		// Try to get local slug from custom plugins post type.
+		$maybe_custom_plugin_post = get_posts(
+			array(
+				'post_type' => 'wppic_custom_plugins',
+				'name'      => sanitize_title( $slug ),
+			)
+		);
+		$maybe_custom_slug        = '';
+		if ( $maybe_custom_plugin_post ) {
+			$maybe_custom_slug = $maybe_custom_plugin_post[0]->post_name;
+		}
+
+		return (bool) $maybe_custom_slug;
 	}
 
 	/**

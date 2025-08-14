@@ -293,6 +293,33 @@ class Functions {
 	}
 
 	/**
+	 * Get the plugin's supported file extensions.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array The supported file extensions.
+	 */
+	public static function get_supported_file_extensions() {
+		$file_extensions = array(
+			'jpeg',
+			'jpg',
+			'gif',
+			'png',
+			'webp',
+			'avif',
+		);
+		/**
+		 * Filter the valid file extensions for the photo block.
+		 *
+		 * @param array $file_extensions The valid mime types.
+		 */
+		$file_extensions = apply_filters( 'wppic_block_file_extensions', $file_extensions );
+
+		return $file_extensions;
+	}
+
+
+	/**
 	 * Take a _ separated field and convert to camelcase.
 	 *
 	 * @param string $field Field to convert to camelcase.
@@ -840,30 +867,6 @@ class Functions {
 			return $images_array;
 		}
 		return array();
-	}
-
-	/**
-	 * Get the plugin's supported file extensions.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return array The supported file extensions.
-	 */
-	public static function get_supported_file_extensions() {
-		$file_extensions = array(
-			'jpeg',
-			'jpg',
-			'gif',
-			'png',
-		);
-		/**
-		 * Filter the valid file extensions for the photo block.
-		 *
-		 * @param array $file_extensions The valid mime types.
-		 */
-		$file_extensions = apply_filters( 'wppic_block_file_extensions', $file_extensions );
-
-		return $file_extensions;
 	}
 
 	/**
