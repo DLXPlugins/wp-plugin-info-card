@@ -55,6 +55,7 @@ class Custom_Plugin {
 				'getNonce'              => wp_create_nonce( 'wppic-admin-custom-plugin-retrieve-options' ),
 				'getCustomPlugins'      => wp_create_nonce( 'wppic-get-custom-plugins' ),
 				'saveNonce'             => wp_create_nonce( 'wppic-save-custom-plugin' ),
+				'saveAdvancedNonce'     => wp_create_nonce( 'wppic-admin-custom-plugin-save-advanced-options' ),
 				'checkPluginSlugNonce'  => wp_create_nonce( 'wppic-check-plugin-slug' ),
 				'deleteCustomPlugin'    => wp_create_nonce( 'wppic-delete-custom-plugin' ),
 				'defaultPluginIcon'     => Functions::get_plugin_url( 'assets/img/default-plugin-icon.png' ),

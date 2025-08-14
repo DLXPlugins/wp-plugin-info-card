@@ -46,11 +46,74 @@ class Init {
 		add_action( 'wp_ajax_wppic_delete_custom_plugin', array( $this, 'ajax_delete_custom_plugin' ) );
 		add_action( 'wp_ajax_wppic_get_custom_plugin_data', array( $this, 'ajax_get_custom_plugin_data' ) );
 		add_action( 'wp_ajax_wppic_export_custom_plugin', array( $this, 'ajax_export_custom_plugin' ) );
+		add_action( 'wp_ajax_wppic_get_custom_plugin_advanced_options', array( $this, 'ajax_get_custom_plugin_advanced_options' ) );
+		add_action( 'wp_ajax_wppic_save_custom_plugin_advanced_options', array( $this, 'ajax_save_custom_plugin_advanced_options' ) );
 
 		// Init tabs.
 		new Tabs\Main();
 		new Tabs\EDD();
 		new Tabs\Custom_Plugin();
+	}
+
+	/**
+	 * Save custom plugin advanced options via Ajax.
+	 */
+	public function ajax_save_custom_plugin_advanced_options() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+		if ( ! wp_verify_nonce( $nonce, 'wppic-admin-custom-plugin-save-advanced-options' ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce verification failed', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		$options                          = Options::get_options();
+		$options['enable_rest_api']       = (bool) filter_input( INPUT_POST, 'enable_rest_api', FILTER_VALIDATE_BOOLEAN );
+		$options['enable_custom_plugins'] = (bool) filter_input( INPUT_POST, 'enable_custom_plugins', FILTER_VALIDATE_BOOLEAN );
+
+		$options = Functions::sanitize_array_recursive( $options );
+		Options::update_options( $options );
+
+		wp_send_json_success(
+			array(
+				'message' => __( 'Options saved', 'wp-plugin-info-card' ),
+			)
+		);
+	}
+
+	/**
+	 * Get custom plugin advanced options via Ajax.
+	 */
+	public function ajax_get_custom_plugin_advanced_options() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+		if ( ! wp_verify_nonce( $nonce, 'wppic-admin-custom-plugin-retrieve-options' ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce verification failed', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		$options = Options::get_options();
+
+		wp_send_json_success(
+			array(
+				'options' => $options,
+			)
+		);
 	}
 
 	/**
@@ -165,7 +228,7 @@ class Init {
 		$item_content['restApiPasscode'] = sanitize_text_field( get_post_meta( $custom_plugin->ID, 'restApiPasscode', true ) );
 
 		$item_content['restApiDataVersion'] = absint( get_post_meta( $custom_plugin->ID, 'restApiDataVersion', true ) );
-		$return = array(
+		$return                             = array(
 			'id'      => absint( $custom_plugin->ID ),
 			'title'   => sanitize_text_field( $custom_plugin->post_title ),
 			'slug'    => sanitize_title( $custom_plugin->post_name ),

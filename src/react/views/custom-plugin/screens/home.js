@@ -412,7 +412,7 @@ const PluginHome = ( props ) => {
 							} }
 							iconPosition="right"
 							className="wppic-btn wppic-btn-alt has-icon-right btn-full-width"
-							icon={ () => <ExternalLink /> }
+							icon={ () => <Cog /> }
 						>
 							{ __( 'Configure Settings', 'wp-plugin-info-card' ) }
 						</Button>
@@ -430,9 +430,13 @@ const PluginHome = ( props ) => {
 						</p>
 						<Button
 							variant="secondary"
-							src="https://wppic.dlxplugins.com/"
+							href="https://docs.dlxplugins.com/wp-plugin-info-card/"
 							className="wppic-btn wppic-btn-alt has-icon-right btn-full-width"
 							target="_blank"
+							onClick={ ( e ) => {
+								e.preventDefault();
+								window.open( 'https://docs.dlxplugins.com/wp-plugin-info-card/', '_blank' );
+							} }
 							rel="noopener noreferrer"
 							icon={ () => <ExternalLink /> }
 						>
