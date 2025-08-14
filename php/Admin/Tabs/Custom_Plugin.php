@@ -62,6 +62,7 @@ class Custom_Plugin {
 				'restNonce'             => wp_create_nonce( 'wp_rest' ),
 				'restUrl'               => get_rest_url( null, 'wppic/v1/custom-plugins/import' ),
 				'customPluginsRestBase' => get_rest_url( null, 'wppic/v1/plugins/' ),
+				'importPluginRestUrl'   => get_rest_url( null, 'wppic/v1/custom-plugins/import-from-rest' ),
 			)
 		);
 

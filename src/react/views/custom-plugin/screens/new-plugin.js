@@ -938,34 +938,49 @@ const Interface = ( props ) => {
 								) }
 							/>
 						</div>
-						<div className="wppic-admin-row">
-							<Controller
-								control={ control }
-								name="restApiPasscode"
-								rules={ {
-									required: true,
-								} }
-								render={ ( { field } ) => (
-									<>
-										<TextControl
-											{ ...field }
-											type="text"
-											placeholder={ __( 'Enter REST API Passcode', 'wp-plugin-info-card' ) }
-											className={ classnames( 'wppic-admin-input', { 'has-error': errors?.restApiPasscode } ) }
-											help={ __( '(Optional) Enter the passcode for the REST API if you want to add a passcode to the REST URL for validation. This can help prevent unauthorized access to your plugin data.', 'wp-plugin-info-card' ) }
-											label={ __( 'REST API Passcode', 'wp-plugin-info-card' ) }
-										/>
-										{ errors?.restApiPasscode?.type === 'required' && (
-											<Notice
-												message={ __( 'This field is required.', 'wp-plugin-info-card' ) }
-												status="error"
-												politeness="assertive"
-											/>
+						{
+							formValues.enableRestApi === 'true' && (
+								<div className="wppic-admin-row">
+									<Controller
+										control={ control }
+										name="restApiPasscode"
+										rules={ {
+											required: true,
+											pattern: /^[a-zA-Z0-9]+$/,
+										} }
+										render={ ( { field } ) => (
+											<>
+												<TextControl
+													{ ...field }
+													type="text"
+													placeholder={ __( 'Enter REST API Passcode', 'wp-plugin-info-card' ) }
+													onBlur={ ( value ) => {
+														trigger( 'restApiPasscode' );
+													} }
+													className={ classnames( 'wppic-admin-input is-required', { 'has-error': errors?.restApiPasscode } ) }
+													help={ __( '(Required) Enter the passcode for the REST API. This is used to prevent unauthorized access to your plugin data. If you want users to have to revalidate, change this passcode.', 'wp-plugin-info-card' ) }
+													label={ __( 'REST API Passcode', 'wp-plugin-info-card' ) }
+												/>
+												{ errors?.restApiPasscode?.type === 'required' && (
+													<Notice
+														message={ __( 'This field is required.', 'wp-plugin-info-card' ) }
+														status="error"
+														politeness="assertive"
+													/>
+												) }
+												{ errors?.restApiPasscode?.type === 'pattern' && (
+													<Notice
+														message={ __( 'This field must only contain letters and numbers.', 'wp-plugin-info-card' ) }
+														status="error"
+														politeness="assertive"
+													/>
+												) }
+											</>
 										) }
-									</>
-								) }
-							/>
-						</div>
+									/>
+								</div>
+							)
+						}
 					</td>
 				</tr>
 			</tbody>

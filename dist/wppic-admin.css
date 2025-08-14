@@ -14532,45 +14532,37 @@ p.wppic-admin-header-description {
   position: relative;
   width: 100%;
   min-height: 400px;
-  opacity: 0;
   overflow: hidden;
-  transform: translateY(0);
-  /* Split into individual transitions for better control */
-  transition: none;
-  /* Reset any previous transitions */
-  transition: opacity 350ms ease-out;
-  will-change: opacity;
-  animation: wppic-screen-transition 350ms ease-out;
-  opacity: 1;
 }
 
-@keyframes wppic-screen-transition {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.75;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 .screen-transition-content {
   position: relative;
   width: 100%;
   opacity: 1;
+  transition: opacity 1500ms ease-in-out;
+  will-change: opacity;
 }
 .screen-transition-content.is-animating {
   opacity: 0;
-}
-.screen-transition-content.is-pending {
-  opacity: 0.7;
 }
 
 /* Ensure container maintains height */
 .wppic-admin-panel-container {
   position: relative;
   min-height: 400px;
+}
+
+.wppic-import-plugin-file {
+  margin-top: 24px;
+}
+.wppic-import-plugin-file .wppic-import-plugin-file-input__help {
+  margin-bottom: 0;
+}
+.wppic-import-plugin-file .wppic-admin-buttons {
+  margin-top: 16px;
+}
+.wppic-import-plugin-file .wppic-admin__notice {
+  max-width: 500px;
 }
 
 /*# sourceMappingURL=wppic-admin.css.map*/

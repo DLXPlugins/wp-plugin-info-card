@@ -57,6 +57,17 @@ class Import_Export {
 					)
 				);
 
+				// Setup rest route for handling the import of custom plugin from REST API URL.
+				register_rest_route(
+					'wppic/v1',
+					'custom-plugins/import-from-rest',
+					array(
+						'methods'             => 'POST',
+						'callback'            => array( __CLASS__, 'rest_handle_import_from_rest' ),
+						'permission_callback' => array( __CLASS__, 'rest_check_permissions' ),
+					)
+				);
+
 				// Setup rest route for handling of exposing plugin's JSON.
 				register_rest_route(
 					'wppic/v1',
@@ -155,6 +166,111 @@ class Import_Export {
 		$rest_api_passcode = sanitize_text_field( get_post_meta( $plugin->ID, 'restApiPasscode', true ) );
 		$request_passcode  = $request->get_param( 'passcode' );
 		return $rest_api_passcode === $request_passcode;
+	}
+
+	/**
+	 * Handle the import of custom plugins from a REST API URL.
+	 *
+	 * @param WP_REST_Request $request The request object.
+	 * @return WP_REST_Response The response object.
+	 */
+	public static function rest_handle_import_from_rest( $request ) {
+		$params   = $request->get_params();
+		$rest_url = $params['restUrl'];
+
+		$response = wp_safe_remote_get( esc_url_raw( $rest_url ) );
+		if ( is_wp_error( $response ) ) {
+			return new \WP_REST_Response( array( 'message' => 'Error fetching data from REST API' ), 400 );
+		}
+
+		$payload = json_decode( $response['body'], true );
+
+		$checksum         = $payload['checksum'];
+		$items            = $payload['items'];
+		$payload_checksum = 'sha256:' . hash( 'sha256', json_encode( $items ) );
+
+		if ( $checksum !== $payload_checksum ) {
+			return new \WP_REST_Response( array( 'message' => 'Checksum mismatch' ), 400 );
+		}
+
+		// Store all errors here that are non-fatal and can be returned to the user.
+		$errors       = array();
+		$total_items  = count( $items );
+		$current_item = 0;
+
+		foreach ( $items as $item ) {
+			$slug = $item['slug'];
+			if ( self::check_plugin_slug( $slug ) ) {
+				$errors[] = sprintf( __( 'Plugin slug %s already in use', 'wp-plugin-info-card' ), $slug );
+				continue;
+			}
+
+			// Sanitize item fields and get into format.
+			$item = Functions::sanitize_array_recursive( $item );
+
+			// Get the image vars.
+			$plugin_icon_url   = $item['pluginIconUrl'];
+			$plugin_banner_url = $item['pluginBannerUrl'];
+
+			// Validate the URLs.
+			$plugin_icon_url   = esc_url_raw( wp_http_validate_url( $plugin_icon_url ) );
+			$plugin_banner_url = esc_url_raw( wp_http_validate_url( $plugin_banner_url ) );
+
+			$plugin_icon_url_id = null;
+			if ( $plugin_icon_url ) {
+				$plugin_icon_url_id = self::sideload_image( $plugin_icon_url );
+				if ( ! is_wp_error( $plugin_icon_url_id ) ) {
+					$item['pluginIconUrl']   = wp_get_attachment_url( $plugin_icon_url_id );
+					$item['pluginIconUrlId'] = $plugin_icon_url_id;
+				} else {
+					$item['pluginIconUrl'] = '';
+					$errors[]              = sprintf( __( 'Error sideloading plugin icon: %s', 'wp-plugin-info-card' ), $plugin_icon_url_id->get_error_message() );
+				}
+			}
+
+			if ( $plugin_banner_url ) {
+				$plugin_banner_url_id = self::sideload_image( $plugin_banner_url );
+				if ( ! is_wp_error( $plugin_banner_url_id ) ) {
+					$item['pluginBannerUrl']   = wp_get_attachment_url( $plugin_banner_url_id );
+					$item['pluginBannerUrlId'] = $plugin_banner_url_id;
+				} else {
+					$item['pluginBannerUrl'] = '';
+					$errors[]                = sprintf( __( 'Error sideloading plugin banner: %s', 'wp-plugin-info-card' ), $plugin_banner_url_id->get_error_message() );
+				}
+			}
+
+			++$current_item;
+
+			// Reconcile with fields.
+			$item = array_intersect_key( $item, array_flip( self::$fields ) );
+
+			$post_item_args = array(
+				'post_type'    => 'wppic_custom_plugins',
+				'post_title'   => sanitize_text_field( $item['name'] ),
+				'post_name'    => sanitize_title( $item['slug'] ),
+				'post_status'  => 'publish',
+				'post_content' => wp_json_encode( $item ),
+			);
+
+			$post_id = wp_insert_post( $post_item_args );
+			if ( is_wp_error( $post_id ) ) {
+				$errors[] = sprintf( __( 'Error creating custom plugin: %s', 'wp-plugin-info-card' ), $post_id->get_error_message() );
+				continue;
+			} else {
+				// Try to set featured image.
+				if ( ! is_wp_error( $plugin_icon_url_id ) && $plugin_icon_url_id ) {
+					set_post_thumbnail( $post_id, $plugin_icon_url_id );
+				}
+			}
+		}
+
+		return new \WP_REST_Response(
+			array(
+				'errors'       => $errors,
+				'total_items'  => $total_items,
+				'current_item' => $current_item,
+			)
+		);
 	}
 
 	/**

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useTransition } from 'react';
-import { useRouter } from '@tanstack/react-router';
 
 const TransitionContent = ( { children, isAnimating, onTransitionEnd, currentPath } ) => {
 	return (
@@ -13,43 +12,34 @@ const TransitionContent = ( { children, isAnimating, onTransitionEnd, currentPat
 	);
 };
 
-const ScreenTransition = ( { children } ) => {
-	const router = useRouter();
+const ScreenTransition = ( { children, location } ) => {
 	const [ , startTransition ] = useTransition();
-	const [ currentPath, setCurrentPath ] = useState( '#' + router.state.location.pathname );
+	const [ currentPath, setCurrentPath ] = useState( location?.pathname || '/' );
 	const [ currentChildren, setCurrentChildren ] = useState( children );
 	const [ isAnimating, setIsAnimating ] = useState( false );
-	const [ shouldUpdateContent, setShouldUpdateContent ] = useState( false );
 
-	// Handle animation end
+	// Handle animation end.
 	const handleTransitionEnd = ( event ) => {
-		// Only handle the opacity transition end
+		// Only handle the opacity transition end.
 		if ( event.propertyName === 'opacity' && isAnimating ) {
-			if ( shouldUpdateContent ) {
-				// Content update phase
-				startTransition( () => {
-					setCurrentPath( '#' + router.state.location.pathname );
-					setCurrentChildren( children );
-					setShouldUpdateContent( false );
-					// Trigger fade in
-					requestAnimationFrame( () => {
-						setIsAnimating( false );
-					} );
-				} );
-			} else {
-				// Initial fade out complete, update content
-				setShouldUpdateContent( true );
-			}
+			// Fade out complete, now update content and fade in.
+			startTransition( () => {
+				setCurrentPath( location?.pathname || '/' );
+				setCurrentChildren( children );
+				// Trigger fade in by removing isAnimating.
+				setIsAnimating( false );
+			} );
 		}
 	};
 
 	useEffect( () => {
-		// If the path changed, trigger animation
-		if ( currentPath !== '#' + router.state.location.pathname ) {
-			// Start fade out
+		// If the path changed, trigger animation.
+		if ( currentPath !== ( location?.pathname || '/' ) ) {
+			console.log('Path changed, starting fade out:', currentPath, '->', location?.pathname );
+			// Start fade out.
 			setIsAnimating( true );
 		}
-	}, [ router.state.location.pathname, currentPath ] );
+	}, [ location?.pathname, currentPath ] );
 
 	return (
 		<div className="screen-transition-wrapper">

@@ -16,6 +16,7 @@ import {
 import PluginIcon from '../../../components/PluginIcon';
 import sendCommand from '../../../utils/SendCommand';
 import ImportPluginModal from './import-plugin-modal';
+import SnackStatus from '../../../components/SnackStatus';
 
 const defaultLayouts = {
 	grid: {
@@ -73,9 +74,15 @@ const PluginHome = ( props ) => {
 	const [ selectedItems, setSelectedItems ] = useState( [] );
 	const [ loading, setLoading ] = useState( true );
 	const [ showDeleteModal, setShowDeleteModal ] = useState( false );
-	const [ deletePluginId, setDeletePluginId ] = useState( null );
 	const [ customPlugins, setCustomPlugins ] = useState( [] );
-	const [ showImportModal, setShowImportModal ] = useState( true );
+	const [ showImportModal, setShowImportModal ] = useState( false );
+	const [ snackbarOptions, setSnackbarOptions ] = useState( {
+		isVisible: false,
+		type: 'info',
+		message: '',
+		title: '',
+		politeness: 'polite',
+	} );
 
 	const navigate = useNavigate();
 
@@ -134,6 +141,14 @@ const PluginHome = ( props ) => {
 					const copyBlob = new Blob( [ restUrl ], { type: 'text/plain' } );
 					const data = [ new ClipboardItem( { [ copyBlob.type ]: copyBlob } ) ];
 					navigator.clipboard.write( data );
+
+					setSnackbarOptions( {
+						isVisible: true,
+						type: 'success',
+						message: __( 'REST URL copied to clipboard.', 'wp-plugin-info-card' ),
+						title: __( 'Success', 'wp-plugin-info-card' ),
+						politeness: 'polite',
+					} );
 				} catch ( e ) {
 					// Try another method.
 					navigator.clipboard.writeText( restUrl );
@@ -247,38 +262,48 @@ const PluginHome = ( props ) => {
 							onRequestClose={ () => setShowDeleteModal( { display: false, items: null } ) }
 						>
 							<p>{ __( 'Are you sure you want to delete this plugin?', 'wp-plugin-info-card' ) }</p>
-							<Button
-								variant="primary"
-								onClick={ async () => {
-									setLoading( true );
-									const pluginIds = [];
-									showDeleteModal.items.forEach( ( item ) => {
-										pluginIds.push( item.id );
-									} );
-									const response = await sendCommand( 'wppic_delete_custom_plugin', {
-										nonce: wppicAdminCustomPlugin.deleteCustomPlugin,
-										pluginIds,
-									} );
-									setLoading( false );
-									const responseData = response.data;
-									if ( responseData.success ) {
-										setShowDeleteModal( { display: false, items: null } );
-										// Now remove from customPlugins array.
-										setCustomPlugins( customPlugins.filter( ( plugin ) => ! pluginIds.includes( plugin.id ) ) );
-									} else {
-										// todo - error handling.
-									}
-								} }
-								isDestructive={ true }
-							>
-								{ __( 'Delete', 'wp-plugin-info-card' ) }
-							</Button>
-							<Button
-								variant="secondary"
-								onClick={ () => setShowDeleteModal( { display: false, items: null } ) }
-							>
-								{ __( 'Cancel', 'wp-plugin-info-card' ) }
-							</Button>
+							<div className="wppic-admin-buttons">
+								<Button
+									variant="primary"
+									onClick={ async () => {
+										setLoading( true );
+										const pluginIds = [];
+										showDeleteModal.items.forEach( ( item ) => {
+											pluginIds.push( item.id );
+										} );
+										const response = await sendCommand( 'wppic_delete_custom_plugin', {
+											nonce: wppicAdminCustomPlugin.deleteCustomPlugin,
+											pluginIds,
+										} );
+										setLoading( false );
+										const responseData = response.data;
+										if ( responseData.success ) {
+											setSnackbarOptions( {
+												isVisible: true,
+												type: 'success',
+												message: __( 'Plugin deleted successfully.', 'wp-plugin-info-card' ),
+												title: __( 'Success', 'wp-plugin-info-card' ),
+												politeness: 'polite',
+											} );
+											setShowDeleteModal( { display: false, items: null } );
+											// Now remove from customPlugins array.
+											setCustomPlugins( customPlugins.filter( ( plugin ) => ! pluginIds.includes( plugin.id ) ) );
+											
+										} else {
+											// todo - error handling.
+										}
+									} }
+									isDestructive={ true }
+								>
+									{ __( 'Delete', 'wp-plugin-info-card' ) }
+								</Button>
+								<Button
+									variant="secondary"
+									onClick={ () => setShowDeleteModal( { display: false, items: null } ) }
+								>
+									{ __( 'Cancel', 'wp-plugin-info-card' ) }
+								</Button>
+							</div>
 						</Modal>
 					)
 				}
@@ -311,6 +336,7 @@ const PluginHome = ( props ) => {
 								onChangeSelection={ setSelectedItems }
 								defaultLayouts={ defaultLayouts }
 								searchLabel={ __( 'Search Plugins', 'wp-plugin-info-card' ) }
+								isLoading={ loading }
 							/>
 						</div>
 					</div>
@@ -418,6 +444,13 @@ const PluginHome = ( props ) => {
 			{ showImportModal && <ImportPluginModal onClose={ () => {
 				setShowImportModal( false ); fetchData( {} );
 			} } /> }
+			<SnackStatus snackbarOptions={ snackbarOptions } onTimeout={ () => {
+				const newSnackbarOptions = {
+					...snackbarOptions,
+					isVisible: false,
+				};
+				setSnackbarOptions( newSnackbarOptions );
+			} } />
 		</>
 	);
 };

@@ -1,6 +1,7 @@
 import { Modal, TabPanel } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import ImportPluginFile from './import-plugin-file';
+import ImportPluginRestUrl from './import-plugin-rest-url';
 
 const ImportPluginModal = ( props ) => {
 	return (
@@ -33,7 +34,7 @@ const ImportPluginModal = ( props ) => {
 						case 'import-file':
 							return <ImportPluginFile onClose={ props.onClose } />;
 						case 'import-rest':
-							return <div>Import from REST API</div>;
+							return <ImportPluginRestUrl onClose={ props.onClose } />;
 					}
 				} }
 			</TabPanel>

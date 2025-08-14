@@ -33,7 +33,6 @@ const SaveResetButtons = ( props ) => {
 	 * Save the options by setting promise as state.
 	 */
 	const saveOptions = async () => {
-		console.log( 'saveOptions', formValues, isEditing );
 		const saveOptionsPromise = SendCommand( 'wppic_save_custom_plugin', { wppicFormData: formValues, isEditing } );
 		setSavePromise( saveOptionsPromise );
 		setSaving( true );
@@ -45,24 +44,6 @@ const SaveResetButtons = ( props ) => {
 			}
 		} );
 		setSaving( false );
-	};
-
-	/**
-	 * Reset the options by setting promise as state.
-	 */
-	const deletePlugin = async () => {
-		const deletePluginPromise = SendCommand( 'wppic_delete_custom_plugin', { wppicFormData: formValues } );
-		setDeletePromise( deletePluginPromise );
-		setDeleting( true );
-		const deleteResponse = await deletePluginPromise;
-		reset(
-			deleteResponse.data.data.formData,
-			{
-				keepErrors: false,
-				keepDirty: false,
-			},
-		);
-		setDeleting( false );
 	};
 
 	const hasErrors = () => {
@@ -87,16 +68,6 @@ const SaveResetButtons = ( props ) => {
 			return __( 'Saved', 'wp-plugin-info-card' );
 		}
 		return __( 'Save and Close', 'wp-plugin-info-card' );
-	};
-
-	const getDeleteText = () => {
-		if ( deleting ) {
-			return __( 'Deleting…', 'wp-plugin-info-card' );
-		}
-		if ( isDeleted ) {
-			return __( 'Deleted', 'wp-plugin-info-card' );
-		}
-		return __( 'Delete Plugin', 'wp-plugin-info-card' );
 	};
 
 	return (
@@ -136,25 +107,6 @@ const SaveResetButtons = ( props ) => {
 						onCancel();
 					} }
 				/>
-				{ isEditing && (
-					<Button
-						className={ classNames(
-							'wppic__btn wppic__btn-danger wppic__btn--icon-right',
-							{ 'has-icon': deleting },
-							{ 'is-deleting': deleting },
-						) }
-						type="button"
-						text={ getDeleteText() }
-						icon={ deleting ? <Loader2 /> : false }
-						iconSize="18"
-						iconPosition="right"
-						disabled={ saving || deleting }
-						onClick={ ( e ) => {
-							e.preventDefault();
-							deletePlugin();
-						} }
-					/>
-				) }
 			</div>
 			<div className="wppic-admin-notices-bottom">
 				<SnackPop

@@ -39115,16 +39115,15 @@ var SaveResetButtons = function b(a) {
       return _regeneratorRuntime().wrap(function e(a) {
         while (1) switch (a.prev = a.next) {
           case 0:
-            console.log('saveOptions', c, j);
             b = (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__["default"])('wppic_save_custom_plugin', {
               wppicFormData: c,
               isEditing: j
             });
             F(b);
             p(true);
-            a.next = 6;
+            a.next = 5;
             return b;
-          case 6:
+          case 5:
             b.then(function (a) {
               if (a.data.success) {
                 x(true);
@@ -39132,7 +39131,7 @@ var SaveResetButtons = function b(a) {
               }
             });
             p(false);
-          case 8:
+          case 7:
           case "end":
             return a.stop();
         }
@@ -39142,44 +39141,10 @@ var SaveResetButtons = function b(a) {
       return a.apply(this, arguments);
     };
   }();
-
-  /**
-   * Reset the options by setting promise as state.
-   */
-  var L = /*#__PURE__*/function () {
-    var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function a() {
-      var b, d;
-      return _regeneratorRuntime().wrap(function f(a) {
-        while (1) switch (a.prev = a.next) {
-          case 0:
-            b = (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__["default"])('wppic_delete_custom_plugin', {
-              wppicFormData: c
-            });
-            J(b);
-            t(true);
-            a.next = 5;
-            return b;
-          case 5:
-            d = a.sent;
-            e(d.data.data.formData, {
-              keepErrors: false,
-              keepDirty: false
-            });
-            t(false);
-          case 8:
-          case "end":
-            return a.stop();
-        }
-      }, a);
-    }));
-    return function b() {
-      return a.apply(this, arguments);
-    };
-  }();
-  var M = function a() {
+  var L = function a() {
     return Object.keys(f).length > 0;
   };
-  var N = function a() {
+  var M = function a() {
     if (o) {
       return function () {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], null);
@@ -39192,7 +39157,7 @@ var SaveResetButtons = function b(a) {
     }
     return false;
   };
-  var O = function a() {
+  var N = function a() {
     if (o) {
       return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Saving…', 'wp-plugin-info-card');
     }
@@ -39201,20 +39166,11 @@ var SaveResetButtons = function b(a) {
     }
     return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Save and Close', 'wp-plugin-info-card');
   };
-  var P = function a() {
-    if (s) {
-      return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Deleting…', 'wp-plugin-info-card');
-    }
-    if (A) {
-      return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Deleted', 'wp-plugin-info-card');
-    }
-    return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Delete Plugin', 'wp-plugin-info-card');
-  };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-buttons"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
     className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wppic__btn wppic__btn-primary wppic__btn--icon-right', {
-      'has-error': M()
+      'has-error': L()
     }, {
       'has-icon': o || w
     }, {
@@ -39223,8 +39179,8 @@ var SaveResetButtons = function b(a) {
       'is-saved': w
     }),
     type: "button",
-    text: O(),
-    icon: N(),
+    text: N(),
+    icon: M(),
     iconSize: "18",
     iconPosition: "right",
     disabled: o,
@@ -39261,22 +39217,6 @@ var SaveResetButtons = function b(a) {
       a.preventDefault();
       l();
     }
-  }), j && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wppic__btn wppic__btn-danger wppic__btn--icon-right', {
-      'has-icon': s
-    }, {
-      'is-deleting': s
-    }),
-    type: "button",
-    text: P(),
-    icon: s ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], null) : false,
-    iconSize: "18",
-    iconPosition: "right",
-    disabled: o || s,
-    onClick: function b(a) {
-      a.preventDefault();
-      L();
-    }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-notices-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SnackPop__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -39285,7 +39225,7 @@ var SaveResetButtons = function b(a) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SnackPop__WEBPACK_IMPORTED_MODULE_6__["default"], {
     ajaxOptions: I,
     loadingMessage: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Deleting Plugin…', 'wp-plugin-info-card')
-  }), M() && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Notice__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }), L() && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Notice__WEBPACK_IMPORTED_MODULE_4__["default"], {
     message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('There are form validation errors. Please correct them above.', 'wp-plugin-info-card'),
     status: "error",
     politeness: "polite"
@@ -39308,14 +39248,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _tanstack_react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @tanstack/react-router */ "./node_modules/@tanstack/react-router/dist/esm/useRouter.js");
 function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) return _arrayLikeToArray(b, c); var a = {}.toString.call(b).slice(8, -1); return "Object" === a && b.constructor && (a = b.constructor.name), "Map" === a || "Set" === a ? Array.from(b) : "Arguments" === a || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a) ? _arrayLikeToArray(b, c) : void 0; } }
 function _arrayLikeToArray(b, c) { (null == c || c > b.length) && (c = b.length); for (var d = 0, f = Array(c); d < c; d++) f[d] = b[d]; return f; }
 function _iterableToArrayLimit(b, c) { var d = null == b ? null : "undefined" != typeof Symbol && b[Symbol.iterator] || b["@@iterator"]; if (null != d) { var g, h, j, k, l = [], a = !0, m = !1; try { if (j = (d = d.call(b)).next, 0 === c) { if (Object(d) !== d) return; a = !1; } else for (; !(a = (g = j.call(d)).done) && (l.push(g.value), l.length !== c); a = !0); } catch (a) { m = !0, h = a; } finally { try { if (!a && null != d["return"] && (k = d["return"](), Object(k) !== k)) return; } finally { if (m) throw h; } } return l; } }
 function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
-
 
 var TransitionContent = function b(a) {
   var c = a.children,
@@ -39329,12 +39267,12 @@ var TransitionContent = function b(a) {
   }, c);
 };
 var ScreenTransition = function b(a) {
-  var c = a.children;
-  var d = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_1__.useRouter)();
+  var c = a.children,
+    d = a.location;
   var e = (0,react__WEBPACK_IMPORTED_MODULE_0__.useTransition)(),
     f = _slicedToArray(e, 2),
     g = f[1];
-  var h = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('#' + d.state.location.pathname),
+  var h = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)((d === null || d === void 0 ? void 0 : d.pathname) || '/'),
     i = _slicedToArray(h, 2),
     j = i[0],
     k = i[1];
@@ -39346,44 +39284,33 @@ var ScreenTransition = function b(a) {
     q = _slicedToArray(p, 2),
     r = q[0],
     s = q[1];
-  var t = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    u = _slicedToArray(t, 2),
-    v = u[0],
-    w = u[1];
 
-  // Handle animation end
-  var x = function b(a) {
-    // Only handle the opacity transition end
+  // Handle animation end.
+  var t = function b(a) {
+    // Only handle the opacity transition end.
     if (a.propertyName === 'opacity' && r) {
-      if (v) {
-        // Content update phase
-        g(function () {
-          k('#' + d.state.location.pathname);
-          o(c);
-          w(false);
-          // Trigger fade in
-          requestAnimationFrame(function () {
-            s(false);
-          });
-        });
-      } else {
-        // Initial fade out complete, update content
-        w(true);
-      }
+      // Fade out complete, now update content and fade in.
+      g(function () {
+        k((d === null || d === void 0 ? void 0 : d.pathname) || '/');
+        o(c);
+        // Trigger fade in by removing isAnimating.
+        s(false);
+      });
     }
   };
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    // If the path changed, trigger animation
-    if (j !== '#' + d.state.location.pathname) {
-      // Start fade out
+    // If the path changed, trigger animation.
+    if (j !== ((d === null || d === void 0 ? void 0 : d.pathname) || '/')) {
+      console.log('Path changed, starting fade out:', j, '->', d === null || d === void 0 ? void 0 : d.pathname);
+      // Start fade out.
       s(true);
     }
-  }, [d.state.location.pathname, j]);
+  }, [d === null || d === void 0 ? void 0 : d.pathname, j]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "screen-transition-wrapper"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(TransitionContent, {
     isAnimating: r,
-    onTransitionEnd: x,
+    onTransitionEnd: t,
     currentPath: j
   }, n));
 };
@@ -39647,6 +39574,209 @@ var SnackPop = function b(a) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, t && B(), " ", p && C(), " ");
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SnackPop);
+
+/***/ }),
+
+/***/ "./src/react/components/SnackStatus/index.js":
+/*!***************************************************!*\
+  !*** ./src/react/components/SnackStatus/index.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-check.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-alert.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/loader-circle.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Notice__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Notice */ "./src/react/components/Notice/index.js");
+function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) return _arrayLikeToArray(b, c); var a = {}.toString.call(b).slice(8, -1); return "Object" === a && b.constructor && (a = b.constructor.name), "Map" === a || "Set" === a ? Array.from(b) : "Arguments" === a || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a) ? _arrayLikeToArray(b, c) : void 0; } }
+function _arrayLikeToArray(b, c) { (null == c || c > b.length) && (c = b.length); for (var d = 0, f = Array(c); d < c; d++) f[d] = b[d]; return f; }
+function _iterableToArrayLimit(b, c) { var d = null == b ? null : "undefined" != typeof Symbol && b[Symbol.iterator] || b["@@iterator"]; if (null != d) { var g, h, j, k, l = [], a = !0, m = !1; try { if (j = (d = d.call(b)).next, 0 === c) { if (Object(d) !== d) return; a = !1; } else for (; !(a = (g = j.call(d)).done) && (l.push(g.value), l.length !== c); a = !0); } catch (a) { m = !0, h = a; } finally { try { if (!a && null != d["return"] && (k = d["return"](), Object(k) !== k)) return; } finally { if (m) throw h; } } return l; } }
+function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
+
+
+
+
+
+
+
+/**
+ * SnackPop is a component which handles alerts and notifications for the user.
+ * It can handle multiple alerts at once, toggles and forms, and will display the notifications in a queue.
+ *
+ * @param {Object} props Component props.
+ *
+ * @return {Element} JSX markup for the component.
+ */
+var SnackStatus = function b(a) {
+  var c = a.snackbarOptions;
+  var d = {
+    type: 'info',
+    message: '',
+    title: '',
+    isDismissable: false,
+    isPersistent: false,
+    isBusy: false,
+    loadingMessage: '',
+    politeness: 'polite' /* can also be assertive */
+  };
+  var e = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(d),
+    f = _slicedToArray(e, 2),
+    g = f[0],
+    h = f[1];
+  var i = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(c.isBusy || false),
+    j = _slicedToArray(i, 2),
+    k = j[0],
+    l = j[1];
+  var m = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    n = _slicedToArray(m, 2),
+    o = n[0],
+    p = n[1];
+  var q = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    r = _slicedToArray(q, 2),
+    s = r[0],
+    t = r[1];
+  var u = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    v = _slicedToArray(u, 2),
+    w = v[0],
+    x = v[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (!c.isVisible) {
+      return;
+    }
+
+    // Set state to busy.
+    h(d);
+    t(true);
+    l(c.isBusy || false);
+
+    // Get the type of notification. (error, info, success, warning, critical, confirmation).
+    var b = c.type || 'info';
+
+    // Get the message.
+    var e = c.message || '';
+
+    // Get the title.
+    var f = c.title || ''; /* title of snackbar or modal */
+
+    // Get whether the notification is dismissable.
+    var g = c.dismissable || false; /* whether the snackbar or modal is dismissable */
+
+    // Get whether the notification is persistent.
+    var i = c.persistent || false; /* whether the snackbar or modal is persistent */
+
+    // Get the politeness based on if successful.
+    var j = 'success' === b ? 'polite' : 'assertive';
+
+    // Set state with the notification.
+    h({
+      type: b,
+      message: e,
+      title: f,
+      isDismissable: g,
+      isBusy: k,
+      isPersistent: i,
+      politeness: j
+    });
+    clearTimeout(w);
+    x(setTimeout(function () {
+      t(false);
+      h(d);
+      a.onTimeout();
+    }, 6000));
+  }, [c]);
+  if (!c.isVisible) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
+  }
+
+  /**
+   * Gets the icon for the notification.
+   *
+   * @return {Element} JSX markup for the icon.
+   */
+  var y = function a() {
+    switch (g.type) {
+      case 'success':
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], null);
+      case 'error':
+      case 'critical':
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], null);
+      default:
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], null);
+    }
+  };
+  var z = function a() {
+    var b = [];
+    if (g.type === 'success') {
+      b.push({
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Back to Top', 'wp-plugin-info-card'),
+        url: '#wppic-admin-header',
+        variant: 'link',
+        className: 'wppic-admin__notice-action wppic-admin__notice-action--to-top'
+      });
+    }
+    return b;
+  };
+  var A = function a() {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Snackbar, {
+      className: classnames__WEBPACK_IMPORTED_MODULE_2___default()("wppic-snackbar wppic-snackbar-".concat(g.type), {
+        'wppic-snackbar-loading': k
+      }),
+      actions: z(),
+      icon: y(),
+      onDismiss: function a() {
+        return t(false);
+      },
+      explicitDismiss: g.isDismissable
+    }, k ? g.loadingMessage : g.message);
+  };
+  var B = function a() {
+    if ('critical' === g.type) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Modal, {
+        className: classnames__WEBPACK_IMPORTED_MODULE_2___default()("wppic-modal wppic-modal-".concat(g.type), {
+          'wppic-modal-loading': k
+        }),
+        bodyOpenClassName: 'wppic-modal-body-open',
+        title: g.title,
+        onRequestClose: function a() {
+          p(false);
+        },
+        isDismissible: true,
+        shouldCloseOnClickOutside: g.isPersistent,
+        shouldCloseOnEsc: g.isPersistent
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Notice__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        message: g.message,
+        status: g.type,
+        politeness: g.politeness,
+        icon: y,
+        inline: false
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "wppic-modal-button-group"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+        className: "button button-error",
+        variant: "secondary",
+        onClick: function a() {
+          p(false);
+        }
+      }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('OK', 'wp-plugin-info-card'))));
+    }
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, s && A(), " ", o && B(), " ");
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SnackStatus);
 
 /***/ }),
 
@@ -40299,25 +40429,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _tanstack_react_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @tanstack/react-router */ "./node_modules/@tanstack/react-router/dist/esm/useNavigate.js");
+/* harmony import */ var _tanstack_react_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @tanstack/react-router */ "./node_modules/@tanstack/react-router/dist/esm/useNavigate.js");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_dataviews__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/dataviews */ "./node_modules/@wordpress/dataviews/build-module/components/dataviews/index.js");
+/* harmony import */ var _wordpress_dataviews__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/dataviews */ "./node_modules/@wordpress/dataviews/build-module/components/dataviews/index.js");
 /* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
 /* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plug-2.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plus.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/cloud-download.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/download.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/cog.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/external-link.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/book-text.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plug-2.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plus.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/cloud-download.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/download.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/cog.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/external-link.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/book-text.js");
 /* harmony import */ var _components_PluginIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../components/PluginIcon */ "./src/react/components/PluginIcon/index.js");
 /* harmony import */ var _utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../utils/SendCommand */ "./src/react/utils/SendCommand.js");
 /* harmony import */ var _import_plugin_modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./import-plugin-modal */ "./src/react/views/custom-plugin/screens/import-plugin-modal.js");
+/* harmony import */ var _components_SnackStatus__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../components/SnackStatus */ "./src/react/components/SnackStatus/index.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(a, b) { var c = Object.keys(a); if (Object.getOwnPropertySymbols) { var d = Object.getOwnPropertySymbols(a); b && (d = d.filter(function (b) { return Object.getOwnPropertyDescriptor(a, b).enumerable; })), c.push.apply(c, d); } return c; }
+function _objectSpread(a) { for (var b = 1; b < arguments.length; b++) { var c = null != arguments[b] ? arguments[b] : {}; b % 2 ? ownKeys(Object(c), !0).forEach(function (b) { _defineProperty(a, b, c[b]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(a, Object.getOwnPropertyDescriptors(c)) : ownKeys(Object(c)).forEach(function (b) { Object.defineProperty(a, b, Object.getOwnPropertyDescriptor(c, b)); }); } return a; }
 function _defineProperty(a, b, c) { return (b = _toPropertyKey(b)) in a ? Object.defineProperty(a, b, { value: c, enumerable: !0, configurable: !0, writable: !0 }) : a[b] = c, a; }
 function _toPropertyKey(a) { var b = _toPrimitive(a, "string"); return "symbol" == (typeof b === "undefined" ? "undefined" : _typeof(b)) ? b : b + ""; }
 function _toPrimitive(a, b) { if ("object" != (typeof a === "undefined" ? "undefined" : _typeof(a)) || !a) return a; var c = a[Symbol.toPrimitive]; if (void 0 !== c) { var d = c.call(a, b || "default"); if ("object" != (typeof d === "undefined" ? "undefined" : _typeof(d))) return d; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === b ? String : Number)(a); }
@@ -40330,6 +40463,7 @@ function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) 
 function _arrayLikeToArray(b, c) { (null == c || c > b.length) && (c = b.length); for (var d = 0, f = Array(c); d < c; d++) f[d] = b[d]; return f; }
 function _iterableToArrayLimit(b, c) { var d = null == b ? null : "undefined" != typeof Symbol && b[Symbol.iterator] || b["@@iterator"]; if (null != d) { var g, h, j, k, l = [], a = !0, m = !1; try { if (j = (d = d.call(b)).next, 0 === c) { if (Object(d) !== d) return; a = !1; } else for (; !(a = (g = j.call(d)).done) && (l.push(g.value), l.length !== c); a = !0); } catch (a) { m = !0, h = a; } finally { try { if (!a && null != d["return"] && (k = d["return"](), Object(k) !== k)) return; } finally { if (m) throw h; } } return l; } }
 function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
+
 
 
 
@@ -40408,19 +40542,25 @@ var PluginHome = function b(a) {
     l = _slicedToArray(k, 2),
     m = l[0],
     n = l[1];
-  var o = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+  var o = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     p = _slicedToArray(o, 2),
     q = p[0],
     r = p[1];
-  var s = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var s = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     t = _slicedToArray(s, 2),
     u = t[0],
     v = t[1];
-  var w = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+  var w = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      isVisible: false,
+      type: 'info',
+      message: '',
+      title: '',
+      politeness: 'polite'
+    }),
     x = _slicedToArray(w, 2),
     y = x[0],
     z = x[1];
-  var A = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_7__.useNavigate)();
+  var A = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_8__.useNavigate)();
   var B = [{
     id: 'edit',
     icon: 'edit',
@@ -40510,6 +40650,13 @@ var PluginHome = function b(a) {
                 });
                 f = [new ClipboardItem(_defineProperty({}, e.type, e))];
                 navigator.clipboard.write(f);
+                z({
+                  isVisible: true,
+                  type: 'success',
+                  message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('REST URL copied to clipboard.', 'wp-plugin-info-card'),
+                  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Success', 'wp-plugin-info-card'),
+                  politeness: 'polite'
+                });
               } catch (a) {
                 // Try another method.
                 navigator.clipboard.writeText(d);
@@ -40535,7 +40682,7 @@ var PluginHome = function b(a) {
       type: 'table',
       previewSize: 'medium',
       paginationInfo: {
-        totalItems: u.length,
+        totalItems: q.length,
         totalPages: 0
       },
       page: 1,
@@ -40574,7 +40721,7 @@ var PluginHome = function b(a) {
             j(false);
             o = n.data;
             if (o.success) {
-              v(o.data.customPlugins);
+              r(o.data.customPlugins);
             } else {
               // todo - error handling.
             }
@@ -40651,7 +40798,9 @@ var PluginHome = function b(a) {
         items: null
       });
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Are you sure you want to delete this plugin?', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Are you sure you want to delete this plugin?', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-buttons"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     variant: "primary",
     onClick: /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function a() {
       var b, c, d;
@@ -40673,12 +40822,19 @@ var PluginHome = function b(a) {
             j(false);
             d = c.data;
             if (d.success) {
+              z({
+                isVisible: true,
+                type: 'success',
+                message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Plugin deleted successfully.', 'wp-plugin-info-card'),
+                title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Success', 'wp-plugin-info-card'),
+                politeness: 'polite'
+              });
               n({
                 display: false,
                 items: null
               });
               // Now remove from customPlugins array.
-              v(u.filter(function (a) {
+              r(q.filter(function (a) {
                 return !b.includes(a.id);
               }));
             } else {
@@ -40699,7 +40855,7 @@ var PluginHome = function b(a) {
         items: null
       });
     }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cancel', 'wp-plugin-info-card'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cancel', 'wp-plugin-info-card')))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-options-wrapper"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-area"
@@ -40707,27 +40863,28 @@ var PluginHome = function b(a) {
     className: "wppic-admin-panel-area__section"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_PluginIcon__WEBPACK_IMPORTED_MODULE_4__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Custom Plugin Cards', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add a custom plugin, enable a REST API endpoint, and share the plugin with the world in beautiful cards.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_dataviews__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    data: u,
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add a custom plugin, enable a REST API endpoint, and share the plugin with the world in beautiful cards.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_dataviews__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    data: q,
     fields: fields,
     actions: B,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Plugins', 'wp-plugin-info-card'),
     view: E,
     onChangeView: H,
     paginationInfo: {
-      totalItems: u.length,
-      totalPages: Math.ceil(u.length / E.perPage)
+      totalItems: q.length,
+      totalPages: Math.ceil(q.length / E.perPage)
     },
     perPageSizes: [10, 25, 50, 100],
     selection: e,
     onChangeSelection: f,
     defaultLayouts: defaultLayouts,
-    searchLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Search Plugins', 'wp-plugin-info-card')
+    searchLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Search Plugins', 'wp-plugin-info-card'),
+    isLoading: i
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add New Plugin', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add a new plugin to the list of plugins.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add New Plugin', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add a new plugin to the list of plugins.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     variant: "primary",
     href: "#",
     onClick: function b(a) {
@@ -40739,25 +40896,25 @@ var PluginHome = function b(a) {
     iconPosition: "left",
     className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
     icon: function a() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_11__["default"], null);
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add New Plugin', 'wp-plugin-info-card'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_11__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Import Plugin', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Import a plugin from a REST API endpoint.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_12__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Import Plugin', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Import a plugin from a REST API endpoint.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     variant: "secondary",
     href: "#",
     onClick: function b(a) {
       a.preventDefault();
-      z(true);
+      v(true);
     },
     iconPosition: "left",
     className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
     icon: function a() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_12__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Import Plugin', 'wp-plugin-info-card'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Advanced Settings', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Configure REST API settings and other advanced options.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_14__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Advanced Settings', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Configure REST API settings and other advanced options.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     variant: "secondary",
     href: "#",
     onClick: function b(a) {
@@ -40769,23 +40926,31 @@ var PluginHome = function b(a) {
     iconPosition: "right",
     className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
     icon: function a() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_14__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_15__["default"], null);
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Configure Settings', 'wp-plugin-info-card'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_15__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Learn more about custom plugins and how to use them in WP Plugin Info Card.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_16__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Learn more about custom plugins and how to use them in WP Plugin Info Card.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     variant: "secondary",
     src: "https://wppic.dlxplugins.com/",
     className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
     target: "_blank",
     rel: "noopener noreferrer",
     icon: function a() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_14__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_15__["default"], null);
     }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('View Documentation', 'wp-plugin-info-card'))))), y && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_import_plugin_modal__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('View Documentation', 'wp-plugin-info-card'))))), u && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_import_plugin_modal__WEBPACK_IMPORTED_MODULE_6__["default"], {
     onClose: function a() {
-      z(false);
+      v(false);
       G({});
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SnackStatus__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    snackbarOptions: y,
+    onTimeout: function a() {
+      var b = _objectSpread(_objectSpread({}, y), {}, {
+        isVisible: false
+      });
+      z(b);
     }
   }));
 };
@@ -40957,7 +41122,7 @@ var ImportPluginFile = function b(a) {
         accept: "application/json",
         type: "file",
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Select a JSON file to import.', 'wp-plugin-info-card'),
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('JSON File', 'wp-plugin-info-card')
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Upload JSON File', 'wp-plugin-info-card')
       })), (B === null || B === void 0 || (c = B.jsonFile) === null || c === void 0 ? void 0 : c.required) && /*#__PURE__*/React.createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_4__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This field is required.', 'wp-plugin-info-card'),
         status: "error",
@@ -40978,7 +41143,7 @@ var ImportPluginFile = function b(a) {
     icon: g ? /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, null) : /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], null),
     iconSize: "18",
     iconPosition: "right",
-    disabled: g
+    disabled: g || !z.jsonFile
   }), o && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic__btn wppic__btn-secondary wppic__btn--icon-right'),
     variant: "primary",
@@ -41015,6 +41180,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _import_plugin_file__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./import-plugin-file */ "./src/react/views/custom-plugin/screens/import-plugin-file.js");
+/* harmony import */ var _import_plugin_rest_url__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./import-plugin-rest-url */ "./src/react/views/custom-plugin/screens/import-plugin-rest-url.js");
+
 
 
 
@@ -41044,11 +41211,229 @@ var ImportPluginModal = function b(a) {
           onClose: a.onClose
         });
       case 'import-rest':
-        return /*#__PURE__*/React.createElement("div", null, "Import from REST API");
+        return /*#__PURE__*/React.createElement(_import_plugin_rest_url__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          onClose: a.onClose
+        });
     }
   }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ImportPluginModal);
+
+/***/ }),
+
+/***/ "./src/react/views/custom-plugin/screens/import-plugin-rest-url.js":
+/*!*************************************************************************!*\
+  !*** ./src/react/views/custom-plugin/screens/import-plugin-rest-url.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_Notice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../components/Notice */ "./src/react/components/Notice/index.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/download.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/x.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/check.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (a) { for (var b = 1; b < arguments.length; b++) { var c = arguments[b]; for (var d in c) ({}).hasOwnProperty.call(c, d) && (a[d] = c[d]); } return a; }, _extends.apply(null, arguments); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return j; }; var b, j = {}, e = Object.prototype, k = e.hasOwnProperty, m = Object.defineProperty || function (a, b, c) { a[b] = c.value; }, n = "function" == typeof Symbol ? Symbol : {}, q = n.iterator || "@@iterator", a = n.asyncIterator || "@@asyncIterator", c = n.toStringTag || "@@toStringTag"; function i(a, b, c) { return Object.defineProperty(a, b, { value: c, enumerable: !0, configurable: !0, writable: !0 }), a[b]; } try { i({}, ""); } catch (a) { i = function i(a, b, c) { return a[b] = c; }; } function u(b, d, e, f) { var g = d && d.prototype instanceof o ? d : o, h = Object.create(g.prototype), a = new F(f || []); return m(h, "_invoke", { value: B(b, e, a) }), h; } function w(a, b, c) { try { return { type: "normal", arg: a.call(b, c) }; } catch (a) { return { type: "throw", arg: a }; } } j.wrap = u; var x = "suspendedStart", h = "suspendedYield", l = "executing", f = "completed", s = {}; function o() {} function r() {} function y() {} var z = {}; i(z, q, function () { return this; }); var t = Object.getPrototypeOf, d = t && t(t(G([]))); d && d !== e && k.call(d, q) && (z = d); var v = y.prototype = o.prototype = Object.create(z); function g(a) { ["next", "throw", "return"].forEach(function (b) { i(a, b, function (a) { return this._invoke(b, a); }); }); } function A(b, d) { function c(e, f, g, i) { var a = w(b[e], b, f); if ("throw" !== a.type) { var j = a.arg, l = j.value; return l && "object" == _typeof(l) && k.call(l, "__await") ? d.resolve(l.__await).then(function (a) { c("next", a, g, i); }, function (a) { c("throw", a, g, i); }) : d.resolve(l).then(function (a) { j.value = a, g(j); }, function (a) { return c("throw", a, g, i); }); } i(a.arg); } var e; m(this, "_invoke", { value: function value(a, b) { function f() { return new d(function (d, e) { c(a, b, d, e); }); } return e = e ? e.then(f, f) : f(); } }); } function B(a, d, e) { var g = x; return function (j, i) { if (g === l) throw Error("Generator is already running"); if (g === f) { if ("throw" === j) throw i; return { value: b, done: !0 }; } for (e.method = j, e.arg = i;;) { var k = e.delegate; if (k) { var m = C(k, e); if (m) { if (m === s) continue; return m; } } if ("next" === e.method) e.sent = e._sent = e.arg;else if ("throw" === e.method) { if (g === x) throw g = f, e.arg; e.dispatchException(e.arg); } else "return" === e.method && e.abrupt("return", e.arg); g = l; var n = w(a, d, e); if ("normal" === n.type) { if (g = e.done ? f : h, n.arg === s) continue; return { value: n.arg, done: e.done }; } "throw" === n.type && (g = f, e.method = "throw", e.arg = n.arg); } }; } function C(c, d) { var e = d.method, f = c.iterator[e]; if (f === b) return d.delegate = null, "throw" === e && c.iterator["return"] && (d.method = "return", d.arg = b, C(c, d), "throw" === d.method) || "return" !== e && (d.method = "throw", d.arg = new TypeError("The iterator does not provide a '" + e + "' method")), s; var g = w(f, c.iterator, d.arg); if ("throw" === g.type) return d.method = "throw", d.arg = g.arg, d.delegate = null, s; var h = g.arg; return h ? h.done ? (d[c.resultName] = h.value, d.next = c.nextLoc, "return" !== d.method && (d.method = "next", d.arg = b), d.delegate = null, s) : h : (d.method = "throw", d.arg = new TypeError("iterator result is not an object"), d.delegate = null, s); } function D(a) { var b = { tryLoc: a[0] }; 1 in a && (b.catchLoc = a[1]), 2 in a && (b.finallyLoc = a[2], b.afterLoc = a[3]), this.tryEntries.push(b); } function E(a) { var b = a.completion || {}; b.type = "normal", delete b.arg, a.completion = b; } function F(a) { this.tryEntries = [{ tryLoc: "root" }], a.forEach(D, this), this.reset(!0); } function G(a) { if (a || "" === a) { var c = a[q]; if (c) return c.call(a); if ("function" == typeof a.next) return a; if (!isNaN(a.length)) { var d = -1, e = function c() { for (; ++d < a.length;) if (k.call(a, d)) return c.value = a[d], c.done = !1, c; return c.value = b, c.done = !0, c; }; return e.next = e; } } throw new TypeError(_typeof(a) + " is not iterable"); } return r.prototype = y, m(v, "constructor", { value: y, configurable: !0 }), m(y, "constructor", { value: r, configurable: !0 }), r.displayName = i(y, c, "GeneratorFunction"), j.isGeneratorFunction = function (a) { var b = "function" == typeof a && a.constructor; return !!b && (b === r || "GeneratorFunction" === (b.displayName || b.name)); }, j.mark = function (a) { return Object.setPrototypeOf ? Object.setPrototypeOf(a, y) : (a.__proto__ = y, i(a, c, "GeneratorFunction")), a.prototype = Object.create(v), a; }, j.awrap = function (a) { return { __await: a }; }, g(A.prototype), i(A.prototype, a, function () { return this; }), j.AsyncIterator = A, j.async = function (b, c, d, e, f) { void 0 === f && (f = Promise); var g = new A(u(b, c, d, e), f); return j.isGeneratorFunction(c) ? g : g.next().then(function (a) { return a.done ? a.value : g.next(); }); }, g(v), i(v, c, "Generator"), i(v, q, function () { return this; }), i(v, "toString", function () { return "[object Generator]"; }), j.keys = function (a) { var b = Object(a), c = []; for (var d in b) c.push(d); return c.reverse(), function a() { for (; c.length;) { var d = c.pop(); if (d in b) return a.value = d, a.done = !1, a; } return a.done = !0, a; }; }, j.values = G, F.prototype = { constructor: F, reset: function reset(a) { if (this.prev = 0, this.next = 0, this.sent = this._sent = b, this.done = !1, this.delegate = null, this.method = "next", this.arg = b, this.tryEntries.forEach(E), !a) for (var c in this) "t" === c.charAt(0) && k.call(this, c) && !isNaN(+c.slice(1)) && (this[c] = b); }, stop: function stop() { this.done = !0; var a = this.tryEntries[0].completion; if ("throw" === a.type) throw a.arg; return this.rval; }, dispatchException: function dispatchException(d) { if (this.done) throw d; var e = this; function f(a, c) { return j.type = "throw", j.arg = d, e.next = a, c && (e.method = "next", e.arg = b), !!c; } for (var g = this.tryEntries.length - 1; g >= 0; --g) { var h = this.tryEntries[g], j = h.completion; if ("root" === h.tryLoc) return f("end"); if (h.tryLoc <= this.prev) { var l = k.call(h, "catchLoc"), m = k.call(h, "finallyLoc"); if (l && m) { if (this.prev < h.catchLoc) return f(h.catchLoc, !0); if (this.prev < h.finallyLoc) return f(h.finallyLoc); } else if (l) { if (this.prev < h.catchLoc) return f(h.catchLoc, !0); } else { if (!m) throw Error("try statement without catch or finally"); if (this.prev < h.finallyLoc) return f(h.finallyLoc); } } } }, abrupt: function abrupt(b, c) { for (var d = this.tryEntries.length - 1; d >= 0; --d) { var e = this.tryEntries[d]; if (e.tryLoc <= this.prev && k.call(e, "finallyLoc") && this.prev < e.finallyLoc) { var f = e; break; } } f && ("break" === b || "continue" === b) && f.tryLoc <= c && c <= f.finallyLoc && (f = null); var g = f ? f.completion : {}; return g.type = b, g.arg = c, f ? (this.method = "next", this.next = f.finallyLoc, s) : this.complete(g); }, complete: function complete(a, b) { if ("throw" === a.type) throw a.arg; return "break" === a.type || "continue" === a.type ? this.next = a.arg : "return" === a.type ? (this.rval = this.arg = a.arg, this.method = "return", this.next = "end") : "normal" === a.type && b && (this.next = b), s; }, finish: function finish(a) { for (var b = this.tryEntries.length - 1; b >= 0; --b) { var c = this.tryEntries[b]; if (c.finallyLoc === a) return this.complete(c.completion, c.afterLoc), E(c), s; } }, "catch": function _catch(a) { for (var b = this.tryEntries.length - 1; b >= 0; --b) { var c = this.tryEntries[b]; if (c.tryLoc === a) { var d = c.completion; if ("throw" === d.type) { var f = d.arg; E(c); } return f; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(a, c, d) { return this.delegate = { iterator: G(a), resultName: c, nextLoc: d }, "next" === this.method && (this.arg = b), s; } }, j; }
+function asyncGeneratorStep(b, d, f, e, g, h, a) { try { var c = b[h](a), i = c.value; } catch (a) { return void f(a); } c.done ? d(i) : Promise.resolve(i).then(e, g); }
+function _asyncToGenerator(b) { return function () { var c = this, d = arguments; return new Promise(function (e, f) { var g = b.apply(c, d); function a(b) { asyncGeneratorStep(g, e, f, a, h, "next", b); } function h(b) { asyncGeneratorStep(g, e, f, a, h, "throw", b); } a(void 0); }); }; }
+function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) return _arrayLikeToArray(b, c); var a = {}.toString.call(b).slice(8, -1); return "Object" === a && b.constructor && (a = b.constructor.name), "Map" === a || "Set" === a ? Array.from(b) : "Arguments" === a || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a) ? _arrayLikeToArray(b, c) : void 0; } }
+function _arrayLikeToArray(b, c) { (null == c || c > b.length) && (c = b.length); for (var d = 0, f = Array(c); d < c; d++) f[d] = b[d]; return f; }
+function _iterableToArrayLimit(b, c) { var d = null == b ? null : "undefined" != typeof Symbol && b[Symbol.iterator] || b["@@iterator"]; if (null != d) { var g, h, j, k, l = [], a = !0, m = !1; try { if (j = (d = d.call(b)).next, 0 === c) { if (Object(d) !== d) return; a = !1; } else for (; !(a = (g = j.call(d)).done) && (l.push(g.value), l.length !== c); a = !0); } catch (a) { m = !0, h = a; } finally { try { if (!a && null != d["return"] && (k = d["return"](), Object(k) !== k)) return; } finally { if (m) throw h; } } return l; } }
+function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
+
+
+
+
+
+
+
+
+var ImportPluginRestUrl = function b(a) {
+  var c, d, e;
+  var f = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    g = _slicedToArray(f, 2),
+    h = g[0],
+    i = g[1];
+  var j = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    k = _slicedToArray(j, 2),
+    l = k[0],
+    m = k[1];
+  var n = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    o = _slicedToArray(n, 2),
+    p = o[0],
+    q = o[1];
+  var r = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    s = _slicedToArray(r, 2),
+    t = s[0],
+    u = s[1];
+  var v = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_6__.useForm)({
+      defaultValues: {
+        restUrl: ''
+      }
+    }),
+    w = v.control,
+    x = v.handleSubmit,
+    y = v.getValues,
+    z = v.reset,
+    A = v.setValue,
+    B = v.setError,
+    C = v.clearErrors,
+    D = v.trigger;
+  var E = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_6__.useWatch)({
+    control: w
+  });
+  var F = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_6__.useFormState)({
+      control: w
+    }),
+    G = F.errors;
+
+  /**
+   * Placeholder for submit event.
+   *
+   * @param {Object} formData contains the form data.
+   */
+  var H = /*#__PURE__*/function () {
+    var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function b(a) {
+      var c, d, e, f, g;
+      return _regeneratorRuntime().wrap(function h(b) {
+        while (1) switch (b.prev = b.next) {
+          case 0:
+            i(true);
+            c = new FormData();
+            c.append('restUrl', a.restUrl);
+            b.next = 5;
+            return fetch(wppicAdminCustomPlugin.importPluginRestUrl, {
+              method: 'POST',
+              body: c,
+              headers: {
+                'X-WP-Nonce': wppicAdminCustomPlugin.restNonce
+              }
+            });
+          case 5:
+            d = b.sent;
+            if (!d.ok) {
+              b.next = 16;
+              break;
+            }
+            b.next = 9;
+            return d.json();
+          case 9:
+            e = b.sent;
+            f = e.errors;
+            if (f.length > 0) {
+              g = '';
+              f.forEach(function (a) {
+                g += a + '\n\r';
+              });
+              B('restUrl', {
+                message: g
+              });
+            }
+            m((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)(/* translators: %d: total items, %s: current item */
+            (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__._n)('Imported %1$d of %2$d items.', 'Imported %1$d of %2$d items.', e.total_items, 'wp-plugin-info-card'), e.current_item, e.total_items, 'wp-plugin-info-card'));
+            q(true);
+            b.next = 17;
+            break;
+          case 16:
+            B('restUrl', {
+              message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Error fetching data from Remote REST API.', 'wp-plugin-info-card')
+            });
+          case 17:
+            i(false);
+          case 18:
+          case "end":
+            return b.stop();
+        }
+      }, b);
+    }));
+    return function b(_x) {
+      return a.apply(this, arguments);
+    };
+  }();
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-import-plugin-rest-url"
+  }, /*#__PURE__*/React.createElement("form", {
+    onSubmit: x(H)
+  }, !p && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_6__.Controller, {
+    control: w,
+    name: "restUrl",
+    rules: {
+      required: true,
+      validate: function b(a) {
+        return (0,_wordpress_url__WEBPACK_IMPORTED_MODULE_4__.isURL)(a);
+      }
+    },
+    render: function b(a) {
+      var c, d;
+      var e = a.field;
+      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, _extends({
+        id: "wppic-import-plugin-rest-url-input"
+      }, e, {
+        onChange: e.onChange,
+        type: "url",
+        placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('https://', 'wp-plugin-info-card'),
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enter the REST URL to import. This should be the URL of the REST API endpoint that contains the plugin data.', 'wp-plugin-info-card'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('REST URL', 'wp-plugin-info-card')
+      })), (G === null || G === void 0 || (c = G.restUrl) === null || c === void 0 ? void 0 : c.required) && /*#__PURE__*/React.createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This field is required.', 'wp-plugin-info-card'),
+        status: "error",
+        politeness: "assertive"
+      }), (G === null || G === void 0 || (d = G.restUrl) === null || d === void 0 ? void 0 : d.validate) && /*#__PURE__*/React.createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is not a valid URL.', 'wp-plugin-info-card'),
+        status: "error",
+        politeness: "assertive"
+      }));
+    }
+  })), (G === null || G === void 0 || (c = G.restUrl) === null || c === void 0 ? void 0 : c.message) && /*#__PURE__*/React.createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    message: G === null || G === void 0 || (d = G.restUrl) === null || d === void 0 ? void 0 : d.message,
+    status: "error",
+    politeness: "assertive"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-admin-buttons"
+  }, !p && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic__btn wppic__btn-secondary wppic__btn--icon-right'),
+    variant: "primary",
+    type: "submit",
+    text: h ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Importing…', 'wp-plugin-info-card') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Import', 'wp-plugin-info-card'),
+    icon: h ? /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, null) : /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], null),
+    iconSize: "18",
+    iconPosition: "right",
+    disabled: h || !E.restUrl || (G === null || G === void 0 || (e = G.restUrl) === null || e === void 0 ? void 0 : e.validate)
+  }), p && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic__btn wppic__btn-secondary wppic__btn--icon-right'),
+    variant: "primary",
+    type: "button",
+    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Close Import Modal', 'wp-plugin-info-card'),
+    icon: /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], null),
+    iconSize: "18",
+    iconPosition: "left",
+    onClick: a.onClose
+  })), l && /*#__PURE__*/React.createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    message: l,
+    status: "success",
+    politeness: "assertive",
+    icon: lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"]
+  }))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ImportPluginRestUrl);
 
 /***/ }),
 
@@ -41998,27 +42383,35 @@ var Interface = function b(a) {
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable the REST API for the plugin. This will allow others to fetch your plugin via an endpoint.', 'wp-plugin-info-card')
       }));
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  })), V.enableRestApi === 'true' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
     control: N,
     name: "restApiPasscode",
     rules: {
-      required: true
+      required: true,
+      pattern: /^[a-zA-Z0-9]+$/
     },
     render: function b(a) {
-      var c;
-      var d = a.field;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.TextControl, _extends({}, d, {
+      var c, d;
+      var e = a.field;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.TextControl, _extends({}, e, {
         type: "text",
         placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter REST API Passcode', 'wp-plugin-info-card'),
-        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input', {
+        onBlur: function b(a) {
+          U('restApiPasscode');
+        },
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input is-required', {
           'has-error': X === null || X === void 0 ? void 0 : X.restApiPasscode
         }),
-        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('(Optional) Enter the passcode for the REST API if you want to add a passcode to the REST URL for validation. This can help prevent unauthorized access to your plugin data.', 'wp-plugin-info-card'),
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('(Required) Enter the passcode for the REST API. This is used to prevent unauthorized access to your plugin data. If you want users to have to revalidate, change this passcode.', 'wp-plugin-info-card'),
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('REST API Passcode', 'wp-plugin-info-card')
       })), (X === null || X === void 0 || (c = X.restApiPasscode) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.', 'wp-plugin-info-card'),
+        status: "error",
+        politeness: "assertive"
+      }), (X === null || X === void 0 || (d = X.restApiPasscode) === null || d === void 0 ? void 0 : d.type) === 'pattern' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field must only contain letters and numbers.', 'wp-plugin-info-card'),
         status: "error",
         politeness: "assertive"
       }));
