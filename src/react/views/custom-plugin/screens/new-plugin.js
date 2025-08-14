@@ -163,7 +163,8 @@ const Interface = ( props ) => {
 			ratings: data.ratings || '',
 			added: data.added || '',
 			enableRestApi: data.enableRestApi || 'false',
-			restApiPasscode: data.restApiPasscode || '',
+			restApiPasscode: data.restApiPasscode || wppicAdminCustomPlugin.tempPasscode,
+			restApiDataVersion: data.restApiDataVersion || 1,
 		},
 	} );
 	const formValues = useWatch( { control } );
@@ -940,45 +941,86 @@ const Interface = ( props ) => {
 						</div>
 						{
 							formValues.enableRestApi === 'true' && (
-								<div className="wppic-admin-row">
-									<Controller
-										control={ control }
-										name="restApiPasscode"
-										rules={ {
-											required: true,
-											pattern: /^[a-zA-Z0-9]+$/,
-										} }
-										render={ ( { field } ) => (
-											<>
-												<TextControl
-													{ ...field }
-													type="text"
-													placeholder={ __( 'Enter REST API Passcode', 'wp-plugin-info-card' ) }
-													onBlur={ ( value ) => {
-														trigger( 'restApiPasscode' );
-													} }
-													className={ classnames( 'wppic-admin-input is-required', { 'has-error': errors?.restApiPasscode } ) }
-													help={ __( '(Required) Enter the passcode for the REST API. This is used to prevent unauthorized access to your plugin data. If you want users to have to revalidate, change this passcode.', 'wp-plugin-info-card' ) }
-													label={ __( 'REST API Passcode', 'wp-plugin-info-card' ) }
-												/>
-												{ errors?.restApiPasscode?.type === 'required' && (
-													<Notice
-														message={ __( 'This field is required.', 'wp-plugin-info-card' ) }
-														status="error"
-														politeness="assertive"
+								<>
+									<div className="wppic-admin-row">
+										<Controller
+											control={ control }
+											name="restApiPasscode"
+											rules={ {
+												required: true,
+												pattern: /^[a-zA-Z0-9]+$/,
+											} }
+											render={ ( { field } ) => (
+												<>
+													<TextControl
+														{ ...field }
+														type="text"
+														placeholder={ __( 'Enter REST API Passcode', 'wp-plugin-info-card' ) }
+														onBlur={ ( value ) => {
+															trigger( 'restApiPasscode' );
+														} }
+														className={ classnames( 'wppic-admin-input is-required', { 'has-error': errors?.restApiPasscode } ) }
+														help={ __( '(Required) Enter the passcode for the REST API. This is used to prevent unauthorized access in case a passcode is being overused. Please consider the passcode something that can be viewed by the public.', 'wp-plugin-info-card' ) }
+														label={ __( 'REST API Passcode', 'wp-plugin-info-card' ) }
 													/>
-												) }
-												{ errors?.restApiPasscode?.type === 'pattern' && (
-													<Notice
-														message={ __( 'This field must only contain letters and numbers.', 'wp-plugin-info-card' ) }
-														status="error"
-														politeness="assertive"
+													{ errors?.restApiPasscode?.type === 'required' && (
+														<Notice
+															message={ __( 'This field is required.', 'wp-plugin-info-card' ) }
+															status="error"
+															politeness="assertive"
+														/>
+													) }
+													{ errors?.restApiPasscode?.type === 'pattern' && (
+														<Notice
+															message={ __( 'This field must only contain letters and numbers.', 'wp-plugin-info-card' ) }
+															status="error"
+															politeness="assertive"
+														/>
+													) }
+												</>
+											) }
+										/>
+									</div>
+									<div className="wppic-admin-row">
+										<Controller
+											control={ control }
+											name="restApiDataVersion"
+											rules={ {
+												required: true,
+												pattern: /^[0-9]+$/,
+											} }
+											render={ ( { field } ) => (
+												<>
+													<TextControl
+														{ ...field }
+														type="number"
+														placeholder={ __( 'Enter REST API Data Version', 'wp-plugin-info-card' ) }
+														onBlur={ ( value ) => {
+															trigger( 'restApiDataVersion' );
+														} }
+														className={ classnames( 'wppic-admin-input is-required', { 'has-error': errors?.restApiDataVersion } ) }
+														help={ __( 'Increase the version by 1 if you make any image changes to the plugin. This will instruct subscribers to redownload images and other plugin data.', 'wp-plugin-info-card' ) }
+														label={ __( 'REST API Data Version', 'wp-plugin-info-card' ) }
 													/>
-												) }
-											</>
-										) }
-									/>
-								</div>
+													{ errors?.restApiDataVersion?.type === 'required' && (
+														<Notice
+															message={ __( 'This field is required.', 'wp-plugin-info-card' ) }
+															status="error"
+															politeness="assertive"
+														/>
+													) }
+													{ errors?.restApiDataVersion?.type === 'pattern' && (
+														<Notice
+															message={ __( 'This field must only contain numbers.', 'wp-plugin-info-card' ) }
+															status="error"
+															politeness="assertive"
+														/>
+													) }
+												</>
+											) }
+										/>
+									</div>
+								</>
 							)
 						}
 					</td>

@@ -164,6 +164,7 @@ class Init {
 		$item_content['enableRestApi']   = sanitize_text_field( get_post_meta( $custom_plugin->ID, 'enableRestApi', true ) );
 		$item_content['restApiPasscode'] = sanitize_text_field( get_post_meta( $custom_plugin->ID, 'restApiPasscode', true ) );
 
+		$item_content['restApiDataVersion'] = absint( get_post_meta( $custom_plugin->ID, 'restApiDataVersion', true ) );
 		$return = array(
 			'id'      => absint( $custom_plugin->ID ),
 			'title'   => sanitize_text_field( $custom_plugin->post_title ),
@@ -226,7 +227,7 @@ class Init {
 				'id'              => $custom_plugin->ID,
 				'title'           => $custom_plugin->post_title,
 				'slug'            => $custom_plugin->post_name,
-				'content'         => json_decode( $custom_plugin->post_content, true ),
+				'content'         => Functions::sanitize_array_recursive( json_decode( $custom_plugin->post_content, true ) ),
 				'icon'            => get_the_post_thumbnail_url( $custom_plugin->ID, 'full' ),
 				'editNonce'       => wp_create_nonce( 'wppic-edit-custom-plugin-' . $custom_plugin->ID ),
 				'saveNonce'       => wp_create_nonce( 'wppic-save-custom-plugin-' . $custom_plugin->ID ),
@@ -273,6 +274,7 @@ class Init {
 		$form_data_copy = $form_data;
 		unset( $form_data['enableRestApi'] );
 		unset( $form_data['restApiPasscode'] );
+		unset( $form_data['restApiDataVersion'] );
 
 		/**
 		 * Filter: wppic_custom_plugin_form_data.
@@ -323,6 +325,7 @@ class Init {
 			);
 			update_post_meta( $post_id_to_edit, 'enableRestApi', sanitize_text_field( $form_data_copy['enableRestApi'] ) );
 			update_post_meta( $post_id_to_edit, 'restApiPasscode', sanitize_text_field( $form_data_copy['restApiPasscode'] ) );
+			update_post_meta( $post_id_to_edit, 'restApiDataVersion', absint( $form_data_copy['restApiDataVersion'] ) );
 			$post_id = $post_id_to_edit;
 		} else {
 			$post_id = wp_insert_post(
@@ -336,11 +339,12 @@ class Init {
 			);
 			update_post_meta( $post_id, 'enableRestApi', sanitize_text_field( $form_data_copy['enableRestApi'] ) );
 			update_post_meta( $post_id, 'restApiPasscode', sanitize_text_field( $form_data_copy['restApiPasscode'] ) );
+			update_post_meta( $post_id, 'restApiDataVersion', absint( $form_data_copy['restApiDataVersion'] ) );
 		}
 
 		// Save icon as featured image.
-		if ( isset( $form_data['custom_plugin_icon_id'] ) && $form_data['custom_plugin_icon_id'] ) {
-			set_post_thumbnail( $post_id, $form_data['custom_plugin_icon_id'] );
+		if ( isset( $form_data['pluginIconId'] ) && $form_data['pluginIconId'] ) {
+			set_post_thumbnail( $post_id, $form_data['pluginIconId'] );
 		}
 
 		/**

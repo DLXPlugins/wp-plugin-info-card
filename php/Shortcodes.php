@@ -131,6 +131,15 @@ class Shortcodes {
 				'sanitize_callback' => 'sanitize_text_field',
 			)
 		);
+		register_meta(
+			'wppic_custom_plugins',
+			'restApiDataVersion',
+			array(
+				'show_in_rest' => true,
+				'single'       => true,
+				'type'         => 'integer',
+			)
+		);
 	}
 
 	/**

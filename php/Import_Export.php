@@ -244,6 +244,19 @@ class Import_Export {
 			// Reconcile with fields.
 			$item = array_intersect_key( $item, array_flip( self::$fields ) );
 
+			/**
+			 * Filter: wppic_import_custom_plugin_item.
+			 *
+			 * Filters the item prior to encoding. Use this to dynamically update ratings, downloads, etc.
+			 *
+			 * @param array $item The item to be imported.
+			 *
+			 * @return array The filtered item.
+			 *
+			 * @see self::$fields
+			 */
+			$item = apply_filters( 'wppic_import_custom_plugin_item', $item );
+
 			$post_item_args = array(
 				'post_type'    => 'wppic_custom_plugins',
 				'post_title'   => sanitize_text_field( $item['name'] ),

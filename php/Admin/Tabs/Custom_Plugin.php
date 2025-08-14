@@ -63,6 +63,7 @@ class Custom_Plugin {
 				'restUrl'               => get_rest_url( null, 'wppic/v1/custom-plugins/import' ),
 				'customPluginsRestBase' => get_rest_url( null, 'wppic/v1/plugins/' ),
 				'importPluginRestUrl'   => get_rest_url( null, 'wppic/v1/custom-plugins/import-from-rest' ),
+				'tempPasscode'          => wp_generate_password( 16, false ),
 			)
 		);
 

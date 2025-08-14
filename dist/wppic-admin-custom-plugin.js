@@ -41687,7 +41687,8 @@ var Interface = function b(a) {
         ratings: c.ratings || '',
         added: c.added || '',
         enableRestApi: c.enableRestApi || 'false',
-        restApiPasscode: c.restApiPasscode || ''
+        restApiPasscode: c.restApiPasscode || wppicAdminCustomPlugin.tempPasscode,
+        restApiDataVersion: c.restApiDataVersion || 1
       }
     }),
     N = M.control,
@@ -42383,7 +42384,7 @@ var Interface = function b(a) {
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable the REST API for the plugin. This will allow others to fetch your plugin via an endpoint.', 'wp-plugin-info-card')
       }));
     }
-  })), V.enableRestApi === 'true' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  })), V.enableRestApi === 'true' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
     control: N,
@@ -42404,7 +42405,7 @@ var Interface = function b(a) {
         className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input is-required', {
           'has-error': X === null || X === void 0 ? void 0 : X.restApiPasscode
         }),
-        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('(Required) Enter the passcode for the REST API. This is used to prevent unauthorized access to your plugin data. If you want users to have to revalidate, change this passcode.', 'wp-plugin-info-card'),
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('(Required) Enter the passcode for the REST API. This is used to prevent unauthorized access in case a passcode is being overused. Please consider the passcode something that can be viewed by the public.', 'wp-plugin-info-card'),
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('REST API Passcode', 'wp-plugin-info-card')
       })), (X === null || X === void 0 || (c = X.restApiPasscode) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.', 'wp-plugin-info-card'),
@@ -42416,7 +42417,40 @@ var Interface = function b(a) {
         politeness: "assertive"
       }));
     }
-  }))))));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
+    control: N,
+    name: "restApiDataVersion",
+    rules: {
+      required: true,
+      pattern: /^[0-9]+$/
+    },
+    render: function b(a) {
+      var c, d;
+      var e = a.field;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.TextControl, _extends({}, e, {
+        type: "number",
+        placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter REST API Data Version', 'wp-plugin-info-card'),
+        onBlur: function b(a) {
+          U('restApiDataVersion');
+        },
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input is-required', {
+          'has-error': X === null || X === void 0 ? void 0 : X.restApiDataVersion
+        }),
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Increase the version by 1 if you make any image changes to the plugin. This will instruct subscribers to redownload images and other plugin data.', 'wp-plugin-info-card'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('REST API Data Version', 'wp-plugin-info-card')
+      })), (X === null || X === void 0 || (c = X.restApiDataVersion) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.', 'wp-plugin-info-card'),
+        status: "error",
+        politeness: "assertive"
+      }), (X === null || X === void 0 || (d = X.restApiDataVersion) === null || d === void 0 ? void 0 : d.type) === 'pattern' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field must only contain numbers.', 'wp-plugin-info-card'),
+        status: "error",
+        politeness: "assertive"
+      }));
+    }
+  })))))));
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-container with-sidebar"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
