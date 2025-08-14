@@ -41141,7 +41141,7 @@ var Interface = function b(a) {
         lastUpdated: c.lastUpdated || '',
         ratings: c.ratings || '',
         added: c.added || '',
-        enableRestApi: c.enableRestApi || false,
+        enableRestApi: c.enableRestApi || 'false',
         restApiPasscode: c.restApiPasscode || ''
       }
     }),
@@ -41830,7 +41830,10 @@ var Interface = function b(a) {
     render: function b(a) {
       var c = a.field;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.ToggleControl, _extends({}, c, {
-        checked: c.value,
+        onChange: function b(a) {
+          c.onChange(a ? 'true' : 'false');
+        },
+        checked: c.value === 'true' ? true : false,
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable REST API', 'wp-plugin-info-card'),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable the REST API for the plugin. This will allow others to fetch your plugin via an endpoint.', 'wp-plugin-info-card')
       }));
@@ -41840,14 +41843,24 @@ var Interface = function b(a) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_13__.Controller, {
     control: N,
     name: "restApiPasscode",
+    rules: {
+      required: true
+    },
     render: function b(a) {
-      var c = a.field;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.TextControl, _extends({}, c, {
+      var c;
+      var d = a.field;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.TextControl, _extends({}, d, {
         type: "text",
         placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter REST API Passcode', 'wp-plugin-info-card'),
-        className: "wppic-admin-input",
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input', {
+          'has-error': X === null || X === void 0 ? void 0 : X.restApiPasscode
+        }),
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('(Optional) Enter the passcode for the REST API if you want to add a passcode to the REST URL for validation. This can help prevent unauthorized access to your plugin data.', 'wp-plugin-info-card'),
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('REST API Passcode', 'wp-plugin-info-card')
+      })), (X === null || X === void 0 || (c = X.restApiPasscode) === null || c === void 0 ? void 0 : c.type) === 'required' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This field is required.', 'wp-plugin-info-card'),
+        status: "error",
+        politeness: "assertive"
       }));
     }
   }))))));

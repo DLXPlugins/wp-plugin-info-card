@@ -105,7 +105,7 @@ class Shortcodes {
 
 		register_meta(
 			'wppic_custom_plugins',
-			'enable_rest_api',
+			'enableRestApi',
 			array(
 				'show_in_rest' => true,
 				'single'       => true,
@@ -114,7 +114,7 @@ class Shortcodes {
 		);
 		register_meta(
 			'wppic_custom_plugins',
-			'is_from_rest',
+			'isFromRest',
 			array(
 				'show_in_rest' => true,
 				'single'       => true,
@@ -123,7 +123,7 @@ class Shortcodes {
 		);
 		register_meta(
 			'wppic_custom_plugins',
-			'rest_api_passcode',
+			'restApiPasscode',
 			array(
 				'show_in_rest'      => true,
 				'single'            => true,

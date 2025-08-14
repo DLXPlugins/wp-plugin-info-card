@@ -162,7 +162,7 @@ const Interface = ( props ) => {
 			lastUpdated: data.lastUpdated || '',
 			ratings: data.ratings || '',
 			added: data.added || '',
-			enableRestApi: data.enableRestApi || false,
+			enableRestApi: data.enableRestApi || 'false',
 			restApiPasscode: data.restApiPasscode || '',
 		},
 	} );
@@ -928,7 +928,10 @@ const Interface = ( props ) => {
 								render={ ( { field } ) => (
 									<ToggleControl
 										{ ...field }
-										checked={ field.value }
+										onChange={ ( value ) => {
+											field.onChange( value ? 'true' : 'false' );
+										} }
+										checked={ field.value === 'true' ? true : false }
 										label={ __( 'Enable REST API', 'wp-plugin-info-card' ) }
 										help={ __( 'Enable the REST API for the plugin. This will allow others to fetch your plugin via an endpoint.', 'wp-plugin-info-card' ) }
 									/>
@@ -939,15 +942,27 @@ const Interface = ( props ) => {
 							<Controller
 								control={ control }
 								name="restApiPasscode"
+								rules={ {
+									required: true,
+								} }
 								render={ ( { field } ) => (
-									<TextControl
-										{ ...field }
-										type="text"
-										placeholder={ __( 'Enter REST API Passcode', 'wp-plugin-info-card' ) }
-										className="wppic-admin-input"
-										help={ __( '(Optional) Enter the passcode for the REST API if you want to add a passcode to the REST URL for validation. This can help prevent unauthorized access to your plugin data.', 'wp-plugin-info-card' ) }
-										label={ __( 'REST API Passcode', 'wp-plugin-info-card' ) }
-									/>
+									<>
+										<TextControl
+											{ ...field }
+											type="text"
+											placeholder={ __( 'Enter REST API Passcode', 'wp-plugin-info-card' ) }
+											className={ classnames( 'wppic-admin-input', { 'has-error': errors?.restApiPasscode } ) }
+											help={ __( '(Optional) Enter the passcode for the REST API if you want to add a passcode to the REST URL for validation. This can help prevent unauthorized access to your plugin data.', 'wp-plugin-info-card' ) }
+											label={ __( 'REST API Passcode', 'wp-plugin-info-card' ) }
+										/>
+										{ errors?.restApiPasscode?.type === 'required' && (
+											<Notice
+												message={ __( 'This field is required.', 'wp-plugin-info-card' ) }
+												status="error"
+												politeness="assertive"
+											/>
+										) }
+									</>
 								) }
 							/>
 						</div>

@@ -46,6 +46,7 @@ class Import_Export {
 		add_action(
 			'rest_api_init',
 			function () {
+				// Setup rest route for handling the import of custom plugin json.
 				register_rest_route(
 					'wppic/v1',
 					'custom-plugins/import',
@@ -55,8 +56,90 @@ class Import_Export {
 						'permission_callback' => array( __CLASS__, 'rest_check_permissions' ),
 					)
 				);
+
+				// Setup rest route for handling of exposing plugin's JSON.
+				register_rest_route(
+					'wppic/v1',
+					'plugins/(?P<slug>[a-zA-Z0-9\-_]+)',
+					array(
+						'methods'             => 'GET',
+						'callback'            => array( __CLASS__, 'rest_handle_get_plugin_json' ),
+						'permission_callback' => array( __CLASS__, 'rest_check_get_plugin_json_permissions' ),
+						'args'                => array(
+							'slug' => array(
+								'required'          => true,
+								'validate_callback' => function ( $param, $request, $key ) {
+									return ! empty( $param ) && preg_match( '/^[a-zA-Z0-9\-_]+$/', $param );
+								},
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+						),
+					)
+				);
 			}
 		);
+	}
+
+	/**
+	 * Handle the export of a plugin's JSON.
+	 *
+	 * @param WP_REST_Request $request The request object.
+	 * @return WP_REST_Response The response object.
+	 */
+	public static function rest_handle_get_plugin_json( $request ) {
+		$slug     = sanitize_title( $request->get_param( 'slug' ) );
+		$passcode = sanitize_text_field( $request->get_param( 'passcode' ) );
+
+		$plugin = get_posts(
+			array(
+				'post_type' => 'wppic_custom_plugins',
+				'name'      => sanitize_title( $slug ),
+			)
+		);
+
+		if ( ! $plugin ) {
+			return new WP_REST_Response( array( 'message' => 'Plugin not found or not enabled for REST API' ), 404 );
+		}
+		$plugin            = $plugin[0];
+		$rest_api_passcode = get_post_meta( $plugin->ID, 'restApiPasscode', true );
+		if ( $rest_api_passcode !== $passcode ) {
+			return new WP_REST_Response( array( 'message' => 'Invalid passcode' ), 403 );
+		}
+
+		$payload = self::generate_export_payload( array( $plugin->ID ) );
+
+		return new WP_REST_Response( $payload );
+	}
+
+	/**
+	 * Check the permissions for the export of a plugin's JSON.
+	 *
+	 * @param WP_REST_Request $request The request object.
+	 * @return WP_REST_Response The response object.
+	 */
+	public static function rest_check_get_plugin_json_permissions( $request ) {
+		// This can technically be public, but let's check the slug and see if it's enabled for the REST API.
+		$slug   = $request->get_param( 'slug' );
+		$plugin = get_posts(
+			array(
+				'post_type' => 'wppic_custom_plugins',
+				'name'      => sanitize_title( $slug ),
+			)
+		);
+
+		if ( ! $plugin ) {
+			return new WP_REST_Response( array( 'message' => 'Plugin not found or not enabled for REST API' ), 404 );
+		}
+
+		$plugin           = $plugin[0];
+		$enabled_for_rest = (bool) get_post_meta( $plugin->ID, 'enableRestApi', true );
+		if ( ! $enabled_for_rest ) {
+			return new WP_REST_Response( array( 'message' => 'Plugin not found or not enabled for REST API' ), 403 );
+		}
+
+		$rest_api_passcode = get_post_meta( $plugin->ID, 'restApiPasscode', true );
+		$request_passcode  = $request->get_param( 'passcode' );
+		return $rest_api_passcode === $request_passcode;
 	}
 
 	/**
@@ -71,8 +154,8 @@ class Import_Export {
 
 		$payload = json_decode( file_get_contents( $json_file['tmp_name'] ), true );
 
-		$checksum = $payload['checksum'];
-		$items = $payload['items'];
+		$checksum         = $payload['checksum'];
+		$items            = $payload['items'];
 		$payload_checksum = 'sha256:' . hash( 'sha256', json_encode( $items ) );
 
 		if ( $checksum !== $payload_checksum ) {
@@ -93,33 +176,33 @@ class Import_Export {
 			$item = Functions::sanitize_array_recursive( $item );
 
 			// Get the image vars.
-			$plugin_icon_url = $item['pluginIconUrl'];
+			$plugin_icon_url   = $item['pluginIconUrl'];
 			$plugin_banner_url = $item['pluginBannerUrl'];
 
 			// Validate the URLs.
-			$plugin_icon_url = esc_url_raw( wp_http_validate_url( $plugin_icon_url ) );
+			$plugin_icon_url   = esc_url_raw( wp_http_validate_url( $plugin_icon_url ) );
 			$plugin_banner_url = esc_url_raw( wp_http_validate_url( $plugin_banner_url ) );
 
 			$plugin_icon_url_id = null;
 			if ( $plugin_icon_url ) {
 				$plugin_icon_url_id = self::sideload_image( $plugin_icon_url );
 				if ( ! is_wp_error( $plugin_icon_url_id ) ) {
-					$item['pluginIconUrl'] = wp_get_attachment_url( $plugin_icon_url_id );
+					$item['pluginIconUrl']   = wp_get_attachment_url( $plugin_icon_url_id );
 					$item['pluginIconUrlId'] = $plugin_icon_url_id;
 				} else {
 					$item['pluginIconUrl'] = '';
-					$errors[] = sprintf( __( 'Error sideloading plugin icon: %s', 'wp-plugin-info-card' ), $plugin_icon_url_id->get_error_message() );
+					$errors[]              = sprintf( __( 'Error sideloading plugin icon: %s', 'wp-plugin-info-card' ), $plugin_icon_url_id->get_error_message() );
 				}
 			}
 
 			if ( $plugin_banner_url ) {
 				$plugin_banner_url_id = self::sideload_image( $plugin_banner_url );
 				if ( ! is_wp_error( $plugin_banner_url_id ) ) {
-					$item['pluginBannerUrl'] = wp_get_attachment_url( $plugin_banner_url_id );
+					$item['pluginBannerUrl']   = wp_get_attachment_url( $plugin_banner_url_id );
 					$item['pluginBannerUrlId'] = $plugin_banner_url_id;
 				} else {
 					$item['pluginBannerUrl'] = '';
-					$errors[] = sprintf( __( 'Error sideloading plugin banner: %s', 'wp-plugin-info-card' ), $plugin_banner_url_id->get_error_message() );
+					$errors[]                = sprintf( __( 'Error sideloading plugin banner: %s', 'wp-plugin-info-card' ), $plugin_banner_url_id->get_error_message() );
 				}
 			}
 
@@ -131,10 +214,10 @@ class Import_Export {
 			$item = array_intersect_key( $item, array_flip( self::$fields ) );
 
 			$post_item_args = array(
-				'post_type'   => 'wppic_custom_plugins',
-				'post_title'  => sanitize_text_field( $item['name'] ),
-				'post_name'   => sanitize_title( $item['slug'] ),
-				'post_status' => 'publish',
+				'post_type'    => 'wppic_custom_plugins',
+				'post_title'   => sanitize_text_field( $item['name'] ),
+				'post_name'    => sanitize_title( $item['slug'] ),
+				'post_status'  => 'publish',
 				'post_content' => wp_json_encode( $item ),
 			);
 
@@ -150,7 +233,7 @@ class Import_Export {
 			}
 		}
 
-		return new WP_REST_Response( $errors );
+		return new WP_REST_Response( array( 'errors' => $errors ) );
 	}
 
 	/**

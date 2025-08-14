@@ -160,11 +160,15 @@ class Init {
 			);
 		}
 
+		$item_content                    = Functions::sanitize_array_recursive( json_decode( $custom_plugin->post_content, true ) );
+		$item_content['enableRestApi']   = sanitize_text_field( get_post_meta( $custom_plugin->ID, 'enableRestApi', true ) );
+		$item_content['restApiPasscode'] = sanitize_text_field( get_post_meta( $custom_plugin->ID, 'restApiPasscode', true ) );
+
 		$return = array(
 			'id'      => absint( $custom_plugin->ID ),
 			'title'   => sanitize_text_field( $custom_plugin->post_title ),
 			'slug'    => sanitize_title( $custom_plugin->post_name ),
-			'content' => json_decode( $custom_plugin->post_content, true ),
+			'content' => $item_content,
 			'icon'    => get_the_post_thumbnail_url( $custom_plugin->ID, 'full' ),
 		);
 
@@ -263,6 +267,11 @@ class Init {
 		unset( $form_data['isEditing'] );
 		unset( $form_data['postId'] );
 
+		// Make a copy for post meta later.
+		$form_data_copy = $form_data;
+		unset( $form_data['enableRestApi'] );
+		unset( $form_data['restApiPasscode'] );
+
 		/**
 		 * Filter: wppic_custom_plugin_form_data.
 		 *
@@ -310,6 +319,8 @@ class Init {
 					'post_content' => wp_json_encode( $form_data ),
 				)
 			);
+			update_post_meta( $post_id_to_edit, 'enableRestApi', sanitize_text_field( $form_data_copy['enableRestApi'] ) );
+			update_post_meta( $post_id_to_edit, 'restApiPasscode', sanitize_text_field( $form_data_copy['restApiPasscode'] ) );
 			$post_id = $post_id_to_edit;
 		} else {
 			$post_id = wp_insert_post(
@@ -321,6 +332,8 @@ class Init {
 					'post_status'  => 'publish',
 				)
 			);
+			update_post_meta( $post_id, 'enableRestApi', sanitize_text_field( $form_data_copy['enableRestApi'] ) );
+			update_post_meta( $post_id, 'restApiPasscode', sanitize_text_field( $form_data_copy['restApiPasscode'] ) );
 		}
 
 		// Save icon as featured image.
