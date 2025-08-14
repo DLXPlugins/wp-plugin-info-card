@@ -30098,6 +30098,37 @@ const BookText = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"]
 
 /***/ }),
 
+/***/ "./node_modules/lucide-react/dist/esm/icons/check.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/check.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
+/* harmony export */   "default": () => (/* binding */ Check)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.503.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const __iconNode = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
+const Check = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("check", __iconNode);
+
+
+//# sourceMappingURL=check.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/lucide-react/dist/esm/icons/circle-alert.js":
 /*!******************************************************************!*\
   !*** ./node_modules/lucide-react/dist/esm/icons/circle-alert.js ***!
@@ -40753,7 +40784,8 @@ var PluginHome = function b(a) {
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('View Documentation', 'wp-plugin-info-card'))))), y && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_import_plugin_modal__WEBPACK_IMPORTED_MODULE_6__["default"], {
     onClose: function a() {
-      return z(false);
+      z(false);
+      G({});
     }
   }));
 };
@@ -40784,6 +40816,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Notice__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../components/Notice */ "./src/react/components/Notice/index.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/download.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/x.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/check.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (a) { for (var b = 1; b < arguments.length; b++) { var c = arguments[b]; for (var d in c) ({}).hasOwnProperty.call(c, d) && (a[d] = c[d]); } return a; }, _extends.apply(null, arguments); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return j; }; var b, j = {}, e = Object.prototype, k = e.hasOwnProperty, m = Object.defineProperty || function (a, b, c) { a[b] = c.value; }, n = "function" == typeof Symbol ? Symbol : {}, q = n.iterator || "@@iterator", a = n.asyncIterator || "@@asyncIterator", c = n.toStringTag || "@@toStringTag"; function i(a, b, c) { return Object.defineProperty(a, b, { value: c, enumerable: !0, configurable: !0, writable: !0 }), a[b]; } try { i({}, ""); } catch (a) { i = function i(a, b, c) { return a[b] = c; }; } function u(b, d, e, f) { var g = d && d.prototype instanceof o ? d : o, h = Object.create(g.prototype), a = new F(f || []); return m(h, "_invoke", { value: B(b, e, a) }), h; } function w(a, b, c) { try { return { type: "normal", arg: a.call(b, c) }; } catch (a) { return { type: "throw", arg: a }; } } j.wrap = u; var x = "suspendedStart", h = "suspendedYield", l = "executing", f = "completed", s = {}; function o() {} function r() {} function y() {} var z = {}; i(z, q, function () { return this; }); var t = Object.getPrototypeOf, d = t && t(t(G([]))); d && d !== e && k.call(d, q) && (z = d); var v = y.prototype = o.prototype = Object.create(z); function g(a) { ["next", "throw", "return"].forEach(function (b) { i(a, b, function (a) { return this._invoke(b, a); }); }); } function A(b, d) { function c(e, f, g, i) { var a = w(b[e], b, f); if ("throw" !== a.type) { var j = a.arg, l = j.value; return l && "object" == _typeof(l) && k.call(l, "__await") ? d.resolve(l.__await).then(function (a) { c("next", a, g, i); }, function (a) { c("throw", a, g, i); }) : d.resolve(l).then(function (a) { j.value = a, g(j); }, function (a) { return c("throw", a, g, i); }); } i(a.arg); } var e; m(this, "_invoke", { value: function value(a, b) { function f() { return new d(function (d, e) { c(a, b, d, e); }); } return e = e ? e.then(f, f) : f(); } }); } function B(a, d, e) { var g = x; return function (j, i) { if (g === l) throw Error("Generator is already running"); if (g === f) { if ("throw" === j) throw i; return { value: b, done: !0 }; } for (e.method = j, e.arg = i;;) { var k = e.delegate; if (k) { var m = C(k, e); if (m) { if (m === s) continue; return m; } } if ("next" === e.method) e.sent = e._sent = e.arg;else if ("throw" === e.method) { if (g === x) throw g = f, e.arg; e.dispatchException(e.arg); } else "return" === e.method && e.abrupt("return", e.arg); g = l; var n = w(a, d, e); if ("normal" === n.type) { if (g = e.done ? f : h, n.arg === s) continue; return { value: n.arg, done: e.done }; } "throw" === n.type && (g = f, e.method = "throw", e.arg = n.arg); } }; } function C(c, d) { var e = d.method, f = c.iterator[e]; if (f === b) return d.delegate = null, "throw" === e && c.iterator["return"] && (d.method = "return", d.arg = b, C(c, d), "throw" === d.method) || "return" !== e && (d.method = "throw", d.arg = new TypeError("The iterator does not provide a '" + e + "' method")), s; var g = w(f, c.iterator, d.arg); if ("throw" === g.type) return d.method = "throw", d.arg = g.arg, d.delegate = null, s; var h = g.arg; return h ? h.done ? (d[c.resultName] = h.value, d.next = c.nextLoc, "return" !== d.method && (d.method = "next", d.arg = b), d.delegate = null, s) : h : (d.method = "throw", d.arg = new TypeError("iterator result is not an object"), d.delegate = null, s); } function D(a) { var b = { tryLoc: a[0] }; 1 in a && (b.catchLoc = a[1]), 2 in a && (b.finallyLoc = a[2], b.afterLoc = a[3]), this.tryEntries.push(b); } function E(a) { var b = a.completion || {}; b.type = "normal", delete b.arg, a.completion = b; } function F(a) { this.tryEntries = [{ tryLoc: "root" }], a.forEach(D, this), this.reset(!0); } function G(a) { if (a || "" === a) { var c = a[q]; if (c) return c.call(a); if ("function" == typeof a.next) return a; if (!isNaN(a.length)) { var d = -1, e = function c() { for (; ++d < a.length;) if (k.call(a, d)) return c.value = a[d], c.done = !1, c; return c.value = b, c.done = !0, c; }; return e.next = e; } } throw new TypeError(_typeof(a) + " is not iterable"); } return r.prototype = y, m(v, "constructor", { value: y, configurable: !0 }), m(y, "constructor", { value: r, configurable: !0 }), r.displayName = i(y, c, "GeneratorFunction"), j.isGeneratorFunction = function (a) { var b = "function" == typeof a && a.constructor; return !!b && (b === r || "GeneratorFunction" === (b.displayName || b.name)); }, j.mark = function (a) { return Object.setPrototypeOf ? Object.setPrototypeOf(a, y) : (a.__proto__ = y, i(a, c, "GeneratorFunction")), a.prototype = Object.create(v), a; }, j.awrap = function (a) { return { __await: a }; }, g(A.prototype), i(A.prototype, a, function () { return this; }), j.AsyncIterator = A, j.async = function (b, c, d, e, f) { void 0 === f && (f = Promise); var g = new A(u(b, c, d, e), f); return j.isGeneratorFunction(c) ? g : g.next().then(function (a) { return a.done ? a.value : g.next(); }); }, g(v), i(v, c, "Generator"), i(v, q, function () { return this; }), i(v, "toString", function () { return "[object Generator]"; }), j.keys = function (a) { var b = Object(a), c = []; for (var d in b) c.push(d); return c.reverse(), function a() { for (; c.length;) { var d = c.pop(); if (d in b) return a.value = d, a.done = !1, a; } return a.done = !0, a; }; }, j.values = G, F.prototype = { constructor: F, reset: function reset(a) { if (this.prev = 0, this.next = 0, this.sent = this._sent = b, this.done = !1, this.delegate = null, this.method = "next", this.arg = b, this.tryEntries.forEach(E), !a) for (var c in this) "t" === c.charAt(0) && k.call(this, c) && !isNaN(+c.slice(1)) && (this[c] = b); }, stop: function stop() { this.done = !0; var a = this.tryEntries[0].completion; if ("throw" === a.type) throw a.arg; return this.rval; }, dispatchException: function dispatchException(d) { if (this.done) throw d; var e = this; function f(a, c) { return j.type = "throw", j.arg = d, e.next = a, c && (e.method = "next", e.arg = b), !!c; } for (var g = this.tryEntries.length - 1; g >= 0; --g) { var h = this.tryEntries[g], j = h.completion; if ("root" === h.tryLoc) return f("end"); if (h.tryLoc <= this.prev) { var l = k.call(h, "catchLoc"), m = k.call(h, "finallyLoc"); if (l && m) { if (this.prev < h.catchLoc) return f(h.catchLoc, !0); if (this.prev < h.finallyLoc) return f(h.finallyLoc); } else if (l) { if (this.prev < h.catchLoc) return f(h.catchLoc, !0); } else { if (!m) throw Error("try statement without catch or finally"); if (this.prev < h.finallyLoc) return f(h.finallyLoc); } } } }, abrupt: function abrupt(b, c) { for (var d = this.tryEntries.length - 1; d >= 0; --d) { var e = this.tryEntries[d]; if (e.tryLoc <= this.prev && k.call(e, "finallyLoc") && this.prev < e.finallyLoc) { var f = e; break; } } f && ("break" === b || "continue" === b) && f.tryLoc <= c && c <= f.finallyLoc && (f = null); var g = f ? f.completion : {}; return g.type = b, g.arg = c, f ? (this.method = "next", this.next = f.finallyLoc, s) : this.complete(g); }, complete: function complete(a, b) { if ("throw" === a.type) throw a.arg; return "break" === a.type || "continue" === a.type ? this.next = a.arg : "return" === a.type ? (this.rval = this.arg = a.arg, this.method = "return", this.next = "end") : "normal" === a.type && b && (this.next = b), s; }, finish: function finish(a) { for (var b = this.tryEntries.length - 1; b >= 0; --b) { var c = this.tryEntries[b]; if (c.finallyLoc === a) return this.complete(c.completion, c.afterLoc), E(c), s; } }, "catch": function _catch(a) { for (var b = this.tryEntries.length - 1; b >= 0; --b) { var c = this.tryEntries[b]; if (c.tryLoc === a) { var d = c.completion; if ("throw" === d.type) { var f = d.arg; E(c); } return f; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(a, c, d) { return this.delegate = { iterator: G(a), resultName: c, nextLoc: d }, "next" === this.method && (this.arg = b), s; } }, j; }
@@ -40808,127 +40841,136 @@ var ImportPluginFile = function b(a) {
     f = _slicedToArray(e, 2),
     g = f[0],
     h = f[1];
-  var i = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useForm)({
+  var i = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    j = _slicedToArray(i, 2),
+    k = j[0],
+    l = j[1];
+  var m = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    n = _slicedToArray(m, 2),
+    o = n[0],
+    p = n[1];
+  var q = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useForm)({
       defaultValues: {
         jsonFile: ''
       }
     }),
-    j = i.control,
-    k = i.handleSubmit,
-    l = i.getValues,
-    m = i.reset,
-    n = i.setValue,
-    o = i.setError,
-    p = i.clearErrors,
-    q = i.trigger;
-  var r = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useWatch)({
-    control: j
+    r = q.control,
+    s = q.handleSubmit,
+    t = q.getValues,
+    u = q.reset,
+    v = q.setValue,
+    w = q.setError,
+    x = q.clearErrors,
+    y = q.trigger;
+  var z = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useWatch)({
+    control: r
   });
-  var s = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useFormState)({
-      control: j
+  var A = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_5__.useFormState)({
+      control: r
     }),
-    t = s.errors;
+    B = A.errors;
 
   /**
    * Placeholder for submit event.
    *
    * @param {Object} formData contains the form data.
    */
-  var u = /*#__PURE__*/function () {
-    var b = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function b() {
-      var c, d, e, f, g, i, j;
-      return _regeneratorRuntime().wrap(function k(b) {
-        while (1) switch (b.prev = b.next) {
+  var C = /*#__PURE__*/function () {
+    var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function a() {
+      var b, c, d, e, f, g, i;
+      return _regeneratorRuntime().wrap(function j(a) {
+        while (1) switch (a.prev = a.next) {
           case 0:
             h(true);
-            c = document.getElementById('wppic-import-plugin-file-input');
-            d = c.files[0];
-            if (!(d.type !== 'application/json' && !d.name.endsWith('.json'))) {
-              b.next = 5;
+            b = document.getElementById('wppic-import-plugin-file-input');
+            c = b.files[0];
+            if (!(c.type !== 'application/json' && !c.name.endsWith('.json'))) {
+              a.next = 5;
               break;
             }
-            return b.abrupt("return", alert('Please upload a .json file.'));
+            return a.abrupt("return", alert('Please upload a .json file.'));
           case 5:
-            e = new FormData();
-            e.append('jsonFile', d);
-            b.next = 9;
+            d = new FormData();
+            d.append('jsonFile', c);
+            a.next = 9;
             return fetch(wppicAdminCustomPlugin.restUrl, {
               method: 'POST',
-              body: e,
+              body: d,
               headers: {
                 'X-WP-Nonce': wppicAdminCustomPlugin.restNonce
               }
             });
           case 9:
-            f = b.sent;
-            if (!f.ok) {
-              b.next = 16;
+            e = a.sent;
+            if (!e.ok) {
+              a.next = 18;
               break;
             }
-            b.next = 13;
-            return f.json();
+            a.next = 13;
+            return e.json();
           case 13:
-            g = b.sent;
-            i = g.errors;
-            if (i.length > 0) {
-              j = '';
-              i.forEach(function (a) {
-                j += a + '\n';
+            f = a.sent;
+            g = f.errors;
+            if (g.length > 0) {
+              i = '';
+              g.forEach(function (a) {
+                i += a + '\n\r';
               });
-              o('jsonFile', {
-                message: j
+              w('jsonFile', {
+                message: i
               });
-            } else {
-              a.onClose();
             }
-          case 16:
+            l((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)(/* translators: %d: total items, %s: current item */
+            (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__._n)('Imported %1$d of %2$d items.', 'Imported %1$d of %2$d items.', f.total_items, 'wp-plugin-info-card'), f.current_item, f.total_items, 'wp-plugin-info-card'));
+            p(true);
+          case 18:
             h(false);
-          case 17:
+          case 19:
           case "end":
-            return b.stop();
+            return a.stop();
         }
-      }, b);
+      }, a);
     }));
-    return function a() {
-      return b.apply(this, arguments);
+    return function b() {
+      return a.apply(this, arguments);
     };
   }();
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "wppic-import-plugin-file"
   }, /*#__PURE__*/React.createElement("form", {
-    onSubmit: k(u)
-  }, /*#__PURE__*/React.createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_5__.Controller, {
-    control: j,
+    onSubmit: s(C)
+  }, !o && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_5__.Controller, {
+    control: r,
     name: "jsonFile",
     rules: {
       required: true
     },
     render: function b(a) {
-      var c, d, e;
-      var f = a.field;
+      var c;
+      var d = a.field;
       return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, _extends({
         id: "wppic-import-plugin-file-input"
-      }, f, {
+      }, d, {
         onChange: function b(a) {
-          f.onChange(a);
+          d.onChange(a);
         },
         accept: "application/json",
         type: "file",
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Select a JSON file to import.', 'wp-plugin-info-card'),
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('JSON File', 'wp-plugin-info-card')
-      })), (t === null || t === void 0 || (c = t.jsonFile) === null || c === void 0 ? void 0 : c.required) && /*#__PURE__*/React.createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      })), (B === null || B === void 0 || (c = B.jsonFile) === null || c === void 0 ? void 0 : c.required) && /*#__PURE__*/React.createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_4__["default"], {
         message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This field is required.', 'wp-plugin-info-card'),
-        status: "error",
-        politeness: "assertive"
-      }), (t === null || t === void 0 || (d = t.jsonFile) === null || d === void 0 ? void 0 : d.message) && /*#__PURE__*/React.createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        message: t === null || t === void 0 || (e = t.jsonFile) === null || e === void 0 ? void 0 : e.message,
         status: "error",
         politeness: "assertive"
       }));
     }
+  })), (B === null || B === void 0 || (c = B.jsonFile) === null || c === void 0 ? void 0 : c.message) && /*#__PURE__*/React.createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    message: B === null || B === void 0 || (d = B.jsonFile) === null || d === void 0 ? void 0 : d.message,
+    status: "error",
+    politeness: "assertive"
   }), /*#__PURE__*/React.createElement("div", {
     className: "wppic-admin-buttons"
-  }, !(t !== null && t !== void 0 && (c = t.jsonFile) !== null && c !== void 0 && c.message) && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+  }, !o && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic__btn wppic__btn-secondary wppic__btn--icon-right'),
     variant: "primary",
     type: "submit",
@@ -40937,16 +40979,21 @@ var ImportPluginFile = function b(a) {
     iconSize: "18",
     iconPosition: "right",
     disabled: g
-  }), (t === null || t === void 0 || (d = t.jsonFile) === null || d === void 0 ? void 0 : d.message) && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+  }), o && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic__btn wppic__btn-secondary wppic__btn--icon-right'),
     variant: "primary",
     type: "button",
-    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Close Modal', 'wp-plugin-info-card'),
+    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Close Import Modal', 'wp-plugin-info-card'),
     icon: /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], null),
     iconSize: "18",
     iconPosition: "left",
     onClick: a.onClose
-  })))));
+  })), k && /*#__PURE__*/React.createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    message: k,
+    status: "success",
+    politeness: "assertive",
+    icon: lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ImportPluginFile);
 

@@ -237,7 +237,6 @@ const PluginHome = ( props ) => {
 		//setView( newView );
 	};
 
-
 	return (
 		<>
 			<div className="wppic-admin-panel-container with-sidebar">
@@ -416,7 +415,9 @@ const PluginHome = ( props ) => {
 					</div>
 				</div>
 			</div>
-			{ showImportModal && <ImportPluginModal onClose={ () => setShowImportModal( false ) } /> }
+			{ showImportModal && <ImportPluginModal onClose={ () => {
+				setShowImportModal( false ); fetchData( {} );
+			} } /> }
 		</>
 	);
 };

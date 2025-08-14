@@ -66,7 +66,7 @@ class Import_Export {
 						'callback'            => array( __CLASS__, 'rest_handle_get_plugin_json' ),
 						'permission_callback' => array( __CLASS__, 'rest_check_get_plugin_json_permissions' ),
 						'args'                => array(
-							'slug' => array(
+							'slug'     => array(
 								'required'          => true,
 								'validate_callback' => function ( $param, $request, $key ) {
 									return ! empty( $param ) && preg_match( '/^[a-zA-Z0-9\-_]+$/', $param );
@@ -107,7 +107,7 @@ class Import_Export {
 		if ( ! $plugin ) {
 			return new \WP_REST_Response( array( 'message' => 'Plugin not found or not enabled for REST API' ), 404 );
 		}
-		$plugin            = $plugin[0];
+		$plugin = $plugin[0];
 
 		// Check if plugi is enabled for REST API.
 		$enabled_for_rest = sanitize_text_field( get_post_meta( $plugin->ID, 'enableRestApi', true ) );
@@ -178,7 +178,9 @@ class Import_Export {
 		}
 
 		// Store all errors here that are non-fatal and can be returned to the user.
-		$errors = array();
+		$errors       = array();
+		$total_items  = count( $items );
+		$current_item = 0;
 
 		foreach ( $items as $item ) {
 			$slug = $item['slug'];
@@ -221,9 +223,7 @@ class Import_Export {
 				}
 			}
 
-			/**
-			 * Begin forming items.
-			 */
+			++$current_item;
 
 			// Reconcile with fields.
 			$item = array_intersect_key( $item, array_flip( self::$fields ) );
@@ -248,7 +248,13 @@ class Import_Export {
 			}
 		}
 
-		return new \WP_REST_Response( array( 'errors' => $errors ) );
+		return new \WP_REST_Response(
+			array(
+				'errors'       => $errors,
+				'total_items'  => $total_items,
+				'current_item' => $current_item,
+			)
+		);
 	}
 
 	/**
