@@ -184,7 +184,7 @@ class Import_Export {
 		$existing_data['contributors'] = sanitize_text_field( $custom_plugin_data['contributors'] );
 
 		// Get rating.
-		$existing_data['rating'] = absint( $custom_plugin_data['rating'] );
+		$existing_data['rating'] = sanitize_text_field( $custom_plugin_data['rating'] );
 
 		// Get number of ratings.
 		$existing_data['num_ratings'] = absint( $custom_plugin_data['numRatings'] );
@@ -219,7 +219,7 @@ class Import_Export {
 
 		// Set screenshots.
 		$existing_data['screenshots'] = array();
-		$existing_data['ratings']     = array();
+		$existing_data['ratings']     = sanitize_text_field( $custom_plugin_data['rating'] );
 
 		// Set reviews url.
 		$existing_data['reviews_url'] = ''; // todo - do we need this?
@@ -312,7 +312,12 @@ class Import_Export {
 
 		$response = wp_safe_remote_get( esc_url_raw( $rest_url ) );
 		if ( is_wp_error( $response ) ) {
-			return new \WP_REST_Response( array( 'message' => 'Error fetching data from REST API' ), 400 );
+			return new \WP_REST_Response( array( 'message' => 'Error fetching data from REST API. This request could have been blocked by a firewall or proxy.' ), 400 );
+		}
+
+		// Check error status code.
+		if ( wp_remote_retrieve_response_code( $response ) !== 200 ) {
+			return new \WP_REST_Response( array( 'message' => 'Error fetching data from REST API. Invalid response code: ' . wp_remote_retrieve_response_code( $response ) ), 400 );
 		}
 
 		$payload = json_decode( $response['body'], true );
