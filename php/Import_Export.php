@@ -140,7 +140,6 @@ class Import_Export {
 		// Get the number of tries.
 		$num_tries = absint( get_post_meta( $post_id, 'numTries', true ) );
 		if ( $num_tries >= 3 ) {
-			error_log( 'WPPIC: Too many tries for plugin: ' . $post_id );
 			wp_clear_scheduled_hook( 'wppic_rest_api_update_plugin_data', array( $post_id ) );
 			return;
 		}
@@ -148,19 +147,16 @@ class Import_Export {
 		// Get local post.
 		$post = get_post( $post_id );
 		if ( ! $post ) {
-			error_log( 'WPPIC: Local plugin not found for ID: ' . $post_id );
 			return;
 		}
 
 		$response = wp_safe_remote_get( esc_url_raw( $rest_url ) );
 		if ( is_wp_error( $response ) ) {
-			error_log( 'WPPIC: Error fetching data from REST API. This request could have been blocked by a firewall or proxy. ' . $response->get_error_message() );
 			return;
 		}
 
 		// Check error status code.
 		if ( wp_remote_retrieve_response_code( $response ) !== 200 ) {
-			error_log( 'WPPIC: Error fetching data from REST API. Invalid response code: ' . wp_remote_retrieve_response_code( $response ) );
 			return;
 		}
 
@@ -269,11 +265,6 @@ class Import_Export {
 			delete_transient( sanitize_key( 'wppic_plugin_' . preg_replace( '/\-/', '_', $slug ) ) );
 		} else {
 			update_post_meta( $post_id, 'numTries', absint( get_post_meta( $post_id, 'numTries', true ) ) + 1 );
-		}
-
-		// if WP_DEBUG, error_log errors.
-		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-			error_log( 'WPPIC: Errors: ' . implode( ', ', $errors ) );
 		}
 
 		return null;
