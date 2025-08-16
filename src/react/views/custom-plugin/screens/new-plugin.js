@@ -11,6 +11,7 @@ import PluginIcon from '../../../components/PluginIcon';
 import Notice from '../../../components/Notice';
 import SaveCustomPluginButtons from '../../../components/SaveCustomPluginButtons';
 import ImportSidebarRest from './import-sidebar-rest';
+import ImportSidebarDeletePlugin from './import-sidebar-delete-plugin';
 
 import {
 	TextControl,
@@ -24,7 +25,7 @@ import {
 	ExternalLink,
 	BookText,
 	AlertCircle,
-	TriangleAlert
+	TriangleAlert,
 } from 'lucide-react';
 import SendCommand from '../../../utils/SendCommand';
 const Breadcrumbs = ( { screen, isEditing } ) => (
@@ -49,9 +50,17 @@ const Breadcrumbs = ( { screen, isEditing } ) => (
 	</div>
 );
 
+/**
+ * New Plugin.
+ *
+ * @param {Object} props - The component props.
+ * @return {JSX.Element} The New Plugin component.
+ */
 const NewPlugin = ( props ) => {
 	const [ pluginData, setPluginData ] = useState( {} );
-
+	const [ errorMessage, setErrorMessage ] = useState( '' );
+	const [ isError, setIsError ] = useState( false );
+	const navigate = useNavigate();
 	const { id, nonce } = useParams( {
 		shouldThrow: false,
 	} );
@@ -69,6 +78,9 @@ const NewPlugin = ( props ) => {
 			const { success, data } = response.data;
 			if ( success ) {
 				setPluginData( { ...data.data.content, post_id: id } );
+			} else {
+				setErrorMessage( data.message );
+				setIsError( true );
 			}
 		};
 		// Fetch options.
@@ -76,19 +88,44 @@ const NewPlugin = ( props ) => {
 	}, [ id, nonce ] );
 
 	return (
-		<Interface data={ pluginData } editMode={ id > 0 } { ...props } />
+		<Interface isError={ isError } errorMessage={ errorMessage } data={ pluginData } editMode={ id > 0 } { ...props } />
 	);
 };
 
+/**
+ * NewPlugin Component.
+ *
+ * This component handles the creation of new custom plugin cards.
+ * It provides a form interface for users to input plugin information
+ * and submit it to create a new plugin entry.
+ *
+ * @since 1.0.0
+ * @since 1.1.0 Added form validation and error handling.
+ *
+ * @param {Object}   props             - The component props.
+ * @param {string}   props.title       - The title of the plugin.
+ * @param {string}   props.description - The description of the plugin.
+ * @param {string}   props.version     - The version number of the plugin.
+ * @param {string}   props.author      - The author of the plugin.
+ * @param {string}   props.pluginUrl   - The URL to the plugin.
+ * @param {string}   props.downloadUrl - The download URL for the plugin.
+ * @param {string}   props.icon        - The icon URL for the plugin.
+ * @param {boolean}  props.isActive    - Whether the plugin is currently active.
+ * @param {Function} props.onSubmit    - Callback function when form is submitted.
+ * @param {Function} props.onCancel    - Callback function when form is cancelled.
+ *
+ * @return {JSX.Element} The rendered NewPlugin component.
+ *
+ */
 const Interface = ( props ) => {
 	const { editMode } = props;
 	const [ data, setData ] = useState( props.data );
 
 	const navigate = useNavigate();
 	const [ isChecking, setIsChecking ] = useState( false );
-	const [ isError, setIsError ] = useState( false );
+	const [ isError, setIsError ] = useState( props.isError || false );
 	const [ isWarning, setIsWarning ] = useState( false );
-	const [ errorMessage, setErrorMessage ] = useState( '' );
+	const [ errorMessage, setErrorMessage ] = useState( props.errorMessage || '' );
 	const [ warningMessage, setWarningMessage ] = useState( '' );
 	const [ pluginSlugInputRef, setPluginSlugInputRef ] = useState( null );
 	const [ isEditing, setIsEditing ] = useState( editMode ? true : false );
@@ -194,8 +231,12 @@ const Interface = ( props ) => {
 			setData( props.data );
 			reset( props.data );
 			setLoading( false );
+		} else {
+			// No data probably.
+			setIsError( props.isError || false );
+			setErrorMessage( props.errorMessage || '' );
 		}
-	}, [ props.data, reset ] );
+	}, [ props.data, reset, props.isError, props.errorMessage ] );
 
 	const formTable = (
 		<table className="form-table form-table-row-sections">
@@ -1126,38 +1167,71 @@ const Interface = ( props ) => {
 									) }
 								</h2>
 							</div>
-							{ loading ? (
+							{
+								isError && (
+									<>
+										<Notice
+											message={ errorMessage }
+											status="error"
+											politeness="assertive"
+										/>
+										<div className="wppic-admin-buttons">
+											<Button
+												variant="secondary"
+												onClick={ () => {
+													navigate( { to: '/' } );
+												} }
+											>
+												{ __( 'Go Back to Plugins', 'wp-plugin-info-card' ) }
+											</Button>
+										</div>
+									</>
+								)
+							}
+							{ ( loading && ! isError ) && (
 								<div className="wppic-admin-panel-area__section-loading">
 									<Spinner />
 								</div>
-							) : (
-								formTable
 							) }
-							<SaveCustomPluginButtons
-								formValues={ formValues }
-								setError={ setError }
-								reset={ reset }
-								errors={ errors }
-								isDirty={ isDirty }
-								dirtyFields={ dirtyFields }
-								trigger={ trigger }
-								onSave={ ( values ) => {
-									setTimeout( () => {
-										navigate( { to: '/' } );
-									}, 1200 );
-								} }
-								isEditing={ isEditing }
-								onCancel={ () => {
-									navigate( { to: '/' } );
-								} }
-							/>
+							{ ! loading && ! isError && formTable }
+							{ ! loading && ! isError && (
+								<>
+									<SaveCustomPluginButtons
+										formValues={ formValues }
+										setError={ setError }
+										reset={ reset }
+										errors={ errors }
+										isDirty={ isDirty }
+										dirtyFields={ dirtyFields }
+										trigger={ trigger }
+										onSave={ ( values ) => {
+											setTimeout( () => {
+												navigate( { to: '/' } );
+											}, 1200 );
+										} }
+										isEditing={ isEditing }
+										onCancel={ () => {
+											navigate( { to: '/' } );
+										} }
+									/>
+								</>
+							) }
 						</div>
 					</form>
 				</div>
 				<div className="wppic-admin-panel-sidebar">
 					{
-						isFromRest && (
-							<ImportSidebarRest onPluginData={ ( newPluginData ) => {
+						( ! loading && isFromRest && ! isError ) && (
+							<ImportSidebarRest { ...data } onPluginData={ ( newPluginData ) => {
+								setIsFromRest( newPluginData.isFromRest );
+								setData( newPluginData );
+								reset( newPluginData );
+							} } />
+						)
+					}
+					{
+						( ! loading && isEditing && ! isError ) && (
+							<ImportSidebarDeletePlugin { ...data } onPluginData={ ( newPluginData ) => {
 								setIsFromRest( newPluginData.isFromRest );
 								setData( newPluginData );
 								reset( newPluginData );

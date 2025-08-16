@@ -13763,6 +13763,10 @@ html {
   background-color: var(--wppic-admin--color-notice--error);
 }
 
+.components-modal__content {
+  max-width: 600px;
+}
+
 .wppic-close-btn svg {
   color: #FFF;
   fill: unset;
@@ -14058,6 +14062,15 @@ html {
   width: 100%;
   font-size: 14px;
   padding: 8px 14px 8px 12px;
+}
+.wppic-admin-row .components-base-control:not(.components-range-control__number) input[type=text]:disabled,
+.wppic-admin-row .components-base-control:not(.components-range-control__number) input[type=number]:disabled,
+.wppic-admin-row .components-form-token-field input[type=text]:disabled,
+.wppic-admin-row .components-form-token-field input[type=number]:disabled {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(220, 220, 222, 0.75);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+  color: rgba(44, 51, 56, 0.5);
 }
 .wppic-admin-row label.components-base-control__label {
   position: relative;

@@ -43,17 +43,52 @@ class Init {
 		add_action( 'wp_ajax_wppic_save_custom_plugin', array( $this, 'ajax_save_custom_plugin' ) );
 		add_action( 'wp_ajax_wppic_delete_custom_plugin', array( $this, 'ajax_delete_custom_plugin' ) );
 		add_action( 'wp_ajax_wppic_get_custom_plugins', array( $this, 'ajax_get_custom_plugins' ) );
-		add_action( 'wp_ajax_wppic_delete_custom_plugin', array( $this, 'ajax_delete_custom_plugin' ) );
 		add_action( 'wp_ajax_wppic_get_custom_plugin_data', array( $this, 'ajax_get_custom_plugin_data' ) );
 		add_action( 'wp_ajax_wppic_export_custom_plugin', array( $this, 'ajax_export_custom_plugin' ) );
 		add_action( 'wp_ajax_wppic_get_custom_plugin_advanced_options', array( $this, 'ajax_get_custom_plugin_advanced_options' ) );
 		add_action( 'wp_ajax_wppic_save_custom_plugin_advanced_options', array( $this, 'ajax_save_custom_plugin_advanced_options' ) );
 		add_action( 'wp_ajax_wppic_detach_custom_plugin_from_rest', array( $this, 'ajax_detach_custom_plugin_from_rest' ) );
+		add_action( 'wp_ajax_wppic_delete_plugin', array( $this, 'ajax_delete_plugin' ) );
 
 		// Init tabs.
 		new Tabs\Main();
 		new Tabs\EDD();
 		new Tabs\Custom_Plugin();
+	}
+
+	/**
+	 * Delete a custom plugin via Ajax.
+	 */
+	public function ajax_delete_plugin() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'You are not authorized to delete custom plugins', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+		$id    = absint( filter_input( INPUT_POST, 'id', FILTER_DEFAULT ) );
+
+		if ( ! wp_verify_nonce( $nonce, 'wppic-edit-custom-plugin-' . $id ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce verification failed', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		wp_delete_post( $id, true );
+		wp_send_json_success(
+			array(
+				'message' => __( 'Plugin deleted', 'wp-plugin-info-card' ),
+			)
+		);
 	}
 
 	/**
@@ -257,6 +292,7 @@ class Init {
 		$item_content['restApiPasscode']    = sanitize_text_field( get_post_meta( $custom_plugin->ID, 'restApiPasscode', true ) );
 		$item_content['isFromRest']         = (bool) get_post_meta( $custom_plugin->ID, 'isFromRest', true );
 		$item_content['restApiDataVersion'] = absint( get_post_meta( $custom_plugin->ID, 'restApiDataVersion', true ) );
+		$item_content['restApiUrl']         = esc_url_raw( get_post_meta( $custom_plugin->ID, 'restApiUrl', true ) );
 		$return                             = array(
 			'id'      => absint( $custom_plugin->ID ),
 			'title'   => sanitize_text_field( $custom_plugin->post_title ),

@@ -5,91 +5,22 @@ import { RefreshCcw, ShieldX } from 'lucide-react';
 import { useParams } from '@tanstack/react-router';
 import SendCommand from '../../../utils/SendCommand';
 import Notice from '../../../components/Notice';
+import ImportSidebarRestModal from './import-sidebar-rest-modal';
+import ImportSidebarRestDetachModal from './import-sidebar-rest-detach-modal';
 
+/**
+ * Import Sidebar Rest.
+ *
+ * @param {Object}   props              - The component props.
+ * @param {Function} props.onPluginData - The function to call when the plugin data is updated.
+ * @param {string}   props.restApiUrl   - The URL of the REST API.
+ * @param {string}   props.id           - The ID of the plugin.
+ * @param {string}   props.nonce        - The nonce of the plugin.
+ * @return {JSX.Element} The Import Sidebar Rest component.
+ */
 const ImportSidebarRest = ( props ) => {
 	const [ showSyncModal, setShowSyncModal ] = useState( false );
 	const [ showDetachModal, setShowDetachModal ] = useState( false );
-	const [ isSyncing, setIsSyncing ] = useState( false );
-	const [ isDetaching, setIsDetaching ] = useState( false );
-	const [ statusMessage, setStatusMessage ] = useState( '' );
-	const [ syncError, setSyncError ] = useState( '' );
-
-	const { id, nonce } = useParams( {
-		shouldThrow: false,
-	} );
-
-	const fetchPlugin = async () => {
-		const response = await SendCommand( 'wppic_get_custom_plugin_data', {
-			nonce,
-			id,
-		} );
-		const { success, data } = response.data;
-		if ( success ) {
-			props.onPluginData( { ...data.data.content } );
-		}
-	};
-
-	/**
-	 * Detach the plugin from the REST API.
-	 */
-	const detachFromRest = async () => {
-		setStatusMessage( '' );
-		setShowDetachModal( true );
-		const response = await SendCommand( 'wppic_detach_custom_plugin_from_rest', {
-			nonce,
-			id,
-		} );
-		const { success, data } = response.data;
-		if ( success ) {
-			setStatusMessage( __( 'Plugin data detached successfully.', 'wp-plugin-info-card' ) );
-			await fetchPlugin();
-			setTimeout( () => {
-				setShowDetachModal( false );
-			}, 3000 );
-		}
-	};
-
-	/**
-	 * Sync plugin data from REST API.
-	 */
-	const syncPluginData = async () => {
-		setStatusMessage( '' );
-		setShowSyncModal( true );
-		setIsSyncing( true );
-
-		const formDataObj = new FormData();
-		formDataObj.append( 'postId', id );
-		formDataObj.append( 'nonce', nonce );
-		const response = await fetch( wppicAdminCustomPlugin.importPluginRestRefreshUrl, {
-			method: 'POST',
-			body: formDataObj,
-			headers: {
-				'X-WP-Nonce': wppicAdminCustomPlugin.restNonce,
-			},
-		} );
-		if ( response.ok ) {
-			const data = await response.json();
-			const maybeErrors = data.errors;
-			if ( maybeErrors.length > 0 ) {
-				let errorMessage = '';
-				maybeErrors.forEach( ( error ) => {
-					errorMessage += error + '\n\r';
-				} );
-				setSyncError( errorMessage );
-			}
-			setIsSyncing( false );
-			setStatusMessage( __( 'Plugin data synced successfully.', 'wp-plugin-info-card' ) );
-			setTimeout( () => {
-				setShowSyncModal( false );
-			}, 3000 );
-			await fetchPlugin();
-		} else {
-			setStatusMessage( __( 'Error syncing plugin data.', 'wp-plugin-info-card' ) );
-			setTimeout( () => {
-				setIsSyncing( false );
-			}, 3000 );
-		}
-	};
 
 	return (
 		<>
@@ -109,7 +40,7 @@ const ImportSidebarRest = ( props ) => {
 					href="#"
 					onClick={ ( e ) => {
 						e.preventDefault();
-						syncPluginData();
+						setShowSyncModal( true );
 					} }
 					iconPosition="left"
 					className="wppic-btn wppic-btn-alt has-icon-right btn-full-width"
@@ -120,9 +51,10 @@ const ImportSidebarRest = ( props ) => {
 				<Button
 					variant="secondary"
 					href="#"
+					isDestructive={ true }
 					onClick={ ( e ) => {
 						e.preventDefault();
-						detachFromRest();
+						setShowDetachModal( true );
 					} }
 					iconPosition="left"
 					className="wppic-btn wppic-btn-alt has-icon-right btn-full-width"
@@ -133,71 +65,28 @@ const ImportSidebarRest = ( props ) => {
 			</div>
 			{
 				showSyncModal && (
-					<Modal
-						title={ __( 'Resync Plugin Data', 'wp-plugin-info-card' ) }
-						onRequestClose={ () => {
-							setIsSyncing( false );
+					<ImportSidebarRestModal
+						restApiUrl={ props.restApiUrl }
+						onClose={ () => {
+							setShowSyncModal( false );
 						} }
-						shouldCloseOnEsc={ false }
-						shouldCloseOnClickOutside={ false }
-					>
-						<div className="wppic-admin-row">
-							{
-								isSyncing && (
-									<p>
-										{ __( 'Resyncing plugin data…', 'wp-plugin-info-card' ) }
-										<Spinner />
-									</p>
-								)
-							}
-							{
-								statusMessage && (
-									<Notice
-										message={ statusMessage }
-										status="success"
-										politeness="assertive"
-									/>
-								)
-							}
-							{
-								syncError && (
-									<Notice
-										message={ syncError }
-										status="error"
-										politeness="assertive"
-									/>
-								)
-							}
-						</div>
-					</Modal>
+						onPluginData={ ( newPluginData ) => {
+							props.onPluginData( newPluginData );
+						} }
+					/>
 				)
 			}
 			{
 				showDetachModal && (
-					<Modal
-						title={ __( 'Detach Plugin from REST', 'wp-plugin-info-card' ) }
-						onRequestClose={ () => {
+					<ImportSidebarRestDetachModal
+						restApiUrl={ props.restApiUrl }
+						onClose={ () => {
 							setShowDetachModal( false );
 						} }
-						shouldCloseOnEsc={ false }
-						shouldCloseOnClickOutside={ false }
-					>
-						<div className="wppic-admin-row">
-							<p>
-								{ __( 'Detaching plugin from REST API…', 'wp-plugin-info-card' ) }
-								<Spinner />
-							</p>
-							{
-								statusMessage && (
-									<Notice
-										message={ statusMessage }
-										status="success"
-										politeness="assertive"
-									/>
-								)
-							}
-						</div>
-					</Modal>
+						onPluginData={ ( newPluginData ) => {
+							props.onPluginData( newPluginData );
+						} }
+					/>
 				)
 			}
 		</>

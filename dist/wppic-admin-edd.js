@@ -22078,7 +22078,6 @@ var useMediaUploader = function b(a) {
       y2: s,
       aspectRatio: e.aspectRatio
     };
-    console.log(t);
     return t;
   };
   return {
