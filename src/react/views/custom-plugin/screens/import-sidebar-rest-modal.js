@@ -82,7 +82,11 @@ const ImportSidebarRestModal = ( props ) => {
 			await fetchPlugin();
 		} else {
 			setStatusMessage( '' );
-			setSyncError( __( 'Error syncing plugin data.', 'wp-plugin-info-card' ) );
+			if ( response.status === 400 ) {
+				setSyncError( __( 'REST API Path unreachable. It may be disabled or blocked by a firewall or proxy.', 'wp-plugin-info-card' ) );
+			} else {
+				setSyncError( __( 'Error syncing plugin data.', 'wp-plugin-info-card' ) + ' ' + response.statusText );
+			}
 			setIsSyncing( false );
 		}
 	};
