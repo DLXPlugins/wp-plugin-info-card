@@ -35,6 +35,8 @@ import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
 import SnackPop from '../../components/SnackPop';
 import usePluginPreview from '../../hooks/usePluginPreview';
+import CacheButton from '../../components/CacheButton';
+import CacheOptionsButton from '../../components/CacheOptionsButton';
 
 const OrgAsset = ( { type, slug, index, moveCallback, removeCallback } ) => {
 	const ref = useRef( null );
@@ -364,128 +366,6 @@ const AddTheme = ( props ) => {
 				/>
 			) }
 		</div>
-	);
-};
-
-const CacheOptionsButton = () => {
-	const [ clearing, setClearing ] = useState( false );
-	const [ isCleared ] = useState( false );
-	const [ clearPromise, setClearPromise ] = useState( null );
-
-	const getCacheText = () => {
-		if ( clearing ) {
-			return __( 'Clearing…', 'wp-plugin-info-card' );
-		}
-		if ( isCleared ) {
-			return __( 'Cache Cleared', 'wp-plugin-info-card' );
-		}
-		return __( 'Clear Options Cache', 'wp-plugin-info-card' );
-	};
-
-	const clearCache = async () => {
-		const clearOptionsPromise = SendCommand( 'wppic_clear_cache_options', { nonce: wppicAdminHome.clearCacheNonce } );
-		setClearPromise( clearOptionsPromise );
-		setClearing( true );
-		await clearOptionsPromise;
-		setClearing( false );
-	};
-
-	const getCacheIcon = () => {
-		if ( clearing ) {
-			return () => <Loader2 />;
-		}
-		if ( isCleared ) {
-			return () => <ClipboardCheck />;
-		}
-		return <Database />;
-	};
-
-	return (
-		<>
-			<Button
-				variant="primary"
-				onClick={ () => {
-					clearCache();
-				} }
-				icon={ getCacheIcon() }
-				iconSize="18"
-				iconPosition="right"
-				disabled={ clearing }
-				className={
-					classNames( 'wppic-btn wppic-btn-cache has-icon-right', {
-						'is-saving': clearing && ! isCleared,
-						'is-saved': isCleared,
-					} ) }
-				label={ getCacheText() }
-			>
-				{ getCacheText() }
-			</Button>
-			<SnackPop
-				ajaxOptions={ clearPromise }
-				loadingMessage={ __( 'Clearing Cache…', 'wp-plugin-info-card' ) }
-			/>
-		</>
-	);
-};
-
-const CacheButton = () => {
-	const [ clearing, setClearing ] = useState( false );
-	const [ isCleared ] = useState( false );
-	const [ clearPromise, setClearPromise ] = useState( null );
-
-	const getCacheText = () => {
-		if ( clearing ) {
-			return __( 'Clearing…', 'wp-plugin-info-card' );
-		}
-		if ( isCleared ) {
-			return __( 'Cache Cleared', 'wp-plugin-info-card' );
-		}
-		return __( 'Clear Cache', 'wp-plugin-info-card' );
-	};
-
-	const clearCache = async () => {
-		const clearOptionsPromise = SendCommand( 'wppic_clear_cache', { nonce: wppicAdminHome.clearCacheNonce } );
-		setClearPromise( clearOptionsPromise );
-		setClearing( true );
-		await clearOptionsPromise;
-		setClearing( false );
-	};
-
-	const getCacheIcon = () => {
-		if ( clearing ) {
-			return () => <Loader2 />;
-		}
-		if ( isCleared ) {
-			return () => <ClipboardCheck />;
-		}
-		return <Database />;
-	};
-
-	return (
-		<>
-			<Button
-				variant="primary"
-				onClick={ () => {
-					clearCache();
-				} }
-				icon={ getCacheIcon() }
-				iconSize="18"
-				iconPosition="right"
-				disabled={ clearing }
-				className={
-					classNames( 'wppic-btn wppic-btn-cache has-icon-right', {
-						'is-saving': clearing && ! isCleared,
-						'is-saved': isCleared,
-					} ) }
-				label={ getCacheText() }
-			>
-				{ getCacheText() }
-			</Button>
-			<SnackPop
-				ajaxOptions={ clearPromise }
-				loadingMessage={ __( 'Clearing Cache…', 'wp-plugin-info-card' ) }
-			/>
-		</>
 	);
 };
 
@@ -1166,14 +1046,14 @@ const Interface = ( props ) => {
 								'wp-plugin-info-card',
 							) }
 						</p>
-						<CacheButton />
+						<CacheButton nonce={ wppicAdminHome.clearCacheNonce } />
 						<p>
 							{ __(
 								'WP Plugin Info Card stores plugin and theme data as options in case the transient cache fails to update or errors out. You can remove these options by clicking the button below.',
 								'wp-plugin-info-card',
 							) }
 						</p>
-						<CacheOptionsButton />
+						<CacheOptionsButton nonce={ wppicAdminHome.clearCacheNonce } />
 					</div>
 					<div className="wppic-admin-panel-sidebar-card">
 						<h3>

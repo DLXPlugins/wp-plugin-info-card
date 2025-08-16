@@ -30320,6 +30320,78 @@ const Cog = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("co
 
 /***/ }),
 
+/***/ "./node_modules/lucide-react/dist/esm/icons/database-zap.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/database-zap.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
+/* harmony export */   "default": () => (/* binding */ DatabaseZap)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.503.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const __iconNode = [
+  ["ellipse", { cx: "12", cy: "5", rx: "9", ry: "3", key: "msslwz" }],
+  ["path", { d: "M3 5V19A9 3 0 0 0 15 21.84", key: "14ibmq" }],
+  ["path", { d: "M21 5V8", key: "1marbg" }],
+  ["path", { d: "M21 12L18 17H22L19 22", key: "zafso" }],
+  ["path", { d: "M3 12A9 3 0 0 0 14.59 14.87", key: "1y4wr8" }]
+];
+const DatabaseZap = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("database-zap", __iconNode);
+
+
+//# sourceMappingURL=database-zap.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/database.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/database.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
+/* harmony export */   "default": () => (/* binding */ Database)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.503.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const __iconNode = [
+  ["ellipse", { cx: "12", cy: "5", rx: "9", ry: "3", key: "msslwz" }],
+  ["path", { d: "M3 5V19A9 3 0 0 0 21 19V5", key: "1wlel7" }],
+  ["path", { d: "M3 12A9 3 0 0 0 21 12", key: "mv7ke4" }]
+];
+const Database = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("database", __iconNode);
+
+
+//# sourceMappingURL=database.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/lucide-react/dist/esm/icons/download.js":
 /*!**************************************************************!*\
   !*** ./node_modules/lucide-react/dist/esm/icons/download.js ***!
@@ -39050,6 +39122,260 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./src/react/components/CacheButton/index.js":
+/*!***************************************************!*\
+  !*** ./src/react/components/CacheButton/index.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/loader-circle.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/clipboard-check.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/database.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _utils_SendCommand__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/SendCommand */ "./src/react/utils/SendCommand.js");
+/* harmony import */ var _SnackPop__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../SnackPop */ "./src/react/components/SnackPop/index.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return j; }; var b, j = {}, e = Object.prototype, k = e.hasOwnProperty, m = Object.defineProperty || function (a, b, c) { a[b] = c.value; }, n = "function" == typeof Symbol ? Symbol : {}, q = n.iterator || "@@iterator", a = n.asyncIterator || "@@asyncIterator", c = n.toStringTag || "@@toStringTag"; function i(a, b, c) { return Object.defineProperty(a, b, { value: c, enumerable: !0, configurable: !0, writable: !0 }), a[b]; } try { i({}, ""); } catch (a) { i = function i(a, b, c) { return a[b] = c; }; } function u(b, d, e, f) { var g = d && d.prototype instanceof o ? d : o, h = Object.create(g.prototype), a = new F(f || []); return m(h, "_invoke", { value: B(b, e, a) }), h; } function w(a, b, c) { try { return { type: "normal", arg: a.call(b, c) }; } catch (a) { return { type: "throw", arg: a }; } } j.wrap = u; var x = "suspendedStart", h = "suspendedYield", l = "executing", f = "completed", s = {}; function o() {} function r() {} function y() {} var z = {}; i(z, q, function () { return this; }); var t = Object.getPrototypeOf, d = t && t(t(G([]))); d && d !== e && k.call(d, q) && (z = d); var v = y.prototype = o.prototype = Object.create(z); function g(a) { ["next", "throw", "return"].forEach(function (b) { i(a, b, function (a) { return this._invoke(b, a); }); }); } function A(b, d) { function c(e, f, g, i) { var a = w(b[e], b, f); if ("throw" !== a.type) { var j = a.arg, l = j.value; return l && "object" == _typeof(l) && k.call(l, "__await") ? d.resolve(l.__await).then(function (a) { c("next", a, g, i); }, function (a) { c("throw", a, g, i); }) : d.resolve(l).then(function (a) { j.value = a, g(j); }, function (a) { return c("throw", a, g, i); }); } i(a.arg); } var e; m(this, "_invoke", { value: function value(a, b) { function f() { return new d(function (d, e) { c(a, b, d, e); }); } return e = e ? e.then(f, f) : f(); } }); } function B(a, d, e) { var g = x; return function (j, i) { if (g === l) throw Error("Generator is already running"); if (g === f) { if ("throw" === j) throw i; return { value: b, done: !0 }; } for (e.method = j, e.arg = i;;) { var k = e.delegate; if (k) { var m = C(k, e); if (m) { if (m === s) continue; return m; } } if ("next" === e.method) e.sent = e._sent = e.arg;else if ("throw" === e.method) { if (g === x) throw g = f, e.arg; e.dispatchException(e.arg); } else "return" === e.method && e.abrupt("return", e.arg); g = l; var n = w(a, d, e); if ("normal" === n.type) { if (g = e.done ? f : h, n.arg === s) continue; return { value: n.arg, done: e.done }; } "throw" === n.type && (g = f, e.method = "throw", e.arg = n.arg); } }; } function C(c, d) { var e = d.method, f = c.iterator[e]; if (f === b) return d.delegate = null, "throw" === e && c.iterator["return"] && (d.method = "return", d.arg = b, C(c, d), "throw" === d.method) || "return" !== e && (d.method = "throw", d.arg = new TypeError("The iterator does not provide a '" + e + "' method")), s; var g = w(f, c.iterator, d.arg); if ("throw" === g.type) return d.method = "throw", d.arg = g.arg, d.delegate = null, s; var h = g.arg; return h ? h.done ? (d[c.resultName] = h.value, d.next = c.nextLoc, "return" !== d.method && (d.method = "next", d.arg = b), d.delegate = null, s) : h : (d.method = "throw", d.arg = new TypeError("iterator result is not an object"), d.delegate = null, s); } function D(a) { var b = { tryLoc: a[0] }; 1 in a && (b.catchLoc = a[1]), 2 in a && (b.finallyLoc = a[2], b.afterLoc = a[3]), this.tryEntries.push(b); } function E(a) { var b = a.completion || {}; b.type = "normal", delete b.arg, a.completion = b; } function F(a) { this.tryEntries = [{ tryLoc: "root" }], a.forEach(D, this), this.reset(!0); } function G(a) { if (a || "" === a) { var c = a[q]; if (c) return c.call(a); if ("function" == typeof a.next) return a; if (!isNaN(a.length)) { var d = -1, e = function c() { for (; ++d < a.length;) if (k.call(a, d)) return c.value = a[d], c.done = !1, c; return c.value = b, c.done = !0, c; }; return e.next = e; } } throw new TypeError(_typeof(a) + " is not iterable"); } return r.prototype = y, m(v, "constructor", { value: y, configurable: !0 }), m(y, "constructor", { value: r, configurable: !0 }), r.displayName = i(y, c, "GeneratorFunction"), j.isGeneratorFunction = function (a) { var b = "function" == typeof a && a.constructor; return !!b && (b === r || "GeneratorFunction" === (b.displayName || b.name)); }, j.mark = function (a) { return Object.setPrototypeOf ? Object.setPrototypeOf(a, y) : (a.__proto__ = y, i(a, c, "GeneratorFunction")), a.prototype = Object.create(v), a; }, j.awrap = function (a) { return { __await: a }; }, g(A.prototype), i(A.prototype, a, function () { return this; }), j.AsyncIterator = A, j.async = function (b, c, d, e, f) { void 0 === f && (f = Promise); var g = new A(u(b, c, d, e), f); return j.isGeneratorFunction(c) ? g : g.next().then(function (a) { return a.done ? a.value : g.next(); }); }, g(v), i(v, c, "Generator"), i(v, q, function () { return this; }), i(v, "toString", function () { return "[object Generator]"; }), j.keys = function (a) { var b = Object(a), c = []; for (var d in b) c.push(d); return c.reverse(), function a() { for (; c.length;) { var d = c.pop(); if (d in b) return a.value = d, a.done = !1, a; } return a.done = !0, a; }; }, j.values = G, F.prototype = { constructor: F, reset: function reset(a) { if (this.prev = 0, this.next = 0, this.sent = this._sent = b, this.done = !1, this.delegate = null, this.method = "next", this.arg = b, this.tryEntries.forEach(E), !a) for (var c in this) "t" === c.charAt(0) && k.call(this, c) && !isNaN(+c.slice(1)) && (this[c] = b); }, stop: function stop() { this.done = !0; var a = this.tryEntries[0].completion; if ("throw" === a.type) throw a.arg; return this.rval; }, dispatchException: function dispatchException(d) { if (this.done) throw d; var e = this; function f(a, c) { return j.type = "throw", j.arg = d, e.next = a, c && (e.method = "next", e.arg = b), !!c; } for (var g = this.tryEntries.length - 1; g >= 0; --g) { var h = this.tryEntries[g], j = h.completion; if ("root" === h.tryLoc) return f("end"); if (h.tryLoc <= this.prev) { var l = k.call(h, "catchLoc"), m = k.call(h, "finallyLoc"); if (l && m) { if (this.prev < h.catchLoc) return f(h.catchLoc, !0); if (this.prev < h.finallyLoc) return f(h.finallyLoc); } else if (l) { if (this.prev < h.catchLoc) return f(h.catchLoc, !0); } else { if (!m) throw Error("try statement without catch or finally"); if (this.prev < h.finallyLoc) return f(h.finallyLoc); } } } }, abrupt: function abrupt(b, c) { for (var d = this.tryEntries.length - 1; d >= 0; --d) { var e = this.tryEntries[d]; if (e.tryLoc <= this.prev && k.call(e, "finallyLoc") && this.prev < e.finallyLoc) { var f = e; break; } } f && ("break" === b || "continue" === b) && f.tryLoc <= c && c <= f.finallyLoc && (f = null); var g = f ? f.completion : {}; return g.type = b, g.arg = c, f ? (this.method = "next", this.next = f.finallyLoc, s) : this.complete(g); }, complete: function complete(a, b) { if ("throw" === a.type) throw a.arg; return "break" === a.type || "continue" === a.type ? this.next = a.arg : "return" === a.type ? (this.rval = this.arg = a.arg, this.method = "return", this.next = "end") : "normal" === a.type && b && (this.next = b), s; }, finish: function finish(a) { for (var b = this.tryEntries.length - 1; b >= 0; --b) { var c = this.tryEntries[b]; if (c.finallyLoc === a) return this.complete(c.completion, c.afterLoc), E(c), s; } }, "catch": function _catch(a) { for (var b = this.tryEntries.length - 1; b >= 0; --b) { var c = this.tryEntries[b]; if (c.tryLoc === a) { var d = c.completion; if ("throw" === d.type) { var f = d.arg; E(c); } return f; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(a, c, d) { return this.delegate = { iterator: G(a), resultName: c, nextLoc: d }, "next" === this.method && (this.arg = b), s; } }, j; }
+function asyncGeneratorStep(b, d, f, e, g, h, a) { try { var c = b[h](a), i = c.value; } catch (a) { return void f(a); } c.done ? d(i) : Promise.resolve(i).then(e, g); }
+function _asyncToGenerator(b) { return function () { var c = this, d = arguments; return new Promise(function (e, f) { var g = b.apply(c, d); function a(b) { asyncGeneratorStep(g, e, f, a, h, "next", b); } function h(b) { asyncGeneratorStep(g, e, f, a, h, "throw", b); } a(void 0); }); }; }
+function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) return _arrayLikeToArray(b, c); var a = {}.toString.call(b).slice(8, -1); return "Object" === a && b.constructor && (a = b.constructor.name), "Map" === a || "Set" === a ? Array.from(b) : "Arguments" === a || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a) ? _arrayLikeToArray(b, c) : void 0; } }
+function _arrayLikeToArray(b, c) { (null == c || c > b.length) && (c = b.length); for (var d = 0, f = Array(c); d < c; d++) f[d] = b[d]; return f; }
+function _iterableToArrayLimit(b, c) { var d = null == b ? null : "undefined" != typeof Symbol && b[Symbol.iterator] || b["@@iterator"]; if (null != d) { var g, h, j, k, l = [], a = !0, m = !1; try { if (j = (d = d.call(b)).next, 0 === c) { if (Object(d) !== d) return; a = !1; } else for (; !(a = (g = j.call(d)).done) && (l.push(g.value), l.length !== c); a = !0); } catch (a) { m = !0, h = a; } finally { try { if (!a && null != d["return"] && (k = d["return"](), Object(k) !== k)) return; } finally { if (m) throw h; } } return l; } }
+function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
+
+
+
+
+
+
+
+var CacheButton = function b(a) {
+  var c = a.nonce;
+  var d = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    e = _slicedToArray(d, 2),
+    f = e[0],
+    g = e[1];
+  var h = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    i = _slicedToArray(h, 1),
+    j = i[0];
+  var k = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    l = _slicedToArray(k, 2),
+    m = l[0],
+    n = l[1];
+  var o = function a() {
+    if (f) {
+      return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Clearing…', 'wp-plugin-info-card');
+    }
+    if (j) {
+      return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Cache Cleared', 'wp-plugin-info-card');
+    }
+    return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Clear Cache', 'wp-plugin-info-card');
+  };
+  var p = /*#__PURE__*/function () {
+    var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function a() {
+      var b;
+      return _regeneratorRuntime().wrap(function d(a) {
+        while (1) switch (a.prev = a.next) {
+          case 0:
+            b = (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_4__["default"])('wppic_clear_cache', {
+              nonce: c
+            });
+            n(b);
+            g(true);
+            a.next = 5;
+            return b;
+          case 5:
+            g(false);
+          case 6:
+          case "end":
+            return a.stop();
+        }
+      }, a);
+    }));
+    return function b() {
+      return a.apply(this, arguments);
+    };
+  }();
+  var q = function a() {
+    if (f) {
+      return function () {
+        return /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], null);
+      };
+    }
+    if (j) {
+      return function () {
+        return /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], null);
+      };
+    }
+    return /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], null);
+  };
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    variant: "primary",
+    onClick: function a() {
+      p();
+    },
+    icon: q(),
+    iconSize: "18",
+    iconPosition: "right",
+    disabled: f,
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-btn wppic-btn-cache has-icon-right', {
+      'is-saving': f && !j,
+      'is-saved': j
+    }),
+    label: o()
+  }, o()), /*#__PURE__*/React.createElement(_SnackPop__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    ajaxOptions: m,
+    loadingMessage: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Clearing Cache…', 'wp-plugin-info-card')
+  }));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CacheButton);
+
+/***/ }),
+
+/***/ "./src/react/components/CacheOptionsButton/index.js":
+/*!**********************************************************!*\
+  !*** ./src/react/components/CacheOptionsButton/index.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/loader-circle.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/clipboard-check.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/database.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _utils_SendCommand__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/SendCommand */ "./src/react/utils/SendCommand.js");
+/* harmony import */ var _SnackPop__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../SnackPop */ "./src/react/components/SnackPop/index.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return j; }; var b, j = {}, e = Object.prototype, k = e.hasOwnProperty, m = Object.defineProperty || function (a, b, c) { a[b] = c.value; }, n = "function" == typeof Symbol ? Symbol : {}, q = n.iterator || "@@iterator", a = n.asyncIterator || "@@asyncIterator", c = n.toStringTag || "@@toStringTag"; function i(a, b, c) { return Object.defineProperty(a, b, { value: c, enumerable: !0, configurable: !0, writable: !0 }), a[b]; } try { i({}, ""); } catch (a) { i = function i(a, b, c) { return a[b] = c; }; } function u(b, d, e, f) { var g = d && d.prototype instanceof o ? d : o, h = Object.create(g.prototype), a = new F(f || []); return m(h, "_invoke", { value: B(b, e, a) }), h; } function w(a, b, c) { try { return { type: "normal", arg: a.call(b, c) }; } catch (a) { return { type: "throw", arg: a }; } } j.wrap = u; var x = "suspendedStart", h = "suspendedYield", l = "executing", f = "completed", s = {}; function o() {} function r() {} function y() {} var z = {}; i(z, q, function () { return this; }); var t = Object.getPrototypeOf, d = t && t(t(G([]))); d && d !== e && k.call(d, q) && (z = d); var v = y.prototype = o.prototype = Object.create(z); function g(a) { ["next", "throw", "return"].forEach(function (b) { i(a, b, function (a) { return this._invoke(b, a); }); }); } function A(b, d) { function c(e, f, g, i) { var a = w(b[e], b, f); if ("throw" !== a.type) { var j = a.arg, l = j.value; return l && "object" == _typeof(l) && k.call(l, "__await") ? d.resolve(l.__await).then(function (a) { c("next", a, g, i); }, function (a) { c("throw", a, g, i); }) : d.resolve(l).then(function (a) { j.value = a, g(j); }, function (a) { return c("throw", a, g, i); }); } i(a.arg); } var e; m(this, "_invoke", { value: function value(a, b) { function f() { return new d(function (d, e) { c(a, b, d, e); }); } return e = e ? e.then(f, f) : f(); } }); } function B(a, d, e) { var g = x; return function (j, i) { if (g === l) throw Error("Generator is already running"); if (g === f) { if ("throw" === j) throw i; return { value: b, done: !0 }; } for (e.method = j, e.arg = i;;) { var k = e.delegate; if (k) { var m = C(k, e); if (m) { if (m === s) continue; return m; } } if ("next" === e.method) e.sent = e._sent = e.arg;else if ("throw" === e.method) { if (g === x) throw g = f, e.arg; e.dispatchException(e.arg); } else "return" === e.method && e.abrupt("return", e.arg); g = l; var n = w(a, d, e); if ("normal" === n.type) { if (g = e.done ? f : h, n.arg === s) continue; return { value: n.arg, done: e.done }; } "throw" === n.type && (g = f, e.method = "throw", e.arg = n.arg); } }; } function C(c, d) { var e = d.method, f = c.iterator[e]; if (f === b) return d.delegate = null, "throw" === e && c.iterator["return"] && (d.method = "return", d.arg = b, C(c, d), "throw" === d.method) || "return" !== e && (d.method = "throw", d.arg = new TypeError("The iterator does not provide a '" + e + "' method")), s; var g = w(f, c.iterator, d.arg); if ("throw" === g.type) return d.method = "throw", d.arg = g.arg, d.delegate = null, s; var h = g.arg; return h ? h.done ? (d[c.resultName] = h.value, d.next = c.nextLoc, "return" !== d.method && (d.method = "next", d.arg = b), d.delegate = null, s) : h : (d.method = "throw", d.arg = new TypeError("iterator result is not an object"), d.delegate = null, s); } function D(a) { var b = { tryLoc: a[0] }; 1 in a && (b.catchLoc = a[1]), 2 in a && (b.finallyLoc = a[2], b.afterLoc = a[3]), this.tryEntries.push(b); } function E(a) { var b = a.completion || {}; b.type = "normal", delete b.arg, a.completion = b; } function F(a) { this.tryEntries = [{ tryLoc: "root" }], a.forEach(D, this), this.reset(!0); } function G(a) { if (a || "" === a) { var c = a[q]; if (c) return c.call(a); if ("function" == typeof a.next) return a; if (!isNaN(a.length)) { var d = -1, e = function c() { for (; ++d < a.length;) if (k.call(a, d)) return c.value = a[d], c.done = !1, c; return c.value = b, c.done = !0, c; }; return e.next = e; } } throw new TypeError(_typeof(a) + " is not iterable"); } return r.prototype = y, m(v, "constructor", { value: y, configurable: !0 }), m(y, "constructor", { value: r, configurable: !0 }), r.displayName = i(y, c, "GeneratorFunction"), j.isGeneratorFunction = function (a) { var b = "function" == typeof a && a.constructor; return !!b && (b === r || "GeneratorFunction" === (b.displayName || b.name)); }, j.mark = function (a) { return Object.setPrototypeOf ? Object.setPrototypeOf(a, y) : (a.__proto__ = y, i(a, c, "GeneratorFunction")), a.prototype = Object.create(v), a; }, j.awrap = function (a) { return { __await: a }; }, g(A.prototype), i(A.prototype, a, function () { return this; }), j.AsyncIterator = A, j.async = function (b, c, d, e, f) { void 0 === f && (f = Promise); var g = new A(u(b, c, d, e), f); return j.isGeneratorFunction(c) ? g : g.next().then(function (a) { return a.done ? a.value : g.next(); }); }, g(v), i(v, c, "Generator"), i(v, q, function () { return this; }), i(v, "toString", function () { return "[object Generator]"; }), j.keys = function (a) { var b = Object(a), c = []; for (var d in b) c.push(d); return c.reverse(), function a() { for (; c.length;) { var d = c.pop(); if (d in b) return a.value = d, a.done = !1, a; } return a.done = !0, a; }; }, j.values = G, F.prototype = { constructor: F, reset: function reset(a) { if (this.prev = 0, this.next = 0, this.sent = this._sent = b, this.done = !1, this.delegate = null, this.method = "next", this.arg = b, this.tryEntries.forEach(E), !a) for (var c in this) "t" === c.charAt(0) && k.call(this, c) && !isNaN(+c.slice(1)) && (this[c] = b); }, stop: function stop() { this.done = !0; var a = this.tryEntries[0].completion; if ("throw" === a.type) throw a.arg; return this.rval; }, dispatchException: function dispatchException(d) { if (this.done) throw d; var e = this; function f(a, c) { return j.type = "throw", j.arg = d, e.next = a, c && (e.method = "next", e.arg = b), !!c; } for (var g = this.tryEntries.length - 1; g >= 0; --g) { var h = this.tryEntries[g], j = h.completion; if ("root" === h.tryLoc) return f("end"); if (h.tryLoc <= this.prev) { var l = k.call(h, "catchLoc"), m = k.call(h, "finallyLoc"); if (l && m) { if (this.prev < h.catchLoc) return f(h.catchLoc, !0); if (this.prev < h.finallyLoc) return f(h.finallyLoc); } else if (l) { if (this.prev < h.catchLoc) return f(h.catchLoc, !0); } else { if (!m) throw Error("try statement without catch or finally"); if (this.prev < h.finallyLoc) return f(h.finallyLoc); } } } }, abrupt: function abrupt(b, c) { for (var d = this.tryEntries.length - 1; d >= 0; --d) { var e = this.tryEntries[d]; if (e.tryLoc <= this.prev && k.call(e, "finallyLoc") && this.prev < e.finallyLoc) { var f = e; break; } } f && ("break" === b || "continue" === b) && f.tryLoc <= c && c <= f.finallyLoc && (f = null); var g = f ? f.completion : {}; return g.type = b, g.arg = c, f ? (this.method = "next", this.next = f.finallyLoc, s) : this.complete(g); }, complete: function complete(a, b) { if ("throw" === a.type) throw a.arg; return "break" === a.type || "continue" === a.type ? this.next = a.arg : "return" === a.type ? (this.rval = this.arg = a.arg, this.method = "return", this.next = "end") : "normal" === a.type && b && (this.next = b), s; }, finish: function finish(a) { for (var b = this.tryEntries.length - 1; b >= 0; --b) { var c = this.tryEntries[b]; if (c.finallyLoc === a) return this.complete(c.completion, c.afterLoc), E(c), s; } }, "catch": function _catch(a) { for (var b = this.tryEntries.length - 1; b >= 0; --b) { var c = this.tryEntries[b]; if (c.tryLoc === a) { var d = c.completion; if ("throw" === d.type) { var f = d.arg; E(c); } return f; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(a, c, d) { return this.delegate = { iterator: G(a), resultName: c, nextLoc: d }, "next" === this.method && (this.arg = b), s; } }, j; }
+function asyncGeneratorStep(b, d, f, e, g, h, a) { try { var c = b[h](a), i = c.value; } catch (a) { return void f(a); } c.done ? d(i) : Promise.resolve(i).then(e, g); }
+function _asyncToGenerator(b) { return function () { var c = this, d = arguments; return new Promise(function (e, f) { var g = b.apply(c, d); function a(b) { asyncGeneratorStep(g, e, f, a, h, "next", b); } function h(b) { asyncGeneratorStep(g, e, f, a, h, "throw", b); } a(void 0); }); }; }
+function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) return _arrayLikeToArray(b, c); var a = {}.toString.call(b).slice(8, -1); return "Object" === a && b.constructor && (a = b.constructor.name), "Map" === a || "Set" === a ? Array.from(b) : "Arguments" === a || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a) ? _arrayLikeToArray(b, c) : void 0; } }
+function _arrayLikeToArray(b, c) { (null == c || c > b.length) && (c = b.length); for (var d = 0, f = Array(c); d < c; d++) f[d] = b[d]; return f; }
+function _iterableToArrayLimit(b, c) { var d = null == b ? null : "undefined" != typeof Symbol && b[Symbol.iterator] || b["@@iterator"]; if (null != d) { var g, h, j, k, l = [], a = !0, m = !1; try { if (j = (d = d.call(b)).next, 0 === c) { if (Object(d) !== d) return; a = !1; } else for (; !(a = (g = j.call(d)).done) && (l.push(g.value), l.length !== c); a = !0); } catch (a) { m = !0, h = a; } finally { try { if (!a && null != d["return"] && (k = d["return"](), Object(k) !== k)) return; } finally { if (m) throw h; } } return l; } }
+function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
+
+
+
+
+
+
+
+
+/**
+ * Cache Options Button.
+ *
+ * @return {JSX.Element} The Cache Options Button component.
+ */
+var CacheOptionsButton = function b(a) {
+  var c = a.nonce;
+  var d = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    e = _slicedToArray(d, 2),
+    f = e[0],
+    g = e[1];
+  var h = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    i = _slicedToArray(h, 1),
+    j = i[0];
+  var k = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    l = _slicedToArray(k, 2),
+    m = l[0],
+    n = l[1];
+  var o = function a() {
+    if (f) {
+      return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Clearing…', 'wp-plugin-info-card');
+    }
+    if (j) {
+      return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Cache Cleared', 'wp-plugin-info-card');
+    }
+    return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Clear Options Cache', 'wp-plugin-info-card');
+  };
+  var p = /*#__PURE__*/function () {
+    var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function a() {
+      var b;
+      return _regeneratorRuntime().wrap(function d(a) {
+        while (1) switch (a.prev = a.next) {
+          case 0:
+            b = (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_4__["default"])('wppic_clear_cache_options', {
+              nonce: c
+            });
+            n(b);
+            g(true);
+            a.next = 5;
+            return b;
+          case 5:
+            g(false);
+          case 6:
+          case "end":
+            return a.stop();
+        }
+      }, a);
+    }));
+    return function b() {
+      return a.apply(this, arguments);
+    };
+  }();
+  var q = function a() {
+    if (f) {
+      return function () {
+        return /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], null);
+      };
+    }
+    if (j) {
+      return function () {
+        return /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], null);
+      };
+    }
+    return /*#__PURE__*/React.createElement(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], null);
+  };
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    variant: "primary",
+    onClick: function a() {
+      p();
+    },
+    icon: q(),
+    iconSize: "18",
+    iconPosition: "right",
+    disabled: f,
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-btn wppic-btn-cache has-icon-right', {
+      'is-saving': f && !j,
+      'is-saved': j
+    }),
+    label: o()
+  }, o()), /*#__PURE__*/React.createElement(_SnackPop__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    ajaxOptions: m,
+    loadingMessage: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Clearing Cache…', 'wp-plugin-info-card')
+  }));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CacheOptionsButton);
+
+/***/ }),
+
 /***/ "./src/react/components/Notice/index.js":
 /*!**********************************************!*\
   !*** ./src/react/components/Notice/index.js ***!
@@ -40701,25 +41027,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _tanstack_react_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @tanstack/react-router */ "./node_modules/@tanstack/react-router/dist/esm/useNavigate.js");
+/* harmony import */ var _tanstack_react_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @tanstack/react-router */ "./node_modules/@tanstack/react-router/dist/esm/useNavigate.js");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_dataviews__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/dataviews */ "./node_modules/@wordpress/dataviews/build-module/components/dataviews/index.js");
+/* harmony import */ var _wordpress_dataviews__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/dataviews */ "./node_modules/@wordpress/dataviews/build-module/components/dataviews/index.js");
 /* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
 /* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plug-2.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plus.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/cloud-download.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/download.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/cog.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/book-text.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/external-link.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plug-2.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plus.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/cloud-download.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/download.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/cog.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/database-zap.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/book-text.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/external-link.js");
 /* harmony import */ var _components_PluginIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../components/PluginIcon */ "./src/react/components/PluginIcon/index.js");
 /* harmony import */ var _utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../utils/SendCommand */ "./src/react/utils/SendCommand.js");
 /* harmony import */ var _import_plugin_modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./import-plugin-modal */ "./src/react/views/custom-plugin/screens/import-plugin-modal.js");
 /* harmony import */ var _components_SnackStatus__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../components/SnackStatus */ "./src/react/components/SnackStatus/index.js");
+/* harmony import */ var _components_CacheButton__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../components/CacheButton */ "./src/react/components/CacheButton/index.js");
+/* harmony import */ var _components_CacheOptionsButton__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../components/CacheOptionsButton */ "./src/react/components/CacheOptionsButton/index.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(a, b) { var c = Object.keys(a); if (Object.getOwnPropertySymbols) { var d = Object.getOwnPropertySymbols(a); b && (d = d.filter(function (b) { return Object.getOwnPropertyDescriptor(a, b).enumerable; })), c.push.apply(c, d); } return c; }
 function _objectSpread(a) { for (var b = 1; b < arguments.length; b++) { var c = null != arguments[b] ? arguments[b] : {}; b % 2 ? ownKeys(Object(c), !0).forEach(function (b) { _defineProperty(a, b, c[b]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(a, Object.getOwnPropertyDescriptors(c)) : ownKeys(Object(c)).forEach(function (b) { Object.defineProperty(a, b, Object.getOwnPropertyDescriptor(c, b)); }); } return a; }
@@ -40735,6 +41064,8 @@ function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) 
 function _arrayLikeToArray(b, c) { (null == c || c > b.length) && (c = b.length); for (var d = 0, f = Array(c); d < c; d++) f[d] = b[d]; return f; }
 function _iterableToArrayLimit(b, c) { var d = null == b ? null : "undefined" != typeof Symbol && b[Symbol.iterator] || b["@@iterator"]; if (null != d) { var g, h, j, k, l = [], a = !0, m = !1; try { if (j = (d = d.call(b)).next, 0 === c) { if (Object(d) !== d) return; a = !1; } else for (; !(a = (g = j.call(d)).done) && (l.push(g.value), l.length !== c); a = !0); } catch (a) { m = !0, h = a; } finally { try { if (!a && null != d["return"] && (k = d["return"](), Object(k) !== k)) return; } finally { if (m) throw h; } } return l; } }
 function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
+
+
 
 
 
@@ -40832,7 +41163,7 @@ var PluginHome = function b(a) {
     x = _slicedToArray(w, 2),
     y = x[0],
     z = x[1];
-  var A = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_8__.useNavigate)();
+  var A = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_10__.useNavigate)();
   var B = [{
     id: 'edit',
     icon: 'edit',
@@ -41135,7 +41466,7 @@ var PluginHome = function b(a) {
     className: "wppic-admin-panel-area__section"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_PluginIcon__WEBPACK_IMPORTED_MODULE_4__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Custom Plugin Cards', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
     className: "description"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add a custom plugin, enable a REST API endpoint, and share the plugin with the world in beautiful cards.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_dataviews__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add a custom plugin, enable a REST API endpoint, and share the plugin with the world in beautiful cards.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_dataviews__WEBPACK_IMPORTED_MODULE_11__["default"], {
     data: q,
     fields: fields,
     actions: B,
@@ -41156,7 +41487,7 @@ var PluginHome = function b(a) {
     className: "wppic-admin-panel-sidebar"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add New Plugin', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add a new plugin to the list of plugins.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_12__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add New Plugin', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add a new plugin to the list of plugins.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     variant: "primary",
     href: "#",
     onClick: function b(a) {
@@ -41168,11 +41499,11 @@ var PluginHome = function b(a) {
     iconPosition: "left",
     className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
     icon: function a() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_11__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add New Plugin', 'wp-plugin-info-card'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_12__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Import Plugin', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Import a plugin from a REST API endpoint.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_14__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Import Plugin', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Import a plugin from a REST API endpoint.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     variant: "secondary",
     href: "#",
     onClick: function b(a) {
@@ -41182,11 +41513,11 @@ var PluginHome = function b(a) {
     iconPosition: "left",
     className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
     icon: function a() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_15__["default"], null);
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Import Plugin', 'wp-plugin-info-card'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_14__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Advanced Settings', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Configure REST API settings and other advanced options.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_16__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Advanced Settings', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Configure REST API settings and other advanced options.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     variant: "secondary",
     href: "#",
     onClick: function b(a) {
@@ -41198,11 +41529,17 @@ var PluginHome = function b(a) {
     iconPosition: "right",
     className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
     icon: function a() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_14__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_16__["default"], null);
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Configure Settings', 'wp-plugin-info-card'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_15__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Learn more about custom plugins and how to use them in WP Plugin Info Card.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_17__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cache Options', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('WP Plugin Info Card uses a cache system to improve performance. You can clear the cache manually by clicking the button below.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_CacheButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    nonce: wppicAdminCustomPlugin.clearCacheNonce
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('WP Plugin Info Card stores plugin and theme data as options in case the transient cache fails to update or errors out. You can remove these options by clicking the button below.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_CacheOptionsButton__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    nonce: wppicAdminCustomPlugin.clearCacheNonce
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-panel-sidebar-card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_18__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Learn more about custom plugins and how to use them in WP Plugin Info Card.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     variant: "secondary",
     href: "https://docs.dlxplugins.com/wp-plugin-info-card/",
     className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
@@ -41213,7 +41550,7 @@ var PluginHome = function b(a) {
     },
     rel: "noopener noreferrer",
     icon: function a() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_16__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_19__["default"], null);
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('View Documentation', 'wp-plugin-info-card'))))), u && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_import_plugin_modal__WEBPACK_IMPORTED_MODULE_6__["default"], {
     onClose: function a() {

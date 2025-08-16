@@ -66,6 +66,7 @@ class Custom_Plugin {
 				'importPluginRestUrl'        => get_rest_url( null, 'wppic/v1/custom-plugins/import-from-rest' ),
 				'importPluginRestRefreshUrl' => get_rest_url( null, 'wppic/v1/custom-plugins/import-from-rest/refresh' ),
 				'tempPasscode'               => wp_generate_password( 16, false ),
+				'clearCacheNonce'            => wp_create_nonce( 'wppic-clear-cache' ),
 			)
 		);
 

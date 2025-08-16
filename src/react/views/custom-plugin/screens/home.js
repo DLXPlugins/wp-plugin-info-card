@@ -12,11 +12,14 @@ import {
 	ExternalLink,
 	Download,
 	CloudDownload,
+	DatabaseZap,
 } from 'lucide-react';
 import PluginIcon from '../../../components/PluginIcon';
 import sendCommand from '../../../utils/SendCommand';
 import ImportPluginModal from './import-plugin-modal';
 import SnackStatus from '../../../components/SnackStatus';
+import CacheButton from '../../../components/CacheButton';
+import CacheOptionsButton from '../../../components/CacheOptionsButton';
 
 const defaultLayouts = {
 	grid: {
@@ -416,6 +419,26 @@ const PluginHome = ( props ) => {
 						>
 							{ __( 'Configure Settings', 'wp-plugin-info-card' ) }
 						</Button>
+					</div>
+					<div className="wppic-admin-panel-sidebar-card">
+						<h3>
+							<DatabaseZap />
+							{ __( 'Cache Options', 'wp-plugin-info-card' ) }
+						</h3>
+						<p>
+							{ __(
+								'WP Plugin Info Card uses a cache system to improve performance. You can clear the cache manually by clicking the button below.',
+								'wp-plugin-info-card',
+							) }
+						</p>
+						<CacheButton nonce={ wppicAdminCustomPlugin.clearCacheNonce } />
+						<p>
+							{ __(
+								'WP Plugin Info Card stores plugin and theme data as options in case the transient cache fails to update or errors out. You can remove these options by clicking the button below.',
+								'wp-plugin-info-card',
+							) }
+						</p>
+						<CacheOptionsButton nonce={ wppicAdminCustomPlugin.clearCacheNonce } />
 					</div>
 					<div className="wppic-admin-panel-sidebar-card">
 						<h3>
