@@ -48,6 +48,8 @@ class Import_Export {
 		add_action(
 			'rest_api_init',
 			function () {
+				$options = Options::get_options();
+
 				// Setup rest route for handling the import of custom plugin json.
 				register_rest_route(
 					'wppic/v1',
@@ -80,6 +82,10 @@ class Import_Export {
 						'permission_callback' => array( __CLASS__, 'rest_check_permissions' ),
 					)
 				);
+
+				if ( ! isset( $options['enable_rest_api'] ) || ! (bool) $options['enable_rest_api'] ) {
+					return;
+				}
 
 				// Setup rest route for handling of exposing plugin's JSON.
 				register_rest_route(
