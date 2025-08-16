@@ -223,10 +223,10 @@ class Init {
 			);
 		}
 
-		$item_content                    = Functions::sanitize_array_recursive( json_decode( $custom_plugin->post_content, true ) );
-		$item_content['enableRestApi']   = sanitize_text_field( get_post_meta( $custom_plugin->ID, 'enableRestApi', true ) );
-		$item_content['restApiPasscode'] = sanitize_text_field( get_post_meta( $custom_plugin->ID, 'restApiPasscode', true ) );
-
+		$item_content                       = Functions::sanitize_array_recursive( json_decode( $custom_plugin->post_content, true ) );
+		$item_content['enableRestApi']      = sanitize_text_field( get_post_meta( $custom_plugin->ID, 'enableRestApi', true ) );
+		$item_content['restApiPasscode']    = sanitize_text_field( get_post_meta( $custom_plugin->ID, 'restApiPasscode', true ) );
+		$item_content['isFromRest']         = (bool) get_post_meta( $custom_plugin->ID, 'isFromRest', true );
 		$item_content['restApiDataVersion'] = absint( get_post_meta( $custom_plugin->ID, 'restApiDataVersion', true ) );
 		$return                             = array(
 			'id'      => absint( $custom_plugin->ID ),

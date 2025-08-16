@@ -10,6 +10,7 @@ import useMediaUploader from '../../../hooks/useMediaUploader';
 import PluginIcon from '../../../components/PluginIcon';
 import Notice from '../../../components/Notice';
 import SaveCustomPluginButtons from '../../../components/SaveCustomPluginButtons';
+import ImportSidebarRest from './import-sidebar-rest';
 
 import {
 	TextControl,
@@ -20,13 +21,10 @@ import {
 	TextareaControl,
 } from '@wordpress/components';
 import {
-	CloudDownload,
-	Download,
 	ExternalLink,
 	BookText,
-	Plug2,
-	Plus,
 	AlertCircle,
+	TriangleAlert
 } from 'lucide-react';
 import SendCommand from '../../../utils/SendCommand';
 const Breadcrumbs = ( { screen, isEditing } ) => (
@@ -83,7 +81,9 @@ const NewPlugin = ( props ) => {
 };
 
 const Interface = ( props ) => {
-	const { data, editMode } = props;
+	const { editMode } = props;
+	const [ data, setData ] = useState( props.data );
+
 	const navigate = useNavigate();
 	const [ isChecking, setIsChecking ] = useState( false );
 	const [ isError, setIsError ] = useState( false );
@@ -93,6 +93,7 @@ const Interface = ( props ) => {
 	const [ pluginSlugInputRef, setPluginSlugInputRef ] = useState( null );
 	const [ isEditing, setIsEditing ] = useState( editMode ? true : false );
 	const [ loading, setLoading ] = useState( editMode ? true : false );
+	const [ isFromRest, setIsFromRest ] = useState( data.isFromRest || false );
 
 	const checkPluginSlug = async ( slug ) => {
 		// If data is set, we're editing, so we don't need to check the slug. Will check on save.
@@ -187,12 +188,14 @@ const Interface = ( props ) => {
 	};
 
 	useEffect( () => {
-		if ( Object.keys( data ).length > 0 ) {
+		if ( Object.keys( props.data ).length > 0 ) {
 			setIsEditing( true );
-			reset( data );
+			setIsFromRest( props.data.isFromRest );
+			setData( props.data );
+			reset( props.data );
 			setLoading( false );
 		}
-	}, [ data, reset ] );
+	}, [ props.data, reset ] );
 
 	const formTable = (
 		<table className="form-table form-table-row-sections">
@@ -202,6 +205,19 @@ const Interface = ( props ) => {
 						{ __( 'Plugin Details', 'wp-plugin-info-card' ) }
 					</th>
 					<td>
+						{
+							isFromRest && (
+								<div className="wppic-admin-row">
+									<Notice
+										message={ __( 'This plugin has been imported from a REST API. Fields are read only. You can resync the plugin data by clicking the "Sync From REST" button in the sidebar.', 'wp-plugin-info-card' ) }
+										status="warning"
+										politeness="assertive"
+										icon={ () => <TriangleAlert style={ { color: 'currentColor' } } /> }
+										inline={ false }
+									/>
+								</div>
+							)
+						}
 						<div className="wppic-admin-row">
 							<Controller
 								control={ control }
@@ -222,6 +238,7 @@ const Interface = ( props ) => {
 												) }
 											help={ __( 'Enter the name of the plugin.', 'wp-plugin-info-card' ) }
 											label={ __( 'Plugin Name', 'wp-plugin-info-card' ) }
+											disabled={ isFromRest }
 										/>
 										{ errors?.name && (
 											<Notice
@@ -269,6 +286,7 @@ const Interface = ( props ) => {
 												setIsError( false );
 												checkPluginSlug( getValues( 'slug' ) );
 											} }
+											disabled={ isFromRest }
 										/>
 										{ isChecking && (
 											<div className="wppic-admin-row">
@@ -337,6 +355,7 @@ const Interface = ( props ) => {
 												field.onChange( value );
 												clearErrors( 'shortDescription' );
 											} }
+											disabled={ isFromRest }
 										/>
 										{ errors?.shortDescription?.type === 'required' && (
 											<Notice
@@ -402,6 +421,7 @@ const Interface = ( props ) => {
 											} );
 										} }
 										help={ __( 'Select an Icon with dimensions 256x256', 'wp-plugin-info-card' ) }
+										disabled={ isFromRest }
 									>
 										{ __( 'Upload Icon', 'wp-plugin-info-card' ) }
 									</Button>
@@ -414,6 +434,7 @@ const Interface = ( props ) => {
 												setValue( 'pluginIconUrl', '' );
 											} }
 											isDestructive={ true }
+											disabled={ isFromRest }
 										>
 											{ __( 'Remove Icon', 'wp-plugin-info-card' ) }
 										</Button>
@@ -468,6 +489,7 @@ const Interface = ( props ) => {
 											} );
 										} }
 										help={ __( 'Select an Icon with dimensions 1544x720', 'wp-plugin-info-card' ) }
+										disabled={ isFromRest }
 									>
 										{ __( 'Upload Banner Image', 'wp-plugin-info-card' ) }
 									</Button>
@@ -480,6 +502,7 @@ const Interface = ( props ) => {
 												setValue( 'pluginBannerUrl', '' );
 											} }
 											isDestructive={ true }
+											disabled={ isFromRest }
 										>
 											{ __( 'Remove Banner', 'wp-plugin-info-card' ) }
 										</Button>
@@ -511,6 +534,7 @@ const Interface = ( props ) => {
 												field.onChange( value );
 												clearErrors( 'version' );
 											} }
+											disabled={ isFromRest }
 										/>
 										{ errors?.version?.type === 'required' && (
 											<Notice
@@ -540,6 +564,7 @@ const Interface = ( props ) => {
 												field.onChange( value );
 												clearErrors( 'requires' );
 											} }
+											disabled={ isFromRest }
 										/>
 										{ errors?.requires?.type === 'required' && (
 											<Notice
@@ -569,6 +594,7 @@ const Interface = ( props ) => {
 												field.onChange( value );
 												clearErrors( 'tested' );
 											} }
+											disabled={ isFromRest }
 										/>
 										{ errors?.tested?.type === 'required' && (
 											<Notice
@@ -597,6 +623,7 @@ const Interface = ( props ) => {
 												field.onChange( value );
 												clearErrors( 'requiresPHP' );
 											} }
+											disabled={ isFromRest }
 										/>
 										{ errors?.requiresPHP?.type === 'required' && (
 											<Notice
@@ -636,6 +663,7 @@ const Interface = ( props ) => {
 												field.onChange( value );
 												clearErrors( 'homepage' );
 											} }
+											disabled={ isFromRest }
 										/>
 										{ errors?.url?.type === 'required' && (
 											<Notice
@@ -668,6 +696,7 @@ const Interface = ( props ) => {
 												field.onChange( value );
 												clearErrors( 'homepage' );
 											} }
+											disabled={ isFromRest }
 										/>
 										{ errors?.homepage?.type === 'required' && (
 											<Notice
@@ -700,6 +729,7 @@ const Interface = ( props ) => {
 												field.onChange( value );
 												clearErrors( 'downloadLink' );
 											} }
+											disabled={ isFromRest }
 										/>
 										{ errors?.downloadLink?.type === 'required' && (
 											<Notice
@@ -732,6 +762,7 @@ const Interface = ( props ) => {
 												field.onChange( value );
 												clearErrors( 'reviewsUrl' );
 											} }
+											disabled={ isFromRest }
 										/>
 										{ errors?.reviewsUrl?.type === 'required' && (
 											<Notice
@@ -768,6 +799,7 @@ const Interface = ( props ) => {
 												field.onChange( value );
 												clearErrors( 'author' );
 											} }
+											disabled={ isFromRest }
 										/>
 										{ errors?.author?.type === 'required' && (
 											<Notice
@@ -794,6 +826,7 @@ const Interface = ( props ) => {
 										className="wppic-admin-input"
 										help={ __( 'Enter the URL to the author\'s profile.', 'wp-plugin-info-card' ) }
 										label={ __( 'Author Profile URL', 'wp-plugin-info-card' ) }
+										disabled={ isFromRest }
 									/>
 								) }
 							/>
@@ -809,6 +842,7 @@ const Interface = ( props ) => {
 										className="wppic-admin-input"
 										help={ __( 'Enter comma-separated WordPress.org usernames of contributors.', 'wp-plugin-info-card' ) }
 										label={ __( 'Contributors', 'wp-plugin-info-card' ) }
+										disabled={ isFromRest }
 									/>
 								) }
 							/>
@@ -840,6 +874,7 @@ const Interface = ( props ) => {
 												field.onChange( value );
 												clearErrors( 'rating' );
 											} }
+											disabled={ isFromRest }
 										/>
 										{ errors?.rating?.type === 'required' && (
 											<Notice
@@ -872,6 +907,7 @@ const Interface = ( props ) => {
 												field.onChange( value );
 												clearErrors( 'numRatings' );
 											} }
+											disabled={ isFromRest }
 										/>
 										{ errors?.numRatings?.type === 'required' && (
 											<Notice
@@ -898,6 +934,7 @@ const Interface = ( props ) => {
 										className="wppic-admin-input"
 										help={ __( 'Enter the total number of downloads.', 'wp-plugin-info-card' ) }
 										label={ __( 'Downloads', 'wp-plugin-info-card' ) }
+										disabled={ isFromRest }
 									/>
 								) }
 							/>
@@ -921,6 +958,7 @@ const Interface = ( props ) => {
 												field.onChange( value );
 												clearErrors( 'activeInstalls' );
 											} }
+											disabled={ isFromRest }
 										/>
 										{ errors?.activeInstalls?.type === 'required' && (
 											<Notice
@@ -946,6 +984,7 @@ const Interface = ( props ) => {
 										className="wppic-admin-input"
 										help={ __( 'Enter the date when the plugin was last updated.', 'wp-plugin-info-card' ) }
 										label={ __( 'Last Updated', 'wp-plugin-info-card' ) }
+										disabled={ isFromRest }
 									/>
 								) }
 							/>
@@ -970,6 +1009,7 @@ const Interface = ( props ) => {
 										checked={ field.value === 'true' ? true : false }
 										label={ __( 'Enable REST API', 'wp-plugin-info-card' ) }
 										help={ __( 'Enable the REST API for the plugin. This will allow others to fetch your plugin via an endpoint.', 'wp-plugin-info-card' ) }
+										disabled={ isFromRest }
 									/>
 								) }
 							/>
@@ -997,6 +1037,7 @@ const Interface = ( props ) => {
 														className={ classnames( 'wppic-admin-input is-required', { 'has-error': errors?.restApiPasscode } ) }
 														help={ __( '(Required) Enter the passcode for the REST API. This is used to prevent unauthorized access in case a passcode is being overused. Please consider the passcode something that can be viewed by the public.', 'wp-plugin-info-card' ) }
 														label={ __( 'REST API Passcode', 'wp-plugin-info-card' ) }
+														disabled={ isFromRest }
 													/>
 													{ errors?.restApiPasscode?.type === 'required' && (
 														<Notice
@@ -1036,6 +1077,7 @@ const Interface = ( props ) => {
 														className={ classnames( 'wppic-admin-input is-required', { 'has-error': errors?.restApiDataVersion } ) }
 														help={ __( 'Increase the version by 1 if you make any image changes to the plugin. This will instruct subscribers to redownload images and other plugin data.', 'wp-plugin-info-card' ) }
 														label={ __( 'REST API Data Version', 'wp-plugin-info-card' ) }
+														disabled={ isFromRest }
 													/>
 													{ errors?.restApiDataVersion?.type === 'required' && (
 														<Notice
@@ -1113,6 +1155,14 @@ const Interface = ( props ) => {
 					</form>
 				</div>
 				<div className="wppic-admin-panel-sidebar">
+					{
+						isFromRest && (
+							<ImportSidebarRest onPluginData={ ( newPluginData ) => {
+								setData( newPluginData );
+								reset( newPluginData );
+							} } />
+						)
+					}
 					<div className="wppic-admin-panel-sidebar-card">
 						<h3>
 							<BookText />

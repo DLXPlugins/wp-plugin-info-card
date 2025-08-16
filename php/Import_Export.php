@@ -70,6 +70,17 @@ class Import_Export {
 					)
 				);
 
+				// Setup rest route for handling the import of custom plugin from REST API URL.
+				register_rest_route(
+					'wppic/v1',
+					'custom-plugins/import-from-rest/refresh',
+					array(
+						'methods'             => 'POST',
+						'callback'            => array( __CLASS__, 'rest_handle_import_from_rest_refresh' ),
+						'permission_callback' => array( __CLASS__, 'rest_check_permissions' ),
+					)
+				);
+
 				// Setup rest route for handling of exposing plugin's JSON.
 				register_rest_route(
 					'wppic/v1',
@@ -407,6 +418,140 @@ class Import_Export {
 			$post_id = wp_insert_post( $post_item_args );
 			if ( is_wp_error( $post_id ) ) {
 				$errors[] = sprintf( __( 'Error creating custom plugin: %s', 'wp-plugin-info-card' ), $post_id->get_error_message() );
+				continue;
+			} else {
+				// Try to set featured image.
+				if ( ! is_wp_error( $plugin_icon_url_id ) && $plugin_icon_url_id ) {
+					set_post_thumbnail( $post_id, $plugin_icon_url_id );
+				}
+
+				// Set post as being from rest.
+				update_post_meta( $post_id, 'isFromRest', true );
+				update_post_meta( $post_id, 'restApiUrl', esc_url_raw( $rest_url ) );
+
+				// Set cron job to update the plugin data.
+				// wp_schedule_single_event( time() + 10, 'wppic_update_plugin_data', array( $post_id ) );
+			}
+		}
+
+		return new \WP_REST_Response(
+			array(
+				'errors'       => $errors,
+				'total_items'  => $total_items,
+				'current_item' => $current_item,
+			)
+		);
+	}
+
+	/**
+	 * Handle the refresh of custom plugins from a REST API URL.
+	 *
+	 * @param WP_REST_Request $request The request object.
+	 * @return WP_REST_Response The response object.
+	 */
+	public static function rest_handle_import_from_rest_refresh( $request ) {
+		$params   = $request->get_params();
+		$post_id  = $params['postId'];
+		$rest_url = get_post_meta( $post_id, 'restApiUrl', true );
+
+		// Get local post.
+		$post = get_post( $post_id );
+		if ( ! $post ) {
+			return new \WP_REST_Response( array( 'message' => 'Local Plugin not found' ), 404 );
+		}
+
+		$response = wp_safe_remote_get( esc_url_raw( $rest_url ) );
+		if ( is_wp_error( $response ) ) {
+			return new \WP_REST_Response( array( 'message' => 'Error fetching data from REST API. This request could have been blocked by a firewall or proxy.' ), 400 );
+		}
+
+		// Check error status code.
+		if ( wp_remote_retrieve_response_code( $response ) !== 200 ) {
+			return new \WP_REST_Response( array( 'message' => 'Error fetching data from REST API. Invalid response code: ' . wp_remote_retrieve_response_code( $response ) ), 400 );
+		}
+
+		$payload = json_decode( $response['body'], true );
+
+		$checksum         = $payload['checksum'];
+		$items            = $payload['items'];
+		$payload_checksum = 'sha256:' . hash( 'sha256', json_encode( $items ) );
+
+		if ( $checksum !== $payload_checksum ) {
+			return new \WP_REST_Response( array( 'message' => 'Checksum mismatch' ), 400 );
+		}
+
+		// Store all errors here that are non-fatal and can be returned to the user.
+		$errors       = array();
+		$total_items  = count( $items );
+		$current_item = 0;
+
+		foreach ( $items as $item ) {
+			$slug = $item['slug'];
+			if ( ! self::check_plugin_slug( $slug ) || $slug !== $post->post_name ) {
+				$errors[] = sprintf( __( 'Could not find plugin %s', 'wp-plugin-info-card' ), $slug );
+				continue;
+			}
+
+			$item = Functions::sanitize_array_recursive( $item );
+
+			// Get the image vars.
+			$plugin_icon_url   = $item['pluginIconUrl'];
+			$plugin_banner_url = $item['pluginBannerUrl'];
+
+			// Validate the URLs.
+			$plugin_icon_url   = esc_url_raw( wp_http_validate_url( $plugin_icon_url ) );
+			$plugin_banner_url = esc_url_raw( wp_http_validate_url( $plugin_banner_url ) );
+
+			$plugin_icon_url_id = null;
+			if ( $plugin_icon_url ) {
+				$plugin_icon_url_id = self::sideload_image( $plugin_icon_url );
+				if ( ! is_wp_error( $plugin_icon_url_id ) ) {
+					$item['pluginIconUrl']   = wp_get_attachment_url( $plugin_icon_url_id );
+					$item['pluginIconUrlId'] = $plugin_icon_url_id;
+				} else {
+					$item['pluginIconUrl'] = '';
+					$errors[]              = sprintf( __( 'Error sideloading plugin icon: %s', 'wp-plugin-info-card' ), $plugin_icon_url_id->get_error_message() );
+				}
+			}
+
+			if ( $plugin_banner_url ) {
+				$plugin_banner_url_id = self::sideload_image( $plugin_banner_url );
+				if ( ! is_wp_error( $plugin_banner_url_id ) ) {
+					$item['pluginBannerUrl']   = wp_get_attachment_url( $plugin_banner_url_id );
+					$item['pluginBannerUrlId'] = $plugin_banner_url_id;
+				} else {
+					$item['pluginBannerUrl'] = '';
+					$errors[]                = sprintf( __( 'Error sideloading plugin banner: %s', 'wp-plugin-info-card' ), $plugin_banner_url_id->get_error_message() );
+				}
+			}
+
+			++$current_item;
+
+			// Reconcile with fields.
+			$item = array_intersect_key( $item, array_flip( self::$fields ) );
+
+			/**
+			 * Filter: wppic_import_custom_plugin_item.
+			 *
+			 * Filters the item prior to encoding. Use this to dynamically update ratings, downloads, etc.
+			 *
+			 * @param array $item The item to be imported.
+			 *
+			 * @return array The filtered item.
+			 *
+			 * @see self::$fields
+			 */
+			$item = apply_filters( 'wppic_import_custom_plugin_item', $item );
+
+			$post_item_args = array(
+				'ID'           => $post_id,
+				'post_title'   => sanitize_text_field( $item['name'] ),
+				'post_content' => wp_json_encode( $item ),
+			);
+
+			$post_update_status = wp_update_post( $post_item_args );
+			if ( is_wp_error( $post_update_status ) ) {
+				$errors[] = sprintf( __( 'Error updating custom plugin: %s', 'wp-plugin-info-card' ), $post_update_status->get_error_message() );
 				continue;
 			} else {
 				// Try to set featured image.

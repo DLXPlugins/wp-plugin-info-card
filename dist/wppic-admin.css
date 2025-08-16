@@ -14546,6 +14546,10 @@ p.wppic-admin-header-description {
   opacity: 0;
 }
 
+input[disabled] {
+  cursor: not-allowed;
+}
+
 /* Ensure container maintains height */
 .wppic-admin-panel-container {
   position: relative;

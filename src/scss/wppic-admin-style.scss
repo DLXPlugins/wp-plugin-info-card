@@ -1469,6 +1469,10 @@ p.wppic-admin-header-description {
 	}
 }
 
+input[disabled] {
+	cursor: not-allowed;
+}
+
 /* Ensure container maintains height */
 .wppic-admin-panel-container {
 	position: relative;
