@@ -23,7 +23,7 @@ const ImportPluginRestUrl = ( props ) => {
 		trigger,
 	} = useForm( {
 		defaultValues: {
-			restUrl: '',
+			restUrl: props?.restApiUrl || '',
 		},
 	} );
 	const formValues = useWatch( { control } );
@@ -144,22 +144,6 @@ const ImportPluginRestUrl = ( props ) => {
 									iconSize="18"
 									iconPosition="right"
 									disabled={ importing || ! formValues.restUrl || errors?.restUrl?.validate }
-								/>
-							)
-						}
-						{
-							hasImported && (
-								<Button
-									className={ classnames(
-										'wppic__btn wppic__btn-secondary wppic__btn--icon-right',
-									) }
-									variant="primary"
-									type="button"
-									text={ __( 'Close Import Modal', 'wp-plugin-info-card' ) }
-									icon={ <X /> }
-									iconSize="18"
-									iconPosition="left"
-									onClick={ props.onClose }
 								/>
 							)
 						}

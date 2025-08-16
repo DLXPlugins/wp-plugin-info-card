@@ -271,6 +271,16 @@ class Blocks {
 				'screenshot_preset_save_nonce'   => wp_create_nonce( 'wppic_screenshot_preset_save' ),
 				'screenshot_preset_delete_nonce' => wp_create_nonce( 'wppic_screenshot_preset_delete' ),
 				'can_edit_others_posts'          => current_user_can( 'edit_others_posts' ),
+				'can_manage_options'             => current_user_can( 'manage_options' ),
+			)
+		);
+
+		wp_localize_script(
+			'wp-plugin-info-card-block-js',
+			'wppicAdminCustomPlugin',
+			array(
+				'importPluginRestUrl' => get_rest_url( null, 'wppic/v1/custom-plugins/import-from-rest' ),
+				'restNonce'           => wp_create_nonce( 'wp_rest' ),
 			)
 		);
 

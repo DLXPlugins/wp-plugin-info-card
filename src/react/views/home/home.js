@@ -36,7 +36,7 @@ import Notice from '../../components/Notice';
 import SnackPop from '../../components/SnackPop';
 import usePluginPreview from '../../hooks/usePluginPreview';
 import CacheButton from '../../components/CacheButton';
-import CacheOptionsButton from '../../components/CacheOptionsButton';
+import CacheOptionsButton from '../../components/CacheOptionsButton.js';
 
 const OrgAsset = ( { type, slug, index, moveCallback, removeCallback } ) => {
 	const ref = useRef( null );

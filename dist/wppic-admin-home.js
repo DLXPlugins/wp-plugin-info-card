@@ -27370,10 +27370,10 @@ var CacheButton = function b(a) {
 
 /***/ }),
 
-/***/ "./src/react/components/CacheOptionsButton/index.js":
-/*!**********************************************************!*\
-  !*** ./src/react/components/CacheOptionsButton/index.js ***!
-  \**********************************************************/
+/***/ "./src/react/components/CacheOptionsButton.js/index.js":
+/*!*************************************************************!*\
+  !*** ./src/react/components/CacheOptionsButton.js/index.js ***!
+  \*************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -28404,7 +28404,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_SnackPop__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/SnackPop */ "./src/react/components/SnackPop/index.js");
 /* harmony import */ var _hooks_usePluginPreview__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../hooks/usePluginPreview */ "./src/react/hooks/usePluginPreview.js");
 /* harmony import */ var _components_CacheButton__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/CacheButton */ "./src/react/components/CacheButton/index.js");
-/* harmony import */ var _components_CacheOptionsButton__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/CacheOptionsButton */ "./src/react/components/CacheOptionsButton/index.js");
+/* harmony import */ var _components_CacheOptionsButton_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/CacheOptionsButton.js */ "./src/react/components/CacheOptionsButton.js/index.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _toConsumableArray(a) { return _arrayWithoutHoles(a) || _iterableToArray(a) || _unsupportedIterableToArray(a) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -29372,7 +29372,7 @@ var Interface = function b(a) {
     className: "wppic-admin-panel-sidebar-card"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_24__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Cache Options', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('WP Plugin Info Card uses a cache system to improve performance. You can clear the cache manually by clicking the button below.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_CacheButton__WEBPACK_IMPORTED_MODULE_12__["default"], {
     nonce: wppicAdminHome.clearCacheNonce
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('WP Plugin Info Card stores plugin and theme data as options in case the transient cache fails to update or errors out. You can remove these options by clicking the button below.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_CacheOptionsButton__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('WP Plugin Info Card stores plugin and theme data as options in case the transient cache fails to update or errors out. You can remove these options by clicking the button below.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_CacheOptionsButton_js__WEBPACK_IMPORTED_MODULE_13__["default"], {
     nonce: wppicAdminHome.clearCacheNonce
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"

@@ -19,7 +19,7 @@ import sendCommand from '../../../utils/SendCommand';
 import ImportPluginModal from './import-plugin-modal';
 import SnackStatus from '../../../components/SnackStatus';
 import CacheButton from '../../../components/CacheButton';
-import CacheOptionsButton from '../../../components/CacheOptionsButton';
+import CacheOptionsButton from '../../../components/CacheOptionsButton.js';
 
 const defaultLayouts = {
 	grid: {
