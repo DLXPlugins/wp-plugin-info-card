@@ -321,6 +321,9 @@ class Import_Export {
 		// Get the author and link to the download page for the plugin.
 		$existing_data['author'] = esc_attr( $custom_plugin_data['author'] );
 
+		// Get the author profile.
+		$existing_data['author_profile'] = esc_url_raw( $custom_plugin_data['authorProfile'] );
+
 		// Author/Download URL.
 		$existing_data['homepage'] = esc_url_raw( $custom_plugin_data['homepage'] );
 
