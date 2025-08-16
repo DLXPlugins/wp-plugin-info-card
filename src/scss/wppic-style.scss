@@ -106,6 +106,12 @@ p.wp-pic-author,
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 35px;
+
+	img {
+		max-width: 100%;
+		height: auto;
+		object-fit: cover;
+	}
 }
 .wp-pic:not(.plugin) a.wp-pic-logo:not([data="no-image"]) {
 	width: 100%;

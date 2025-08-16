@@ -9744,6 +9744,11 @@ p.wp-pic-author,
   margin-right: auto;
   margin-top: 35px;
 }
+.wp-pic div.wp-pic-logo img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
 
 .wp-pic:not(.plugin) a.wp-pic-logo:not([data=no-image]) {
   width: 100%;
