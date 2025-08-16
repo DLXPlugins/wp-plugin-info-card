@@ -60,7 +60,7 @@ if ( isset( $wppic_data->is_edd ) && $wppic_data->is_edd ) {
 <div class="wp-pic-flip" style="display: none;">
 	<div class="wp-pic-face wp-pic-front">
 		<a class="wp-pic-logo" href="<?php echo esc_url_raw( $wppic_data->url ); ?>" <?php echo wp_kses_post( $bgImage ); ?> target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ); ?>"></a>
-		<a class="wp-pic-name" href="<?php echo $wppic_data->url; ?>" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ); ?>"><?php echo $wppic_data->name; ?></a>
+		<a class="wp-pic-name" href="<?php echo esc_url_raw( $wppic_data->url ); ?>" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ); ?>"><?php echo esc_html( $wppic_data->name ); ?></a>
 		<p class="wp-pic-author"><?php _e( 'Author(s):', 'wp-plugin-info-card' ); ?> <?php echo $wppic_data->author; ?></p>
 		<div class="wp-pic-bottom">
 			<div class="wp-pic-bar">
