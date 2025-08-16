@@ -26,6 +26,7 @@ class Import_Export {
 		'url',
 		'homepage',
 		'downloadLink',
+		'reviewsUrl',
 		'version',
 		'author',
 		'authorProfile',
@@ -137,23 +138,23 @@ class Import_Export {
 		$custom_plugin_data = Functions::sanitize_array_recursive( json_decode( $custom_plugin->post_content, true ) );
 
 		// Get plugin name.
-		$existing_data['name'] = sanitize_text_field( $custom_plugin_data['name'] );
+		$existing_data['name'] = esc_attr( $custom_plugin_data['name'] );
 
 		// Get slug.
-		$existing_data['slug'] = sanitize_title( $slug );
+		$existing_data['slug'] = esc_attr( sanitize_title( $slug ) );
 
 		// Get plugin version.
-		$existing_data['version'] = sanitize_text_field( $custom_plugin_data['version'] );
+		$existing_data['version'] = esc_attr( $custom_plugin_data['version'] );
 
 		// Get the required versions.
-		$existing_data['requires']     = sanitize_text_field( $custom_plugin_data['requires'] );
-		$existing_data['requires_php'] = sanitize_text_field( $custom_plugin_data['requiresPHP'] );
+		$existing_data['requires']     = esc_attr( $custom_plugin_data['requires'] );
+		$existing_data['requires_php'] = esc_attr( $custom_plugin_data['requiresPHP'] );
 
 		// Get the short description from excerpt. Overwrite with readme later if needed.
-		$existing_data['short_description'] = wp_kses_post( $custom_plugin_data['shortDescription'] );
+		$existing_data['short_description'] = esc_attr( wp_kses_post( $custom_plugin_data['shortDescription'] ) );
 
 		// Get the author and link to the download page for the plugin.
-		$existing_data['author'] = sanitize_text_field( $custom_plugin_data['author'] );
+		$existing_data['author'] = esc_attr( $custom_plugin_data['author'] );
 
 		// Author/Download URL.
 		$existing_data['homepage'] = esc_url_raw( $custom_plugin_data['homepage'] );
@@ -165,11 +166,11 @@ class Import_Export {
 		$existing_data['url'] = esc_url_raw( $custom_plugin_data['url'] );
 
 		// Set last updated and mk.
-		$existing_data['last_updated']    = gmdate( 'Y-m-d', strtotime( $custom_plugin_data['lastUpdated'] ) );
-		$existing_data['last_updated_mk'] = gmdate( 'Y-m-d', strtotime( $custom_plugin_data['lastUpdated'] ) );
+		$existing_data['last_updated']    = esc_attr( gmdate( 'Y-m-d', strtotime( $custom_plugin_data['lastUpdated'] ) ) );
+		$existing_data['last_updated_mk'] = esc_attr( gmdate( 'Y-m-d', strtotime( $custom_plugin_data['lastUpdated'] ) ) );
 
 		// Set the plugin added date.
-		$existing_data['added'] = gmdate( 'Y-m-d', strtotime( $custom_plugin_data['lastUpdated'] ) );
+		$existing_data['added'] = esc_attr( gmdate( 'Y-m-d', strtotime( $custom_plugin_data['lastUpdated'] ) ) );
 
 		// Get total number of downloads for the plugin.
 		$existing_data['downloaded'] = absint( $custom_plugin_data['downloaded'] );
@@ -178,13 +179,13 @@ class Import_Export {
 		$existing_data['active_installs'] = absint( $custom_plugin_data['activeInstalls'] );
 
 		// Get tested WordPress version.
-		$existing_data['tested'] = sanitize_text_field( $custom_plugin_data['tested'] );
+		$existing_data['tested'] = esc_attr( $custom_plugin_data['tested'] );
 
 		// Get contributors.
-		$existing_data['contributors'] = sanitize_text_field( $custom_plugin_data['contributors'] );
+		$existing_data['contributors'] = esc_attr( $custom_plugin_data['contributors'] );
 
 		// Get rating.
-		$existing_data['rating'] = sanitize_text_field( $custom_plugin_data['rating'] );
+		$existing_data['rating'] = esc_attr( $custom_plugin_data['rating'] );
 
 		// Get number of ratings.
 		$existing_data['num_ratings'] = absint( $custom_plugin_data['numRatings'] );
@@ -219,13 +220,14 @@ class Import_Export {
 
 		// Set screenshots.
 		$existing_data['screenshots'] = array();
-		$existing_data['ratings']     = sanitize_text_field( $custom_plugin_data['rating'] );
+		$existing_data['ratings']     = esc_attr( $custom_plugin_data['rating'] );
 
 		// Set reviews url.
-		$existing_data['reviews_url'] = ''; // todo - do we need this?
+		$existing_data['reviews_url'] = esc_url_raw( $custom_plugin_data['reviewsUrl'] );
 
 		// Set custom plugin flag.
 		$existing_data['is_custom_plugin'] = true;
+		$existing_data['is_edd']           = true; // Added in for legacy purposes.
 
 		return $existing_data;
 	}

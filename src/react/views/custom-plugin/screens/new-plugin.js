@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Suspense, useCallback, useRef } from 'react';
 import { useForm, Controller, useWatch, useFormState } from 'react-hook-form';
 import classnames from 'classnames';
+import { escapeEditableHTML } from '@wordpress/escapeHtml';
 import { Link, useNavigate, useParams } from '@tanstack/react-router';
 import { __ } from '@wordpress/i18n';
 import { isURL, cleanForSlug } from '@wordpress/url';
@@ -138,33 +139,34 @@ const Interface = ( props ) => {
 	} = useForm( {
 		defaultValues: {
 			post_id: data.id || 0,
-			nonce: wppicAdminCustomPlugin.saveNonce,
+			nonce: escapeEditableHTML( wppicAdminCustomPlugin.saveNonce ),
 			pluginIconId: data.pluginIconId || 0,
 			pluginBannerId: data.pluginBannerId || 0,
-			pluginIconUrl: data.pluginIconUrl || '',
-			pluginBannerUrl: data.pluginBannerUrl || '',
-			name: data.name || '',
-			slug: data.slug || '',
-			shortDescription: data.shortDescription || '',
-			url: data.url || '',
-			homepage: data.homepage || '',
-			downloadLink: data.downloadLink || '',
-			version: data.version || '',
-			author: data.author || '',
-			authorProfile: data.authorProfile || '',
-			contributors: data.contributors || '',
+			pluginIconUrl: escapeEditableHTML( data.pluginIconUrl || '' ),
+			pluginBannerUrl: escapeEditableHTML( data.pluginBannerUrl || '' ),
+			name: escapeEditableHTML( data.name || '' ),
+			slug: escapeEditableHTML( data.slug || '' ),
+			shortDescription: escapeEditableHTML( data.shortDescription || '' ),
+			url: escapeEditableHTML( data.url || '' ),
+			homepage: escapeEditableHTML( data.homepage || '' ),
+			downloadLink: escapeEditableHTML( data.downloadLink || '' ),
+			reviewsUrl: escapeEditableHTML( data.reviewsUrl || '' ),
+			version: escapeEditableHTML( data.version || '' ),
+			author: escapeEditableHTML( data.author || '' ),
+			authorProfile: escapeEditableHTML( data.authorProfile || '' ),
+			contributors: escapeEditableHTML( data.contributors || '' ),
 			requires: data.requires || '',
-			tested: data.tested || '',
-			rating: data.rating || '',
+			tested: escapeEditableHTML( data.tested || '' ),
+			rating: escapeEditableHTML( data.rating || '' ),
 			numRatings: data.numRatings || '',
 			downloaded: data.downloaded || '',
 			activeInstalls: data.activeInstalls || '',
-			requiresPHP: data.requiresPHP || '',
-			lastUpdated: data.lastUpdated || '',
-			ratings: data.ratings || '',
-			added: data.added || '',
-			enableRestApi: data.enableRestApi || 'false',
-			restApiPasscode: data.restApiPasscode || wppicAdminCustomPlugin.tempPasscode,
+			requiresPHP: escapeEditableHTML( data.requiresPHP || '' ),
+			lastUpdated: escapeEditableHTML( data.lastUpdated || '' ),
+			ratings: escapeEditableHTML( data.ratings || '' ),
+			added: escapeEditableHTML( data.added || '' ),
+			enableRestApi: escapeEditableHTML( data.enableRestApi || 'false' ),
+			restApiPasscode: escapeEditableHTML( data.restApiPasscode || wppicAdminCustomPlugin.tempPasscode ),
 			restApiDataVersion: data.restApiDataVersion || 1,
 		},
 	} );
@@ -700,6 +702,38 @@ const Interface = ( props ) => {
 											} }
 										/>
 										{ errors?.downloadLink?.type === 'required' && (
+											<Notice
+												message={ __( 'This field is required.', 'wp-plugin-info-card' ) }
+												status="error"
+												politeness="assertive"
+											/>
+										) }
+									</>
+								) }
+							/>
+						</div>
+						<div className="wppic-admin-row">
+							<Controller
+								control={ control }
+								name="reviewsUrl"
+								rules={ {
+									required: true,
+									pattern: /^https?:\/\/.+/,
+								} }
+								render={ ( { field } ) => (
+									<>
+										<TextControl
+											{ ...field }
+											placeholder={ __( 'Enter Plugin Reviews URL', 'wp-plugin-info-card' ) }
+											className={ classnames( 'wppic-admin-input is-required', { 'has-error': errors?.reviewsUrl } ) }
+											help={ __( 'Enter the reviews URL for the plugin.', 'wp-plugin-info-card' ) }
+											label={ __( 'Reviews URL', 'wp-plugin-info-card' ) }
+											onChange={ ( value ) => {
+												field.onChange( value );
+												clearErrors( 'reviewsUrl' );
+											} }
+										/>
+										{ errors?.reviewsUrl?.type === 'required' && (
 											<Notice
 												message={ __( 'This field is required.', 'wp-plugin-info-card' ) }
 												status="error"
