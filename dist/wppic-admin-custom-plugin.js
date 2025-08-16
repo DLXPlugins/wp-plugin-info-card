@@ -40806,6 +40806,9 @@ var Advanced = function a() {
     z = w.formState.errors,
     A = w.getValues,
     B = w.reset;
+  var C = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_8__.useWatch)({
+    control: x
+  });
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (e) {
       return;
@@ -40854,7 +40857,7 @@ var Advanced = function a() {
    *
    * @param {Object} formData Form data to save.
    */
-  var C = /*#__PURE__*/function () {
+  var D = /*#__PURE__*/function () {
     var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function b(a) {
       var c, d;
       return _regeneratorRuntime().wrap(function e(b) {
@@ -40900,7 +40903,7 @@ var Advanced = function a() {
       return a.apply(this, arguments);
     };
   }();
-  var D = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", {
+  var E = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", {
     className: "form-table form-table-row-sections"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
     scope: "row"
@@ -40932,7 +40935,7 @@ var Advanced = function a() {
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Allow plugins to have a REST API enabled so that others can import the plugin data (if enabled). Disabilng this will remove all REST API access.', 'wp-plugin-info-card')
       }));
     }
-  })), A('enable_rest_api') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  })), C.enable_rest_api && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
     control: x,
@@ -40958,7 +40961,7 @@ var Advanced = function a() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-options-wrapper"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
-    onSubmit: y(C)
+    onSubmit: y(D)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Breadcrumbs, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-area"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -40967,7 +40970,7 @@ var Advanced = function a() {
     className: "wppic-admin-panel-area__section-title"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Advanced Settings', 'wp-plugin-info-card')))), i ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, null)) : D, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, null)) : E, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-area__section"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
     type: "submit",

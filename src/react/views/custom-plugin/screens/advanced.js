@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import classnames from 'classnames';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, useWatch } from 'react-hook-form';
 import { Link } from '@tanstack/react-router';
 import { __ } from '@wordpress/i18n';
 import { ToggleControl, Button, Spinner, TextControl } from '@wordpress/components';
@@ -51,6 +51,8 @@ const Advanced = () => {
 			nonce: wppicAdminCustomPlugin.saveAdvancedNonce,
 		},
 	} );
+
+	const formValues = useWatch( { control } );
 
 	useEffect( () => {
 		if ( advancedOptions ) {
@@ -156,7 +158,7 @@ const Advanced = () => {
 							/>
 						</div>
 						{
-							getValues( 'enable_rest_api' ) && (
+							formValues.enable_rest_api && (
 								<>
 									<div className="wppic-admin-row">
 										<Controller
