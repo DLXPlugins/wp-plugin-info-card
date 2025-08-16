@@ -16134,6 +16134,20 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__, {
         }
       }
     }, {
+      type: 'block',
+      blocks: ['wp-plugin-info-card/plugin-screenshots-info-card'],
+      transform: function b(a) {
+        var c = a.slug,
+          d = a.assetData;
+        // Convert from object to array.
+        return (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.createBlock)('wp-plugin-info-card/wp-plugin-info-card', {
+          slug: c,
+          type: 'plugin',
+          loading: true,
+          defaultsApplied: false
+        });
+      }
+    }, {
       type: 'raw',
       isMatch: function b(a) {
         if (a.nodeName === 'P') {
@@ -16198,6 +16212,19 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__, {
           type: e ? 'plugin' : 'theme',
           loading: false,
           defaultsApplied: false
+        });
+      }
+    }],
+    to: [{
+      type: 'block',
+      blocks: ['wp-plugin-info-card/plugin-screenshots-info-card'],
+      transform: function b(a) {
+        var c = a.slug,
+          d = a.assetData;
+        return (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.createBlock)('wp-plugin-info-card/plugin-screenshots-info-card', {
+          slug: c,
+          skipAnimatedGifs: true,
+          loading: true
         });
       }
     }]

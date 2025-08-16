@@ -2,7 +2,7 @@ import metadata from './block.json';
 import InfoCardIcon from '../components/InfoCardIcon';
 
 import { useState, useEffect } from '@wordpress/element';
-import { createBlock, insertBlocks } from '@wordpress/blocks';
+import { createBlock } from '@wordpress/blocks';
 import { doAction, addAction } from '@wordpress/hooks';
 import { Modal } from '@wordpress/components';
 import { registerPlugin } from '@wordpress/plugins';
@@ -27,7 +27,7 @@ registerBlockType( metadata, {
 			{
 				type: 'block',
 				blocks: [ 'core/embed' ],
-				transform: ( { url, providerNameSlug}) => {
+				transform: ( { url, providerNameSlug } ) => {
 					const pluginRegex = /https:\/\/wordpress\.org\/plugins\/([a-z0-9-]+)\/?/i;
 					const themeRegex = /https:\/\/wordpress\.org\/themes\/([a-z0-9-]+)\/?/i;
 					const match = pluginRegex.exec( url );
@@ -48,6 +48,19 @@ registerBlockType( metadata, {
 							defaultsApplied: false,
 						} );
 					}
+				},
+			},
+			{
+				type: 'block',
+				blocks: [ 'wp-plugin-info-card/plugin-screenshots-info-card' ],
+				transform: ( { slug, assetData } ) => {
+					// Convert from object to array.
+					return createBlock( 'wp-plugin-info-card/wp-plugin-info-card', {
+						slug,
+						type: 'plugin',
+						loading: true,
+						defaultsApplied: false,
+					} );
 				},
 			},
 			{
@@ -90,7 +103,7 @@ registerBlockType( metadata, {
 						const regex = /https:\/\/wordpress\.org\/plugins\/([a-z0-9-]+)\/?/i;
 						const themeRegex = /https:\/\/wordpress\.org\/themes\/([a-z0-9-]+)\/?/i;
 						const match = regex.exec( node.textContent );
-						const themeMatch = themeRegex.exec( node.textContent  );
+						const themeMatch = themeRegex.exec( node.textContent );
 						if ( match || themeMatch ) {
 							return true;
 						}
@@ -103,7 +116,7 @@ registerBlockType( metadata, {
 					const regex = /https:\/\/wordpress\.org\/plugins\/([a-z0-9-]+)\/?/i;
 					const themeRegex = /https:\/\/wordpress\.org\/themes\/([a-z0-9-]+)\/?/i;
 					const match = regex.exec( node.textContent );
-					const themeMatch = themeRegex.exec( node.textContent  );
+					const themeMatch = themeRegex.exec( node.textContent );
 					let slugMatch = '';
 					if ( match ) {
 						slugMatch = match[ 1 ];
@@ -116,6 +129,19 @@ registerBlockType( metadata, {
 						type: match ? 'plugin' : 'theme',
 						loading: false,
 						defaultsApplied: false,
+					} );
+				},
+			},
+		],
+		to: [
+			{
+				type: 'block',
+				blocks: [ 'wp-plugin-info-card/plugin-screenshots-info-card' ],
+				transform: ( { slug, assetData } ) => {
+					return createBlock( 'wp-plugin-info-card/plugin-screenshots-info-card', {
+						slug,
+						skipAnimatedGifs: true,
+						loading: true,
 					} );
 				},
 			},
