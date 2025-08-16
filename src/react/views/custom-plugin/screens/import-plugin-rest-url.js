@@ -74,6 +74,9 @@ const ImportPluginRestUrl = ( props ) => {
 				),
 			);
 			setHasImported( true );
+			setTimeout( () => {
+				props.onClose();
+			}, 3000 );
 		} else {
 			setError( 'restUrl', { message: __( 'Error fetching data from Remote REST API.', 'wp-plugin-info-card' ) } );
 		}

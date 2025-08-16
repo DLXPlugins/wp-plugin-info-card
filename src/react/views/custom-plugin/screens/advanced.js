@@ -3,10 +3,11 @@ import classnames from 'classnames';
 import { useForm, Controller } from 'react-hook-form';
 import { Link } from '@tanstack/react-router';
 import { __ } from '@wordpress/i18n';
-import { ToggleControl, Button, Spinner } from '@wordpress/components';
-import { Cog, BookText, ExternalLink } from 'lucide-react';
+import { ToggleControl, Button, Spinner, TextControl } from '@wordpress/components';
+import { Cog, BookText, ExternalLink, TriangleAlert } from 'lucide-react';
 import SendCommand from '../../../utils/SendCommand';
 import SnackStatus from '../../../components/SnackStatus';
+import Notice from '../../../components/Notice';
 
 const Breadcrumbs = () => (
 	<div className="wppic-admin-panel-breadcrumbs">
@@ -39,10 +40,13 @@ const Advanced = () => {
 	const {
 		control,
 		handleSubmit,
+		formState: { errors },
+		getValues,
 		reset,
 	} = useForm( {
 		defaultValues: {
 			enable_rest_api: false,
+			ping_rest_api_interval: 14,
 			enable_custom_plugins: true,
 			nonce: wppicAdminCustomPlugin.saveAdvancedNonce,
 		},
@@ -64,6 +68,7 @@ const Advanced = () => {
 				reset( {
 					enable_rest_api: data.options.enable_rest_api,
 					enable_custom_plugins: data.options.enable_custom_plugins,
+					ping_rest_api_interval: data.options.ping_rest_api_interval,
 				} );
 				setAdvancedOptions( data.options );
 			} else {
@@ -87,6 +92,7 @@ const Advanced = () => {
 				nonce: wppicAdminCustomPlugin.saveAdvancedNonce,
 				enable_rest_api: formData.enable_rest_api,
 				enable_custom_plugins: formData.enable_custom_plugins,
+				ping_rest_api_interval: formData.ping_rest_api_interval,
 			} );
 
 			const { success } = response.data;
@@ -111,6 +117,27 @@ const Advanced = () => {
 			<tbody>
 				<tr>
 					<th scope="row">
+						{ __( 'Custom Plugins', 'wp-plugin-info-card' ) }
+					</th>
+					<td>
+						<div className="wppic-admin-row">
+							<Controller
+								control={ control }
+								name="enable_custom_plugins"
+								render={ ( { field } ) => (
+									<ToggleControl
+										{ ...field }
+										checked={ field.value }
+										label={ __( 'Enable Custom Plugins', 'wp-plugin-info-card' ) }
+										help={ __( 'Enable the custom plugins feature. Disabling this will prevent custom plugins from being rendered on the front-end. This will not disable the Custom Plugins interface in the admin panel.', 'wp-plugin-info-card' ) }
+									/>
+								) }
+							/>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">
 						{ __( 'REST API Settings', 'wp-plugin-info-card' ) }
 					</th>
 					<td>
@@ -128,27 +155,36 @@ const Advanced = () => {
 								) }
 							/>
 						</div>
-					</td>
-				</tr>
-				<tr>
-					<th scope="row">
-						{ __( 'Custom Plugins', 'wp-plugin-info-card' ) }
-					</th>
-					<td>
-						<div className="wppic-admin-row">
-							<Controller
-								control={ control }
-								name="enable_custom_plugins"
-								render={ ( { field } ) => (
-									<ToggleControl
-										{ ...field }
-										checked={ field.value }
-										label={ __( 'Enable Custom Plugins', 'wp-plugin-info-card' ) }
-										help={ __( 'Enable the custom plugins feature. Disabling this will prevent custom plugins from being rendered on the front-end.', 'wp-plugin-info-card' ) }
-									/>
-								) }
-							/>
-						</div>
+						{
+							getValues( 'enable_rest_api' ) && (
+								<>
+									<div className="wppic-admin-row">
+										<Controller
+											control={ control }
+											name="ping_rest_api_interval"
+											type="number"
+											pattern="[1-9][0-9]*"
+											render={ ( { field } ) => (
+												<TextControl
+													{ ...field }
+													label={ __( 'Sync from REST API Interval (in days)', 'wp-plugin-info-card' ) }
+													help={ __( 'If you sync plugins from REST, this is how often the plugin\'s REST API will be pinged to check for updates. The default is 14 days.', 'wp-plugin-info-card' ) }
+												/>
+											) }
+										/>
+										{
+											errors?.ping_rest_api_interval?.pattern && (
+												<Notice
+													type="error"
+													message={ __( 'Please enter a valid number above zero.', 'wp-plugin-info-card' ) }
+													icon={ () => <TriangleAlert /> }
+												/>
+											)
+										}
+									</div>
+								</>
+							)
+						}
 					</td>
 				</tr>
 			</tbody>

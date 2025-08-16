@@ -369,18 +369,6 @@ const PluginHome = ( props ) => {
 						>
 							{ __( 'Add New Plugin', 'wp-plugin-info-card' ) }
 						</Button>
-					</div>
-					<div className="wppic-admin-panel-sidebar-card">
-						<h3>
-							<CloudDownload />
-							{ __( 'Import Plugin', 'wp-plugin-info-card' ) }
-						</h3>
-						<p>
-							{ __(
-								'Import a plugin from a REST API endpoint.',
-								'wp-plugin-info-card',
-							) }
-						</p>
 						<Button
 							variant="secondary"
 							href="#"

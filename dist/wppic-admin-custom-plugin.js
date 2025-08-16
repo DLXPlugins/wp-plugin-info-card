@@ -30239,41 +30239,6 @@ const ClipboardCheck = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["def
 
 /***/ }),
 
-/***/ "./node_modules/lucide-react/dist/esm/icons/cloud-download.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/lucide-react/dist/esm/icons/cloud-download.js ***!
-  \********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
-/* harmony export */   "default": () => (/* binding */ CloudDownload)
-/* harmony export */ });
-/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
-/**
- * @license lucide-react v0.503.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-
-const __iconNode = [
-  ["path", { d: "M12 13v8l-4-4", key: "1f5nwf" }],
-  ["path", { d: "m12 21 4-4", key: "1lfcce" }],
-  ["path", { d: "M4.393 15.269A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.436 8.284", key: "ui1hmy" }]
-];
-const CloudDownload = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("cloud-download", __iconNode);
-
-
-//# sourceMappingURL=cloud-download.js.map
-
-
-/***/ }),
-
 /***/ "./node_modules/lucide-react/dist/esm/icons/cog.js":
 /*!*********************************************************!*\
   !*** ./node_modules/lucide-react/dist/esm/icons/cog.js ***!
@@ -40750,17 +40715,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
-/* harmony import */ var _tanstack_react_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @tanstack/react-router */ "./node_modules/@tanstack/react-router/dist/esm/link.js");
+/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/index.esm.mjs");
+/* harmony import */ var _tanstack_react_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @tanstack/react-router */ "./node_modules/@tanstack/react-router/dist/esm/link.js");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/cog.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/book-text.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/external-link.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/triangle-alert.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/cog.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/book-text.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/external-link.js");
 /* harmony import */ var _utils_SendCommand__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../utils/SendCommand */ "./src/react/utils/SendCommand.js");
 /* harmony import */ var _components_SnackStatus__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../components/SnackStatus */ "./src/react/components/SnackStatus/index.js");
+/* harmony import */ var _components_Notice__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../components/Notice */ "./src/react/components/Notice/index.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(a, b) { var c = Object.keys(a); if (Object.getOwnPropertySymbols) { var d = Object.getOwnPropertySymbols(a); b && (d = d.filter(function (b) { return Object.getOwnPropertyDescriptor(a, b).enumerable; })), c.push.apply(c, d); } return c; }
 function _objectSpread(a) { for (var b = 1; b < arguments.length; b++) { var c = null != arguments[b] ? arguments[b] : {}; b % 2 ? ownKeys(Object(c), !0).forEach(function (b) { _defineProperty(a, b, c[b]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(a, Object.getOwnPropertyDescriptors(c)) : ownKeys(Object(c)).forEach(function (b) { Object.defineProperty(a, b, Object.getOwnPropertyDescriptor(c, b)); }); } return a; }
@@ -40786,62 +40753,67 @@ function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
 
 
 
+
 var Breadcrumbs = function a() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-breadcrumbs"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-breadcrumbs__item"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_tanstack_react_router__WEBPACK_IMPORTED_MODULE_6__.Link, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_tanstack_react_router__WEBPACK_IMPORTED_MODULE_7__.Link, {
     href: "/"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Custom Plugins', 'wp-plugin-info-card')), ' > ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "wppic-admin-panel-breadcrumbs__item-current"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Advanced Settings', 'wp-plugin-info-card'))));
 };
 var Advanced = function a() {
-  var b = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-    c = _slicedToArray(b, 2),
-    d = c[0],
-    e = c[1];
-  var f = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
-    g = _slicedToArray(f, 2),
-    h = g[0],
-    i = g[1];
-  var j = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-    k = _slicedToArray(j, 2),
-    l = k[0],
-    m = k[1];
-  var n = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    o = _slicedToArray(n, 2),
-    p = o[0],
-    q = o[1];
-  var r = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+  var b;
+  var c = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    d = _slicedToArray(c, 2),
+    e = d[0],
+    f = d[1];
+  var g = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    h = _slicedToArray(g, 2),
+    i = h[0],
+    j = h[1];
+  var k = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    l = _slicedToArray(k, 2),
+    m = l[0],
+    n = l[1];
+  var o = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    p = _slicedToArray(o, 2),
+    q = p[0],
+    r = p[1];
+  var s = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       isVisible: false,
       type: 'info',
       message: '',
       title: '',
       politeness: 'polite'
     }),
-    s = _slicedToArray(r, 2),
-    t = s[0],
-    u = s[1];
-  var v = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_7__.useForm)({
+    t = _slicedToArray(s, 2),
+    u = t[0],
+    v = t[1];
+  var w = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_8__.useForm)({
       defaultValues: {
         enable_rest_api: false,
+        ping_rest_api_interval: 14,
         enable_custom_plugins: true,
         nonce: wppicAdminCustomPlugin.saveAdvancedNonce
       }
     }),
-    w = v.control,
-    x = v.handleSubmit,
-    y = v.reset;
+    x = w.control,
+    y = w.handleSubmit,
+    z = w.formState.errors,
+    A = w.getValues,
+    B = w.reset;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (d) {
+    if (e) {
       return;
     }
-    i(true);
+    j(true);
     var a = /*#__PURE__*/function () {
       var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function a() {
-        var b, c, d, f;
+        var b, c, d, e;
         return _regeneratorRuntime().wrap(function g(a) {
           while (1) switch (a.prev = a.next) {
             case 0:
@@ -40851,17 +40823,18 @@ var Advanced = function a() {
               });
             case 2:
               b = a.sent;
-              c = b.data, d = c.success, f = c.data;
+              c = b.data, d = c.success, e = c.data;
               if (d) {
-                y({
-                  enable_rest_api: f.options.enable_rest_api,
-                  enable_custom_plugins: f.options.enable_custom_plugins
+                B({
+                  enable_rest_api: e.options.enable_rest_api,
+                  enable_custom_plugins: e.options.enable_custom_plugins,
+                  ping_rest_api_interval: e.options.ping_rest_api_interval
                 });
-                e(f.options);
+                f(e.options);
               } else {
-                m(f.message);
+                n(e.message);
               }
-              i(false);
+              j(false);
             case 6:
             case "end":
               return a.stop();
@@ -40881,26 +40854,27 @@ var Advanced = function a() {
    *
    * @param {Object} formData Form data to save.
    */
-  var z = /*#__PURE__*/function () {
+  var C = /*#__PURE__*/function () {
     var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function b(a) {
       var c, d;
       return _regeneratorRuntime().wrap(function e(b) {
         while (1) switch (b.prev = b.next) {
           case 0:
-            q(true);
+            r(true);
             b.prev = 1;
             b.next = 4;
             return (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_4__["default"])('wppic_save_custom_plugin_advanced_options', {
               nonce: wppicAdminCustomPlugin.saveAdvancedNonce,
               enable_rest_api: a.enable_rest_api,
-              enable_custom_plugins: a.enable_custom_plugins
+              enable_custom_plugins: a.enable_custom_plugins,
+              ping_rest_api_interval: a.ping_rest_api_interval
             });
           case 4:
             c = b.sent;
             d = c.data.success;
             if (d) {
               // Show success notice.
-              u({
+              v({
                 isVisible: true,
                 type: 'success',
                 message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Settings saved', 'wp-plugin-info-card'),
@@ -40912,10 +40886,10 @@ var Advanced = function a() {
           case 9:
             b.prev = 9;
             b.t0 = b["catch"](1);
-            m(b.t0.message);
+            n(b.t0.message);
             // Show error notice.
           case 12:
-            q(false);
+            r(false);
           case 13:
           case "end":
             return b.stop();
@@ -40926,14 +40900,29 @@ var Advanced = function a() {
       return a.apply(this, arguments);
     };
   }();
-  var A = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", {
+  var D = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", {
     className: "form-table form-table-row-sections"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
     scope: "row"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Custom Plugins', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "wppic-admin-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
+    control: x,
+    name: "enable_custom_plugins",
+    render: function b(a) {
+      var c = a.field;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, _extends({}, c, {
+        checked: c.value,
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable Custom Plugins', 'wp-plugin-info-card'),
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable the custom plugins feature. Disabling this will prevent custom plugins from being rendered on the front-end. This will not disable the Custom Plugins interface in the admin panel.', 'wp-plugin-info-card')
+      }));
+    }
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    scope: "row"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('REST API Settings', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
-    control: w,
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
+    control: x,
     name: "enable_rest_api",
     render: function b(a) {
       var c = a.field;
@@ -40943,51 +40932,56 @@ var Advanced = function a() {
         help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Allow plugins to have a REST API enabled so that others can import the plugin data (if enabled). Disabilng this will remove all REST API access.', 'wp-plugin-info-card')
       }));
     }
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
-    scope: "row"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Custom Plugins', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  })), A('enable_rest_api') && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_7__.Controller, {
-    control: w,
-    name: "enable_custom_plugins",
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_hook_form__WEBPACK_IMPORTED_MODULE_8__.Controller, {
+    control: x,
+    name: "ping_rest_api_interval",
+    type: "number",
+    pattern: "[1-9][0-9]*",
     render: function b(a) {
       var c = a.field;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, _extends({}, c, {
-        checked: c.value,
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable Custom Plugins', 'wp-plugin-info-card'),
-        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enable the custom plugins feature. Disabling this will prevent custom plugins from being rendered on the front-end.', 'wp-plugin-info-card')
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, _extends({}, c, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Sync from REST API Interval (in days)', 'wp-plugin-info-card'),
+        help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('If you sync plugins from REST, this is how often the plugin\'s REST API will be pinged to check for updates. The default is 14 days.', 'wp-plugin-info-card')
       }));
     }
-  }))))));
+  }), (z === null || z === void 0 || (b = z.ping_rest_api_interval) === null || b === void 0 ? void 0 : b.pattern) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    type: "error",
+    message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Please enter a valid number above zero.', 'wp-plugin-info-card'),
+    icon: function a() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], null);
+    }
+  })))))));
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-container with-sidebar"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-options-wrapper"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
-    onSubmit: x(z)
+    onSubmit: y(C)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Breadcrumbs, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-area"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-area__section"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "wppic-admin-panel-area__section-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Advanced Settings', 'wp-plugin-info-card')))), h ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Advanced Settings', 'wp-plugin-info-card')))), i ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, null)) : A, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, null)) : D, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-area__section"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
     type: "submit",
     variant: "primary",
     className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic__btn wppic__btn-secondary wppic__btn--icon-right'),
-    disabled: p,
+    disabled: q,
     icon: function a() {
-      return p ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, null) : null;
+      return q ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, null) : null;
     }
-  }, p ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Saving…', 'wp-plugin-info-card') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Save Settings', 'wp-plugin-info-card')))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, q ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Saving…', 'wp-plugin-info-card') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Save Settings', 'wp-plugin-info-card')))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Learn more about the REST API and advanced settings in WP Plugin Info Card.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_11__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Learn more about the REST API and advanced settings in WP Plugin Info Card.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
     variant: "secondary",
     href: "https://docs.dlxplugins.com/wp-plugin-info-card/",
     className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
@@ -40998,15 +40992,15 @@ var Advanced = function a() {
     },
     rel: "noopener noreferrer",
     icon: function a() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_12__["default"], null);
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('View Documentation', 'wp-plugin-info-card'))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SnackStatus__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    snackbarOptions: t,
+    snackbarOptions: u,
     onTimeout: function a() {
-      var b = _objectSpread(_objectSpread({}, t), {}, {
+      var b = _objectSpread(_objectSpread({}, u), {}, {
         isVisible: false
       });
-      u(b);
+      v(b);
     }
   }));
 };
@@ -41037,12 +41031,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plug-2.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plus.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/cloud-download.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/download.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/cog.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/database-zap.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/book-text.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/external-link.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/download.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/cog.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/database-zap.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/book-text.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/external-link.js");
 /* harmony import */ var _components_PluginIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../components/PluginIcon */ "./src/react/components/PluginIcon/index.js");
 /* harmony import */ var _utils_SendCommand__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../utils/SendCommand */ "./src/react/utils/SendCommand.js");
 /* harmony import */ var _import_plugin_modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./import-plugin-modal */ "./src/react/views/custom-plugin/screens/import-plugin-modal.js");
@@ -41501,9 +41494,7 @@ var PluginHome = function b(a) {
     icon: function a() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], null);
     }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add New Plugin', 'wp-plugin-info-card'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "wppic-admin-panel-sidebar-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_14__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Import Plugin', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Import a plugin from a REST API endpoint.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add New Plugin', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     variant: "secondary",
     href: "#",
     onClick: function b(a) {
@@ -41513,11 +41504,11 @@ var PluginHome = function b(a) {
     iconPosition: "left",
     className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
     icon: function a() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_15__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_14__["default"], null);
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Import Plugin', 'wp-plugin-info-card'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_16__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Advanced Settings', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Configure REST API settings and other advanced options.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_15__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Advanced Settings', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Configure REST API settings and other advanced options.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     variant: "secondary",
     href: "#",
     onClick: function b(a) {
@@ -41529,17 +41520,17 @@ var PluginHome = function b(a) {
     iconPosition: "right",
     className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
     icon: function a() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_16__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_15__["default"], null);
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Configure Settings', 'wp-plugin-info-card'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_17__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cache Options', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('WP Plugin Info Card uses a cache system to improve performance. You can clear the cache manually by clicking the button below.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_CacheButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_16__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cache Options', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('WP Plugin Info Card uses a cache system to improve performance. You can clear the cache manually by clicking the button below.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_CacheButton__WEBPACK_IMPORTED_MODULE_8__["default"], {
     nonce: wppicAdminCustomPlugin.clearCacheNonce
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('WP Plugin Info Card stores plugin and theme data as options in case the transient cache fails to update or errors out. You can remove these options by clicking the button below.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_CacheOptionsButton__WEBPACK_IMPORTED_MODULE_9__["default"], {
     nonce: wppicAdminCustomPlugin.clearCacheNonce
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin-panel-sidebar-card"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_18__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Learn more about custom plugins and how to use them in WP Plugin Info Card.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_17__["default"], null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Documentation', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Learn more about custom plugins and how to use them in WP Plugin Info Card.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     variant: "secondary",
     href: "https://docs.dlxplugins.com/wp-plugin-info-card/",
     className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
@@ -41550,7 +41541,7 @@ var PluginHome = function b(a) {
     },
     rel: "noopener noreferrer",
     icon: function a() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_19__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_18__["default"], null);
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('View Documentation', 'wp-plugin-info-card'))))), u && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_import_plugin_modal__WEBPACK_IMPORTED_MODULE_6__["default"], {
     onClose: function a() {
@@ -41922,61 +41913,64 @@ var ImportPluginRestUrl = function b(a) {
    * @param {Object} formData contains the form data.
    */
   var H = /*#__PURE__*/function () {
-    var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function b(a) {
-      var c, d, e, f, g;
-      return _regeneratorRuntime().wrap(function h(b) {
-        while (1) switch (b.prev = b.next) {
+    var b = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function c(b) {
+      var d, e, f, g, h;
+      return _regeneratorRuntime().wrap(function j(c) {
+        while (1) switch (c.prev = c.next) {
           case 0:
             i(true);
-            c = new FormData();
-            c.append('restUrl', a.restUrl);
-            b.next = 5;
+            d = new FormData();
+            d.append('restUrl', b.restUrl);
+            c.next = 5;
             return fetch(wppicAdminCustomPlugin.importPluginRestUrl, {
               method: 'POST',
-              body: c,
+              body: d,
               headers: {
                 'X-WP-Nonce': wppicAdminCustomPlugin.restNonce
               }
             });
           case 5:
-            d = b.sent;
-            if (!d.ok) {
-              b.next = 16;
+            e = c.sent;
+            if (!e.ok) {
+              c.next = 17;
               break;
             }
-            b.next = 9;
-            return d.json();
+            c.next = 9;
+            return e.json();
           case 9:
-            e = b.sent;
-            f = e.errors;
-            if (f.length > 0) {
-              g = '';
-              f.forEach(function (a) {
-                g += a + '\n\r';
+            f = c.sent;
+            g = f.errors;
+            if (g.length > 0) {
+              h = '';
+              g.forEach(function (a) {
+                h += a + '\n\r';
               });
               B('restUrl', {
-                message: g
+                message: h
               });
             }
             m((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)(/* translators: %d: total items, %s: current item */
-            (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__._n)('Imported %1$d of %2$d items.', 'Imported %1$d of %2$d items.', e.total_items, 'wp-plugin-info-card'), e.current_item, e.total_items, 'wp-plugin-info-card'));
+            (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__._n)('Imported %1$d of %2$d items.', 'Imported %1$d of %2$d items.', f.total_items, 'wp-plugin-info-card'), f.current_item, f.total_items, 'wp-plugin-info-card'));
             q(true);
-            b.next = 17;
+            setTimeout(function () {
+              a.onClose();
+            }, 3000);
+            c.next = 18;
             break;
-          case 16:
+          case 17:
             B('restUrl', {
               message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Error fetching data from Remote REST API.', 'wp-plugin-info-card')
             });
-          case 17:
-            i(false);
           case 18:
+            i(false);
+          case 19:
           case "end":
-            return b.stop();
+            return c.stop();
         }
-      }, b);
+      }, c);
     }));
-    return function b(_x) {
-      return a.apply(this, arguments);
+    return function a(_x) {
+      return b.apply(this, arguments);
     };
   }();
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {

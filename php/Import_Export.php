@@ -117,6 +117,160 @@ class Import_Export {
 	public static function setup_actions_and_filters() {
 		// For adding custom plugin data (if enabled).
 		add_filter( 'wppic_plugin_info', array( __CLASS__, 'maybe_add_custom_plugin_data' ), 10, 4 );
+
+		// For updating plugin data from REST API.
+		add_action( 'wppic_rest_api_update_plugin_data', array( __CLASS__, 'cron_rest_api_update_plugin_data' ) );
+	}
+
+	/**
+	 * Cron job for updating plugin data from REST API.
+	 *
+	 * @param int $plugin_id The plugin ID.
+	 */
+	public static function cron_rest_api_update_plugin_data( $plugin_id ) {
+		$post_id  = $plugin_id;
+		$rest_url = get_post_meta( $post_id, 'restApiUrl', true );
+
+		// Get the number of tries.
+		$num_tries = absint( get_post_meta( $post_id, 'numTries', true ) );
+		if ( $num_tries >= 3 ) {
+			error_log( 'WPPIC: Too many tries for plugin: ' . $post_id );
+			wp_clear_scheduled_hook( 'wppic_rest_api_update_plugin_data', array( $post_id ) );
+			return;
+		}
+
+		// Get local post.
+		$post = get_post( $post_id );
+		if ( ! $post ) {
+			error_log( 'WPPIC: Local plugin not found for ID: ' . $post_id );
+			return;
+		}
+
+		$response = wp_safe_remote_get( esc_url_raw( $rest_url ) );
+		if ( is_wp_error( $response ) ) {
+			error_log( 'WPPIC: Error fetching data from REST API. This request could have been blocked by a firewall or proxy. ' . $response->get_error_message() );
+			return;
+		}
+
+		// Check error status code.
+		if ( wp_remote_retrieve_response_code( $response ) !== 200 ) {
+			error_log( 'WPPIC: Error fetching data from REST API. Invalid response code: ' . wp_remote_retrieve_response_code( $response ) );
+			return;
+		}
+
+		$payload = json_decode( $response['body'], true );
+
+		$checksum         = $payload['checksum'];
+		$items            = $payload['items'];
+		$payload_checksum = 'sha256:' . hash( 'sha256', json_encode( $items ) );
+
+		if ( $checksum !== $payload_checksum ) {
+			return new \WP_REST_Response( array( 'message' => 'Checksum mismatch' ), 400 );
+		}
+
+		// Store all errors here that are non-fatal and can be returned to the user.
+		$errors       = array();
+		$total_items  = count( $items );
+		$current_item = 0;
+
+		foreach ( $items as $item ) {
+			$slug = $item['slug'];
+			if ( ! self::check_plugin_slug( $slug ) || $slug !== $post->post_name ) {
+				$errors[] = sprintf( __( 'Could not find plugin %s', 'wp-plugin-info-card' ), $slug );
+				continue;
+			}
+
+			$item = Functions::sanitize_array_recursive( $item );
+
+			// Get the plugin's image version.
+			$remote_plugin_image_version = absint( $item['version'] ?? 0 );
+			$custom_plugin_image_version = absint( get_post_meta( $post_id, 'restApiDataVersion', true ) );
+			if ( $remote_plugin_image_version !== $custom_plugin_image_version ) { // very loose check.
+				// Get the image vars.
+				$plugin_icon_url   = $item['pluginIconUrl'];
+				$plugin_banner_url = $item['pluginBannerUrl'];
+
+				// Validate the URLs.
+				$plugin_icon_url    = esc_url_raw( wp_http_validate_url( $plugin_icon_url ) );
+				$plugin_banner_url  = esc_url_raw( wp_http_validate_url( $plugin_banner_url ) );
+				$plugin_icon_url_id = null;
+				if ( $plugin_icon_url ) {
+					$plugin_icon_url_id = self::sideload_image( $plugin_icon_url );
+					if ( ! is_wp_error( $plugin_icon_url_id ) ) {
+						$item['pluginIconUrl']   = wp_get_attachment_url( $plugin_icon_url_id );
+						$item['pluginIconUrlId'] = $plugin_icon_url_id;
+					} else {
+						$item['pluginIconUrl'] = '';
+						$errors[]              = sprintf( __( 'Error sideloading plugin icon: %s', 'wp-plugin-info-card' ), $plugin_icon_url_id->get_error_message() );
+					}
+				}
+
+				if ( $plugin_banner_url ) {
+					$plugin_banner_url_id = self::sideload_image( $plugin_banner_url );
+					if ( ! is_wp_error( $plugin_banner_url_id ) ) {
+						$item['pluginBannerUrl']   = wp_get_attachment_url( $plugin_banner_url_id );
+						$item['pluginBannerUrlId'] = $plugin_banner_url_id;
+					} else {
+						$item['pluginBannerUrl'] = '';
+						$errors[]                = sprintf( __( 'Error sideloading plugin banner: %s', 'wp-plugin-info-card' ), $plugin_banner_url_id->get_error_message() );
+					}
+				}
+				update_post_meta( $post_id, 'restApiDataVersion', $remote_plugin_image_version );
+				// Try to set featured image.
+				if ( ! is_wp_error( $plugin_icon_url_id ) && $plugin_icon_url_id ) {
+					set_post_thumbnail( $post_id, $plugin_icon_url_id );
+				}
+			}
+
+			++$current_item;
+
+			// Reconcile with fields.
+			$item = array_intersect_key( $item, array_flip( self::$fields ) );
+
+			/**
+			 * Filter: wppic_import_custom_plugin_item.
+			 *
+			 * Filters the item prior to encoding. Use this to dynamically update ratings, downloads, etc.
+			 *
+			 * @param array $item The item to be imported.
+			 *
+			 * @return array The filtered item.
+			 *
+			 * @see self::$fields
+			 */
+			$item = apply_filters( 'wppic_import_custom_plugin_item', $item );
+
+			$post_item_args = array(
+				'ID'            => $post_id,
+				'post_title'    => sanitize_text_field( $item['name'] ),
+				'post_content'  => wp_json_encode( $item ),
+				'post_modified' => gmdate( 'Y-m-d H:i:s', strtotime( $item['lastUpdated'] ) ),
+			);
+
+			$post_update_status = wp_update_post( $post_item_args );
+			if ( is_wp_error( $post_update_status ) ) {
+				$errors[] = sprintf( __( 'Error updating custom plugin: %s', 'wp-plugin-info-card' ), $post_update_status->get_error_message() );
+				continue;
+			}
+		}
+
+		// If there are no errors, then we can update the plugin's last updated date.
+		if ( empty( $errors ) ) {
+			update_post_meta( $post_id, 'lastUpdated', gmdate( 'Y-m-d', time() ) );
+			update_post_meta( $post_id, 'numTries', 0 );
+
+			// Clear WPPIC Transient for plugin.
+			delete_transient( sanitize_key( 'wppic_plugin_' . preg_replace( '/\-/', '_', $slug ) ) );
+		} else {
+			update_post_meta( $post_id, 'numTries', absint( get_post_meta( $post_id, 'numTries', true ) ) + 1 );
+		}
+
+		// if WP_DEBUG, error_log errors.
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			error_log( 'WPPIC: Errors: ' . implode( ', ', $errors ) );
+		}
+
+		return null;
 	}
 
 	/**
@@ -239,6 +393,26 @@ class Import_Export {
 		// Set custom plugin flag.
 		$existing_data['is_custom_plugin'] = true;
 		$existing_data['is_edd']           = true; // Added in for legacy purposes.
+
+		// Get the advanced options for pinging the REST API.
+		if ( isset( $options['ping_rest_api_interval'] ) ) {
+			$existing_data['ping_rest_api_interval'] = absint( $options['ping_rest_api_interval'] );
+
+			// Get the post's last update date.
+			$last_updated = get_post_field( 'post_modified', $custom_plugin->ID );
+
+			// Get the days between now and last updated.
+			$days_since_last_updated = absint( ( time() - strtotime( $last_updated ) ) / ( 60 * 60 * 24 ) );
+
+			// If the days since last updated is greater than the ping interval, then we need to ping the REST API.
+			if ( $days_since_last_updated > $existing_data['ping_rest_api_interval'] ) {
+				// Make sure there are no other cron jobs for this plugin.
+				wp_clear_scheduled_hook( 'wppic_rest_api_update_plugin_data', array( $custom_plugin->ID ) );
+
+				// Schedule the cron job.
+				wp_schedule_single_event( time() + 10, 'wppic_rest_api_update_plugin_data', array( $custom_plugin->ID ) );
+			}
+		}
 
 		return $existing_data;
 	}
@@ -428,9 +602,7 @@ class Import_Export {
 				// Set post as being from rest.
 				update_post_meta( $post_id, 'isFromRest', true );
 				update_post_meta( $post_id, 'restApiUrl', esc_url_raw( $rest_url ) );
-
-				// Set cron job to update the plugin data.
-				// wp_schedule_single_event( time() + 10, 'wppic_update_plugin_data', array( $post_id ) );
+				update_post_meta( $post_id, 'restApiDataVersion', absint( $item['restApiDataVersion'] ?? 0 ) );
 			}
 		}
 
@@ -547,6 +719,7 @@ class Import_Export {
 				'ID'           => $post_id,
 				'post_title'   => sanitize_text_field( $item['name'] ),
 				'post_content' => wp_json_encode( $item ),
+				'post_modified' => gmdate( 'Y-m-d H:i:s', strtotime( $item['lastUpdated'] ) ),
 			);
 
 			$post_update_status = wp_update_post( $post_item_args );
@@ -558,6 +731,12 @@ class Import_Export {
 				if ( ! is_wp_error( $plugin_icon_url_id ) && $plugin_icon_url_id ) {
 					set_post_thumbnail( $post_id, $plugin_icon_url_id );
 				}
+
+				// Reset the number of tries.
+				update_post_meta( $post_id, 'numTries', 0 );
+
+				// Clear WPPIC Transient for plugin.
+				delete_transient( sanitize_key( 'wppic_plugin_' . preg_replace( '/\-/', '_', $slug ) ) );
 			}
 		}
 

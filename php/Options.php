@@ -132,6 +132,7 @@ class Options {
 			'enqueue'                                   => false,
 			'credit'                                    => false,
 			'cache_expiration'                          => 3600,
+			'ping_rest_api_interval'                    => 14, /* days */
 			'enable_screenshots'                        => true,
 			'enable_local_screenshots'                  => false,
 			'skip_animated_gifs'                        => true,
