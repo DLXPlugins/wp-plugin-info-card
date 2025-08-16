@@ -1158,6 +1158,7 @@ const Interface = ( props ) => {
 					{
 						isFromRest && (
 							<ImportSidebarRest onPluginData={ ( newPluginData ) => {
+								setIsFromRest( newPluginData.isFromRest );
 								setData( newPluginData );
 								reset( newPluginData );
 							} } />

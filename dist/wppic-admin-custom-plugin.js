@@ -41734,7 +41734,7 @@ var ImportSidebarRest = function b(a) {
     l = _slicedToArray(k, 2),
     m = l[0],
     n = l[1];
-  var o = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+  var o = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     p = _slicedToArray(o, 2),
     q = p[0],
     r = p[1];
@@ -41742,12 +41742,16 @@ var ImportSidebarRest = function b(a) {
     t = _slicedToArray(s, 2),
     u = t[0],
     v = t[1];
-  var w = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_5__.useParams)({
+  var w = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    x = _slicedToArray(w, 2),
+    y = x[0],
+    z = x[1];
+  var A = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_5__.useParams)({
       shouldThrow: false
     }),
-    x = w.id,
-    y = w.nonce;
-  var z = /*#__PURE__*/function () {
+    B = A.id,
+    C = A.nonce;
+  var D = /*#__PURE__*/function () {
     var b = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function b() {
       var c, d, e, f;
       return _regeneratorRuntime().wrap(function g(b) {
@@ -41755,8 +41759,8 @@ var ImportSidebarRest = function b(a) {
           case 0:
             b.next = 2;
             return (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_3__["default"])('wppic_get_custom_plugin_data', {
-              nonce: y,
-              id: x
+              nonce: C,
+              id: B
             });
           case 2:
             c = b.sent;
@@ -41776,20 +41780,62 @@ var ImportSidebarRest = function b(a) {
   }();
 
   /**
+   * Detach the plugin from the REST API.
+   */
+  var E = /*#__PURE__*/function () {
+    var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function a() {
+      var b, c, d, e;
+      return _regeneratorRuntime().wrap(function f(a) {
+        while (1) switch (a.prev = a.next) {
+          case 0:
+            v('');
+            j(true);
+            a.next = 4;
+            return (0,_utils_SendCommand__WEBPACK_IMPORTED_MODULE_3__["default"])('wppic_detach_custom_plugin_from_rest', {
+              nonce: C,
+              id: B
+            });
+          case 4:
+            b = a.sent;
+            c = b.data, d = c.success, e = c.data;
+            if (!d) {
+              a.next = 11;
+              break;
+            }
+            v((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Plugin data detached successfully.', 'wp-plugin-info-card'));
+            a.next = 10;
+            return D();
+          case 10:
+            setTimeout(function () {
+              j(false);
+            }, 3000);
+          case 11:
+          case "end":
+            return a.stop();
+        }
+      }, a);
+    }));
+    return function b() {
+      return a.apply(this, arguments);
+    };
+  }();
+
+  /**
    * Sync plugin data from REST API.
    */
-  var A = /*#__PURE__*/function () {
+  var F = /*#__PURE__*/function () {
     var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function a() {
       var b, c, d, e, g;
       return _regeneratorRuntime().wrap(function h(a) {
         while (1) switch (a.prev = a.next) {
           case 0:
+            v('');
             f(true);
-            j(true);
+            n(true);
             b = new FormData();
-            b.append('postId', x);
-            b.append('nonce', y);
-            a.next = 7;
+            b.append('postId', B);
+            b.append('nonce', C);
+            a.next = 8;
             return fetch(wppicAdminCustomPlugin.importPluginRestRefreshUrl, {
               method: 'POST',
               body: b,
@@ -41797,15 +41843,15 @@ var ImportSidebarRest = function b(a) {
                 'X-WP-Nonce': wppicAdminCustomPlugin.restNonce
               }
             });
-          case 7:
+          case 8:
             c = a.sent;
             if (!c.ok) {
-              a.next = 21;
+              a.next = 22;
               break;
             }
-            a.next = 11;
+            a.next = 12;
             return c.json();
-          case 11:
+          case 12:
             d = a.sent;
             e = d.errors;
             if (e.length > 0) {
@@ -41813,24 +41859,24 @@ var ImportSidebarRest = function b(a) {
               e.forEach(function (a) {
                 g += a + '\n\r';
               });
-              v(g);
+              z(g);
             }
-            j(false);
-            r((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Plugin data synced successfully.', 'wp-plugin-info-card'));
+            n(false);
+            v((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Plugin data synced successfully.', 'wp-plugin-info-card'));
             setTimeout(function () {
               f(false);
             }, 3000);
-            a.next = 19;
-            return z();
-          case 19:
-            a.next = 23;
+            a.next = 20;
+            return D();
+          case 20:
+            a.next = 24;
             break;
-          case 21:
-            r((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Error syncing plugin data.', 'wp-plugin-info-card'));
+          case 22:
+            v((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Error syncing plugin data.', 'wp-plugin-info-card'));
             setTimeout(function () {
-              j(false);
+              n(false);
             }, 3000);
-          case 23:
+          case 24:
           case "end":
             return a.stop();
         }
@@ -41847,7 +41893,7 @@ var ImportSidebarRest = function b(a) {
     href: "#",
     onClick: function b(a) {
       a.preventDefault();
-      A();
+      F();
     },
     iconPosition: "left",
     className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
@@ -41859,6 +41905,7 @@ var ImportSidebarRest = function b(a) {
     href: "#",
     onClick: function b(a) {
       a.preventDefault();
+      E();
     },
     iconPosition: "left",
     className: "wppic-btn wppic-btn-alt has-icon-right btn-full-width",
@@ -41868,19 +41915,32 @@ var ImportSidebarRest = function b(a) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Detach From REST', 'wp-plugin-info-card'))), e && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Modal, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Resync Plugin Data', 'wp-plugin-info-card'),
     onRequestClose: function a() {
+      n(false);
+    },
+    shouldCloseOnEsc: false,
+    shouldCloseOnClickOutside: false
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-admin-row"
+  }, m && /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Resyncing plugin data…', 'wp-plugin-info-card'), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Spinner, null)), u && /*#__PURE__*/React.createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    message: u,
+    status: "success",
+    politeness: "assertive"
+  }), y && /*#__PURE__*/React.createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    message: y,
+    status: "error",
+    politeness: "assertive"
+  }))), i && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Modal, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Detach Plugin from REST', 'wp-plugin-info-card'),
+    onRequestClose: function a() {
       j(false);
     },
     shouldCloseOnEsc: false,
     shouldCloseOnClickOutside: false
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-admin-row"
-  }, i && /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Resyncing plugin data…', 'wp-plugin-info-card'), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Spinner, null)), q && /*#__PURE__*/React.createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    message: q,
-    status: "success",
-    politeness: "assertive"
-  }), u && /*#__PURE__*/React.createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Detaching plugin from REST API…', 'wp-plugin-info-card'), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Spinner, null)), u && /*#__PURE__*/React.createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_4__["default"], {
     message: u,
-    status: "error",
+    status: "success",
     politeness: "assertive"
   }))));
 };
@@ -43032,6 +43092,7 @@ var Interface = function b(a) {
     className: "wppic-admin-panel-sidebar"
   }, Q && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_import_sidebar_rest__WEBPACK_IMPORTED_MODULE_9__["default"], {
     onPluginData: function b(a) {
+      R(a.isFromRest);
       g(a);
       X(a);
     }

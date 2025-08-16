@@ -8,6 +8,7 @@ import Notice from '../../../components/Notice';
 
 const ImportSidebarRest = ( props ) => {
 	const [ showSyncModal, setShowSyncModal ] = useState( false );
+	const [ showDetachModal, setShowDetachModal ] = useState( false );
 	const [ isSyncing, setIsSyncing ] = useState( false );
 	const [ isDetaching, setIsDetaching ] = useState( false );
 	const [ statusMessage, setStatusMessage ] = useState( '' );
@@ -29,9 +30,30 @@ const ImportSidebarRest = ( props ) => {
 	};
 
 	/**
+	 * Detach the plugin from the REST API.
+	 */
+	const detachFromRest = async () => {
+		setStatusMessage( '' );
+		setShowDetachModal( true );
+		const response = await SendCommand( 'wppic_detach_custom_plugin_from_rest', {
+			nonce,
+			id,
+		} );
+		const { success, data } = response.data;
+		if ( success ) {
+			setStatusMessage( __( 'Plugin data detached successfully.', 'wp-plugin-info-card' ) );
+			await fetchPlugin();
+			setTimeout( () => {
+				setShowDetachModal( false );
+			}, 3000 );
+		}
+	};
+
+	/**
 	 * Sync plugin data from REST API.
 	 */
 	const syncPluginData = async () => {
+		setStatusMessage( '' );
 		setShowSyncModal( true );
 		setIsSyncing( true );
 
@@ -100,6 +122,7 @@ const ImportSidebarRest = ( props ) => {
 					href="#"
 					onClick={ ( e ) => {
 						e.preventDefault();
+						detachFromRest();
 					} }
 					iconPosition="left"
 					className="wppic-btn wppic-btn-alt has-icon-right btn-full-width"
@@ -141,6 +164,34 @@ const ImportSidebarRest = ( props ) => {
 									<Notice
 										message={ syncError }
 										status="error"
+										politeness="assertive"
+									/>
+								)
+							}
+						</div>
+					</Modal>
+				)
+			}
+			{
+				showDetachModal && (
+					<Modal
+						title={ __( 'Detach Plugin from REST', 'wp-plugin-info-card' ) }
+						onRequestClose={ () => {
+							setShowDetachModal( false );
+						} }
+						shouldCloseOnEsc={ false }
+						shouldCloseOnClickOutside={ false }
+					>
+						<div className="wppic-admin-row">
+							<p>
+								{ __( 'Detaching plugin from REST API…', 'wp-plugin-info-card' ) }
+								<Spinner />
+							</p>
+							{
+								statusMessage && (
+									<Notice
+										message={ statusMessage }
+										status="success"
 										politeness="assertive"
 									/>
 								)

@@ -48,11 +48,40 @@ class Init {
 		add_action( 'wp_ajax_wppic_export_custom_plugin', array( $this, 'ajax_export_custom_plugin' ) );
 		add_action( 'wp_ajax_wppic_get_custom_plugin_advanced_options', array( $this, 'ajax_get_custom_plugin_advanced_options' ) );
 		add_action( 'wp_ajax_wppic_save_custom_plugin_advanced_options', array( $this, 'ajax_save_custom_plugin_advanced_options' ) );
+		add_action( 'wp_ajax_wppic_detach_custom_plugin_from_rest', array( $this, 'ajax_detach_custom_plugin_from_rest' ) );
 
 		// Init tabs.
 		new Tabs\Main();
 		new Tabs\EDD();
 		new Tabs\Custom_Plugin();
+	}
+
+	/**
+	 * Detach a custom plugin from the REST API.
+	 */
+	public function ajax_detach_custom_plugin_from_rest() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
+		$id    = absint( filter_input( INPUT_POST, 'id', FILTER_DEFAULT ) );
+		if ( ! wp_verify_nonce( $nonce, 'wppic-edit-custom-plugin-' . $id ) ) {
+			wp_send_json_error(
+				array(
+					'message'     => __( 'Nonce verification failed', 'wp-plugin-info-card' ),
+					'type'        => 'error',
+					'dismissable' => true,
+				)
+			);
+		}
+
+		delete_post_meta( $id, 'isFromRest' );
+		wp_send_json_success(
+			array(
+				'message' => __( 'Plugin detached from REST API', 'wp-plugin-info-card' ),
+			)
+		);
 	}
 
 	/**
