@@ -41,6 +41,12 @@ if ( isset( $wppic_data->is_edd ) && $wppic_data->is_edd ) {
 	$download_label = __( 'More Details', 'wp-plugin-info-card' ); // EDD uses the download link for the more details link.		
 }
 
+// If author_url is set, use it instead of the author profile.
+$author_url = '';
+if ( isset( $wppic_data->author_profile ) && ! empty( $wppic_data->author_profile ) ) {
+	$author_url = $wppic_data->author_profile;
+}
+
 /***************************************************************
  * Start template
  ***************************************************************/
@@ -50,20 +56,24 @@ if ( isset( $wppic_data->is_edd ) && $wppic_data->is_edd ) {
 		<div class="wp-pic-plugin-card-top">
 			<div class="wp-pic-column-name">
 				<h3>
-					<a href="<?php echo $wppic_data->url; ?>"  title="<?php printf( __( 'More information about %s', 'wp-plugin-info-card' ), $wppic_data->name ); ?>">
-						<?php echo $wppic_data->name ?>
-						<?php echo $logo ?>
+					<a href="<?php echo esc_url( $wppic_data->url ); ?>"  title="<?php printf( __( 'More information about %s', 'wp-plugin-info-card' ), $wppic_data->name ); ?>">
+						<?php echo esc_html( $wppic_data->name ); ?>
+						<?php echo wp_kses_post( $logo ); ?>
 					</a>
 				</h3>
 			</div>
 			<div class="wp-pic-action-links">
-				<a class="wp-pic-action-buttons" href="<?php echo $wppic_data->download_link ?>" title="<?php echo esc_attr( $download_label ); ?>"><?php echo esc_html( $download_label ); ?></a>
+				<a class="wp-pic-action-buttons" href="<?php echo esc_url( $wppic_data->download_link ); ?>" title="<?php echo esc_attr( $download_label ); ?>"><?php echo esc_html( $download_label ); ?></a>
 			</div>
 			<div class="wp-pic-column-description">
-				<p><?php echo strip_tags( $wppic_data->short_description ); ?></p>
-				<p class="authors"><cite><?php printf( esc_html__( 'By %s', 'wp-plugin-info-card' ), esc_html( $wppic_data->author ) ); ?></cite></p>
+				<p><?php echo wp_kses_post( $wppic_data->short_description ); ?></p>
+				<?php if ( ! empty( $author_url ) ) : ?>
+					<p class="authors"><?php esc_html_e( 'By', 'wp-plugin-info-card' ); ?> <cite><a href="<?php echo esc_url( $author_url ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $wppic_data->author ); ?></a></cite></p>
+				<?php else : ?>
+					<p class="authors"><?php esc_html_e( 'By', 'wp-plugin-info-card' ); ?> <cite><?php echo esc_html( $wppic_data->author ); ?></cite></p>
+				<?php endif; ?>
 			</div>
-			<?php echo $wppic_data->credit ?>
+			<?php echo wp_kses_post( $wppic_data->credit ); ?>
 		</div>
 		<div class="wp-pic-plugin-card-bottom">
 			<div class="wp-pic-column-rating" title="<?php printf( esc_attr( _n( '(based on %s rating)', '(based on %s ratings)', $wppic_data->num_ratings, 'wp-plugin-info-card' ) ), esc_html( number_format_i18n( $wppic_data->num_ratings ) ) ); ?>">
