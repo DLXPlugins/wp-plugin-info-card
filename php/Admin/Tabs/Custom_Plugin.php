@@ -31,9 +31,9 @@ class Custom_Plugin {
 	public function __construct() {
 		add_filter( 'wppic_admin_tabs', array( $this, 'add_custom_plugin_tab' ), 1, 1 );
 		add_filter( 'wppic_admin_sub_tabs', array( $this, 'add_custom_plugin_sub_tab' ), 1, 3 );
-		add_action( 'wppic_output_custom_plugin', array( $this, 'output_custom_plugin_content' ), 1, 3 );
-		add_action( 'wppic_admin_enqueue_scripts_custom_plugin', array( $this, 'admin_scripts' ) );
-		add_action( 'wp_ajax_wppic_get_custom_plugin_options', array( $this, 'ajax_get_options' ) );
+		add_action( 'wppic_output_custom-plugin-cards', array( $this, 'output_custom_plugin_content' ), 1, 3 );
+		add_action( 'wppic_admin_enqueue_scripts_custom-plugin-cards', array( $this, 'admin_scripts' ) );
+		add_action( 'wp_ajax_wppic_get_custom-plugin-cards_options', array( $this, 'ajax_get_options' ) );
 	}
 
 	/**
@@ -103,10 +103,10 @@ class Custom_Plugin {
 	 */
 	public function add_custom_plugin_tab( $tabs ) {
 		$tabs[] = array(
-			'get'    => 'custom_plugin',
-			'action' => 'wppic_output_custom_plugin',
-			'url'    => Functions::get_settings_url( 'custom_plugin' ),
-			'label'  => _x( 'Custom Plugins', 'Tab label as Custom Plugin', 'wp-plugin-info-card' ),
+			'get'    => 'custom-plugin-cards',
+			'action' => 'wppic_output_custom_plugin_cards',
+			'url'    => Functions::get_settings_url( 'custom-plugin-cards' ),
+			'label'  => _x( 'Custom Plugin Cards', 'Tab label as Custom Plugin Cards', 'wp-plugin-info-card' ),
 			'icon'   => 'wppic-flaticon-custom-plugin',
 		);
 		return $tabs;
@@ -122,7 +122,7 @@ class Custom_Plugin {
 	 * @return array of tabs.
 	 */
 	public function add_custom_plugin_sub_tab( $tabs, $current_tab, $sub_tab ) {
-		if ( ( ! empty( $current_tab ) || ! empty( $sub_tab ) ) && 'custom_plugin' !== $current_tab ) {
+		if ( ( ! empty( $current_tab ) || ! empty( $sub_tab ) ) && 'custom-plugin-cards' !== $current_tab ) {
 			return $tabs;
 		}
 		return $tabs;
@@ -135,7 +135,7 @@ class Custom_Plugin {
 	 * @param string $sub_tab Sub tab.
 	 */
 	public function output_custom_plugin_content( $tab, $sub_tab = '' ) {
-		if ( 'custom_plugin' === $tab ) {
+		if ( 'custom-plugin-cards' === $tab ) {
 			?>
 			<div id="wppic-tab-custom-plugin"></div>
 			<?php
