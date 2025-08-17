@@ -132,5 +132,3 @@ if ( isset( $wppic_data->is_edd ) && $wppic_data->is_edd ) {
 		</div>
 	</div>
 </div>
-<?php
-// end of template
