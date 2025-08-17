@@ -173,7 +173,7 @@ const PluginHome = ( props ) => {
 			totalPages: 0,
 		},
 		page: 1,
-		perPage: 20,
+		perPage: 10,
 		sort: {
 			field: 'title',
 			direction: 'asc',
