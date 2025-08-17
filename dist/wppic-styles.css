@@ -122,6 +122,10 @@
   clear: both;
 }
 
+.wp-pic {
+  font-size: 16px;
+}
+
 .wp-pic * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -197,10 +201,10 @@
 p.wp-pic-author,
 .editor-styles-wrapper p.wp-pic-author {
   vertical-align: baseline;
-  font-size: 13px;
+  font-size: 0.9rem;
   display: block;
   padding: 0;
-  margin: 0 !important;
+  margin: 8px 0 0 0 !important;
   line-height: 18px;
   color: #79808a;
 }
@@ -212,7 +216,7 @@ p.wp-pic-author,
   height: 125px;
   display: inline-block;
   overflow: hidden;
-  margin: 35px 0 0;
+  margin: 35px 0 8px 0;
   -webkit-border-radius: 50% 50%;
   border-radius: 50% 50%;
   background-image: url(../assets/img/wp-pic-sprite.png);
@@ -550,9 +554,9 @@ p.wp-pic-author,
 
 .wp-pic-card.wp-pic .wp-pic-front .wp-pic-name {
   width: 280px;
-  font-size: 18px;
+  font-size: 1.3rem;
   padding: 0 12px;
-  line-height: 22px;
+  line-height: 1.35;
   height: 48px;
   vertical-align: middle;
   display: table-cell;
