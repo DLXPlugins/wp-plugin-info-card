@@ -1,9 +1,8 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { __ } from '@wordpress/i18n';
 import { Button, Modal } from '@wordpress/components';
 import { DataViews } from '@wordpress/dataviews';
-import { addQueryArgs, getQueryArgs } from '@wordpress/url';
 import {
 	Plug2,
 	Plus,
@@ -11,7 +10,6 @@ import {
 	BookText,
 	ExternalLink,
 	Download,
-	CloudDownload,
 	DatabaseZap,
 } from 'lucide-react';
 import PluginIcon from '../../../components/PluginIcon';
@@ -73,6 +71,7 @@ const fields = [
 		enableHiding: false,
 	},
 ];
+
 const PluginHome = ( props ) => {
 	const [ selectedItems, setSelectedItems ] = useState( [] );
 	const [ loading, setLoading ] = useState( true );
@@ -210,10 +209,7 @@ const PluginHome = ( props ) => {
 		}
 	};
 	useEffect( () => {
-		fetchData( {
-			page: 1,
-			perPage: view.perPage,
-		} );
+		fetchData( {} );
 	}, [] );
 
 	/**
@@ -302,7 +298,6 @@ const PluginHome = ( props ) => {
 											setShowDeleteModal( { display: false, items: null } );
 											// Now remove from customPlugins array.
 											setCustomPlugins( customPlugins.filter( ( plugin ) => ! pluginIds.includes( plugin.id ) ) );
-											
 										} else {
 											// todo - error handling.
 										}

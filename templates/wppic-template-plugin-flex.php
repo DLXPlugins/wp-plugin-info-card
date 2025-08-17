@@ -22,7 +22,7 @@ if ( !empty( $wppic_data->icons[ 'svg' ] ) ) {
 //Define card image
 //$image is the custom image URL if you provided it
 if( !empty( $image ) ){
-	$bgImage = 'style="background-image: url( ' . $image . ' );"';
+	$bgImage = 'style="background-image: url( ' . esc_url_raw( $image ) . ' );"';
 } else if( isset( $icon ) ) {
 	$bgImage = 'style="background-image: url( ' . esc_attr( $icon ) . ' );"';
 } else {
@@ -34,9 +34,9 @@ $banner = '';
 $banner_image = isset( $wppic_data->banners['high'] ) ? $wppic_data->banners['high'] : '';
 if ( empty( $banner_image ) ) {
 	if ( isset( $wppic_data->banners['low'] ) ) {
-		$banner_image = $wppic_data->banners['low'];
+		$banner_image = esc_url_raw( $wppic_data->banners['low'] );
 	} else {
-		$banner_image = plugins_url( 'assets/img/default-banner.png', WPPIC_FILE );
+		$banner_image = esc_url_raw( plugins_url( 'assets/img/default-banner.png', WPPIC_FILE ) );
 	}
 }
 $wppic_data->name = wp_trim_words( $wppic_data->name, 6 );
@@ -51,11 +51,11 @@ if ( isset( $wppic_data->reviews_url ) && ! empty( $wppic_data->reviews_url ) ) 
 
 $download_label = sprintf(
 	/* translators: %s: Plugin Name */
-	__( 'Download: %s', 'wp-plugin-info-card' ),
+	esc_html__( 'Download: %s', 'wp-plugin-info-card' ),
 	$wppic_data->name
 );
 if ( isset( $wppic_data->is_edd ) && $wppic_data->is_edd ) {
-	$download_label = __( 'More Details', 'wp-plugin-info-card' );
+	$download_label = esc_html__( 'More Details', 'wp-plugin-info-card' );
 }
 
 /***************************************************************
@@ -68,42 +68,41 @@ if ( isset( $wppic_data->is_edd ) && $wppic_data->is_edd ) {
 		if ( ! empty( $banner_image ) ):
 		?>
 		<div class="wp-pic-banner-wrapper">
-			<a href="<?php echo $wppic_data->url ?>" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ) ?>"><img src="<?php echo esc_url( $banner_image ); ?>" alt="<?php echo esc_attr( $wppic_data->name ); ?>" /></a>
+			<a href="<?php echo esc_url( $wppic_data->url ); ?>" target="_blank" title="<?php esc_attr_e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ); ?>"><img src="<?php echo esc_url( $banner_image ); ?>" alt="<?php echo esc_attr( $wppic_data->name ); ?>" /></a>
 		</div>
 		<?php endif; ?>
 		<div class="wp-pic-name-wrapper">
-			<a class="wp-pic-name" href="<?php echo $wppic_data->url ?>" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ) ?>"><strong><?php echo $wppic_data->name ?></strong></a>
+			<a class="wp-pic-name" href="<?php echo esc_url( $wppic_data->url ); ?>" target="_blank" title="<?php esc_attr_e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ); ?>"><strong><?php echo esc_html( $wppic_data->name ); ?></strong></a>
 		</div>
 		<div class="wp-pic-version-wrapper">
-			<p class="wp-pic-version"><span><?php _e( 'Current Version:', 'wp-plugin-info-card' ) ?></span> <?php echo $wppic_data->version ?></p>
+			<p class="wp-pic-version"><span><?php esc_html_e( 'Current Version:', 'wp-plugin-info-card' ); ?></span> <?php echo esc_html( $wppic_data->version ); ?></p>
 		</div>
 		<div class="wp-pic-updated-wrapper">
-			<p class="wp-pic-updated"><span><?php _e( 'Last Updated:', 'wp-plugin-info-card' ) ?></span> <?php echo $wppic_data->last_updated ?></p>
+			<p class="wp-pic-updated"><span><?php esc_html_e( 'Last Updated:', 'wp-plugin-info-card' ); ?></span> <?php echo esc_html( $wppic_data->last_updated ); ?></p>
 		</div>
 		<div class="wp-pic-tested-wrapper">
-			<p class="wp-pic-tested"><span><?php _e( 'Tested Up To:', 'wp-plugin-info-card' ) ?></span> <?php echo $wppic_data->tested ?></p>
+			<p class="wp-pic-tested"><span><?php esc_html_e( 'Tested Up To:', 'wp-plugin-info-card' ); ?></span> <?php echo esc_html( $wppic_data->tested ); ?></p>
 		</div>
 		<div class="wp-pic-author-wrapper">
-			<p class="wp-pic-author"><?php _e( 'Author(s):', 'wp-plugin-info-card' ) ?> <?php echo $wppic_data->author ?></p>
+			<p class="wp-pic-author"><?php esc_html_e( 'Author(s):', 'wp-plugin-info-card' ); ?> <?php echo esc_html( $wppic_data->author ); ?></p>
 		</div>
 		<div class="wp-pic-bottom">
 			<div class="wp-pic-bar">
-				<a href="<?php echo esc_url( $reviews_url ); ?>" class="wp-pic-rating" target="_blank" title="<?php _e( 'Ratings', 'wp-plugin-info-card' ) ?>">
-					<?php echo round( $wppic_data->rating ); ?>%<em><?php _e( 'Ratings', 'wp-plugin-info-card' ) ?></em>
+				<a href="<?php echo esc_url( $reviews_url ); ?>" class="wp-pic-rating" target="_blank" title="<?php esc_attr_e( 'Ratings', 'wp-plugin-info-card' ); ?>">
+					<?php echo round( $wppic_data->rating ); ?>%<em><?php esc_html_e( 'Ratings', 'wp-plugin-info-card' ); ?></em>
 				</a>
-				<a href="<?php echo $wppic_data->download_link ?>" class="wp-pic-downloaded" target="_blank" title="<?php _e( 'Direct download', 'wp-plugin-info-card' ) ?>">
-					<?php echo number_format_i18n( $wppic_data->active_installs ) ?>+<em><?php _e( 'Installs', 'wp-plugin-info-card' ) ?></em>
+				<a href="<?php echo esc_url( $wppic_data->download_link ); ?>" class="wp-pic-downloaded" target="_blank" title="<?php esc_attr_e( 'Direct download', 'wp-plugin-info-card' ); ?>">
+					<?php echo number_format_i18n( $wppic_data->active_installs ); ?>+<em><?php esc_html_e( 'Installs', 'wp-plugin-info-card' ); ?></em>
 				</a>
-				<a href="<?php echo $wppic_data->url ?>" class="wp-pic-requires" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ) ?>">
-					<?php echo $wppic_data->requires ?><em><?php _e( 'Requires', 'wp-plugin-info-card' ) ?></em>
+				<a href="<?php echo esc_url( $wppic_data->url ); ?>" class="wp-pic-requires" target="_blank" title="<?php esc_attr_e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ); ?>">
+					<?php echo esc_html( $wppic_data->requires ); ?><em><?php esc_html_e( 'Requires', 'wp-plugin-info-card' ); ?></em>
 				</a>
 			</div>
 			<div class="wp-pic-download-link">
-				<a href="<?php echo esc_url( $wppic_data->download_link ) ?>" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ) ?>">
+				<a href="<?php echo esc_url( $wppic_data->download_link ); ?>" target="_blank" title="<?php esc_attr_e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ); ?>">
 				<span><?php echo esc_html( $download_label ); ?></span>
 				</a>
 			</div>
 		</div>
 	</div>
 </div>
-<?php //end of template
