@@ -48,6 +48,9 @@ const {
 
 const { useInstanceId } = wp.compose;
 
+import { escapeAttribute } from '@wordpress/escape-html';
+import { decodeEntities } from '@wordpress/html-entities';
+
 const SitePluginsCardGrid = ( props ) => {
 	const { attributes, setAttributes } = props;
 	const generatedUniqueId = useInstanceId( SitePluginsCardGrid, 'wp-plugin-info-card-id' );
@@ -239,7 +242,7 @@ const SitePluginsCardGrid = ( props ) => {
 				}
 			}
 
-			const panelBodyTitle = cardData.name + ' (' + ( displayPlugin ? __( 'Enabled', 'wp-plugin-info-card' ) : __( 'Disabled', 'wp-plugin-info-card' ) ) + ')';
+			const panelBodyTitle = escapeAttribute( decodeEntities( cardData.name ) ) + ' (' + ( displayPlugin ? __( 'Enabled', 'wp-plugin-info-card' ) : __( 'Disabled', 'wp-plugin-info-card' ) ) + ')';
 			return (
 				<PanelBody
 					title={ panelBodyTitle }

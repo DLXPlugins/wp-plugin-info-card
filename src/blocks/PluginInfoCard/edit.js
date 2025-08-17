@@ -7,6 +7,8 @@
  */
 import axios from 'axios';
 import classnames from 'classnames';
+import { escapeAttribute } from '@wordpress/escape-html';
+import { decodeEntities } from '@wordpress/html-entities';
 import PluginFlex from '../templates/PluginFlex';
 import PluginCard from '../templates/PluginCard';
 import PluginLarge from '../templates/PluginLarge';
@@ -263,7 +265,7 @@ const WPPluginInfoCard = ( props ) => {
 			}
 			return (
 				<PanelBody
-					title={ cardData.name }
+					title={ escapeAttribute( decodeEntities( cardData.name ) ) }
 					key={ key }
 					initialOpen={ false }
 				>
@@ -380,6 +382,7 @@ const WPPluginInfoCard = ( props ) => {
 		{ value: 'compact', label: __( 'Compact', 'wp-plugin-info-card' ) },
 		{ value: 'comfortable', label: __( 'Comfortable', 'wp-plugin-info-card' ) },
 		{ value: 'spacious', label: __( 'Spacious', 'wp-plugin-info-card' ) },
+		{ value: 'extreme', label: __( 'Extreme', 'wp-plugin-info-card' ) },
 	];
 
 	const marginSpacingTargetOptions = [
@@ -460,63 +463,9 @@ const WPPluginInfoCard = ( props ) => {
 				) }
 			</PanelBody>
 			<PanelBody
-				title={ __( 'Options', 'wp-plugin-info-card' ) }
-				initialOpen={ false }
+				title={ __( 'Appearance', 'wp-plugin-info-card' ) }
+				initialOpen={ true }
 			>
-				<div className="wppic-block-sidebar-row">
-					<MediaUpload
-						onSelect={ ( imageObject ) => {
-							setAttributes( { image: imageObject.url } );
-							setImage( imageObject.url );
-						} }
-						type="image"
-						value={ image }
-						render={ ( { open } ) => (
-							<Fragment>
-								<button
-									className="components-button is-button"
-									onClick={ open }
-								>
-									{ __(
-										'Upload Image!',
-										'wp-plugin-info-card',
-									) }
-								</button>
-								{ image && (
-									<Fragment>
-										<div>
-											<img
-												src={ image }
-												alt={ __(
-													'Plugin Card Image',
-													'wp-plugin-info-card',
-												) }
-												width="250"
-												height="250"
-											/>
-										</div>
-										<div>
-											<button
-												className="components-button is-button"
-												onClick={ ( event ) => {
-													setAttributes( {
-														image: '',
-													} );
-													setImage( '' );
-												} }
-											>
-												{ __(
-													'Reset Image',
-													'wp-plugin-info-card',
-												) }
-											</button>
-										</div>
-									</Fragment>
-								) }
-							</Fragment>
-						) }
-					/>
-				</div>
 				<div className="wppic-block-sidebar-row">
 					<TextControl
 						label={ __( 'Container ID', 'wp-plugin-info-card' ) }

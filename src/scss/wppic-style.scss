@@ -12,22 +12,28 @@
 	font-size: 16px;
 }
 .wppic-margin-spacing-compact {
-	margin-top: 8px;
-	margin-bottom: 8px;
-	margin-block-start: 8px !important;
-	margin-block-end: 8px !important;
-}
-.wppic-margin-spacing-comfortable {
 	margin-top: 16px;
 	margin-bottom: 16px;
 	margin-block-start: 16px !important;
 	margin-block-end: 16px !important;
 }
+.wppic-margin-spacing-comfortable {
+	margin-top: 32px;
+	margin-bottom: 32px;
+	margin-block-start: 32px !important;
+	margin-block-end: 32px !important;
+}
 .wppic-margin-spacing-spacious {
-	margin-top: 24px;
-	margin-bottom: 24px;
-	margin-block-start: 24px !important;
-	margin-block-end: 24px !important;
+	margin-top: 48px;
+	margin-bottom: 48px;
+	margin-block-start: 48px !important;
+	margin-block-end: 48px !important;
+}
+.wppic-margin-spacing-extreme {
+	margin-top: 64px;
+	margin-bottom: 64px;
+	margin-block-start: 64px !important;
+	margin-block-end: 64px !important;
 }
 .wppic-margin-spacing-target-top {
 	margin-bottom: 0;
