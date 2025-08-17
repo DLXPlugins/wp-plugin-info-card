@@ -347,10 +347,10 @@ class Init {
 			$post_type_args['paged'] = $paged;
 		}
 
-		$custom_plugins      = get_posts( $post_type_args );
+		$custom_plugins      = new \WP_Query( $post_type_args );
 		$custom_plugins_data = array();
 
-		foreach ( $custom_plugins as $custom_plugin ) {
+		foreach ( $custom_plugins->posts as $custom_plugin ) {
 			$custom_plugins_data[] = array(
 				'id'              => $custom_plugin->ID,
 				'title'           => $custom_plugin->post_title,
@@ -368,6 +368,8 @@ class Init {
 		wp_send_json_success(
 			array(
 				'customPlugins' => $custom_plugins_data,
+				'totalItems'    => $custom_plugins->found_posts,
+				'totalPages'    => $custom_plugins->max_num_pages,
 			)
 		);
 	}

@@ -86,6 +86,10 @@ const PluginHome = ( props ) => {
 		title: '',
 		politeness: 'polite',
 	} );
+	const [ paginationInfo, setPaginationInfo ] = useState( {
+		totalItems: 0,
+		totalPages: 0,
+	} );
 
 	const navigate = useNavigate();
 
@@ -197,12 +201,19 @@ const PluginHome = ( props ) => {
 		const responseData = response.data;
 		if ( responseData.success ) {
 			setCustomPlugins( responseData.data.customPlugins );
+			setPaginationInfo( {
+				totalItems: responseData.data.totalItems,
+				totalPages: responseData.data.totalPages,
+			} );
 		} else {
 			// todo - error handling.
 		}
 	};
 	useEffect( () => {
-		fetchData( {} );
+		fetchData( {
+			page: 1,
+			perPage: view.perPage,
+		} );
 	}, [] );
 
 	/**
@@ -330,10 +341,7 @@ const PluginHome = ( props ) => {
 								label={ __( 'Plugins', 'wp-plugin-info-card' ) }
 								view={ view }
 								onChangeView={ onChangeView }
-								paginationInfo={ {
-									totalItems: customPlugins.length,
-									totalPages: Math.ceil( customPlugins.length / view.perPage ),
-								} }
+								paginationInfo={ paginationInfo }
 								perPageSizes={ [ 10, 25, 50, 100 ] }
 								selection={ selectedItems }
 								onChangeSelection={ setSelectedItems }

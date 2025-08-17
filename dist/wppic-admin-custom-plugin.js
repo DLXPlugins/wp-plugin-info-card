@@ -41159,14 +41159,21 @@ var PluginHome = function b(a) {
     x = _slicedToArray(w, 2),
     y = x[0],
     z = x[1];
-  var A = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_10__.useNavigate)();
-  var B = [{
+  var A = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      totalItems: 0,
+      totalPages: 0
+    }),
+    B = _slicedToArray(A, 2),
+    C = B[0],
+    D = B[1];
+  var E = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_10__.useNavigate)();
+  var F = [{
     id: 'edit',
     icon: 'edit',
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Edit Plugin', 'wp-plugin-info-card'),
     callback: function b(a) {
       var c = a[0];
-      A({
+      E({
         to: "/edit/".concat(c.id, "/").concat(c.editNonce)
       });
     },
@@ -41277,7 +41284,7 @@ var PluginHome = function b(a) {
       return 'true' === a.enableRestApi;
     }
   }];
-  var C = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+  var G = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       type: 'table',
       previewSize: 'medium',
       paginationInfo: {
@@ -41295,10 +41302,10 @@ var PluginHome = function b(a) {
       layout: defaultLayouts.grid.layout,
       fields: [].concat(fields)
     }),
-    D = _slicedToArray(C, 2),
-    E = D[0],
-    F = D[1];
-  var G = /*#__PURE__*/function () {
+    H = _slicedToArray(G, 2),
+    I = H[0],
+    J = H[1];
+  var K = /*#__PURE__*/function () {
     var a = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function b(a) {
       var c, d, e, f, g, h, i, k, l, m, n, o;
       return _regeneratorRuntime().wrap(function p(b) {
@@ -41321,6 +41328,10 @@ var PluginHome = function b(a) {
             o = n.data;
             if (o.success) {
               r(o.data.customPlugins);
+              D({
+                totalItems: o.data.totalItems,
+                totalPages: o.data.totalPages
+              });
             } else {
               // todo - error handling.
             }
@@ -41335,7 +41346,10 @@ var PluginHome = function b(a) {
     };
   }();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    G({});
+    K({
+      page: 1,
+      perPage: I.perPage
+    });
   }, []);
 
   /**
@@ -41343,15 +41357,15 @@ var PluginHome = function b(a) {
    *
    * @param {Object} newView The new view object.
    */
-  var H = function b(a) {
-    G({
+  var L = function b(a) {
+    K({
       order: a.sort.direction,
       orderby: a.sort.field,
       page: a.page,
       perPage: a.perPage,
       search: a.search
     });
-    F(a);
+    J(a);
     // Create query args object with view state.
     // const changeQueryArgs = {
     // 	page: parseInt( getQueryArgs( window.location.href ).paged ) || 1,
@@ -41465,14 +41479,11 @@ var PluginHome = function b(a) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add a custom plugin, enable a REST API endpoint, and share the plugin with the world in beautiful cards.', 'wp-plugin-info-card')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_dataviews__WEBPACK_IMPORTED_MODULE_11__["default"], {
     data: q,
     fields: fields,
-    actions: B,
+    actions: F,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Plugins', 'wp-plugin-info-card'),
-    view: E,
-    onChangeView: H,
-    paginationInfo: {
-      totalItems: q.length,
-      totalPages: Math.ceil(q.length / E.perPage)
-    },
+    view: I,
+    onChangeView: L,
+    paginationInfo: C,
     perPageSizes: [10, 25, 50, 100],
     selection: e,
     onChangeSelection: f,
@@ -41488,7 +41499,7 @@ var PluginHome = function b(a) {
     href: "#",
     onClick: function b(a) {
       a.preventDefault();
-      A({
+      E({
         to: '/new-plugin'
       });
     },
@@ -41516,7 +41527,7 @@ var PluginHome = function b(a) {
     href: "#",
     onClick: function b(a) {
       a.preventDefault();
-      A({
+      E({
         to: '/advanced'
       });
     },
@@ -41549,7 +41560,7 @@ var PluginHome = function b(a) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('View Documentation', 'wp-plugin-info-card'))))), u && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_import_plugin_modal__WEBPACK_IMPORTED_MODULE_6__["default"], {
     onClose: function a() {
       v(false);
-      G({});
+      K({});
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_SnackStatus__WEBPACK_IMPORTED_MODULE_7__["default"], {
     snackbarOptions: y,
