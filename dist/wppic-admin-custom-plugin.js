@@ -40761,7 +40761,7 @@ var Breadcrumbs = function a() {
     className: "wppic-admin-panel-breadcrumbs__item"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_tanstack_react_router__WEBPACK_IMPORTED_MODULE_7__.Link, {
     href: "/"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Custom Plugins', 'wp-plugin-info-card')), ' > ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Custom Plugin Cards', 'wp-plugin-info-card')), ' > ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "wppic-admin-panel-breadcrumbs__item-current"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Advanced Settings', 'wp-plugin-info-card'))));
 };
@@ -42890,7 +42890,7 @@ var Breadcrumbs = function b(a) {
     className: "wppic-admin-panel-breadcrumbs__item"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_tanstack_react_router__WEBPACK_IMPORTED_MODULE_13__.Link, {
     href: "/"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Custom Plugins', 'wp-plugin-info-card')), d && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, ' > ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Custom Plugin Cards', 'wp-plugin-info-card')), d && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, ' > ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "wppic-admin-panel-breadcrumbs__item-current"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Edit', 'wp-plugin-info-card'))), !d && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, ' > ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "wppic-admin-panel-breadcrumbs__item-current"

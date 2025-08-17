@@ -13,7 +13,7 @@ const Breadcrumbs = () => (
 	<div className="wppic-admin-panel-breadcrumbs">
 		<div className="wppic-admin-panel-breadcrumbs__item">
 			<Link href="/">
-				{ __( 'Custom Plugins', 'wp-plugin-info-card' ) }
+				{ __( 'Custom Plugin Cards', 'wp-plugin-info-card' ) }
 			</Link>
 			{ ' > ' }
 			<span className="wppic-admin-panel-breadcrumbs__item-current">
