@@ -11,6 +11,32 @@
 .wp-pic {
 	font-size: 16px;
 }
+.wppic-margin-spacing-compact {
+	margin-top: 8px;
+	margin-bottom: 8px;
+	margin-block-start: 8px !important;
+	margin-block-end: 8px !important;
+}
+.wppic-margin-spacing-comfortable {
+	margin-top: 16px;
+	margin-bottom: 16px;
+	margin-block-start: 16px !important;
+	margin-block-end: 16px !important;
+}
+.wppic-margin-spacing-spacious {
+	margin-top: 24px;
+	margin-bottom: 24px;
+	margin-block-start: 24px !important;
+	margin-block-end: 24px !important;
+}
+.wppic-margin-spacing-target-top {
+	margin-bottom: 0;
+	margin-block-end: 0 !important;
+}
+.wppic-margin-spacing-target-bottom {
+	margin-top: 0;
+	margin-block-start: 0 !important;
+}
 .wp-pic * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

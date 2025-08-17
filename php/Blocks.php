@@ -434,6 +434,8 @@ class Blocks {
 			'col_gap'     => $attributes['colGap'],
 			'row_gap'     => $attributes['rowGap'],
 			'itemSlugs'   => $attributes['itemSlugs'],
+			'marginSpacing' => $attributes['marginSpacing'],
+			'marginSpacingTarget' => $attributes['marginSpacingTarget'],
 		);
 
 		$html = '';

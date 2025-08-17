@@ -153,6 +153,14 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
+			'marginSpacing' => array(
+				'type' => 'string',
+				'default' => 'none'
+			),
+			'marginSpacingTarget' => array(
+				'type' => 'string',
+				'default' => 'both'
+			),
 			'clear' => array(
 				'type' => 'string',
 				'default' => 'none'

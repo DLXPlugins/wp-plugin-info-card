@@ -51,6 +51,14 @@
       "type": "string",
       "default": ""
     },
+    "marginSpacing": {
+      "type": "string",
+      "default": "none"
+    },
+    "marginSpacingTarget": {
+      "type": "string",
+      "default": "both"
+    },
     "clear": {
       "type": "string",
       "default": "none"

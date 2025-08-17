@@ -717,7 +717,8 @@ class Shortcodes {
 				'col_gap'     => 20,
 				'row_gap'     => 20,
 				'itemSlugs'   => array(),
-
+				'marginSpacing' => 'none',
+				'marginSpacingTarget' => 'both',
 			),
 		);
 		// Use "shortcode_atts_wppic_default" filter to edit shortcode parameters default values or add your owns.
@@ -763,6 +764,12 @@ class Shortcodes {
 			$add_class[] = $layout;
 		}
 
+		if ( 'none' !== $attributes['marginSpacing'] ) {
+			$add_class[] = 'wppic-margin-spacing-' . esc_attr( $attributes['marginSpacing'] );
+		}
+		if ( 'both' !== $attributes['marginSpacingTarget'] ) {
+			$add_class[] = 'wppic-margin-spacing-target-' . esc_attr( $attributes['marginSpacingTarget'] );
+		}
 		// Check to see if slug exists and if it is false, else we should skip this.
 		if ( isset( $attributes[ $slug ] ) ) {
 			// If false, that means don't show the plugin.
