@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Output home wppic tab.
  *

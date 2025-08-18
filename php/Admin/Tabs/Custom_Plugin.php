@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Output Custom Plugin wppic tab.
  *
