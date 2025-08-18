@@ -1,13 +1,19 @@
 <?php
+/**
+ * Template for the theme ratings card.
+ *
+ * @package WP_Plugin_Info_Card
+ */
+
 /***************************************************************
  * $wppic_data Object contain the following values:
  * url, name, slug, version, author, author_profile, contributors, requires, tested, requires, rating, num_ratings, ratings,
  * active_installs, downloaded, last_updated, last_updated_mk, added, homepage, short_description, download_link, donate_link, icons, banners
  ***************************************************************/
 
-// Define card image
-// $image is the custom image URL if you provided it
-$bgImage = esc_url( $wppic_data->screenshot_url);
+// Define card image.
+// $image is the custom image URL if you provided it.
+$background_image = esc_url( $wppic_data->screenshot_url );
 
 
 /***************************************************************
@@ -16,7 +22,7 @@ $bgImage = esc_url( $wppic_data->screenshot_url);
 ?>
 <div class="wp-pic-ratings wp-pic-plugin-ratings wp-pic-card" style="display: none;">
 	<div class="wp-pic-ratings wp-pic-ratings-front">
-		<div class="wp-pic-logo wp-pic-rating-logo"><a class="wp-pic-logo-anchor" href="<?php echo esc_url( $wppic_data->url ); ?>" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ); ?>"><img src="<?php echo esc_url_raw( $bgImage ); ?>" width="85" height="85" alt="WordPress plugin logo" /></a></div>
+		<div class="wp-pic-logo wp-pic-rating-logo"><a class="wp-pic-logo-anchor" href="<?php echo esc_url( $wppic_data->url ); ?>" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ); ?>"><img src="<?php echo esc_url_raw( $background_image ); ?>" width="85" height="85" alt="WordPress plugin logo" /></a></div>
 		<div class="wp-pic-rating-row">
 			<?php
 			$rating = round( $wppic_data->rating / 20, 1 );
@@ -48,7 +54,7 @@ $bgImage = esc_url( $wppic_data->screenshot_url);
 						</div>
 					</div>
 				</a>
-				<a href="<?php echo esc_url( $wppic_data->preview_url); ?>">
+				<a href="<?php echo esc_url( $wppic_data->preview_url ); ?>">
 					<div class="wp-pic-bar-item">
 						<div class="wp-pic-plugin-screenshots-meta-item-svg">
 							<svg width="24" height="24">
