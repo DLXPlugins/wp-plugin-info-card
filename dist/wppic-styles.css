@@ -239,7 +239,7 @@
 p.wp-pic-author,
 .editor-styles-wrapper p.wp-pic-author {
   vertical-align: baseline;
-  font-size: 0.9rem;
+  font-size: 0.9em;
   display: block;
   padding: 0;
   margin: 8px 0 0 0 !important;
@@ -592,7 +592,7 @@ p.wp-pic-author,
 
 .wp-pic-card.wp-pic .wp-pic-front .wp-pic-name {
   width: 280px;
-  font-size: 1.3rem;
+  font-size: 1.3em;
   padding: 0 12px;
   line-height: 1.35;
   height: 48px;
@@ -681,7 +681,7 @@ p.wp-pic-author,
   flex: 1;
 }
 .wp-pic-ratings .wp-pic-name {
-  font-size: 1.15rem;
+  font-size: 1.15em;
   line-height: 1.35;
 }
 .wp-pic-ratings .wp-pic-bar {

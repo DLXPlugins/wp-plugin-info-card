@@ -8,13 +8,14 @@ import {
 	createRoute,
 	createRootRoute,
 } from '@tanstack/react-router';
-import CustomPlugin from './custom-plugin';
 import PluginHome from './screens/home';
 import NewPlugin from './screens/new-plugin';
 import Advanced from './screens/advanced';
 
 const container = document.getElementById( 'wppic-tab-custom-plugin' );
 const root = createRoot( container );
+
+console.log( 'root', container );
 
 const hashHistory = createHashHistory( {
 	initialEntries: [ '/', '#/' ],

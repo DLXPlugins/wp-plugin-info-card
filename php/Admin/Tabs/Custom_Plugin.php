@@ -40,7 +40,13 @@ class Custom_Plugin {
 	 * Include admin scripts for the home screen.
 	 */
 	public function admin_scripts() {
-		$deps = require Functions::get_plugin_dir( 'dist/wppic-admin-home.asset.php' );
+		$deps = require Functions::get_plugin_dir( 'dist/wppic-admin-custom-plugin.asset.php' );
+		// Rename wp-escapeHtml to wp-escape-html.
+		foreach ( $deps['dependencies'] as $key => $value ) {
+			if ( 'wp-escapeHtml' === $value ) {
+				$deps['dependencies'][ $key ] = 'wp-escape-html';
+			}
+		}
 		wp_enqueue_script(
 			'wppic-admin-custom-plugin',
 			Functions::get_plugin_url( 'dist/wppic-admin-custom-plugin.js' ),
