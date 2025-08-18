@@ -1,16 +1,22 @@
 <?php
+/**
+ * Template for the plugin large card.
+ *
+ * @package WP_Plugin_Info_Card
+ */
+
 /***************************************************************
  * $wppic_data Object contain the following values:
  * url, name, slug, version, author, author_profile, contributors, requires, tested, requires, rating, num_ratings, ratings,
  * active_installs, downloaded, last_updated, last_updated_mk, added, homepage, short_description, download_link, donate_link, icons, banners
  ***************************************************************/
 
-// Fix for requiered version with extra info. EG: WP 3.9, BP 2.1+
+// Fix for requiered version with extra info. EG: WP 3.9, BP 2.1+.
 if ( is_numeric( $wppic_data->requires ) ) {
 	$wppic_data->requires = 'WP ' . $wppic_data->requires . '+';
 }
 
-// Icon URL
+// Icon URL.
 if ( ! empty( $wppic_data->icons['svg'] ) ) {
 	$icon = $wppic_data->icons['svg'];
 } elseif ( ! empty( $wppic_data->icons['2x'] ) ) {
@@ -19,17 +25,17 @@ if ( ! empty( $wppic_data->icons['svg'] ) ) {
 	$icon = $wppic_data->icons['1x'];
 }
 
-// Define card image
-// $image is the custom image URL if you provided it
+// Define card image.
+// $image is the custom image URL if you provided it.
 if ( ! empty( $image ) ) {
-	$bgImage = 'style="background-image: url( ' . esc_url( $image ) . ' );"';
+	$background_image = 'style="background-image: url( ' . esc_url( $image ) . ' );"';
 } elseif ( isset( $icon ) ) {
-	$bgImage = 'style="background-image: url(' . esc_url( $icon ) . ' );"';
+	$background_image = 'style="background-image: url(' . esc_url( $icon ) . ' );"';
 } else {
-	$bgImage = 'data="no-image"';
+	$background_image = 'data="no-image"';
 }
 
-// Plugin banner
+// Plugin banner.
 $banner = '';
 if ( ! empty( $wppic_data->banners['low'] ) ) {
 	$banner = '<img src="' . esc_url( $wppic_data->banners['low'] ) . '" alt="' . esc_attr( $wppic_data->name ) . '" />';
@@ -67,7 +73,7 @@ if ( isset( $wppic_data->is_edd ) && $wppic_data->is_edd ) {
 			<span class="wp-pic-asset-bg-title"><span><?php echo esc_html( $wppic_data->name ); ?></span></span>
 		</a>
 		<div class="wp-pic-half-first">
-			<a class="wp-pic-logo" href="<?php echo esc_url( $wppic_data->url ); ?>" <?php echo wp_kses_post( $bgImage ); ?> target="_blank" title="<?php esc_attr_e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ); ?>"></a>
+			<a class="wp-pic-logo" href="<?php echo esc_url( $wppic_data->url ); ?>" <?php echo wp_kses_post( $background_image ); ?> target="_blank" title="<?php esc_attr_e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ); ?>"></a>
 			<p class="wp-pic-author"><?php esc_html_e( 'Author(s):', 'wp-plugin-info-card' ); ?>
 				<?php if ( ! empty( $author_url ) ) : ?>
 					<a href="<?php echo esc_url( $author_url ); ?>"><?php echo esc_html( $wppic_data->author ); ?></a>
