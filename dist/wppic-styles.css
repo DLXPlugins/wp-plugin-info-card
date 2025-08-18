@@ -738,6 +738,7 @@ p.wp-pic-author,
 }
 .wp-pic-ratings .wp-pic-name {
   padding: 0 15px;
+  margin-bottom: 8px;
   text-align: center;
 }
 .wp-pic-ratings .wp-pic-rating-background {
