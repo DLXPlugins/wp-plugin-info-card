@@ -76,7 +76,7 @@ class EDD {
 		if ( ! wp_verify_nonce( $nonce, 'wppic-admin-edd-retrieve-options' ) || ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error(
 				array(
-					'message' => __( 'Could not verify nonce.', 'wp-wppic-comments' ),
+					'message' => __( 'Could not verify nonce.', 'wp-plugin-info-card' ),
 				)
 			);
 		}
@@ -99,7 +99,7 @@ class EDD {
 			'get'    => 'edd',
 			'action' => 'wppic_output_edd',
 			'url'    => Functions::get_settings_url( 'edd' ),
-			'label'  => _x( 'EDD', 'Tab label as Easy digital downloads', 'wp-wppic-comments' ),
+			'label'  => _x( 'EDD', 'Tab label as Easy digital downloads', 'wp-plugin-info-card' ),
 			'icon'   => 'wppic-edd',
 		);
 		return $tabs;

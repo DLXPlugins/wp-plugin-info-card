@@ -13671,9 +13671,6 @@ html {
   width: 100%;
   margin-bottom: 12px;
 }
-.wppic-btn.components-button.btn-full-width:last-child {
-  margin-bottom: 0;
-}
 .wppic-btn.components-button.is-saving {
   display: inline-flex;
   justify-content: center;
@@ -13877,6 +13874,7 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 2em;
 }
 .wppic-admin-buttons.no-flex {
   display: block;

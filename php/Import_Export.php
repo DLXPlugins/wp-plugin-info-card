@@ -178,6 +178,7 @@ class Import_Export {
 		foreach ( $items as $item ) {
 			$slug = $item['slug'];
 			if ( ! self::check_plugin_slug( $slug ) || $slug !== $post->post_name ) {
+				// translators: %s is the plugin slug.
 				$errors[] = sprintf( __( 'Could not find plugin %s', 'wp-plugin-info-card' ), $slug );
 				continue;
 			}
@@ -203,7 +204,8 @@ class Import_Export {
 						$item['pluginIconUrlId'] = $plugin_icon_url_id;
 					} else {
 						$item['pluginIconUrl'] = '';
-						$errors[]              = sprintf( __( 'Error sideloading plugin icon: %s', 'wp-plugin-info-card' ), $plugin_icon_url_id->get_error_message() );
+						// translators: %s is the plugin icon URL.
+						$errors[] = sprintf( __( 'Error sideloading plugin icon: %s', 'wp-plugin-info-card' ), $plugin_icon_url_id->get_error_message() );
 					}
 				}
 
@@ -214,7 +216,8 @@ class Import_Export {
 						$item['pluginBannerUrlId'] = $plugin_banner_url_id;
 					} else {
 						$item['pluginBannerUrl'] = '';
-						$errors[]                = sprintf( __( 'Error sideloading plugin banner: %s', 'wp-plugin-info-card' ), $plugin_banner_url_id->get_error_message() );
+						// translators: %s is the plugin banner URL.
+						$errors[] = sprintf( __( 'Error sideloading plugin banner: %s', 'wp-plugin-info-card' ), $plugin_banner_url_id->get_error_message() );
 					}
 				}
 				update_post_meta( $post_id, 'restApiDataVersion', $remote_plugin_image_version );
@@ -251,6 +254,7 @@ class Import_Export {
 
 			$post_update_status = wp_update_post( $post_item_args );
 			if ( is_wp_error( $post_update_status ) ) {
+				// translators: %s is the error message.
 				$errors[] = sprintf( __( 'Error updating custom plugin: %s', 'wp-plugin-info-card' ), $post_update_status->get_error_message() );
 				continue;
 			}
@@ -525,6 +529,7 @@ class Import_Export {
 		foreach ( $items as $item ) {
 			$slug = $item['slug'];
 			if ( self::check_plugin_slug( $slug ) ) {
+				// translators: %s is the plugin slug.
 				$errors[] = sprintf( __( 'Plugin slug %s already in use', 'wp-plugin-info-card' ), $slug );
 				continue;
 			}
@@ -548,7 +553,8 @@ class Import_Export {
 					$item['pluginIconUrlId'] = $plugin_icon_url_id;
 				} else {
 					$item['pluginIconUrl'] = '';
-					$errors[]              = sprintf( __( 'Error sideloading plugin icon: %s', 'wp-plugin-info-card' ), $plugin_icon_url_id->get_error_message() );
+					// translators: %s is the plugin icon URL.
+					$errors[] = sprintf( __( 'Error sideloading plugin icon: %s', 'wp-plugin-info-card' ), $plugin_icon_url_id->get_error_message() );
 				}
 			}
 
@@ -559,7 +565,8 @@ class Import_Export {
 					$item['pluginBannerUrlId'] = $plugin_banner_url_id;
 				} else {
 					$item['pluginBannerUrl'] = '';
-					$errors[]                = sprintf( __( 'Error sideloading plugin banner: %s', 'wp-plugin-info-card' ), $plugin_banner_url_id->get_error_message() );
+					// translators: %s is the plugin banner URL.
+					$errors[] = sprintf( __( 'Error sideloading plugin banner: %s', 'wp-plugin-info-card' ), $plugin_banner_url_id->get_error_message() );
 				}
 			}
 
@@ -591,6 +598,7 @@ class Import_Export {
 
 			$post_id = wp_insert_post( $post_item_args );
 			if ( is_wp_error( $post_id ) ) {
+				// translators: %s is the error message.
 				$errors[] = sprintf( __( 'Error creating custom plugin: %s', 'wp-plugin-info-card' ), $post_id->get_error_message() );
 				continue;
 			} else {
@@ -660,6 +668,7 @@ class Import_Export {
 		foreach ( $items as $item ) {
 			$slug = $item['slug'];
 			if ( ! self::check_plugin_slug( $slug ) || $slug !== $post->post_name ) {
+				// translators: %s is the plugin slug.
 				$errors[] = sprintf( __( 'Could not find plugin %s', 'wp-plugin-info-card' ), $slug );
 				continue;
 			}
@@ -682,7 +691,8 @@ class Import_Export {
 					$item['pluginIconUrlId'] = $plugin_icon_url_id;
 				} else {
 					$item['pluginIconUrl'] = '';
-					$errors[]              = sprintf( __( 'Error sideloading plugin icon: %s', 'wp-plugin-info-card' ), $plugin_icon_url_id->get_error_message() );
+					// translators: %s is the plugin icon URL.
+					$errors[] = sprintf( __( 'Error sideloading plugin icon: %s', 'wp-plugin-info-card' ), $plugin_icon_url_id->get_error_message() );
 				}
 			}
 
@@ -693,7 +703,8 @@ class Import_Export {
 					$item['pluginBannerUrlId'] = $plugin_banner_url_id;
 				} else {
 					$item['pluginBannerUrl'] = '';
-					$errors[]                = sprintf( __( 'Error sideloading plugin banner: %s', 'wp-plugin-info-card' ), $plugin_banner_url_id->get_error_message() );
+					// translators: %s is the plugin banner URL.
+					$errors[] = sprintf( __( 'Error sideloading plugin banner: %s', 'wp-plugin-info-card' ), $plugin_banner_url_id->get_error_message() );
 				}
 			}
 
@@ -716,14 +727,15 @@ class Import_Export {
 			$item = apply_filters( 'wppic_import_custom_plugin_item', $item );
 
 			$post_item_args = array(
-				'ID'           => $post_id,
-				'post_title'   => sanitize_text_field( $item['name'] ),
-				'post_content' => wp_json_encode( $item ),
+				'ID'            => $post_id,
+				'post_title'    => sanitize_text_field( $item['name'] ),
+				'post_content'  => wp_json_encode( $item ),
 				'post_modified' => gmdate( 'Y-m-d H:i:s', strtotime( $item['lastUpdated'] ) ),
 			);
 
 			$post_update_status = wp_update_post( $post_item_args );
 			if ( is_wp_error( $post_update_status ) ) {
+				// translators: %s is the error message.
 				$errors[] = sprintf( __( 'Error updating custom plugin: %s', 'wp-plugin-info-card' ), $post_update_status->get_error_message() );
 				continue;
 			} else {
@@ -777,6 +789,7 @@ class Import_Export {
 		foreach ( $items as $item ) {
 			$slug = $item['slug'];
 			if ( self::check_plugin_slug( $slug ) ) {
+				// translators: %s is the plugin slug.
 				$errors[] = sprintf( __( 'Plugin slug %s already in use', 'wp-plugin-info-card' ), $slug );
 				continue;
 			}
@@ -800,7 +813,8 @@ class Import_Export {
 					$item['pluginIconUrlId'] = $plugin_icon_url_id;
 				} else {
 					$item['pluginIconUrl'] = '';
-					$errors[]              = sprintf( __( 'Error sideloading plugin icon: %s', 'wp-plugin-info-card' ), $plugin_icon_url_id->get_error_message() );
+					// translators: %s is the plugin icon URL.
+					$errors[] = sprintf( __( 'Error sideloading plugin icon: %s', 'wp-plugin-info-card' ), $plugin_icon_url_id->get_error_message() );
 				}
 			}
 
@@ -811,7 +825,8 @@ class Import_Export {
 					$item['pluginBannerUrlId'] = $plugin_banner_url_id;
 				} else {
 					$item['pluginBannerUrl'] = '';
-					$errors[]                = sprintf( __( 'Error sideloading plugin banner: %s', 'wp-plugin-info-card' ), $plugin_banner_url_id->get_error_message() );
+					// translators: %s is the plugin banner URL.
+					$errors[] = sprintf( __( 'Error sideloading plugin banner: %s', 'wp-plugin-info-card' ), $plugin_banner_url_id->get_error_message() );
 				}
 			}
 
@@ -830,6 +845,7 @@ class Import_Export {
 
 			$post_id = wp_insert_post( $post_item_args );
 			if ( is_wp_error( $post_id ) ) {
+				// translators: %s is the error message.
 				$errors[] = sprintf( __( 'Error creating custom plugin: %s', 'wp-plugin-info-card' ), $post_id->get_error_message() );
 				continue;
 			} else {
@@ -866,10 +882,12 @@ class Import_Export {
 
 		// Start testing.
 		if ( ! $extension ) {
+			// translators: %s is the file extension.
 			return new \WP_Error( 'invalid_url', __( 'File extension not found.', 'wp-plugin-info-card' ), array( 'status' => 400 ) );
 		}
 		$valid_extensions = Functions::get_supported_file_extensions();
 		if ( ! in_array( $extension, $valid_extensions, true ) ) {
+			// translators: %s is the file extension.
 			return new \WP_Error( 'invalid_url', __( 'Invalid file extension.', 'wp-plugin-info-card' ), array( 'status' => 400 ) );
 		}
 

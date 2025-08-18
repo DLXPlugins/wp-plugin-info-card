@@ -439,10 +439,6 @@ html {
 	&.btn-full-width {
 		width: 100%;
 		margin-bottom: 12px;
-
-		&:last-child {
-			margin-bottom: 0;
-		}
 	}
 
 	&.is-saving {
@@ -697,6 +693,7 @@ html {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	gap: 2em;
 
 	&.no-flex {
 		display: block;

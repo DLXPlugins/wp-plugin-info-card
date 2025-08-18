@@ -343,6 +343,38 @@ const PluginHome = ( props ) => {
 								defaultLayouts={ defaultLayouts }
 								searchLabel={ __( 'Search Plugins', 'wp-plugin-info-card' ) }
 								isLoading={ loading }
+								empty={
+									<>
+										<p className="description">
+											{ __( 'No plugins found.', 'wp-plugin-info-card' ) }
+										</p>
+										<div className="wppic-admin-buttons">
+											<Button
+												variant="primary"
+												onClick={ () => {
+													navigate( { to: '/new-plugin' } );
+												} }
+												className="wppic-btn wppic-btn-alt  btn-full-width"
+												iconPosition="right"
+												icon={ () => <Plus /> }
+											>
+												{ __( 'Add New Plugin', 'wp-plugin-info-card' ) }
+											</Button>
+											<Button
+												variant="secondary"
+												onClick={ ( e ) => {
+													e.preventDefault();
+													setShowImportModal( true );
+												} }
+												iconPosition="right"
+												className="wppic-btn wppic-btn-alt has-icon-right btn-full-width"
+												icon={ () => <Download /> }
+											>
+												{ __( 'Import Plugin', 'wp-plugin-info-card' ) }
+											</Button>
+										</div>
+									</>
+								}
 							/>
 						</div>
 					</div>
