@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Tags: cards, card, theme cards, plugin cards, plugin list
 Requires at least: 3.7
 Tested up to: 6.8
-Stable tag: 5.4.1
+Stable tag: 6.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,6 +101,15 @@ This video shows you how:
 11. WordPress layout with themes and 2 columns
 
 == Changelog ==
+
+= 6.0.0 =
+* Released 2025-08-19
+* New feature: Custom Plugin Cards (<a href="https://dlxplugins.com/announcements/wp-plugin-info-card-6-0-released-with-custom-plugin-cards/">read the 6.0.0 annnouncement</a>). Create, import, and export these custom plugins.
+* New feature: New margin controls on the plugin cards for better appearance.
+* New feature: Added transforms to the main card block and the screenshots block.
+* Bug fix: A lot of code cleanup has been done.
+* Bug fix: Font sizes on title cards were too large and had too much padding.
+* Bug fix: Resolved block icons not rendering correctly.
 
 = 5.4.1 =
 * Released 2025-06-02
@@ -485,5 +494,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 5.4.1 =
-Resolving fatal on uninstall. Fixing a few typos in SVG and enqueue code.
+= 6.0.0 =
+New: Custom Plugin Cards! Now you can list third-party plugins alongside Plugin Info Card. New margin controls for the main card block/shortcode. Numerous other enhancements.
