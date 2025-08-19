@@ -27,6 +27,8 @@ const {
 } = wp.components;
 
 import { debounce, useInstanceId } from '@wordpress/compose';
+import { escapeAttribute } from '@wordpress/escape-html';
+import { decodeEntities } from '@wordpress/html-entities';
 
 const {
 	InspectorControls,
@@ -351,7 +353,7 @@ const WP_Plugin_Card_Query = ( props ) => {
 				}
 			}
 
-			const panelBodyTitle = cardData.name + ' (' + ( displayPlugin ? __( 'Enabled', 'wp-plugin-info-card' ) : __( 'Disabled', 'wp-plugin-info-card' ) ) + ')';
+			const panelBodyTitle = escapeAttribute( decodeEntities( cardData.name ) ) + ' (' + ( displayPlugin ? __( 'Enabled', 'wp-plugin-info-card' ) : __( 'Disabled', 'wp-plugin-info-card' ) ) + ')';
 			return (
 				<PanelBody
 					title={ panelBodyTitle }

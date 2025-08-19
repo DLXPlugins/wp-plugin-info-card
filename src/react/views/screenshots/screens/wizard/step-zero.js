@@ -28,7 +28,6 @@ const StepZero
 		setEnablingScreenshots( true );
 		setStatusText( __( 'Enabling Screenshots', 'wp-plugin-info-card' ) );
 		const response = await SendCommand( 'enableScreenshots', { nonce: wppicAdminScreenshots.enableScreenshotsNonce } );
-		console.log( response );
 	};
 
 	return (

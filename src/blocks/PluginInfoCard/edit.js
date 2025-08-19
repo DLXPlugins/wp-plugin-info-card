@@ -7,6 +7,8 @@
  */
 import axios from 'axios';
 import classnames from 'classnames';
+import { escapeAttribute } from '@wordpress/escape-html';
+import { decodeEntities } from '@wordpress/html-entities';
 import PluginFlex from '../templates/PluginFlex';
 import PluginCard from '../templates/PluginCard';
 import PluginLarge from '../templates/PluginLarge';
@@ -76,6 +78,8 @@ const WPPluginInfoCard = ( props ) => {
 	const [ noData, setNoData ] = useState( false );
 	const [ pluginThemeSearchInput, setPluginThemeSearchInput ] = useState( '' );
 	const [ itemSlugs, setItemSlugs ] = useState( attributes.itemSlugs );
+	const [ marginSpacing, setMarginSpacing ] = useState( attributes.marginSpacing );
+	const [ marginSpacingTarget, setMarginSpacingTarget ] = useState( attributes.marginSpacingTarget );
 
 	useEffect( () => {
 		setAttributes( { uniqueId: generatedUniqueId } );
@@ -261,7 +265,7 @@ const WPPluginInfoCard = ( props ) => {
 			}
 			return (
 				<PanelBody
-					title={ cardData.name }
+					title={ escapeAttribute( decodeEntities( cardData.name ) ) }
 					key={ key }
 					initialOpen={ false }
 				>
@@ -373,6 +377,20 @@ const WPPluginInfoCard = ( props ) => {
 		{ value: 'flex', label: __( 'Flex', 'wp-plugin-info-card' ) },
 	];
 
+	const marginSpacingOptions = [
+		{ value: 'none', label: __( 'None', 'wp-plugin-info-card' ) },
+		{ value: 'compact', label: __( 'Compact', 'wp-plugin-info-card' ) },
+		{ value: 'comfortable', label: __( 'Comfortable', 'wp-plugin-info-card' ) },
+		{ value: 'spacious', label: __( 'Spacious', 'wp-plugin-info-card' ) },
+		{ value: 'extreme', label: __( 'Extreme', 'wp-plugin-info-card' ) },
+	];
+
+	const marginSpacingTargetOptions = [
+		{ value: 'both', label: __( 'Both', 'wp-plugin-info-card' ) },
+		{ value: 'top', label: __( 'Top', 'wp-plugin-info-card' ) },
+		{ value: 'bottom', label: __( 'Bottom', 'wp-plugin-info-card' ) },
+	];
+
 	const layoutClass = 'card' === layout ? 'wp-pic-card' : layout;
 	const previewLoadingClass = cardLoading ? 'wp-pic-spin' : '';
 
@@ -445,64 +463,10 @@ const WPPluginInfoCard = ( props ) => {
 				) }
 			</PanelBody>
 			<PanelBody
-				title={ __( 'Options', 'wp-plugin-info-card' ) }
-				initialOpen={ false }
+				title={ __( 'Appearance', 'wp-plugin-info-card' ) }
+				initialOpen={ true }
 			>
-				<PanelRow>
-					<MediaUpload
-						onSelect={ ( imageObject ) => {
-							setAttributes( { image: imageObject.url } );
-							setImage( imageObject.url );
-						} }
-						type="image"
-						value={ image }
-						render={ ( { open } ) => (
-							<Fragment>
-								<button
-									className="components-button is-button"
-									onClick={ open }
-								>
-									{ __(
-										'Upload Image!',
-										'wp-plugin-info-card',
-									) }
-								</button>
-								{ image && (
-									<Fragment>
-										<div>
-											<img
-												src={ image }
-												alt={ __(
-													'Plugin Card Image',
-													'wp-plugin-info-card',
-												) }
-												width="250"
-												height="250"
-											/>
-										</div>
-										<div>
-											<button
-												className="components-button is-button"
-												onClick={ ( event ) => {
-													setAttributes( {
-														image: '',
-													} );
-													setImage( '' );
-												} }
-											>
-												{ __(
-													'Reset Image',
-													'wp-plugin-info-card',
-												) }
-											</button>
-										</div>
-									</Fragment>
-								) }
-							</Fragment>
-						) }
-					/>
-				</PanelRow>
-				<PanelRow>
+				<div className="wppic-block-sidebar-row">
 					<TextControl
 						label={ __( 'Container ID', 'wp-plugin-info-card' ) }
 						type="text"
@@ -512,7 +476,27 @@ const WPPluginInfoCard = ( props ) => {
 							setContainerid( value );
 						} }
 					/>
-				</PanelRow>
+				</div>
+				<div className="wppic-block-sidebar-row">
+					<SelectControl
+						label={ __( 'Margin Spacing', 'wp-plugin-info-card' ) }
+						options={ marginSpacingOptions }
+						value={ marginSpacing }
+						onChange={ ( value ) => {
+							setAttributes( { marginSpacing: value } );
+							setMarginSpacing( value );
+						} }
+					/>
+					<SelectControl
+						label={ __( 'Margin Target', 'wp-plugin-info-card' ) }
+						options={ marginSpacingTargetOptions }
+						value={ marginSpacingTarget }
+						onChange={ ( value ) => {
+							setAttributes( { marginSpacingTarget: value } );
+							setMarginSpacingTarget( value );
+						} }
+					/>
+				</div>
 			</PanelBody>
 			{ outputSlugs( data, itemSlugs ) }
 		</InspectorControls>
@@ -527,7 +511,7 @@ const WPPluginInfoCard = ( props ) => {
 	`;
 
 	const blockProps = useBlockProps( {
-		className: classnames( `wp-plugin-info-card align${ align }` ),
+		className: classnames( `wp-plugin-info-card align${ align }`, `wppic-margin-spacing-${ marginSpacing }`, `wppic-margin-spacing-target-${ marginSpacingTarget }` ),
 	} );
 
 	if ( preview ) {

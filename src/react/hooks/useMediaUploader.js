@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { __ } from '@wordpress/i18n';
 const getCropSettings = ( overrides = {} ) => {
 	// Set the settings for the media uploader and cropper.
@@ -33,14 +32,11 @@ const getCropControl = ( overrides = {} ) => {
 };
 
 const useMediaUploader = ( props ) => {
-
-	const [ cropDefaults, setCropDefaults ] = useState( {} );
-
 	/**
 	 * Retrieve crop options for an attachment.
 	 *
-	 * @param {Object} attachment Attachment image object.
-	 * @param {Object} controller Media controller object.
+	 * @param {Object} attachment   Attachment image object.
+	 * @param {Object} controller   Media controller object.
 	 * @param {Object} cropSettings Crop settings.
 	 *
 	 * @return {Object} Cropping options.
@@ -103,15 +99,21 @@ const useMediaUploader = ( props ) => {
 
 		let cropWidthX2 = 0;
 		let cropHeightY2 = 0;
-		if ( xInit + x1 > realWidth ) {
+		if ( xInit + x1 >= realWidth ) {
 			cropWidthX2 = xInit - 1;
 		} else {
 			cropWidthX2 = xInit + x1;
 		}
-		if ( yInit + y1 > realHeight ) {
+		if ( yInit + y1 >= realHeight ) {
 			cropHeightY2 = yInit - 1;
 		} else {
 			cropHeightY2 = yInit + y1;
+		}
+		if ( x1 > realWidth ) {
+			x1 = 0;
+		}
+		if ( y1 > realHeight ) {
+			y1 = 0;
 		}
 
 		const imgSelectOptions = {
@@ -131,7 +133,6 @@ const useMediaUploader = ( props ) => {
 	};
 	return {
 		openMediaUploader: ( cropSettings, callback ) => {
-			setCropDefaults( cropSettings );
 			const settings = getCropSettings( cropSettings );
 			const cropControl = getCropControl( cropSettings );
 			const uploader = wp.media( {
@@ -159,7 +160,7 @@ const useMediaUploader = ( props ) => {
 					const options = {};
 					options.items = {};
 					options.items.select = {
-						text: __( 'Save Image', 'wp-plugin-info-card' ),
+						text: settings.buttonLabel,
 						style: 'primary',
 						click: wp.media.view.Toolbar.Select.prototype.clickSelect,
 						requires: { selection: true },
@@ -171,7 +172,7 @@ const useMediaUploader = ( props ) => {
 					};
 					this.createSelectToolbar( toolbar, options );
 				},
-				uploader
+				uploader,
 			);
 
 			//For when the Add Profile Image is clicked

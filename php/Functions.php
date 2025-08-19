@@ -155,8 +155,32 @@ class Functions {
 			foreach ( $all_plugins_with_info as $plugin_file => $plugin_data ) {
 				if ( isset( $plugin_data['id'] ) && strstr( $plugin_data['id'], 'w.org' ) ) {
 					$plugins_on_org[ $plugin_file ] = $plugin_data;
+					$plugins_on_org[ $plugin_file ]['name'] = $plugin_data['Name'];
 				}
 			}
+
+			// Strip out local org plugins from active plugins.
+			$remaining_active_plugins = array_diff( array_keys( $active_plugins ), array_keys( $plugins_on_org ) );
+
+			// Check local post type for plugins and add them if available.
+			if ( (bool) Options::get_options( 'enable_custom_plugins' ) && ! empty( $remaining_active_plugins ) ) {
+				foreach ( $remaining_active_plugins as $plugin_file ) {
+					$plugin_slug = basename( $plugin_file, '.php' );
+					$plugin_post = get_page_by_path( $plugin_slug, OBJECT, 'wppic_custom_plugins' );
+					if ( $plugin_post && isset( $active_plugins[ $plugin_file ] ) ) {
+						$plugins_on_org[ $plugin_file ] = json_decode( wp_json_encode( wppic_api_parser( 'plugin', sanitize_title( $plugin_post->post_name ) ) ), true );
+					}
+				}
+			}
+
+			// Sort plugins by name.
+			usort(
+				$plugins_on_org,
+				function ( $a, $b ) {
+					return strcmp( $a['name'], $b['name'] );
+				}
+			);
+			$plugins_on_org = array_values( $plugins_on_org );
 
 			// Cache results.
 			wp_cache_set( 'plugins_on_org', $plugins_on_org, 'wppic' );

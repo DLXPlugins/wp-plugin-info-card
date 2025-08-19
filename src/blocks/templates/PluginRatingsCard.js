@@ -45,6 +45,11 @@ const PluginRatingsCard = ( props ) => {
 		backgroundRepeat: 'no-repeat',
 		backgroundSize: 'cover',
 	};
+
+	let downloadLabel = __( 'Download', 'wp-plugin-info-card' );
+	if ( props.data.is_edd ) {
+		downloadLabel = __( 'More Details', 'wp-plugin-info-card' );
+	}
 	const htmlToReactParser = new HtmlToReactParser();
 
 	return (
@@ -100,9 +105,7 @@ const PluginRatingsCard = ( props ) => {
 								</div>
 							</div>
 							<div className="wp-pic-download">
-								<span>
-									{ __( 'Download', 'wp-plugin-info-card' ) }
-								</span>
+								<span>{ downloadLabel }</span>
 							</div>
 						</div>
 					</div>

@@ -28,6 +28,12 @@ const PluginWordPress = ( props ) => {
 	} else {
 		requires = props.data.tested;
 	}
+
+	let downloadLabel = __( 'Download', 'wp-plugin-info-card' );
+	if ( props.data.is_edd ) {
+		downloadLabel = __( 'More Details', 'wp-plugin-info-card' );
+	}
+
 	const htmlToReactParser = new HtmlToReactParser();
 	return (
 		<div className={ wrapperClasses }>
@@ -46,7 +52,7 @@ const PluginWordPress = ( props ) => {
 							</div>
 							<div className="wp-pic-action-links">
 								<span className="wp-pic-action-buttons">
-									{ __( 'Download', 'wp-plugin-info-card' ) }
+									{ downloadLabel }
 								</span>
 							</div>
 							<div className="wp-pic-column-description">

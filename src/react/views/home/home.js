@@ -29,12 +29,14 @@ import {
 	ClipboardCheck,
 	Plug2,
 	Paintbrush2,
+	Globe,
 } from 'lucide-react';
-import ErrorBoundary from '../../components/ErrorBoundary';
 import SendCommand from '../../utils/SendCommand';
 import Notice from '../../components/Notice';
 import SnackPop from '../../components/SnackPop';
 import usePluginPreview from '../../hooks/usePluginPreview';
+import CacheButton from '../../components/CacheButton';
+import CacheOptionsButton from '../../components/CacheOptionsButton.js';
 
 const OrgAsset = ( { type, slug, index, moveCallback, removeCallback } ) => {
 	const ref = useRef( null );
@@ -367,144 +369,6 @@ const AddTheme = ( props ) => {
 	);
 };
 
-const CacheOptionsButton = ( props ) => {
-	const [ clearing, setClearing ] = useState( false );
-	const [ isCleared, setIsCleared ] = useState( false );
-	const [ clearPromise, setClearPromise ] = useState( null );
-
-	const getCacheText = () => {
-		if ( clearing ) {
-			return __( 'Clearing…', 'wp-plugin-info-card' );
-		}
-		if ( isCleared ) {
-			return __( 'Cache Cleared', 'wp-plugin-info-card' );
-		}
-		return __( 'Clear Options Cache', 'wp-plugin-info-card' );
-	};
-
-	const clearCache = async () => {
-		const clearOptionsPromise = SendCommand( 'wppic_clear_cache_options', { nonce: wppicAdminHome.clearCacheNonce } );
-		setClearPromise( clearOptionsPromise );
-		setClearing( true );
-		await clearOptionsPromise;
-		setClearing( false );
-	};
-
-	const getCacheIcon = () => {
-		if ( clearing ) {
-			return () => <Loader2 />;
-		}
-		if ( isCleared ) {
-			return () => <ClipboardCheck />;
-		}
-		return <Database />;
-	};
-
-	return (
-		<>
-			<Button
-				variant="primary"
-				onClick={ () => {
-					clearCache();
-				} }
-				icon={ getCacheIcon() }
-				iconSize="18"
-				iconPosition="right"
-				disabled={ clearing }
-				className={
-					classNames( 'wppic-btn wppic-btn-cache has-icon-right', {
-						'is-saving': clearing && ! isCleared,
-						'is-saved': isCleared,
-					} ) }
-				label={ getCacheText() }
-			>
-				{ getCacheText() }
-			</Button>
-			<SnackPop
-				ajaxOptions={ clearPromise }
-				loadingMessage={ __( 'Clearing Cache…', 'wp-plugin-info-card' ) }
-			/>
-		</>
-	);
-};
-
-const CacheButton = ( props ) => {
-	const [ clearing, setClearing ] = useState( false );
-	const [ isCleared, setIsCleared ] = useState( false );
-	const [ clearPromise, setClearPromise ] = useState( null );
-
-	const getCacheText = () => {
-		if ( clearing ) {
-			return __( 'Clearing…', 'wp-plugin-info-card' );
-		}
-		if ( isCleared ) {
-			return __( 'Cache Cleared', 'wp-plugin-info-card' );
-		}
-		return __( 'Clear Cache', 'wp-plugin-info-card' );
-	};
-
-	const clearCache = async () => {
-		const clearOptionsPromise = SendCommand( 'wppic_clear_cache', { nonce: wppicAdminHome.clearCacheNonce } );
-		setClearPromise( clearOptionsPromise );
-		setClearing( true );
-		await clearOptionsPromise;
-		setClearing( false );
-	};
-
-	const getCacheIcon = () => {
-		if ( clearing ) {
-			return () => <Loader2 />;
-		}
-		if ( isCleared ) {
-			return () => <ClipboardCheck />;
-		}
-		return <Database />;
-	};
-
-	return (
-		<>
-			<Button
-				variant="primary"
-				onClick={ () => {
-					clearCache();
-				} }
-				icon={ getCacheIcon() }
-				iconSize="18"
-				iconPosition="right"
-				disabled={ clearing }
-				className={
-					classNames( 'wppic-btn wppic-btn-cache has-icon-right', {
-						'is-saving': clearing && ! isCleared,
-						'is-saved': isCleared,
-					} ) }
-				label={ getCacheText() }
-			>
-				{ getCacheText() }
-			</Button>
-			<SnackPop
-				ajaxOptions={ clearPromise }
-				loadingMessage={ __( 'Clearing Cache…', 'wp-plugin-info-card' ) }
-			/>
-		</>
-	);
-};
-
-const retrieveHomeOptions = async () => {
-	// Retrieve from server.
-	const response = await SendCommand( 'wppic_get_home_options', {
-		nonce: wppicAdminHome.getNonce,
-	} );
-	const { success, data } = response.data;
-	if ( success ) {
-		// Save to local storage.
-		localStorage.setItem( 'wppic_home_options', JSON.stringify( data ) );
-		localStorage.setItem( 'wppic_home_options_timestamp', new Date().getTime().toString() );
-
-		return response;
-	}
-	return {};
-};
-
 const HomeScreen = ( props ) => {
 	const [ homeOptions, setHomeOptions ] = useState( null );
 
@@ -517,8 +381,8 @@ const HomeScreen = ( props ) => {
 		const cachedTimestamp = localStorage.getItem( 'wppic_home_options_timestamp' );
 
 		if ( cachedOptions && cachedTimestamp ) {
-			// Do verison check.
-			const currentVersion = wppicAdmin.pluginVersion;
+			// Do version check.
+			const currentVersion = window?.wppicAdmin?.pluginVersion;
 			const cachedJson = JSON.parse( cachedOptions );
 			const cachedVersion = cachedJson.version;
 			if ( currentVersion !== cachedVersion ) {
@@ -538,7 +402,6 @@ const HomeScreen = ( props ) => {
 				nonce: wppicAdminHome.getNonce,
 			} );
 			const { success, data } = response.data;
-			console.log( response );
 			if ( success ) {
 				// Save to local storage.
 				localStorage.setItem( 'wppic_home_options', JSON.stringify( data ) );
@@ -582,12 +445,15 @@ const Interface = ( props ) => {
 			widget: data.widget,
 			ajax: data.ajax,
 			enqueue: data.enqueue,
-			credit: DataTransferItem.credit,
+			credit: data.credit,
 			cache_expiration: data.cache_expiration,
 			list: data.list ?? [],
 			'theme-list': data[ 'theme-list' ] ?? [],
+			enable_rest_api: data.enable_rest_api ?? false,
+			restrict_rest_api: data.restrict_rest_api ?? false,
 			saveNonce: wppicAdminHome.saveNonce,
 			resetNonce: wppicAdminHome.resetNonce,
+			restEndpointEnabled: wppicAdminHome?.restEndpointEnabled ?? false,
 		},
 	} );
 	const formValues = useWatch( { control } );
@@ -680,11 +546,9 @@ const Interface = ( props ) => {
 	}, [] );
 
 	/**
-	 * Placeholder for submit event.
-	 *
-	 * @param {Object} formData contains the form data.
+	 * Handle form submission.
 	 */
-	const onSubmit = ( formData ) => {
+	const onSubmit = () => {
 		// Update local storage by clearing it.
 		localStorage.removeItem( 'wppic_home_options' );
 		localStorage.removeItem( 'wppic_home_options_timestamp' );
@@ -839,7 +703,7 @@ const Interface = ( props ) => {
 																			'wp-plugin-info-card',
 																		),
 																		value: 'ratings',
-																	}
+																	},
 																] }
 																onChange={ onChange }
 															/>
@@ -1162,8 +1026,8 @@ const Interface = ( props ) => {
 									isDirty={ isDirty }
 									dirtyFields={ dirtyFields }
 									trigger={ trigger }
-									onSave={ ( values ) => {
-										onSubmit( values );
+									onSave={ () => {
+										onSubmit();
 									} }
 								/>
 							</form>
@@ -1182,14 +1046,14 @@ const Interface = ( props ) => {
 								'wp-plugin-info-card',
 							) }
 						</p>
-						<CacheButton />
+						<CacheButton nonce={ wppicAdminHome.clearCacheNonce } />
 						<p>
 							{ __(
 								'WP Plugin Info Card stores plugin and theme data as options in case the transient cache fails to update or errors out. You can remove these options by clicking the button below.',
 								'wp-plugin-info-card',
 							) }
 						</p>
-						<CacheOptionsButton />
+						<CacheOptionsButton nonce={ wppicAdminHome.clearCacheNonce } />
 					</div>
 					<div className="wppic-admin-panel-sidebar-card">
 						<h3>
@@ -1230,4 +1094,5 @@ const Interface = ( props ) => {
 		</>
 	);
 };
+
 export default HomeScreen;

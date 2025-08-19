@@ -271,6 +271,16 @@ class Blocks {
 				'screenshot_preset_save_nonce'   => wp_create_nonce( 'wppic_screenshot_preset_save' ),
 				'screenshot_preset_delete_nonce' => wp_create_nonce( 'wppic_screenshot_preset_delete' ),
 				'can_edit_others_posts'          => current_user_can( 'edit_others_posts' ),
+				'can_manage_options'             => current_user_can( 'manage_options' ),
+			)
+		);
+
+		wp_localize_script(
+			'wp-plugin-info-card-block-js',
+			'wppicAdminCustomPlugin',
+			array(
+				'importPluginRestUrl' => get_rest_url( null, 'wppic/v1/custom-plugins/import-from-rest' ),
+				'restNonce'           => wp_create_nonce( 'wp_rest' ),
 			)
 		);
 
@@ -287,7 +297,7 @@ class Blocks {
 		$render_callbacks = array(
 			'wp-plugin-info-card/wp-plugin-info-card'   => array( $this, 'info_card_render' ),
 			'wp-plugin-info-card/wp-plugin-info-card-query' => array( $this, 'info_card_query_render' ),
-			'wp-plugin-info-card/site-plugin-card-grid' => array( $this, 'site_plugin_card_grid_render' ),
+			'wp-plugin-info-card/site-plugins-card-grid' => array( $this, 'site_plugin_card_grid_render' ),
 			'wp-plugin-info-card/plugin-screenshots-info-card' => array( $this, 'site_plugin_screenshots' ),
 		);
 
@@ -304,7 +314,7 @@ class Blocks {
 		);
 
 		if ( function_exists( 'wp_register_block_types_from_metadata_collection' ) ) {
-			wp_register_block_types_from_metadata_collection( Functions::get_plugin_dir( 'build' ), Functions::get_plugin_dir( 'build/blocks-manifest.php' ) );
+			wp_register_block_types_from_metadata_collection( Functions::get_plugin_dir( 'build/blocks' ), Functions::get_plugin_dir( 'build/blocks-manifest.php' ) );
 			return;
 		} else {
 			if ( function_exists( 'wp_register_block_metadata_collection' ) ) {
@@ -312,7 +322,7 @@ class Blocks {
 			}
 			$manifest_data = require Functions::get_plugin_dir( 'build/blocks-manifest.php' );
 			foreach ( array_keys( $manifest_data ) as $block_type ) {
-				register_block_type( __DIR__ . "/build/{$block_type}" );
+				register_block_type( __DIR__ . "/build/blocks/{$block_type}" );
 			}
 		}
 	}
@@ -424,6 +434,8 @@ class Blocks {
 			'col_gap'     => $attributes['colGap'],
 			'row_gap'     => $attributes['rowGap'],
 			'itemSlugs'   => $attributes['itemSlugs'],
+			'marginSpacing' => $attributes['marginSpacing'],
+			'marginSpacingTarget' => $attributes['marginSpacingTarget'],
 		);
 
 		$html = '';

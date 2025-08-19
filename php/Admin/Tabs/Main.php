@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Output home wppic tab.
  *
@@ -71,7 +70,7 @@ class Main {
 		if ( ! wp_verify_nonce( $nonce, 'wppic-admin-home-retrieve-options' ) || ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error(
 				array(
-					'message' => __( 'Could not verify nonce.', 'wp-wppic-comments' ),
+					'message' => __( 'Could not verify nonce.', 'wp-plugin-info-card' ),
 				)
 			);
 		}
@@ -94,7 +93,7 @@ class Main {
 			'get'    => 'home',
 			'action' => 'wppic_output_home',
 			'url'    => Functions::get_settings_url( 'home' ),
-			'label'  => _x( 'Home', 'Tab label as Home', 'wp-wppic-comments' ),
+			'label'  => _x( 'Home', 'Tab label as Home', 'wp-plugin-info-card' ),
 			'icon'   => 'wppic-flaticon-home',
 		);
 		return $tabs;

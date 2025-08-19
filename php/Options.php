@@ -58,6 +58,8 @@ class Options {
 				case 'enqueue':
 				case 'credit':
 				case 'enable_edd':
+				case 'enable_rest_api':
+				case 'enable_custom_plugins':
 					$option = filter_var( $options[ $key ], FILTER_VALIDATE_BOOLEAN );
 					break;
 				default:
@@ -130,6 +132,7 @@ class Options {
 			'enqueue'                                   => false,
 			'credit'                                    => false,
 			'cache_expiration'                          => 3600,
+			'ping_rest_api_interval'                    => 14, /* days */
 			'enable_screenshots'                        => true,
 			'enable_local_screenshots'                  => false,
 			'skip_animated_gifs'                        => true,
@@ -142,6 +145,8 @@ class Options {
 			'edd_default_banner_id'                     => 0,
 			'edd_default_icon_url'                      => '',
 			'edd_default_banner_url'                    => '',
+			'enable_rest_api'                           => false,
+			'enable_custom_plugins'                     => true,
 		);
 		return $defaults;
 	}

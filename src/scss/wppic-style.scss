@@ -8,6 +8,41 @@
  	text-align: center;
 	clear: both;
 }
+.wp-pic {
+	font-size: 16px;
+}
+.wppic-margin-spacing-compact {
+	margin-top: 16px;
+	margin-bottom: 16px;
+	margin-block-start: 16px !important;
+	margin-block-end: 16px !important;
+}
+.wppic-margin-spacing-comfortable {
+	margin-top: 32px;
+	margin-bottom: 32px;
+	margin-block-start: 32px !important;
+	margin-block-end: 32px !important;
+}
+.wppic-margin-spacing-spacious {
+	margin-top: 48px;
+	margin-bottom: 48px;
+	margin-block-start: 48px !important;
+	margin-block-end: 48px !important;
+}
+.wppic-margin-spacing-extreme {
+	margin-top: 64px;
+	margin-bottom: 64px;
+	margin-block-start: 64px !important;
+	margin-block-end: 64px !important;
+}
+.wppic-margin-spacing-target-top {
+	margin-bottom: 0;
+	margin-block-end: 0 !important;
+}
+.wppic-margin-spacing-target-bottom {
+	margin-top: 0;
+	margin-block-start: 0 !important;
+}
 .wp-pic * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -73,10 +108,10 @@
 p.wp-pic-author,
 .editor-styles-wrapper p.wp-pic-author {
 	vertical-align: baseline;
-	font-size: 13px;
+	font-size: 0.9em;
 	display: block;
 	padding: 0;
-	margin: 0 !important;
+	margin: 8px 0 0 0 !important;
 	line-height: 18px;
 	color: #79808a;
 }
@@ -87,7 +122,7 @@ p.wp-pic-author,
 	height: 125px;
 	display: inline-block;
 	overflow: hidden;
-	margin: 35px 0 0;
+	margin: 35px 0 8px 0;
 	-webkit-border-radius: 50% 50%;
 	border-radius: 50% 50%;
 	background-image: url(../assets/img/wp-pic-sprite.png);
@@ -106,6 +141,12 @@ p.wp-pic-author,
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 35px;
+
+	img {
+		max-width: 100%;
+		height: auto;
+		object-fit: cover;
+	}
 }
 .wp-pic:not(.plugin) a.wp-pic-logo:not([data="no-image"]) {
 	width: 100%;
@@ -390,9 +431,9 @@ p.wp-pic-author,
 }
 .wp-pic-card.wp-pic .wp-pic-front .wp-pic-name{
 	width: 280px;
-	font-size: 18px;
+	font-size: 1.3em;
 	padding: 0 12px;
-	line-height: 22px;
+	line-height: 1.35;
 	height: 48px;
 	vertical-align: middle;
 	display: table-cell;
@@ -472,7 +513,7 @@ p.wp-pic-author,
 		flex: 1;
 	}
 	.wp-pic-name {
-		font-size: 1.15rem;
+		font-size: 1.15em;
 		line-height: 1.35;
 	}
 	.wp-pic-bar {
@@ -533,6 +574,7 @@ p.wp-pic-author,
 	}
 	.wp-pic-name {
 		padding: 0 15px;
+		margin-bottom: 8px;
 		text-align: center;
 	}
 	.wp-pic-rating-background {
