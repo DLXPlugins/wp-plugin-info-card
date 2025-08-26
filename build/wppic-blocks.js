@@ -16070,7 +16070,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/escape-html */ "@wordpress/escape-html");
@@ -16091,6 +16091,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
 /* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_14__);
 /* harmony import */ var _components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/GitHubIcons */ "./src/blocks/components/GitHubIcons.js");
+/* harmony import */ var _wordpress_date__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @wordpress/date */ "@wordpress/date");
+/* harmony import */ var _wordpress_date__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_wordpress_date__WEBPACK_IMPORTED_MODULE_16__);
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(a, b) { var c = Object.keys(a); if (Object.getOwnPropertySymbols) { var d = Object.getOwnPropertySymbols(a); b && (d = d.filter(function (b) { return Object.getOwnPropertyDescriptor(a, b).enumerable; })), c.push.apply(c, d); } return c; }
 function _objectSpread(a) { for (var b = 1; b < arguments.length; b++) { var c = null != arguments[b] ? arguments[b] : {}; b % 2 ? ownKeys(Object(c), !0).forEach(function (b) { _defineProperty(a, b, c[b]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(a, Object.getOwnPropertyDescriptors(c)) : ownKeys(Object(c)).forEach(function (b) { Object.defineProperty(a, b, Object.getOwnPropertyDescriptor(c, b)); }); } return a; }
@@ -16131,6 +16133,7 @@ var _wp$element = wp.element,
   Fragment = _wp$element.Fragment,
   useEffect = _wp$element.useEffect,
   useState = _wp$element.useState;
+
 var __ = wp.i18n.__;
 var _wp$components = wp.components,
   PanelBody = _wp$components.PanelBody,
@@ -16194,7 +16197,7 @@ var _GitHubInfoCard = function b(a) {
     v(true);
     r(false);
     var b = wppic.rest_url + 'wppic/v2/get_github_data';
-    axios__WEBPACK_IMPORTED_MODULE_16__["default"].get(b + "?username=".concat(g, "&repo=").concat(i)).then(function (a) {
+    axios__WEBPACK_IMPORTED_MODULE_17__["default"].get(b + "?username=".concat(g, "&repo=").concat(i)).then(function (a) {
       console.log(a);
       if (a.data.success) {
         // Now Set State
@@ -16302,10 +16305,13 @@ var _GitHubInfoCard = function b(a) {
       }));
     });
   };
-  var H = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
+  var H = function b(a) {
+    return (0,_wordpress_date__WEBPACK_IMPORTED_MODULE_16__.dateI18n)('F j, Y', a);
+  };
+  var I = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Layout', 'wp-plugin-info-card')
   }, "hi"));
-  var I = useBlockProps({
+  var J = useBlockProps({
     className: classnames__WEBPACK_IMPORTED_MODULE_0___default()("wppic-github-info-card align".concat(j))
   });
   if (h) {
@@ -16323,7 +16329,7 @@ var _GitHubInfoCard = function b(a) {
     }));
   }
   if (u) {
-    return /*#__PURE__*/React.createElement("div", I, /*#__PURE__*/React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", J, /*#__PURE__*/React.createElement("div", {
       className: "wppic-loading-placeholder"
     }, /*#__PURE__*/React.createElement("div", {
       className: "wppic-loading"
@@ -16333,7 +16339,7 @@ var _GitHubInfoCard = function b(a) {
       className: "wppic-spinner"
     }, /*#__PURE__*/React.createElement(Spinner, null)))));
   }
-  var J = /*#__PURE__*/React.createElement(Fragment, null, y && /*#__PURE__*/React.createElement("div", {
+  var K = /*#__PURE__*/React.createElement(Fragment, null, y && /*#__PURE__*/React.createElement("div", {
     className: "wppic-query-block wppic-query-block-panel"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-block-svg"
@@ -16426,7 +16432,7 @@ var _GitHubInfoCard = function b(a) {
     size: "45"
   }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
     className: "wppic-spinner"
-  }, /*#__PURE__*/React.createElement(Spinner, null))))), !y && !u && /*#__PURE__*/React.createElement(Fragment, null, H, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
+  }, /*#__PURE__*/React.createElement(Spinner, null))))), !y && !u && /*#__PURE__*/React.createElement(Fragment, null, I, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
     icon: "edit",
     title: __('Edit and Configure', 'wp-plugin-info-card'),
     onClick: function a() {
@@ -16560,8 +16566,25 @@ var _GitHubInfoCard = function b(a) {
     height: 20
   })), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item-text"
-  }, f.latest_release_tag_name)))))));
-  return /*#__PURE__*/React.createElement("div", I, J);
+  }, f.latest_release_tag_name))), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-description"
+  }, f.description), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-buttons"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-buttons-left"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-last-updated"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "wppic-github-info-card-last-updated-label"
+  }, __('Last updated:', 'wp-plugin-info-card')), " ", H(f.updated_at))), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-buttons-right"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-buttons-right-button"
+  }, /*#__PURE__*/React.createElement(Button, {
+    className: "wppic-github-button button-reset",
+    variant: "link"
+  }, __('View on GitHub', 'wp-plugin-info-card')))))))));
+  return /*#__PURE__*/React.createElement("div", J, K);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_GitHubInfoCard);
 
@@ -24102,6 +24125,17 @@ module.exports = window["wp"]["compose"];
 
 "use strict";
 module.exports = window["wp"]["data"];
+
+/***/ }),
+
+/***/ "@wordpress/date":
+/*!******************************!*\
+  !*** external ["wp","date"] ***!
+  \******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["date"];
 
 /***/ }),
 

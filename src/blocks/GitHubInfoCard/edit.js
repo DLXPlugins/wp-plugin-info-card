@@ -23,6 +23,7 @@ import Logo from '../Logo';
 import { isURL } from '@wordpress/url';
 import { ForkIcon, HomeIcon, GitHubIcon, HeartIcon, StarIcon, EyeIcon, CodeIcon } from '../components/GitHubIcons';
 const { Fragment, useEffect, useState } = wp.element;
+import { dateI18n } from '@wordpress/date';
 
 const { __ } = wp.i18n;
 
@@ -220,6 +221,9 @@ const GitHubInfoCard = ( props ) => {
 				</Fragment>
 			);
 		} );
+	};
+	const getDateFromDateTime = ( dateTime ) => {
+		return dateI18n( 'F j, Y', dateTime );
 	};
 	const inspectorControls = (
 		<InspectorControls>
@@ -546,6 +550,26 @@ const GitHubInfoCard = ( props ) => {
 									</div>
 									<div className="wppic-github-info-card-meta-item-text">
 										{ assetData.latest_release_tag_name }
+									</div>
+								</div>
+							</div>
+							<div className="wppic-github-info-card-description">
+								{ assetData.description }
+							</div>
+							<div className="wppic-github-info-card-buttons">
+								<div className="wppic-github-info-card-buttons-left">
+									<div className="wppic-github-info-card-last-updated">
+										<span className="wppic-github-info-card-last-updated-label">{ __( 'Last updated:', 'wp-plugin-info-card' ) }</span> { getDateFromDateTime( assetData.updated_at ) }
+									</div>
+								</div>
+								<div className="wppic-github-info-card-buttons-right">
+									<div className="wppic-github-info-card-buttons-right-button">
+										<Button
+											className="wppic-github-button button-reset"
+											variant="link"
+										>
+											{ __( 'View on GitHub', 'wp-plugin-info-card' ) }
+										</Button>
 									</div>
 								</div>
 							</div>

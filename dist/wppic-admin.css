@@ -13275,6 +13275,7 @@ button.button-reset.components-button, button.button-reset.components-button:foc
   color: inherit;
   border: none;
   padding: 0;
+  margin: 0;
   cursor: pointer;
   outline: inherit;
   text-transform: unset;
@@ -13294,6 +13295,7 @@ button.button-reset.show-cursor {
   color: inherit;
   border: none;
   padding: 0;
+  margin: 0;
   cursor: pointer;
   outline: inherit;
   text-transform: unset;
