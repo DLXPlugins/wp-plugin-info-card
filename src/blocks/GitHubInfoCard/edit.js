@@ -20,9 +20,8 @@ import ThemeLarge from '../templates/ThemeLarge';
 import ThemeCard from '../templates/ThemeCard';
 import ThemesRatingCard from '../templates/ThemeRatingsCard';
 import Logo from '../Logo';
-import NumbersComponent from '../components/Numbers';
 import { isURL } from '@wordpress/url';
-import { useCallback } from 'react';
+import { ForkIcon, HomeIcon, GitHubIcon, HeartIcon, StarIcon, EyeIcon, CodeIcon } from '../components/GitHubIcons';
 const { Fragment, useEffect, useState } = wp.element;
 
 const { __ } = wp.i18n;
@@ -486,6 +485,67 @@ const GitHubInfoCard = ( props ) => {
 									</div>
 									<div className="wppic-github-info-card-header-license">
 										{ assetData.license }
+									</div>
+								</div>
+								<div className="wppic-github-info-card-header-right">
+									<div className="wppic-github-info-card-header-icon wppic-github-info-card-icon-home">
+										<HomeIcon width={ 20 } height={ 20 } />
+									</div>
+									<div className="wppic-github-info-card-header-icon wppic-github-info-card-icon-github">
+										<GitHubIcon width={ 20 } height={ 20 } />
+									</div>
+									<div className="wppic-github-info-card-header-icon wppic-github-info-card-icon-heart">
+										<HeartIcon width={ 20 } height={ 20 } />
+									</div>
+									<div className="wppic-github-info-card-header-icon wppic-github-info-card-icon-star">
+										<StarIcon width={ 20 } height={ 20 } />
+									</div>
+								</div>
+							</div>
+							<div className="wppic-github-info-card-author-section">
+								<div className="wppic-github-info-card-author-section-avatar">
+									<img src={ assetData.avatar } alt={ assetData.full_name } />
+								</div>
+								<div className="wppic-github-info-card-author-section-info">
+									<div className="wppic-github-info-card-author-section-name">
+										{ assetData.name }
+									</div>
+									<div className="wppic-github-info-card-author-section-login">
+										{ __( 'By', 'wp-plugin-info-card' ) } { assetData.login }
+									</div>
+								</div>
+							</div>
+							<div className="wppic-github-info-card-meta">
+								<div className="wppic-github-info-card-meta-item">
+									<div className="wppic-github-info-card-meta-item-icon">
+										<StarIcon width={ 20 } height={ 20 } />
+									</div>
+									<div className="wppic-github-info-card-meta-item-text">
+										{ assetData.stargazers_count }
+									</div>
+								</div>
+								<div className="wppic-github-info-card-meta-item">
+									<div className="wppic-github-info-card-meta-item-icon">
+										<ForkIcon width={ 20 } height={ 20 } />
+									</div>
+									<div className="wppic-github-info-card-meta-item-text">
+										{ assetData.forks_count }
+									</div>
+								</div>
+								<div className="wppic-github-info-card-meta-item">
+									<div className="wppic-github-info-card-meta-item-icon">
+										<EyeIcon width={ 20 } height={ 20 } />
+									</div>
+									<div className="wppic-github-info-card-meta-item-text">
+										{ assetData.watchers_count }
+									</div>
+								</div>
+								<div className="wppic-github-info-card-meta-item">
+									<div className="wppic-github-info-card-meta-item-icon">
+										<CodeIcon width={ 20 } height={ 20 } />
+									</div>
+									<div className="wppic-github-info-card-meta-item-text">
+										{ assetData.latest_release_tag_name }
 									</div>
 								</div>
 							</div>

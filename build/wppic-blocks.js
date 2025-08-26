@@ -16070,7 +16070,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/escape-html */ "@wordpress/escape-html");
@@ -16088,11 +16088,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _templates_ThemeCard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../templates/ThemeCard */ "./src/blocks/templates/ThemeCard.js");
 /* harmony import */ var _templates_ThemeRatingsCard__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../templates/ThemeRatingsCard */ "./src/blocks/templates/ThemeRatingsCard.js");
 /* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../Logo */ "./src/blocks/Logo.js");
-/* harmony import */ var _components_Numbers__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/Numbers */ "./src/blocks/components/Numbers.js");
-/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
-/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/GitHubIcons */ "./src/blocks/components/GitHubIcons.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(a, b) { var c = Object.keys(a); if (Object.getOwnPropertySymbols) { var d = Object.getOwnPropertySymbols(a); b && (d = d.filter(function (b) { return Object.getOwnPropertyDescriptor(a, b).enumerable; })), c.push.apply(c, d); } return c; }
 function _objectSpread(a) { for (var b = 1; b < arguments.length; b++) { var c = null != arguments[b] ? arguments[b] : {}; b % 2 ? ownKeys(Object(c), !0).forEach(function (b) { _defineProperty(a, b, c[b]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(a, Object.getOwnPropertyDescriptors(c)) : ownKeys(Object(c)).forEach(function (b) { Object.defineProperty(a, b, Object.getOwnPropertyDescriptor(c, b)); }); } return a; }
@@ -16112,7 +16110,6 @@ function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
 /**
  * External dependencies
  */
-
 
 
 
@@ -16197,7 +16194,7 @@ var _GitHubInfoCard = function b(a) {
     v(true);
     r(false);
     var b = wppic.rest_url + 'wppic/v2/get_github_data';
-    axios__WEBPACK_IMPORTED_MODULE_17__["default"].get(b + "?username=".concat(g, "&repo=").concat(i)).then(function (a) {
+    axios__WEBPACK_IMPORTED_MODULE_16__["default"].get(b + "?username=".concat(g, "&repo=").concat(i)).then(function (a) {
       console.log(a);
       if (a.data.success) {
         // Now Set State
@@ -16350,7 +16347,7 @@ var _GitHubInfoCard = function b(a) {
     value: g,
     onChange: function b(a) {
       // Check for URL so we don't paste in the slug AND url.
-      if ((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_15__.isURL)(a)) {
+      if ((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_14__.isURL)(a)) {
         return;
       }
       d({
@@ -16361,7 +16358,7 @@ var _GitHubInfoCard = function b(a) {
     onPaste: function b(a) {
       // Get contents from clipboard.
       var c = a.clipboardData.getData('text/plain').trim();
-      if ((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_15__.isURL)(c)) {
+      if ((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_14__.isURL)(c)) {
         // Extract out the slug from the URL.
         var e = /https:\/\/github\.com\/([^/]*)\/([^/]*)/;
         if (!e.test(c)) {
@@ -16377,7 +16374,7 @@ var _GitHubInfoCard = function b(a) {
     },
     onBlur: function a() {
       // If the username is a URL, extract out the username.
-      if ((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_15__.isURL)(g)) {
+      if ((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_14__.isURL)(g)) {
         // Extract out the username from the URL.
         var b = /https:\/\/github\.com\/([^/]*)\/([^/]*)/;
         if (!b.test(clipboardData)) {
@@ -16490,7 +16487,80 @@ var _GitHubInfoCard = function b(a) {
     className: "wppic-github-info-card-header-language"
   }, f.language), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-header-license"
-  }, f.license)))))));
+  }, f.license)), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-header-right"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-header-icon wppic-github-info-card-icon-home"
+  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__.HomeIcon, {
+    width: 20,
+    height: 20
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-header-icon wppic-github-info-card-icon-github"
+  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__.GitHubIcon, {
+    width: 20,
+    height: 20
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-header-icon wppic-github-info-card-icon-heart"
+  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__.HeartIcon, {
+    width: 20,
+    height: 20
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-header-icon wppic-github-info-card-icon-star"
+  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__.StarIcon, {
+    width: 20,
+    height: 20
+  })))), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-author-section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-author-section-avatar"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: f.avatar,
+    alt: f.full_name
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-author-section-info"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-author-section-name"
+  }, f.name), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-author-section-login"
+  }, __('By', 'wp-plugin-info-card'), " ", f.login))), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-meta"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-meta-item"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-meta-item-icon"
+  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__.StarIcon, {
+    width: 20,
+    height: 20
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-meta-item-text"
+  }, f.stargazers_count)), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-meta-item"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-meta-item-icon"
+  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__.ForkIcon, {
+    width: 20,
+    height: 20
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-meta-item-text"
+  }, f.forks_count)), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-meta-item"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-meta-item-icon"
+  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__.EyeIcon, {
+    width: 20,
+    height: 20
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-meta-item-text"
+  }, f.watchers_count)), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-meta-item"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-meta-item-icon"
+  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__.CodeIcon, {
+    width: 20,
+    height: 20
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-meta-item-text"
+  }, f.latest_release_tag_name)))))));
   return /*#__PURE__*/React.createElement("div", I, J);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_GitHubInfoCard);
@@ -21605,6 +21675,91 @@ GearIcon.propTypes = {
   fill: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string)
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GearIcon);
+
+/***/ }),
+
+/***/ "./src/blocks/components/GitHubIcons.js":
+/*!**********************************************!*\
+  !*** ./src/blocks/components/GitHubIcons.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CodeIcon: () => (/* binding */ CodeIcon),
+/* harmony export */   EyeIcon: () => (/* binding */ EyeIcon),
+/* harmony export */   ForkIcon: () => (/* binding */ ForkIcon),
+/* harmony export */   GitHubIcon: () => (/* binding */ GitHubIcon),
+/* harmony export */   HeartIcon: () => (/* binding */ HeartIcon),
+/* harmony export */   HomeIcon: () => (/* binding */ HomeIcon),
+/* harmony export */   StarIcon: () => (/* binding */ StarIcon)
+/* harmony export */ });
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (a) { for (var b = 1; b < arguments.length; b++) { var c = arguments[b]; for (var d in c) ({}).hasOwnProperty.call(c, d) && (a[d] = c[d]); } return a; }, _extends.apply(null, arguments); }
+var ForkIcon = function b(a) {
+  return /*#__PURE__*/React.createElement("svg", _extends({
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 640 640"
+  }, a), /*#__PURE__*/React.createElement("path", {
+    fill: "currentColor",
+    d: "M176 168c13.3 0 24-10.7 24-24s-10.7-24-24-24-24 10.7-24 24 10.7 24 24 24zm80-24c0 32.8-19.7 61-48 73.3V240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48v-22.7c-28.3-12.3-48-40.5-48-73.3 0-44.2 35.8-80 80-80s80 35.8 80 80c0 32.8-19.7 61-48 73.3V240c0 61.9-50.1 112-112 112h-32v70.7c28.3 12.3 48 40.5 48 73.3 0 44.2-35.8 80-80 80s-80-35.8-80-80c0-32.8 19.7-61 48-73.3V352h-32c-61.9 0-112-50.1-112-112v-22.7C115.7 205 96 176.8 96 144c0-44.2 35.8-80 80-80s80 35.8 80 80zm208 24c13.3 0 24-10.7 24-24s-10.7-24-24-24-24 10.7-24 24 10.7 24 24 24zM344 496c0-13.3-10.7-24-24-24s-24 10.7-24 24 10.7 24 24 24 24-10.7 24-24z"
+  }));
+};
+var HomeIcon = function b(a) {
+  return /*#__PURE__*/React.createElement("svg", _extends({
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 640 640"
+  }, a), /*#__PURE__*/React.createElement("path", {
+    fill: "currentColor",
+    d: "M341.8 72.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1C71.1 327.9 82.8 336 96 336h16v176c0 35.3 28.7 64 64 64h288c35.3 0 64-28.7 64-64V336h16c13.2 0 25-8.1 29.8-20.3 4.8-12.2 1.6-26.2-8-35.1l-224-208zM304 384h32c26.5 0 48 21.5 48 48v96H256v-96c0-26.5 21.5-48 48-48z"
+  }));
+};
+var GitHubIcon = function b(a) {
+  return /*#__PURE__*/React.createElement("svg", _extends({
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 640 640"
+  }, a), /*#__PURE__*/React.createElement("path", {
+    fill: "currentColor",
+    d: "M237.9 461.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2 .6-2-1.3-4.3-4.3-5.2-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM316.8 72C178.1 72 72 177.3 72 316c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5 21.3 0 42.8 2.9 62.8 8.5 0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C500.2 521.8 568 426.9 568 316c0-138.7-112.5-244-251.2-244zM169.2 416.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"
+  }));
+};
+var HeartIcon = function b(a) {
+  return /*#__PURE__*/React.createElement("svg", _extends({
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 640 640"
+  }, a), /*#__PURE__*/React.createElement("path", {
+    fill: "currentColor",
+    d: "m305 151.1 15 20.7 15-20.7C360 116.5 400.2 96 442.9 96 516.4 96 576 155.6 576 229.1v2.6c0 112.2-139.9 242.5-212.9 298.2-12.4 9.4-27.6 14.1-43.1 14.1s-30.8-4.6-43.1-14.1C203.9 474.2 64 343.9 64 231.7v-2.6C64 155.6 123.6 96 197.1 96c42.7 0 82.9 20.5 107.9 55.1z"
+  }));
+};
+var StarIcon = function b(a) {
+  return /*#__PURE__*/React.createElement("svg", _extends({
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 640 640"
+  }, a), /*#__PURE__*/React.createElement("path", {
+    fill: "currentColor",
+    d: "M341.5 45.1c-4.1-8-12.4-13.1-21.4-13.1-9 0-17.3 5.1-21.4 13.1l-73.6 144.2-159.9 25.4c-8.9 1.4-16.3 7.7-19.1 16.3-2.8 8.6-.5 18 5.8 24.4l114.4 114.5-25.2 159.9c-1.4 8.9 2.3 17.9 9.6 23.2 7.3 5.3 16.9 6.1 25 2l144.4-73.4L464.4 555c8 4.1 17.7 3.3 25-2 7.3-5.3 11-14.2 9.6-23.2l-25.3-159.9 114.4-114.5c6.4-6.4 8.6-15.8 5.8-24.4-2.8-8.6-10.1-14.9-19.1-16.3L415 189.3 341.5 45.1z"
+  }));
+};
+var EyeIcon = function b(a) {
+  return /*#__PURE__*/React.createElement("svg", _extends({
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 640 640"
+  }, a), /*#__PURE__*/React.createElement("path", {
+    fill: "currentColor",
+    d: "M320 96c-80.8 0-145.5 36.8-192.6 80.6-46.8 43.5-78.1 95.4-93 131.1-3.3 7.9-3.3 16.7 0 24.6 14.9 35.7 46.2 87.7 93 131.1C174.5 507.1 239.2 544 320 544s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1 3.3-7.9 3.3-16.7 0-24.6-14.9-35.7-46.2-87.7-93-131.1C465.5 132.9 400.8 96 320 96zM176 320c0-79.5 64.5-144 144-144s144 64.5 144 144-64.5 144-144 144-144-64.5-144-144zm144-64c0 35.3-28.7 64-64 64-11.5 0-22.3-3-31.7-8.4-1 10.9-.1 22.1 2.9 33.2 13.7 51.2 66.4 81.6 117.6 67.9 51.2-13.7 81.6-66.4 67.9-117.6-12.2-45.7-55.5-74.8-101.1-70.8 5.3 9.3 8.4 20.1 8.4 31.7z"
+  }));
+};
+var CodeIcon = function b(a) {
+  return /*#__PURE__*/React.createElement("svg", _extends({
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 640 640"
+  }, a), /*#__PURE__*/React.createElement("path", {
+    fill: "currentColor",
+    d: "M246.6 182.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 320l137.3-137.4zm146.7 0L530.7 320 393.4 457.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3z"
+  }));
+};
+
 
 /***/ }),
 

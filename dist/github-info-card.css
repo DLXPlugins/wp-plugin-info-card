@@ -4,8 +4,11 @@
 :root {
   --wppic-github-text-color: #24292f;
   --wppic-github-border: #d0d7de;
-  --wppic-github-language-bg: #2da44e;
+  --wppic-github-language-bg: #1a7f37;
   --wppic-github-language-color: #fff;
+  --wppic-github-home-color: #1a7f37;
+  --wppic-github-sponsors-color: #bf3989;
+  --wppic-github-star-color: #eac54f;
   --wppic-gap-sm: 8px;
   --wppic-gap-md: 16px;
   --wppic-gap-lg: 24px;
@@ -16,6 +19,12 @@
   border-radius: 4px;
   overflow: hidden;
   color: var(--wppic-github-text-color);
+  font-size: 16px;
+  padding: 16px 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--wppic-gap-md);
+  row-gap: var(--wppic-gap-md);
 }
 
 .wppic-github-info-card-header {
@@ -28,6 +37,20 @@
   display: flex;
   align-items: center;
   gap: var(--wppic-gap-sm);
+}
+
+.wppic-github-info-card-header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--wppic-gap-sm);
+}
+.wppic-github-info-card-header-right .wppic-github-info-card-header-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--wppic-github-text-color);
+}
+.wppic-github-info-card-header-right .wppic-github-info-card-icon-heart svg {
+  color: var(--wppic-github-sponsors-color);
 }
 
 .wppic-github-info-card-header-language {
@@ -50,6 +73,73 @@
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.2em;
+}
+
+.wppic-github-info-card-author-section {
+  display: grid;
+  align-items: center;
+  grid-template-columns: auto 1fr;
+  gap: var(--wppic-gap-md);
+  row-gap: var(--wppic-gap-md);
+}
+
+.wppic-github-info-card-author-section-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.wppic-github-info-card-author-section-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wppic-github-info-card-author-section-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wppic-gap-sm);
+}
+
+.wppic-github-info-card-author-section-name {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.wppic-github-info-card-author-section-login {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.wppic-github-info-card-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--wppic-gap-sm);
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+}
+
+.wppic-github-info-card-meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--wppic-gap-sm);
+  padding: 4px 8px;
+  transition: background-color 0.3s ease;
+  border-radius: 4px;
+}
+
+.wppic-github-info-card-meta-item:hover {
+  background-color: var(--wppic-github-border);
+}
+
+.wppic-github-info-card-meta-item-icon svg {
+  width: 20px;
+  height: 20px;
+  line-height: 0;
 }
 
 /*# sourceMappingURL=github-info-card.css.map*/
