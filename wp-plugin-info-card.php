@@ -139,6 +139,10 @@ class WP_Plugin_Info_Card {
 		$add_theme = new Add_Theme();
 		$add_theme->run();
 
+		// Set up GitHub.
+		$github = new GitHub();
+		$github->run();
+
 		// Set up shortcodes and callbacks.
 		$shortcodes = new Shortcodes();
 		$shortcodes->run();

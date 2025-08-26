@@ -87,6 +87,7 @@ const GitHubInfoCard = ( props ) => {
 				restUrl + `?username=${ username }&repo=${ repo }`,
 			)
 			.then( ( response ) => {
+				console.log( response );
 				if ( response.data.success ) {
 					// Now Set State
 					setData( response.data.data );
@@ -477,7 +478,7 @@ const GitHubInfoCard = ( props ) => {
 							`align${ align }`,
 						) }
 					>
-						{ outputInfoCards( data ) }
+						here is a github card
 					</div>
 				</Fragment>
 			) }

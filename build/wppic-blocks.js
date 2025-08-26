@@ -16198,6 +16198,7 @@ var _GitHubInfoCard = function b(a) {
     r(false);
     var b = wppic.rest_url + 'wppic/v2/get_github_data';
     axios__WEBPACK_IMPORTED_MODULE_17__["default"].get(b + "?username=".concat(g, "&repo=").concat(i)).then(function (a) {
+      console.log(a);
       if (a.data.success) {
         // Now Set State
         n(a.data.data);
@@ -16479,7 +16480,7 @@ var _GitHubInfoCard = function b(a) {
   }))), /*#__PURE__*/React.createElement("div", {
     id: c.uniqueId,
     className: classnames__WEBPACK_IMPORTED_MODULE_0___default()('is-placeholder', 'wp-block-github-info-card', "align".concat(j))
-  }, G(m))));
+  }, "here is a github card")));
   return /*#__PURE__*/React.createElement("div", I, J);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_GitHubInfoCard);

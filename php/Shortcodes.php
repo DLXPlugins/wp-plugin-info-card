@@ -242,6 +242,39 @@ class Shortcodes {
 				'permission_callback' => array( $this, 'rest_check_permissions' ),
 			)
 		);
+
+		register_rest_route(
+			'wppic/v2',
+			'/get_github_data',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'get_github_data' ),
+				'permission_callback' => '__return_true',
+			)
+		);
+	}
+
+	/**
+	 * Get plugin data for return.
+	 *
+	 * @param object $request Request data.
+	 */
+	public function get_github_data( $request ) {
+
+		$username = sanitize_key( strtolower( $request->get_param( 'username' ) ) );
+		$repo     = sanitize_key( strtolower( $request->get_param( 'repo' ) ) );
+
+		if ( empty( $username ) || empty( $repo ) ) {
+			wp_send_json_error( array( 'message' => 'Invalid username or repo.' ) );
+		}
+
+		$github_data = wppic_api_parser( 'github', $username . '/' . $repo, HOUR_IN_SECONDS, '', false, true );
+
+		if ( empty( $github_data ) ) {
+			wp_send_json_error( array( 'message' => 'No data found.' ) );
+		}
+
+		wp_send_json_success( $github_data );
 	}
 
 	/**
