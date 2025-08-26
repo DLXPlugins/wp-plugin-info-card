@@ -1,4 +1,5 @@
 @import 'button-resets';
+@import 'breakpoints-mixin.scss';
 :root {
 	--wppic-github-text-color: #24292f;
 	--wppic-github-icon-color: #666;
@@ -29,6 +30,17 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	flex-wrap: wrap;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: var(--wppic-gap-sm);
+
+	@include respond-to('medium') {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+
 }
 .wppic-github-info-card-header-left {
 	display: flex;
@@ -81,11 +93,16 @@
 	letter-spacing: 0.2em;
 }
 .wppic-github-info-card-author-section {
-	display: grid;
-	align-items: center;
-	grid-template-columns: auto 1fr;
-	gap: var(--wppic-gap-md);
-	row-gap: var(--wppic-gap-md);
+	display: flex;
+	flex-direction: column;
+	gap: var(--wppic-gap-sm);
+	@include respond-to('medium') {
+		display: grid;
+		align-items: center;
+		grid-template-columns: auto 1fr;
+		gap: var(--wppic-gap-md);
+		row-gap: var(--wppic-gap-md);
+	}
 }
 .wppic-github-info-card-author-section-avatar {
 	width: 100px;
@@ -102,11 +119,17 @@
 	display: flex;
 	flex-direction: column;
 	gap: var(--wppic-gap-sm);
+	@include respond-to('medium') {
+		display: flex;
+		flex-direction: column;
+		gap: var(--wppic-gap-sm);
+	}
 }
 .wppic-github-info-card-author-section-name {
 	font-size: 32px;
 	font-weight: 600;
 	line-height: 1.2;
+	word-break: break-word;
 }
 .wppic-github-info-card-author-section-login {
 	font-size: 16px;
@@ -114,13 +137,19 @@
 	line-height: 1.2;
 }
 .wppic-github-info-card-meta {
-	display: flex;
-	align-items: center;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
 	gap: var(--wppic-gap-sm);
-	font-size: 14px;
-	line-height: 1;
-	font-weight: 600;
-	letter-spacing: 0.2em;
+	row-gap: var(--wppic-gap-sm);
+	@include respond-to('medium') {
+		display: flex;
+		align-items: center;
+		gap: var(--wppic-gap-sm);
+		font-size: 14px;
+		line-height: 1;
+		font-weight: 600;
+		letter-spacing: 0.2em;
+	}
 }
 .wppic-github-info-card-meta-item {
 	display: flex;
@@ -129,6 +158,10 @@
 	padding: 4px 8px;
 	transition: background-color 0.3s ease;
 	border-radius: 4px;
+	border: 1px solid var(--wppic-github-border);
+	@include respond-to('medium') {
+		border: none;
+	}
 }
 .wppic-github-info-card-meta-item:hover {
 	background-color: var(--wppic-github-border);
@@ -147,9 +180,14 @@
 }
 .wppic-github-info-card-buttons {
 	display: flex;
-	align-items: flex-start;
-	justify-content: space-between;
+	flex-direction: column;
 	gap: var(--wppic-gap-md);
+	flex-direction: column-reverse;
+	@include respond-to('medium') {
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: space-between;
+	}
 }
 .wppic-github-info-card-last-updated {
 	font-size: 14px;
@@ -169,6 +207,7 @@
 .wppic-github-button.button-reset, .wppic-github-button.components-button.button-reset, .wppic-github-button.components-button.button-reset:hover {
 	color: #FFF;
 	padding: 16px 24px;
+	margin-top: 0;
 	border-radius: 4px;
 	background-color: #2da44e;
 	transition: background-color 0.3s ease;

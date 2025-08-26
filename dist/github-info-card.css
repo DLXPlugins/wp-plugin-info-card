@@ -36,6 +36,9 @@ button.button-reset.show-cursor {
   height: unset;
 }
 
+/* Responsive styles - In hindsight, should've used mobile-first */
+/* Mixin from: https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/ */
+/* It's only used here, so no external file for mixin? */
 :root {
   --wppic-github-text-color: #24292f;
   --wppic-github-icon-color: #666;
@@ -68,6 +71,17 @@ button.button-reset.show-cursor {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--wppic-gap-sm);
+}
+@media (min-width: 768px) {
+  .wppic-github-info-card-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 .wppic-github-info-card-header-left {
@@ -118,11 +132,18 @@ button.button-reset.show-cursor {
 }
 
 .wppic-github-info-card-author-section {
-  display: grid;
-  align-items: center;
-  grid-template-columns: auto 1fr;
-  gap: var(--wppic-gap-md);
-  row-gap: var(--wppic-gap-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wppic-gap-sm);
+}
+@media (min-width: 768px) {
+  .wppic-github-info-card-author-section {
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto 1fr;
+    gap: var(--wppic-gap-md);
+    row-gap: var(--wppic-gap-md);
+  }
 }
 
 .wppic-github-info-card-author-section-avatar {
@@ -142,11 +163,19 @@ button.button-reset.show-cursor {
   flex-direction: column;
   gap: var(--wppic-gap-sm);
 }
+@media (min-width: 768px) {
+  .wppic-github-info-card-author-section-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wppic-gap-sm);
+  }
+}
 
 .wppic-github-info-card-author-section-name {
   font-size: 32px;
   font-weight: 600;
   line-height: 1.2;
+  word-break: break-word;
 }
 
 .wppic-github-info-card-author-section-login {
@@ -156,13 +185,21 @@ button.button-reset.show-cursor {
 }
 
 .wppic-github-info-card-meta {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: var(--wppic-gap-sm);
-  font-size: 14px;
-  line-height: 1;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  row-gap: var(--wppic-gap-sm);
+}
+@media (min-width: 768px) {
+  .wppic-github-info-card-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--wppic-gap-sm);
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+  }
 }
 
 .wppic-github-info-card-meta-item {
@@ -172,6 +209,12 @@ button.button-reset.show-cursor {
   padding: 4px 8px;
   transition: background-color 0.3s ease;
   border-radius: 4px;
+  border: 1px solid var(--wppic-github-border);
+}
+@media (min-width: 768px) {
+  .wppic-github-info-card-meta-item {
+    border: none;
+  }
 }
 
 .wppic-github-info-card-meta-item:hover {
@@ -192,9 +235,16 @@ button.button-reset.show-cursor {
 
 .wppic-github-info-card-buttons {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  flex-direction: column;
   gap: var(--wppic-gap-md);
+  flex-direction: column-reverse;
+}
+@media (min-width: 768px) {
+  .wppic-github-info-card-buttons {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
 }
 
 .wppic-github-info-card-last-updated {
@@ -219,6 +269,7 @@ button.button-reset.show-cursor {
 .wppic-github-button.button-reset, .wppic-github-button.components-button.button-reset, .wppic-github-button.components-button.button-reset:hover {
   color: #FFF;
   padding: 16px 24px;
+  margin-top: 0;
   border-radius: 4px;
   background-color: #2da44e;
   transition: background-color 0.3s ease;
