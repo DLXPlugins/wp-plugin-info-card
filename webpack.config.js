@@ -41,6 +41,7 @@ module.exports = ( env ) => {
 				'wppic-admin-custom-plugin': [ './src/react/views/custom-plugin/index.js' ],
 				'wppic-fancybox': './src/js/fancyapps/carousel.js',
 				'wppic-fancybox-css': './src/scss/carousel.scss',
+				'github-info-card': './src/scss/github-cards.scss',
 			},
 			mode: env.mode,
 			devtool: 'production' === env.mode ? false : 'source-map',
