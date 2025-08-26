@@ -24,6 +24,7 @@ import { isURL } from '@wordpress/url';
 import { ForkIcon, HomeIcon, GitHubIcon, HeartIcon, StarIcon, EyeIcon, CodeIcon } from '../components/GitHubIcons';
 const { Fragment, useEffect, useState } = wp.element;
 import { dateI18n } from '@wordpress/date';
+import numbro from 'numbro';
 
 const { __ } = wp.i18n;
 
@@ -224,6 +225,17 @@ const GitHubInfoCard = ( props ) => {
 	};
 	const getDateFromDateTime = ( dateTime ) => {
 		return dateI18n( 'F j, Y', dateTime );
+	};
+	/**
+	 * Get a humanized number.
+	 * @param {number} number - The number to humanize.
+	 * @returns {string} The humanized number.
+	 */
+	const getNumberHumanized = ( number ) => {
+		if ( number < 1000 ) {
+			return number;
+		}
+		return numbro( number ).format( { mantissa: 1, average: true } );
 	};
 	const inspectorControls = (
 		<InspectorControls>
@@ -525,7 +537,7 @@ const GitHubInfoCard = ( props ) => {
 										<StarIcon width={ 20 } height={ 20 } />
 									</div>
 									<div className="wppic-github-info-card-meta-item-text">
-										{ assetData.stargazers_count }
+										{ getNumberHumanized( assetData.stargazers_count ) }
 									</div>
 								</div>
 								<div className="wppic-github-info-card-meta-item">
@@ -533,7 +545,7 @@ const GitHubInfoCard = ( props ) => {
 										<ForkIcon width={ 20 } height={ 20 } />
 									</div>
 									<div className="wppic-github-info-card-meta-item-text">
-										{ assetData.forks_count }
+										{ getNumberHumanized( assetData.forks_count ) }
 									</div>
 								</div>
 								<div className="wppic-github-info-card-meta-item">
@@ -541,7 +553,7 @@ const GitHubInfoCard = ( props ) => {
 										<EyeIcon width={ 20 } height={ 20 } />
 									</div>
 									<div className="wppic-github-info-card-meta-item-text">
-										{ assetData.watchers_count }
+										{ getNumberHumanized( assetData.subscribers_count ) }
 									</div>
 								</div>
 								<div className="wppic-github-info-card-meta-item">

@@ -39,6 +39,7 @@
   ],
   "dependencies": {
     "babel-loader": "^8.2.2",
+    "numbro": "^2.5.0",
     "react-content-loader": "^6.2.1",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",

@@ -98,7 +98,6 @@
 	gap: var(--wppic-gap-sm);
 	@include respond-to('medium') {
 		display: grid;
-		align-items: center;
 		grid-template-columns: auto 1fr;
 		gap: var(--wppic-gap-md);
 		row-gap: var(--wppic-gap-md);

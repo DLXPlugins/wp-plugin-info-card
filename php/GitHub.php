@@ -58,24 +58,25 @@ class GitHub {
 			$github_data = json_decode( wp_remote_retrieve_body( $response ) );
 
 			$keys_to_extract = array(
-				'name'             => 'name',
-				'full_name'        => 'full_name',
-				'login'            => 'organization/login',
-				'description'      => 'description',
-				'org_url'          => 'organization/html_url',
-				'github_url'       => 'html_url',
-				'is_private'       => 'private',
-				'license'          => 'license/spdx_id',
-				'avatar'           => 'organization/avatar_url',
-				'stargazers_count' => 'stargazers_count',
-				'watchers_count'   => 'watchers_count',
-				'forks_count'      => 'forks_count',
-				'updated_at'       => 'updated_at',
-				'created_at'       => 'created_at',
-				'pushed_at'        => 'pushed_at',
-				'homepage'         => 'homepage',
-				'language'         => 'language',
-				'has_downloads'    => 'has_downloads',
+				'name'              => 'name',
+				'full_name'         => 'full_name',
+				'login'             => 'organization/login',
+				'description'       => 'description',
+				'org_url'           => 'organization/html_url',
+				'github_url'        => 'html_url',
+				'is_private'        => 'private',
+				'license'           => 'license/spdx_id',
+				'avatar'            => 'organization/avatar_url',
+				'stargazers_count'  => 'stargazers_count',
+				'watchers_count'    => 'watchers_count', /* this would be the same as stargazers_count */
+				'subscribers_count' => 'subscribers_count',
+				'forks_count'       => 'forks_count',
+				'updated_at'        => 'updated_at',
+				'created_at'        => 'created_at',
+				'pushed_at'         => 'pushed_at',
+				'homepage'          => 'homepage',
+				'language'          => 'language',
+				'has_downloads'     => 'has_downloads',
 			);
 
 			$wppic_data = array();

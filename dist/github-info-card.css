@@ -139,7 +139,6 @@ button.button-reset.show-cursor {
 @media (min-width: 768px) {
   .wppic-github-info-card-author-section {
     display: grid;
-    align-items: center;
     grid-template-columns: auto 1fr;
     gap: var(--wppic-gap-md);
     row-gap: var(--wppic-gap-md);
