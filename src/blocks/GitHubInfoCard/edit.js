@@ -22,9 +22,10 @@ import ThemesRatingCard from '../templates/ThemeRatingsCard';
 import Logo from '../Logo';
 import { isURL } from '@wordpress/url';
 import { ForkIcon, HomeIcon, GitHubIcon, HeartIcon, StarIcon, EyeIcon, CodeIcon } from '../components/GitHubIcons';
-const { Fragment, useEffect, useState } = wp.element;
+import { Fragment, useEffect, useState } from 'react';
 import { dateI18n } from '@wordpress/date';
 import numbro from 'numbro';
+import { select, dispatch } from '@wordpress/data';
 
 const { __ } = wp.i18n;
 
@@ -74,6 +75,55 @@ const GitHubInfoCard = ( props ) => {
 	const [ loading, setLoading ] = useState( attributes.loading );
 	const [ mainInputField, setMainInputField ] = useState( null );
 
+	/**
+	 * Get the styles of the parent block.
+	 * @returns {Array} The styles of the parent block.
+	 */
+	const getParentBlockStyles = () => {
+		const currentBlockClientId = select( 'core/block-editor' ).getSelectedBlockClientId();
+		if ( ! currentBlockClientId ) {
+			return [];
+		}
+		const parentBlockClientId = select( 'core/block-editor' ).getBlockRootClientId( currentBlockClientId );
+		if ( ! parentBlockClientId ) {
+			return [];
+		}
+		const parentBlock = select( 'core/block-editor' ).getBlock( parentBlockClientId );
+		if ( ! parentBlock ) {
+			return [];
+		}
+		const blockType = select( 'core/blocks' ).getBlockType( parentBlock.name );
+		const styles = blockType?.styles || [];
+
+		// Get into label|value pairs.
+		return styles.map( ( style ) => {
+			return {
+				label: style.label,
+				value: style.name,
+			};
+		} );
+	};
+
+	/**
+	 * Get the class name of the parent block.
+	 * @returns {string} The class name of the parent block.
+	 */
+	const getParentBlockClassName = () => {
+		const currentBlockClientId = select( 'core/block-editor' ).getSelectedBlockClientId();
+		if ( ! currentBlockClientId ) {
+			return '';
+		}
+		const parentBlockClientId = select( 'core/block-editor' ).getBlockRootClientId( currentBlockClientId );
+		if ( ! parentBlockClientId ) {
+			return '';
+		}
+		const parentBlock = select( 'core/block-editor' ).getBlock( parentBlockClientId );
+		if ( ! parentBlock ) {
+			return '';
+		}
+		return parentBlock.attributes?.className || '';
+	};
+
 	useEffect( () => {
 		setAttributes( { uniqueId: generatedUniqueId } );
 	}, [] );
@@ -88,7 +138,6 @@ const GitHubInfoCard = ( props ) => {
 				restUrl + `?username=${ username }&repo=${ repo }`,
 			)
 			.then( ( response ) => {
-				console.log( response );
 				if ( response.data.success ) {
 					// Now Set State
 					setData( response.data.data );
@@ -430,7 +479,7 @@ const GitHubInfoCard = ( props ) => {
 									<DropdownMenu
 										toggleProps={ toolbarItemHTMLProps }
 										label={ __(
-											'Select Color Scheme',
+											'Select Theme',
 											'wp-plugin-info-card',
 										) }
 										icon="admin-customizer"
@@ -438,15 +487,25 @@ const GitHubInfoCard = ( props ) => {
 										{ ( { onClose } ) => (
 											<Fragment>
 												<MenuItemsChoice
-													choices={ schemeOptions }
+													choices={ getParentBlockStyles() }
 													onSelect={ ( value ) => {
-														setAttributes( {
-															scheme: value,
-														} );
-														setScheme( value );
+														const currentBlockClientId = select( 'core/block-editor' ).getSelectedBlockClientId();
+														if ( ! currentBlockClientId ) {
+															return;
+														}
+														const parentBlockClientId = select( 'core/block-editor' ).getBlockRootClientId( currentBlockClientId );
+														if ( ! parentBlockClientId ) {
+															return;
+														}
+														const parentBlock = select( 'core/block-editor' ).getBlock( parentBlockClientId );
+														if ( ! parentBlock ) {
+															return;
+														}
+														const newAttributes = { ...parentBlock.attributes, className: 'is-style-' + value };
+														dispatch( 'core/block-editor' ).updateBlockAttributes( parentBlockClientId, newAttributes );
 														onClose();
 													} }
-													value={ scheme }
+													value={ getParentBlockClassName() }
 												/>
 											</Fragment>
 										) }

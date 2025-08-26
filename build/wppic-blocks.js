@@ -21534,7 +21534,7 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__, {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"GitHub Info Card","apiVersion":2,"name":"wp-plugin-info-card/github-info-card","category":"wp-plugin-info-card","icon":"<svg version=\'1.1\' id=\'Calque_1\' xmlns=\'http://www.w3.org/2000/svg\' x=\'0px\' y=\'0px\' width=\'24\' height=\'24\' viewBox=\'0 0 850.39 850.39\' enable-background=\'new 0 0 850.39 850.39\'><path fill=\'#333\' d=\'M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39 c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451 l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07 h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887 l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z\'></path></svg>","description":"Add a beautiful GitHub repo info card to your site.","keywords":["github","repo","card","theme"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"assetData":{"type":"array","default":[]},"loading":{"type":"boolean","default":true},"username":{"type":"string","default":""},"repo":{"type":"string","default":""},"align":{"type":"string","default":"center"},"uniqueId":{"type":"string","default":""},"preview":{"type":"boolean","default":false}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["center","wide","full"],"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"],"style":"wppic-github-info-card"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"GitHub Info Card Item","apiVersion":3,"name":"wp-plugin-info-card/github-info-card","parent":"wp-plugin-info-card/github-info-card-grid","category":"wp-plugin-info-card","icon":"<svg version=\'1.1\' id=\'Calque_1\' xmlns=\'http://www.w3.org/2000/svg\' x=\'0px\' y=\'0px\' width=\'24\' height=\'24\' viewBox=\'0 0 850.39 850.39\' enable-background=\'new 0 0 850.39 850.39\'><path fill=\'#333\' d=\'M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39 c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451 l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07 h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887 l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z\'></path></svg>","description":"Add a beautiful GitHub repo info card to your site.","keywords":["github","repo","card","theme"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"assetData":{"type":"object","default":{}},"loading":{"type":"boolean","default":true},"username":{"type":"string","default":""},"repo":{"type":"string","default":""},"align":{"type":"string","default":"center"},"uniqueId":{"type":"string","default":""},"preview":{"type":"boolean","default":false}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["center","wide","full"],"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"],"style":"wppic-github-info-card"}');
 
 /***/ }),
 
@@ -21549,7 +21549,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/escape-html */ "@wordpress/escape-html");
@@ -21570,9 +21570,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
 /* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_14__);
 /* harmony import */ var _components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/GitHubIcons */ "./src/blocks/components/GitHubIcons.js");
-/* harmony import */ var _wordpress_date__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @wordpress/date */ "@wordpress/date");
-/* harmony import */ var _wordpress_date__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_wordpress_date__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var numbro__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! numbro */ "./node_modules/numbro/dist/es/numbro.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _wordpress_date__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @wordpress/date */ "@wordpress/date");
+/* harmony import */ var _wordpress_date__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_wordpress_date__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var numbro__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! numbro */ "./node_modules/numbro/dist/es/numbro.js");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_19__);
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(a, b) { var c = Object.keys(a); if (Object.getOwnPropertySymbols) { var d = Object.getOwnPropertySymbols(a); b && (d = d.filter(function (b) { return Object.getOwnPropertyDescriptor(a, b).enumerable; })), c.push.apply(c, d); } return c; }
 function _objectSpread(a) { for (var b = 1; b < arguments.length; b++) { var c = null != arguments[b] ? arguments[b] : {}; b % 2 ? ownKeys(Object(c), !0).forEach(function (b) { _defineProperty(a, b, c[b]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(a, Object.getOwnPropertyDescriptors(c)) : ownKeys(Object(c)).forEach(function (b) { Object.defineProperty(a, b, Object.getOwnPropertyDescriptor(c, b)); }); } return a; }
@@ -21609,10 +21613,8 @@ function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
 
 
 
-var _wp$element = wp.element,
-  Fragment = _wp$element.Fragment,
-  useEffect = _wp$element.useEffect,
-  useState = _wp$element.useState;
+
+
 
 
 var __ = wp.i18n.__;
@@ -21648,38 +21650,87 @@ var _GitHubInfoCard = function b(a) {
     h = c.preview,
     i = c.repo,
     j = c.align;
-  var k = useState(f),
+  var k = (0,react__WEBPACK_IMPORTED_MODULE_16__.useState)(f),
     l = _slicedToArray(k, 2),
     m = l[0],
     n = l[1];
-  var o = useState(false),
+  var o = (0,react__WEBPACK_IMPORTED_MODULE_16__.useState)(false),
     p = _slicedToArray(o, 2),
     q = p[0],
     r = p[1];
-  var s = useState(false),
+  var s = (0,react__WEBPACK_IMPORTED_MODULE_16__.useState)(false),
     t = _slicedToArray(s, 2),
     u = t[0],
     v = t[1];
-  var w = useState(c.loading),
+  var w = (0,react__WEBPACK_IMPORTED_MODULE_16__.useState)(c.loading),
     x = _slicedToArray(w, 2),
     y = x[0],
     z = x[1];
-  var A = useState(null),
+  var A = (0,react__WEBPACK_IMPORTED_MODULE_16__.useState)(null),
     B = _slicedToArray(A, 2),
     C = B[0],
     D = B[1];
-  useEffect(function () {
+
+  /**
+   * Get the styles of the parent block.
+   * @returns {Array} The styles of the parent block.
+   */
+  var E = function a() {
+    var b = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getSelectedBlockClientId();
+    if (!b) {
+      return [];
+    }
+    var c = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getBlockRootClientId(b);
+    if (!c) {
+      return [];
+    }
+    var d = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getBlock(c);
+    if (!d) {
+      return [];
+    }
+    var e = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/blocks').getBlockType(d.name);
+    var f = (e === null || e === void 0 ? void 0 : e.styles) || [];
+
+    // Get into label|value pairs.
+    return f.map(function (a) {
+      return {
+        label: a.label,
+        value: a.name
+      };
+    });
+  };
+
+  /**
+   * Get the class name of the parent block.
+   * @returns {string} The class name of the parent block.
+   */
+  var F = function a() {
+    var b;
+    var c = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getSelectedBlockClientId();
+    if (!c) {
+      return '';
+    }
+    var d = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getBlockRootClientId(c);
+    if (!d) {
+      return '';
+    }
+    var e = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getBlock(d);
+    if (!e) {
+      return '';
+    }
+    return ((b = e.attributes) === null || b === void 0 ? void 0 : b.className) || '';
+  };
+  (0,react__WEBPACK_IMPORTED_MODULE_16__.useEffect)(function () {
     d({
       uniqueId: e
     });
   }, []);
-  var E = function a() {
+  var G = function a() {
     z(false);
     v(true);
     r(false);
     var b = wppic.rest_url + 'wppic/v2/get_github_data';
-    axios__WEBPACK_IMPORTED_MODULE_18__["default"].get(b + "?username=".concat(g, "&repo=").concat(i)).then(function (a) {
-      console.log(a);
+    axios__WEBPACK_IMPORTED_MODULE_20__["default"].get(b + "?username=".concat(g, "&repo=").concat(i)).then(function (a) {
       if (a.data.success) {
         // Now Set State
         n(a.data.data);
@@ -21694,22 +21745,22 @@ var _GitHubInfoCard = function b(a) {
       }
     });
   };
-  var F = function c(a, b) {
-    E();
+  var H = function c(a, b) {
+    G();
   };
-  useEffect(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_16__.useEffect)(function () {
     if (y) {
       return;
     }
     if (!m || 0 === m.length) {
-      E();
+      G();
     }
   }, []);
 
   /**
    * Select the search input field.
    */
-  useEffect(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_16__.useEffect)(function () {
     if (C) {
       C.focus();
 
@@ -21717,7 +21768,7 @@ var _GitHubInfoCard = function b(a) {
       C.select();
     }
   }, [C]);
-  var G = function b(a) {
+  var I = function b(a) {
     return a.map(function (a, b) {
       var c = '';
 
@@ -21731,7 +21782,7 @@ var _GitHubInfoCard = function b(a) {
           });
         }
       }
-      return /*#__PURE__*/React.createElement(Fragment, {
+      return /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_16__.Fragment, {
         key: b
       }, 'flex' === layout && 'plugin' === type && /*#__PURE__*/React.createElement(_templates_PluginFlex__WEBPACK_IMPORTED_MODULE_3__["default"], {
         scheme: scheme,
@@ -21786,27 +21837,27 @@ var _GitHubInfoCard = function b(a) {
       }));
     });
   };
-  var H = function b(a) {
-    return (0,_wordpress_date__WEBPACK_IMPORTED_MODULE_16__.dateI18n)('F j, Y', a);
+  var J = function b(a) {
+    return (0,_wordpress_date__WEBPACK_IMPORTED_MODULE_17__.dateI18n)('F j, Y', a);
   };
   /**
    * Get a humanized number.
    * @param {number} number - The number to humanize.
    * @returns {string} The humanized number.
    */
-  var I = function b(a) {
+  var K = function b(a) {
     if (a < 1000) {
       return a;
     }
-    return (0,numbro__WEBPACK_IMPORTED_MODULE_17__["default"])(a).format({
+    return (0,numbro__WEBPACK_IMPORTED_MODULE_18__["default"])(a).format({
       mantissa: 1,
       average: true
     });
   };
-  var J = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
+  var L = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Layout', 'wp-plugin-info-card')
   }, "hi"));
-  var K = useBlockProps({
+  var M = useBlockProps({
     className: classnames__WEBPACK_IMPORTED_MODULE_0___default()("wppic-github-info-card align".concat(j))
   });
   if (h) {
@@ -21824,7 +21875,7 @@ var _GitHubInfoCard = function b(a) {
     }));
   }
   if (u) {
-    return /*#__PURE__*/React.createElement("div", K, /*#__PURE__*/React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", M, /*#__PURE__*/React.createElement("div", {
       className: "wppic-loading-placeholder"
     }, /*#__PURE__*/React.createElement("div", {
       className: "wppic-loading"
@@ -21834,7 +21885,7 @@ var _GitHubInfoCard = function b(a) {
       className: "wppic-spinner"
     }, /*#__PURE__*/React.createElement(Spinner, null)))));
   }
-  var L = /*#__PURE__*/React.createElement(Fragment, null, y && /*#__PURE__*/React.createElement("div", {
+  var N = /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_16__.Fragment, null, y && /*#__PURE__*/React.createElement("div", {
     className: "wppic-query-block wppic-query-block-panel"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-block-svg"
@@ -21917,9 +21968,9 @@ var _GitHubInfoCard = function b(a) {
       d({
         loading: false
       });
-      F(a);
+      H(a);
     }
-  }, __('Preview and Configure', 'wp-plugin-info-card')))), u && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }, __('Preview and Configure', 'wp-plugin-info-card')))), u && /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_16__.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "wppic-loading-placeholder"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-loading"
@@ -21927,7 +21978,7 @@ var _GitHubInfoCard = function b(a) {
     size: "45"
   }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
     className: "wppic-spinner"
-  }, /*#__PURE__*/React.createElement(Spinner, null))))), !y && !u && /*#__PURE__*/React.createElement(Fragment, null, J, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
+  }, /*#__PURE__*/React.createElement(Spinner, null))))), !y && !u && /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_16__.Fragment, null, L, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
     icon: "edit",
     title: __('Edit and Configure', 'wp-plugin-info-card'),
     onClick: function a() {
@@ -21938,20 +21989,32 @@ var _GitHubInfoCard = function b(a) {
   }, function (a) {
     return /*#__PURE__*/React.createElement(DropdownMenu, {
       toggleProps: a,
-      label: __('Select Color Scheme', 'wp-plugin-info-card'),
+      label: __('Select Theme', 'wp-plugin-info-card'),
       icon: "admin-customizer"
     }, function (a) {
       var b = a.onClose;
-      return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(MenuItemsChoice, {
-        choices: schemeOptions,
+      return /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_16__.Fragment, null, /*#__PURE__*/React.createElement(MenuItemsChoice, {
+        choices: E(),
         onSelect: function c(a) {
-          d({
-            scheme: a
+          var d = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getSelectedBlockClientId();
+          if (!d) {
+            return;
+          }
+          var e = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getBlockRootClientId(d);
+          if (!e) {
+            return;
+          }
+          var f = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getBlock(e);
+          if (!f) {
+            return;
+          }
+          var g = _objectSpread(_objectSpread({}, f.attributes), {}, {
+            className: 'is-style-' + a
           });
-          setScheme(a);
+          (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.dispatch)('core/block-editor').updateBlockAttributes(e, g);
           b();
         },
-        value: scheme
+        value: F()
       }));
     });
   })), /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarItem, {
@@ -21963,7 +22026,7 @@ var _GitHubInfoCard = function b(a) {
       icon: "layout"
     }, function (a) {
       var b = a.onClose;
-      return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(MenuItemsChoice, {
+      return /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_16__.Fragment, null, /*#__PURE__*/React.createElement(MenuItemsChoice, {
         choices: layoutOptions,
         onSelect: function c(a) {
           d({
@@ -22034,7 +22097,7 @@ var _GitHubInfoCard = function b(a) {
     height: 20
   })), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item-text"
-  }, I(f.stargazers_count))), /*#__PURE__*/React.createElement("div", {
+  }, K(f.stargazers_count))), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item-icon"
@@ -22043,7 +22106,7 @@ var _GitHubInfoCard = function b(a) {
     height: 20
   })), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item-text"
-  }, I(f.forks_count))), /*#__PURE__*/React.createElement("div", {
+  }, K(f.forks_count))), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item-icon"
@@ -22052,7 +22115,7 @@ var _GitHubInfoCard = function b(a) {
     height: 20
   })), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item-text"
-  }, I(f.subscribers_count))), /*#__PURE__*/React.createElement("div", {
+  }, K(f.subscribers_count))), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item-icon"
@@ -22071,7 +22134,7 @@ var _GitHubInfoCard = function b(a) {
     className: "wppic-github-info-card-last-updated"
   }, /*#__PURE__*/React.createElement("span", {
     className: "wppic-github-info-card-last-updated-label"
-  }, __('Last updated:', 'wp-plugin-info-card')), " ", H(f.updated_at))), /*#__PURE__*/React.createElement("div", {
+  }, __('Last updated:', 'wp-plugin-info-card')), " ", J(f.updated_at))), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-buttons-right"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-buttons-right-button"
@@ -22079,9 +22142,168 @@ var _GitHubInfoCard = function b(a) {
     className: "wppic-github-button button-reset",
     variant: "link"
   }, __('View on GitHub', 'wp-plugin-info-card')))))))));
-  return /*#__PURE__*/React.createElement("div", K, L);
+  return /*#__PURE__*/React.createElement("div", M, N);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_GitHubInfoCard);
+
+/***/ }),
+
+/***/ "./src/blocks/GitHubInfoCardGrid/block.js":
+/*!************************************************!*\
+  !*** ./src/blocks/GitHubInfoCardGrid/block.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./block.json */ "./src/blocks/GitHubInfoCardGrid/block.json");
+/* harmony import */ var _components_InfoCardIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/InfoCardIcon */ "./src/blocks/components/InfoCardIcon.js");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./src/blocks/GitHubInfoCardGrid/edit.js");
+
+
+
+
+//  Import main block file.
+
+var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
+
+registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__, {
+  icon: /*#__PURE__*/React.createElement(_components_InfoCardIcon__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    fill: "#333"
+  }),
+  edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
+  save: function a() {
+    return /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks.Content, null);
+  }
+});
+
+/***/ }),
+
+/***/ "./src/blocks/GitHubInfoCardGrid/block.json":
+/*!**************************************************!*\
+  !*** ./src/blocks/GitHubInfoCardGrid/block.json ***!
+  \**************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"GitHub Info Card","apiVersion":3,"name":"wp-plugin-info-card/github-info-card-grid","category":"wp-plugin-info-card","children":["wp-plugin-info-card/github-info-card"],"icon":"<svg version=\'1.1\' id=\'Calque_1\' xmlns=\'http://www.w3.org/2000/svg\' x=\'0px\' y=\'0px\' width=\'24\' height=\'24\' viewBox=\'0 0 850.39 850.39\' enable-background=\'new 0 0 850.39 850.39\'><path fill=\'#333\' d=\'M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39 c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451 l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07 h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887 l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z\'></path></svg>","description":"Add a beautiful GitHub repo info card grid to your site.","keywords":["github","repo","card","theme"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"preview":{"type":"boolean","default":false}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["center","wide","full"],"className":true},"styles":[{"name":"wppic-github-light","label":"GitHub Light","isDefault":true},{"name":"wppic-github-dark","label":"GitHub Dark","isDefault":false},{"name":"wppic-github-colorful","label":"Colorful","isDefault":false},{"name":"wppic-github-bw","label":"Black & White","isDefault":false},{"name":"wppic-github-custom","label":"Custom","isDefault":false}],"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"],"style":"wppic-github-info-card"}');
+
+/***/ }),
+
+/***/ "./src/blocks/GitHubInfoCardGrid/edit.js":
+/*!***********************************************!*\
+  !*** ./src/blocks/GitHubInfoCardGrid/edit.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/escape-html */ "@wordpress/escape-html");
+/* harmony import */ var _wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_html_entities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/html-entities */ "@wordpress/html-entities");
+/* harmony import */ var _wordpress_html_entities__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_html_entities__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _templates_PluginFlex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../templates/PluginFlex */ "./src/blocks/templates/PluginFlex.js");
+/* harmony import */ var _templates_PluginCard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../templates/PluginCard */ "./src/blocks/templates/PluginCard.js");
+/* harmony import */ var _templates_PluginLarge__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../templates/PluginLarge */ "./src/blocks/templates/PluginLarge.js");
+/* harmony import */ var _templates_PluginWordPress__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../templates/PluginWordPress */ "./src/blocks/templates/PluginWordPress.js");
+/* harmony import */ var _templates_PluginRatingsCard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../templates/PluginRatingsCard */ "./src/blocks/templates/PluginRatingsCard.js");
+/* harmony import */ var _templates_ThemeFlex__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../templates/ThemeFlex */ "./src/blocks/templates/ThemeFlex.js");
+/* harmony import */ var _templates_ThemeWordPress__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../templates/ThemeWordPress */ "./src/blocks/templates/ThemeWordPress.js");
+/* harmony import */ var _templates_ThemeLarge__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../templates/ThemeLarge */ "./src/blocks/templates/ThemeLarge.js");
+/* harmony import */ var _templates_ThemeCard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../templates/ThemeCard */ "./src/blocks/templates/ThemeCard.js");
+/* harmony import */ var _templates_ThemeRatingsCard__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../templates/ThemeRatingsCard */ "./src/blocks/templates/ThemeRatingsCard.js");
+/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../Logo */ "./src/blocks/Logo.js");
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/GitHubIcons */ "./src/blocks/components/GitHubIcons.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _wordpress_date__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @wordpress/date */ "@wordpress/date");
+/* harmony import */ var _wordpress_date__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_wordpress_date__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_20__);
+/* eslint-disable react/jsx-key */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+/* eslint-disable camelcase */
+/**
+ * External dependencies
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var useInstanceId = wp.compose.useInstanceId;
+var _GitHubInfoCardGrid = function b(a) {
+  var c = a.attributes,
+    d = a.setAttributes;
+  var e = useInstanceId(_GitHubInfoCardGrid, 'wp-plugin-info-card-id');
+  var f = c.preview,
+    g = c.align;
+  var h = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_20__.useInnerBlocksProps)({
+    className: 'wppic-github-info-card-grid'
+  }, {
+    allowedBlocks: ['wp-plugin-info-card/github-info-card'],
+    template: [['wp-plugin-info-card/github-info-card']],
+    templateInsertUpdatesSelection: true
+  });
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_16__.useEffect)(function () {
+    d({
+      uniqueId: e
+    });
+  }, []);
+  var i = /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_20__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_19__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_18__.__)('Layout', 'wp-plugin-info-card')
+  }, "hi"));
+  var j = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_20__.useBlockProps)({
+    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()("wppic-github-info-card align".concat(g))
+  });
+  if (f) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: 'center'
+      }
+    }, /*#__PURE__*/React.createElement("img", {
+      src: wppic.wppic_preview,
+      alt: "",
+      style: {
+        width: '100%',
+        height: 'auto'
+      }
+    }));
+  }
+  return /*#__PURE__*/React.createElement("div", j, i, /*#__PURE__*/React.createElement("div", h));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_GitHubInfoCardGrid);
 
 /***/ }),
 
@@ -22359,7 +22581,7 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__, {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"WP Plugin Info Card","apiVersion":2,"name":"wp-plugin-info-card/wp-plugin-info-card","category":"wp-plugin-info-card","icon":"<svg version=\'1.1\' id=\'Calque_1\' xmlns=\'http://www.w3.org/2000/svg\' x=\'0px\' y=\'0px\' width=\'24\' height=\'24\' viewBox=\'0 0 850.39 850.39\' enable-background=\'new 0 0 850.39 850.39\'><path fill=\'#333\' d=\'M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39 c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451 l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07 h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887 l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z\'></path></svg>","description":"Add a beautiful plugin or theme info card to your site.","keywords":["wp plugin","plugin","card","theme"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"assetData":{"type":"array","default":[]},"type":{"type":"string","default":"plugin"},"slug":{"type":"string","default":"wp-plugin-info-card"},"loading":{"type":"boolean","default":true},"html":{"type":"string","default":""},"align":{"type":"string","default":"full"},"image":{"type":"string","default":""},"containerid":{"type":"string","default":""},"margin":{"type":"string","default":""},"marginSpacing":{"type":"string","default":"none"},"marginSpacingTarget":{"type":"string","default":"both"},"clear":{"type":"string","default":"none"},"expiration":{"type":"number","default":0},"ajax":{"type":"string","default":"false"},"scheme":{"type":"string","default":"default"},"layout":{"type":"string","default":"card"},"custom":{"type":"string","default":""},"width":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"multi":{"type":"boolean","default":false},"defaultsApplied":{"type":"boolean","default":false},"cols":{"type":"number","default":2},"colGap":{"type":"number","default":20},"rowGap":{"type":"number","default":20},"uniqueId":{"type":"string","default":""},"itemSlugs":{"type":"object","default":{}}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["left","center","right","full"],"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"]}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"WP Plugin Info Card","apiVersion":3,"name":"wp-plugin-info-card/wp-plugin-info-card","category":"wp-plugin-info-card","icon":"<svg version=\'1.1\' id=\'Calque_1\' xmlns=\'http://www.w3.org/2000/svg\' x=\'0px\' y=\'0px\' width=\'24\' height=\'24\' viewBox=\'0 0 850.39 850.39\' enable-background=\'new 0 0 850.39 850.39\'><path fill=\'#333\' d=\'M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39 c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451 l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07 h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887 l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z\'></path></svg>","description":"Add a beautiful plugin or theme info card to your site.","keywords":["wp plugin","plugin","card","theme"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"assetData":{"type":"array","default":[]},"type":{"type":"string","default":"plugin"},"slug":{"type":"string","default":"wp-plugin-info-card"},"loading":{"type":"boolean","default":true},"html":{"type":"string","default":""},"align":{"type":"string","default":"full"},"image":{"type":"string","default":""},"containerid":{"type":"string","default":""},"margin":{"type":"string","default":""},"marginSpacing":{"type":"string","default":"none"},"marginSpacingTarget":{"type":"string","default":"both"},"clear":{"type":"string","default":"none"},"expiration":{"type":"number","default":0},"ajax":{"type":"string","default":"false"},"scheme":{"type":"string","default":"default"},"layout":{"type":"string","default":"card"},"custom":{"type":"string","default":""},"width":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"multi":{"type":"boolean","default":false},"defaultsApplied":{"type":"boolean","default":false},"cols":{"type":"number","default":2},"colGap":{"type":"number","default":20},"rowGap":{"type":"number","default":20},"uniqueId":{"type":"string","default":""},"itemSlugs":{"type":"object","default":{}}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["left","center","right","full"],"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"]}');
 
 /***/ }),
 
@@ -23204,7 +23426,7 @@ var _WPPluginInfoCard = function b(a) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"WP Plugin Info Card Query","apiVersion":2,"name":"wp-plugin-info-card/wp-plugin-info-card-query","category":"wp-plugin-info-card","icon":"<svg height=\'24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 512 512\'><path fill=\'#333\' d=\'M256 140c-63.962 0-116 52.038-116 116s52.038 116 116 116 116-52.038 116-116-52.038-116-116-116zm-60.25 59.875h86.635l-4.578-5.045c-5.566-6.135-5.106-15.622 1.029-21.188 6.136-5.567 15.621-5.106 21.188 1.029l27.333 30.125c5.188 5.718 5.188 14.441 0 20.159l-27.333 30.125a14.958 14.958 0 0 1-11.113 4.92 14.945 14.945 0 0 1-10.075-3.891c-6.135-5.567-6.596-15.053-1.029-21.188l4.578-5.045H195.75c-8.284 0-15-6.716-15-15s6.716-15.001 15-15.001zm120.5 112.25h-86.635l4.578 5.045c5.566 6.135 5.106 15.622-1.029 21.188a14.948 14.948 0 0 1-10.075 3.891 14.964 14.964 0 0 1-11.113-4.92l-27.333-30.125c-5.188-5.718-5.188-14.441 0-20.159l27.333-30.125c5.567-6.135 15.054-6.596 21.188-1.029 6.135 5.567 6.596 15.053 1.029 21.188l-4.578 5.045h86.635c8.284 0 15 6.716 15 15s-6.716 15.001-15 15.001z\'></path><path fill=\'#333\' d=\'M497 199.92h-33.479a212.647 212.647 0 0 0-21.142-50.991l23.688-23.688c5.858-5.858 5.858-15.355 0-21.213l-58.095-58.095c-5.857-5.858-15.355-5.858-21.213 0L363.07 69.621a212.647 212.647 0 0 0-50.991-21.142V15c0-8.284-6.716-15-15-15H214.92c-8.284 0-15 6.716-15 15v33.479a212.664 212.664 0 0 0-50.991 21.142l-23.688-23.688c-5.857-5.858-15.355-5.858-21.213 0l-58.095 58.095c-5.858 5.858-5.858 15.355 0 21.213l23.688 23.688a212.647 212.647 0 0 0-21.142 50.991H15c-8.284 0-15 6.716-15 15v82.159c0 8.284 6.716 15 15 15h33.479a212.664 212.664 0 0 0 21.142 50.991l-23.688 23.688c-5.858 5.858-5.858 15.355 0 21.213l58.095 58.095c5.857 5.858 15.355 5.858 21.213 0l23.688-23.688a212.633 212.633 0 0 0 50.991 21.143V497c0 8.284 6.716 15 15 15h82.159c8.284 0 15-6.716 15-15v-33.479a212.568 212.568 0 0 0 50.991-21.143l23.688 23.688c5.857 5.858 15.355 5.858 21.213 0l58.095-58.095c5.858-5.858 5.858-15.355 0-21.213l-23.688-23.688a212.647 212.647 0 0 0 21.142-50.991H497c8.284 0 15-6.716 15-15V214.92c0-8.284-6.716-15-15-15zM256 402c-80.505 0-146-65.495-146-146s65.495-146 146-146 146 65.495 146 146-65.495 146-146 146z\'></path></svg>","description":"Query and display a list of plugins or themes in a beautiful card format.","keywords":["wp plugin","plugin","card","theme","query"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"assetData":{"type":"array","default":[]},"uniqueId":{"type":"string","default":""},"search":{"type":"string","default":""},"tag":{"type":"string","default":""},"author":{"type":"string","default":""},"user":{"type":"string","default":""},"browse":{"type":"string","default":""},"per_page":{"type":"string","default":"8"},"cols":{"type":"string","default":2},"colGap":{"type":"number","default":20},"rowGap":{"type":"number","default":20},"type":{"type":"string","default":"plugin"},"slug":{"type":"string","default":""},"loading":{"type":"boolean","default":false},"html":{"type":"string","default":""},"align":{"type":"string","default":"full"},"image":{"type":"string","default":""},"containerid":{"type":"string","default":""},"margin":{"type":"string","default":""},"clear":{"type":"string","default":"none"},"expiration":{"type":"number","default":0},"ajax":{"type":"string","default":"false"},"scheme":{"type":"string","default":"default"},"layout":{"type":"string","default":"card"},"custom":{"type":"string","default":""},"width":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"defaultsApplied":{"type":"boolean","default":false},"sortby":{"type":"string","default":"none"},"sort":{"type":"string","default":"ASC"},"itemSlugs":{"type":"object","default":{}}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":false,"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"]}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"WP Plugin Info Card Query","apiVersion":3,"name":"wp-plugin-info-card/wp-plugin-info-card-query","category":"wp-plugin-info-card","icon":"<svg height=\'24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 512 512\'><path fill=\'#333\' d=\'M256 140c-63.962 0-116 52.038-116 116s52.038 116 116 116 116-52.038 116-116-52.038-116-116-116zm-60.25 59.875h86.635l-4.578-5.045c-5.566-6.135-5.106-15.622 1.029-21.188 6.136-5.567 15.621-5.106 21.188 1.029l27.333 30.125c5.188 5.718 5.188 14.441 0 20.159l-27.333 30.125a14.958 14.958 0 0 1-11.113 4.92 14.945 14.945 0 0 1-10.075-3.891c-6.135-5.567-6.596-15.053-1.029-21.188l4.578-5.045H195.75c-8.284 0-15-6.716-15-15s6.716-15.001 15-15.001zm120.5 112.25h-86.635l4.578 5.045c5.566 6.135 5.106 15.622-1.029 21.188a14.948 14.948 0 0 1-10.075 3.891 14.964 14.964 0 0 1-11.113-4.92l-27.333-30.125c-5.188-5.718-5.188-14.441 0-20.159l27.333-30.125c5.567-6.135 15.054-6.596 21.188-1.029 6.135 5.567 6.596 15.053 1.029 21.188l-4.578 5.045h86.635c8.284 0 15 6.716 15 15s-6.716 15.001-15 15.001z\'></path><path fill=\'#333\' d=\'M497 199.92h-33.479a212.647 212.647 0 0 0-21.142-50.991l23.688-23.688c5.858-5.858 5.858-15.355 0-21.213l-58.095-58.095c-5.857-5.858-15.355-5.858-21.213 0L363.07 69.621a212.647 212.647 0 0 0-50.991-21.142V15c0-8.284-6.716-15-15-15H214.92c-8.284 0-15 6.716-15 15v33.479a212.664 212.664 0 0 0-50.991 21.142l-23.688-23.688c-5.857-5.858-15.355-5.858-21.213 0l-58.095 58.095c-5.858 5.858-5.858 15.355 0 21.213l23.688 23.688a212.647 212.647 0 0 0-21.142 50.991H15c-8.284 0-15 6.716-15 15v82.159c0 8.284 6.716 15 15 15h33.479a212.664 212.664 0 0 0 21.142 50.991l-23.688 23.688c-5.858 5.858-5.858 15.355 0 21.213l58.095 58.095c5.857 5.858 15.355 5.858 21.213 0l23.688-23.688a212.633 212.633 0 0 0 50.991 21.143V497c0 8.284 6.716 15 15 15h82.159c8.284 0 15-6.716 15-15v-33.479a212.568 212.568 0 0 0 50.991-21.143l23.688 23.688c5.857 5.858 15.355 5.858 21.213 0l58.095-58.095c5.858-5.858 5.858-15.355 0-21.213l-23.688-23.688a212.647 212.647 0 0 0 21.142-50.991H497c8.284 0 15-6.716 15-15V214.92c0-8.284-6.716-15-15-15zM256 402c-80.505 0-146-65.495-146-146s65.495-146 146-146 146 65.495 146 146-65.495 146-146 146z\'></path></svg>","description":"Query and display a list of plugins or themes in a beautiful card format.","keywords":["wp plugin","plugin","card","theme","query"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"assetData":{"type":"array","default":[]},"uniqueId":{"type":"string","default":""},"search":{"type":"string","default":""},"tag":{"type":"string","default":""},"author":{"type":"string","default":""},"user":{"type":"string","default":""},"browse":{"type":"string","default":""},"per_page":{"type":"string","default":"8"},"cols":{"type":"string","default":2},"colGap":{"type":"number","default":20},"rowGap":{"type":"number","default":20},"type":{"type":"string","default":"plugin"},"slug":{"type":"string","default":""},"loading":{"type":"boolean","default":false},"html":{"type":"string","default":""},"align":{"type":"string","default":"full"},"image":{"type":"string","default":""},"containerid":{"type":"string","default":""},"margin":{"type":"string","default":""},"clear":{"type":"string","default":"none"},"expiration":{"type":"number","default":0},"ajax":{"type":"string","default":"false"},"scheme":{"type":"string","default":"default"},"layout":{"type":"string","default":"card"},"custom":{"type":"string","default":""},"width":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"defaultsApplied":{"type":"boolean","default":false},"sortby":{"type":"string","default":"none"},"sort":{"type":"string","default":"ASC"},"itemSlugs":{"type":"object","default":{}}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":false,"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"]}');
 
 /***/ }),
 
@@ -24234,7 +24456,7 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_1__, {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Plugin Screenshots Info Card","apiVersion":2,"name":"wp-plugin-info-card/plugin-screenshots-info-card","category":"wp-plugin-info-card","icon":"<svg viewBox=\'0 0 48 48\' width=\'24\' height=\'24\'><path d=\'M3.11 33.305v9.504a2.501 2.501 0 0 0 2.5 2.502h9.506a1 1 0 0 0 0-2.001H5.61a.504.504 0 0 1-.354-.147.504.504 0 0 1-.146-.354v-9.504a1 1 0 0 0-2.001 0zM33.125 45.31h9.504a2.501 2.501 0 0 0 2.502-2.502v-9.504a1 1 0 0 0-2.001 0v9.504a.504.504 0 0 1-.5.5h-9.505a1 1 0 0 0 0 2.002zM45.13 15.296V5.79a2.501 2.501 0 0 0-2.502-2.501h-9.504a1 1 0 0 0 0 2h9.504a.504.504 0 0 1 .5.5v9.506a1 1 0 0 0 2.002 0zM15.116 3.29H5.61a2.501 2.501 0 0 0-2.501 2.5v9.506a1 1 0 0 0 2 0V5.79a.504.504 0 0 1 .5-.5h9.506a1 1 0 0 0 0-2.001zM34.661 18.297H31.63a.501.501 0 0 1-.416-.223l-1.777-2.665a2.501 2.501 0 0 0-2.081-1.114h-6.398c-.836 0-1.617.418-2.08 1.114l-1.778 2.665a.501.501 0 0 1-.416.223h-3.032a2.501 2.501 0 0 0-2.501 2.501v11.006a2.5 2.5 0 0 0 2.5 2.501h21.011a2.5 2.5 0 0 0 2.502-2.501V20.798a2.501 2.501 0 0 0-2.502-2.501zm-10.505 2.001a5.004 5.004 0 0 0 0 10.005c2.761 0 5.003-2.241 5.003-5.002s-2.242-5.003-5.003-5.003zm0 2.001a3.003 3.003 0 0 1 0 6.003 3.003 3.003 0 0 1 0-6.003z\' fill=\'currentColor\' /></svg>","description":"Add a beautiful plugin card with screenshots.","keywords":["wp plugin","plugin","card","theme","screenshot"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"uniqueId":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"screen":{"type":"string","default":"slug-entry"},"assetData":{"type":"object","default":{}},"type":{"type":"string","default":"plugin"},"slug":{"type":"string","default":"highlight-and-share"},"loading":{"type":"boolean","default":true},"iconStyle":{"type":"string","default":"none"},"enableRoundedIcon":{"type":"boolean","default":true},"colorTheme":{"type":"string","default":"default"},"customColors":{"type":"boolean","default":false},"pluginTitle":{"type":"string","default":""},"enableContextMenu":{"type":"boolean","default":true},"enableScreenshots":{"type":"boolean","default":true},"imageSource":{"type":"string","default":"local"},"images":{"type":"array","default":[]},"align":{"type":"string","default":"center"},"colorBackground":{"type":"string","default":"#FFFFFF"},"colorText":{"type":"string","default":"#000000"},"colorBorder":{"type":"string","default":"#000000"},"colorMenuBorder":{"type":"string","default":"#000000"},"colorMenu":{"type":"string","default":"#000000"},"colorMenuHover":{"type":"string","default":"#DDDDDD"},"colorMenuText":{"type":"string","default":"#FFFFFF"},"colorMenuTextHover":{"type":"string","default":"#000000"},"colorScreenshotsBackground":{"type":"string","default":"#DDDDDD"},"colorScreenshotsBorder":{"type":"string","default":"#000000"},"colorScreenshotsArrowBackground":{"type":"string","default":"#333333"},"colorScreenshotsArrowBackgroundHover":{"type":"string","default":"#000000"},"colorScreenshotsArrow":{"type":"string","default":"#EEEEEE"},"colorScreenshotsArrowHover":{"type":"string","default":"#FFFFFF"},"colorStar":{"type":"string","default":"#FF9529"},"colorMetaBackground":{"type":"string","default":"#000000"},"colorMetaText":{"type":"string","default":"#FFFFFF"},"skipAnimatedGifs":{"type":"boolean","default":false}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["wide","center","full"],"className":true},"editorScript":"wp_plugin_info_card-cgb-block-js","editorStyle":["wp_plugin_info_card-cgb-block-editor-css","wp_plugin_info_card-cgb-style-css","wp-plugin-info-card-block-editor-css-inline"],"style":"has-style-frontend-css"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Plugin Screenshots Info Card","apiVersion":3,"name":"wp-plugin-info-card/plugin-screenshots-info-card","category":"wp-plugin-info-card","icon":"<svg viewBox=\'0 0 48 48\' width=\'24\' height=\'24\'><path d=\'M3.11 33.305v9.504a2.501 2.501 0 0 0 2.5 2.502h9.506a1 1 0 0 0 0-2.001H5.61a.504.504 0 0 1-.354-.147.504.504 0 0 1-.146-.354v-9.504a1 1 0 0 0-2.001 0zM33.125 45.31h9.504a2.501 2.501 0 0 0 2.502-2.502v-9.504a1 1 0 0 0-2.001 0v9.504a.504.504 0 0 1-.5.5h-9.505a1 1 0 0 0 0 2.002zM45.13 15.296V5.79a2.501 2.501 0 0 0-2.502-2.501h-9.504a1 1 0 0 0 0 2h9.504a.504.504 0 0 1 .5.5v9.506a1 1 0 0 0 2.002 0zM15.116 3.29H5.61a2.501 2.501 0 0 0-2.501 2.5v9.506a1 1 0 0 0 2 0V5.79a.504.504 0 0 1 .5-.5h9.506a1 1 0 0 0 0-2.001zM34.661 18.297H31.63a.501.501 0 0 1-.416-.223l-1.777-2.665a2.501 2.501 0 0 0-2.081-1.114h-6.398c-.836 0-1.617.418-2.08 1.114l-1.778 2.665a.501.501 0 0 1-.416.223h-3.032a2.501 2.501 0 0 0-2.501 2.501v11.006a2.5 2.5 0 0 0 2.5 2.501h21.011a2.5 2.5 0 0 0 2.502-2.501V20.798a2.501 2.501 0 0 0-2.502-2.501zm-10.505 2.001a5.004 5.004 0 0 0 0 10.005c2.761 0 5.003-2.241 5.003-5.002s-2.242-5.003-5.003-5.003zm0 2.001a3.003 3.003 0 0 1 0 6.003 3.003 3.003 0 0 1 0-6.003z\' fill=\'currentColor\' /></svg>","description":"Add a beautiful plugin card with screenshots.","keywords":["wp plugin","plugin","card","theme","screenshot"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"uniqueId":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"screen":{"type":"string","default":"slug-entry"},"assetData":{"type":"object","default":{}},"type":{"type":"string","default":"plugin"},"slug":{"type":"string","default":"highlight-and-share"},"loading":{"type":"boolean","default":true},"iconStyle":{"type":"string","default":"none"},"enableRoundedIcon":{"type":"boolean","default":true},"colorTheme":{"type":"string","default":"default"},"customColors":{"type":"boolean","default":false},"pluginTitle":{"type":"string","default":""},"enableContextMenu":{"type":"boolean","default":true},"enableScreenshots":{"type":"boolean","default":true},"imageSource":{"type":"string","default":"local"},"images":{"type":"array","default":[]},"align":{"type":"string","default":"center"},"colorBackground":{"type":"string","default":"#FFFFFF"},"colorText":{"type":"string","default":"#000000"},"colorBorder":{"type":"string","default":"#000000"},"colorMenuBorder":{"type":"string","default":"#000000"},"colorMenu":{"type":"string","default":"#000000"},"colorMenuHover":{"type":"string","default":"#DDDDDD"},"colorMenuText":{"type":"string","default":"#FFFFFF"},"colorMenuTextHover":{"type":"string","default":"#000000"},"colorScreenshotsBackground":{"type":"string","default":"#DDDDDD"},"colorScreenshotsBorder":{"type":"string","default":"#000000"},"colorScreenshotsArrowBackground":{"type":"string","default":"#333333"},"colorScreenshotsArrowBackgroundHover":{"type":"string","default":"#000000"},"colorScreenshotsArrow":{"type":"string","default":"#EEEEEE"},"colorScreenshotsArrowHover":{"type":"string","default":"#FFFFFF"},"colorStar":{"type":"string","default":"#FF9529"},"colorMetaBackground":{"type":"string","default":"#000000"},"colorMetaText":{"type":"string","default":"#FFFFFF"},"skipAnimatedGifs":{"type":"boolean","default":false}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["wide","center","full"],"className":true},"editorScript":"wp_plugin_info_card-cgb-block-js","editorStyle":["wp_plugin_info_card-cgb-block-editor-css","wp_plugin_info_card-cgb-style-css","wp-plugin-info-card-block-editor-css-inline"],"style":"has-style-frontend-css"}');
 
 /***/ }),
 
@@ -25156,7 +25378,7 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__, {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Site Plugins Card Grid","apiVersion":2,"name":"wp-plugin-info-card/site-plugins-card-grid","category":"wp-plugin-info-card","icon":"<svg height=\'24\' viewBox=\'0 0 64 64\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\'><path d=M32 49.11a17.93 17.93 0 0 1-2.005-.12V60h4.014V48.99c-.66.074-1.329.12-2.009.12zM49.019 19.03a2.325 2.325 0 0 0 2.215-2.317 2.33 2.33 0 0 0-2.328-2.328H15.094a2.33 2.33 0 0 0-2.328 2.328c0 1.245.984 2.257 2.215 2.317.045-.006.085-.027.132-.027h33.773c.047 0 .087.02.132.027zM47.887 21.041H16.114v10.182c0 8.761 7.127 15.888 15.887 15.888s15.887-7.127 15.887-15.888V21.041zM35.859 33.463l-5.71 9.193a1 1 0 0 1-1.699-1.054l4.762-7.666h-5.944a1.002 1.002 0 0 1-.762-1.648l7.742-9.097a1.001 1.001 0 0 1 1.523 1.296l-6.34 7.449h5.578a1.001 1.001 0 0 1 .85 1.527zM20.818 4c-.948 0-1.72.771-1.72 1.719v6.666h3.438V5.719A1.72 1.72 0 0 0 20.817 4zM43.182 4c-.947 0-1.719.771-1.719 1.719v6.666h3.438V5.719c0-.948-.771-1.719-1.72-1.719z\' fill=\'currentColor\' /></svg>","description":"Display all your active plugins in a grid layout.","keywords":["wp plugin","site","grid","plugin","card","active"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"assetData":{"type":"array","default":[]},"uniqueId":{"type":"string","default":""},"align":{"type":"string","default":"center"},"loading":{"type":"boolean","default":true},"scheme":{"type":"string","default":"default"},"layout":{"type":"string","default":"card"},"preview":{"type":"boolean","default":false},"defaultsApplied":{"type":"boolean","default":false},"sortby":{"type":"string","default":"none"},"sort":{"type":"string","default":"ASC"},"cols":{"type":"number","default":2},"colGap":{"type":"number","default":20},"rowGap":{"type":"number","default":20},"itemSlugs":{"type":"object","default":{}}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":false,"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"]}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Site Plugins Card Grid","apiVersion":3,"name":"wp-plugin-info-card/site-plugins-card-grid","category":"wp-plugin-info-card","icon":"<svg height=\'24\' viewBox=\'0 0 64 64\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\'><path d=M32 49.11a17.93 17.93 0 0 1-2.005-.12V60h4.014V48.99c-.66.074-1.329.12-2.009.12zM49.019 19.03a2.325 2.325 0 0 0 2.215-2.317 2.33 2.33 0 0 0-2.328-2.328H15.094a2.33 2.33 0 0 0-2.328 2.328c0 1.245.984 2.257 2.215 2.317.045-.006.085-.027.132-.027h33.773c.047 0 .087.02.132.027zM47.887 21.041H16.114v10.182c0 8.761 7.127 15.888 15.887 15.888s15.887-7.127 15.887-15.888V21.041zM35.859 33.463l-5.71 9.193a1 1 0 0 1-1.699-1.054l4.762-7.666h-5.944a1.002 1.002 0 0 1-.762-1.648l7.742-9.097a1.001 1.001 0 0 1 1.523 1.296l-6.34 7.449h5.578a1.001 1.001 0 0 1 .85 1.527zM20.818 4c-.948 0-1.72.771-1.72 1.719v6.666h3.438V5.719A1.72 1.72 0 0 0 20.817 4zM43.182 4c-.947 0-1.719.771-1.719 1.719v6.666h3.438V5.719c0-.948-.771-1.719-1.72-1.719z\' fill=\'currentColor\' /></svg>","description":"Display all your active plugins in a grid layout.","keywords":["wp plugin","site","grid","plugin","card","active"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"assetData":{"type":"array","default":[]},"uniqueId":{"type":"string","default":""},"align":{"type":"string","default":"center"},"loading":{"type":"boolean","default":true},"scheme":{"type":"string","default":"default"},"layout":{"type":"string","default":"card"},"preview":{"type":"boolean","default":false},"defaultsApplied":{"type":"boolean","default":false},"sortby":{"type":"string","default":"none"},"sort":{"type":"string","default":"ASC"},"cols":{"type":"number","default":2},"colGap":{"type":"number","default":20},"rowGap":{"type":"number","default":20},"itemSlugs":{"type":"object","default":{}}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":false,"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"]}');
 
 /***/ }),
 
@@ -29848,12 +30070,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _blocks_SitePluginsCardGrid_block__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./blocks/SitePluginsCardGrid/block */ "./src/blocks/SitePluginsCardGrid/block.js");
 /* harmony import */ var _blocks_PluginScreenshotsInfoCard_block__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./blocks/PluginScreenshotsInfoCard/block */ "./src/blocks/PluginScreenshotsInfoCard/block.js");
 /* harmony import */ var _blocks_GitHubInfoCard_block__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./blocks/GitHubInfoCard/block */ "./src/blocks/GitHubInfoCard/block.js");
+/* harmony import */ var _blocks_GitHubInfoCardGrid_block__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./blocks/GitHubInfoCardGrid/block */ "./src/blocks/GitHubInfoCardGrid/block.js");
 function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) return _arrayLikeToArray(b, c); var a = {}.toString.call(b).slice(8, -1); return "Object" === a && b.constructor && (a = b.constructor.name), "Map" === a || "Set" === a ? Array.from(b) : "Arguments" === a || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a) ? _arrayLikeToArray(b, c) : void 0; } }
 function _arrayLikeToArray(b, c) { (null == c || c > b.length) && (c = b.length); for (var d = 0, f = Array(c); d < c; d++) f[d] = b[d]; return f; }
 function _iterableToArrayLimit(b, c) { var d = null == b ? null : "undefined" != typeof Symbol && b[Symbol.iterator] || b["@@iterator"]; if (null != d) { var g, h, j, k, l = [], a = !0, m = !1; try { if (j = (d = d.call(b)).next, 0 === c) { if (Object(d) !== d) return; a = !1; } else for (; !(a = (g = j.call(d)).done) && (l.push(g.value), l.length !== c); a = !0); } catch (a) { m = !0, h = a; } finally { try { if (!a && null != d["return"] && (k = d["return"](), Object(k) !== k)) return; } finally { if (m) throw h; } } return l; } }
 function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
+
 
 
 
