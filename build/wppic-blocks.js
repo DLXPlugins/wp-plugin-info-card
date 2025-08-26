@@ -16480,7 +16480,17 @@ var _GitHubInfoCard = function b(a) {
   }))), /*#__PURE__*/React.createElement("div", {
     id: c.uniqueId,
     className: classnames__WEBPACK_IMPORTED_MODULE_0___default()('is-placeholder', 'wp-block-github-info-card', "align".concat(j))
-  }, "here is a github card")));
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-header"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-header-left"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-header-language"
+  }, f.language), /*#__PURE__*/React.createElement("div", {
+    className: "wppic-github-info-card-header-license"
+  }, f.license)))))));
   return /*#__PURE__*/React.createElement("div", I, J);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_GitHubInfoCard);

@@ -478,7 +478,18 @@ const GitHubInfoCard = ( props ) => {
 							`align${ align }`,
 						) }
 					>
-						here is a github card
+						<div className="wppic-github-info-card-wrapper">
+							<div className="wppic-github-info-card-header">
+								<div className="wppic-github-info-card-header-left">
+									<div className="wppic-github-info-card-header-language">
+										{ assetData.language }
+									</div>
+									<div className="wppic-github-info-card-header-license">
+										{ assetData.license }
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</Fragment>
 			) }

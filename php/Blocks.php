@@ -240,6 +240,14 @@ class Blocks {
 			'all'
 		);
 
+		wp_register_style(
+			'wppic-github-info-card',
+			Functions::get_plugin_url( 'dist/github-info-card.css' ),
+			array(),
+			Functions::get_plugin_version(),
+			'all'
+		);
+
 		// Scripts.
 		wp_register_script(
 			'wp-plugin-info-card-block-js',

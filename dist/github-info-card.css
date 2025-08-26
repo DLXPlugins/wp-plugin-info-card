@@ -1,4 +1,55 @@
 /*!*************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/scss/github-cards.scss ***!
   \*************************************************************************************************************************************************/
+:root {
+  --wppic-github-text-color: #24292f;
+  --wppic-github-border: #d0d7de;
+  --wppic-github-language-bg: #2da44e;
+  --wppic-github-language-color: #fff;
+  --wppic-gap-sm: 8px;
+  --wppic-gap-md: 16px;
+  --wppic-gap-lg: 24px;
+}
 
+.wppic-github-info-card-wrapper {
+  border: 1px solid var(--wppic-github-border);
+  border-radius: 4px;
+  overflow: hidden;
+  color: var(--wppic-github-text-color);
+}
+
+.wppic-github-info-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wppic-github-info-card-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--wppic-gap-sm);
+}
+
+.wppic-github-info-card-header-language {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: var(--wppic-github-language-bg);
+  color: var(--wppic-github-language-color);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+}
+
+.wppic-github-info-card-header-license {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+}
+
+/*# sourceMappingURL=github-info-card.css.map*/
