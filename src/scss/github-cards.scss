@@ -365,3 +365,37 @@
 	color: var(--wppic-github-button-text-color-hover);
 	background-color: var(--wppic-github-button-bg-hover);
 }
+
+
+.wppic-margin-spacing-compact {
+	margin-top: 16px;
+	margin-bottom: 16px;
+	margin-block-start: 16px !important;
+	margin-block-end: 16px !important;
+}
+.wppic-margin-spacing-comfortable {
+	margin-top: 32px;
+	margin-bottom: 32px;
+	margin-block-start: 32px !important;
+	margin-block-end: 32px !important;
+}
+.wppic-margin-spacing-spacious {
+	margin-top: 48px;
+	margin-bottom: 48px;
+	margin-block-start: 48px !important;
+	margin-block-end: 48px !important;
+}
+.wppic-margin-spacing-extreme {
+	margin-top: 64px;
+	margin-bottom: 64px;
+	margin-block-start: 64px !important;
+	margin-block-end: 64px !important;
+}
+.wppic-margin-spacing-target-top {
+	margin-bottom: 0;
+	margin-block-end: 0 !important;
+}
+.wppic-margin-spacing-target-bottom {
+	margin-top: 0;
+	margin-block-start: 0 !important;
+}

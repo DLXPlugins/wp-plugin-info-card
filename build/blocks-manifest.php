@@ -276,6 +276,14 @@ return array(
 			'rowGap' => array(
 				'type' => 'number',
 				'default' => 20
+			),
+			'marginSpacing' => array(
+				'type' => 'string',
+				'default' => 'none'
+			),
+			'marginSpacingTarget' => array(
+				'type' => 'string',
+				'default' => 'both'
 			)
 		),
 		'providesContext' => array(

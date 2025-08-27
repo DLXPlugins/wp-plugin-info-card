@@ -65,6 +65,14 @@
     "rowGap": {
       "type": "number",
       "default": 20
+    },
+    "marginSpacing": {
+      "type": "string",
+      "default": "none"
+    },
+    "marginSpacingTarget": {
+      "type": "string",
+      "default": "both"
     }
   },
   "providesContext": {

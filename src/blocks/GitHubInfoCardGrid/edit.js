@@ -62,6 +62,8 @@ const GitHubInfoCardGrid = ( props ) => {
 		colGap,
 		rowGap,
 		cols,
+		marginSpacing,
+		marginSpacingTarget,
 	} = attributes;
 
 	const {
@@ -165,11 +167,41 @@ const GitHubInfoCardGrid = ( props ) => {
 		);
 	};
 
+	const marginSpacingOptions = [
+		{ value: 'none', label: __( 'None', 'wp-plugin-info-card' ) },
+		{ value: 'compact', label: __( 'Compact', 'wp-plugin-info-card' ) },
+		{ value: 'comfortable', label: __( 'Comfortable', 'wp-plugin-info-card' ) },
+		{ value: 'spacious', label: __( 'Spacious', 'wp-plugin-info-card' ) },
+		{ value: 'extreme', label: __( 'Extreme', 'wp-plugin-info-card' ) },
+	];
+
+	const marginSpacingTargetOptions = [
+		{ value: 'both', label: __( 'Both', 'wp-plugin-info-card' ) },
+		{ value: 'top', label: __( 'Top', 'wp-plugin-info-card' ) },
+		{ value: 'bottom', label: __( 'Bottom', 'wp-plugin-info-card' ) },
+	];
+
 	const inspectorControls = (
 		<InspectorControls>
 			{
 				numChildren > 1 && (
 					<PanelBody title={ __( 'Layout', 'wp-plugin-info-card' ) }>
+						<SelectControl
+							label={ __( 'Margin Spacing', 'wp-plugin-info-card' ) }
+							options={ marginSpacingOptions }
+							value={ marginSpacing }
+							onChange={ ( value ) => {
+								setAttributes( { marginSpacing: value } );
+							} }
+						/>
+						<SelectControl
+							label={ __( 'Margin Target', 'wp-plugin-info-card' ) }
+							options={ marginSpacingTargetOptions }
+							value={ marginSpacingTarget }
+							onChange={ ( value ) => {
+								setAttributes( { marginSpacingTarget: value } );
+							} }
+						/>
 						<PanelRow className="wppic-panel-rows-cols">
 							{ getCols() }
 						</PanelRow>
@@ -255,7 +287,7 @@ const GitHubInfoCardGrid = ( props ) => {
 
 	const blockProps = useBlockProps( {
 		className: classnames(
-			`wppic-github-info-card align${ align } layout-${ layout } cols-${ numChildren > 1 ? cols : 1 }`,
+			`wppic-github-info-card align${ align } layout-${ layout } cols-${ numChildren > 1 ? cols : 1 } wppic-margin-spacing-${ marginSpacing } wppic-margin-spacing-target-${ marginSpacingTarget }`,
 			{
 				'is-grid': numChildren > 1,
 			},
