@@ -1,5 +1,5 @@
 import metadata from './block.json';
-import InfoCardIcon from '../components/InfoCardIcon';
+import { GitHubIcon } from '../components/GitHubIcons';
 import { InnerBlocks } from '@wordpress/block-editor';
 
 //  Import main block file.
@@ -9,7 +9,7 @@ const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.b
 
 registerBlockType( metadata, {
 	icon: (
-		<InfoCardIcon fill="#333" />
+		<GitHubIcon fill="#333" />
 	),
 	edit,
 	save() {

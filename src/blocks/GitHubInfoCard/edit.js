@@ -58,7 +58,8 @@ const {
 const { useInstanceId } = wp.compose;
 
 const GitHubInfoCard = ( props ) => {
-	const { attributes, setAttributes } = props;
+	const { attributes, setAttributes, context } = props;
+
 	const generatedUniqueId = useInstanceId( GitHubInfoCard, 'wp-plugin-info-card-id' );
 
 	const {
@@ -77,7 +78,8 @@ const GitHubInfoCard = ( props ) => {
 
 	/**
 	 * Get the styles of the parent block.
-	 * @returns {Array} The styles of the parent block.
+	 *
+	 * @return {Array} The styles of the parent block.
 	 */
 	const getParentBlockStyles = () => {
 		const currentBlockClientId = select( 'core/block-editor' ).getSelectedBlockClientId();
@@ -99,14 +101,15 @@ const GitHubInfoCard = ( props ) => {
 		return styles.map( ( style ) => {
 			return {
 				label: style.label,
-				value: style.name,
+				value: 'is-style-' + style.name,
 			};
 		} );
 	};
 
 	/**
 	 * Get the class name of the parent block.
-	 * @returns {string} The class name of the parent block.
+	 *
+	 * @return {string} The class name of the parent block.
 	 */
 	const getParentBlockClassName = () => {
 		const currentBlockClientId = select( 'core/block-editor' ).getSelectedBlockClientId();
@@ -277,8 +280,9 @@ const GitHubInfoCard = ( props ) => {
 	};
 	/**
 	 * Get a humanized number.
+	 *
 	 * @param {number} number - The number to humanize.
-	 * @returns {string} The humanized number.
+	 * @return {string} The humanized number.
 	 */
 	const getNumberHumanized = ( number ) => {
 		if ( number < 1000 ) {
@@ -298,6 +302,37 @@ const GitHubInfoCard = ( props ) => {
 		className: classnames( `wppic-github-info-card align${ align }` ),
 	} );
 
+	const layouts = [
+		{
+			label: __( 'Large', 'wp-plugin-info-card' ),
+			value: 'large',
+		},
+		{
+			label: __( 'Card', 'wp-plugin-info-card' ),
+			value: 'card',
+		},
+	];
+
+	/**
+	 * Get the layout of the parent block.
+	 *
+	 * @returns {string} The layout of the parent block.
+	 */
+	const getParentBlockLayout = () => {
+		const currentBlockClientId = select( 'core/block-editor' ).getSelectedBlockClientId();
+		if ( ! currentBlockClientId ) {
+			return '';
+		}
+		const parentBlockClientId = select( 'core/block-editor' ).getBlockRootClientId( currentBlockClientId );
+		if ( ! parentBlockClientId ) {
+			return '';
+		}
+		const parentBlock = select( 'core/block-editor' ).getBlock( parentBlockClientId );
+		if ( ! parentBlock ) {
+			return '';
+		}
+		return parentBlock.attributes?.layout || 'large';
+	};
 	if ( preview ) {
 		return (
 			<div style={ { textAlign: 'center' } }>
@@ -474,6 +509,16 @@ const GitHubInfoCard = ( props ) => {
 							/>
 						</ToolbarGroup>
 						<ToolbarGroup>
+							<ToolbarButton
+								icon="update"
+								title={ __(
+									'Refresh',
+									'wp-plugin-info-card',
+								) }
+								onClick={ () => loadData() }
+							/>
+						</ToolbarGroup>
+						<ToolbarGroup>
 							<ToolbarItem as="button">
 								{ ( toolbarItemHTMLProps ) => (
 									<DropdownMenu
@@ -501,7 +546,7 @@ const GitHubInfoCard = ( props ) => {
 														if ( ! parentBlock ) {
 															return;
 														}
-														const newAttributes = { ...parentBlock.attributes, className: 'is-style-' + value };
+														const newAttributes = { ...parentBlock.attributes, className: value };
 														dispatch( 'core/block-editor' ).updateBlockAttributes( parentBlockClientId, newAttributes );
 														onClose();
 													} }
@@ -527,15 +572,25 @@ const GitHubInfoCard = ( props ) => {
 										{ ( { onClose } ) => (
 											<Fragment>
 												<MenuItemsChoice
-													choices={ layoutOptions }
+													choices={ layouts }
 													onSelect={ ( value ) => {
-														setAttributes( {
-															layout: value,
-														} );
-														setLayout( value );
+														const currentBlockClientId = select( 'core/block-editor' ).getSelectedBlockClientId();
+														if ( ! currentBlockClientId ) {
+															return;
+														}
+														const parentBlockClientId = select( 'core/block-editor' ).getBlockRootClientId( currentBlockClientId );
+														if ( ! parentBlockClientId ) {
+															return;
+														}
+														const parentBlock = select( 'core/block-editor' ).getBlock( parentBlockClientId );
+														if ( ! parentBlock ) {
+															return;
+														}
+														const newAttributes = { ...parentBlock.attributes, layout: value };
+														dispatch( 'core/block-editor' ).updateBlockAttributes( parentBlockClientId, newAttributes );
 														onClose();
 													} }
-													value={ layout }
+													value={ getParentBlockLayout() }
 												/>
 											</Fragment>
 										) }

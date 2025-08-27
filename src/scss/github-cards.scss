@@ -63,6 +63,19 @@
 	--wppic-github-button-text-color-hover: #ffffff;
 }
 
+:root .is-style-wppic-github-purple {
+	--wppic-github-background-color: #f5f3ff;
+	--wppic-github-border: #ddd6fe;
+	--wppic-github-text-color: #1e1b4b;
+	--wppic-github-icon-color: #6366f1;
+	--wppic-github-icon-color-hover: #4338ca;
+	--wppic-github-language-bg: #22c55e;
+	--wppic-github-language-color: #ffffff;
+	--wppic-github-sponsors-color: #ec4899;
+	--wppic-github-button-bg: #7c3aed;
+	--wppic-github-button-bg-hover: #6d28d9;
+}
+
 .wppic-github-info-card-wrapper {
 	background-color: var(--wppic-github-background-color);
 	border: 1px solid var(--wppic-github-border);
@@ -76,6 +89,11 @@
 	gap: var(--wppic-gap-md);
 	row-gap: var(--wppic-gap-md);
 	max-width: 600px;
+}
+.wppic-github-info-card.layout-card .wppic-github-info-card-wrapper{
+	max-width: 325px;
+	width: 100%;
+	padding: 24px 24px;
 }
 .wppic-github-info-card-header {
 	display: flex;
@@ -91,18 +109,29 @@
 		align-items: center;
 		justify-content: space-between;
 	}
-
+}
+.wppic-github-info-card.layout-card .wppic-github-info-card-header{
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 }
 .wppic-github-info-card-header-left {
 	display: flex;
 	align-items: center;
 	gap: var(--wppic-gap-sm);
 }
+.wppic-github-info-card.layout-card .wppic-github-info-card-header-left{
+	display: none;
+	visibility: hidden;
+}
 .wppic-github-info-card-header-right {
 	display: flex;
 	align-items: center;
 	gap: var(--wppic-gap-sm);
 	.wppic-github-info-card-header-icon {
+		&:hover {
+			cursor: pointer;
+		}
 		svg {
 			transition: color 0.3s ease-in-out;
 			width: 24px;
@@ -154,6 +183,13 @@
 		row-gap: var(--wppic-gap-md);
 	}
 }
+.wppic-github-info-card.layout-card .wppic-github-info-card-author-section{
+	display: flex;
+	flex-direction: column;
+	gap: var(--wppic-gap-sm);
+	align-items: center;
+	justify-content: center;
+}
 .wppic-github-info-card-author-section-avatar {
 	width: 100px;
 	height: 100px;
@@ -174,6 +210,10 @@
 		flex-direction: column;
 		gap: var(--wppic-gap-sm);
 	}
+}
+.wppic-github-info-card.layout-card .wppic-github-info-card-author-section-info{
+	align-items: center;
+	justify-content: center;
 }
 .wppic-github-info-card-author-section-name {
 	font-size: 32px;
@@ -201,6 +241,12 @@
 		letter-spacing: 0.2em;
 	}
 }
+.wppic-github-info-card.layout-card .wppic-github-info-card-meta{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--wppic-gap-sm);
+	row-gap: var(--wppic-gap-sm);
+}
 .wppic-github-info-card-meta-item {
 	display: flex;
 	align-items: center;
@@ -212,6 +258,12 @@
 	@include respond-to('medium') {
 		border: none;
 	}
+	&:hover {
+		cursor: pointer;
+	}
+}
+.wppic-github-info-card.layout-card .wppic-github-info-card-meta-item {
+	border: 1px solid var( --wppic-github-border );
 }
 .wppic-github-info-card-meta-item:hover {
 	background-color: var(--wppic-github-border);
@@ -234,9 +286,11 @@
 	font-weight: 400;
 	line-height: 1.5;
 }
+.wppic-github-info-card.layout-card .wppic-github-info-card-description{
+	text-align: center;
+}
 .wppic-github-info-card-buttons {
 	display: flex;
-	flex-direction: column;
 	gap: var(--wppic-gap-md);
 	flex-direction: column-reverse;
 	@include respond-to('medium') {
@@ -244,6 +298,13 @@
 		align-items: flex-start;
 		justify-content: space-between;
 	}
+}
+.wppic-github-info-card.layout-card .wppic-github-info-card-buttons{
+	display: flex;
+	gap: var(--wppic-gap-md);
+	flex-direction: column-reverse;
+	align-items: center;
+	justify-content: center;
 }
 .wppic-github-info-card-last-updated {
 	font-size: 14px;

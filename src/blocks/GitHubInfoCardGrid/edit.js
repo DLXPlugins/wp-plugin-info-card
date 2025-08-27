@@ -63,6 +63,8 @@ const GitHubInfoCardGrid = ( props ) => {
 	const {
 		preview,
 		align,
+		className,
+		layout,
 	} = attributes;
 
 	const innerBlocksProps = useInnerBlocksProps( {
@@ -88,7 +90,7 @@ const GitHubInfoCardGrid = ( props ) => {
 	);
 
 	const blockProps = useBlockProps( {
-		className: classnames( `wppic-github-info-card align${ align }` ),
+		className: classnames( `wppic-github-info-card align${ align } layout-${ layout }` ),
 	} );
 
 	if ( preview ) {
@@ -103,9 +105,111 @@ const GitHubInfoCardGrid = ( props ) => {
 		);
 	}
 
+	const themes = [
+		{
+			label: 'GitHub Light',
+			value: 'is-style-wppic-github-light',
+		},
+		{
+			label: 'GitHub Dark',
+			value: 'is-style-wppic-github-dark',
+		},
+		
+		{
+			label: 'GitHub Colorful',
+			value: 'is-style-wppic-github-colorful',
+		},
+		
+		{
+			label: 'GitHub Black & White',
+			value: 'is-style-wppic-github-bw',
+		},
+		
+		{
+			label: 'GitHub Custom',
+			value: 'is-style-wppic-github-custom',
+		},
+	];
+
+	const layouts = [
+		{
+			label: __( 'Large', 'wp-plugin-info-card' ),
+			value: 'large',
+		},
+		{
+			label: __( 'Card', 'wp-plugin-info-card' ),
+			value: 'card',
+		},
+	];
+
+	const getBlockControls = () => (
+		<BlockControls>
+			<ToolbarGroup>
+				<ToolbarItem as="button">
+					{ ( toolbarItemHTMLProps ) => (
+						<DropdownMenu
+							toggleProps={ toolbarItemHTMLProps }
+							label={ __(
+								'Select Theme',
+								'wp-plugin-info-card',
+							) }
+							icon="admin-customizer"
+						>
+							{ ( { onClose } ) => (
+								<Fragment>
+									<MenuItemsChoice
+										choices={ themes }
+										onSelect={ ( value ) => {
+											setAttributes( {
+												className: value,
+											} );
+											onClose();
+										} }
+										value={ attributes.className }
+									/>
+								</Fragment>
+							) }
+						</DropdownMenu>
+					) }
+				</ToolbarItem>
+			</ToolbarGroup>
+			<ToolbarGroup>
+				<ToolbarItem as="button">
+					{ ( toolbarItemHTMLProps ) => (
+						<DropdownMenu
+							toggleProps={ toolbarItemHTMLProps }
+							label={ __(
+								'Select a Layout',
+								'wp-plugin-info-card',
+							) }
+							icon="layout"
+						>
+							{ ( { onClose } ) => (
+								<Fragment>
+									<MenuItemsChoice
+										choices={ layouts }
+										onSelect={ ( value ) => {
+											setAttributes( {
+												layout: value,
+											} );
+											setLayout( value );
+											onClose();
+										} }
+										value={ layout }
+									/>
+								</Fragment>
+							) }
+						</DropdownMenu>
+					) }
+				</ToolbarItem>
+			</ToolbarGroup>
+		</BlockControls>
+	)
+
 	return (
 		<div { ...blockProps }>
 			{ inspectorControls }
+			{ getBlockControls() }
 			<div { ...innerBlocksProps } />
 		</div>
 	);

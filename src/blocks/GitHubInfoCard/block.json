@@ -40,6 +40,10 @@
 			"default": false
 		}
 	},
+	"usesContext": [
+		"wppic/github-grid-className",
+		"wppic/github-grid-layout"
+	],
 	"example": {
 		"attributes": {
 			"preview": true
@@ -47,7 +51,7 @@
 	},
 	"supports": {
 		"anchor": true,
-		"align": [ "center", "wide", "full" ],
+		"align": false,
 		"className": true
 	},
 	"editorScript": "wp-plugin-info-card-block-js",
