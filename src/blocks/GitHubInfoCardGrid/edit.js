@@ -375,8 +375,8 @@ const GitHubInfoCardGrid = ( props ) => {
 		</BlockControls>
 	);
 
-	const styles = `
-		#${ attributes.uniqueId } {
+	const gridStyles = `
+		#${ attributes.uniqueId } .wppic-github-info-card-grid {
 			display: grid;
 			column-gap: ${ colGap }px;
 			row-gap: ${ rowGap }px;
@@ -384,7 +384,10 @@ const GitHubInfoCardGrid = ( props ) => {
 	`;
 
 	return (
-		<div { ...blockProps }>
+		<div { ...blockProps } id={ attributes.uniqueId }>
+			{ numChildren > 1 && (
+				<style>{ gridStyles }</style>
+			) }
 			{ inspectorControls }
 			{ getBlockControls() }
 			<div { ...innerBlocksProps } />

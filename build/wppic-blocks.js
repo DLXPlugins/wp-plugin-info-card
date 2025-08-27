@@ -22366,6 +22366,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
 /* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_10__);
 /* harmony import */ var _components_Numbers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/Numbers */ "./src/blocks/components/Numbers.js");
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (a) { for (var b = 1; b < arguments.length; b++) { var c = arguments[b]; for (var d in c) ({}).hasOwnProperty.call(c, d) && (a[d] = c[d]); } return a; }, _extends.apply(null, arguments); }
 /* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
@@ -22665,8 +22666,10 @@ var _GitHubInfoCardGrid = function b(a) {
       });
     })));
   };
-  var N = "\n\t\t#".concat(c.uniqueId, " {\n\t\t\tdisplay: grid;\n\t\t\tcolumn-gap: ").concat(q, "px;\n\t\t\trow-gap: ").concat(r, "px;\n\t\t}\n\t");
-  return /*#__PURE__*/React.createElement("div", J, I, M(), /*#__PURE__*/React.createElement("div", G));
+  var N = "\n\t\t#".concat(c.uniqueId, " .wppic-github-info-card-grid {\n\t\t\tdisplay: grid;\n\t\t\tcolumn-gap: ").concat(q, "px;\n\t\t\trow-gap: ").concat(r, "px;\n\t\t}\n\t");
+  return /*#__PURE__*/React.createElement("div", _extends({}, J, {
+    id: c.uniqueId
+  }), p > 1 && /*#__PURE__*/React.createElement("style", null, N), I, M(), /*#__PURE__*/React.createElement("div", G));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_GitHubInfoCardGrid);
 

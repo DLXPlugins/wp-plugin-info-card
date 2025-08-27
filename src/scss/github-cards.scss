@@ -76,6 +76,10 @@
 	--wppic-github-button-bg-hover: #6d28d9;
 }
 
+.wppic-github-info-card {
+	display: flex;
+	justify-content: center;
+}
 .wppic-github-info-card.is-grid {
 	.wppic-github-info-card-grid {
 		height: 100%;
