@@ -18,6 +18,10 @@
   "version": "1.0.0",
   "textdomain": "wp-plugin-info-card",
   "attributes": {
+    "uniqueId": {
+      "type": "string",
+      "default": ""
+    },
     "preview": {
       "type": "boolean",
       "default": false
@@ -25,11 +29,37 @@
     "layout": {
       "type": "string",
       "default": "large"
+    },
+    "showTopBar": {
+      "type": "boolean",
+      "default": true
+    },
+    "showAuthorBar": {
+      "type": "boolean",
+      "default": true
+    },
+    "showStatsBar": {
+      "type": "boolean",
+      "default": true
+    },
+    "showLastUpdated": {
+      "type": "boolean",
+      "default": true
+    },
+    "buttonType": {
+      "type": "string",
+      "default": "github"
     }
   },
   "providesContext": {
+    "wppic/github-grid-uniqueId": "uniqueId",
     "wppic/github-grid-className": "className",
-    "wppic/github-grid-layout": "layout"
+    "wppic/github-grid-layout": "layout",
+    "wppic/github-grid-showTopBar": "showTopBar",
+    "wppic/github-grid-showAuthorBar": "showAuthorBar",
+    "wppic/github-grid-showStatsBar": "showStatsBar",
+    "wppic/github-grid-showLastUpdated": "showLastUpdated",
+    "wppic/github-grid-buttonType": "buttonType"
   },
   "example": {
     "attributes": {

@@ -255,6 +255,7 @@ button.button-reset.show-cursor {
 .wppic-github-info-card-author-section-info {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: var(--wppic-gap-sm);
 }
 @media (min-width: 768px) {

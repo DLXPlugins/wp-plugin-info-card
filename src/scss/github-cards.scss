@@ -204,6 +204,7 @@
 .wppic-github-info-card-author-section-info {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	gap: var(--wppic-gap-sm);
 	@include respond-to('medium') {
 		display: flex;

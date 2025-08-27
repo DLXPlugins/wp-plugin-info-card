@@ -145,11 +145,32 @@ return array(
 			'preview' => array(
 				'type' => 'boolean',
 				'default' => false
+			),
+			'nameOverride' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'loginOverride' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'sponsorsUrlOverride' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'organizationUrlOverride' => array(
+				'type' => 'string',
+				'default' => ''
 			)
 		),
 		'usesContext' => array(
 			'wppic/github-grid-className',
-			'wppic/github-grid-layout'
+			'wppic/github-grid-layout',
+			'wppic/github-grid-uniqueId',
+			'wppic/github-grid-showAuthorBar',
+			'wppic/github-grid-showStatsBar',
+			'wppic/github-grid-showLastUpdated',
+			'wppic/github-grid-buttonType'
 		),
 		'example' => array(
 			'attributes' => array(
@@ -188,6 +209,10 @@ return array(
 		'version' => '1.0.0',
 		'textdomain' => 'wp-plugin-info-card',
 		'attributes' => array(
+			'uniqueId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'preview' => array(
 				'type' => 'boolean',
 				'default' => false
@@ -195,11 +220,37 @@ return array(
 			'layout' => array(
 				'type' => 'string',
 				'default' => 'large'
+			),
+			'showTopBar' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'showAuthorBar' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'showStatsBar' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'showLastUpdated' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'buttonType' => array(
+				'type' => 'string',
+				'default' => 'github'
 			)
 		),
 		'providesContext' => array(
+			'wppic/github-grid-uniqueId' => 'uniqueId',
 			'wppic/github-grid-className' => 'className',
-			'wppic/github-grid-layout' => 'layout'
+			'wppic/github-grid-layout' => 'layout',
+			'wppic/github-grid-showTopBar' => 'showTopBar',
+			'wppic/github-grid-showAuthorBar' => 'showAuthorBar',
+			'wppic/github-grid-showStatsBar' => 'showStatsBar',
+			'wppic/github-grid-showLastUpdated' => 'showLastUpdated',
+			'wppic/github-grid-buttonType' => 'buttonType'
 		),
 		'example' => array(
 			'attributes' => array(

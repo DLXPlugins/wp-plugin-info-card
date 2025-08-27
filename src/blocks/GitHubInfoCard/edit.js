@@ -7,29 +7,20 @@
  */
 import axios from 'axios';
 import classnames from 'classnames';
-import { escapeAttribute } from '@wordpress/escape-html';
+import { escapeAttribute, escapeHTML } from '@wordpress/escape-html';
 import { decodeEntities } from '@wordpress/html-entities';
-import PluginFlex from '../templates/PluginFlex';
-import PluginCard from '../templates/PluginCard';
-import PluginLarge from '../templates/PluginLarge';
-import PluginWordPress from '../templates/PluginWordPress';
-import PluginRatingsCard from '../templates/PluginRatingsCard';
-import ThemeFlex from '../templates/ThemeFlex';
-import ThemeWordPress from '../templates/ThemeWordPress';
-import ThemeLarge from '../templates/ThemeLarge';
-import ThemeCard from '../templates/ThemeCard';
-import ThemesRatingCard from '../templates/ThemeRatingsCard';
 import Logo from '../Logo';
-import { isURL } from '@wordpress/url';
+import { isURL, filterURLForDisplay } from '@wordpress/url';
 import { ForkIcon, HomeIcon, GitHubIcon, HeartIcon, StarIcon, EyeIcon, CodeIcon } from '../components/GitHubIcons';
 import { Fragment, useEffect, useState } from 'react';
 import { dateI18n } from '@wordpress/date';
 import numbro from 'numbro';
-import { select, dispatch } from '@wordpress/data';
+import { select, dispatch, useSelect, useDispatch } from '@wordpress/data';
+import { blockStore } from '../store';
 
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
-const {
+import {
 	PanelBody,
 	PanelRow,
 	SelectControl,
@@ -45,22 +36,28 @@ const {
 	BaseControl,
 	ButtonGroup,
 	Notice,
-} = wp.components;
+	__experimentalTruncate as Truncate,
+} from '@wordpress/components';
 
-const {
+import {
 	InspectorControls,
 	BlockAlignmentToolbar,
 	MediaUpload,
 	BlockControls,
 	useBlockProps,
-} = wp.blockEditor;
+} from '@wordpress/block-editor';
 
-const { useInstanceId } = wp.compose;
+import { useInstanceId } from '@wordpress/compose';
 
 const GitHubInfoCard = ( props ) => {
 	const { attributes, setAttributes, context } = props;
 
-	const generatedUniqueId = useInstanceId( GitHubInfoCard, 'wp-plugin-info-card-id' );
+	const blockUniqueId = context[ 'wppic/github-grid-uniqueId' ];
+
+	// Shortcircuit early if the block is not part of a grid.
+	if ( ! blockUniqueId ) {
+		return null;
+	}
 
 	const {
 		assetData,
@@ -68,6 +65,11 @@ const GitHubInfoCard = ( props ) => {
 		preview,
 		repo,
 		align,
+		nameOverride,
+		loginOverride,
+		sponsorsUrlOverride,
+		organizationUrlOverride,
+		versionOverride,
 	} = attributes;
 
 	const [ data, setData ] = useState( assetData );
@@ -75,6 +77,22 @@ const GitHubInfoCard = ( props ) => {
 	const [ cardLoading, setCardLoading ] = useState( false );
 	const [ loading, setLoading ] = useState( attributes.loading );
 	const [ mainInputField, setMainInputField ] = useState( null );
+
+	const {
+		getShowTopBar,
+		getShowAuthorBar,
+		getShowStatsBar,
+		getShowLastUpdated,
+		getButtonType,
+	} = useSelect( ( newSelect ) => {
+		return {
+			getShowTopBar: newSelect( blockStore( blockUniqueId ) ).getShowTopBar,
+			getShowAuthorBar: newSelect( blockStore( blockUniqueId ) ).getShowAuthorBar,
+			getShowStatsBar: newSelect( blockStore( blockUniqueId ) ).getShowStatsBar,
+			getShowLastUpdated: newSelect( blockStore( blockUniqueId ) ).getShowLastUpdated,
+			getButtonType: newSelect( blockStore( blockUniqueId ) ).getButtonType,
+		};
+	} );
 
 	/**
 	 * Get the styles of the parent block.
@@ -127,10 +145,6 @@ const GitHubInfoCard = ( props ) => {
 		return parentBlock.attributes?.className || '';
 	};
 
-	useEffect( () => {
-		setAttributes( { uniqueId: generatedUniqueId } );
-	}, [] );
-
 	const loadData = () => {
 		setLoading( false );
 		setCardLoading( true );
@@ -177,104 +191,6 @@ const GitHubInfoCard = ( props ) => {
 		}
 	}, [ mainInputField ] );
 
-	const outputInfoCards = ( cardDataArray ) => {
-		return cardDataArray.map( ( cardData, key ) => {
-			let textValue = '';
-
-			// Check to see if slug is in the itemSlugs array.
-			if ( cardData.slug in itemSlugs ) {
-				if ( '' !== itemSlugs[ cardData.slug ] ) {
-					textValue = itemSlugs[ cardData.slug ];
-					// Merge with card data.
-					cardData = { ...cardData, name: textValue };
-				}
-			}
-			return (
-				<Fragment key={ key }>
-					{ 'flex' === layout && 'plugin' === type && (
-						<PluginFlex
-							scheme={ scheme }
-							image={ image }
-							data={ cardData }
-							align={ align }
-						/>
-					) }
-					{ 'card' === layout && 'plugin' === type && (
-						<PluginCard
-							scheme={ scheme }
-							image={ image }
-							data={ cardData }
-							align={ align }
-						/>
-					) }
-					{ 'large' === layout && 'plugin' === type && (
-						<PluginLarge
-							scheme={ scheme }
-							image={ image }
-							data={ cardData }
-							align={ align }
-						/>
-					) }
-					{ 'wordpress' === layout && 'plugin' === type && (
-						<PluginWordPress
-							scheme={ scheme }
-							image={ image }
-							data={ cardData }
-							align={ align }
-						/>
-					) }
-					{ 'ratings' === layout && 'plugin' === type && (
-						<PluginRatingsCard
-							scheme={ scheme }
-							image={ image }
-							data={ cardData }
-							align={ align }
-						/>
-					) }
-					{ 'flex' === layout && 'theme' === type && (
-						<ThemeFlex
-							scheme={ scheme }
-							image={ image }
-							data={ cardData }
-							align={ align }
-						/>
-					) }
-					{ 'wordpress' === layout && 'theme' === type && (
-						<ThemeWordPress
-							scheme={ scheme }
-							image={ image }
-							data={ cardData }
-							align={ align }
-						/>
-					) }
-					{ 'large' === layout && 'theme' === type && (
-						<ThemeLarge
-							scheme={ scheme }
-							image={ image }
-							data={ cardData }
-							align={ align }
-						/>
-					) }
-					{ 'card' === layout && 'theme' === type && (
-						<ThemeCard
-							scheme={ scheme }
-							image={ image }
-							data={ cardData }
-							align={ align }
-						/>
-					) }
-					{ 'ratings' === layout && 'theme' === type && (
-						<ThemesRatingCard
-							scheme={ scheme }
-							image={ image }
-							data={ cardData }
-							align={ align }
-						/>
-					) }
-				</Fragment>
-			);
-		} );
-	};
 	const getDateFromDateTime = ( dateTime ) => {
 		return dateI18n( 'F j, Y', dateTime );
 	};
@@ -292,8 +208,44 @@ const GitHubInfoCard = ( props ) => {
 	};
 	const inspectorControls = (
 		<InspectorControls>
-			<PanelBody title={ __( 'Layout', 'wp-plugin-info-card' ) }>
-				hi
+			<PanelBody
+				title={ __( 'Overrides', 'wp-plugin-info-card' ) }
+				initialOpen={ false }
+			>
+				<TextControl
+					label={ __( 'Name Override', 'wp-plugin-info-card' ) }
+					value={ nameOverride }
+					onChange={ ( value ) => setAttributes( { nameOverride: value } ) }
+					help={ __( 'Override the name of the repo.', 'wp-plugin-info-card' ) }
+				/>
+				<TextControl
+					label={ __( 'Login Override', 'wp-plugin-info-card' ) }
+					value={ loginOverride }
+					onChange={ ( value ) => setAttributes( { loginOverride: value } ) }
+					help={ __( 'Override the login of the repo.', 'wp-plugin-info-card' ) }
+				/>
+				<TextControl
+					label={ __( 'Sponsors URL Override', 'wp-plugin-info-card' ) }
+					value={ sponsorsUrlOverride }
+					type="url"
+					onChange={ ( value ) => setAttributes( { sponsorsUrlOverride: value } ) }
+					placeholder="https://"
+					help={ __( 'Override the sponsors URL of the repo.', 'wp-plugin-info-card' ) }
+				/>
+				<TextControl
+					label={ __( 'Organization URL Override', 'wp-plugin-info-card' ) }
+					value={ organizationUrlOverride }
+					type="url"
+					placeholder="https://"
+					onChange={ ( value ) => setAttributes( { organizationUrlOverride: value } ) }
+					help={ __( 'Override the organization URL of the repo.', 'wp-plugin-info-card' ) }
+				/>
+				<TextControl
+					label={ __( 'Version Override', 'wp-plugin-info-card' ) }
+					value={ versionOverride }
+					onChange={ ( value ) => setAttributes( { versionOverride: value } ) }
+					help={ __( 'Override the version of the repo.', 'wp-plugin-info-card' ) }
+				/>
 			</PanelBody>
 		</InspectorControls>
 	);
@@ -316,7 +268,7 @@ const GitHubInfoCard = ( props ) => {
 	/**
 	 * Get the layout of the parent block.
 	 *
-	 * @returns {string} The layout of the parent block.
+	 * @return {string} The layout of the parent block.
 	 */
 	const getParentBlockLayout = () => {
 		const currentBlockClientId = select( 'core/block-editor' ).getSelectedBlockClientId();
@@ -359,6 +311,25 @@ const GitHubInfoCard = ( props ) => {
 			</div>
 		);
 	}
+
+	/**
+	 * Get the text for the button.
+	 *
+	 * @return {string} The text for the button.
+	 */
+	const getButtonText = () => {
+		const buttonType = getButtonType();
+		switch ( buttonType ) {
+			case 'github':
+				return __( 'View on GitHub', 'wp-plugin-info-card' );
+			case 'website':
+				return __( 'View Website', 'wp-plugin-info-card' );
+			case 'sponsor':
+				return __( 'Sponsor', 'wp-plugin-info-card' );
+			default:
+				return __( 'View on GitHub', 'wp-plugin-info-card' );
+		}
+	};
 
 	const block = (
 		<Fragment>
@@ -608,93 +579,119 @@ const GitHubInfoCard = ( props ) => {
 						) }
 					>
 						<div className="wppic-github-info-card-wrapper">
-							<div className="wppic-github-info-card-header">
-								<div className="wppic-github-info-card-header-left">
-									<div className="wppic-github-info-card-header-language">
-										{ assetData.language }
+							{ getShowTopBar() && (
+								<>
+									<div className="wppic-github-info-card-header">
+										<div className="wppic-github-info-card-header-left">
+											<div className="wppic-github-info-card-header-language">
+												{ escapeHTML( assetData.language ) }
+											</div>
+											<div className="wppic-github-info-card-header-license">
+												{ escapeHTML( assetData.license ) }
+											</div>
+										</div>
+										<div className="wppic-github-info-card-header-right">
+											<div className="wppic-github-info-card-header-icon wppic-github-info-card-icon-home">
+												<HomeIcon width={ 20 } height={ 20 } />
+											</div>
+											<div className="wppic-github-info-card-header-icon wppic-github-info-card-icon-github">
+												<GitHubIcon width={ 20 } height={ 20 } />
+											</div>
+											<div className="wppic-github-info-card-header-icon wppic-github-info-card-icon-heart">
+												<HeartIcon width={ 20 } height={ 20 } />
+											</div>
+											<div className="wppic-github-info-card-header-icon wppic-github-info-card-icon-star">
+												<StarIcon width={ 20 } height={ 20 } />
+											</div>
+										</div>
 									</div>
-									<div className="wppic-github-info-card-header-license">
-										{ assetData.license }
-									</div>
-								</div>
-								<div className="wppic-github-info-card-header-right">
-									<div className="wppic-github-info-card-header-icon wppic-github-info-card-icon-home">
-										<HomeIcon width={ 20 } height={ 20 } />
-									</div>
-									<div className="wppic-github-info-card-header-icon wppic-github-info-card-icon-github">
-										<GitHubIcon width={ 20 } height={ 20 } />
-									</div>
-									<div className="wppic-github-info-card-header-icon wppic-github-info-card-icon-heart">
-										<HeartIcon width={ 20 } height={ 20 } />
-									</div>
-									<div className="wppic-github-info-card-header-icon wppic-github-info-card-icon-star">
-										<StarIcon width={ 20 } height={ 20 } />
-									</div>
-								</div>
-							</div>
+								</>
+							) }
 							<div className="wppic-github-info-card-author-section">
 								<div className="wppic-github-info-card-author-section-avatar">
-									<img src={ assetData.avatar } alt={ assetData.full_name } />
+									<img src={ isURL( assetData.avatar ) ? assetData.avatar : '' } alt={ escapeHTML( assetData.full_name ) } />
 								</div>
 								<div className="wppic-github-info-card-author-section-info">
 									<div className="wppic-github-info-card-author-section-name">
-										{ assetData.name }
+										{ escapeHTML( nameOverride || assetData.name ) }
 									</div>
-									<div className="wppic-github-info-card-author-section-login">
-										{ __( 'By', 'wp-plugin-info-card' ) } { assetData.login }
-									</div>
+									{ getShowAuthorBar() && (
+										<div className="wppic-github-info-card-author-section-login">
+											{ __( 'By', 'wp-plugin-info-card' ) } { escapeHTML( loginOverride || assetData.login ) }
+										</div>
+									) }
 								</div>
 							</div>
-							<div className="wppic-github-info-card-meta">
-								<div className="wppic-github-info-card-meta-item">
-									<div className="wppic-github-info-card-meta-item-icon">
-										<StarIcon width={ 20 } height={ 20 } />
+							{
+								getShowStatsBar() && (
+									<div className="wppic-github-info-card-meta">
+										<div className="wppic-github-info-card-meta-item">
+											<div className="wppic-github-info-card-meta-item-icon">
+												<StarIcon width={ 20 } height={ 20 } />
+											</div>
+											<div className="wppic-github-info-card-meta-item-text">
+												{ getNumberHumanized( parseInt( assetData.stargazers_count ) ) }
+											</div>
+										</div>
+										<div className="wppic-github-info-card-meta-item">
+											<div className="wppic-github-info-card-meta-item-icon">
+												<ForkIcon width={ 20 } height={ 20 } />
+											</div>
+											<div className="wppic-github-info-card-meta-item-text">
+												{ getNumberHumanized( parseInt( assetData.forks_count ) ) }
+											</div>
+										</div>
+										<div className="wppic-github-info-card-meta-item">
+											<div className="wppic-github-info-card-meta-item-icon">
+												<EyeIcon width={ 20 } height={ 20 } />
+											</div>
+											<div className="wppic-github-info-card-meta-item-text">
+												{ getNumberHumanized( parseInt( assetData.subscribers_count ) ) }
+											</div>
+										</div>
+										<div className="wppic-github-info-card-meta-item">
+											<div className="wppic-github-info-card-meta-item-icon">
+												<CodeIcon width={ 20 } height={ 20 } />
+											</div>
+											<div className="wppic-github-info-card-meta-item-text">
+												<Truncate
+													ellipsizeMode="tail"
+													limit={ 10 }
+												>
+													{ escapeHTML( versionOverride || assetData.latest_release_tag_name ) }
+												</Truncate>
+											</div>
+										</div>
 									</div>
-									<div className="wppic-github-info-card-meta-item-text">
-										{ getNumberHumanized( assetData.stargazers_count ) }
-									</div>
-								</div>
-								<div className="wppic-github-info-card-meta-item">
-									<div className="wppic-github-info-card-meta-item-icon">
-										<ForkIcon width={ 20 } height={ 20 } />
-									</div>
-									<div className="wppic-github-info-card-meta-item-text">
-										{ getNumberHumanized( assetData.forks_count ) }
-									</div>
-								</div>
-								<div className="wppic-github-info-card-meta-item">
-									<div className="wppic-github-info-card-meta-item-icon">
-										<EyeIcon width={ 20 } height={ 20 } />
-									</div>
-									<div className="wppic-github-info-card-meta-item-text">
-										{ getNumberHumanized( assetData.subscribers_count ) }
-									</div>
-								</div>
-								<div className="wppic-github-info-card-meta-item">
-									<div className="wppic-github-info-card-meta-item-icon">
-										<CodeIcon width={ 20 } height={ 20 } />
-									</div>
-									<div className="wppic-github-info-card-meta-item-text">
-										{ assetData.latest_release_tag_name }
-									</div>
-								</div>
-							</div>
+								)
+							}
 							<div className="wppic-github-info-card-description">
-								{ assetData.description }
+								{ escapeHTML( assetData.description ) }
 							</div>
 							<div className="wppic-github-info-card-buttons">
 								<div className="wppic-github-info-card-buttons-left">
-									<div className="wppic-github-info-card-last-updated">
-										<span className="wppic-github-info-card-last-updated-label">{ __( 'Last updated:', 'wp-plugin-info-card' ) }</span> { getDateFromDateTime( assetData.updated_at ) }
-									</div>
+									{
+										getShowLastUpdated() && (
+											<div className="wppic-github-info-card-last-updated">
+												<span className="wppic-github-info-card-last-updated-label">{ __( 'Last updated:', 'wp-plugin-info-card' ) }</span> { getDateFromDateTime( escapeHTML( assetData.updated_at ) ) }
+											</div>
+										)
+									}
 								</div>
 								<div className="wppic-github-info-card-buttons-right">
 									<div className="wppic-github-info-card-buttons-right-button">
 										<Button
-											className="wppic-github-button button-reset"
+											className={
+												classnames(
+													'wppic-github-button button-reset',
+													`wppic-github-button-${ getButtonType() }`,
+												)
+											}
 											variant="link"
 										>
-											{ __( 'View on GitHub', 'wp-plugin-info-card' ) }
+											{
+												getButtonText()
+											}
 										</Button>
 									</div>
 								</div>

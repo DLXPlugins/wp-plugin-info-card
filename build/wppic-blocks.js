@@ -21534,7 +21534,7 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__, {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"GitHub Info Card Item","apiVersion":3,"name":"wp-plugin-info-card/github-info-card","parent":"wp-plugin-info-card/github-info-card-grid","category":"wp-plugin-info-card","icon":"<svg version=\'1.1\' id=\'Calque_1\' xmlns=\'http://www.w3.org/2000/svg\' x=\'0px\' y=\'0px\' width=\'24\' height=\'24\' viewBox=\'0 0 850.39 850.39\' enable-background=\'new 0 0 850.39 850.39\'><path fill=\'#333\' d=\'M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39 c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451 l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07 h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887 l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z\'></path></svg>","description":"Add a beautiful GitHub repo info card to your site.","keywords":["github","repo","card","theme"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"assetData":{"type":"object","default":{}},"loading":{"type":"boolean","default":true},"username":{"type":"string","default":""},"repo":{"type":"string","default":""},"align":{"type":"string","default":"center"},"uniqueId":{"type":"string","default":""},"preview":{"type":"boolean","default":false}},"usesContext":["wppic/github-grid-className","wppic/github-grid-layout"],"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":false,"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"],"style":"wppic-github-info-card"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"GitHub Info Card Item","apiVersion":3,"name":"wp-plugin-info-card/github-info-card","parent":"wp-plugin-info-card/github-info-card-grid","category":"wp-plugin-info-card","icon":"<svg version=\'1.1\' id=\'Calque_1\' xmlns=\'http://www.w3.org/2000/svg\' x=\'0px\' y=\'0px\' width=\'24\' height=\'24\' viewBox=\'0 0 850.39 850.39\' enable-background=\'new 0 0 850.39 850.39\'><path fill=\'#333\' d=\'M425.195,2C190.366,2,0,191.918,0,426.195C0,660.472,190.366,850.39,425.195,850.39 c234.828,0,425.195-189.918,425.195-424.195C850.39,191.918,660.023,2,425.195,2z M662.409,476.302l-2.624,4.533L559.296,654.451 l78.654,45.525l-228.108,105.9L388.046,555.33l78.653,45.523l69.391-119.887l-239.354-0.303l-94.925-0.337l-28.75-0.032l-0.041-0.07 h0l-24.361-42.303l28.111-48.563l109.635-189.419l-78.653-45.524L435.859,48.514l21.797,250.546l-78.654-45.525l-69.391,119.887 l239.353,0.303l123.676,0.37l16.571,28.772l7.831,13.596L662.409,476.302z\'></path></svg>","description":"Add a beautiful GitHub repo info card to your site.","keywords":["github","repo","card","theme"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"assetData":{"type":"object","default":{}},"loading":{"type":"boolean","default":true},"username":{"type":"string","default":""},"repo":{"type":"string","default":""},"align":{"type":"string","default":"center"},"uniqueId":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"nameOverride":{"type":"string","default":""},"loginOverride":{"type":"string","default":""},"sponsorsUrlOverride":{"type":"string","default":""},"organizationUrlOverride":{"type":"string","default":""}},"usesContext":["wppic/github-grid-className","wppic/github-grid-layout","wppic/github-grid-uniqueId","wppic/github-grid-showAuthorBar","wppic/github-grid-showStatsBar","wppic/github-grid-showLastUpdated","wppic/github-grid-buttonType"],"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":false,"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"],"style":"wppic-github-info-card"}');
 
 /***/ }),
 
@@ -21549,34 +21549,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/escape-html */ "@wordpress/escape-html");
 /* harmony import */ var _wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_html_entities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/html-entities */ "@wordpress/html-entities");
 /* harmony import */ var _wordpress_html_entities__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_html_entities__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _templates_PluginFlex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../templates/PluginFlex */ "./src/blocks/templates/PluginFlex.js");
-/* harmony import */ var _templates_PluginCard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../templates/PluginCard */ "./src/blocks/templates/PluginCard.js");
-/* harmony import */ var _templates_PluginLarge__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../templates/PluginLarge */ "./src/blocks/templates/PluginLarge.js");
-/* harmony import */ var _templates_PluginWordPress__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../templates/PluginWordPress */ "./src/blocks/templates/PluginWordPress.js");
-/* harmony import */ var _templates_PluginRatingsCard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../templates/PluginRatingsCard */ "./src/blocks/templates/PluginRatingsCard.js");
-/* harmony import */ var _templates_ThemeFlex__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../templates/ThemeFlex */ "./src/blocks/templates/ThemeFlex.js");
-/* harmony import */ var _templates_ThemeWordPress__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../templates/ThemeWordPress */ "./src/blocks/templates/ThemeWordPress.js");
-/* harmony import */ var _templates_ThemeLarge__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../templates/ThemeLarge */ "./src/blocks/templates/ThemeLarge.js");
-/* harmony import */ var _templates_ThemeCard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../templates/ThemeCard */ "./src/blocks/templates/ThemeCard.js");
-/* harmony import */ var _templates_ThemeRatingsCard__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../templates/ThemeRatingsCard */ "./src/blocks/templates/ThemeRatingsCard.js");
-/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../Logo */ "./src/blocks/Logo.js");
-/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
-/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/GitHubIcons */ "./src/blocks/components/GitHubIcons.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _wordpress_date__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @wordpress/date */ "@wordpress/date");
-/* harmony import */ var _wordpress_date__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_wordpress_date__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var numbro__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! numbro */ "./node_modules/numbro/dist/es/numbro.js");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Logo */ "./src/blocks/Logo.js");
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_GitHubIcons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/GitHubIcons */ "./src/blocks/components/GitHubIcons.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _wordpress_date__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/date */ "@wordpress/date");
+/* harmony import */ var _wordpress_date__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_date__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var numbro__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! numbro */ "./node_modules/numbro/dist/es/numbro.js");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../store */ "./src/blocks/store/index.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_14__);
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(a, b) { var c = Object.keys(a); if (Object.getOwnPropertySymbols) { var d = Object.getOwnPropertySymbols(a); b && (d = d.filter(function (b) { return Object.getOwnPropertyDescriptor(a, b).enumerable; })), c.push.apply(c, d); } return c; }
 function _objectSpread(a) { for (var b = 1; b < arguments.length; b++) { var c = null != arguments[b] ? arguments[b] : {}; b % 2 ? ownKeys(Object(c), !0).forEach(function (b) { _defineProperty(a, b, c[b]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(a, Object.getOwnPropertyDescriptors(c)) : ownKeys(Object(c)).forEach(function (b) { Object.defineProperty(a, b, Object.getOwnPropertyDescriptor(c, b)); }); } return a; }
@@ -21612,85 +21611,80 @@ function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
 
 
 
-
-
-
-
-
-var __ = wp.i18n.__;
-var _wp$components = wp.components,
-  PanelBody = _wp$components.PanelBody,
-  PanelRow = _wp$components.PanelRow,
-  SelectControl = _wp$components.SelectControl,
-  Spinner = _wp$components.Spinner,
-  TextControl = _wp$components.TextControl,
-  ToolbarGroup = _wp$components.ToolbarGroup,
-  ToolbarButton = _wp$components.ToolbarButton,
-  ToolbarItem = _wp$components.ToolbarItem,
-  DropdownMenu = _wp$components.DropdownMenu,
-  TabPanel = _wp$components.TabPanel,
-  Button = _wp$components.Button,
-  MenuItemsChoice = _wp$components.MenuItemsChoice,
-  BaseControl = _wp$components.BaseControl,
-  ButtonGroup = _wp$components.ButtonGroup,
-  Notice = _wp$components.Notice;
-var _wp$blockEditor = wp.blockEditor,
-  InspectorControls = _wp$blockEditor.InspectorControls,
-  BlockAlignmentToolbar = _wp$blockEditor.BlockAlignmentToolbar,
-  MediaUpload = _wp$blockEditor.MediaUpload,
-  BlockControls = _wp$blockEditor.BlockControls,
-  useBlockProps = _wp$blockEditor.useBlockProps;
-var useInstanceId = wp.compose.useInstanceId;
-var _GitHubInfoCard = function b(a) {
+var GitHubInfoCard = function b(a) {
   var c = a.attributes,
     d = a.setAttributes,
     e = a.context;
-  var f = useInstanceId(_GitHubInfoCard, 'wp-plugin-info-card-id');
+  var f = e['wppic/github-grid-uniqueId'];
+
+  // Shortcircuit early if the block is not part of a grid.
+  if (!f) {
+    return null;
+  }
   var g = c.assetData,
     h = c.username,
     i = c.preview,
     j = c.repo,
-    k = c.align;
-  var l = (0,react__WEBPACK_IMPORTED_MODULE_16__.useState)(g),
-    m = _slicedToArray(l, 2),
-    n = m[0],
-    o = m[1];
-  var p = (0,react__WEBPACK_IMPORTED_MODULE_16__.useState)(false),
-    q = _slicedToArray(p, 2),
-    r = q[0],
-    s = q[1];
-  var t = (0,react__WEBPACK_IMPORTED_MODULE_16__.useState)(false),
-    u = _slicedToArray(t, 2),
-    v = u[0],
-    w = u[1];
-  var x = (0,react__WEBPACK_IMPORTED_MODULE_16__.useState)(c.loading),
-    y = _slicedToArray(x, 2),
-    z = y[0],
-    A = y[1];
-  var B = (0,react__WEBPACK_IMPORTED_MODULE_16__.useState)(null),
-    C = _slicedToArray(B, 2),
-    D = C[0],
-    E = C[1];
+    k = c.align,
+    l = c.nameOverride,
+    m = c.loginOverride,
+    n = c.sponsorsUrlOverride,
+    o = c.organizationUrlOverride,
+    p = c.versionOverride;
+  var q = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(g),
+    r = _slicedToArray(q, 2),
+    s = r[0],
+    t = r[1];
+  var u = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(false),
+    v = _slicedToArray(u, 2),
+    w = v[0],
+    x = v[1];
+  var y = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(false),
+    z = _slicedToArray(y, 2),
+    A = z[0],
+    B = z[1];
+  var C = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(c.loading),
+    D = _slicedToArray(C, 2),
+    E = D[0],
+    F = D[1];
+  var G = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(null),
+    H = _slicedToArray(G, 2),
+    I = H[0],
+    J = H[1];
+  var K = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.useSelect)(function (a) {
+      return {
+        getShowTopBar: a((0,_store__WEBPACK_IMPORTED_MODULE_10__.blockStore)(f)).getShowTopBar,
+        getShowAuthorBar: a((0,_store__WEBPACK_IMPORTED_MODULE_10__.blockStore)(f)).getShowAuthorBar,
+        getShowStatsBar: a((0,_store__WEBPACK_IMPORTED_MODULE_10__.blockStore)(f)).getShowStatsBar,
+        getShowLastUpdated: a((0,_store__WEBPACK_IMPORTED_MODULE_10__.blockStore)(f)).getShowLastUpdated,
+        getButtonType: a((0,_store__WEBPACK_IMPORTED_MODULE_10__.blockStore)(f)).getButtonType
+      };
+    }),
+    L = K.getShowTopBar,
+    M = K.getShowAuthorBar,
+    N = K.getShowStatsBar,
+    O = K.getShowLastUpdated,
+    P = K.getButtonType;
 
   /**
    * Get the styles of the parent block.
    *
    * @return {Array} The styles of the parent block.
    */
-  var F = function a() {
-    var b = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getSelectedBlockClientId();
+  var Q = function a() {
+    var b = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.select)('core/block-editor').getSelectedBlockClientId();
     if (!b) {
       return [];
     }
-    var c = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getBlockRootClientId(b);
+    var c = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.select)('core/block-editor').getBlockRootClientId(b);
     if (!c) {
       return [];
     }
-    var d = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getBlock(c);
+    var d = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.select)('core/block-editor').getBlock(c);
     if (!d) {
       return [];
     }
-    var e = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/blocks').getBlockType(d.name);
+    var e = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.select)('core/blocks').getBlockType(d.name);
     var f = (e === null || e === void 0 ? void 0 : e.styles) || [];
 
     // Get into label|value pairs.
@@ -21707,141 +21701,67 @@ var _GitHubInfoCard = function b(a) {
    *
    * @return {string} The class name of the parent block.
    */
-  var G = function a() {
+  var R = function a() {
     var b;
-    var c = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getSelectedBlockClientId();
+    var c = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.select)('core/block-editor').getSelectedBlockClientId();
     if (!c) {
       return '';
     }
-    var d = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getBlockRootClientId(c);
+    var d = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.select)('core/block-editor').getBlockRootClientId(c);
     if (!d) {
       return '';
     }
-    var e = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getBlock(d);
+    var e = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.select)('core/block-editor').getBlock(d);
     if (!e) {
       return '';
     }
     return ((b = e.attributes) === null || b === void 0 ? void 0 : b.className) || '';
   };
-  (0,react__WEBPACK_IMPORTED_MODULE_16__.useEffect)(function () {
-    d({
-      uniqueId: f
-    });
-  }, []);
-  var H = function a() {
-    A(false);
-    w(true);
-    s(false);
+  var S = function a() {
+    F(false);
+    B(true);
+    x(false);
     var b = wppic.rest_url + 'wppic/v2/get_github_data';
-    axios__WEBPACK_IMPORTED_MODULE_20__["default"].get(b + "?username=".concat(h, "&repo=").concat(j)).then(function (a) {
+    axios__WEBPACK_IMPORTED_MODULE_15__["default"].get(b + "?username=".concat(h, "&repo=").concat(j)).then(function (a) {
       if (a.data.success) {
         // Now Set State
-        o(a.data.data);
+        t(a.data.data);
         d({
           assetData: a.data.data
         });
-        w(false);
+        B(false);
       } else {
-        s(true);
-        w(false);
-        A(true);
+        x(true);
+        B(false);
+        F(true);
       }
     });
   };
-  var I = function c(a, b) {
-    H();
+  var T = function c(a, b) {
+    S();
   };
-  (0,react__WEBPACK_IMPORTED_MODULE_16__.useEffect)(function () {
-    if (z) {
+  (0,react__WEBPACK_IMPORTED_MODULE_6__.useEffect)(function () {
+    if (E) {
       return;
     }
-    if (!n || 0 === n.length) {
-      H();
+    if (!s || 0 === s.length) {
+      S();
     }
   }, []);
 
   /**
    * Select the search input field.
    */
-  (0,react__WEBPACK_IMPORTED_MODULE_16__.useEffect)(function () {
-    if (D) {
-      D.focus();
+  (0,react__WEBPACK_IMPORTED_MODULE_6__.useEffect)(function () {
+    if (I) {
+      I.focus();
 
       // Select the text in the input field.
-      D.select();
+      I.select();
     }
-  }, [D]);
-  var J = function b(a) {
-    return a.map(function (a, b) {
-      var c = '';
-
-      // Check to see if slug is in the itemSlugs array.
-      if (a.slug in itemSlugs) {
-        if ('' !== itemSlugs[a.slug]) {
-          c = itemSlugs[a.slug];
-          // Merge with card data.
-          a = _objectSpread(_objectSpread({}, a), {}, {
-            name: c
-          });
-        }
-      }
-      return /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_16__.Fragment, {
-        key: b
-      }, 'flex' === layout && 'plugin' === type && /*#__PURE__*/React.createElement(_templates_PluginFlex__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        scheme: scheme,
-        image: image,
-        data: a,
-        align: k
-      }), 'card' === layout && 'plugin' === type && /*#__PURE__*/React.createElement(_templates_PluginCard__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        scheme: scheme,
-        image: image,
-        data: a,
-        align: k
-      }), 'large' === layout && 'plugin' === type && /*#__PURE__*/React.createElement(_templates_PluginLarge__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        scheme: scheme,
-        image: image,
-        data: a,
-        align: k
-      }), 'wordpress' === layout && 'plugin' === type && /*#__PURE__*/React.createElement(_templates_PluginWordPress__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        scheme: scheme,
-        image: image,
-        data: a,
-        align: k
-      }), 'ratings' === layout && 'plugin' === type && /*#__PURE__*/React.createElement(_templates_PluginRatingsCard__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        scheme: scheme,
-        image: image,
-        data: a,
-        align: k
-      }), 'flex' === layout && 'theme' === type && /*#__PURE__*/React.createElement(_templates_ThemeFlex__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        scheme: scheme,
-        image: image,
-        data: a,
-        align: k
-      }), 'wordpress' === layout && 'theme' === type && /*#__PURE__*/React.createElement(_templates_ThemeWordPress__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        scheme: scheme,
-        image: image,
-        data: a,
-        align: k
-      }), 'large' === layout && 'theme' === type && /*#__PURE__*/React.createElement(_templates_ThemeLarge__WEBPACK_IMPORTED_MODULE_10__["default"], {
-        scheme: scheme,
-        image: image,
-        data: a,
-        align: k
-      }), 'card' === layout && 'theme' === type && /*#__PURE__*/React.createElement(_templates_ThemeCard__WEBPACK_IMPORTED_MODULE_11__["default"], {
-        scheme: scheme,
-        image: image,
-        data: a,
-        align: k
-      }), 'ratings' === layout && 'theme' === type && /*#__PURE__*/React.createElement(_templates_ThemeRatingsCard__WEBPACK_IMPORTED_MODULE_12__["default"], {
-        scheme: scheme,
-        image: image,
-        data: a,
-        align: k
-      }));
-    });
-  };
-  var K = function b(a) {
-    return (0,_wordpress_date__WEBPACK_IMPORTED_MODULE_17__.dateI18n)('F j, Y', a);
+  }, [I]);
+  var U = function b(a) {
+    return (0,_wordpress_date__WEBPACK_IMPORTED_MODULE_7__.dateI18n)('F j, Y', a);
   };
   /**
    * Get a humanized number.
@@ -21849,45 +21769,95 @@ var _GitHubInfoCard = function b(a) {
    * @param {number} number - The number to humanize.
    * @return {string} The humanized number.
    */
-  var L = function b(a) {
+  var V = function b(a) {
     if (a < 1000) {
       return a;
     }
-    return (0,numbro__WEBPACK_IMPORTED_MODULE_18__["default"])(a).format({
+    return (0,numbro__WEBPACK_IMPORTED_MODULE_8__["default"])(a).format({
       mantissa: 1,
       average: true
     });
   };
-  var M = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
-    title: __('Layout', 'wp-plugin-info-card')
-  }, "hi"));
-  var N = useBlockProps({
+  var W = /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_13__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Overrides', 'wp-plugin-info-card'),
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Name Override', 'wp-plugin-info-card'),
+    value: l,
+    onChange: function b(a) {
+      return d({
+        nameOverride: a
+      });
+    },
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Override the name of the repo.', 'wp-plugin-info-card')
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Login Override', 'wp-plugin-info-card'),
+    value: m,
+    onChange: function b(a) {
+      return d({
+        loginOverride: a
+      });
+    },
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Override the login of the repo.', 'wp-plugin-info-card')
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Sponsors URL Override', 'wp-plugin-info-card'),
+    value: n,
+    type: "url",
+    onChange: function b(a) {
+      return d({
+        sponsorsUrlOverride: a
+      });
+    },
+    placeholder: "https://",
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Override the sponsors URL of the repo.', 'wp-plugin-info-card')
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Organization URL Override', 'wp-plugin-info-card'),
+    value: o,
+    type: "url",
+    placeholder: "https://",
+    onChange: function b(a) {
+      return d({
+        organizationUrlOverride: a
+      });
+    },
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Override the organization URL of the repo.', 'wp-plugin-info-card')
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Version Override', 'wp-plugin-info-card'),
+    value: p,
+    onChange: function b(a) {
+      return d({
+        versionOverride: a
+      });
+    },
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Override the version of the repo.', 'wp-plugin-info-card')
+  })));
+  var X = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_13__.useBlockProps)({
     className: classnames__WEBPACK_IMPORTED_MODULE_0___default()("wppic-github-info-card align".concat(k))
   });
-  var O = [{
-    label: __('Large', 'wp-plugin-info-card'),
+  var Y = [{
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Large', 'wp-plugin-info-card'),
     value: 'large'
   }, {
-    label: __('Card', 'wp-plugin-info-card'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Card', 'wp-plugin-info-card'),
     value: 'card'
   }];
 
   /**
    * Get the layout of the parent block.
    *
-   * @returns {string} The layout of the parent block.
+   * @return {string} The layout of the parent block.
    */
-  var P = function a() {
+  var Z = function a() {
     var b;
-    var c = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getSelectedBlockClientId();
+    var c = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.select)('core/block-editor').getSelectedBlockClientId();
     if (!c) {
       return '';
     }
-    var d = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getBlockRootClientId(c);
+    var d = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.select)('core/block-editor').getBlockRootClientId(c);
     if (!d) {
       return '';
     }
-    var e = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getBlock(d);
+    var e = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.select)('core/block-editor').getBlock(d);
     if (!e) {
       return '';
     }
@@ -21907,43 +21877,62 @@ var _GitHubInfoCard = function b(a) {
       }
     }));
   }
-  if (v) {
-    return /*#__PURE__*/React.createElement("div", N, /*#__PURE__*/React.createElement("div", {
+  if (A) {
+    return /*#__PURE__*/React.createElement("div", X, /*#__PURE__*/React.createElement("div", {
       className: "wppic-loading-placeholder"
     }, /*#__PURE__*/React.createElement("div", {
       className: "wppic-loading"
-    }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_3__["default"], {
       size: "45"
     }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
       className: "wppic-spinner"
-    }, /*#__PURE__*/React.createElement(Spinner, null)))));
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.Spinner, null)))));
   }
-  var Q = /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_16__.Fragment, null, z && /*#__PURE__*/React.createElement("div", {
+
+  /**
+   * Get the text for the button.
+   *
+   * @return {string} The text for the button.
+   */
+  var $ = function a() {
+    var b = P();
+    switch (b) {
+      case 'github':
+        return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('View on GitHub', 'wp-plugin-info-card');
+      case 'website':
+        return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('View Website', 'wp-plugin-info-card');
+      case 'sponsor':
+        return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Sponsor', 'wp-plugin-info-card');
+      default:
+        return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('View on GitHub', 'wp-plugin-info-card');
+    }
+  };
+  var _ = /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_6__.Fragment, null, E && /*#__PURE__*/React.createElement("div", {
     className: "wppic-query-block wppic-query-block-panel"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-block-svg"
-  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_3__["default"], {
     size: "75"
   })), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-tab-panel"
-  }, /*#__PURE__*/React.createElement(TextControl, {
-    label: __('GitHub Username or GitHub Repo URL', 'wp-plugin-info-card'),
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('GitHub Username or GitHub Repo URL', 'wp-plugin-info-card'),
     id: "search-github-username",
     value: h,
     onChange: function b(a) {
       // Check for URL so we don't paste in the slug AND url.
-      if ((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_14__.isURL)(a)) {
+      if ((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_4__.isURL)(a)) {
         return;
       }
       d({
         username: a
       });
     },
-    help: __('Enter a GitHub username or GitHub repo URL.', 'wp-plugin-info-card'),
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Enter a GitHub username or GitHub repo URL.', 'wp-plugin-info-card'),
     onPaste: function b(a) {
       // Get contents from clipboard.
       var c = a.clipboardData.getData('text/plain').trim();
-      if ((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_14__.isURL)(c)) {
+      if ((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_4__.isURL)(c)) {
         // Extract out the slug from the URL.
         var e = /https:\/\/github\.com\/([^/]*)\/([^/]*)/;
         if (!e.test(c)) {
@@ -21959,7 +21948,7 @@ var _GitHubInfoCard = function b(a) {
     },
     onBlur: function a() {
       // If the username is a URL, extract out the username.
-      if ((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_14__.isURL)(h)) {
+      if ((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_4__.isURL)(h)) {
         // Extract out the username from the URL.
         var b = /https:\/\/github\.com\/([^/]*)\/([^/]*)/;
         if (!b.test(clipboardData)) {
@@ -21973,9 +21962,9 @@ var _GitHubInfoCard = function b(a) {
         });
       }
     },
-    ref: E
-  }), /*#__PURE__*/React.createElement(TextControl, {
-    label: __('GitHub Repo', 'wp-plugin-info-card'),
+    ref: J
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('GitHub Repo', 'wp-plugin-info-card'),
     id: "search-github-repo",
     value: j,
     onChange: function b(a) {
@@ -21984,14 +21973,14 @@ var _GitHubInfoCard = function b(a) {
       });
       setRepo(a);
     }
-  }), r && /*#__PURE__*/React.createElement(Notice, {
+  }), w && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.Notice, {
     status: "error",
     isDismissible: false
-  }, __('No data found for the given slug.', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('No data found for the given slug.', 'wp-plugin-info-card'))), /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-gutenberg-button"
-  }, /*#__PURE__*/React.createElement(Button, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.Button, {
     iconSize: 20,
-    icon: /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    icon: /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_3__["default"], {
       size: "25"
     }),
     isSecondary: true,
@@ -22001,92 +21990,92 @@ var _GitHubInfoCard = function b(a) {
       d({
         loading: false
       });
-      I(a);
+      T(a);
     }
-  }, __('Preview and Configure', 'wp-plugin-info-card')))), v && /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_16__.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Preview and Configure', 'wp-plugin-info-card')))), A && /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_6__.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "wppic-loading-placeholder"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-loading"
-  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  }, /*#__PURE__*/React.createElement(_Logo__WEBPACK_IMPORTED_MODULE_3__["default"], {
     size: "45"
   }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
     className: "wppic-spinner"
-  }, /*#__PURE__*/React.createElement(Spinner, null))))), !z && !v && /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_16__.Fragment, null, M, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.Spinner, null))))), !E && !A && /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_6__.Fragment, null, W, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_13__.BlockControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.ToolbarGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.ToolbarButton, {
     icon: "edit",
-    title: __('Edit and Configure', 'wp-plugin-info-card'),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Edit and Configure', 'wp-plugin-info-card'),
     onClick: function a() {
-      return A(true);
+      return F(true);
     }
-  })), /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.ToolbarGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.ToolbarButton, {
     icon: "update",
-    title: __('Refresh', 'wp-plugin-info-card'),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Refresh', 'wp-plugin-info-card'),
     onClick: function a() {
-      return H();
+      return S();
     }
-  })), /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarItem, {
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.ToolbarGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.ToolbarItem, {
     as: "button"
   }, function (a) {
-    return /*#__PURE__*/React.createElement(DropdownMenu, {
+    return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.DropdownMenu, {
       toggleProps: a,
-      label: __('Select Theme', 'wp-plugin-info-card'),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Select Theme', 'wp-plugin-info-card'),
       icon: "admin-customizer"
     }, function (a) {
       var b = a.onClose;
-      return /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_16__.Fragment, null, /*#__PURE__*/React.createElement(MenuItemsChoice, {
-        choices: F(),
+      return /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_6__.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.MenuItemsChoice, {
+        choices: Q(),
         onSelect: function c(a) {
-          var d = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getSelectedBlockClientId();
+          var d = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.select)('core/block-editor').getSelectedBlockClientId();
           if (!d) {
             return;
           }
-          var e = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getBlockRootClientId(d);
+          var e = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.select)('core/block-editor').getBlockRootClientId(d);
           if (!e) {
             return;
           }
-          var f = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getBlock(e);
+          var f = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.select)('core/block-editor').getBlock(e);
           if (!f) {
             return;
           }
           var g = _objectSpread(_objectSpread({}, f.attributes), {}, {
             className: a
           });
-          (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.dispatch)('core/block-editor').updateBlockAttributes(e, g);
+          (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.dispatch)('core/block-editor').updateBlockAttributes(e, g);
           b();
         },
-        value: G()
+        value: R()
       }));
     });
-  })), /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarItem, {
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.ToolbarGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.ToolbarItem, {
     as: "button"
   }, function (a) {
-    return /*#__PURE__*/React.createElement(DropdownMenu, {
+    return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.DropdownMenu, {
       toggleProps: a,
-      label: __('Select a Layout', 'wp-plugin-info-card'),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Select a Layout', 'wp-plugin-info-card'),
       icon: "layout"
     }, function (a) {
       var b = a.onClose;
-      return /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_16__.Fragment, null, /*#__PURE__*/React.createElement(MenuItemsChoice, {
-        choices: O,
+      return /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_6__.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.MenuItemsChoice, {
+        choices: Y,
         onSelect: function c(a) {
-          var d = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getSelectedBlockClientId();
+          var d = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.select)('core/block-editor').getSelectedBlockClientId();
           if (!d) {
             return;
           }
-          var e = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getBlockRootClientId(d);
+          var e = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.select)('core/block-editor').getBlockRootClientId(d);
           if (!e) {
             return;
           }
-          var f = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.select)('core/block-editor').getBlock(e);
+          var f = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.select)('core/block-editor').getBlock(e);
           if (!f) {
             return;
           }
           var g = _objectSpread(_objectSpread({}, f.attributes), {}, {
             layout: a
           });
-          (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_19__.dispatch)('core/block-editor').updateBlockAttributes(e, g);
+          (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.dispatch)('core/block-editor').updateBlockAttributes(e, g);
           b();
         },
-        value: P()
+        value: Z()
       }));
     });
   }))), /*#__PURE__*/React.createElement("div", {
@@ -22094,108 +22083,111 @@ var _GitHubInfoCard = function b(a) {
     className: classnames__WEBPACK_IMPORTED_MODULE_0___default()('is-placeholder', 'wp-block-github-info-card', "align".concat(k))
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-wrapper"
-  }, /*#__PURE__*/React.createElement("div", {
+  }, L() && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-header"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-header-left"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-header-language"
-  }, g.language), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(g.language)), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-header-license"
-  }, g.license)), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(g.license))), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-header-right"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-header-icon wppic-github-info-card-icon-home"
-  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__.HomeIcon, {
+  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_5__.HomeIcon, {
     width: 20,
     height: 20
   })), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-header-icon wppic-github-info-card-icon-github"
-  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__.GitHubIcon, {
+  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_5__.GitHubIcon, {
     width: 20,
     height: 20
   })), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-header-icon wppic-github-info-card-icon-heart"
-  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__.HeartIcon, {
+  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_5__.HeartIcon, {
     width: 20,
     height: 20
   })), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-header-icon wppic-github-info-card-icon-star"
-  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__.StarIcon, {
+  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_5__.StarIcon, {
     width: 20,
     height: 20
-  })))), /*#__PURE__*/React.createElement("div", {
+  }))))), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-author-section"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-author-section-avatar"
   }, /*#__PURE__*/React.createElement("img", {
-    src: g.avatar,
-    alt: g.full_name
+    src: (0,_wordpress_url__WEBPACK_IMPORTED_MODULE_4__.isURL)(g.avatar) ? g.avatar : '',
+    alt: (0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(g.full_name)
   })), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-author-section-info"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-author-section-name"
-  }, g.name), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(l || g.name)), M() && /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-author-section-login"
-  }, __('By', 'wp-plugin-info-card'), " ", g.login))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('By', 'wp-plugin-info-card'), " ", (0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(m || g.login)))), N() && /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item-icon"
-  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__.StarIcon, {
+  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_5__.StarIcon, {
     width: 20,
     height: 20
   })), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item-text"
-  }, L(g.stargazers_count))), /*#__PURE__*/React.createElement("div", {
+  }, V(parseInt(g.stargazers_count)))), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item-icon"
-  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__.ForkIcon, {
+  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_5__.ForkIcon, {
     width: 20,
     height: 20
   })), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item-text"
-  }, L(g.forks_count))), /*#__PURE__*/React.createElement("div", {
+  }, V(parseInt(g.forks_count)))), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item-icon"
-  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__.EyeIcon, {
+  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_5__.EyeIcon, {
     width: 20,
     height: 20
   })), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item-text"
-  }, L(g.subscribers_count))), /*#__PURE__*/React.createElement("div", {
+  }, V(parseInt(g.subscribers_count)))), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item-icon"
-  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__.CodeIcon, {
+  }, /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_5__.CodeIcon, {
     width: 20,
     height: 20
   })), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item-text"
-  }, g.latest_release_tag_name))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.__experimentalTruncate, {
+    ellipsizeMode: "tail",
+    limit: 10
+  }, (0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(p || g.latest_release_tag_name))))), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-description"
-  }, g.description), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(g.description)), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-buttons"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-buttons-left"
-  }, /*#__PURE__*/React.createElement("div", {
+  }, O() && /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-last-updated"
   }, /*#__PURE__*/React.createElement("span", {
     className: "wppic-github-info-card-last-updated-label"
-  }, __('Last updated:', 'wp-plugin-info-card')), " ", K(g.updated_at))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Last updated:', 'wp-plugin-info-card')), " ", U((0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(g.updated_at)))), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-buttons-right"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-buttons-right-button"
-  }, /*#__PURE__*/React.createElement(Button, {
-    className: "wppic-github-button button-reset",
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_12__.Button, {
+    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()('wppic-github-button button-reset', "wppic-github-button-".concat(P())),
     variant: "link"
-  }, __('View on GitHub', 'wp-plugin-info-card')))))))));
-  return /*#__PURE__*/React.createElement("div", N, Q);
+  }, $()))))))));
+  return /*#__PURE__*/React.createElement("div", X, _);
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_GitHubInfoCard);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GitHubInfoCard);
 
 /***/ }),
 
@@ -22239,7 +22231,7 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__, {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"GitHub Info Card","apiVersion":3,"name":"wp-plugin-info-card/github-info-card-grid","category":"wp-plugin-info-card","children":["wp-plugin-info-card/github-info-card"],"icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 640 640\' width=\'24\' height=\'24\'><path fill=\'currentColor\' d=\'M237.9 461.4C237.9 463.4 235.6 465 232.7 465C229.4 465.3 227.1 463.7 227.1 461.4C227.1 459.4 229.4 457.8 232.3 457.8C235.3 457.5 237.9 459.1 237.9 461.4zM206.8 456.9C206.1 458.9 208.1 461.2 211.1 461.8C213.7 462.8 216.7 461.8 217.3 459.8C217.9 457.8 216 455.5 213 454.6C210.4 453.9 207.5 454.9 206.8 456.9zM251 455.2C248.1 455.9 246.1 457.8 246.4 460.1C246.7 462.1 249.3 463.4 252.3 462.7C255.2 462 257.2 460.1 256.9 458.1C256.6 456.2 253.9 454.9 251 455.2zM316.8 72C178.1 72 72 177.3 72 316C72 426.9 141.8 521.8 241.5 555.2C254.3 557.5 258.8 549.6 258.8 543.1C258.8 536.9 258.5 502.7 258.5 481.7C258.5 481.7 188.5 496.7 173.8 451.9C173.8 451.9 162.4 422.8 146 415.3C146 415.3 123.1 399.6 147.6 399.9C147.6 399.9 172.5 401.9 186.2 425.7C208.1 464.3 244.8 453.2 259.1 446.6C261.4 430.6 267.9 419.5 275.1 412.9C219.2 406.7 162.8 398.6 162.8 302.4C162.8 274.9 170.4 261.1 186.4 243.5C183.8 237 175.3 210.2 189 175.6C209.9 169.1 258 202.6 258 202.6C278 197 299.5 194.1 320.8 194.1C342.1 194.1 363.6 197 383.6 202.6C383.6 202.6 431.7 169 452.6 175.6C466.3 210.3 457.8 237 455.2 243.5C471.2 261.2 481 275 481 302.4C481 398.9 422.1 406.6 366.2 412.9C375.4 420.8 383.2 435.8 383.2 459.3C383.2 493 382.9 534.7 382.9 542.9C382.9 549.4 387.5 557.3 400.2 555C500.2 521.8 568 426.9 568 316C568 177.3 455.5 72 316.8 72zM169.2 416.9C167.9 417.9 168.2 420.2 169.9 422.1C171.5 423.7 173.8 424.4 175.1 423.1C176.4 422.1 176.1 419.8 174.4 417.9C172.8 416.3 170.5 415.6 169.2 416.9zM158.4 408.8C157.7 410.1 158.7 411.7 160.7 412.7C162.3 413.7 164.3 413.4 165 412C165.7 410.7 164.7 409.1 162.7 408.1C160.7 407.5 159.1 407.8 158.4 408.8zM190.8 444.4C189.2 445.7 189.8 448.7 192.1 450.6C194.4 452.9 197.3 453.2 198.6 451.6C199.9 450.3 199.3 447.3 197.3 445.4C195.1 443.1 192.1 442.8 190.8 444.4zM179.4 429.7C177.8 430.7 177.8 433.3 179.4 435.6C181 437.9 183.7 438.9 185 437.9C186.6 436.6 186.6 434 185 431.7C183.6 429.4 181 428.4 179.4 429.7z\'/></svg>","description":"Add a beautiful GitHub repo info card grid to your site.","keywords":["github","repo","card","theme"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"preview":{"type":"boolean","default":false},"layout":{"type":"string","default":"large"}},"providesContext":{"wppic/github-grid-className":"className","wppic/github-grid-layout":"layout"},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["center","wide","full"],"className":true},"styles":[{"name":"wppic-github-light","label":"GitHub Light","isDefault":true},{"name":"wppic-github-dark","label":"GitHub Dark","isDefault":false},{"name":"wppic-github-colorful","label":"Colorful","isDefault":false},{"name":"wppic-github-bw","label":"Black & White","isDefault":false},{"name":"wppic-github-purple","label":"Purple","isDefault":false},{"name":"wppic-github-custom","label":"Custom","isDefault":false}],"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"],"style":"wppic-github-info-card"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"GitHub Info Card","apiVersion":3,"name":"wp-plugin-info-card/github-info-card-grid","category":"wp-plugin-info-card","children":["wp-plugin-info-card/github-info-card"],"icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 640 640\' width=\'24\' height=\'24\'><path fill=\'currentColor\' d=\'M237.9 461.4C237.9 463.4 235.6 465 232.7 465C229.4 465.3 227.1 463.7 227.1 461.4C227.1 459.4 229.4 457.8 232.3 457.8C235.3 457.5 237.9 459.1 237.9 461.4zM206.8 456.9C206.1 458.9 208.1 461.2 211.1 461.8C213.7 462.8 216.7 461.8 217.3 459.8C217.9 457.8 216 455.5 213 454.6C210.4 453.9 207.5 454.9 206.8 456.9zM251 455.2C248.1 455.9 246.1 457.8 246.4 460.1C246.7 462.1 249.3 463.4 252.3 462.7C255.2 462 257.2 460.1 256.9 458.1C256.6 456.2 253.9 454.9 251 455.2zM316.8 72C178.1 72 72 177.3 72 316C72 426.9 141.8 521.8 241.5 555.2C254.3 557.5 258.8 549.6 258.8 543.1C258.8 536.9 258.5 502.7 258.5 481.7C258.5 481.7 188.5 496.7 173.8 451.9C173.8 451.9 162.4 422.8 146 415.3C146 415.3 123.1 399.6 147.6 399.9C147.6 399.9 172.5 401.9 186.2 425.7C208.1 464.3 244.8 453.2 259.1 446.6C261.4 430.6 267.9 419.5 275.1 412.9C219.2 406.7 162.8 398.6 162.8 302.4C162.8 274.9 170.4 261.1 186.4 243.5C183.8 237 175.3 210.2 189 175.6C209.9 169.1 258 202.6 258 202.6C278 197 299.5 194.1 320.8 194.1C342.1 194.1 363.6 197 383.6 202.6C383.6 202.6 431.7 169 452.6 175.6C466.3 210.3 457.8 237 455.2 243.5C471.2 261.2 481 275 481 302.4C481 398.9 422.1 406.6 366.2 412.9C375.4 420.8 383.2 435.8 383.2 459.3C383.2 493 382.9 534.7 382.9 542.9C382.9 549.4 387.5 557.3 400.2 555C500.2 521.8 568 426.9 568 316C568 177.3 455.5 72 316.8 72zM169.2 416.9C167.9 417.9 168.2 420.2 169.9 422.1C171.5 423.7 173.8 424.4 175.1 423.1C176.4 422.1 176.1 419.8 174.4 417.9C172.8 416.3 170.5 415.6 169.2 416.9zM158.4 408.8C157.7 410.1 158.7 411.7 160.7 412.7C162.3 413.7 164.3 413.4 165 412C165.7 410.7 164.7 409.1 162.7 408.1C160.7 407.5 159.1 407.8 158.4 408.8zM190.8 444.4C189.2 445.7 189.8 448.7 192.1 450.6C194.4 452.9 197.3 453.2 198.6 451.6C199.9 450.3 199.3 447.3 197.3 445.4C195.1 443.1 192.1 442.8 190.8 444.4zM179.4 429.7C177.8 430.7 177.8 433.3 179.4 435.6C181 437.9 183.7 438.9 185 437.9C186.6 436.6 186.6 434 185 431.7C183.6 429.4 181 428.4 179.4 429.7z\'/></svg>","description":"Add a beautiful GitHub repo info card grid to your site.","keywords":["github","repo","card","theme"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"uniqueId":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"layout":{"type":"string","default":"large"},"showTopBar":{"type":"boolean","default":true},"showAuthorBar":{"type":"boolean","default":true},"showStatsBar":{"type":"boolean","default":true},"showLastUpdated":{"type":"boolean","default":true},"buttonType":{"type":"string","default":"github"}},"providesContext":{"wppic/github-grid-uniqueId":"uniqueId","wppic/github-grid-className":"className","wppic/github-grid-layout":"layout","wppic/github-grid-showTopBar":"showTopBar","wppic/github-grid-showAuthorBar":"showAuthorBar","wppic/github-grid-showStatsBar":"showStatsBar","wppic/github-grid-showLastUpdated":"showLastUpdated","wppic/github-grid-buttonType":"buttonType"},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["center","wide","full"],"className":true},"styles":[{"name":"wppic-github-light","label":"GitHub Light","isDefault":true},{"name":"wppic-github-dark","label":"GitHub Dark","isDefault":false},{"name":"wppic-github-colorful","label":"Colorful","isDefault":false},{"name":"wppic-github-bw","label":"Black & White","isDefault":false},{"name":"wppic-github-purple","label":"Purple","isDefault":false},{"name":"wppic-github-custom","label":"Custom","isDefault":false}],"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"],"style":"wppic-github-info-card"}');
 
 /***/ }),
 
@@ -22256,34 +22248,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/escape-html */ "@wordpress/escape-html");
-/* harmony import */ var _wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_html_entities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/html-entities */ "@wordpress/html-entities");
-/* harmony import */ var _wordpress_html_entities__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_html_entities__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _templates_PluginFlex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../templates/PluginFlex */ "./src/blocks/templates/PluginFlex.js");
-/* harmony import */ var _templates_PluginCard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../templates/PluginCard */ "./src/blocks/templates/PluginCard.js");
-/* harmony import */ var _templates_PluginLarge__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../templates/PluginLarge */ "./src/blocks/templates/PluginLarge.js");
-/* harmony import */ var _templates_PluginWordPress__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../templates/PluginWordPress */ "./src/blocks/templates/PluginWordPress.js");
-/* harmony import */ var _templates_PluginRatingsCard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../templates/PluginRatingsCard */ "./src/blocks/templates/PluginRatingsCard.js");
-/* harmony import */ var _templates_ThemeFlex__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../templates/ThemeFlex */ "./src/blocks/templates/ThemeFlex.js");
-/* harmony import */ var _templates_ThemeWordPress__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../templates/ThemeWordPress */ "./src/blocks/templates/ThemeWordPress.js");
-/* harmony import */ var _templates_ThemeLarge__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../templates/ThemeLarge */ "./src/blocks/templates/ThemeLarge.js");
-/* harmony import */ var _templates_ThemeCard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../templates/ThemeCard */ "./src/blocks/templates/ThemeCard.js");
-/* harmony import */ var _templates_ThemeRatingsCard__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../templates/ThemeRatingsCard */ "./src/blocks/templates/ThemeRatingsCard.js");
-/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../Logo */ "./src/blocks/Logo.js");
-/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
-/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _components_GitHubIcons__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/GitHubIcons */ "./src/blocks/components/GitHubIcons.js");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _wordpress_date__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @wordpress/date */ "@wordpress/date");
-/* harmony import */ var _wordpress_date__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_wordpress_date__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_18__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_19__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_20__);
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_GitHubIcons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/GitHubIcons */ "./src/blocks/components/GitHubIcons.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_date__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/date */ "@wordpress/date");
+/* harmony import */ var _wordpress_date__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_date__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../store */ "./src/blocks/store/index.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_10__);
 /* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
@@ -22303,41 +22285,123 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-var useInstanceId = wp.compose.useInstanceId;
 var _GitHubInfoCardGrid = function b(a) {
   var c = a.attributes,
     d = a.setAttributes;
-  var e = useInstanceId(_GitHubInfoCardGrid, 'wp-plugin-info-card-id');
+  var e = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_10__.useInstanceId)(_GitHubInfoCardGrid, 'wp-plugin-info-card-id');
   var f = c.preview,
     g = c.align,
     h = c.className,
-    i = c.layout;
-  var j = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_20__.useInnerBlocksProps)({
+    i = c.layout,
+    j = c.showTopBar,
+    k = c.showAuthorBar,
+    l = c.showStatsBar,
+    m = c.showLastUpdated,
+    n = c.buttonType;
+  var o = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_7__.useSelect)(function (a) {
+      return {
+        getShowTopBar: a((0,_store__WEBPACK_IMPORTED_MODULE_5__.blockStore)(e)).getShowTopBar,
+        getShowStatsBar: a((0,_store__WEBPACK_IMPORTED_MODULE_5__.blockStore)(e)).getShowStatsBar,
+        getShowAuthorBar: a((0,_store__WEBPACK_IMPORTED_MODULE_5__.blockStore)(e)).getShowAuthorBar,
+        getShowLastUpdated: a((0,_store__WEBPACK_IMPORTED_MODULE_5__.blockStore)(e)).getShowLastUpdated,
+        getButtonType: a((0,_store__WEBPACK_IMPORTED_MODULE_5__.blockStore)(e)).getButtonType
+      };
+    }),
+    p = o.getShowTopBar,
+    q = o.getShowStatsBar,
+    r = o.getShowAuthorBar,
+    s = o.getShowLastUpdated,
+    t = o.getButtonType;
+  var u = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_7__.useDispatch)((0,_store__WEBPACK_IMPORTED_MODULE_5__.blockStore)(e)),
+    v = u.setShowTopBar,
+    w = u.setShowStatsBar,
+    x = u.setShowLastUpdated,
+    y = u.setButtonType,
+    z = u.setShowAuthorBar;
+
+  // Set defaults.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+    v(c.showTopBar);
+    w(c.showStatsBar);
+    x(c.showLastUpdated);
+    y(c.buttonType);
+  }, []);
+  var A = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_9__.useInnerBlocksProps)({
     className: 'wppic-github-info-card-grid'
   }, {
     allowedBlocks: ['wp-plugin-info-card/github-info-card'],
     template: [['wp-plugin-info-card/github-info-card']],
     templateInsertUpdatesSelection: true
   });
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_16__.useEffect)(function () {
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     d({
       uniqueId: e
     });
   }, []);
-  var k = /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_20__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_19__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_18__.__)('Layout', 'wp-plugin-info-card')
-  }, "hi"));
-  var l = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_20__.useBlockProps)({
+  var B = /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_9__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Layout', 'wp-plugin-info-card')
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Show Top Bar', 'wp-plugin-info-card'),
+    checked: j,
+    onChange: function b(a) {
+      v(a);
+      d({
+        showTopBar: a
+      });
+    },
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Show the top bar with the icons.', 'wp-plugin-info-card')
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Show Stats Bar', 'wp-plugin-info-card'),
+    checked: l,
+    onChange: function b(a) {
+      w(a);
+      d({
+        showStatsBar: a
+      });
+    },
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Show the stats bar with the plugin stats.', 'wp-plugin-info-card')
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Show Author Bar', 'wp-plugin-info-card'),
+    checked: k,
+    onChange: function b(a) {
+      z(a);
+      d({
+        showAuthorBar: a
+      });
+    },
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Show the author bar with the Organization Name and login.', 'wp-plugin-info-card')
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Show Last Updated', 'wp-plugin-info-card'),
+    checked: m,
+    onChange: function b(a) {
+      x(a);
+      d({
+        showLastUpdated: a
+      });
+    },
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Show the last updated date.', 'wp-plugin-info-card')
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Button Type', 'wp-plugin-info-card'),
+    value: n,
+    onChange: function b(a) {
+      y(a);
+      d({
+        buttonType: a
+      });
+    },
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('View on GitHub', 'wp-plugin-info-card'),
+      value: 'github'
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('View Website', 'wp-plugin-info-card'),
+      value: 'website'
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Sponsor', 'wp-plugin-info-card'),
+      value: 'sponsor'
+    }],
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Select the type of button to display and where it will link to.', 'wp-plugin-info-card')
+  })));
+  var C = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_9__.useBlockProps)({
     className: classnames__WEBPACK_IMPORTED_MODULE_0___default()("wppic-github-info-card align".concat(g, " layout-").concat(i))
   });
   if (f) {
@@ -22354,7 +22418,7 @@ var _GitHubInfoCardGrid = function b(a) {
       }
     }));
   }
-  var m = [{
+  var D = [{
     label: 'GitHub Light',
     value: 'is-style-wppic-github-light'
   }, {
@@ -22370,25 +22434,25 @@ var _GitHubInfoCardGrid = function b(a) {
     label: 'GitHub Custom',
     value: 'is-style-wppic-github-custom'
   }];
-  var n = [{
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_18__.__)('Large', 'wp-plugin-info-card'),
+  var E = [{
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Large', 'wp-plugin-info-card'),
     value: 'large'
   }, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_18__.__)('Card', 'wp-plugin-info-card'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Card', 'wp-plugin-info-card'),
     value: 'card'
   }];
-  var o = function a() {
-    return /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_20__.BlockControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_19__.ToolbarGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_19__.ToolbarItem, {
+  var F = function a() {
+    return /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_9__.BlockControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.ToolbarGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.ToolbarItem, {
       as: "button"
     }, function (a) {
-      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_19__.DropdownMenu, {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.DropdownMenu, {
         toggleProps: a,
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_18__.__)('Select Theme', 'wp-plugin-info-card'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Select Theme', 'wp-plugin-info-card'),
         icon: "admin-customizer"
       }, function (a) {
         var b = a.onClose;
-        return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_16__.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_19__.MenuItemsChoice, {
-          choices: m,
+        return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.MenuItemsChoice, {
+          choices: D,
           onSelect: function c(a) {
             d({
               className: a
@@ -22398,17 +22462,17 @@ var _GitHubInfoCardGrid = function b(a) {
           value: c.className
         }));
       });
-    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_19__.ToolbarGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_19__.ToolbarItem, {
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.ToolbarGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.ToolbarItem, {
       as: "button"
     }, function (a) {
-      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_19__.DropdownMenu, {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.DropdownMenu, {
         toggleProps: a,
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_18__.__)('Select a Layout', 'wp-plugin-info-card'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Select a Layout', 'wp-plugin-info-card'),
         icon: "layout"
       }, function (a) {
         var b = a.onClose;
-        return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_16__.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_19__.MenuItemsChoice, {
-          choices: n,
+        return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.MenuItemsChoice, {
+          choices: E,
           onSelect: function c(a) {
             d({
               layout: a
@@ -22421,7 +22485,7 @@ var _GitHubInfoCardGrid = function b(a) {
       });
     })));
   };
-  return /*#__PURE__*/React.createElement("div", l, k, o(), /*#__PURE__*/React.createElement("div", j));
+  return /*#__PURE__*/React.createElement("div", C, B, F(), /*#__PURE__*/React.createElement("div", A));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_GitHubInfoCardGrid);
 
@@ -28310,6 +28374,152 @@ WordPressIcon.propTypes = {
   fill: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string)
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WordPressIcon);
+
+/***/ }),
+
+/***/ "./src/blocks/store/index.js":
+/*!***********************************!*\
+  !*** ./src/blocks/store/index.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   blockStore: () => (/* binding */ blockStore),
+/* harmony export */   getBlockStores: () => (/* binding */ getBlockStores)
+/* harmony export */ });
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(a) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (a) { return typeof a; } : function (a) { return a && "function" == typeof Symbol && a.constructor === Symbol && a !== Symbol.prototype ? "symbol" : typeof a; }, _typeof(a); }
+function ownKeys(a, b) { var c = Object.keys(a); if (Object.getOwnPropertySymbols) { var d = Object.getOwnPropertySymbols(a); b && (d = d.filter(function (b) { return Object.getOwnPropertyDescriptor(a, b).enumerable; })), c.push.apply(c, d); } return c; }
+function _objectSpread(a) { for (var b = 1; b < arguments.length; b++) { var c = null != arguments[b] ? arguments[b] : {}; b % 2 ? ownKeys(Object(c), !0).forEach(function (b) { _defineProperty(a, b, c[b]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(a, Object.getOwnPropertyDescriptors(c)) : ownKeys(Object(c)).forEach(function (b) { Object.defineProperty(a, b, Object.getOwnPropertyDescriptor(c, b)); }); } return a; }
+function _defineProperty(a, b, c) { return (b = _toPropertyKey(b)) in a ? Object.defineProperty(a, b, { value: c, enumerable: !0, configurable: !0, writable: !0 }) : a[b] = c, a; }
+function _toPropertyKey(a) { var b = _toPrimitive(a, "string"); return "symbol" == (typeof b === "undefined" ? "undefined" : _typeof(b)) ? b : b + ""; }
+function _toPrimitive(a, b) { if ("object" != _typeof(a) || !a) return a; var c = a[Symbol.toPrimitive]; if (void 0 !== c) { var d = c.call(a, b || "default"); if ("object" != _typeof(d)) return d; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === b ? String : Number)(a); }
+
+var DEFAULT_STATE = {
+  showTopBar: true,
+  showAuthorBar: true,
+  showStatsBar: true,
+  showLastUpdated: true,
+  buttonType: 'github'
+};
+var actions = {
+  setShowTopBar: function b(a) {
+    return {
+      type: 'SET_SHOW_TOP_BAR',
+      showTopBar: a
+    };
+  },
+  setShowAuthorBar: function b(a) {
+    return {
+      type: 'SET_SHOW_AUTHOR_BAR',
+      showAuthorBar: a
+    };
+  },
+  setShowStatsBar: function b(a) {
+    return {
+      type: 'SET_SHOW_STATS_BAR',
+      showStatsBar: a
+    };
+  },
+  setShowLastUpdated: function b(a) {
+    return {
+      type: 'SET_SHOW_LAST_UPDATED',
+      showLastUpdated: a
+    };
+  },
+  setButtonType: function b(a) {
+    return {
+      type: 'SET_BUTTON_TYPE',
+      buttonType: a
+    };
+  }
+};
+var createBlockStore = function b(a) {
+  return (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.createReduxStore)("dlxplugins/github-grid-block/".concat(a), {
+    reducer: function a() {
+      var b = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DEFAULT_STATE;
+      var c = arguments.length > 1 ? arguments[1] : undefined;
+      switch (c.type) {
+        case 'SET_SHOW_TOP_BAR':
+          return _objectSpread(_objectSpread({}, b), {}, {
+            showTopBar: c.showTopBar
+          });
+        case 'SET_SHOW_AUTHOR_BAR':
+          return _objectSpread(_objectSpread({}, b), {}, {
+            showAuthorBar: c.showAuthorBar
+          });
+        case 'SET_SHOW_STATS_BAR':
+          return _objectSpread(_objectSpread({}, b), {}, {
+            showStatsBar: c.showStatsBar
+          });
+        case 'SET_SHOW_LAST_UPDATED':
+          return _objectSpread(_objectSpread({}, b), {}, {
+            showLastUpdated: c.showLastUpdated
+          });
+        case 'SET_BUTTON_TYPE':
+          return _objectSpread(_objectSpread({}, b), {}, {
+            buttonType: c.buttonType
+          });
+        default:
+          return b;
+      }
+    },
+    actions: actions,
+    selectors: {
+      getShowTopBar: function b(a) {
+        return a.showTopBar;
+      },
+      getShowAuthorBar: function b(a) {
+        return a.showAuthorBar;
+      },
+      getShowStatsBar: function b(a) {
+        return a.showStatsBar;
+      },
+      getShowLastUpdated: function b(a) {
+        return a.showLastUpdated;
+      },
+      getButtonType: function b(a) {
+        return a.buttonType;
+      }
+    }
+  });
+};
+var blockStores = [];
+var blockStore = function b(a) {
+  if (!a) {
+    return null;
+  }
+  var c = "dlxplugins/github-grid-block/".concat(a);
+  // Attempt to select the store to check if it's already registered
+  var d = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.select)(c); // can be undefined.
+
+  if (!d) {
+    var e = createBlockStore(a);
+
+    // Make sure store is initialized. Check for instantiate function and return null if it doesn't exist.
+    if (!e.instantiate) {
+      return c;
+    }
+    (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.register)(e);
+    blockStores.push(e);
+    return c;
+  }
+
+  // If the store is already registered, return its instance
+  return c;
+};
+/**
+ * Retrieve a current list of all registered blocks.
+ *
+ * @return {Array} Array of block stores
+ */
+var getBlockStores = function a() {
+  return blockStores;
+};
+
 
 /***/ }),
 

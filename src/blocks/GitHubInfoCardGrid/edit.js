@@ -7,25 +7,13 @@
  */
 import axios from 'axios';
 import classnames from 'classnames';
-import { escapeAttribute } from '@wordpress/escape-html';
-import { decodeEntities } from '@wordpress/html-entities';
-import PluginFlex from '../templates/PluginFlex';
-import PluginCard from '../templates/PluginCard';
-import PluginLarge from '../templates/PluginLarge';
-import PluginWordPress from '../templates/PluginWordPress';
-import PluginRatingsCard from '../templates/PluginRatingsCard';
-import ThemeFlex from '../templates/ThemeFlex';
-import ThemeWordPress from '../templates/ThemeWordPress';
-import ThemeLarge from '../templates/ThemeLarge';
-import ThemeCard from '../templates/ThemeCard';
-import ThemesRatingCard from '../templates/ThemeRatingsCard';
-import Logo from '../Logo';
 import { isURL } from '@wordpress/url';
 import { ForkIcon, HomeIcon, GitHubIcon, HeartIcon, StarIcon, EyeIcon, CodeIcon } from '../components/GitHubIcons';
 import { Fragment, useEffect, useState } from '@wordpress/element';
 import { dateI18n } from '@wordpress/date';
-
+import { blockStore } from '../store';
 import { __ } from '@wordpress/i18n';
+import { useSelect, useDispatch } from '@wordpress/data';
 
 import {
 	PanelBody,
@@ -33,16 +21,12 @@ import {
 	SelectControl,
 	Spinner,
 	TextControl,
+	ToggleControl,
 	ToolbarGroup,
 	ToolbarButton,
 	ToolbarItem,
 	DropdownMenu,
-	TabPanel,
-	Button,
 	MenuItemsChoice,
-	BaseControl,
-	ButtonGroup,
-	Notice,
 } from '@wordpress/components';
 
 import {
@@ -54,18 +38,55 @@ import {
 	useInnerBlocksProps,
 } from '@wordpress/block-editor';
 
-const { useInstanceId } = wp.compose;
+import { useInstanceId } from '@wordpress/compose';
 
 const GitHubInfoCardGrid = ( props ) => {
 	const { attributes, setAttributes } = props;
-	const generatedUniqueId = useInstanceId( GitHubInfoCardGrid, 'wp-plugin-info-card-id' );
+	const blockUniqueId = useInstanceId( GitHubInfoCardGrid, 'wp-plugin-info-card-id' );
 
 	const {
 		preview,
 		align,
 		className,
 		layout,
+		showTopBar,
+		showAuthorBar,
+		showStatsBar,
+		showLastUpdated,
+		buttonType,
 	} = attributes;
+
+	const {
+		getShowTopBar,
+		getShowStatsBar,
+		getShowAuthorBar,
+		getShowLastUpdated,
+		getButtonType,
+	} = useSelect( ( select ) => {
+		return {
+			getShowTopBar: select( blockStore( blockUniqueId ) ).getShowTopBar,
+			getShowStatsBar: select( blockStore( blockUniqueId ) ).getShowStatsBar,
+			getShowAuthorBar: select( blockStore( blockUniqueId ) ).getShowAuthorBar,
+			getShowLastUpdated: select( blockStore( blockUniqueId ) ).getShowLastUpdated,
+			getButtonType: select( blockStore( blockUniqueId ) ).getButtonType,
+		};
+	} );
+
+	const {
+		setShowTopBar,
+		setShowStatsBar,
+		setShowLastUpdated,
+		setButtonType,
+		setShowAuthorBar,
+	} = useDispatch( blockStore( blockUniqueId ) );
+
+	// Set defaults.
+	useEffect( () => {
+		setShowTopBar( attributes.showTopBar );
+		setShowStatsBar( attributes.showStatsBar );
+		setShowLastUpdated( attributes.showLastUpdated );
+		setButtonType( attributes.buttonType );
+	}, [] );
 
 	const innerBlocksProps = useInnerBlocksProps( {
 		className: 'wppic-github-info-card-grid',
@@ -78,13 +99,62 @@ const GitHubInfoCardGrid = ( props ) => {
 	} );
 
 	useEffect( () => {
-		setAttributes( { uniqueId: generatedUniqueId } );
+		setAttributes( { uniqueId: blockUniqueId } );
 	}, [] );
 
 	const inspectorControls = (
 		<InspectorControls>
 			<PanelBody title={ __( 'Layout', 'wp-plugin-info-card' ) }>
-				hi
+				<ToggleControl
+					label={ __( 'Show Top Bar', 'wp-plugin-info-card' ) }
+					checked={ showTopBar }
+					onChange={ ( value ) => {
+						setShowTopBar( value );
+						setAttributes( { showTopBar: value } );
+					} }
+					help={ __( 'Show the top bar with the icons.', 'wp-plugin-info-card' ) }
+				/>
+				<ToggleControl
+					label={ __( 'Show Stats Bar', 'wp-plugin-info-card' ) }
+					checked={ showStatsBar }
+					onChange={ ( value ) => {
+						setShowStatsBar( value );
+						setAttributes( { showStatsBar: value } );
+					} }
+					help={ __( 'Show the stats bar with the plugin stats.', 'wp-plugin-info-card' ) }
+				/>
+				<ToggleControl
+					label={ __( 'Show Author Bar', 'wp-plugin-info-card' ) }
+					checked={ showAuthorBar }
+					onChange={ ( value ) => {
+						setShowAuthorBar( value );
+						setAttributes( { showAuthorBar: value } );
+					} }
+					help={ __( 'Show the author bar with the Organization Name and login.', 'wp-plugin-info-card' ) }
+				/>
+				<ToggleControl
+					label={ __( 'Show Last Updated', 'wp-plugin-info-card' ) }
+					checked={ showLastUpdated }
+					onChange={ ( value ) => {
+						setShowLastUpdated( value );
+						setAttributes( { showLastUpdated: value } );
+					} }
+					help={ __( 'Show the last updated date.', 'wp-plugin-info-card' ) }
+				/>
+				<SelectControl
+					label={ __( 'Button Type', 'wp-plugin-info-card' ) }
+					value={ buttonType }
+					onChange={ ( value ) => {
+						setButtonType( value );
+						setAttributes( { buttonType: value } );
+					} }
+					options={ [
+						{ label: __( 'View on GitHub', 'wp-plugin-info-card' ), value: 'github' },
+						{ label: __( 'View Website', 'wp-plugin-info-card' ), value: 'website' },
+						{ label: __( 'Sponsor', 'wp-plugin-info-card' ), value: 'sponsor' },
+					] }
+					help={ __( 'Select the type of button to display and where it will link to.', 'wp-plugin-info-card' ) }
+				/>
 			</PanelBody>
 		</InspectorControls>
 	);
@@ -114,17 +184,17 @@ const GitHubInfoCardGrid = ( props ) => {
 			label: 'GitHub Dark',
 			value: 'is-style-wppic-github-dark',
 		},
-		
+
 		{
 			label: 'GitHub Colorful',
 			value: 'is-style-wppic-github-colorful',
 		},
-		
+
 		{
 			label: 'GitHub Black & White',
 			value: 'is-style-wppic-github-bw',
 		},
-		
+
 		{
 			label: 'GitHub Custom',
 			value: 'is-style-wppic-github-custom',
@@ -204,7 +274,7 @@ const GitHubInfoCardGrid = ( props ) => {
 				</ToolbarItem>
 			</ToolbarGroup>
 		</BlockControls>
-	)
+	);
 
 	return (
 		<div { ...blockProps }>

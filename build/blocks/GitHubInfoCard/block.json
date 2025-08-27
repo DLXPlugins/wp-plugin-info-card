@@ -43,11 +43,32 @@
     "preview": {
       "type": "boolean",
       "default": false
+    },
+    "nameOverride": {
+      "type": "string",
+      "default": ""
+    },
+    "loginOverride": {
+      "type": "string",
+      "default": ""
+    },
+    "sponsorsUrlOverride": {
+      "type": "string",
+      "default": ""
+    },
+    "organizationUrlOverride": {
+      "type": "string",
+      "default": ""
     }
   },
   "usesContext": [
     "wppic/github-grid-className",
-    "wppic/github-grid-layout"
+    "wppic/github-grid-layout",
+    "wppic/github-grid-uniqueId",
+    "wppic/github-grid-showAuthorBar",
+    "wppic/github-grid-showStatsBar",
+    "wppic/github-grid-showLastUpdated",
+    "wppic/github-grid-buttonType"
   ],
   "example": {
     "attributes": {
