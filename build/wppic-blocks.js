@@ -22362,6 +22362,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Numbers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Numbers */ "./src/blocks/components/Numbers.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../store */ "./src/blocks/store/index.js");
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (a) { for (var b = 1; b < arguments.length; b++) { var c = arguments[b]; for (var d in c) ({}).hasOwnProperty.call(c, d) && (a[d] = c[d]); } return a; }, _extends.apply(null, arguments); }
+function _toConsumableArray(a) { return _arrayWithoutHoles(a) || _iterableToArray(a) || _unsupportedIterableToArray(a) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(a) { if ("undefined" != typeof Symbol && null != a[Symbol.iterator] || null != a["@@iterator"]) return Array.from(a); }
+function _arrayWithoutHoles(a) { if (Array.isArray(a)) return _arrayLikeToArray(a); }
 function _slicedToArray(a, b) { return _arrayWithHoles(a) || _iterableToArrayLimit(a, b) || _unsupportedIterableToArray(a, b) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(b, c) { if (b) { if ("string" == typeof b) return _arrayLikeToArray(b, c); var a = {}.toString.call(b).slice(8, -1); return "Object" === a && b.constructor && (a = b.constructor.name), "Map" === a || "Set" === a ? Array.from(b) : "Arguments" === a || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a) ? _arrayLikeToArray(b, c) : void 0; } }
@@ -22385,6 +22389,55 @@ function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
 
 
 
+var gitHubColors = [{
+  color: '#B9F6DD',
+  name: 'Mint Green',
+  slug: 'mint-green'
+}, {
+  color: '#0E0911',
+  name: 'Charcoal Black',
+  slug: 'charcoal-black'
+}, {
+  color: '#E8851A',
+  name: 'Vibrant Orange',
+  slug: 'vibrant-orange'
+}, {
+  color: '#4C28A7',
+  name: 'Deep Purple',
+  slug: 'deep-purple'
+}, {
+  color: '#F8F7FA',
+  name: 'Soft White',
+  slug: 'soft-white'
+}, {
+  color: '#8A2925',
+  name: 'Brick Red',
+  slug: 'brick-red'
+}, {
+  color: '#A1A8A3',
+  name: 'Cool Gray',
+  slug: 'cool-gray'
+}, {
+  color: '#E078E4',
+  name: 'Lavender Pink',
+  slug: 'lavender-pink'
+}, {
+  color: '#1363F1',
+  name: 'Bright Blue',
+  slug: 'bright-blue'
+}, {
+  color: '#0B682A',
+  name: 'Forest Green',
+  slug: 'forest-green'
+}, {
+  color: '#E6DD73',
+  name: 'Golden Yellow',
+  slug: 'golden-yellow'
+}, {
+  color: '#61EB84',
+  name: 'Lime Green',
+  slug: 'lime-green'
+}];
 var _GitHubInfoCardGrid = function b(a) {
   var c = a.attributes,
     d = a.setAttributes,
@@ -22394,34 +22447,37 @@ var _GitHubInfoCardGrid = function b(a) {
     h = _slicedToArray(g, 2),
     i = h[0],
     j = h[1];
-  var k = c.preview,
-    l = c.align,
-    m = c.className,
-    n = c.layout,
-    o = c.showTopBar,
-    p = c.showAuthorBar,
-    q = c.showStatsBar,
-    r = c.showLastUpdated,
-    s = c.buttonType,
-    t = c.numChildren,
-    u = c.colGap,
-    v = c.rowGap,
-    w = c.cols,
-    x = c.marginSpacing,
-    y = c.marginSpacingTarget,
-    z = c.backgroundColor,
-    A = c.textColor,
-    B = c.iconColor,
-    C = c.iconColorHover,
-    D = c.borderColor,
-    E = c.languageBgColor,
-    F = c.languageTextColor,
-    G = c.sponsorsColor,
-    H = c.buttonBgColor,
-    I = c.buttonBgColorHover,
-    J = c.buttonTextColor,
-    K = c.buttonTextColorHover;
-  var L = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(function (a) {
+  var k = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)([].concat(_toConsumableArray(wppic.palette), gitHubColors)),
+    l = _slicedToArray(k, 1),
+    m = l[0];
+  var n = c.preview,
+    o = c.align,
+    p = c.className,
+    q = c.layout,
+    r = c.showTopBar,
+    s = c.showAuthorBar,
+    t = c.showStatsBar,
+    u = c.showLastUpdated,
+    v = c.buttonType,
+    w = c.numChildren,
+    x = c.colGap,
+    y = c.rowGap,
+    z = c.cols,
+    A = c.marginSpacing,
+    B = c.marginSpacingTarget,
+    C = c.backgroundColor,
+    D = c.textColor,
+    E = c.iconColor,
+    F = c.iconColorHover,
+    G = c.borderColor,
+    H = c.languageBgColor,
+    I = c.languageTextColor,
+    J = c.sponsorsColor,
+    K = c.buttonBgColor,
+    L = c.buttonBgColorHover,
+    M = c.buttonTextColor,
+    N = c.buttonTextColorHover;
+  var O = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(function (a) {
       return {
         getShowTopBar: a((0,_store__WEBPACK_IMPORTED_MODULE_8__.blockStore)(f)).getShowTopBar,
         getShowStatsBar: a((0,_store__WEBPACK_IMPORTED_MODULE_8__.blockStore)(f)).getShowStatsBar,
@@ -22430,45 +22486,45 @@ var _GitHubInfoCardGrid = function b(a) {
         getButtonType: a((0,_store__WEBPACK_IMPORTED_MODULE_8__.blockStore)(f)).getButtonType
       };
     }),
-    M = L.getShowTopBar,
-    N = L.getShowStatsBar,
-    O = L.getShowAuthorBar,
-    P = L.getShowLastUpdated,
-    Q = L.getButtonType;
-  var R = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useDispatch)((0,_store__WEBPACK_IMPORTED_MODULE_8__.blockStore)(f)),
-    S = R.setShowTopBar,
-    T = R.setShowStatsBar,
-    U = R.setShowLastUpdated,
-    V = R.setButtonType,
-    W = R.setShowAuthorBar;
-  var X = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(function (a) {
+    P = O.getShowTopBar,
+    Q = O.getShowStatsBar,
+    R = O.getShowAuthorBar,
+    S = O.getShowLastUpdated,
+    T = O.getButtonType;
+  var U = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useDispatch)((0,_store__WEBPACK_IMPORTED_MODULE_8__.blockStore)(f)),
+    V = U.setShowTopBar,
+    W = U.setShowStatsBar,
+    X = U.setShowLastUpdated,
+    Y = U.setButtonType,
+    Z = U.setShowAuthorBar;
+  var $ = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(function (a) {
     var b = a('core/block-editor').getBlockOrder(e);
     return b.length;
   });
 
   // Set defaults.
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    S(c.showTopBar);
-    T(c.showStatsBar);
-    U(c.showLastUpdated);
-    V(c.buttonType);
+    V(c.showTopBar);
+    W(c.showStatsBar);
+    X(c.showLastUpdated);
+    Y(c.buttonType);
   }, []);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    if (t !== X) {
+    if (w !== $) {
       d({
-        numChildren: X
+        numChildren: $
       });
     }
-  }, [X]);
+  }, [$]);
 
   /**
    * Attempt to check when block styles are changed.
    */
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    if (undefined === m) {
+    if (undefined === p) {
       return;
     }
-    var a = new RegExp(/is-style-([^\s]*)/g).exec(m);
+    var a = new RegExp(/is-style-([^\s]*)/g).exec(p);
     if (null !== a) {
       var b = a[1];
       if ('wppic-github-custom' === b) {
@@ -22477,8 +22533,8 @@ var _GitHubInfoCardGrid = function b(a) {
         j(false);
       }
     }
-  }, [m]);
-  var Y = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useInnerBlocksProps)({
+  }, [p]);
+  var _ = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useInnerBlocksProps)({
     className: 'wppic-github-info-card-grid'
   }, {
     allowedBlocks: ['wp-plugin-info-card/github-info-card'],
@@ -22496,26 +22552,26 @@ var _GitHubInfoCardGrid = function b(a) {
    *
    * @return {Element} The columns interface.
    */
-  var Z = function a() {
+  var aa = function a() {
     return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.BaseControl, {
       id: "col-count",
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select How Many Columns', 'wp-plugin-info-card')
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ButtonGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
-      variant: w === 1 ? 'primary' : 'secondary',
+      variant: z === 1 ? 'primary' : 'secondary',
       onClick: function a() {
         d({
           cols: 1
         });
       }
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('One', 'wp-plugin-info-card')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
-      variant: w === 2 ? 'primary' : 'secondary',
+      variant: z === 2 ? 'primary' : 'secondary',
       onClick: function a() {
         d({
           cols: 2
         });
       }
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Two', 'wp-plugin-info-card')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
-      variant: w === 3 ? 'primary' : 'secondary',
+      variant: z === 3 ? 'primary' : 'secondary',
       onClick: function a() {
         d({
           cols: 3
@@ -22523,7 +22579,7 @@ var _GitHubInfoCardGrid = function b(a) {
       }
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Three', 'wp-plugin-info-card'))));
   };
-  var $ = [{
+  var ba = [{
     value: 'none',
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('None', 'wp-plugin-info-card')
   }, {
@@ -22539,7 +22595,7 @@ var _GitHubInfoCardGrid = function b(a) {
     value: 'extreme',
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Extreme', 'wp-plugin-info-card')
   }];
-  var _ = [{
+  var ca = [{
     value: 'both',
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Both', 'wp-plugin-info-card')
   }, {
@@ -22549,12 +22605,12 @@ var _GitHubInfoCardGrid = function b(a) {
     value: 'bottom',
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bottom', 'wp-plugin-info-card')
   }];
-  var aa = /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.InspectorControls, null, t > 1 && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
+  var da = /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.InspectorControls, null, w > 1 && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Layout', 'wp-plugin-info-card')
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Margin Spacing', 'wp-plugin-info-card'),
-    options: $,
-    value: x,
+    options: ba,
+    value: A,
     onChange: function b(a) {
       d({
         marginSpacing: a
@@ -22562,8 +22618,8 @@ var _GitHubInfoCardGrid = function b(a) {
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Margin Target', 'wp-plugin-info-card'),
-    options: _,
-    value: y,
+    options: ca,
+    value: B,
     onChange: function b(a) {
       d({
         marginSpacingTarget: a
@@ -22571,10 +22627,10 @@ var _GitHubInfoCardGrid = function b(a) {
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
     className: "wppic-panel-rows-cols"
-  }, Z()), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
+  }, aa()), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
     className: "wppic-panel-rows-numbers"
   }, /*#__PURE__*/React.createElement(_components_Numbers__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    value: u,
+    value: x,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Column Gap (in px)', 'wp-plugin-info-card'),
     numbers: [20, 40, 60, 80],
     onClick: function b(a) {
@@ -22586,7 +22642,7 @@ var _GitHubInfoCardGrid = function b(a) {
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
     className: "wppic-panel-rows-numbers"
   }, /*#__PURE__*/React.createElement(_components_Numbers__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    value: v,
+    value: y,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Row Gap (in px)', 'wp-plugin-info-card'),
     numbers: [20, 40, 60, 80],
     onClick: function b(a) {
@@ -22600,7 +22656,7 @@ var _GitHubInfoCardGrid = function b(a) {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Custom Color Settings', 'wp-plugin-info-card'),
     colorSettings: [{
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Background Color', 'wp-plugin-info-card'),
-      value: z,
+      value: C,
       onChange: function b(a) {
         d({
           backgroundColor: a
@@ -22608,7 +22664,7 @@ var _GitHubInfoCardGrid = function b(a) {
       }
     }, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Text Color', 'wp-plugin-info-card'),
-      value: A,
+      value: D,
       onChange: function b(a) {
         d({
           textColor: a
@@ -22616,7 +22672,7 @@ var _GitHubInfoCardGrid = function b(a) {
       }
     }, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Icon Color', 'wp-plugin-info-card'),
-      value: B,
+      value: E,
       onChange: function b(a) {
         d({
           iconColor: a
@@ -22624,7 +22680,7 @@ var _GitHubInfoCardGrid = function b(a) {
       }
     }, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Icon Color Hover', 'wp-plugin-info-card'),
-      value: C,
+      value: F,
       onChange: function b(a) {
         d({
           iconColorHover: a
@@ -22632,7 +22688,7 @@ var _GitHubInfoCardGrid = function b(a) {
       }
     }, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Border Color', 'wp-plugin-info-card'),
-      value: D,
+      value: G,
       onChange: function b(a) {
         d({
           borderColor: a
@@ -22640,7 +22696,7 @@ var _GitHubInfoCardGrid = function b(a) {
       }
     }, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Language Background Color', 'wp-plugin-info-card'),
-      value: E,
+      value: H,
       onChange: function b(a) {
         d({
           languageBgColor: a
@@ -22648,7 +22704,7 @@ var _GitHubInfoCardGrid = function b(a) {
       }
     }, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Language Text Color', 'wp-plugin-info-card'),
-      value: F,
+      value: I,
       onChange: function b(a) {
         d({
           languageTextColor: a
@@ -22656,7 +22712,7 @@ var _GitHubInfoCardGrid = function b(a) {
       }
     }, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Sponsors Color', 'wp-plugin-info-card'),
-      value: G,
+      value: J,
       onChange: function b(a) {
         d({
           sponsorsColor: a
@@ -22664,7 +22720,7 @@ var _GitHubInfoCardGrid = function b(a) {
       }
     }, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Button Background Color', 'wp-plugin-info-card'),
-      value: H,
+      value: K,
       onChange: function b(a) {
         d({
           buttonBgColor: a
@@ -22672,7 +22728,7 @@ var _GitHubInfoCardGrid = function b(a) {
       }
     }, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Button Background Color Hover', 'wp-plugin-info-card'),
-      value: I,
+      value: L,
       onChange: function b(a) {
         d({
           buttonBgColorHover: a
@@ -22680,7 +22736,7 @@ var _GitHubInfoCardGrid = function b(a) {
       }
     }, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Button Text Color', 'wp-plugin-info-card'),
-      value: J,
+      value: M,
       onChange: function b(a) {
         d({
           buttonTextColor: a
@@ -22688,20 +22744,21 @@ var _GitHubInfoCardGrid = function b(a) {
       }
     }, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Button Text Color Hover', 'wp-plugin-info-card'),
-      value: K,
+      value: N,
       onChange: function b(a) {
         d({
           buttonTextColorHover: a
         });
       }
-    }]
+    }],
+    colors: m
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Visibility Controls', 'wp-plugin-info-card')
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show Top Bar', 'wp-plugin-info-card'),
-    checked: o,
+    checked: r,
     onChange: function b(a) {
-      S(a);
+      V(a);
       d({
         showTopBar: a
       });
@@ -22709,9 +22766,9 @@ var _GitHubInfoCardGrid = function b(a) {
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show the top bar with the icons.', 'wp-plugin-info-card')
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show Stats Bar', 'wp-plugin-info-card'),
-    checked: q,
+    checked: t,
     onChange: function b(a) {
-      T(a);
+      W(a);
       d({
         showStatsBar: a
       });
@@ -22719,9 +22776,9 @@ var _GitHubInfoCardGrid = function b(a) {
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show the stats bar with the plugin stats.', 'wp-plugin-info-card')
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show Author Bar', 'wp-plugin-info-card'),
-    checked: p,
+    checked: s,
     onChange: function b(a) {
-      W(a);
+      Z(a);
       d({
         showAuthorBar: a
       });
@@ -22729,9 +22786,9 @@ var _GitHubInfoCardGrid = function b(a) {
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show the author bar with the Organization Name and login.', 'wp-plugin-info-card')
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show Last Updated', 'wp-plugin-info-card'),
-    checked: r,
+    checked: u,
     onChange: function b(a) {
-      U(a);
+      X(a);
       d({
         showLastUpdated: a
       });
@@ -22739,9 +22796,9 @@ var _GitHubInfoCardGrid = function b(a) {
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show the last updated date.', 'wp-plugin-info-card')
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Button Type', 'wp-plugin-info-card'),
-    value: s,
+    value: v,
     onChange: function b(a) {
-      V(a);
+      Y(a);
       d({
         buttonType: a
       });
@@ -22758,12 +22815,12 @@ var _GitHubInfoCardGrid = function b(a) {
     }],
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select the type of button to display and where it will link to.', 'wp-plugin-info-card')
   })));
-  var ba = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useBlockProps)({
-    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()("wppic-github-info-card align".concat(l, " layout-").concat(n, " cols-").concat(t > 1 ? w : 1, " wppic-margin-spacing-").concat(x, " wppic-margin-spacing-target-").concat(y), {
-      'is-grid': t > 1
+  var ea = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useBlockProps)({
+    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()("wppic-github-info-card align".concat(o, " layout-").concat(q, " cols-").concat(w > 1 ? z : 1, " wppic-margin-spacing-").concat(A, " wppic-margin-spacing-target-").concat(B), {
+      'is-grid': w > 1
     })
   });
-  if (k) {
+  if (n) {
     return /*#__PURE__*/React.createElement("div", {
       style: {
         textAlign: 'center'
@@ -22777,7 +22834,7 @@ var _GitHubInfoCardGrid = function b(a) {
       }
     }));
   }
-  var ca = [{
+  var fa = [{
     label: 'GitHub Light',
     value: 'is-style-wppic-github-light'
   }, {
@@ -22793,14 +22850,14 @@ var _GitHubInfoCardGrid = function b(a) {
     label: 'GitHub Custom',
     value: 'is-style-wppic-github-custom'
   }];
-  var da = [{
+  var ga = [{
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Large', 'wp-plugin-info-card'),
     value: 'large'
   }, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Card', 'wp-plugin-info-card'),
     value: 'card'
   }];
-  var ea = function a() {
+  var ha = function a() {
     return /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.BlockControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarItem, {
       as: "button"
     }, function (a) {
@@ -22811,7 +22868,7 @@ var _GitHubInfoCardGrid = function b(a) {
       }, function (a) {
         var b = a.onClose;
         return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.MenuItemsChoice, {
-          choices: ca,
+          choices: fa,
           onSelect: function c(a) {
             d({
               className: a
@@ -22831,7 +22888,7 @@ var _GitHubInfoCardGrid = function b(a) {
       }, function (a) {
         var b = a.onClose;
         return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.MenuItemsChoice, {
-          choices: da,
+          choices: ga,
           onSelect: function c(a) {
             d({
               layout: a
@@ -22839,15 +22896,16 @@ var _GitHubInfoCardGrid = function b(a) {
             setLayout(a);
             b();
           },
-          value: n
+          value: q
         }));
       });
     })));
   };
-  var fa = "\n\t\t#".concat(c.uniqueId, " .wppic-github-info-card-grid {\n\t\t\tdisplay: grid;\n\t\t\tcolumn-gap: ").concat(u, "px;\n\t\t\trow-gap: ").concat(v, "px;\n\t\t}\n\t");
-  return /*#__PURE__*/React.createElement("div", _extends({}, ba, {
+  var ia = "\n\t\t#".concat(c.uniqueId, " .wppic-github-info-card-grid {\n\t\t\tdisplay: grid;\n\t\t\tcolumn-gap: ").concat(x, "px;\n\t\t\trow-gap: ").concat(y, "px;\n\t\t}\n\t");
+  var ja = "\n\t\t#".concat(c.uniqueId, " .wppic-github-info-card {\n\t\t\t--wppic-github-background-color: ").concat(C, ";\n\t\t\t--wppic-github-text-color: ").concat(D, ";\n\t\t\t--wppic-github-icon-color: ").concat(E, ";\n\t\t\t--wppic-github-icon-color-hover: ").concat(F, ";\n\t\t\t--wppic-github-border: ").concat(G, ";\n\t\t\t--wppic-github-language-bg: ").concat(H, ";\n\t\t\t--wppic-github-language-color: ").concat(I, ";\n\t\t\t--wppic-github-sponsors-color: ").concat(J, ";\n\t\t\t--wppic-github-button-bg: ").concat(K, ";\n\t\t\t--wppic-github-button-bg-hover: ").concat(L, ";\n\t\t\t--wppic-github-button-text-color: ").concat(M, ";\n\t\t\t--wppic-github-button-text-color-hover: ").concat(N, ";\n\t\t}\n\t");
+  return /*#__PURE__*/React.createElement("div", _extends({}, ea, {
     id: c.uniqueId
-  }), t > 1 && /*#__PURE__*/React.createElement("style", null, fa), aa, ea(), /*#__PURE__*/React.createElement("div", Y));
+  }), w > 1 && /*#__PURE__*/React.createElement("style", null, ia), i && /*#__PURE__*/React.createElement("style", null, ja), da, ha(), /*#__PURE__*/React.createElement("div", _));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_GitHubInfoCardGrid);
 

@@ -40,10 +40,30 @@ import { useInstanceId } from '@wordpress/compose';
 import NumbersComponent from '../components/Numbers';
 import { blockStore } from '../store';
 
+const gitHubColors = [
+	{ color: '#B9F6DD', name: 'Mint Green', slug: 'mint-green' },
+	{ color: '#0E0911', name: 'Charcoal Black', slug: 'charcoal-black' },
+	{ color: '#E8851A', name: 'Vibrant Orange', slug: 'vibrant-orange' },
+	{ color: '#4C28A7', name: 'Deep Purple', slug: 'deep-purple' },
+	{ color: '#F8F7FA', name: 'Soft White', slug: 'soft-white' },
+	{ color: '#8A2925', name: 'Brick Red', slug: 'brick-red' },
+	{ color: '#A1A8A3', name: 'Cool Gray', slug: 'cool-gray' },
+	{ color: '#E078E4', name: 'Lavender Pink', slug: 'lavender-pink' },
+	{ color: '#1363F1', name: 'Bright Blue', slug: 'bright-blue' },
+	{ color: '#0B682A', name: 'Forest Green', slug: 'forest-green' },
+	{ color: '#E6DD73', name: 'Golden Yellow', slug: 'golden-yellow' },
+	{ color: '#61EB84', name: 'Lime Green', slug: 'lime-green' },
+];
+
 const GitHubInfoCardGrid = ( props ) => {
 	const { attributes, setAttributes, clientId } = props;
 	const blockUniqueId = useInstanceId( GitHubInfoCardGrid, 'wp-plugin-info-card-id' );
 	const [ hasCustomColors, setHasCustomColors ] = useState( false );
+	const [ colors ] = useState( [
+		...wppic.palette,
+		...gitHubColors,
+	] );
+
 	const {
 		preview,
 		align,
@@ -193,6 +213,7 @@ const GitHubInfoCardGrid = ( props ) => {
 			</BaseControl>
 		);
 	};
+
 
 	const marginSpacingOptions = [
 		{ value: 'none', label: __( 'None', 'wp-plugin-info-card' ) },
@@ -347,6 +368,7 @@ const GitHubInfoCardGrid = ( props ) => {
 							},
 						},
 					] }
+					colors={ colors }
 				/>
 			) }
 			<PanelBody title={ __( 'Visibility Controls', 'wp-plugin-info-card' ) }>
@@ -534,10 +556,30 @@ const GitHubInfoCardGrid = ( props ) => {
 		}
 	`;
 
+	const colorStyles = `
+		#${ attributes.uniqueId } .wppic-github-info-card {
+			--wppic-github-background-color: ${ backgroundColor };
+			--wppic-github-text-color: ${ textColor };
+			--wppic-github-icon-color: ${ iconColor };
+			--wppic-github-icon-color-hover: ${ iconColorHover };
+			--wppic-github-border: ${ borderColor };
+			--wppic-github-language-bg: ${ languageBgColor };
+			--wppic-github-language-color: ${ languageTextColor };
+			--wppic-github-sponsors-color: ${ sponsorsColor };
+			--wppic-github-button-bg: ${ buttonBgColor };
+			--wppic-github-button-bg-hover: ${ buttonBgColorHover };
+			--wppic-github-button-text-color: ${ buttonTextColor };
+			--wppic-github-button-text-color-hover: ${ buttonTextColorHover };
+		}
+	`;
+
 	return (
 		<div { ...blockProps } id={ attributes.uniqueId }>
 			{ numChildren > 1 && (
 				<style>{ gridStyles }</style>
+			) }
+			{ hasCustomColors && (
+				<style>{ colorStyles }</style>
 			) }
 			{ inspectorControls }
 			{ getBlockControls() }
