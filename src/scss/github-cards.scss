@@ -263,12 +263,12 @@
 	grid-template-columns: 1fr 1fr;
 	gap: var(--wppic-gap-sm);
 	row-gap: var(--wppic-gap-sm);
+	line-height: 0;
 	@include respond-to('medium') {
 		display: flex;
 		align-items: center;
 		gap: var(--wppic-gap-sm);
 		font-size: 14px;
-		line-height: 1;
 		font-weight: 600;
 		letter-spacing: 0.2em;
 	}

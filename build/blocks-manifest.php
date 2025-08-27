@@ -237,6 +237,10 @@ return array(
 				'type' => 'number',
 				'default' => 0
 			),
+			'className' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'preview' => array(
 				'type' => 'boolean',
 				'default' => false
@@ -284,6 +288,54 @@ return array(
 			'marginSpacingTarget' => array(
 				'type' => 'string',
 				'default' => 'both'
+			),
+			'backgroundColor' => array(
+				'type' => 'string',
+				'default' => '#fff'
+			),
+			'textColor' => array(
+				'type' => 'string',
+				'default' => '#24292f'
+			),
+			'iconColor' => array(
+				'type' => 'string',
+				'default' => '#666'
+			),
+			'iconColorHover' => array(
+				'type' => 'string',
+				'default' => '#111827'
+			),
+			'borderColor' => array(
+				'type' => 'string',
+				'default' => '#d0d7de'
+			),
+			'languageBgColor' => array(
+				'type' => 'string',
+				'default' => '#24292f'
+			),
+			'languageTextColor' => array(
+				'type' => 'string',
+				'default' => '#fff'
+			),
+			'sponsorsColor' => array(
+				'type' => 'string',
+				'default' => '#bf3989'
+			),
+			'buttonBgColor' => array(
+				'type' => 'string',
+				'default' => '#1a7f37'
+			),
+			'buttonBgColorHover' => array(
+				'type' => 'string',
+				'default' => '#2c974b'
+			),
+			'buttonTextColor' => array(
+				'type' => 'string',
+				'default' => '#fff'
+			),
+			'buttonTextColorHover' => array(
+				'type' => 'string',
+				'default' => '#fff'
 			)
 		),
 		'providesContext' => array(

@@ -1,5 +1,5 @@
 import metadata from './block.json';
-import InfoCardIcon from '../components/InfoCardIcon';
+import { ForkIcon } from '../components/GitHubIcons';
 
 //  Import main block file.
 import edit from './edit';
@@ -8,7 +8,7 @@ const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.b
 
 registerBlockType( metadata, {
 	icon: (
-		<InfoCardIcon fill="#333" />
+		<ForkIcon fill="#333" />
 	),
 	edit,
 	save() {

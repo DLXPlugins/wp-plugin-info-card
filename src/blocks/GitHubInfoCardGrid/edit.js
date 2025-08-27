@@ -7,11 +7,7 @@
  */
 import axios from 'axios';
 import classnames from 'classnames';
-import { isURL } from '@wordpress/url';
-import { ForkIcon, HomeIcon, GitHubIcon, HeartIcon, StarIcon, EyeIcon, CodeIcon } from '../components/GitHubIcons';
 import { Fragment, useEffect, useState } from '@wordpress/element';
-import { dateI18n } from '@wordpress/date';
-import { blockStore } from '../store';
 import { __ } from '@wordpress/i18n';
 import { useSelect, useDispatch } from '@wordpress/data';
 
@@ -34,20 +30,20 @@ import {
 
 import {
 	InspectorControls,
-	BlockAlignmentToolbar,
-	MediaUpload,
 	BlockControls,
 	useBlockProps,
 	useInnerBlocksProps,
+	PanelColorSettings,
 } from '@wordpress/block-editor';
 
 import { useInstanceId } from '@wordpress/compose';
 import NumbersComponent from '../components/Numbers';
+import { blockStore } from '../store';
 
 const GitHubInfoCardGrid = ( props ) => {
 	const { attributes, setAttributes, clientId } = props;
 	const blockUniqueId = useInstanceId( GitHubInfoCardGrid, 'wp-plugin-info-card-id' );
-
+	const [ hasCustomColors, setHasCustomColors ] = useState( false );
 	const {
 		preview,
 		align,
@@ -64,6 +60,18 @@ const GitHubInfoCardGrid = ( props ) => {
 		cols,
 		marginSpacing,
 		marginSpacingTarget,
+		backgroundColor,
+		textColor,
+		iconColor,
+		iconColorHover,
+		borderColor,
+		languageBgColor,
+		languageTextColor,
+		sponsorsColor,
+		buttonBgColor,
+		buttonBgColorHover,
+		buttonTextColor,
+		buttonTextColorHover,
 	} = attributes;
 
 	const {
@@ -108,6 +116,25 @@ const GitHubInfoCardGrid = ( props ) => {
 			setAttributes( { numChildren: innerBlocksCount } );
 		}
 	}, [ innerBlocksCount ] );
+
+	/**
+	 * Attempt to check when block styles are changed.
+	 */
+	useEffect( () => {
+		if ( undefined === className ) {
+			return;
+		}
+
+		const styleMatch = new RegExp( /is-style-([^\s]*)/g ).exec( className );
+		if ( null !== styleMatch ) {
+			const match = styleMatch[ 1 ];
+			if ( 'wppic-github-custom' === match ) {
+				setHasCustomColors( true );
+			} else {
+				setHasCustomColors( false );
+			}
+		}
+	}, [ className ] );
 
 	const innerBlocksProps = useInnerBlocksProps( {
 		className: 'wppic-github-info-card-grid',
@@ -230,6 +257,98 @@ const GitHubInfoCardGrid = ( props ) => {
 					</PanelBody>
 				)
 			}
+			{ hasCustomColors && (
+				<PanelColorSettings
+					__experimentalIsRenderedInSidebar
+					title={ __( 'Custom Color Settings', 'wp-plugin-info-card' ) }
+					colorSettings={ [
+						{
+							label: __( 'Background Color', 'wp-plugin-info-card' ),
+							value: backgroundColor,
+							onChange: ( value ) => {
+								setAttributes( { backgroundColor: value } );
+							},
+						},
+						{
+							label: __( 'Text Color', 'wp-plugin-info-card' ),
+							value: textColor,
+							onChange: ( value ) => {
+								setAttributes( { textColor: value } );
+							},
+						},
+						{
+							label: __( 'Icon Color', 'wp-plugin-info-card' ),
+							value: iconColor,
+							onChange: ( value ) => {
+								setAttributes( { iconColor: value } );
+							},
+						},
+						{
+							label: __( 'Icon Color Hover', 'wp-plugin-info-card' ),
+							value: iconColorHover,
+							onChange: ( value ) => {
+								setAttributes( { iconColorHover: value } );
+							},
+						},
+						{
+							label: __( 'Border Color', 'wp-plugin-info-card' ),
+							value: borderColor,
+							onChange: ( value ) => {
+								setAttributes( { borderColor: value } );
+							},
+						},
+						{
+							label: __( 'Language Background Color', 'wp-plugin-info-card' ),
+							value: languageBgColor,
+							onChange: ( value ) => {
+								setAttributes( { languageBgColor: value } );
+							},
+						},
+						{
+							label: __( 'Language Text Color', 'wp-plugin-info-card' ),
+							value: languageTextColor,
+							onChange: ( value ) => {
+								setAttributes( { languageTextColor: value } );
+							},
+						},
+						{
+							label: __( 'Sponsors Color', 'wp-plugin-info-card' ),
+							value: sponsorsColor,
+							onChange: ( value ) => {
+								setAttributes( { sponsorsColor: value } );
+							},
+						},
+						{
+							label: __( 'Button Background Color', 'wp-plugin-info-card' ),
+							value: buttonBgColor,
+							onChange: ( value ) => {
+								setAttributes( { buttonBgColor: value } );
+							},
+						},
+						{
+							label: __( 'Button Background Color Hover', 'wp-plugin-info-card' ),
+							value: buttonBgColorHover,
+							onChange: ( value ) => {
+								setAttributes( { buttonBgColorHover: value } );
+							},
+						},
+						{
+							label: __( 'Button Text Color', 'wp-plugin-info-card' ),
+							value: buttonTextColor,
+							onChange: ( value ) => {
+								setAttributes( { buttonTextColor: value } );
+							},
+						},
+						{
+							label: __( 'Button Text Color Hover', 'wp-plugin-info-card' ),
+							value: buttonTextColorHover,
+							onChange: ( value ) => {
+								setAttributes( { buttonTextColorHover: value } );
+							},
+						},
+					] }
+				/>
+			) }
 			<PanelBody title={ __( 'Visibility Controls', 'wp-plugin-info-card' ) }>
 				<ToggleControl
 					label={ __( 'Show Top Bar', 'wp-plugin-info-card' ) }

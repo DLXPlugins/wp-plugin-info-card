@@ -26,6 +26,10 @@
       "type": "number",
       "default": 0
     },
+    "className": {
+      "type": "string",
+      "default": ""
+    },
     "preview": {
       "type": "boolean",
       "default": false
@@ -73,6 +77,54 @@
     "marginSpacingTarget": {
       "type": "string",
       "default": "both"
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#fff"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#24292f"
+    },
+    "iconColor": {
+      "type": "string",
+      "default": "#666"
+    },
+    "iconColorHover": {
+      "type": "string",
+      "default": "#111827"
+    },
+    "borderColor": {
+      "type": "string",
+      "default": "#d0d7de"
+    },
+    "languageBgColor": {
+      "type": "string",
+      "default": "#24292f"
+    },
+    "languageTextColor": {
+      "type": "string",
+      "default": "#fff"
+    },
+    "sponsorsColor": {
+      "type": "string",
+      "default": "#bf3989"
+    },
+    "buttonBgColor": {
+      "type": "string",
+      "default": "#1a7f37"
+    },
+    "buttonBgColorHover": {
+      "type": "string",
+      "default": "#2c974b"
+    },
+    "buttonTextColor": {
+      "type": "string",
+      "default": "#fff"
+    },
+    "buttonTextColorHover": {
+      "type": "string",
+      "default": "#fff"
     }
   },
   "providesContext": {
