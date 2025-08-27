@@ -303,10 +303,11 @@ class Blocks {
 	public function register_blocks() {
 
 		$render_callbacks = array(
-			'wp-plugin-info-card/wp-plugin-info-card'   => array( $this, 'info_card_render' ),
+			'wp-plugin-info-card/wp-plugin-info-card'    => array( $this, 'info_card_render' ),
 			'wp-plugin-info-card/wp-plugin-info-card-query' => array( $this, 'info_card_query_render' ),
 			'wp-plugin-info-card/site-plugins-card-grid' => array( $this, 'site_plugin_card_grid_render' ),
 			'wp-plugin-info-card/plugin-screenshots-info-card' => array( $this, 'site_plugin_screenshots' ),
+			'wp-plugin-info-card/github-info-card-grid'  => array( $this, 'github_info_card_grid_render' ),
 		);
 
 		add_filter(
@@ -425,24 +426,24 @@ class Blocks {
 			return;
 		}
 		$args = array(
-			'type'        => $attributes['type'],
-			'slug'        => $attributes['slug'],
-			'align'       => $attributes['align'],
-			'image'       => $attributes['image'],
-			'containerid' => $attributes['containerid'],
-			'margin'      => $attributes['margin'],
-			'clear'       => $attributes['clear'],
-			'expiration'  => $attributes['expiration'],
-			'ajax'        => $attributes['ajax'],
-			'scheme'      => $attributes['scheme'],
-			'layout'      => $attributes['layout'],
-			'multi'       => true,
-			'id'          => $attributes['uniqueId'],
-			'cols'        => $attributes['cols'],
-			'col_gap'     => $attributes['colGap'],
-			'row_gap'     => $attributes['rowGap'],
-			'itemSlugs'   => $attributes['itemSlugs'],
-			'marginSpacing' => $attributes['marginSpacing'],
+			'type'                => $attributes['type'],
+			'slug'                => $attributes['slug'],
+			'align'               => $attributes['align'],
+			'image'               => $attributes['image'],
+			'containerid'         => $attributes['containerid'],
+			'margin'              => $attributes['margin'],
+			'clear'               => $attributes['clear'],
+			'expiration'          => $attributes['expiration'],
+			'ajax'                => $attributes['ajax'],
+			'scheme'              => $attributes['scheme'],
+			'layout'              => $attributes['layout'],
+			'multi'               => true,
+			'id'                  => $attributes['uniqueId'],
+			'cols'                => $attributes['cols'],
+			'col_gap'             => $attributes['colGap'],
+			'row_gap'             => $attributes['rowGap'],
+			'itemSlugs'           => $attributes['itemSlugs'],
+			'marginSpacing'       => $attributes['marginSpacing'],
 			'marginSpacingTarget' => $attributes['marginSpacingTarget'],
 		);
 
@@ -509,5 +510,130 @@ class Blocks {
 			<symbol id="lucide-line-chart" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-line-chart"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></symbol>
 			<sybmol id="lucide-download" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></symbol>
 		<?php
+	}
+
+	/**
+	 * Render the GitHub info card grid block.
+	 *
+	 * @param array $attributes Array of block attributes.
+	 *
+	 * @return string Block rendered.
+	 */
+	public function github_info_card_grid_render( $attributes, $content ) {
+		if ( is_admin() ) {
+			return;
+		}
+
+		/*
+		const gridStyles = `
+		#${ attributes.uniqueId } .wppic-github-info-card-grid {
+			display: grid;
+			column-gap: ${ colGap }px;
+			row-gap: ${ rowGap }px;
+		}
+		`;
+
+		const colorStyles = `
+		#${ attributes.uniqueId } .wppic-github-info-card {
+			--wppic-github-background-color: ${ backgroundColor };
+			--wppic-github-text-color: ${ textColor };
+			--wppic-github-icon-color: ${ iconColor };
+			--wppic-github-icon-color-hover: ${ iconColorHover };
+			--wppic-github-border: ${ borderColor };
+			--wppic-github-language-bg: ${ languageBgColor };
+			--wppic-github-language-color: ${ languageTextColor };
+			--wppic-github-sponsors-color: ${ sponsorsColor };
+			--wppic-github-button-bg: ${ buttonBgColor };
+			--wppic-github-button-bg-hover: ${ buttonBgColorHover };
+			--wppic-github-button-text-color: ${ buttonTextColor };
+			--wppic-github-button-text-color-hover: ${ buttonTextColorHover };
+		}
+		`;
+		*/
+
+		$align                   = Functions::sanitize_attribute( $attributes, 'align', 'string' );
+		$num_children            = Functions::sanitize_attribute( $attributes, 'numChildren', 'number' );
+		$class_name              = Functions::sanitize_attribute( $attributes, 'className', 'string' );
+		$unique_id               = Functions::sanitize_attribute( $attributes, 'uniqueId', 'string' );
+		$col_gap                 = Functions::sanitize_attribute( $attributes, 'colGap', 'number' );
+		$row_gap                 = Functions::sanitize_attribute( $attributes, 'rowGap', 'number' );
+		$background_color        = Functions::sanitize_attribute( $attributes, 'backgroundColor', 'string' );
+		$text_color              = Functions::sanitize_attribute( $attributes, 'textColor', 'string' );
+		$icon_color              = Functions::sanitize_attribute( $attributes, 'iconColor', 'string' );
+		$icon_color_hover        = Functions::sanitize_attribute( $attributes, 'iconColorHover', 'string' );
+		$border_color            = Functions::sanitize_attribute( $attributes, 'borderColor', 'string' );
+		$language_bg_color       = Functions::sanitize_attribute( $attributes, 'languageBgColor', 'string' );
+		$language_text_color     = Functions::sanitize_attribute( $attributes, 'languageTextColor', 'string' );
+		$sponsors_color          = Functions::sanitize_attribute( $attributes, 'sponsorsColor', 'string' );
+		$button_bg_color         = Functions::sanitize_attribute( $attributes, 'buttonBgColor', 'string' );
+		$button_bg_color_hover   = Functions::sanitize_attribute( $attributes, 'buttonBgColorHover', 'string' );
+		$button_text_color       = Functions::sanitize_attribute( $attributes, 'buttonTextColor', 'string' );
+		$button_text_color_hover = Functions::sanitize_attribute( $attributes, 'buttonTextColorHover', 'string' );
+		$layout                  = Functions::sanitize_attribute( $attributes, 'layout', 'string' );
+		$cols                    = Functions::sanitize_attribute( $attributes, 'cols', 'number' );
+		$margin_spacing          = Functions::sanitize_attribute( $attributes, 'marginSpacing', 'string' );
+		$margin_spacing_target   = Functions::sanitize_attribute( $attributes, 'marginSpacingTarget', 'string' );
+
+		/*
+		`wppic-github-info-card align${ align } layout-${ layout } cols-${ numChildren > 1 ? cols : 1 } wppic-margin-spacing-${ marginSpacing } wppic-margin-spacing-target-${ marginSpacingTarget }`,
+			{
+				'is-grid': numChildren > 1,
+			},
+		),
+		*/
+		ob_start();
+
+		$base_classes = array(
+			'wppic-github-info-card',
+			'align' . $align,
+			'layout-' . $layout,
+			'cols-' . ( $num_children > 1 ? $cols : 1 ),
+			'wppic-margin-spacing-' . $margin_spacing,
+			'wppic-margin-spacing-target-' . $margin_spacing_target,
+			$class_name,
+		);
+
+		?>
+		<div class="<?php echo esc_attr( implode( ' ', $base_classes ) ); ?>">
+			<style>
+				<?php
+				if ( $num_children > 1 ) {
+					?>
+					#<?php echo esc_attr( $unique_id ); ?> .wppic-github-info-card-grid {
+						column-gap: <?php echo esc_attr( $col_gap ); ?>px;
+						row-gap: <?php echo esc_attr( $row_gap ); ?>px;
+					}
+					<?php
+				}
+				?>
+				<?php
+				if ( 'is-style-wppic-github-custom' === $class_name ) {
+					?>
+				#<?php echo esc_attr( $unique_id ); ?> {
+					--wppic-github-background-color: <?php echo esc_attr( $background_color ); ?>;
+					--wppic-github-text-color: <?php echo esc_attr( $text_color ); ?>;
+					--wppic-github-icon-color: <?php echo esc_attr( $icon_color ); ?>;
+					--wppic-github-icon-color-hover: <?php echo esc_attr( $icon_color_hover ); ?>;
+					--wppic-github-border: <?php echo esc_attr( $border_color ); ?>;
+					--wppic-github-language-bg: <?php echo esc_attr( $language_bg_color ); ?>;
+					--wppic-github-language-color: <?php echo esc_attr( $language_text_color ); ?>;
+					--wppic-github-sponsors-color: <?php echo esc_attr( $sponsors_color ); ?>;
+					--wppic-github-button-bg: <?php echo esc_attr( $button_bg_color ); ?>;
+					--wppic-github-button-bg-hover: <?php echo esc_attr( $button_bg_color_hover ); ?>;
+					--wppic-github-button-text-color: <?php echo esc_attr( $button_text_color ); ?>;
+					--wppic-github-button-text-color-hover: <?php echo esc_attr( $button_text_color_hover ); ?>;
+					}
+					<?php
+				}
+				?>
+			</style>
+			<?php
+			echo wp_kses_post( $content );
+			?>
+			test
+		</div>
+		<?php
+
+		return ob_get_clean();
 	}
 }
