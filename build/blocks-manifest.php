@@ -161,6 +161,26 @@ return array(
 			'organizationUrlOverride' => array(
 				'type' => 'string',
 				'default' => ''
+			),
+			'overrideButton' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'overrideButtonText' => array(
+				'type' => 'string',
+				'default' => 'View on GitHub'
+			),
+			'buttonType' => array(
+				'type' => 'string',
+				'default' => 'github'
+			),
+			'avatarImageId' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'avatarImageUrl' => array(
+				'type' => 'string',
+				'default' => ''
 			)
 		),
 		'usesContext' => array(
@@ -213,6 +233,10 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
+			'numChildren' => array(
+				'type' => 'number',
+				'default' => 0
+			),
 			'preview' => array(
 				'type' => 'boolean',
 				'default' => false
@@ -240,6 +264,18 @@ return array(
 			'buttonType' => array(
 				'type' => 'string',
 				'default' => 'github'
+			),
+			'cols' => array(
+				'type' => 'number',
+				'default' => 2
+			),
+			'colGap' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'rowGap' => array(
+				'type' => 'number',
+				'default' => 20
 			)
 		),
 		'providesContext' => array(

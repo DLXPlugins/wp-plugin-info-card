@@ -119,6 +119,32 @@ button.button-reset.show-cursor {
   --wppic-github-button-bg-hover: #6d28d9;
 }
 
+.wppic-github-info-card.is-grid .wppic-github-info-card-grid {
+  height: 100%;
+}
+.wppic-github-info-card.is-grid .wp-block-github-info-card {
+  display: grid;
+  height: 100%;
+}
+.wppic-github-info-card.is-grid.cols-1 .wppic-github-info-card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  row-gap: 24px;
+}
+.wppic-github-info-card.is-grid.cols-2 .wppic-github-info-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  row-gap: 24px;
+}
+.wppic-github-info-card.is-grid.cols-3 .wppic-github-info-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  row-gap: 24px;
+}
+
 .wppic-github-info-card-wrapper {
   background-color: var(--wppic-github-background-color);
   border: 1px solid var(--wppic-github-border);
@@ -275,7 +301,7 @@ button.button-reset.show-cursor {
   font-size: 32px;
   font-weight: 600;
   line-height: 1.2;
-  word-break: break-word;
+  word-break: break-all;
 }
 
 .wppic-github-info-card-author-section-login {

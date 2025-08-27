@@ -59,6 +59,26 @@
     "organizationUrlOverride": {
       "type": "string",
       "default": ""
+    },
+    "overrideButton": {
+      "type": "boolean",
+      "default": false
+    },
+    "overrideButtonText": {
+      "type": "string",
+      "default": "View on GitHub"
+    },
+    "buttonType": {
+      "type": "string",
+      "default": "github"
+    },
+    "avatarImageId": {
+      "type": "number",
+      "default": 0
+    },
+    "avatarImageUrl": {
+      "type": "string",
+      "default": ""
     }
   },
   "usesContext": [

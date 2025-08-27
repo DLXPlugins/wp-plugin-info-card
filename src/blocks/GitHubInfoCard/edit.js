@@ -17,6 +17,7 @@ import { dateI18n } from '@wordpress/date';
 import numbro from 'numbro';
 import { select, dispatch, useSelect, useDispatch } from '@wordpress/data';
 import { blockStore } from '../store';
+import useMediaUploader from '../hooks/useMediaUploader';
 
 import { __ } from '@wordpress/i18n';
 
@@ -26,6 +27,7 @@ import {
 	SelectControl,
 	Spinner,
 	TextControl,
+	ToggleControl,
 	ToolbarGroup,
 	ToolbarButton,
 	ToolbarItem,
@@ -59,6 +61,8 @@ const GitHubInfoCard = ( props ) => {
 		return null;
 	}
 
+	const { openMediaUploader } = useMediaUploader();
+
 	const {
 		assetData,
 		username,
@@ -70,6 +74,11 @@ const GitHubInfoCard = ( props ) => {
 		sponsorsUrlOverride,
 		organizationUrlOverride,
 		versionOverride,
+		overrideButton,
+		overrideButtonText,
+		buttonType,
+		avatarImageId,
+		avatarImageUrl,
 	} = attributes;
 
 	const [ data, setData ] = useState( assetData );
@@ -246,6 +255,81 @@ const GitHubInfoCard = ( props ) => {
 					onChange={ ( value ) => setAttributes( { versionOverride: value } ) }
 					help={ __( 'Override the version of the repo.', 'wp-plugin-info-card' ) }
 				/>
+				<div className="wppic-avatar-image-container">
+					{
+						( avatarImageUrl ) && (
+							<>
+								<Button
+									variant="secondary"
+									isDestructive={ true }
+									icon="trash"
+									label={ __( 'Remove Avatar Image', 'wp-plugin-info-card' ) }
+									onClick={ () => {
+										setAttributes( { avatarImageId: 0, avatarImageUrl: '' } );
+									} }
+								>
+									{ __( 'Remove Custom Avatar', 'wp-plugin-info-card' ) }
+								</Button>
+							</>
+						)
+					}
+					{
+						( ! avatarImageId && ! avatarImageUrl ) && (
+							<>
+								<Button
+									variant="secondary"
+									label={ __( 'Override Avatar Image', 'wp-plugin-info-card' ) }
+									help={ __( 'Upload an avatar image for the card. Recommended size is 500x500.', 'wp-plugin-info-card' ) }
+									onClick={ () => {
+										openMediaUploader( {
+											attachmentId: avatarImageId,
+											title: __( 'Avatar Image', 'wp-plugin-info-card' ),
+											buttonLabel: __( 'Upload Avatar Image', 'wp-plugin-info-card' ),
+											suggestedWidth: '500',
+											suggestedHeight: '500',
+											aspectRatio: '1:1',
+										}, ( media ) => {
+											setAttributes( { avatarImageId: media.id, avatarImageUrl: media.url } );
+										} );
+									} }
+								>
+									{ __( 'Upload Custom Avatar', 'wp-plugin-info-card' ) }
+								</Button>
+							</>
+						)
+					}
+				</div>
+			</PanelBody>
+			<PanelBody
+				title={ __( 'Button', 'wp-plugin-info-card' ) }
+				initialOpen={ false }
+			>
+				<ToggleControl
+					label={ __( 'Override Button', 'wp-plugin-info-card' ) }
+					checked={ overrideButton }
+					onChange={ ( value ) => setAttributes( { overrideButton: value } ) }
+					help={ __( 'Override the button of the card. Leave disabled to use the parent settings.', 'wp-plugin-info-card' ) }
+				/>
+				{ overrideButton && (
+					<>
+						<TextControl
+							label={ __( 'Button Text', 'wp-plugin-info-card' ) }
+							value={ overrideButtonText }
+							onChange={ ( value ) => setAttributes( { overrideButtonText: value } ) }
+							help={ __( 'Override the text of the button. Leave blank to use the parent settings.', 'wp-plugin-info-card' ) }
+						/>
+						<SelectControl
+							label={ __( 'Button Type', 'wp-plugin-info-card' ) }
+							value={ buttonType }
+							onChange={ ( value ) => setAttributes( { buttonType: value } ) }
+							options={ [
+								{ label: __( 'View on GitHub', 'wp-plugin-info-card' ), value: 'github' },
+								{ label: __( 'View Website', 'wp-plugin-info-card' ), value: 'website' },
+								{ label: __( 'Sponsor', 'wp-plugin-info-card' ), value: 'sponsor' },
+							] }
+						/>
+					</>
+				) }
 			</PanelBody>
 		</InspectorControls>
 	);
@@ -318,19 +402,37 @@ const GitHubInfoCard = ( props ) => {
 	 * @return {string} The text for the button.
 	 */
 	const getButtonText = () => {
-		const buttonType = getButtonType();
-		switch ( buttonType ) {
-			case 'github':
-				return __( 'View on GitHub', 'wp-plugin-info-card' );
-			case 'website':
-				return __( 'View Website', 'wp-plugin-info-card' );
-			case 'sponsor':
-				return __( 'Sponsor', 'wp-plugin-info-card' );
-			default:
-				return __( 'View on GitHub', 'wp-plugin-info-card' );
+		let parentButtonType = getButtonType();
+		let buttonText = '';
+		if ( overrideButton ) {
+			parentButtonType = buttonType;
 		}
+		switch ( parentButtonType ) {
+			case 'github':
+				buttonText = __( 'View on GitHub', 'wp-plugin-info-card' );
+				break;
+			case 'website':
+				buttonText = __( 'View Website', 'wp-plugin-info-card' );
+				break;
+			case 'sponsor':
+				buttonText = __( 'Sponsor', 'wp-plugin-info-card' );
+				break;
+		}
+		buttonText = overrideButton ? ( overrideButtonText || buttonText ) : buttonText;
+		return buttonText;
 	};
 
+	/**
+	 * Get the avatar image.
+	 *
+	 * @return {string} The avatar image.
+	 */
+	const getAvatarImage = () => {
+		if ( avatarImageId ) {
+			return avatarImageUrl;
+		}
+		return assetData.avatar;
+	};
 	const block = (
 		<Fragment>
 			{ loading && (
@@ -609,7 +711,7 @@ const GitHubInfoCard = ( props ) => {
 							) }
 							<div className="wppic-github-info-card-author-section">
 								<div className="wppic-github-info-card-author-section-avatar">
-									<img src={ isURL( assetData.avatar ) ? assetData.avatar : '' } alt={ escapeHTML( assetData.full_name ) } />
+									<img src={ getAvatarImage() } alt={ escapeHTML( assetData.full_name ) } />
 								</div>
 								<div className="wppic-github-info-card-author-section-info">
 									<div className="wppic-github-info-card-author-section-name">

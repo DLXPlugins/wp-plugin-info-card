@@ -17,6 +17,10 @@
 			"type": "string",
 			"default": ""
 		},
+		"numChildren": {
+			"type": "number",
+			"default": 0
+		},
 		"preview": {
 			"type": "boolean",
 			"default": false
@@ -44,6 +48,18 @@
 		"buttonType": {
 			"type": "string",
 			"default": "github"
+		},
+		"cols": {
+			"type": "number",
+			"default": 2
+		},
+		"colGap": {
+			"type": "number",
+			"default": 20
+		},
+		"rowGap": {
+			"type": "number",
+			"default": 20
 		}
 	},
 	"providesContext": {
