@@ -1,103 +1,6 @@
 <?php
 // This file is generated. Do not modify it manually.
 return array(
-	'EDDCardGrid' => array(
-		'$schema' => 'https://schemas.wp.org/trunk/block.json',
-		'title' => 'EDD Plugins Grid',
-		'apiVersion' => 2,
-		'name' => 'wp-plugin-info-card/edd-plugins-grid',
-		'category' => 'wp-plugin-info-card',
-		'icon' => '<svg height=\'24\' viewBox=\'0 0 512 512\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\'><path id=\'background\' d=\'m256 31a225.07 225.07 0 0 1 87.57 432.33 225.07 225.07 0 0 1 -175.14-414.66 223.45 223.45 0 0 1 87.57-17.67m0-31c-141.38 0-256 114.62-256 256s114.62 256 256 256 256-114.62 256-256-114.62-256-256-256z\'/><path d=\'m255.71 396q-34.11 0-68.21 0c-31.18 0-53.68-22.42-53.84-53.59q-.09-16.32 0-32.65c.06-11.22 6.86-18.44 17.26-18.46s17.29 7.15 17.36 18.36 0 22.16 0 33.24c.08 11.62 6.91 18.39 18.57 18.4q69.09 0 138.17 0c11.67 0 18.51-6.78 18.6-18.39.08-11.08 0-22.16 0-33.24s6.91-18.39 17.35-18.37 17.34 7.24 17.25 18.45c-.11 14.17.68 28.49-1.1 42.47-3.26 25.58-25.07 43.64-50.95 43.76-23.43.07-46.95.02-70.46.02z\'/><path d=\'m273.35 248.88c2.64-2.46 4.19-3.81 5.63-5.26 11.08-11.19 22.1-22.45 33.23-33.6 7.9-7.91 18.91-8.5 26.05-1.56s6.86 18.29-.91 26.11q-33.93 34.14-68.08 68.07c-8 7.95-18.46 8-26.46 0q-34.38-34.1-68.48-68.49c-7.48-7.55-7.52-18.9-.57-25.68s18-6.48 25.63 1.1c11.3 11.24 22.43 22.67 33.65 34 1.44 1.46 3 2.82 5.31 5 .15-3.14.33-5.17.33-7.2 0-35.79-.06-71.57 0-107.36 0-13.43 11.82-21.42 24.1-16.63 6.81 2.64 10.49 8.54 10.5 17.18q.06 53.1 0 106.19z\'/></svg>',
-		'description' => 'Display all EDD plugins as cards.',
-		'keywords' => array(
-			'wp plugin',
-			'edd',
-			'grid',
-			'plugin',
-			'card',
-			'active',
-			'download'
-		),
-		'version' => '1.0.0',
-		'textdomain' => 'wp-plugin-info-card',
-		'attributes' => array(
-			'assetData' => array(
-				'type' => 'array',
-				'default' => array(
-					
-				)
-			),
-			'uniqueId' => array(
-				'type' => 'string',
-				'default' => ''
-			),
-			'align' => array(
-				'type' => 'string',
-				'default' => 'center'
-			),
-			'loading' => array(
-				'type' => 'boolean',
-				'default' => true
-			),
-			'scheme' => array(
-				'type' => 'string',
-				'default' => 'default'
-			),
-			'layout' => array(
-				'type' => 'string',
-				'default' => 'card'
-			),
-			'preview' => array(
-				'type' => 'boolean',
-				'default' => false
-			),
-			'defaultsApplied' => array(
-				'type' => 'boolean',
-				'default' => false
-			),
-			'sortby' => array(
-				'type' => 'string',
-				'default' => 'none'
-			),
-			'sort' => array(
-				'type' => 'string',
-				'default' => 'ASC'
-			),
-			'cols' => array(
-				'type' => 'number',
-				'default' => 2
-			),
-			'colGap' => array(
-				'type' => 'number',
-				'default' => 20
-			),
-			'rowGap' => array(
-				'type' => 'number',
-				'default' => 20
-			),
-			'excludedSlugs' => array(
-				'type' => 'array',
-				'default' => array(
-					
-				)
-			)
-		),
-		'example' => array(
-			'attributes' => array(
-				'preview' => true
-			)
-		),
-		'supports' => array(
-			'anchor' => true,
-			'align' => false,
-			'className' => true
-		),
-		'editorScript' => 'wp-plugin-info-card-block-js',
-		'editorStyle' => array(
-			'wp-plugin-info-card-block-editor-css',
-			'wp-plugin-info-card-block-styles-css'
-		)
-	),
 	'GitHubInfoCard' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'title' => 'GitHub Info Card Item',
@@ -184,13 +87,33 @@ return array(
 			)
 		),
 		'usesContext' => array(
+			'wppic/github-grid-numChildren',
 			'wppic/github-grid-className',
 			'wppic/github-grid-layout',
 			'wppic/github-grid-uniqueId',
 			'wppic/github-grid-showAuthorBar',
 			'wppic/github-grid-showStatsBar',
 			'wppic/github-grid-showLastUpdated',
-			'wppic/github-grid-buttonType'
+			'wppic/github-grid-align',
+			'wppic/github-grid-showTopBar',
+			'wppic/github-grid-buttonType',
+			'wppic/github-grid-cols',
+			'wppic/github-grid-colGap',
+			'wppic/github-grid-rowGap',
+			'wppic/github-grid-marginSpacing',
+			'wppic/github-grid-marginSpacingTarget',
+			'wppic/github-grid-backgroundColor',
+			'wppic/github-grid-textColor',
+			'wppic/github-grid-iconColor',
+			'wppic/github-grid-iconColorHover',
+			'wppic/github-grid-borderColor',
+			'wppic/github-grid-languageBgColor',
+			'wppic/github-grid-languageTextColor',
+			'wppic/github-grid-sponsorsColor',
+			'wppic/github-grid-buttonBgColor',
+			'wppic/github-grid-buttonBgColorHover',
+			'wppic/github-grid-buttonTextColor',
+			'wppic/github-grid-buttonTextColorHover'
 		),
 		'example' => array(
 			'attributes' => array(
@@ -229,6 +152,10 @@ return array(
 		'version' => '1.0.0',
 		'textdomain' => 'wp-plugin-info-card',
 		'attributes' => array(
+			'align' => array(
+				'type' => 'string',
+				'default' => 'center'
+			),
 			'uniqueId' => array(
 				'type' => 'string',
 				'default' => ''
@@ -339,6 +266,8 @@ return array(
 			)
 		),
 		'providesContext' => array(
+			'wppic/github-grid-numChildren' => 'numChildren',
+			'wppic/github-grid-align' => 'align',
 			'wppic/github-grid-uniqueId' => 'uniqueId',
 			'wppic/github-grid-className' => 'className',
 			'wppic/github-grid-layout' => 'layout',
@@ -346,7 +275,24 @@ return array(
 			'wppic/github-grid-showAuthorBar' => 'showAuthorBar',
 			'wppic/github-grid-showStatsBar' => 'showStatsBar',
 			'wppic/github-grid-showLastUpdated' => 'showLastUpdated',
-			'wppic/github-grid-buttonType' => 'buttonType'
+			'wppic/github-grid-buttonType' => 'buttonType',
+			'wppic/github-grid-cols' => 'cols',
+			'wppic/github-grid-colGap' => 'colGap',
+			'wppic/github-grid-rowGap' => 'rowGap',
+			'wppic/github-grid-marginSpacing' => 'marginSpacing',
+			'wppic/github-grid-marginSpacingTarget' => 'marginSpacingTarget',
+			'wppic/github-grid-backgroundColor' => 'backgroundColor',
+			'wppic/github-grid-textColor' => 'textColor',
+			'wppic/github-grid-iconColor' => 'iconColor',
+			'wppic/github-grid-iconColorHover' => 'iconColorHover',
+			'wppic/github-grid-borderColor' => 'borderColor',
+			'wppic/github-grid-languageBgColor' => 'languageBgColor',
+			'wppic/github-grid-languageTextColor' => 'languageTextColor',
+			'wppic/github-grid-sponsorsColor' => 'sponsorsColor',
+			'wppic/github-grid-buttonBgColor' => 'buttonBgColor',
+			'wppic/github-grid-buttonBgColorHover' => 'buttonBgColorHover',
+			'wppic/github-grid-buttonTextColor' => 'buttonTextColor',
+			'wppic/github-grid-buttonTextColorHover' => 'buttonTextColorHover'
 		),
 		'example' => array(
 			'attributes' => array(

@@ -18,6 +18,10 @@
   "version": "1.0.0",
   "textdomain": "wp-plugin-info-card",
   "attributes": {
+    "align": {
+      "type": "string",
+      "default": "center"
+    },
     "uniqueId": {
       "type": "string",
       "default": ""
@@ -128,6 +132,8 @@
     }
   },
   "providesContext": {
+    "wppic/github-grid-numChildren": "numChildren",
+    "wppic/github-grid-align": "align",
     "wppic/github-grid-uniqueId": "uniqueId",
     "wppic/github-grid-className": "className",
     "wppic/github-grid-layout": "layout",
@@ -135,7 +141,24 @@
     "wppic/github-grid-showAuthorBar": "showAuthorBar",
     "wppic/github-grid-showStatsBar": "showStatsBar",
     "wppic/github-grid-showLastUpdated": "showLastUpdated",
-    "wppic/github-grid-buttonType": "buttonType"
+    "wppic/github-grid-buttonType": "buttonType",
+    "wppic/github-grid-cols": "cols",
+    "wppic/github-grid-colGap": "colGap",
+    "wppic/github-grid-rowGap": "rowGap",
+    "wppic/github-grid-marginSpacing": "marginSpacing",
+    "wppic/github-grid-marginSpacingTarget": "marginSpacingTarget",
+    "wppic/github-grid-backgroundColor": "backgroundColor",
+    "wppic/github-grid-textColor": "textColor",
+    "wppic/github-grid-iconColor": "iconColor",
+    "wppic/github-grid-iconColorHover": "iconColorHover",
+    "wppic/github-grid-borderColor": "borderColor",
+    "wppic/github-grid-languageBgColor": "languageBgColor",
+    "wppic/github-grid-languageTextColor": "languageTextColor",
+    "wppic/github-grid-sponsorsColor": "sponsorsColor",
+    "wppic/github-grid-buttonBgColor": "buttonBgColor",
+    "wppic/github-grid-buttonBgColorHover": "buttonBgColorHover",
+    "wppic/github-grid-buttonTextColor": "buttonTextColor",
+    "wppic/github-grid-buttonTextColorHover": "buttonTextColorHover"
   },
   "example": {
     "attributes": {

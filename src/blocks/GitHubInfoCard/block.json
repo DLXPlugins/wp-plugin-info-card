@@ -77,13 +77,33 @@
 		}
 	},
 	"usesContext": [
+		"wppic/github-grid-numChildren",
 		"wppic/github-grid-className",
 		"wppic/github-grid-layout",
 		"wppic/github-grid-uniqueId",
 		"wppic/github-grid-showAuthorBar",
 		"wppic/github-grid-showStatsBar",
 		"wppic/github-grid-showLastUpdated",
-		"wppic/github-grid-buttonType"
+		"wppic/github-grid-align",
+		"wppic/github-grid-showTopBar",
+		"wppic/github-grid-buttonType",
+		"wppic/github-grid-cols",
+		"wppic/github-grid-colGap",
+		"wppic/github-grid-rowGap",
+		"wppic/github-grid-marginSpacing",
+		"wppic/github-grid-marginSpacingTarget",
+		"wppic/github-grid-backgroundColor",
+		"wppic/github-grid-textColor",
+		"wppic/github-grid-iconColor",
+		"wppic/github-grid-iconColorHover",
+		"wppic/github-grid-borderColor",
+		"wppic/github-grid-languageBgColor",
+		"wppic/github-grid-languageTextColor",
+		"wppic/github-grid-sponsorsColor",
+		"wppic/github-grid-buttonBgColor",
+		"wppic/github-grid-buttonBgColorHover",
+		"wppic/github-grid-buttonTextColor",
+		"wppic/github-grid-buttonTextColorHover"
 	],
 	"example": {
 		"attributes": {

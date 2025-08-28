@@ -308,6 +308,7 @@ class Blocks {
 			'wp-plugin-info-card/site-plugins-card-grid' => array( $this, 'site_plugin_card_grid_render' ),
 			'wp-plugin-info-card/plugin-screenshots-info-card' => array( $this, 'site_plugin_screenshots' ),
 			'wp-plugin-info-card/github-info-card-grid'  => array( $this, 'github_info_card_grid_render' ),
+			'wp-plugin-info-card/github-info-card'       => array( $this, 'github_info_card_render' ),
 		);
 
 		add_filter(
@@ -520,43 +521,16 @@ class Blocks {
 	 * @return string Block rendered.
 	 */
 	public function github_info_card_grid_render( $attributes, $content ) {
-		if ( is_admin() ) {
+		if ( is_admin() || defined( 'REST_REQUEST' ) ) {
 			return;
 		}
 
-		/*
-		const gridStyles = `
-		#${ attributes.uniqueId } .wppic-github-info-card-grid {
-			display: grid;
-			column-gap: ${ colGap }px;
-			row-gap: ${ rowGap }px;
-		}
-		`;
-
-		const colorStyles = `
-		#${ attributes.uniqueId } .wppic-github-info-card {
-			--wppic-github-background-color: ${ backgroundColor };
-			--wppic-github-text-color: ${ textColor };
-			--wppic-github-icon-color: ${ iconColor };
-			--wppic-github-icon-color-hover: ${ iconColorHover };
-			--wppic-github-border: ${ borderColor };
-			--wppic-github-language-bg: ${ languageBgColor };
-			--wppic-github-language-color: ${ languageTextColor };
-			--wppic-github-sponsors-color: ${ sponsorsColor };
-			--wppic-github-button-bg: ${ buttonBgColor };
-			--wppic-github-button-bg-hover: ${ buttonBgColorHover };
-			--wppic-github-button-text-color: ${ buttonTextColor };
-			--wppic-github-button-text-color-hover: ${ buttonTextColorHover };
-		}
-		`;
-		*/
-
 		$align                   = Functions::sanitize_attribute( $attributes, 'align', 'string' );
-		$num_children            = Functions::sanitize_attribute( $attributes, 'numChildren', 'number' );
+		$num_children            = Functions::sanitize_attribute( $attributes, 'numChildren', 'integer' );
 		$class_name              = Functions::sanitize_attribute( $attributes, 'className', 'string' );
 		$unique_id               = Functions::sanitize_attribute( $attributes, 'uniqueId', 'string' );
-		$col_gap                 = Functions::sanitize_attribute( $attributes, 'colGap', 'number' );
-		$row_gap                 = Functions::sanitize_attribute( $attributes, 'rowGap', 'number' );
+		$col_gap                 = Functions::sanitize_attribute( $attributes, 'colGap', 'integer' );
+		$row_gap                 = Functions::sanitize_attribute( $attributes, 'rowGap', 'integer' );
 		$background_color        = Functions::sanitize_attribute( $attributes, 'backgroundColor', 'string' );
 		$text_color              = Functions::sanitize_attribute( $attributes, 'textColor', 'string' );
 		$icon_color              = Functions::sanitize_attribute( $attributes, 'iconColor', 'string' );
@@ -570,17 +544,10 @@ class Blocks {
 		$button_text_color       = Functions::sanitize_attribute( $attributes, 'buttonTextColor', 'string' );
 		$button_text_color_hover = Functions::sanitize_attribute( $attributes, 'buttonTextColorHover', 'string' );
 		$layout                  = Functions::sanitize_attribute( $attributes, 'layout', 'string' );
-		$cols                    = Functions::sanitize_attribute( $attributes, 'cols', 'number' );
+		$cols                    = Functions::sanitize_attribute( $attributes, 'cols', 'integer' );
 		$margin_spacing          = Functions::sanitize_attribute( $attributes, 'marginSpacing', 'string' );
 		$margin_spacing_target   = Functions::sanitize_attribute( $attributes, 'marginSpacingTarget', 'string' );
 
-		/*
-		`wppic-github-info-card align${ align } layout-${ layout } cols-${ numChildren > 1 ? cols : 1 } wppic-margin-spacing-${ marginSpacing } wppic-margin-spacing-target-${ marginSpacingTarget }`,
-			{
-				'is-grid': numChildren > 1,
-			},
-		),
-		*/
 		ob_start();
 
 		$base_classes = array(
@@ -628,12 +595,58 @@ class Blocks {
 				?>
 			</style>
 			<?php
-			echo wp_kses_post( $content );
+			echo wp_kses( $content, Functions::get_kses_allowed_html() );
 			?>
-			test
 		</div>
 		<?php
 
 		return ob_get_clean();
+	}
+
+	public function github_info_card_render( $attributes, $content, $block ) {
+		if ( is_admin() || defined( 'REST_REQUEST' ) ) {
+			return;
+		}
+
+		// Gather attributes from context.
+		$block_attributes                         = array();
+		$block_attributes['numChildren']          = $block->context['wppic/github-grid-numChildren'];
+		$block_attributes['cols']                 = $block->context['wppic/github-grid-cols'];
+		$block_attributes['colGap']               = $block->context['wppic/github-grid-colGap'];
+		$block_attributes['rowGap']               = $block->context['wppic/github-grid-rowGap'];
+		$block_attributes['marginSpacing']        = $block->context['wppic/github-grid-marginSpacing'];
+		$block_attributes['marginSpacingTarget']  = $block->context['wppic/github-grid-marginSpacingTarget'];
+		$block_attributes['backgroundColor']      = $block->context['wppic/github-grid-backgroundColor'];
+		$block_attributes['textColor']            = $block->context['wppic/github-grid-textColor'];
+		$block_attributes['iconColor']            = $block->context['wppic/github-grid-iconColor'];
+		$block_attributes['iconColorHover']       = $block->context['wppic/github-grid-iconColorHover'];
+		$block_attributes['borderColor']          = $block->context['wppic/github-grid-borderColor'];
+		$block_attributes['languageBgColor']      = $block->context['wppic/github-grid-languageBgColor'];
+		$block_attributes['languageTextColor']    = $block->context['wppic/github-grid-languageTextColor'];
+		$block_attributes['sponsorsColor']        = $block->context['wppic/github-grid-sponsorsColor'];
+		$block_attributes['buttonBgColor']        = $block->context['wppic/github-grid-buttonBgColor'];
+		$block_attributes['buttonBgColorHover']   = $block->context['wppic/github-grid-buttonBgColorHover'];
+		$block_attributes['buttonTextColor']      = $block->context['wppic/github-grid-buttonTextColor'];
+		$block_attributes['buttonTextColorHover'] = $block->context['wppic/github-grid-buttonTextColorHover'];
+		$block_attributes['layout']               = $block->context['wppic/github-grid-layout'];
+		$block_attributes['align']                = $block->context['wppic/github-grid-align'];
+		$block_attributes['uniqueId']             = $block->context['wppic/github-grid-uniqueId'];
+		$block_attributes['showTopBar']           = $block->context['wppic/github-grid-showTopBar'];
+		$block_attributes['showAuthorBar']        = $block->context['wppic/github-grid-showAuthorBar'];
+		$block_attributes['showStatsBar']         = $block->context['wppic/github-grid-showStatsBar'];
+		$block_attributes['showLastUpdated']      = $block->context['wppic/github-grid-showLastUpdated'];
+		$block_attributes['parentButtonType']           = $block->context['wppic/github-grid-buttonType'];
+
+
+		// Now merge the attributes.
+		$attributes = array_merge( $attributes, $block_attributes );
+
+		// Remove assetData from attributes.
+		unset( $attributes['assetData'] );
+
+		// Now render the block.
+		$html = Shortcodes::shortcode_github_info_card( $attributes );
+
+		return $html;
 	}
 }
