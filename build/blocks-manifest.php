@@ -73,6 +73,10 @@ return array(
 				'type' => 'string',
 				'default' => 'View on GitHub'
 			),
+			'versionOverride' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'buttonType' => array(
 				'type' => 'string',
 				'default' => 'github'

@@ -63,6 +63,10 @@
 			"type": "string",
 			"default": "View on GitHub"
 		},
+		"versionOverride": {
+			"type": "string",
+			"default": ""
+		},
 		"buttonType": {
 			"type": "string",
 			"default": "github"

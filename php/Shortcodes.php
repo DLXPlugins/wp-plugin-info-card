@@ -733,25 +733,25 @@ class Shortcodes {
 		$attributes = wp_parse_args(
 			$atts,
 			array(
-				'id'          => '',  // custom Div ID (could be use for anchor).
-				'type'        => '',  // plugin | theme.
-				'slug'        => '',  // plugin slug name.
-				'image'       => '',  // image url to replace WP logo (175px X 175px).
-				'align'       => '',  // center|left|right.
-				'containerid' => '',  // custom Div ID (could be use for anchor).
-				'margin'      => '',  // custom container margin - eg: "15px 0".
-				'clear'       => '',  // clear float before or after the card: before|after.
-				'expiration'  => '',  // transient duration in minutes - 0 for never expires.
-				'ajax'        => '',  // load plugin data async whith ajax: yes|no (default: no).
-				'scheme'      => '',  // color scheme : default|scheme1->scheme10 (default: empty).
-				'layout'      => '',  // card|large|flex|wordpress.
-				'custom'      => '',  // value to print : url|name|version|author|requires|rating|num_ratings|downloaded|last_updated|download_link.
-				'multi'       => false,
-				'cols'        => 2,
-				'col_gap'     => 20,
-				'row_gap'     => 20,
-				'itemSlugs'   => array(),
-				'marginSpacing' => 'none',
+				'id'                  => '',  // custom Div ID (could be use for anchor).
+				'type'                => '',  // plugin | theme.
+				'slug'                => '',  // plugin slug name.
+				'image'               => '',  // image url to replace WP logo (175px X 175px).
+				'align'               => '',  // center|left|right.
+				'containerid'         => '',  // custom Div ID (could be use for anchor).
+				'margin'              => '',  // custom container margin - eg: "15px 0".
+				'clear'               => '',  // clear float before or after the card: before|after.
+				'expiration'          => '',  // transient duration in minutes - 0 for never expires.
+				'ajax'                => '',  // load plugin data async whith ajax: yes|no (default: no).
+				'scheme'              => '',  // color scheme : default|scheme1->scheme10 (default: empty).
+				'layout'              => '',  // card|large|flex|wordpress.
+				'custom'              => '',  // value to print : url|name|version|author|requires|rating|num_ratings|downloaded|last_updated|download_link.
+				'multi'               => false,
+				'cols'                => 2,
+				'col_gap'             => 20,
+				'row_gap'             => 20,
+				'itemSlugs'           => array(),
+				'marginSpacing'       => 'none',
 				'marginSpacingTarget' => 'both',
 			),
 		);
@@ -1977,86 +1977,86 @@ class Shortcodes {
 	public static function shortcode_github_info_card( $attributes, $content = '' ) {
 
 		$defaults_attributes = array(
-			'className' => '',
-			'uniqueId' => 'wp-pic-' . wp_generate_password( 10, false ),
-			'numChildren' => 0,
-			'cols' => 1,
-			'colGap' => 10,
-			'rowGap' => 10,
-			'marginSpacing' => 'none',
-			'marginSpacingTarget' => 'both',
-			'backgroundColor' => '#fff',
-			'textColor' => '#24292f',
-			'iconColor' => '#666',
-			'iconColorHover' => '#111827',
-			'borderColor' => '#d0d7de',
-			'languageBgColor' => '#24292f',
-			'languageTextColor' => '#fff',
-			'sponsorsColor' => '#bf3989',
-			'buttonBgColor' => '#1a7f37',
-			'buttonBgColorHover' => '#2c974b',
-			'buttonTextColor' => '#fff',
-			'buttonTextColorHover' => '#fff',
-			'layout' => 'large',
-			'align' => 'center',
-			'uniqueId' => '',
-			'showTopBar' => true,
-			'showAuthorBar' => true,
-			'showStatsBar' => true,
-			'showLastUpdated' => true,
-			'parentButtonType' => '',
-			'username' => '',
-			'repo' => '',
-			'nameOverride' => '',
-			'loginOverride' => '',
-			'sponsorsUrlOverride' => '',
+			'class'               => '',
+			'uniqueId'                => 'wp-pic-' . wp_generate_password( 10, false ),
+			'numChildren'             => 0,
+			'cols'                    => 1,
+			'colGap'                  => 10,
+			'rowGap'                  => 10,
+			'marginSpacing'           => 'none',
+			'marginSpacingTarget'     => 'both',
+			'backgroundColor'         => '#fff',
+			'textColor'               => '#24292f',
+			'iconColor'               => '#666',
+			'iconColorHover'          => '#111827',
+			'borderColor'             => '#d0d7de',
+			'languageBgColor'         => '#24292f',
+			'languageTextColor'       => '#fff',
+			'sponsorsColor'           => '#bf3989',
+			'buttonBgColor'           => '#1a7f37',
+			'buttonBgColorHover'      => '#2c974b',
+			'buttonTextColor'         => '#fff',
+			'buttonTextColorHover'    => '#fff',
+			'layout'                  => 'large',
+			'align'                   => 'center',
+			'uniqueId'                => '',
+			'showTopBar'              => true,
+			'showAuthorBar'           => true,
+			'showStatsBar'            => true,
+			'showLastUpdated'         => true,
+			'parentButtonType'        => '',
+			'username'                => '',
+			'repo'                    => '',
+			'nameOverride'            => '',
+			'loginOverride'           => '',
+			'sponsorsUrlOverride'     => '',
 			'organizationUrlOverride' => '',
-			'overrideButton' => false,
-			'overrideButtonText' => __( 'View on GitHub', 'wp-plugin-info-card' ),
-			'buttonType' => 'github',
-			'avatarImageUrl' => '',
+			'overrideButton'          => false,
+			'overrideButtonText'      => __( 'View on GitHub', 'wp-plugin-info-card' ),
+			'buttonType'              => 'github',
+			'avatarImageUrl'          => '',
 		);
 
 		$attributes = shortcode_atts( $defaults_attributes, $attributes, 'github-info-card' );
 
 		// Let's sanitize these one-by-one.
-		$attributes['className'] = Functions::sanitize_attribute( $attributes, 'className', 'string' );
-		$attributes['numChildren'] = Functions::sanitize_attribute( $attributes, 'numChildren', 'integer' );
-		$attributes['cols'] = Functions::sanitize_attribute( $attributes, 'cols', 'integer' );
-		$attributes['colGap'] = Functions::sanitize_attribute( $attributes, 'colGap', 'integer' );
-		$attributes['rowGap'] = Functions::sanitize_attribute( $attributes, 'rowGap', 'integer' );
-		$attributes['marginSpacing'] = Functions::sanitize_attribute( $attributes, 'marginSpacing', 'string' );
-		$attributes['marginSpacingTarget'] = Functions::sanitize_attribute( $attributes, 'marginSpacingTarget', 'string' );
-		$attributes['backgroundColor'] = Functions::sanitize_attribute( $attributes, 'backgroundColor', 'string' );
-		$attributes['textColor'] = Functions::sanitize_attribute( $attributes, 'textColor', 'string' );
-		$attributes['iconColor'] = Functions::sanitize_attribute( $attributes, 'iconColor', 'string' );
-		$attributes['iconColorHover'] = Functions::sanitize_attribute( $attributes, 'iconColorHover', 'string' );
-		$attributes['borderColor'] = Functions::sanitize_attribute( $attributes, 'borderColor', 'string' );
-		$attributes['languageBgColor'] = Functions::sanitize_attribute( $attributes, 'languageBgColor', 'string' );
-		$attributes['languageTextColor'] = Functions::sanitize_attribute( $attributes, 'languageTextColor', 'string' );
-		$attributes['sponsorsColor'] = Functions::sanitize_attribute( $attributes, 'sponsorsColor', 'string' );
-		$attributes['buttonBgColor'] = Functions::sanitize_attribute( $attributes, 'buttonBgColor', 'string' );
-		$attributes['buttonBgColorHover'] = Functions::sanitize_attribute( $attributes, 'buttonBgColorHover', 'string' );
-		$attributes['buttonTextColor'] = Functions::sanitize_attribute( $attributes, 'buttonTextColor', 'string' );
-		$attributes['buttonTextColorHover'] = Functions::sanitize_attribute( $attributes, 'buttonTextColorHover', 'string' );
-		$attributes['layout'] = Functions::sanitize_attribute( $attributes, 'layout', 'string' );
-		$attributes['align'] = Functions::sanitize_attribute( $attributes, 'align', 'string' );
-		$attributes['uniqueId'] = Functions::sanitize_attribute( $attributes, 'uniqueId', 'string' );
-		$attributes['showTopBar'] = Functions::sanitize_attribute( $attributes, 'showTopBar', 'boolean' );
-		$attributes['showAuthorBar'] = Functions::sanitize_attribute( $attributes, 'showAuthorBar', 'boolean' );
-		$attributes['showStatsBar'] = Functions::sanitize_attribute( $attributes, 'showStatsBar', 'boolean' );
-		$attributes['showLastUpdated'] = Functions::sanitize_attribute( $attributes, 'showLastUpdated', 'boolean' );
-		$attributes['parentButtonType'] = Functions::sanitize_attribute( $attributes, 'parentButtonType', 'string' );
-		$attributes['username'] = Functions::sanitize_attribute( $attributes, 'username', 'string' );
-		$attributes['repo'] = Functions::sanitize_attribute( $attributes, 'repo', 'string' );
-		$attributes['nameOverride'] = Functions::sanitize_attribute( $attributes, 'nameOverride', 'string' );
-		$attributes['loginOverride'] = Functions::sanitize_attribute( $attributes, 'loginOverride', 'string' );
-		$attributes['sponsorsUrlOverride'] = Functions::sanitize_attribute( $attributes, 'sponsorsUrlOverride', 'string' );
+		$attributes['class']               = Functions::sanitize_attribute( $attributes, 'class', 'string' );
+		$attributes['numChildren']             = Functions::sanitize_attribute( $attributes, 'numChildren', 'integer' );
+		$attributes['cols']                    = Functions::sanitize_attribute( $attributes, 'cols', 'integer' );
+		$attributes['colGap']                  = Functions::sanitize_attribute( $attributes, 'colGap', 'integer' );
+		$attributes['rowGap']                  = Functions::sanitize_attribute( $attributes, 'rowGap', 'integer' );
+		$attributes['marginSpacing']           = Functions::sanitize_attribute( $attributes, 'marginSpacing', 'string' );
+		$attributes['marginSpacingTarget']     = Functions::sanitize_attribute( $attributes, 'marginSpacingTarget', 'string' );
+		$attributes['backgroundColor']         = Functions::sanitize_attribute( $attributes, 'backgroundColor', 'string' );
+		$attributes['textColor']               = Functions::sanitize_attribute( $attributes, 'textColor', 'string' );
+		$attributes['iconColor']               = Functions::sanitize_attribute( $attributes, 'iconColor', 'string' );
+		$attributes['iconColorHover']          = Functions::sanitize_attribute( $attributes, 'iconColorHover', 'string' );
+		$attributes['borderColor']             = Functions::sanitize_attribute( $attributes, 'borderColor', 'string' );
+		$attributes['languageBgColor']         = Functions::sanitize_attribute( $attributes, 'languageBgColor', 'string' );
+		$attributes['languageTextColor']       = Functions::sanitize_attribute( $attributes, 'languageTextColor', 'string' );
+		$attributes['sponsorsColor']           = Functions::sanitize_attribute( $attributes, 'sponsorsColor', 'string' );
+		$attributes['buttonBgColor']           = Functions::sanitize_attribute( $attributes, 'buttonBgColor', 'string' );
+		$attributes['buttonBgColorHover']      = Functions::sanitize_attribute( $attributes, 'buttonBgColorHover', 'string' );
+		$attributes['buttonTextColor']         = Functions::sanitize_attribute( $attributes, 'buttonTextColor', 'string' );
+		$attributes['buttonTextColorHover']    = Functions::sanitize_attribute( $attributes, 'buttonTextColorHover', 'string' );
+		$attributes['layout']                  = Functions::sanitize_attribute( $attributes, 'layout', 'string' );
+		$attributes['align']                   = Functions::sanitize_attribute( $attributes, 'align', 'string' );
+		$attributes['uniqueId']                = Functions::sanitize_attribute( $attributes, 'uniqueId', 'string' );
+		$attributes['showTopBar']              = Functions::sanitize_attribute( $attributes, 'showTopBar', 'boolean' );
+		$attributes['showAuthorBar']           = Functions::sanitize_attribute( $attributes, 'showAuthorBar', 'boolean' );
+		$attributes['showStatsBar']            = Functions::sanitize_attribute( $attributes, 'showStatsBar', 'boolean' );
+		$attributes['showLastUpdated']         = Functions::sanitize_attribute( $attributes, 'showLastUpdated', 'boolean' );
+		$attributes['parentButtonType']        = Functions::sanitize_attribute( $attributes, 'parentButtonType', 'string' );
+		$attributes['username']                = Functions::sanitize_attribute( $attributes, 'username', 'string' );
+		$attributes['repo']                    = Functions::sanitize_attribute( $attributes, 'repo', 'string' );
+		$attributes['nameOverride']            = Functions::sanitize_attribute( $attributes, 'nameOverride', 'string' );
+		$attributes['loginOverride']           = Functions::sanitize_attribute( $attributes, 'loginOverride', 'string' );
+		$attributes['sponsorsUrlOverride']     = Functions::sanitize_attribute( $attributes, 'sponsorsUrlOverride', 'string' );
 		$attributes['organizationUrlOverride'] = Functions::sanitize_attribute( $attributes, 'organizationUrlOverride', 'string' );
-		$attributes['overrideButton'] = Functions::sanitize_attribute( $attributes, 'overrideButton', 'boolean' );
-		$attributes['overrideButtonText'] = Functions::sanitize_attribute( $attributes, 'overrideButtonText', 'string' );
-		$attributes['buttonType'] = Functions::sanitize_attribute( $attributes, 'buttonType', 'string' );
-		$attributes['avatarImageUrl'] = Functions::sanitize_attribute( $attributes, 'avatarImageUrl', 'url' );
+		$attributes['overrideButton']          = Functions::sanitize_attribute( $attributes, 'overrideButton', 'boolean' );
+		$attributes['overrideButtonText']      = Functions::sanitize_attribute( $attributes, 'overrideButtonText', 'string' );
+		$attributes['buttonType']              = Functions::sanitize_attribute( $attributes, 'buttonType', 'string' );
+		$attributes['avatarImageUrl']          = Functions::sanitize_attribute( $attributes, 'avatarImageUrl', 'url' );
 
 		// Now let's build the shortcode.
 		if ( 0 === $attributes['numChildren'] ) {
@@ -2078,33 +2078,57 @@ class Shortcodes {
 		ob_start();
 
 		// Get Home URL.
-		$has_homepage_url = false;
-		$homepage_url = Functions::sanitize_attribute( $asset_data, 'homepage', 'url' );
+		$has_homepage_url      = false;
+		$homepage_url          = Functions::sanitize_attribute( $asset_data, 'homepage', 'url' );
 		$homepage_url_override = Functions::sanitize_attribute( $attributes, 'homepageUrlOverride', 'url' );
 		if ( ! is_wp_error( $homepage_url ) && ! empty( $homepage_url ) ) {
 			$has_homepage_url = true;
 		}
 		if ( ! is_wp_error( $homepage_url_override ) && ! empty( $homepage_url_override ) ) {
-			$homepage_url = $homepage_url_override;
+			$homepage_url     = $homepage_url_override;
 			$has_homepage_url = true;
 		}
 
 		// Get GitHub URL. No override.
 		$has_github_url = false;
-		$github_url = Functions::sanitize_attribute( $asset_data, 'github_url', 'url' );
+		$github_url     = Functions::sanitize_attribute( $asset_data, 'github_url', 'url' );
 		if ( ! is_wp_error( $github_url ) && ! empty( $github_url ) ) {
 			$has_github_url = true;
 		}
 
+		// Get stargazer's count for GitHub URL.
+		$has_stargazers_count = false;
+		$stargazers_count_url = '';
+		if ( $has_github_url ) {
+			$has_stargazers_count = true;
+			$stargazers_count_url = sprintf( '%s/stargazers', $github_url );
+		}
+
+		// Get watchers GitHub URL.
+		$has_watchers_count = false;
+		$watchers_count_url = '';
+		if ( $has_github_url ) {
+			$has_watchers_count = true;
+			$watchers_count_url = sprintf( '%s/watchers', $github_url );
+		}
+
+		// Get forks GitHub URL.
+		$has_forks_count = false;
+		$forks_count_url = '';
+		if ( $has_github_url ) {
+			$has_forks_count = true;
+			$forks_count_url = sprintf( '%s/forks', $github_url );
+		}
+
 		// Get sponsors URL.
 		$has_sponsors_url = false;
-		$sponsors_url = Functions::sanitize_attribute( $asset_data, 'sponsors_url', 'url' );
+		$sponsors_url     = Functions::sanitize_attribute( $asset_data, 'sponsors_url', 'url' );
 		if ( ! is_wp_error( $sponsors_url ) && ! empty( $sponsors_url ) ) {
 			$has_sponsors_url = true;
 		}
 		$sponsors_url_override = Functions::sanitize_attribute( $attributes, 'sponsorsUrlOverride', 'url' );
 		if ( ! is_wp_error( $sponsors_url_override ) && ! empty( $sponsors_url_override ) ) {
-			$sponsors_url = $sponsors_url_override;
+			$sponsors_url     = $sponsors_url_override;
 			$has_sponsors_url = true;
 		}
 
@@ -2120,7 +2144,7 @@ class Shortcodes {
 		}
 
 		// Get org name.
-		$org_name = Functions::sanitize_attribute( $asset_data, 'login', 'string' );
+		$org_name          = Functions::sanitize_attribute( $asset_data, 'login', 'string' );
 		$org_name_override = Functions::sanitize_attribute( $attributes, 'organizationUrlOverride', 'string' );
 		if ( ! is_wp_error( $org_name_override ) && ! empty( $org_name_override ) ) {
 			$org_name = $org_name_override;
@@ -2146,6 +2170,41 @@ class Shortcodes {
 		$repo_description = Functions::sanitize_attribute( $asset_data, 'description', 'string' );
 		if ( is_wp_error( $repo_description ) ) {
 			$repo_description = '';
+		}
+
+		// Get counts.
+		$stargazers_count = Functions::sanitize_attribute( $asset_data, 'stargazers_count', 'integer' );
+		if ( is_wp_error( $stargazers_count ) ) {
+			$stargazers_count = 0;
+		}
+		$watchers_count = Functions::sanitize_attribute( $asset_data, 'watchers_count', 'integer' );
+		if ( is_wp_error( $watchers_count ) ) {
+			$watchers_count = 0;
+		}
+		$forks_count = Functions::sanitize_attribute( $asset_data, 'forks_count', 'integer' );
+		if ( is_wp_error( $forks_count ) ) {
+			$forks_count = 0;
+		}
+		$subscribers_count = Functions::sanitize_attribute( $asset_data, 'subscribers_count', 'integer' );
+		if ( is_wp_error( $subscribers_count ) ) {
+			$subscribers_count = 0;
+		}
+
+		// Get latest release tag name and URL.
+		$latest_release_tag_name = Functions::sanitize_attribute( $asset_data, 'latest_release_tag_name', 'string' );
+		$latest_release_url      = Functions::sanitize_attribute( $asset_data, 'latest_release_url', 'url' );
+		if ( is_wp_error( $latest_release_tag_name ) || is_wp_error( $latest_release_url ) ) {
+			$latest_release_tag_name = '';
+			$latest_release_url      = '';
+		}
+		$latest_release_download_url = Functions::sanitize_attribute( $asset_data, 'latest_release_download_url', 'url' );
+		if ( ! is_wp_error( $latest_release_download_url ) && ! empty( $latest_release_download_url ) ) {
+			$latest_release_url = $latest_release_download_url;
+		}
+		// Get version override.
+		$version_override = Functions::sanitize_attribute( $attributes, 'versionOverride', 'string' );
+		if ( ! is_wp_error( $version_override ) && ! empty( $version_override ) && ! empty( $latest_release_tag_name ) ) {
+			$latest_release_tag_name = $version_override;
 		}
 		?>
 		<div class="wppic-github-info-card-wrapper">
@@ -2186,7 +2245,7 @@ class Shortcodes {
 							</a>
 						</div>
 							<?php
-						endif;
+							endif;
 						?>
 						<?php
 						if ( $has_sponsors_url ) :
@@ -2195,6 +2254,19 @@ class Shortcodes {
 							<a href="<?php echo esc_url( $sponsors_url ); ?>">
 								<svg class="wppic-github-info-card-icon-svg" width="20" height="20" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<use xlink:href="#fa-icon-heart" />
+								</svg>
+							</a>
+						</div>
+							<?php
+						endif;
+						?>
+						<?php
+						if ( $has_stargazers_count ) :
+							?>
+						<div class="wppic-github-info-card-header-icon wppic-github-info-card-icon-star">
+							<a href="<?php echo esc_url( $stargazers_count_url ); ?>">
+								<svg class="wppic-github-info-card-icon-svg" width="20" height="20" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<use xlink:href="#fa-icon-star" />
 								</svg>
 							</a>
 						</div>
@@ -2221,6 +2293,69 @@ class Shortcodes {
 					<?php endif; ?>
 				</div>
 			</div><!-- .wppic-github-info-card-author-section -->
+			<?php if ( (bool) $attributes['showStatsBar'] ) : ?>
+				<div class="wppic-github-info-card-meta">
+					<div class="wppic-github-info-card-meta-item">
+						<?php if ( $has_sponsors_url ) : ?>
+							<a href="<?php echo esc_url( $sponsors_url ); ?>">
+								<div class="wppic-github-info-card-meta-item-icon">
+									<svg class="wppic-github-info-card-icon-svg" width="20" height="20" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<use xlink:href="#fa-icon-star" />
+									</svg>
+								</div>
+								<div class="wppic-github-info-card-meta-item-text">
+									<?php echo esc_html( Functions::abbreviate_number( $stargazers_count ) ); ?>
+								</div>
+							</a>
+						<?php endif; ?>
+					</div>
+					<div class="wppic-github-info-card-meta-item">
+						<?php if ( ! empty( $forks_count ) ) : ?>
+							<a href="<?php echo esc_url( $forks_count_url ); ?>">
+								<div class="wppic-github-info-card-meta-item-icon">
+									<svg class="wppic-github-info-card-icon-svg" width="20" height="20" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<use xlink:href="#fa-icon-fork" />
+									</svg>
+								</div>
+								<div class="wppic-github-info-card-meta-item-text">
+									<?php echo esc_html( Functions::abbreviate_number( $forks_count ) ); ?>
+								</div>
+							</a>
+						<?php endif; ?>
+					</div>
+					<div class="wppic-github-info-card-meta-item">
+						<?php if ( ! empty( $watchers_count ) ) : ?>
+							<a href="<?php echo esc_url( $watchers_count_url ); ?>">
+								<div class="wppic-github-info-card-meta-item-icon">
+									<svg class="wppic-github-info-card-icon-svg" width="20" height="20" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<use xlink:href="#fa-icon-eye" />
+									</svg>
+								</div>
+								<div class="wppic-github-info-card-meta-item-text">
+									<?php echo esc_html( Functions::abbreviate_number( $subscribers_count ) ); ?>
+								</div>
+							</a>
+						<?php endif; ?>
+					</div>
+					<div class="wppic-github-info-card-meta-item">
+						<?php if ( ! empty( $latest_release_tag_name ) ) : ?>
+							<a href="<?php echo esc_url( $latest_release_url ); ?>">
+								<div class="wppic-github-info-card-meta-item-icon">
+									<svg class="wppic-github-info-card-icon-svg" width="20" height="20" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<use xlink:href="#fa-icon-code" />
+									</svg>
+								</div>
+								<div class="wppic-github-info-card-meta-item-text">
+									<?php echo esc_html( mb_strimwidth( $latest_release_tag_name, 0, 10, '...' ) ); ?>
+								</div>
+							</a>
+						<?php endif; ?>
+					</div>
+				</div>
+			<?php endif; ?>
+			<div class="wppic-github-info-card-description">
+				<?php echo esc_html( $repo_description ); ?>
+			</div>
 		</div><!-- .wppic-github-info-card-wrapper -->
 
 		<?php

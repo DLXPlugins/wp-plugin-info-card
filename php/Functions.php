@@ -154,7 +154,7 @@ class Functions {
 			$plugins_on_org = array();
 			foreach ( $all_plugins_with_info as $plugin_file => $plugin_data ) {
 				if ( isset( $plugin_data['id'] ) && strstr( $plugin_data['id'], 'w.org' ) ) {
-					$plugins_on_org[ $plugin_file ] = $plugin_data;
+					$plugins_on_org[ $plugin_file ]         = $plugin_data;
 					$plugins_on_org[ $plugin_file ]['name'] = $plugin_data['Name'];
 				}
 			}
@@ -275,6 +275,36 @@ class Functions {
 			}
 		}
 		return $options_url;
+	}
+
+	/**
+	 * Abbreviate a number.
+	 *
+	 * @param int $number The number to abbreviate.
+	 * @param int $precision The precision of the number.
+	 *
+	 * @return string The abbreviated number.
+	 */
+	public static function abbreviate_number( $number, $precision = 1 ) {
+		if ( $number < 1000 ) {
+			return number_format_i18n( $number );
+		}
+
+		$divisions = array(
+			1000000000000 => __( 't', 'textdomain' ), // trillion.
+			1000000000    => __( 'b', 'textdomain' ), // billion.
+			1000000       => __( 'm', 'textdomain' ), // million.
+			1000          => __( 'k', 'textdomain' ), // thousand.
+		);
+
+		foreach ( $divisions as $divisor => $shorthand ) {
+			if ( $number >= $divisor ) {
+				$formatted = $number / $divisor;
+				return number_format_i18n( round( $formatted, $precision ) ) . $shorthand;
+			}
+		}
+
+		return number_format_i18n( $number );
 	}
 
 	/**
