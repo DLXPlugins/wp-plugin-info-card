@@ -2133,7 +2133,7 @@ class Shortcodes {
 		}
 
 		// Get repo name.
-		$repo_name = Functions::sanitize_attribute( $asset_data, 'name', 'string' );
+			$repo_name = Functions::sanitize_attribute( $asset_data, 'name', 'string' );
 		if ( is_wp_error( $repo_name ) ) {
 			$repo_name = '';
 		}
