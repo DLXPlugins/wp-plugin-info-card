@@ -1984,6 +1984,7 @@ class Shortcodes {
 
 		$defaults_attributes = array(
 			'class'                   => '',
+			'style'                   => 'light',
 			'uniqueid'                => 'wp-pic-' . wp_generate_password( 10, false ),
 			'numchildren'             => 0,
 			'cols'                    => 1,
@@ -2005,7 +2006,6 @@ class Shortcodes {
 			'buttontextcolorhover'    => '#fff',
 			'layout'                  => 'large',
 			'align'                   => 'center',
-			'uniqueid'                => '',
 			'showtopbar'              => true,
 			'showauthorbar'           => true,
 			'showstatsbar'            => true,
@@ -2030,6 +2030,7 @@ class Shortcodes {
 
 		// Let's sanitize these one-by-one.
 		$attributes['class']                   = Functions::sanitize_attribute( $attributes, 'class', 'string' );
+		$attributes['style']                   = Functions::sanitize_attribute( $attributes, 'style', 'string' );
 		$attributes['numchildren']             = Functions::sanitize_attribute( $attributes, 'numchildren', 'integer' );
 		$attributes['cols']                    = Functions::sanitize_attribute( $attributes, 'cols', 'integer' );
 		$attributes['colgap']                  = Functions::sanitize_attribute( $attributes, 'colgap', 'integer' );
@@ -2080,7 +2081,7 @@ class Shortcodes {
 			if ( current_user_can( 'manage_options' ) ) {
 				echo esc_html__( 'GitHub Card Not Found', 'wp-plugin-info-card' );
 			}
-			return '';
+			return ob_get_clean();
 		}
 
 		// Turn asset data into an array.
@@ -2298,10 +2299,31 @@ class Shortcodes {
 			$wrapper_classes[] = 'wppic-margin-spacing-' . $attributes['marginspacing'];
 			$wrapper_classes[] = 'wppic-margin-spacing-target-' . $attributes['marginspacingtarget'];
 			$wrapper_classes[] = $attributes['class'];
+			$wrapper_classes[] = 'is-style-wppic-github-' . $attributes['style'];
 		}
 
+		if ( ( 'is-style-wppic-github-custom' === $attributes['class'] || 'custom' === $attributes['style'] ) && 0 === $attributes['numchildren'] ) {
+			?>
+			<style>
+				#<?php echo esc_attr( $attributes['uniqueid'] ); ?> {
+					--wppic-github-background-color: <?php echo esc_attr( $attributes['backgroundcolor'] ); ?>;
+					--wppic-github-text-color: <?php echo esc_attr( $attributes['textcolor'] ); ?>;
+					--wppic-github-icon-color: <?php echo esc_attr( $attributes['iconcolor'] ); ?>;
+					--wppic-github-icon-color-hover: <?php echo esc_attr( $attributes['iconcolorhover'] ); ?>;
+					--wppic-github-border: <?php echo esc_attr( $attributes['bordercolor'] ); ?>;
+					--wppic-github-language-bg: <?php echo esc_attr( $attributes['languagebgcolor'] ); ?>;
+					--wppic-github-language-color: <?php echo esc_attr( $attributes['languagetextcolor'] ); ?>;
+					--wppic-github-sponsors-color: <?php echo esc_attr( $attributes['sponsorscolor'] ); ?>;
+					--wppic-github-button-bg: <?php echo esc_attr( $attributes['buttonbgcolor'] ); ?>;
+					--wppic-github-button-bg-hover: <?php echo esc_attr( $attributes['buttonbgcolorhover'] ); ?>;
+					--wppic-github-button-text-color: <?php echo esc_attr( $attributes['buttontextcolor'] ); ?>;
+					--wppic-github-button-text-color-hover: <?php echo esc_attr( $attributes['buttontextcolorhover'] ); ?>;
+					}
+				</style>
+			<?php
+		}
 		?>
-		<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>">
+		<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" id="<?php echo esc_attr( $attributes['uniqueid'] ); ?>">
 			<div class="wppic-github-info-card-wrapper">
 			<?php
 			if ( (bool) $attributes['showtopbar'] ) :
