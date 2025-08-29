@@ -443,7 +443,7 @@ const GitHubInfoCardGrid = ( props ) => {
 		return (
 			<div style={ { textAlign: 'center' } }>
 				<img
-					src={ wppic.wppic_preview }
+					src={ wppic.github_items_grid_preview }
 					alt=""
 					style={ { width: '100%', height: 'auto' } }
 				/>

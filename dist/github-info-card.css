@@ -137,6 +137,10 @@ button.button-reset.show-cursor {
   width: 100%;
 }
 
+.layout-card.wppic-github-info-card {
+  display: grid;
+}
+
 .layout-card.wppic-github-info-card-grid,
 .layout-card.wppic-github-info-card-grid.cols-1 {
   grid-template-columns: repeat(auto-fit, minmax(275px, 325px));
@@ -147,21 +151,21 @@ button.button-reset.show-cursor {
 }
 
 .wppic-github-info-card-grid.cols-1 {
-  grid-template-columns: minmax(325px, 600px);
+  grid-template-columns: repeat(1, minmax(325px, 600px));
   gap: var(--wppic-grid-col-gap);
   row-gap: var(--wppic-grid-row-gap);
   justify-content: center;
 }
 
 .wppic-github-info-card-grid.cols-2 {
-  grid-template-columns: minmax(325px, 600px);
+  grid-template-columns: repeat(2, minmax(autox, 600px));
   gap: var(--wppic-grid-col-gap);
   row-gap: var(--wppic-grid-row-gap);
   justify-content: center;
 }
 
 .layout-card.wppic-github-info-card-grid.cols-2 {
-  grid-template-columns: minmax(275px, 325px);
+  grid-template-columns: repeat(2, minmax(275px, 325px));
   gap: var(--wppic-grid-col-gap);
   row-gap: var(--wppic-grid-row-gap);
   justify-content: center;
@@ -170,21 +174,21 @@ button.button-reset.show-cursor {
 
 @media (min-width: 768px) {
   .wppic-github-info-card-grid.cols-2 {
-    grid-template-columns: minmax(325px, 600px) minmax(325px, 600px);
+    grid-template-columns: repeat(2, minmax(auto, 600px));
   }
   .layout-card.wppic-github-info-card-grid.cols-2 {
-    grid-template-columns: minmax(275px, 325px) minmax(275px, 325px);
+    grid-template-columns: repeat(2, minmax(275px, 325px));
   }
 }
 .wppic-github-info-card-grid.cols-3 {
-  grid-template-columns: minmax(325px, 600px);
+  grid-template-columns: repeat(3, minmax(325px, 600px));
   gap: var(--wppic-grid-col-gap);
   row-gap: var(--wppic-grid-row-gap);
   justify-content: center;
 }
 
 .layout-card.wppic-github-info-card-grid.cols-3 {
-  grid-template-columns: minmax(275px, 325px);
+  grid-template-columns: repeat(3, minmax(275px, 325px));
   gap: var(--wppic-grid-col-gap);
   row-gap: var(--wppic-grid-row-gap);
   justify-content: center;
@@ -209,6 +213,7 @@ button.button-reset.show-cursor {
 }
 .wp-block-github-info-card {
   width: 100%;
+  display: grid;
 }
 
 .wppic-github-info-card-wrapper {
@@ -223,8 +228,9 @@ button.button-reset.show-cursor {
   grid-template-columns: 1fr;
   gap: var(--wppic-gap-md);
   row-gap: var(--wppic-gap-md);
-  max-width: 600px;
+  max-width: none;
   width: 100%;
+  min-width: 100%;
   overflow: hidden;
   box-sizing: border-box;
 }

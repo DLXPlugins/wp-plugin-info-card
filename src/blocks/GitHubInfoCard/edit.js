@@ -399,7 +399,7 @@ const GitHubInfoCard = ( props ) => {
 		return (
 			<div style={ { textAlign: 'center' } }>
 				<img
-					src={ wppic.wppic_preview }
+					src={ wppic.github_items_preview }
 					alt=""
 					style={ { width: '100%', height: 'auto' } }
 				/>

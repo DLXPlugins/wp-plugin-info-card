@@ -271,6 +271,9 @@ class Blocks {
 				'screenshots_card_preview'       => Functions::get_plugin_url( 'assets/img/wp-pic-screenshots-preview.jpg' ),
 				'wppic_plugin_icon_default'      => Functions::get_plugin_url( 'assets/img/default-plugin-icon.png' ),
 				'wppic_banner_default'           => Functions::get_plugin_url( 'assets/img/default-banner.png' ),
+				'github_items_preview'           => Functions::get_plugin_url( 'assets/img/wp-github-item-preview.jpg' ),
+				'github_items_grid_preview'      => Functions::get_plugin_url( 'assets/img/wp-github-item-grid-preview.jpg' ),
+				
 				'default_scheme'                 => $default_scheme,
 				'default_layout'                 => $default_layout,
 				'rest_nonce'                     => wp_create_nonce( 'wp_rest' ),

@@ -21983,7 +21983,7 @@ var GitHubInfoCard = function b(a) {
         textAlign: 'center'
       }
     }, /*#__PURE__*/React.createElement("img", {
-      src: wppic.wppic_preview,
+      src: wppic.github_items_preview,
       alt: "",
       style: {
         width: '100%',
@@ -22877,7 +22877,7 @@ var _GitHubInfoCardGrid = function b(a) {
         textAlign: 'center'
       }
     }, /*#__PURE__*/React.createElement("img", {
-      src: wppic.wppic_preview,
+      src: wppic.github_items_grid_preview,
       alt: "",
       style: {
         width: '100%',
