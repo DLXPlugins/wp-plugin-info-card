@@ -4,6 +4,7 @@
 	--wppic-gap-sm: 8px;
 	--wppic-gap-md: 16px;
 	--wppic-gap-lg: 24px;
+	--wpic-grid-gap: 24px;
 }
 :root,
 :root .is-style-wppic-github-light {
@@ -85,33 +86,48 @@
 .wppic-github-info-card-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(325px, 600px));
-	gap: 24px;
+	gap: var(--wpic-grid-gap);
 	justify-content: center;
-	row-gap: 24px;
+	row-gap: var(--wpic-grid-gap);
 	width: 100%;
 }
 .layout-card.wppic-github-info-card-grid {
 	grid-template-columns: repeat(auto-fit, minmax(325px, 600px));
-	gap: 24px;
-	row-gap: 24px;
+	gap: var(--wpic-grid-gap);
+	row-gap: var(--wpic-grid-gap);
 }
 .wppic-github-info-card-grid.cols-1 {
 	grid-template-columns: minmax(325px, 600px);
-	gap: 24px;
-	row-gap: 24px;
+	gap: var(--wpic-grid-gap);
+	row-gap: var(--wpic-grid-gap);
 	justify-content: center;
 }
-.wppic-github-info-card-grid.cols-2 {
-	grid-template-columns: minmax(325px, 600px) minmax(325px, 600px);
-	gap: 24px;
-	row-gap: 24px;
+.wppic-github-info-card-grid.cols-2  {
+	grid-template-columns: minmax(325px, 600px);
+	gap: var(--wpic-grid-gap);
+	row-gap: var(--wpic-grid-gap);
 	justify-content: center;
+}
+@include respond-to('medium') {
+	.wppic-github-info-card-grid.cols-2 {
+		grid-template-columns: minmax(325px, 600px) minmax(325px, 600px);
+	}
 }
 .wppic-github-info-card-grid.cols-3 {
-	grid-template-columns: minmax(325px, 600px) minmax(325px, 600px) minmax(325px, 600px);
-	gap: 24px;
-	row-gap: 24px;
+	grid-template-columns: minmax(325px, 600px);
+	gap: var(--wpic-grid-gap);
+	row-gap: var(--wpic-grid-gap);
 	justify-content: center;
+}
+@include respond-to('medium') {
+	.wppic-github-info-card-grid.cols-3 {
+		grid-template-columns: minmax(325px, 600px) minmax(325px, 600px);
+	}
+}
+@include respond-to('large') {
+	.wppic-github-info-card-grid.cols-3 {
+		grid-template-columns: minmax(325px, 600px) minmax(325px, 600px) minmax(325px, 600px);
+	}
 }
 .wp-block-github-info-card {
 	width: 100%;
@@ -290,6 +306,7 @@
 	line-height: 0;
 	@include respond-to('medium') {
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
 		gap: var(--wppic-gap-sm);
 		font-size: 14px;
@@ -307,6 +324,7 @@
 .wppic-github-info-card-meta-item:not(:has(a)) {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	gap: var(--wppic-gap-sm);
 	padding: 4px 8px;
 	transition: background-color 0.3s ease;
@@ -379,6 +397,31 @@
 }
 .wppic-github-info-card-buttons-right {
 	display: flex;
+}
+.wppic-github-info-card-buttons-right-button {
+	display: flex;
+	width: 100%;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+.wppic-github-button.button-reset, .wppic-github-button.components-button.button-reset, .wppic-github-button.components-button.button-reset:hover {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	width: 100%;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+@include respond-to('xs') {
+	.wppic-github-info-card-buttons-right-button {
+		display: unset;
+	}
+	.wppic-github-button.button-reset, .wppic-github-button.components-button.button-reset, .wppic-github-button.components-button.button-reset:hover {
+		display: inline-block;
+		width: unset;
+		text-align: left;
+	}
 }
 .wppic-github-button.button-reset, .wppic-github-button.components-button.button-reset, .wppic-github-button.components-button.button-reset:hover {
 	display: inline-block;
