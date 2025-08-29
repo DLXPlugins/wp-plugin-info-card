@@ -2077,8 +2077,43 @@ class Shortcodes {
 			// todo - build wrapper around the shortcode.
 		}
 
-		// Get GitHub Asset data.
-		$asset_data = wppic_api_parser( 'github', sanitize_key( $attributes['username'] ) . '/' . sanitize_key( $attributes['repo'] ) );
+		// Check if option exists for GitHub local option cache.
+		$maybe_local_cache = get_transient( 'wppic_github_' . sanitize_key( preg_replace( '/\-/', '_', $attributes['username'] . '/' . $attributes['repo'] ) ), false );
+		if ( ! $maybe_local_cache ) { // Start lazy load.
+			// Get wrapper classes for loading card.
+			$wrapper_classes = array(
+				'layout-' . $attributes['layout'],
+				'cols-' . ( $attributes['numchildren'] > 1 ? $attributes['cols'] : 1 ),
+			);
+			if ( 0 === $attributes['numchildren'] ) {
+				$wrapper_classes[] = 'wppic-github-info-card';
+				$wrapper_classes[] = 'wppic-margin-spacing-' . $attributes['marginspacing'];
+				$wrapper_classes[] = 'wppic-margin-spacing-target-' . $attributes['marginspacingtarget'];
+				$wrapper_classes[] = $attributes['class'];
+				$wrapper_classes[] = 'is-style-wppic-github-' . $attributes['style'];
+				$wrapper_classes[] = 'align' . ( ! is_wp_error( $attributes['align'] ) && ! empty( $attributes['align'] ) ? $attributes['align'] : 'center' );
+				$wrapper_classes[] = 'horizontal-align-' . ( ! is_wp_error( $attributes['horizontalalign'] ) && ! empty( $attributes['horizontalalign'] ) ? $attributes['horizontalalign'] : 'center' );
+			} else {
+				$wrapper_classes[] = 'wppic-github-info-card-grid';
+			}
+
+			$nonce = wp_create_nonce( 'wppic_github_lazy_load_' . sanitize_key( $attributes['username'] . '/' . $attributes['repo'] ) );
+			ob_start();
+			?>
+			<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" id="<?php echo esc_attr( $attributes['uniqueid'] ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>" data-username="<?php echo esc_attr( $attributes['username'] ); ?>" data-repo="<?php echo esc_attr( $attributes['repo'] ); ?>" data-is-github-card-loading="true">
+				<div class="wppic-github-info-card">
+					<div class="wppic-github-info-card-loading" >
+						<div class="wppic-github-info-card-loading-inner">
+							<h2><?php esc_html_e( 'Loading GitHub Info Card...', 'wp-plugin-info-card' ); ?></h2>
+							<p><?php esc_html_e( 'This may take a few seconds.', 'wp-plugin-info-card' ); ?></p>
+						</div>
+					</div><!-- .wppic-github-info-card-loading -->
+				</div><!-- .wppic-github-info-card -->
+			</div><!-- .wppic-github-info-card-grid -->
+			<?php
+			return ob_get_clean();
+		}
+		$asset_data = $maybe_local_cache;
 		if ( ! $asset_data ) {
 			if ( current_user_can( 'manage_options' ) ) {
 				echo esc_html__( 'GitHub Card Not Found', 'wp-plugin-info-card' );
@@ -2230,6 +2265,9 @@ class Shortcodes {
 		$latest_release_download_url = Functions::sanitize_attribute( $asset_data, 'latest_release_download_url', 'url' );
 		if ( ! is_wp_error( $latest_release_download_url ) && ! empty( $latest_release_download_url ) ) {
 			$latest_release_url = $latest_release_download_url;
+		}
+		if ( empty( $latest_release_url ) ) {
+			$latest_release_url = $github_url;
 		}
 		// Get version override.
 		$version_override = Functions::sanitize_attribute( $attributes, 'versionoverride', 'string' );

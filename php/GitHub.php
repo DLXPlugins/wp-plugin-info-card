@@ -80,9 +80,9 @@ class GitHub {
 			);
 
 			$alt_keys_to_extract = array(
-				'login' => 'owner/login',
-				'avatar' => 'owner/avatar_url',
-				'org_url' => 'organization/html_url',
+				'login'   => 'owner/login',
+				'avatar'  => 'owner/avatar_url',
+				'org_url' => 'owner/html_url',
 			);
 
 			$wppic_data = array();
@@ -99,7 +99,9 @@ class GitHub {
 			foreach ( $alt_keys_to_extract as $target_key => $github_path ) {
 				$value = $this->get_nested_value( $github_data, $github_path );
 				if ( null !== $value && ! empty( $value ) ) {
-					$wppic_data[ $target_key ] = $value;
+					if ( ! isset( $wppic_data[ $target_key ] ) ) {
+						$wppic_data[ $target_key ] = $value;
+					}
 				}
 			}
 
