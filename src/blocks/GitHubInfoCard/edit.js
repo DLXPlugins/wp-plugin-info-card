@@ -580,6 +580,11 @@ const GitHubInfoCard = ( props ) => {
 							onClick={ ( event ) => {
 								event.preventDefault();
 								setAttributes( { loading: false } );
+								// Make sure the two fields are filled out.
+								if ( ! username || ! repo ) {
+									setNoData( true );
+									return;
+								}
 								pluginOnClick( event );
 							} }
 							ref={ setMainButton }

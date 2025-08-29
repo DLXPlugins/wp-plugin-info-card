@@ -45,6 +45,7 @@ button.button-reset.show-cursor {
   --wppic-gap-lg: 24px;
   --wppic-grid-col-gap: 24px;
   --wppic-grid-row-gap: 24px;
+  --wppic-grid-max-width: 600px;
 }
 
 :root,
@@ -125,7 +126,11 @@ button.button-reset.show-cursor {
   display: flex;
   justify-content: center;
   width: 100%;
-  max-width: 600px;
+  max-width: var(--wppic-grid-max-width);
+}
+
+.is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)).wppic-github-info-card {
+  max-width: var(--wppic-grid-max-width); /* fix for blocksy theme */
 }
 
 .wppic-github-info-card-grid {
@@ -349,7 +354,6 @@ button.button-reset.show-cursor {
 .wppic-github-info-card-author-section-avatar {
   width: 100px;
   height: 100px;
-  border-radius: 50%;
   overflow: hidden;
 }
 .wppic-github-info-card-author-section-avatar img {
@@ -381,22 +385,28 @@ button.button-reset.show-cursor {
   text-align: center;
 }
 
+.entry-content .wppic-github-info-card-author-section-name,
 .wppic-github-info-card-author-section-name {
   font-size: clamp(24px, 2vw, 28px);
   font-weight: 600;
   line-height: 1.2;
 }
-.wppic-github-info-card-author-section-name a, .wppic-github-info-card-author-section-name a:hover {
+.entry-content .wppic-github-info-card-author-section-name a, .entry-content .wppic-github-info-card-author-section-name a:hover,
+.wppic-github-info-card-author-section-name a,
+.wppic-github-info-card-author-section-name a:hover {
   color: var(--wppic-github-text-color);
   text-decoration: none;
 }
 
+.entry-content .wppic-github-info-card-author-section-login,
 .wppic-github-info-card-author-section-login {
   font-size: 16px;
   font-weight: 400;
   line-height: 1.2;
 }
-.wppic-github-info-card-author-section-login a, .wppic-github-info-card-author-section-login a:hover {
+.entry-content .wppic-github-info-card-author-section-login a, .entry-content .wppic-github-info-card-author-section-login a:hover,
+.wppic-github-info-card-author-section-login a,
+.wppic-github-info-card-author-section-login a:hover {
   color: var(--wppic-github-text-color);
   text-decoration: none;
 }
@@ -452,10 +462,15 @@ button.button-reset.show-cursor {
   color: var(--wppic-github-text-color);
 }
 
+.entry-content .wppic-github-info-card-meta-item a {
+  text-decoration: none;
+}
+
 .wppic-github-info-card.layout-card .wppic-github-info-card-meta-item a {
   border: 1px solid var(--wppic-github-border);
 }
 
+.entry-content .wppic-github-info-card-meta-item a:hover,
 .wppic-github-info-card-meta-item a:hover {
   color: var(--wppic-github-text-color);
   background-color: var(--wppic-github-border);
@@ -481,6 +496,7 @@ button.button-reset.show-cursor {
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
+  text-align: left;
 }
 
 .wppic-github-info-card.layout-card .wppic-github-info-card-description {

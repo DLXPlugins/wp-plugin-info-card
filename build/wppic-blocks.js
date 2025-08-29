@@ -22137,6 +22137,11 @@ var GitHubInfoCard = function b(a) {
       d({
         loading: false
       });
+      // Make sure the two fields are filled out.
+      if (!j || !l) {
+        G(true);
+        return;
+      }
       ea(a);
     },
     ref: W
