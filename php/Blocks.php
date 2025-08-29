@@ -561,7 +561,7 @@ class Blocks {
 		);
 
 		?>
-		<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>">
+		<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" id="<?php echo esc_attr( $unique_id ); ?>">
 			<style>
 				<?php
 				if ( $num_children > 1 ) {
@@ -573,6 +573,10 @@ class Blocks {
 					<?php
 				}
 				?>
+				#<?php echo esc_attr( $unique_id ); ?> {
+					--wppic-grid-col-gap: <?php echo esc_attr( $col_gap ); ?>px;
+					--wppic-grid-row-gap: <?php echo esc_attr( $row_gap ); ?>px;
+				}
 				<?php
 				if ( 'is-style-wppic-github-custom' === $class_name ) {
 					?>
