@@ -2154,14 +2154,18 @@ class Shortcodes {
 		}
 
 		// Get avatar image.
-		$avatar_image = Functions::sanitize_attribute( $asset_data, 'avatar', 'url' );
-		if ( ! is_wp_error( $avatar_image ) && ! empty( $avatar_image ) ) {
+		$has_avatar_image      = false;
+		$avatar_image          = Functions::sanitize_attribute( $asset_data, 'avatar', 'url' );
+		$avatar_image_override = Functions::sanitize_attribute( $attributes, 'avatarimageurl', 'url' );
+		if ( ! is_wp_error( $avatar_image_override ) && ! empty( $avatar_image_override ) ) {
+			$avatar_image     = $avatar_image_override;
 			$has_avatar_image = true;
-		} else {
-			$avatar_image = Functions::get_plugin_url( 'assets/img/default-plugin-icon.png' ); // todo - replace with GitHub avatar.
+		} elseif ( ! is_wp_error( $avatar_image ) && ! empty( $avatar_image ) ) {
+			$has_avatar_image = true;
 		}
-		if ( ! empty( $attributes['avatarImageUrl'] ) ) {
-			$avatar_image = $attributes['avatarImageUrl'];
+		if ( ! $has_avatar_image ) {
+			$has_avatar_image = true;
+			$avatar_image     = Functions::get_plugin_url( 'assets/img/default-plugin-icon.png' ); // todo - replace with GitHub avatar.
 		}
 
 		// Get org name.
