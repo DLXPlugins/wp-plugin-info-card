@@ -163,6 +163,7 @@ button.button-reset.show-cursor {
   gap: var(--wppic-gap-md);
   row-gap: var(--wppic-gap-md);
   max-width: 600px;
+  width: 100%;
 }
 
 .wppic-github-info-card.layout-card .wppic-github-info-card-wrapper {
@@ -308,11 +309,17 @@ button.button-reset.show-cursor {
   line-height: 1.2;
   word-break: break-all;
 }
+.wppic-github-info-card-author-section-name a, .wppic-github-info-card-author-section-name a:hover {
+  text-decoration: none;
+}
 
 .wppic-github-info-card-author-section-login {
   font-size: 16px;
   font-weight: 400;
   line-height: 1.2;
+}
+.wppic-github-info-card-author-section-login a, .wppic-github-info-card-author-section-login a:hover {
+  text-decoration: none;
 }
 
 .wppic-github-info-card-meta {
@@ -340,7 +347,8 @@ button.button-reset.show-cursor {
   row-gap: var(--wppic-gap-sm);
 }
 
-.wppic-github-info-card-meta-item a {
+.wppic-github-info-card-meta-item a,
+.wppic-github-info-card-meta-item:not(:has(a)) {
   display: flex;
   align-items: center;
   gap: var(--wppic-gap-sm);
@@ -351,11 +359,13 @@ button.button-reset.show-cursor {
   text-decoration: none;
 }
 @media (min-width: 768px) {
-  .wppic-github-info-card-meta-item a {
+  .wppic-github-info-card-meta-item a,
+  .wppic-github-info-card-meta-item:not(:has(a)) {
     border: none;
   }
 }
-.wppic-github-info-card-meta-item a:hover {
+.wppic-github-info-card-meta-item a:hover,
+.wppic-github-info-card-meta-item:not(:has(a)):hover {
   cursor: pointer;
 }
 

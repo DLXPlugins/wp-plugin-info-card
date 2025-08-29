@@ -73,12 +73,12 @@ const GitHubInfoCard = ( props ) => {
 		loginOverride,
 		sponsorsUrlOverride,
 		organizationUrlOverride,
-		versionOverride,
 		overrideButton,
 		overrideButtonText,
 		buttonType,
 		avatarImageId,
 		avatarImageUrl,
+		versionOverride,
 	} = attributes;
 
 	const [ data, setData ] = useState( assetData );

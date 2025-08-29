@@ -21634,12 +21634,12 @@ var GitHubInfoCard = function b(a) {
     o = c.loginOverride,
     p = c.sponsorsUrlOverride,
     q = c.organizationUrlOverride,
-    r = c.versionOverride,
-    s = c.overrideButton,
-    t = c.overrideButtonText,
-    u = c.buttonType,
-    v = c.avatarImageId,
-    w = c.avatarImageUrl;
+    r = c.overrideButton,
+    s = c.overrideButtonText,
+    t = c.buttonType,
+    u = c.avatarImageId,
+    v = c.avatarImageUrl,
+    w = c.versionOverride;
   var x = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(i),
     y = _slicedToArray(x, 2),
     z = y[0],
@@ -21832,7 +21832,7 @@ var GitHubInfoCard = function b(a) {
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('Override the organization URL of the repo.', 'wp-plugin-info-card')
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('Version Override', 'wp-plugin-info-card'),
-    value: r,
+    value: w,
     onChange: function b(a) {
       return d({
         versionOverride: a
@@ -21841,7 +21841,7 @@ var GitHubInfoCard = function b(a) {
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('Override the version of the repo.', 'wp-plugin-info-card')
   }), /*#__PURE__*/React.createElement("div", {
     className: "wppic-avatar-image-container"
-  }, w && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__.Button, {
+  }, v && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__.Button, {
     variant: "secondary",
     isDestructive: true,
     icon: "trash",
@@ -21852,13 +21852,13 @@ var GitHubInfoCard = function b(a) {
         avatarImageUrl: ''
       });
     }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('Remove Custom Avatar', 'wp-plugin-info-card'))), !v && !w && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__.Button, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('Remove Custom Avatar', 'wp-plugin-info-card'))), !u && !v && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__.Button, {
     variant: "secondary",
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('Override Avatar Image', 'wp-plugin-info-card'),
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('Upload an avatar image for the card. Recommended size is 500x500.', 'wp-plugin-info-card'),
     onClick: function a() {
       h({
-        attachmentId: v,
+        attachmentId: u,
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('Avatar Image', 'wp-plugin-info-card'),
         buttonLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('Upload Avatar Image', 'wp-plugin-info-card'),
         suggestedWidth: '500',
@@ -21876,16 +21876,16 @@ var GitHubInfoCard = function b(a) {
     initialOpen: false
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('Override Button', 'wp-plugin-info-card'),
-    checked: s,
+    checked: r,
     onChange: function b(a) {
       return d({
         overrideButton: a
       });
     },
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('Override the button of the card. Leave disabled to use the parent settings.', 'wp-plugin-info-card')
-  }), s && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__.TextControl, {
+  }), r && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('Button Text', 'wp-plugin-info-card'),
-    value: t,
+    value: s,
     onChange: function b(a) {
       return d({
         overrideButtonText: a
@@ -21894,7 +21894,7 @@ var GitHubInfoCard = function b(a) {
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('Override the text of the button. Leave blank to use the parent settings.', 'wp-plugin-info-card')
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('Button Type', 'wp-plugin-info-card'),
-    value: u,
+    value: t,
     onChange: function b(a) {
       return d({
         buttonType: a
@@ -21977,8 +21977,8 @@ var GitHubInfoCard = function b(a) {
   var fa = function a() {
     var b = W();
     var c = '';
-    if (s) {
-      b = u;
+    if (r) {
+      b = t;
     }
     switch (b) {
       case 'github':
@@ -21991,7 +21991,7 @@ var GitHubInfoCard = function b(a) {
         c = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('Sponsor', 'wp-plugin-info-card');
         break;
     }
-    c = s ? t || c : c;
+    c = r ? s || c : c;
     return c;
   };
 
@@ -22001,8 +22001,8 @@ var GitHubInfoCard = function b(a) {
    * @return {string} The avatar image.
    */
   var ga = function a() {
-    if (v) {
-      return w;
+    if (u) {
+      return v;
     }
     return i.avatar;
   };
@@ -22266,7 +22266,7 @@ var GitHubInfoCard = function b(a) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__.__experimentalTruncate, {
     ellipsizeMode: "tail",
     limit: 10
-  }, (0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(r || i.latest_release_tag_name))))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(w || i.latest_release_tag_name))))), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-description"
   }, (0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(i.description)), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-buttons"

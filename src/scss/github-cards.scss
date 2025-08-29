@@ -120,6 +120,7 @@
 	gap: var(--wppic-gap-md);
 	row-gap: var(--wppic-gap-md);
 	max-width: 600px;
+	width: 100%;
 }
 .wppic-github-info-card.layout-card .wppic-github-info-card-wrapper{
 	max-width: 325px;
@@ -252,11 +253,19 @@
 	font-weight: 600;
 	line-height: 1.2;
 	word-break: break-all;
+
+	a, a:hover {
+		text-decoration: none;
+	}
 }
 .wppic-github-info-card-author-section-login {
 	font-size: 16px;
 	font-weight: 400;
 	line-height: 1.2;
+
+	a, a:hover {
+		text-decoration: none;
+	}
 }
 .wppic-github-info-card-meta {
 	display: grid;
@@ -279,7 +288,8 @@
 	gap: var(--wppic-gap-sm);
 	row-gap: var(--wppic-gap-sm);
 }
-.wppic-github-info-card-meta-item a {
+.wppic-github-info-card-meta-item a,
+.wppic-github-info-card-meta-item:not(:has(a)) {
 	display: flex;
 	align-items: center;
 	gap: var(--wppic-gap-sm);

@@ -269,7 +269,7 @@ class Shortcodes {
 			wp_send_json_error( array( 'message' => 'Invalid username or repo.' ) );
 		}
 
-		$github_data = wppic_api_parser( 'github', $username . '/' . $repo, HOUR_IN_SECONDS, '', false, true );
+		$github_data = wppic_api_parser( 'github', $username . '/' . $repo, HOUR_IN_SECONDS, '', false, false );
 
 		if ( empty( $github_data ) ) {
 			wp_send_json_error( array( 'message' => 'No data found.' ) );
@@ -1977,7 +1977,7 @@ class Shortcodes {
 	public static function shortcode_github_info_card( $attributes, $content = '' ) {
 
 		$defaults_attributes = array(
-			'class'               => '',
+			'class'                   => '',
 			'uniqueId'                => 'wp-pic-' . wp_generate_password( 10, false ),
 			'numChildren'             => 0,
 			'cols'                    => 1,
@@ -2010,6 +2010,7 @@ class Shortcodes {
 			'nameOverride'            => '',
 			'loginOverride'           => '',
 			'sponsorsUrlOverride'     => '',
+			'versionOverride'         => '',
 			'organizationUrlOverride' => '',
 			'overrideButton'          => false,
 			'overrideButtonText'      => __( 'View on GitHub', 'wp-plugin-info-card' ),
@@ -2020,7 +2021,7 @@ class Shortcodes {
 		$attributes = shortcode_atts( $defaults_attributes, $attributes, 'github-info-card' );
 
 		// Let's sanitize these one-by-one.
-		$attributes['class']               = Functions::sanitize_attribute( $attributes, 'class', 'string' );
+		$attributes['class']                   = Functions::sanitize_attribute( $attributes, 'class', 'string' );
 		$attributes['numChildren']             = Functions::sanitize_attribute( $attributes, 'numChildren', 'integer' );
 		$attributes['cols']                    = Functions::sanitize_attribute( $attributes, 'cols', 'integer' );
 		$attributes['colGap']                  = Functions::sanitize_attribute( $attributes, 'colGap', 'integer' );
@@ -2053,6 +2054,7 @@ class Shortcodes {
 		$attributes['loginOverride']           = Functions::sanitize_attribute( $attributes, 'loginOverride', 'string' );
 		$attributes['sponsorsUrlOverride']     = Functions::sanitize_attribute( $attributes, 'sponsorsUrlOverride', 'string' );
 		$attributes['organizationUrlOverride'] = Functions::sanitize_attribute( $attributes, 'organizationUrlOverride', 'string' );
+		$attributes['versionOverride']         = Functions::sanitize_attribute( $attributes, 'versionOverride', 'string' );
 		$attributes['overrideButton']          = Functions::sanitize_attribute( $attributes, 'overrideButton', 'boolean' );
 		$attributes['overrideButtonText']      = Functions::sanitize_attribute( $attributes, 'overrideButtonText', 'string' );
 		$attributes['buttonType']              = Functions::sanitize_attribute( $attributes, 'buttonType', 'string' );
@@ -2130,6 +2132,15 @@ class Shortcodes {
 		if ( ! is_wp_error( $sponsors_url_override ) && ! empty( $sponsors_url_override ) ) {
 			$sponsors_url     = $sponsors_url_override;
 			$has_sponsors_url = true;
+		}
+
+		// Get organization URL.
+		$has_org_name_url      = false;
+		$org_name_url          = '';
+		$org_name_url_override = Functions::sanitize_attribute( $asset_data, 'org_url', 'url' );
+		if ( ! is_wp_error( $org_name_url_override ) && ! empty( $org_name_url_override ) ) {
+			$org_name_url     = $org_name_url_override;
+			$has_org_name_url = true;
 		}
 
 		// Get avatar image.
@@ -2280,15 +2291,32 @@ class Shortcodes {
 			?>
 			<div class="wppic-github-info-card-author-section">
 				<div class="wppic-github-info-card-author-section-avatar">
-					<img src="<?php echo esc_url( $avatar_image ); ?>" alt="<?php echo esc_attr( $repo_full_name ); ?>" />
+					<a href="<?php echo esc_url( $github_url ); ?>" title="<?php echo esc_attr( $repo_full_name ); ?>">
+						<img src="<?php echo esc_url( $avatar_image ); ?>" alt="<?php echo esc_attr( $repo_full_name ); ?>" />
+					</a>
 				</div>
 				<div class="wppic-github-info-card-author-section-info">
 					<div class="wppic-github-info-card-author-section-name">
-						<?php echo esc_html( $repo_name ); ?>
+						<a href="<?php echo esc_url( $github_url ); ?>">
+							<?php echo esc_html( $repo_name ); ?>
+						</a>
 					</div>
 					<?php if ( (bool) $attributes['showAuthorBar'] ) : ?>
 						<div class="wppic-github-info-card-author-section-login">
-							<?php echo esc_html__( 'By', 'wp-plugin-info-card' ); ?> <?php echo esc_html( $org_name ); ?>
+							<?php echo esc_html__( 'By', 'wp-plugin-info-card' ); ?>&nbsp;
+							<?php
+							if ( $has_org_name_url ) :
+								?>
+								<a href="<?php echo esc_url( $org_name_url ); ?>">
+									<?php echo esc_html( $org_name ); ?>
+								</a>
+								<?php
+							else :
+								?>
+								<?php echo esc_html( $org_name ); ?>
+								<?php
+							endif;
+							?>
 						</div>
 					<?php endif; ?>
 				</div>
