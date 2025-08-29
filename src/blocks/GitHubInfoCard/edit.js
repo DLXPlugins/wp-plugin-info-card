@@ -88,6 +88,7 @@ const GitHubInfoCard = ( props ) => {
 	const [ cardLoading, setCardLoading ] = useState( false );
 	const [ loading, setLoading ] = useState( attributes.loading );
 	const [ mainInputField, setMainInputField ] = useState( null );
+	const [ mainButton, setMainButton ] = useState( null );
 
 	const {
 		getShowTopBar,
@@ -516,6 +517,7 @@ const GitHubInfoCard = ( props ) => {
 										username: newUsername,
 										repo: newRepo,
 									} );
+									mainButton.focus();
 								}
 							} }
 							onBlur={ () => {
@@ -536,6 +538,7 @@ const GitHubInfoCard = ( props ) => {
 										username: newUsername,
 										repo: newRepo,
 									} );
+									mainButton.focus();
 								}
 							} }
 							ref={ setMainInputField }
@@ -571,13 +574,15 @@ const GitHubInfoCard = ( props ) => {
 						<Button
 							iconSize={ 20 }
 							icon={ <Logo size="25" /> }
-							isSecondary
+							variant="primary"
+							type="submit"
 							id="wppic-input-submit"
 							onClick={ ( event ) => {
 								event.preventDefault();
 								setAttributes( { loading: false } );
 								pluginOnClick( event );
 							} }
+							ref={ setMainButton }
 						>
 							{ __(
 								'Preview and Configure',
