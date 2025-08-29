@@ -312,13 +312,16 @@
 	align-items: center;
 	justify-content: center;
 }
+.layout-card .wppic-github-info-card-author-section-name {
+	text-align: center;
+}
 .wppic-github-info-card-author-section-name {
-	font-size: 32px;
+	font-size: clamp(24px, 2vw, 28px);
 	font-weight: 600;
 	line-height: 1.2;
-	word-break: break-all;
 
 	a, a:hover {
+		color: var(--wppic-github-text-color);
 		text-decoration: none;
 	}
 }
@@ -328,6 +331,7 @@
 	line-height: 1.2;
 
 	a, a:hover {
+		color: var(--wppic-github-text-color);
 		text-decoration: none;
 	}
 }
@@ -364,19 +368,25 @@
 	border-radius: 4px;
 	border: 1px solid var(--wppic-github-border);
 	text-decoration: none;
+	color: var(--wppic-github-text-color);
 	@include respond-to('medium') {
 		border: none;
 	}
 	&:hover {
 		cursor: pointer;
+		color: var(--wppic-github-text-color);
 	}
 }
 .wppic-github-info-card.layout-card .wppic-github-info-card-meta-item a {
 	border: 1px solid var( --wppic-github-border );
 }
 .wppic-github-info-card-meta-item a:hover {
+	color: var(--wppic-github-text-color);
 	background-color: var(--wppic-github-border);
 	text-decoration: none;
+}
+.wppic-github-info-card-meta-item a:hover svg {
+	color: var( --wppic-github-icon-color-hover );
 }
 .wppic-github-info-card-meta-item-icon {
 	svg {

@@ -286,25 +286,49 @@ class Functions {
 	 * @return string The abbreviated number.
 	 */
 	public static function abbreviate_number( $number, $precision = 1 ) {
-		if ( $number < 1000 ) {
-			return number_format_i18n( $number );
+		$negative = $number < 0;
+		$n        = abs( $number );
+
+		if ( $n < 1000 ) {
+			return ( $negative ? '-' : '' ) . number_format_i18n( $n, 0 );
 		}
 
-		$divisions = array(
-			1000000000000 => __( 't', 'textdomain' ), // trillion.
-			1000000000    => __( 'b', 'textdomain' ), // billion.
-			1000000       => __( 'm', 'textdomain' ), // million.
-			1000          => __( 'k', 'textdomain' ), // thousand.
+		// Map of divisors to suffixes.
+		$units = array(
+			1000000000000 => _x( 't', 'trillion suffix', 'wp-plugin-info-card' ),
+			1000000000    => _x( 'b', 'billion suffix', 'wp-plugin-info-card' ),
+			1000000       => _x( 'm', 'million suffix', 'wp-plugin-info-card' ),
+			1000          => _x( 'k', 'thousand suffix', 'wp-plugin-info-card' ),
 		);
 
-		foreach ( $divisions as $divisor => $shorthand ) {
-			if ( $number >= $divisor ) {
-				$formatted = $number / $divisor;
-				return number_format_i18n( round( $formatted, $precision ) ) . $shorthand;
+		foreach ( $units as $divisor => $suffix ) {
+			if ( $n >= $divisor ) {
+				$value = $n / $divisor;
+
+				// Round to requested precision first so promotion checks work.
+				$value = round( $value, $precision );
+
+				// Promote 999.95k -> 1.0m after rounding.
+				$next_divisor = $divisor * 1000;
+				if ( $value >= 1000 && isset( $units[ $next_divisor ] ) ) {
+					$divisor = $next_divisor;
+					$suffix  = $units[ $divisor ];
+					$value   = round( $n / $divisor, $precision );
+				}
+
+				// Format with locale and requested decimals.
+				$formatted = number_format_i18n( $value, $precision );
+
+				// Trim trailing zeros and dangling decimal (works for "." or ",").
+				$formatted = rtrim( $formatted, '0' );
+				$formatted = rtrim( $formatted, '.,' );
+
+				return ( $negative ? '-' : '' ) . $formatted . $suffix;
 			}
 		}
 
-		return number_format_i18n( $number );
+		// Fallback (shouldn't hit for normal ranges).
+		return ( $negative ? '-' : '' ) . number_format_i18n( $n, 0 );
 	}
 
 	/**

@@ -2146,8 +2146,11 @@ class Shortcodes {
 
 		// Get organization URL.
 		$has_org_name_url      = false;
-		$org_name_url          = '';
-		$org_name_url_override = Functions::sanitize_attribute( $asset_data, 'org_url', 'url' );
+		$org_name_url          = Functions::sanitize_attribute( $asset_data, 'org_url', 'url' );
+		$org_name_url_override = Functions::sanitize_attribute( $attributes, 'organizationurloverride', 'url' );
+		if ( ! is_wp_error( $org_name_url ) && ! empty( $org_name_url ) ) {
+			$has_org_name_url = true;
+		}
 		if ( ! is_wp_error( $org_name_url_override ) && ! empty( $org_name_url_override ) ) {
 			$org_name_url     = $org_name_url_override;
 			$has_org_name_url = true;
@@ -2160,7 +2163,7 @@ class Shortcodes {
 		if ( ! is_wp_error( $avatar_image_override ) && ! empty( $avatar_image_override ) ) {
 			$avatar_image     = $avatar_image_override;
 			$has_avatar_image = true;
-		} elseif ( ! is_wp_error( $avatar_image ) && ! empty( $avatar_image ) ) {
+		} elseif ( ! is_wp_error( $avatar_image ) && ! empty( $avatar_image ) ) {	
 			$has_avatar_image = true;
 		}
 		if ( ! $has_avatar_image ) {
@@ -2227,7 +2230,7 @@ class Shortcodes {
 			$latest_release_url = $latest_release_download_url;
 		}
 		// Get version override.
-		$version_override = Functions::sanitize_attribute( $attributes, 'versionOverride', 'string' );
+		$version_override = Functions::sanitize_attribute( $attributes, 'versionoverride', 'string' );
 		if ( ! is_wp_error( $version_override ) && ! empty( $version_override ) && ! empty( $latest_release_tag_name ) ) {
 			$latest_release_tag_name = $version_override;
 		}
@@ -2269,8 +2272,8 @@ class Shortcodes {
 				$button_text = __( 'Star', 'wp-plugin-info-card' );
 				break;
 			case 'custom':
-				$button_url  = $attributes['overrideButtonUrl'];
-				$button_text = $attributes['overrideButtonText'];
+				$button_url  = $attributes['overridebuttonurl'];
+				$button_text = $attributes['overridebuttontext'];
 				break;
 			default:
 				$button_url  = $github_url;
@@ -2304,6 +2307,7 @@ class Shortcodes {
 			$wrapper_classes[] = 'wppic-margin-spacing-target-' . $attributes['marginspacingtarget'];
 			$wrapper_classes[] = $attributes['class'];
 			$wrapper_classes[] = 'is-style-wppic-github-' . $attributes['style'];
+			$wrapper_classes[] = 'align' . ( ! is_wp_error( $attributes['align'] ) && ! empty( $attributes['align'] ) ? $attributes['align'] : 'center' );
 		}
 
 		if ( ( 'is-style-wppic-github-custom' === $attributes['class'] || 'custom' === $attributes['style'] ) && 0 === $attributes['numchildren'] ) {
@@ -2446,7 +2450,7 @@ class Shortcodes {
 									</svg>
 								</div>
 								<div class="wppic-github-info-card-meta-item-text">
-									<?php echo esc_html( Functions::abbreviate_number( $stargazers_count ) ); ?>
+									<?php echo esc_html( Functions::abbreviate_number( $stargazers_count, 1 ) ); ?>
 								</div>
 							</a>
 						<?php endif; ?>
