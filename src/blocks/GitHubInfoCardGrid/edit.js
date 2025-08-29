@@ -9,7 +9,8 @@ import axios from 'axios';
 import classnames from 'classnames';
 import { Fragment, useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useSelect, useDispatch, select, dispatch } from '@wordpress/data';
+import { createBlock, insertBlocks } from '@wordpress/blocks';
 
 import {
 	PanelBody,
@@ -164,6 +165,7 @@ const GitHubInfoCardGrid = ( props ) => {
 			[ 'wp-plugin-info-card/github-info-card' ],
 		],
 		templateInsertUpdatesSelection: true,
+		renderAppender: false,
 	} );
 
 	useEffect( () => {
@@ -545,6 +547,24 @@ const GitHubInfoCardGrid = ( props ) => {
 							) }
 						</DropdownMenu>
 					) }
+				</ToolbarItem>
+			</ToolbarGroup>
+			<ToolbarGroup>
+				<ToolbarItem as={ Button }
+					onClick={ () => {
+						// Get the current inner blocks.
+						const parentBlock = select( 'core/block-editor' ).getBlock( clientId );
+						const innerBlocks = parentBlock.innerBlocks;
+						const parentInnerBlocksCount = innerBlocks.length;
+						// Create a new block.
+						const newBlock = createBlock( 'wp-plugin-info-card/github-info-card' );
+						// Insert the block at the end of the inner blocks.
+						dispatch( 'core/block-editor' ).insertBlock( newBlock, parentInnerBlocksCount, clientId );
+						// Select the new block.
+						dispatch( 'core/block-editor' ).selectBlock( newBlock.clientId );
+					} }
+				>
+					{ __( 'Add Card', 'wp-plugin-info-card' ) }
 				</ToolbarItem>
 			</ToolbarGroup>
 		</BlockControls>

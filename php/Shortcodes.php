@@ -2166,7 +2166,7 @@ class Shortcodes {
 
 		// Get org name.
 		$org_name          = Functions::sanitize_attribute( $asset_data, 'login', 'string' );
-		$org_name_override = Functions::sanitize_attribute( $attributes, 'organizationurloverride', 'string' );
+		$org_name_override = Functions::sanitize_attribute( $attributes, 'loginoverride', 'string' );
 		if ( ! is_wp_error( $org_name_override ) && ! empty( $org_name_override ) ) {
 			$org_name = $org_name_override;
 		}

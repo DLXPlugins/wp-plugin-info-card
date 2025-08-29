@@ -22394,14 +22394,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _components_Numbers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Numbers */ "./src/blocks/components/Numbers.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../store */ "./src/blocks/store/index.js");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _components_Numbers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Numbers */ "./src/blocks/components/Numbers.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../store */ "./src/blocks/store/index.js");
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (a) { for (var b = 1; b < arguments.length; b++) { var c = arguments[b]; for (var d in c) ({}).hasOwnProperty.call(c, d) && (a[d] = c[d]); } return a; }, _extends.apply(null, arguments); }
 function _toConsumableArray(a) { return _arrayWithoutHoles(a) || _iterableToArray(a) || _unsupportedIterableToArray(a) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -22420,6 +22422,7 @@ function _arrayWithHoles(a) { if (Array.isArray(a)) return a; }
 /**
  * External dependencies
  */
+
 
 
 
@@ -22483,7 +22486,7 @@ var _GitHubInfoCardGrid = function b(a) {
   var c = a.attributes,
     d = a.setAttributes,
     e = a.clientId;
-  var f = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_6__.useInstanceId)(_GitHubInfoCardGrid, 'wp-plugin-info-card-id');
+  var f = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_7__.useInstanceId)(_GitHubInfoCardGrid, 'wp-plugin-info-card-id');
   var g = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
     h = _slicedToArray(g, 2),
     i = h[0],
@@ -22520,11 +22523,11 @@ var _GitHubInfoCardGrid = function b(a) {
     N = c.buttonTextColorHover;
   var O = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(function (a) {
       return {
-        getShowTopBar: a((0,_store__WEBPACK_IMPORTED_MODULE_8__.blockStore)(f)).getShowTopBar,
-        getShowStatsBar: a((0,_store__WEBPACK_IMPORTED_MODULE_8__.blockStore)(f)).getShowStatsBar,
-        getShowAuthorBar: a((0,_store__WEBPACK_IMPORTED_MODULE_8__.blockStore)(f)).getShowAuthorBar,
-        getShowLastUpdated: a((0,_store__WEBPACK_IMPORTED_MODULE_8__.blockStore)(f)).getShowLastUpdated,
-        getButtonType: a((0,_store__WEBPACK_IMPORTED_MODULE_8__.blockStore)(f)).getButtonType
+        getShowTopBar: a((0,_store__WEBPACK_IMPORTED_MODULE_9__.blockStore)(f)).getShowTopBar,
+        getShowStatsBar: a((0,_store__WEBPACK_IMPORTED_MODULE_9__.blockStore)(f)).getShowStatsBar,
+        getShowAuthorBar: a((0,_store__WEBPACK_IMPORTED_MODULE_9__.blockStore)(f)).getShowAuthorBar,
+        getShowLastUpdated: a((0,_store__WEBPACK_IMPORTED_MODULE_9__.blockStore)(f)).getShowLastUpdated,
+        getButtonType: a((0,_store__WEBPACK_IMPORTED_MODULE_9__.blockStore)(f)).getButtonType
       };
     }),
     P = O.getShowTopBar,
@@ -22532,7 +22535,7 @@ var _GitHubInfoCardGrid = function b(a) {
     R = O.getShowAuthorBar,
     S = O.getShowLastUpdated,
     T = O.getButtonType;
-  var U = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useDispatch)((0,_store__WEBPACK_IMPORTED_MODULE_8__.blockStore)(f)),
+  var U = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useDispatch)((0,_store__WEBPACK_IMPORTED_MODULE_9__.blockStore)(f)),
     V = U.setShowTopBar,
     W = U.setShowStatsBar,
     X = U.setShowLastUpdated,
@@ -22575,12 +22578,13 @@ var _GitHubInfoCardGrid = function b(a) {
       }
     }
   }, [p]);
-  var _ = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useInnerBlocksProps)({
+  var _ = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.useInnerBlocksProps)({
     className: "wppic-github-info-card-grid cols-".concat(z, " layout-").concat(q)
   }, {
     allowedBlocks: ['wp-plugin-info-card/github-info-card'],
     template: [['wp-plugin-info-card/github-info-card']],
-    templateInsertUpdatesSelection: true
+    templateInsertUpdatesSelection: true,
+    renderAppender: false
   });
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     d({
@@ -22594,24 +22598,24 @@ var _GitHubInfoCardGrid = function b(a) {
    * @return {Element} The columns interface.
    */
   var aa = function a() {
-    return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.BaseControl, {
+    return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.BaseControl, {
       id: "col-count",
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select How Many Columns', 'wp-plugin-info-card')
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ButtonGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ButtonGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
       variant: z === 1 ? 'primary' : 'secondary',
       onClick: function a() {
         d({
           cols: 1
         });
       }
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('One', 'wp-plugin-info-card')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('One', 'wp-plugin-info-card')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
       variant: z === 2 ? 'primary' : 'secondary',
       onClick: function a() {
         d({
           cols: 2
         });
       }
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Two', 'wp-plugin-info-card')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Two', 'wp-plugin-info-card')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
       variant: z === 3 ? 'primary' : 'secondary',
       onClick: function a() {
         d({
@@ -22646,9 +22650,9 @@ var _GitHubInfoCardGrid = function b(a) {
     value: 'bottom',
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bottom', 'wp-plugin-info-card')
   }];
-  var da = /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.InspectorControls, null, w > 1 && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
+  var da = /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.InspectorControls, null, w > 1 && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Layout', 'wp-plugin-info-card')
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Margin Spacing', 'wp-plugin-info-card'),
     options: ba,
     value: A,
@@ -22657,7 +22661,7 @@ var _GitHubInfoCardGrid = function b(a) {
         marginSpacing: a
       });
     }
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Margin Target', 'wp-plugin-info-card'),
     options: ca,
     value: B,
@@ -22666,11 +22670,11 @@ var _GitHubInfoCardGrid = function b(a) {
         marginSpacingTarget: a
       });
     }
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
     className: "wppic-panel-rows-cols"
-  }, aa()), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
+  }, aa()), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
     className: "wppic-panel-rows-numbers"
-  }, /*#__PURE__*/React.createElement(_components_Numbers__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, /*#__PURE__*/React.createElement(_components_Numbers__WEBPACK_IMPORTED_MODULE_8__["default"], {
     value: x,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Column Gap (in px)', 'wp-plugin-info-card'),
     numbers: [20, 40, 60, 80],
@@ -22680,9 +22684,9 @@ var _GitHubInfoCardGrid = function b(a) {
       });
     },
     id: "wppic-col-gap"
-  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
     className: "wppic-panel-rows-numbers"
-  }, /*#__PURE__*/React.createElement(_components_Numbers__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, /*#__PURE__*/React.createElement(_components_Numbers__WEBPACK_IMPORTED_MODULE_8__["default"], {
     value: y,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Row Gap (in px)', 'wp-plugin-info-card'),
     numbers: [20, 40, 60, 80],
@@ -22692,7 +22696,7 @@ var _GitHubInfoCardGrid = function b(a) {
       });
     },
     id: "wppic-row-gap"
-  }))), i && /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.PanelColorSettings, {
+  }))), i && /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.PanelColorSettings, {
     __experimentalIsRenderedInSidebar: true,
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Custom Color Settings', 'wp-plugin-info-card'),
     colorSettings: [{
@@ -22793,9 +22797,9 @@ var _GitHubInfoCardGrid = function b(a) {
       }
     }],
     colors: m
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Visibility Controls', 'wp-plugin-info-card')
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show Top Bar', 'wp-plugin-info-card'),
     checked: r,
     onChange: function b(a) {
@@ -22805,7 +22809,7 @@ var _GitHubInfoCardGrid = function b(a) {
       });
     },
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show the top bar with the icons.', 'wp-plugin-info-card')
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show Stats Bar', 'wp-plugin-info-card'),
     checked: t,
     onChange: function b(a) {
@@ -22815,7 +22819,7 @@ var _GitHubInfoCardGrid = function b(a) {
       });
     },
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show the stats bar with the plugin stats.', 'wp-plugin-info-card')
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show Author Bar', 'wp-plugin-info-card'),
     checked: s,
     onChange: function b(a) {
@@ -22825,7 +22829,7 @@ var _GitHubInfoCardGrid = function b(a) {
       });
     },
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show the author bar with the Organization Name and login.', 'wp-plugin-info-card')
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show Last Updated', 'wp-plugin-info-card'),
     checked: u,
     onChange: function b(a) {
@@ -22835,7 +22839,7 @@ var _GitHubInfoCardGrid = function b(a) {
       });
     },
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show the last updated date.', 'wp-plugin-info-card')
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Button Target and Type', 'wp-plugin-info-card'),
     value: v,
     onChange: function b(a) {
@@ -22862,7 +22866,7 @@ var _GitHubInfoCardGrid = function b(a) {
     }],
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select the type of button to display and where it will link to.', 'wp-plugin-info-card')
   })));
-  var ea = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useBlockProps)({
+  var ea = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.useBlockProps)({
     className: classnames__WEBPACK_IMPORTED_MODULE_0___default()("wppic-github-info-card align".concat(o, " layout-").concat(q, " cols-").concat(w > 1 ? z : 1, " wppic-margin-spacing-").concat(A, " wppic-margin-spacing-target-").concat(B), {
       'is-grid': w > 1
     })
@@ -22905,16 +22909,16 @@ var _GitHubInfoCardGrid = function b(a) {
     value: 'card'
   }];
   var ha = function a() {
-    return /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.BlockControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarItem, {
+    return /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.BlockControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ToolbarGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ToolbarItem, {
       as: "button"
     }, function (a) {
-      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.DropdownMenu, {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.DropdownMenu, {
         toggleProps: a,
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select Theme', 'wp-plugin-info-card'),
         icon: "admin-customizer"
       }, function (a) {
         var b = a.onClose;
-        return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.MenuItemsChoice, {
+        return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.MenuItemsChoice, {
           choices: fa,
           onSelect: function c(a) {
             d({
@@ -22925,16 +22929,16 @@ var _GitHubInfoCardGrid = function b(a) {
           value: c.className
         }));
       });
-    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarItem, {
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ToolbarGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ToolbarItem, {
       as: "button"
     }, function (a) {
-      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.DropdownMenu, {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.DropdownMenu, {
         toggleProps: a,
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select a Layout', 'wp-plugin-info-card'),
         icon: "layout"
       }, function (a) {
         var b = a.onClose;
-        return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.MenuItemsChoice, {
+        return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.MenuItemsChoice, {
           choices: ga,
           onSelect: function c(a) {
             d({
@@ -22946,7 +22950,21 @@ var _GitHubInfoCardGrid = function b(a) {
           value: q
         }));
       });
-    })));
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ToolbarGroup, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ToolbarItem, {
+      as: _wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button,
+      onClick: function a() {
+        // Get the current inner blocks.
+        var b = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.select)('core/block-editor').getBlock(e);
+        var c = b.innerBlocks;
+        var d = c.length;
+        // Create a new block.
+        var f = (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__.createBlock)('wp-plugin-info-card/github-info-card');
+        // Insert the block at the end of the inner blocks.
+        (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.dispatch)('core/block-editor').insertBlock(f, d, e);
+        // Select the new block.
+        (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.dispatch)('core/block-editor').selectBlock(f.clientId);
+      }
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Add Card', 'wp-plugin-info-card'))));
   };
   var ia = "\n\t\t#".concat(c.uniqueId, " .wppic-github-info-card-grid {\n\t\t\tdisplay: grid;\n\t\t\tcolumn-gap: ").concat(x, "px;\n\t\t\trow-gap: ").concat(y, "px;\n\t\t}\n\t");
   var ja = "\n\t\t#".concat(c.uniqueId, " .wppic-github-info-card {\n\t\t\t--wppic-github-background-color: ").concat(C, ";\n\t\t\t--wppic-github-text-color: ").concat(D, ";\n\t\t\t--wppic-github-icon-color: ").concat(E, ";\n\t\t\t--wppic-github-icon-color-hover: ").concat(F, ";\n\t\t\t--wppic-github-border: ").concat(G, ";\n\t\t\t--wppic-github-language-bg: ").concat(H, ";\n\t\t\t--wppic-github-language-color: ").concat(I, ";\n\t\t\t--wppic-github-sponsors-color: ").concat(J, ";\n\t\t\t--wppic-github-button-bg: ").concat(K, ";\n\t\t\t--wppic-github-button-bg-hover: ").concat(L, ";\n\t\t\t--wppic-github-button-text-color: ").concat(M, ";\n\t\t\t--wppic-github-button-text-color-hover: ").concat(N, ";\n\t\t}\n\t");
