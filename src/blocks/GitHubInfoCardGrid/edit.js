@@ -157,7 +157,7 @@ const GitHubInfoCardGrid = ( props ) => {
 	}, [ className ] );
 
 	const innerBlocksProps = useInnerBlocksProps( {
-		className: `wppic-github-info-card-grid cols-${ cols }`,
+		className: `wppic-github-info-card-grid cols-${ cols } layout-${ layout }`,
 	}, {
 		allowedBlocks: [ 'wp-plugin-info-card/github-info-card' ],
 		template: [

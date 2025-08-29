@@ -22576,7 +22576,7 @@ var _GitHubInfoCardGrid = function b(a) {
     }
   }, [p]);
   var _ = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useInnerBlocksProps)({
-    className: "wppic-github-info-card-grid cols-".concat(z)
+    className: "wppic-github-info-card-grid cols-".concat(z, " layout-").concat(q)
   }, {
     allowedBlocks: ['wp-plugin-info-card/github-info-card'],
     template: [['wp-plugin-info-card/github-info-card']],
@@ -26440,8 +26440,7 @@ var _SitePluginsCardGrid = function b(a) {
     value: 'ratings',
     label: __('Ratings', 'wp-plugin-info-card')
   }];
-  var W = 'card' === h ? 'wp-pic-card' : h;
-  var X = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
+  var W = /*#__PURE__*/React.createElement(InspectorControls, null, /*#__PURE__*/React.createElement(PanelBody, {
     title: __('Layout', 'wp-plugin-info-card')
   }, /*#__PURE__*/React.createElement(PanelRow, null, /*#__PURE__*/React.createElement(SelectControl, {
     label: __('Scheme', 'wp-plugin-info-card'),
@@ -26496,9 +26495,10 @@ var _SitePluginsCardGrid = function b(a) {
     },
     id: "wppic-row-gap"
   }))), S(f, N));
-  var Y = "\n\t\t#".concat(q, " {\n\t\t\tdisplay: grid;\n\t\t\tcolumn-gap: ").concat(n, "px;\n\t\t\trow-gap: ").concat(o, "px;\n\t\t}\n\t");
+  var X = "\n\t\t#".concat(q, " {\n\t\t\tdisplay: grid;\n\t\t\tcolumn-gap: ").concat(n, "px;\n\t\t\trow-gap: ").concat(o, "px;\n\t\t}\n\t");
+  var Y = 'card' === h ? 'wp-pic-card' : h;
   var Z = useBlockProps({
-    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()("site-plugins-card-grid align".concat(p))
+    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()("site-plugins-card-grid align".concat(p, " ").concat(Y))
   });
   if (i) {
     return /*#__PURE__*/React.createElement("div", {
@@ -26559,7 +26559,7 @@ var _SitePluginsCardGrid = function b(a) {
   }, /*#__PURE__*/React.createElement(Notice, {
     status: "warning",
     isDismissible: false
-  }, __('No plugins have been loaded or found. Please try again.', 'wp-plugin-info-card'))), $), !t && Object.keys(f).length > 0 && !x && /*#__PURE__*/React.createElement(Fragment, null, X, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
+  }, __('No plugins have been loaded or found. Please try again.', 'wp-plugin-info-card'))), $), !t && Object.keys(f).length > 0 && !x && /*#__PURE__*/React.createElement(Fragment, null, W, /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
     icon: "image-rotate",
     title: __('Refresh Plugins', 'wp-plugin-info-card'),
     onClick: function a() {
@@ -26605,9 +26605,9 @@ var _SitePluginsCardGrid = function b(a) {
         value: h
       }));
     });
-  }))), /*#__PURE__*/React.createElement("style", null, Y), /*#__PURE__*/React.createElement("div", {
+  }))), /*#__PURE__*/React.createElement("style", null, X), /*#__PURE__*/React.createElement("div", {
     id: q,
-    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()('is-placeholder', W, 'wp-block-plugin-info-card', 'wp-site-plugin-info-card', "align".concat(p), "cols-".concat(m))
+    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()('is-placeholder', 'wp-block-plugin-info-card', 'wp-site-plugin-info-card', "align".concat(p), "cols-".concat(m))
   }, R(f))));
   return /*#__PURE__*/React.createElement("div", Z, _);
 };
