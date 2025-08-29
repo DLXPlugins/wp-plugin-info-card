@@ -80,6 +80,7 @@
 	display: flex;
 	justify-content: center;
 	width: 100%;
+	max-width: 600px;
 }
 .wppic-github-info-card-grid {
 	display: grid;
@@ -90,18 +91,22 @@
 	width: 100%;
 }
 .wppic-github-info-card-grid.cols-1 {
-	grid-template-columns: 1fr;
+	grid-template-columns: minmax(325px, 600px);
 	gap: 24px;
 	row-gap: 24px;
 	max-width: 600px;
 }
 .wppic-github-info-card-grid.cols-2 {
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: minmax(325px, 600px) minmax(325px, 600px);
 	gap: 24px;
 	row-gap: 24px;
+	justify-content: center;
 }
 .wppic-github-info-card-grid.cols-3 {
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: minmax(325px, 600px) minmax(325px, 600px) minmax(325px, 600px);
+	gap: 24px;
+	row-gap: 24px;
+	justify-content: center;
 }
 .wp-block-github-info-card {
 	width: 100%;
