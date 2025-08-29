@@ -135,6 +135,13 @@ button.button-reset.show-cursor {
   width: 100%;
 }
 
+.layout-card .wppic-github-info-card-grid.cols-1 {
+  grid-template-columns: 1fr;
+  gap: 24px;
+  row-gap: 24px;
+  max-width: 325px;
+}
+
 .wppic-github-info-card-grid.cols-1 {
   grid-template-columns: minmax(325px, 600px);
   gap: 24px;
@@ -149,8 +156,22 @@ button.button-reset.show-cursor {
   justify-content: center;
 }
 
+.layout-card .wppic-github-info-card-grid.cols-2 {
+  grid-template-columns: minmax(275px, 325px) minmax(275px, 325px);
+  gap: 24px;
+  row-gap: 24px;
+  justify-content: center;
+}
+
 .wppic-github-info-card-grid.cols-3 {
   grid-template-columns: minmax(325px, 600px) minmax(325px, 600px) minmax(325px, 600px);
+  gap: 24px;
+  row-gap: 24px;
+  justify-content: center;
+}
+
+.layout-card .wppic-github-info-card-grid.cols-3 {
+  grid-template-columns: minmax(275px, 325px) minmax(275px, 325px) minmax(275px, 325px);
   gap: 24px;
   row-gap: 24px;
   justify-content: center;

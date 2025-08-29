@@ -1975,96 +1975,102 @@ class Shortcodes {
 	 * @param string $content The content of the shortcode.
 	 */
 	public static function shortcode_github_info_card( $attributes, $content = '' ) {
+		if ( is_admin() || defined( 'REST_REQUEST' ) ) {
+			return '';
+		}
+
+		// Make attributes lowercase to avoid case-sensitive issues.
+		$attributes = array_change_key_case( $attributes, CASE_LOWER );
 
 		$defaults_attributes = array(
 			'class'                   => '',
-			'uniqueId'                => 'wp-pic-' . wp_generate_password( 10, false ),
-			'numChildren'             => 0,
+			'uniqueid'                => 'wp-pic-' . wp_generate_password( 10, false ),
+			'numchildren'             => 0,
 			'cols'                    => 1,
-			'colGap'                  => 10,
-			'rowGap'                  => 10,
-			'marginSpacing'           => 'none',
-			'marginSpacingTarget'     => 'both',
-			'backgroundColor'         => '#fff',
-			'textColor'               => '#24292f',
-			'iconColor'               => '#666',
-			'iconColorHover'          => '#111827',
-			'borderColor'             => '#d0d7de',
-			'languageBgColor'         => '#24292f',
-			'languageTextColor'       => '#fff',
-			'sponsorsColor'           => '#bf3989',
-			'buttonBgColor'           => '#1a7f37',
-			'buttonBgColorHover'      => '#2c974b',
-			'buttonTextColor'         => '#fff',
-			'buttonTextColorHover'    => '#fff',
+			'colgap'                  => 10,
+			'rowgap'                  => 10,
+			'margins'                 => 'none',
+			'marginstarget'           => 'both',
+			'backgroundcolor'         => '#fff',
+			'textcolor'               => '#24292f',
+			'iconcolor'               => '#666',
+			'iconcolorhover'          => '#111827',
+			'bordercolor'             => '#d0d7de',
+			'languagebgcolor'         => '#24292f',
+			'languagetextcolor'       => '#fff',
+			'sponsorscolor'           => '#bf3989',
+			'buttonbgcolor'           => '#1a7f37',
+			'buttonbgcolorhover'      => '#2c974b',
+			'buttontextcolor'         => '#fff',
+			'buttontextcolorhover'    => '#fff',
 			'layout'                  => 'large',
 			'align'                   => 'center',
-			'uniqueId'                => '',
-			'showTopBar'              => true,
-			'showAuthorBar'           => true,
-			'showStatsBar'            => true,
-			'showLastUpdated'         => true,
-			'parentButtonType'        => '',
+			'uniqueid'                => '',
+			'showtopbar'              => true,
+			'showauthorbar'           => true,
+			'showstatsbar'            => true,
+			'showlastupdated'         => true,
+			'parentbuttontype'        => '',
 			'username'                => '',
 			'repo'                    => '',
-			'nameOverride'            => '',
-			'loginOverride'           => '',
-			'sponsorsUrlOverride'     => '',
-			'versionOverride'         => '',
-			'organizationUrlOverride' => '',
-			'homepageUrlOverride'     => '',
-			'overrideButton'          => false,
-			'overrideButtonText'      => __( 'View on GitHub', 'wp-plugin-info-card' ),
-			'overrideButtonUrl'       => '',
-			'buttonType'              => 'github',
-			'avatarImageUrl'          => '',
+			'nameoverride'            => '',
+			'loginoverride'           => '',
+			'sponsorsurloverride'     => '',
+			'versionoverride'         => '',
+			'organizationurloverride' => '',
+			'homepageurloverride'     => '',
+			'overridebutton'          => false,
+			'overridebuttontext'      => __( 'View on GitHub', 'wp-plugin-info-card' ),
+			'overridebuttonurl'       => '',
+			'buttontype'              => 'github',
+			'avatarimageurl'          => '',
 		);
 
 		$attributes = shortcode_atts( $defaults_attributes, $attributes, 'github-info-card' );
 
 		// Let's sanitize these one-by-one.
 		$attributes['class']                   = Functions::sanitize_attribute( $attributes, 'class', 'string' );
-		$attributes['numChildren']             = Functions::sanitize_attribute( $attributes, 'numChildren', 'integer' );
+		$attributes['numchildren']             = Functions::sanitize_attribute( $attributes, 'numchildren', 'integer' );
 		$attributes['cols']                    = Functions::sanitize_attribute( $attributes, 'cols', 'integer' );
-		$attributes['colGap']                  = Functions::sanitize_attribute( $attributes, 'colGap', 'integer' );
-		$attributes['rowGap']                  = Functions::sanitize_attribute( $attributes, 'rowGap', 'integer' );
-		$attributes['marginSpacing']           = Functions::sanitize_attribute( $attributes, 'marginSpacing', 'string' );
-		$attributes['marginSpacingTarget']     = Functions::sanitize_attribute( $attributes, 'marginSpacingTarget', 'string' );
-		$attributes['backgroundColor']         = Functions::sanitize_attribute( $attributes, 'backgroundColor', 'string' );
-		$attributes['textColor']               = Functions::sanitize_attribute( $attributes, 'textColor', 'string' );
-		$attributes['iconColor']               = Functions::sanitize_attribute( $attributes, 'iconColor', 'string' );
-		$attributes['iconColorHover']          = Functions::sanitize_attribute( $attributes, 'iconColorHover', 'string' );
-		$attributes['borderColor']             = Functions::sanitize_attribute( $attributes, 'borderColor', 'string' );
-		$attributes['languageBgColor']         = Functions::sanitize_attribute( $attributes, 'languageBgColor', 'string' );
-		$attributes['languageTextColor']       = Functions::sanitize_attribute( $attributes, 'languageTextColor', 'string' );
-		$attributes['sponsorsColor']           = Functions::sanitize_attribute( $attributes, 'sponsorsColor', 'string' );
-		$attributes['buttonBgColor']           = Functions::sanitize_attribute( $attributes, 'buttonBgColor', 'string' );
-		$attributes['buttonBgColorHover']      = Functions::sanitize_attribute( $attributes, 'buttonBgColorHover', 'string' );
-		$attributes['buttonTextColor']         = Functions::sanitize_attribute( $attributes, 'buttonTextColor', 'string' );
-		$attributes['buttonTextColorHover']    = Functions::sanitize_attribute( $attributes, 'buttonTextColorHover', 'string' );
+		$attributes['colgap']                  = Functions::sanitize_attribute( $attributes, 'colgap', 'integer' );
+		$attributes['rowgap']                  = Functions::sanitize_attribute( $attributes, 'rowgap', 'integer' );
+		$attributes['margins']                 = Functions::sanitize_attribute( $attributes, 'margins', 'string' );
+		$attributes['marginstarget']           = Functions::sanitize_attribute( $attributes, 'marginstarget', 'string' );
+		$attributes['backgroundcolor']         = Functions::sanitize_attribute( $attributes, 'backgroundcolor', 'string' );
+		$attributes['textcolor']               = Functions::sanitize_attribute( $attributes, 'textcolor', 'string' );
+		$attributes['iconcolor']               = Functions::sanitize_attribute( $attributes, 'iconcolor', 'string' );
+		$attributes['iconcolorhover']          = Functions::sanitize_attribute( $attributes, 'iconcolorhover', 'string' );
+		$attributes['bordercolor']             = Functions::sanitize_attribute( $attributes, 'bordercolor', 'string' );
+		$attributes['languagebgcolor']         = Functions::sanitize_attribute( $attributes, 'languagebgcolor', 'string' );
+		$attributes['languagetextcolor']       = Functions::sanitize_attribute( $attributes, 'languagetextcolor', 'string' );
+		$attributes['sponsorscolor']           = Functions::sanitize_attribute( $attributes, 'sponsorscolor', 'string' );
+		$attributes['buttonbgcolor']           = Functions::sanitize_attribute( $attributes, 'buttonbgcolor', 'string' );
+		$attributes['buttonbgcolorhover']      = Functions::sanitize_attribute( $attributes, 'buttonbgcolorhover', 'string' );
+		$attributes['buttontextcolor']         = Functions::sanitize_attribute( $attributes, 'buttontextcolor', 'string' );
+		$attributes['buttontextcolorhover']    = Functions::sanitize_attribute( $attributes, 'buttontextcolorhover', 'string' );
 		$attributes['layout']                  = Functions::sanitize_attribute( $attributes, 'layout', 'string' );
 		$attributes['align']                   = Functions::sanitize_attribute( $attributes, 'align', 'string' );
-		$attributes['uniqueId']                = Functions::sanitize_attribute( $attributes, 'uniqueId', 'string' );
-		$attributes['showTopBar']              = Functions::sanitize_attribute( $attributes, 'showTopBar', 'boolean' );
-		$attributes['showAuthorBar']           = Functions::sanitize_attribute( $attributes, 'showAuthorBar', 'boolean' );
-		$attributes['showStatsBar']            = Functions::sanitize_attribute( $attributes, 'showStatsBar', 'boolean' );
-		$attributes['showLastUpdated']         = Functions::sanitize_attribute( $attributes, 'showLastUpdated', 'boolean' );
-		$attributes['parentButtonType']        = Functions::sanitize_attribute( $attributes, 'parentButtonType', 'string' );
+		$attributes['uniqueid']                = Functions::sanitize_attribute( $attributes, 'uniqueid', 'string' );
+		$attributes['showtopbar']              = Functions::sanitize_attribute( $attributes, 'showtopbar', 'boolean' );
+		$attributes['showauthorbar']           = Functions::sanitize_attribute( $attributes, 'showauthorbar', 'boolean' );
+		$attributes['showstatsbar']            = Functions::sanitize_attribute( $attributes, 'showstatsbar', 'boolean' );
+		$attributes['showlastupdated']         = Functions::sanitize_attribute( $attributes, 'showlastupdated', 'boolean' );
+		$attributes['parentbuttontype']        = Functions::sanitize_attribute( $attributes, 'parentbuttontype', 'string' );
 		$attributes['username']                = Functions::sanitize_attribute( $attributes, 'username', 'string' );
 		$attributes['repo']                    = Functions::sanitize_attribute( $attributes, 'repo', 'string' );
-		$attributes['nameOverride']            = Functions::sanitize_attribute( $attributes, 'nameOverride', 'string' );
-		$attributes['loginOverride']           = Functions::sanitize_attribute( $attributes, 'loginOverride', 'string' );
-		$attributes['sponsorsUrlOverride']     = Functions::sanitize_attribute( $attributes, 'sponsorsUrlOverride', 'string' );
-		$attributes['organizationUrlOverride'] = Functions::sanitize_attribute( $attributes, 'organizationUrlOverride', 'string' );
-		$attributes['versionOverride']         = Functions::sanitize_attribute( $attributes, 'versionOverride', 'string' );
-		$attributes['overrideButton']          = Functions::sanitize_attribute( $attributes, 'overrideButton', 'boolean' );
-		$attributes['overrideButtonText']      = Functions::sanitize_attribute( $attributes, 'overrideButtonText', 'string' );
-		$attributes['overrideButtonUrl']       = Functions::sanitize_attribute( $attributes, 'overrideButtonUrl', 'url' );
-		$attributes['buttonType']              = Functions::sanitize_attribute( $attributes, 'buttonType', 'string' );
-		$attributes['avatarImageUrl']          = Functions::sanitize_attribute( $attributes, 'avatarImageUrl', 'url' );
+		$attributes['nameoverride']            = Functions::sanitize_attribute( $attributes, 'nameoverride', 'string' );
+		$attributes['loginoverride']           = Functions::sanitize_attribute( $attributes, 'loginoverride', 'string' );
+		$attributes['sponsorsurloverride']     = Functions::sanitize_attribute( $attributes, 'sponsorsurloverride', 'string' );
+		$attributes['organizationurloverride'] = Functions::sanitize_attribute( $attributes, 'organizationurloverride', 'string' );
+		$attributes['versionoverride']         = Functions::sanitize_attribute( $attributes, 'versionoverride', 'string' );
+		$attributes['overridebutton']          = Functions::sanitize_attribute( $attributes, 'overridebutton', 'boolean' );
+		$attributes['overridebuttontext']      = Functions::sanitize_attribute( $attributes, 'overridebuttontext', 'string' );
+		$attributes['overridebuttonurl']       = Functions::sanitize_attribute( $attributes, 'overridebuttonurl', 'url' );
+		$attributes['buttontype']              = Functions::sanitize_attribute( $attributes, 'buttontype', 'string' );
+		$attributes['avatarimageurl']          = Functions::sanitize_attribute( $attributes, 'avatarimageurl', 'url' );
 
 		// Now let's build the shortcode.
-		if ( 0 === $attributes['numChildren'] ) {
+		if ( 0 === $attributes['numchildren'] ) {
 			// todo - build wrapper around the shortcode.
 		}
 
@@ -2085,7 +2091,7 @@ class Shortcodes {
 		// Get Home URL.
 		$has_homepage_url      = false;
 		$homepage_url          = Functions::sanitize_attribute( $asset_data, 'homepage', 'url' );
-		$homepage_url_override = Functions::sanitize_attribute( $attributes, 'homepageUrlOverride', 'url' );
+		$homepage_url_override = Functions::sanitize_attribute( $attributes, 'homepageurloverride', 'url' );
 		if ( ! is_wp_error( $homepage_url ) && ! empty( $homepage_url ) ) {
 			$has_homepage_url = true;
 		}
@@ -2131,7 +2137,7 @@ class Shortcodes {
 		if ( ! is_wp_error( $sponsors_url ) && ! empty( $sponsors_url ) ) {
 			$has_sponsors_url = true;
 		}
-		$sponsors_url_override = Functions::sanitize_attribute( $attributes, 'sponsorsUrlOverride', 'url' );
+		$sponsors_url_override = Functions::sanitize_attribute( $attributes, 'sponsorsurloverride', 'url' );
 		if ( ! is_wp_error( $sponsors_url_override ) && ! empty( $sponsors_url_override ) ) {
 			$sponsors_url     = $sponsors_url_override;
 			$has_sponsors_url = true;
@@ -2159,7 +2165,7 @@ class Shortcodes {
 
 		// Get org name.
 		$org_name          = Functions::sanitize_attribute( $asset_data, 'login', 'string' );
-		$org_name_override = Functions::sanitize_attribute( $attributes, 'organizationUrlOverride', 'string' );
+		$org_name_override = Functions::sanitize_attribute( $attributes, 'organizationurloverride', 'string' );
 		if ( ! is_wp_error( $org_name_override ) && ! empty( $org_name_override ) ) {
 			$org_name = $org_name_override;
 		}
@@ -2175,7 +2181,7 @@ class Shortcodes {
 		if ( is_wp_error( $repo_name ) ) {
 			$repo_name = '';
 		}
-		$repo_name_override = Functions::sanitize_attribute( $attributes, 'nameOverride', 'string' );
+		$repo_name_override = Functions::sanitize_attribute( $attributes, 'nameoverride', 'string' );
 		if ( ! is_wp_error( $repo_name_override ) && ! empty( $repo_name_override ) ) {
 			$repo_name = $repo_name_override;
 		}
@@ -2222,16 +2228,16 @@ class Shortcodes {
 		}
 
 		// Get last updated date.
-		$show_last_updated = (bool) $attributes['showLastUpdated'];
+		$show_last_updated = (bool) $attributes['showlastupdated'];
 		$last_updated_date = Functions::sanitize_attribute( $asset_data, 'updated_at', 'string' );
 		if ( is_wp_error( $last_updated_date ) ) {
 			$last_updated_date = '';
 		}
 
 		// Get button type and URL.
-		$button_type        = $attributes['buttonType'];
-		$parent_button_type = Functions::sanitize_attribute( $attributes, 'parentButtonType', 'string' ); // This is passed from the parent block. If not passed, this errors, and it's as if a shortcode passed it.
-		$button_override    = (bool) $attributes['overrideButton'];
+		$button_type        = $attributes['buttontype'];
+		$parent_button_type = Functions::sanitize_attribute( $attributes, 'parentbuttontype', 'string' ); // This is passed from the parent block. If not passed, this errors, and it's as if a shortcode passed it.
+		$button_override    = (bool) $attributes['overridebutton'];
 		if ( ! is_wp_error( $parent_button_type ) && ! empty( $parent_button_type ) && ! $button_override ) {
 			$button_type = $parent_button_type;
 		}
@@ -2267,8 +2273,8 @@ class Shortcodes {
 				break;
 		}
 		// Failsafe.
-		if ( $button_override && ! empty( $attributes['overrideButtonText'] ) ) {
-			$button_text = $attributes['overrideButtonText'];
+		if ( $button_override && ! empty( $attributes['overridebuttontext'] ) ) {
+			$button_text = $attributes['overridebuttontext'];
 		}
 
 		$has_language = false;
@@ -2286,7 +2292,7 @@ class Shortcodes {
 		<div class="wppic-github-info-card">
 			<div class="wppic-github-info-card-wrapper">
 			<?php
-			if ( (bool) $attributes['showTopBar'] ) :
+			if ( (bool) $attributes['showtopbar'] ) :
 				?>
 				<div class="wppic-github-info-card-header">
 					<div class="wppic-github-info-card-header-left">
@@ -2371,7 +2377,7 @@ class Shortcodes {
 							<?php echo esc_html( $repo_name ); ?>
 						</a>
 					</div>
-					<?php if ( (bool) $attributes['showAuthorBar'] ) : ?>
+					<?php if ( (bool) $attributes['showauthorbar'] ) : ?>
 						<div class="wppic-github-info-card-author-section-login">
 							<?php echo esc_html__( 'By', 'wp-plugin-info-card' ); ?>&nbsp;
 							<?php
@@ -2391,7 +2397,7 @@ class Shortcodes {
 					<?php endif; ?>
 				</div>
 			</div><!-- .wppic-github-info-card-author-section -->
-			<?php if ( (bool) $attributes['showStatsBar'] ) : ?>
+			<?php if ( (bool) $attributes['showstatsbar'] ) : ?>
 				<div class="wppic-github-info-card-meta">
 					<div class="wppic-github-info-card-meta-item">
 						<?php if ( $has_stargazers_count ) : ?>
