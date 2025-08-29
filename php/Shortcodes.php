@@ -2295,7 +2295,9 @@ class Shortcodes {
 		$has_license = false;
 		$license     = Functions::sanitize_attribute( $asset_data, 'license', 'string' );
 		if ( ! is_wp_error( $license ) && ! empty( $license ) ) {
-			$has_license = true;
+			if ( 'NOASSERTION' !== $license ) {
+				$has_license = true;
+			}
 		}
 
 		// Get wrapper classes.
@@ -2486,8 +2488,8 @@ class Shortcodes {
 							</a>
 						<?php endif; ?>
 					</div>
+					<?php if ( ! empty( $latest_release_tag_name ) ) : ?>
 					<div class="wppic-github-info-card-meta-item">
-						<?php if ( ! empty( $latest_release_tag_name ) ) : ?>
 							<a href="<?php echo esc_url( $latest_release_url ); ?>">
 								<div class="wppic-github-info-card-meta-item-icon">
 									<svg class="wppic-github-info-card-icon-svg" width="20" height="20" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2498,8 +2500,8 @@ class Shortcodes {
 									<?php echo esc_html( mb_strimwidth( $latest_release_tag_name, 0, 10, '...' ) ); ?>
 								</div>
 							</a>
-						<?php endif; ?>
 					</div>
+					<?php endif; ?>
 				</div>
 			<?php endif; ?>
 			<div class="wppic-github-info-card-description">
