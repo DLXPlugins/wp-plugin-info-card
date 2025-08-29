@@ -68,6 +68,7 @@ const GitHubInfoCardGrid = ( props ) => {
 	const {
 		preview,
 		align,
+		horizontalAlign,
 		className,
 		layout,
 		showTopBar,
@@ -277,6 +278,39 @@ const GitHubInfoCardGrid = ( props ) => {
 								id="wppic-row-gap"
 							/>
 						</PanelRow>
+						<PanelRow>
+							<BaseControl
+								label={ __( 'Horizontal Alignment', 'wp-plugin-info-card' ) }
+								id="wppic-horizontal-align"
+							>
+								<ButtonGroup>
+									<Button
+										variant={ horizontalAlign === 'left' ? 'primary' : 'secondary' }
+										onClick={ () => {
+											setAttributes( { horizontalAlign: 'left' } );
+										} }
+										icon="align-left"
+										label={ __( 'Left', 'wp-plugin-info-card' ) }
+									/>
+									<Button
+										variant={ horizontalAlign === 'center' ? 'primary' : 'secondary' }
+										onClick={ () => {
+											setAttributes( { horizontalAlign: 'center' } );
+										} }
+										icon="align-center"
+										label={ __( 'Center', 'wp-plugin-info-card' ) }
+									/>
+									<Button
+										variant={ horizontalAlign === 'right' ? 'primary' : 'secondary' }
+										onClick={ () => {
+											setAttributes( { horizontalAlign: 'right' } );
+										} }
+										icon="align-right"
+										label={ __( 'Right', 'wp-plugin-info-card' ) }
+									/>
+								</ButtonGroup>
+							</BaseControl>
+						</PanelRow>
 					</PanelBody>
 				)
 			}
@@ -432,7 +466,7 @@ const GitHubInfoCardGrid = ( props ) => {
 
 	const blockProps = useBlockProps( {
 		className: classnames(
-			`wppic-github-info-card align${ align } layout-${ layout } cols-${ numChildren > 1 ? cols : 1 } wppic-margin-spacing-${ marginSpacing } wppic-margin-spacing-target-${ marginSpacingTarget }`,
+			`wppic-github-info-card align${ align } horizontal-align-${ horizontalAlign } layout-${ layout } cols-${ numChildren > 1 ? cols : 1 } wppic-margin-spacing-${ marginSpacing } wppic-margin-spacing-target-${ marginSpacingTarget }`,
 			{
 				'is-grid': numChildren > 1,
 			},

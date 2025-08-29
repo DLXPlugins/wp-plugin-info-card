@@ -22,6 +22,10 @@
       "type": "string",
       "default": "center"
     },
+    "horizontalAlign": {
+      "type": "string",
+      "default": "center"
+    },
     "uniqueId": {
       "type": "string",
       "default": ""

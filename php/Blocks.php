@@ -273,7 +273,7 @@ class Blocks {
 				'wppic_banner_default'           => Functions::get_plugin_url( 'assets/img/default-banner.png' ),
 				'github_items_preview'           => Functions::get_plugin_url( 'assets/img/wp-github-item-preview.jpg' ),
 				'github_items_grid_preview'      => Functions::get_plugin_url( 'assets/img/wp-github-item-grid-preview.jpg' ),
-				
+
 				'default_scheme'                 => $default_scheme,
 				'default_layout'                 => $default_layout,
 				'rest_nonce'                     => wp_create_nonce( 'wp_rest' ),
@@ -529,6 +529,7 @@ class Blocks {
 		}
 
 		$align                   = Functions::sanitize_attribute( $attributes, 'align', 'string' );
+		$horizontal_align        = Functions::sanitize_attribute( $attributes, 'horizontalAlign', 'string' );
 		$num_children            = Functions::sanitize_attribute( $attributes, 'numChildren', 'integer' );
 		$class_name              = Functions::sanitize_attribute( $attributes, 'className', 'string' );
 		$unique_id               = Functions::sanitize_attribute( $attributes, 'uniqueId', 'string' );
@@ -556,6 +557,7 @@ class Blocks {
 		$wrapper_classes = array(
 			'wppic-github-info-card-grid',
 			'align' . $align,
+			'horizontal-align-' . $horizontal_align,
 			'layout-' . $layout,
 			'cols-' . ( $num_children > 1 ? $cols : 1 ),
 			'wppic-margin-spacing-' . $margin_spacing,

@@ -2006,6 +2006,7 @@ class Shortcodes {
 			'buttontextcolorhover'    => '#fff',
 			'layout'                  => 'large',
 			'align'                   => 'center',
+			'horizontalalign'         => 'center',
 			'showtopbar'              => true,
 			'showauthorbar'           => true,
 			'showstatsbar'            => true,
@@ -2051,6 +2052,7 @@ class Shortcodes {
 		$attributes['buttontextcolorhover']    = Functions::sanitize_attribute( $attributes, 'buttontextcolorhover', 'string' );
 		$attributes['layout']                  = Functions::sanitize_attribute( $attributes, 'layout', 'string' );
 		$attributes['align']                   = Functions::sanitize_attribute( $attributes, 'align', 'string' );
+		$attributes['horizontalalign']         = Functions::sanitize_attribute( $attributes, 'horizontalalign', 'string' );
 		$attributes['uniqueid']                = Functions::sanitize_attribute( $attributes, 'uniqueid', 'string' );
 		$attributes['showtopbar']              = Functions::sanitize_attribute( $attributes, 'showtopbar', 'boolean' );
 		$attributes['showauthorbar']           = Functions::sanitize_attribute( $attributes, 'showauthorbar', 'boolean' );
@@ -2308,6 +2310,7 @@ class Shortcodes {
 			$wrapper_classes[] = $attributes['class'];
 			$wrapper_classes[] = 'is-style-wppic-github-' . $attributes['style'];
 			$wrapper_classes[] = 'align' . ( ! is_wp_error( $attributes['align'] ) && ! empty( $attributes['align'] ) ? $attributes['align'] : 'center' );
+			$wrapper_classes[] = 'horizontal-align-' . ( ! is_wp_error( $attributes['horizontalalign'] ) && ! empty( $attributes['horizontalalign'] ) ? $attributes['horizontalalign'] : 'center' );
 		}
 
 		if ( ( 'is-style-wppic-github-custom' === $attributes['class'] || 'custom' === $attributes['style'] ) && 0 === $attributes['numchildren'] ) {

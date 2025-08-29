@@ -168,6 +168,10 @@ return array(
 				'type' => 'string',
 				'default' => 'center'
 			),
+			'horizontalAlign' => array(
+				'type' => 'string',
+				'default' => 'center'
+			),
 			'uniqueId' => array(
 				'type' => 'string',
 				'default' => ''

@@ -129,6 +129,24 @@ button.button-reset.show-cursor {
   max-width: var(--wppic-grid-max-width);
 }
 
+.horizontal-align-left.wppic-github-info-card,
+.horizontal-align-left .wppic-github-info-card-grid,
+.horizontal-align-left .wppic-github-info-card-grid.cols-1,
+.horizontal-align-left .wppic-github-info-card-grid.cols-2,
+.horizontal-align-left .wppic-github-info-card-grid.cols-3 {
+  justify-content: flex-start;
+  justify-content: start;
+}
+
+.horizontal-align-right.wppic-github-info-card,
+.horizontal-align-right .wppic-github-info-card-grid,
+.horizontal-align-right .wppic-github-info-card-grid.cols-1,
+.horizontal-align-right .wppic-github-info-card-grid.cols-2,
+.horizontal-align-right .wppic-github-info-card-grid.cols-3 {
+  justify-content: flex-end;
+  justify-content: end;
+}
+
 .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)).wppic-github-info-card {
   max-width: var(--wppic-grid-max-width); /* fix for blocksy theme */
 }
@@ -570,6 +588,16 @@ button.button-reset.show-cursor {
     text-align: left;
   }
 }
+.entry-content .wppic-github-button.button-reset,
+.entry-content .wppic-github-button.button-reset:hover,
+.entry-content .wppic-github-button.components-button,
+.entry-content .wppic-github-button.components-button:hover,
+.entry-content .wppic-github-button.components-button.button-reset,
+.entry-content .wppic-github-button.components-button.button-reset:hover,
+.entry-content .wppic-github-button.components-button:hover {
+  text-decoration: none;
+}
+
 .wppic-github-button.button-reset, .wppic-github-button.components-button.button-reset, .wppic-github-button.components-button.button-reset:hover {
   display: inline-block;
   text-decoration: none;
