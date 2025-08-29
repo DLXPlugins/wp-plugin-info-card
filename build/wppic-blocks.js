@@ -22227,11 +22227,11 @@ var GitHubInfoCard = function b(a) {
     className: "wppic-github-info-card-header"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-header-left"
-  }, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(React.Fragment, null, i.language && /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-header-language"
-  }, (0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(i.language)), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(i.language)), i.license && /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-header-license"
-  }, (0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(i.license))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(i.license)))), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-header-right"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-header-icon wppic-github-info-card-icon-home"
@@ -22576,7 +22576,7 @@ var _GitHubInfoCardGrid = function b(a) {
     }
   }, [p]);
   var _ = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useInnerBlocksProps)({
-    className: 'wppic-github-info-card-grid'
+    className: "wppic-github-info-card-grid cols-".concat(z)
   }, {
     allowedBlocks: ['wp-plugin-info-card/github-info-card'],
     template: [['wp-plugin-info-card/github-info-card']],

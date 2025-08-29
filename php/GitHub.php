@@ -84,6 +84,8 @@ class GitHub {
 				$value = $this->get_nested_value( $github_data, $github_path );
 				if ( null !== $value ) {
 					$wppic_data[ $target_key ] = $value;
+				} else {
+					$wppic_data[ $target_key ] = '';
 				}
 			}
 

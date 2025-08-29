@@ -550,8 +550,8 @@ class Blocks {
 
 		ob_start();
 
-		$base_classes = array(
-			'wppic-github-info-card',
+		$wrapper_classes = array(
+			'wppic-github-info-card-grid',
 			'align' . $align,
 			'layout-' . $layout,
 			'cols-' . ( $num_children > 1 ? $cols : 1 ),
@@ -561,7 +561,7 @@ class Blocks {
 		);
 
 		?>
-		<div class="<?php echo esc_attr( implode( ' ', $base_classes ) ); ?>">
+		<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>">
 			<style>
 				<?php
 				if ( $num_children > 1 ) {

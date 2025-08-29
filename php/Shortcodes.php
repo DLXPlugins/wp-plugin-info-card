@@ -269,7 +269,7 @@ class Shortcodes {
 			wp_send_json_error( array( 'message' => 'Invalid username or repo.' ) );
 		}
 
-		$github_data = wppic_api_parser( 'github', $username . '/' . $repo, HOUR_IN_SECONDS, '', false, false );
+		$github_data = wppic_api_parser( 'github', $username . '/' . $repo, HOUR_IN_SECONDS, '', false, true );
 
 		if ( empty( $github_data ) ) {
 			wp_send_json_error( array( 'message' => 'No data found.' ) );
@@ -2271,19 +2271,35 @@ class Shortcodes {
 			$button_text = $attributes['overrideButtonText'];
 		}
 
+		$has_language = false;
+		$language     = Functions::sanitize_attribute( $asset_data, 'language', 'string' );
+		if ( ! is_wp_error( $language ) && ! empty( $language ) ) {
+			$has_language = true;
+		}
+		$has_license = false;
+		$license     = Functions::sanitize_attribute( $asset_data, 'license', 'string' );
+		if ( ! is_wp_error( $license ) && ! empty( $license ) ) {
+			$has_license = true;
+		}
+
 		?>
-		<div class="wppic-github-info-card-wrapper">
+		<div class="wppic-github-info-card">
+			<div class="wppic-github-info-card-wrapper">
 			<?php
 			if ( (bool) $attributes['showTopBar'] ) :
 				?>
 				<div class="wppic-github-info-card-header">
 					<div class="wppic-github-info-card-header-left">
-						<div class="wppic-github-info-card-header-language">
-							<?php echo esc_html( Functions::sanitize_attribute( $asset_data, 'language', 'string' ) ); ?>
-						</div>
-						<div class="wppic-github-info-card-header-license">
-							<?php echo esc_html( Functions::sanitize_attribute( $asset_data, 'license', 'string' ) ); ?>
-						</div>
+						<?php if ( $has_language ) : ?>
+							<div class="wppic-github-info-card-header-language">
+								<?php echo esc_html( $language ); ?>
+							</div>
+						<?php endif; ?>
+						<?php if ( $has_license ) : ?>
+							<div class="wppic-github-info-card-header-license">
+								<?php echo esc_html( $license ); ?>
+							</div>
+						<?php endif; ?>
 					</div>
 					<div class="wppic-github-info-card-header-right">
 						<?php
@@ -2378,8 +2394,8 @@ class Shortcodes {
 			<?php if ( (bool) $attributes['showStatsBar'] ) : ?>
 				<div class="wppic-github-info-card-meta">
 					<div class="wppic-github-info-card-meta-item">
-						<?php if ( $has_sponsors_url ) : ?>
-							<a href="<?php echo esc_url( $sponsors_url ); ?>">
+						<?php if ( $has_stargazers_count ) : ?>
+							<a href="<?php echo esc_url( $stargazers_count_url ); ?>">
 								<div class="wppic-github-info-card-meta-item-icon">
 									<svg class="wppic-github-info-card-icon-svg" width="20" height="20" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<use xlink:href="#fa-icon-star" />
@@ -2392,7 +2408,7 @@ class Shortcodes {
 						<?php endif; ?>
 					</div>
 					<div class="wppic-github-info-card-meta-item">
-						<?php if ( ! empty( $forks_count ) ) : ?>
+						<?php if ( $has_forks_count ) : ?>
 							<a href="<?php echo esc_url( $forks_count_url ); ?>">
 								<div class="wppic-github-info-card-meta-item-icon">
 									<svg class="wppic-github-info-card-icon-svg" width="20" height="20" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2406,7 +2422,7 @@ class Shortcodes {
 						<?php endif; ?>
 					</div>
 					<div class="wppic-github-info-card-meta-item">
-						<?php if ( ! empty( $watchers_count ) ) : ?>
+						<?php if ( $has_watchers_count ) : ?>
 							<a href="<?php echo esc_url( $watchers_count_url ); ?>">
 								<div class="wppic-github-info-card-meta-item-icon">
 									<svg class="wppic-github-info-card-icon-svg" width="20" height="20" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2459,7 +2475,8 @@ class Shortcodes {
 					</div>
 				</div>
 			</div>
-		</div><!-- .wppic-github-info-card-wrapper -->
+			</div><!-- .wppic-github-info-card-wrapper -->
+		</div><!-- .wppic-github-info-card -->
 
 		<?php
 		/**

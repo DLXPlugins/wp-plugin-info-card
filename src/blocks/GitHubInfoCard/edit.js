@@ -718,12 +718,18 @@ const GitHubInfoCard = ( props ) => {
 								<>
 									<div className="wppic-github-info-card-header">
 										<div className="wppic-github-info-card-header-left">
-											<div className="wppic-github-info-card-header-language">
-												{ escapeHTML( assetData.language ) }
-											</div>
-											<div className="wppic-github-info-card-header-license">
-												{ escapeHTML( assetData.license ) }
-											</div>
+											<>
+												{ assetData.language && (
+													<div className="wppic-github-info-card-header-language">
+														{ escapeHTML( assetData.language ) }
+													</div>
+												) }
+												{ assetData.license && (
+													<div className="wppic-github-info-card-header-license">
+														{ escapeHTML( assetData.license ) }
+													</div>
+												) }
+											</>
 										</div>
 										<div className="wppic-github-info-card-header-right">
 											<div className="wppic-github-info-card-header-icon wppic-github-info-card-icon-home">
