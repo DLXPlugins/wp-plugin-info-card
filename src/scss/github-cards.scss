@@ -85,19 +85,26 @@
 	width: 100%;
 	max-width: var(--wppic-grid-max-width);
 }
+.horizontal-align-center.wppic-github-info-card,
+.horizontal-align-center.wppic-github-info-card-grid,
+.horizontal-align-center.wppic-github-info-card-grid.cols-1,
+.horizontal-align-center.wppic-github-info-card-grid.cols-2,
+.horizontal-align-center.wppic-github-info-card-grid.cols-3 {
+	justify-content: center;
+}
 .horizontal-align-left.wppic-github-info-card,
-.horizontal-align-left .wppic-github-info-card-grid,
-.horizontal-align-left .wppic-github-info-card-grid.cols-1,
-.horizontal-align-left .wppic-github-info-card-grid.cols-2,
-.horizontal-align-left .wppic-github-info-card-grid.cols-3 {
+.horizontal-align-left.wppic-github-info-card-grid,
+.horizontal-align-left.wppic-github-info-card-grid.cols-1,
+.horizontal-align-left.wppic-github-info-card-grid.cols-2,
+.horizontal-align-left.wppic-github-info-card-grid.cols-3 {
 	justify-content: flex-start;
 	justify-content: start;
 }
 .horizontal-align-right.wppic-github-info-card,
-.horizontal-align-right .wppic-github-info-card-grid,
-.horizontal-align-right .wppic-github-info-card-grid.cols-1,
-.horizontal-align-right .wppic-github-info-card-grid.cols-2,
-.horizontal-align-right .wppic-github-info-card-grid.cols-3 {
+.horizontal-align-right.wppic-github-info-card-grid,
+.horizontal-align-right.wppic-github-info-card-grid.cols-1,
+.horizontal-align-right.wppic-github-info-card-grid.cols-2,
+.horizontal-align-right.wppic-github-info-card-grid.cols-3 {
 	justify-content: flex-end;
 	justify-content: end;
 }
@@ -320,11 +327,14 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	align-items: flex-start;
 	gap: var(--wppic-gap-sm);
 	@include respond-to('medium') {
 		display: flex;
 		flex-direction: column;
 		gap: var(--wppic-gap-sm);
+		align-items: flex-start;
+		justify-content: center;
 	}
 }
 .wppic-github-info-card.layout-card .wppic-github-info-card-author-section-info{
@@ -390,9 +400,6 @@
 	border: 1px solid var(--wppic-github-border);
 	text-decoration: none;
 	color: var(--wppic-github-text-color);
-	@include respond-to('medium') {
-		border: none;
-	}
 	&:hover {
 		cursor: pointer;
 		color: var(--wppic-github-text-color);
@@ -483,9 +490,7 @@
 	overflow: hidden;
 }
 @include respond-to('xs') {
-	.wppic-github-info-card-buttons-right-button {
-		display: unset;
-	}
+
 	.wppic-github-button.button-reset, .wppic-github-button.components-button.button-reset, .wppic-github-button.components-button.button-reset:hover {
 		display: inline-block;
 		width: unset;

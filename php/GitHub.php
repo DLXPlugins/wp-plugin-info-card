@@ -79,6 +79,12 @@ class GitHub {
 				'has_downloads'     => 'has_downloads',
 			);
 
+			$alt_keys_to_extract = array(
+				'login' => 'owner/login',
+				'avatar' => 'owner/avatar_url',
+				'org_url' => 'organization/html_url',
+			);
+
 			$wppic_data = array();
 			foreach ( $keys_to_extract as $target_key => $github_path ) {
 				$value = $this->get_nested_value( $github_data, $github_path );
@@ -86,6 +92,14 @@ class GitHub {
 					$wppic_data[ $target_key ] = $value;
 				} else {
 					$wppic_data[ $target_key ] = '';
+				}
+			}
+
+			// Extract alt keys.
+			foreach ( $alt_keys_to_extract as $target_key => $github_path ) {
+				$value = $this->get_nested_value( $github_data, $github_path );
+				if ( null !== $value && ! empty( $value ) ) {
+					$wppic_data[ $target_key ] = $value;
 				}
 			}
 
@@ -140,6 +154,11 @@ class GitHub {
 					}
 					$wppic_data['latest_release_url'] = $latest_release->html_url;
 				}
+			}
+
+			// Get default full_name if not set.
+			if ( empty( $wppic_data['name'] ) ) {
+				$wppic_data['name'] = $wppic_data['login'];
 			}
 
 			// Sanitize the data.

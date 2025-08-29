@@ -214,7 +214,7 @@ return array(
 			),
 			'cols' => array(
 				'type' => 'number',
-				'default' => 2
+				'default' => 1
 			),
 			'colGap' => array(
 				'type' => 'number',

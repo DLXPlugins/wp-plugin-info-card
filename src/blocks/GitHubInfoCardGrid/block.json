@@ -63,7 +63,7 @@
 		},
 		"cols": {
 			"type": "number",
-			"default": 2
+			"default": 1
 		},
 		"colGap": {
 			"type": "number",

@@ -159,7 +159,7 @@ const GitHubInfoCardGrid = ( props ) => {
 	}, [ className ] );
 
 	const innerBlocksProps = useInnerBlocksProps( {
-		className: `wppic-github-info-card-grid cols-${ cols } layout-${ layout }`,
+		className: `wppic-github-info-card-grid cols-${ cols } layout-${ layout } horizontal-align-${ horizontalAlign }`,
 	}, {
 		allowedBlocks: [ 'wp-plugin-info-card/github-info-card' ],
 		template: [
@@ -217,7 +217,6 @@ const GitHubInfoCardGrid = ( props ) => {
 		);
 	};
 
-
 	const marginSpacingOptions = [
 		{ value: 'none', label: __( 'None', 'wp-plugin-info-card' ) },
 		{ value: 'compact', label: __( 'Compact', 'wp-plugin-info-card' ) },
@@ -235,84 +234,88 @@ const GitHubInfoCardGrid = ( props ) => {
 	const inspectorControls = (
 		<InspectorControls>
 			{
-				numChildren > 1 && (
-					<PanelBody title={ __( 'Layout', 'wp-plugin-info-card' ) }>
-						<SelectControl
-							label={ __( 'Margin Spacing', 'wp-plugin-info-card' ) }
-							options={ marginSpacingOptions }
-							value={ marginSpacing }
-							onChange={ ( value ) => {
-								setAttributes( { marginSpacing: value } );
-							} }
-						/>
-						<SelectControl
-							label={ __( 'Margin Target', 'wp-plugin-info-card' ) }
-							options={ marginSpacingTargetOptions }
-							value={ marginSpacingTarget }
-							onChange={ ( value ) => {
-								setAttributes( { marginSpacingTarget: value } );
-							} }
-						/>
-						<PanelRow className="wppic-panel-rows-cols">
-							{ getCols() }
-						</PanelRow>
-						<PanelRow className="wppic-panel-rows-numbers">
-							<NumbersComponent
-								value={ colGap }
-								label={ __( 'Column Gap (in px)', 'wp-plugin-info-card' ) }
-								numbers={ [ 20, 40, 60, 80 ] }
-								onClick={ ( value ) => {
-									setAttributes( { colGap: parseInt( value ) } );
-								} }
-								id="wppic-col-gap"
-							/>
-						</PanelRow>
-						<PanelRow className="wppic-panel-rows-numbers">
-							<NumbersComponent
-								value={ rowGap }
-								label={ __( 'Row Gap (in px)', 'wp-plugin-info-card' ) }
-								numbers={ [ 20, 40, 60, 80 ] }
-								onClick={ ( value ) => {
-									setAttributes( { rowGap: parseInt( value ) } );
-								} }
-								id="wppic-row-gap"
-							/>
-						</PanelRow>
-						<PanelRow>
-							<BaseControl
-								label={ __( 'Horizontal Alignment', 'wp-plugin-info-card' ) }
-								id="wppic-horizontal-align"
-							>
-								<ButtonGroup>
-									<Button
-										variant={ horizontalAlign === 'left' ? 'primary' : 'secondary' }
-										onClick={ () => {
-											setAttributes( { horizontalAlign: 'left' } );
+				<PanelBody title={ __( 'Layout', 'wp-plugin-info-card' ) }>
+					<SelectControl
+						label={ __( 'Margin Spacing', 'wp-plugin-info-card' ) }
+						options={ marginSpacingOptions }
+						value={ marginSpacing }
+						onChange={ ( value ) => {
+							setAttributes( { marginSpacing: value } );
+						} }
+					/>
+					<SelectControl
+						label={ __( 'Margin Target', 'wp-plugin-info-card' ) }
+						options={ marginSpacingTargetOptions }
+						value={ marginSpacingTarget }
+						onChange={ ( value ) => {
+							setAttributes( { marginSpacingTarget: value } );
+						} }
+					/>
+					{
+						numChildren > 1 && (
+							<>
+								<PanelRow className="wppic-panel-rows-cols">
+									{ getCols() }
+								</PanelRow>
+								<PanelRow className="wppic-panel-rows-numbers">
+									<NumbersComponent
+										value={ colGap }
+										label={ __( 'Column Gap (in px)', 'wp-plugin-info-card' ) }
+										numbers={ [ 20, 40, 60, 80 ] }
+										onClick={ ( value ) => {
+											setAttributes( { colGap: parseInt( value ) } );
 										} }
-										icon="align-left"
-										label={ __( 'Left', 'wp-plugin-info-card' ) }
+										id="wppic-col-gap"
 									/>
-									<Button
-										variant={ horizontalAlign === 'center' ? 'primary' : 'secondary' }
-										onClick={ () => {
-											setAttributes( { horizontalAlign: 'center' } );
+								</PanelRow>
+								<PanelRow className="wppic-panel-rows-numbers">
+									<NumbersComponent
+										value={ rowGap }
+										label={ __( 'Row Gap (in px)', 'wp-plugin-info-card' ) }
+										numbers={ [ 20, 40, 60, 80 ] }
+										onClick={ ( value ) => {
+											setAttributes( { rowGap: parseInt( value ) } );
 										} }
-										icon="align-center"
-										label={ __( 'Center', 'wp-plugin-info-card' ) }
+										id="wppic-row-gap"
 									/>
-									<Button
-										variant={ horizontalAlign === 'right' ? 'primary' : 'secondary' }
-										onClick={ () => {
-											setAttributes( { horizontalAlign: 'right' } );
-										} }
-										icon="align-right"
-										label={ __( 'Right', 'wp-plugin-info-card' ) }
-									/>
-								</ButtonGroup>
-							</BaseControl>
-						</PanelRow>
-					</PanelBody>
-				)
+								</PanelRow>
+							</>
+						)
+					}
+					<PanelRow>
+						<BaseControl
+							label={ __( 'Horizontal Alignment', 'wp-plugin-info-card' ) }
+							id="wppic-horizontal-align"
+						>
+							<ButtonGroup>
+								<Button
+									variant={ horizontalAlign === 'left' ? 'primary' : 'secondary' }
+									onClick={ () => {
+										setAttributes( { horizontalAlign: 'left' } );
+									} }
+									icon="align-left"
+									label={ __( 'Left', 'wp-plugin-info-card' ) }
+								/>
+								<Button
+									variant={ horizontalAlign === 'center' ? 'primary' : 'secondary' }
+									onClick={ () => {
+										setAttributes( { horizontalAlign: 'center' } );
+									} }
+									icon="align-center"
+									label={ __( 'Center', 'wp-plugin-info-card' ) }
+								/>
+								<Button
+									variant={ horizontalAlign === 'right' ? 'primary' : 'secondary' }
+									onClick={ () => {
+										setAttributes( { horizontalAlign: 'right' } );
+									} }
+									icon="align-right"
+									label={ __( 'Right', 'wp-plugin-info-card' ) }
+								/>
+							</ButtonGroup>
+						</BaseControl>
+					</PanelRow>
+				</PanelBody>
 			}
 			{ hasCustomColors && (
 				<PanelColorSettings
@@ -466,7 +469,7 @@ const GitHubInfoCardGrid = ( props ) => {
 
 	const blockProps = useBlockProps( {
 		className: classnames(
-			`wppic-github-info-card align${ align } horizontal-align-${ horizontalAlign } layout-${ layout } cols-${ numChildren > 1 ? cols : 1 } wppic-margin-spacing-${ marginSpacing } wppic-margin-spacing-target-${ marginSpacingTarget }`,
+			`wppic-github-info-card align${ align } layout-${ layout } cols-${ numChildren > 1 ? cols : 1 } wppic-margin-spacing-${ marginSpacing } wppic-margin-spacing-target-${ marginSpacingTarget }`,
 			{
 				'is-grid': numChildren > 1,
 			},
