@@ -1989,8 +1989,8 @@ class Shortcodes {
 			'cols'                    => 1,
 			'colgap'                  => 10,
 			'rowgap'                  => 10,
-			'margins'                 => 'none',
-			'marginstarget'           => 'both',
+			'marginspacing'           => 'none',
+			'marginspacingtarget'     => 'both',
 			'backgroundcolor'         => '#fff',
 			'textcolor'               => '#24292f',
 			'iconcolor'               => '#666',
@@ -2034,8 +2034,8 @@ class Shortcodes {
 		$attributes['cols']                    = Functions::sanitize_attribute( $attributes, 'cols', 'integer' );
 		$attributes['colgap']                  = Functions::sanitize_attribute( $attributes, 'colgap', 'integer' );
 		$attributes['rowgap']                  = Functions::sanitize_attribute( $attributes, 'rowgap', 'integer' );
-		$attributes['margins']                 = Functions::sanitize_attribute( $attributes, 'margins', 'string' );
-		$attributes['marginstarget']           = Functions::sanitize_attribute( $attributes, 'marginstarget', 'string' );
+		$attributes['marginspacingtarget']     = Functions::sanitize_attribute( $attributes, 'marginspacingtarget', 'string' );
+		$attributes['marginspacing']           = Functions::sanitize_attribute( $attributes, 'marginspacing', 'string' );
 		$attributes['backgroundcolor']         = Functions::sanitize_attribute( $attributes, 'backgroundcolor', 'string' );
 		$attributes['textcolor']               = Functions::sanitize_attribute( $attributes, 'textcolor', 'string' );
 		$attributes['iconcolor']               = Functions::sanitize_attribute( $attributes, 'iconcolor', 'string' );
@@ -2288,8 +2288,20 @@ class Shortcodes {
 			$has_license = true;
 		}
 
+		// Get wrapper classes.
+		$wrapper_classes = array(
+			'wppic-github-info-card',
+			'layout-' . $attributes['layout'],
+			'cols-' . ( $attributes['numchildren'] > 1 ? $attributes['cols'] : 1 ),
+		);
+		if ( 0 === $attributes['numchildren'] ) {
+			$wrapper_classes[] = 'wppic-margin-spacing-' . $attributes['marginspacing'];
+			$wrapper_classes[] = 'wppic-margin-spacing-target-' . $attributes['marginspacingtarget'];
+			$wrapper_classes[] = $attributes['class'];
+		}
+
 		?>
-		<div class="wppic-github-info-card">
+		<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>">
 			<div class="wppic-github-info-card-wrapper">
 			<?php
 			if ( (bool) $attributes['showtopbar'] ) :
