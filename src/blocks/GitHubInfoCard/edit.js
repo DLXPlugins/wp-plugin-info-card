@@ -790,19 +790,30 @@ const GitHubInfoCard = ( props ) => {
 												{ getNumberHumanized( parseInt( assetData.subscribers_count ) ) }
 											</div>
 										</div>
-										<div className="wppic-github-info-card-meta-item">
-											<div className="wppic-github-info-card-meta-item-icon">
-												<CodeIcon width={ 20 } height={ 20 } />
-											</div>
-											<div className="wppic-github-info-card-meta-item-text">
-												<Truncate
-													ellipsizeMode="tail"
-													limit={ 10 }
-												>
-													{ escapeHTML( versionOverride || assetData.latest_release_tag_name ) }
-												</Truncate>
-											</div>
-										</div>
+										{
+											(
+												versionOverride || typeof assetData.latest_release_tag_name !== 'undefined'
+											) && (
+												<>
+													<div className="wppic-github-info-card-meta-item">
+														<div className="wppic-github-info-card-meta-item-icon">
+															<CodeIcon width={ 20 } height={ 20 } />
+														</div>
+
+														<div className="wppic-github-info-card-meta-item-text">
+															<Truncate
+																ellipsizeMode="tail"
+																limit={ 10 }
+															>
+																{ escapeHTML( versionOverride || assetData.latest_release_tag_name ) }
+															</Truncate>
+														</div>
+
+													</div>
+												</>
+
+											) }
+
 									</div>
 								)
 							}

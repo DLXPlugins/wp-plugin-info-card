@@ -269,7 +269,7 @@ class Shortcodes {
 			wp_send_json_error( array( 'message' => 'Invalid username or repo.' ) );
 		}
 
-		$github_data = wppic_api_parser( 'github', $username . '/' . $repo, HOUR_IN_SECONDS, '', false, true );
+		$github_data = wppic_api_parser( 'github', $username . '/' . $repo, HOUR_IN_SECONDS, '', false, false );
 
 		if ( empty( $github_data ) ) {
 			wp_send_json_error( array( 'message' => 'No data found.' ) );
@@ -2075,7 +2075,7 @@ class Shortcodes {
 		}
 
 		// Get GitHub Asset data.
-		$asset_data = wppic_api_parser( 'github', sanitize_key( $attributes['username'] . '/' . sanitize_key( $attributes['repo'] ) ) );
+		$asset_data = wppic_api_parser( 'github', sanitize_key( $attributes['username'] ) . '/' . sanitize_key( $attributes['repo'] ) );
 		if ( ! $asset_data ) {
 			if ( current_user_can( 'manage_options' ) ) {
 				echo esc_html__( 'GitHub Card Not Found', 'wp-plugin-info-card' );

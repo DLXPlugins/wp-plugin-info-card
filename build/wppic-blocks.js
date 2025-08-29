@@ -22295,7 +22295,7 @@ var GitHubInfoCard = function b(a) {
     height: 20
   })), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item-text"
-  }, ca(parseInt(i.subscribers_count)))), /*#__PURE__*/React.createElement("div", {
+  }, ca(parseInt(i.subscribers_count)))), (y || typeof i.latest_release_tag_name !== 'undefined') && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item"
   }, /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-meta-item-icon"
@@ -22307,7 +22307,7 @@ var GitHubInfoCard = function b(a) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__.__experimentalTruncate, {
     ellipsizeMode: "tail",
     limit: 10
-  }, (0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(y || i.latest_release_tag_name))))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(y || i.latest_release_tag_name)))))), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-description"
   }, (0,_wordpress_escape_html__WEBPACK_IMPORTED_MODULE_1__.escapeHTML)(i.description)), /*#__PURE__*/React.createElement("div", {
     className: "wppic-github-info-card-buttons"
