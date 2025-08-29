@@ -409,7 +409,7 @@ const GitHubInfoCardGrid = ( props ) => {
 					help={ __( 'Show the last updated date.', 'wp-plugin-info-card' ) }
 				/>
 				<SelectControl
-					label={ __( 'Button Type', 'wp-plugin-info-card' ) }
+					label={ __( 'Button Target and Type', 'wp-plugin-info-card' ) }
 					value={ buttonType }
 					onChange={ ( value ) => {
 						setButtonType( value );
@@ -419,6 +419,8 @@ const GitHubInfoCardGrid = ( props ) => {
 						{ label: __( 'View on GitHub', 'wp-plugin-info-card' ), value: 'github' },
 						{ label: __( 'View Website', 'wp-plugin-info-card' ), value: 'website' },
 						{ label: __( 'Sponsor', 'wp-plugin-info-card' ), value: 'sponsor' },
+						{ label: __( 'Download', 'wp-plugin-info-card' ), value: 'download' },
+						{ label: __( 'Star', 'wp-plugin-info-card' ), value: 'star' },
 					] }
 					help={ __( 'Select the type of button to display and where it will link to.', 'wp-plugin-info-card' ) }
 				/>

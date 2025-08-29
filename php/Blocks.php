@@ -603,6 +603,15 @@ class Blocks {
 		return ob_get_clean();
 	}
 
+	/**
+	 * Render the GitHub info card block.
+	 *
+	 * @param array    $attributes Array of block attributes.
+	 * @param string   $content Block content.
+	 * @param WP_Block $block Block object.
+	 *
+	 * @return string Block rendered.
+	 */
 	public function github_info_card_render( $attributes, $content, $block ) {
 		if ( is_admin() || defined( 'REST_REQUEST' ) ) {
 			return;
@@ -635,8 +644,7 @@ class Blocks {
 		$block_attributes['showAuthorBar']        = $block->context['wppic/github-grid-showAuthorBar'];
 		$block_attributes['showStatsBar']         = $block->context['wppic/github-grid-showStatsBar'];
 		$block_attributes['showLastUpdated']      = $block->context['wppic/github-grid-showLastUpdated'];
-		$block_attributes['parentButtonType']           = $block->context['wppic/github-grid-buttonType'];
-
+		$block_attributes['parentButtonType']     = $block->context['wppic/github-grid-buttonType'];
 
 		// Now merge the attributes.
 		$attributes = array_merge( $attributes, $block_attributes );

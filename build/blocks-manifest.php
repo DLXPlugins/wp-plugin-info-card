@@ -65,13 +65,21 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
+			'homepageUrlOverride' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'overrideButton' => array(
 				'type' => 'boolean',
 				'default' => false
 			),
 			'overrideButtonText' => array(
 				'type' => 'string',
-				'default' => 'View on GitHub'
+				'default' => ''
+			),
+			'overrideButtonUrl' => array(
+				'type' => 'string',
+				'default' => ''
 			),
 			'versionOverride' => array(
 				'type' => 'string',

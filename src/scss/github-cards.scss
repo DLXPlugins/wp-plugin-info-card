@@ -366,6 +366,8 @@
 	display: flex;
 }
 .wppic-github-button.button-reset, .wppic-github-button.components-button.button-reset, .wppic-github-button.components-button.button-reset:hover {
+	display: inline-block;
+	text-decoration: none;
 	color: var(--wppic-github-button-text-color);
 	padding: 16px 24px;
 	margin-top: 0;
@@ -376,6 +378,7 @@
 .wppic-github-button.button-reset:hover, .wppic-github-button.components-button.button-reset:hover, .wppic-github-button.components-button.button-reset:hover {
 	color: var(--wppic-github-button-text-color-hover);
 	background-color: var(--wppic-github-button-bg-hover);
+	text-decoration: none;
 }
 
 

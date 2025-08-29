@@ -73,9 +73,11 @@ const GitHubInfoCard = ( props ) => {
 		loginOverride,
 		sponsorsUrlOverride,
 		organizationUrlOverride,
+		homepageUrlOverride,
 		overrideButton,
 		overrideButtonText,
 		buttonType,
+		overrideButtonUrl,
 		avatarImageId,
 		avatarImageUrl,
 		versionOverride,
@@ -219,7 +221,7 @@ const GitHubInfoCard = ( props ) => {
 		<InspectorControls>
 			<PanelBody
 				title={ __( 'Overrides', 'wp-plugin-info-card' ) }
-				initialOpen={ false }
+				initialOpen={ true }
 			>
 				<TextControl
 					label={ __( 'Name Override', 'wp-plugin-info-card' ) }
@@ -248,6 +250,14 @@ const GitHubInfoCard = ( props ) => {
 					placeholder="https://"
 					onChange={ ( value ) => setAttributes( { organizationUrlOverride: value } ) }
 					help={ __( 'Override the organization URL of the repo.', 'wp-plugin-info-card' ) }
+				/>
+				<TextControl
+					label={ __( 'Homepage URL Override', 'wp-plugin-info-card' ) }
+					value={ homepageUrlOverride }
+					type="url"
+					placeholder="https://"
+					onChange={ ( value ) => setAttributes( { homepageUrlOverride: value } ) }
+					help={ __( 'Override the homepage URL of the repo.', 'wp-plugin-info-card' ) }
 				/>
 				<TextControl
 					label={ __( 'Version Override', 'wp-plugin-info-card' ) }
@@ -302,7 +312,7 @@ const GitHubInfoCard = ( props ) => {
 			</PanelBody>
 			<PanelBody
 				title={ __( 'Button', 'wp-plugin-info-card' ) }
-				initialOpen={ false }
+				initialOpen={ true }
 			>
 				<ToggleControl
 					label={ __( 'Override Button', 'wp-plugin-info-card' ) }
@@ -319,15 +329,31 @@ const GitHubInfoCard = ( props ) => {
 							help={ __( 'Override the text of the button. Leave blank to use the parent settings.', 'wp-plugin-info-card' ) }
 						/>
 						<SelectControl
-							label={ __( 'Button Type', 'wp-plugin-info-card' ) }
+							label={ __( 'Button Target and Type', 'wp-plugin-info-card' ) }
 							value={ buttonType }
 							onChange={ ( value ) => setAttributes( { buttonType: value } ) }
 							options={ [
 								{ label: __( 'View on GitHub', 'wp-plugin-info-card' ), value: 'github' },
 								{ label: __( 'View Website', 'wp-plugin-info-card' ), value: 'website' },
 								{ label: __( 'Sponsor', 'wp-plugin-info-card' ), value: 'sponsor' },
+								{ label: __( 'Download', 'wp-plugin-info-card' ), value: 'download' },
+								{ label: __( 'Star', 'wp-plugin-info-card' ), value: 'star' },
+								{ label: __( 'Custom', 'wp-plugin-info-card' ), value: 'custom' },
 							] }
+							help={ __( 'Select the target of the button.', 'wp-plugin-info-card' ) }
 						/>
+						{
+							buttonType === 'custom' && (
+								<TextControl
+									label={ __( 'Button URL', 'wp-plugin-info-card' ) }
+									value={ overrideButtonUrl }
+									onChange={ ( value ) => setAttributes( { overrideButtonUrl: value } ) }
+									type="url"
+									placeholder="https://"
+									help={ __( 'Override the URL of the button.', 'wp-plugin-info-card' ) }
+								/>
+							)
+						}
 					</>
 				) }
 			</PanelBody>
@@ -409,6 +435,7 @@ const GitHubInfoCard = ( props ) => {
 		}
 		switch ( parentButtonType ) {
 			case 'github':
+			case 'custom':
 				buttonText = __( 'View on GitHub', 'wp-plugin-info-card' );
 				break;
 			case 'website':
@@ -416,6 +443,12 @@ const GitHubInfoCard = ( props ) => {
 				break;
 			case 'sponsor':
 				buttonText = __( 'Sponsor', 'wp-plugin-info-card' );
+				break;
+			case 'download':
+				buttonText = __( 'Download', 'wp-plugin-info-card' );
+				break;
+			case 'star':
+				buttonText = __( 'Star', 'wp-plugin-info-card' );
 				break;
 		}
 		buttonText = overrideButton ? ( overrideButtonText || buttonText ) : buttonText;

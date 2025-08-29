@@ -2012,8 +2012,10 @@ class Shortcodes {
 			'sponsorsUrlOverride'     => '',
 			'versionOverride'         => '',
 			'organizationUrlOverride' => '',
+			'homepageUrlOverride'     => '',
 			'overrideButton'          => false,
 			'overrideButtonText'      => __( 'View on GitHub', 'wp-plugin-info-card' ),
+			'overrideButtonUrl'       => '',
 			'buttonType'              => 'github',
 			'avatarImageUrl'          => '',
 		);
@@ -2057,6 +2059,7 @@ class Shortcodes {
 		$attributes['versionOverride']         = Functions::sanitize_attribute( $attributes, 'versionOverride', 'string' );
 		$attributes['overrideButton']          = Functions::sanitize_attribute( $attributes, 'overrideButton', 'boolean' );
 		$attributes['overrideButtonText']      = Functions::sanitize_attribute( $attributes, 'overrideButtonText', 'string' );
+		$attributes['overrideButtonUrl']       = Functions::sanitize_attribute( $attributes, 'overrideButtonUrl', 'url' );
 		$attributes['buttonType']              = Functions::sanitize_attribute( $attributes, 'buttonType', 'string' );
 		$attributes['avatarImageUrl']          = Functions::sanitize_attribute( $attributes, 'avatarImageUrl', 'url' );
 
@@ -2217,6 +2220,57 @@ class Shortcodes {
 		if ( ! is_wp_error( $version_override ) && ! empty( $version_override ) && ! empty( $latest_release_tag_name ) ) {
 			$latest_release_tag_name = $version_override;
 		}
+
+		// Get last updated date.
+		$show_last_updated = (bool) $attributes['showLastUpdated'];
+		$last_updated_date = Functions::sanitize_attribute( $asset_data, 'updated_at', 'string' );
+		if ( is_wp_error( $last_updated_date ) ) {
+			$last_updated_date = '';
+		}
+
+		// Get button type and URL.
+		$button_type        = $attributes['buttonType'];
+		$parent_button_type = Functions::sanitize_attribute( $attributes, 'parentButtonType', 'string' ); // This is passed from the parent block. If not passed, this errors, and it's as if a shortcode passed it.
+		$button_override    = (bool) $attributes['overrideButton'];
+		if ( ! is_wp_error( $parent_button_type ) && ! empty( $parent_button_type ) && ! $button_override ) {
+			$button_type = $parent_button_type;
+		}
+
+		switch ( $button_type ) {
+			case 'github':
+				$button_url  = $github_url;
+				$button_text = __( 'View on GitHub', 'wp-plugin-info-card' );
+				break;
+			case 'website':
+				$button_url  = $homepage_url;
+				$button_text = __( 'View Website', 'wp-plugin-info-card' );
+				break;
+			case 'sponsor':
+				$button_url  = $sponsors_url;
+				$button_text = __( 'Sponsor', 'wp-plugin-info-card' );
+				break;
+			case 'download':
+				$button_url  = $latest_release_url;
+				$button_text = __( 'Download', 'wp-plugin-info-card' );
+				break;
+			case 'star':
+				$button_url  = $stargazers_count_url;
+				$button_text = __( 'Star', 'wp-plugin-info-card' );
+				break;
+			case 'custom':
+				$button_url  = $attributes['overrideButtonUrl'];
+				$button_text = $attributes['overrideButtonText'];
+				break;
+			default:
+				$button_url  = $github_url;
+				$button_text = __( 'View on GitHub', 'wp-plugin-info-card' );
+				break;
+		}
+		// Failsafe.
+		if ( $button_override && ! empty( $attributes['overrideButtonText'] ) ) {
+			$button_text = $attributes['overrideButtonText'];
+		}
+
 		?>
 		<div class="wppic-github-info-card-wrapper">
 			<?php
@@ -2383,6 +2437,27 @@ class Shortcodes {
 			<?php endif; ?>
 			<div class="wppic-github-info-card-description">
 				<?php echo esc_html( $repo_description ); ?>
+			</div>
+			<div class="wppic-github-info-card-buttons">
+				<div class="wppic-github-info-card-buttons-left">
+					<?php
+					if ( $show_last_updated ) :
+						?>
+						<div class="wppic-github-info-card-last-updated">
+							<span class="wppic-github-info-card-last-updated-label"><?php echo esc_html__( 'Last updated:', 'wp-plugin-info-card' ); ?></span> <?php echo date_i18n( get_option( 'date_format' ), strtotime( $last_updated_date ) ); ?>
+						</div>
+					<?php endif; ?>
+				</div>
+				<div class="wppic-github-info-card-buttons-right">
+					<div class="wppic-github-info-card-buttons-right-button">
+						<a
+							href="<?php echo esc_url( $button_url ); ?>"
+							class="wppic-github-button button-reset wppic-github-button-<?php echo esc_attr( $button_type ); ?>"
+						>
+							<?php echo esc_html( $button_text ); ?>
+						</a>
+					</div>
+				</div>
 			</div>
 		</div><!-- .wppic-github-info-card-wrapper -->
 

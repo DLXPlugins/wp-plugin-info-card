@@ -55,13 +55,21 @@
 			"type": "string",
 			"default": ""
 		},
+		"homepageUrlOverride": {
+			"type": "string",
+			"default": ""
+		},
 		"overrideButton": {
 			"type": "boolean",
 			"default": false
 		},
 		"overrideButtonText": {
 			"type": "string",
-			"default": "View on GitHub"
+			"default": ""
+		},
+		"overrideButtonUrl": {
+			"type": "string",
+			"default": ""
 		},
 		"versionOverride": {
 			"type": "string",
