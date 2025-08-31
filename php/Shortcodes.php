@@ -253,6 +253,19 @@ class Shortcodes {
 				'permission_callback' => '__return_true',
 			)
 		);
+
+		/**
+		 * Register REST API for getting GitHub card HTML.
+		 */
+		register_rest_route(
+			'wppic/v2',
+			'/get_github_card_html',
+			array(
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_github_card_html' ),
+				'permission_callback' => '__return_true',
+			)
+		);
 	}
 
 	/**
@@ -1974,8 +1987,8 @@ class Shortcodes {
 	 * @param array  $attributes Shortcode attributes.
 	 * @param string $content The content of the shortcode.
 	 */
-	public static function shortcode_github_info_card( $attributes, $content = '' ) {
-		if ( is_admin() || defined( 'REST_REQUEST' ) ) {
+	public static function shortcode_github_info_card( $attributes, $content = '', $shortcode_name = '', $asset_data = null ) {
+		if ( is_admin() || ( defined( 'REST_REQUEST' ) && ! defined( 'WPPIC_REST_REQUEST' ) ) ) {
 			return '';
 		}
 
@@ -2072,14 +2085,41 @@ class Shortcodes {
 		$attributes['buttontype']              = Functions::sanitize_attribute( $attributes, 'buttontype', 'string' );
 		$attributes['avatarimageurl']          = Functions::sanitize_attribute( $attributes, 'avatarimageurl', 'url' );
 
+		// Skip enqueueing the lazy load script if we're in the REST API.
+		if ( ! defined( 'WPPIC_REST_REQUEST' ) ) {
+			// Enqueue the lazy load script.
+			require Functions::get_plugin_dir( 'dist/github-info-card-lazy-load.asset.php' );
+			wp_enqueue_script(
+				'wppic-github-info-card-lazy-load',
+				Functions::get_plugin_url( 'dist/github-info-card-lazy-load.js' ),
+				array( 'wp-api-fetch'),
+				Functions::get_plugin_version(),
+				true
+			);
+
+			wp_localize_script(
+				'wppic-github-info-card-lazy-load',
+				'wppicGithubInfoCardLazyLoad',
+				array(
+					'restUrl' => rest_url( 'wppic/v2/get_github_card_html' ),
+					'restNonce' => wp_create_nonce( 'wp_rest' ),
+					'cardAttributes' => array(),
+				)
+			);
+		}
+
 		// Now let's build the shortcode.
 		if ( 0 === $attributes['numchildren'] ) {
 			// todo - build wrapper around the shortcode.
 		}
 
 		// Check if option exists for GitHub local option cache.
-		$maybe_local_cache = get_transient( 'wppic_github_' . sanitize_key( preg_replace( '/\-/', '_', $attributes['username'] . '/' . $attributes['repo'] ) ), false );
-		if ( ! $maybe_local_cache ) { // Start lazy load.
+		if ( null !== $asset_data ) {
+			$maybe_local_cache = $asset_data;
+		} else {
+			$maybe_local_cache = get_transient( 'wppic_github_' . sanitize_key( preg_replace( '/\-/', '_', $attributes['username'] . '/' . $attributes['repo'] ) ), false );
+		}
+		if ( ! $maybe_local_cache && ! defined( 'WPPIC_REST_REQUEST' ) ) { // Start lazy load.
 			// Get wrapper classes for loading card.
 			$wrapper_classes = array(
 				'layout-' . $attributes['layout'],
@@ -2098,9 +2138,25 @@ class Shortcodes {
 			}
 
 			$nonce = wp_create_nonce( 'wppic_github_lazy_load_' . sanitize_key( $attributes['username'] . '/' . $attributes['repo'] ) );
+
+			// Preload in GitHub repo URLs.
+			$preload_paths = array(
+				esc_url_raw( add_query_arg( array( 'username' => sanitize_key( $attributes['username'] ), 'repo' => sanitize_key( $attributes['repo'] ) ), rest_url( 'wppic/v2/get_github_card_html' ) ) ),
+			);
+			wp_add_inline_script(
+				'wppic-github-info-card-lazy-load',
+				'wp.apiFetch.use( wp.apiFetch.createPreloadingMiddleware( ' . wp_json_encode( $preload_paths ) . ' ) );',
+				'after',
+			);
+			// Add attributes as localized vars.
+			wp_add_inline_script(
+				'wppic-github-info-card-lazy-load',
+				'wppicGithubInfoCardLazyLoad.cardAttributes[\'' . sanitize_title( strtolower( $attributes['username'] ) . '_' . sanitize_title( strtolower( $attributes['repo'] ) ) ) . '\'] = ' . wp_json_encode( $attributes ) . ';',
+				'after',
+			);
 			ob_start();
 			?>
-			<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" id="<?php echo esc_attr( $attributes['uniqueid'] ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>" data-username="<?php echo esc_attr( $attributes['username'] ); ?>" data-repo="<?php echo esc_attr( $attributes['repo'] ); ?>" data-is-github-card-loading="true">
+			<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" id="<?php echo esc_attr( $attributes['uniqueid'] ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>" data-username="<?php echo esc_attr( strtolower( $attributes['username'] ) ); ?>" data-repo="<?php echo esc_attr( strtolower( $attributes['repo'] ) ); ?>" data-is-github-card-loading="true">
 				<div class="wppic-github-info-card">
 					<div class="wppic-github-info-card-loading" >
 						<div class="wppic-github-info-card-loading-inner">
@@ -2575,5 +2631,26 @@ class Shortcodes {
 		 */
 		add_action( 'wp_footer', array( __CLASS__, 'add_icons_to_footer' ) );
 		return ob_get_clean();
+	}
+
+	/**
+	 * Get GitHub card HTML.
+	 *
+	 * @param object $request The request object.
+	 * @return string The GitHub card HTML.
+	 */
+	public function get_github_card_html( $request ) {
+		$attributes = $request->get_param( 'cardAttributes' );
+		$username = sanitize_title( $request->get_param( 'username' ) );
+		$repo = sanitize_title( $request->get_param( 'repo' ) );
+		$github_data = wppic_api_parser( 'github', $username . '/' . $repo, HOUR_IN_SECONDS, '', false, false );
+		if ( empty( $github_data ) ) {
+			wp_send_json_error( array( 'message' => 'No data found.', 'html' => '' ) );
+		}
+		$attributes = Functions::sanitize_array_recursive( $attributes );
+
+		define( 'WPPIC_REST_REQUEST', true );
+		$html = self::shortcode_github_info_card( $attributes, '', 'github-info-card', $github_data );
+		return rest_ensure_response( array( 'html' => $html ) );
 	}
 }

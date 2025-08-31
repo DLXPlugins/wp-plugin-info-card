@@ -29,9 +29,9 @@ registerBlockType( metadata, {
 						return createBlock( 'wp-plugin-info-card/wp-plugin-info-card', {},
 							[
 								createBlock( 'wp-plugin-info-card/wp-plugin-info-card', {
-									slug: githubMatch[ 1 ],
+									username: githubMatch[ 1 ],
 									repo: githubMatch[ 2 ],
-									loading: false,
+									loading: true,
 								} ),
 							],
 						);
@@ -60,9 +60,9 @@ registerBlockType( metadata, {
 						return createBlock( 'wp-plugin-info-card/github-info-card-grid', {},
 							[
 								createBlock( 'wp-plugin-info-card/github-info-card', {
-									slug: match[ 1 ],
+									username: match[ 1 ],
 									repo: match[ 2 ],
-									loading: false,
+									loading: true,
 								} ),
 							],
 						);

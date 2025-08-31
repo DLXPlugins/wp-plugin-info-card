@@ -42,6 +42,7 @@ module.exports = ( env ) => {
 				'wppic-fancybox': './src/js/fancyapps/carousel.js',
 				'wppic-fancybox-css': './src/scss/carousel.scss',
 				'github-info-card': './src/scss/github-cards.scss',
+				'github-info-card-lazy-load': './src/js/github-info-card/github-info-card-lazy-load.js',
 			},
 			mode: env.mode,
 			devtool: 'production' === env.mode ? false : 'source-map',

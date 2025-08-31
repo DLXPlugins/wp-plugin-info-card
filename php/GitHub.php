@@ -44,7 +44,14 @@ class GitHub {
 				$slug
 			);
 
-			$response = wp_remote_get( esc_url( $api_url ) );
+			$token = '';
+
+			$headers = array(
+				'Authorization' => 'Bearer ' . $token,
+				'Content-Type' => 'application/json',
+			);
+
+			$response = wp_remote_get( esc_url( $api_url ), array( 'headers' => $headers ) );
 			if ( is_wp_error( $response ) ) {
 				return $wppic_data;
 			}
@@ -113,7 +120,7 @@ class GitHub {
 				'https://api.github.com/repos/%s/contents/.github/FUNDING.yml',
 				$slug
 			);
-			$sponsors_response          = wp_remote_get( esc_url( $sponsors_url ) );
+			$sponsors_response          = wp_remote_get( esc_url( $sponsors_url ), array( 'headers' => $headers ) );
 			if ( is_wp_error( $sponsors_response ) || 200 !== wp_remote_retrieve_response_code( $sponsors_response ) ) {
 				return $wppic_data;
 			}
@@ -141,7 +148,7 @@ class GitHub {
 					'https://api.github.com/repos/%s/releases',
 					$slug
 				);
-				$releases_response = wp_remote_get( esc_url( $releases_url ) );
+				$releases_response = wp_remote_get( esc_url( $releases_url ), array( 'headers' => $headers ) );
 				if ( is_wp_error( $releases_response ) || 200 !== wp_remote_retrieve_response_code( $releases_response ) ) {
 					return $wppic_data;
 				}

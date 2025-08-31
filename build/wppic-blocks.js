@@ -22388,9 +22388,9 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__, {
         var f = e.exec(c);
         if (f) {
           return (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.createBlock)('wp-plugin-info-card/wp-plugin-info-card', {}, [(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.createBlock)('wp-plugin-info-card/wp-plugin-info-card', {
-            slug: f[1],
+            username: f[1],
             repo: f[2],
-            loading: false
+            loading: true
           })]);
         }
         return false;
@@ -22414,9 +22414,9 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__, {
         var d = c.exec(a.textContent);
         if (d) {
           return (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.createBlock)('wp-plugin-info-card/github-info-card-grid', {}, [(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.createBlock)('wp-plugin-info-card/github-info-card', {
-            slug: d[1],
+            username: d[1],
             repo: d[2],
-            loading: false
+            loading: true
           })]);
         }
         return false;
