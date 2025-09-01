@@ -22051,6 +22051,9 @@ var GitHubInfoCard = function b(a) {
     if (w) {
       return x;
     }
+    if (!i.avatar) {
+      return wppic.default_github_avatar;
+    }
     return i.avatar;
   };
   var na = /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_6__.Fragment, null, N && /*#__PURE__*/React.createElement("div", {

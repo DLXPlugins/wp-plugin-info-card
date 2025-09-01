@@ -170,7 +170,8 @@ button.button-reset.show-cursor {
 }
 
 .layout-card.wppic-github-info-card {
-  display: grid;
+  display: flex;
+  max-width: 325px;
 }
 
 .layout-card.wppic-github-info-card-grid,

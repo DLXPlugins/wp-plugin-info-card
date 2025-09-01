@@ -2333,11 +2333,11 @@ class Shortcodes {
 		if ( ! $maybe_local_cache && ! defined( 'WPPIC_REST_REQUEST' ) ) { // Start lazy load.
 			// Get wrapper classes for loading card.
 			$wrapper_classes = array(
+				'wppic-github-info-card',
 				'layout-' . $attributes['layout'],
 				'cols-' . ( $attributes['numchildren'] > 1 ? $attributes['cols'] : 1 ),
 			);
 			if ( 0 === $attributes['numchildren'] ) {
-				$wrapper_classes[] = 'wppic-github-info-card';
 				$wrapper_classes[] = 'wppic-margin-spacing-' . $attributes['marginspacing'];
 				$wrapper_classes[] = 'wppic-margin-spacing-target-' . $attributes['marginspacingtarget'];
 				$wrapper_classes[] = $attributes['class'];
@@ -2374,7 +2374,7 @@ class Shortcodes {
 			ob_start();
 			?>
 			<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" id="<?php echo esc_attr( $attributes['uniqueid'] ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>" data-username="<?php echo esc_attr( strtolower( $attributes['username'] ) ); ?>" data-repo="<?php echo esc_attr( strtolower( $attributes['repo'] ) ); ?>" data-is-github-card-loading="true">
-				<div class="wppic-github-info-card">
+				<div class="wppic-github-info-card-wrapper">
 					<div class="wppic-github-info-card-loading" >
 					<article class="github-skeleton-card" aria-busy="true" aria-label="Loading repository card">
 						<div class="github-skeleton-badges">
@@ -2408,8 +2408,8 @@ class Shortcodes {
 						</div>
 						</article>
 					</div><!-- .wppic-github-info-card-loading -->
-				</div><!-- .wppic-github-info-card -->
-			</div><!-- .wppic-github-info-card-grid -->
+				</div><!-- .wppic-github-info-card-wrapper -->
+			</div><!-- .wppic-github-info-card -->
 			<?php
 			return ob_get_clean();
 		}
@@ -2505,7 +2505,7 @@ class Shortcodes {
 		}
 		if ( ! $has_avatar_image ) {
 			$has_avatar_image = true;
-			$avatar_image     = Functions::get_plugin_url( 'assets/img/default-plugin-icon.png' ); // todo - replace with GitHub avatar.
+			$avatar_image     = Functions::get_plugin_url( 'assets/img/default-github-avatar.png' );
 		}
 
 		// Get org name.

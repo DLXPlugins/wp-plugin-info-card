@@ -465,6 +465,9 @@ const GitHubInfoCard = ( props ) => {
 		if ( avatarImageId ) {
 			return avatarImageUrl;
 		}
+		if ( ! assetData.avatar ) {
+			return wppic.default_github_avatar;
+		}
 		return assetData.avatar;
 	};
 	const block = (

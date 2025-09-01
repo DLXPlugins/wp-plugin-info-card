@@ -5,7 +5,8 @@
  * @since 1.2.0
  */
 import apiFetch from '@wordpress/api-fetch';
-import { safeDecodeURIComponent, isURL, removeQueryArgs } from '@wordpress/url';
+import { safeDecodeURIComponent } from '@wordpress/url';
+import { __ } from '@wordpress/i18n';
 import lozad from 'lozad';
 
 ( () => {
@@ -47,11 +48,13 @@ import lozad from 'lozad';
 			method: 'POST',
 			body: JSON.stringify( data ),
 		} );
-		// Replace element with response.html.
-		// Create element from new html.
-		const newElement = document.createElement( 'div' );
-		newElement.innerHTML = response.html;
-		element.replaceWith( newElement );
+		if ( ! response.html ) {
+			const errorElement = document.createElement( 'div' );
+			errorElement.innerHTML = __( 'GitHub Card data could not be loaded.', 'wp-plugin-info-card' );
+			element.replaceWith( errorElement );
+			return;
+		}
+		element.outerHTML = response.html;
 		return response.html;
 	};
 
