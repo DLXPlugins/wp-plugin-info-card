@@ -223,7 +223,7 @@ const GitHubInfoCards = () => {
 	};
 
 	const tableContent = (
-		<table className="form-table form-table-row-sections form-table-list">
+		<table className="form-table form-table-row-sections">
 			<tbody>
 				<tr>
 					<th scope="row">
@@ -309,7 +309,7 @@ const GitHubInfoCards = () => {
 				<h3>
 					{ __( 'GitHub API Rate Limits', 'wp-plugin-info-card' ) }
 				</h3>
-				<table className="form-table form-table-row-sections">
+				<table className="form-table form-table-row-sections form-table-list">
 					<thead>
 						<tr>
 							<th scope="col">
