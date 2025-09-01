@@ -13458,18 +13458,18 @@ html {
   padding-bottom: 20px;
 }
 
-.wppic-admin-panel-area__section .form-table {
+.wppic-admin-panel-area__section .form-table-list {
   border: 1px solid #E0E0E0;
   padding: 15px;
   margin-bottom: 15px;
 }
-.wppic-admin-panel-area__section .form-table th, .wppic-admin-panel-area__section .form-table td {
+.wppic-admin-panel-area__section .form-table-list th, .wppic-admin-panel-area__section .form-table-list td {
   padding: 10px;
 }
-.wppic-admin-panel-area__section .form-table thead {
+.wppic-admin-panel-area__section .form-table-list thead {
   background: #F5F5F5;
 }
-.wppic-admin-panel-area__section .form-table.striped tbody tr:nth-child(even) {
+.wppic-admin-panel-area__section .form-table-list.striped tbody tr:nth-child(even) {
   background: #F8F8F8;
 }
 

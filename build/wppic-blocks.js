@@ -22122,7 +22122,6 @@ var GitHubInfoCard = function b(a) {
       d({
         repo: a
       });
-      setRepo(a);
     }
   }), F && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__.Notice, {
     status: "error",
@@ -23045,7 +23044,6 @@ var _GitHubInfoCardGrid = function b(a) {
             d({
               layout: a
             });
-            setLayout(a);
             b();
           },
           value: r

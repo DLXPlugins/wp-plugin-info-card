@@ -575,7 +575,6 @@ const GitHubInfoCardGrid = ( props ) => {
 											setAttributes( {
 												layout: value,
 											} );
-											setLayout( value );
 											onClose();
 										} }
 										value={ layout }

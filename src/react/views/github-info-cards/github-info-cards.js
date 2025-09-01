@@ -223,7 +223,7 @@ const GitHubInfoCards = () => {
 	};
 
 	const tableContent = (
-		<table className="form-table form-table-row-sections">
+		<table className="form-table form-table-row-sections form-table-list">
 			<tbody>
 				<tr>
 					<th scope="row">

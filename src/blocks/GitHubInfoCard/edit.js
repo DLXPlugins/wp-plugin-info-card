@@ -557,7 +557,6 @@ const GitHubInfoCard = ( props ) => {
 								setAttributes( {
 									repo: value,
 								} );
-								setRepo( value );
 							} }
 						/>
 						{ noData && (
