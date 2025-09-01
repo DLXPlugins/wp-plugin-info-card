@@ -1,6 +1,6 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
-  "title": "GitHub Info Card Item",
+  "title": "GitHub Info Card",
   "apiVersion": 3,
   "name": "wp-plugin-info-card/github-info-card",
   "parent": "wp-plugin-info-card/github-info-card-grid",

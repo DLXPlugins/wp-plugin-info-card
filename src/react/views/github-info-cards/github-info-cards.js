@@ -263,6 +263,10 @@ const GitHubInfoCards = () => {
 													<TextControl
 														{ ...field }
 														label={ __( 'GitHub Personal Access Token', 'wp-plugin-info-card' ) }
+														className={
+															classnames( 'wppic-admin-input is-required',
+																{ 'has-error': errors?.github_info_cards_token },
+															) }
 														type="text"
 														onChange={ ( e ) => {
 															field.onChange( e );
@@ -272,8 +276,8 @@ const GitHubInfoCards = () => {
 														disabled={ apiValid || revoking || saving }
 													/>
 													<p className="wppic-admin-row-description">
-														<a href="https://github.com/settings/personal-access-tokens" target="_blank" rel="noopener noreferrer">
-															{ __( 'Get a GitHub Personal Access Token.', 'wp-plugin-info-card' ) }
+														<a href="https://dlxplugins.com/how-tos/how-to-create-a-non-expiring-github-personal-access-token/" target="_blank" rel="noopener noreferrer">
+															{ __( 'How to Create a Non-Expiring GitHub Personal Access Token.', 'wp-plugin-info-card' ) }
 														</a>
 													</p>
 												</>

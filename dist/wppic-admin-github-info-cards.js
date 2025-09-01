@@ -12899,6 +12899,9 @@ var GitHubInfoCards = function a() {
       var c = a.field;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, _extends({}, c, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('GitHub Personal Access Token', 'wp-plugin-info-card'),
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('wppic-admin-input is-required', {
+          'has-error': R === null || R === void 0 ? void 0 : R.github_info_cards_token
+        }),
         type: "text",
         onChange: function b(a) {
           c.onChange(a);
@@ -12909,10 +12912,10 @@ var GitHubInfoCards = function a() {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
         className: "wppic-admin-row-description"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-        href: "https://github.com/settings/personal-access-tokens",
+        href: "https://dlxplugins.com/how-tos/how-to-create-a-non-expiring-github-personal-access-token/",
         target: "_blank",
         rel: "noopener noreferrer"
-      }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Get a GitHub Personal Access Token.', 'wp-plugin-info-card'))));
+      }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('How to Create a Non-Expiring GitHub Personal Access Token.', 'wp-plugin-info-card'))));
     }
   }), (R === null || R === void 0 || (b = R.github_info_cards_token) === null || b === void 0 ? void 0 : b.required) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Notice__WEBPACK_IMPORTED_MODULE_7__["default"], {
     type: "error",
