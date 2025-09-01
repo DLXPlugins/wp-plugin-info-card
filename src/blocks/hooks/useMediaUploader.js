@@ -129,7 +129,6 @@ const useMediaUploader = ( props ) => {
 			y2: cropHeightY2,
 			aspectRatio: settings.aspectRatio,
 		};
-		console.log( imgSelectOptions );
 		return imgSelectOptions;
 	};
 	return {

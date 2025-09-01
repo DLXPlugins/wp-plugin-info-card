@@ -22371,7 +22371,6 @@ __webpack_require__.r(__webpack_exports__);
 //  Import main block file.
 
 var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
-console.log(wppic);
 if (wppic.is_github_info_cards_enabled) {
   registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__, {
     icon: /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_1__.GitHubIcon, {
@@ -29107,7 +29106,6 @@ var useMediaUploader = function b(a) {
       y2: s,
       aspectRatio: e.aspectRatio
     };
-    console.log(t);
     return t;
   };
   return {

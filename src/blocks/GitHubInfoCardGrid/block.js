@@ -7,7 +7,6 @@ import { createBlock } from '@wordpress/blocks';
 import edit from './edit';
 
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-console.log( wppic );
 if ( wppic.is_github_info_cards_enabled ) {
 	registerBlockType( metadata, {
 		icon: (

@@ -43792,7 +43792,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var container = document.getElementById('wppic-tab-custom-plugin');
 var root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(container);
-console.log('root', container);
 var hashHistory = (0,_tanstack_react_router__WEBPACK_IMPORTED_MODULE_5__.createHashHistory)({
   initialEntries: ['/', '#/']
 });
