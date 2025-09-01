@@ -251,6 +251,22 @@ class Shortcodes {
 				'methods'             => 'GET',
 				'callback'            => array( $this, 'get_github_data' ),
 				'permission_callback' => '__return_true',
+				'args'                => array(
+					'username' => array(
+						'type'              => 'string',
+						'sanitize_callback' => 'sanitize_title',
+					),
+					'repo'     => array(
+						'type'              => 'string',
+						'sanitize_callback' => 'sanitize_title',
+					),
+				),
+				'force'               => array(
+					'type'              => 'boolean',
+					'sanitize_callback' => function ( $value ) {
+						return filter_var( $value, FILTER_VALIDATE_BOOLEAN );
+					},
+				),
 			)
 		);
 
@@ -264,6 +280,187 @@ class Shortcodes {
 				'methods'             => 'POST',
 				'callback'            => array( $this, 'get_github_card_html' ),
 				'permission_callback' => '__return_true',
+				'args'                => array(
+					'repo'           => array(
+						'type'              => 'string',
+						'sanitize_callback' => 'sanitize_title',
+					),
+					'username'       => array(
+						'type'              => 'string',
+						'sanitize_callback' => 'sanitize_title',
+					),
+					'cardAttributes' => array(
+						'type'       => 'object',
+						'properties' => array(
+							'align'                   => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'avatarimageurl'          => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'esc_url_raw',
+							),
+							'backgroundcolor'         => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'bordercolor'             => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'borderradius'            => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'borderwidth'             => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'cardstyle'               => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'colgap'                  => array(
+								'type'              => 'integer',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'cols'                    => array(
+								'type'              => 'integer',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'homepageurloverride'     => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'horizontalalign'         => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'iconcolor'               => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'iconcolorhover'          => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'languagebgcolor'         => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'languagetextcolor'       => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'layout'                  => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'loginoverride'           => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'marginspacing'           => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'marginspacingtarget'     => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'nameoverride'            => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'numchildren'             => array(
+								'type'              => 'integer',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'organizationurloverride' => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'overridebutton'          => array(
+								'type'              => 'boolean',
+								'sanitize_callback' => function ( $value ) {
+									return filter_var( $value, FILTER_VALIDATE_BOOLEAN );
+								},
+							),
+							'overridebuttontext'      => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'overridebuttonurl'       => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'parentbuttontype'        => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'repo'                    => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_title',
+							),
+							'rowgap'                  => array(
+								'type'              => 'integer',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'showauthorbar'           => array(
+								'type'              => 'boolean',
+								'sanitize_callback' => function ( $value ) {
+									return filter_var( $value, FILTER_VALIDATE_BOOLEAN );
+								},
+							),
+							'showlastupdated'         => array(
+								'type'              => 'boolean',
+								'sanitize_callback' => function ( $value ) {
+									return filter_var( $value, FILTER_VALIDATE_BOOLEAN );
+								},
+							),
+							'showstatsbar'            => array(
+								'type'              => 'boolean',
+								'sanitize_callback' => function ( $value ) {
+									return filter_var( $value, FILTER_VALIDATE_BOOLEAN );
+								},
+							),
+							'showtopbar'              => array(
+								'type'              => 'boolean',
+								'sanitize_callback' => function ( $value ) {
+									return filter_var( $value, FILTER_VALIDATE_BOOLEAN );
+								},
+							),
+							'sponsorscolor'           => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'sponsorsurloverride'     => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'style'                   => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'textcolor'               => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'uniqueid'                => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'username'                => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_title',
+							),
+							'versionoverride'         => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+						),
+					),
+				),
 			)
 		);
 	}
@@ -275,10 +472,10 @@ class Shortcodes {
 	 */
 	public function get_github_data( $request ) {
 
-		$username = sanitize_key( strtolower( $request->get_param( 'username' ) ) );
-		$repo     = sanitize_key( strtolower( $request->get_param( 'repo' ) ) );
-		$maybe_force    = $request->get_param( 'force' );
-		$force          = false;
+		$username    = sanitize_key( strtolower( $request->get_param( 'username' ) ) );
+		$repo        = sanitize_key( strtolower( $request->get_param( 'repo' ) ) );
+		$maybe_force = $request->get_param( 'force' );
+		$force       = false;
 		if ( ! empty( $maybe_force ) ) {
 			$force = filter_var( $maybe_force, FILTER_VALIDATE_BOOLEAN );
 		}
@@ -287,7 +484,7 @@ class Shortcodes {
 			wp_send_json_error( array( 'message' => 'Invalid username or repo.' ) );
 		}
 
-		$github_data = wppic_api_parser( 'github', $username . '/' . $repo, HOUR_IN_SECONDS, '', false, $force );
+		$github_data = wppic_api_parser( 'github', $username . '/' . $repo, 1 * WEEK_IN_SECONDS, '', false, $force );
 
 		if ( empty( $github_data ) ) {
 			wp_send_json_error( array( 'message' => 'No data found.' ) );
@@ -2102,7 +2299,7 @@ class Shortcodes {
 			wp_enqueue_script(
 				'wppic-github-info-card-lazy-load',
 				Functions::get_plugin_url( 'dist/github-info-card-lazy-load.js' ),
-				array( 'wp-api-fetch'),
+				array( 'wp-api-fetch' ),
 				Functions::get_plugin_version(),
 				true
 			);
@@ -2111,8 +2308,8 @@ class Shortcodes {
 				'wppic-github-info-card-lazy-load',
 				'wppicGithubInfoCardLazyLoad',
 				array(
-					'restUrl' => rest_url( 'wppic/v2/get_github_card_html' ),
-					'restNonce' => wp_create_nonce( 'wp_rest' ),
+					'restUrl'        => rest_url( 'wppic/v2/get_github_card_html' ),
+					'restNonce'      => wp_create_nonce( 'wp_rest' ),
 					'cardAttributes' => array(),
 				)
 			);
@@ -2153,7 +2350,15 @@ class Shortcodes {
 
 			// Preload in GitHub repo URLs.
 			$preload_paths = array(
-				esc_url_raw( add_query_arg( array( 'username' => sanitize_key( $attributes['username'] ), 'repo' => sanitize_key( $attributes['repo'] ) ), rest_url( 'wppic/v2/get_github_card_html' ) ) ),
+				esc_url_raw(
+					add_query_arg(
+						array(
+							'username' => sanitize_key( $attributes['username'] ),
+							'repo'     => sanitize_key( $attributes['repo'] ),
+						),
+						rest_url( 'wppic/v2/get_github_card_html' )
+					)
+				),
 			);
 			wp_add_inline_script(
 				'wppic-github-info-card-lazy-load',
@@ -2295,7 +2500,7 @@ class Shortcodes {
 		if ( ! is_wp_error( $avatar_image_override ) && ! empty( $avatar_image_override ) ) {
 			$avatar_image     = $avatar_image_override;
 			$has_avatar_image = true;
-		} elseif ( ! is_wp_error( $avatar_image ) && ! empty( $avatar_image ) ) {	
+		} elseif ( ! is_wp_error( $avatar_image ) && ! empty( $avatar_image ) ) {
 			$has_avatar_image = true;
 		}
 		if ( ! $has_avatar_image ) {
@@ -2675,12 +2880,17 @@ class Shortcodes {
 	 * @return string The GitHub card HTML.
 	 */
 	public function get_github_card_html( $request ) {
-		$attributes = $request->get_param( 'cardAttributes' );
-		$username = sanitize_title( $request->get_param( 'username' ) );
-		$repo = sanitize_title( $request->get_param( 'repo' ) );
-		$github_data = wppic_api_parser( 'github', $username . '/' . $repo, HOUR_IN_SECONDS, '', false, false );
+		$attributes  = $request->get_param( 'cardAttributes' );
+		$username    = sanitize_title( $request->get_param( 'username' ) );
+		$repo        = sanitize_title( $request->get_param( 'repo' ) );
+		$github_data = wppic_api_parser( 'github', $username . '/' . $repo, 1 * WEEK_IN_SECONDS, '', false, false );
 		if ( empty( $github_data ) ) {
-			wp_send_json_error( array( 'message' => 'No data found.', 'html' => '' ) );
+			wp_send_json_error(
+				array(
+					'message' => 'No data found.',
+					'html'    => '',
+				)
+			);
 		}
 		$attributes = Functions::sanitize_array_recursive( $attributes );
 

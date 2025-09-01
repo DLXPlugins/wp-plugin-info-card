@@ -160,17 +160,21 @@ function _asyncToGenerator(b) { return function () { var c = this, d = arguments
   var e = null;
   var f = /*#__PURE__*/function () {
     var b = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function c(b) {
-      var d, e, f;
-      return _regeneratorRuntime().wrap(function g(c) {
+      var d, e, f, g;
+      return _regeneratorRuntime().wrap(function h(c) {
         while (1) switch (c.prev = c.next) {
           case 0:
-            d = {
+            d = b.dataset.username + '_' + b.dataset.repo;
+            e = {
               username: (0,_wordpress_url__WEBPACK_IMPORTED_MODULE_1__.safeDecodeURIComponent)(b.dataset.username),
               repo: (0,_wordpress_url__WEBPACK_IMPORTED_MODULE_1__.safeDecodeURIComponent)(b.dataset.repo),
               nonce: (0,_wordpress_url__WEBPACK_IMPORTED_MODULE_1__.safeDecodeURIComponent)(b.dataset.nonce),
-              cardAttributes: wppicGithubInfoCardLazyLoad.cardAttributes[b.dataset.username + '_' + b.dataset.repo] /* todo: harden */
+              cardAttributes: {}
             };
-            c.next = 3;
+            if (wppicGithubInfoCardLazyLoad.cardAttributes[d]) {
+              e.cardAttributes = wppicGithubInfoCardLazyLoad.cardAttributes[d];
+            }
+            c.next = 5;
             return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default()({
               url: a.endpoint,
               parse: true,
@@ -179,18 +183,17 @@ function _asyncToGenerator(b) { return function () { var c = this, d = arguments
                 'Content-Type': 'application/json'
               },
               method: 'POST',
-              body: JSON.stringify(d)
+              body: JSON.stringify(e)
             });
-          case 3:
-            e = c.sent;
-            console.log('response', e);
+          case 5:
+            f = c.sent;
             // Replace element with response.html.
             // Create element from new html.
-            f = document.createElement('div');
-            f.innerHTML = e.html;
-            b.replaceWith(f);
-            return c.abrupt("return", e.html);
-          case 9:
+            g = document.createElement('div');
+            g.innerHTML = f.html;
+            b.replaceWith(g);
+            return c.abrupt("return", f.html);
+          case 10:
           case "end":
             return c.stop();
         }

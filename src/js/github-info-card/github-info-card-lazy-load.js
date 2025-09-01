@@ -27,12 +27,16 @@ import lozad from 'lozad';
 	let observer = null;
 
 	const fetchCard = async ( element ) => {
+		const attributesKey = element.dataset.username + '_' + element.dataset.repo;
 		const data = {
 			username: safeDecodeURIComponent( element.dataset.username ),
 			repo: safeDecodeURIComponent( element.dataset.repo ),
 			nonce: safeDecodeURIComponent( element.dataset.nonce ),
-			cardAttributes: wppicGithubInfoCardLazyLoad.cardAttributes[ element.dataset.username + '_' + element.dataset.repo ], /* todo: harden */
+			cardAttributes: {},
 		};
+		if ( wppicGithubInfoCardLazyLoad.cardAttributes[ attributesKey ] ) {
+			data.cardAttributes = wppicGithubInfoCardLazyLoad.cardAttributes[ attributesKey ];
+		}
 		const response = await apiFetch( {
 			url: DEFAULTS.endpoint,
 			parse: true,
@@ -43,7 +47,6 @@ import lozad from 'lozad';
 			method: 'POST',
 			body: JSON.stringify( data ),
 		} );
-		console.log( 'response', response );
 		// Replace element with response.html.
 		// Create element from new html.
 		const newElement = document.createElement( 'div' );
