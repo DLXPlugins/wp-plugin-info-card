@@ -33,7 +33,7 @@ class GitHub {
 	 * @param bool   $load_attachments Load attachments.
 	 * @param bool   $force            Force refresh.
 	 *
-	 * @return array $wppic_data The data object.
+	 * @return array|false $wppic_data The data object. False if the GitHub Info Cards are not enabled or on failure.
 	 */
 	public function api_parser( $wppic_data, $type, $slug, $load_attachments = false, $force = false ) {
 		if ( 'github' === $type ) {
@@ -44,22 +44,28 @@ class GitHub {
 				$slug
 			);
 
-			$token = '';
+			if ( ! Options::is_github_info_cards_enabled() ) {
+				return false;
+			}
+
+			// Get options.
+			$options = Options::get_options( false, true );
+			$token   = $options['github_info_cards_token'];
 
 			$headers = array(
 				'Authorization' => 'Bearer ' . $token,
-				'Content-Type' => 'application/json',
+				'Content-Type'  => 'application/json',
 			);
 
 			$response = wp_remote_get( esc_url( $api_url ), array( 'headers' => $headers ) );
 			if ( is_wp_error( $response ) ) {
-				return $wppic_data;
+				return false;
 			}
 
 			// Check error code.
 			$response_code = wp_remote_retrieve_response_code( $response );
 			if ( 200 !== $response_code ) {
-				return $wppic_data;
+				return false;
 			}
 
 			$github_data = json_decode( wp_remote_retrieve_body( $response ) );
@@ -106,7 +112,7 @@ class GitHub {
 			foreach ( $alt_keys_to_extract as $target_key => $github_path ) {
 				$value = $this->get_nested_value( $github_data, $github_path );
 				if ( null !== $value && ! empty( $value ) ) {
-					if ( ! isset( $wppic_data[ $target_key ] ) ) {
+					if ( ! isset( $wppic_data[ $target_key ] ) || empty( $wppic_data[ $target_key ] ) ) {
 						$wppic_data[ $target_key ] = $value;
 					}
 				}
@@ -121,21 +127,19 @@ class GitHub {
 				$slug
 			);
 			$sponsors_response          = wp_remote_get( esc_url( $sponsors_url ), array( 'headers' => $headers ) );
-			if ( is_wp_error( $sponsors_response ) || 200 !== wp_remote_retrieve_response_code( $sponsors_response ) ) {
-				return $wppic_data;
-			}
-
-			$sponsors_data = json_decode( wp_remote_retrieve_body( $sponsors_response ) );
-			if ( ! empty( $sponsors_data ) ) {
-				$yml_content = base64_decode( $sponsors_data->content );
-				$yml_data    = $this->parse_simple_yaml( $yml_content );
-				if ( ! empty( $yml_data ) ) {
-					$wppic_data['sponsors_url'] = esc_url(
-						sprintf(
-							'https://github.com/sponsors/%s',
-							preg_replace( '/[\[\]]/', '', $yml_data['github'] )
-						)
-					);
+			if ( ! is_wp_error( $sponsors_response ) && 200 === wp_remote_retrieve_response_code( $sponsors_response ) ) {
+				$sponsors_data = json_decode( wp_remote_retrieve_body( $sponsors_response ) );
+				if ( ! empty( $sponsors_data ) ) {
+					$yml_content = base64_decode( $sponsors_data->content );
+					$yml_data    = $this->parse_simple_yaml( $yml_content );
+					if ( ! empty( $yml_data ) ) {
+						$wppic_data['sponsors_url'] = esc_url(
+							sprintf(
+								'https://github.com/sponsors/%s',
+								preg_replace( '/[\[\]]/', '', $yml_data['github'] )
+							)
+						);
+					}
 				}
 			}
 
@@ -149,19 +153,18 @@ class GitHub {
 					$slug
 				);
 				$releases_response = wp_remote_get( esc_url( $releases_url ), array( 'headers' => $headers ) );
-				if ( is_wp_error( $releases_response ) || 200 !== wp_remote_retrieve_response_code( $releases_response ) ) {
-					return $wppic_data;
-				}
-				$releases_data = json_decode( wp_remote_retrieve_body( $releases_response ) );
-				if ( ! empty( $releases_data ) ) {
-					// Get the first item.
-					$latest_release                        = current( $releases_data );
-					$wppic_data['latest_release_tag_name'] = $latest_release->tag_name;
-					if ( ! empty( $latest_release->assets ) ) {
-						$current_asset                             = current( $latest_release->assets );
-						$wppic_data['latest_release_download_url'] = $current_asset->browser_download_url;
+				if ( ! is_wp_error( $releases_response ) && 200 === wp_remote_retrieve_response_code( $releases_response ) ) {
+					$releases_data = json_decode( wp_remote_retrieve_body( $releases_response ) );
+					if ( ! empty( $releases_data ) ) {
+						// Get the first item.
+						$latest_release                        = current( $releases_data );
+						$wppic_data['latest_release_tag_name'] = $latest_release->tag_name;
+						if ( ! empty( $latest_release->assets ) ) {
+							$current_asset                             = current( $latest_release->assets );
+							$wppic_data['latest_release_download_url'] = $current_asset->browser_download_url;
+						}
+						$wppic_data['latest_release_url'] = $latest_release->html_url;
 					}
-					$wppic_data['latest_release_url'] = $latest_release->html_url;
 				}
 			}
 
@@ -239,135 +242,5 @@ class GitHub {
 			}
 		}
 		return $result;
-	}
-
-	/**
-	 * Load a plugin template.
-	 *
-	 * @param string $content The content.
-	 * @param array  $data    Plugin data.
-	 */
-	public function plugin_template( $content, $data ) {
-		$type       = $data[0];
-		$wppic_data = $data[1]; // $wppic_data is used in the included templates.
-		$image      = $data[2]; // $image is used in the included templates.
-		$layout     = '-' . $data[3];
-
-		if ( 'plugin' === $type ) {
-
-			// load custom user template if exists.
-			$wppic_template_file = '/wppic-templates/wppic-template-plugin';
-
-			ob_start();
-			if ( file_exists( get_stylesheet_directory() . $wppic_template_file . $layout . '.php' ) ) {
-				include get_stylesheet_directory() . $wppic_template_file . $layout . '.php';
-			} elseif ( file_exists( Functions::get_plugin_dir( 'templates/wppic-template-plugin' . $layout . '.php' ) ) ) {
-				include Functions::get_plugin_dir( 'templates/wppic-template-plugin' . $layout . '.php' );
-			} else {
-				include Functions::get_plugin_dir( 'templates/wppic-template-plugin.php' );
-			}
-			$content .= ob_get_clean();
-
-		}
-
-		return $content;
-	}
-
-	/**
-	 * Add MCE types for the plugins.
-	 *
-	 * @param array $parameters Array of MCE types.
-	 *
-	 * @return array $parameters Array of MCE types.
-	 */
-	public function mce_type( $parameters ) {
-		$parameters['types'][] = array(
-			'text'  => __( 'Plugin', 'wp-plugin-info-card' ),
-			'value' => 'plugin',
-		);
-		return $parameters;
-	}
-
-	/**
-	 * Add MCE list form for the plugins.
-	 *
-	 * @param array $parameters Array of MCE types.
-	 *
-	 * @return array $parameters Array of MCE types.
-	 */
-	public function list_form( $parameters ) {
-		$parameters[] = array(
-			'list',
-			__( 'Add a plugin', 'wp-plugin-info-card' ),
-			__(
-				'Please refer to the plugin URL on wordpress.org to determine its slug',
-				'wp-plugin-info-card'
-			),
-			'https://wordpress.org/plugins/<strong>THE-SLUG</strong>/',
-		);
-		return $parameters;
-	}
-
-	/**
-	 * Add MCE list validation for the plugins.
-	 *
-	 * @param array $parameters Array of MCE types.
-	 *
-	 * @return array $parameters Array of MCE types.
-	 */
-	public function list_validation( $parameters ) {
-		$parameters[] = array(
-			'list',
-			__( 'is not a valid plugin name format. This key has been deleted.', 'wp-plugin-info-card' ),
-			'/^[a-z0-9\-]+$/',
-		);
-		return $parameters;
-	}
-
-	/**
-	 * Add MCE widget type for the plugins.
-	 *
-	 * @param array $parameters Array of MCE types.
-	 *
-	 * @return array $parameters Array of MCE types.
-	 */
-	public function widget_type( $parameters ) {
-		$parameters[] = array( 'plugin', 'list', __( 'Plugins', 'wp-plugin-info-card' ) );
-		return $parameters;
-	}
-
-	/**
-	 * Output the plugin widget.
-	 *
-	 * @param string $content    The content output.
-	 * @param object $wppic_data The plugin data.
-	 * @param string $type       Plugin or Theme.
-	 *
-	 * @return string $content.
-	 */
-	public function widget_item( $content, $wppic_data, $type ) {
-		if ( 'plugin' === $type ) {
-
-			$date_format = Options::get_date_format();
-
-			$wppic_data->last_updated = date_i18n( $date_format, strtotime( $wppic_data->last_updated ) );
-
-			$content .= '<div class="wp-pic-item">';
-			$content .= '<a class="wp-pic-widget-name" href="' . esc_url( $wppic_data->url ) . '" target="_blank" title="' . __( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ) . '">' . esc_html( $wppic_data->name ) . '</a>';
-			$content .= '<span class="wp-pic-widget-rating"><span>' . __( 'Ratings:', 'wp-plugin-info-card' ) . '</span> ' . esc_html( $wppic_data->rating ) . '%';
-			if ( ! empty( $wppic_data->num_ratings ) ) {
-				$content .= ' (' . esc_html( $wppic_data->num_ratings ) . esc_html__( ' votes', 'wp-plugin-info-card' ) . ')';
-			}
-			$content .= '</span>';
-			$content .= '<span class="wp-pic-widget-downloaded"><span>' . __( 'Active Installs:', 'wp-plugin-info-card' ) . '</span> ' . esc_html( number_format_i18n( $wppic_data->active_installs ) ) . '+</span>';
-			$content .= '<p class="wp-pic-widget-updated"><span>' . __( 'Last Updated:', 'wp-plugin-info-card' ) . '</span> ' . esc_html( $wppic_data->last_updated );
-			if ( ! empty( $wppic_data->version ) ) {
-				$content .= ' (v.' . esc_html( $wppic_data->version ) . ' )';
-			}
-			$content .= '</p>';
-			$content .= '</div>';
-
-		}
-		return $content;
 	}
 }

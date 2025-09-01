@@ -21515,15 +21515,17 @@ __webpack_require__.r(__webpack_exports__);
 
 var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
 
-registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__, {
-  icon: /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_1__.ForkIcon, {
-    fill: "#333"
-  }),
-  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
-  save: function a() {
-    return null;
-  }
-});
+if (wppic.is_github_info_cards_enabled) {
+  registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__, {
+    icon: /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_1__.ForkIcon, {
+      fill: "#333"
+    }),
+    edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
+    save: function a() {
+      return null;
+    }
+  });
+}
 
 /***/ }),
 
@@ -21737,7 +21739,7 @@ var GitHubInfoCard = function b(a) {
     K(true);
     G(false);
     var b = wppic.rest_url + 'wppic/v2/get_github_data';
-    axios__WEBPACK_IMPORTED_MODULE_16__["default"].get(b + "?username=".concat(j, "&repo=").concat(l)).then(function (a) {
+    axios__WEBPACK_IMPORTED_MODULE_16__["default"].get(b + "?username=".concat(j, "&repo=").concat(l, "&force=true")).then(function (a) {
       if (a.data.success) {
         // Now Set State
         C(a.data.data);
@@ -22367,63 +22369,65 @@ __webpack_require__.r(__webpack_exports__);
 //  Import main block file.
 
 var registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks
-
-registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__, {
-  icon: /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_1__.GitHubIcon, {
-    fill: "#333"
-  }),
-  edit: _edit__WEBPACK_IMPORTED_MODULE_4__["default"],
-  save: function a() {
-    return /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks.Content, null);
-  },
-  transforms: {
-    from: [{
-      type: 'block',
-      blocks: ['core/embed'],
-      transform: function b(a) {
-        var c = a.url,
-          d = a.providerNameSlug;
-        // https://github.com/dlxplugins/alertsdlx
-        var e = /https:\/\/github\.com\/([a-z0-9-]+)\/([a-z0-9-]+)\/?$/i;
-        var f = e.exec(c);
-        if (f) {
-          return (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.createBlock)('wp-plugin-info-card/wp-plugin-info-card', {}, [(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.createBlock)('wp-plugin-info-card/wp-plugin-info-card', {
-            username: f[1],
-            repo: f[2],
-            loading: true
-          })]);
+console.log(wppic);
+if (wppic.is_github_info_cards_enabled) {
+  registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__, {
+    icon: /*#__PURE__*/React.createElement(_components_GitHubIcons__WEBPACK_IMPORTED_MODULE_1__.GitHubIcon, {
+      fill: "#333"
+    }),
+    edit: _edit__WEBPACK_IMPORTED_MODULE_4__["default"],
+    save: function a() {
+      return /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks.Content, null);
+    },
+    transforms: {
+      from: [{
+        type: 'block',
+        blocks: ['core/embed'],
+        transform: function b(a) {
+          var c = a.url,
+            d = a.providerNameSlug;
+          // https://github.com/dlxplugins/alertsdlx
+          var e = /https:\/\/github\.com\/([a-z0-9-]+)\/([a-z0-9-]+)\/?$/i;
+          var f = e.exec(c);
+          if (f) {
+            return (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.createBlock)('wp-plugin-info-card/wp-plugin-info-card', {}, [(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.createBlock)('wp-plugin-info-card/wp-plugin-info-card', {
+              username: f[1],
+              repo: f[2],
+              loading: true
+            })]);
+          }
+          return false;
         }
-        return false;
-      }
-    }, {
-      type: 'raw',
-      isMatch: function b(a) {
-        if (a.nodeName === 'P') {
-          // RegEx for detecting plugin slug in WordPress URL.
+      }, {
+        type: 'raw',
+        isMatch: function b(a) {
+          if (a.nodeName === 'P') {
+            // RegEx for detecting plugin slug in WordPress URL.
+            var c = /https:\/\/github\.com\/([a-z0-9-]+)\/([a-z0-9-]+)\/?$/i;
+            var d = c.exec(a.textContent);
+            if (d) {
+              return true;
+            }
+          }
+          return false;
+        },
+        priority: 5,
+        transform: function b(a) {
           var c = /https:\/\/github\.com\/([a-z0-9-]+)\/([a-z0-9-]+)\/?$/i;
           var d = c.exec(a.textContent);
           if (d) {
-            return true;
+            return (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.createBlock)('wp-plugin-info-card/github-info-card-grid', {}, [(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.createBlock)('wp-plugin-info-card/github-info-card', {
+              username: d[1],
+              repo: d[2],
+              loading: true
+            })]);
           }
+          return false;
         }
-        return false;
-      },
-      priority: 5,
-      transform: function b(a) {
-        var c = /https:\/\/github\.com\/([a-z0-9-]+)\/([a-z0-9-]+)\/?$/i;
-        var d = c.exec(a.textContent);
-        if (d) {
-          return (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.createBlock)('wp-plugin-info-card/github-info-card-grid', {}, [(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.createBlock)('wp-plugin-info-card/github-info-card', {
-            username: d[1],
-            repo: d[2],
-            loading: true
-          })]);
-        }
-        return false;
-      }
-    }]
-  }
-});
+      }]
+    }
+  });
+}
 
 /***/ }),
 

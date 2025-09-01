@@ -277,12 +277,17 @@ class Shortcodes {
 
 		$username = sanitize_key( strtolower( $request->get_param( 'username' ) ) );
 		$repo     = sanitize_key( strtolower( $request->get_param( 'repo' ) ) );
+		$maybe_force    = $request->get_param( 'force' );
+		$force          = false;
+		if ( ! empty( $maybe_force ) ) {
+			$force = filter_var( $maybe_force, FILTER_VALIDATE_BOOLEAN );
+		}
 
 		if ( empty( $username ) || empty( $repo ) ) {
 			wp_send_json_error( array( 'message' => 'Invalid username or repo.' ) );
 		}
 
-		$github_data = wppic_api_parser( 'github', $username . '/' . $repo, HOUR_IN_SECONDS, '', false, false );
+		$github_data = wppic_api_parser( 'github', $username . '/' . $repo, HOUR_IN_SECONDS, '', false, $force );
 
 		if ( empty( $github_data ) ) {
 			wp_send_json_error( array( 'message' => 'No data found.' ) );
@@ -1992,6 +1997,11 @@ class Shortcodes {
 			return '';
 		}
 
+		// If GitHub cards aren't supported, return early.
+		if ( ! (bool) Options::is_github_info_cards_enabled() ) {
+			return '';
+		}
+
 		// Make attributes lowercase to avoid case-sensitive issues.
 		$attributes = array_change_key_case( $attributes, CASE_LOWER );
 
@@ -2106,6 +2116,10 @@ class Shortcodes {
 					'cardAttributes' => array(),
 				)
 			);
+			/**
+			 * Add icons to footer for plugin card.
+			 */
+			add_action( 'wp_footer', array( __CLASS__, 'add_icons_to_footer' ) );
 		}
 
 		// Now let's build the shortcode.
@@ -2133,8 +2147,6 @@ class Shortcodes {
 				$wrapper_classes[] = 'is-style-wppic-github-' . $attributes['style'];
 				$wrapper_classes[] = 'align' . ( ! is_wp_error( $attributes['align'] ) && ! empty( $attributes['align'] ) ? $attributes['align'] : 'center' );
 				$wrapper_classes[] = 'horizontal-align-' . ( ! is_wp_error( $attributes['horizontalalign'] ) && ! empty( $attributes['horizontalalign'] ) ? $attributes['horizontalalign'] : 'center' );
-			} else {
-				$wrapper_classes[] = 'wppic-github-info-card-grid';
 			}
 
 			$nonce = wp_create_nonce( 'wppic_github_lazy_load_' . sanitize_key( $attributes['username'] . '/' . $attributes['repo'] ) );
@@ -2159,10 +2171,37 @@ class Shortcodes {
 			<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" id="<?php echo esc_attr( $attributes['uniqueid'] ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>" data-username="<?php echo esc_attr( strtolower( $attributes['username'] ) ); ?>" data-repo="<?php echo esc_attr( strtolower( $attributes['repo'] ) ); ?>" data-is-github-card-loading="true">
 				<div class="wppic-github-info-card">
 					<div class="wppic-github-info-card-loading" >
-						<div class="wppic-github-info-card-loading-inner">
-							<h2><?php esc_html_e( 'Loading GitHub Info Card...', 'wp-plugin-info-card' ); ?></h2>
-							<p><?php esc_html_e( 'This may take a few seconds.', 'wp-plugin-info-card' ); ?></p>
+					<article class="github-skeleton-card" aria-busy="true" aria-label="Loading repository card">
+						<div class="github-skeleton-badges">
+							<span class="github-skeleton-pill skeleton-loader"></span>
+							<span class="github-skeleton-pill skeleton-loader"></span>
 						</div>
+
+						<div class="github-skeleton-header">
+							<div class="github-skeleton-avatar skeleton-loader"></div>
+							<div class="github-skeleton-title skeleton-loader">
+							<div class="github-skeleton-line github-skeleton-lg github-skeleton-w-60 skeleton-loader"></div>
+							<div class="github-skeleton-line github-skeleton-md github-skeleton-w-40 skeleton-loader"></div>
+							</div>
+						</div>
+
+						<div class="github-skeleton-meta">
+							<span class="github-skeleton-chip github-skeleton-w-4 skeleton-loader"></span>
+							<span class="github-skeleton-chip github-skeleton-w-4 skeleton-loader"></span>
+							<span class="github-skeleton-chip github-skeleton-w-4 skeleton-loader"></span>
+							<span class="github-skeleton-chip github-skeleton-w-4 skeleton-loader"></span>
+						</div>
+
+						<div class="github-skeleton-desc">
+							<div class="github-skeleton-line github-skeleton-w-90 skeleton-loader"></div>
+							<div class="github-skeleton-line github-skeleton-w-70 skeleton-loader"></div>
+						</div>
+
+						<div class="github-skeleton-footer">
+							<div class="github-skeleton-date github-skeleton-w-40 skeleton-loader"></div>
+							<div class="github-skeleton-cta skeleton-loader"></div>
+						</div>
+						</article>
 					</div><!-- .wppic-github-info-card-loading -->
 				</div><!-- .wppic-github-info-card -->
 			</div><!-- .wppic-github-info-card-grid -->
@@ -2520,7 +2559,7 @@ class Shortcodes {
 					</div>
 					<?php if ( (bool) $attributes['showauthorbar'] ) : ?>
 						<div class="wppic-github-info-card-author-section-login">
-							<?php echo esc_html__( 'By', 'wp-plugin-info-card' ); ?>&nbsp;
+							<?php echo esc_html__( 'By', 'wp-plugin-info-card' ); ?>
 							<?php
 							if ( $has_org_name_url ) :
 								?>
@@ -2626,10 +2665,6 @@ class Shortcodes {
 		</div><!-- .wppic-github-info-card -->
 
 		<?php
-		/**
-		 * Add icons to footer for plugin card.
-		 */
-		add_action( 'wp_footer', array( __CLASS__, 'add_icons_to_footer' ) );
 		return ob_get_clean();
 	}
 

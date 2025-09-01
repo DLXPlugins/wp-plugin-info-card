@@ -194,6 +194,24 @@ html {
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
+.wppic-admin-panel-area__section .form-table {
+	border: 1px solid #E0E0E0;
+	padding: 15px;
+	margin-bottom: 15px;
+
+	th, td {
+		padding: 10px;
+	}
+
+	thead {
+		background: #F5F5F5;
+	}
+	&.striped {
+		tbody tr:nth-child(even) {
+			background: #F8F8F8;
+		}
+	}
+}
 
 .wppic-admin-panel-container {
 	max-width: 1200px;

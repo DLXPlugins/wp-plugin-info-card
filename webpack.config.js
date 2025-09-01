@@ -38,6 +38,7 @@ module.exports = ( env ) => {
 				'wppic-editor': [ './src/scss/editor.scss' ],
 				'wppic-admin-home': [ './src/react/views/home/index.js' ],
 				'wppic-admin-edd': [ './src/react/views/edd/index.js' ],
+				'wppic-admin-github-info-cards': [ './src/react/views/github-info-cards/index.js' ],
 				'wppic-admin-custom-plugin': [ './src/react/views/custom-plugin/index.js' ],
 				'wppic-fancybox': './src/js/fancyapps/carousel.js',
 				'wppic-fancybox-css': './src/scss/carousel.scss',

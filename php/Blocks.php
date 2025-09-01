@@ -283,6 +283,7 @@ class Blocks {
 				'screenshot_preset_delete_nonce' => wp_create_nonce( 'wppic_screenshot_preset_delete' ),
 				'can_edit_others_posts'          => current_user_can( 'edit_others_posts' ),
 				'can_manage_options'             => current_user_can( 'manage_options' ),
+				'is_github_info_cards_enabled'   => Options::is_github_info_cards_enabled(),
 			)
 		);
 
@@ -326,9 +327,10 @@ class Blocks {
 			2
 		);
 
+
+
 		if ( function_exists( 'wp_register_block_types_from_metadata_collection' ) ) {
 			wp_register_block_types_from_metadata_collection( Functions::get_plugin_dir( 'build/blocks' ), Functions::get_plugin_dir( 'build/blocks-manifest.php' ) );
-			return;
 		} else {
 			if ( function_exists( 'wp_register_block_metadata_collection' ) ) {
 				wp_register_block_metadata_collection( Functions::get_plugin_dir( 'build' ), Functions::get_plugin_dir( 'build/blocks-manifest.php' ) );
@@ -337,6 +339,12 @@ class Blocks {
 			foreach ( array_keys( $manifest_data ) as $block_type ) {
 				register_block_type( __DIR__ . "/build/blocks/{$block_type}" );
 			}
+		}
+
+		// If github info cards are disabled, unregister the github info card block.
+		if ( ! Options::is_github_info_cards_enabled() ) {
+			unregister_block_type( 'wp-plugin-info-card/github-info-card' );
+			unregister_block_type( 'wp-plugin-info-card/github-info-card-grid' );
 		}
 	}
 

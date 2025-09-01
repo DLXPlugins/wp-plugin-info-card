@@ -164,7 +164,7 @@ const GitHubInfoCard = ( props ) => {
 		const restUrl = wppic.rest_url + 'wppic/v2/get_github_data';
 		axios
 			.get(
-				restUrl + `?username=${ username }&repo=${ repo }`,
+				restUrl + `?username=${ username }&repo=${ repo }&force=true`,
 			)
 			.then( ( response ) => {
 				if ( response.data.success ) {

@@ -212,11 +212,9 @@ function _asyncToGenerator(b) { return function () { var c = this, d = arguments
     if (c.length > 0 && !d) {
       d = true;
     }
-    console.log('init', g);
     d = true;
     e = lozad__WEBPACK_IMPORTED_MODULE_2___default()(g, {
       load: function b(a) {
-        console.log('load', a);
         f(a);
       }
     });

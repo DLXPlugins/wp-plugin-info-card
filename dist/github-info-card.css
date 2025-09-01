@@ -156,7 +156,8 @@ button.button-reset.show-cursor {
 }
 
 .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)).wppic-github-info-card {
-  max-width: var(--wppic-grid-max-width); /* fix for blocksy theme */
+  max-width: var(--wppic-grid-max-width);
+  /* fix for blocksy theme */
 }
 
 .wppic-github-info-card-grid {
@@ -420,7 +421,8 @@ button.button-reset.show-cursor {
   font-weight: 600;
   line-height: 1.2;
 }
-.entry-content .wppic-github-info-card-author-section-name a, .entry-content .wppic-github-info-card-author-section-name a:hover,
+.entry-content .wppic-github-info-card-author-section-name a,
+.entry-content .wppic-github-info-card-author-section-name a:hover,
 .wppic-github-info-card-author-section-name a,
 .wppic-github-info-card-author-section-name a:hover {
   color: var(--wppic-github-text-color);
@@ -433,7 +435,8 @@ button.button-reset.show-cursor {
   font-weight: 400;
   line-height: 1.2;
 }
-.entry-content .wppic-github-info-card-author-section-login a, .entry-content .wppic-github-info-card-author-section-login a:hover,
+.entry-content .wppic-github-info-card-author-section-login a,
+.entry-content .wppic-github-info-card-author-section-login a:hover,
 .wppic-github-info-card-author-section-login a,
 .wppic-github-info-card-author-section-login a:hover {
   color: var(--wppic-github-text-color);
@@ -573,7 +576,9 @@ button.button-reset.show-cursor {
   overflow: hidden;
 }
 
-.wppic-github-button.button-reset, .wppic-github-button.components-button.button-reset, .wppic-github-button.components-button.button-reset:hover {
+.wppic-github-button.button-reset,
+.wppic-github-button.components-button.button-reset,
+.wppic-github-button.components-button.button-reset:hover {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -584,7 +589,9 @@ button.button-reset.show-cursor {
 }
 
 @media (min-width: 375px) {
-  .wppic-github-button.button-reset, .wppic-github-button.components-button.button-reset, .wppic-github-button.components-button.button-reset:hover {
+  .wppic-github-button.button-reset,
+  .wppic-github-button.components-button.button-reset,
+  .wppic-github-button.components-button.button-reset:hover {
     display: inline-block;
     width: unset;
     text-align: left;
@@ -600,7 +607,9 @@ button.button-reset.show-cursor {
   text-decoration: none;
 }
 
-.wppic-github-button.button-reset, .wppic-github-button.components-button.button-reset, .wppic-github-button.components-button.button-reset:hover {
+.wppic-github-button.button-reset,
+.wppic-github-button.components-button.button-reset,
+.wppic-github-button.components-button.button-reset:hover {
   display: inline-block;
   text-decoration: none;
   color: var(--wppic-github-button-text-color);
@@ -611,7 +620,9 @@ button.button-reset.show-cursor {
   transition: background-color 0.3s ease;
 }
 
-.wppic-github-button.button-reset:hover, .wppic-github-button.components-button.button-reset:hover, .wppic-github-button.components-button.button-reset:hover {
+.wppic-github-button.button-reset:hover,
+.wppic-github-button.components-button.button-reset:hover,
+.wppic-github-button.components-button.button-reset:hover {
   color: var(--wppic-github-button-text-color-hover);
   background-color: var(--wppic-github-button-bg-hover);
   text-decoration: none;
@@ -653,6 +664,196 @@ button.button-reset.show-cursor {
 .wppic-margin-spacing-target-bottom {
   margin-top: 0;
   margin-block-start: 0 !important;
+}
+
+/* --- Layout & sizing --- */
+.wppic-github-info-card-loading {
+  width: 100%;
+}
+
+.github-skeleton-card {
+  --radius: 14px;
+  --pad: 20px;
+  --gap: 16px;
+  --chip-h: 36px;
+  --avatar: clamp(56px, 12vw, 96px);
+  --cta-w: clamp(120px, 28%, 180px);
+  border-radius: var(--radius);
+  border: 1px solid hsl(210, 15%, 90%);
+  background: white;
+  padding: var(--pad);
+  box-shadow: 0 8px 22px hsla(0, 0%, 0%, 0.08);
+  display: grid;
+  gap: var(--gap);
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* --- Skeleton base --- */
+.github-skeleton-card .skeleton-loader {
+  position: relative;
+  overflow: hidden;
+  background: hsl(210, 16%, 93%);
+  border-radius: 10px;
+}
+
+/* Shimmer */
+@keyframes github-skeleton-shimmer {
+  to {
+    transform: translateX(100%);
+  } /* sweep fully to the right */
+}
+.github-skeleton-card .skeleton-loader::after {
+  content: "";
+  position: absolute;
+  /* make the sweep 200% wide so it fully crosses */
+  left: -50%;
+  right: -50%;
+  top: 0;
+  bottom: 0;
+  /* start fully off to the left */
+  transform: translateX(-100%);
+  /* wider and softer gradient band */
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 30%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0.5) 70%, transparent 100%);
+  animation: github-skeleton-shimmer 1.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .github-skeleton-card *::after {
+    display: none;
+  }
+}
+/* --- Sections --- */
+.github-skeleton-badges {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.github-skeleton-pill {
+  display: inline-block;
+  height: 28px;
+  width: clamp(96px, 18%, 140px);
+  border-radius: 999px;
+}
+
+.github-skeleton-text.github-skeleton-sm {
+  height: 16px;
+  width: 40px;
+}
+
+.github-skeleton-header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: center;
+  width: 100%;
+}
+
+.github-skeleton-avatar {
+  width: var(--avatar);
+  height: var(--avatar);
+  border-radius: 12px;
+}
+
+.github-skeleton-title .github-skeleton-line {
+  height: 22px;
+}
+
+.github-skeleton-title .github-skeleton-lg {
+  height: 28px;
+}
+
+.github-skeleton-title .github-skeleton-md {
+  height: 18px;
+  margin-top: 8px;
+  opacity: 0.9;
+}
+
+.github-skeleton-meta {
+  display: flex;
+  gap: 10px;
+  max-width: 600px;
+}
+
+.github-skeleton-chip {
+  display: inline-block;
+  width: clamp(48px, 18%, 70px);
+  height: 24px;
+  border-radius: 10px;
+}
+
+.github-skeleton-desc .github-skeleton-line {
+  height: 18px;
+  margin-top: 8px;
+}
+
+.github-skeleton-footer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.github-skeleton-date {
+  height: 16px;
+  width: 100%;
+}
+
+.github-skeleton-cta {
+  height: 46px;
+  width: var(--cta-w);
+  border-radius: 12px;
+  width: 100%;
+}
+
+/* Utility widths */
+.github-skeleton-w-28 {
+  width: 28ch;
+  max-width: var(--wppic-grid-max-width);
+}
+
+.github-skeleton-w-24 {
+  width: 24ch;
+  max-width: var(--wppic-grid-max-width);
+}
+
+.github-skeleton-w-4 {
+  width: 4ch;
+  max-width: var(--wppic-grid-max-width);
+}
+
+.github-skeleton-w-20 {
+  width: 20ch;
+  max-width: var(--wppic-grid-max-width);
+}
+
+.github-skeleton-w-16 {
+  width: 16ch;
+  max-width: var(--wppic-grid-max-width);
+}
+
+.github-skeleton-w-90 {
+  width: 90%;
+  max-width: var(--wppic-grid-max-width);
+}
+
+.github-skeleton-w-70 {
+  width: 70%;
+  max-width: var(--wppic-grid-max-width);
+}
+
+.github-skeleton-w-60 {
+  width: 60%;
+  max-width: var(--wppic-grid-max-width);
+}
+
+.github-skeleton-w-40 {
+  width: 40%;
+  max-width: var(--wppic-grid-max-width);
 }
 
 /*# sourceMappingURL=github-info-card.css.map*/

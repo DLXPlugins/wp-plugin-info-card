@@ -6,12 +6,14 @@ import edit from './edit';
 
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 
-registerBlockType( metadata, {
-	icon: (
-		<ForkIcon fill="#333" />
-	),
-	edit,
-	save() {
-		return null;
-	},
-} );
+if ( wppic.is_github_info_cards_enabled ) {
+	registerBlockType( metadata, {
+		icon: (
+			<ForkIcon fill="#333" />
+		),
+		edit,
+		save() {
+			return null;
+		},
+	} );
+}

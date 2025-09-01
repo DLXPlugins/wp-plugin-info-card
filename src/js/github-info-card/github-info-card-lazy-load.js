@@ -64,12 +64,9 @@ import lozad from 'lozad';
 		if ( cards.length > 0 && ! initialized ) {
 			initialized = true;
 		}
-		
-		console.log( 'init', maybeCards );
 		initialized = true;
 		observer = lozad( maybeCards, {
 			load: ( element ) => {
-				console.log( 'load', element );
 				fetchCard( element );
 			},
 		} );

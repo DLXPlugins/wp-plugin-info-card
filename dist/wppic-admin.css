@@ -13458,6 +13458,21 @@ html {
   padding-bottom: 20px;
 }
 
+.wppic-admin-panel-area__section .form-table {
+  border: 1px solid #E0E0E0;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+.wppic-admin-panel-area__section .form-table th, .wppic-admin-panel-area__section .form-table td {
+  padding: 10px;
+}
+.wppic-admin-panel-area__section .form-table thead {
+  background: #F5F5F5;
+}
+.wppic-admin-panel-area__section .form-table.striped tbody tr:nth-child(even) {
+  background: #F8F8F8;
+}
+
 .wppic-admin-panel-container {
   max-width: 1200px;
   padding: 0 40px;
