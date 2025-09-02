@@ -469,7 +469,7 @@ const GitHubInfoCardGrid = ( props ) => {
 
 	const blockProps = useBlockProps( {
 		className: classnames(
-			`wppic-github-info-card align${ align } layout-${ layout } cols-${ numChildren > 1 ? cols : 1 } wppic-margin-spacing-${ marginSpacing } wppic-margin-spacing-target-${ marginSpacingTarget }`,
+			`align${ align } layout-${ layout } cols-${ numChildren > 1 ? cols : 1 } wppic-margin-spacing-${ marginSpacing } wppic-margin-spacing-target-${ marginSpacingTarget }`,
 			{
 				'is-grid': numChildren > 1,
 			},

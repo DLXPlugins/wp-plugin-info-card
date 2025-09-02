@@ -394,17 +394,17 @@ const GitHubInfoCards = () => {
 						</p>
 						<Button
 							variant="secondary"
-							href="https://docs.dlxplugins.com/wp-plugin-info-card/"
+							href="https://docs.dlxplugins.com/wp-plugin-info-card/overview/github-info-cards"
 							className="wppic-btn wppic-btn-alt has-icon-right btn-full-width"
 							target="_blank"
 							onClick={ ( e ) => {
 								e.preventDefault();
-								window.open( 'https://docs.dlxplugins.com/wp-plugin-info-card/', '_blank' );
+								window.open( 'https://docs.dlxplugins.com/wp-plugin-info-card/overview/github-info-cards', '_blank' );
 							} }
 							rel="noopener noreferrer"
 							icon={ () => <ExternalLink /> }
 						>
-							{ __( 'View Documentation', 'wp-plugin-info-card' ) }
+							{ __( 'View Cards Documentation', 'wp-plugin-info-card' ) }
 						</Button>
 					</div>
 				</div>
