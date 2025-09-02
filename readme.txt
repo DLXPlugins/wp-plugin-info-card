@@ -109,7 +109,7 @@ This video shows you how:
 
 = 6.1.0 =
 * Released 2025-09-02
-* New Feature: GitHub Info Cards released. Now showcase your favorite GitHub repo using a block or shortcode.
+* New Feature: <a href="https://dlxplugins.com/announcements/wp-plugin-info-card-6-1-0-released-with-github-info-cards/">GitHub Info Cards released</a>. Now showcase your favorite GitHub repo using a block or shortcode.
 * New: Admin panel option for enabling GitHub Info Cards.
 * New: Cards support lazy loading for performance.
 
