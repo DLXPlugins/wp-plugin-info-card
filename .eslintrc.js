@@ -10,6 +10,8 @@ module.exports = {
 		wppicAdminScreenshots: 'readonly',
 		wppic_dashboard_widget: 'readonly',
 		wppicAdminCustomPlugin: 'readonly',
+		wppicGithubInfoCardLazyLoad: 'readonly',
+		wppicAdminGitHubInfoCards: 'readonly',
 	},
 	extends: [
 		'eslint:recommended',

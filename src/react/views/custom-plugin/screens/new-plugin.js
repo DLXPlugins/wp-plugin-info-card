@@ -1201,6 +1201,7 @@ const Interface = ( props ) => {
 										setError={ setError }
 										reset={ reset }
 										errors={ errors }
+										isFromRest={ isFromRest }
 										isDirty={ isDirty }
 										dirtyFields={ dirtyFields }
 										trigger={ trigger }

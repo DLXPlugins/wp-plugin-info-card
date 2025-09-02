@@ -15,8 +15,6 @@ import Advanced from './screens/advanced';
 const container = document.getElementById( 'wppic-tab-custom-plugin' );
 const root = createRoot( container );
 
-console.log( 'root', container );
-
 const hashHistory = createHashHistory( {
 	initialEntries: [ '/', '#/' ],
 } );

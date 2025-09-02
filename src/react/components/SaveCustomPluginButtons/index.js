@@ -17,6 +17,7 @@ const SaveResetButtons = ( props ) => {
 		isDirty,
 		dirtyFields,
 		trigger,
+		isFromRest,
 		isEditing,
 		onSave,
 		onCancel,
@@ -86,7 +87,7 @@ const SaveResetButtons = ( props ) => {
 					icon={ getSaveIcon() }
 					iconSize="18"
 					iconPosition="right"
-					disabled={ saving }
+					disabled={ saving || isFromRest }
 					onClick={ async ( e ) => {
 						e.preventDefault();
 						const validationResult = await trigger();

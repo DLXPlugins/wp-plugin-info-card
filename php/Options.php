@@ -50,7 +50,7 @@ class Options {
 	 */
 	public static function update_options( $options, $merge_options = true ) {
 		$force           = true;
-		$current_options = $merge_options ? self::get_options( $force, true ) : array();
+		$current_options = $merge_options ? self::get_options( $force, true, true ) : array();
 		foreach ( $options as $key => &$option ) {
 			switch ( $key ) {
 				case 'widget':
@@ -85,10 +85,11 @@ class Options {
 	 * Return a list of options.
 	 *
 	 * @param bool $force Whether to get options from cache or not.
+	 * @param bool $include_sensitive Whether to include sensitive options or not.
 	 *
 	 * @return array Array of options.
 	 */
-	public static function get_options( $force = false ) {
+	public static function get_options( $force = false, $include_sensitive = false ) {
 		if ( is_array( self::$options ) && ! $force ) {
 			return self::$options;
 		}
@@ -107,10 +108,13 @@ class Options {
 		 *
 		 * @param array  $options The options to be output.
 		 */
-		$options       = apply_filters(
+		$options = apply_filters(
 			'wppic_options_home',
 			$options,
 		);
+		if ( ! $include_sensitive ) {
+			unset( $options['github_info_card_token'] );
+		}
 		self::$options = $options;
 		return $options;
 	}
@@ -147,7 +151,28 @@ class Options {
 			'edd_default_banner_url'                    => '',
 			'enable_rest_api'                           => false,
 			'enable_custom_plugins'                     => true,
+			'enable_github_info_cards'                  => false,
+			'github_info_cards_token'                   => '',
+			'github_info_cards_rate_limit'              => 0,
+			'github_info_cards_rate_remaining'          => 0,
+			'github_info_cards_rate_reset'              => 0,
 		);
 		return $defaults;
+	}
+
+	/**
+	 * Check if the GitHub Info Cards are enabled.
+	 *
+	 * @return bool True if the GitHub Info Cards are enabled, false otherwise.
+	 */
+	public static function is_github_info_cards_enabled() {
+		$options           = self::get_options();
+		$github_enabled    = (bool) $options['enable_github_info_cards'];
+		$github_token      = sanitize_text_field( $options['github_info_cards_token'] );
+		$github_rate_limit = (int) $options['github_info_cards_rate_limit'];
+		if ( $github_enabled && ! empty( $github_token ) && $github_rate_limit > 0 ) {
+			return true;
+		}
+		return false;
 	}
 }

@@ -644,7 +644,7 @@ const Interface = ( props ) => {
 						<div className="wppic-admin-panel-area__section">
 							<h2>
 								<Cog />
-								{ __( 'Settings', 'wp-plugin-info-card' ) }
+								{ __( 'Card Settings', 'wp-plugin-info-card' ) }
 							</h2>
 							<p className="description">
 								{ __(

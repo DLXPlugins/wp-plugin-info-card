@@ -27,6 +27,7 @@ class Shortcodes {
 		add_shortcode( 'wp-pic-query', array( static::class, 'shortcode_query_function' ) );
 		add_shortcode( 'wp-pic-site-plugins', array( static::class, 'shortcode_active_site_plugins_function' ) );
 		add_shortcode( 'wp-pic-plugin-screenshots', array( static::class, 'shortcode_plugin_screenshots_info_card' ) );
+		add_shortcode( 'github-info-card', array( static::class, 'shortcode_github_info_card' ) );
 		add_action( 'wp_ajax_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
 		add_action( 'wp_ajax_nopriv_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
 		add_action( 'init', array( static::class, 'register_screenshots_presets_post_type' ) );
@@ -242,6 +243,254 @@ class Shortcodes {
 				'permission_callback' => array( $this, 'rest_check_permissions' ),
 			)
 		);
+
+		register_rest_route(
+			'wppic/v2',
+			'/get_github_data',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'get_github_data' ),
+				'permission_callback' => '__return_true',
+				'args'                => array(
+					'username' => array(
+						'type'              => 'string',
+						'sanitize_callback' => 'sanitize_title',
+					),
+					'repo'     => array(
+						'type'              => 'string',
+						'sanitize_callback' => 'sanitize_title',
+					),
+				),
+				'force'               => array(
+					'type'              => 'boolean',
+					'sanitize_callback' => function ( $value ) {
+						return filter_var( $value, FILTER_VALIDATE_BOOLEAN );
+					},
+				),
+			)
+		);
+
+		/**
+		 * Register REST API for getting GitHub card HTML.
+		 */
+		register_rest_route(
+			'wppic/v2',
+			'/get_github_card_html',
+			array(
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_github_card_html' ),
+				'permission_callback' => '__return_true',
+				'args'                => array(
+					'repo'           => array(
+						'type'              => 'string',
+						'sanitize_callback' => 'sanitize_title',
+					),
+					'username'       => array(
+						'type'              => 'string',
+						'sanitize_callback' => 'sanitize_title',
+					),
+					'cardAttributes' => array(
+						'type'       => 'object',
+						'properties' => array(
+							'align'                   => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'avatarimageurl'          => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'esc_url_raw',
+							),
+							'backgroundcolor'         => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'bordercolor'             => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'borderradius'            => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'borderwidth'             => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'cardstyle'               => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'colgap'                  => array(
+								'type'              => 'integer',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'cols'                    => array(
+								'type'              => 'integer',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'homepageurloverride'     => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'horizontalalign'         => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'iconcolor'               => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'iconcolorhover'          => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'languagebgcolor'         => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'languagetextcolor'       => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'layout'                  => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'loginoverride'           => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'marginspacing'           => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'marginspacingtarget'     => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'nameoverride'            => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'numchildren'             => array(
+								'type'              => 'integer',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'organizationurloverride' => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'overridebutton'          => array(
+								'type'              => 'boolean',
+								'sanitize_callback' => function ( $value ) {
+									return filter_var( $value, FILTER_VALIDATE_BOOLEAN );
+								},
+							),
+							'overridebuttontext'      => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'overridebuttonurl'       => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'parentbuttontype'        => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'repo'                    => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_title',
+							),
+							'rowgap'                  => array(
+								'type'              => 'integer',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'showauthorbar'           => array(
+								'type'              => 'boolean',
+								'sanitize_callback' => function ( $value ) {
+									return filter_var( $value, FILTER_VALIDATE_BOOLEAN );
+								},
+							),
+							'showlastupdated'         => array(
+								'type'              => 'boolean',
+								'sanitize_callback' => function ( $value ) {
+									return filter_var( $value, FILTER_VALIDATE_BOOLEAN );
+								},
+							),
+							'showstatsbar'            => array(
+								'type'              => 'boolean',
+								'sanitize_callback' => function ( $value ) {
+									return filter_var( $value, FILTER_VALIDATE_BOOLEAN );
+								},
+							),
+							'showtopbar'              => array(
+								'type'              => 'boolean',
+								'sanitize_callback' => function ( $value ) {
+									return filter_var( $value, FILTER_VALIDATE_BOOLEAN );
+								},
+							),
+							'sponsorscolor'           => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'sponsorsurloverride'     => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'style'                   => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'textcolor'               => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'uniqueid'                => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+							'username'                => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_title',
+							),
+							'versionoverride'         => array(
+								'type'              => 'string',
+								'sanitize_callback' => 'sanitize_text_field',
+							),
+						),
+					),
+				),
+			)
+		);
+	}
+
+	/**
+	 * Get plugin data for return.
+	 *
+	 * @param object $request Request data.
+	 */
+	public function get_github_data( $request ) {
+
+		$username    = sanitize_key( strtolower( $request->get_param( 'username' ) ) );
+		$repo        = sanitize_key( strtolower( $request->get_param( 'repo' ) ) );
+		$maybe_force = $request->get_param( 'force' );
+		$force       = false;
+		if ( ! empty( $maybe_force ) ) {
+			$force = filter_var( $maybe_force, FILTER_VALIDATE_BOOLEAN );
+		}
+
+		if ( empty( $username ) || empty( $repo ) ) {
+			wp_send_json_error( array( 'message' => 'Invalid username or repo.' ) );
+		}
+
+		$github_data = wppic_api_parser( 'github', $username . '/' . $repo, 1 * WEEK_IN_SECONDS, '', false, $force );
+
+		if ( empty( $github_data ) ) {
+			wp_send_json_error( array( 'message' => 'No data found.' ) );
+		}
+
+		wp_send_json_success( $github_data );
 	}
 
 	/**
@@ -699,25 +948,25 @@ class Shortcodes {
 		$attributes = wp_parse_args(
 			$atts,
 			array(
-				'id'          => '',  // custom Div ID (could be use for anchor).
-				'type'        => '',  // plugin | theme.
-				'slug'        => '',  // plugin slug name.
-				'image'       => '',  // image url to replace WP logo (175px X 175px).
-				'align'       => '',  // center|left|right.
-				'containerid' => '',  // custom Div ID (could be use for anchor).
-				'margin'      => '',  // custom container margin - eg: "15px 0".
-				'clear'       => '',  // clear float before or after the card: before|after.
-				'expiration'  => '',  // transient duration in minutes - 0 for never expires.
-				'ajax'        => '',  // load plugin data async whith ajax: yes|no (default: no).
-				'scheme'      => '',  // color scheme : default|scheme1->scheme10 (default: empty).
-				'layout'      => '',  // card|large|flex|wordpress.
-				'custom'      => '',  // value to print : url|name|version|author|requires|rating|num_ratings|downloaded|last_updated|download_link.
-				'multi'       => false,
-				'cols'        => 2,
-				'col_gap'     => 20,
-				'row_gap'     => 20,
-				'itemSlugs'   => array(),
-				'marginSpacing' => 'none',
+				'id'                  => '',  // custom Div ID (could be use for anchor).
+				'type'                => '',  // plugin | theme.
+				'slug'                => '',  // plugin slug name.
+				'image'               => '',  // image url to replace WP logo (175px X 175px).
+				'align'               => '',  // center|left|right.
+				'containerid'         => '',  // custom Div ID (could be use for anchor).
+				'margin'              => '',  // custom container margin - eg: "15px 0".
+				'clear'               => '',  // clear float before or after the card: before|after.
+				'expiration'          => '',  // transient duration in minutes - 0 for never expires.
+				'ajax'                => '',  // load plugin data async whith ajax: yes|no (default: no).
+				'scheme'              => '',  // color scheme : default|scheme1->scheme10 (default: empty).
+				'layout'              => '',  // card|large|flex|wordpress.
+				'custom'              => '',  // value to print : url|name|version|author|requires|rating|num_ratings|downloaded|last_updated|download_link.
+				'multi'               => false,
+				'cols'                => 2,
+				'col_gap'             => 20,
+				'row_gap'             => 20,
+				'itemSlugs'           => array(),
+				'marginSpacing'       => 'none',
 				'marginSpacingTarget' => 'both',
 			),
 		);
@@ -1894,7 +2143,28 @@ class Shortcodes {
 				<symbol id="wppic-icon-download-cloud" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download-cloud">
 					<path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m8 17 4 4 4-4"/>
 				</symbol>
-			</svg>
+				<symbol id="fa-icon-home" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+					<path fill="currentColor" d="M341.8 72.6C329.5 61.2 310.5 61.2 298.3 72.6L74.3 280.6C64.7 289.6 61.5 303.5 66.3 315.7C71.1 327.9 82.8 336 96 336L112 336L112 512C112 547.3 140.7 576 176 576L464 576C499.3 576 528 547.3 528 512L528 336L544 336C557.2 336 569 327.9 573.8 315.7C578.6 303.5 575.4 289.5 565.8 280.6L341.8 72.6zM304 384L336 384C362.5 384 384 405.5 384 432L384 528L256 528L256 432C256 405.5 277.5 384 304 384z"/>
+				</symbol>
+				<symbol id="fa-icon-github" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+					<path fill="currentColor" d="M237.9 461.4C237.9 463.4 235.6 465 232.7 465C229.4 465.3 227.1 463.7 227.1 461.4C227.1 459.4 229.4 457.8 232.3 457.8C235.3 457.5 237.9 459.1 237.9 461.4zM206.8 456.9C206.1 458.9 208.1 461.2 211.1 461.8C213.7 462.8 216.7 461.8 217.3 459.8C217.9 457.8 216 455.5 213 454.6C210.4 453.9 207.5 454.9 206.8 456.9zM251 455.2C248.1 455.9 246.1 457.8 246.4 460.1C246.7 462.1 249.3 463.4 252.3 462.7C255.2 462 257.2 460.1 256.9 458.1C256.6 456.2 253.9 454.9 251 455.2zM316.8 72C178.1 72 72 177.3 72 316C72 426.9 141.8 521.8 241.5 555.2C254.3 557.5 258.8 549.6 258.8 543.1C258.8 536.9 258.5 502.7 258.5 481.7C258.5 481.7 188.5 496.7 173.8 451.9C173.8 451.9 162.4 422.8 146 415.3C146 415.3 123.1 399.6 147.6 399.9C147.6 399.9 172.5 401.9 186.2 425.7C208.1 464.3 244.8 453.2 259.1 446.6C261.4 430.6 267.9 419.5 275.1 412.9C219.2 406.7 162.8 398.6 162.8 302.4C162.8 274.9 170.4 261.1 186.4 243.5C183.8 237 175.3 210.2 189 175.6C209.9 169.1 258 202.6 258 202.6C278 197 299.5 194.1 320.8 194.1C342.1 194.1 363.6 197 383.6 202.6C383.6 202.6 431.7 169 452.6 175.6C466.3 210.3 457.8 237 455.2 243.5C471.2 261.2 481 275 481 302.4C481 398.9 422.1 406.6 366.2 412.9C375.4 420.8 383.2 435.8 383.2 459.3C383.2 493 382.9 534.7 382.9 542.9C382.9 549.4 387.5 557.3 400.2 555C500.2 521.8 568 426.9 568 316C568 177.3 455.5 72 316.8 72zM169.2 416.9C167.9 417.9 168.2 420.2 169.9 422.1C171.5 423.7 173.8 424.4 175.1 423.1C176.4 422.1 176.1 419.8 174.4 417.9C172.8 416.3 170.5 415.6 169.2 416.9zM158.4 408.8C157.7 410.1 158.7 411.7 160.7 412.7C162.3 413.7 164.3 413.4 165 412C165.7 410.7 164.7 409.1 162.7 408.1C160.7 407.5 159.1 407.8 158.4 408.8zM190.8 444.4C189.2 445.7 189.8 448.7 192.1 450.6C194.4 452.9 197.3 453.2 198.6 451.6C199.9 450.3 199.3 447.3 197.3 445.4C195.1 443.1 192.1 442.8 190.8 444.4zM179.4 429.7C177.8 430.7 177.8 433.3 179.4 435.6C181 437.9 183.7 438.9 185 437.9C186.6 436.6 186.6 434 185 431.7C183.6 429.4 181 428.4 179.4 429.7z"/>
+				</symbol>
+				<symbol id="fa-icon-heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+					<path fill="currentColor" d="M305 151.1L320 171.8L335 151.1C360 116.5 400.2 96 442.9 96C516.4 96 576 155.6 576 229.1L576 231.7C576 343.9 436.1 474.2 363.1 529.9C350.7 539.3 335.5 544 320 544C304.5 544 289.2 539.4 276.9 529.9C203.9 474.2 64 343.9 64 231.7L64 229.1C64 155.6 123.6 96 197.1 96C239.8 96 280 116.5 305 151.1z"/>
+				</symbol>
+				<symbol id="fa-icon-star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+					<path fill="currentColor" d="M341.5 45.1C337.4 37.1 329.1 32 320.1 32C311.1 32 302.8 37.1 298.7 45.1L225.1 189.3L65.2 214.7C56.3 216.1 48.9 222.4 46.1 231C43.3 239.6 45.6 249 51.9 255.4L166.3 369.9L141.1 529.8C139.7 538.7 143.4 547.7 150.7 553C158 558.3 167.6 559.1 175.7 555L320.1 481.6L464.4 555C472.4 559.1 482.1 558.3 489.4 553C496.7 547.7 500.4 538.8 499 529.8L473.7 369.9L588.1 255.4C594.5 249 596.7 239.6 593.9 231C591.1 222.4 583.8 216.1 574.8 214.7L415 189.3L341.5 45.1z"/>
+				</symbol>
+				<symbol id="fa-icon-fork" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+					<path fill="currentColor" d="M176 168C189.3 168 200 157.3 200 144C200 130.7 189.3 120 176 120C162.7 120 152 130.7 152 144C152 157.3 162.7 168 176 168zM256 144C256 176.8 236.3 205 208 217.3L208 240C208 266.5 229.5 288 256 288L384 288C410.5 288 432 266.5 432 240L432 217.3C403.7 205 384 176.8 384 144C384 99.8 419.8 64 464 64C508.2 64 544 99.8 544 144C544 176.8 524.3 205 496 217.3L496 240C496 301.9 445.9 352 384 352L352 352L352 422.7C380.3 435 400 463.2 400 496C400 540.2 364.2 576 320 576C275.8 576 240 540.2 240 496C240 463.2 259.7 435 288 422.7L288 352L256 352C194.1 352 144 301.9 144 240L144 217.3C115.7 205 96 176.8 96 144C96 99.8 131.8 64 176 64C220.2 64 256 99.8 256 144zM464 168C477.3 168 488 157.3 488 144C488 130.7 477.3 120 464 120C450.7 120 440 130.7 440 144C440 157.3 450.7 168 464 168zM344 496C344 482.7 333.3 472 320 472C306.7 472 296 482.7 296 496C296 509.3 306.7 520 320 520C333.3 520 344 509.3 344 496z"/>
+				</symbol>
+				<symbol id="fa-icon-eye" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+					<path fill="currentColor" d="M320 96C239.2 96 174.5 132.8 127.4 176.6C80.6 220.1 49.3 272 34.4 307.7C31.1 315.6 31.1 324.4 34.4 332.3C49.3 368 80.6 420 127.4 463.4C174.5 507.1 239.2 544 320 544C400.8 544 465.5 507.2 512.6 463.4C559.4 419.9 590.7 368 605.6 332.3C608.9 324.4 608.9 315.6 605.6 307.7C590.7 272 559.4 220 512.6 176.6C465.5 132.9 400.8 96 320 96zM176 320C176 240.5 240.5 176 320 176C399.5 176 464 240.5 464 320C464 399.5 399.5 464 320 464C240.5 464 176 399.5 176 320zM320 256C320 291.3 291.3 320 256 320C244.5 320 233.7 317 224.3 311.6C223.3 322.5 224.2 333.7 227.2 344.8C240.9 396 293.6 426.4 344.8 412.7C396 399 426.4 346.3 412.7 295.1C400.5 249.4 357.2 220.3 311.6 224.3C316.9 233.6 320 244.4 320 256z"/>
+				</symbol>
+				<symbol id="fa-icon-code" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+					<path fill="currentColor" d="M246.6 182.6C259.1 170.1 259.1 149.8 246.6 137.3C234.1 124.8 213.8 124.8 201.3 137.3L41.3 297.3C28.8 309.8 28.8 330.1 41.3 342.6L201.3 502.6C213.8 515.1 234.1 515.1 246.6 502.6C259.1 490.1 259.1 469.8 246.6 457.3L109.3 320L246.6 182.6zM393.3 182.6L530.7 320L393.4 457.4C380.9 469.9 380.9 490.2 393.4 502.7C405.9 515.2 426.2 515.2 438.7 502.7L598.7 342.7C611.2 330.2 611.2 309.9 598.7 297.4L438.7 137.4C426.2 124.9 405.9 124.9 393.4 137.4C380.9 149.9 380.9 170.2 393.4 182.7z"/>
+				</symbol>
+			</symbol>
 		</div>
 		<?php
 	}
@@ -1911,5 +2181,721 @@ class Shortcodes {
 			);
 			wp_print_styles( array( 'wppic-fancybox-css' ) );
 		}
+	}
+
+	/**
+	 * GitHub Info Card shortcode.
+	 *
+	 * @param array  $attributes Shortcode attributes.
+	 * @param string $content The content of the shortcode.
+	 */
+	public static function shortcode_github_info_card( $attributes, $content = '', $shortcode_name = '', $asset_data = null ) {
+		if ( is_admin() || ( defined( 'REST_REQUEST' ) && ! defined( 'WPPIC_REST_REQUEST' ) ) ) {
+			return '';
+		}
+
+		// If GitHub cards aren't supported, return early.
+		if ( ! (bool) Options::is_github_info_cards_enabled() ) {
+			return '';
+		}
+
+		// Make attributes lowercase to avoid case-sensitive issues.
+		$attributes = array_change_key_case( $attributes, CASE_LOWER );
+
+		$defaults_attributes = array(
+			'class'                   => '',
+			'style'                   => 'light',
+			'uniqueid'                => 'wp-pic-' . wp_generate_password( 10, false ),
+			'numchildren'             => 0,
+			'cols'                    => 1,
+			'colgap'                  => 10,
+			'rowgap'                  => 10,
+			'marginspacing'           => 'none',
+			'marginspacingtarget'     => 'both',
+			'backgroundcolor'         => '#fff',
+			'textcolor'               => '#24292f',
+			'iconcolor'               => '#666',
+			'iconcolorhover'          => '#111827',
+			'bordercolor'             => '#d0d7de',
+			'languagebgcolor'         => '#24292f',
+			'languagetextcolor'       => '#fff',
+			'sponsorscolor'           => '#bf3989',
+			'buttonbgcolor'           => '#1a7f37',
+			'buttonbgcolorhover'      => '#2c974b',
+			'buttontextcolor'         => '#fff',
+			'buttontextcolorhover'    => '#fff',
+			'layout'                  => 'large',
+			'align'                   => 'center',
+			'horizontalalign'         => 'center',
+			'showtopbar'              => true,
+			'showauthorbar'           => true,
+			'showstatsbar'            => true,
+			'showlastupdated'         => true,
+			'parentbuttontype'        => '',
+			'username'                => '',
+			'repo'                    => '',
+			'nameoverride'            => '',
+			'loginoverride'           => '',
+			'sponsorsurloverride'     => '',
+			'versionoverride'         => '',
+			'organizationurloverride' => '',
+			'homepageurloverride'     => '',
+			'overridebutton'          => false,
+			'overridebuttontext'      => __( 'View on GitHub', 'wp-plugin-info-card' ),
+			'overridebuttonurl'       => '',
+			'buttontype'              => 'github',
+			'avatarimageurl'          => '',
+		);
+
+		$attributes = shortcode_atts( $defaults_attributes, $attributes, 'github-info-card' );
+
+		// Let's sanitize these one-by-one.
+		$attributes['class']                   = Functions::sanitize_attribute( $attributes, 'class', 'string' );
+		$attributes['style']                   = Functions::sanitize_attribute( $attributes, 'style', 'string' );
+		$attributes['numchildren']             = Functions::sanitize_attribute( $attributes, 'numchildren', 'integer' );
+		$attributes['cols']                    = Functions::sanitize_attribute( $attributes, 'cols', 'integer' );
+		$attributes['colgap']                  = Functions::sanitize_attribute( $attributes, 'colgap', 'integer' );
+		$attributes['rowgap']                  = Functions::sanitize_attribute( $attributes, 'rowgap', 'integer' );
+		$attributes['marginspacingtarget']     = Functions::sanitize_attribute( $attributes, 'marginspacingtarget', 'string' );
+		$attributes['marginspacing']           = Functions::sanitize_attribute( $attributes, 'marginspacing', 'string' );
+		$attributes['backgroundcolor']         = Functions::sanitize_attribute( $attributes, 'backgroundcolor', 'string' );
+		$attributes['textcolor']               = Functions::sanitize_attribute( $attributes, 'textcolor', 'string' );
+		$attributes['iconcolor']               = Functions::sanitize_attribute( $attributes, 'iconcolor', 'string' );
+		$attributes['iconcolorhover']          = Functions::sanitize_attribute( $attributes, 'iconcolorhover', 'string' );
+		$attributes['bordercolor']             = Functions::sanitize_attribute( $attributes, 'bordercolor', 'string' );
+		$attributes['languagebgcolor']         = Functions::sanitize_attribute( $attributes, 'languagebgcolor', 'string' );
+		$attributes['languagetextcolor']       = Functions::sanitize_attribute( $attributes, 'languagetextcolor', 'string' );
+		$attributes['sponsorscolor']           = Functions::sanitize_attribute( $attributes, 'sponsorscolor', 'string' );
+		$attributes['buttonbgcolor']           = Functions::sanitize_attribute( $attributes, 'buttonbgcolor', 'string' );
+		$attributes['buttonbgcolorhover']      = Functions::sanitize_attribute( $attributes, 'buttonbgcolorhover', 'string' );
+		$attributes['buttontextcolor']         = Functions::sanitize_attribute( $attributes, 'buttontextcolor', 'string' );
+		$attributes['buttontextcolorhover']    = Functions::sanitize_attribute( $attributes, 'buttontextcolorhover', 'string' );
+		$attributes['layout']                  = Functions::sanitize_attribute( $attributes, 'layout', 'string' );
+		$attributes['align']                   = Functions::sanitize_attribute( $attributes, 'align', 'string' );
+		$attributes['horizontalalign']         = Functions::sanitize_attribute( $attributes, 'horizontalalign', 'string' );
+		$attributes['uniqueid']                = Functions::sanitize_attribute( $attributes, 'uniqueid', 'string' );
+		$attributes['showtopbar']              = Functions::sanitize_attribute( $attributes, 'showtopbar', 'boolean' );
+		$attributes['showauthorbar']           = Functions::sanitize_attribute( $attributes, 'showauthorbar', 'boolean' );
+		$attributes['showstatsbar']            = Functions::sanitize_attribute( $attributes, 'showstatsbar', 'boolean' );
+		$attributes['showlastupdated']         = Functions::sanitize_attribute( $attributes, 'showlastupdated', 'boolean' );
+		$attributes['parentbuttontype']        = Functions::sanitize_attribute( $attributes, 'parentbuttontype', 'string' );
+		$attributes['username']                = Functions::sanitize_attribute( $attributes, 'username', 'string' );
+		$attributes['repo']                    = Functions::sanitize_attribute( $attributes, 'repo', 'string' );
+		$attributes['nameoverride']            = Functions::sanitize_attribute( $attributes, 'nameoverride', 'string' );
+		$attributes['loginoverride']           = Functions::sanitize_attribute( $attributes, 'loginoverride', 'string' );
+		$attributes['sponsorsurloverride']     = Functions::sanitize_attribute( $attributes, 'sponsorsurloverride', 'string' );
+		$attributes['organizationurloverride'] = Functions::sanitize_attribute( $attributes, 'organizationurloverride', 'string' );
+		$attributes['versionoverride']         = Functions::sanitize_attribute( $attributes, 'versionoverride', 'string' );
+		$attributes['overridebutton']          = Functions::sanitize_attribute( $attributes, 'overridebutton', 'boolean' );
+		$attributes['overridebuttontext']      = Functions::sanitize_attribute( $attributes, 'overridebuttontext', 'string' );
+		$attributes['overridebuttonurl']       = Functions::sanitize_attribute( $attributes, 'overridebuttonurl', 'url' );
+		$attributes['buttontype']              = Functions::sanitize_attribute( $attributes, 'buttontype', 'string' );
+		$attributes['avatarimageurl']          = Functions::sanitize_attribute( $attributes, 'avatarimageurl', 'url' );
+
+		// Skip enqueueing the lazy load script if we're in the REST API.
+		if ( ! defined( 'WPPIC_REST_REQUEST' ) ) {
+			// Enqueue the lazy load script.
+			require Functions::get_plugin_dir( 'dist/github-info-card-lazy-load.asset.php' );
+			wp_enqueue_script(
+				'wppic-github-info-card-lazy-load',
+				Functions::get_plugin_url( 'dist/github-info-card-lazy-load.js' ),
+				array( 'wp-api-fetch' ),
+				Functions::get_plugin_version(),
+				true
+			);
+
+			wp_localize_script(
+				'wppic-github-info-card-lazy-load',
+				'wppicGithubInfoCardLazyLoad',
+				array(
+					'restUrl'        => rest_url( 'wppic/v2/get_github_card_html' ),
+					'restNonce'      => wp_create_nonce( 'wp_rest' ),
+					'cardAttributes' => array(),
+				)
+			);
+			/**
+			 * Add icons to footer for plugin card.
+			 */
+			add_action( 'wp_footer', array( __CLASS__, 'add_icons_to_footer' ) );
+		}
+
+		// Now let's build the shortcode.
+		if ( 0 === $attributes['numchildren'] ) {
+			// todo - build wrapper around the shortcode.
+		}
+
+		// Check if option exists for GitHub local option cache.
+		if ( null !== $asset_data ) {
+			$maybe_local_cache = $asset_data;
+		} else {
+			$maybe_local_cache = get_transient( 'wppic_github_' . sanitize_key( preg_replace( '/\-/', '_', $attributes['username'] . '/' . $attributes['repo'] ) ), false );
+		}
+		if ( ! $maybe_local_cache && ! defined( 'WPPIC_REST_REQUEST' ) ) { // Start lazy load.
+			// Get wrapper classes for loading card.
+			$wrapper_classes = array(
+				'wppic-github-info-card',
+				'layout-' . $attributes['layout'],
+				'cols-' . ( $attributes['numchildren'] > 1 ? $attributes['cols'] : 1 ),
+			);
+			if ( 0 === $attributes['numchildren'] ) {
+				$wrapper_classes[] = 'wppic-margin-spacing-' . $attributes['marginspacing'];
+				$wrapper_classes[] = 'wppic-margin-spacing-target-' . $attributes['marginspacingtarget'];
+				$wrapper_classes[] = $attributes['class'];
+				$wrapper_classes[] = 'is-style-wppic-github-' . $attributes['style'];
+				$wrapper_classes[] = 'align' . ( ! is_wp_error( $attributes['align'] ) && ! empty( $attributes['align'] ) ? $attributes['align'] : 'center' );
+				$wrapper_classes[] = 'horizontal-align-' . ( ! is_wp_error( $attributes['horizontalalign'] ) && ! empty( $attributes['horizontalalign'] ) ? $attributes['horizontalalign'] : 'center' );
+			}
+
+			$nonce = wp_create_nonce( 'wppic_github_lazy_load_' . sanitize_key( $attributes['username'] . '/' . $attributes['repo'] ) );
+
+			// Preload in GitHub repo URLs.
+			$preload_paths = array(
+				esc_url_raw(
+					add_query_arg(
+						array(
+							'username' => sanitize_key( $attributes['username'] ),
+							'repo'     => sanitize_key( $attributes['repo'] ),
+						),
+						rest_url( 'wppic/v2/get_github_card_html' )
+					)
+				),
+			);
+			wp_add_inline_script(
+				'wppic-github-info-card-lazy-load',
+				'wp.apiFetch.use( wp.apiFetch.createPreloadingMiddleware( ' . wp_json_encode( $preload_paths ) . ' ) );',
+				'after',
+			);
+			// Add attributes as localized vars.
+			wp_add_inline_script(
+				'wppic-github-info-card-lazy-load',
+				'wppicGithubInfoCardLazyLoad.cardAttributes[\'' . sanitize_title( strtolower( $attributes['username'] ) . '_' . sanitize_title( strtolower( $attributes['repo'] ) ) ) . '\'] = ' . wp_json_encode( $attributes ) . ';',
+				'after',
+			);
+			ob_start();
+			?>
+			<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" id="<?php echo esc_attr( $attributes['uniqueid'] ); ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>" data-username="<?php echo esc_attr( strtolower( $attributes['username'] ) ); ?>" data-repo="<?php echo esc_attr( strtolower( $attributes['repo'] ) ); ?>" data-is-github-card-loading="true">
+				<div class="wppic-github-info-card-wrapper">
+					<div class="wppic-github-info-card-loading" >
+					<article class="github-skeleton-card" aria-busy="true" aria-label="Loading repository card">
+						<div class="github-skeleton-badges">
+							<span class="github-skeleton-pill skeleton-loader"></span>
+							<span class="github-skeleton-pill skeleton-loader"></span>
+						</div>
+
+						<div class="github-skeleton-header">
+							<div class="github-skeleton-avatar skeleton-loader"></div>
+							<div class="github-skeleton-title skeleton-loader">
+							<div class="github-skeleton-line github-skeleton-lg github-skeleton-w-60 skeleton-loader"></div>
+							<div class="github-skeleton-line github-skeleton-md github-skeleton-w-40 skeleton-loader"></div>
+							</div>
+						</div>
+
+						<div class="github-skeleton-meta">
+							<span class="github-skeleton-chip github-skeleton-w-4 skeleton-loader"></span>
+							<span class="github-skeleton-chip github-skeleton-w-4 skeleton-loader"></span>
+							<span class="github-skeleton-chip github-skeleton-w-4 skeleton-loader"></span>
+							<span class="github-skeleton-chip github-skeleton-w-4 skeleton-loader"></span>
+						</div>
+
+						<div class="github-skeleton-desc">
+							<div class="github-skeleton-line github-skeleton-w-90 skeleton-loader"></div>
+							<div class="github-skeleton-line github-skeleton-w-70 skeleton-loader"></div>
+						</div>
+
+						<div class="github-skeleton-footer">
+							<div class="github-skeleton-date github-skeleton-w-40 skeleton-loader"></div>
+							<div class="github-skeleton-cta skeleton-loader"></div>
+						</div>
+						</article>
+					</div><!-- .wppic-github-info-card-loading -->
+				</div><!-- .wppic-github-info-card-wrapper -->
+			</div><!-- .wppic-github-info-card -->
+			<?php
+			return ob_get_clean();
+		}
+		$asset_data = $maybe_local_cache;
+		if ( ! $asset_data ) {
+			if ( current_user_can( 'manage_options' ) ) {
+				echo esc_html__( 'GitHub Card Not Found', 'wp-plugin-info-card' );
+			}
+			return ob_get_clean();
+		}
+
+		// Turn asset data into an array.
+		$asset_data = json_decode( wp_json_encode( $asset_data ), true );
+
+		ob_start();
+
+		// Get Home URL.
+		$has_homepage_url      = false;
+		$homepage_url          = Functions::sanitize_attribute( $asset_data, 'homepage', 'url' );
+		$homepage_url_override = Functions::sanitize_attribute( $attributes, 'homepageurloverride', 'url' );
+		if ( ! is_wp_error( $homepage_url ) && ! empty( $homepage_url ) ) {
+			$has_homepage_url = true;
+		}
+		if ( ! is_wp_error( $homepage_url_override ) && ! empty( $homepage_url_override ) ) {
+			$homepage_url     = $homepage_url_override;
+			$has_homepage_url = true;
+		}
+
+		// Get GitHub URL. No override.
+		$has_github_url = false;
+		$github_url     = Functions::sanitize_attribute( $asset_data, 'github_url', 'url' );
+		if ( ! is_wp_error( $github_url ) && ! empty( $github_url ) ) {
+			$has_github_url = true;
+		}
+
+		// Get stargazer's count for GitHub URL.
+		$has_stargazers_count = false;
+		$stargazers_count_url = '';
+		if ( $has_github_url ) {
+			$has_stargazers_count = true;
+			$stargazers_count_url = sprintf( '%s/stargazers', $github_url );
+		}
+
+		// Get watchers GitHub URL.
+		$has_watchers_count = false;
+		$watchers_count_url = '';
+		if ( $has_github_url ) {
+			$has_watchers_count = true;
+			$watchers_count_url = sprintf( '%s/watchers', $github_url );
+		}
+
+		// Get forks GitHub URL.
+		$has_forks_count = false;
+		$forks_count_url = '';
+		if ( $has_github_url ) {
+			$has_forks_count = true;
+			$forks_count_url = sprintf( '%s/forks', $github_url );
+		}
+
+		// Get sponsors URL.
+		$has_sponsors_url = false;
+		$sponsors_url     = Functions::sanitize_attribute( $asset_data, 'sponsors_url', 'url' );
+		if ( ! is_wp_error( $sponsors_url ) && ! empty( $sponsors_url ) ) {
+			$has_sponsors_url = true;
+		}
+		$sponsors_url_override = Functions::sanitize_attribute( $attributes, 'sponsorsurloverride', 'url' );
+		if ( ! is_wp_error( $sponsors_url_override ) && ! empty( $sponsors_url_override ) ) {
+			$sponsors_url     = $sponsors_url_override;
+			$has_sponsors_url = true;
+		}
+
+		// Get organization URL.
+		$has_org_name_url      = false;
+		$org_name_url          = Functions::sanitize_attribute( $asset_data, 'org_url', 'url' );
+		$org_name_url_override = Functions::sanitize_attribute( $attributes, 'organizationurloverride', 'url' );
+		if ( ! is_wp_error( $org_name_url ) && ! empty( $org_name_url ) ) {
+			$has_org_name_url = true;
+		}
+		if ( ! is_wp_error( $org_name_url_override ) && ! empty( $org_name_url_override ) ) {
+			$org_name_url     = $org_name_url_override;
+			$has_org_name_url = true;
+		}
+
+		// Get avatar image.
+		$has_avatar_image      = false;
+		$avatar_image          = Functions::sanitize_attribute( $asset_data, 'avatar', 'url' );
+		$avatar_image_override = Functions::sanitize_attribute( $attributes, 'avatarimageurl', 'url' );
+		if ( ! is_wp_error( $avatar_image_override ) && ! empty( $avatar_image_override ) ) {
+			$avatar_image     = $avatar_image_override;
+			$has_avatar_image = true;
+		} elseif ( ! is_wp_error( $avatar_image ) && ! empty( $avatar_image ) ) {
+			$has_avatar_image = true;
+		}
+		if ( ! $has_avatar_image ) {
+			$has_avatar_image = true;
+			$avatar_image     = Functions::get_plugin_url( 'assets/img/default-github-avatar.png' );
+		}
+
+		// Get org name.
+		$org_name          = Functions::sanitize_attribute( $asset_data, 'login', 'string' );
+		$org_name_override = Functions::sanitize_attribute( $attributes, 'loginoverride', 'string' );
+		if ( ! is_wp_error( $org_name_override ) && ! empty( $org_name_override ) ) {
+			$org_name = $org_name_override;
+		}
+
+		// Get repo full name.
+		$repo_full_name = Functions::sanitize_attribute( $asset_data, 'full_name', 'string' );
+		if ( is_wp_error( $repo_full_name ) ) {
+			$repo_full_name = '';
+		}
+
+		// Get repo name.
+		$repo_name = Functions::sanitize_attribute( $asset_data, 'name', 'string' );
+		if ( is_wp_error( $repo_name ) ) {
+			$repo_name = '';
+		}
+		$repo_name_override = Functions::sanitize_attribute( $attributes, 'nameoverride', 'string' );
+		if ( ! is_wp_error( $repo_name_override ) && ! empty( $repo_name_override ) ) {
+			$repo_name = $repo_name_override;
+		}
+
+		// Get repo description.
+		$repo_description = Functions::sanitize_attribute( $asset_data, 'description', 'string' );
+		if ( is_wp_error( $repo_description ) ) {
+			$repo_description = '';
+		}
+
+		// Get counts.
+		$stargazers_count = Functions::sanitize_attribute( $asset_data, 'stargazers_count', 'integer' );
+		if ( is_wp_error( $stargazers_count ) ) {
+			$stargazers_count = 0;
+		}
+		$watchers_count = Functions::sanitize_attribute( $asset_data, 'watchers_count', 'integer' );
+		if ( is_wp_error( $watchers_count ) ) {
+			$watchers_count = 0;
+		}
+		$forks_count = Functions::sanitize_attribute( $asset_data, 'forks_count', 'integer' );
+		if ( is_wp_error( $forks_count ) ) {
+			$forks_count = 0;
+		}
+		$subscribers_count = Functions::sanitize_attribute( $asset_data, 'subscribers_count', 'integer' );
+		if ( is_wp_error( $subscribers_count ) ) {
+			$subscribers_count = 0;
+		}
+
+		// Get latest release tag name and URL.
+		$latest_release_tag_name = Functions::sanitize_attribute( $asset_data, 'latest_release_tag_name', 'string' );
+		$latest_release_url      = Functions::sanitize_attribute( $asset_data, 'latest_release_url', 'url' );
+		if ( is_wp_error( $latest_release_tag_name ) || is_wp_error( $latest_release_url ) ) {
+			$latest_release_tag_name = '';
+			$latest_release_url      = '';
+		}
+		$latest_release_download_url = Functions::sanitize_attribute( $asset_data, 'latest_release_download_url', 'url' );
+		if ( ! is_wp_error( $latest_release_download_url ) && ! empty( $latest_release_download_url ) ) {
+			$latest_release_url = $latest_release_download_url;
+		}
+		if ( empty( $latest_release_url ) ) {
+			$latest_release_url = $github_url;
+		}
+		// Get version override.
+		$version_override = Functions::sanitize_attribute( $attributes, 'versionoverride', 'string' );
+		if ( ! is_wp_error( $version_override ) && ! empty( $version_override ) && ! empty( $latest_release_tag_name ) ) {
+			$latest_release_tag_name = $version_override;
+		}
+
+		// Get last updated date.
+		$show_last_updated = (bool) $attributes['showlastupdated'];
+		$last_updated_date = Functions::sanitize_attribute( $asset_data, 'updated_at', 'string' );
+		if ( is_wp_error( $last_updated_date ) ) {
+			$last_updated_date = '';
+		}
+
+		// Get button type and URL.
+		$button_type        = $attributes['buttontype'];
+		$parent_button_type = Functions::sanitize_attribute( $attributes, 'parentbuttontype', 'string' ); // This is passed from the parent block. If not passed, this errors, and it's as if a shortcode passed it.
+		$button_override    = (bool) $attributes['overridebutton'];
+		if ( ! is_wp_error( $parent_button_type ) && ! empty( $parent_button_type ) && ! $button_override ) {
+			$button_type = $parent_button_type;
+		}
+
+		switch ( $button_type ) {
+			case 'github':
+				$button_url  = $github_url;
+				$button_text = __( 'View on GitHub', 'wp-plugin-info-card' );
+				break;
+			case 'website':
+				$button_url  = $homepage_url;
+				$button_text = __( 'View Website', 'wp-plugin-info-card' );
+				break;
+			case 'sponsor':
+				$button_url  = $sponsors_url;
+				$button_text = __( 'Sponsor', 'wp-plugin-info-card' );
+				break;
+			case 'download':
+				$button_url  = $latest_release_url;
+				$button_text = __( 'Download', 'wp-plugin-info-card' );
+				break;
+			case 'star':
+				$button_url  = $stargazers_count_url;
+				$button_text = __( 'Star', 'wp-plugin-info-card' );
+				break;
+			case 'custom':
+				$button_url  = $attributes['overridebuttonurl'];
+				$button_text = $attributes['overridebuttontext'];
+				break;
+			default:
+				$button_url  = $github_url;
+				$button_text = __( 'View on GitHub', 'wp-plugin-info-card' );
+				break;
+		}
+		// Failsafe.
+		if ( $button_override && ! empty( $attributes['overridebuttontext'] ) ) {
+			$button_text = $attributes['overridebuttontext'];
+		}
+
+		$has_language = false;
+		$language     = Functions::sanitize_attribute( $asset_data, 'language', 'string' );
+		if ( ! is_wp_error( $language ) && ! empty( $language ) ) {
+			$has_language = true;
+		}
+		$has_license = false;
+		$license     = Functions::sanitize_attribute( $asset_data, 'license', 'string' );
+		if ( ! is_wp_error( $license ) && ! empty( $license ) ) {
+			if ( 'NOASSERTION' !== $license ) {
+				$has_license = true;
+			}
+		}
+
+		// Get wrapper classes.
+		$wrapper_classes = array(
+			'wppic-github-info-card',
+			'layout-' . $attributes['layout'],
+			'cols-' . ( $attributes['numchildren'] > 1 ? $attributes['cols'] : 1 ),
+		);
+		if ( 0 === $attributes['numchildren'] ) {
+			$wrapper_classes[] = 'wppic-margin-spacing-' . $attributes['marginspacing'];
+			$wrapper_classes[] = 'wppic-margin-spacing-target-' . $attributes['marginspacingtarget'];
+			$wrapper_classes[] = $attributes['class'];
+			$wrapper_classes[] = 'is-style-wppic-github-' . $attributes['style'];
+			$wrapper_classes[] = 'align' . ( ! is_wp_error( $attributes['align'] ) && ! empty( $attributes['align'] ) ? $attributes['align'] : 'center' );
+			$wrapper_classes[] = 'horizontal-align-' . ( ! is_wp_error( $attributes['horizontalalign'] ) && ! empty( $attributes['horizontalalign'] ) ? $attributes['horizontalalign'] : 'center' );
+		}
+
+		if ( ( 'is-style-wppic-github-custom' === $attributes['class'] || 'custom' === $attributes['style'] ) && 0 === $attributes['numchildren'] ) {
+			?>
+			<style>
+				#<?php echo esc_attr( $attributes['uniqueid'] ); ?> {
+					--wppic-github-background-color: <?php echo esc_attr( $attributes['backgroundcolor'] ); ?>;
+					--wppic-github-text-color: <?php echo esc_attr( $attributes['textcolor'] ); ?>;
+					--wppic-github-icon-color: <?php echo esc_attr( $attributes['iconcolor'] ); ?>;
+					--wppic-github-icon-color-hover: <?php echo esc_attr( $attributes['iconcolorhover'] ); ?>;
+					--wppic-github-border: <?php echo esc_attr( $attributes['bordercolor'] ); ?>;
+					--wppic-github-language-bg: <?php echo esc_attr( $attributes['languagebgcolor'] ); ?>;
+					--wppic-github-language-color: <?php echo esc_attr( $attributes['languagetextcolor'] ); ?>;
+					--wppic-github-sponsors-color: <?php echo esc_attr( $attributes['sponsorscolor'] ); ?>;
+					--wppic-github-button-bg: <?php echo esc_attr( $attributes['buttonbgcolor'] ); ?>;
+					--wppic-github-button-bg-hover: <?php echo esc_attr( $attributes['buttonbgcolorhover'] ); ?>;
+					--wppic-github-button-text-color: <?php echo esc_attr( $attributes['buttontextcolor'] ); ?>;
+					--wppic-github-button-text-color-hover: <?php echo esc_attr( $attributes['buttontextcolorhover'] ); ?>;
+					}
+				</style>
+			<?php
+		}
+		?>
+		<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" id="<?php echo esc_attr( $attributes['uniqueid'] ); ?>">
+			<div class="wppic-github-info-card-wrapper">
+			<?php
+			if ( (bool) $attributes['showtopbar'] ) :
+				?>
+				<div class="wppic-github-info-card-header">
+					<div class="wppic-github-info-card-header-left">
+						<?php if ( $has_language ) : ?>
+							<div class="wppic-github-info-card-header-language">
+								<?php echo esc_html( $language ); ?>
+							</div>
+						<?php endif; ?>
+						<?php if ( $has_license ) : ?>
+							<div class="wppic-github-info-card-header-license">
+								<?php echo esc_html( $license ); ?>
+							</div>
+						<?php endif; ?>
+					</div>
+					<div class="wppic-github-info-card-header-right">
+						<?php
+						if ( $has_homepage_url ) :
+							?>
+						<div class="wppic-github-info-card-header-icon wppic-github-info-card-icon-home">
+							<a href="<?php echo esc_url( $homepage_url ); ?>">
+								<svg class="wppic-github-info-card-icon-svg" width="20" height="20" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<use xlink:href="#fa-icon-home" />
+								</svg>
+							</a>
+						</div>
+							<?php
+						endif;
+						?>
+						<?php
+						if ( $has_github_url ) :
+							?>
+						<div class="wppic-github-info-card-header-icon wppic-github-info-card-icon-github">
+							<a href="<?php echo esc_url( $github_url ); ?>">
+								<svg class="wppic-github-info-card-icon-svg" width="20" height="20" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<use xlink:href="#fa-icon-github" />
+								</svg>
+							</a>
+						</div>
+							<?php
+							endif;
+						?>
+						<?php
+						if ( $has_sponsors_url ) :
+							?>
+						<div class="wppic-github-info-card-header-icon wppic-github-info-card-icon-heart">
+							<a href="<?php echo esc_url( $sponsors_url ); ?>">
+								<svg class="wppic-github-info-card-icon-svg" width="20" height="20" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<use xlink:href="#fa-icon-heart" />
+								</svg>
+							</a>
+						</div>
+							<?php
+						endif;
+						?>
+						<?php
+						if ( $has_stargazers_count ) :
+							?>
+						<div class="wppic-github-info-card-header-icon wppic-github-info-card-icon-star">
+							<a href="<?php echo esc_url( $stargazers_count_url ); ?>">
+								<svg class="wppic-github-info-card-icon-svg" width="20" height="20" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<use xlink:href="#fa-icon-star" />
+								</svg>
+							</a>
+						</div>
+							<?php
+						endif;
+						?>
+					</div>
+				</div><!-- .wppic-github-info-card-header -->
+				<?php
+			endif;
+			?>
+			<div class="wppic-github-info-card-author-section">
+				<div class="wppic-github-info-card-author-section-avatar">
+					<a href="<?php echo esc_url( $github_url ); ?>" title="<?php echo esc_attr( $repo_full_name ); ?>">
+						<img src="<?php echo esc_url( $avatar_image ); ?>" alt="<?php echo esc_attr( $repo_full_name ); ?>" />
+					</a>
+				</div>
+				<div class="wppic-github-info-card-author-section-info">
+					<div class="wppic-github-info-card-author-section-name">
+						<a href="<?php echo esc_url( $github_url ); ?>">
+							<?php echo esc_html( $repo_name ); ?>
+						</a>
+					</div>
+					<?php if ( (bool) $attributes['showauthorbar'] ) : ?>
+						<div class="wppic-github-info-card-author-section-login">
+							<?php echo esc_html__( 'By', 'wp-plugin-info-card' ); ?>
+							<?php
+							if ( $has_org_name_url ) :
+								?>
+								<a href="<?php echo esc_url( $org_name_url ); ?>">
+									<?php echo esc_html( $org_name ); ?>
+								</a>
+								<?php
+							else :
+								?>
+								<?php echo esc_html( $org_name ); ?>
+								<?php
+							endif;
+							?>
+						</div>
+					<?php endif; ?>
+				</div>
+			</div><!-- .wppic-github-info-card-author-section -->
+			<?php if ( (bool) $attributes['showstatsbar'] ) : ?>
+				<div class="wppic-github-info-card-meta">
+					<div class="wppic-github-info-card-meta-item">
+						<?php if ( $has_stargazers_count ) : ?>
+							<a href="<?php echo esc_url( $stargazers_count_url ); ?>">
+								<div class="wppic-github-info-card-meta-item-icon">
+									<svg class="wppic-github-info-card-icon-svg" width="20" height="20" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<use xlink:href="#fa-icon-star" />
+									</svg>
+								</div>
+								<div class="wppic-github-info-card-meta-item-text">
+									<?php echo esc_html( Functions::abbreviate_number( $stargazers_count, 1 ) ); ?>
+								</div>
+							</a>
+						<?php endif; ?>
+					</div>
+					<div class="wppic-github-info-card-meta-item">
+						<?php if ( $has_forks_count ) : ?>
+							<a href="<?php echo esc_url( $forks_count_url ); ?>">
+								<div class="wppic-github-info-card-meta-item-icon">
+									<svg class="wppic-github-info-card-icon-svg" width="20" height="20" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<use xlink:href="#fa-icon-fork" />
+									</svg>
+								</div>
+								<div class="wppic-github-info-card-meta-item-text">
+									<?php echo esc_html( Functions::abbreviate_number( $forks_count ) ); ?>
+								</div>
+							</a>
+						<?php endif; ?>
+					</div>
+					<div class="wppic-github-info-card-meta-item">
+						<?php if ( $has_watchers_count ) : ?>
+							<a href="<?php echo esc_url( $watchers_count_url ); ?>">
+								<div class="wppic-github-info-card-meta-item-icon">
+									<svg class="wppic-github-info-card-icon-svg" width="20" height="20" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<use xlink:href="#fa-icon-eye" />
+									</svg>
+								</div>
+								<div class="wppic-github-info-card-meta-item-text">
+									<?php echo esc_html( Functions::abbreviate_number( $subscribers_count ) ); ?>
+								</div>
+							</a>
+						<?php endif; ?>
+					</div>
+					<?php if ( ! empty( $latest_release_tag_name ) ) : ?>
+					<div class="wppic-github-info-card-meta-item">
+							<a href="<?php echo esc_url( $latest_release_url ); ?>">
+								<div class="wppic-github-info-card-meta-item-icon">
+									<svg class="wppic-github-info-card-icon-svg" width="20" height="20" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<use xlink:href="#fa-icon-code" />
+									</svg>
+								</div>
+								<div class="wppic-github-info-card-meta-item-text">
+									<?php echo esc_html( mb_strimwidth( $latest_release_tag_name, 0, 10, '...' ) ); ?>
+								</div>
+							</a>
+					</div>
+					<?php endif; ?>
+				</div>
+			<?php endif; ?>
+			<div class="wppic-github-info-card-description">
+				<?php echo esc_html( $repo_description ); ?>
+			</div>
+			<div class="wppic-github-info-card-buttons">
+				<div class="wppic-github-info-card-buttons-left">
+					<?php
+					if ( $show_last_updated ) :
+						?>
+						<div class="wppic-github-info-card-last-updated">
+							<span class="wppic-github-info-card-last-updated-label"><?php echo esc_html__( 'Last updated:', 'wp-plugin-info-card' ); ?></span> <?php echo date_i18n( get_option( 'date_format' ), strtotime( $last_updated_date ) ); ?>
+						</div>
+					<?php endif; ?>
+				</div>
+				<div class="wppic-github-info-card-buttons-right">
+					<div class="wppic-github-info-card-buttons-right-button">
+						<a
+							href="<?php echo esc_url( $button_url ); ?>"
+							class="wppic-github-button button-reset wppic-github-button-<?php echo esc_attr( $button_type ); ?>"
+						>
+							<?php echo esc_html( $button_text ); ?>
+						</a>
+					</div>
+				</div>
+			</div>
+			</div><!-- .wppic-github-info-card-wrapper -->
+		</div><!-- .wppic-github-info-card -->
+
+		<?php
+		return ob_get_clean();
+	}
+
+	/**
+	 * Get GitHub card HTML.
+	 *
+	 * @param object $request The request object.
+	 * @return string The GitHub card HTML.
+	 */
+	public function get_github_card_html( $request ) {
+		$attributes  = $request->get_param( 'cardAttributes' );
+		$username    = sanitize_title( $request->get_param( 'username' ) );
+		$repo        = sanitize_title( $request->get_param( 'repo' ) );
+		$github_data = wppic_api_parser( 'github', $username . '/' . $repo, 1 * WEEK_IN_SECONDS, '', false, false );
+		if ( empty( $github_data ) ) {
+			wp_send_json_error(
+				array(
+					'message' => 'No data found.',
+					'html'    => '',
+				)
+			);
+		}
+		$attributes = Functions::sanitize_array_recursive( $attributes );
+
+		define( 'WPPIC_REST_REQUEST', true );
+		$html = self::shortcode_github_info_card( $attributes, '', 'github-info-card', $github_data );
+		return rest_ensure_response( array( 'html' => $html ) );
 	}
 }

@@ -355,7 +355,6 @@ const SitePluginsCardGrid = ( props ) => {
 		{ value: 'ratings', label: __( 'Ratings', 'wp-plugin-info-card' ) },
 	];
 
-	const layoutClass = 'card' === layout ? 'wp-pic-card' : layout;
 	const inspectorControls = (
 		<InspectorControls>
 			<PanelBody title={ __( 'Layout', 'wp-plugin-info-card' ) }>
@@ -426,9 +425,9 @@ const SitePluginsCardGrid = ( props ) => {
 			row-gap: ${ rowGap }px;
 		}
 	`;
-
+	const layoutClass = 'card' === layout ? 'wp-pic-card' : layout;
 	const blockProps = useBlockProps( {
-		className: classnames( `site-plugins-card-grid align${ align }` ),
+		className: classnames( `site-plugins-card-grid align${ align } ${ layoutClass }` ),
 	} );
 
 	if ( preview ) {
@@ -602,7 +601,6 @@ const SitePluginsCardGrid = ( props ) => {
 						id={ uniqueId }
 						className={ classnames(
 							'is-placeholder',
-							layoutClass,
 							'wp-block-plugin-info-card',
 							'wp-site-plugin-info-card',
 							`align${ align }`,
