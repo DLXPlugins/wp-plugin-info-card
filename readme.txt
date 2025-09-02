@@ -3,16 +3,16 @@ Contributors: briKou, ronalfy
 Tags: cards, card, theme cards, plugin cards, plugin list
 Requires at least: 3.7
 Tested up to: 6.8
-Stable tag: 6.0.0
+Stable tag: 6.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 
-WP Plugin Info Card displays plugins & themes data in beautiful cards using WP Plugin & Theme APIs. Dashboard widget included.
+Plugin Info Card displays plugins & themes data in beautiful cards using WP APIs. Custom plugins, EDD, and GitHub Info Cards are supported.
 
 == Description ==
 
-Plugin Info Card displays plugins & themes data in beautiful cards using WP Plugin & Theme APIs. With four blocks, four shortcodes, and several layouts and 14 schemes, you can display your plugins and themes in a variety of ways.
+Plugin Info Card displays plugins & themes data in beautiful cards using WP Plugin & Theme APIs. It has five blocks, five shortcodes, support for custom third-party plugins, Easy Digital Downloads, and GitHub Info Cards.
 
 [youtube https://www.youtube.com/watch?v=8eKDCEoXGKU&rel=0]
 
@@ -41,6 +41,8 @@ It is perfect to keep track of your own plugins and themes!
 * <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic-site-plugins">[wp-pic-site-plugins] shortcode and parameters</a>.
 * <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic-plugin-screenshots">[wp-pic-plugin-screenshots
 ] shortcode and parameters</a>.]
+* <a href="https://docs.dlxplugins.com/wp-plugin-info-card/shortcodes/github-info-card">[github-info-card
+] shortcode and parameters</a>.]
 
 = Quick Links (Block Documentation) =
 
@@ -48,8 +50,11 @@ It is perfect to keep track of your own plugins and themes!
 * <a href="https://wppic.dlxplugins.com/blocks/wp-plugin-info-card-query-block">WP Plugin Info Card Query block</a>.
 * <a href="https://wppic.dlxplugins.com/blocks/site-plugins-card-grid">Site Plugins Card Grid block</a>.
 * <a href="https://wppic.dlxplugins.com/blocks/plugin-screenshots-info-card">WP Plugin Info Card Plugin Screenshots block</a>.
+* <a href="https://docs.dlxplugins.com/wp-plugin-info-card/blocks/the-github-info-cards-block">GitHub Info Cards Grid block</a>.
 
 > <a href="https://wppic.dlxplugins.com/overview/easy-digital-downloads-integration">Easy Digital Downloads integration</a> is now available as part of the free plugin. Show off your EDD plugins too!
+
+> <a href="https://docs.dlxplugins.com/wp-plugin-info-card/overview/custom-plugin-cards">Custom Third-Party plugins</a> are available as well.
 
 [PREMIUM ADD-ON - WP Envato Affiliate Card](http://b-website.com/wp-envato-affiliate-card-powered-envato-market-api "WP Envato Affiliate Card")
 
@@ -101,6 +106,12 @@ This video shows you how:
 11. WordPress layout with themes and 2 columns
 
 == Changelog ==
+
+= 6.1.0 =
+* Released 2025-09-02
+* New Feature: GitHub Info Cards released. Now showcase your favorite GitHub repo using a block or shortcode.
+* New: Admin panel option for enabling GitHub Info Cards.
+* New: Cards support lazy loading for performance.
 
 = 6.0.0 =
 * Released 2025-08-19
@@ -494,5 +505,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 6.0.0 =
-New: Custom Plugin Cards! Now you can list third-party plugins alongside Plugin Info Card. New margin controls for the main card block/shortcode. Numerous other enhancements.
+= 6.1.0 =
+New: GitHub Info Cards! Display your favorite GitHub repos in beautiful card format. This must be enabled through new admin panel settings.

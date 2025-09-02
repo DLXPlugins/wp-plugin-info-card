@@ -472,6 +472,7 @@ const GitHubInfoCardGrid = ( props ) => {
 			`align${ align } layout-${ layout } cols-${ numChildren > 1 ? cols : 1 } wppic-margin-spacing-${ marginSpacing } wppic-margin-spacing-target-${ marginSpacingTarget }`,
 			{
 				'is-grid': numChildren > 1,
+				'wppic-github-info-card': layout === 'card',
 			},
 		),
 	} );
