@@ -94,13 +94,17 @@ const PluginScreenshots = ( props ) => {
 
 	useEffect( () => {
 		if ( null !== screenshotsWrapper ) {
-			Fancybox.bind( screenshotsWrapper, {} );
-			new Carousel( screenshotsWrapper, {
-				slidesPerPage: 1,
-				Dots: false,
-				infinite: false,
-				adaptiveHeight: false,
-			} );
+			try {
+				Fancybox.bind( screenshotsWrapper, {} );
+				new Carousel( screenshotsWrapper, {
+					slidesPerPage: 1,
+					Dots: false,
+					infinite: false,
+					adaptiveHeight: false,
+				} );
+			} catch ( error ) {
+				console.error( error );
+			}
 		}
 	}, [ screenshotsWrapper ] );
 

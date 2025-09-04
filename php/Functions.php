@@ -190,6 +190,21 @@ class Functions {
 	}
 
 	/**
+	 * Get the REST URL for a given network.
+	 *
+	 * @param string $path The path to the REST URL.
+	 *
+	 * @return string The REST URL.
+	 */
+	public static function get_rest_url( $path = '' ) {
+		if ( self::is_multisite() ) {
+			$blog_id = get_current_blog_id();
+			return get_rest_url( $blog_id, $path );
+		}
+		return get_rest_url( null, $path );
+	}
+
+	/**
 	 * Sanitize an attribute based on type.
 	 *
 	 * @param array  $attributes Array of attributes.

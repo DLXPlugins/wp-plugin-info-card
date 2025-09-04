@@ -2308,7 +2308,7 @@ class Shortcodes {
 				'wppic-github-info-card-lazy-load',
 				'wppicGithubInfoCardLazyLoad',
 				array(
-					'restUrl'        => rest_url( 'wppic/v2/get_github_card_html' ),
+					'restUrl'        => Functions::get_rest_url( 'wppic/v2/get_github_card_html' ),
 					'restNonce'      => wp_create_nonce( 'wp_rest' ),
 					'cardAttributes' => array(),
 				)
@@ -2356,7 +2356,7 @@ class Shortcodes {
 							'username' => sanitize_key( $attributes['username'] ),
 							'repo'     => sanitize_key( $attributes['repo'] ),
 						),
-						rest_url( 'wppic/v2/get_github_card_html' )
+						Functions::get_rest_url( 'wppic/v2/get_github_card_html' )
 					)
 				),
 			);

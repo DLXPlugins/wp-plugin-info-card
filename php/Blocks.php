@@ -264,7 +264,7 @@ class Blocks {
 			'wp-plugin-info-card-block-js',
 			'wppic',
 			array(
-				'rest_url'                       => get_rest_url(),
+				'rest_url'                       => Functions::get_rest_url(),
 				'query_preview'                  => Functions::get_plugin_url( 'assets/img/wp-query-preview.jpg' ),
 				'wppic_preview'                  => Functions::get_plugin_url( 'assets/img/wp-pic-preview.jpg' ),
 				'site_plugins_preview'           => Functions::get_plugin_url( 'assets/img/wppic-site-plugins.jpg' ),
@@ -292,7 +292,7 @@ class Blocks {
 			'wp-plugin-info-card-block-js',
 			'wppicAdminCustomPlugin',
 			array(
-				'importPluginRestUrl' => get_rest_url( null, 'wppic/v1/custom-plugins/import-from-rest' ),
+				'importPluginRestUrl' => Functions::get_rest_url( null, 'wppic/v1/custom-plugins/import-from-rest' ),
 				'restNonce'           => wp_create_nonce( 'wp_rest' ),
 			)
 		);

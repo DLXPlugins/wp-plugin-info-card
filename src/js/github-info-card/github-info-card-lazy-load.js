@@ -12,7 +12,7 @@ import lozad from 'lozad';
 ( () => {
 	const DEFAULTS = {
 		selector: '[data-is-github-card-loading="true"]',
-		endpoint: '/wp-json/wppic/v2/get_github_card_html',
+		endpoint: wppicGithubInfoCardLazyLoad.restUrl,
 	};
 	const ready = ( fn ) => {
 		if ( document.readyState === 'loading' ) {
