@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Tags: cards, card, theme cards, plugin cards, plugin list
 Requires at least: 3.7
 Tested up to: 6.8
-Stable tag: 6.1.0
+Stable tag: 6.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,6 +106,11 @@ This video shows you how:
 11. WordPress layout with themes and 2 columns
 
 == Changelog ==
+
+= 6.1.1 =
+* Released 2025-09-04
+* Bug fix: Multisite installations couldn't access REST APIs for new GitHub Info Cards and also Custom Plugins REST API.
+* Bug fix: Screenshots Card was erroring out in the block editor on iframe only installs.
 
 = 6.1.0 =
 * Released 2025-09-02
@@ -505,5 +510,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 6.1.0 =
-New: GitHub Info Cards! Display your favorite GitHub repos in beautiful card format. This must be enabled through new admin panel settings.
+= 6.1.1 =
+Bug fix: REST Url was incorrect on Multisite installs. Fixed Screenshots Block with iframe editors.
