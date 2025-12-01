@@ -1,8 +1,8 @@
 === WP Plugin Info Card ===
 Contributors: briKou, ronalfy
-Tags: cards, card, theme cards, plugin cards, plugin list
+Tags: cards, card, github, embed, plugin list, theme list
 Requires at least: 3.7
-Tested up to: 6.8
+Tested up to: 6.9
 Stable tag: 6.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
