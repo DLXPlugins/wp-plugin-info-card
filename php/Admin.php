@@ -54,6 +54,13 @@ class Admin {
 				true
 			);
 			wp_enqueue_script( 'wppic-dashboard-widget' );
+			wp_enqueue_style(
+				'wppic-styles-admin',
+				Functions::get_plugin_url( 'dist/wppic-admin.css' ),
+				array(),
+				Functions::get_plugin_version(),
+				'all'
+			);
 		}
 	}
 	/**
