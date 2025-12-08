@@ -52,49 +52,6 @@ class Init {
 
 			add_filter( 'mce_external_plugins', array( $this, 'add_tinymce_button' ) );
 			add_filter( 'mce_buttons', array( $this, 'register_mce_button' ) );
-return;
-			// Load stylesheet for tinyMCE button only.
-			wp_enqueue_style(
-				'wppic-admin-css',
-				Functions::get_plugin_url( 'dist/wppic-admin.css' ),
-				array(),
-				Functions::get_plugin_version(),
-				'all'
-			);
-			wp_enqueue_script(
-				'wppic-ui-scripts',
-				Functions::get_plugin_url( 'assets/js/wppic-ui-scripts.js' ),
-				array( 'jquery' ),
-				Functions::get_plugin_version(),
-				true
-			);
-
-			// Define additionnal hookable MCE parameters.
-			$mce_add_params = array(
-				'types'   => array(),
-				'layouts' => array(
-					array(
-						'text'  => __( 'Card (default)', 'wp-plugin-info-card' ),
-						'value' => '',
-					),
-					array(
-						'text'  => __( 'Large', 'wp-plugin-info-card' ),
-						'value' => 'large',
-					),
-					array(
-						'text'  => __( 'WordPress', 'wp-plugin-info-card' ),
-						'value' => 'wordpress',
-					),
-				),
-
-			);
-			$mce_add_params = apply_filters( 'wppic_add_mce_type', $mce_add_params );
-			$mce_add_params = json_encode( $mce_add_params );
-
-			echo '<script>// <![CDATA[
-			var wppicMceList = ' . $mce_add_params . ';
-			// ]]></script>';
-
 		}
 	}
 
@@ -105,6 +62,60 @@ return;
 	 */
 	public function add_tinymce_button( $plugin_array ) {
 		$plugin_array['wppic_mce_button'] = Functions::get_plugin_url( 'assets/js/wppic-ui-mce.js' );
+		wp_enqueue_script(
+			'wppic-ui-scripts',
+			Functions::get_plugin_url( 'assets/js/wppic-ui-scripts.js' ),
+			array( 'jquery' ),
+			Functions::get_plugin_version(),
+			true
+		);
+
+		// Define additionnal hookable MCE parameters.
+		$mce_add_params = array(
+			'types'   => array(),
+			'layouts' => array(
+				array(
+					'text'  => __( 'Card (default)', 'wp-plugin-info-card' ),
+					'value' => '',
+				),
+				array(
+					'text'  => __( 'Large', 'wp-plugin-info-card' ),
+					'value' => 'large',
+				),
+				array(
+					'text'  => __( 'WordPress', 'wp-plugin-info-card' ),
+					'value' => 'wordpress',
+				),
+			),
+
+		);
+		$mce_add_params = apply_filters( 'wppic_add_mce_type', $mce_add_params );
+
+		wp_register_script(
+			'wppic-mce-script',
+			null,
+		);
+		wp_localize_script(
+			'wppic-mce-script',
+			'wppicMceList',
+			$mce_add_params
+		);
+		wp_print_scripts( array( 'wppic-mce-script' ) );
+
+		wp_register_style(
+			'wppic-mce-style',
+			null,
+			array(),
+			Functions::get_plugin_version(),
+			'all'
+		);
+		wp_add_inline_style(
+			'wppic-mce-style',
+			'.mce-i-wppic-icon {
+background-image: url(' . esc_url( Functions::get_plugin_url( 'assets/img/wppic.png' ) ) . ') !important;
+}'
+		);
+		wp_print_styles( array( 'wppic-mce-style' ) );
 		return $plugin_array;
 	}
 
