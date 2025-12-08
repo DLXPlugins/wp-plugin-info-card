@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Tags: cards, card, github, Edd, grid
 Requires at least: 3.7
 Tested up to: 6.9
-Stable tag: 6.1.1
+Stable tag: 6.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,6 +101,11 @@ This video shows you how:
 6. GitHub Info Cards displaying in a grid.
 
 == Changelog ==
+
+= 6.1.4 =
+* Released 2025-12-08
+* Bug fix: Dashboard widget wasn't styled correctly.
+* Bug fix: TinyMCE button wasn't showing for classic editor.
 
 = 6.1.1 =
 * Released 2025-09-04
@@ -505,5 +510,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 6.1.1 =
-Bug fix: REST Url was incorrect on Multisite installs. Fixed Screenshots Block with iframe editors.
+= 6.1.4 =
+Bug fix: Dashboard widget wasn't styled correctly. Fixing missing TinyMCE button.
