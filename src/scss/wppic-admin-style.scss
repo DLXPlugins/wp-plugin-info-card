@@ -47,7 +47,7 @@ html {
 	scroll-behavior: smooth;
 }
 
-#wpcontent {
+.settings_page_wp-plugin-info-card #wpcontent {
 	padding-left: 0 !important;
 	padding-right: 0 !important;
 	position: relative;
@@ -181,16 +181,16 @@ html {
 	}
 }
 
-.notice,
-.updated {
+.settings_page_wp-plugin-info-card .notice,
+.settings_page_wp-plugin-info-card .updated {
 	display: none;
 }
 
-.form-table th {
+.settings_page_wp-plugin-info-card .form-table th {
 	padding-top: 15px;
 }
 
-.form-table td {
+.settings_page_wp-plugin-info-card .form-table td {
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
