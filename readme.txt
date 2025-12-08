@@ -1,6 +1,6 @@
 === WP Plugin Info Card ===
 Contributors: briKou, ronalfy
-Tags: cards, card, github, embed, plugin list, theme list
+Tags: cards, card, github, Edd, grid
 Requires at least: 3.7
 Tested up to: 6.9
 Stable tag: 6.1.1
@@ -93,17 +93,12 @@ This video shows you how:
 
 == Screenshots ==
 
-1. Plugin identity card
-2. Admin page
-3. Dashboard widget
-4. Shortcode builder
-5. Shortcode button
-6. Another example with a theme (back of the card), a plugin with a custom icon, a plugin without icon (default WorPress logo)
-7. Theme with the large layout
-8. Plugin with the large layout
-9. Plugin with the large layout in the sidebar
-10. WordPress layout with a plugin card
-11. WordPress layout with themes and 2 columns
+1. Card Layout (Plugins) with one showing the back of the card.
+2. Admin page showing EDD, Custom Plugins, and GitHub Card options.
+3. Theme Card Layouts showing Info Card, Ratings Card, and Large format card for Ollie theme.
+4. Author Query displaying cards in a 3-column grid.
+5. Plugin Screenshots Info Card - Display a plugin with screenshots (if available).
+6. GitHub Info Cards displaying in a grid.
 
 == Changelog ==
 
