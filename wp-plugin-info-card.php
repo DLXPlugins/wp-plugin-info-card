@@ -37,7 +37,7 @@ if ( file_exists( __DIR__ . '/lib/autoload.php' ) ) {
  * Define Constants.
  */
 if ( ! defined( 'WPPIC_VERSION' ) ) {
-	define( 'WPPIC_VERSION', '6.1.1' );
+	define( 'WPPIC_VERSION', '6.1.4' );
 }
 if ( ! defined( 'WPPIC_PATH' ) ) {
 	define( 'WPPIC_PATH', plugin_dir_path( __FILE__ ) . '/src/' );
