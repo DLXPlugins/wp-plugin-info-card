@@ -247,6 +247,13 @@ class Blocks {
 			Functions::get_plugin_version(),
 			'all'
 		);
+		wp_register_style(
+			'wppic-badges',
+			Functions::get_plugin_url( 'dist/badges.css' ),
+			array(),
+			Functions::get_plugin_version(),
+			'all'
+		);
 
 		// Scripts.
 		wp_register_script(

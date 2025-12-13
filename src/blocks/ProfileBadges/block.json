@@ -29,6 +29,10 @@
 		"lastUpdated": {
 			"type": "string",
 			"default": ""
+		},
+		"title": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"example": {
@@ -42,5 +46,6 @@
 		"className": true
 	},
 	"editorScript": "wp-plugin-info-card-block-js",
-	"editorStyle": [ "wp-plugin-info-card-block-editor-css", "wp-plugin-info-card-block-styles-css" ]
+	"editorStyle": [ "wp-plugin-info-card-block-editor-css", "wp-plugin-info-card-block-styles-css" ],
+	"style": "wppic-badges"
 }

@@ -898,6 +898,10 @@ return array(
 			'lastUpdated' => array(
 				'type' => 'string',
 				'default' => ''
+			),
+			'title' => array(
+				'type' => 'string',
+				'default' => ''
 			)
 		),
 		'example' => array(
@@ -914,7 +918,8 @@ return array(
 		'editorStyle' => array(
 			'wp-plugin-info-card-block-editor-css',
 			'wp-plugin-info-card-block-styles-css'
-		)
+		),
+		'style' => 'wppic-badges'
 	),
 	'SitePluginsCardGrid' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
