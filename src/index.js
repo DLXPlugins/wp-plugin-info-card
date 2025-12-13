@@ -11,6 +11,7 @@ import './blocks/SitePluginsCardGrid/block';
 import './blocks/PluginScreenshotsInfoCard/block';
 import './blocks/GitHubInfoCard/block';
 import './blocks/GitHubInfoCardGrid/block';
+import './blocks/ProfileBadges/block';
 
 /**
  * Add Block Category Icon.

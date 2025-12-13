@@ -11,6 +11,7 @@ module.exports = function( grunt ) {
 					{ src: [ 'functions.php' ], dest: '/', filter: 'isFile' },
 					{ src: [ 'uninstall.php' ], dest: '/', filter: 'isFile' },
 					{ src: [ 'assets/**' ], dest: '/' },
+					{ src: [ 'src/**' ], dest: '/' },
 					{ src: [ 'build/**' ], dest: '/' },
 					{ src: [ 'dist/**' ], dest: '/' },
 					{ src: [ 'langs/**' ], dest: '/' },

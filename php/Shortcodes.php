@@ -68,6 +68,36 @@ class Shortcodes {
 		);
 
 		register_post_type( 'wppic_screen_presets', $args );
+
+		// Post type for author profiles.
+		$labels = array(
+			'name'               => __( 'Profiles', 'wp-plugin-info-card' ),
+			'singular_name'      => __( 'Profile', 'wp-plugin-info-card' ),
+			'add_new'            => __( 'Add New', 'wp-plugin-info-card' ),
+			'add_new_item'       => __( 'Add New Profile', 'wp-plugin-info-card' ),
+			'edit_item'          => __( 'Edit Profile', 'wp-plugin-info-card' ),
+			'new_item'           => __( 'New Profile', 'wp-plugin-info-card' ),
+			'all_items'          => __( 'All Profiles', 'wp-plugin-info-card' ),
+			'view_item'          => __( 'View Profile', 'wp-plugin-info-card' ),
+			'search_items'       => __( 'Search Profiles', 'wp-plugin-info-card' ),
+			'not_found'          => __( 'No Profiles found', 'wp-plugin-info-card' ),
+			'not_found_in_trash' => __( 'No Profiles found in Trash', 'wp-plugin-info-card' ),
+			'parent_item_colon'  => '',
+			'menu_name'          => __( 'Profiles', 'wp-plugin-info-card' ),
+		);
+
+		$args = array(
+			'labels'             => $labels,
+			'public'             => false,
+			'publicly_queryable' => false,
+			'show_ui'            => false,
+			'show_in_menu'       => false,
+			'query_var'          => false,
+			'rewrite'            => false,
+			'hierarchical'       => false,
+		);
+
+		register_post_type( 'wppic_profiles', $args );
 	}
 
 	/**
@@ -463,6 +493,42 @@ class Shortcodes {
 				),
 			)
 		);
+
+		register_rest_route(
+			'wppic/v2',
+			'/get_profile_data',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'get_profile_data' ),
+				'permission_callback' => array( $this, 'rest_check_permissions' ),
+			)
+		);
+	}
+
+	/**
+	 * Get .org username profile data for return.
+	 *
+	 * @param array $request Request data.
+	 */
+	public function get_profile_data( $request ) {
+		// Get username.
+		$username = isset( $request['author'] ) ? sanitize_text_field( $request['author'] ) : '';
+
+		// If no username, return error.
+		if ( empty( $username ) ) {
+			wp_send_json_error( array( 'message' => 'No username provided' ) );
+		}
+
+		// Get user profile data from .org.
+		$user_data = Functions::get_org_profile_data( $username );
+
+		// If no error, return data.
+		if ( ! is_wp_error( $user_data ) ) {
+			wp_send_json_success( $user_data );
+		}
+
+		// Return error if no data found.
+		wp_send_json_error( array( 'message' => 'No data found' ) );
 	}
 
 	/**
