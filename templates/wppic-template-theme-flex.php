@@ -42,7 +42,7 @@ if ( ! empty( $image ) ) {
 			<p class="wp-pic-updated"><span><?php esc_html_e( 'Last Updated:', 'wp-plugin-info-card' ); ?></span> <?php echo esc_html( $wppic_data->last_updated ); ?></p>
 		</div>
 		<div class="wp-pic-author-wrapper">
-			<p class="wp-pic-author"><?php esc_html_e( 'Author(s):', 'wp-plugin-info-card' ); ?> <?php echo esc_html( $wppic_data->author ); ?></p>
+			<p class="wp-pic-author"><?php esc_html_e( 'Author(s):', 'wp-plugin-info-card' ); ?> <?php echo wp_kses_post( $wppic_data->author ); ?></p>
 		</div>
 		<div class="wp-pic-bottom">
 			<div class="wp-pic-bar">
