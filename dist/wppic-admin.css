@@ -13056,18 +13056,22 @@ a.wp-pic-credit:focus:after {
   height: auto;
   max-height: 175px;
 }
-.wp-pic-plugin-screenshots-images .f-button {
+.wp-pic-plugin-screenshots-images button.f-button {
   background: var(--wppic-plugin-screenshots-card-screenshots-arrow-background-color);
   transition: all 0.3s ease-in-out;
   border-radius: 100%;
 }
-.wp-pic-plugin-screenshots-images .f-button:hover {
+.wp-pic-plugin-screenshots-images button.f-button:hover {
   background: var(--wppic-plugin-screenshots-card-screenshots-arrow-background-color-hover);
   transition: all 0.3s ease-in-out;
 }
-.wp-pic-plugin-screenshots-images .f-button:hover svg {
+.wp-pic-plugin-screenshots-images button.f-button:hover svg {
   transition: all 0.3s ease-in-out;
   fill: var(--wppic-plugin-screenshots-card-screenshots-arrow-color-hover);
+}
+.wp-pic-plugin-screenshots-images button.f-button:disabled {
+  opacity: 0;
+  pointer-events: none;
 }
 .wp-pic-plugin-screenshots-images .f-button svg {
   transition: all 0.3s ease-in-out;
@@ -13108,6 +13112,10 @@ a.wp-pic-credit:focus:after {
 
 .wp-pic-plugin-screenshots-rating {
   margin: 12px 0;
+}
+
+.wp-pic-plugin-screenshots-meta-item-svg {
+  display: inline-flex;
 }
 
 .wp-pic-plugin-screenshots-rating svg {

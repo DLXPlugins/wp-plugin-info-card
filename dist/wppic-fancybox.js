@@ -97,7 +97,7 @@ document.addEventListener('wppicFancyboxCarouselInit', function (event) {
   new iframeWindow.Carousel(wrapper, {
     slidesPerPage: 1,
     Dots: false,
-    infinite: true,
+    infinite: false,
     adaptiveHeight: false
   });
 });
@@ -179,7 +179,8 @@ document.addEventListener('DOMContentLoaded', function () {
                   newCarousel = new _fancyapps_ui__WEBPACK_IMPORTED_MODULE_0__.Carousel(carouselUl, {
                     Dots: false,
                     infinite: false,
-                    adaptiveHeight: false
+                    adaptiveHeight: false,
+                    slidesPerPage: 1
                   }); // Let's go for the deferred images and load them in.
                   deferredImages.forEach(function (deferredImage) {
                     var newDeferredImage = new Image();

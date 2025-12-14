@@ -238,7 +238,7 @@ class Blocks {
 		wp_register_style(
 			'wp-plugin-info-card-block-styles-css', // Handle.
 			Functions::get_plugin_url( 'dist/wppic-styles.css' ), // Block editor CSS.
-			array( 'wp-edit-blocks' ),
+			array(),
 			Functions::get_plugin_version(),
 			'all'
 		);

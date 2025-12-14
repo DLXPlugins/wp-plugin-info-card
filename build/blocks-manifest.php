@@ -852,14 +852,13 @@ return array(
 			),
 			'className' => true
 		),
-		'editorScript' => 'wp_plugin_info_card-cgb-block-js',
+		'editorScript' => 'wp-plugin-info-card-block-js',
 		'editorStyle' => array(
-			'wp_plugin_info_card-cgb-block-editor-css',
-			'wp_plugin_info_card-cgb-style-css',
+			'wp-plugin-info-card-block-editor-css',
+			'wp-plugin-info-card-block-styles-css',
 			'wp-plugin-info-card-block-editor-css-inline'
 		),
 		'style' => array(
-			'has-style-frontend-css',
 			'wppic-fancybox-css'
 		)
 	),
