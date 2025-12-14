@@ -142,7 +142,9 @@ return array(
 			'wp-plugin-info-card-block-editor-css',
 			'wp-plugin-info-card-block-styles-css'
 		),
-		'style' => 'wppic-github-info-card'
+		'style' => array(
+			'wppic-github-info-card'
+		)
 	),
 	'GitHubInfoCardGrid' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',

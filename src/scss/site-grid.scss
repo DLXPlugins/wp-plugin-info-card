@@ -16,7 +16,7 @@
 	&.cols-2 {
 		grid-template-columns: 1fr;
 		@include respond-to('medium') {
-			grid-template-columns: 1fr 1fr;
+			grid-template-columns: auto auto;
 			justify-content: center;
 
 			.wp-pic-wrapper:nth-child(odd) {
@@ -30,10 +30,10 @@
 	&.cols-3 {
 		grid-template-columns: 1fr;
 		@include respond-to('medium') {
-			grid-template-columns: 1fr 1fr;
+			grid-template-columns: auto auto;
 		}
 		@include respond-to('large') {
-			grid-template-columns: 1fr 1fr 1fr;
+			grid-template-columns: auto auto auto;
 			justify-content: center;
 			.wp-pic-wrapper {
 				justify-content: center;
@@ -59,7 +59,7 @@
 		&.cols-2 {
 			grid-template-columns: 1fr;
 			@include respond-to('medium') {
-				grid-template-columns: 1fr 1fr;
+				grid-template-columns: auto auto;
 			}
 			.wp-pic-wrapper:nth-child(odd) {
 				justify-content: flex-end;
@@ -71,7 +71,7 @@
 		&.cols-3 {
 			grid-template-columns: 1fr;
 			@include respond-to('medium') {
-				grid-template-columns: 1fr 1fr;
+				grid-template-columns: auto auto;
 
 				&:nth-child(odd) {
 					.wp-pic-wrapper {
@@ -85,7 +85,7 @@
 				}
 			}
 			@include respond-to('large') {
-				grid-template-columns: 1fr 1fr 1fr;
+				grid-template-columns: auto auto auto;
 
 				&:nth-child( 3n + 1 ) {
 					.wp-pic-wrapper {

@@ -9752,7 +9752,7 @@ div.components-toolbar > div + div.has-left-divider::before {
 @media (min-width: 768px) {
   .wp-site-plugin-info-card.cols-2,
   .wp-query-plugin-info-card.cols-2 {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto auto;
     justify-content: center;
   }
   .wp-site-plugin-info-card.cols-2 .wp-pic-wrapper:nth-child(odd),
@@ -9771,13 +9771,13 @@ div.components-toolbar > div + div.has-left-divider::before {
 @media (min-width: 768px) {
   .wp-site-plugin-info-card.cols-3,
   .wp-query-plugin-info-card.cols-3 {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto auto;
   }
 }
 @media (min-width: 1024px) {
   .wp-site-plugin-info-card.cols-3,
   .wp-query-plugin-info-card.cols-3 {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: auto auto auto;
     justify-content: center;
   }
   .wp-site-plugin-info-card.cols-3 .wp-pic-wrapper,
@@ -9802,7 +9802,7 @@ div.components-toolbar > div + div.has-left-divider::before {
 }
 @media (min-width: 768px) {
   .wp-block-plugin-info-card.has-grid.cols-2 {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto auto;
   }
 }
 .wp-block-plugin-info-card.has-grid.cols-2 .wp-pic-wrapper:nth-child(odd) {
@@ -9816,7 +9816,7 @@ div.components-toolbar > div + div.has-left-divider::before {
 }
 @media (min-width: 768px) {
   .wp-block-plugin-info-card.has-grid.cols-3 {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto auto;
   }
   .wp-block-plugin-info-card.has-grid.cols-3:nth-child(odd) .wp-pic-wrapper {
     justify-content: flex-end;
@@ -9827,7 +9827,7 @@ div.components-toolbar > div + div.has-left-divider::before {
 }
 @media (min-width: 1024px) {
   .wp-block-plugin-info-card.has-grid.cols-3 {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: auto auto auto;
   }
   .wp-block-plugin-info-card.has-grid.cols-3:nth-child(3n+1) .wp-pic-wrapper {
     justify-content: flex-start;

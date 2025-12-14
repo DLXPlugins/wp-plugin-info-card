@@ -215,9 +215,6 @@ class Blocks {
 	 * Register any scripts/styles needed for blocks.
 	 */
 	public function register_block_assets() {
-		if ( ! is_admin() ) {
-			return;
-		}
 		wp_register_style(
 			'wp-plugin-info-card-block-editor-css',
 			Functions::get_plugin_url( 'dist/wppic-editor.css' ),
@@ -309,23 +306,19 @@ class Blocks {
 		);
 
 		$fancybox_deps = require Functions::get_plugin_dir( 'dist/wppic-fancybox.asset.php' );
-
-		foreach ( $fancybox_deps['dependencies'] as $key => $value ) {
-			if ( 'wp-escapeHtml' === $value ) {
-				$fancybox_deps['dependencies'][ $key ] = 'wp-escape-html';
-			}
+		if ( is_admin() ) {
+			/**
+			 * This will load outside the iframe, and within it. It also loads on the frontend in a separate file (Shortcodes.php)
+			 * This is used for the plugin screenshots block.
+			 */
+			wp_enqueue_script(
+				'wppic-fancybox-js',
+				Functions::get_plugin_url( '/dist/wppic-fancybox.js' ),
+				$fancybox_deps['dependencies'],
+				$fancybox_deps['version'],
+				true
+			);
 		}
-		/**
-		 * This will load outside the iframe, and within it. It also loads on the frontend in a separate file (Shortcodes.php)
-		 * This is used for the plugin screenshots block.
-		 */
-		wp_enqueue_script(
-			'wppic-fancybox-js',
-			Functions::get_plugin_url( '/dist/wppic-fancybox.js' ),
-			$fancybox_deps['dependencies'],
-			$fancybox_deps['version'],
-			true
-		);
 
 		/**
 		 * This will load outside the iframe, and within it. It also loads on the frontend in a separate file (Shortcodes.php).

@@ -129,5 +129,5 @@
 	},
 	"editorScript": "wp-plugin-info-card-block-js",
 	"editorStyle": [ "wp-plugin-info-card-block-editor-css", "wp-plugin-info-card-block-styles-css" ],
-	"style": "wppic-github-info-card"
+	"style": [ "wppic-github-info-card" ]
 }
