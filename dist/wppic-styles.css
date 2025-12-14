@@ -746,6 +746,48 @@ p.wp-pic-author,
   font-size: 36px;
 }
 
+.wp-block .wp-pic-plugin-screenshots-rating > span {
+  display: inline-flex;
+}
+
+.wp-block .wp-pic-plugin-screenshots-rating {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.wp-pic-card .react-simple-star-rating {
+  position: relative;
+}
+
+.wp-pic-card .react-simple-star-rating {
+  position: relative;
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.wp-pic-card .react-simple-star-rating .empty-icons {
+  display: inline-block;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  z-index: 1;
+  line-height: 0;
+}
+
+.wp-pic-card .react-simple-star-rating .filled-icons {
+  display: inline-block;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  z-index: 2;
+  line-height: 0;
+}
+
 .wp-pic-rating-row {
   width: 100%;
   text-align: center;
