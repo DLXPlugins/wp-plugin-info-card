@@ -102,6 +102,17 @@ This video shows you how:
 
 == Changelog ==
 
+= 6.2.0 =
+* Released 2025-12-0x
+* New: Badges block and shortcode. Show off your WordPress.org badges on your own site.
+* New: Screenshots block has been ported to block.json API version 3. This brings all blocks to v3 in preparation for WordPress 7.0.
+* New: Added gallery capabilities to the screenshots block.
+* New: Theme downloads are now rounded down on the plugin/theme cards.
+* Bug fix: Fix nav styles in the screenshots block in the block editor.
+* Bug fix: Fix icon alignment in the screenshots block.
+* Bug fix: Fixing overly sanitized author link in the Flex card layout.
+* Bug fix: Grid columns are no longer too stretched out.
+
 = 6.1.4 =
 * Released 2025-12-08
 * Bug fix: Dashboard widget wasn't styled correctly.
