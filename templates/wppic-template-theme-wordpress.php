@@ -5,6 +5,8 @@
  * @package WP_Plugin_Info_Card
  */
 
+use MediaRon\WPPIC\Functions;
+
 /***************************************************************
  * $wppic_data Object contain the following values:
  * url, name, slug, version, preview_url, author_def, author, screenshot_url, rating, num_ratings, downloaded, last_updated_mk, last_updated, homepage, description, download_link
@@ -61,7 +63,7 @@ if ( ! empty( $image ) ) {
 				<strong><?php esc_html_e( 'Last Updated:', 'wp-plugin-info-card' ); ?></strong> <?php /* Translators: %s is the time ago */ printf( esc_html__( '%s ago', 'wp-plugin-info-card' ), human_time_diff( strtotime( $wppic_data->last_updated_mk ) ) ); ?>
 			</div>
 			<div class="wp-pic-column-downloaded">
-				<?php /* Translators: %s is the number of downloads */ printf( esc_html__( '%s Downloads', 'wp-plugin-info-card' ), esc_html( number_format( filter_var( $wppic_data->downloaded, FILTER_SANITIZE_NUMBER_INT ) ) ) ); ?>
+				<?php /* Translators: %s is the number of downloads */ printf( esc_html__( '%s Downloads', 'wp-plugin-info-card' ), esc_html( number_format_i18n( Functions::get_downloaded_count_from_string( $wppic_data->downloaded ) ) ) ); ?>
 			</div>
 			<div class="wp-pic-column-version">
 				<span><?php /* Translators: %s is the theme version */ printf( esc_html__( 'Version: %s', 'wp-plugin-info-card' ), esc_html( $wppic_data->version ) ); ?></span>

@@ -271,6 +271,19 @@ class Functions {
 		return $profile_data;
 	}
 
+	/**
+	 * Get the downloaded count from a string.
+	 *
+	 * @param string $downloaded_count_string The downloaded count string. Typically in format: 100,104.
+	 *
+	 * @return int The download count in integer format (100,104 -> 104).
+	 */
+	public static function get_downloaded_count_from_string( $downloaded_count_string ) {
+		$downloaded_count = absint( str_replace( ',', '', $downloaded_count_string ) );
+		$result           = (int) floor( $downloaded_count / 1000 ) * 1000;
+		return $result;
+	}
+
 
 	/**
 	 * Gets an array of plugins active on either the current site, or site-wide
