@@ -88,6 +88,36 @@ function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { 
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 
+
+/**
+ * Escapes a string for safe use in HTML attributes.
+ *
+ * Used in place of @wordpress/escape-html which isn't available on the frontend.
+ *
+ * @param {string} value - The value to escape.
+ * @return {string} The escaped value.
+ */
+var escapeAttribute = function escapeAttribute(value) {
+  if (value === null || value === undefined) {
+    return '';
+  }
+  return String(value).replace(/[&<>"']/g, function (match) {
+    switch (match) {
+      case '&':
+        return '&amp;';
+      case '<':
+        return '&lt;';
+      case '>':
+        return '&gt;';
+      case '"':
+        return '&quot;';
+      case "'":
+        return '&#039;';
+      default:
+        return match;
+    }
+  });
+};
 document.addEventListener('wppicFancyboxCarouselInit', function (event) {
   var iframeWindow = event.detail.window;
   var wrapper = event.detail.screenshotsWrapper;
@@ -106,32 +136,32 @@ document.addEventListener('DOMContentLoaded', function () {
   if (null !== maybeIframe) {
     return;
   }
-  var buildSlide = function buildSlide(anchor, caption) {
+  var buildSlide = function buildSlide(anchor, caption, slug, uniqueId) {
     var liSlide = document.createElement('li');
     liSlide.classList.add('f-carousel__slide');
     var aSlide = document.createElement('a');
     aSlide.href = anchor;
 
     // Fancybox attributes.
-    aSlide.setAttribute('data-fancybox', '');
-    aSlide.setAttribute('data-caption', caption);
+    aSlide.setAttribute('data-fancybox', escapeAttribute("wppic-screenshot-".concat(slug, "-").concat(uniqueId)));
+    aSlide.setAttribute('data-caption', escapeAttribute(caption));
     var imgSlide = document.createElement('img');
     imgSlide.src = anchor;
-    imgSlide.alt = caption;
+    imgSlide.alt = escapeAttribute(caption);
     aSlide.appendChild(imgSlide);
     liSlide.appendChild(aSlide);
     return liSlide;
   };
-  var buildSlideNoLi = function buildSlideNoLi(anchor, caption) {
+  var buildSlideNoLi = function buildSlideNoLi(anchor, caption, slug, uniqueId) {
     var aSlide = document.createElement('a');
     aSlide.href = anchor;
 
     // Fancybox attributes.
-    aSlide.setAttribute('data-fancybox', '');
-    aSlide.setAttribute('data-caption', caption);
+    aSlide.setAttribute('data-fancybox', escapeAttribute("wppic-screenshot-".concat(slug, "-").concat(uniqueId)));
+    aSlide.setAttribute('data-caption', escapeAttribute(caption));
     var imgSlide = document.createElement('img');
     imgSlide.src = anchor;
-    imgSlide.alt = caption;
+    imgSlide.alt = escapeAttribute(caption);
     aSlide.appendChild(imgSlide);
     return aSlide;
   };
@@ -152,6 +182,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var deferredImages = [];
     var countImage = 0;
     var carouselUl = carouselWrapper.querySelector('.wppic-screenshot-fancyapps');
+    var slug = carouselWrapper.getAttribute('data-slug');
+    var uniqueId = carouselWrapper.getAttribute('data-unique-id');
     // Loop through the first three images and preload them.
     carouselImages.forEach(function (image, index) {
       if (index > 2) {
@@ -168,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function () {
           return _regenerator().w(function (_context2) {
             while (1) switch (_context2.n) {
               case 0:
-                carouselUl.appendChild(buildSlide(image.getAttribute('data-src'), image.getAttribute('data-alt')));
+                carouselUl.appendChild(buildSlide(image.getAttribute('data-src'), image.getAttribute('data-alt'), slug, uniqueId));
                 countImage++;
                 if (countImage === 3 || countImage === carouselImages.length) {
                   // Show carouselUL.
@@ -190,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function () {
                       return _regenerator().w(function (_context) {
                         while (1) switch (_context.n) {
                           case 0:
-                            newCarousel.appendSlide(buildSlideNoLi(deferredImage.src, deferredImage.alt));
+                            newCarousel.appendSlide(buildSlideNoLi(deferredImage.src, deferredImage.alt, slug, uniqueId));
                           case 1:
                             return _context.a(2);
                         }
@@ -206,7 +238,11 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
-  _fancyapps_ui__WEBPACK_IMPORTED_MODULE_0__.Fancybox.bind('[data-fancybox]', {});
+  _fancyapps_ui__WEBPACK_IMPORTED_MODULE_0__.Fancybox.bind('[data-fancybox]', {
+    Thumbs: {
+      type: 'classic'
+    }
+  });
 });
 })();
 

@@ -308,6 +308,13 @@ class Blocks {
 			)
 		);
 
+		$fancybox_deps = require Functions::get_plugin_dir( 'dist/wppic-fancybox.asset.php' );
+
+		foreach ( $fancybox_deps['dependencies'] as $key => $value ) {
+			if ( 'wp-escapeHtml' === $value ) {
+				$fancybox_deps['dependencies'][ $key ] = 'wp-escape-html';
+			}
+		}
 		/**
 		 * This will load outside the iframe, and within it. It also loads on the frontend in a separate file (Shortcodes.php)
 		 * This is used for the plugin screenshots block.
@@ -315,8 +322,8 @@ class Blocks {
 		wp_enqueue_script(
 			'wppic-fancybox-js',
 			Functions::get_plugin_url( '/dist/wppic-fancybox.js' ),
-			array(),
-			Functions::get_plugin_version(),
+			$fancybox_deps['dependencies'],
+			$fancybox_deps['version'],
 			true
 		);
 

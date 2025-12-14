@@ -1870,7 +1870,7 @@ class Shortcodes {
 										}
 										?>
 									</div>
-									<ul class="wppic-screenshot-fancyapps f-carousel" style="display: none;">
+									<ul class="wppic-screenshot-fancyapps f-carousel" data-slug="<?php echo esc_attr( $asset_data['slug'] ); ?>" data-unique-id="<?php echo esc_attr( $attributes['unique_id'] ); ?>" style="display: none;">
 									</ul>
 								</div>
 							<?php
@@ -1916,6 +1916,7 @@ class Shortcodes {
 				</div>
 			</div>
 		<?php
+		wp_enqueue_script( 'wp-escape-html' );
 		if ( 0 === did_action( 'wppic_enqueue_scripts' ) ) {
 			do_action( 'wppic_enqueue_scripts' );
 		}
