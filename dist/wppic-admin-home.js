@@ -27091,31 +27091,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var Fragment = wp.element.Fragment;
-var BannerWrapper = function BannerWrapper(props) {
-  var bannerImage = props.defaultBanner;
-  if ('high' in props.bannerImage && false !== props.bannerImage.high) {
-    bannerImage = props.bannerImage.high;
-  } else if ('low' in props.bannerImage && false !== props.bannerImage) {
-    bannerImage = props.bannerImage.low;
+var BannerWrapper = function BannerWrapper(_ref) {
+  var _ref$name = _ref.name,
+    name = _ref$name === void 0 ? '' : _ref$name,
+    _ref$banners = _ref.banners,
+    banners = _ref$banners === void 0 ? {} : _ref$banners,
+    _ref$hasBanner = _ref.hasBanner,
+    hasBanner = _ref$hasBanner === void 0 ? false : _ref$hasBanner,
+    _ref$bannerImage = _ref.bannerImage,
+    bannerImage = _ref$bannerImage === void 0 ? {} : _ref$bannerImage,
+    _ref$defaultBanner = _ref.defaultBanner,
+    defaultBanner = _ref$defaultBanner === void 0 ? typeof wppic !== 'undefined' ? wppic.wppic_banner_default : '' : _ref$defaultBanner,
+    _ref$image = _ref.image,
+    image = _ref$image === void 0 ? false : _ref$image;
+  var bannerImageSrc = defaultBanner;
+  if ('high' in bannerImage && false !== bannerImage.high) {
+    bannerImageSrc = bannerImage.high;
+  } else if ('low' in bannerImage && false !== bannerImage) {
+    bannerImageSrc = bannerImage.low;
   }
-  if (props.image) {
-    bannerImage = props.image;
+  if (image) {
+    bannerImageSrc = image;
   }
   return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "wp-pic-banner-wrapper"
   }, /*#__PURE__*/React.createElement("img", {
-    src: bannerImage,
-    alt: props.name
+    src: bannerImageSrc,
+    alt: name
   })));
-};
-BannerWrapper.defaultProps = {
-  name: '',
-  banners: {},
-  hasBanner: false,
-  bannerImage: {},
-  // eslint-disable-next-line no-undef
-  defaultBanner: wppic.wppic_banner_default,
-  image: false
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BannerWrapper);
 
@@ -27133,26 +27136,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var Fragment = wp.element.Fragment;
-var PicIcon = function PicIcon(props) {
-  var icon = props.defaultIcon;
-  if (props.image) {
-    icon = props.image;
-  } else if (props.data.icons.svg) {
-    icon = props.data.icons.svg;
-  } else if (props.data.icons['2x']) {
-    icon = props.data.icons['2x'];
-  } else if (props.data.icons['1x']) {
-    icon = props.data.icons['1x'];
+var PicIcon = function PicIcon(_ref) {
+  var defaultIcon = _ref.defaultIcon,
+    _ref$image = _ref.image,
+    image = _ref$image === void 0 ? false : _ref$image,
+    data = _ref.data;
+  var icon = defaultIcon;
+  if (image) {
+    icon = image;
+  } else if (data.icons.svg) {
+    icon = data.icons.svg;
+  } else if (data.icons['2x']) {
+    icon = data.icons['2x'];
+  } else if (data.icons['1x']) {
+    icon = data.icons['1x'];
   }
   return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("img", {
     src: icon,
     className: "wp-pic-plugin-icon",
-    alt: props.data.name
+    alt: data.name
   }));
-};
-PicIcon.defaultProps = {
-  name: '',
-  image: false
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PicIcon);
 
@@ -27169,30 +27172,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
- // ES6
-
-var WordPressIcon = function WordPressIcon(props) {
+var WordPressIcon = function WordPressIcon(_ref) {
+  var _ref$width = _ref.width,
+    width = _ref$width === void 0 ? 24 : _ref$width,
+    _ref$height = _ref.height,
+    height = _ref$height === void 0 ? 24 : _ref$height,
+    _ref$fill = _ref.fill,
+    fill = _ref$fill === void 0 ? '#333333' : _ref$fill;
   return /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 512 512",
-    width: props.width,
-    height: props.height
+    width: width,
+    height: height
   }, /*#__PURE__*/React.createElement("path", {
-    fill: props.fill,
+    fill: fill,
     d: "M256 8C119.3 8 8 119.2 8 256c0 136.7 111.3 248 248 248s248-111.3 248-248C504 119.2 392.7 8 256 8zM33 256c0-32.3 6.9-63 19.3-90.7l106.4 291.4C84.3 420.5 33 344.2 33 256zm223 223c-21.9 0-43-3.2-63-9.1l66.9-194.4 68.5 187.8c.5 1.1 1 2.1 1.6 3.1-23.1 8.1-48 12.6-74 12.6zm30.7-327.5c13.4-.7 25.5-2.1 25.5-2.1 12-1.4 10.6-19.1-1.4-18.4 0 0-36.1 2.8-59.4 2.8-21.9 0-58.7-2.8-58.7-2.8-12-.7-13.4 17.7-1.4 18.4 0 0 11.4 1.4 23.4 2.1l34.7 95.2L200.6 393l-81.2-241.5c13.4-.7 25.5-2.1 25.5-2.1 12-1.4 10.6-19.1-1.4-18.4 0 0-36.1 2.8-59.4 2.8-4.2 0-9.1-.1-14.4-.3C109.6 73 178.1 33 256 33c58 0 110.9 22.2 150.6 58.5-1-.1-1.9-.2-2.9-.2-21.9 0-37.4 19.1-37.4 39.6 0 18.4 10.6 33.9 21.9 52.3 8.5 14.8 18.4 33.9 18.4 61.5 0 19.1-7.3 41.2-17 72.1l-22.2 74.3-80.7-239.6zm81.4 297.2 68.1-196.9c12.7-31.8 17-57.2 17-79.9 0-8.2-.5-15.8-1.5-22.9 17.4 31.8 27.3 68.2 27.3 107 0 82.3-44.6 154.1-110.9 192.7z"
   }));
-};
-WordPressIcon.defaultProps = {
-  width: 24,
-  height: 24,
-  fill: '#333333'
-};
-WordPressIcon.propTypes = {
-  width: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().number),
-  height: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().number),
-  fill: (prop_types__WEBPACK_IMPORTED_MODULE_0___default().string)
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WordPressIcon);
 
@@ -27987,40 +27982,47 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_a11y__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/a11y */ "@wordpress/a11y");
-/* harmony import */ var _wordpress_a11y__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_a11y__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_a11y__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/a11y */ "@wordpress/a11y");
+/* harmony import */ var _wordpress_a11y__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_a11y__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+var _excluded = ["message", "status", "politeness", "icon", "className", "inline", "children", "hasToTop"];
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _objectWithoutProperties(e, t) { if (null == e) return {}; var o, r, i = _objectWithoutPropertiesLoose(e, t); if (Object.getOwnPropertySymbols) { var n = Object.getOwnPropertySymbols(e); for (r = 0; r < n.length; r++) o = n[r], -1 === t.indexOf(o) && {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]); } return i; }
+function _objectWithoutPropertiesLoose(r, e) { if (null == r) return {}; var t = {}; for (var n in r) if ({}.hasOwnProperty.call(r, n)) { if (-1 !== e.indexOf(n)) continue; t[n] = r[n]; } return t; }
 // eslint-disable-next-line no-unused-vars
 
- // ES6
 
 
 
 
-var Notice = function Notice(props) {
-  var message = props.message,
-    status = props.status,
-    politeness = props.politeness,
-    icon = props.icon,
-    className = props.className,
-    inline = props.inline,
-    children = props.children,
-    _props$hasToTop = props.hasToTop,
-    hasToTop = _props$hasToTop === void 0 ? false : _props$hasToTop;
+var Notice = function Notice(_ref) {
+  var _ref$message = _ref.message,
+    message = _ref$message === void 0 ? '' : _ref$message,
+    _ref$status = _ref.status,
+    status = _ref$status === void 0 ? 'info' : _ref$status,
+    _ref$politeness = _ref.politeness,
+    politeness = _ref$politeness === void 0 ? 'polite' : _ref$politeness,
+    _ref$icon = _ref.icon,
+    icon = _ref$icon === void 0 ? null : _ref$icon,
+    _ref$className = _ref.className,
+    className = _ref$className === void 0 ? '' : _ref$className,
+    _ref$inline = _ref.inline,
+    inline = _ref$inline === void 0 ? false : _ref$inline,
+    children = _ref.children,
+    _ref$hasToTop = _ref.hasToTop,
+    hasToTop = _ref$hasToTop === void 0 ? false : _ref$hasToTop,
+    props = _objectWithoutProperties(_ref, _excluded);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    (0,_wordpress_a11y__WEBPACK_IMPORTED_MODULE_2__.speak)(message, politeness);
+    (0,_wordpress_a11y__WEBPACK_IMPORTED_MODULE_1__.speak)(message, politeness);
   }, [message, status, politeness]);
   var hasIcon = function hasIcon() {
     return icon !== null;
@@ -28032,18 +28034,18 @@ var Notice = function Notice(props) {
       fill: "#6c757d"
     });
   };
-  var containerClasses = classnames__WEBPACK_IMPORTED_MODULE_5___default()(className, 'wppic-admin__notice', _defineProperty(_defineProperty(_defineProperty({
+  var containerClasses = classnames__WEBPACK_IMPORTED_MODULE_4___default()(className, 'wppic-admin__notice', _defineProperty(_defineProperty(_defineProperty({
     'wppic-admin__notice--has-icon': hasIcon()
   }, "wppic-admin__notice-type--".concat(status), true), "wppic-admin__notice-appearance--inline", inline), "wppic-admin__notice-appearance--block", !inline));
   var actions = [{
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Back to Top', 'wp-plugin-info-card'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Back to Top', 'wp-plugin-info-card'),
     url: '#wppic-admin-header',
     variant: 'link',
     className: 'wppic-admin__notice-action wppic-admin__notice-action--to-top'
   }];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: containerClasses
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Notice, _extends({
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Notice, _extends({
     isDismissible: false,
     spokenMessage: message,
     actions: hasToTop ? actions : []
@@ -28052,24 +28054,6 @@ var Notice = function Notice(props) {
   }, getIcon(icon)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wppic-admin__notice-message"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, message, " ", children, " "))));
-};
-Notice.defaultProps = {
-  message: '',
-  status: 'info',
-  politeness: 'polite',
-  icon: null,
-  className: '',
-  inline: false,
-  hasToTop: false
-};
-Notice.propTypes = {
-  message: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().string).isRequired,
-  status: prop_types__WEBPACK_IMPORTED_MODULE_1___default().oneOf(['info', 'warning', 'success', 'error']),
-  politeness: prop_types__WEBPACK_IMPORTED_MODULE_1___default().oneOf(['assertive', 'polite']),
-  icon: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().func),
-  className: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().string),
-  inline: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().bool),
-  hasToTop: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().bool)
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Notice);
 

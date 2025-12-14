@@ -8,7 +8,6 @@ import classnames from 'classnames';
 import hexToRgba from 'hex-to-rgba';
 import rgb2hex from 'rgb2hex';
 import { __ } from '@wordpress/i18n';
-import PropTypes from 'prop-types';
 
 import {
 	Tooltip,
@@ -20,23 +19,22 @@ import {
 	Button,
 } from '@wordpress/components';
 
-const ColorPickerControl = ( props ) => {
-	const [ colorKey, setColorKey ] = useState( props.slug );
+const ColorPickerControl = ( {
+	label = __( 'Color', 'ajaxify-block' ),
+	value = '',
+	defaultColor = 'transparent',
+	alpha = false,
+	hideLabelFromVision = false,
+	onOpacityChange = () => {},
+	defaultColors,
+	onChange,
+	slug,
+	opacity,
+} ) => {
+	const [ colorKey, setColorKey ] = useState( slug );
 	const [ isVisible, setIsVisible ] = useState( false );
-	const [ color, setColor ] = useState( props.value );
-	const [ opacity, setOpacity ] = useState( props.opacity );
-
-	const {
-		defaultColor,
-		defaultColors,
-		value,
-		onChange,
-		onOpacityChange,
-		label,
-		alpha = false,
-		slug,
-		hideLabelFromVision = false,
-	} = props;
+	const [ color, setColor ] = useState( value );
+	const [ opacityState, setOpacity ] = useState( opacity );
 
 	useEffect( () => {
 		setColor( value );
@@ -129,7 +127,7 @@ const ColorPickerControl = ( props ) => {
 								className={ classnames(
 									'components-color-palette__item-wrapper components-circular-option-picker__option-wrapper ajaxify-block-color-picker-area ajaxify-block-component-color-picker-palette',
 
-									value ? '' : 'components-color-palette__custom-color'
+									value ? '' : 'components-color-palette__custom-color',
 								) }
 							>
 								<Tooltip text={ __( 'Choose Color', 'ajaxify-block' ) }>
@@ -140,10 +138,10 @@ const ColorPickerControl = ( props ) => {
 										onClick={ toggleVisible }
 										aria-label={ __(
 											'Custom color picker',
-											'ajaxify-block'
+											'ajaxify-block',
 										) }
 										style={ {
-											background: getColor( color, opacity ),
+											background: getColor( color, opacityState ),
 										} }
 									>
 										<span className="components-color-palette__custom-color-gradient" />
@@ -158,7 +156,7 @@ const ColorPickerControl = ( props ) => {
 							className={ classnames(
 								'components-color-palette__item-wrapper components-circular-option-picker__option-wrapper ajaxify-block-color-picker-area ajaxify-block-component-color-picker-palette',
 
-								value ? '' : 'components-color-palette__custom-color'
+								value ? '' : 'components-color-palette__custom-color',
 							) }
 						>
 							<Tooltip text={ __( 'Choose Color', 'ajaxify-block' ) }>
@@ -169,10 +167,10 @@ const ColorPickerControl = ( props ) => {
 									onClick={ toggleClose }
 									aria-label={ __(
 										'Custom color picker',
-										'ajaxify-block'
+										'ajaxify-block',
 									) }
 									style={ {
-										background: getColor( color, opacity ),
+										background: getColor( color, opacityState ),
 									} }
 								>
 									<span className="components-color-palette__custom-color-gradient" />
@@ -194,7 +192,7 @@ const ColorPickerControl = ( props ) => {
 									key={ colorKey }
 									color={ color }
 									onChangeComplete={ ( newColor ) => {
-										const maybeNewColor = getColor( newColor.hex, opacity );
+										const maybeNewColor = getColor( newColor.hex, opacityState );
 										setColor( maybeNewColor );
 										onChange( slug, maybeNewColor );
 									} }
@@ -210,7 +208,7 @@ const ColorPickerControl = ( props ) => {
 									</Tooltip>
 
 									<RangeControl
-										value={ opacity }
+										value={ opacityState }
 										onChange={ ( opacityValue ) => {
 											const newColor = getColor( color, opacityValue );
 											setOpacity( opacityValue );
@@ -254,26 +252,6 @@ const ColorPickerControl = ( props ) => {
 			</div>
 		</BaseControl>
 	);
-};
-
-ColorPickerControl.propTypes = {
-	label: PropTypes.string,
-	onChange: PropTypes.func.isRequired,
-	onOpacityChange: PropTypes.func,
-	value: PropTypes.string,
-	defaultColor: PropTypes.string,
-	alpha: PropTypes.bool,
-	hideLabelFromVision: PropTypes.bool,
-	defaultColors: PropTypes.array.isRequired,
-};
-
-ColorPickerControl.defaultProps = {
-	label: __( 'Color', 'ajaxify-block' ),
-	value: '',
-	defaultColor: 'transparent',
-	alpha: false,
-	hideLabelFromVision: false,
-	onOpacityChange: () => {},
 };
 
 export default ColorPickerControl;

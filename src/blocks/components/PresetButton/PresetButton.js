@@ -1,13 +1,23 @@
 import './editor.scss';
 import React, { useRef, useState } from 'react';
-import Proptypes from 'prop-types';
 import { Button, Popover, Modal } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import PluginScreenshots from '../../templates/PluginScreenshots';
 import BlockPreview from '../BlockPreview';
 
-const PresetButton = ( props ) => {
-	const { setAttributes, label, attributes, uniqueId, theme, customFormData = {}, isPresssed = false } = props;
+const PresetButton = ( { 
+	setAttributes = () => {}, 
+	label = 'Purple', 
+	attributes, 
+	uniqueId, 
+	theme, 
+	customFormData = {}, 
+	isPresssed = false,
+	previewBlock = <></>,
+	presetData = {},
+	disabled = false,
+	...props 
+} ) => {
 
 	// Define state for the popover visibility
 	const [ showPopover, setShowPopover ] = useState( false );
@@ -62,7 +72,7 @@ const PresetButton = ( props ) => {
 				onMouseLeave={ () => handlePopoverClose( false ) }
 				label={ label }
 				ref={ setPopoverAnchor }
-				disabled={ props.disabled ?? false }
+				disabled={ disabled }
 				{ ...props }
 			>
 				{ label }
@@ -79,7 +89,7 @@ const PresetButton = ( props ) => {
 							variant="primary"
 							onClick={ () => {
 								const uniqueIdAttribute = { uniqueId };
-								const blockAttributes = { ...props.attributes, customFormData, uniqueIdAttribute };
+								const blockAttributes = { ...attributes, customFormData, uniqueIdAttribute };
 								setAttributes( blockAttributes );
 								setShowModal( false );
 							} }
@@ -117,16 +127,4 @@ const PresetButton = ( props ) => {
 	);
 };
 
-PresetButton.propTypes = {
-	previewBlock: Proptypes.element.isRequired,
-	setAttributes: Proptypes.func.isRequired,
-	label: Proptypes.string.isRequired,
-	presetData: Proptypes.object.isRequired,
-};
-PresetButton.defaultProps = {
-	label: 'Purple',
-	previewBlock: <></>,
-	setAttributes: () => {},
-	presetData: {},
-};
 export default PresetButton;

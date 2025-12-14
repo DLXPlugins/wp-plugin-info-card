@@ -1,14 +1,21 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types'; // ES6
 import { speak } from '@wordpress/a11y';
 import { __ } from '@wordpress/i18n';
 import { Notice as WPNotice } from '@wordpress/components';
 import classNames from 'classnames';
 
-const Notice = ( props ) => {
-	const { message, status, politeness, icon, className, inline, children, hasToTop = false } = props;
-
+const Notice = ( {
+	message = '',
+	status = 'info',
+	politeness = 'polite',
+	icon = null,
+	className = '',
+	inline = false,
+	children,
+	hasToTop = false,
+	...props
+} ) => {
 	useEffect( () => {
 		speak( message, politeness );
 	}, [ message, status, politeness ] );
@@ -44,26 +51,6 @@ const Notice = ( props ) => {
 			</WPNotice>
 		</div>
 	);
-};
-
-Notice.defaultProps = {
-	message: '',
-	status: 'info',
-	politeness: 'polite',
-	icon: null,
-	className: '',
-	inline: false,
-	hasToTop: false,
-};
-
-Notice.propTypes = {
-	message: PropTypes.string.isRequired,
-	status: PropTypes.oneOf( [ 'info', 'warning', 'success', 'error' ] ),
-	politeness: PropTypes.oneOf( [ 'assertive', 'polite' ] ),
-	icon: PropTypes.func,
-	className: PropTypes.string,
-	inline: PropTypes.bool,
-	hasToTop: PropTypes.bool,
 };
 
 export default Notice;

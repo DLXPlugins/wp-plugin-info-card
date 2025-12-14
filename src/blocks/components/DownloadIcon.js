@@ -1,10 +1,8 @@
-import PropTypes from 'prop-types'; // ES6
-
-const DownloadIcon = ( props ) => {
+const DownloadIcon = ( { width = 24, height = 24, fill = '#333333' } ) => {
 	return (
 		<svg
-			height={ props.height }
-			width={ props.width }
+			height={ height }
+			width={ width }
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 512 512"
 		>
@@ -13,18 +11,6 @@ const DownloadIcon = ( props ) => {
 			<path fill="currentColor" d="M273.35 248.88c2.64-2.46 4.19-3.81 5.63-5.26 11.08-11.19 22.1-22.45 33.23-33.6 7.9-7.91 18.91-8.5 26.05-1.56s6.86 18.29-.91 26.11q-33.93 34.14-68.08 68.07c-8 7.95-18.46 8-26.46 0q-34.38-34.1-68.48-68.49c-7.48-7.55-7.52-18.9-.57-25.68s18-6.48 25.63 1.1c11.3 11.24 22.43 22.67 33.65 34 1.44 1.46 3 2.82 5.31 5 .15-3.14.33-5.17.33-7.2 0-35.79-.06-71.57 0-107.36 0-13.43 11.82-21.42 24.1-16.63 6.81 2.64 10.49 8.54 10.5 17.18q.06 53.1 0 106.19z" />
 		</svg>
 	);
-};
-
-DownloadIcon.defaultProps = {
-	width: 24,
-	height: 24,
-	fill: '#333333',
-};
-
-DownloadIcon.propTypes = {
-	width: PropTypes.number,
-	height: PropTypes.number,
-	fill: PropTypes.string,
 };
 
 export default DownloadIcon;

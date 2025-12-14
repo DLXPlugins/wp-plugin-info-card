@@ -88,7 +88,24 @@ function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { 
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 
+document.addEventListener('wppicFancyboxCarouselInit', function (event) {
+  var iframeWindow = event.detail.window;
+  var wrapper = event.detail.screenshotsWrapper;
+  iframeWindow.Carousel = _fancyapps_ui__WEBPACK_IMPORTED_MODULE_0__.Carousel; // Make Carousel available in the iframe window. This could also set it in non-iframe window, but that's fine for block.json v2 outliers.
+
+  // IMPORTANT: call Fancybox FROM iframe window
+  new iframeWindow.Carousel(wrapper, {
+    slidesPerPage: 1,
+    Dots: false,
+    infinite: true,
+    adaptiveHeight: false
+  });
+});
 document.addEventListener('DOMContentLoaded', function () {
+  var maybeIframe = document.querySelector('.block-editor-iframe__body');
+  if (null !== maybeIframe) {
+    return;
+  }
   var buildSlide = function buildSlide(anchor, caption) {
     var liSlide = document.createElement('li');
     liSlide.classList.add('f-carousel__slide');

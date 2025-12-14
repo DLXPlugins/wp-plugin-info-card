@@ -215,6 +215,9 @@ class Blocks {
 	 * Register any scripts/styles needed for blocks.
 	 */
 	public function register_block_assets() {
+		if ( ! is_admin() ) {
+			return;
+		}
 		wp_register_style(
 			'wp-plugin-info-card-block-editor-css',
 			Functions::get_plugin_url( 'dist/wppic-editor.css' ),
@@ -255,12 +258,13 @@ class Blocks {
 			'all'
 		);
 
+		$block_deps = require Functions::get_plugin_dir( 'build/wppic-blocks.asset.php' );
 		// Scripts.
 		wp_register_script(
 			'wp-plugin-info-card-block-js',
 			Functions::get_plugin_url( 'build/wppic-blocks.js' ),
-			array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
-			Functions::get_plugin_version(),
+			$block_deps['dependencies'],
+			$block_deps['version'],
 			true
 		);
 		$options = get_option( 'wppic_settings' );
@@ -302,6 +306,30 @@ class Blocks {
 				'importPluginRestUrl' => Functions::get_rest_url( null, 'wppic/v1/custom-plugins/import-from-rest' ),
 				'restNonce'           => wp_create_nonce( 'wp_rest' ),
 			)
+		);
+
+		/**
+		 * This will load outside the iframe, and within it. It also loads on the frontend in a separate file (Shortcodes.php)
+		 * This is used for the plugin screenshots block.
+		 */
+		wp_enqueue_script(
+			'wppic-fancybox-js',
+			Functions::get_plugin_url( '/dist/wppic-fancybox.js' ),
+			array(),
+			Functions::get_plugin_version(),
+			true
+		);
+
+		/**
+		 * This will load outside the iframe, and within it. It also loads on the frontend in a separate file (Shortcodes.php).
+		 * This is used for the plugin screenshots block.
+		 */
+		wp_register_style(
+			'wppic-fancybox-css',
+			Functions::get_plugin_url( '/dist/wppic-fancybox-css.css' ),
+			array(),
+			Functions::get_plugin_version(),
+			'all'
 		);
 
 		if ( function_exists( 'wp_set_script_translations' ) ) {

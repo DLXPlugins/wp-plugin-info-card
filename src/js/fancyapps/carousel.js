@@ -1,7 +1,23 @@
 import { Fancybox, Carousel } from '@fancyapps/ui';
 
-document.addEventListener( 'DOMContentLoaded', function() {
+document.addEventListener( 'wppicFancyboxCarouselInit', function( event ) {
+	const iframeWindow = event.detail.window;
+	const wrapper = event.detail.screenshotsWrapper;
+	iframeWindow.Carousel = Carousel; // Make Carousel available in the iframe window. This could also set it in non-iframe window, but that's fine for block.json v2 outliers.
 
+	// IMPORTANT: call Fancybox FROM iframe window
+	new iframeWindow.Carousel( wrapper, {
+		slidesPerPage: 1,
+		Dots: false,
+		infinite: true,
+		adaptiveHeight: false,
+	} );
+} );
+document.addEventListener( 'DOMContentLoaded', function() {
+	const maybeIframe = document.querySelector( '.block-editor-iframe__body' );
+	if ( null !== maybeIframe ) {
+		return;
+	}
 	const buildSlide = function( anchor, caption ) {
 		const liSlide = document.createElement( 'li' );
 		liSlide.classList.add( 'f-carousel__slide' );

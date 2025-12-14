@@ -1,9 +1,10 @@
 import classnames from 'classnames';
 import isNumeric from 'validator/lib/isNumeric';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Rating } from 'react-simple-star-rating';
 import { Code, DownloadCloud, Star, LineChart, Download } from 'lucide-react';
-import { Fancybox, Carousel } from '@fancyapps/ui';
+import { Fancybox } from '@fancyapps/ui';
+import { Carousel } from '@fancyapps/ui/dist/carousel/carousel.umd.js';
 const HtmlToReactParser = require( 'html-to-react' ).Parser;
 import WordPressIcon from '../components/WordPressIcon';
 import { uniqueId } from 'lodash';
@@ -18,7 +19,7 @@ const PluginScreenshots = ( props ) => {
 
 	const [ screenshots, setScreenshots ] = useState( null );
 	const [ rating, setRating ] = useState( assetData.rating );
-	const [ screenshotsWrapper, setScreenshotsWrapper ] = useState( null );
+	const screenshotsWrapper = useRef( null );
 
 	const wrapperClasses = classnames( {
 		large: true,
@@ -92,19 +93,25 @@ const PluginScreenshots = ( props ) => {
 		`;
 	}
 
-	useEffect( () => {
-		if ( null !== screenshotsWrapper ) {
-			try {
-				Fancybox.bind( screenshotsWrapper, {} );
-				new Carousel( screenshotsWrapper, {
-					slidesPerPage: 1,
-					Dots: false,
-					infinite: false,
-					adaptiveHeight: false,
-				} );
-			} catch ( error ) {
-				console.error( error );
-			}
+	// Callback ref that fires when the element is mounted and DOM is ready.
+	const screenshotsWrapperRef = useCallback( ( node ) => {
+		// Store reference for potential cleanup.
+		screenshotsWrapper.current = node;
+
+		if ( node !== null ) {
+			// If screenshotsWrapper is in an iframe, fire off custom event.
+			const parentDocument = node.ownerDocument;
+			const newEvent = new CustomEvent( 'wppicFancyboxCarouselInit', {
+				detail: {
+					screenshotsWrapper: node,
+					document: parentDocument,
+					window,
+				},
+			} );
+			// Give component enough time to render so the event listener isn't fired before the component is mounted, aka, html visible on the page and can be parsed via the DOM.
+			setTimeout( () => {
+				parentDocument.dispatchEvent( newEvent );
+			}, 500 );
 		}
 	}, [ screenshotsWrapper ] );
 
@@ -211,7 +218,7 @@ const PluginScreenshots = ( props ) => {
 							<div className="wp-pic-plugin-screenshots-images">
 								<ul
 									className="wppic-screenshot-fancyapps f-carousel"
-									ref={ setScreenshotsWrapper }
+									ref={ screenshotsWrapperRef }
 								>
 									{
 										Object.values( pluginScreenshots ).map( ( screenshot, index ) => {
