@@ -10,12 +10,21 @@ export const badges = [
 		custom: false,
 	},
 	{
+		id: 'badge-code-committer',
+		source: 'wporg',
+		class: 'badge-code-committer has-overlay',
+		iconType: 'dashicon',
+		icon: 'dashicons-editor-code',
+		label: __( 'Core Team', 'wp-plugin-info-card' ),
+		custom: false,
+	},
+	{
 		id: 'badge-design',
 		source: 'wporg',
-		class: 'badge-design',
+		class: 'badge-design has-overlay',
 		iconType: 'dashicon',
 		icon: 'dashicons-art',
-		label: __( 'Design', 'wp-plugin-info-card' ),
+		label: __( 'Design Team', 'wp-plugin-info-card' ),
 		custom: false,
 	},
 	{
@@ -93,10 +102,10 @@ export const badges = [
 	{
 		id: 'badge-marketing',
 		source: 'wporg',
-		class: 'badge-marketing',
+		class: 'badge-marketing has-overlay',
 		iconType: 'dashicon',
 		icon: 'dashicons-format-status',
-		label: __( 'Marketing Contributor', 'wp-plugin-info-card' ),
+		label: __( 'Marketing Team', 'wp-plugin-info-card' ),
 		custom: false,
 	},
 	{
@@ -165,10 +174,10 @@ export const badges = [
 	{
 		id: 'badge-documentation',
 		source: 'wporg',
-		class: 'badge-documentation',
+		class: 'badge-documentation has-overlay',
 		iconType: 'dashicon',
 		icon: 'dashicons-admin-page',
-		label: __( 'Documentation Contributor', 'wp-plugin-info-card' ),
+		label: __( 'Documentation Team', 'wp-plugin-info-card' ),
 		custom: false,
 	},
 	{
@@ -192,10 +201,10 @@ export const badges = [
 	{
 		id: 'badge-accessibility',
 		source: 'wporg',
-		class: 'badge-accessibility',
+		class: 'badge-accessibility has-overlay',
 		iconType: 'dashicon',
 		icon: 'dashicons-universal-access',
-		label: __( 'Accessibility Contributor', 'wp-plugin-info-card' ),
+		label: __( 'Accessibility Team', 'wp-plugin-info-card' ),
 		custom: false,
 	},
 	{
@@ -210,10 +219,10 @@ export const badges = [
 	{
 		id: 'badge-training',
 		source: 'wporg',
-		class: 'badge-training',
+		class: 'badge-training has-overlay',
 		iconType: 'dashicon',
 		icon: 'dashicons-welcome-learn-more',
-		label: __( 'Training Contributor', 'wp-plugin-info-card' ),
+		label: __( 'Training Team', 'wp-plugin-info-card' ),
 		custom: false,
 	},
 	{
@@ -228,10 +237,10 @@ export const badges = [
 	{
 		id: 'badge-media-corps-team',
 		source: 'wporg',
-		class: 'badge-media-corps-team',
+		class: 'badge-media-corps-team has-overlay',
 		iconType: 'dashicon',
 		icon: 'dashicons-format-status',
-		label: __( 'Media Corps Team Contributor', 'wp-plugin-info-card' ),
+		label: __( 'Media Corps Team', 'wp-plugin-info-card' ),
 		custom: false,
 	},
 	{
@@ -240,16 +249,16 @@ export const badges = [
 		class: 'badge-media-corps-contributor',
 		iconType: 'dashicon',
 		icon: 'dashicons-format-status',
-		label: __( 'Media Corps Team Contributor', 'wp-plugin-info-card' ),
+		label: __( 'Media Corps Contributor', 'wp-plugin-info-card' ),
 		custom: false,
 	},
 	{
 		id: 'badge-wp-cli',
 		source: 'wporg',
-		class: 'badge-wp-cli',
+		class: 'badge-wp-cli has-overlay',
 		iconType: 'dashicon',
 		icon: 'dashicons-arrow-right-alt2',
-		label: __( 'WP CLI Contributor', 'wp-plugin-info-card' ),
+		label: __( 'WP CLI Team', 'wp-plugin-info-card' ),
 		custom: false,
 	},
 	{
@@ -264,10 +273,10 @@ export const badges = [
 	{
 		id: 'badge-hosting',
 		source: 'wporg',
-		class: 'badge-hosting',
+		class: 'badge-hosting has-overlay',
 		iconType: 'dashicon',
 		icon: 'dashicons-cloud',
-		label: __( 'Hosting', 'wp-plugin-info-card' ),
+		label: __( 'Hosting Team', 'wp-plugin-info-card' ),
 		custom: false,
 	},
 	{
@@ -276,16 +285,16 @@ export const badges = [
 		class: 'badge-hosting-contributor',
 		iconType: 'dashicon',
 		icon: 'dashicons-cloud',
-		label: __( 'Hosting', 'wp-plugin-info-card' ),
+		label: __( 'Hosting Contributor', 'wp-plugin-info-card' ),
 		custom: false,
 	},
 	{
 		id: 'badge-tide',
 		source: 'wporg',
-		class: 'badge-tide',
+		class: 'badge-tide has-overlay',
 		iconType: 'dashicon',
 		icon: 'dashicons-tide',
-		label: __( 'Tide Contributor', 'wp-plugin-info-card' ),
+		label: __( 'Tide Team', 'wp-plugin-info-card' ),
 		custom: false,
 	},
 	{
@@ -318,10 +327,10 @@ export const badges = [
 	{
 		id: 'badge-bbpress',
 		source: 'wporg',
-		class: 'badge-bbpress',
+		class: 'badge-bbpress has-overlay',
 		iconType: 'dashicon',
 		icon: 'dashicons-buddicons-bbpress-logo',
-		label: __( 'BBPress Contributor', 'wp-plugin-info-card' ),
+		label: __( 'BBPress Team', 'wp-plugin-info-card' ),
 		custom: false,
 	},
 	{
@@ -426,7 +435,7 @@ export const badges = [
 	{
 		id: 'badge-core-ai-team',
 		source: 'wporg',
-		class: 'badge-core-ai-team',
+		class: 'badge-core-ai-team has-overlay',
 		iconType: 'image',
 		icon: 'data:image/svg+xml,%3Csvg viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M17 5H16V3H11V5H9V3H4V5H3C1.9 5 1 5.9 1 7V15C1 16.1 1.9 17 3 17H17C18.1 17 19 16.1 19 15V7C19 5.9 18.1 5 17 5ZM17.5 15C17.5 15.3 17.3 15.5 17 15.5H3C2.7 15.5 2.5 15.3 2.5 15V7C2.5 6.7 2.7 6.5 3 6.5H17C17.3 6.5 17.5 6.7 17.5 7V15Z\' stroke=\'none\' fill=\'%237A00DF\' fill-rule=\'evenodd\' clip-rule=\'evenodd\'%3E%3C/path%3E%3Cpath d=\'M14 10L14.1474 10.3983C14.3406 10.9206 14.4373 11.1817 14.6278 11.3722C14.8183 11.5627 15.0794 11.6594 15.6017 11.8526L16 12L15.6017 12.1474C15.0794 12.3406 14.8183 12.4373 14.6278 12.6278C14.4373 12.8183 14.3406 13.0794 14.1474 13.6017L14 14L13.8526 13.6017C13.6594 13.0794 13.5627 12.8183 13.3722 12.6278C13.1817 12.4373 12.9206 12.3406 12.3983 12.1474L12 12L12.3983 11.8526C12.9206 11.6594 13.1817 11.5627 13.3722 11.3722C13.5627 11.1817 13.6594 10.9206 13.8526 10.3983L14 10Z\' stroke=\'none\' fill=\'%237A00DF\' fill-rule=\'evenodd\' clip-rule=\'evenodd\'%3E%3C/path%3E%3Cpath d=\'M12 8L12.0737 8.19915C12.1703 8.46029 12.2186 8.59086 12.3139 8.68611C12.4091 8.78136 12.5397 8.82968 12.8009 8.92631L13 9L12.8009 9.07369C12.5397 9.17032 12.4091 9.21864 12.3139 9.31389C12.2186 9.40914 12.1703 9.53971 12.0737 9.80085L12 10L11.9263 9.80085C11.8297 9.53971 11.7814 9.40914 11.6861 9.31389C11.5909 9.21864 11.4603 9.17032 11.1991 9.07369L11 9L11.1991 8.92631C11.4603 8.82968 11.5909 8.78136 11.6861 8.68611C11.7814 8.59086 11.8297 8.46029 11.9263 8.19915L12 8Z\' stroke=\'none\' fill=\'%237A00DF\' fill-rule=\'evenodd\' clip-rule=\'evenodd\'%3E%3C/path%3E%3Cpath d=\'M10.25 10L10.3421 10.2489C10.4629 10.5754 10.5233 10.7386 10.6424 10.8576C10.7614 10.9767 10.9246 11.0371 11.2511 11.1579L11.5 11.25L11.2511 11.3421C10.9246 11.4629 10.7614 11.5233 10.6424 11.6424C10.5233 11.7614 10.4629 11.9246 10.3421 12.2511L10.25 12.5L10.1579 12.2511C10.0371 11.9246 9.97671 11.7614 9.85764 11.6424C9.73857 11.5233 9.57536 11.4629 9.24893 11.3421L9 11.25L9.24893 11.1579C9.57536 11.0371 9.73857 10.9767 9.85764 10.8576C9.97671 10.7386 10.0371 10.5754 10.1579 10.2489L10.25 10Z\' stroke=\'none\' fill=\'%237A00DF\' fill-rule=\'evenodd\' clip-rule=\'evenodd\'%3E%3C/path%3E%3C/svg%3E',
 		label: __( 'Core AI Team', 'wp-plugin-info-card' ),
@@ -444,10 +453,10 @@ export const badges = [
 	{
 		id: 'badge-buddypress',
 		source: 'wporg',
-		class: 'badge-buddypress',
+		class: 'badge-buddypress has-overlay',
 		iconType: 'dashicon',
 		icon: 'dashicons-buddicons-buddypress-logo',
-		label: __( 'BuddyPress Contributor', 'wp-plugin-info-card' ),
+		label: __( 'BuddyPress Team', 'wp-plugin-info-card' ),
 		custom: false,
 	},
 	{
@@ -462,10 +471,10 @@ export const badges = [
 	{
 		id: 'badge-openverse',
 		source: 'wporg',
-		class: 'badge-openverse',
+		class: 'badge-openverse has-overlay',
 		iconType: 'image',
 		icon: 'data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M142.044 93.023c16.159 0 29.259-13.213 29.259-29.512 0-16.298-13.1-29.511-29.259-29.511s-29.259 13.213-29.259 29.511c0 16.299 13.1 29.512 29.259 29.512ZM28 63.511c0 16.24 12.994 29.512 29.074 29.512V34C40.994 34 28 47.19 28 63.511ZM70.392 63.511c0 16.24 12.994 29.512 29.074 29.512V34c-15.998 0-29.074 13.19-29.074 29.511ZM142.044 165.975c16.159 0 29.259-13.213 29.259-29.512 0-16.298-13.1-29.511-29.259-29.511s-29.259 13.213-29.259 29.511c0 16.299 13.1 29.512 29.259 29.512ZM70.392 136.414c0 16.257 12.994 29.544 29.074 29.544v-59.006c-15.999 0-29.074 13.204-29.074 29.462ZM28 136.414c0 16.34 12.994 29.544 29.074 29.544v-59.006c-16.08 0-29.074 13.204-29.074 29.462Z\' fill=\'%23C52B9B\'/%3E%3C/svg%3E',
-		label: __( 'Openverse Contributor', 'wp-plugin-info-card' ),
+		label: __( 'Openverse Team', 'wp-plugin-info-card' ),
 		custom: false,
 	},
 	{
@@ -480,7 +489,7 @@ export const badges = [
 	{
 		id: 'badge-performance-team',
 		source: 'wporg',
-		class: 'badge-performance-team',
+		class: 'badge-performance-team has-overlay',
 		iconType: 'image',
 		icon: 'data:image/svg+xml,%3C%3Fxml version=\'1.0\' encoding=\'UTF-8\'%3F%3E%3Csvg version=\'1.1\' viewBox=\'0 0 94 94\' xmlns=\'http://www.w3.org/2000/svg\' xmlns:cc=\'http://creativecommons.org/ns%23\' xmlns:dc=\'http://purl.org/dc/elements/1.1/\' xmlns:rdf=\'http://www.w3.org/1999/02/22-rdf-syntax-ns%23\'%3E%3Cdefs%3E%3Cstyle%3Epath%7Bfill:%230073aa;%7D%3C/style%3E%3C/defs%3E%3Cpath d=\'m39.21 20.85h-11.69c-1.38 0-2.5 1.12-2.5 2.5v11.69c0 1.38 1.12 2.5 2.5 2.5h11.69c1.38 0 2.5-1.12 2.5-2.5v-11.69c0-1.38-1.12-2.5-2.5-2.5z\'/%3E%3Cpath d=\'M41.71,58.96v11.69c0,.66-.26,1.3-.73,1.77-.47,.47-1.11,.73-1.77,.73h-11.69c-.66,0-1.3-.26-1.77-.73-.47-.47-.73-1.11-.73-1.77v-21.37c0-.4,.1-.79,.28-1.14,.03-.06,.07-.12,.1-.18,.21-.33,.49-.61,.83-.82l11.67-7.04c.44-.27,.95-.39,1.47-.36,.51,.03,1,.23,1.4,.55,.26,.21,.47,.46,.63,.75,.16,.29,.26,.61,.29,.94,.02,.11,.02,.22,.02,.34v5.38s0,.07,0,.11v11.08s0,.04,0,.07Z\'/%3E%3Cpath d=\'M68.98,30.23v16.84c0,.33-.06,.65-.19,.96-.13,.3-.31,.58-.54,.81l-6.88,6.88c-.23,.23-.51,.42-.81,.54-.3,.13-.63,.19-.96,.19h-13.15c-.66,0-1.3-.26-1.77-.73-.47-.47-.73-1.11-.73-1.77v-11.69c0-.66,.26-1.3,.73-1.77,.47-.47,1.11-.73,1.77-.73h13.08s1.11,0,1.11-1.11-1.11-1.11-1.11-1.11h-13.08c-.66,0-1.3-.26-1.77-.73s-.73-1.11-.73-1.77v-11.69c0-.66,.26-1.3,.73-1.77,.47-.47,1.11-.73,1.77-.73h13.15c.33,0,.65,.06,.96,.19,.3,.13,.58,.31,.81,.54l6.88,6.88c.23,.23,.42,.51,.54,.81,.13,.3,.19,.63,.19,.96Z\'/%3E%3C/svg%3E',
 		label: __( 'Performance Team', 'wp-plugin-info-card' ),
@@ -492,7 +501,7 @@ export const badges = [
 		class: 'badge-performance-contributor',
 		iconType: 'image',
 		icon: 'data:image/svg+xml,%3C%3Fxml version=\'1.0\' encoding=\'UTF-8\'%3F%3E%3Csvg version=\'1.1\' viewBox=\'0 0 94 94\' xmlns=\'http://www.w3.org/2000/svg\' xmlns:cc=\'http://creativecommons.org/ns%23\' xmlns:dc=\'http://purl.org/dc/elements/1.1/\' xmlns:rdf=\'http://www.w3.org/1999/02/22-rdf-syntax-ns%23\'%3E%3Cdefs%3E%3Cstyle%3Epath%7Bfill:%230073aa;%7D%3C/style%3E%3C/defs%3E%3Cpath d=\'m39.21 20.85h-11.69c-1.38 0-2.5 1.12-2.5 2.5v11.69c0 1.38 1.12 2.5 2.5 2.5h11.69c1.38 0 2.5-1.12 2.5-2.5v-11.69c0-1.38-1.12-2.5-2.5-2.5z\'/%3E%3Cpath d=\'M41.71,58.96v11.69c0,.66-.26,1.3-.73,1.77-.47,.47-1.11,.73-1.77,.73h-11.69c-.66,0-1.3-.26-1.77-.73-.47-.47-.73-1.11-.73-1.77v-21.37c0-.4,.1-.79,.28-1.14,.03-.06,.07-.12,.1-.18,.21-.33,.49-.61,.83-.82l11.67-7.04c.44-.27,.95-.39,1.47-.36,.51,.03,1,.23,1.4,.55,.26,.21,.47,.46,.63,.75,.16,.29,.26,.61,.29,.94,.02,.11,.02,.22,.02,.34v5.38s0,.07,0,.11v11.08s0,.04,0,.07Z\'/%3E%3Cpath d=\'M68.98,30.23v16.84c0,.33-.06,.65-.19,.96-.13,.3-.31,.58-.54,.81l-6.88,6.88c-.23,.23-.51,.42-.81,.54-.3,.13-.63,.19-.96,.19h-13.15c-.66,0-1.3-.26-1.77-.73-.47-.47-.73-1.11-.73-1.77v-11.69c0-.66,.26-1.3,.73-1.77,.47-.47,1.11-.73,1.77-.73h13.08s1.11,0,1.11-1.11-1.11-1.11-1.11-1.11h-13.08c-.66,0-1.3-.26-1.77-.73s-.73-1.11-.73-1.77v-11.69c0-.66,.26-1.3,.73-1.77,.47-.47,1.11-.73,1.77-.73h13.15c.33,0,.65,.06,.96,.19,.3,.13,.58,.31,.81,.54l6.88,6.88c.23,.23,.42,.51,.54,.81,.13,.3,.19,.63,.19,.96Z\'/%3E%3C/svg%3E',
-		label: __( 'Performance Team', 'wp-plugin-info-card' ),
+		label: __( 'Performance Contributor', 'wp-plugin-info-card' ),
 		custom: false,
 	},
 	{

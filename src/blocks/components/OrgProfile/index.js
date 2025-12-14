@@ -13,7 +13,6 @@ import Notice from '../../components/Notice';
 import Loading from '../../components/Loading';
 import { badges as badgeMap } from '../Badges';
 
-
 const OrgProfile = ( props ) => {
 	const { attributes, setAttributes, Preview } = props;
 	const [ authorSlugSearchValue, setAuthorSlugSearchValue ] = useState( attributes.authorSlug );
@@ -41,19 +40,26 @@ const OrgProfile = ( props ) => {
 						member_badges,
 					} = data;
 					let badgeOrder = 0;
-					const badges = member_badges.map( ( badge ) => {
+					/**
+					 * Reduce the member badges array to an array of objects with the badge class, label, enabled, and order.
+					 *
+					 * @param {Array}  acc   - The accumulator array.
+					 * @param {string} badge - The badge ID.
+					 * @return {Array} The accumulator array.
+					 */
+					const badges = member_badges.reduce( ( acc, badge ) => {
 						const badgeData = badgeMap.find( ( b ) => b.id === badge );
 						if ( badgeData ) {
 							badgeOrder++;
-							return {
+							acc.push( {
 								class: badgeData.class,
 								label: badgeData.label,
 								enabled: true,
 								order: badgeOrder,
-							};
+							} );
 						}
-						return null;
-					} );
+						return acc;
+					}, [] );
 					setAuthorSlugSearchValue( authorSlug );
 					setAttributes( {
 						authorSlug,
