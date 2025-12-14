@@ -250,7 +250,7 @@ class Blocks {
 		wp_register_style(
 			'wppic-badges',
 			Functions::get_plugin_url( 'dist/badges.css' ),
-			array(),
+			array( 'dashicons'),
 			Functions::get_plugin_version(),
 			'all'
 		);
