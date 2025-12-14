@@ -11,6 +11,7 @@ import classnames from 'classnames';
 import Logo from '../../Logo';
 import Notice from '../../components/Notice';
 import Loading from '../../components/Loading';
+import { badges as badgeMap } from '../Badges';
 
 
 const OrgProfile = ( props ) => {
@@ -37,15 +38,26 @@ const OrgProfile = ( props ) => {
 				const { success, data } = response.data;
 				if ( success ) {
 					const {
-						author_name,
-						author_avatar,
-						member_website,
 						member_badges,
 					} = data;
+					let badgeOrder = 0;
+					const badges = member_badges.map( ( badge ) => {
+						const badgeData = badgeMap.find( ( b ) => b.id === badge );
+						if ( badgeData ) {
+							badgeOrder++;
+							return {
+								class: badgeData.class,
+								label: badgeData.label,
+								enabled: true,
+								order: badgeOrder,
+							};
+						}
+						return null;
+					} );
 					setAuthorSlugSearchValue( authorSlug );
 					setAttributes( {
 						authorSlug,
-						badges: member_badges,
+						badges,
 						lastUpdated: new Date().getTime().toString(),
 					} );
 				} else {
