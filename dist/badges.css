@@ -352,6 +352,7 @@
   grid-template-columns: 1fr;
   gap: 8px;
   justify-items: center;
+  align-items: start;
 }
 .wppic-badges-grid.layout-centered .wppic-profile-badge .wppic-profile-badge-title {
   order: 2;
