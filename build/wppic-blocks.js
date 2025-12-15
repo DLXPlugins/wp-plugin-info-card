@@ -26781,24 +26781,41 @@ const SlugEntryScreen = props => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edit */ "./src/blocks/ProfileBadges/edit.js");
-/* harmony import */ var _components_WordPressIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/WordPressIcon */ "./src/blocks/components/WordPressIcon.js");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./block.json */ "./src/blocks/ProfileBadges/block.json");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit */ "./src/blocks/ProfileBadges/edit.js");
+/* harmony import */ var _components_WordPressIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/WordPressIcon */ "./src/blocks/components/WordPressIcon.js");
+/* harmony import */ var _contexts_ProfileBadges__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../contexts/ProfileBadges */ "./src/blocks/contexts/ProfileBadges.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/blocks/ProfileBadges/block.json");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
 //  Import CSS.
 
 
 
 
+
+
+const EditComponent = props => {
+  const [isEditing, setIsEditing] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_contexts_ProfileBadges__WEBPACK_IMPORTED_MODULE_3__["default"].Provider, {
+    value: {
+      isEditing,
+      setIsEditing
+    },
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_edit__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      ...props
+    })
+  });
+};
 const {
   registerBlockType
 } = wp.blocks;
-registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_2__, {
-  icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_WordPressIcon__WEBPACK_IMPORTED_MODULE_1__["default"], {
+registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_4__, {
+  icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_WordPressIcon__WEBPACK_IMPORTED_MODULE_2__["default"], {
     fill: "#333"
   }),
-  edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
+  edit: EditComponent,
   save() {
     return null;
   }
@@ -26813,7 +26830,7 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_2__, {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Profile Badges","apiVersion":3,"name":"wp-plugin-info-card/profile-highlights-badges","category":"wp-plugin-info-card","icon":"<svg height=\'24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 512 512\'><path fill=\'#333\' d=\'M256 140c-63.962 0-116 52.038-116 116s52.038 116 116 116 116-52.038 116-116-52.038-116-116-116zm-60.25 59.875h86.635l-4.578-5.045c-5.566-6.135-5.106-15.622 1.029-21.188 6.136-5.567 15.621-5.106 21.188 1.029l27.333 30.125c5.188 5.718 5.188 14.441 0 20.159l-27.333 30.125a14.958 14.958 0 0 1-11.113 4.92 14.945 14.945 0 0 1-10.075-3.891c-6.135-5.567-6.596-15.053-1.029-21.188l4.578-5.045H195.75c-8.284 0-15-6.716-15-15s6.716-15.001 15-15.001zm120.5 112.25h-86.635l4.578 5.045c5.566 6.135 5.106 15.622-1.029 21.188a14.948 14.948 0 0 1-10.075 3.891 14.964 14.964 0 0 1-11.113-4.92l-27.333-30.125c-5.188-5.718-5.188-14.441 0-20.159l27.333-30.125c5.567-6.135 15.054-6.596 21.188-1.029 6.135 5.567 6.596 15.053 1.029 21.188l-4.578 5.045h86.635c8.284 0 15 6.716 15 15s-6.716 15.001-15 15.001z\'></path><path fill=\'#333\' d=\'M497 199.92h-33.479a212.647 212.647 0 0 0-21.142-50.991l23.688-23.688c5.858-5.858 5.858-15.355 0-21.213l-58.095-58.095c-5.857-5.858-15.355-5.858-21.213 0L363.07 69.621a212.647 212.647 0 0 0-50.991-21.142V15c0-8.284-6.716-15-15-15H214.92c-8.284 0-15 6.716-15 15v33.479a212.664 212.664 0 0 0-50.991 21.142l-23.688-23.688c-5.857-5.858-15.355-5.858-21.213 0l-58.095 58.095c-5.858 5.858-5.858 15.355 0 21.213l23.688 23.688a212.647 212.647 0 0 0-21.142 50.991H15c-8.284 0-15 6.716-15 15v82.159c0 8.284 6.716 15 15 15h33.479a212.664 212.664 0 0 0 21.142 50.991l-23.688 23.688c-5.858 5.858-5.858 15.355 0 21.213l58.095 58.095c5.857 5.858 15.355 5.858 21.213 0l23.688-23.688a212.633 212.633 0 0 0 50.991 21.143V497c0 8.284 6.716 15 15 15h82.159c8.284 0 15-6.716 15-15v-33.479a212.568 212.568 0 0 0 50.991-21.143l23.688 23.688c5.857 5.858 15.355 5.858 21.213 0l58.095-58.095c5.858-5.858 5.858-15.355 0-21.213l-23.688-23.688a212.647 212.647 0 0 0 21.142-50.991H497c8.284 0 15-6.716 15-15V214.92c0-8.284-6.716-15-15-15zM256 402c-80.505 0-146-65.495-146-146s65.495-146 146-146 146 65.495 146 146-65.495 146-146 146z\'></path></svg>","description":"Display your WordPress.org author badges in a grid format.","keywords":["badge","wp plugin","badges","author"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"uniqueId":{"type":"string","default":""},"anchor":{"type":"string","default":""},"align":{"type":"string","default":"center"},"preview":{"type":"boolean","default":false},"authorSlug":{"type":"string","default":""},"baseSize":{"type":"number","default":16},"badges":{"type":"array","default":[]},"lastUpdated":{"type":"string","default":""},"colGap":{"type":"number","default":20},"rowGap":{"type":"number","default":20},"cols":{"type":"number","default":2},"layout":{"type":"string","default":"horizontal"},"headingColor":{"type":"string","default":"#000000"},"styles":{"type":"object","default":{"padding":{"top":"0","right":"0","bottom":"0","left":"0"},"margin":{"top":"0","right":"0","bottom":"0","left":"0"}}}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["left","center","right"],"className":true,"spacing":{"margin":true,"padding":true}},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"],"style":"wppic-badges"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Profile Badges","apiVersion":3,"name":"wp-plugin-info-card/profile-highlights-badges","category":"wp-plugin-info-card","icon":"<svg height=\'24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 512 512\'><path fill=\'#333\' d=\'M256 140c-63.962 0-116 52.038-116 116s52.038 116 116 116 116-52.038 116-116-52.038-116-116-116zm-60.25 59.875h86.635l-4.578-5.045c-5.566-6.135-5.106-15.622 1.029-21.188 6.136-5.567 15.621-5.106 21.188 1.029l27.333 30.125c5.188 5.718 5.188 14.441 0 20.159l-27.333 30.125a14.958 14.958 0 0 1-11.113 4.92 14.945 14.945 0 0 1-10.075-3.891c-6.135-5.567-6.596-15.053-1.029-21.188l4.578-5.045H195.75c-8.284 0-15-6.716-15-15s6.716-15.001 15-15.001zm120.5 112.25h-86.635l4.578 5.045c5.566 6.135 5.106 15.622-1.029 21.188a14.948 14.948 0 0 1-10.075 3.891 14.964 14.964 0 0 1-11.113-4.92l-27.333-30.125c-5.188-5.718-5.188-14.441 0-20.159l27.333-30.125c5.567-6.135 15.054-6.596 21.188-1.029 6.135 5.567 6.596 15.053 1.029 21.188l-4.578 5.045h86.635c8.284 0 15 6.716 15 15s-6.716 15.001-15 15.001z\'></path><path fill=\'#333\' d=\'M497 199.92h-33.479a212.647 212.647 0 0 0-21.142-50.991l23.688-23.688c5.858-5.858 5.858-15.355 0-21.213l-58.095-58.095c-5.857-5.858-15.355-5.858-21.213 0L363.07 69.621a212.647 212.647 0 0 0-50.991-21.142V15c0-8.284-6.716-15-15-15H214.92c-8.284 0-15 6.716-15 15v33.479a212.664 212.664 0 0 0-50.991 21.142l-23.688-23.688c-5.857-5.858-15.355-5.858-21.213 0l-58.095 58.095c-5.858 5.858-5.858 15.355 0 21.213l23.688 23.688a212.647 212.647 0 0 0-21.142 50.991H15c-8.284 0-15 6.716-15 15v82.159c0 8.284 6.716 15 15 15h33.479a212.664 212.664 0 0 0 21.142 50.991l-23.688 23.688c-5.858 5.858-5.858 15.355 0 21.213l58.095 58.095c5.857 5.858 15.355 5.858 21.213 0l23.688-23.688a212.633 212.633 0 0 0 50.991 21.143V497c0 8.284 6.716 15 15 15h82.159c8.284 0 15-6.716 15-15v-33.479a212.568 212.568 0 0 0 50.991-21.143l23.688 23.688c5.857 5.858 15.355 5.858 21.213 0l58.095-58.095c5.858-5.858 5.858-15.355 0-21.213l-23.688-23.688a212.647 212.647 0 0 0 21.142-50.991H497c8.284 0 15-6.716 15-15V214.92c0-8.284-6.716-15-15-15zM256 402c-80.505 0-146-65.495-146-146s65.495-146 146-146 146 65.495 146 146-65.495 146-146 146z\'></path></svg>","description":"Display your WordPress.org author badges in a grid format.","keywords":["badge","wp plugin","badges","author"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"uniqueId":{"type":"string","default":""},"anchor":{"type":"string","default":""},"align":{"type":"string","default":"center"},"preview":{"type":"boolean","default":false},"authorSlug":{"type":"string","default":""},"baseSize":{"type":"number","default":16},"badges":{"type":"array","default":[]},"lastUpdated":{"type":"string","default":""},"colGap":{"type":"number","default":20},"rowGap":{"type":"number","default":20},"cols":{"type":"number","default":2},"layout":{"type":"string","default":"horizontal"},"headingColor":{"type":"string","default":"#000000"}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["left","center","right"],"className":true,"spacing":{"margin":true,"padding":true}},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"],"style":"wppic-badges"}');
 
 /***/ }),
 
@@ -26846,12 +26863,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _components_OrgProfile__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/OrgProfile */ "./src/blocks/components/OrgProfile/index.js");
 /* harmony import */ var _preview__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./preview */ "./src/blocks/ProfileBadges/preview.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _contexts_ProfileBadges__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../contexts/ProfileBadges */ "./src/blocks/contexts/ProfileBadges.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__);
 // @ts-nocheck
 /**
  * External dependencies
  */
+
 
 
 
@@ -26872,24 +26891,35 @@ const ProfileHighlightsAuthorAvatar = props => {
     setAttributes
   } = props;
   const {
+    isEditing,
+    setIsEditing
+  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(_contexts_ProfileBadges__WEBPACK_IMPORTED_MODULE_11__["default"]);
+  const {
     preview,
     align,
     layout,
     cols
   } = attributes;
-  const block = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_OrgProfile__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  const block = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_OrgProfile__WEBPACK_IMPORTED_MODULE_9__["default"], {
       attributes: attributes,
       setAttributes: setAttributes,
-      Preview: _preview__WEBPACK_IMPORTED_MODULE_10__["default"]
+      Preview: _preview__WEBPACK_IMPORTED_MODULE_10__["default"],
+      isEditing: isEditing,
+      setIsEditing: setIsEditing
     })
   });
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useBlockProps)({
-    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()(`wppic-badges-grid align${align} layout-${layout} is-grid cols-${cols}`)
+    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()(`wppic-badges-grid`, {
+      [`align${align}`]: !isEditing,
+      [`layout-${layout}`]: !isEditing,
+      'is-grid': !isEditing,
+      [`cols-${cols}`]: !isEditing
+    })
   });
   if (preview) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("img", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.Fragment, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("img", {
         src: wppic.query_preview,
         style: {
           width: '100%',
@@ -26898,7 +26928,7 @@ const ProfileHighlightsAuthorAvatar = props => {
       })
     });
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
     ...blockProps,
     id: attributes.uniqueId,
     children: block
@@ -30020,15 +30050,62 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const {
-  Spinner
-} = wp.components;
+/**
+ * Creates animation keyframes in the specified document context.
+ * This is needed for iframe rendering in the block editor.
+ *
+ * @param {Document} targetDocument - The document to inject styles into.
+ * @param {string}   loaderName     - The loader name.
+ * @param {string}   frames         - The keyframe animation frames.
+ * @param {string}   suffix         - The animation suffix.
+ * @return {string} The animation name.
+ */
+
+const createAnimationInDocument = (targetDocument, loaderName, frames, suffix) => {
+  const animationName = `react-spinners-${loaderName}-${suffix}`;
+
+  // Check if document is available.
+  if (!targetDocument || !targetDocument.head) {
+    return animationName;
+  }
+
+  // Check if animation already exists to avoid duplicates.
+  const existingStyle = targetDocument.getElementById(`wppic-${animationName}`);
+  if (existingStyle) {
+    return animationName;
+  }
+
+  // Create style element and inject into the target document's head.
+  const styleEl = targetDocument.createElement('style');
+  styleEl.id = `wppic-${animationName}`;
+  const keyFrames = `
+    @keyframes ${animationName} {
+      ${frames}
+    }
+  `;
+  styleEl.textContent = keyFrames;
+  targetDocument.head.appendChild(styleEl);
+  return animationName;
+};
 const LoadingScreen = props => {
+  const loaderRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (loaderRef.current) {
+      // Get document owner (iframe document in block editor).
+      const ownerDocument = loaderRef.current.ownerDocument;
+      if (ownerDocument && ownerDocument !== document) {
+        // Inject animations into the iframe's document.
+        createAnimationInDocument(ownerDocument, 'BarLoader', '0% { left: -35%; right: 100% } 60% { left: 100%; right: -90% } 100% { left: 100%; right: -90% }', 'long');
+        createAnimationInDocument(ownerDocument, 'BarLoader', '0% { left: -200%; right: 100% } 60% { left: 107%; right: -8% } 100% { left: 107%; right: -8% }', 'short');
+      }
+    }
+  }, [loaderRef]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "wppic-loading-placeholder",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "wppic-loading",
+        ref: loaderRef,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Logo__WEBPACK_IMPORTED_MODULE_2__["default"], {
           size: "45"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
@@ -30037,7 +30114,8 @@ const LoadingScreen = props => {
           className: "wppic-spinner",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_spinners__WEBPACK_IMPORTED_MODULE_1__["default"], {
             color: '#DB3939',
-            speedMultiplier: 1
+            speedMultiplier: 1,
+            cssOverride: true
           })
         })]
       })
@@ -30286,18 +30364,34 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/**
+  /**
+ * OrgProfile component displays the organization profile,
+ * including badge information and author slug editor.
+ *
+ * @param {Object}        props                - The component props.
+ * @param {Object}        props.attributes     - Block attributes.
+ * @param {Function}      props.setAttributes  - Updates block attributes.
+ * @param {JSX.Component} [props.Preview]      - Optional preview component.
+ * @param {boolean}       [props.isEditing]    - Editing mode state (if provided by context).
+ * @param {Function}      [props.setIsEditing] - Setter for the editing mode (if provided).
+ * @return {JSX.Element} The rendered component.
+ */
+
 const OrgProfile = props => {
   const {
     attributes,
     setAttributes,
-    Preview
+    Preview,
+    isEditing,
+    setIsEditing
   } = props;
   const [authorSlugSearchValue, setAuthorSlugSearchValue] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.authorSlug);
   const [authorError, setAuthorError] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [authorErrorMessage, setAuthorErrorMessage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [cardLoading, setCardLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const [isEditing, setIsEditing] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const loadProfileData = async authorSlug => {
+    setIsEditing(true);
     setCardLoading(true);
     const restUrl = wppic.rest_url + 'wppic/v2/get_profile_data';
     axios__WEBPACK_IMPORTED_MODULE_1__["default"].get(restUrl + `?author=${authorSlug}`, {
@@ -30345,6 +30439,7 @@ const OrgProfile = props => {
         setAuthorError(true);
       }
     }).then(() => {
+      setIsEditing(false);
       setCardLoading(false);
     });
   };
@@ -30364,6 +30459,7 @@ const OrgProfile = props => {
           setIsEditing(true);
         },
         onRefresh: () => {
+          setIsEditing(true);
           loadProfileData(attributes.authorSlug);
         }
       })
@@ -30412,7 +30508,6 @@ const OrgProfile = props => {
                 setCardLoading(false);
                 return;
               }
-              setIsEditing(false);
               loadProfileData((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_4__.cleanForSlug)(authorSlugSearchValue));
             },
             children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Get Author Information', 'wp-plugin-info-card')
@@ -30746,6 +30841,25 @@ const WordPressIcon = ({
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WordPressIcon);
+
+/***/ }),
+
+/***/ "./src/blocks/contexts/ProfileBadges.js":
+/*!**********************************************!*\
+  !*** ./src/blocks/contexts/ProfileBadges.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const ProfileBadgesContext = react__WEBPACK_IMPORTED_MODULE_0___default().createContext();
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProfileBadgesContext);
 
 /***/ }),
 

@@ -7,7 +7,7 @@ import classnames from 'classnames';
 
 import { __ } from '@wordpress/i18n';
 
-import { useState, useEffect, Fragment, useCallback } from 'react';
+import { useState, useEffect, Fragment, useCallback, useContext } from 'react';
 
 import {
 	PanelBody,
@@ -43,10 +43,11 @@ import NumbersComponent from '../components/Numbers';
 import { set, uniqueId } from 'lodash';
 import OrgProfile from '../components/OrgProfile';
 import Preview from './preview';
+import ProfileBadgesContext from '../contexts/ProfileBadges';
 
 const ProfileHighlightsAuthorAvatar = ( props ) => {
 	const { attributes, setAttributes } = props;
-
+	const { isEditing, setIsEditing } = useContext( ProfileBadgesContext );
 	const {
 		preview,
 		align,
@@ -60,13 +61,21 @@ const ProfileHighlightsAuthorAvatar = ( props ) => {
 				attributes={ attributes }
 				setAttributes={ setAttributes }
 				Preview={ Preview }
+				isEditing={ isEditing }
+				setIsEditing={ setIsEditing }
 			/>
 		</>
 	);
 
 	const blockProps = useBlockProps( {
 		className: classnames(
-			`wppic-badges-grid align${ align } layout-${ layout } is-grid cols-${ cols }`,
+			`wppic-badges-grid`,
+			{
+				[ `align${ align }` ]: ! isEditing,
+				[ `layout-${ layout }` ]: ! isEditing,
+				'is-grid': ! isEditing,
+				[ `cols-${ cols }` ]: ! isEditing,
+			},
 		),
 	} );
 

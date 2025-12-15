@@ -934,23 +934,6 @@ return array(
 			'headingColor' => array(
 				'type' => 'string',
 				'default' => '#000000'
-			),
-			'styles' => array(
-				'type' => 'object',
-				'default' => array(
-					'padding' => array(
-						'top' => '0',
-						'right' => '0',
-						'bottom' => '0',
-						'left' => '0'
-					),
-					'margin' => array(
-						'top' => '0',
-						'right' => '0',
-						'bottom' => '0',
-						'left' => '0'
-					)
-				)
 			)
 		),
 		'example' => array(

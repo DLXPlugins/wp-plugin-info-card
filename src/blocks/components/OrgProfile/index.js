@@ -13,15 +13,28 @@ import Notice from '../../components/Notice';
 import Loading from '../../components/Loading';
 import { badges as badgeMap } from '../Badges';
 
+/**
+  /**
+ * OrgProfile component displays the organization profile,
+ * including badge information and author slug editor.
+ *
+ * @param {Object}        props                - The component props.
+ * @param {Object}        props.attributes     - Block attributes.
+ * @param {Function}      props.setAttributes  - Updates block attributes.
+ * @param {JSX.Component} [props.Preview]      - Optional preview component.
+ * @param {boolean}       [props.isEditing]    - Editing mode state (if provided by context).
+ * @param {Function}      [props.setIsEditing] - Setter for the editing mode (if provided).
+ * @return {JSX.Element} The rendered component.
+ */
 const OrgProfile = ( props ) => {
-	const { attributes, setAttributes, Preview } = props;
+	const { attributes, setAttributes, Preview, isEditing, setIsEditing } = props;
 	const [ authorSlugSearchValue, setAuthorSlugSearchValue ] = useState( attributes.authorSlug );
 	const [ authorError, setAuthorError ] = useState( false );
 	const [ authorErrorMessage, setAuthorErrorMessage ] = useState( '' );
 	const [ cardLoading, setCardLoading ] = useState( false );
-	const [ isEditing, setIsEditing ] = useState( false );
 
 	const loadProfileData = async ( authorSlug ) => {
+		setIsEditing( true );
 		setCardLoading( true );
 		const restUrl = wppic.rest_url + 'wppic/v2/get_profile_data';
 		axios
@@ -71,6 +84,7 @@ const OrgProfile = ( props ) => {
 					setAuthorError( true );
 				}
 			} ).then( () => {
+				setIsEditing( false );
 				setCardLoading( false );
 			} );
 	};
@@ -93,6 +107,7 @@ const OrgProfile = ( props ) => {
 						setIsEditing( true );
 					} }
 					onRefresh={ () => {
+						setIsEditing( true );
 						loadProfileData( attributes.authorSlug );
 					} }
 				/>
@@ -148,7 +163,6 @@ const OrgProfile = ( props ) => {
 									setCardLoading( false );
 									return;
 								}
-								setIsEditing( false );
 								loadProfileData( cleanForSlug( authorSlugSearchValue ) );
 							} }
 						>
