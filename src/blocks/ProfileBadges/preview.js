@@ -13,17 +13,20 @@ import {
 	Button,
 	SelectControl,
 } from '@wordpress/components';
-import classnames from 'classnames';
 
 import { __ } from '@wordpress/i18n';
 import {
 	BlockControls,
 	InspectorControls,
+	ColorPalette,
 } from '@wordpress/block-editor';
+import { useInstanceId } from '@wordpress/compose';
 import { badges as badgeMap } from '../components/Badges';
 import NumbersComponent from '../components/Numbers';
 
 const Preview = ( props ) => {
+	const blockUniqueId = useInstanceId( Preview, 'wp-plugin-info-card-badges' );
+
 	const {
 		attributes,
 		setAttributes,
@@ -39,9 +42,9 @@ const Preview = ( props ) => {
 		colGap,
 		rowGap,
 		cols,
-		marginSpacing,
-		marginSpacingTarget,
 		layout,
+		baseSize,
+		headingColor,
 	} = attributes;
 
 	useEffect( () => {
@@ -60,6 +63,10 @@ const Preview = ( props ) => {
 			setLoading( false );
 		}
 	}, [ badges ] );
+
+	useEffect( () => {
+		setAttributes( { uniqueId: blockUniqueId } );
+	}, [] );
 
 	/**
 	 * Retrieve colums interface for sidebar options.
@@ -105,91 +112,86 @@ const Preview = ( props ) => {
 		);
 	};
 
-	const marginSpacingOptions = [
-		{ value: 'none', label: __( 'None', 'wp-plugin-info-card' ) },
-		{ value: 'compact', label: __( 'Compact', 'wp-plugin-info-card' ) },
-		{ value: 'comfortable', label: __( 'Comfortable', 'wp-plugin-info-card' ) },
-		{ value: 'spacious', label: __( 'Spacious', 'wp-plugin-info-card' ) },
-		{ value: 'extreme', label: __( 'Extreme', 'wp-plugin-info-card' ) },
-	];
-
-	const marginSpacingTargetOptions = [
-		{ value: 'both', label: __( 'Both', 'wp-plugin-info-card' ) },
-		{ value: 'top', label: __( 'Top', 'wp-plugin-info-card' ) },
-		{ value: 'bottom', label: __( 'Bottom', 'wp-plugin-info-card' ) },
-	];
-
 	const inspectorControls = (
-		<InspectorControls>
-			<PanelBody
-				title={ __( 'Block Options', 'wp-plugin-info-card' ) }
-			>
-				<Button
-					variant="secondary"
-					onClick={ () => {
-						setShowCustomizeBadges( true );
-					} }
+		<>
+			<InspectorControls>
+				<PanelBody
+					title={ __( 'Block Options', 'wp-plugin-info-card' ) }
 				>
-					{ __( 'Customize Badges', 'wp-plugin-info-card' ) }
-				</Button>
-			</PanelBody>
-			{
-				<PanelBody title={ __( 'Layout', 'wp-plugin-info-card' ) }>
-					<SelectControl
-						label={ __( 'Badge Layout', 'wp-plugin-info-card' ) }
-						options={ [
-							{ value: 'horizontal', label: __( 'Horizontal', 'wp-plugin-info-card' ) },
-							{ value: 'centered', label: __( 'Centered', 'wp-plugin-info-card' ) },
-						] }
-						value={ layout }
-						onChange={ ( value ) => {
-							setAttributes( { layout: value } );
+					<Button
+						variant="secondary"
+						onClick={ () => {
+							setShowCustomizeBadges( true );
 						} }
-					/>
-					<SelectControl
-						label={ __( 'Margin Spacing', 'wp-plugin-info-card' ) }
-						options={ marginSpacingOptions }
-						value={ marginSpacing }
-						onChange={ ( value ) => {
-							setAttributes( { marginSpacing: value } );
-						} }
-					/>
-					<SelectControl
-						label={ __( 'Margin Target', 'wp-plugin-info-card' ) }
-						options={ marginSpacingTargetOptions }
-						value={ marginSpacingTarget }
-						onChange={ ( value ) => {
-							setAttributes( { marginSpacingTarget: value } );
-						} }
-					/>
-					<PanelRow className="wppic-panel-rows-cols">
-						{ getCols() }
-					</PanelRow>
-					<PanelRow className="wppic-panel-rows-numbers">
-						<NumbersComponent
-							value={ colGap }
-							label={ __( 'Column Gap (in px)', 'wp-plugin-info-card' ) }
-							numbers={ [ 20, 40, 60, 80 ] }
-							onClick={ ( value ) => {
-								setAttributes( { colGap: parseInt( value ) } );
-							} }
-							id="wppic-col-gap"
-						/>
-					</PanelRow>
-					<PanelRow className="wppic-panel-rows-numbers">
-						<NumbersComponent
-							value={ rowGap }
-							label={ __( 'Row Gap (in px)', 'wp-plugin-info-card' ) }
-							numbers={ [ 20, 40, 60, 80 ] }
-							onClick={ ( value ) => {
-								setAttributes( { rowGap: parseInt( value ) } );
-							} }
-							id="wppic-row-gap"
-						/>
-					</PanelRow>
+					>
+						{ __( 'Customize Badges', 'wp-plugin-info-card' ) }
+					</Button>
 				</PanelBody>
-			}
-		</InspectorControls>
+				{
+					<PanelBody title={ __( 'Layout', 'wp-plugin-info-card' ) }>
+						<SelectControl
+							label={ __( 'Badge Layout', 'wp-plugin-info-card' ) }
+							options={ [
+								{ value: 'horizontal', label: __( 'Horizontal', 'wp-plugin-info-card' ) },
+								{ value: 'centered', label: __( 'Centered', 'wp-plugin-info-card' ) },
+							] }
+							value={ layout }
+							onChange={ ( value ) => {
+								setAttributes( { layout: value } );
+							} }
+						/>
+						<PanelRow className="wppic-panel-rows-cols">
+							{ getCols() }
+						</PanelRow>
+						<PanelRow className="wppic-panel-rows-numbers">
+							<NumbersComponent
+								value={ colGap }
+								label={ __( 'Column Gap (in px)', 'wp-plugin-info-card' ) }
+								numbers={ [ 20, 40, 60, 80 ] }
+								onClick={ ( value ) => {
+									setAttributes( { colGap: parseInt( value ) } );
+								} }
+								id="wppic-col-gap"
+							/>
+						</PanelRow>
+						<PanelRow className="wppic-panel-rows-numbers">
+							<NumbersComponent
+								value={ rowGap }
+								label={ __( 'Row Gap (in px)', 'wp-plugin-info-card' ) }
+								numbers={ [ 20, 40, 60, 80 ] }
+								onClick={ ( value ) => {
+									setAttributes( { rowGap: parseInt( value ) } );
+								} }
+								id="wppic-row-gap"
+							/>
+						</PanelRow>
+					</PanelBody>
+				}
+			</InspectorControls>
+			<InspectorControls group="styles">
+				<PanelBody title={ __( 'Badge and Heading Size', 'wp-plugin-info-card' ) }>
+					<RangeControl
+						label={ __( 'Base Size', 'wp-plugin-info-card' ) }
+						value={ baseSize }
+						onChange={ ( value ) => {
+							setAttributes( { baseSize: parseInt( value ) } );
+						} }
+						help={ __( 'This is the base size of the badges and heading.', 'wp-plugin-info-card' ) }
+						step={ 1 }
+						min={ 1 }
+						max={ 96 }
+					/>
+				</PanelBody>
+				<PanelBody title={ __( 'Heading Color', 'wp-plugin-info-card' ) }>
+					<ColorPalette
+						value={ headingColor }
+						onChange={ ( value ) => {
+							setAttributes( { headingColor: value } );
+						} }
+					/>
+				</PanelBody>
+			</InspectorControls>
+		</>
 	);
 
 	const toolbar = (
@@ -219,10 +221,20 @@ const Preview = ( props ) => {
 		return null;
 	}
 
+	const gridStyles = `
+		#${ blockUniqueId }.wppic-badges-grid {
+			--wppic-grid-row-gap: ${ rowGap }px;
+			--wppic-grid-col-gap: ${ colGap }px;
+			--wppic-base-size: ${ baseSize }px;
+			--wppic-heading-color: ${ headingColor };
+		}
+	`;
+
 	return (
 		<>
 			{ inspectorControls }
 			{ toolbar }
+			<style>{ gridStyles }</style>
 			<>
 				{
 					badges && badges.length > 0 && (

@@ -47,15 +47,11 @@ import Preview from './preview';
 const ProfileHighlightsAuthorAvatar = ( props ) => {
 	const { attributes, setAttributes } = props;
 
-	const generatedUniqueId = useInstanceId( ProfileHighlightsAuthorAvatar, 'wp-plugin-info-card-query' );
-
 	const {
 		preview,
 		align,
 		layout,
 		cols,
-		marginSpacing,
-		marginSpacingTarget,
 	} = attributes;
 
 	const block = (
@@ -70,7 +66,7 @@ const ProfileHighlightsAuthorAvatar = ( props ) => {
 
 	const blockProps = useBlockProps( {
 		className: classnames(
-			`wppic-badges-grid align${ align } layout-${ layout } is-grid cols-${ cols } wppic-margin-spacing-${ marginSpacing } wppic-margin-spacing-target-${ marginSpacingTarget }`,
+			`wppic-badges-grid align${ align } layout-${ layout } is-grid cols-${ cols }`,
 		),
 	} );
 

@@ -14,6 +14,14 @@
 			"type": "string",
 			"default": ""
 		},
+		"anchor": {
+			"type": "string",
+			"default": ""
+		},
+		"align": {
+			"type": "string",
+			"default": "center"
+		},
 		"preview": {
 			"type": "boolean",
 			"default" : false
@@ -21,6 +29,10 @@
 		"authorSlug": {
 			"type": "string",
 			"default": ""
+		},
+		"baseSize": {
+			"type": "number",
+			"default": 16
 		},
 		"badges": {
 			"type": "array",
@@ -42,17 +54,30 @@
 			"type": "number",
 			"default": 2
 		},
-		"marginSpacing": {
-			"type": "string",
-			"default": "none"
-		},
-		"marginSpacingTarget": {
-			"type": "string",
-			"default": "both"
-		},
 		"layout": {
 			"type": "string",
 			"default": "horizontal"
+		},
+		"headingColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"styles": {
+			"type": "object",
+			"default": {
+				"padding": {
+					"top": "0",
+					"right": "0",
+					"bottom": "0",
+					"left": "0"
+				},
+				"margin": {
+					"top": "0",
+					"right": "0",
+					"bottom": "0",
+					"left": "0"
+				}
+			}
 		}
 	},
 	"example": {
@@ -62,8 +87,12 @@
 	},
 	"supports": {
 		"anchor": true,
-		"align": false,
-		"className": true
+		"align": [ "left", "center", "right" ],
+		"className": true,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
 	},
 	"editorScript": "wp-plugin-info-card-block-js",
 	"editorStyle": [ "wp-plugin-info-card-block-editor-css", "wp-plugin-info-card-block-styles-css" ],

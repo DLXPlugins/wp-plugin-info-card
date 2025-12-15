@@ -16,42 +16,49 @@
   align-items: center;
   justify-content: flex-end;
   flex-direction: row-reverse;
-  gap: 24px;
-  font-size: 16px;
+  gap: 1em;
+  font-size: var(--wppic-base-size, 16px);
 }
 .wppic-profile-badge span.dashicons {
   width: unset;
   height: unset;
 }
 .wppic-profile-badge span.dashicons:before {
-  font-size: 28px;
+  font-size: 1.75em;
   color: var(--badge-color);
 }
 .wppic-profile-badge h3.wppic-profile-badge-title {
+  color: var(--wppic-heading-color, #000000);
   margin: 0;
   padding: 0;
   font-size: 1.25em;
+  line-height: 125%;
 }
 .wppic-profile-badge img {
-  max-width: 28px;
+  max-width: 1.75em;
   height: auto;
 }
 .wppic-profile-badge .badge {
   --badge-color: white; /* The badge color. */
   --tint-color: white; /* The color of the tint overlay on the badge. */
   margin: 4px;
-  width: 40px;
-  height: 40px;
+  min-width: 2.5em;
+  min-height: 2.5em;
+  max-width: 2.5em;
+  max-height: 2.5em;
   border: 2px solid white;
   border-radius: 50%;
   box-sizing: border-box;
   box-shadow: 0 0 0 4px var(--badge-color);
-  background-size: 22px; /* The image overflows the circle otherwise. */
+  background-size: 1.375em; /* The image overflows the circle otherwise. */
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.wppic-profile-badge .badge .dashicons {
+  font-size: inherit;
 }
 .wppic-profile-badge .badge.has-overlay {
   background-color: var(--tint-color);
@@ -277,9 +284,23 @@
   display: grid;
 }
 
+.wppic-badges-grid.alignleft,
+.wppic-badges-grid.alignleft.cols-1,
+.wppic-badges-grid.alignleft.cols-2,
+.wppic-badges-grid.alignleft.cols-3 {
+  justify-content: start;
+}
+
+.wppic-badges-grid.alignright,
+.wppic-badges-grid.alignright.cols-1,
+.wppic-badges-grid.alignright.cols-2,
+.wppic-badges-grid.alignright.cols-3 {
+  justify-content: end;
+}
+
 .wppic-badges-grid,
 .wppic-badges-grid.cols-1 {
-  grid-template-columns: repeat(auto-fit, minmax(275px, 325px));
+  grid-template-columns: auto;
   gap: var(--wppic-grid-col-gap);
   row-gap: var(--wppic-grid-row-gap);
   justify-content: center;
@@ -287,14 +308,7 @@
 }
 
 .wppic-badges-grid.cols-1 {
-  grid-template-columns: repeat(1, minmax(325px, 600px));
-  gap: var(--wppic-grid-col-gap);
-  row-gap: var(--wppic-grid-row-gap);
-  justify-content: center;
-}
-
-.wppic-badges-grid.cols-2 {
-  grid-template-columns: repeat(2, minmax(autox, 600px));
+  grid-template-columns: auto;
   gap: var(--wppic-grid-col-gap);
   row-gap: var(--wppic-grid-row-gap);
   justify-content: center;
@@ -317,7 +331,7 @@
   }
 }
 .wppic-badges-grid.cols-3 {
-  grid-template-columns: repeat(1, minmax(325px, 600px));
+  grid-template-columns: auto;
   gap: var(--wppic-grid-col-gap);
   row-gap: var(--wppic-grid-row-gap);
   justify-content: center;
@@ -325,13 +339,26 @@
 
 @media (min-width: 768px) {
   .wppic-badges-grid.cols-3 {
-    grid-template-columns: minmax(325px, 600px) minmax(325px, 600px);
+    grid-template-columns: auto auto;
   }
 }
 @media (min-width: 1024px) {
   .wppic-badges-grid.cols-3 {
-    grid-template-columns: minmax(325px, 600px) minmax(325px, 600px) minmax(325px, 600px);
+    grid-template-columns: auto auto auto;
   }
+}
+.wppic-badges-grid.layout-centered .wppic-profile-badge {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  justify-items: center;
+}
+.wppic-badges-grid.layout-centered .wppic-profile-badge .wppic-profile-badge-title {
+  order: 2;
+  text-align: center;
+}
+.wppic-badges-grid.layout-centered .wppic-profile-badge .badge-accessibility-contributor {
+  order: 1;
 }
 
 /*# sourceMappingURL=badges.css.map*/

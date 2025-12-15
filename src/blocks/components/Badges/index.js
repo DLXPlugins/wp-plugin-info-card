@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-export const badges = [
+const badges = [
 	{
 		id: 'badge-code',
 		source: 'wporg',
@@ -532,3 +532,7 @@ export const badges = [
 		custom: false,
 	},
 ];
+
+// Sort badges alphabetically.
+badges.sort( ( a, b ) => a.label.localeCompare( b.label ) );
+export { badges };

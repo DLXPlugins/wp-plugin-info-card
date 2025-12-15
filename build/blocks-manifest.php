@@ -885,6 +885,14 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
+			'anchor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'align' => array(
+				'type' => 'string',
+				'default' => 'center'
+			),
 			'preview' => array(
 				'type' => 'boolean',
 				'default' => false
@@ -892,6 +900,10 @@ return array(
 			'authorSlug' => array(
 				'type' => 'string',
 				'default' => ''
+			),
+			'baseSize' => array(
+				'type' => 'number',
+				'default' => 16
 			),
 			'badges' => array(
 				'type' => 'array',
@@ -915,17 +927,30 @@ return array(
 				'type' => 'number',
 				'default' => 2
 			),
-			'marginSpacing' => array(
-				'type' => 'string',
-				'default' => 'none'
-			),
-			'marginSpacingTarget' => array(
-				'type' => 'string',
-				'default' => 'both'
-			),
 			'layout' => array(
 				'type' => 'string',
 				'default' => 'horizontal'
+			),
+			'headingColor' => array(
+				'type' => 'string',
+				'default' => '#000000'
+			),
+			'styles' => array(
+				'type' => 'object',
+				'default' => array(
+					'padding' => array(
+						'top' => '0',
+						'right' => '0',
+						'bottom' => '0',
+						'left' => '0'
+					),
+					'margin' => array(
+						'top' => '0',
+						'right' => '0',
+						'bottom' => '0',
+						'left' => '0'
+					)
+				)
 			)
 		),
 		'example' => array(
@@ -935,8 +960,16 @@ return array(
 		),
 		'supports' => array(
 			'anchor' => true,
-			'align' => false,
-			'className' => true
+			'align' => array(
+				'left',
+				'center',
+				'right'
+			),
+			'className' => true,
+			'spacing' => array(
+				'margin' => true,
+				'padding' => true
+			)
 		),
 		'editorScript' => 'wp-plugin-info-card-block-js',
 		'editorStyle' => array(

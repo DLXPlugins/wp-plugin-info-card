@@ -26813,7 +26813,7 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_2__, {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Profile Badges","apiVersion":3,"name":"wp-plugin-info-card/profile-highlights-badges","category":"wp-plugin-info-card","icon":"<svg height=\'24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 512 512\'><path fill=\'#333\' d=\'M256 140c-63.962 0-116 52.038-116 116s52.038 116 116 116 116-52.038 116-116-52.038-116-116-116zm-60.25 59.875h86.635l-4.578-5.045c-5.566-6.135-5.106-15.622 1.029-21.188 6.136-5.567 15.621-5.106 21.188 1.029l27.333 30.125c5.188 5.718 5.188 14.441 0 20.159l-27.333 30.125a14.958 14.958 0 0 1-11.113 4.92 14.945 14.945 0 0 1-10.075-3.891c-6.135-5.567-6.596-15.053-1.029-21.188l4.578-5.045H195.75c-8.284 0-15-6.716-15-15s6.716-15.001 15-15.001zm120.5 112.25h-86.635l4.578 5.045c5.566 6.135 5.106 15.622-1.029 21.188a14.948 14.948 0 0 1-10.075 3.891 14.964 14.964 0 0 1-11.113-4.92l-27.333-30.125c-5.188-5.718-5.188-14.441 0-20.159l27.333-30.125c5.567-6.135 15.054-6.596 21.188-1.029 6.135 5.567 6.596 15.053 1.029 21.188l-4.578 5.045h86.635c8.284 0 15 6.716 15 15s-6.716 15.001-15 15.001z\'></path><path fill=\'#333\' d=\'M497 199.92h-33.479a212.647 212.647 0 0 0-21.142-50.991l23.688-23.688c5.858-5.858 5.858-15.355 0-21.213l-58.095-58.095c-5.857-5.858-15.355-5.858-21.213 0L363.07 69.621a212.647 212.647 0 0 0-50.991-21.142V15c0-8.284-6.716-15-15-15H214.92c-8.284 0-15 6.716-15 15v33.479a212.664 212.664 0 0 0-50.991 21.142l-23.688-23.688c-5.857-5.858-15.355-5.858-21.213 0l-58.095 58.095c-5.858 5.858-5.858 15.355 0 21.213l23.688 23.688a212.647 212.647 0 0 0-21.142 50.991H15c-8.284 0-15 6.716-15 15v82.159c0 8.284 6.716 15 15 15h33.479a212.664 212.664 0 0 0 21.142 50.991l-23.688 23.688c-5.858 5.858-5.858 15.355 0 21.213l58.095 58.095c5.857 5.858 15.355 5.858 21.213 0l23.688-23.688a212.633 212.633 0 0 0 50.991 21.143V497c0 8.284 6.716 15 15 15h82.159c8.284 0 15-6.716 15-15v-33.479a212.568 212.568 0 0 0 50.991-21.143l23.688 23.688c5.857 5.858 15.355 5.858 21.213 0l58.095-58.095c5.858-5.858 5.858-15.355 0-21.213l-23.688-23.688a212.647 212.647 0 0 0 21.142-50.991H497c8.284 0 15-6.716 15-15V214.92c0-8.284-6.716-15-15-15zM256 402c-80.505 0-146-65.495-146-146s65.495-146 146-146 146 65.495 146 146-65.495 146-146 146z\'></path></svg>","description":"Display your WordPress.org author badges in a grid format.","keywords":["badge","wp plugin","badges","author"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"uniqueId":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"authorSlug":{"type":"string","default":""},"badges":{"type":"array","default":[]},"lastUpdated":{"type":"string","default":""},"colGap":{"type":"number","default":20},"rowGap":{"type":"number","default":20},"cols":{"type":"number","default":2},"marginSpacing":{"type":"string","default":"none"},"marginSpacingTarget":{"type":"string","default":"both"},"layout":{"type":"string","default":"horizontal"}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":false,"className":true},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"],"style":"wppic-badges"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Profile Badges","apiVersion":3,"name":"wp-plugin-info-card/profile-highlights-badges","category":"wp-plugin-info-card","icon":"<svg height=\'24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 512 512\'><path fill=\'#333\' d=\'M256 140c-63.962 0-116 52.038-116 116s52.038 116 116 116 116-52.038 116-116-52.038-116-116-116zm-60.25 59.875h86.635l-4.578-5.045c-5.566-6.135-5.106-15.622 1.029-21.188 6.136-5.567 15.621-5.106 21.188 1.029l27.333 30.125c5.188 5.718 5.188 14.441 0 20.159l-27.333 30.125a14.958 14.958 0 0 1-11.113 4.92 14.945 14.945 0 0 1-10.075-3.891c-6.135-5.567-6.596-15.053-1.029-21.188l4.578-5.045H195.75c-8.284 0-15-6.716-15-15s6.716-15.001 15-15.001zm120.5 112.25h-86.635l4.578 5.045c5.566 6.135 5.106 15.622-1.029 21.188a14.948 14.948 0 0 1-10.075 3.891 14.964 14.964 0 0 1-11.113-4.92l-27.333-30.125c-5.188-5.718-5.188-14.441 0-20.159l27.333-30.125c5.567-6.135 15.054-6.596 21.188-1.029 6.135 5.567 6.596 15.053 1.029 21.188l-4.578 5.045h86.635c8.284 0 15 6.716 15 15s-6.716 15.001-15 15.001z\'></path><path fill=\'#333\' d=\'M497 199.92h-33.479a212.647 212.647 0 0 0-21.142-50.991l23.688-23.688c5.858-5.858 5.858-15.355 0-21.213l-58.095-58.095c-5.857-5.858-15.355-5.858-21.213 0L363.07 69.621a212.647 212.647 0 0 0-50.991-21.142V15c0-8.284-6.716-15-15-15H214.92c-8.284 0-15 6.716-15 15v33.479a212.664 212.664 0 0 0-50.991 21.142l-23.688-23.688c-5.857-5.858-15.355-5.858-21.213 0l-58.095 58.095c-5.858 5.858-5.858 15.355 0 21.213l23.688 23.688a212.647 212.647 0 0 0-21.142 50.991H15c-8.284 0-15 6.716-15 15v82.159c0 8.284 6.716 15 15 15h33.479a212.664 212.664 0 0 0 21.142 50.991l-23.688 23.688c-5.858 5.858-5.858 15.355 0 21.213l58.095 58.095c5.857 5.858 15.355 5.858 21.213 0l23.688-23.688a212.633 212.633 0 0 0 50.991 21.143V497c0 8.284 6.716 15 15 15h82.159c8.284 0 15-6.716 15-15v-33.479a212.568 212.568 0 0 0 50.991-21.143l23.688 23.688c5.857 5.858 15.355 5.858 21.213 0l58.095-58.095c5.858-5.858 5.858-15.355 0-21.213l-23.688-23.688a212.647 212.647 0 0 0 21.142-50.991H497c8.284 0 15-6.716 15-15V214.92c0-8.284-6.716-15-15-15zM256 402c-80.505 0-146-65.495-146-146s65.495-146 146-146 146 65.495 146 146-65.495 146-146 146z\'></path></svg>","description":"Display your WordPress.org author badges in a grid format.","keywords":["badge","wp plugin","badges","author"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"uniqueId":{"type":"string","default":""},"anchor":{"type":"string","default":""},"align":{"type":"string","default":"center"},"preview":{"type":"boolean","default":false},"authorSlug":{"type":"string","default":""},"baseSize":{"type":"number","default":16},"badges":{"type":"array","default":[]},"lastUpdated":{"type":"string","default":""},"colGap":{"type":"number","default":20},"rowGap":{"type":"number","default":20},"cols":{"type":"number","default":2},"layout":{"type":"string","default":"horizontal"},"headingColor":{"type":"string","default":"#000000"},"styles":{"type":"object","default":{"padding":{"top":"0","right":"0","bottom":"0","left":"0"},"margin":{"top":"0","right":"0","bottom":"0","left":"0"}}}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["left","center","right"],"className":true,"spacing":{"margin":true,"padding":true}},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"],"style":"wppic-badges"}');
 
 /***/ }),
 
@@ -26871,14 +26871,11 @@ const ProfileHighlightsAuthorAvatar = props => {
     attributes,
     setAttributes
   } = props;
-  const generatedUniqueId = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__.useInstanceId)(ProfileHighlightsAuthorAvatar, 'wp-plugin-info-card-query');
   const {
     preview,
     align,
     layout,
-    cols,
-    marginSpacing,
-    marginSpacingTarget
+    cols
   } = attributes;
   const block = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_OrgProfile__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -26888,7 +26885,7 @@ const ProfileHighlightsAuthorAvatar = props => {
     })
   });
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useBlockProps)({
-    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()(`wppic-badges-grid align${align} layout-${layout} is-grid cols-${cols} wppic-margin-spacing-${marginSpacing} wppic-margin-spacing-target-${marginSpacingTarget}`)
+    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()(`wppic-badges-grid align${align} layout-${layout} is-grid cols-${cols}`)
   });
   if (preview) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
@@ -26926,12 +26923,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_Badges__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Badges */ "./src/blocks/components/Badges/index.js");
 /* harmony import */ var _components_Numbers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Numbers */ "./src/blocks/components/Numbers.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
@@ -26945,6 +26942,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const Preview = props => {
+  const blockUniqueId = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__.useInstanceId)(Preview, 'wp-plugin-info-card-badges');
   const {
     attributes,
     setAttributes,
@@ -26958,9 +26956,9 @@ const Preview = props => {
     colGap,
     rowGap,
     cols,
-    marginSpacing,
-    marginSpacingTarget,
-    layout
+    layout,
+    baseSize,
+    headingColor
   } = attributes;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     // Reorder badges by alphabetical order and then show the interface(label).
@@ -26980,6 +26978,11 @@ const Preview = props => {
       setLoading(false);
     }
   }, [badges]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    setAttributes({
+      uniqueId: blockUniqueId
+    });
+  }, []);
 
   /**
    * Retrieve colums interface for sidebar options.
@@ -26989,7 +26992,7 @@ const Preview = props => {
   const getCols = () => {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
       id: "col-count",
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Select How Many Columns', 'wp-plugin-info-card'),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select How Many Columns', 'wp-plugin-info-card'),
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ButtonGroup, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
           variant: cols === 1 ? 'primary' : 'secondary',
@@ -26998,7 +27001,7 @@ const Preview = props => {
               cols: 1
             });
           },
-          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('One', 'wp-plugin-info-card')
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('One', 'wp-plugin-info-card')
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
           variant: cols === 2 ? 'primary' : 'secondary',
           onClick: () => {
@@ -27006,7 +27009,7 @@ const Preview = props => {
               cols: 2
             });
           },
-          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Two', 'wp-plugin-info-card')
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Two', 'wp-plugin-info-card')
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
           variant: cols === 3 ? 'primary' : 'secondary',
           onClick: () => {
@@ -27014,123 +27017,109 @@ const Preview = props => {
               cols: 3
             });
           },
-          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Three', 'wp-plugin-info-card')
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Three', 'wp-plugin-info-card')
         })]
       })
     });
   };
-  const marginSpacingOptions = [{
-    value: 'none',
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('None', 'wp-plugin-info-card')
-  }, {
-    value: 'compact',
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Compact', 'wp-plugin-info-card')
-  }, {
-    value: 'comfortable',
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Comfortable', 'wp-plugin-info-card')
-  }, {
-    value: 'spacious',
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Spacious', 'wp-plugin-info-card')
-  }, {
-    value: 'extreme',
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Extreme', 'wp-plugin-info-card')
-  }];
-  const marginSpacingTargetOptions = [{
-    value: 'both',
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Both', 'wp-plugin-info-card')
-  }, {
-    value: 'top',
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Top', 'wp-plugin-info-card')
-  }, {
-    value: 'bottom',
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Bottom', 'wp-plugin-info-card')
-  }];
-  const inspectorControls = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.InspectorControls, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Block Options', 'wp-plugin-info-card'),
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-        variant: "secondary",
-        onClick: () => {
-          setShowCustomizeBadges(true);
-        },
-        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Customize Badges', 'wp-plugin-info-card')
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Layout', 'wp-plugin-info-card'),
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Badge Layout', 'wp-plugin-info-card'),
-        options: [{
-          value: 'horizontal',
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Horizontal', 'wp-plugin-info-card')
-        }, {
-          value: 'centered',
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Centered', 'wp-plugin-info-card')
-        }],
-        value: layout,
-        onChange: value => {
-          setAttributes({
-            layout: value
-          });
-        }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Margin Spacing', 'wp-plugin-info-card'),
-        options: marginSpacingOptions,
-        value: marginSpacing,
-        onChange: value => {
-          setAttributes({
-            marginSpacing: value
-          });
-        }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Margin Target', 'wp-plugin-info-card'),
-        options: marginSpacingTargetOptions,
-        value: marginSpacingTarget,
-        onChange: value => {
-          setAttributes({
-            marginSpacingTarget: value
-          });
-        }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        className: "wppic-panel-rows-cols",
-        children: getCols()
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        className: "wppic-panel-rows-numbers",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_Numbers__WEBPACK_IMPORTED_MODULE_6__["default"], {
-          value: colGap,
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Column Gap (in px)', 'wp-plugin-info-card'),
-          numbers: [20, 40, 60, 80],
-          onClick: value => {
-            setAttributes({
-              colGap: parseInt(value)
-            });
+  const inspectorControls = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Block Options', 'wp-plugin-info-card'),
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+          variant: "secondary",
+          onClick: () => {
+            setShowCustomizeBadges(true);
           },
-          id: "wppic-col-gap"
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Customize Badges', 'wp-plugin-info-card')
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
-        className: "wppic-panel-rows-numbers",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_Numbers__WEBPACK_IMPORTED_MODULE_6__["default"], {
-          value: rowGap,
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Row Gap (in px)', 'wp-plugin-info-card'),
-          numbers: [20, 40, 60, 80],
-          onClick: value => {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Layout', 'wp-plugin-info-card'),
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Badge Layout', 'wp-plugin-info-card'),
+          options: [{
+            value: 'horizontal',
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Horizontal', 'wp-plugin-info-card')
+          }, {
+            value: 'centered',
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Centered', 'wp-plugin-info-card')
+          }],
+          value: layout,
+          onChange: value => {
             setAttributes({
-              rowGap: parseInt(value)
+              layout: value
+            });
+          }
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+          className: "wppic-panel-rows-cols",
+          children: getCols()
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+          className: "wppic-panel-rows-numbers",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_Numbers__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            value: colGap,
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Column Gap (in px)', 'wp-plugin-info-card'),
+            numbers: [20, 40, 60, 80],
+            onClick: value => {
+              setAttributes({
+                colGap: parseInt(value)
+              });
+            },
+            id: "wppic-col-gap"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+          className: "wppic-panel-rows-numbers",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_Numbers__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            value: rowGap,
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Row Gap (in px)', 'wp-plugin-info-card'),
+            numbers: [20, 40, 60, 80],
+            onClick: value => {
+              setAttributes({
+                rowGap: parseInt(value)
+              });
+            },
+            id: "wppic-row-gap"
+          })
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, {
+      group: "styles",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Badge and Heading Size', 'wp-plugin-info-card'),
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Base Size', 'wp-plugin-info-card'),
+          value: baseSize,
+          onChange: value => {
+            setAttributes({
+              baseSize: parseInt(value)
             });
           },
-          id: "wppic-row-gap"
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('This is the base size of the badges and heading.', 'wp-plugin-info-card'),
+          step: 1,
+          min: 1,
+          max: 96
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Heading Color', 'wp-plugin-info-card'),
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.ColorPalette, {
+          value: headingColor,
+          onChange: value => {
+            setAttributes({
+              headingColor: value
+            });
+          }
         })
       })]
     })]
   });
-  const toolbar = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.BlockControls, {
+  const toolbar = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarGroup, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarButton, {
         icon: "edit",
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Edit and Configure', 'wp-plugin-info-card'),
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Edit and Configure', 'wp-plugin-info-card'),
         onClick: () => onEdit()
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarButton, {
         icon: "update",
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Refresh', 'wp-plugin-info-card'),
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Refresh', 'wp-plugin-info-card'),
         onClick: () => onRefresh()
       })]
     })
@@ -27138,8 +27127,18 @@ const Preview = props => {
   if (loading) {
     return null;
   }
+  const gridStyles = `
+		#${blockUniqueId}.wppic-badges-grid {
+			--wppic-grid-row-gap: ${rowGap}px;
+			--wppic-grid-col-gap: ${colGap}px;
+			--wppic-base-size: ${baseSize}px;
+			--wppic-heading-color: ${headingColor};
+		}
+	`;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
-    children: [inspectorControls, toolbar, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+    children: [inspectorControls, toolbar, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("style", {
+      children: gridStyles
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
       children: badges && badges.length > 0 && badges.map(badge => {
         let image = null;
         const badgeData = _components_Badges__WEBPACK_IMPORTED_MODULE_5__.badges.find(b => b.class === badge.class);
@@ -27168,16 +27167,16 @@ const Preview = props => {
         }, badge.class + badge.order);
       })
     }), showCustomizeBadges && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Modal, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Select Badges', 'wp-plugin-info-card'),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select Badges', 'wp-plugin-info-card'),
       onRequestClose: () => setShowCustomizeBadges(false),
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
-        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Select the badges you want to display in your profile.', 'wp-plugin-info-card')
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select the badges you want to display in your profile.', 'wp-plugin-info-card')
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
         className: "wppic-profile-badges-modal wppic-profile-badges",
         children: _components_Badges__WEBPACK_IMPORTED_MODULE_5__.badges.map(badge => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
           className: "wppic-profile-badge-modal-item wppic-profile-badge",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enabled', 'wp-plugin-info-card'),
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enabled', 'wp-plugin-info-card'),
             checked: badges.find(b => b.class === badge.class && b.enabled) ? true : false,
             onChange: value => {
               if (!value) {
@@ -28382,6 +28381,10 @@ const badges = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Campus Connect Participant', 'wp-plugin-info-card'),
   custom: false
 }];
+
+// Sort badges alphabetically.
+badges.sort((a, b) => a.label.localeCompare(b.label));
+
 
 /***/ }),
 
