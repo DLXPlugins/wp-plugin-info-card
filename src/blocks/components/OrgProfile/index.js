@@ -5,6 +5,9 @@ import {
 	Button,
 	Spinner,
 } from '@wordpress/components';
+import { 
+	InspectorControls,
+} from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import { cleanForSlug } from '@wordpress/url';
 import classnames from 'classnames';
@@ -92,7 +95,12 @@ const OrgProfile = ( props ) => {
 	// Show loading if loading.
 	if ( cardLoading ) {
 		return (
-			<Loading />
+			<>
+				<InspectorControls>
+					<></>
+				</InspectorControls>
+				<Loading />
+			</>
 		);
 	}
 
@@ -118,6 +126,9 @@ const OrgProfile = ( props ) => {
 	const block = (
 		<>
 			<>
+				<InspectorControls>
+					<></>
+				</InspectorControls>
 				<div className="wppic-query-block wppic-query-block-panel">
 					<div className="wppic-block-svg">
 						<Logo size="75" />
