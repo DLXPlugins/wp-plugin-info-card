@@ -49,6 +49,10 @@
 		"marginSpacingTarget": {
 			"type": "string",
 			"default": "both"
+		},
+		"layout": {
+			"type": "string",
+			"default": "horizontal"
 		}
 	},
 	"example": {

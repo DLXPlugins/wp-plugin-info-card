@@ -922,6 +922,10 @@ return array(
 			'marginSpacingTarget' => array(
 				'type' => 'string',
 				'default' => 'both'
+			),
+			'layout' => array(
+				'type' => 'string',
+				'default' => 'horizontal'
 			)
 		),
 		'example' => array(

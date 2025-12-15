@@ -41,6 +41,7 @@ const Preview = ( props ) => {
 		cols,
 		marginSpacing,
 		marginSpacingTarget,
+		layout,
 	} = attributes;
 
 	useEffect( () => {
@@ -134,6 +135,17 @@ const Preview = ( props ) => {
 			</PanelBody>
 			{
 				<PanelBody title={ __( 'Layout', 'wp-plugin-info-card' ) }>
+					<SelectControl
+						label={ __( 'Badge Layout', 'wp-plugin-info-card' ) }
+						options={ [
+							{ value: 'horizontal', label: __( 'Horizontal', 'wp-plugin-info-card' ) },
+							{ value: 'centered', label: __( 'Centered', 'wp-plugin-info-card' ) },
+						] }
+						value={ layout }
+						onChange={ ( value ) => {
+							setAttributes( { layout: value } );
+						} }
+					/>
 					<SelectControl
 						label={ __( 'Margin Spacing', 'wp-plugin-info-card' ) }
 						options={ marginSpacingOptions }
