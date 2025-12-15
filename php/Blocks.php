@@ -250,7 +250,7 @@ class Blocks {
 		wp_register_style(
 			'wppic-badges',
 			Functions::get_plugin_url( 'dist/badges.css' ),
-			array( 'dashicons'),
+			array( 'dashicons' ),
 			Functions::get_plugin_version(),
 			'all'
 		);
@@ -349,6 +349,7 @@ class Blocks {
 			'wp-plugin-info-card/plugin-screenshots-info-card' => array( $this, 'site_plugin_screenshots' ),
 			'wp-plugin-info-card/github-info-card-grid'  => array( $this, 'github_info_card_grid_render' ),
 			'wp-plugin-info-card/github-info-card'       => array( $this, 'github_info_card_render' ),
+			'wp-plugin-info-card/profile-highlights-badges' => array( $this, 'profile_badges_render' ),
 		);
 
 		add_filter(
@@ -362,8 +363,6 @@ class Blocks {
 			10,
 			2
 		);
-
-
 
 		if ( function_exists( 'wp_register_block_types_from_metadata_collection' ) ) {
 			wp_register_block_types_from_metadata_collection( Functions::get_plugin_dir( 'build/blocks' ), Functions::get_plugin_dir( 'build/blocks-manifest.php' ) );
@@ -709,5 +708,76 @@ class Blocks {
 		$html = Shortcodes::shortcode_github_info_card( $attributes );
 
 		return $html;
+	}
+
+	/**
+	 * Render the Profile Badges block.
+	 *
+	 * @param array    $attributes Array of block attributes.
+	 * @param string   $content Block content.
+	 * @param WP_Block $block Block object.
+	 *
+	 * @return string Block rendered.
+	 */
+	public function profile_badges_render( $attributes, $content, $block ) {
+		if ( is_admin() || defined( 'REST_REQUEST' ) ) {
+			return;
+		}
+
+		// Gather attributes from context.
+		$block_attributes                 = array();
+		$block_attributes['uniqueId']     = Functions::sanitize_attribute( $attributes, 'uniqueId', 'string' );
+		$block_attributes['anchor']       = Functions::sanitize_attribute( $attributes, 'anchor', 'string' );
+		$block_attributes['align']        = Functions::sanitize_attribute( $attributes, 'align', 'string' );
+		$block_attributes['authorSlug']   = Functions::sanitize_attribute( $attributes, 'authorSlug', 'string' );
+		$block_attributes['baseSize']     = Functions::sanitize_attribute( $attributes, 'baseSize', 'integer' );
+		$block_attributes['badges']       = Functions::sanitize_attribute( $attributes, 'badges', 'array' );
+		$block_attributes['lastUpdated']  = Functions::sanitize_attribute( $attributes, 'lastUpdated', 'string' );
+		$block_attributes['colGap']       = Functions::sanitize_attribute( $attributes, 'colGap', 'integer' );
+		$block_attributes['rowGap']       = Functions::sanitize_attribute( $attributes, 'rowGap', 'integer' );
+		$block_attributes['cols']         = Functions::sanitize_attribute( $attributes, 'cols', 'integer' );
+		$block_attributes['layout']       = Functions::sanitize_attribute( $attributes, 'layout', 'string' );
+		$block_attributes['headingColor'] = Functions::sanitize_attribute( $attributes, 'headingColor', 'string' );
+
+		// Get wrapper attributes / styles / classes.
+		$wrapper_classes    = array(
+			'wppic-badges-grid',
+			'is-grid',
+			'layout-' . $block_attributes['layout'],
+			'cols-' . $block_attributes['cols'],
+		);
+		$wrapper_attributes = get_block_wrapper_attributes(
+			array(
+				'class' => implode( ' ', $wrapper_classes ),
+			)
+		);
+
+		// Get unique ID.
+		$unique_id = $block_attributes['anchor'] ? $block_attributes['anchor'] : $block_attributes['uniqueId'];
+
+		// Generate grid styles.
+		$grid_styles = sprintf(
+			'#%1$s.wppic-badges-grid {' . PHP_EOL .
+			'	--wppic-grid-row-gap: %2$spx;' . PHP_EOL .
+			'	--wppic-grid-col-gap: %3$spx;' . PHP_EOL .
+			'	--wppic-base-size: %4$spx;' . PHP_EOL .
+			'	--wppic-heading-color: %5$s;' . PHP_EOL .
+			'}',
+			esc_attr( $unique_id ),
+			esc_attr( $block_attributes['rowGap'] ),
+			esc_attr( $block_attributes['colGap'] ),
+			esc_attr( $block_attributes['baseSize'] ),
+			esc_attr( $block_attributes['headingColor'] )
+		);
+		ob_start();
+		?>
+		<div <?php echo wp_kses_post( $wrapper_attributes ); ?> id="<?php echo esc_attr( $unique_id ); ?>">
+			<style><?php echo esc_html( $grid_styles ); ?></style>
+			<div class="wppic-badges-grid">
+				test
+			</div>
+		</div>
+		<?php
+		return ob_get_clean();
 	}
 }
