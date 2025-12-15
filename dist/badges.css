@@ -1,6 +1,9 @@
 /*!*******************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/scss/badges.scss ***!
   \*******************************************************************************************************************************************/
+/* Responsive styles - In hindsight, should've used mobile-first */
+/* Mixin from: https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/ */
+/* It's only used here, so no external file for mixin? */
 .wppic-profile-badges {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -248,6 +251,87 @@
 .wppic-profile-badge-modal-item.wppic-profile-badge img {
   width: 100%;
   height: 100%;
+}
+
+.is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)).wppic-badges {
+  max-width: var(--wppic-grid-max-width);
+  /* fix for blocksy theme */
+}
+
+.wppic-badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(325px, 600px));
+  gap: var(--wppic-grid-col-gap);
+  justify-content: center;
+  row-gap: var(--wppic-grid-row-gap);
+  width: 100%;
+}
+
+.wppic-badges {
+  display: flex;
+  max-width: 325px;
+}
+
+.wppic-badges-grid,
+.wppic-badges-grid.aligncenter {
+  display: grid;
+}
+
+.wppic-badges-grid,
+.wppic-badges-grid.cols-1 {
+  grid-template-columns: repeat(auto-fit, minmax(275px, 325px));
+  gap: var(--wppic-grid-col-gap);
+  row-gap: var(--wppic-grid-row-gap);
+  justify-content: center;
+  width: 100%;
+}
+
+.wppic-badges-grid.cols-1 {
+  grid-template-columns: repeat(1, minmax(325px, 600px));
+  gap: var(--wppic-grid-col-gap);
+  row-gap: var(--wppic-grid-row-gap);
+  justify-content: center;
+}
+
+.wppic-badges-grid.cols-2 {
+  grid-template-columns: repeat(2, minmax(autox, 600px));
+  gap: var(--wppic-grid-col-gap);
+  row-gap: var(--wppic-grid-row-gap);
+  justify-content: center;
+}
+
+.wppic-badges-grid.cols-2 {
+  grid-template-columns: repeat(2, minmax(275px, 325px));
+  gap: var(--wppic-grid-col-gap);
+  row-gap: var(--wppic-grid-row-gap);
+  justify-content: center;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .wppic-badges-grid.cols-2 {
+    grid-template-columns: repeat(2, minmax(auto, 600px));
+  }
+  .wppic-badges-grid.cols-2 {
+    grid-template-columns: repeat(2, minmax(275px, 325px));
+  }
+}
+.wppic-badges-grid.cols-3 {
+  grid-template-columns: repeat(1, minmax(325px, 600px));
+  gap: var(--wppic-grid-col-gap);
+  row-gap: var(--wppic-grid-row-gap);
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .wppic-badges-grid.cols-3 {
+    grid-template-columns: minmax(325px, 600px) minmax(325px, 600px);
+  }
+}
+@media (min-width: 1024px) {
+  .wppic-badges-grid.cols-3 {
+    grid-template-columns: minmax(325px, 600px) minmax(325px, 600px) minmax(325px, 600px);
+  }
 }
 
 /*# sourceMappingURL=badges.css.map*/

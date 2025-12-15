@@ -903,9 +903,25 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
-			'title' => array(
+			'colGap' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'rowGap' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'cols' => array(
+				'type' => 'number',
+				'default' => 2
+			),
+			'marginSpacing' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => 'none'
+			),
+			'marginSpacingTarget' => array(
+				'type' => 'string',
+				'default' => 'both'
 			)
 		),
 		'example' => array(

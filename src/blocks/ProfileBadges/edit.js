@@ -51,6 +51,11 @@ const ProfileHighlightsAuthorAvatar = ( props ) => {
 
 	const {
 		preview,
+		align,
+		layout,
+		cols,
+		marginSpacing,
+		marginSpacingTarget,
 	} = attributes;
 
 	const block = (
@@ -64,9 +69,11 @@ const ProfileHighlightsAuthorAvatar = ( props ) => {
 	);
 
 	const blockProps = useBlockProps( {
-		className: classnames( `profile-highlights-author-avatar` ),
-		style: {},
+		className: classnames(
+			`wppic-badges-grid align${ align } layout-${ layout } is-grid cols-${ cols } wppic-margin-spacing-${ marginSpacing } wppic-margin-spacing-target-${ marginSpacingTarget }`,
+		),
 	} );
+
 	if ( preview ) {
 		return (
 			<>

@@ -49,6 +49,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 	if ( null !== maybeIframe ) {
 		return;
 	}
+
 	const buildSlide = function( anchor, caption, slug, uniqueId ) {
 		const liSlide = document.createElement( 'li' );
 		liSlide.classList.add( 'f-carousel__slide' );

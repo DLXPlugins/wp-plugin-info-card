@@ -1,3 +1,5 @@
+@import 'breakpoints-mixin.scss';
+
 .wppic-profile-badges {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -288,5 +290,89 @@
 	img {
 		width: 100%;
 		height: 100%;
+	}
+}
+
+
+.is-layout-constrained> :where(:not(.alignleft):not(.alignright):not(.alignfull)).wppic-badges {
+	max-width: var(--wppic-grid-max-width);
+	/* fix for blocksy theme */
+}
+
+.wppic-badges-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(325px, 600px));
+	gap: var(--wppic-grid-col-gap);
+	justify-content: center;
+	row-gap: var(--wppic-grid-row-gap);
+	width: 100%;
+}
+
+.wppic-badges {
+	display: flex;
+	max-width: 325px;
+}
+.wppic-badges-grid,
+.wppic-badges-grid.aligncenter {
+	display: grid;
+}
+.wppic-badges-grid,
+.wppic-badges-grid.cols-1 {
+	grid-template-columns: repeat(auto-fit, minmax(275px, 325px));
+	gap: var(--wppic-grid-col-gap);
+	row-gap: var(--wppic-grid-row-gap);
+	justify-content: center;
+	width: 100%;
+}
+
+.wppic-badges-grid.cols-1 {
+	grid-template-columns: repeat(1, minmax(325px, 600px));
+	gap: var(--wppic-grid-col-gap);
+	row-gap: var(--wppic-grid-row-gap);
+	justify-content: center;
+}
+
+.wppic-badges-grid.cols-2 {
+	grid-template-columns: repeat(2, minmax(autox, 600px));
+	gap: var(--wppic-grid-col-gap);
+	row-gap: var(--wppic-grid-row-gap);
+	justify-content: center;
+}
+
+.wppic-badges-grid.cols-2 {
+	grid-template-columns: repeat(2, minmax(275px, 325px));
+	gap: var(--wppic-grid-col-gap);
+	row-gap: var(--wppic-grid-row-gap);
+	justify-content: center;
+	width: 100%;
+}
+
+@include respond-to('medium') {
+	.wppic-badges-grid.cols-2 {
+		grid-template-columns: repeat(2, minmax(auto, 600px));
+	}
+
+	.wppic-badges-grid.cols-2 {
+		grid-template-columns: repeat(2, minmax(275px, 325px));
+	}
+}
+
+.wppic-badges-grid.cols-3 {
+	grid-template-columns: repeat(1, minmax(325px, 600px));
+	gap: var(--wppic-grid-col-gap);
+	row-gap: var(--wppic-grid-row-gap);
+	justify-content: center;
+}
+
+
+@include respond-to('medium') {
+	.wppic-badges-grid.cols-3 {
+		grid-template-columns: minmax(325px, 600px) minmax(325px, 600px);
+	}
+}
+
+@include respond-to('large') {
+	.wppic-badges-grid.cols-3 {
+		grid-template-columns: minmax(325px, 600px) minmax(325px, 600px) minmax(325px, 600px);
 	}
 }

@@ -30,9 +30,25 @@
 			"type": "string",
 			"default": ""
 		},
-		"title": {
+		"colGap": {
+			"type": "number",
+			"default": 20
+		},
+		"rowGap": {
+			"type": "number",
+			"default": 20
+		},
+		"cols": {
+			"type": "number",
+			"default": 2
+		},
+		"marginSpacing": {
 			"type": "string",
-			"default": ""
+			"default": "none"
+		},
+		"marginSpacingTarget": {
+			"type": "string",
+			"default": "both"
 		}
 	},
 	"example": {
