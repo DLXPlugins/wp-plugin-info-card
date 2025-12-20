@@ -1,11 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import {
 	TextControl,
 	Button,
-	Spinner,
 } from '@wordpress/components';
-import { 
+import {
 	InspectorControls,
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
@@ -36,7 +35,7 @@ const OrgProfile = ( props ) => {
 	const [ authorErrorMessage, setAuthorErrorMessage ] = useState( '' );
 	const [ cardLoading, setCardLoading ] = useState( false );
 
-	const loadProfileData = async ( authorSlug ) => {
+	const loadProfileData = useCallback( async ( authorSlug ) => {
 		setIsEditing( true );
 		setCardLoading( true );
 		const restUrl = wppic.rest_url + 'wppic/v2/get_profile_data';
@@ -90,7 +89,25 @@ const OrgProfile = ( props ) => {
 				setIsEditing( false );
 				setCardLoading( false );
 			} );
-	};
+	}, [ setIsEditing, setAttributes ] );
+
+	// Refetch data if lastUpdated is a week old or more.
+	useEffect( () => {
+		if ( attributes.lastUpdated && ! cardLoading && attributes.authorSlug ) {
+			// Convert string timestamp to number before creating Date object.
+			const lastUpdatedTimestamp = Number( attributes.lastUpdated );
+			if ( isNaN( lastUpdatedTimestamp ) ) {
+				return;
+			}
+			const lastUpdated = new Date( lastUpdatedTimestamp );
+			const now = new Date();
+			const diffTime = Math.abs( now - lastUpdated );
+			const diffDays = Math.ceil( diffTime / ( 1000 * 60 * 60 * 24 ) );
+			if ( diffDays >= 7 ) {
+				loadProfileData( attributes.authorSlug );
+			}
+		}
+	}, [] );
 
 	// Show loading if loading.
 	if ( cardLoading ) {
@@ -166,7 +183,7 @@ const OrgProfile = ( props ) => {
 							icon={ <Logo size="25" /> }
 							isSecondary
 							id="wppic-input-submit"
-							onClick={ ( event ) => {
+							onClick={ () => {
 								// Error out if author slug is empty.
 								if ( '' === authorSlugSearchValue ) {
 									setAuthorError( true );

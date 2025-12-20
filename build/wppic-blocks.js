@@ -30393,7 +30393,7 @@ const OrgProfile = props => {
   const [authorError, setAuthorError] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [authorErrorMessage, setAuthorErrorMessage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [cardLoading, setCardLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const loadProfileData = async authorSlug => {
+  const loadProfileData = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(async authorSlug => {
     setIsEditing(true);
     setCardLoading(true);
     const restUrl = wppic.rest_url + 'wppic/v2/get_profile_data';
@@ -30445,7 +30445,25 @@ const OrgProfile = props => {
       setIsEditing(false);
       setCardLoading(false);
     });
-  };
+  }, [setIsEditing, setAttributes]);
+
+  // Refetch data if lastUpdated is a week old or more.
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (attributes.lastUpdated && !cardLoading && attributes.authorSlug) {
+      // Convert string timestamp to number before creating Date object.
+      const lastUpdatedTimestamp = Number(attributes.lastUpdated);
+      if (isNaN(lastUpdatedTimestamp)) {
+        return;
+      }
+      const lastUpdated = new Date(lastUpdatedTimestamp);
+      const now = new Date();
+      const diffTime = Math.abs(now - lastUpdated);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      if (diffDays >= 7) {
+        loadProfileData(attributes.authorSlug);
+      }
+    }
+  }, []);
 
   // Show loading if loading.
   if (cardLoading) {
@@ -30509,7 +30527,7 @@ const OrgProfile = props => {
             }),
             isSecondary: true,
             id: "wppic-input-submit",
-            onClick: event => {
+            onClick: () => {
               // Error out if author slug is empty.
               if ('' === authorSlugSearchValue) {
                 setAuthorError(true);
