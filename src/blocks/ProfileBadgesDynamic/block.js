@@ -1,7 +1,7 @@
 //  Import CSS.
 import { useState } from '@wordpress/element';
 import Edit from './edit';
-import BadgesIcon from '../components/BadgesIcon';
+import BadgesIcon from '../components/WordPressIcon';
 import ProfileBadgesContext from '../contexts/ProfileBadges';
 
 import metadata from './block.json';

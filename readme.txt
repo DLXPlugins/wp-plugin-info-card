@@ -112,6 +112,7 @@ This video shows you how:
 * Bug fix: Fix icon alignment in the screenshots block.
 * Bug fix: Fixing overly sanitized author link in the Flex card layout.
 * Bug fix: Grid columns are no longer too stretched out.
+* Bug fix: GitHub Info Card was throwing JS warning in block.json.
 
 = 6.1.4 =
 * Released 2025-12-08

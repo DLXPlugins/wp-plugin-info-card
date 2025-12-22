@@ -7,7 +7,9 @@ import {
 	PanelRow,
 	ButtonGroup,
 	BaseControl,
+	ToggleControl,
 	RangeControl,
+	Modal,
 	Button,
 	SelectControl,
 } from '@wordpress/components';
@@ -21,7 +23,6 @@ import {
 import { useInstanceId } from '@wordpress/compose';
 import { badges as badgeMap } from '../components/Badges';
 import NumbersComponent from '../components/Numbers';
-import BadgeSelectionModal from '../components/BadgeSelectionModal';
 
 const Preview = ( props ) => {
 	const blockUniqueId = useInstanceId( Preview, 'wp-plugin-info-card-badges' );
@@ -266,12 +267,43 @@ const Preview = ( props ) => {
 					)
 				}
 			</>
-			<BadgeSelectionModal
-				isOpen={ showCustomizeBadges }
-				onClose={ () => setShowCustomizeBadges( false ) }
-				badges={ badges }
-				setAttributes={ setAttributes }
-			/>
+			{ showCustomizeBadges && (
+				<Modal
+					title={ __( 'Select Badges', 'wp-plugin-info-card' ) }
+					onRequestClose={ () => setShowCustomizeBadges( false ) }
+				>
+					<p>{ __( 'Select the badges you want to display in your profile.', 'wp-plugin-info-card' ) }</p>
+					<div className="wppic-profile-badges-modal wppic-profile-badges">
+						{ badgeMap.map( ( badge ) => (
+							<div key={ badge.class } className="wppic-profile-badge-modal-item wppic-profile-badge">
+								<ToggleControl
+									label={ __( 'Enabled', 'wp-plugin-info-card' ) }
+									checked={ badges.find( ( b ) => b.class === badge.class && b.enabled ) ? true : false }
+									onChange={ ( value ) => {
+										if ( ! value ) {
+											badges.splice( badges.findIndex( ( b ) => b.class === badge.class ), 1 );
+										} else {
+											badges.push( {
+												class: badge.class,
+												label: badge.label,
+												enabled: true,
+												order: badges.length + 1,
+											} );
+										}
+										setAttributes( { badges: [ ...badges ] } );
+									} }
+								/>
+								{ 'image' === badge.iconType ? (
+									<img src={ badge.icon } alt={ badge.label } />
+								) : (
+									<span className={ `dashicons ${ badge.class } ${ badge.icon }` }></span>
+								) }
+								<p>{ badge.label }</p>
+							</div>
+						) ) }
+					</div>
+				</Modal>
+			) }
 		</>
 	);
 };

@@ -41,9 +41,9 @@ import Logo from '../Logo';
 import { Radio } from 'lucide-react';
 import NumbersComponent from '../components/Numbers';
 import { set, uniqueId } from 'lodash';
+import OrgProfile from '../components/OrgProfile';
 import Preview from './preview';
 import ProfileBadgesContext from '../contexts/ProfileBadges';
-import BadgeSelectionModal from '../components/BadgeSelectionModal';
 
 const ProfileHighlightsAuthorAvatar = ( props ) => {
 	const { attributes, setAttributes } = props;
@@ -53,66 +53,16 @@ const ProfileHighlightsAuthorAvatar = ( props ) => {
 		align,
 		layout,
 		cols,
-		badges,
 	} = attributes;
-
-	const [ showBadgeModal, setShowBadgeModal ] = useState( false );
-
-	// Ensure badges is an array.
-	const currentBadges = badges || [];
-
-	const hasBadges = currentBadges && currentBadges.length > 0;
 
 	const block = (
 		<>
-			{ hasBadges && (
-				<>
-					<Preview
-						attributes={ attributes }
-						setAttributes={ setAttributes }
-						onEdit={ () => setIsEditing( true ) }
-						onRefresh={ () => setIsEditing( false ) }
-					/>
-				</>
-			) }
-			{ ! hasBadges && (
-				<>
-					<div className="wppic-query-block wppic-query-block-panel">
-						<div className="wppic-block-svg">
-							<Logo size="75" />
-						</div>
-						<div className="wppic-badges-grid-empty">
-							<div className="wp-pic-gutenberg-button">
-								<Button
-									iconSize={ 20 }
-									icon={ <Logo size="25" /> }
-									isSecondary
-									id="wppic-input-submit"
-									onClick={ () => {
-										setShowBadgeModal( true );
-									} }
-								>
-									{ __(
-										'Add Badges',
-										'wp-plugin-info-card',
-									) }
-								</Button>
-							</div>
-						</div>
-					</div>
-					<InspectorControls>
-						<></>
-					</InspectorControls>
-					<InspectorControls group="styles">
-						<></>
-					</InspectorControls>
-				</>
-			) }
-			<BadgeSelectionModal
-				isOpen={ showBadgeModal }
-				onClose={ () => setShowBadgeModal( false ) }
-				badges={ currentBadges }
+			<OrgProfile
+				attributes={ attributes }
 				setAttributes={ setAttributes }
+				Preview={ Preview }
+				isEditing={ isEditing }
+				setIsEditing={ setIsEditing }
 			/>
 		</>
 	);
@@ -134,7 +84,6 @@ const ProfileHighlightsAuthorAvatar = ( props ) => {
 			<>
 				<img
 					src={ wppic.query_preview }
-					alt={ __( 'Preview', 'wp-plugin-info-card' ) }
 					style={ { width: '100%', height: 'auto' } }
 				/>
 			</>
