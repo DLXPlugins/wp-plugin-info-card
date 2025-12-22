@@ -28039,20 +28039,26 @@ const BadgeSelectionModal = ({
         className: "wppic-profile-badges-modal wppic-profile-badges",
         children: _Badges__WEBPACK_IMPORTED_MODULE_3__.badges.map(badge => {
           const isEnabled = badges.find(b => b.class === badge.class && b.enabled) ? true : false;
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          const hasOverlay = badge.class.includes('has-overlay');
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "wppic-profile-badge-modal-item wppic-profile-badge",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enabled', 'wp-plugin-info-card'),
-              checked: isEnabled,
-              onChange: value => handleBadgeToggle(badge, value)
-            }), 'image' === badge.iconType ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-              src: badge.icon,
-              alt: badge.label
-            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-              className: `dashicons ${badge.class} ${badge.icon}`
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-              children: badge.label
-            })]
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              className: `wppic-profile-badge-modal-item__row`,
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                className: `badge ${badge.class} ${hasOverlay ? 'has-overlay' : ''}`,
+                children: 'image' === badge.iconType ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+                  src: badge.icon,
+                  alt: badge.label,
+                  className: hasOverlay ? 'has-overlay' : ''
+                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                  className: `dashicons ${badge.class} ${badge.icon} ${hasOverlay ? 'has-overlay' : ''}`
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+                label: badge.label,
+                checked: isEnabled,
+                onChange: value => handleBadgeToggle(badge, value)
+              })]
+            })
           }, badge.class);
         })
       })]

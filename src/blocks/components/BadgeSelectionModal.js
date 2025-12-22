@@ -101,20 +101,24 @@ const BadgeSelectionModal = ( { badges, setAttributes, isOpen, onClose } ) => {
 				<div className="wppic-profile-badges-modal wppic-profile-badges">
 					{ badgeMap.map( ( badge ) => {
 						const isEnabled = badges.find( ( b ) => b.class === badge.class && b.enabled ) ? true : false;
+						const hasOverlay = badge.class.includes( 'has-overlay' );
 
 						return (
 							<div key={ badge.class } className="wppic-profile-badge-modal-item wppic-profile-badge">
-								<ToggleControl
-									label={ __( 'Enabled', 'wp-plugin-info-card' ) }
-									checked={ isEnabled }
-									onChange={ ( value ) => handleBadgeToggle( badge, value ) }
-								/>
-								{ 'image' === badge.iconType ? (
-									<img src={ badge.icon } alt={ badge.label } />
-								) : (
-									<span className={ `dashicons ${ badge.class } ${ badge.icon }` }></span>
-								) }
-								<p>{ badge.label }</p>
+								<div className={ `wppic-profile-badge-modal-item__row` }>
+									<div className={ `badge ${ badge.class } ${ hasOverlay ? 'has-overlay' : '' }` }>
+										{ 'image' === badge.iconType ? (
+											<img src={ badge.icon } alt={ badge.label } className={ hasOverlay ? 'has-overlay' : '' } />
+										) : (
+											<span className={ `dashicons ${ badge.class } ${ badge.icon } ${ hasOverlay ? 'has-overlay' : '' }` }></span>
+										) }
+									</div>
+									<ToggleControl
+										label={ badge.label }
+										checked={ isEnabled }
+										onChange={ ( value ) => handleBadgeToggle( badge, value ) }
+									/>
+								</div>
 							</div>
 						);
 					} ) }

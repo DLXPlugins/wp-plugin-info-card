@@ -573,4 +573,19 @@ div[data-type="wp-plugin-info-card/wp-plugin-info-card"] .wp-block {
   color: #757575;
 }
 
+.wppic-profile-badge-modal-item__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.wppic-profile-badge-modal-item img {
+  width: 20px;
+  height: 20px;
+}
+.wppic-profile-badge-modal-item .dashicons {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
 /*# sourceMappingURL=wppic-editor.css.map*/
