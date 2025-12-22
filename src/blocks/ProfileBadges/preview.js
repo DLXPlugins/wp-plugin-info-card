@@ -10,6 +10,7 @@ import {
 	RangeControl,
 	Button,
 	SelectControl,
+	ToggleControl,
 } from '@wordpress/components';
 
 import { __ } from '@wordpress/i18n';
@@ -41,6 +42,7 @@ const Preview = ( props ) => {
 		layout,
 		baseSize,
 		headingColor,
+		hideHeading,
 	} = attributes;
 
 	useEffect( () => {
@@ -122,6 +124,13 @@ const Preview = ( props ) => {
 							value={ layout }
 							onChange={ ( value ) => {
 								setAttributes( { layout: value } );
+							} }
+						/>
+						<ToggleControl
+							label={ __( 'Hide Heading', 'wp-plugin-info-card' ) }
+							checked={ hideHeading }
+							onChange={ ( value ) => {
+								setAttributes( { hideHeading: value } );
 							} }
 						/>
 						<PanelRow className="wppic-panel-rows-cols">
@@ -227,11 +236,13 @@ const Preview = ( props ) => {
 							}
 							return (
 								<div key={ badge.class + badge.order } className="wppic-profile-badge">
-									<h3 className="wppic-profile-badge-title">
-										{
-											badgeData.label
-										}
-									</h3>
+									{ ! hideHeading && (
+										<h3 className="wppic-profile-badge-title">
+											{
+												badgeData.label
+											}
+										</h3>
+									) }
 									<div className={ `badge ${ badgeData.class } ` }>
 										{
 											image

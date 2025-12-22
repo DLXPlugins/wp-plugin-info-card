@@ -69,6 +69,10 @@
       "type": "string",
       "default": "horizontal"
     },
+    "hideHeading": {
+      "type": "boolean",
+      "default": false
+    },
     "headingColor": {
       "type": "string",
       "default": "#000000"

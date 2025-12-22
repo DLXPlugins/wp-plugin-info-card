@@ -939,6 +939,10 @@ return array(
 				'type' => 'string',
 				'default' => 'horizontal'
 			),
+			'hideHeading' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
 			'headingColor' => array(
 				'type' => 'string',
 				'default' => '#000000'
