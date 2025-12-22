@@ -70,8 +70,7 @@ const ProfileHighlightsAuthorAvatar = ( props ) => {
 					<Preview
 						attributes={ attributes }
 						setAttributes={ setAttributes }
-						onEdit={ () => setIsEditing( true ) }
-						onRefresh={ () => setIsEditing( false ) }
+						onEdit={ () => setShowBadgeModal( true ) }
 					/>
 				</>
 			) }

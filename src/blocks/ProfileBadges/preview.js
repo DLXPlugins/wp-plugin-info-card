@@ -21,7 +21,6 @@ import {
 import { useInstanceId } from '@wordpress/compose';
 import { badges as badgeMap } from '../components/Badges';
 import NumbersComponent from '../components/Numbers';
-import BadgeSelectionModal from '../components/BadgeSelectionModal';
 
 const Preview = ( props ) => {
 	const blockUniqueId = useInstanceId( Preview, 'wp-plugin-info-card-badges' );
@@ -30,10 +29,8 @@ const Preview = ( props ) => {
 		attributes,
 		setAttributes,
 		onEdit,
-		onRefresh,
 	} = props;
 
-	const [ showCustomizeBadges, setShowCustomizeBadges ] = useState( false );
 	const [ loading, setLoading ] = useState( true );
 
 	const {
@@ -114,18 +111,6 @@ const Preview = ( props ) => {
 	const inspectorControls = (
 		<>
 			<InspectorControls>
-				<PanelBody
-					title={ __( 'Block Options', 'wp-plugin-info-card' ) }
-				>
-					<Button
-						variant="secondary"
-						onClick={ () => {
-							setShowCustomizeBadges( true );
-						} }
-					>
-						{ __( 'Customize Badges', 'wp-plugin-info-card' ) }
-					</Button>
-				</PanelBody>
 				{
 					<PanelBody title={ __( 'Layout', 'wp-plugin-info-card' ) }>
 						<SelectControl
@@ -204,14 +189,6 @@ const Preview = ( props ) => {
 					) }
 					onClick={ () => onEdit() }
 				/>
-				<ToolbarButton
-					icon="update"
-					title={ __(
-						'Refresh',
-						'wp-plugin-info-card',
-					) }
-					onClick={ () => onRefresh() }
-				/>
 			</ToolbarGroup>
 		</BlockControls>
 	);
@@ -266,12 +243,6 @@ const Preview = ( props ) => {
 					)
 				}
 			</>
-			<BadgeSelectionModal
-				isOpen={ showCustomizeBadges }
-				onClose={ () => setShowCustomizeBadges( false ) }
-				badges={ badges }
-				setAttributes={ setAttributes }
-			/>
 		</>
 	);
 };
