@@ -26787,11 +26787,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/blocks/ProfileBadges/edit.js");
 /* harmony import */ var _components_BadgesIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/BadgesIcon */ "./src/blocks/components/BadgesIcon.js");
-/* harmony import */ var _contexts_ProfileBadges__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../contexts/ProfileBadges */ "./src/blocks/contexts/ProfileBadges.js");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./block.json */ "./src/blocks/ProfileBadges/block.json");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _components_BadgesIcon2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/BadgesIcon2 */ "./src/blocks/components/BadgesIcon2.js");
+/* harmony import */ var _contexts_ProfileBadges__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../contexts/ProfileBadges */ "./src/blocks/contexts/ProfileBadges.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./block.json */ "./src/blocks/ProfileBadges/block.json");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__);
 //  Import CSS.
+
 
 
 
@@ -26802,14 +26804,14 @@ __webpack_require__.r(__webpack_exports__);
 const EditComponent = props => {
   const [isEditing, setIsEditing] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [isRefreshing, setIsRefreshing] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_contexts_ProfileBadges__WEBPACK_IMPORTED_MODULE_4__["default"].Provider, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_contexts_ProfileBadges__WEBPACK_IMPORTED_MODULE_5__["default"].Provider, {
     value: {
       isEditing,
       setIsEditing,
       isRefreshing,
       setIsRefreshing
     },
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_edit__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_edit__WEBPACK_IMPORTED_MODULE_2__["default"], {
       ...props
     })
   });
@@ -26817,8 +26819,8 @@ const EditComponent = props => {
 const {
   registerBlockType
 } = wp.blocks;
-registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_5__, {
-  icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_BadgesIcon__WEBPACK_IMPORTED_MODULE_3__["default"], {
+registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_6__, {
+  icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_BadgesIcon__WEBPACK_IMPORTED_MODULE_3__["default"], {
     fill: "#333"
   }),
   edit: EditComponent,
@@ -26829,6 +26831,9 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_5__, {
     name: 'wp-plugin-info-card/profile-highlights-badges-dynamic',
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Profile Badges - Dynamic', 'wp-plugin-info-card'),
     description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Display your WordPress.org badges in a grid format for a specific author slug. This updates automatically every few weeks.', 'wp-plugin-info-card'),
+    icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_BadgesIcon2__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      fill: "#333"
+    }),
     attributes: {
       type: 'dynamic',
       badges: [],
@@ -26840,11 +26845,6 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_5__, {
     },
     keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Profile Badges', 'wp-plugin-info-card'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Dynamic', 'wp-plugin-info-card'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Author Slug', 'wp-plugin-info-card'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Badges', 'wp-plugin-info-card')],
     scope: ['inserter'],
-    example: {
-      attributes: {
-        preview: true
-      }
-    },
     isDefault: false
   }]
 });
@@ -28653,22 +28653,57 @@ const BadgesIcon = ({
   height = 24,
   fill = '#333333'
 }) => {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
     xmlns: "http://www.w3.org/2000/svg",
-    xmlSpace: "preserve",
-    viewBox: "0 0 370.04 370.04",
     width: width,
     height: height,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+    viewBox: "0 0 454.656 454.656",
+    fill: fill,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
       fill: "currentColor",
-      d: "m341.668 314.412-48.438-83.248c8.382-2.557 17.311-4.815 21.021-11.221 6.183-10.674-4.823-28.184-1.933-39.625 2.977-11.775 20.551-21.964 20.551-33.933 0-11.661-18.169-25.284-21.148-36.99-2.91-11.439 8.063-28.968 1.86-39.629-6.203-10.662-26.864-9.786-35.369-17.97-8.751-8.422-8.724-29.028-19.279-34.672-10.598-5.665-27.822 5.784-39.589 3.072C207.711 17.515 197.318 0 185.167 0c-12.331 0-31.944 19.868-35.02 20.583-11.761 2.734-29.007-8.687-39.594-2.998-10.545 5.663-10.48 26.271-19.215 34.707-8.491 8.199-29.153 7.361-35.337 18.035-6.183 10.672 4.823 28.178 1.934 39.625-2.897 11.476-21.083 23.104-21.083 36.376 0 11.97 17.618 22.127 20.613 33.896 2.911 11.439-8.062 28.966-1.859 39.631 3.377 5.805 11.039 8.188 18.691 10.479.893.267 2.582 1.266 1.438 2.933l-47.37 81.755c-3.352 5.784-.63 10.742 6.047 11.023l32.683 1.363c6.677.281 15.053 5.133 18.617 10.786l17.44 27.674c3.564 5.653 9.219 5.547 12.57-.236 0 0 48.797-84.246 48.817-84.27.979-1.144 1.963-.909 2.434-.509 5.339 4.546 12.782 9.081 18.994 9.081 6.092 0 11.733-4.269 17.313-9.03.454-.387 1.559-1.18 2.367.466.013.026 48.756 83.811 48.756 83.811 3.36 5.776 9.016 5.874 12.569.214l17.391-27.707c3.554-5.657 11.921-10.528 18.598-10.819l32.68-1.424c6.674-.293 9.387-5.258 6.027-11.033zM239.18 238.631c-36.136 21.023-79.511 18.77-112.641-2.127-48.545-31.095-64.518-95.419-35.335-145.788 29.516-50.95 94.399-68.928 145.808-40.929.27.147.537.299.805.449.381.211.761.425 1.14.641 15.86 9.144 29.613 22.415 39.461 39.342 30.098 51.736 12.497 118.314-39.238 148.412z"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
-      fill: "currentColor",
-      d: "M230.916 66.103c-.15-.087-.302-.168-.452-.254-27.462-15.894-62.464-17.056-91.799.011-43.532 25.326-58.345 81.345-33.019 124.876 7.728 13.284 18.318 23.888 30.536 31.498a93.462 93.462 0 0 0 3.164 1.927c43.579 25.247 99.568 10.333 124.814-33.244 25.245-43.579 10.335-99.567-33.244-124.814zm10.902 71.241-15.259 14.873c-4.726 4.606-7.68 13.698-6.563 20.203l3.602 21.001c1.116 6.505-2.75 9.314-8.592 6.243l-18.861-9.916c-5.842-3.071-15.401-3.071-21.243 0l-18.86 9.916c-5.842 3.071-9.709.262-8.593-6.243l3.602-21.001c1.116-6.505-1.838-15.597-6.564-20.203l-15.258-14.873c-4.727-4.606-3.249-9.152 3.282-10.102l21.086-3.064c6.531-.949 14.265-6.568 17.186-12.486l9.43-19.107c2.921-5.918 7.701-5.918 10.621 0l9.431 19.107c2.921 5.918 10.654 11.537 17.186 12.486l21.086 3.064c6.53.95 8.007 5.496 3.281 10.102z"
-    })]
+      d: "m454.656 227.584-38.912-50.688 8.704-62.976-59.392-23.552-23.552-59.392-62.976 8.704-51.2-39.424-50.688 38.912-62.976-8.704-23.552 59.392-59.392 23.552 8.704 62.976L0 227.584l38.912 50.688-8.704 62.976L89.6 364.8l23.552 59.392 62.976-8.704 50.688 38.912 50.688-38.912 62.976 8.704 23.552-59.392 59.392-24.064-8.704-62.976 39.936-50.176zm-245.76 73.728-75.776-62.464 16.384-19.968 56.32 46.08 96.256-111.104 19.456 16.896-112.64 130.56z"
+    })
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BadgesIcon);
+
+/***/ }),
+
+/***/ "./src/blocks/components/BadgesIcon2.js":
+/*!**********************************************!*\
+  !*** ./src/blocks/components/BadgesIcon2.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+
+const BadgesIcon2 = ({
+  width = 24,
+  height = 24,
+  fill = '#333333'
+}) => {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: width,
+    height: height,
+    viewBox: "0 0 64 64",
+    fill: fill,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+      fill: "currentColor",
+      d: "M39.44 45.9c2.28-.74 3.11-4.36 5.01-5.75 1.92-1.39 5.62-1.07 7.02-2.99 1.38-1.9-.06-5.31.68-7.6.72-2.2 3.91-4.1 3.91-6.54s-3.19-4.35-3.91-6.55c-.74-2.28.7-5.7-.68-7.59-1.4-1.92-5.1-1.61-7.02-3C42.56 4.5 41.72.87 39.44.13c-2.2-.71-4.99 1.71-7.43 1.71S26.77-.58 24.57.13c-2.28.74-3.11 4.37-5.01 5.75-1.92 1.39-5.62 1.08-7.02 2.99-1.38 1.9.06 5.32-.68 7.6-.72 2.2-3.91 4.11-3.91 6.55s3.19 4.34 3.91 6.54c.74 2.29-.7 5.7.68 7.6 1.4 1.91 5.1 1.6 7.02 2.99 1.89 1.39 2.73 5.01 5.01 5.75 2.2.71 4.99-1.7 7.44-1.7 2.43 0 5.23 2.41 7.43 1.7zM32 37.29c-7.89 0-14.27-6.4-14.27-14.27 0-7.89 6.39-14.27 14.27-14.27s14.26 6.39 14.26 14.27c.01 7.88-6.38 14.27-14.26 14.27z"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+      fill: "currentColor",
+      d: "M45.15 41.12c-.62.46-1.16 1.35-1.74 2.29-.88 1.44-1.88 3.07-3.6 3.63-.39.13-.81.19-1.24.19-1.25 0-2.48-.5-3.67-.99-.26-.11-.53-.21-.79-.31L37.97 64l6.63-7.77 9.48 1.51-7.68-17.19c-.5.16-.93.34-1.25.57zM25.43 47.23c-.43 0-.85-.06-1.24-.19-1.72-.56-2.73-2.2-3.61-3.64-.58-.94-1.12-1.82-1.74-2.28-.32-.23-.76-.41-1.24-.57L9.92 57.74l9.48-1.51L26.02 64l3.87-18.07c-.27.1-.53.2-.8.31-1.17.49-2.41.99-3.66.99zM42.34 19.66l-7.14-1.04-3.2-6.48-3.2 6.48-7.14 1.04 5.17 5.04-1.22 7.12L32 28.45l6.39 3.37-1.22-7.12z"
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BadgesIcon2);
 
 /***/ }),
 
