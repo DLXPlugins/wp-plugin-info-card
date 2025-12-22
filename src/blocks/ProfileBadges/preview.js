@@ -30,6 +30,7 @@ const Preview = ( props ) => {
 		attributes,
 		setAttributes,
 		onEdit,
+		onRefresh,
 	} = props;
 
 	const [ loading, setLoading ] = useState( true );
@@ -198,6 +199,18 @@ const Preview = ( props ) => {
 					) }
 					onClick={ () => onEdit() }
 				/>
+				{
+					( 'dynamic' === attributes.type && badges && badges.length > 0 ) && (
+						<ToolbarButton
+							icon="update"
+							title={ __(
+								'Refresh',
+								'wp-plugin-info-card',
+							) }
+							onClick={ () => onRefresh() }
+						/>
+					)
+				}
 			</ToolbarGroup>
 		</BlockControls>
 	);

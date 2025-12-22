@@ -1,11 +1,14 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useContext } from 'react';
 import axios from 'axios';
 import {
 	TextControl,
 	Button,
+	ToolbarGroup,
+	ToolbarButton,
 } from '@wordpress/components';
 import {
 	InspectorControls,
+	BlockControls,
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import { cleanForSlug } from '@wordpress/url';
@@ -26,15 +29,15 @@ import { badges as badgeMap } from '../Badges';
  * @param {JSX.Component} [props.Preview]      - Optional preview component.
  * @param {boolean}       [props.isEditing]    - Editing mode state (if provided by context).
  * @param {Function}      [props.setIsEditing] - Setter for the editing mode (if provided).
+ * @param {boolean}       [props.isRefreshing] - Refreshing state (if provided).
  * @return {JSX.Element} The rendered component.
  */
 const OrgProfile = ( props ) => {
-	const { attributes, setAttributes, Preview, isEditing, setIsEditing } = props;
+	const { attributes, setAttributes, Preview, isEditing, setIsEditing, isRefreshing } = props;
 	const [ authorSlugSearchValue, setAuthorSlugSearchValue ] = useState( attributes.authorSlug );
 	const [ authorError, setAuthorError ] = useState( false );
 	const [ authorErrorMessage, setAuthorErrorMessage ] = useState( '' );
 	const [ cardLoading, setCardLoading ] = useState( false );
-
 	const loadProfileData = useCallback( async ( authorSlug ) => {
 		setIsEditing( true );
 		setCardLoading( true );
@@ -89,7 +92,7 @@ const OrgProfile = ( props ) => {
 				setIsEditing( false );
 				setCardLoading( false );
 			} );
-	}, [ setIsEditing, setAttributes ] );
+	}, [ setIsEditing, setAttributes, isRefreshing ] );
 
 	// Refetch data if lastUpdated is a week old or more.
 	useEffect( () => {
@@ -114,7 +117,8 @@ const OrgProfile = ( props ) => {
 		return (
 			<>
 				<InspectorControls>
-					<></>
+					<>
+					</>
 				</InspectorControls>
 				<Loading />
 			</>
@@ -144,8 +148,32 @@ const OrgProfile = ( props ) => {
 		<>
 			<>
 				<InspectorControls>
-					<></>
+					<>
+					</>
 				</InspectorControls>
+				{ ( attributes.authorSlug && ! isRefreshing && attributes.badges && attributes.badges.length > 0 ) && (
+					<>
+						<BlockControls>
+							<ToolbarGroup>
+								<ToolbarButton
+									icon="undo"
+									title={ __(
+										'Back',
+										'wp-plugin-info-card',
+									) }
+									onClick={ () => {
+										setIsEditing( false );
+									} }
+								>
+									{ __(
+										'Back',
+										'wp-plugin-info-card',
+									) }
+								</ToolbarButton>
+							</ToolbarGroup>
+						</BlockControls>
+					</>
+				) }
 				<div className="wppic-query-block wppic-query-block-panel">
 					<div className="wppic-block-svg">
 						<Logo size="75" />

@@ -26783,13 +26783,16 @@ const SlugEntryScreen = props => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit */ "./src/blocks/ProfileBadges/edit.js");
-/* harmony import */ var _components_BadgesIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/BadgesIcon */ "./src/blocks/components/BadgesIcon.js");
-/* harmony import */ var _contexts_ProfileBadges__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../contexts/ProfileBadges */ "./src/blocks/contexts/ProfileBadges.js");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/blocks/ProfileBadges/block.json");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/blocks/ProfileBadges/edit.js");
+/* harmony import */ var _components_BadgesIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/BadgesIcon */ "./src/blocks/components/BadgesIcon.js");
+/* harmony import */ var _contexts_ProfileBadges__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../contexts/ProfileBadges */ "./src/blocks/contexts/ProfileBadges.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./block.json */ "./src/blocks/ProfileBadges/block.json");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
 //  Import CSS.
+
 
 
 
@@ -26798,12 +26801,15 @@ __webpack_require__.r(__webpack_exports__);
 
 const EditComponent = props => {
   const [isEditing, setIsEditing] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_contexts_ProfileBadges__WEBPACK_IMPORTED_MODULE_3__["default"].Provider, {
+  const [isRefreshing, setIsRefreshing] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_contexts_ProfileBadges__WEBPACK_IMPORTED_MODULE_4__["default"].Provider, {
     value: {
       isEditing,
-      setIsEditing
+      setIsEditing,
+      isRefreshing,
+      setIsRefreshing
     },
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_edit__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_edit__WEBPACK_IMPORTED_MODULE_2__["default"], {
       ...props
     })
   });
@@ -26811,14 +26817,36 @@ const EditComponent = props => {
 const {
   registerBlockType
 } = wp.blocks;
-registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_4__, {
-  icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_BadgesIcon__WEBPACK_IMPORTED_MODULE_2__["default"], {
+registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_5__, {
+  icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_BadgesIcon__WEBPACK_IMPORTED_MODULE_3__["default"], {
     fill: "#333"
   }),
   edit: EditComponent,
   save() {
     return null;
-  }
+  },
+  variations: [{
+    name: 'wp-plugin-info-card/profile-highlights-badges-dynamic',
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Profile Badges - Dynamic', 'wp-plugin-info-card'),
+    description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Display your WordPress.org badges in a grid format for a specific author slug. This updates automatically every few weeks.', 'wp-plugin-info-card'),
+    attributes: {
+      type: 'dynamic',
+      badges: [],
+      authorSlug: '',
+      lastUpdated: ''
+    },
+    isActive: attributes => {
+      return attributes.type === 'dynamic' && attributes.authorSlug !== '';
+    },
+    keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Profile Badges', 'wp-plugin-info-card'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Dynamic', 'wp-plugin-info-card'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Author Slug', 'wp-plugin-info-card'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Badges', 'wp-plugin-info-card')],
+    scope: ['inserter'],
+    example: {
+      attributes: {
+        preview: true
+      }
+    },
+    isDefault: false
+  }]
 });
 
 /***/ }),
@@ -26861,15 +26889,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Numbers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Numbers */ "./src/blocks/components/Numbers.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lodash */ "lodash");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _preview__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./preview */ "./src/blocks/ProfileBadges/preview.js");
-/* harmony import */ var _contexts_ProfileBadges__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../contexts/ProfileBadges */ "./src/blocks/contexts/ProfileBadges.js");
-/* harmony import */ var _components_BadgeSelectionModal__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/BadgeSelectionModal */ "./src/blocks/components/BadgeSelectionModal.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _components_OrgProfile__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/OrgProfile */ "./src/blocks/components/OrgProfile/index.js");
+/* harmony import */ var _preview__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./preview */ "./src/blocks/ProfileBadges/preview.js");
+/* harmony import */ var _contexts_ProfileBadges__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../contexts/ProfileBadges */ "./src/blocks/contexts/ProfileBadges.js");
+/* harmony import */ var _components_BadgeSelectionModal__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/BadgeSelectionModal */ "./src/blocks/components/BadgeSelectionModal.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__);
 // @ts-nocheck
 /**
  * External dependencies
  */
+
 
 
 
@@ -26892,11 +26922,14 @@ const ProfileHighlightsAuthorAvatar = props => {
   } = props;
   const {
     isEditing,
-    setIsEditing
-  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(_contexts_ProfileBadges__WEBPACK_IMPORTED_MODULE_10__["default"]);
+    setIsEditing,
+    isRefreshing,
+    setIsRefreshing
+  } = (0,react__WEBPACK_IMPORTED_MODULE_2__.useContext)(_contexts_ProfileBadges__WEBPACK_IMPORTED_MODULE_11__["default"]);
   const {
     preview,
     align,
+    type,
     layout,
     cols,
     badges
@@ -26906,52 +26939,66 @@ const ProfileHighlightsAuthorAvatar = props => {
   // Ensure badges is an array.
   const currentBadges = badges || [];
   const hasBadges = currentBadges && currentBadges.length > 0;
-  const block = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.Fragment, {
-    children: [hasBadges && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.Fragment, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_preview__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  const getBlock = () => {
+    if (type === 'dynamic') {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_OrgProfile__WEBPACK_IMPORTED_MODULE_9__["default"], {
         attributes: attributes,
         setAttributes: setAttributes,
-        onEdit: () => setShowBadgeModal(true)
-      })
-    }), !hasBadges && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-        className: "wppic-query-block wppic-query-block-panel",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-          className: "wppic-block-svg",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_Logo__WEBPACK_IMPORTED_MODULE_6__["default"], {
-            size: "75"
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-          className: "wppic-badges-grid-empty",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
-            className: "wp-pic-gutenberg-button",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-              iconSize: 20,
-              icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_Logo__WEBPACK_IMPORTED_MODULE_6__["default"], {
-                size: "25"
-              }),
-              isSecondary: true,
-              id: "wppic-input-submit",
-              onClick: () => {
-                setShowBadgeModal(true);
-              },
-              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add Badges', 'wp-plugin-info-card')
+        Preview: _preview__WEBPACK_IMPORTED_MODULE_10__["default"],
+        isEditing: isEditing,
+        setIsEditing: setIsEditing,
+        isRefreshing: isRefreshing
+      });
+    }
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.Fragment, {
+      children: [hasBadges && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.Fragment, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_preview__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          attributes: attributes,
+          setAttributes: setAttributes,
+          onEdit: () => setShowBadgeModal(true),
+          onRefresh: () => setIsRefreshing(true)
+        })
+      }), !hasBadges && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
+          className: "wppic-query-block wppic-query-block-panel",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
+            className: "wppic-block-svg",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_Logo__WEBPACK_IMPORTED_MODULE_6__["default"], {
+              size: "75"
             })
-          })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
+            className: "wppic-badges-grid-empty",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
+              className: "wp-pic-gutenberg-button",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+                iconSize: 20,
+                icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_Logo__WEBPACK_IMPORTED_MODULE_6__["default"], {
+                  size: "25"
+                }),
+                isSecondary: true,
+                id: "wppic-input-submit",
+                onClick: () => {
+                  setShowBadgeModal(true);
+                },
+                children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add Badges', 'wp-plugin-info-card')
+              })
+            })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.InspectorControls, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.Fragment, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.InspectorControls, {
+          group: "styles",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.Fragment, {})
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.InspectorControls, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.Fragment, {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.InspectorControls, {
-        group: "styles",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.Fragment, {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_BadgeSelectionModal__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        isOpen: showBadgeModal,
+        onClose: () => setShowBadgeModal(false),
+        badges: currentBadges,
+        setAttributes: setAttributes
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_BadgeSelectionModal__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      isOpen: showBadgeModal,
-      onClose: () => setShowBadgeModal(false),
-      badges: currentBadges,
-      setAttributes: setAttributes
-    })]
-  });
+    });
+  };
+  const block = getBlock();
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useBlockProps)({
     className: classnames__WEBPACK_IMPORTED_MODULE_0___default()(`wppic-badges-grid`, {
       [`align${align}`]: !isEditing,
@@ -26961,8 +27008,8 @@ const ProfileHighlightsAuthorAvatar = props => {
     })
   });
   if (preview) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.Fragment, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("img", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.Fragment, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("img", {
         src: wppic.query_preview,
         alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Preview', 'wp-plugin-info-card'),
         style: {
@@ -26972,7 +27019,7 @@ const ProfileHighlightsAuthorAvatar = props => {
       })
     });
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
     ...blockProps,
     id: attributes.uniqueId,
     children: block
@@ -27020,7 +27067,8 @@ const Preview = props => {
   const {
     attributes,
     setAttributes,
-    onEdit
+    onEdit,
+    onRefresh
   } = props;
   const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
   const {
@@ -27184,12 +27232,16 @@ const Preview = props => {
     })]
   });
   const toolbar = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarGroup, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarButton, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarGroup, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarButton, {
         icon: "edit",
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Edit and Configure', 'wp-plugin-info-card'),
         onClick: () => onEdit()
-      })
+      }), 'dynamic' === attributes.type && badges && badges.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToolbarButton, {
+        icon: "update",
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Refresh', 'wp-plugin-info-card'),
+        onClick: () => onRefresh()
+      })]
     })
   });
   if (loading) {
@@ -30524,6 +30576,247 @@ const NumbersComponent = props => {
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NumbersComponent);
+
+/***/ }),
+
+/***/ "./src/blocks/components/OrgProfile/index.js":
+/*!***************************************************!*\
+  !*** ./src/blocks/components/OrgProfile/index.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _Logo__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../Logo */ "./src/blocks/Logo.js");
+/* harmony import */ var _components_Notice__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/Notice */ "./src/blocks/components/Notice/index.js");
+/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/Loading */ "./src/blocks/components/Loading.js");
+/* harmony import */ var _Badges__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../Badges */ "./src/blocks/components/Badges/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__);
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+  /**
+ * OrgProfile component displays the organization profile,
+ * including badge information and author slug editor.
+ *
+ * @param {Object}        props                - The component props.
+ * @param {Object}        props.attributes     - Block attributes.
+ * @param {Function}      props.setAttributes  - Updates block attributes.
+ * @param {JSX.Component} [props.Preview]      - Optional preview component.
+ * @param {boolean}       [props.isEditing]    - Editing mode state (if provided by context).
+ * @param {Function}      [props.setIsEditing] - Setter for the editing mode (if provided).
+ * @param {boolean}       [props.isRefreshing] - Refreshing state (if provided).
+ * @return {JSX.Element} The rendered component.
+ */
+
+const OrgProfile = props => {
+  const {
+    attributes,
+    setAttributes,
+    Preview,
+    isEditing,
+    setIsEditing,
+    isRefreshing
+  } = props;
+  const [authorSlugSearchValue, setAuthorSlugSearchValue] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.authorSlug);
+  const [authorError, setAuthorError] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [authorErrorMessage, setAuthorErrorMessage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [cardLoading, setCardLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const loadProfileData = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(async authorSlug => {
+    setIsEditing(true);
+    setCardLoading(true);
+    const restUrl = wppic.rest_url + 'wppic/v2/get_profile_data';
+    axios__WEBPACK_IMPORTED_MODULE_1__["default"].get(restUrl + `?author=${authorSlug}`, {
+      headers: {
+        'X-WP-Nonce': wppic.rest_nonce
+      }
+    }).then(response => {
+      const {
+        success,
+        data
+      } = response.data;
+      if (success) {
+        const {
+          member_badges
+        } = data;
+        let badgeOrder = 0;
+        /**
+         * Reduce the member badges array to an array of objects with the badge class, label, enabled, and order.
+         *
+         * @param {Array}  acc   - The accumulator array.
+         * @param {string} badge - The badge ID.
+         * @return {Array} The accumulator array.
+         */
+        const badges = member_badges.reduce((acc, badge) => {
+          const badgeData = _Badges__WEBPACK_IMPORTED_MODULE_10__.badges.find(b => b.id === badge);
+          if (badgeData) {
+            badgeOrder++;
+            acc.push({
+              class: badgeData.class,
+              label: badgeData.label,
+              enabled: true,
+              order: badgeOrder
+            });
+          }
+          return acc;
+        }, []);
+        setAuthorSlugSearchValue(authorSlug);
+        setAttributes({
+          authorSlug,
+          badges,
+          lastUpdated: new Date().getTime().toString()
+        });
+      } else {
+        setAuthorErrorMessage(data.message);
+        setAuthorError(true);
+      }
+    }).then(() => {
+      setIsEditing(false);
+      setCardLoading(false);
+    });
+  }, [setIsEditing, setAttributes, isRefreshing]);
+
+  // Refetch data if lastUpdated is a week old or more.
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (attributes.lastUpdated && !cardLoading && attributes.authorSlug) {
+      // Convert string timestamp to number before creating Date object.
+      const lastUpdatedTimestamp = Number(attributes.lastUpdated);
+      if (isNaN(lastUpdatedTimestamp)) {
+        return;
+      }
+      const lastUpdated = new Date(lastUpdatedTimestamp);
+      const now = new Date();
+      const diffTime = Math.abs(now - lastUpdated);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      if (diffDays >= 7) {
+        loadProfileData(attributes.authorSlug);
+      }
+    }
+  }, []);
+
+  // Show loading if loading.
+  if (cardLoading) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_Loading__WEBPACK_IMPORTED_MODULE_9__["default"], {})]
+    });
+  }
+
+  // If we have an authorSlug and lastUpdated isn't empty, show the preview.
+  if (authorSlugSearchValue && attributes.lastUpdated && !isEditing) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(Preview, {
+        attributes: attributes,
+        setAttributes: setAttributes,
+        onEdit: () => {
+          setIsEditing(true);
+        },
+        onRefresh: () => {
+          setIsEditing(true);
+          loadProfileData(attributes.authorSlug);
+        }
+      })
+    });
+  }
+  const block = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {})
+      }), attributes.authorSlug && !isRefreshing && attributes.badges && attributes.badges.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
+              icon: "undo",
+              title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Back', 'wp-plugin-info-card'),
+              onClick: () => {
+                setIsEditing(false);
+              },
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Back', 'wp-plugin-info-card')
+            })
+          })
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+        className: "wppic-query-block wppic-query-block-panel",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          className: "wppic-block-svg",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Logo__WEBPACK_IMPORTED_MODULE_7__["default"], {
+            size: "75"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Enter a WordPress.org Username Slug', 'wp-plugin-info-card'),
+          value: authorSlugSearchValue,
+          onChange: value => {
+            setAuthorError(false);
+            setAuthorSlugSearchValue(value);
+          },
+          name: 'searchOrgUsername',
+          className: classnames__WEBPACK_IMPORTED_MODULE_6___default()('wppic-input', {
+            'wppic-input-error': authorError
+          }),
+          placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Enter a .org username…', 'wp-plugin-info-card')
+        }), authorError && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_Notice__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          status: "error",
+          isDismissible: false,
+          className: "wppic-error-notice",
+          children: authorErrorMessage
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+          className: "wp-pic-gutenberg-button",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+            iconSize: 20,
+            icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Logo__WEBPACK_IMPORTED_MODULE_7__["default"], {
+              size: "25"
+            }),
+            isSecondary: true,
+            id: "wppic-input-submit",
+            onClick: () => {
+              // Error out if author slug is empty.
+              if ('' === authorSlugSearchValue) {
+                setAuthorError(true);
+                setAuthorErrorMessage((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Please enter a username.', 'wp-plugin-info-card'));
+                setCardLoading(false);
+                return;
+              }
+              loadProfileData((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_5__.cleanForSlug)(authorSlugSearchValue));
+            },
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Get Author Information', 'wp-plugin-info-card')
+          })
+        })]
+      })]
+    })
+  });
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
+    children: block
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (OrgProfile);
 
 /***/ }),
 

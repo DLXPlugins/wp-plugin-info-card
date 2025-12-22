@@ -41,16 +41,18 @@ import Logo from '../Logo';
 import { Radio } from 'lucide-react';
 import NumbersComponent from '../components/Numbers';
 import { set, uniqueId } from 'lodash';
+import OrgProfile from '../components/OrgProfile';
 import Preview from './preview';
 import ProfileBadgesContext from '../contexts/ProfileBadges';
 import BadgeSelectionModal from '../components/BadgeSelectionModal';
 
 const ProfileHighlightsAuthorAvatar = ( props ) => {
 	const { attributes, setAttributes } = props;
-	const { isEditing, setIsEditing } = useContext( ProfileBadgesContext );
+	const { isEditing, setIsEditing, isRefreshing, setIsRefreshing } = useContext( ProfileBadgesContext );
 	const {
 		preview,
 		align,
+		type,
 		layout,
 		cols,
 		badges,
@@ -63,58 +65,66 @@ const ProfileHighlightsAuthorAvatar = ( props ) => {
 
 	const hasBadges = currentBadges && currentBadges.length > 0;
 
-	const block = (
-		<>
-			{ hasBadges && (
-				<>
-					<Preview
-						attributes={ attributes }
-						setAttributes={ setAttributes }
-						onEdit={ () => setShowBadgeModal( true ) }
-					/>
-				</>
-			) }
-			{ ! hasBadges && (
-				<>
-					<div className="wppic-query-block wppic-query-block-panel">
-						<div className="wppic-block-svg">
-							<Logo size="75" />
-						</div>
-						<div className="wppic-badges-grid-empty">
-							<div className="wp-pic-gutenberg-button">
-								<Button
-									iconSize={ 20 }
-									icon={ <Logo size="25" /> }
-									isSecondary
-									id="wppic-input-submit"
-									onClick={ () => {
-										setShowBadgeModal( true );
-									} }
-								>
-									{ __(
-										'Add Badges',
-										'wp-plugin-info-card',
-									) }
-								</Button>
+	const getBlock = () => {
+		if ( type === 'dynamic' ) {
+			return <OrgProfile attributes={ attributes } setAttributes={ setAttributes } Preview={ Preview } isEditing={ isEditing } setIsEditing={ setIsEditing } isRefreshing={ isRefreshing } />;
+		}
+		return (
+			<>
+				{ hasBadges && (
+					<>
+						<Preview
+							attributes={ attributes }
+							setAttributes={ setAttributes }
+							onEdit={ () => setShowBadgeModal( true ) }
+							onRefresh={ () => setIsRefreshing( true ) }
+						/>
+					</>
+				) }
+				{ ! hasBadges && (
+					<>
+						<div className="wppic-query-block wppic-query-block-panel">
+							<div className="wppic-block-svg">
+								<Logo size="75" />
+							</div>
+							<div className="wppic-badges-grid-empty">
+								<div className="wp-pic-gutenberg-button">
+									<Button
+										iconSize={ 20 }
+										icon={ <Logo size="25" /> }
+										isSecondary
+										id="wppic-input-submit"
+										onClick={ () => {
+											setShowBadgeModal( true );
+										} }
+									>
+										{ __(
+											'Add Badges',
+											'wp-plugin-info-card',
+										) }
+									</Button>
+								</div>
 							</div>
 						</div>
-					</div>
-					<InspectorControls>
-						<></>
-					</InspectorControls>
-					<InspectorControls group="styles">
-						<></>
-					</InspectorControls>
-				</>
-			) }
-			<BadgeSelectionModal
-				isOpen={ showBadgeModal }
-				onClose={ () => setShowBadgeModal( false ) }
-				badges={ currentBadges }
-				setAttributes={ setAttributes }
-			/>
-		</>
-	);
+						<InspectorControls>
+							<></>
+						</InspectorControls>
+						<InspectorControls group="styles">
+							<></>
+						</InspectorControls>
+					</>
+				) }
+				<BadgeSelectionModal
+					isOpen={ showBadgeModal }
+					onClose={ () => setShowBadgeModal( false ) }
+					badges={ currentBadges }
+					setAttributes={ setAttributes }
+				/>
+			</>
+		);
+	};
+
+	const block = getBlock();
 
 	const blockProps = useBlockProps( {
 		className: classnames(
