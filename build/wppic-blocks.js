@@ -28009,10 +28009,55 @@ const BadgeSelectionModal = ({
       badges: updatedBadges
     });
   }, [badges, setAttributes]);
+
+  /**
+   * Handle select all badges.
+   */
+  const handleSelectAll = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {
+    const allBadges = _Badges__WEBPACK_IMPORTED_MODULE_3__.badges.map((badge, index) => ({
+      class: badge.class,
+      label: badge.label,
+      enabled: true,
+      order: index + 1
+    }));
+    setAttributes({
+      badges: allBadges
+    });
+  }, [setAttributes]);
+
+  /**
+   * Handle deselect all badges.
+   */
+  const handleSelectNone = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {
+    setAttributes({
+      badges: []
+    });
+  }, [setAttributes]);
+
+  // Calculate selection state.
+  const selectedCount = badges.length;
+  const totalCount = _Badges__WEBPACK_IMPORTED_MODULE_3__.badges.length;
   const modalContent = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
         children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select the badges you want to display in your profile.', 'wp-plugin-info-card')
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "wppic-badge-selection-modal__actions",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          className: "wppic-badge-selection-modal__buttons",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+            variant: "secondary",
+            onClick: handleSelectAll,
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select All', 'wp-plugin-info-card')
+          }), selectedCount > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+            variant: "secondary",
+            onClick: handleSelectNone,
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select None', 'wp-plugin-info-card')
+          })]
+        }), selectedCount > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+          className: "wppic-badge-selection-modal__counter",
+          children: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Selected:', 'wp-plugin-info-card'), " ", selectedCount, " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('of', 'wp-plugin-info-card'), " ", totalCount]
+        })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "wppic-profile-badges-modal wppic-profile-badges",
         children: _Badges__WEBPACK_IMPORTED_MODULE_3__.badges.map(badge => {
@@ -28035,7 +28080,7 @@ const BadgeSelectionModal = ({
         })
       })]
     });
-  }, [badges, handleBadgeToggle]);
+  }, [badges, handleBadgeToggle, selectedCount, totalCount, handleSelectAll, handleSelectNone]);
   if (!isOpen) {
     return null;
   }

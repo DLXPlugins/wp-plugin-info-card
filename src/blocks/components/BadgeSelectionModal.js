@@ -2,6 +2,7 @@ import React, { useMemo, useCallback } from 'react';
 import {
 	Modal,
 	ToggleControl,
+	Button,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { badges as badgeMap } from './Badges';
@@ -46,10 +47,57 @@ const BadgeSelectionModal = ( { badges, setAttributes, isOpen, onClose } ) => {
 		setAttributes( { badges: updatedBadges } );
 	}, [ badges, setAttributes ] );
 
+	/**
+	 * Handle select all badges.
+	 */
+	const handleSelectAll = useCallback( () => {
+		const allBadges = badgeMap.map( ( badge, index ) => ( {
+			class: badge.class,
+			label: badge.label,
+			enabled: true,
+			order: index + 1,
+		} ) );
+		setAttributes( { badges: allBadges } );
+	}, [ setAttributes ] );
+
+	/**
+	 * Handle deselect all badges.
+	 */
+	const handleSelectNone = useCallback( () => {
+		setAttributes( { badges: [] } );
+	}, [ setAttributes ] );
+
+	// Calculate selection state.
+	const selectedCount = badges.length;
+	const totalCount = badgeMap.length;
+
 	const modalContent = useMemo( () => {
 		return (
 			<>
 				<p>{ __( 'Select the badges you want to display in your profile.', 'wp-plugin-info-card' ) }</p>
+				<div className="wppic-badge-selection-modal__actions">
+					<div className="wppic-badge-selection-modal__buttons">
+						<Button
+							variant="secondary"
+							onClick={ handleSelectAll }
+						>
+							{ __( 'Select All', 'wp-plugin-info-card' ) }
+						</Button>
+						{ selectedCount > 0 && (
+							<Button
+								variant="secondary"
+								onClick={ handleSelectNone }
+							>
+								{ __( 'Select None', 'wp-plugin-info-card' ) }
+							</Button>
+						) }
+					</div>
+					{ selectedCount > 0 && (
+						<p className="wppic-badge-selection-modal__counter">
+							{ __( 'Selected:', 'wp-plugin-info-card' ) } { selectedCount } { __( 'of', 'wp-plugin-info-card' ) } { totalCount }
+						</p>
+					) }
+				</div>
 				<div className="wppic-profile-badges-modal wppic-profile-badges">
 					{ badgeMap.map( ( badge ) => {
 						const isEnabled = badges.find( ( b ) => b.class === badge.class && b.enabled ) ? true : false;
@@ -73,7 +121,7 @@ const BadgeSelectionModal = ( { badges, setAttributes, isOpen, onClose } ) => {
 				</div>
 			</>
 		);
-	}, [ badges, handleBadgeToggle ] );
+	}, [ badges, handleBadgeToggle, selectedCount, totalCount, handleSelectAll, handleSelectNone ] );
 
 	if ( ! isOpen ) {
 		return null;

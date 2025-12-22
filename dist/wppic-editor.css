@@ -557,4 +557,20 @@ div[data-type="wp-plugin-info-card/wp-plugin-info-card"] .wp-block {
   text-align: center;
 }
 
+/* Badge Selection Modal Styles */
+.wppic-badge-selection-modal__actions {
+  margin-bottom: 16px;
+}
+.wppic-badge-selection-modal__buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.wppic-badge-selection-modal__counter {
+  margin-top: 8px;
+  margin-bottom: 0;
+  font-size: 13px;
+  color: #757575;
+}
+
 /*# sourceMappingURL=wppic-editor.css.map*/
