@@ -30,18 +30,13 @@ const BadgeSelectionModal = ( { badges, setAttributes, isOpen, onClose } ) => {
 
 		if ( ! value ) {
 			// Remove badge if disabled.
-			const badgeIndex = updatedBadges.findIndex( ( b ) => b.class === badge.class );
+			const badgeIndex = updatedBadges.indexOf( badge.class );
 			if ( badgeIndex !== -1 ) {
 				updatedBadges.splice( badgeIndex, 1 );
 			}
-		} else {
+		} else if ( ! updatedBadges.includes( badge.class ) ) {
 			// Add badge if enabled.
-			updatedBadges.push( {
-				class: badge.class,
-				label: badge.label,
-				enabled: true,
-				order: updatedBadges.length + 1,
-			} );
+			updatedBadges.push( badge.class );
 		}
 
 		setAttributes( { badges: updatedBadges } );
@@ -51,12 +46,7 @@ const BadgeSelectionModal = ( { badges, setAttributes, isOpen, onClose } ) => {
 	 * Handle select all badges.
 	 */
 	const handleSelectAll = useCallback( () => {
-		const allBadges = badgeMap.map( ( badge, index ) => ( {
-			class: badge.class,
-			label: badge.label,
-			enabled: true,
-			order: index + 1,
-		} ) );
+		const allBadges = badgeMap.map( ( badge ) => badge.class );
 		setAttributes( { badges: allBadges } );
 	}, [ setAttributes ] );
 
@@ -100,7 +90,7 @@ const BadgeSelectionModal = ( { badges, setAttributes, isOpen, onClose } ) => {
 				</div>
 				<div className="wppic-profile-badges-modal wppic-profile-badges">
 					{ badgeMap.map( ( badge ) => {
-						const isEnabled = badges.find( ( b ) => b.class === badge.class && b.enabled ) ? true : false;
+						const isEnabled = badges.includes( badge.class );
 						const hasOverlay = badge.class.includes( 'has-overlay' );
 
 						return (

@@ -47,25 +47,14 @@ const Preview = ( props ) => {
 	} = attributes;
 
 	useEffect( () => {
-		// Reorder badges by alphabetical order and then show the interface(label).
-		badges.sort( ( a, b ) => a.label.localeCompare( b.label ) );
-
-		// Recursively update the badge order. This is needed for the future if I introduce drag and drop reordering.
-		badges.forEach( ( badge, index ) => {
-			badge.order = index + 1;
-		} );
 		if ( loading ) {
-			// This makes sure reordering is only done initially.
-			if ( badges !== attributes.badges ) {
-				setAttributes( { badges: [ ...badges ] } );
-			}
 			setLoading( false );
 		}
-	}, [ badges ] );
+	}, [ badges, loading ] );
 
 	useEffect( () => {
 		setAttributes( { uniqueId: blockUniqueId } );
-	}, [] );
+	}, [ blockUniqueId, setAttributes ] );
 
 	/**
 	 * Retrieve colums interface for sidebar options.
@@ -236,19 +225,19 @@ const Preview = ( props ) => {
 			<>
 				{
 					badges && badges.length > 0 && (
-						badges.map( ( badge ) => {
+						badges.map( ( badgeClass ) => {
 							let image = null;
-							const badgeData = badgeMap.find( ( b ) => b.class === badge.class );
+							const badgeData = badgeMap.find( ( b ) => b.class === badgeClass );
 							if ( ! badgeData ) {
 								return null;
 							}
 							if ( 'image' === badgeData.iconType ) {
-								image = <img src={ badgeData.icon } alt={ badgeData.name } />;
+								image = <img src={ badgeData.icon } alt={ badgeData.label } />;
 							} else {
 								image = <span className={ `dashicons ${ badgeData.class } ${ badgeData.icon }` }></span>;
 							}
 							return (
-								<div key={ badge.class + badge.order } className="wppic-profile-badge">
+								<div key={ badgeClass } className="wppic-profile-badge">
 									{ ! hideHeading && (
 										<h3 className="wppic-profile-badge-title">
 											{

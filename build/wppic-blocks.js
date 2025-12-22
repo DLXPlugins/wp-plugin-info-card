@@ -26849,6 +26849,35 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_6__, {
   }]
 });
 
+/*
+{
+    "uniqueId": "wp-plugin-info-card-badges-1",
+    "authorSlug": "ronalfy",
+    "type": "dynamic",
+    "anchor": "",
+    "align": "center",
+    "preview": false,
+    "baseSize": 16,
+    "badges": [
+        "badge-code",
+        "badge-meta-contributor",
+        "badge-plugins",
+        "badge-translation-contributor",
+        "badge-translation-editor",
+        "badge-speaker"
+    ],
+    "lastUpdated": "1766379590717",
+    "colGap": 20,
+    "rowGap": 20,
+    "cols": 2,
+    "layout": "centered",
+    "hideHeading": false,
+    "headingColor": "#000000",
+    "gbBlockCondition": "",
+    "gbBlockConditionInvert": false
+}
+	*/
+
 /***/ }),
 
 /***/ "./src/blocks/ProfileBadges/block.json":
@@ -27082,28 +27111,15 @@ const Preview = props => {
     hideHeading
   } = attributes;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    // Reorder badges by alphabetical order and then show the interface(label).
-    badges.sort((a, b) => a.label.localeCompare(b.label));
-
-    // Recursively update the badge order. This is needed for the future if I introduce drag and drop reordering.
-    badges.forEach((badge, index) => {
-      badge.order = index + 1;
-    });
     if (loading) {
-      // This makes sure reordering is only done initially.
-      if (badges !== attributes.badges) {
-        setAttributes({
-          badges: [...badges]
-        });
-      }
       setLoading(false);
     }
-  }, [badges]);
+  }, [badges, loading]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     setAttributes({
       uniqueId: blockUniqueId
     });
-  }, []);
+  }, [blockUniqueId, setAttributes]);
 
   /**
    * Retrieve colums interface for sidebar options.
@@ -27259,16 +27275,16 @@ const Preview = props => {
     children: [inspectorControls, toolbar, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("style", {
       children: gridStyles
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
-      children: badges && badges.length > 0 && badges.map(badge => {
+      children: badges && badges.length > 0 && badges.map(badgeClass => {
         let image = null;
-        const badgeData = _components_Badges__WEBPACK_IMPORTED_MODULE_5__.badges.find(b => b.class === badge.class);
+        const badgeData = _components_Badges__WEBPACK_IMPORTED_MODULE_5__.badges.find(b => b.class === badgeClass);
         if (!badgeData) {
           return null;
         }
         if ('image' === badgeData.iconType) {
           image = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
             src: badgeData.icon,
-            alt: badgeData.name
+            alt: badgeData.label
           });
         } else {
           image = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
@@ -27284,7 +27300,7 @@ const Preview = props => {
             className: `badge ${badgeData.class} `,
             children: image
           })]
-        }, badge.class + badge.order);
+        }, badgeClass);
       })
     })]
   });
@@ -28030,18 +28046,13 @@ const BadgeSelectionModal = ({
     const updatedBadges = [...badges];
     if (!value) {
       // Remove badge if disabled.
-      const badgeIndex = updatedBadges.findIndex(b => b.class === badge.class);
+      const badgeIndex = updatedBadges.indexOf(badge.class);
       if (badgeIndex !== -1) {
         updatedBadges.splice(badgeIndex, 1);
       }
-    } else {
+    } else if (!updatedBadges.includes(badge.class)) {
       // Add badge if enabled.
-      updatedBadges.push({
-        class: badge.class,
-        label: badge.label,
-        enabled: true,
-        order: updatedBadges.length + 1
-      });
+      updatedBadges.push(badge.class);
     }
     setAttributes({
       badges: updatedBadges
@@ -28052,12 +28063,7 @@ const BadgeSelectionModal = ({
    * Handle select all badges.
    */
   const handleSelectAll = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {
-    const allBadges = _Badges__WEBPACK_IMPORTED_MODULE_3__.badges.map((badge, index) => ({
-      class: badge.class,
-      label: badge.label,
-      enabled: true,
-      order: index + 1
-    }));
+    const allBadges = _Badges__WEBPACK_IMPORTED_MODULE_3__.badges.map(badge => badge.class);
     setAttributes({
       badges: allBadges
     });
@@ -28099,7 +28105,7 @@ const BadgeSelectionModal = ({
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "wppic-profile-badges-modal wppic-profile-badges",
         children: _Badges__WEBPACK_IMPORTED_MODULE_3__.badges.map(badge => {
-          const isEnabled = badges.find(b => b.class === badge.class && b.enabled) ? true : false;
+          const isEnabled = badges.includes(badge.class);
           const hasOverlay = badge.class.includes('has-overlay');
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "wppic-profile-badge-modal-item wppic-profile-badge",
@@ -30699,26 +30705,19 @@ const OrgProfile = props => {
       } = response.data;
       if (success) {
         const {
-          member_badges
+          member_badges: memberBadges
         } = data;
-        let badgeOrder = 0;
         /**
-         * Reduce the member badges array to an array of objects with the badge class, label, enabled, and order.
+         * Reduce the member badges array to an array of badge classnames.
          *
          * @param {Array}  acc   - The accumulator array.
          * @param {string} badge - The badge ID.
          * @return {Array} The accumulator array.
          */
-        const badges = member_badges.reduce((acc, badge) => {
+        const badges = memberBadges.reduce((acc, badge) => {
           const badgeData = _Badges__WEBPACK_IMPORTED_MODULE_10__.badges.find(b => b.id === badge);
-          if (badgeData) {
-            badgeOrder++;
-            acc.push({
-              class: badgeData.class,
-              label: badgeData.label,
-              enabled: true,
-              order: badgeOrder
-            });
+          if (badgeData && !acc.includes(badgeData.class)) {
+            acc.push(badgeData.class);
           }
           return acc;
         }, []);

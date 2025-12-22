@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useContext } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import {
 	TextControl,
@@ -55,26 +55,19 @@ const OrgProfile = ( props ) => {
 				const { success, data } = response.data;
 				if ( success ) {
 					const {
-						member_badges,
+						member_badges: memberBadges,
 					} = data;
-					let badgeOrder = 0;
 					/**
-					 * Reduce the member badges array to an array of objects with the badge class, label, enabled, and order.
+					 * Reduce the member badges array to an array of badge classnames.
 					 *
 					 * @param {Array}  acc   - The accumulator array.
 					 * @param {string} badge - The badge ID.
 					 * @return {Array} The accumulator array.
 					 */
-					const badges = member_badges.reduce( ( acc, badge ) => {
+					const badges = memberBadges.reduce( ( acc, badge ) => {
 						const badgeData = badgeMap.find( ( b ) => b.id === badge );
-						if ( badgeData ) {
-							badgeOrder++;
-							acc.push( {
-								class: badgeData.class,
-								label: badgeData.label,
-								enabled: true,
-								order: badgeOrder,
-							} );
+						if ( badgeData && ! acc.includes( badgeData.class ) ) {
+							acc.push( badgeData.class );
 						}
 						return acc;
 					}, [] );

@@ -49,3 +49,32 @@ registerBlockType( metadata, {
 		},
 	],
 } );
+
+/*
+{
+    "uniqueId": "wp-plugin-info-card-badges-1",
+    "authorSlug": "ronalfy",
+    "type": "dynamic",
+    "anchor": "",
+    "align": "center",
+    "preview": false,
+    "baseSize": 16,
+    "badges": [
+        "badge-code",
+        "badge-meta-contributor",
+        "badge-plugins",
+        "badge-translation-contributor",
+        "badge-translation-editor",
+        "badge-speaker"
+    ],
+    "lastUpdated": "1766379590717",
+    "colGap": 20,
+    "rowGap": 20,
+    "cols": 2,
+    "layout": "centered",
+    "hideHeading": false,
+    "headingColor": "#000000",
+    "gbBlockCondition": "",
+    "gbBlockConditionInvert": false
+}
+	*/
