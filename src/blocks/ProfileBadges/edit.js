@@ -46,7 +46,7 @@ import Preview from './preview';
 import ProfileBadgesContext from '../contexts/ProfileBadges';
 import BadgeSelectionModal from '../components/BadgeSelectionModal';
 
-const ProfileHighlightsAuthorAvatar = ( props ) => {
+const ProfileBadges = ( props ) => {
 	const { attributes, setAttributes } = props;
 	const { isEditing, setIsEditing, isRefreshing, setIsRefreshing } = useContext( ProfileBadgesContext );
 	const {
@@ -66,7 +66,7 @@ const ProfileHighlightsAuthorAvatar = ( props ) => {
 	const hasBadges = currentBadges && currentBadges.length > 0;
 
 	const getBlock = () => {
-		if ( type === 'dynamic' ) {
+		if ( type === 'dynamic' && ! preview ) {
 			return <OrgProfile attributes={ attributes } setAttributes={ setAttributes } Preview={ Preview } isEditing={ isEditing } setIsEditing={ setIsEditing } isRefreshing={ isRefreshing } />;
 		}
 		return (
@@ -134,21 +134,10 @@ const ProfileHighlightsAuthorAvatar = ( props ) => {
 				[ `layout-${ layout }` ]: ! isEditing,
 				'is-grid': ! isEditing,
 				[ `cols-${ cols }` ]: ! isEditing,
+				'has-no-title': attributes.hideHeading,
 			},
 		),
 	} );
-
-	if ( preview ) {
-		return (
-			<>
-				<img
-					src={ wppic.query_preview }
-					alt={ __( 'Preview', 'wp-plugin-info-card' ) }
-					style={ { width: '100%', height: 'auto' } }
-				/>
-			</>
-		);
-	}
 
 	return (
 		<div { ...blockProps } id={ attributes.uniqueId }>
@@ -157,4 +146,4 @@ const ProfileHighlightsAuthorAvatar = ( props ) => {
 	);
 };
 
-export default ProfileHighlightsAuthorAvatar;
+export default ProfileBadges;

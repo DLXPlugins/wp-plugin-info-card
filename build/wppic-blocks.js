@@ -26836,7 +26836,6 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_6__, {
     }),
     attributes: {
       type: 'dynamic',
-      badges: [],
       authorSlug: '',
       lastUpdated: ''
     },
@@ -26849,35 +26848,6 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_6__, {
   }]
 });
 
-/*
-{
-    "uniqueId": "wp-plugin-info-card-badges-1",
-    "authorSlug": "ronalfy",
-    "type": "dynamic",
-    "anchor": "",
-    "align": "center",
-    "preview": false,
-    "baseSize": 16,
-    "badges": [
-        "badge-code",
-        "badge-meta-contributor",
-        "badge-plugins",
-        "badge-translation-contributor",
-        "badge-translation-editor",
-        "badge-speaker"
-    ],
-    "lastUpdated": "1766379590717",
-    "colGap": 20,
-    "rowGap": 20,
-    "cols": 2,
-    "layout": "centered",
-    "hideHeading": false,
-    "headingColor": "#000000",
-    "gbBlockCondition": "",
-    "gbBlockConditionInvert": false
-}
-	*/
-
 /***/ }),
 
 /***/ "./src/blocks/ProfileBadges/block.json":
@@ -26887,7 +26857,7 @@ registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_6__, {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Profile Badges - Custom","apiVersion":3,"name":"wp-plugin-info-card/profile-highlights-badges","category":"wp-plugin-info-card","icon":"<svg height=\'24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 512 512\'><path fill=\'#333\' d=\'M256 140c-63.962 0-116 52.038-116 116s52.038 116 116 116 116-52.038 116-116-52.038-116-116-116zm-60.25 59.875h86.635l-4.578-5.045c-5.566-6.135-5.106-15.622 1.029-21.188 6.136-5.567 15.621-5.106 21.188 1.029l27.333 30.125c5.188 5.718 5.188 14.441 0 20.159l-27.333 30.125a14.958 14.958 0 0 1-11.113 4.92 14.945 14.945 0 0 1-10.075-3.891c-6.135-5.567-6.596-15.053-1.029-21.188l4.578-5.045H195.75c-8.284 0-15-6.716-15-15s6.716-15.001 15-15.001zm120.5 112.25h-86.635l4.578 5.045c5.566 6.135 5.106 15.622-1.029 21.188a14.948 14.948 0 0 1-10.075 3.891 14.964 14.964 0 0 1-11.113-4.92l-27.333-30.125c-5.188-5.718-5.188-14.441 0-20.159l27.333-30.125c5.567-6.135 15.054-6.596 21.188-1.029 6.135 5.567 6.596 15.053 1.029 21.188l-4.578 5.045h86.635c8.284 0 15 6.716 15 15s-6.716 15.001-15 15.001z\'></path><path fill=\'#333\' d=\'M497 199.92h-33.479a212.647 212.647 0 0 0-21.142-50.991l23.688-23.688c5.858-5.858 5.858-15.355 0-21.213l-58.095-58.095c-5.857-5.858-15.355-5.858-21.213 0L363.07 69.621a212.647 212.647 0 0 0-50.991-21.142V15c0-8.284-6.716-15-15-15H214.92c-8.284 0-15 6.716-15 15v33.479a212.664 212.664 0 0 0-50.991 21.142l-23.688-23.688c-5.857-5.858-15.355-5.858-21.213 0l-58.095 58.095c-5.858 5.858-5.858 15.355 0 21.213l23.688 23.688a212.647 212.647 0 0 0-21.142 50.991H15c-8.284 0-15 6.716-15 15v82.159c0 8.284 6.716 15 15 15h33.479a212.664 212.664 0 0 0 21.142 50.991l-23.688 23.688c-5.858 5.858-5.858 15.355 0 21.213l58.095 58.095c5.857 5.858 15.355 5.858 21.213 0l23.688-23.688a212.633 212.633 0 0 0 50.991 21.143V497c0 8.284 6.716 15 15 15h82.159c8.284 0 15-6.716 15-15v-33.479a212.568 212.568 0 0 0 50.991-21.143l23.688 23.688c5.857 5.858 15.355 5.858 21.213 0l58.095-58.095c5.858-5.858 5.858-15.355 0-21.213l-23.688-23.688a212.647 212.647 0 0 0 21.142-50.991H497c8.284 0 15-6.716 15-15V214.92c0-8.284-6.716-15-15-15zM256 402c-80.505 0-146-65.495-146-146s65.495-146 146-146 146 65.495 146 146-65.495 146-146 146z\'></path></svg>","description":"Display select WordPress.org badges in a grid format.","keywords":["badge","wp plugin","badges","org",".org","wordpress.org"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"uniqueId":{"type":"string","default":""},"authorSlug":{"type":"string","default":""},"type":{"type":"string","default":"static"},"anchor":{"type":"string","default":""},"align":{"type":"string","default":"center"},"preview":{"type":"boolean","default":false},"baseSize":{"type":"number","default":16},"badges":{"type":"array","default":[]},"lastUpdated":{"type":"string","default":""},"colGap":{"type":"number","default":20},"rowGap":{"type":"number","default":20},"cols":{"type":"number","default":2},"layout":{"type":"string","default":"horizontal"},"hideHeading":{"type":"boolean","default":false},"headingColor":{"type":"string","default":"#000000"}},"example":{"attributes":{"preview":true}},"supports":{"anchor":true,"align":["left","center","right"],"className":true,"spacing":{"margin":true,"padding":true}},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"],"style":"wppic-badges"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","title":"Profile Badges - Custom","apiVersion":3,"name":"wp-plugin-info-card/profile-highlights-badges","category":"wp-plugin-info-card","icon":"<svg height=\'24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 512 512\'><path fill=\'#333\' d=\'M256 140c-63.962 0-116 52.038-116 116s52.038 116 116 116 116-52.038 116-116-52.038-116-116-116zm-60.25 59.875h86.635l-4.578-5.045c-5.566-6.135-5.106-15.622 1.029-21.188 6.136-5.567 15.621-5.106 21.188 1.029l27.333 30.125c5.188 5.718 5.188 14.441 0 20.159l-27.333 30.125a14.958 14.958 0 0 1-11.113 4.92 14.945 14.945 0 0 1-10.075-3.891c-6.135-5.567-6.596-15.053-1.029-21.188l4.578-5.045H195.75c-8.284 0-15-6.716-15-15s6.716-15.001 15-15.001zm120.5 112.25h-86.635l4.578 5.045c5.566 6.135 5.106 15.622-1.029 21.188a14.948 14.948 0 0 1-10.075 3.891 14.964 14.964 0 0 1-11.113-4.92l-27.333-30.125c-5.188-5.718-5.188-14.441 0-20.159l27.333-30.125c5.567-6.135 15.054-6.596 21.188-1.029 6.135 5.567 6.596 15.053 1.029 21.188l-4.578 5.045h86.635c8.284 0 15 6.716 15 15s-6.716 15.001-15 15.001z\'></path><path fill=\'#333\' d=\'M497 199.92h-33.479a212.647 212.647 0 0 0-21.142-50.991l23.688-23.688c5.858-5.858 5.858-15.355 0-21.213l-58.095-58.095c-5.857-5.858-15.355-5.858-21.213 0L363.07 69.621a212.647 212.647 0 0 0-50.991-21.142V15c0-8.284-6.716-15-15-15H214.92c-8.284 0-15 6.716-15 15v33.479a212.664 212.664 0 0 0-50.991 21.142l-23.688-23.688c-5.857-5.858-15.355-5.858-21.213 0l-58.095 58.095c-5.858 5.858-5.858 15.355 0 21.213l23.688 23.688a212.647 212.647 0 0 0-21.142 50.991H15c-8.284 0-15 6.716-15 15v82.159c0 8.284 6.716 15 15 15h33.479a212.664 212.664 0 0 0 21.142 50.991l-23.688 23.688c-5.858 5.858-5.858 15.355 0 21.213l58.095 58.095c5.857 5.858 15.355 5.858 21.213 0l23.688-23.688a212.633 212.633 0 0 0 50.991 21.143V497c0 8.284 6.716 15 15 15h82.159c8.284 0 15-6.716 15-15v-33.479a212.568 212.568 0 0 0 50.991-21.143l23.688 23.688c5.857 5.858 15.355 5.858 21.213 0l58.095-58.095c5.858-5.858 5.858-15.355 0-21.213l-23.688-23.688a212.647 212.647 0 0 0 21.142-50.991H497c8.284 0 15-6.716 15-15V214.92c0-8.284-6.716-15-15-15zM256 402c-80.505 0-146-65.495-146-146s65.495-146 146-146 146 65.495 146 146-65.495 146-146 146z\'></path></svg>","description":"Display select WordPress.org badges in a grid format.","keywords":["badge","wp plugin","badges","org",".org","wordpress.org"],"version":"1.0.0","textdomain":"wp-plugin-info-card","attributes":{"uniqueId":{"type":"string","default":""},"authorSlug":{"type":"string","default":""},"type":{"type":"string","default":"static"},"anchor":{"type":"string","default":""},"align":{"type":"string","default":"center"},"preview":{"type":"boolean","default":false},"baseSize":{"type":"number","default":16},"badges":{"type":"array","default":[]},"lastUpdated":{"type":"string","default":""},"colGap":{"type":"number","default":20},"rowGap":{"type":"number","default":20},"cols":{"type":"number","default":2},"layout":{"type":"string","default":"horizontal"},"hideHeading":{"type":"boolean","default":false},"headingColor":{"type":"string","default":"#000000"}},"example":{"attributes":{"type":"static","anchor":"","align":"center","preview":true,"baseSize":16,"badges":["badge-accessibility-contributor","badge-accessibility has-overlay","badge-bbpress-contributor","badge-bbpress has-overlay","badge-buddypress-contributor","badge-buddypress has-overlay","badge-campus-connect-participant","badge-community-contributor","badge-core-ai-contributor","badge-core-ai-team has-overlay","badge-code","badge-code-committer has-overlay","badge-credits-graduate","badge-credits-mentor","badge-design-contributor","badge-design has-overlay","badge-documentation-contributor","badge-documentation has-overlay"],"headingColor":"#000000","colGap":5,"rowGap":20,"cols":3,"hideHeading":true,"style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|20","right":"var:preset|spacing|20"}}}}},"supports":{"anchor":true,"align":["left","center","right"],"className":true,"spacing":{"margin":true,"padding":true}},"editorScript":"wp-plugin-info-card-block-js","editorStyle":["wp-plugin-info-card-block-editor-css","wp-plugin-info-card-block-styles-css"],"style":"wppic-badges"}');
 
 /***/ }),
 
@@ -26944,7 +26914,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const ProfileHighlightsAuthorAvatar = props => {
+const ProfileBadges = props => {
   const {
     attributes,
     setAttributes
@@ -26969,7 +26939,7 @@ const ProfileHighlightsAuthorAvatar = props => {
   const currentBadges = badges || [];
   const hasBadges = currentBadges && currentBadges.length > 0;
   const getBlock = () => {
-    if (type === 'dynamic') {
+    if (type === 'dynamic' && !preview) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_OrgProfile__WEBPACK_IMPORTED_MODULE_9__["default"], {
         attributes: attributes,
         setAttributes: setAttributes,
@@ -27033,28 +27003,17 @@ const ProfileHighlightsAuthorAvatar = props => {
       [`align${align}`]: !isEditing,
       [`layout-${layout}`]: !isEditing,
       'is-grid': !isEditing,
-      [`cols-${cols}`]: !isEditing
+      [`cols-${cols}`]: !isEditing,
+      'has-no-title': attributes.hideHeading
     })
   });
-  if (preview) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.Fragment, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("img", {
-        src: wppic.query_preview,
-        alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Preview', 'wp-plugin-info-card'),
-        style: {
-          width: '100%',
-          height: 'auto'
-        }
-      })
-    });
-  }
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
     ...blockProps,
     id: attributes.uniqueId,
     children: block
   });
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProfileHighlightsAuthorAvatar);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProfileBadges);
 
 /***/ }),
 

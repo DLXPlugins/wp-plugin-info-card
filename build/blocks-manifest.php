@@ -950,7 +950,46 @@ return array(
 		),
 		'example' => array(
 			'attributes' => array(
-				'preview' => true
+				'type' => 'static',
+				'anchor' => '',
+				'align' => 'center',
+				'preview' => true,
+				'baseSize' => 16,
+				'badges' => array(
+					'badge-accessibility-contributor',
+					'badge-accessibility has-overlay',
+					'badge-bbpress-contributor',
+					'badge-bbpress has-overlay',
+					'badge-buddypress-contributor',
+					'badge-buddypress has-overlay',
+					'badge-campus-connect-participant',
+					'badge-community-contributor',
+					'badge-core-ai-contributor',
+					'badge-core-ai-team has-overlay',
+					'badge-code',
+					'badge-code-committer has-overlay',
+					'badge-credits-graduate',
+					'badge-credits-mentor',
+					'badge-design-contributor',
+					'badge-design has-overlay',
+					'badge-documentation-contributor',
+					'badge-documentation has-overlay'
+				),
+				'headingColor' => '#000000',
+				'colGap' => 5,
+				'rowGap' => 20,
+				'cols' => 3,
+				'hideHeading' => true,
+				'style' => array(
+					'spacing' => array(
+						'padding' => array(
+							'top' => 'var:preset|spacing|50',
+							'bottom' => 'var:preset|spacing|50',
+							'left' => 'var:preset|spacing|20',
+							'right' => 'var:preset|spacing|20'
+						)
+					)
+				)
 			)
 		),
 		'supports' => array(
