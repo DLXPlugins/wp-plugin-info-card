@@ -3699,8 +3699,8 @@ class Shortcodes {
 						// Image icon.
 						$badge_html .= '<img src="' . esc_url( $badge_data['icon'] ) . '" alt="' . esc_attr( $badge_data['label'] ) . '" />';
 					} else {
-						// Dashicon.
-						$badge_html .= '<span class="dashicons ' . esc_attr( $badge_data['icon'] ) . '"></span>';
+						// Dashicon - include badge class from badge data plus icon class.
+						$badge_html .= '<span class="dashicons ' . esc_attr( $badge_data['class'] ) . ' ' . esc_attr( $badge_data['icon'] ) . '"></span>';
 					}
 
 					$badge_html .= '</div>'; // End .badge.

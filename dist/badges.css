@@ -284,12 +284,15 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, auto));
 }
 .wppic-badges-grid.aligncenter {
+  display: grid;
   justify-content: center;
 }
 .wppic-badges-grid.alignleft {
+  display: grid;
   justify-content: start;
 }
 .wppic-badges-grid.alignright {
+  display: grid;
   justify-content: end;
 }
 .wppic-badges-grid.cols-1 {

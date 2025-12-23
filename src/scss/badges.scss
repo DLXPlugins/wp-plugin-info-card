@@ -327,14 +327,17 @@
 
 	// Alignment modifiers.
 	&.aligncenter {
+		display: grid;
 		justify-content: center;
 	}
 
 	&.alignleft {
+		display: grid;
 		justify-content: start;
 	}
 
 	&.alignright {
+		display: grid;
 		justify-content: end;
 	}
 
