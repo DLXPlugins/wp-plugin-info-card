@@ -724,66 +724,7 @@ class Blocks {
 			return;
 		}
 
-		// Gather attributes from context.
-		$block_attributes                 = array();
-		$block_attributes['uniqueId']     = Functions::sanitize_attribute( $attributes, 'uniqueId', 'string' );
-		$block_attributes['anchor']       = Functions::sanitize_attribute( $attributes, 'anchor', 'string' );
-		$block_attributes['align']        = Functions::sanitize_attribute( $attributes, 'align', 'string' );
-		$block_attributes['type']         = Functions::sanitize_attribute( $attributes, 'type', 'string' );
-		$block_attributes['authorSlug']   = Functions::sanitize_attribute( $attributes, 'authorSlug', 'string' );
-		$block_attributes['baseSize']     = Functions::sanitize_attribute( $attributes, 'baseSize', 'integer' );
-		$block_attributes['badges']       = Functions::sanitize_attribute( $attributes, 'badges', 'array' );
-		$block_attributes['lastUpdated']  = Functions::sanitize_attribute( $attributes, 'lastUpdated', 'string' );
-		$block_attributes['colGap']       = Functions::sanitize_attribute( $attributes, 'colGap', 'integer' );
-		$block_attributes['rowGap']       = Functions::sanitize_attribute( $attributes, 'rowGap', 'integer' );
-		$block_attributes['cols']         = Functions::sanitize_attribute( $attributes, 'cols', 'integer' );
-		$block_attributes['layout']       = Functions::sanitize_attribute( $attributes, 'layout', 'string' );
-		$block_attributes['hideHeading']  = Functions::sanitize_attribute( $attributes, 'hideHeading', 'boolean' );
-		$block_attributes['headingColor'] = Functions::sanitize_attribute( $attributes, 'headingColor', 'string' );
-
-		// Get wrapper attributes / styles / classes.
-		$wrapper_classes = array(
-			'wppic-badges-grid',
-			'is-grid',
-			'align' . $block_attributes['align'],
-			'layout-' . $block_attributes['layout'],
-			'cols-' . $block_attributes['cols'],
-		);
-		if ( $block_attributes['hideHeading'] ) {
-			$wrapper_classes[] = 'has-no-title';
-		}
-		$wrapper_attributes = get_block_wrapper_attributes(
-			array(
-				'class' => implode( ' ', $wrapper_classes ),
-			)
-		);
-
-		// Get unique ID.
-		$unique_id = $block_attributes['anchor'] ? $block_attributes['anchor'] : $block_attributes['uniqueId'];
-
-		// Generate grid styles.
-		$grid_styles = sprintf(
-			'#%1$s.wppic-badges-grid {' . PHP_EOL .
-			'	--wppic-grid-row-gap: %2$spx;' . PHP_EOL .
-			'	--wppic-grid-col-gap: %3$spx;' . PHP_EOL .
-			'	--wppic-base-size: %4$spx;' . PHP_EOL .
-			'	--wppic-heading-color: %5$s;' . PHP_EOL .
-			'}',
-			esc_attr( $unique_id ),
-			esc_attr( $block_attributes['rowGap'] ),
-			esc_attr( $block_attributes['colGap'] ),
-			esc_attr( $block_attributes['baseSize'] ),
-			esc_attr( $block_attributes['headingColor'] )
-		);
-		ob_start();
-		?>
-		<div <?php echo wp_kses_post( $wrapper_attributes ); ?> id="<?php echo esc_attr( $unique_id ); ?>">
-			<style><?php echo esc_html( $grid_styles ); ?></style>
-			<div class="wppic-badges-grid">
-				test
-			</div>
-		</div>
-		<?php
-		return ob_get_clean();
+		// Call shared helper.
+		return Shortcodes::render_profile_badges( $attributes );
 	}
 }

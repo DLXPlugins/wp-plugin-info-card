@@ -28,6 +28,7 @@ class Shortcodes {
 		add_shortcode( 'wp-pic-site-plugins', array( static::class, 'shortcode_active_site_plugins_function' ) );
 		add_shortcode( 'wp-pic-plugin-screenshots', array( static::class, 'shortcode_plugin_screenshots_info_card' ) );
 		add_shortcode( 'github-info-card', array( static::class, 'shortcode_github_info_card' ) );
+		add_shortcode( 'wp-pic-badges', array( static::class, 'shortcode_profile_badges' ) );
 		add_action( 'wp_ajax_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
 		add_action( 'wp_ajax_nopriv_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
 		add_action( 'init', array( static::class, 'register_screenshots_presets_post_type' ) );
@@ -2964,5 +2965,203 @@ class Shortcodes {
 		define( 'WPPIC_REST_REQUEST', true );
 		$html = self::shortcode_github_info_card( $attributes, '', 'github-info-card', $github_data );
 		return rest_ensure_response( array( 'html' => $html ) );
+	}
+
+	/**
+	 * Render profile badges (shared helper for block and shortcode).
+	 *
+	 * @param array $args {
+	 *     Array of arguments.
+	 *
+	 *     @type string  $uniqueId      Unique identifier for the wrapper.
+	 *     @type string  $anchor        Anchor ID (overrides uniqueId if set).
+	 *     @type string  $align         Alignment: left|center|right.
+	 *     @type string  $type          Badge type: static|dynamic.
+	 *     @type string  $authorSlug    WordPress.org author slug (for dynamic).
+	 *     @type int     $baseSize      Base font size in pixels.
+	 *     @type array   $badges        Array of badge class names (for static).
+	 *     @type string  $lastUpdated   Last update timestamp (for dynamic).
+	 *     @type int     $colGap        Column gap in pixels.
+	 *     @type int     $rowGap        Row gap in pixels.
+	 *     @type int     $cols          Number of columns.
+	 *     @type string  $layout        Layout: horizontal|centered.
+	 *     @type bool    $hideHeading   Whether to hide badge headings.
+	 *     @type string  $headingColor  Heading text color.
+	 * }
+	 * @return string Rendered HTML.
+	 */
+	public static function render_profile_badges( $args = array() ) {
+		// Normalize arguments with defaults.
+		$defaults = array(
+			'uniqueId'     => '',
+			'anchor'       => '',
+			'align'        => 'center',
+			'type'         => 'static',
+			'authorSlug'   => '',
+			'baseSize'     => 16,
+			'badges'       => array(),
+			'lastUpdated'  => '',
+			'colGap'       => 20,
+			'rowGap'       => 20,
+			'cols'         => 2,
+			'layout'       => 'horizontal',
+			'hideHeading'  => false,
+			'headingColor' => '#000000',
+		);
+
+		$args = wp_parse_args( $args, $defaults );
+
+		// Sanitize inputs.
+		$unique_id     = sanitize_text_field( $args['uniqueId'] );
+		$anchor        = sanitize_text_field( $args['anchor'] );
+		$align         = sanitize_text_field( $args['align'] );
+		$type          = sanitize_text_field( $args['type'] );
+		$author_slug   = sanitize_text_field( $args['authorSlug'] );
+		$base_size     = absint( $args['baseSize'] );
+		$badges        = is_array( $args['badges'] ) ? $args['badges'] : array();
+		$last_updated  = sanitize_text_field( $args['lastUpdated'] );
+		$col_gap       = absint( $args['colGap'] );
+		$row_gap       = absint( $args['rowGap'] );
+		$cols          = absint( $args['cols'] );
+		$layout        = sanitize_text_field( $args['layout'] );
+		$hide_heading  = filter_var( $args['hideHeading'], FILTER_VALIDATE_BOOLEAN );
+		$heading_color = sanitize_hex_color( $args['headingColor'] );
+
+		// Generate unique ID if not provided.
+		if ( empty( $unique_id ) ) {
+			$unique_id = 'wppic-badges-' . uniqid();
+		}
+
+		// Use anchor if provided, otherwise use uniqueId.
+		$wrapper_id = ! empty( $anchor ) ? $anchor : $unique_id;
+
+		// Build wrapper classes.
+		$wrapper_classes = array(
+			'wppic-badges-grid',
+			'is-grid',
+			'align' . $align,
+			'layout-' . $layout,
+			'cols-' . $cols,
+		);
+
+		if ( $hide_heading ) {
+			$wrapper_classes[] = 'has-no-title';
+		}
+
+		// Generate CSS variables.
+		$grid_styles = sprintf(
+			'#%1$s.wppic-badges-grid {' . PHP_EOL .
+			'	--wppic-grid-row-gap: %2$spx;' . PHP_EOL .
+			'	--wppic-grid-col-gap: %3$spx;' . PHP_EOL .
+			'	--wppic-base-size: %4$spx;' . PHP_EOL .
+			'	--wppic-heading-color: %5$s;' . PHP_EOL .
+			'}',
+			esc_attr( $wrapper_id ),
+			esc_attr( $row_gap ),
+			esc_attr( $col_gap ),
+			esc_attr( $base_size ),
+			esc_attr( $heading_color )
+		);
+
+		// Build content based on type.
+		$content = '';
+		if ( 'dynamic' === $type ) {
+			// Display .org username for dynamic type.
+			if ( ! empty( $author_slug ) ) {
+				$content  = '<div class="wppic-badges-content">';
+				$content .= '<p>WordPress.org Username: <strong>' . esc_html( $author_slug ) . '</strong></p>';
+				$content .= '</div>';
+			} else {
+				$content = '<div class="wppic-badges-content"><p>No author slug provided for dynamic badges.</p></div>';
+			}
+		} else {
+			// Display all passed badges for static type.
+			$content = '<div class="wppic-badges-content">';
+			if ( ! empty( $badges ) ) {
+				$content .= '<p>Static Badges (' . count( $badges ) . '):</p>';
+				$content .= '<ul>';
+				foreach ( $badges as $badge ) {
+					$badge_class = is_string( $badge ) ? esc_html( $badge ) : esc_html( $badge['class'] ?? '' );
+					if ( ! empty( $badge_class ) ) {
+						$content .= '<li>' . $badge_class . '</li>';
+					}
+				}
+				$content .= '</ul>';
+			} else {
+				$content .= '<p>No badges provided for static badges.</p>';
+			}
+			$content .= '</div>';
+		}
+
+		// Build HTML output.
+		ob_start();
+		?>
+		<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" id="<?php echo esc_attr( $wrapper_id ); ?>">
+			<style><?php echo esc_html( $grid_styles ); ?></style>
+			<div class="wppic-badges-grid">
+				<?php echo wp_kses_post( $content ); ?>
+			</div>
+		</div>
+		<?php
+		return ob_get_clean();
+	}
+
+	/**
+	 * Shortcode handler for profile badges.
+	 *
+	 * @param array  $atts    Shortcode attributes.
+	 * @param string $content Shortcode content.
+	 * @return string Rendered HTML.
+	 */
+	public static function shortcode_profile_badges( $atts, $content = '' ) {
+		// Default attributes matching block.json defaults.
+		$defaults = array(
+			'unique_id'     => '',
+			'anchor'        => '',
+			'align'         => 'center',
+			'type'          => 'dynamic',
+			'author_slug'   => '',
+			'base_size'     => 16,
+			'badges'        => '',
+			'last_updated'  => '',
+			'col_gap'       => 20,
+			'row_gap'       => 20,
+			'cols'          => 2,
+			'layout'        => 'horizontal',
+			'hide_heading'  => false,
+			'heading_color' => '#000000',
+		);
+
+		$atts = wp_parse_args( $atts, $defaults );
+
+		// Convert shortcode attribute names (snake_case) to block attribute names (camelCase).
+		$block_args                 = array();
+		$block_args['uniqueId']     = sanitize_text_field( $atts['unique_id'] );
+		$block_args['anchor']       = sanitize_text_field( $atts['anchor'] );
+		$block_args['align']        = sanitize_text_field( $atts['align'] );
+		$block_args['type']         = sanitize_text_field( $atts['type'] );
+		$block_args['authorSlug']   = sanitize_text_field( $atts['author_slug'] );
+		$block_args['baseSize']     = absint( $atts['base_size'] );
+		$block_args['lastUpdated']  = sanitize_text_field( $atts['last_updated'] );
+		$block_args['colGap']       = absint( $atts['col_gap'] );
+		$block_args['rowGap']       = absint( $atts['row_gap'] );
+		$block_args['cols']         = absint( $atts['cols'] );
+		$block_args['layout']       = sanitize_text_field( $atts['layout'] );
+		$block_args['hideHeading']  = filter_var( $atts['hide_heading'], FILTER_VALIDATE_BOOLEAN );
+		$block_args['headingColor'] = sanitize_hex_color( $atts['heading_color'] );
+
+		// Parse badges from comma-separated string to array.
+		$badges_string = sanitize_text_field( $atts['badges'] );
+		if ( ! empty( $badges_string ) ) {
+			$badges_array         = explode( ',', $badges_string );
+			$badges_array         = array_map( 'trim', $badges_array );
+			$badges_array         = array_filter( $badges_array );
+			$block_args['badges'] = array_values( $badges_array );
+		} else {
+			$block_args['badges'] = array();
+		}
+
+		// Call shared helper.
+		return self::render_profile_badges( $block_args );
 	}
 }
