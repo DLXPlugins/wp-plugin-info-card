@@ -729,6 +729,7 @@ class Blocks {
 		$block_attributes['uniqueId']     = Functions::sanitize_attribute( $attributes, 'uniqueId', 'string' );
 		$block_attributes['anchor']       = Functions::sanitize_attribute( $attributes, 'anchor', 'string' );
 		$block_attributes['align']        = Functions::sanitize_attribute( $attributes, 'align', 'string' );
+		$block_attributes['type']         = Functions::sanitize_attribute( $attributes, 'type', 'string' );
 		$block_attributes['authorSlug']   = Functions::sanitize_attribute( $attributes, 'authorSlug', 'string' );
 		$block_attributes['baseSize']     = Functions::sanitize_attribute( $attributes, 'baseSize', 'integer' );
 		$block_attributes['badges']       = Functions::sanitize_attribute( $attributes, 'badges', 'array' );
@@ -737,15 +738,20 @@ class Blocks {
 		$block_attributes['rowGap']       = Functions::sanitize_attribute( $attributes, 'rowGap', 'integer' );
 		$block_attributes['cols']         = Functions::sanitize_attribute( $attributes, 'cols', 'integer' );
 		$block_attributes['layout']       = Functions::sanitize_attribute( $attributes, 'layout', 'string' );
+		$block_attributes['hideHeading']  = Functions::sanitize_attribute( $attributes, 'hideHeading', 'boolean' );
 		$block_attributes['headingColor'] = Functions::sanitize_attribute( $attributes, 'headingColor', 'string' );
 
 		// Get wrapper attributes / styles / classes.
-		$wrapper_classes    = array(
+		$wrapper_classes = array(
 			'wppic-badges-grid',
 			'is-grid',
+			'align' . $block_attributes['align'],
 			'layout-' . $block_attributes['layout'],
 			'cols-' . $block_attributes['cols'],
 		);
+		if ( $block_attributes['hideHeading'] ) {
+			$wrapper_classes[] = 'has-no-title';
+		}
 		$wrapper_attributes = get_block_wrapper_attributes(
 			array(
 				'class' => implode( ' ', $wrapper_classes ),
