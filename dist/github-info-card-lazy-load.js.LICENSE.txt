@@ -1,0 +1,5 @@
+/*! lozad.js - v1.16.0 - 2020-09-06
+* https://github.com/ApoorvSaxena/lozad.js
+* Copyright (c) 2020 Apoorv Saxena; Licensed MIT */
+
+/*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */
