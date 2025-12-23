@@ -3692,12 +3692,18 @@ class Shortcodes {
 
 					// Build badge icon/icon container.
 					// Use the user's badge_class to preserve any modifiers (e.g., "has-overlay").
-					$badge_html .= '<div class="badge ' . esc_attr( $badge_class ) . '">';
+					// Add data-label to badge container only when headings are hidden (for tooltips).
+					$badge_container_attrs = 'class="badge ' . esc_attr( $badge_class ) . '"';
+					if ( $hide_heading ) {
+						$badge_container_attrs .= ' data-label="' . esc_attr( $badge_data['label'] ) . '"';
+					}
+					$badge_html .= '<div ' . $badge_container_attrs . '>';
 
 					// Handle icon type.
 					if ( 'image' === $badge_data['iconType'] ) {
 						// Image icon - alt text already provides accessibility.
-						$badge_html .= '<img src="' . esc_url( $badge_data['icon'] ) . '" alt="' . esc_attr( $badge_data['label'] ) . '" data-label="' . esc_attr( $badge_data['label'] ) . '" />';
+						// Use esc_attr() for data URIs (SVG data URIs) instead of esc_url() to preserve special characters.
+						$badge_html .= '<img src="' . esc_attr( $badge_data['icon'] ) . '" alt="' . esc_attr( $badge_data['label'] ) . '" aria-label="' . esc_attr( $badge_data['label'] ) . '" />';
 					} else {
 						// Dashicon - include badge class from badge data plus icon class.
 						// Add accessibility attributes: role="img" and aria-label for screen readers.
@@ -3713,11 +3719,14 @@ class Shortcodes {
 		}
 
 		// Build HTML output.
+		// Since badge data comes from trusted source (hardcoded array) and all attributes
+		// are already escaped with esc_attr()/esc_html(), we can output directly.
+		// wp_kses_post() would strip data URIs, so we bypass it for trusted badge content.
 		ob_start();
 		?>
 		<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" id="<?php echo esc_attr( $wrapper_id ); ?>">
 			<style><?php echo esc_html( $grid_styles ); ?></style>
-			<?php echo wp_kses_post( $content ); ?>
+			<?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped - Badge data is trusted, attributes already escaped. ?>
 		</div>
 		<?php
 		return ob_get_clean();

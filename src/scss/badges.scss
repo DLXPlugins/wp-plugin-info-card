@@ -58,30 +58,50 @@
 		align-items: center;
 		justify-content: center;
 
-		span, img {
-			cursor: pointer;
-			&::after {
-				content: attr(data-label);
-				display: block;
-				position: absolute;
-				bottom: calc(100% + 12px);
-				font-family: Arial, Helvetica, sans-serif;
-				left: 50%;
-				transform: translateX(-50%);
-				background-color: #333333;
-				color: #ffffff;
-				padding: 8px 12px;
-				border-radius: 4px;
-				font-size: 13px;
-				white-space: nowrap;
-				opacity: 0;
-				transition: opacity 0.2s ease-in-out;
-			}
-			&:hover {
-				&::after {
-					opacity: 1;
-				}
-			}
+		// Tooltip for all badges - use badge container for consistent positioning.
+		&[data-label] {
+			cursor: help;
+		}
+
+		// Show tooltip on badge container when it has data-label and is hovered.
+		&[data-label]:hover::after {
+			content: attr(data-label);
+			display: block;
+			position: absolute;
+			bottom: calc(100% + 12px);
+			font-family: Arial, Helvetica, sans-serif;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: #333333;
+			color: #ffffff;
+			padding: 6px 12px;
+			border-radius: 4px;
+			font-size: 13px;
+			white-space: nowrap;
+			opacity: 0.8;
+			visibility: visible;
+			z-index: 1000;
+		}
+
+		// Initially hide tooltip for badge containers with data-label.
+		&[data-label]::after {
+			content: attr(data-label);
+			display: block;
+			position: absolute;
+			bottom: calc(100% + 12px);
+			font-family: Arial, Helvetica, sans-serif;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: #333333;
+			color: #ffffff;
+			padding: 6px 12px;
+			border-radius: 4px;
+			font-size: 13px;
+			white-space: nowrap;
+			opacity: 0;
+			visibility: hidden;
+			transition: opacity 0.2s ease-in-out;
+			z-index: 1000;
 		}
 	}
 
