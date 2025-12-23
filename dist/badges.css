@@ -39,6 +39,7 @@
   height: auto;
 }
 .wppic-profile-badge .badge {
+  position: relative;
   --badge-color: white; /* The badge color. */
   --tint-color: white; /* The color of the tint overlay on the badge. */
   margin: 4px;
@@ -56,6 +57,29 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.wppic-profile-badge .badge span, .wppic-profile-badge .badge img {
+  cursor: pointer;
+}
+.wppic-profile-badge .badge span::after, .wppic-profile-badge .badge img::after {
+  content: attr(data-label);
+  display: block;
+  position: absolute;
+  bottom: calc(100% + 12px);
+  font-family: Arial, Helvetica, sans-serif;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333333;
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+.wppic-profile-badge .badge span:hover::after, .wppic-profile-badge .badge img:hover::after {
+  opacity: 1;
 }
 .wppic-profile-badge .badge .dashicons {
   font-size: inherit;

@@ -3696,11 +3696,12 @@ class Shortcodes {
 
 					// Handle icon type.
 					if ( 'image' === $badge_data['iconType'] ) {
-						// Image icon.
-						$badge_html .= '<img src="' . esc_url( $badge_data['icon'] ) . '" alt="' . esc_attr( $badge_data['label'] ) . '" />';
+						// Image icon - alt text already provides accessibility.
+						$badge_html .= '<img src="' . esc_url( $badge_data['icon'] ) . '" alt="' . esc_attr( $badge_data['label'] ) . '" data-label="' . esc_attr( $badge_data['label'] ) . '" />';
 					} else {
 						// Dashicon - include badge class from badge data plus icon class.
-						$badge_html .= '<span class="dashicons ' . esc_attr( $badge_data['class'] ) . ' ' . esc_attr( $badge_data['icon'] ) . '"></span>';
+						// Add accessibility attributes: role="img" and aria-label for screen readers.
+						$badge_html .= '<span class="dashicons ' . esc_attr( $badge_data['class'] ) . ' ' . esc_attr( $badge_data['icon'] ) . '" role="img" data-label="' . esc_attr( $badge_data['label'] ) . '" aria-label="' . esc_attr( $badge_data['label'] ) . '"></span>';
 					}
 
 					$badge_html .= '</div>'; // End .badge.
