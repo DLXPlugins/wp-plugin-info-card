@@ -449,6 +449,27 @@
 			}
 		}
 	}
+
+	// Exclude column constraints when editing.
+	&.is-editing {
+		grid-template-columns: repeat(1, 1fr) !important;
+
+		&.cols-1,
+		&.cols-2,
+		&.cols-3 {
+			grid-template-columns: repeat(1, 1fr) !important;
+		}
+
+		&.has-no-title {
+			grid-template-columns: repeat(1, 1fr) !important;
+
+			&.cols-1,
+			&.cols-2,
+			&.cols-3 {
+				grid-template-columns: repeat(1, 1fr) !important;
+			}
+		}
+	}
 }
 
 .wppic-badges-grid.layout-centered .wppic-profile-badge {

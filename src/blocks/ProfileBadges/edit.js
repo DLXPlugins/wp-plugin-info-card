@@ -135,6 +135,7 @@ const ProfileBadges = ( props ) => {
 				'is-grid': ! isEditing,
 				[ `cols-${ cols }` ]: ! isEditing,
 				'has-no-title': attributes.hideHeading,
+				'is-editing': isEditing || ( type === 'dynamic' && '' === attributes.authorSlug ) || ( type === 'static' && ! hasBadges ),
 			},
 		),
 	} );

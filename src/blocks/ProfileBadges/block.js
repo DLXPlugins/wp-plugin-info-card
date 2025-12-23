@@ -1,6 +1,7 @@
 //  Import CSS.
 import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
+import { createBlock } from '@wordpress/blocks';
 import Edit from './edit';
 import BadgesIcon from '../components/BadgesIcon';
 import BadgesIcon2 from '../components/BadgesIcon2';
@@ -27,6 +28,26 @@ registerBlockType( metadata, {
 	edit: EditComponent,
 	save() {
 		return null;
+	},
+	transforms: {
+		to: [
+			{
+				type: 'block',
+				blocks: [ 'wp-plugin-info-card/profile-highlights-badges' ],
+				isMatch: ( attributes ) => {
+					return attributes.type === 'dynamic';
+				},
+				transform: ( attributes ) => {
+					const { authorSlug, lastUpdated, ...restAttributes } = attributes;
+					return createBlock( 'wp-plugin-info-card/profile-highlights-badges', {
+						...restAttributes,
+						type: 'static',
+						authorSlug: '',
+						lastUpdated: '',
+					} );
+				},
+			},
+		],
 	},
 	variations: [
 		{
