@@ -103,7 +103,13 @@ const Preview = ( props ) => {
 	const inspectorControls = (
 		<>
 			<InspectorControls>
-				{
+				<>
+					{ attributes.type === 'dynamic' && attributes.authorSlug && (
+						<div className="block-editor-block-card">
+							<strong>{ __( 'Author Slug:', 'wp-plugin-info-card' ) }</strong>&nbsp;
+							<span>{ attributes.authorSlug }</span>
+						</div>
+					) }
 					<PanelBody title={ __( 'Layout', 'wp-plugin-info-card' ) }>
 						<SelectControl
 							label={ __( 'Badge Layout', 'wp-plugin-info-card' ) }
@@ -149,7 +155,7 @@ const Preview = ( props ) => {
 							/>
 						</PanelRow>
 					</PanelBody>
-				}
+				</>
 			</InspectorControls>
 			<InspectorControls group="styles">
 				<PanelBody title={ __( 'Badge and Heading Size', 'wp-plugin-info-card' ) }>
