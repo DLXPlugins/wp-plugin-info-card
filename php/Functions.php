@@ -261,11 +261,11 @@ class Functions {
 					'ping_status'    => 'closed',
 				)
 			);
-			update_post_meta( $org_profile_data_id, '_wppic_last_updated', time() );
-			update_post_meta( $org_profile_data_id, '_wppic_profile_data', $profile_data );
+			update_post_meta( absint( $org_profile_data_id ), '_wppic_last_updated', time() );
+			update_post_meta( absint( $org_profile_data_id ), '_wppic_profile_data', $profile_data );
 		} else {
-			update_post_meta( $org_profile_data->ID, '_wppic_last_updated', time() );
-			update_post_meta( $org_profile_data->ID, '_wppic_profile_data', $profile_data );
+			update_post_meta( absint( $org_profile_data->ID ), '_wppic_last_updated', time() );
+			update_post_meta( absint( $org_profile_data->ID ), '_wppic_profile_data', $profile_data );
 		}
 
 		return $profile_data;
