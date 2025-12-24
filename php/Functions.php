@@ -97,11 +97,14 @@ class Functions {
 	 * Retrieve an author's .org profile data.
 	 *
 	 * @param string $org_username The author's WordPress.org username.
-	 *
+	 * @param bool   $force        Whether to force a refresh of the profile data.
 	 * @return array|WP_Error Author profile data. WP_Error if error.
 	 */
-	public static function get_org_profile_data( $org_username ) {
+	public static function get_org_profile_data( $org_username, $force = false ) {
 		$org_username = sanitize_text_field( $org_username );
+		if ( empty( $org_username ) ) {
+			return new \WP_Error( 'wppic_empty_username', __( 'Username is required.', 'wp-plugin-info-card' ) );
+		}
 		// Get REST endpoint.
 		$profiles_rest_endpoint = sprintf(
 			'https://profiles.wordpress.org/wp-json/wporg/v1/users/%s',
@@ -114,7 +117,7 @@ class Functions {
 
 		// Let's get .org data first.
 		$org_profile_data = \get_page_by_path( $org_username, OBJECT, 'wppic_profiles' );
-		if ( $org_profile_data ) {
+		if ( $org_profile_data && ! $force ) {
 			// Let's see if we need to update the data.
 			$last_updated = get_post_meta( $org_profile_data->ID, '_wppic_last_updated', true );
 			$profile_data = get_post_meta( $org_profile_data->ID, '_wppic_profile_data', true );

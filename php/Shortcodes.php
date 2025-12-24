@@ -539,14 +539,14 @@ class Shortcodes {
 	public function get_profile_data( $request ) {
 		// Get username.
 		$username = isset( $request['author'] ) ? sanitize_text_field( $request['author'] ) : '';
-
+		$force    = isset( $request['force'] ) ? filter_var( $request['force'], FILTER_VALIDATE_BOOLEAN ) : false;
 		// If no username, return error.
 		if ( empty( $username ) ) {
 			wp_send_json_error( array( 'message' => 'No username provided' ) );
 		}
 
 		// Get user profile data from .org.
-		$user_data = Functions::get_org_profile_data( $username );
+		$user_data = Functions::get_org_profile_data( $username, $force );
 
 		// If no error, return data.
 		if ( ! is_wp_error( $user_data ) ) {

@@ -30675,11 +30675,18 @@ const OrgProfile = props => {
   const [authorError, setAuthorError] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [authorErrorMessage, setAuthorErrorMessage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [cardLoading, setCardLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const loadProfileData = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(async authorSlug => {
+  /**
+   * Load the profile data for the given author slug.
+   *
+   * @param {string}  authorSlug - The author slug to load the profile data for.
+   * @param {boolean} force      - Whether to force a refresh of the profile data.
+   * @return {Promise<void>} A promise that resolves when the profile data has been loaded.
+   */
+  const loadProfileData = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(async (authorSlug, force = false) => {
     setIsEditing(true);
     setCardLoading(true);
     const restUrl = wppic.rest_url + 'wppic/v2/get_profile_data';
-    axios__WEBPACK_IMPORTED_MODULE_1__["default"].get(restUrl + `?author=${authorSlug}`, {
+    axios__WEBPACK_IMPORTED_MODULE_1__["default"].get(restUrl + `?author=${authorSlug}&force=${force}`, {
       headers: {
         'X-WP-Nonce': wppic.rest_nonce
       }
@@ -30767,7 +30774,7 @@ const OrgProfile = props => {
           setAuthorError(false);
           setAuthorErrorMessage('');
           setIsEditing(true);
-          loadProfileData(attributes.authorSlug);
+          loadProfileData(attributes.authorSlug, true);
         }
       }), authorError && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_Notice__WEBPACK_IMPORTED_MODULE_8__["default"], {
         status: "error",

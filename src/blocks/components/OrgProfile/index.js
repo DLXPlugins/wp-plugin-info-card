@@ -38,13 +38,20 @@ const OrgProfile = ( props ) => {
 	const [ authorError, setAuthorError ] = useState( false );
 	const [ authorErrorMessage, setAuthorErrorMessage ] = useState( '' );
 	const [ cardLoading, setCardLoading ] = useState( false );
-	const loadProfileData = useCallback( async ( authorSlug ) => {
+	/**
+	 * Load the profile data for the given author slug.
+	 *
+	 * @param {string}  authorSlug - The author slug to load the profile data for.
+	 * @param {boolean} force      - Whether to force a refresh of the profile data.
+	 * @return {Promise<void>} A promise that resolves when the profile data has been loaded.
+	 */
+	const loadProfileData = useCallback( async ( authorSlug, force = false ) => {
 		setIsEditing( true );
 		setCardLoading( true );
 		const restUrl = wppic.rest_url + 'wppic/v2/get_profile_data';
 		axios
 			.get(
-				restUrl + `?author=${ authorSlug }`,
+				restUrl + `?author=${ authorSlug }&force=${ force }`,
 				{
 					headers: {
 						'X-WP-Nonce': wppic.rest_nonce,
@@ -137,7 +144,7 @@ const OrgProfile = ( props ) => {
 						setAuthorError( false );
 						setAuthorErrorMessage( '' );
 						setIsEditing( true );
-						loadProfileData( attributes.authorSlug );
+						loadProfileData( attributes.authorSlug, true );
 					} }
 				/>
 				{
