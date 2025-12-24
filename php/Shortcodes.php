@@ -3863,12 +3863,20 @@ class Shortcodes {
 	 * @return string Loading skeleton HTML.
 	 */
 	private static function render_loading_skeleton( $args, $author_slug = '', $token = '', $unique_id = '' ) {
+		// Always show 6 skeleton badges for consistent, realistic appearance.
+		$skeleton_count = 6;
+
+		// Build classes to match the wrapper (including column classes).
 		$cols = absint( $args['cols'] ?? 2 );
-		// Show 3-6 skeleton items based on column count.
-		$skeleton_count = min( max( $cols * 2, 3 ), 6 );
+		$align = sanitize_text_field( $args['align'] ?? 'center' );
+		$skeleton_classes = array(
+			'wppic-profile-badges-loading',
+			'align' . $align,
+			'cols-' . $cols,
+		);
 
 		$data_attrs = array(
-			'class'           => 'wppic-profile-badges-loading',
+			'class'           => implode( ' ', $skeleton_classes ),
 			'aria-busy'       => 'true',
 			'aria-label'      => esc_attr__( 'Loading badges...', 'wp-plugin-info-card' ),
 			'data-is-loading' => 'true',

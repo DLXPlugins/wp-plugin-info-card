@@ -468,11 +468,11 @@
 
 .wppic-profile-badges-loading {
   display: grid;
-  gap: var(--wppic-grid-col-gap, 20px);
-  row-gap: var(--wppic-grid-row-gap, 20px);
+  gap: var(--wppic-grid-col-gap, 25px);
+  row-gap: var(--wppic-grid-row-gap, 25px);
   width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
   justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
 }
 .wppic-profile-badges-loading.aligncenter {
   display: grid;
@@ -486,40 +486,128 @@
   display: grid;
   justify-content: end;
 }
+.wppic-profile-badges-loading.cols-1 {
+  grid-template-columns: repeat(1, minmax(200px, 350px));
+  max-width: 100%;
+}
+@media (min-width: 520px) {
+  .wppic-profile-badges-loading.cols-1 {
+    grid-template-columns: repeat(1, minmax(150px, 350px));
+  }
+}
+.wppic-profile-badges-loading.cols-2 {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 350px));
+  grid-column: span 2;
+}
+@media (min-width: 520px) {
+  .wppic-profile-badges-loading.cols-2 {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 350px));
+  }
+}
+@media (min-width: 768px) {
+  .wppic-profile-badges-loading.cols-2 {
+    grid-template-columns: repeat(2, minmax(250px, auto));
+  }
+}
+@media (min-width: 1024px) {
+  .wppic-profile-badges-loading.cols-2 {
+    grid-template-columns: repeat(2, minmax(275px, auto));
+  }
+}
+.wppic-profile-badges-loading.cols-3 {
+  grid-template-columns: repeat(auto-fit, minmax(120px, 350px));
+  grid-column: span 3;
+}
+@media (min-width: 520px) {
+  .wppic-profile-badges-loading.cols-3 {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 350px));
+  }
+}
+@media (min-width: 768px) {
+  .wppic-profile-badges-loading.cols-3 {
+    grid-template-columns: repeat(3, minmax(200px, auto));
+  }
+}
+@media (min-width: 1024px) {
+  .wppic-profile-badges-loading.cols-3 {
+    grid-template-columns: repeat(3, minmax(220px, auto));
+  }
+}
+@media (min-width: 1200px) {
+  .wppic-profile-badges-loading.cols-3 {
+    grid-template-columns: repeat(3, minmax(250px, auto));
+  }
+}
 
 .wppic-profile-badge-skeleton {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  flex-direction: row-reverse;
+  justify-content: flex-start;
   gap: 1em;
   font-size: var(--wppic-base-size, 16px);
   min-height: 60px;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+}
+.wppic-profile-badge-skeleton::after {
+  content: "";
+  display: block;
+  height: 1.25em;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
   background-size: 200% 100%;
   border-radius: 4px;
   animation: skeleton-loading 1.5s ease-in-out infinite;
+  width: 60%;
 }
 .wppic-profile-badge-skeleton::before {
   content: "";
   display: block;
   width: 2.5em;
   height: 2.5em;
+  min-width: 2.5em;
+  min-height: 2.5em;
   border-radius: 50%;
-  background: linear-gradient(90deg, #e0e0e0 25%, #d0d0d0 50%, #e0e0e0 75%);
+  border: 2px solid #e8e8e8;
+  box-shadow: 0 0 0 4px #f5f5f5;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
   background-size: 200% 100%;
   animation: skeleton-loading 1.5s ease-in-out infinite;
+  flex-shrink: 0;
 }
-.wppic-profile-badge-skeleton::after {
-  content: "";
-  display: block;
-  width: 40%;
-  height: 1.25em;
-  background: linear-gradient(90deg, #e0e0e0 25%, #d0d0d0 50%, #e0e0e0 75%);
-  background-size: 200% 100%;
-  border-radius: 4px;
-  animation: skeleton-loading 1.5s ease-in-out infinite;
+.wppic-profile-badge-skeleton:nth-child(1)::before, .wppic-profile-badge-skeleton:nth-child(1)::after {
+  animation-delay: 0s;
+}
+.wppic-profile-badge-skeleton:nth-child(2)::before, .wppic-profile-badge-skeleton:nth-child(2)::after {
+  animation-delay: 0.1s;
+}
+.wppic-profile-badge-skeleton:nth-child(3)::before, .wppic-profile-badge-skeleton:nth-child(3)::after {
+  animation-delay: 0.2s;
+}
+.wppic-profile-badge-skeleton:nth-child(4)::before, .wppic-profile-badge-skeleton:nth-child(4)::after {
+  animation-delay: 0.3s;
+}
+.wppic-profile-badge-skeleton:nth-child(5)::before, .wppic-profile-badge-skeleton:nth-child(5)::after {
+  animation-delay: 0.4s;
+}
+.wppic-profile-badge-skeleton:nth-child(6)::before, .wppic-profile-badge-skeleton:nth-child(6)::after {
+  animation-delay: 0.5s;
+}
+.wppic-profile-badge-skeleton:nth-child(1)::after {
+  width: 55%;
+}
+.wppic-profile-badge-skeleton:nth-child(2)::after {
+  width: 70%;
+}
+.wppic-profile-badge-skeleton:nth-child(3)::after {
+  width: 65%;
+}
+.wppic-profile-badge-skeleton:nth-child(4)::after {
+  width: 50%;
+}
+.wppic-profile-badge-skeleton:nth-child(5)::after {
+  width: 75%;
+}
+.wppic-profile-badge-skeleton:nth-child(6)::after {
+  width: 60%;
 }
 
 @keyframes skeleton-loading {

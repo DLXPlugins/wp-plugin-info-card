@@ -541,12 +541,14 @@
 // Loading skeleton styles.
 .wppic-profile-badges-loading {
 	display: grid;
-	gap: var(--wppic-grid-col-gap, 20px);
-	row-gap: var(--wppic-grid-row-gap, 20px);
+	gap: var(--wppic-grid-col-gap, 25px);
+	row-gap: var(--wppic-grid-row-gap, 25px);
 	width: 100%;
-	grid-template-columns: repeat(auto-fit, minmax(200px, auto));
 	justify-content: center;
+	// Use auto-fit to let grid-items fit the screen where possible.
+	grid-template-columns: repeat(auto-fit, minmax(200px, auto));
 
+	// Alignment modifiers.
 	&.aligncenter {
 		display: grid;
 		justify-content: center;
@@ -561,57 +563,175 @@
 		display: grid;
 		justify-content: end;
 	}
+
+	// Single column layout - always 1 column, but fluid width.
+	&.cols-1 {
+		grid-template-columns: repeat(1, minmax(200px, 350px));
+		max-width: 100%;
+
+		@include respond-to('small') {
+			grid-template-columns: repeat(1, minmax(150px, 350px));
+		}
+	}
+
+	// Two column layout - max 2 columns, fluid on mobile.
+	&.cols-2 {
+		grid-template-columns: repeat(auto-fit, minmax(150px, 350px));
+		grid-column: span 2;
+
+		@include respond-to('small') {
+			grid-template-columns: repeat(auto-fit, minmax(150px, 350px));
+		}
+
+		@include respond-to('medium') {
+			grid-template-columns: repeat(2, minmax(250px, auto));
+		}
+
+		@include respond-to('large') {
+			grid-template-columns: repeat(2, minmax(275px, auto));
+		}
+	}
+
+	// Three column layout - max 3 columns, fluid on mobile.
+	&.cols-3 {
+		grid-template-columns: repeat(auto-fit, minmax(120px, 350px));
+		grid-column: span 3;
+
+		@include respond-to('small') {
+			grid-template-columns: repeat(auto-fit, minmax(180px, 350px));
+		}
+
+		@include respond-to('medium') {
+			grid-template-columns: repeat(3, minmax(200px, auto));
+		}
+
+		@include respond-to('large') {
+			grid-template-columns: repeat(3, minmax(220px, auto));
+		}
+
+		@include respond-to('xl') {
+			grid-template-columns: repeat(3, minmax(250px, auto));
+		}
+	}
 }
 
 .wppic-profile-badge-skeleton {
 	position: relative;
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
-	flex-direction: row-reverse;
+	justify-content: flex-start;
 	gap: 1em;
 	font-size: var(--wppic-base-size, 16px);
 	min-height: 60px;
-	background: linear-gradient(
-		90deg,
-		#f0f0f0 25%,
-		#e0e0e0 50%,
-		#f0f0f0 75%
-	);
-	background-size: 200% 100%;
-	border-radius: 4px;
-	animation: skeleton-loading 1.5s ease-in-out infinite;
 
+	// Text label skeleton (on the left).
+	// With row-reverse, ::after (last in DOM) appears on the left.
+	&::after {
+		content: '';
+		display: block;
+		height: 1.25em;
+		background: linear-gradient(
+			90deg,
+			#f0f0f0 25%,
+			#e8e8e8 50%,
+			#f0f0f0 75%
+		);
+		background-size: 200% 100%;
+		border-radius: 4px;
+		animation: skeleton-loading 1.5s ease-in-out infinite;
+		// Vary widths for more realistic appearance.
+		width: 60%;
+	}
+
+	// Badge icon skeleton (circular, on the right).
+	// With row-reverse, ::before (first in DOM) appears on the right.
 	&::before {
 		content: '';
 		display: block;
 		width: 2.5em;
 		height: 2.5em;
+		min-width: 2.5em;
+		min-height: 2.5em;
 		border-radius: 50%;
+		border: 2px solid #e8e8e8;
+		box-shadow: 0 0 0 4px #f5f5f5;
 		background: linear-gradient(
 			90deg,
-			#e0e0e0 25%,
-			#d0d0d0 50%,
-			#e0e0e0 75%
+			#f0f0f0 25%,
+			#e8e8e8 50%,
+			#f0f0f0 75%
 		);
 		background-size: 200% 100%;
 		animation: skeleton-loading 1.5s ease-in-out infinite;
+		flex-shrink: 0;
 	}
 
-	&::after {
-		content: '';
-		display: block;
-		width: 40%;
-		height: 1.25em;
-		background: linear-gradient(
-			90deg,
-			#e0e0e0 25%,
-			#d0d0d0 50%,
-			#e0e0e0 75%
-		);
-		background-size: 200% 100%;
-		border-radius: 4px;
-		animation: skeleton-loading 1.5s ease-in-out infinite;
+	// Stagger animation delays for more natural loading effect.
+	&:nth-child(1) {
+		&::before,
+		&::after {
+			animation-delay: 0s;
+		}
+	}
+
+	&:nth-child(2) {
+		&::before,
+		&::after {
+			animation-delay: 0.1s;
+		}
+	}
+
+	&:nth-child(3) {
+		&::before,
+		&::after {
+			animation-delay: 0.2s;
+		}
+	}
+
+	&:nth-child(4) {
+		&::before,
+		&::after {
+			animation-delay: 0.3s;
+		}
+	}
+
+	&:nth-child(5) {
+		&::before,
+		&::after {
+			animation-delay: 0.4s;
+		}
+	}
+
+	&:nth-child(6) {
+		&::before,
+		&::after {
+			animation-delay: 0.5s;
+		}
+	}
+
+	// Vary text widths for more realistic appearance.
+	&:nth-child(1)::after {
+		width: 55%;
+	}
+
+	&:nth-child(2)::after {
+		width: 70%;
+	}
+
+	&:nth-child(3)::after {
+		width: 65%;
+	}
+
+	&:nth-child(4)::after {
+		width: 50%;
+	}
+
+	&:nth-child(5)::after {
+		width: 75%;
+	}
+
+	&:nth-child(6)::after {
+		width: 60%;
 	}
 }
 
