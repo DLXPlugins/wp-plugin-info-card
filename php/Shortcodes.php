@@ -3562,29 +3562,41 @@ class Shortcodes {
 	}
 
 	/**
-	 * Render profile badges (shared helper for block and shortcode).
+	 * Build wrapper classes for profile badges.
 	 *
 	 * @param array $args {
-	 *     Array of arguments.
+	 *     Array of sanitized arguments.
 	 *
-	 *     @type string  $uniqueId      Unique identifier for the wrapper.
-	 *     @type string  $anchor        Anchor ID (overrides uniqueId if set).
-	 *     @type string  $align         Alignment: left|center|right.
-	 *     @type string  $type          Badge type: static|dynamic.
-	 *     @type string  $authorSlug    WordPress.org author slug (for dynamic).
-	 *     @type int     $baseSize      Base font size in pixels.
-	 *     @type array   $badges        Array of badge class names (for static).
-	 *     @type string  $lastUpdated   Last update timestamp (for dynamic).
-	 *     @type int     $colGap        Column gap in pixels.
-	 *     @type int     $rowGap        Row gap in pixels.
-	 *     @type int     $cols          Number of columns.
-	 *     @type string  $layout        Layout: horizontal|centered.
-	 *     @type bool    $hideHeading   Whether to hide badge headings.
-	 *     @type string  $headingColor  Heading text color.
+	 *     @type string $align       Alignment: left|center|right.
+	 *     @type string $layout      Layout: horizontal|centered.
+	 *     @type int    $cols        Number of columns.
+	 *     @type bool   $hideHeading Whether to hide badge headings.
 	 * }
-	 * @return string Rendered HTML.
+	 * @return array Array of wrapper class names.
 	 */
-	public static function render_profile_badges( $args = array() ) {
+	public static function build_profile_badges_wrapper_classes( $args ) {
+		$wrapper_classes = array(
+			'wppic-badges-grid',
+			'is-grid',
+			'align' . $args['align'],
+			'layout-' . $args['layout'],
+			'cols-' . $args['cols'],
+		);
+
+		if ( $args['hideHeading'] ) {
+			$wrapper_classes[] = 'has-no-title';
+		}
+
+		return $wrapper_classes;
+	}
+
+	/**
+	 * Normalize and sanitize profile badges arguments.
+	 *
+	 * @param array $args Raw arguments.
+	 * @return array Normalized and sanitized arguments.
+	 */
+	public static function normalize_profile_badges_args( $args = array() ) {
 		// Normalize arguments with defaults.
 		$defaults = array(
 			'uniqueId'     => '',
@@ -3606,20 +3618,72 @@ class Shortcodes {
 		$args = wp_parse_args( $args, $defaults );
 
 		// Sanitize inputs.
-		$unique_id     = sanitize_text_field( $args['uniqueId'] );
-		$anchor        = sanitize_text_field( $args['anchor'] );
-		$align         = sanitize_text_field( $args['align'] );
-		$type          = sanitize_text_field( $args['type'] );
-		$author_slug   = sanitize_text_field( $args['authorSlug'] );
-		$base_size     = absint( $args['baseSize'] );
-		$badges        = is_array( $args['badges'] ) ? $args['badges'] : array();
-		$last_updated  = sanitize_text_field( $args['lastUpdated'] );
-		$col_gap       = absint( $args['colGap'] );
-		$row_gap       = absint( $args['rowGap'] );
-		$cols          = absint( $args['cols'] );
-		$layout        = sanitize_text_field( $args['layout'] );
-		$hide_heading  = filter_var( $args['hideHeading'], FILTER_VALIDATE_BOOLEAN );
-		$heading_color = sanitize_hex_color( $args['headingColor'] );
+		return array(
+			'uniqueId'     => sanitize_text_field( $args['uniqueId'] ),
+			'anchor'       => sanitize_text_field( $args['anchor'] ),
+			'align'        => sanitize_text_field( $args['align'] ),
+			'type'         => sanitize_text_field( $args['type'] ),
+			'authorSlug'   => sanitize_text_field( $args['authorSlug'] ),
+			'baseSize'     => absint( $args['baseSize'] ),
+			'badges'       => is_array( $args['badges'] ) ? $args['badges'] : array(),
+			'lastUpdated'  => sanitize_text_field( $args['lastUpdated'] ),
+			'colGap'       => absint( $args['colGap'] ),
+			'rowGap'       => absint( $args['rowGap'] ),
+			'cols'         => absint( $args['cols'] ),
+			'layout'       => sanitize_text_field( $args['layout'] ),
+			'hideHeading'  => filter_var( $args['hideHeading'], FILTER_VALIDATE_BOOLEAN ),
+			'headingColor' => sanitize_hex_color( $args['headingColor'] ),
+		);
+	}
+
+	/**
+	 * Render profile badges (shared helper for block and shortcode).
+	 *
+	 * @param array $args {
+	 *     Array of arguments.
+	 *
+	 *     @type string  $uniqueId          Unique identifier for the wrapper.
+	 *     @type string  $anchor            Anchor ID (overrides uniqueId if set).
+	 *     @type string  $align             Alignment: left|center|right.
+	 *     @type string  $type              Badge type: static|dynamic.
+	 *     @type string  $authorSlug        WordPress.org author slug (for dynamic).
+	 *     @type int     $baseSize          Base font size in pixels.
+	 *     @type array   $badges            Array of badge class names (for static).
+	 *     @type string  $lastUpdated       Last update timestamp (for dynamic).
+	 *     @type int     $colGap            Column gap in pixels.
+	 *     @type int     $rowGap            Row gap in pixels.
+	 *     @type int     $cols              Number of columns.
+	 *     @type string  $layout            Layout: horizontal|centered.
+	 *     @type bool    $hideHeading       Whether to hide badge headings.
+	 *     @type string  $headingColor      Heading text color.
+	 *     @type string  $wrapperAttributes Optional. Pre-built wrapper attributes (for blocks).
+	 * }
+	 * @return string Rendered HTML.
+	 */
+	public static function render_profile_badges( $args = array() ) {
+		// Normalize and sanitize all arguments (skip if already normalized).
+		if ( ! empty( $args['_already_normalized'] ) ) {
+			unset( $args['_already_normalized'] );
+			$sanitized = $args;
+		} else {
+			$sanitized = self::normalize_profile_badges_args( $args );
+		}
+
+		// Extract sanitized values for easier use.
+		$unique_id     = $sanitized['uniqueId'];
+		$anchor        = $sanitized['anchor'];
+		$align         = $sanitized['align'];
+		$type          = $sanitized['type'];
+		$author_slug   = $sanitized['authorSlug'];
+		$base_size     = $sanitized['baseSize'];
+		$badges        = $sanitized['badges'];
+		$last_updated  = $sanitized['lastUpdated'];
+		$col_gap       = $sanitized['colGap'];
+		$row_gap       = $sanitized['rowGap'];
+		$cols          = $sanitized['cols'];
+		$layout        = $sanitized['layout'];
+		$hide_heading  = $sanitized['hideHeading'];
+		$heading_color = $sanitized['headingColor'];
 
 		// Generate unique ID if not provided.
 		if ( empty( $unique_id ) ) {
@@ -3630,16 +3694,18 @@ class Shortcodes {
 		$wrapper_id = ! empty( $anchor ) ? $anchor : $unique_id;
 
 		// Build wrapper classes.
-		$wrapper_classes = array(
-			'wppic-badges-grid',
-			'is-grid',
-			'align' . $align,
-			'layout-' . $layout,
-			'cols-' . $cols,
-		);
+		$wrapper_classes = self::build_profile_badges_wrapper_classes( $sanitized );
 
-		if ( $hide_heading ) {
-			$wrapper_classes[] = 'has-no-title';
+		// Check if wrapper attributes were provided (from block context).
+		$wrapper_attributes = isset( $args['wrapperAttributes'] ) ? $args['wrapperAttributes'] : null;
+
+		// Extract ID from wrapper attributes if provided (for CSS selector).
+		$css_wrapper_id = $wrapper_id;
+		if ( ! empty( $wrapper_attributes ) ) {
+			// Extract id from wrapper attributes string (format: id="value" or id='value').
+			if ( preg_match( '/id=["\']([^"\']+)["\']/', $wrapper_attributes, $matches ) ) {
+				$css_wrapper_id = $matches[1];
+			}
 		}
 
 		// Generate CSS variables.
@@ -3650,7 +3716,7 @@ class Shortcodes {
 			'	--wppic-base-size: %4$spx;' . PHP_EOL .
 			'	--wppic-heading-color: %5$s;' . PHP_EOL .
 			'}',
-			esc_attr( $wrapper_id ),
+			esc_attr( $css_wrapper_id ),
 			esc_attr( $row_gap ),
 			esc_attr( $col_gap ),
 			esc_attr( $base_size ),
@@ -3724,10 +3790,20 @@ class Shortcodes {
 		// wp_kses_post() would strip data URIs, so we bypass it for trusted badge content.
 		ob_start();
 		?>
-		<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" id="<?php echo esc_attr( $wrapper_id ); ?>">
-			<style><?php echo esc_html( $grid_styles ); ?></style>
-			<?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped - Badge data is trusted, attributes already escaped. ?>
-		</div>
+		<?php if ( ! empty( $wrapper_attributes ) ) : ?>
+			<?php
+			// get_block_wrapper_attributes() already includes id if anchor is set, so we use it directly.
+			?>
+			<div <?php echo wp_kses_post( $wrapper_attributes ); ?>>
+				<style><?php echo esc_html( $grid_styles ); ?></style>
+				<?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped - Badge data is trusted, attributes already escaped. ?>
+			</div>
+		<?php else : ?>
+			<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" id="<?php echo esc_attr( $wrapper_id ); ?>">
+				<style><?php echo esc_html( $grid_styles ); ?></style>
+				<?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped - Badge data is trusted, attributes already escaped. ?>
+			</div>
+		<?php endif; ?>
 		<?php
 		return ob_get_clean();
 	}

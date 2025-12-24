@@ -724,7 +724,25 @@ class Blocks {
 			return;
 		}
 
+		// Normalize arguments once to get sanitized values for wrapper classes.
+		$sanitized = Shortcodes::normalize_profile_badges_args( $attributes );
+
+		// Build wrapper classes using shared helper method.
+		$wrapper_classes = Shortcodes::build_profile_badges_wrapper_classes( $sanitized );
+
+		// Get block wrapper attributes (includes styles, spacing, etc.).
+		$wrapper_attributes = get_block_wrapper_attributes(
+			array(
+				'class' => implode( ' ', $wrapper_classes ),
+			)
+		);
+
+		// Pass already-normalized attributes with wrapper attributes to helper function.
+		// Mark as already normalized to skip re-normalization.
+		$sanitized['wrapperAttributes']   = $wrapper_attributes;
+		$sanitized['_already_normalized'] = true;
+
 		// Call shared helper.
-		return Shortcodes::render_profile_badges( $attributes );
+		return Shortcodes::render_profile_badges( $sanitized );
 	}
 }
