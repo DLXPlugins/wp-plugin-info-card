@@ -30716,6 +30716,9 @@ const OrgProfile = props => {
         setAuthorErrorMessage(data.message);
         setAuthorError(true);
       }
+    }).catch(() => {
+      setAuthorErrorMessage((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('An error occurred while fetching the profile data. Please try again.', 'wp-plugin-info-card'));
+      setAuthorError(true);
     }).then(() => {
       setIsEditing(false);
       setCardLoading(false);
@@ -30751,25 +30754,34 @@ const OrgProfile = props => {
 
   // If we have an authorSlug and lastUpdated isn't empty, show the preview.
   if (authorSlugSearchValue && attributes.lastUpdated && !isEditing) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(Preview, {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(Preview, {
         attributes: attributes,
         setAttributes: setAttributes,
         onEdit: () => {
+          setAuthorError(false);
+          setAuthorErrorMessage('');
           setIsEditing(true);
         },
         onRefresh: () => {
+          setAuthorError(false);
+          setAuthorErrorMessage('');
           setIsEditing(true);
           loadProfileData(attributes.authorSlug);
         }
-      })
+      }), authorError && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_Notice__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        status: "error",
+        isDismissible: false,
+        className: "wppic-error-notice",
+        children: authorErrorMessage
+      })]
     });
   }
   const block = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {})
-      }), attributes.authorSlug && !isRefreshing && attributes.badges && attributes.badges.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
+      }), attributes.authorSlug && !isRefreshing && attributes.badges.length > 0 && !authorError && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
@@ -30823,6 +30835,12 @@ const OrgProfile = props => {
                 setCardLoading(false);
                 return;
               }
+              setAuthorError(false);
+              setAuthorErrorMessage('');
+              setAttributes({
+                badges: [],
+                lastUpdated: ''
+              });
               loadProfileData((0,_wordpress_url__WEBPACK_IMPORTED_MODULE_5__.cleanForSlug)(authorSlugSearchValue));
             },
             children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Get Author Information', 'wp-plugin-info-card')

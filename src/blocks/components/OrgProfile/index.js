@@ -81,6 +81,9 @@ const OrgProfile = ( props ) => {
 					setAuthorErrorMessage( data.message );
 					setAuthorError( true );
 				}
+			} ).catch( () => {
+				setAuthorErrorMessage( __( 'An error occurred while fetching the profile data. Please try again.', 'wp-plugin-info-card' ) );
+				setAuthorError( true );
 			} ).then( () => {
 				setIsEditing( false );
 				setCardLoading( false );
@@ -126,13 +129,28 @@ const OrgProfile = ( props ) => {
 					attributes={ attributes }
 					setAttributes={ setAttributes }
 					onEdit={ () => {
+						setAuthorError( false );
+						setAuthorErrorMessage( '' );
 						setIsEditing( true );
 					} }
 					onRefresh={ () => {
+						setAuthorError( false );
+						setAuthorErrorMessage( '' );
 						setIsEditing( true );
 						loadProfileData( attributes.authorSlug );
 					} }
 				/>
+				{
+					authorError && (
+						<Notice
+							status="error"
+							isDismissible={ false }
+							className="wppic-error-notice"
+						>
+							{ authorErrorMessage }
+						</Notice>
+					)
+				}
 			</>
 		);
 	}
@@ -144,7 +162,7 @@ const OrgProfile = ( props ) => {
 					<>
 					</>
 				</InspectorControls>
-				{ ( attributes.authorSlug && ! isRefreshing && attributes.badges && attributes.badges.length > 0 ) && (
+				{ ( attributes.authorSlug && ! isRefreshing && attributes.badges.length > 0 && ! authorError ) && (
 					<>
 						<BlockControls>
 							<ToolbarGroup>
@@ -212,6 +230,12 @@ const OrgProfile = ( props ) => {
 									setCardLoading( false );
 									return;
 								}
+								setAuthorError( false );
+								setAuthorErrorMessage( '' );
+								setAttributes( {
+									badges: [],
+									lastUpdated: '',
+								} );
 								loadProfileData( cleanForSlug( authorSlugSearchValue ) );
 							} }
 						>
