@@ -466,4 +466,75 @@
   order: 1;
 }
 
+.wppic-profile-badges-loading {
+  display: grid;
+  gap: var(--wppic-grid-col-gap, 20px);
+  row-gap: var(--wppic-grid-row-gap, 20px);
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+  justify-content: center;
+}
+.wppic-profile-badges-loading.aligncenter {
+  display: grid;
+  justify-content: center;
+}
+.wppic-profile-badges-loading.alignleft {
+  display: grid;
+  justify-content: start;
+}
+.wppic-profile-badges-loading.alignright {
+  display: grid;
+  justify-content: end;
+}
+
+.wppic-profile-badge-skeleton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+  gap: 1em;
+  font-size: var(--wppic-base-size, 16px);
+  min-height: 60px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  border-radius: 4px;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+.wppic-profile-badge-skeleton::before {
+  content: "";
+  display: block;
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #e0e0e0 25%, #d0d0d0 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+.wppic-profile-badge-skeleton::after {
+  content: "";
+  display: block;
+  width: 40%;
+  height: 1.25em;
+  background: linear-gradient(90deg, #e0e0e0 25%, #d0d0d0 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  border-radius: 4px;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+.wppic-profile-badges-error {
+  padding: 1em;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
 /*# sourceMappingURL=badges.css.map*/

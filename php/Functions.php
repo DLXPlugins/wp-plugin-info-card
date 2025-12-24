@@ -272,6 +272,169 @@ class Functions {
 	}
 
 	/**
+	 * Get WordPress.org profile data with badge extraction and multi-layer caching.
+	 *
+	 * Caching Strategy:
+	 * - Transient: 72 hours (immediate access)
+	 * - Post Type: 14 days (persistent backup)
+	 * - Fresh Scrape: When post type data is older than 2 weeks
+	 *
+	 * @param string $author_slug WordPress.org author slug (username).
+	 * @param bool   $force       Force refresh all caches (bypass transient and post type).
+	 * @return array|false|WP_Error Profile data array with badges, false on failure, or WP_Error on scraping error.
+	 */
+	public static function wppic_get_profile_data( $author_slug, $force = false ) {
+		$author_slug = sanitize_title( $author_slug );
+		if ( empty( $author_slug ) ) {
+			return false;
+		}
+
+		// Layer 1: Check transient (72 hours) - fastest access.
+		if ( ! $force ) {
+			$cached = get_transient( 'wppic_profile_' . sanitize_key( $author_slug ) );
+			if ( false !== $cached ) {
+				return $cached; // Immediate return.
+			}
+		}
+
+		// Layer 2: Check post type (up to 2 weeks) - persistent backup.
+		$post = get_page_by_path( $author_slug, OBJECT, 'wppic_profiles' );
+		if ( $post && ! $force ) {
+			$last_updated = get_post_meta( $post->ID, '_wppic_last_updated', true );
+			$profile_data = get_post_meta( $post->ID, '_wppic_profile_data', true );
+
+			// If post data exists and is less than 2 weeks old.
+			if ( $last_updated && ( time() - $last_updated ) < ( 14 * DAY_IN_SECONDS ) && ! empty( $profile_data ) ) {
+				// Sanitize profile data before using.
+				$profile_data = self::sanitize_profile_data( $profile_data );
+				// Refresh transient with post data (72-hour expiration).
+				set_transient( 'wppic_profile_' . sanitize_key( $author_slug ), $profile_data, 72 * HOUR_IN_SECONDS );
+				return $profile_data; // Return from post type, transient refreshed.
+			}
+		}
+
+		// Layer 3: Fresh scrape (post type expired or doesn't exist).
+		// Use existing scraping logic from get_org_profile_data().
+		$profile_data = self::get_org_profile_data( $author_slug );
+
+		if ( is_wp_error( $profile_data ) || empty( $profile_data ) ) {
+			return false;
+		}
+
+		// Ensure badges array exists (use member_badges if badges key doesn't exist).
+		if ( ! isset( $profile_data['badges'] ) && isset( $profile_data['member_badges'] ) ) {
+			$profile_data['badges'] = $profile_data['member_badges'];
+		}
+
+		// Add additional fields for compatibility.
+		$profile_data['author_slug']   = $author_slug;
+		$profile_data['profile_url']   = esc_url( sprintf( 'https://profiles.wordpress.org/%s/', $author_slug ) );
+		$profile_data['display_name']  = sanitize_text_field( $profile_data['author_name'] ?? '' );
+		$profile_data['last_updated']   = time();
+
+		// Sanitize profile data before caching.
+		$profile_data = self::sanitize_profile_data( $profile_data );
+
+		// Update both caches.
+		// Transient: 72 hours (fast access).
+		set_transient( 'wppic_profile_' . sanitize_key( $author_slug ), $profile_data, 72 * HOUR_IN_SECONDS );
+
+		// Post type: 14 days (persistent backup).
+		if ( ! $post ) {
+			$post_id = wp_insert_post(
+				array(
+					'post_title'     => sanitize_text_field( $profile_data['author_name'] ?? $author_slug ),
+					'post_name'      => sanitize_title( $author_slug ),
+					'post_type'      => 'wppic_profiles',
+					'post_status'    => 'publish',
+					'comment_status' => 'closed',
+					'ping_status'    => 'closed',
+				)
+			);
+		} else {
+			$post_id = $post->ID;
+		}
+
+		update_post_meta( $post_id, '_wppic_last_updated', time() );
+		update_post_meta( $post_id, '_wppic_profile_data', $profile_data );
+
+		return $profile_data;
+	}
+
+	/**
+	 * Sanitize profile data array.
+	 *
+	 * Ensures all profile data fields are properly sanitized before use or storage.
+	 *
+	 * @param array $profile_data Raw profile data array.
+	 * @return array Sanitized profile data array.
+	 */
+	public static function sanitize_profile_data( $profile_data ) {
+		if ( ! is_array( $profile_data ) ) {
+			return array();
+		}
+
+		$sanitized = array();
+
+		// Sanitize text fields.
+		if ( isset( $profile_data['author_name'] ) ) {
+			$sanitized['author_name'] = sanitize_text_field( wp_strip_all_tags( $profile_data['author_name'] ) );
+		}
+		if ( isset( $profile_data['author_bio'] ) ) {
+			$sanitized['author_bio'] = sanitize_text_field( wp_strip_all_tags( $profile_data['author_bio'] ) );
+		}
+		if ( isset( $profile_data['member_since'] ) ) {
+			$sanitized['member_since'] = sanitize_text_field( wp_strip_all_tags( $profile_data['member_since'] ) );
+		}
+		if ( isset( $profile_data['member_location'] ) ) {
+			$sanitized['member_location'] = sanitize_text_field( wp_strip_all_tags( $profile_data['member_location'] ) );
+		}
+		if ( isset( $profile_data['member_occupation'] ) ) {
+			$sanitized['member_occupation'] = sanitize_text_field( wp_strip_all_tags( $profile_data['member_occupation'] ) );
+		}
+		if ( isset( $profile_data['member_employer'] ) ) {
+			$sanitized['member_employer'] = sanitize_text_field( wp_strip_all_tags( $profile_data['member_employer'] ) );
+		}
+		if ( isset( $profile_data['display_name'] ) ) {
+			$sanitized['display_name'] = sanitize_text_field( wp_strip_all_tags( $profile_data['display_name'] ) );
+		}
+
+		// Sanitize URL fields.
+		if ( isset( $profile_data['author_avatar'] ) ) {
+			$sanitized['author_avatar'] = esc_url( $profile_data['author_avatar'] );
+		}
+		if ( isset( $profile_data['member_github'] ) ) {
+			$sanitized['member_github'] = esc_url( $profile_data['member_github'] );
+		}
+		if ( isset( $profile_data['profile_url'] ) ) {
+			$sanitized['profile_url'] = esc_url( $profile_data['profile_url'] );
+		}
+
+		// Sanitize integer fields.
+		if ( isset( $profile_data['member_since_timestamp'] ) ) {
+			$sanitized['member_since_timestamp'] = absint( $profile_data['member_since_timestamp'] );
+		}
+		if ( isset( $profile_data['last_updated'] ) ) {
+			$sanitized['last_updated'] = absint( $profile_data['last_updated'] );
+		}
+
+		// Sanitize badge arrays.
+		if ( isset( $profile_data['member_badges'] ) && is_array( $profile_data['member_badges'] ) ) {
+			$sanitized['member_badges'] = array_map( 'esc_attr', $profile_data['member_badges'] );
+		}
+		if ( isset( $profile_data['badges'] ) && is_array( $profile_data['badges'] ) ) {
+			$sanitized['badges'] = array_map( 'esc_attr', $profile_data['badges'] );
+		}
+
+		// Sanitize author_slug.
+		if ( isset( $profile_data['author_slug'] ) ) {
+			$sanitized['author_slug'] = sanitize_title( $profile_data['author_slug'] );
+		}
+
+		return $sanitized;
+	}
+
+	/**
 	 * Get the downloaded count from a string.
 	 *
 	 * @param string $downloaded_count_string The downloaded count string. Typically in format: 100,104.

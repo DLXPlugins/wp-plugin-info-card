@@ -32,6 +32,7 @@ module.exports = ( env ) => {
 				'wppic-fancybox-css': './src/scss/carousel.scss',
 				'github-info-card': './src/scss/github-cards.scss',
 				'github-info-card-lazy-load': './src/js/github-info-card/github-info-card-lazy-load.js',
+				'profile-badges-lazy-load': './src/js/profile-badges-lazy-load.js',
 				badges: './src/scss/badges.scss',
 			},
 			mode: env.mode,

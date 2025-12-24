@@ -504,6 +504,31 @@ class Shortcodes {
 				'permission_callback' => array( $this, 'rest_check_permissions' ),
 			)
 		);
+
+		/**
+		 * Register REST API for getting profile badges HTML.
+		 */
+		register_rest_route(
+			'wppic/v2',
+			'/get_profile_badges_html',
+			array(
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'get_profile_badges_html' ),
+				'permission_callback' => '__return_true',
+				'args'                => array(
+					'authorSlug' => array(
+						'type'              => 'string',
+						'sanitize_callback' => 'sanitize_text_field',
+						'required'          => true,
+					),
+					'token'      => array(
+						'type'              => 'string',
+						'sanitize_callback' => 'sanitize_key',
+						'required'          => true,
+					),
+				),
+			)
+		);
 	}
 
 	/**
@@ -2968,6 +2993,116 @@ class Shortcodes {
 	}
 
 	/**
+	 * REST API callback for getting profile badges HTML.
+	 *
+	 * @param WP_REST_Request $request REST API request object.
+	 * @return WP_REST_Response|WP_Error REST API response.
+	 */
+	public function get_profile_badges_html( $request ) {
+		// Validate one-time use token.
+		$token = sanitize_key( $request->get_param( 'token' ) );
+		if ( empty( $token ) ) {
+			return new \WP_Error(
+				'missing_token',
+				__( 'Missing security token.', 'wp-plugin-info-card' ),
+				array( 'status' => 400 )
+			);
+		}
+
+		// Get token data from transient.
+		$token_data = get_transient( 'wppic_badge_token_' . $token );
+		if ( false === $token_data ) {
+			return new \WP_Error(
+				'invalid_token',
+				__( 'Invalid or expired security token.', 'wp-plugin-info-card' ),
+				array( 'status' => 401 )
+			);
+		}
+
+		// Get author slug from request (needed for nonce verification).
+		$author_slug = sanitize_title( $request->get_param( 'authorSlug' ) );
+
+		// Verify REST API nonce (additional security layer).
+		$nonce = isset( $token_data['nonce'] ) ? $token_data['nonce'] : '';
+		if ( empty( $nonce ) || ! wp_verify_nonce( $nonce, 'wppic_badge_load_' . $author_slug ) ) {
+			return new \WP_Error(
+				'invalid_nonce',
+				__( 'Invalid security nonce.', 'wp-plugin-info-card' ),
+				array( 'status' => 401 )
+			);
+		}
+
+		// Verify author slug matches token.
+		if ( $author_slug !== $token_data['author_slug'] ) {
+			return new \WP_Error(
+				'author_mismatch',
+				__( 'Author slug mismatch.', 'wp-plugin-info-card' ),
+				array( 'status' => 400 )
+			);
+		}
+
+		// Check attempt limit (allow up to 3 retries for network errors).
+		$attempts = isset( $token_data['attempts'] ) ? absint( $token_data['attempts'] ) : 0;
+		if ( $attempts >= 3 ) {
+			// Delete token after max attempts.
+			delete_transient( 'wppic_badge_token_' . $token );
+			return new \WP_Error(
+				'max_attempts',
+				__( 'Maximum retry attempts exceeded.', 'wp-plugin-info-card' ),
+				array( 'status' => 429 )
+			);
+		}
+
+		// Increment attempt counter.
+		$token_data['attempts'] = $attempts + 1;
+		set_transient( 'wppic_badge_token_' . $token, $token_data, 10 * MINUTE_IN_SECONDS );
+
+		// Fetch profile data (will use multi-layer cache or scrape if needed).
+		$profile_data = Functions::wppic_get_profile_data( $author_slug, false );
+
+		if ( empty( $profile_data ) ) {
+			return new \WP_Error(
+				'no_profile_data',
+				__( 'No profile data found.', 'wp-plugin-info-card' ),
+				array( 'status' => 404 )
+			);
+		}
+
+		// Extract badges from profile data (check both 'badges' and 'member_badges' keys for compatibility).
+		$badges = $profile_data['badges'] ?? $profile_data['member_badges'] ?? array();
+
+		if ( empty( $badges ) ) {
+			return new \WP_Error(
+				'no_badges',
+				__( 'No badges found for this profile.', 'wp-plugin-info-card' ),
+				array( 'status' => 404 )
+			);
+		}
+
+		// Validate badges.
+		$valid_badges = self::validate_badges( $badges );
+
+		if ( empty( $valid_badges ) ) {
+			return new \WP_Error(
+				'no_valid_badges',
+				__( 'No valid badges found.', 'wp-plugin-info-card' ),
+				array( 'status' => 404 )
+			);
+		}
+
+		// Get hideHeading from token data. Needed to render badge HTML. Used in render_badge_list().
+		$hide_heading = isset( $token_data['hideHeading'] ) ? (bool) $token_data['hideHeading'] : false;
+
+		// Render only badge HTML (not the wrapper).
+		$html = self::render_badge_list( $valid_badges, $hide_heading );
+
+		// Delete token after successful use.
+		delete_transient( 'wppic_badge_token_' . $token );
+
+		return rest_ensure_response( array( 'html' => $html ) );
+	}
+
+	/**
 	 * Get badge data structure (mirrors JS badges array).
 	 *
 	 * @return array Array of badge data.
@@ -3660,6 +3795,146 @@ class Shortcodes {
 	 * }
 	 * @return string Rendered HTML.
 	 */
+	/**
+	 * Render a list of badges.
+	 *
+	 * @param array $badge_classes Array of badge class names.
+	 * @param bool  $hide_heading  Whether to hide badge headings.
+	 * @return string Rendered badge HTML.
+	 */
+	private static function render_badge_list( $badge_classes, $hide_heading = false ) {
+		$content = '';
+		if ( empty( $badge_classes ) ) {
+			return $content;
+		}
+
+		// Validate badges.
+		$valid_badges = self::validate_badges( $badge_classes );
+		foreach ( $valid_badges as $badge_class ) {
+			$badge_data = self::lookup_badge( $badge_class );
+			if ( ! $badge_data ) {
+				continue;
+			}
+
+			// Build badge HTML.
+			$badge_html = '<div class="wppic-profile-badge">';
+
+			// Add heading if not hidden.
+			if ( ! $hide_heading ) {
+				$badge_html .= '<h3 class="wppic-profile-badge-title">' . esc_html( $badge_data['label'] ) . '</h3>';
+			}
+
+			// Build badge icon/icon container.
+			// Use the user's badge_class to preserve any modifiers (e.g., "has-overlay").
+			// Add data-label to badge container only when headings are hidden (for tooltips).
+			$badge_container_attrs = 'class="badge ' . esc_attr( $badge_class ) . '"';
+			if ( $hide_heading ) {
+				$badge_container_attrs .= ' data-label="' . esc_attr( $badge_data['label'] ) . '"';
+			}
+			$badge_html .= '<div ' . $badge_container_attrs . '>';
+
+			// Handle icon type.
+			if ( 'image' === $badge_data['iconType'] ) {
+				// Image icon - alt text already provides accessibility.
+				// Use esc_attr() for data URIs (SVG data URIs) instead of esc_url() to preserve special characters.
+				$badge_html .= '<img src="' . esc_attr( $badge_data['icon'] ) . '" alt="' . esc_attr( $badge_data['label'] ) . '" aria-label="' . esc_attr( $badge_data['label'] ) . '" />';
+			} else {
+				// Dashicon - include badge class from badge data plus icon class.
+				// Add accessibility attributes: role="img" and aria-label for screen readers.
+				$badge_html .= '<span class="dashicons ' . esc_attr( $badge_data['class'] ) . ' ' . esc_attr( $badge_data['icon'] ) . '" role="img" data-label="' . esc_attr( $badge_data['label'] ) . '" aria-label="' . esc_attr( $badge_data['label'] ) . '"></span>';
+			}
+
+			$badge_html .= '</div>'; // End .badge.
+			$badge_html .= '</div>'; // End .wppic-profile-badge.
+
+			$content .= $badge_html;
+		}
+
+		return $content;
+	}
+
+	/**
+	 * Render loading skeleton for profile badges.
+	 *
+	 * @param array  $args       Normalized badge arguments.
+	 * @param string $author_slug Author slug for data attribute.
+	 * @param string $token      One-time use token for data attribute.
+	 * @param string $unique_id  Unique ID for data attribute.
+	 * @return string Loading skeleton HTML.
+	 */
+	private static function render_loading_skeleton( $args, $author_slug = '', $token = '', $unique_id = '' ) {
+		$cols = absint( $args['cols'] ?? 2 );
+		// Show 3-6 skeleton items based on column count.
+		$skeleton_count = min( max( $cols * 2, 3 ), 6 );
+
+		$data_attrs = array(
+			'class'           => 'wppic-profile-badges-loading',
+			'aria-busy'       => 'true',
+			'aria-label'      => esc_attr__( 'Loading badges...', 'wp-plugin-info-card' ),
+			'data-is-loading' => 'true',
+		);
+
+		if ( ! empty( $author_slug ) ) {
+			$data_attrs['data-author-slug'] = esc_attr( $author_slug );
+		}
+		if ( ! empty( $token ) ) {
+			$data_attrs['data-token'] = esc_attr( $token );
+		}
+		if ( ! empty( $unique_id ) ) {
+			$data_attrs['data-unique-id'] = esc_attr( $unique_id );
+		}
+
+		$attrs_string = '';
+		foreach ( $data_attrs as $key => $value ) {
+			$attrs_string .= ' ' . esc_attr( $key ) . '="' . esc_attr( $value ) . '"';
+		}
+
+		$content = '<div' . $attrs_string . '>';
+		for ( $i = 0; $i < $skeleton_count; $i++ ) {
+			$content .= '<div class="wppic-profile-badge-skeleton"></div>';
+		}
+		$content .= '</div>';
+
+		return $content;
+	}
+
+	/**
+	 * Enqueue lazy load script for profile badges.
+	 *
+	 * @param array $args Normalized badge arguments.
+	 * @return void
+	 */
+	private static function enqueue_profile_badges_lazy_load( $args ) {
+		// Only enqueue once per page load.
+		static $enqueued = false;
+		if ( $enqueued ) {
+			return;
+		}
+		$enqueued = true;
+
+		// Register and enqueue script.
+		$script_url = Functions::get_plugin_url( 'dist/profile-badges-lazy-load.js' );
+		$script_ver = Functions::get_plugin_version();
+
+		wp_enqueue_script(
+			'wppic-profile-badges-lazy-load',
+			$script_url,
+			array( 'wp-api-fetch' ),
+			$script_ver,
+			true
+		);
+
+		// Localize script with REST API URL and nonce.
+		wp_localize_script(
+			'wppic-profile-badges-lazy-load',
+			'wppicProfileBadgesLazyLoad',
+			array(
+				'restUrl'   => Functions::get_rest_url( 'wppic/v2/get_profile_badges_html' ),
+				'restNonce' => wp_create_nonce( 'wp_rest' ),
+			)
+		);
+	}
+
 	public static function render_profile_badges( $args = array() ) {
 		// Normalize and sanitize all arguments (skip if already normalized).
 		if ( ! empty( $args['_already_normalized'] ) ) {
@@ -3726,15 +4001,63 @@ class Shortcodes {
 		// Build content based on type.
 		$content = '';
 		if ( 'dynamic' === $type ) {
-			// Dynamic badges will be handled in Phase 3 (WordPress.org API integration).
-			// For now, show placeholder.
+			// Dynamic badges: check cache first, then show skeleton if needed.
 			if ( ! empty( $author_slug ) ) {
-				$content  = '<div class="wppic-badges-content">';
-				$content .= '<p>WordPress.org Username: <strong>' . esc_html( $author_slug ) . '</strong></p>';
-				$content .= '<p><em>Dynamic badge fetching will be implemented in Phase 3.</em></p>';
-				$content .= '</div>';
+				// Layer 1: Check transient cache (72 hours) - fastest access.
+				$cached_data = get_transient( 'wppic_profile_' . sanitize_key( $author_slug ) );
+
+				// Layer 2: If transient expired, check post type cache (up to 2 weeks).
+				if ( false === $cached_data ) {
+					$post = get_page_by_path( $author_slug, OBJECT, 'wppic_profiles' );
+					if ( $post ) {
+						$last_updated = get_post_meta( $post->ID, '_wppic_last_updated', true );
+						$post_data    = get_post_meta( $post->ID, '_wppic_profile_data', true );
+
+						// If post data exists and is less than 2 weeks old.
+						if ( $last_updated && ( time() - $last_updated ) < ( 14 * DAY_IN_SECONDS ) && ! empty( $post_data ) ) {
+							// Sanitize post data before using.
+							$cached_data = Functions::sanitize_profile_data( $post_data );
+							// Refresh transient with post data (72-hour expiration).
+							set_transient( 'wppic_profile_' . sanitize_key( $author_slug ), $cached_data, 72 * HOUR_IN_SECONDS );
+						}
+					}
+				}
+
+				if ( false !== $cached_data && ! empty( $cached_data['badges'] ) ) {
+					// Render badges from cache immediately.
+					$cached_badges = $cached_data['badges'] ?? $cached_data['member_badges'] ?? array();
+					$content       = self::render_badge_list( $cached_badges, $hide_heading );
+				} else {
+					// No cache: show loading skeleton and generate token for lazy loading.
+					// Generate one-time use token.
+					$token = wp_generate_password( 32, false );
+
+					// Create REST API nonce for additional security.
+					$nonce = wp_create_nonce( 'wppic_badge_load_' . $author_slug );
+
+					// Store token with author slug, nonce, hideHeading, and attempt counter.
+					$token_data = array(
+						'author_slug' => $author_slug,
+						'nonce'       => $nonce,
+						'hideHeading' => $hide_heading,
+						'attempts'    => 0,
+						'created'     => time(),
+					);
+
+					// Store in transient with 10-minute expiration.
+					set_transient( 'wppic_badge_token_' . $token, $token_data, 10 * MINUTE_IN_SECONDS );
+
+					// Render loading skeleton with data attributes.
+					$content = self::render_loading_skeleton( $sanitized, $author_slug, $token, $unique_id );
+
+					// Enqueue lazy load script.
+					self::enqueue_profile_badges_lazy_load( $sanitized );
+				}
+			} elseif ( current_user_can( 'manage_options' ) ) {
+				$content = '<div class="wppic-badges-content">' . esc_html__( 'No author slug provided for dynamic badges. Please provide an author slug to display badges.', 'wp-plugin-info-card' ) . '</div>';
 			} else {
-				$content = '<div class="wppic-badges-content"><p>No author slug provided for dynamic badges.</p></div>';
+				// Show nada since user has no privs to see the content.
+				$content = '';
 			}
 		} else {
 			// Render static badges.
@@ -3742,45 +4065,7 @@ class Shortcodes {
 			if ( ! empty( $badges ) ) {
 				// Validate badges.
 				$valid_badges = self::validate_badges( $badges );
-				foreach ( $valid_badges as $badge_class ) {
-					$badge_data = self::lookup_badge( $badge_class );
-					if ( ! $badge_data ) {
-						continue;
-					}
-
-					// Build badge HTML.
-					$badge_html = '<div class="wppic-profile-badge">';
-
-					// Add heading if not hidden.
-					if ( ! $hide_heading ) {
-						$badge_html .= '<h3 class="wppic-profile-badge-title">' . esc_html( $badge_data['label'] ) . '</h3>';
-					}
-
-					// Build badge icon/icon container.
-					// Use the user's badge_class to preserve any modifiers (e.g., "has-overlay").
-					// Add data-label to badge container only when headings are hidden (for tooltips).
-					$badge_container_attrs = 'class="badge ' . esc_attr( $badge_class ) . '"';
-					if ( $hide_heading ) {
-						$badge_container_attrs .= ' data-label="' . esc_attr( $badge_data['label'] ) . '"';
-					}
-					$badge_html .= '<div ' . $badge_container_attrs . '>';
-
-					// Handle icon type.
-					if ( 'image' === $badge_data['iconType'] ) {
-						// Image icon - alt text already provides accessibility.
-						// Use esc_attr() for data URIs (SVG data URIs) instead of esc_url() to preserve special characters.
-						$badge_html .= '<img src="' . esc_attr( $badge_data['icon'] ) . '" alt="' . esc_attr( $badge_data['label'] ) . '" aria-label="' . esc_attr( $badge_data['label'] ) . '" />';
-					} else {
-						// Dashicon - include badge class from badge data plus icon class.
-						// Add accessibility attributes: role="img" and aria-label for screen readers.
-						$badge_html .= '<span class="dashicons ' . esc_attr( $badge_data['class'] ) . ' ' . esc_attr( $badge_data['icon'] ) . '" role="img" data-label="' . esc_attr( $badge_data['label'] ) . '" aria-label="' . esc_attr( $badge_data['label'] ) . '"></span>';
-					}
-
-					$badge_html .= '</div>'; // End .badge.
-					$badge_html .= '</div>'; // End .wppic-profile-badge.
-
-					$content .= $badge_html;
-				}
+				$content      = self::render_badge_list( $valid_badges, $hide_heading );
 			}
 		}
 
@@ -3811,11 +4096,10 @@ class Shortcodes {
 	/**
 	 * Shortcode handler for profile badges.
 	 *
-	 * @param array  $atts    Shortcode attributes.
-	 * @param string $content Shortcode content.
+	 * @param array $atts    Shortcode attributes.
 	 * @return string Rendered HTML.
 	 */
-	public static function shortcode_profile_badges( $atts, $content = '' ) {
+	public static function shortcode_profile_badges( $atts ) {
 		// Default attributes matching block.json defaults.
 		$defaults = array(
 			'unique_id'     => '',
