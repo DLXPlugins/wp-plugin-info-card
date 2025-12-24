@@ -27023,14 +27023,17 @@ const ProfileBadges = props => {
     });
   };
   const block = getBlock();
+
+  // Determine if we should show grid layout (when badges are displayed).
+  const showGrid = type === 'static' && hasBadges || type === 'dynamic' && attributes.authorSlug && attributes.badges && attributes.badges.length > 0 || attributes.preview;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useBlockProps)({
     className: classnames__WEBPACK_IMPORTED_MODULE_0___default()(`wppic-badges-grid`, {
-      [`align${align}`]: !isEditing,
-      [`layout-${layout}`]: !isEditing,
-      'is-grid': !isEditing,
-      [`cols-${cols}`]: !isEditing,
+      [`align${align}`]: showGrid,
+      [`layout-${layout}`]: showGrid,
+      'is-grid': showGrid,
+      [`cols-${cols}`]: showGrid,
       'has-no-title': attributes.hideHeading,
-      'is-editing': isEditing || type === 'dynamic' && '' === attributes.authorSlug || type === 'static' && !hasBadges
+      'is-editing': (isEditing || type === 'dynamic' && '' === attributes.authorSlug || type === 'static' && !hasBadges) && !attributes.preview
     })
   });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
