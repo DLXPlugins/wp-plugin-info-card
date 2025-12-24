@@ -4031,7 +4031,7 @@ class Shortcodes {
 					}
 				}
 
-				if ( false !== $cached_data && ! empty( $cached_data['badges'] ) ) {
+				if ( false !== $cached_data && ( ! empty( $cached_data['badges'] ) || ! empty( $cached_data['member_badges'] ) ) ) {
 					// Render badges from cache immediately.
 					$cached_badges = $cached_data['badges'] ?? $cached_data['member_badges'] ?? array();
 					$content       = self::render_badge_list( $cached_badges, $hide_heading );
