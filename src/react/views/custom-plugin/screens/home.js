@@ -17,7 +17,6 @@ import sendCommand from '../../../utils/SendCommand';
 import ImportPluginModal from './import-plugin-modal';
 import SnackStatus from '../../../components/SnackStatus';
 import CacheButton from '../../../components/CacheButton';
-import CacheOptionsButton from '../../../components/CacheOptionsButton.js';
 
 const defaultLayouts = {
 	grid: {
@@ -455,13 +454,6 @@ const PluginHome = ( props ) => {
 							) }
 						</p>
 						<CacheButton nonce={ wppicAdminCustomPlugin.clearCacheNonce } />
-						<p>
-							{ __(
-								'WP Plugin Info Card stores plugin and theme data as options in case the transient cache fails to update or errors out. You can remove these options by clicking the button below.',
-								'wp-plugin-info-card',
-							) }
-						</p>
-						<CacheOptionsButton nonce={ wppicAdminCustomPlugin.clearCacheNonce } />
 					</div>
 					<div className="wppic-admin-panel-sidebar-card">
 						<h3>
