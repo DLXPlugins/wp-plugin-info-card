@@ -4016,7 +4016,7 @@ class Shortcodes {
 
 				// Layer 2: If transient expired, check post type cache (up to 2 weeks).
 				if ( false === $cached_data ) {
-					$post = get_page_by_path( $author_slug, OBJECT, 'wppic_profiles' );
+					$post = get_page_by_path( $author_slug, OBJECT, array( 'wppic_profiles' ) );
 					if ( $post ) {
 						$last_updated = get_post_meta( $post->ID, '_wppic_last_updated', true );
 						$post_data    = get_post_meta( $post->ID, '_wppic_profile_data', true );

@@ -116,7 +116,7 @@ class Functions {
 		);
 
 		// Let's get .org data first.
-		$org_profile_data = \get_page_by_path( $org_username, OBJECT, 'wppic_profiles' );
+		$org_profile_data = \get_page_by_path( $org_username, OBJECT, array( 'wppic_profiles' ) );
 		if ( $org_profile_data && ! $force ) {
 			// Let's see if we need to update the data.
 			$last_updated = get_post_meta( $org_profile_data->ID, '_wppic_last_updated', true );
@@ -252,7 +252,7 @@ class Functions {
 			'member_badges'          => array_map( 'esc_attr', $member_badges ),
 		);
 
-		$org_local_profile_data = get_page_by_path( $org_username, OBJECT, 'wppic_profiles' );
+		$org_local_profile_data = get_page_by_path( $org_username, OBJECT, array( 'wppic_profiles' ) );
 		if ( ! $org_local_profile_data ) {
 			$org_profile_data_id = wp_insert_post(
 				array(
@@ -301,7 +301,7 @@ class Functions {
 		}
 
 		// Layer 2: Check post type (up to 2 weeks) - persistent backup.
-		$post = get_page_by_path( $author_slug, OBJECT, 'wppic_profiles' );
+		$post = get_page_by_path( $author_slug, OBJECT, array( 'wppic_profiles' ) );
 		if ( $post && ! $force ) {
 			$last_updated = get_post_meta( $post->ID, '_wppic_last_updated', true );
 			$profile_data = get_post_meta( $post->ID, '_wppic_profile_data', true );
@@ -524,7 +524,7 @@ class Functions {
 			if ( (bool) Options::get_options( 'enable_custom_plugins' ) && ! empty( $remaining_active_plugins ) ) {
 				foreach ( $remaining_active_plugins as $plugin_file ) {
 					$plugin_slug = basename( $plugin_file, '.php' );
-					$plugin_post = get_page_by_path( $plugin_slug, OBJECT, 'wppic_custom_plugins' );
+					$plugin_post = get_page_by_path( $plugin_slug, OBJECT, array( 'wppic_custom_plugins' ) );
 					if ( $plugin_post && isset( $active_plugins[ $plugin_file ] ) ) {
 						$plugins_on_org[ $plugin_file ] = json_decode( wp_json_encode( wppic_api_parser( 'plugin', sanitize_title( $plugin_post->post_name ) ) ), true );
 					}
@@ -1167,7 +1167,7 @@ class Functions {
 	public static function get_plugin_page( $slug ) {
 		$slug = sanitize_title( $slug );
 
-		$maybe_plugin_page = get_page_by_path( $slug, OBJECT, 'wppic_plugins' );
+		$maybe_plugin_page = get_page_by_path( $slug, OBJECT, array( 'wppic_plugins' ) );
 		if ( null === $maybe_plugin_page ) {
 			$plugin = wppic_api_parser( 'plugin', $slug );
 			if ( ! empty( $plugin ) ) {
