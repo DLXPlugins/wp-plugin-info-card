@@ -381,11 +381,17 @@ body .wppic-badges-grid {
 	&.alignleft {
 		display: grid;
 		justify-content: start;
+		float: unset;
+		margin-inline-start: unset;
+		margin-inline-end: unset;
 	}
 
 	&.alignright {
 		display: grid;
 		justify-content: end;
+		float: unset;
+		margin-inline-start: unset;
+		margin-inline-end: unset;
 	}
 
 	// Single column layout - always 1 column, but fluid width.
@@ -614,11 +620,15 @@ body .wppic-badges-flex {
 	&.alignleft {
 		display: grid;
 		justify-content: start;
+		float: unset;
+		margin-inline-start: unset;
 	}
 
 	&.alignright {
 		display: grid;
 		justify-content: end;
+		float: unset;
+		margin-inline-end: unset;
 	}
 
 	// Single column layout - always 1 column, but fluid width.
@@ -687,10 +697,16 @@ body .wppic-badges-flex {
 
 	&.alignleft {
 		justify-content: flex-start;
+		float: unset;
+		margin-inline-start: unset;
+		margin-inline-end: unset;
 	}
 
 	&.alignright {
 		justify-content: flex-end;
+		float: unset;
+		margin-inline-start: unset;
+		margin-inline-end: unset;
 	}
 }
 
