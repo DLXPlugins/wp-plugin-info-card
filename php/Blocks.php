@@ -235,7 +235,7 @@ class Blocks {
 		wp_register_style(
 			'wp-plugin-info-card-block-styles-css', // Handle.
 			Functions::get_plugin_url( 'dist/wppic-styles.css' ), // Block editor CSS.
-			array( 'wp-edit-blocks' ),
+			array(),
 			Functions::get_plugin_version(),
 			'all'
 		);
@@ -247,13 +247,21 @@ class Blocks {
 			Functions::get_plugin_version(),
 			'all'
 		);
+		wp_register_style(
+			'wppic-badges',
+			Functions::get_plugin_url( 'dist/badges.css' ),
+			array( 'dashicons' ),
+			Functions::get_plugin_version(),
+			'all'
+		);
 
+		$block_deps = require Functions::get_plugin_dir( 'build/wppic-blocks.asset.php' );
 		// Scripts.
 		wp_register_script(
 			'wp-plugin-info-card-block-js',
 			Functions::get_plugin_url( 'build/wppic-blocks.js' ),
-			array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
-			Functions::get_plugin_version(),
+			$block_deps['dependencies'],
+			$block_deps['version'],
 			true
 		);
 		$options = get_option( 'wppic_settings' );
@@ -297,6 +305,33 @@ class Blocks {
 			)
 		);
 
+		$fancybox_deps = require Functions::get_plugin_dir( 'dist/wppic-fancybox.asset.php' );
+		if ( is_admin() ) {
+			/**
+			 * This will load outside the iframe, and within it. It also loads on the frontend in a separate file (Shortcodes.php)
+			 * This is used for the plugin screenshots block.
+			 */
+			wp_enqueue_script(
+				'wppic-fancybox-js',
+				Functions::get_plugin_url( '/dist/wppic-fancybox.js' ),
+				$fancybox_deps['dependencies'],
+				$fancybox_deps['version'],
+				true
+			);
+		}
+
+		/**
+		 * This will load outside the iframe, and within it. It also loads on the frontend in a separate file (Shortcodes.php).
+		 * This is used for the plugin screenshots block.
+		 */
+		wp_register_style(
+			'wppic-fancybox-css',
+			Functions::get_plugin_url( '/dist/wppic-fancybox-css.css' ),
+			array(),
+			Functions::get_plugin_version(),
+			'all'
+		);
+
 		if ( function_exists( 'wp_set_script_translations' ) ) {
 			wp_set_script_translations( 'wp-plugin-info-card-block-js', 'wp-plugin-info-card' );
 		}
@@ -314,6 +349,7 @@ class Blocks {
 			'wp-plugin-info-card/plugin-screenshots-info-card' => array( $this, 'site_plugin_screenshots' ),
 			'wp-plugin-info-card/github-info-card-grid'  => array( $this, 'github_info_card_grid_render' ),
 			'wp-plugin-info-card/github-info-card'       => array( $this, 'github_info_card_render' ),
+			'wp-plugin-info-card/profile-highlights-badges' => array( $this, 'profile_badges_render' ),
 		);
 
 		add_filter(
@@ -327,8 +363,6 @@ class Blocks {
 			10,
 			2
 		);
-
-
 
 		if ( function_exists( 'wp_register_block_types_from_metadata_collection' ) ) {
 			wp_register_block_types_from_metadata_collection( Functions::get_plugin_dir( 'build/blocks' ), Functions::get_plugin_dir( 'build/blocks-manifest.php' ) );
@@ -674,5 +708,41 @@ class Blocks {
 		$html = Shortcodes::shortcode_github_info_card( $attributes );
 
 		return $html;
+	}
+
+	/**
+	 * Render the Profile Badges block.
+	 *
+	 * @param array    $attributes Array of block attributes.
+	 * @param string   $content Block content.
+	 * @param WP_Block $block Block object.
+	 *
+	 * @return string Block rendered.
+	 */
+	public function profile_badges_render( $attributes, $content, $block ) {
+		if ( is_admin() || defined( 'REST_REQUEST' ) ) {
+			return;
+		}
+
+		// Normalize arguments once to get sanitized values for wrapper classes.
+		$sanitized = Shortcodes::normalize_profile_badges_args( $attributes );
+
+		// Build wrapper classes using shared helper method.
+		$wrapper_classes = Shortcodes::build_profile_badges_wrapper_classes( $sanitized );
+
+		// Get block wrapper attributes (includes styles, spacing, etc.).
+		$wrapper_attributes = get_block_wrapper_attributes(
+			array(
+				'class' => implode( ' ', $wrapper_classes ),
+			)
+		);
+
+		// Pass already-normalized attributes with wrapper attributes to helper function.
+		// Mark as already normalized to skip re-normalization.
+		$sanitized['wrapperAttributes']   = $wrapper_attributes;
+		$sanitized['_already_normalized'] = true;
+
+		// Call shared helper.
+		return Shortcodes::render_profile_badges( $sanitized );
 	}
 }

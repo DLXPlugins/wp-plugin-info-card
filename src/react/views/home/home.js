@@ -36,7 +36,6 @@ import Notice from '../../components/Notice';
 import SnackPop from '../../components/SnackPop';
 import usePluginPreview from '../../hooks/usePluginPreview';
 import CacheButton from '../../components/CacheButton';
-import CacheOptionsButton from '../../components/CacheOptionsButton.js';
 
 const OrgAsset = ( { type, slug, index, moveCallback, removeCallback } ) => {
 	const ref = useRef( null );
@@ -1047,13 +1046,6 @@ const Interface = ( props ) => {
 							) }
 						</p>
 						<CacheButton nonce={ wppicAdminHome.clearCacheNonce } />
-						<p>
-							{ __(
-								'WP Plugin Info Card stores plugin and theme data as options in case the transient cache fails to update or errors out. You can remove these options by clicking the button below.',
-								'wp-plugin-info-card',
-							) }
-						</p>
-						<CacheOptionsButton nonce={ wppicAdminHome.clearCacheNonce } />
 					</div>
 					<div className="wppic-admin-panel-sidebar-card">
 						<h3>

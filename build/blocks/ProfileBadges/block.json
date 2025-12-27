@@ -1,0 +1,148 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "title": "Profile Badges - Custom",
+  "apiVersion": 3,
+  "name": "wp-plugin-info-card/profile-highlights-badges",
+  "category": "wp-plugin-info-card",
+  "icon": "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 454.656 454.656'><path fill='#333' d='m454.656 227.584-38.912-50.688 8.704-62.976-59.392-23.552-23.552-59.392-62.976 8.704-51.2-39.424-50.688 38.912-62.976-8.704-23.552 59.392-59.392 23.552 8.704 62.976L0 227.584l38.912 50.688-8.704 62.976L89.6 364.8l23.552 59.392 62.976-8.704 50.688 38.912 50.688-38.912 62.976 8.704 23.552-59.392 59.392-24.064-8.704-62.976 39.936-50.176zm-245.76 73.728-75.776-62.464 16.384-19.968 56.32 46.08 96.256-111.104 19.456 16.896-112.64 130.56z'/></svg>",
+  "description": "Display select WordPress.org badges in a grid format.",
+  "keywords": [
+    "badge",
+    "wp plugin",
+    "badges",
+    "org",
+    ".org",
+    "wordpress.org"
+  ],
+  "version": "1.0.0",
+  "textdomain": "wp-plugin-info-card",
+  "attributes": {
+    "uniqueId": {
+      "type": "string",
+      "default": ""
+    },
+    "authorSlug": {
+      "type": "string",
+      "default": ""
+    },
+    "type": {
+      "type": "string",
+      "default": "static"
+    },
+    "anchor": {
+      "type": "string",
+      "default": ""
+    },
+    "align": {
+      "type": "string",
+      "default": "center"
+    },
+    "preview": {
+      "type": "boolean",
+      "default": false
+    },
+    "baseSize": {
+      "type": "number",
+      "default": 16
+    },
+    "badges": {
+      "type": "array",
+      "default": []
+    },
+    "lastUpdated": {
+      "type": "string",
+      "default": ""
+    },
+    "colGap": {
+      "type": "number",
+      "default": 20
+    },
+    "rowGap": {
+      "type": "number",
+      "default": 20
+    },
+    "cols": {
+      "type": "number",
+      "default": 2
+    },
+    "layout": {
+      "type": "string",
+      "default": "horizontal"
+    },
+    "badgeLayout": {
+      "type": "string",
+      "default": "grid"
+    },
+    "hideHeading": {
+      "type": "boolean",
+      "default": false
+    },
+    "headingColor": {
+      "type": "string",
+      "default": "#000000"
+    }
+  },
+  "example": {
+    "attributes": {
+      "type": "static",
+      "anchor": "",
+      "align": "center",
+      "preview": true,
+      "baseSize": 16,
+      "badges": [
+        "badge-accessibility-contributor",
+        "badge-accessibility has-overlay",
+        "badge-bbpress-contributor",
+        "badge-bbpress has-overlay",
+        "badge-buddypress-contributor",
+        "badge-buddypress has-overlay",
+        "badge-campus-connect-participant",
+        "badge-community-contributor",
+        "badge-core-ai-contributor",
+        "badge-core-ai-team has-overlay",
+        "badge-code",
+        "badge-code-committer has-overlay",
+        "badge-credits-graduate",
+        "badge-credits-mentor",
+        "badge-design-contributor",
+        "badge-design has-overlay",
+        "badge-documentation-contributor",
+        "badge-documentation has-overlay"
+      ],
+      "headingColor": "#000000",
+      "colGap": 5,
+      "rowGap": 20,
+      "cols": 3,
+      "hideHeading": true,
+      "style": {
+        "spacing": {
+          "padding": {
+            "top": "var:preset|spacing|50",
+            "bottom": "var:preset|spacing|50",
+            "left": "var:preset|spacing|20",
+            "right": "var:preset|spacing|20"
+          }
+        }
+      }
+    }
+  },
+  "supports": {
+    "anchor": true,
+    "align": [
+      "left",
+      "center",
+      "right"
+    ],
+    "className": true,
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  },
+  "editorScript": "wp-plugin-info-card-block-js",
+  "editorStyle": [
+    "wp-plugin-info-card-block-editor-css",
+    "wp-plugin-info-card-block-styles-css"
+  ],
+  "style": "wppic-badges"
+}

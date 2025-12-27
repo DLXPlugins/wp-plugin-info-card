@@ -9,7 +9,6 @@ import classnames from 'classnames';
 import hexToRgba from 'hex-to-rgba';
 import rgb2hex from 'rgb2hex';
 import { __ } from '@wordpress/i18n';
-import PropTypes from 'prop-types';
 
 import {
 	Tooltip,
@@ -21,23 +20,22 @@ import {
 	Button,
 } from '@wordpress/components';
 
-const ColorPickerControl = ( props ) => {
-	const [ colorKey, setColorKey ] = useState( props.slug );
+const ColorPickerControl = ( { 
+	label = __( 'Color', 'wp-plugin-info-card' ),
+	value = '',
+	defaultColor = 'transparent',
+	alpha = false,
+	hideLabelFromVision = false,
+	onOpacityChange = () => {},
+	defaultColors,
+	onChange,
+	slug,
+	opacity,
+} ) => {
+	const [ colorKey, setColorKey ] = useState( slug );
 	const [ isVisible, setIsVisible ] = useState( false );
-	const [ color, setColor ] = useState( props.value );
-	const [ opacity, setOpacity ] = useState( props.opacity );
-
-	const {
-		defaultColor,
-		defaultColors,
-		value,
-		onChange,
-		onOpacityChange,
-		label,
-		alpha = false,
-		slug,
-		hideLabelFromVision = false,
-	} = props;
+	const [ color, setColor ] = useState( value );
+	const [ opacityState, setOpacity ] = useState( opacity );
 
 	useEffect( () => {
 		setColor( value );
@@ -74,6 +72,10 @@ const ColorPickerControl = ( props ) => {
 
 		return colorValue;
 	};
+
+	useEffect( () => {
+		setColor( value );
+	}, [ value ] );
 
 	// Retrieve colors while avoiding duplicates.
 	const getDefaultColors = () => {
@@ -173,7 +175,7 @@ const ColorPickerControl = ( props ) => {
 										'wp-plugin-info-card'
 									) }
 									style={ {
-										background: getColor( color, opacity ),
+										background: getColor( color, opacityState ),
 									} }
 								>
 									<span className="components-color-palette__custom-color-gradient" />
@@ -209,7 +211,7 @@ const ColorPickerControl = ( props ) => {
 									</Tooltip>
 
 									<RangeControl
-										value={ opacity }
+										value={ opacityState }
 										onChange={ ( opacityValue ) => {
 											const newColor = getColor( color, opacityValue );
 											setOpacity( opacityValue );
@@ -255,24 +257,5 @@ const ColorPickerControl = ( props ) => {
 	);
 };
 
-ColorPickerControl.propTypes = {
-	label: PropTypes.string,
-	onChange: PropTypes.func.isRequired,
-	onOpacityChange: PropTypes.func,
-	value: PropTypes.string,
-	defaultColor: PropTypes.string,
-	alpha: PropTypes.bool,
-	hideLabelFromVision: PropTypes.bool,
-	defaultColors: PropTypes.array.isRequired,
-};
-
-ColorPickerControl.defaultProps = {
-	label: __( 'Color', 'wp-plugin-info-card' ),
-	value: '',
-	defaultColor: 'transparent',
-	alpha: false,
-	hideLabelFromVision: false,
-	onOpacityChange: () => {},
-};
 
 export default ColorPickerControl;

@@ -5,6 +5,8 @@
  * @package WP_Plugin_Info_Card
  */
 
+use MediaRon\WPPIC\Functions;
+
 /***************************************************************
  * $wppic_data Object contain the following values:
  * url, name, slug, version, preview_url, author_def, author, screenshot_url, rating, num_ratings, downloaded, last_updated, homepage, description, download_link
@@ -40,7 +42,7 @@ if ( ! empty( $image ) ) {
 			<p class="wp-pic-updated"><span><?php esc_html_e( 'Last Updated:', 'wp-plugin-info-card' ); ?></span> <?php echo esc_html( $wppic_data->last_updated ); ?></p>
 		</div>
 		<div class="wp-pic-author-wrapper">
-			<p class="wp-pic-author"><?php esc_html_e( 'Author(s):', 'wp-plugin-info-card' ); ?> <?php echo esc_html( $wppic_data->author ); ?></p>
+			<p class="wp-pic-author"><?php esc_html_e( 'Author(s):', 'wp-plugin-info-card' ); ?> <?php echo wp_kses_post( $wppic_data->author ); ?></p>
 		</div>
 		<div class="wp-pic-bottom">
 			<div class="wp-pic-bar">
@@ -48,7 +50,7 @@ if ( ! empty( $image ) ) {
 					<?php echo round( $wppic_data->rating ); ?>%<em><?php esc_html_e( 'Ratings', 'wp-plugin-info-card' ); ?></em>
 				</a>
 				<a href="<?php echo esc_url( $wppic_data->download_link ); ?>" class="wp-pic-downloaded" target="_blank" title="<?php esc_attr_e( 'Direct download', 'wp-plugin-info-card' ); ?>">
-				<?php echo number_format( filter_var( $wppic_data->downloaded, FILTER_SANITIZE_NUMBER_INT ) ); ?> <em><?php esc_html_e( 'Downloads', 'wp-plugin-info-card' ); ?></em>
+				<?php echo number_format_i18n( Functions::get_downloaded_count_from_string( $wppic_data->downloaded ) ); ?> <em><?php esc_html_e( 'Downloads', 'wp-plugin-info-card' ); ?></em>
 				</a>
 				<a href="<?php echo esc_url( $wppic_data->url ); ?>" class="wp-pic-version" target="_blank" title="<?php esc_attr_e( 'WordPress.org Theme Page', 'wp-plugin-info-card' ); ?>">
 					<?php echo esc_html( $wppic_data->version ); ?><em><?php esc_html_e( 'Version', 'wp-plugin-info-card' ); ?></em>

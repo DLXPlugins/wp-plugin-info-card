@@ -12,6 +12,8 @@
 	</rule>
 
 	<rule ref="WordPress-Docs"></rule>
+	<rule ref="WordPress-Extra"></rule>
+	<rule ref="WordPress-Core"></rule>
 
 	<config name="testVersion" value="5.6-" />
 	<file>.</file>

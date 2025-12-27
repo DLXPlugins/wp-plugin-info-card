@@ -552,3 +552,42 @@ div[data-type="wp-plugin-info-card/wp-plugin-info-card"] .wp-block {
 .edd-plugins-grid {
 	text-align: center;
 }
+
+/* Badge Selection Modal Styles */
+.wppic-badge-selection-modal {
+	&__actions {
+		margin-bottom: 16px;
+	}
+
+	&__buttons {
+		display: flex;
+		gap: 8px;
+		align-items: center;
+	}
+
+	&__counter {
+		margin-top: 8px;
+		margin-bottom: 0;
+		font-size: 13px;
+		color: #757575;
+	}
+}
+
+.wppic-profile-badge-modal-item {
+	&__row {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	img {
+		width: 20px;
+		height: 20px;
+	}
+
+	.dashicons {
+		font-size: 20px;
+		width: 20px;
+		height: 20px;
+	}
+}

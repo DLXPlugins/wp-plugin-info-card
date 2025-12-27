@@ -1,33 +1,31 @@
 const { Fragment } = wp.element;
 
-const BannerWrapper = ( props ) => {
-	let bannerImage = props.defaultBanner;
-	if ( 'high' in props.bannerImage && false !== props.bannerImage.high ) {
-		bannerImage = props.bannerImage.high;
-	} else if ( 'low' in props.bannerImage && false !== props.bannerImage ) {
-		bannerImage = props.bannerImage.low;
+const BannerWrapper = ( { 
+	name = '', 
+	banners = {}, 
+	hasBanner = false, 
+	bannerImage = {}, 
+	// eslint-disable-next-line no-undef
+	defaultBanner = typeof wppic !== 'undefined' ? wppic.wppic_banner_default : '', 
+	image = false 
+} ) => {
+	let bannerImageSrc = defaultBanner;
+	if ( 'high' in bannerImage && false !== bannerImage.high ) {
+		bannerImageSrc = bannerImage.high;
+	} else if ( 'low' in bannerImage && false !== bannerImage ) {
+		bannerImageSrc = bannerImage.low;
 	}
-	if ( props.image ) {
-		bannerImage = props.image;
+	if ( image ) {
+		bannerImageSrc = image;
 	}
 
 	return (
 		<Fragment>
 			<div className="wp-pic-banner-wrapper">
-				<img src={ bannerImage } alt={ props.name } />
+				<img src={ bannerImageSrc } alt={ name } />
 			</div>
 		</Fragment>
 	);
-};
-
-BannerWrapper.defaultProps = {
-	name: '',
-	banners: {},
-	hasBanner: false,
-	bannerImage: {},
-	// eslint-disable-next-line no-undef
-	defaultBanner: wppic.wppic_banner_default,
-	image: false,
 };
 
 export default BannerWrapper;

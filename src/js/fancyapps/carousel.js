@@ -1,8 +1,56 @@
 import { Fancybox, Carousel } from '@fancyapps/ui';
 
-document.addEventListener( 'DOMContentLoaded', function() {
+/**
+ * Escapes a string for safe use in HTML attributes.
+ *
+ * Used in place of @wordpress/escape-html which isn't available on the frontend.
+ *
+ * @param {string} value - The value to escape.
+ * @return {string} The escaped value.
+ */
+const escapeAttribute = function( value ) {
+	if ( value === null || value === undefined ) {
+		return '';
+	}
 
-	const buildSlide = function( anchor, caption ) {
+	return String( value ).replace( /[&<>"']/g, ( match ) => {
+		switch ( match ) {
+			case '&':
+				return '&amp;';
+			case '<':
+				return '&lt;';
+			case '>':
+				return '&gt;';
+			case '"':
+				return '&quot;';
+			case "'":
+				return '&#039;';
+			default:
+				return match;
+		}
+	} );
+};
+
+document.addEventListener( 'wppicFancyboxCarouselInit', function( event ) {
+	const iframeWindow = event.detail.window;
+	const wrapper = event.detail.screenshotsWrapper;
+	iframeWindow.Carousel = Carousel; // Make Carousel available in the iframe window. This could also set it in non-iframe window, but that's fine for block.json v2 outliers.
+
+	// IMPORTANT: call Fancybox FROM iframe window
+	new iframeWindow.Carousel( wrapper, {
+		slidesPerPage: 1,
+		Dots: false,
+		infinite: false,
+		adaptiveHeight: false,
+	} );
+} );
+document.addEventListener( 'DOMContentLoaded', function() {
+	const maybeIframe = document.querySelector( '.block-editor-iframe__body' );
+	if ( null !== maybeIframe ) {
+		return;
+	}
+
+	const buildSlide = function( anchor, caption, slug, uniqueId ) {
 		const liSlide = document.createElement( 'li' );
 		liSlide.classList.add( 'f-carousel__slide' );
 
@@ -10,12 +58,12 @@ document.addEventListener( 'DOMContentLoaded', function() {
 		aSlide.href = anchor;
 
 		// Fancybox attributes.
-		aSlide.setAttribute( 'data-fancybox', '' );
-		aSlide.setAttribute( 'data-caption', caption );
+		aSlide.setAttribute( 'data-fancybox', escapeAttribute( `wppic-screenshot-${ slug }-${ uniqueId }` ) );
+		aSlide.setAttribute( 'data-caption', escapeAttribute( caption ) );
 
 		const imgSlide = document.createElement( 'img' );
 		imgSlide.src = anchor;
-		imgSlide.alt = caption;
+		imgSlide.alt = escapeAttribute( caption );
 
 		aSlide.appendChild( imgSlide );
 		liSlide.appendChild( aSlide );
@@ -23,17 +71,17 @@ document.addEventListener( 'DOMContentLoaded', function() {
 		return liSlide;
 	};
 
-	const buildSlideNoLi = function( anchor, caption ) {
+	const buildSlideNoLi = function( anchor, caption, slug, uniqueId ) {
 		const aSlide = document.createElement( 'a' );
 		aSlide.href = anchor;
 
 		// Fancybox attributes.
-		aSlide.setAttribute( 'data-fancybox', '' );
-		aSlide.setAttribute( 'data-caption', caption );
+		aSlide.setAttribute( 'data-fancybox', escapeAttribute( `wppic-screenshot-${ slug }-${ uniqueId }` ) );
+		aSlide.setAttribute( 'data-caption', escapeAttribute( caption ) );
 
 		const imgSlide = document.createElement( 'img' );
 		imgSlide.src = anchor;
-		imgSlide.alt = caption;
+		imgSlide.alt = escapeAttribute( caption );
 
 		aSlide.appendChild( imgSlide );
 		return aSlide;
@@ -57,6 +105,8 @@ document.addEventListener( 'DOMContentLoaded', function() {
 		const deferredImages = [];
 		let countImage = 0;
 		const carouselUl = carouselWrapper.querySelector( '.wppic-screenshot-fancyapps' );
+		const slug = carouselWrapper.getAttribute( 'data-slug' );
+		const uniqueId = carouselWrapper.getAttribute( 'data-unique-id' );
 		// Loop through the first three images and preload them.
 		carouselImages.forEach( function( image, index ) {
 			if ( index > 2 ) {
@@ -69,7 +119,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 				newImg.src = image.getAttribute( 'data-src' );
 				newImg.alt = image.getAttribute( 'data-alt' );
 				newImg.onload = async function() {
-					carouselUl.appendChild( buildSlide( image.getAttribute( 'data-src' ), image.getAttribute( 'data-alt' ) ) );
+					carouselUl.appendChild( buildSlide( image.getAttribute( 'data-src' ), image.getAttribute( 'data-alt' ), slug, uniqueId ) );
 					countImage++;
 					if ( countImage === 3 || countImage === carouselImages.length ) {
 						// Show carouselUL.
@@ -81,6 +131,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 							Dots: false,
 							infinite: false,
 							adaptiveHeight: false,
+							slidesPerPage: 1,
 						} );
 						// Let's go for the deferred images and load them in.
 						deferredImages.forEach( function( deferredImage ) {
@@ -88,7 +139,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 							newDeferredImage.src = deferredImage.src;
 							newDeferredImage.alt = deferredImage.alt;
 							newDeferredImage.onload = async function() {
-								newCarousel.appendSlide( buildSlideNoLi( deferredImage.src, deferredImage.alt ) );
+								newCarousel.appendSlide( buildSlideNoLi( deferredImage.src, deferredImage.alt, slug, uniqueId ) );
 							};
 						} );
 					}
@@ -97,5 +148,8 @@ document.addEventListener( 'DOMContentLoaded', function() {
 		} );
 	} );
 	Fancybox.bind( '[data-fancybox]', {
+		Thumbs: {
+			type: 'classic',
+		},
 	} );
 } );

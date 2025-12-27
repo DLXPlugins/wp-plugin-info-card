@@ -5,6 +5,8 @@
  * @package WP_Plugin_Info_Card
  */
 
+use MediaRon\WPPIC\Functions;
+
 /***************************************************************
  * $wppic_data Object contain the following values:
  * url, name, slug, version, author, author_profile, contributors, requires, tested, requires, rating, num_ratings, ratings,
@@ -74,7 +76,7 @@ $background_image = esc_url( $wppic_data->screenshot_url );
 							</svg>
 						</div>
 						<div class="wp-pic-plugin-screenshots-meta-item-label">
-							<?php echo esc_html( $wppic_data->downloaded ); ?>+ <?php esc_html_e( 'Downloads', 'wp-plugin-info-card' ); ?>
+							<?php echo esc_html( number_format_i18n( Functions::get_downloaded_count_from_string( $wppic_data->downloaded ) ) ); ?>+ <?php esc_html_e( 'Downloads', 'wp-plugin-info-card' ); ?>
 						</div>
 					</div>
 				</a>

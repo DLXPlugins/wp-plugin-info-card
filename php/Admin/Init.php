@@ -744,34 +744,11 @@ class Init {
 		// Clear cache.
 		wppic_delete_transients();
 
-		wp_send_json_success(
-			array(
-				'message'     => __( 'Cache cleared', 'wp-plugin-info-card' ),
-				'type'        => 'success',
-				'dismissable' => true,
-			)
-		);
-	}
-
-	/**
-	 * Clear Cache Options
-	 */
-	public function ajax_clear_cache_options() {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
-		$nonce = sanitize_text_field( filter_input( INPUT_POST, 'nonce', FILTER_DEFAULT ) );
-		if ( ! wp_verify_nonce( $nonce, 'wppic-clear-cache' ) ) {
-			wp_send_json_error(
-				array(
-					'message'     => __( 'Nonce verification failed', 'wp-plugin-info-card' ),
-					'type'        => 'error',
-					'dismissable' => true,
-				)
-			);
-		}
 		// Clear cache.
 		\wppic_delete_options_cache();
+
+		// Clear author cache.
+		\wppic_clear_author_cache();
 
 		wp_send_json_success(
 			array(

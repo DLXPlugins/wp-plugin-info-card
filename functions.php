@@ -111,12 +111,46 @@ function wppic_delete_transients() {
 }
 
 /***************************************************************
- * Purge all plugin options cache function
+ * Purge all plugin transients cache function
  ***************************************************************/
 function wppic_delete_options_cache() {
 	global $wpdb;
 	$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'wppic_plugin%'" );
 	$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'wppic_theme%'" );
+}
+
+/***************************************************************
+ * Purge all author/profile badge cache function
+ ***************************************************************/
+function wppic_clear_author_cache() {
+	global $wpdb;
+
+	// Delete all badge profile transients.
+	$wppic_profile_transients = $wpdb->get_results(
+		"SELECT option_name AS name,
+		option_value AS value FROM $wpdb->options
+		WHERE option_name LIKE '_transient_wppic_profile_%'"
+	);
+	foreach ( (array) $wppic_profile_transients as $single_transient ) {
+		delete_transient( str_replace( '_transient_', '', $single_transient->name ) );
+	}
+
+	// Also delete transient timeouts.
+	$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_wppic_profile_%'" );
+
+	// Update _wppic_last_updated to 0 for all wppic_profiles posts to force refetch.
+	$wpdb->query(
+		$wpdb->prepare(
+			"UPDATE {$wpdb->postmeta} pm
+			INNER JOIN {$wpdb->posts} p ON pm.post_id = p.ID
+			SET pm.meta_value = %s
+			WHERE pm.meta_key = %s
+			AND p.post_type = %s",
+			'0',
+			'_wppic_last_updated',
+			'wppic_profiles'
+		)
+	);
 }
 
 

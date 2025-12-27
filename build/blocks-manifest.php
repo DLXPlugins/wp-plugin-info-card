@@ -6,7 +6,9 @@ return array(
 		'title' => 'GitHub Info Card',
 		'apiVersion' => 3,
 		'name' => 'wp-plugin-info-card/github-info-card',
-		'parent' => 'wp-plugin-info-card/github-info-card-grid',
+		'parent' => array(
+			'wp-plugin-info-card/github-info-card-grid'
+		),
 		'category' => 'wp-plugin-info-card',
 		'icon' => '<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 640 640\' width=\'24\' height=\'24\'><path fill=\'currentColor\' d=\'M237.9 461.4C237.9 463.4 235.6 465 232.7 465C229.4 465.3 227.1 463.7 227.1 461.4C227.1 459.4 229.4 457.8 232.3 457.8C235.3 457.5 237.9 459.1 237.9 461.4zM206.8 456.9C206.1 458.9 208.1 461.2 211.1 461.8C213.7 462.8 216.7 461.8 217.3 459.8C217.9 457.8 216 455.5 213 454.6C210.4 453.9 207.5 454.9 206.8 456.9zM251 455.2C248.1 455.9 246.1 457.8 246.4 460.1C246.7 462.1 249.3 463.4 252.3 462.7C255.2 462 257.2 460.1 256.9 458.1C256.6 456.2 253.9 454.9 251 455.2zM316.8 72C178.1 72 72 177.3 72 316C72 426.9 141.8 521.8 241.5 555.2C254.3 557.5 258.8 549.6 258.8 543.1C258.8 536.9 258.5 502.7 258.5 481.7C258.5 481.7 188.5 496.7 173.8 451.9C173.8 451.9 162.4 422.8 146 415.3C146 415.3 123.1 399.6 147.6 399.9C147.6 399.9 172.5 401.9 186.2 425.7C208.1 464.3 244.8 453.2 259.1 446.6C261.4 430.6 267.9 419.5 275.1 412.9C219.2 406.7 162.8 398.6 162.8 302.4C162.8 274.9 170.4 261.1 186.4 243.5C183.8 237 175.3 210.2 189 175.6C209.9 169.1 258 202.6 258 202.6C278 197 299.5 194.1 320.8 194.1C342.1 194.1 363.6 197 383.6 202.6C383.6 202.6 431.7 169 452.6 175.6C466.3 210.3 457.8 237 455.2 243.5C471.2 261.2 481 275 481 302.4C481 398.9 422.1 406.6 366.2 412.9C375.4 420.8 383.2 435.8 383.2 459.3C383.2 493 382.9 534.7 382.9 542.9C382.9 549.4 387.5 557.3 400.2 555C500.2 521.8 568 426.9 568 316C568 177.3 455.5 72 316.8 72zM169.2 416.9C167.9 417.9 168.2 420.2 169.9 422.1C171.5 423.7 173.8 424.4 175.1 423.1C176.4 422.1 176.1 419.8 174.4 417.9C172.8 416.3 170.5 415.6 169.2 416.9zM158.4 408.8C157.7 410.1 158.7 411.7 160.7 412.7C162.3 413.7 164.3 413.4 165 412C165.7 410.7 164.7 409.1 162.7 408.1C160.7 407.5 159.1 407.8 158.4 408.8zM190.8 444.4C189.2 445.7 189.8 448.7 192.1 450.6C194.4 452.9 197.3 453.2 198.6 451.6C199.9 450.3 199.3 447.3 197.3 445.4C195.1 443.1 192.1 442.8 190.8 444.4zM179.4 429.7C177.8 430.7 177.8 433.3 179.4 435.6C181 437.9 183.7 438.9 185 437.9C186.6 436.6 186.6 434 185 431.7C183.6 429.4 181 428.4 179.4 429.7z\'/></svg>',
 		'description' => 'Add a beautiful GitHub repo info card to your site.',
@@ -142,7 +144,9 @@ return array(
 			'wp-plugin-info-card-block-editor-css',
 			'wp-plugin-info-card-block-styles-css'
 		),
-		'style' => 'wppic-github-info-card'
+		'style' => array(
+			'wppic-github-info-card'
+		)
 	),
 	'GitHubInfoCardGrid' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
@@ -678,7 +682,7 @@ return array(
 	'PluginScreenshotsInfoCard' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'title' => 'Plugin Screenshots Info Card',
-		'apiVersion' => 2,
+		'apiVersion' => 3,
 		'name' => 'wp-plugin-info-card/plugin-screenshots-info-card',
 		'category' => 'wp-plugin-info-card',
 		'icon' => '<svg viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'><path fill=\'currentColor\' d=\'m24.3382206 2.5h-12.3400888c-5.2538867 0-9.4981289 4.2442431-9.4981289 9.4981298v12.3400908c0 1.0470371.8413696 1.9071026 1.9071045 1.9071026h5.7026172c1.0470371 0 1.9071045-.8413696 1.9071045-1.9071026v-12.3400908h12.3400898c1.0470371 0 1.9071045-.8413696 1.9071045-1.9071045v-5.6839208c-.0186983-1.0657346-.8600679-1.9071045-1.9258028-1.9071045z\'></path><path fill=\'currentColor\'  d=\'m87.9831696 2.5h-12.3400879c-1.0657425 0-1.9071121.8413699-1.9071121 1.9071045v5.7026176c0 1.0470371.8413696 1.9071045 1.9071121 1.9071045h12.3400879v12.3400898c0 1.0470371.8413696 1.9071064 1.9071045 1.9071064h5.7026138c1.0470428 0 1.9071121-.8413696 1.9071121-1.9071045v-12.3400898c-.0187073-5.2725854-4.2629547-9.5168285-9.5168304-9.5168285z\'></path><path fill=\'currentColor\'  d=\'m42.3996239 11.9981298h15.2007484c1.047039 0 1.9071083-.8413706 1.9071083-1.9071054v-5.6839199c0-1.0470376-.8413696-1.9071045-1.9071083-1.9071045h-15.2007484c-1.047039 0-1.9071045.8413699-1.9071045 1.9071045v5.7026176c0 1.0470372.8413696 1.8884077 1.9071045 1.8884077z\'></path><path fill=\'currentColor\'  d=\'m95.5741882 73.7359695h-5.7026215c-1.0470352 0-1.9071045.8413696-1.9071045 1.9071121v12.3400879h-12.3400878c-1.0470428 0-1.9071045.8413696-1.9071045 1.9071045v5.7026215c0 1.0470352.8413696 1.9071045 1.9071045 1.9071045h12.3400879c5.253891 0 9.4981308-4.2442474 9.4981308-9.4981308v-12.3400879c.0186996-1.0844421-.82267-1.9258118-1.8884049-1.9258118z\'></path><path fill=\'currentColor\'  d=\'m24.3382206 87.9831696h-12.3400888v-12.3400879c0-1.0470428-.8413696-1.9071121-1.9071045-1.9071121h-5.6839204c-1.0657349 0-1.9071045.8413696-1.9071045 1.9071121v12.3400879c0 5.2538834 4.2442427 9.4981232 9.4981289 9.4981232h12.3400888c1.0470371 0 1.9071045-.8413696 1.9071045-1.9071045v-5.7026138c.0000005-1.0470353-.8413691-1.8884049-1.907104-1.8884049z\'></path><path fill=\'currentColor\'  d=\'m57.5816727 87.9831696h-15.2007447c-1.047039 0-1.9071045.8413696-1.9071045 1.9071045v5.7026215c0 1.0470352.8413696 1.9071045 1.9071045 1.9071045h15.2007446c1.047039 0 1.9071083-.8413696 1.9071083-1.9071045v-5.7026216c-.0000076-1.0657348-.8413772-1.9071044-1.9071082-1.9071044z\'></path><path fill=\'currentColor\'  d=\'m95.5741882 40.4925194h-5.7026215c-1.0470352 0-1.9071045.8413696-1.9071045 1.9071045v15.2007484c0 1.047039.8413696 1.9071083 1.9071045 1.9071083h5.7026215c1.0470352 0 1.9071045-.8413696 1.9071045-1.9071083v-15.2007484c0-1.0657349-.8413696-1.9071045-1.9071045-1.9071045z\'></path><path fill=\'currentColor\'  d=\'m4.4071069 59.4887772h5.7026172c1.0470371 0 1.9071045-.8413734 1.9071045-1.9071083v-15.2007485c0-1.047039-.8413696-1.9071045-1.9071045-1.9071045h-5.7026172c-1.0470378 0-1.9071045.8413696-1.9071045 1.9071045v15.2007484c0 1.0657349.8413696 1.9071084 1.9071045 1.9071084z\'></path><path fill=\'currentColor\' d=\'M 68.987 49.991 A 18.996 18.996 0 1 1 30.995 49.991 A 18.996 18.996 0 1 1 68.987 49.991 Z\'></path></svg>',
@@ -852,13 +856,165 @@ return array(
 			),
 			'className' => true
 		),
-		'editorScript' => 'wp_plugin_info_card-cgb-block-js',
+		'editorScript' => 'wp-plugin-info-card-block-js',
 		'editorStyle' => array(
-			'wp_plugin_info_card-cgb-block-editor-css',
-			'wp_plugin_info_card-cgb-style-css',
+			'wp-plugin-info-card-block-editor-css',
+			'wp-plugin-info-card-block-styles-css',
 			'wp-plugin-info-card-block-editor-css-inline'
 		),
-		'style' => 'has-style-frontend-css'
+		'style' => array(
+			'wppic-fancybox-css'
+		)
+	),
+	'ProfileBadges' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'title' => 'Profile Badges - Custom',
+		'apiVersion' => 3,
+		'name' => 'wp-plugin-info-card/profile-highlights-badges',
+		'category' => 'wp-plugin-info-card',
+		'icon' => '<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 454.656 454.656\'><path fill=\'#333\' d=\'m454.656 227.584-38.912-50.688 8.704-62.976-59.392-23.552-23.552-59.392-62.976 8.704-51.2-39.424-50.688 38.912-62.976-8.704-23.552 59.392-59.392 23.552 8.704 62.976L0 227.584l38.912 50.688-8.704 62.976L89.6 364.8l23.552 59.392 62.976-8.704 50.688 38.912 50.688-38.912 62.976 8.704 23.552-59.392 59.392-24.064-8.704-62.976 39.936-50.176zm-245.76 73.728-75.776-62.464 16.384-19.968 56.32 46.08 96.256-111.104 19.456 16.896-112.64 130.56z\'/></svg>',
+		'description' => 'Display select WordPress.org badges in a grid format.',
+		'keywords' => array(
+			'badge',
+			'wp plugin',
+			'badges',
+			'org',
+			'.org',
+			'wordpress.org'
+		),
+		'version' => '1.0.0',
+		'textdomain' => 'wp-plugin-info-card',
+		'attributes' => array(
+			'uniqueId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'authorSlug' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'type' => array(
+				'type' => 'string',
+				'default' => 'static'
+			),
+			'anchor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'align' => array(
+				'type' => 'string',
+				'default' => 'center'
+			),
+			'preview' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'baseSize' => array(
+				'type' => 'number',
+				'default' => 16
+			),
+			'badges' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
+			),
+			'lastUpdated' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'colGap' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'rowGap' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'cols' => array(
+				'type' => 'number',
+				'default' => 2
+			),
+			'layout' => array(
+				'type' => 'string',
+				'default' => 'horizontal'
+			),
+			'badgeLayout' => array(
+				'type' => 'string',
+				'default' => 'grid'
+			),
+			'hideHeading' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'headingColor' => array(
+				'type' => 'string',
+				'default' => '#000000'
+			)
+		),
+		'example' => array(
+			'attributes' => array(
+				'type' => 'static',
+				'anchor' => '',
+				'align' => 'center',
+				'preview' => true,
+				'baseSize' => 16,
+				'badges' => array(
+					'badge-accessibility-contributor',
+					'badge-accessibility has-overlay',
+					'badge-bbpress-contributor',
+					'badge-bbpress has-overlay',
+					'badge-buddypress-contributor',
+					'badge-buddypress has-overlay',
+					'badge-campus-connect-participant',
+					'badge-community-contributor',
+					'badge-core-ai-contributor',
+					'badge-core-ai-team has-overlay',
+					'badge-code',
+					'badge-code-committer has-overlay',
+					'badge-credits-graduate',
+					'badge-credits-mentor',
+					'badge-design-contributor',
+					'badge-design has-overlay',
+					'badge-documentation-contributor',
+					'badge-documentation has-overlay'
+				),
+				'headingColor' => '#000000',
+				'colGap' => 5,
+				'rowGap' => 20,
+				'cols' => 3,
+				'hideHeading' => true,
+				'style' => array(
+					'spacing' => array(
+						'padding' => array(
+							'top' => 'var:preset|spacing|50',
+							'bottom' => 'var:preset|spacing|50',
+							'left' => 'var:preset|spacing|20',
+							'right' => 'var:preset|spacing|20'
+						)
+					)
+				)
+			)
+		),
+		'supports' => array(
+			'anchor' => true,
+			'align' => array(
+				'left',
+				'center',
+				'right'
+			),
+			'className' => true,
+			'spacing' => array(
+				'margin' => true,
+				'padding' => true
+			)
+		),
+		'editorScript' => 'wp-plugin-info-card-block-js',
+		'editorStyle' => array(
+			'wp-plugin-info-card-block-editor-css',
+			'wp-plugin-info-card-block-styles-css'
+		),
+		'style' => 'wppic-badges'
 	),
 	'SitePluginsCardGrid' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
