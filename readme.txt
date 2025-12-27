@@ -1,9 +1,9 @@
 === WP Plugin Info Card ===
 Contributors: briKou, ronalfy
 Tags: cards, card, github, Edd, grid
-Requires at least: 3.7
+Requires at least: 6.5
 Tested up to: 6.9
-Stable tag: 6.1.4
+Stable tag: 6.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,9 +40,8 @@ It is perfect to keep track of your own plugins and themes!
 * <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic-query">[wp-pic-query] shortcode and parameters</a>.
 * <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic-site-plugins">[wp-pic-site-plugins] shortcode and parameters</a>.
 * <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic-plugin-screenshots">[wp-pic-plugin-screenshots
-] shortcode and parameters</a>.]
-* <a href="https://docs.dlxplugins.com/wp-plugin-info-card/shortcodes/github-info-card">[github-info-card
-] shortcode and parameters</a>.]
+] shortcode and parameters</a>.
+* <a href="https://docs.dlxplugins.com/wp-plugin-info-card/shortcodes/github-info-card">[github-info-card] shortcode and parameters</a>.
 
 = Quick Links (Block Documentation) =
 
@@ -104,15 +103,16 @@ This video shows you how:
 
 = 6.2.0 =
 * Released 2025-12-0x
-* New: Badges block and shortcode. Show off your WordPress.org badges on your own site.
-* New: Screenshots block has been ported to block.json API version 3. This brings all blocks to v3 in preparation for WordPress 7.0.
-* New: Added gallery capabilities to the screenshots block.
-* New: Theme downloads are now rounded down on the plugin/theme cards.
-* Bug fix: Fix nav styles in the screenshots block in the block editor.
-* Bug fix: Fix icon alignment in the screenshots block.
-* Bug fix: Fixing overly sanitized author link in the Flex card layout.
-* Bug fix: Grid columns are no longer too stretched out.
-* Bug fix: GitHub Info Card was throwing JS warning in block.json.
+
+* New: Profile Badges block and shortcode. Display your WordPress.org profile badges on your own site.
+* New: Screenshots block updated to block.json API version 3, bringing all blocks to v3 in preparation for WordPress 7.0.
+* New: Added gallery capabilities to the Screenshots block.
+* Fix: Theme and plugin download counts are now consistently rounded down.
+* Fix: Resolved navigation style issues in the Screenshots block within the block editor.
+* Fix: Corrected icon alignment in the Screenshots block.
+* Fix: Fixed overly aggressive sanitization of the author link in the Flex card layout.
+* Fix: Prevented grid columns from stretching excessively.
+* Fix: Removed a JavaScript warning in the GitHub Info Card block.json.
 
 = 6.1.4 =
 * Released 2025-12-08
@@ -522,5 +522,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 6.1.4 =
-Bug fix: Dashboard widget wasn't styled correctly. Fixing missing TinyMCE button.
+= 6.2.0 =
+Introduces the new Profile Badges block and shortcode, allowing you to display WordPress.org profile badges on your site. This release also updates all blocks to block.json API version 3 in preparation for WordPress 7.0, adds gallery support to the Screenshots block, and includes several layout and editor fixes.
