@@ -649,6 +649,10 @@ p.wp-pic-author,
   text-decoration: none;
   padding: 0 15px 0 15px;
   margin: 0;
+  background-image: unset;
+}
+.wp-pic-card.wp-pic .wp-pic-dl-link:hover {
+  background-image: unset;
 }
 
 .wp-pic-card.wp-pic .wp-pic-goback {
