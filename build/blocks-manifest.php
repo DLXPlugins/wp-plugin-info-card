@@ -670,8 +670,12 @@ return array(
 		),
 		'supports' => array(
 			'anchor' => true,
-			'align' => false,
-			'className' => true
+			'className' => true,
+			'align' => array(
+				'wide',
+				'center',
+				'full'
+			)
 		),
 		'editorScript' => 'wp-plugin-info-card-block-js',
 		'editorStyle' => array(

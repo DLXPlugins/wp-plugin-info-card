@@ -370,7 +370,7 @@ p.wp-pic-author,
 	position: relative;
 	display: inline-block;
 }
-.wp-pic-card.wp-pic:not(.flex):not(:has(.wp-pic-ratings)) {
+.wp-pic-card.wp-pic:not(.large):not(.flex):not(:has(.wp-pic-ratings)) {
 	height: 420px;
 }
 .wp-pic-card.wp-pic .wp-pic-flip {

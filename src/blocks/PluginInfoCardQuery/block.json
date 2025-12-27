@@ -142,8 +142,8 @@
 	},
 	"supports": {
 		"anchor": true,
-		"align": false,
-		"className": true
+		"className": true,
+		"align": [ "wide", "center", "full" ]
 	},
 	"editorScript": "wp-plugin-info-card-block-js",
 	"editorStyle": [ "wp-plugin-info-card-block-editor-css", "wp-plugin-info-card-block-styles-css" ]

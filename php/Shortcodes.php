@@ -1526,7 +1526,7 @@ class Shortcodes {
 					}
 
 				</style>
-				<div id="<?php echo esc_attr( $containerid ); ?>" class="wp-query-plugin-info-card cols-<?php echo esc_attr( $cols ); ?>">
+				<div id="<?php echo esc_attr( $containerid ); ?>" class="wp-query-plugin-info-card cols-<?php echo esc_attr( $cols ); ?> align<?php echo esc_attr( $align ); ?>">
 					<?php
 					$sort_results = \json_decode( wp_json_encode( $sort_results ), true );
 					// Creat the loop wp-pic-1-.
@@ -1537,6 +1537,8 @@ class Shortcodes {
 							$atts['itemSlugs'][ $item['slug'] ] = $atts[ $item['slug'] ];
 						}
 						$atts['slug'] = $item['slug'];
+						// Set alignment to none as these are nested.
+						$atts['align'] = 'none';
 						// Use the WPPIC shorcode to generate cards.
 						echo self::shortcode_function( $atts );
 					}
