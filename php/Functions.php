@@ -330,10 +330,10 @@ class Functions {
 		}
 
 		// Add additional fields for compatibility.
-		$profile_data['author_slug']   = $author_slug;
-		$profile_data['profile_url']   = esc_url( sprintf( 'https://profiles.wordpress.org/%s/', $author_slug ) );
-		$profile_data['display_name']  = sanitize_text_field( $profile_data['author_name'] ?? '' );
-		$profile_data['last_updated']   = time();
+		$profile_data['author_slug']  = $author_slug;
+		$profile_data['profile_url']  = esc_url( sprintf( 'https://profiles.wordpress.org/%s/', $author_slug ) );
+		$profile_data['display_name'] = sanitize_text_field( $profile_data['author_name'] ?? '' );
+		$profile_data['last_updated'] = time();
 
 		// Sanitize profile data before caching.
 		$profile_data = self::sanitize_profile_data( $profile_data );
