@@ -98,6 +98,7 @@ This video shows you how:
 4. Author Query displaying cards in a 3-column grid.
 5. Plugin Screenshots Info Card - Display a plugin with screenshots (if available).
 6. GitHub Info Cards displaying in a grid.
+7. .org Profile badges displaying in a grid.
 
 == Changelog ==
 
