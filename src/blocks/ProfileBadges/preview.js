@@ -11,6 +11,8 @@ import {
 	Button,
 	SelectControl,
 	ToggleControl,
+	__experimentalToggleGroupControl as ToggleGroupControl,
+    __experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from '@wordpress/components';
 
 import { __ } from '@wordpress/i18n';
@@ -41,6 +43,7 @@ const Preview = ( props ) => {
 		rowGap,
 		cols,
 		layout,
+		badgeLayout,
 		baseSize,
 		headingColor,
 		hideHeading,
@@ -111,6 +114,17 @@ const Preview = ( props ) => {
 						</div>
 					) }
 					<PanelBody title={ __( 'Layout', 'wp-plugin-info-card' ) }>
+						<ToggleGroupControl
+							label={ __( 'Display Layout', 'wp-plugin-info-card' ) }
+							value={ badgeLayout || 'grid' }
+							onChange={ ( value ) => {
+								setAttributes( { badgeLayout: value } );
+							} }
+							isBlock
+						>
+							<ToggleGroupControlOption value="grid" label={ __( 'Grid', 'w	p-plugin-info-card' ) } />
+							<ToggleGroupControlOption value="flex" label={ __( 'Flex', 'wp-plugin-info-card' ) } />
+						</ToggleGroupControl>
 						<SelectControl
 							label={ __( 'Badge Layout', 'wp-plugin-info-card' ) }
 							options={ [
@@ -129,9 +143,11 @@ const Preview = ( props ) => {
 								setAttributes( { hideHeading: value } );
 							} }
 						/>
-						<PanelRow className="wppic-panel-rows-cols">
-							{ getCols() }
-						</PanelRow>
+						{ ( badgeLayout || 'grid' ) === 'grid' && (
+							<PanelRow className="wppic-panel-rows-cols">
+								{ getCols() }
+							</PanelRow>
+						) }
 						<PanelRow className="wppic-panel-rows-numbers">
 							<NumbersComponent
 								value={ colGap }
@@ -215,7 +231,8 @@ const Preview = ( props ) => {
 	}
 
 	const gridStyles = `
-		#${ blockUniqueId }.wppic-badges-grid {
+		#${ blockUniqueId }.wppic-badges-grid,
+		#${ blockUniqueId }.wppic-badges-flex {
 			--wppic-grid-row-gap: ${ rowGap }px;
 			--wppic-grid-col-gap: ${ colGap }px;
 			--wppic-base-size: ${ baseSize }px;

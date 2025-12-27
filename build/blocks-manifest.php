@@ -939,6 +939,10 @@ return array(
 				'type' => 'string',
 				'default' => 'horizontal'
 			),
+			'badgeLayout' => array(
+				'type' => 'string',
+				'default' => 'grid'
+			),
 			'hideHeading' => array(
 				'type' => 'boolean',
 				'default' => false

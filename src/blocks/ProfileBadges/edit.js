@@ -54,6 +54,7 @@ const ProfileBadges = ( props ) => {
 		align,
 		type,
 		layout,
+		badgeLayout,
 		cols,
 		badges,
 	} = attributes;
@@ -129,14 +130,19 @@ const ProfileBadges = ( props ) => {
 	// Determine if we should show grid layout (when badges are displayed).
 	const showGrid = ( type === 'static' && hasBadges ) || ( type === 'dynamic' && attributes.authorSlug && attributes.badges && attributes.badges.length > 0 ) || attributes.preview;
 
+	const displayLayout = badgeLayout || 'grid';
+	const isGrid = displayLayout === 'grid';
+	const isFlex = displayLayout === 'flex';
+
 	const blockProps = useBlockProps( {
 		className: classnames(
-			`wppic-badges-grid`,
+			isGrid ? `wppic-badges-grid` : `wppic-badges-flex`,
 			{
 				[ `align${ align }` ]: showGrid,
 				[ `layout-${ layout }` ]: showGrid,
-				'is-grid': showGrid,
-				[ `cols-${ cols }` ]: showGrid,
+				'is-grid': isGrid && showGrid,
+				'is-flex': isFlex && showGrid,
+				[ `cols-${ cols }` ]: isGrid && showGrid,
 				'has-no-title': attributes.hideHeading,
 				'is-editing': ( isEditing || ( type === 'dynamic' && '' === attributes.authorSlug ) || ( type === 'static' && ! hasBadges ) ) && ! attributes.preview,
 			},

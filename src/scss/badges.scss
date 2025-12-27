@@ -363,7 +363,7 @@
 	width: 100%;
 }
 
-.wppic-badges-grid {
+body .wppic-badges-grid {
 	display: grid;
 	gap: var(--wppic-grid-col-gap, 20px);
 	row-gap: var(--wppic-grid-row-gap, 20px);
@@ -522,6 +522,63 @@
 	}
 }
 
+body .wppic-badges-flex {
+	display: flex;
+	flex-wrap: wrap;
+	column-gap: var(--wppic-grid-col-gap, 20px);
+	row-gap: var(--wppic-grid-row-gap, 20px);
+	width: 100%;
+	margin: 0;
+
+	// Alignment modifiers.
+	&.aligncenter {
+		justify-content: center;
+	}
+
+	&.alignleft {
+		justify-content: flex-start;
+		margin-inline-start: unset;
+	}
+
+	&.alignright {
+		justify-content: flex-end;
+	}
+
+	// Badge items in flex layout.
+	.wppic-profile-badge {
+		flex: 0 1 auto;
+		min-width: 200px;
+		max-width: 100%;
+
+		@include respond-to('small') {
+			min-width: 150px;
+		}
+	}
+
+	// When titles are hidden, badges can be much smaller.
+	&.has-no-title {
+		.wppic-profile-badge {
+			min-width: unset;
+			max-width: unset;
+
+			@include respond-to('small') {
+				min-width: unset;
+				max-width: unset;
+			}
+		}
+	}
+
+	// Exclude flex constraints when editing.
+	&.is-editing {
+		flex-direction: column !important;
+
+		.wppic-profile-badge {
+			min-width: auto !important;
+			max-width: 100% !important;
+		}
+	}
+}
+
 .wppic-badges-grid.layout-centered .wppic-profile-badge {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -612,6 +669,28 @@
 		@include respond-to('xl') {
 			grid-template-columns: repeat(3, minmax(250px, auto));
 		}
+	}
+}
+
+// Loading skeleton for flex layout.
+.wppic-badges-flex.wppic-profile-badges-loading {
+	display: flex;
+	flex-wrap: wrap;
+	column-gap: var(--wppic-grid-col-gap, 25px);
+	row-gap: var(--wppic-grid-row-gap, 25px);
+	width: 100%;
+
+	// Alignment modifiers.
+	&.aligncenter {
+		justify-content: center;
+	}
+
+	&.alignleft {
+		justify-content: flex-start;
+	}
+
+	&.alignright {
+		justify-content: flex-end;
 	}
 }
 

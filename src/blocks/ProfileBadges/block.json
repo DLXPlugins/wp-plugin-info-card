@@ -62,6 +62,10 @@
 			"type": "string",
 			"default": "horizontal"
 		},
+		"badgeLayout": {
+			"type": "string",
+			"default": "grid"
+		},
 		"hideHeading": {
 			"type": "boolean",
 			"default": false

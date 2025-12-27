@@ -3710,13 +3710,22 @@ class Shortcodes {
 	 * @return array Array of wrapper class names.
 	 */
 	public static function build_profile_badges_wrapper_classes( $args ) {
+		$badge_layout = $args['badgeLayout'] ?? 'grid';
+		$is_grid      = 'grid' === $badge_layout;
+		$is_flex      = 'flex' === $badge_layout;
+
 		$wrapper_classes = array(
-			'wppic-badges-grid',
-			'is-grid',
+			$is_grid ? 'wppic-badges-grid' : 'wppic-badges-flex',
 			'align' . $args['align'],
 			'layout-' . $args['layout'],
-			'cols-' . $args['cols'],
 		);
+
+		if ( $is_grid ) {
+			$wrapper_classes[] = 'is-grid';
+			$wrapper_classes[] = 'cols-' . $args['cols'];
+		} elseif ( $is_flex ) {
+			$wrapper_classes[] = 'is-flex';
+		}
 
 		if ( $args['hideHeading'] ) {
 			$wrapper_classes[] = 'has-no-title';
@@ -3746,6 +3755,7 @@ class Shortcodes {
 			'rowGap'       => 20,
 			'cols'         => 2,
 			'layout'       => 'horizontal',
+			'badgeLayout'  => 'grid',
 			'hideHeading'  => false,
 			'headingColor' => '#000000',
 		);
@@ -3753,6 +3763,12 @@ class Shortcodes {
 		$args = wp_parse_args( $args, $defaults );
 
 		// Sanitize inputs.
+		$badge_layout = sanitize_text_field( $args['badgeLayout'] ?? 'grid' );
+		// Validate badgeLayout: only allow 'grid' or 'flex'.
+		if ( ! in_array( $badge_layout, array( 'grid', 'flex' ), true ) ) {
+			$badge_layout = 'grid';
+		}
+
 		return array(
 			'uniqueId'     => sanitize_text_field( $args['uniqueId'] ),
 			'anchor'       => sanitize_text_field( $args['anchor'] ),
@@ -3766,6 +3782,7 @@ class Shortcodes {
 			'rowGap'       => absint( $args['rowGap'] ),
 			'cols'         => absint( $args['cols'] ),
 			'layout'       => sanitize_text_field( $args['layout'] ),
+			'badgeLayout'  => $badge_layout,
 			'hideHeading'  => filter_var( $args['hideHeading'], FILTER_VALIDATE_BOOLEAN ),
 			'headingColor' => sanitize_hex_color( $args['headingColor'] ),
 		);
@@ -3867,13 +3884,33 @@ class Shortcodes {
 		$skeleton_count = 6;
 
 		// Build classes to match the wrapper (including column classes).
-		$cols = absint( $args['cols'] ?? 2 );
-		$align = sanitize_text_field( $args['align'] ?? 'center' );
-		$skeleton_classes = array(
-			'wppic-profile-badges-loading',
-			'align' . $align,
-			'cols-' . $cols,
-		);
+		$badge_layout = $args['badgeLayout'] ?? 'grid';
+		$is_grid      = 'grid' === $badge_layout;
+		$is_flex      = 'flex' === $badge_layout;
+		$cols         = absint( $args['cols'] ?? 2 );
+		$align        = sanitize_text_field( $args['align'] ?? 'center' );
+
+		if ( $is_grid ) {
+			$skeleton_classes = array(
+				'wppic-profile-badges-loading',
+				'align' . $align,
+				'cols-' . $cols,
+			);
+		} elseif ( $is_flex ) {
+			$skeleton_classes = array(
+				'wppic-badges-flex',
+				'wppic-profile-badges-loading',
+				'is-flex',
+				'align' . $align,
+			);
+		} else {
+			// Fallback to grid.
+			$skeleton_classes = array(
+				'wppic-profile-badges-loading',
+				'align' . $align,
+				'cols-' . $cols,
+			);
+		}
 
 		$data_attrs = array(
 			'class'           => implode( ' ', $skeleton_classes ),
@@ -3965,6 +4002,7 @@ class Shortcodes {
 		$row_gap       = $sanitized['rowGap'];
 		$cols          = $sanitized['cols'];
 		$layout        = $sanitized['layout'];
+		$badge_layout  = $sanitized['badgeLayout'];
 		$hide_heading  = $sanitized['hideHeading'];
 		$heading_color = $sanitized['headingColor'];
 
@@ -3991,15 +4029,10 @@ class Shortcodes {
 			}
 		}
 
-		// Generate CSS variables.
-		$grid_styles = sprintf(
-			'#%1$s.wppic-badges-grid {' . PHP_EOL .
-			'	--wppic-grid-row-gap: %2$spx;' . PHP_EOL .
-			'	--wppic-grid-col-gap: %3$spx;' . PHP_EOL .
-			'	--wppic-base-size: %4$spx;' . PHP_EOL .
-			'	--wppic-heading-color: %5$s;' . PHP_EOL .
-			'}',
-			esc_attr( $css_wrapper_id ),
+		// Generate inline CSS variables (shared for both grid and flex layouts).
+		// Set CSS variables directly on the element for better specificity and reliability.
+		$inline_styles = sprintf(
+			'--wppic-grid-row-gap: %1$spx; --wppic-grid-col-gap: %2$spx; --wppic-base-size: %3$spx; --wppic-heading-color: %4$s;',
 			esc_attr( $row_gap ),
 			esc_attr( $col_gap ),
 			esc_attr( $base_size ),
@@ -4085,15 +4118,29 @@ class Shortcodes {
 		?>
 		<?php if ( ! empty( $wrapper_attributes ) ) : ?>
 			<?php
-			// get_block_wrapper_attributes() already includes id if anchor is set, so we use it directly.
+				// Generate CSS variables.
+				$grid_styles = sprintf(
+					'#%1$s.wppic-badges-grid,' . PHP_EOL .
+					'#%1$s.wppic-badges-flex {' . PHP_EOL .
+					'	--wppic-grid-row-gap: %2$spx;' . PHP_EOL .
+					'	--wppic-grid-col-gap: %3$spx;' . PHP_EOL .
+					'	--wppic-base-size: %4$spx;' . PHP_EOL .
+					'	--wppic-heading-color: %5$s;' . PHP_EOL .
+					'}',
+					esc_attr( $css_wrapper_id ),
+					esc_attr( $row_gap ),
+					esc_attr( $col_gap ),
+					esc_attr( $base_size ),
+					esc_attr( $heading_color )
+				);
 			?>
-			<div <?php echo wp_kses_post( $wrapper_attributes ); ?>>
+			<div id="<?php echo esc_attr( $css_wrapper_id ); ?>" <?php echo wp_kses_post( $wrapper_attributes ); ?>>
 				<style><?php echo esc_html( $grid_styles ); ?></style>
+
 				<?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped - Badge data is trusted, attributes already escaped. ?>
 			</div>
 		<?php else : ?>
-			<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" id="<?php echo esc_attr( $wrapper_id ); ?>">
-				<style><?php echo esc_html( $grid_styles ); ?></style>
+			<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" id="<?php echo esc_attr( $wrapper_id ); ?>" style="<?php echo esc_attr( $inline_styles ); ?>">
 				<?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped - Badge data is trusted, attributes already escaped. ?>
 			</div>
 		<?php endif; ?>
@@ -4122,6 +4169,7 @@ class Shortcodes {
 			'row_gap'       => 20,
 			'cols'          => 2,
 			'layout'        => 'horizontal',
+			'badge_layout'  => 'grid',
 			'hide_heading'  => false,
 			'heading_color' => '#000000',
 		);
@@ -4140,18 +4188,24 @@ class Shortcodes {
 		$atts['type'] = $type;
 
 		// Convert shortcode attribute names (snake_case) to block attribute names (camelCase).
-		$block_args                 = array();
-		$block_args['uniqueId']     = sanitize_text_field( $atts['unique_id'] );
-		$block_args['anchor']       = sanitize_text_field( $atts['anchor'] );
-		$block_args['align']        = sanitize_text_field( $atts['align'] );
-		$block_args['type']         = sanitize_text_field( $atts['type'] );
-		$block_args['authorSlug']   = sanitize_text_field( $atts['author_slug'] );
-		$block_args['baseSize']     = absint( $atts['base_size'] );
-		$block_args['lastUpdated']  = sanitize_text_field( $atts['last_updated'] );
-		$block_args['colGap']       = absint( $atts['col_gap'] );
-		$block_args['rowGap']       = absint( $atts['row_gap'] );
-		$block_args['cols']         = absint( $atts['cols'] );
-		$block_args['layout']       = sanitize_text_field( $atts['layout'] );
+		$block_args                = array();
+		$block_args['uniqueId']    = sanitize_text_field( $atts['unique_id'] );
+		$block_args['anchor']      = sanitize_text_field( $atts['anchor'] );
+		$block_args['align']       = sanitize_text_field( $atts['align'] );
+		$block_args['type']        = sanitize_text_field( $atts['type'] );
+		$block_args['authorSlug']  = sanitize_text_field( $atts['author_slug'] );
+		$block_args['baseSize']    = absint( $atts['base_size'] );
+		$block_args['lastUpdated'] = sanitize_text_field( $atts['last_updated'] );
+		$block_args['colGap']      = absint( $atts['col_gap'] );
+		$block_args['rowGap']      = absint( $atts['row_gap'] );
+		$block_args['cols']        = absint( $atts['cols'] );
+		$block_args['layout']      = sanitize_text_field( $atts['layout'] );
+		// Validate badge_layout: only allow 'grid' or 'flex'.
+		$badge_layout = sanitize_text_field( $atts['badge_layout'] );
+		if ( ! in_array( $badge_layout, array( 'grid', 'flex' ), true ) ) {
+			$badge_layout = 'grid';
+		}
+		$block_args['badgeLayout']  = $badge_layout;
 		$block_args['hideHeading']  = filter_var( $atts['hide_heading'], FILTER_VALIDATE_BOOLEAN );
 		$block_args['headingColor'] = sanitize_hex_color( $atts['heading_color'] );
 
