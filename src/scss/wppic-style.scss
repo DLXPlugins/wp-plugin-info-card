@@ -3023,6 +3023,7 @@ a.wp-pic-credit:focus:after {
 	position: relative;
 	font-size: 16px;
 	padding: 20px;
+	text-align: left;
 }
 
 .wp-pic-plugin-screenshots-avatar-wrapper {
@@ -3127,6 +3128,15 @@ body .wp-pic-plugin-screenshots-wrapper,
 .is-layout-contrained .wp-pic-plugin-screenshots-wrapper {
 	max-width: 725px !important;
 	width: 100%;
+
+	&.alignnone {
+		margin-right: auto !important;
+		margin-left: 0 !important;
+	}
+	&.aligncenter, &.alignwide {
+		margin-right: auto;
+		margin-left: auto;
+	}
 }
 
 .wp-pic-plugin-screenshots-images {

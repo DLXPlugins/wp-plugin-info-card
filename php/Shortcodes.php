@@ -1596,9 +1596,14 @@ class Shortcodes {
 			'wp-pic-plugin-screenshots'
 		);
 
+		if ( '' === $attributes['align'] ) {
+			$attributes['align'] = 'none';
+		}
+
 		// Build wrapper classes.
 		$wrapper_classes = array(
 			'wp-pic-plugin-screenshots-wrapper',
+			'align' . $attributes['align'],
 			'wp-pic-card',
 		);
 
