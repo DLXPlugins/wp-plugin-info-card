@@ -42,6 +42,7 @@ It is perfect to keep track of your own plugins and themes!
 * <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic-plugin-screenshots">[wp-pic-plugin-screenshots
 ] shortcode and parameters</a>.
 * <a href="https://docs.dlxplugins.com/wp-plugin-info-card/shortcodes/github-info-card">[github-info-card] shortcode and parameters</a>.
+* <a href="https://docs.dlxplugins.com/wp-plugin-info-card/shortcodes/wp-pic-badges">[wp-pic-badges] shortcode and parameters</a>.
 
 = Quick Links (Block Documentation) =
 
@@ -50,6 +51,7 @@ It is perfect to keep track of your own plugins and themes!
 * <a href="https://wppic.dlxplugins.com/blocks/site-plugins-card-grid">Site Plugins Card Grid block</a>.
 * <a href="https://wppic.dlxplugins.com/blocks/plugin-screenshots-info-card">WP Plugin Info Card Plugin Screenshots block</a>.
 * <a href="https://docs.dlxplugins.com/wp-plugin-info-card/blocks/the-github-info-cards-block">GitHub Info Cards Grid block</a>.
+* <a href="https://docs.dlxplugins.com/wp-plugin-info-card/blocks/badges-block">Profile Badges Block</a>.
 
 > <a href="https://wppic.dlxplugins.com/overview/easy-digital-downloads-integration">Easy Digital Downloads integration</a> is now available as part of the free plugin. Show off your EDD plugins too!
 
