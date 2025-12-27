@@ -102,14 +102,17 @@ This video shows you how:
 == Changelog ==
 
 = 6.2.0 =
-* Released 2025-12-0x
-
+* Released 2025-12-27
 * New: Profile Badges block and shortcode. Display your WordPress.org profile badges on your own site.
 * New: Screenshots block updated to block.json API version 3, bringing all blocks to v3 in preparation for WordPress 7.0.
 * New: Added gallery capabilities to the Screenshots block.
 * Fix: Theme and plugin download counts are now consistently rounded down.
 * Fix: Resolved navigation style issues in the Screenshots block within the block editor.
+* Fix: Resolved alignment issues with the Screenshots block in the block editor and frontend.
 * Fix: Corrected icon alignment in the Screenshots block.
+* Fix: Download button on the Ratings card has been corrected to extend full-width and height.
+* Fix: Removing false height from Large layout card.
+* Fix: Fixing alignment in Query block.
 * Fix: Fixed overly aggressive sanitization of the author link in the Flex card layout.
 * Fix: Prevented grid columns from stretching excessively.
 * Fix: Removed a JavaScript warning in the GitHub Info Card block.json.
