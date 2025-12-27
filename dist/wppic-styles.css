@@ -611,6 +611,19 @@ p.wp-pic-author,
   position: relative;
 }
 
+.wp-pic-card.wp-pic .wp-pic-bottom.wp-pic-bottom-ratings .wp-pic-download {
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+.wp-pic-card.wp-pic .wp-pic-bottom.wp-pic-bottom-ratings .wp-pic-download > span {
+  display: block;
+}
+.wp-pic-card.wp-pic .wp-pic-bottom.wp-pic-bottom-ratings .wp-pic-download a {
+  display: block;
+  padding: 15px;
+}
+
 .wp-pic-card.wp-pic .wp-pic-dl-ico {
   display: inline-block;
   margin: 110px 0 -4px 0;
