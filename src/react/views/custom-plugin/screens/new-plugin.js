@@ -230,6 +230,7 @@ const Interface = ( props ) => {
 			setIsFromRest( props.data.isFromRest );
 			setData( props.data );
 			reset( props.data );
+			setValue( 'nonce', escapeEditableHTML( wppicAdminCustomPlugin.saveNonce ) );
 			setLoading( false );
 		} else {
 			// No data probably.

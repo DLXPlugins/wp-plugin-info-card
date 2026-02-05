@@ -295,11 +295,13 @@ class Init {
 		$item_content['restApiDataVersion'] = absint( get_post_meta( $custom_plugin->ID, 'restApiDataVersion', true ) );
 		$item_content['restApiUrl']         = esc_url_raw( get_post_meta( $custom_plugin->ID, 'restApiUrl', true ) );
 		$return                             = array(
-			'id'      => absint( $custom_plugin->ID ),
-			'title'   => sanitize_text_field( $custom_plugin->post_title ),
-			'slug'    => sanitize_title( $custom_plugin->post_name ),
-			'content' => $item_content,
-			'icon'    => get_the_post_thumbnail_url( $custom_plugin->ID, 'full' ),
+			'id'        => absint( $custom_plugin->ID ),
+			'title'     => sanitize_text_field( $custom_plugin->post_title ),
+			'slug'      => sanitize_title( $custom_plugin->post_name ),
+			'content'   => $item_content,
+			'icon'      => get_the_post_thumbnail_url( $custom_plugin->ID, 'full' ),
+			'nonce'     => wp_create_nonce( 'wppic-edit-custom-plugin-' . $custom_plugin->ID ),
+			'saveNonce' => wp_create_nonce( 'wppic-save-custom-plugin-' . $custom_plugin->ID ),
 		);
 
 		wp_send_json_success(
@@ -387,7 +389,7 @@ class Init {
 
 		// Verify nonce from form data.
 		$nonce = sanitize_text_field( $form_data['nonce'] );
-		if ( false && ! wp_verify_nonce( $nonce, 'wppic-save-custom-plugin' ) ) {
+		if ( ! wp_verify_nonce( $nonce, 'wppic-save-custom-plugin' ) ) {
 			wp_send_json_error(
 				array(
 					'message'     => __( 'Nonce verification failed', 'wp-plugin-info-card' ),

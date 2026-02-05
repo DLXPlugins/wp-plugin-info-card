@@ -183,7 +183,7 @@ const PluginHome = ( props ) => {
 		titleField: 'title',
 		mediaField: 'plugin-info',
 		layout: defaultLayouts.grid.layout,
-		fields: [ ...fields ],
+		fields: [ fields.map( ( field ) => field ) ],
 	} );
 	const fetchData = async ( { order = 'ASC', orderby = 'title', page = 1, perPage = 20, search = '' } ) => {
 		setLoading( true );
