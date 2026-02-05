@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Tags: cards, card, github, Edd, grid
 Requires at least: 6.5
 Tested up to: 6.9
-Stable tag: 6.2.0
+Stable tag: 6.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -103,6 +103,10 @@ This video shows you how:
 7. .org Profile badges displaying in a grid.
 
 == Changelog ==
+
+= 6.3.0 =
+* Released 2026-02-05
+* Fixing nonce validation in custom plugin creation, fixing potential CSRF attacks.
 
 = 6.2.0 =
 * Released 2025-12-27
@@ -528,5 +532,5 @@ This video shows you how:
 
 == Upgrade Notice ==
 
-= 6.2.0 =
-Introduces the new Profile Badges block and shortcode, allowing you to display WordPress.org profile badges on your site. This release also updates all blocks to block.json API version 3 in preparation for WordPress 7.0, adds gallery support to the Screenshots block, and includes several layout and editor fixes.
+= 6.3.0 =
+Fixing nonce validation security vulnerability in custom plugin creation.
