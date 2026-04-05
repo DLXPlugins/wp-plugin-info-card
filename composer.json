@@ -17,9 +17,12 @@
     "config": {
         "vendor-dir": "lib"
     },
-      "autoload": {
+    "autoload": {
         "psr-4": {
             "MediaRon\\WPPIC\\": "php/"
         }
+    },
+    "require-dev": {
+        "szepeviktor/phpstan-wordpress": "^2.0"
     }
 }

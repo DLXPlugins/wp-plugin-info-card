@@ -1718,6 +1718,7 @@ class Shortcodes {
 			);
 		}
 
+		// Use CSS \2605 (BLACK STAR) escapes so UTF-8 glyphs are not mangled by CSS minifiers.
 		$block_styles .= sprintf(
 			'
 			#%1$s .wp-pic-plugin-screenshots-rating-count {
@@ -1728,7 +1729,7 @@ class Shortcodes {
 			}
 			#%1$s .wp-pic-plugin-screenshots-rating-count::before {
 				--percent: %2$s;
-				content: \'★★★★★\';
+				content: \'\\2605\\2605\\2605\\2605\\2605\';
 				display: inline-block;
 				position: relative;
 				top: 0;

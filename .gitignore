@@ -45,3 +45,7 @@ shortcode.md
 changelog.md
 
 badges-documentation.md
+
+dist/
+build/
+lib/
