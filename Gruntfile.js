@@ -13,8 +13,8 @@
  *   locally again if you use PHPStan from this project.
  *
  * Tasks
- * - `grunt` or `grunt compress` — zip as-is (ensure lib/ is already production if you distribute it).
- * - `grunt release` — composer install --no-dev, then zip (recommended for public builds).
+ * - `grunt` or `grunt release` — composer install --no-dev (strips phpstan/php-stubs from lib/), then zip.
+ * - `grunt compress` or `grunt compress-only` — zip only; does not run Composer (lib/ left as-is).
  */
 'use strict';
 
@@ -66,8 +66,11 @@ module.exports = function( grunt ) {
 		},
 	} );
 
-	grunt.registerTask( 'default', [ 'compress' ] );
-	grunt.registerTask( 'release', [ 'composer-install-no-dev', 'compress' ] );
+	const productionZip = [ 'composer-install-no-dev', 'compress' ];
+
+	grunt.registerTask( 'default', productionZip );
+	grunt.registerTask( 'release', productionZip );
+	grunt.registerTask( 'compress-only', [ 'compress' ] );
 
 	grunt.loadNpmTasks( 'grunt-contrib-compress' );
 };

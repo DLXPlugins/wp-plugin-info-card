@@ -29,6 +29,6 @@ To run build scripts:
 
 To ZIP for release:
 
-1. Run `npm run build` t run a production build.
+1. Run `npm run build` to run a production build.
 2. Run `grunt` to create a ZIP file ready for installation.
 
