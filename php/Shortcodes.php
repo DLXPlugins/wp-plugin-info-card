@@ -179,7 +179,7 @@ class Shortcodes {
 	 */
 	public function enqueue_scripts() {
 		$min_or_not = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-		wp_enqueue_style( 'dashicons' ); // for the star ratings.
+		// This enqueue works for block themes where styles/scripts can be run late.
 		wp_enqueue_style(
 			'wppic-style',
 			Functions::get_plugin_url( 'dist/wppic-styles.css' ),
@@ -187,7 +187,6 @@ class Shortcodes {
 			Functions::get_plugin_version(),
 			'all'
 		);
-		wp_print_styles( array( 'dashicons', 'wppic-style' ) );
 		wp_enqueue_script(
 			'wppic-script',
 			Functions::get_plugin_url( 'assets/js/wppic-script' . $min_or_not . '.js' ),
@@ -202,7 +201,23 @@ class Shortcodes {
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 			)
 		);
-		wp_print_scripts( 'wppic-script' );
+
+		// This next filter runs late, and if the scripts aren't output yet, manually print them for classic/hybrid themes.
+		add_action(
+			'wp_footer',
+			function () {
+				if ( ! wp_style_is( 'dashicons', 'registered' ) ) {
+					wp_print_styles( 'dashicons' );
+				}
+				if ( ! wp_style_is( 'wppic-style', 'done' ) ) {
+					wp_print_styles( 'wppic-style' );
+				}
+				if ( ! wp_script_is( 'wppic-script', 'done' ) ) {
+					wp_print_scripts( 'wppic-script' );
+				}
+			},
+			100
+		);
 
 		/**
 		 * Add icons to footer for plugin card.
@@ -2396,12 +2411,12 @@ class Shortcodes {
 		// Skip enqueueing the lazy load script if we're in the REST API.
 		if ( ! defined( 'WPPIC_REST_REQUEST' ) ) {
 			// Enqueue the lazy load script.
-			require Functions::get_plugin_dir( 'dist/github-info-card-lazy-load.asset.php' );
+			$deps = require Functions::get_plugin_dir( 'dist/github-info-card-lazy-load.asset.php' );
 			wp_enqueue_script(
 				'wppic-github-info-card-lazy-load',
 				Functions::get_plugin_url( 'dist/github-info-card-lazy-load.js' ),
-				array( 'wp-api-fetch' ),
-				Functions::get_plugin_version(),
+				$deps['dependencies'],
+				$deps['version'],
 				true
 			);
 

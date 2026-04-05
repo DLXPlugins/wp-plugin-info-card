@@ -6,7 +6,7 @@ import axios from 'axios';
 import classnames from 'classnames';
 const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
-const { __ } = wp.i18n;
+import { __} from '@wordpress/i18n';
 
 const { useState, useEffect, Fragment, useCallback } = wp.element;
 

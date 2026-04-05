@@ -23,11 +23,11 @@ import Logo from '../Logo';
 import NumbersComponent from '../components/Numbers';
 import { isURL } from '@wordpress/url';
 import { useCallback } from 'react';
-const { Fragment, useEffect, useState } = wp.element;
+import { Fragment, useEffect, useState } from '@wordpress/element';
 
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
-const {
+import {
 	PanelBody,
 	PanelRow,
 	SelectControl,
@@ -43,17 +43,17 @@ const {
 	BaseControl,
 	ButtonGroup,
 	Notice,
-} = wp.components;
+} from '@wordpress/components';
 
-const {
+import {
 	InspectorControls,
 	BlockAlignmentToolbar,
 	MediaUpload,
 	BlockControls,
 	useBlockProps,
-} = wp.blockEditor;
+} from '@wordpress/block-editor';
 
-const { useInstanceId } = wp.compose;
+import { useInstanceId } from '@wordpress/compose';
 
 const WPPluginInfoCard = ( props ) => {
 	const { attributes, setAttributes } = props;

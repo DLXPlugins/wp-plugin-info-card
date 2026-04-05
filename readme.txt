@@ -7,32 +7,78 @@ Stable tag: 6.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-
-Plugin Info Card displays plugins & themes data in beautiful cards using WP APIs. Custom plugins, EDD, and GitHub Info Cards are supported.
+Add beautiful, customizable cards to showcase plugins, themes, and projects from WordPress.org, GitHub, EDD, and third-party plugins.
 
 == Description ==
 
-Plugin Info Card displays plugins & themes data in beautiful cards using WP Plugin & Theme APIs. It has five blocks, five shortcodes, support for custom third-party plugins, Easy Digital Downloads, and GitHub Info Cards.
+WP Plugin Info Card lets you display WordPress plugins, GitHub repositories, Easy Digital Downloads plugins, and third-party plugins in beautiful, customizable cards using blocks or shortcodes (compatible with most page builders).
+
+Whether you are showcasing your own plugins, highlighting recommended tools, or displaying GitHub projects, WP Plugin Info Card gives you more flexibility than the default WordPress blocks by supporting multiple data sources with consistent, beautiful layouts.
+
+It works with WordPress.org plugins and themes, GitHub repositories, Easy Digital Downloads (EDD) products, and third-party plugins, so you are not limited to a single ecosystem.
+
+This plugin is perfect for:
+
+* Reviewers and Developers wanting to showcase projects, whether hosted on GitHub, WordPress.org, or hosted else-where and custom created.
+* WordPress contributors who'd like to display contribution badges or past contributions.
+* Users wanting more design choice and layout variation than what is offered by the Core WordPress blocks.
 
 [youtube https://www.youtube.com/watch?v=8eKDCEoXGKU&rel=0]
 
-= How does it work? =
+= Why use WP Plugin Info Card? =
 
-This thirteen minute video gives you an extensive overview on how WP Plugin Info Card works.
+The default WordPress Plugin/Theme blocks are limited to WordPress.org listings with a limited design. WP Plugin Info Card expands on that by allowing you to display plugin cards and project cards from multiple sources in several beautiful cards.
 
-[youtube https://www.youtube.com/watch?v=aPcU27-R6lU&rel=0]
+Use it to:
 
-WP Plugin Info Card lets you display plugins & themes identity cards in a beautiful box with a smooth 3D rotation effect, or in a more large and responsive layout.
+* Display WordPress.org plugin cards and theme cards anywhere on your site. Customize the grids and layouts with ease, supporting both blocks and shortcodes.
+* Showcase GitHub repositories in a card-like grid, highlighting your favorite GitHub projects, or showcasing your own. Depending on the permissions of your GitHub token, this works for private repos.
+* Highlight premium or third-party plugins not listed on WordPress.org. For example, you'd like to feature a popular pro plugin. Simply fill in the plugin details, reference it by slug, and display it in a beautiful card.
+* Display plugin screenshots from a WordPress.org plugin in a responsive card with carousel and lightbox suppport.
+* Display a list of all WordPress.org plugins installed on your site, which is great for showing support and recognition towards plugin authors. This is perfect for About pages or "how it's made" posts/pages.
+* Display plugins or themes from WordPress.org based on a query, for example, only showing plugins by your .org username, where you're able to curate a list of plugins you contribute to in a beautiful card grid.
+* Show off your WordPress.org profile badges, which is perfect for team pages, profile pages, and about pages. Everyone loves flair.
+* Keep track of your own WordPress.org plugins/themes, with a convenient dashboard widget and friendly admin options allowing you to enter watched WordPress.org assets.
 
-It uses WordPress.org plugins API & themes API to fetch data. All you need to do is provide a valid plugin/theme ID (slug name), and then insert the shortcode in any page to make it work at once!
+= Major Features =
 
-This plugin is very light and includes scripts and CSS only if and when required (you can force scripts enqueuing in admin settings). The shortcode may be added anywhere shortcodes are supported within your theme.
+== Multiple Data Sources ==
 
-The plugin also uses WordPress transients to store data returned by the API for 12 hours (720min by default), so your page loading time will not be increased due to too many requests.
+Display plugin and project data from:
 
-The dashboard widget is very easy to set up: you simply add as many plugins and themes as you want in the admin page and they become visible in your dashboard. Fields are added on-the-fly and are sortable via drag-and-drop.
+* WordPress.org plugins and themes
+* GitHub repositories with metadata and stats
+* Easy Digital Downloads products/plugins
+* Third-party plugins and custom integrations
 
-It is perfect to keep track of your own plugins and themes!
+== Blocks and Shortcodes ==
+
+WP Plugin Info Card works with the Block Editor/Gutenberg, Classic Editor, and your favorite page builder:
+
+* Use Gutenberg blocks for visual editing in the block editor.
+* Use shortcodes for classic setups and page builders such as Elementor.
+
+== GitHub Info Card / GitHub Info Cards Grid Block ==
+
+Show GitHub repositories using a dedicated block or shortcode. Display repository details, stats, and links in a compact yet informative card format. This is perfect for highlighting your favorite GitHub repository, showcasing your own, or even consolidating a list of multiple GitHub repositories into a responsive grid.
+
+== Plugin Screenshots Block/Shortcode ==
+
+Display plugin screenshots from WordPress.org in a beautiful card featuring a responsive gallery/carousel layout with lightbox support. This is ideal for plugin landing pages, tutorials, announcements, and documentation.
+
+== Profile Badges ==
+
+Display your WordPress.org profile badges to highlight contributions, plugins, and community involvement. It supports dynamic and custom (user-selected) badges. These are perfect for About, Team, and Profile pages.
+
+== Third-party Plugin Support with Optional REST Support ==
+
+Add plugins that are not hosted on WordPress.org, including premium and private plugins. Showcase these using the blocks/shortcodes that come with WP Plugin Info Card. Optional REST support means that if you're a third-party plugin provider, you can add your custom plugin, enable a REST endpoint, and let others automatically download your details to their own install, and have it updated automatically.
+
+== Performance Friendly ==
+
+* Uses transients for caching and lazy-loading where needed.
+* Uses local options and post types for data storage/easier parsing/less custom tables.
+* Optimized for front-end performance, with things only loading where needed.
 
 = Quick Links (Shortcode Documentation) =
 
@@ -53,9 +99,15 @@ It is perfect to keep track of your own plugins and themes!
 * <a href="https://docs.dlxplugins.com/wp-plugin-info-card/blocks/the-github-info-cards-block">GitHub Info Cards Grid block</a>.
 * <a href="https://docs.dlxplugins.com/wp-plugin-info-card/blocks/badges-block">Profile Badges Block</a>.
 
-> <a href="https://wppic.dlxplugins.com/overview/easy-digital-downloads-integration">Easy Digital Downloads integration</a> is now available as part of the free plugin. Show off your EDD plugins too!
+= When should I use this plugin? =
 
-> <a href="https://docs.dlxplugins.com/wp-plugin-info-card/overview/custom-plugin-cards">Custom Third-Party plugins</a> are available as well.
+WP Plugin Info Card is ideal if you want to:
+
+* Showcase your WordPress plugins on your website
+* Display GitHub repositories on your site
+* Display and highlight premium or third-party plugins
+* Build consistent and beautiful cards with customizable layouts
+* Add .org features like plugin screenshots or profile badges to your site
 
 [PREMIUM ADD-ON - WP Envato Affiliate Card](http://b-website.com/wp-envato-affiliate-card-powered-envato-market-api "WP Envato Affiliate Card")
 
@@ -81,13 +133,52 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Frequently Asked Questions ==
 
-= Is the card-flipping effect cross-browser compatible? =
+= Why use this instead of the default WordPress Plugin block? =
 
-Yes, it is compatible with most recent browsers, except for Opera (but IE10+ works!)
+The default block only supports WordPress.org plugins and offers limited layout control. WP Plugin Info Card supports multiple sources, including GitHub, Easy Digital Downloads, and third-party plugins, while also providing flexible layouts, grid options, and over a dozen card schemes.
 
-= How do I create my own template? =
+This makes it easier to create consistent, visually appealing plugin and project showcases across your site.
 
-This video shows you how:
+= Can I display GitHub repositories? =
+
+Yes. Use the GitHub Info Card block or shortcode to display repositories with metadata and links. When displaying GitHub repositories using the Block Editor, you can add multiple projects to form a gorgous card grid.
+
+= Can I add plugins not hosted on WordPress.org? =
+
+Yes. You can add third-party or private plugins, including EDD (Easy Digital Downloads) products.
+
+= Does this work with Easy Digital Downloads? =
+
+Yes. WP Plugin Info Card supports Easy Digital Downloads so you can showcase your plugins alongside WordPress.org plugins.
+
+For <a href="https://docs.dlxplugins.com/wp-plugin-info-card/overview/easy-digital-downloads-integration">WP Plugin Info Card to work properly with EDD</a>< the following add-ons are recommended:
+
+* Software Licensing (Required)
+* Product Reviews (optional, but nice to have)
+
+= Does this slow down my site? =
+
+No, and it shouldn't. If it does, please leave a support request. Everything is designed to be cached and lazy-loaded where appropriate. If you find something loading where it shouldn't, it's not intentional, and should be addressed.
+
+= Can I use this with classic themes? =
+
+Yes, you can use this with classic themes, the Classic Editor, and even your favorite page builder such as Elementor via the plugin's robust shortcode support.
+
+If you'd prefer to stick with blocks to build the layouts, and use a shortcode to output, I recommend free companion tool <a href="https://wordpress.org/plugins/pattern-wrangler/">Pattern Wrangler</a<>. You can create a new pattern, add and configure the blocks, and copy the shortcode to display anywhere.
+
+= Can I use this with a page builder? =
+
+The plugin has robust shortcode support should you need to use this in a page builder such as Divi, Elementor, Beaver Builder, and more.
+
+If you'd prefer to stick with blocks to build the layouts, and use a shortcode to output, I recommend free companion tool <a href="https://wordpress.org/plugins/pattern-wrangler/">Pattern Wrangler</a<>. You can create a new pattern, add and configure the blocks, and copy the shortcode to display anywhere.
+
+= Is the default card-flipping effect cross-browser compatible? =
+
+Yes, it is compatible with most modern browsers, including iOS Safari/Chrome.
+
+= Can I create my own template/layout/card? =
+
+Yes, this video shows you how:
 
 [youtube https://www.youtube.com/watch?v=hFsVrjQXV_E&t=6s&rel=0]
 
@@ -103,6 +194,10 @@ This video shows you how:
 7. .org Profile badges displaying in a grid.
 
 == Changelog ==
+
+= 6.3.1 =
+* Released 2026-04-05
+* Fix: Certain CSS minifiers would strip out Star Rating CSS or encode it.
 
 = 6.3.0 =
 * Released 2026-02-05

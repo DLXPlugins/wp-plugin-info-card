@@ -13,7 +13,7 @@ import PluginScreenshotsCard from '../templates/PluginScreenshots';
 import Logo from '../Logo';
 import { useState, useEffect } from 'react';
 
-const { __ } = wp.i18n;
+import { __} from '@wordpress/i18n';
 
 const {
 	PanelBody,

@@ -3,7 +3,7 @@ import isNumeric from 'validator/lib/isNumeric';
 import BannerWrapper from '../components/BannerWrapper';
 const HtmlToReactParser = require( 'html-to-react' ).Parser;
 
-const { __ } = wp.i18n;
+import { __} from '@wordpress/i18n';
 
 const PluginLarge = ( props ) => {
 	const wrapperClasses = classnames( {

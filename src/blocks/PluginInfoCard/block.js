@@ -2,7 +2,7 @@ import metadata from './block.json';
 import InfoCardIcon from '../components/InfoCardIcon';
 
 import { useState, useEffect } from '@wordpress/element';
-import { createBlock } from '@wordpress/blocks';
+import { createBlock, registerBlockType } from '@wordpress/blocks';
 import { doAction, addAction } from '@wordpress/hooks';
 import { Modal } from '@wordpress/components';
 import { registerPlugin } from '@wordpress/plugins';
@@ -11,8 +11,6 @@ import ImportPluginRestUrl from '../../react/views/custom-plugin/screens/import-
 
 //  Import main block file.
 import edit from './edit';
-
-const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 
 registerBlockType( metadata, {
 	icon: (

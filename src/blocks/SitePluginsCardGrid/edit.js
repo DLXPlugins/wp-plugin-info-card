@@ -18,7 +18,7 @@ import NumbersComponent from '../components/Numbers';
 import { forEach } from 'lodash';
 const { Fragment, useEffect, useState } = wp.element;
 
-const { __ } = wp.i18n;
+import { __} from '@wordpress/i18n';
 
 const {
 	PanelBody,
