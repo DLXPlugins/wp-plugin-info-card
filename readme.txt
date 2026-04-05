@@ -135,13 +135,13 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 = Why use this instead of the default WordPress Plugin block? =
 
-The default block only supports WordPress.org plugins and offers limited layout control. WP Plugin Info Card supports multiple sources, including GitHub, Easy Digital Downloads, and third-party plugins, while also providing flexible layouts, grid options, and over a dozen card schemes.
+The default block only supports WordPress.org plugins and offers limited layout control. WP Plugin Info Card supports multiple sources, including GitHub, Easy Digital Downloads, and third-party plugins, and provides flexible layouts, grid options, and over a dozen card schemes.
 
 This makes it easier to create consistent, visually appealing plugin and project showcases across your site.
 
 = Can I display GitHub repositories? =
 
-Yes. Use the GitHub Info Card block or shortcode to display repositories with metadata and links. When displaying GitHub repositories using the Block Editor, you can add multiple projects to form a gorgous card grid.
+Yes. Use the GitHub Info Card block or shortcode to display repositories with metadata and links. When displaying GitHub repositories using the Block Editor, you can add multiple projects to form a gorgeous card grid.
 
 = Can I add plugins not hosted on WordPress.org? =
 
@@ -149,7 +149,7 @@ Yes. You can add third-party or private plugins, including EDD (Easy Digital Dow
 
 = Does this work with Easy Digital Downloads? =
 
-Yes. WP Plugin Info Card supports Easy Digital Downloads so you can showcase your plugins alongside WordPress.org plugins.
+Yes. WP Plugin Info Card supports Easy Digital Downloads, so you can showcase your plugins alongside WordPress.org plugins.
 
 For <a href="https://docs.dlxplugins.com/wp-plugin-info-card/overview/easy-digital-downloads-integration">WP Plugin Info Card to work properly with EDD</a>< the following add-ons are recommended:
 
@@ -158,19 +158,31 @@ For <a href="https://docs.dlxplugins.com/wp-plugin-info-card/overview/easy-digit
 
 = Does this slow down my site? =
 
-No, and it shouldn't. If it does, please leave a support request. Everything is designed to be cached and lazy-loaded where appropriate. If you find something loading where it shouldn't, it's not intentional, and should be addressed.
+No, and it shouldn't. If it does, please leave a support request. Everything is designed to be cached and lazy-loaded where appropriate. If you find something loading where it shouldn't, it's not intentional and should be addressed.
 
 = Can I use this with classic themes? =
 
 Yes, you can use this with classic themes, the Classic Editor, and even your favorite page builder such as Elementor via the plugin's robust shortcode support.
 
-If you'd prefer to stick with blocks to build the layouts, and use a shortcode to output, I recommend free companion tool <a href="https://wordpress.org/plugins/pattern-wrangler/">Pattern Wrangler</a<>. You can create a new pattern, add and configure the blocks, and copy the shortcode to display anywhere.
+If you'd prefer to stick with blocks to build the layouts and use a shortcode to output, I recommend the free companion tool <a href="https://wordpress.org/plugins/pattern-wrangler/">Pattern Wrangler</a<>. You can create a new pattern, add and configure the blocks, and copy the shortcode to display anywhere.
 
 = Can I use this with a page builder? =
 
-The plugin has robust shortcode support should you need to use this in a page builder such as Divi, Elementor, Beaver Builder, and more.
+The plugin has robust shortcode support, should you need to use this in a page builder such as Divi, Elementor, Beaver Builder, and more.
 
-If you'd prefer to stick with blocks to build the layouts, and use a shortcode to output, I recommend free companion tool <a href="https://wordpress.org/plugins/pattern-wrangler/">Pattern Wrangler</a<>. You can create a new pattern, add and configure the blocks, and copy the shortcode to display anywhere.
+If you'd prefer to stick with blocks to build the layouts and use a shortcode to output, I recommend the free companion tool <a href="https://wordpress.org/plugins/pattern-wrangler/">Pattern Wrangler</a<>. You can create a new pattern, add and configure the blocks, and copy the shortcode to display anywhere.
+
+= Can I customize the plugin titles being displayed? =
+
+Yes, in the block editor, you can customize the title for each displayed plugin in the block editor sidebar.
+
+For shortcodes, where plugins are displayed, simply use `plugin-slug="my custom title"`. For example, for this plugin, you would use: `wp-plugin-info-card="My Plugin Info Card"`.
+
+See shortcode usage <a href="https://docs.dlxplugins.com/wp-plugin-info-card/shortcodes/wp-pic#slug-title">for custom titles</a>.
+
+= What layouts/color schemes come with the plugin? =
+
+For the main plugin card block/shortcode, there are <a href="https://docs.dlxplugins.com/wp-plugin-info-card/overview/layouts">five different layouts</a>, and <a href="https://docs.dlxplugins.com/wp-plugin-info-card/overview/schemes">fourteen color schemes</a>.
 
 = Is the default card-flipping effect cross-browser compatible? =
 
@@ -190,7 +202,7 @@ Yes, this video shows you how:
 3. Theme Card Layouts showing Info Card, Ratings Card, and Large format card for Ollie theme.
 4. Author Query displaying cards in a 3-column grid.
 5. Plugin Screenshots Info Card - Display a plugin with screenshots (if available).
-6. GitHub Info Cards displaying in a grid.
+6. GitHub Info Cards are displayed in a grid.
 7. .org Profile badges displaying in a grid.
 
 == Changelog ==
@@ -198,6 +210,8 @@ Yes, this video shows you how:
 = 6.3.1 =
 * Released 2026-04-05
 * Fix: Certain CSS minifiers would strip out Star Rating CSS or encode it.
+* Fix: JavaScript could load in unpredictable places, causing previews to be warped.
+* Fix: SVG closing HTML for footer SVGs could break some blocks/query monitor.
 
 = 6.3.0 =
 * Released 2026-02-05
