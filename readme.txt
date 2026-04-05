@@ -1,4 +1,4 @@
-=== WP Plugin Info Card ===
+=== WP Plugin Info Card===
 Contributors: briKou, ronalfy
 Tags: cards, card, github, Edd, grid
 Requires at least: 6.5
@@ -25,7 +25,7 @@ This plugin is perfect for:
 
 [youtube https://www.youtube.com/watch?v=8eKDCEoXGKU&rel=0]
 
-= Why use WP Plugin Info Card? =
+== Why use WP Plugin Info Card? ==
 
 The default WordPress Plugin/Theme blocks are limited to WordPress.org listings with a limited design. WP Plugin Info Card expands on that by allowing you to display plugin cards and project cards from multiple sources in several beautiful cards.
 
@@ -40,9 +40,9 @@ Use it to:
 * Show off your WordPress.org profile badges, which is perfect for team pages, profile pages, and about pages. Everyone loves flair.
 * Keep track of your own WordPress.org plugins/themes, with a convenient dashboard widget and friendly admin options allowing you to enter watched WordPress.org assets.
 
-= Major Features =
+== Major Features ==
 
-== Multiple Data Sources ==
+**Multiple Data Sources**
 
 Display plugin and project data from:
 
@@ -51,36 +51,36 @@ Display plugin and project data from:
 * Easy Digital Downloads products/plugins
 * Third-party plugins and custom integrations
 
-== Blocks and Shortcodes ==
+**Blocks and Shortcodes**
 
 WP Plugin Info Card works with the Block Editor/Gutenberg, Classic Editor, and your favorite page builder:
 
 * Use Gutenberg blocks for visual editing in the block editor.
 * Use shortcodes for classic setups and page builders such as Elementor.
 
-== GitHub Info Card / GitHub Info Cards Grid Block ==
+**GitHub Info Card / GitHub Info Cards Grid Block**
 
 Show GitHub repositories using a dedicated block or shortcode. Display repository details, stats, and links in a compact yet informative card format. This is perfect for highlighting your favorite GitHub repository, showcasing your own, or even consolidating a list of multiple GitHub repositories into a responsive grid.
 
-== Plugin Screenshots Block/Shortcode ==
+**Plugin Screenshots Block/Shortcode**
 
 Display plugin screenshots from WordPress.org in a beautiful card featuring a responsive gallery/carousel layout with lightbox support. This is ideal for plugin landing pages, tutorials, announcements, and documentation.
 
-== Profile Badges ==
+**Profile Badges**
 
 Display your WordPress.org profile badges to highlight contributions, plugins, and community involvement. It supports dynamic and custom (user-selected) badges. These are perfect for About, Team, and Profile pages.
 
-== Third-party Plugin Support with Optional REST Support ==
+**Third-party Plugin Support with Optional REST Support**
 
 Add plugins that are not hosted on WordPress.org, including premium and private plugins. Showcase these using the blocks/shortcodes that come with WP Plugin Info Card. Optional REST support means that if you're a third-party plugin provider, you can add your custom plugin, enable a REST endpoint, and let others automatically download your details to their own install, and have it updated automatically.
 
-== Performance Friendly ==
+**Performance Friendly**
 
 * Uses transients for caching and lazy-loading where needed.
 * Uses local options and post types for data storage/easier parsing/less custom tables.
 * Optimized for front-end performance, with things only loading where needed.
 
-= Quick Links (Shortcode Documentation) =
+== Quick Links (Shortcode Documentation) ==
 
 * <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic">[wp-pic] shortcode and parameters</a>.
 * <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic-query">[wp-pic-query] shortcode and parameters</a>.
@@ -90,7 +90,7 @@ Add plugins that are not hosted on WordPress.org, including premium and private 
 * <a href="https://docs.dlxplugins.com/wp-plugin-info-card/shortcodes/github-info-card">[github-info-card] shortcode and parameters</a>.
 * <a href="https://docs.dlxplugins.com/wp-plugin-info-card/shortcodes/wp-pic-badges">[wp-pic-badges] shortcode and parameters</a>.
 
-= Quick Links (Block Documentation) =
+== Quick Links (Block Documentation) ==
 
 * <a href="https://wppic.dlxplugins.com/blocks/wp-plugin-info-card-block">WP Plugin Info Card block</a>.
 * <a href="https://wppic.dlxplugins.com/blocks/wp-plugin-info-card-query-block">WP Plugin Info Card Query block</a>.
@@ -99,7 +99,7 @@ Add plugins that are not hosted on WordPress.org, including premium and private 
 * <a href="https://docs.dlxplugins.com/wp-plugin-info-card/blocks/the-github-info-cards-block">GitHub Info Cards Grid block</a>.
 * <a href="https://docs.dlxplugins.com/wp-plugin-info-card/blocks/badges-block">Profile Badges Block</a>.
 
-= When should I use this plugin? =
+== When should I use this plugin? ==
 
 WP Plugin Info Card is ideal if you want to:
 
@@ -111,17 +111,13 @@ WP Plugin Info Card is ideal if you want to:
 
 [PREMIUM ADD-ON - WP Envato Affiliate Card](http://b-website.com/wp-envato-affiliate-card-powered-envato-market-api "WP Envato Affiliate Card")
 
-= Languages =
-
-Please <a href="https://translate.wordpress.org/projects/wp-plugins/wp-plugin-info-card">contribute a translation on the plugin translation page</a>.
-
-= GitHub =
+== GitHub ==
 
 Feel free to make pull requests or issues on the <a href="https://github.com/dlxplugins/wp-plugin-info-card">WP Plugin Info Card GitHub account</a>.
 
 > Credits: Originally developed and maintained by <a href="https://www.b-website.com/">Brice CAPOBIANCO</a>.
 
-= How can I report security bugs? =
+== How can I report security bugs? ==
 
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/wp-plugin-info-card)
 
