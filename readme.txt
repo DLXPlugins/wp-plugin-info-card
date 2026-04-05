@@ -2,8 +2,8 @@
 Contributors: briKou, ronalfy
 Tags: cards, card, github, Edd, grid
 Requires at least: 6.5
-Tested up to: 6.9
-Stable tag: 6.3.0
+Tested up to: 7.0
+Stable tag: 6.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -637,5 +637,5 @@ Yes, this video shows you how:
 
 == Upgrade Notice ==
 
-= 6.3.0 =
-Fixing nonce validation security vulnerability in custom plugin creation.
+= 6.3.1 =
+Fixing CSS bug with minified CSS in the Screenshots block/shortcode output. Fixing unclosed SVG output in the footer causing errors in some themes. Fixing preview JS/CSS in certain preview plugins.
