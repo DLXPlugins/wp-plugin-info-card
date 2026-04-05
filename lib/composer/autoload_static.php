@@ -6,15 +6,27 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit65dd49f96bdcda384df030b906ab5eee
 {
+    public static $files = array (
+        '9b38cf48e83f5d8f60375221cd213eee' => __DIR__ . '/..' . '/phpstan/phpstan/bootstrap.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
-        'M' => 
+        'S' =>
+        array (
+            'SzepeViktor\\PHPStan\\WordPress\\' => 30,
+        ),
+        'M' =>
         array (
             'MediaRon\\WPPIC\\' => 15,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'MediaRon\\WPPIC\\' => 
+        'SzepeViktor\\PHPStan\\WordPress\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/szepeviktor/phpstan-wordpress/src',
+        ),
+        'MediaRon\\WPPIC\\' =>
         array (
             0 => __DIR__ . '/../..' . '/php',
         ),

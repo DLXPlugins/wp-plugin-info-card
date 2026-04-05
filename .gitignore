@@ -32,10 +32,6 @@ node_modules
 package
 wp-plugin-info-card.zip
 
-composer.lock
-
-package-lock.json
-
 badge-flex-layout.md
 
 badges-shortcode.md
@@ -46,6 +42,7 @@ changelog.md
 
 badges-documentation.md
 
-dist/
-build/
-lib/
+# Built assets and Composer install (regenerate with npm run build / composer install).
+/dist/
+/build/
+/lib/
