@@ -13,12 +13,22 @@ If you use WP Plugin Info Card, please consider a code contribution or sponsorsh
 ## Quick Links
 
 1. <a href="https://wordpress.org/plugins/wp-plugin-info-card">Plugin Page on WordPress.org</a>
-2. <a href="https://mediaron.com/wp-plugin-info-card/">Plugin Documentation</a> (hosted on MediaRon.com)
+2. <a href="https://dlxplugins.com/plugins/wp-plugin-info-card/">Plugin Documentation</a> (hosted on DLXPlugins.com)
 
-## A Comprehensive Overview
+## Devs - To Duplicate
 
-To find out what WP Plugin Info Card can do for you, please check out this very comprehensive video.
+1. Clone project into `plugins` folder.
+2. Run `nvm use`
+3. Run `npm i --legacy-peer-deps`.
+4. Run `composer install`.
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/aPcU27-R6lU/0.jpg)](https://www.youtube.com/watch?v=aPcU27-R6lU)
+To run build scripts:
 
+1. Run `npm run start` to do a build/watch for development.
+2. Run `npm run build` to run a production build.
+
+To ZIP for release:
+
+1. Run `npm run build` t run a production build.
+2. Run `grunt` to create a ZIP file ready for installation.
 
