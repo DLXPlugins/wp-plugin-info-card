@@ -24,5 +24,8 @@
     },
     "require-dev": {
         "szepeviktor/phpstan-wordpress": "^2.0"
+    },
+    "scripts": {
+        "phpstan": "phpstan analyse -c phpstan.dist.neon --memory-limit=2G"
     }
 }

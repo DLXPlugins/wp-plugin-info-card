@@ -1,32 +1,22 @@
-# PHPStan defaults for this plugin. Commit this file.
-#
-# Optional local overrides: add phpstan.neon (see .gitignore) with:
-#   includes:
-#       - phpstan.dist.neon
-#   parameters:
-#       level: 5
-#
-# Resolution order when you run `phpstan analyse` with no -c flag:
-#   1. phpstan.neon          — local overrides (often gitignored).
-#   2. phpstan.neon.dist     — PHPUnit-style “dist” naming.
-#   3. phpstan.dist.neon     — same role; ends in .neon so IDEs/Cursor get NEON language support.
-#
-# PHPStan binary: can be global (e.g. ~/.composer/vendor/bin/phpstan); see .vscode/settings.json.
-# Composer vendor-dir is lib/, so the WordPress extension lives under lib/ (composer install required).
-
 includes:
-	- lib/szepeviktor/phpstan-wordpress/extension.neon
+    - lib/szepeviktor/phpstan-wordpress/extension.neon
 
 parameters:
-	level: 0
-	paths:
-		- wp-plugin-info-card.php
-		- functions.php
-		- uninstall.php
-		- php
-	excludePaths:
-		analyse:
-			- lib/*
-			- node_modules/*
-			- dist/*
-			- build/*
+    level: 0
+    tmpDir: .phpstan-tmp
+
+    parallel:
+        maximumNumberOfProcesses: 1
+
+    paths:
+        - wp-plugin-info-card.php
+        - functions.php
+        - uninstall.php
+        - php
+
+    excludePaths:
+        analyse:
+            - lib/*
+            - node_modules/*
+            - dist/*
+            - build/*
