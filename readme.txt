@@ -85,8 +85,7 @@ Add plugins that are not hosted on WordPress.org, including premium and private 
 * <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic">[wp-pic] shortcode and parameters</a>.
 * <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic-query">[wp-pic-query] shortcode and parameters</a>.
 * <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic-site-plugins">[wp-pic-site-plugins] shortcode and parameters</a>.
-* <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic-plugin-screenshots">[wp-pic-plugin-screenshots
-] shortcode and parameters</a>.
+* <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic-plugin-screenshots">[wp-pic-plugin-screenshots] shortcode and parameters</a>.
 * <a href="https://docs.dlxplugins.com/wp-plugin-info-card/shortcodes/github-info-card">[github-info-card] shortcode and parameters</a>.
 * <a href="https://docs.dlxplugins.com/wp-plugin-info-card/shortcodes/wp-pic-badges">[wp-pic-badges] shortcode and parameters</a>.
 
@@ -147,7 +146,7 @@ Yes. You can add third-party or private plugins, including EDD (Easy Digital Dow
 
 Yes. WP Plugin Info Card supports Easy Digital Downloads, so you can showcase your plugins alongside WordPress.org plugins.
 
-For <a href="https://docs.dlxplugins.com/wp-plugin-info-card/overview/easy-digital-downloads-integration">WP Plugin Info Card to work properly with EDD</a>< the following add-ons are recommended:
+For <a href="https://docs.dlxplugins.com/wp-plugin-info-card/overview/easy-digital-downloads-integration">WP Plugin Info Card to work properly with EDD</a> the following add-ons are recommended:
 
 * Software Licensing (Required)
 * Product Reviews (optional, but nice to have)
@@ -160,13 +159,13 @@ No, and it shouldn't. If it does, please leave a support request. Everything is 
 
 Yes, you can use this with classic themes, the Classic Editor, and even your favorite page builder such as Elementor via the plugin's robust shortcode support.
 
-If you'd prefer to stick with blocks to build the layouts and use a shortcode to output, I recommend the free companion tool <a href="https://wordpress.org/plugins/pattern-wrangler/">Pattern Wrangler</a<>. You can create a new pattern, add and configure the blocks, and copy the shortcode to display anywhere.
+If you'd prefer to stick with blocks to build the layouts and use a shortcode to output, I recommend the free companion tool <a href="https://wordpress.org/plugins/pattern-wrangler/">Pattern Wrangler</a>. You can create a new pattern, add and configure the blocks, and copy the shortcode to display anywhere.
 
 = Can I use this with a page builder? =
 
 The plugin has robust shortcode support, should you need to use this in a page builder such as Divi, Elementor, Beaver Builder, and more.
 
-If you'd prefer to stick with blocks to build the layouts and use a shortcode to output, I recommend the free companion tool <a href="https://wordpress.org/plugins/pattern-wrangler/">Pattern Wrangler</a<>. You can create a new pattern, add and configure the blocks, and copy the shortcode to display anywhere.
+If you'd prefer to stick with blocks to build the layouts and use a shortcode to output, I recommend the free companion tool <a href="https://wordpress.org/plugins/pattern-wrangler/">Pattern Wrangler</a>. You can create a new pattern, add and configure the blocks, and copy the shortcode to display anywhere.
 
 = Can I customize the plugin titles being displayed? =
 
