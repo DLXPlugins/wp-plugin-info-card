@@ -46,3 +46,4 @@ badges-documentation.md
 /dist/
 /build/
 /lib/
+/.phpstan-tmp/
