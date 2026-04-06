@@ -208,6 +208,8 @@ Yes, this video shows you how:
 * Fix: Certain CSS minifiers would strip out Star Rating CSS or encode it.
 * Fix: JavaScript could load in unpredictable places, causing previews to be warped.
 * Fix: SVG closing HTML for footer SVGs could break some blocks/query monitor.
+* Fix: Resolving PHPStan errors, extra harderning.
+* Fix: Multiple cards in the card block would be mis-aligned on tablet.
 
 = 6.3.0 =
 * Released 2026-02-05
