@@ -2148,8 +2148,9 @@ class Shortcodes {
 
 		// Prepare the credit.
 		$credit = '';
+		$options = Options::get_options();
 		if ( isset( $options['credit'] ) && true === $options['credit'] ) {
-			$credit .= '<a class="wp-pic-credit" href="https://mediaron.com/wp-plugin-info-card/" target="_blank" data-tooltip="';
+			$credit .= '<a class="wp-pic-credit" href="https://dlxplugins.com/plugins/wp-plugin-info-card/" target="_blank" data-tooltip="';
 			$credit .= esc_html__( 'This card has been generated with WP Plugin Info Card', 'wp-plugin-info-card' );
 			$credit .= '"></a>';
 		}

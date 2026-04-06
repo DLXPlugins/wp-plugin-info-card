@@ -30,7 +30,7 @@ class Custom_Plugin {
 	public function __construct() {
 		add_filter( 'wppic_admin_tabs', array( $this, 'add_custom_plugin_tab' ), 1, 1 );
 		add_filter( 'wppic_admin_sub_tabs', array( $this, 'add_custom_plugin_sub_tab' ), 1, 3 );
-		add_action( 'wppic_output_custom-plugin-cards', array( $this, 'output_custom_plugin_content' ), 1, 3 );
+		add_action( 'wppic_output_custom-plugin-cards', array( $this, 'output_custom_plugin_content' ), 1, 2 );
 		add_action( 'wppic_admin_enqueue_scripts_custom-plugin-cards', array( $this, 'admin_scripts' ) );
 		add_action( 'wp_ajax_wppic_get_custom-plugin-cards_options', array( $this, 'ajax_get_options' ) );
 	}

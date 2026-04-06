@@ -30,7 +30,7 @@ class GitHub_Info_Cards {
 	public function __construct() {
 		add_filter( 'wppic_admin_tabs', array( $this, 'add_github_info_cards_tab' ), 1, 1 );
 		add_filter( 'wppic_admin_sub_tabs', array( $this, 'add_github_info_cards_sub_tab' ), 1, 3 );
-		add_action( 'wppic_output_github-info-cards', array( $this, 'output_github_info_cards_content' ), 1, 3 );
+		add_action( 'wppic_output_github-info-cards', array( $this, 'output_github_info_cards_content' ), 1, 2 );
 		add_action( 'wppic_admin_enqueue_scripts_github-info-cards', array( $this, 'admin_scripts' ) );
 		add_action( 'wp_ajax_wppic_get_github_info_cards_options', array( $this, 'ajax_get_options' ) );
 		add_action( 'wp_ajax_wppic_authenticate_with_github', array( $this, 'ajax_authenticate_with_github' ) );

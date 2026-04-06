@@ -9,6 +9,7 @@
 		<exclude name="Generic.Arrays.DisallowShortArraySyntax" />
 		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase" />
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
+		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter" />
 	</rule>
 
 	<rule ref="WordPress-Docs"></rule>

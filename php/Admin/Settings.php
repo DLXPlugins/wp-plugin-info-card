@@ -47,6 +47,7 @@ class Settings {
 		 * @since 4.1.0
 		 *
 		 * @param string $current_tab The current tab.
+		 * @param string $current_sub_tab The current sub tab.
 		 */
 		do_action( 'wppic_output_' . $current_tab, $current_tab, '' );
 	}
@@ -245,9 +246,9 @@ class Settings {
 			 *
 			 * @since 1.0.0
 			 *
-			 * @param array Associative array of tabs.
-			 * @param string Tab
-			 * @param string Sub Tab
+			 * @param array $sub_tabs Associative array of sub tabs.
+			 * @param string $current_tab The current tab.
+			 * @param string $current_sub_tab The current sub tab.
 			 */
 			$sub_tabs = apply_filters( 'wppic_admin_sub_tabs', array(), $current_tab, $current_sub_tab );
 

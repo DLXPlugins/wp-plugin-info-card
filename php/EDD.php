@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Output home wppic tab.
+ * Output EDD wppic tab.
  *
  * @package wppic
  */
@@ -43,10 +42,6 @@ class EDD {
 			// Modify downloads post type to support custom fields.
 			add_action( 'init', array( $this, 'add_custom_fields_to_downloads' ), 100 );
 
-			// Add EDD block registration.
-			// Commented it out as a placeholder for future block.
-			// add_action( 'init', array( $this, 'init_edd_block' ) );
-
 			// Enqueue the sidebar for EDD post type.
 			add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_block_editor_assets' ) );
 
@@ -54,7 +49,7 @@ class EDD {
 			add_action( 'save_post', array( $this, 'clear_plugin_cache' ), 10 );
 
 			// For saving the classic editor meta data.
-			add_action( 'save_post', array( $this, 'save_meta_data' ), 10, 3 );
+			add_action( 'save_post', array( $this, 'save_meta_data' ), 10, 1 );
 
 			// Filter the plugin data before it is output.
 			add_filter( 'wppic_data_pre_display', array( $this, 'modify_wppic_data' ), 10, 2 );
@@ -96,7 +91,7 @@ class EDD {
 
 		// Verify nonce for saving post meta.
 		check_admin_referer( 'update-post_' . $post_id );
-		
+
 		$author            = sanitize_text_field( wp_unslash( $_POST['wppic-plugin-author'] ) );
 		$reviews_url       = sanitize_text_field( wp_unslash( $_POST['wppic-reviews-url'] ) );
 		$downloads_url     = sanitize_text_field( wp_unslash( $_POST['wppic-downloads-url'] ) );
@@ -146,7 +141,6 @@ class EDD {
 			'layout' => $attributes['layout'],
 		);
 		return '';
-		// return Shortcodes::shortcode_active_site_plugins_function( $shortcode_atts );
 	}
 
 	/**
@@ -229,7 +223,7 @@ class EDD {
 	public function init() {
 		register_post_meta(
 			'download',
-			'_wppic_plugin_author', /* true or false */
+			'_wppic_plugin_author',
 			array(
 				'sanitize_callback' => 'sanitize_text_field',
 				'show_in_rest'      => true,
@@ -271,7 +265,7 @@ class EDD {
 		);
 		register_post_meta(
 			'download',
-			'_wppic_override_ratings', /* true or false */
+			'_wppic_override_ratings',
 			array(
 				'sanitize_callback' => 'rest_sanitize_boolean',
 				'show_in_rest'      => true,

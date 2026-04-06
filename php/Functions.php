@@ -804,7 +804,7 @@ class Functions {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string Plugin Author name.
+		 * @param string $plugin_author Plugin Author name.
 		 */
 		$plugin_author = apply_filters( 'wppic_plugin_author', 'Brice CAPOBIANCO and Ronald Huereca' );
 		return $plugin_author;
@@ -821,7 +821,7 @@ class Functions {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string Plugin Author URI.
+		 * @param string $plugin_author_uri Plugin Author URI.
 		 */
 		$plugin_author = apply_filters( 'wppic_plugin_author_uri', 'https://mediaron.com' );
 		return $plugin_author;
@@ -840,7 +840,7 @@ class Functions {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string Plugin name.
+		 * @param string $plugin_name Plugin name.
 		 */
 		return apply_filters( 'wppic_plugin_name', WPPIC_NAME );
 	}
@@ -858,7 +858,7 @@ class Functions {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string Plugin description.
+		 * @param string $plugin_description Plugin description.
 		 */
 		return apply_filters( 'wppic_plugin_description', __( 'WP Plugin Info Card displays plugins & themes data in a beautiful box with a smooth rotation effect using WP Plugin & Theme APIs. Dashboard widget included.', 'wp-plugin-info-card' ) );
 	}
@@ -874,7 +874,7 @@ class Functions {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string Plugin URI.
+		 * @param string $plugin_uri Plugin URI.
 		 */
 		return apply_filters( 'wppic_plugin_uri', 'https://mediaron.com/wp-plugin-info-card/' );
 	}
@@ -890,7 +890,7 @@ class Functions {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string Plugin Support URI.
+		 * @param string $plugin_support_uri Plugin Support URI.
 		 */
 		return apply_filters( 'wppic_plugin_support_uri', 'https://mediaron.com/contact/' );
 	}
@@ -906,7 +906,7 @@ class Functions {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string Plugin Docs URI.
+		 * @param string $plugin_docs_uri Plugin Docs URI.
 		 */
 		return apply_filters( 'wppic_plugin_docs_uri', 'https://mediaron.com/wp-plugin-info-card/' );
 	}
@@ -922,7 +922,7 @@ class Functions {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string Plugin ratings URI.
+		 * @param string $plugin_ratings_uri Plugin ratings URI.
 		 */
 		return apply_filters( 'wppic_plugin_docs_uri', 'https://wordpress.org/support/plugin/wp-plugin-info-card/reviews/' );
 	}
@@ -938,7 +938,7 @@ class Functions {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string Plugin Menu Name.
+		 * @param string $plugin_title Plugin Menu Name.
 		 */
 		return apply_filters( 'wppic_plugin_menu_title', WPPIC_NAME );
 	}

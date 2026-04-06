@@ -32,7 +32,7 @@ class EDD {
 		if ( Functions::is_activated( 'easy-digital-downloads/easy-digital-downloads.php' ) || Functions::is_activated( 'easy-digital-downloads-pro/easy-digital-downloads.php' ) ) {
 			add_filter( 'wppic_admin_tabs', array( $this, 'add_edd_tab' ), 1, 1 );
 			add_filter( 'wppic_admin_sub_tabs', array( $this, 'add_edd_sub_tab' ), 1, 3 );
-			add_action( 'wppic_output_edd', array( $this, 'output_edd_tab' ), 1, 3 );
+			add_action( 'wppic_output_edd', array( $this, 'output_edd_tab' ), 1, 2 );
 			add_action( 'wppic_admin_enqueue_scripts_edd', array( $this, 'admin_scripts' ) );
 			add_action( 'wp_ajax_wppic_get_edd_options', array( $this, 'ajax_get_options' ) );
 		}
