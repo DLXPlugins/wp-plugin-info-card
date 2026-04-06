@@ -41,6 +41,25 @@ module.exports = function( grunt ) {
 			}
 		},
 	);
+	grunt.registerTask(
+		'composer-install',
+		'Install Composer deps with require-dev so lib/ autoload loads PHPStan on every request.',
+		function composerInstall() {
+			try {
+				execSync(
+					'composer install --no-interaction --optimize-autoloader',
+					{
+						stdio: 'inherit',
+						cwd: path.resolve( __dirname ),
+					},
+				);
+			} catch ( err ) {
+				grunt.fail.fatal(
+					'composer install failed. Install Composer and run from the plugin root, or use grunt compress only with a production lib/.',
+				);
+			}
+		},
+	);
 
 	grunt.initConfig( {
 		compress: {
@@ -66,7 +85,7 @@ module.exports = function( grunt ) {
 		},
 	} );
 
-	const productionZip = [ 'composer-install-no-dev', 'compress' ];
+	const productionZip = [ 'composer-install-no-dev', 'compress', 'composer-install' ];
 
 	grunt.registerTask( 'default', productionZip );
 	grunt.registerTask( 'release', productionZip );
