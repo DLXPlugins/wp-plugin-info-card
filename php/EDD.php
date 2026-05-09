@@ -179,11 +179,19 @@ class EDD {
 	 * @param int $post_id Post ID.
 	 */
 	public function clear_plugin_cache( $post_id ) {
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+		if ( wp_is_post_revision( $post_id ) ) {
+			return;
+		}
 		if ( 'download' !== get_post_type( $post_id ) ) {
 			return;
 		}
 		// Do nonce check.
-		check_admin_referer( 'update-post_' . $post_id );
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return;
+		}
 		$slug       = get_post_field( 'post_name', $post_id );
 		$option_key = sanitize_key( 'wppic_plugin_' . preg_replace( '/\-/', '_', $slug ) );
 
