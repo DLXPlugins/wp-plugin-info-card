@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Tags: cards, card, github, Edd, grid
 Requires at least: 6.5
 Tested up to: 7.0
-Stable tag: 6.3.1
+Stable tag: 6.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -201,6 +201,10 @@ Yes, this video shows you how:
 7. .org Profile badges displaying in a grid.
 
 == Changelog ==
+
+= 6.3.2 =
+* Released 2026-05-08
+* Fix: Add EDD download would cause nonce error with EDD enabled.
 
 = 6.3.1 =
 * Released 2026-04-05
@@ -638,5 +642,5 @@ Yes, this video shows you how:
 
 == Upgrade Notice ==
 
-= 6.3.1 =
-Fixing CSS bug with minified CSS in the Screenshots block/shortcode output. Fixing unclosed SVG output in the footer causing errors in some themes. Fixing preview JS/CSS in certain preview plugins.
+= 6.3.2 =
+Fix: Add EDD download would cause nonce error with EDD enabled.
