@@ -181,59 +181,63 @@ class Functions {
 		// Get member since data with ID user-member-since.
 		$member_since           = '';
 		$member_since_timestamp = '';
-		$member_since_element   = $scrape_tags->getElementById( 'user-member-since' );
+		$member_since_element   = $scrape_tags->getElementById( 'slack-username' );
+		$member_location        = '';
 		if ( $member_since_element ) {
 			// Get internal <span> tag, which contains member data.
-			$member_since           = $member_since_element->getElementsByTagName( 'strong' )[0]->textContent;
+			$maybe_member_since_elements = $member_since_element->getElementsByTagName( 'span' );
+			if ( $maybe_member_since_elements->length > 0 ) {
+				foreach ( $maybe_member_since_elements as $maybe_member_since_element ) {
+					if ( $maybe_member_since_element->getAttribute( 'class' ) === 'wp-p2-joined' ) {
+						$member_since = $maybe_member_since_element->textContent; // phpcs:ignore.
+
+						// Skip past the first word.
+						$member_since_array = explode( ' ', $member_since );
+						$member_since       = implode( ' ', array_slice( $member_since_array, 1 ) );
+						continue;
+					} elseif ( $maybe_member_since_element->getAttribute( 'class' ) === 'wp-p2-loc' ) {
+						$member_location = $maybe_member_since_element->textContent; // phpcs:ignore.
+						continue;
+					}
+				}
+			}
 			$member_since_timestamp = strtotime( $member_since );
-		}
-
-		// Get member GitHub.
-		$member_github         = '';
-		$member_github_element = $scrape_tags->getElementById( 'user-github' );
-		if ( $member_github_element ) {
-			// Get internal <span> tag, which contains member data.
-			$member_github = $member_github_element->getElementsByTagName( 'a' )[0]->getAttribute( 'href' );
-		}
-
-		// Get member location.
-		$member_location         = '';
-		$member_location_element = $scrape_tags->getElementById( 'user-location' );
-		if ( $member_location_element ) {
-			// Get internal <span> tag, which contains member data.
-			$member_location = $member_location_element->getElementsByTagName( 'strong' )[0]->textContent;
 		}
 
 		// Get member occupation.
 		$member_occupation         = '';
-		$member_occupation_element = $scrape_tags->getElementById( 'user-job' );
+		$member_employer           = '';
+		$member_occupation_element = $scrape_tags->getElementById( 'wporg-jobs-public' );
 		if ( $member_occupation_element ) {
 			// Get internal <span> tag, which contains member data.
-			$member_occupation = $member_occupation_element->getElementsByTagName( 'strong' )[0]->textContent;
-		}
-
-		// Get member employer.
-		$member_employer         = '';
-		$member_employer_element = $scrape_tags->getElementById( 'user-company' );
-		if ( $member_employer_element ) {
-			// Get internal <span> tag, which contains member data.
-			$member_employer = $member_employer_element->getElementsByTagName( 'strong' )[0]->textContent;
+			$maybe_member_occupation_elements = $member_occupation_element->getElementsByTagName( 'div' );
+			if ( $maybe_member_occupation_elements->length > 0 ) {
+				foreach ( $maybe_member_occupation_elements as $maybe_member_occupation_element ) {
+					if ( $maybe_member_occupation_element->getAttribute( 'class' ) === 'role' ) {
+						$member_occupation = $maybe_member_occupation_element->textContent; // phpcs:ignore.
+						continue;
+					} elseif ( $maybe_member_occupation_element->getAttribute( 'class' ) === 'company' ) {
+						$member_employer = $maybe_member_occupation_element->textContent; // phpcs:ignore.
+						continue;
+					}
+				}
+			}
 		}
 
 		// Get user badges.
-		$member_badges               = array();
-		$member_badges_element       = $scrape_tags->getElementById( 'user-badges' );
-		$member_badges_list_elements = $member_badges_element->getElementsByTagName( 'li' );
-		foreach ( $member_badges_list_elements as $badge_list ) {
-			$member_badge_wrapper         = $badge_list->getElementsByTagName( 'div' )[0];
-			$member_badge_wrapper_classes = $member_badge_wrapper->getAttribute( 'class' );
-			$member_badge_wrapper_classes = explode( ' ', $member_badge_wrapper_classes );
-
-			// If badge is at the start of a class, store it.
-			foreach ( $member_badge_wrapper_classes as $badge_class ) {
-				// If badge is start of class, store it.
-				if ( 'badge' === substr( $badge_class, 0, 5 ) && 'badge' !== $badge_class ) {
-					$member_badges[] = $badge_class;
+		$member_badges    = array();
+		$section_elements = $scrape_tags->getElementsByTagName( 'section' );
+		foreach ( $section_elements as $sections ) {
+			if ( $sections->getAttribute( 'class' ) === 'wp-p2-badges-block' ) {
+				$maybe_member_badges_elements = $sections->getElementsByTagName( 'span' );
+				if ( $maybe_member_badges_elements->length > 0 ) {
+					foreach ( $maybe_member_badges_elements as $maybe_member_badge_element ) {
+						$maybe_badge_element_class = $maybe_member_badge_element->getAttribute( 'class' );
+						if ( ( 'badge' === substr( $maybe_badge_element_class, 0, 5 ) && 'badge' !== $maybe_badge_element_class ) || ( 'medal' !== $maybe_badge_element_class && 'medal' === substr( $maybe_badge_element_class, 0, 5 ) ) ) {
+							$maybe_badge_element_class = str_replace( 'medal', '', $maybe_badge_element_class ); // Replace medal with badge for backwards compatibility.
+							$member_badges[]           = trim( $maybe_badge_element_class );
+						}
+					}
 				}
 			}
 		}
@@ -245,7 +249,6 @@ class Functions {
 			'author_avatar'          => esc_url( $author_avatar ),
 			'member_since'           => sanitize_text_field( wp_strip_all_tags( $member_since ) ),
 			'member_since_timestamp' => absint( $member_since_timestamp ),
-			'member_github'          => esc_url( $member_github ),
 			'member_location'        => sanitize_text_field( wp_strip_all_tags( $member_location ) ),
 			'member_occupation'      => sanitize_text_field( wp_strip_all_tags( $member_occupation ) ),
 			'member_employer'        => sanitize_text_field( wp_strip_all_tags( $member_employer ) ),

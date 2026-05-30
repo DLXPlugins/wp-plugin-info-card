@@ -3720,7 +3720,7 @@ class Shortcodes {
 		$badges = self::get_badge_data();
 		// Split the input badge class to get the base class (first part).
 		$input_classes = explode( ' ', trim( $badge_class ) );
-		$base_class    = ! empty( $input_classes[0] ) ? $input_classes[0] : $badge_class;
+		$base_class    = ! empty( $input_classes ) ? end( $input_classes ) : $badge_class;
 
 		foreach ( $badges as $badge ) {
 			// Check if the badge class matches (handle classes with spaces).

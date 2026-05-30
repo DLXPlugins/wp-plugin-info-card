@@ -64,6 +64,7 @@ const OrgProfile = ( props ) => {
 					const {
 						member_badges: memberBadges,
 					} = data;
+
 					/**
 					 * Reduce the member badges array to an array of badge classnames.
 					 *
@@ -72,12 +73,13 @@ const OrgProfile = ( props ) => {
 					 * @return {Array} The accumulator array.
 					 */
 					const badges = memberBadges.reduce( ( acc, badge ) => {
-						const badgeData = badgeMap.find( ( b ) => b.id === badge );
+						const badgeData = badgeMap.find( ( b ) => badge.includes( b.id ) );
 						if ( badgeData && ! acc.includes( badgeData.class ) ) {
 							acc.push( badgeData.class );
 						}
 						return acc;
 					}, [] );
+
 					setAuthorSlugSearchValue( authorSlug );
 					setAttributes( {
 						authorSlug,
