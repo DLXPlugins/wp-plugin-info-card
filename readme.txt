@@ -1,9 +1,9 @@
 === WP Plugin Info Card===
 Contributors: briKou, ronalfy
 Tags: cards, card, github, Edd, grid
-Requires at least: 6.5
+Requires at least: 6.8
 Tested up to: 7.0
-Stable tag: 6.3.2
+Stable tag: 6.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -201,6 +201,11 @@ Yes, this video shows you how:
 7. .org Profile badges displaying in a grid.
 
 == Changelog ==
+
+= 6.3.3 =
+* Released 2026-05-29
+* Fix: GitHub Card styles weren't loading for shortcodes.
+* Fix: GitHub Card avatars would 404 with no fallback. Avatars are now lazy-loaded with a default if the image fails to load.
 
 = 6.3.2 =
 * Released 2026-05-08
@@ -642,5 +647,5 @@ Yes, this video shows you how:
 
 == Upgrade Notice ==
 
-= 6.3.2 =
-Fix: Add EDD download would cause nonce error with EDD enabled.
+= 6.3.3 =
+Fix: GitHub Card styles weren't loading for shortcode use. Fix: GitHub card avatars are now lazy-loaded and error-checked for 404's with a fallback.
