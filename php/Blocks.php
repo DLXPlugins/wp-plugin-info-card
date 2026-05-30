@@ -292,7 +292,7 @@ class Blocks {
 				'can_edit_others_posts'          => current_user_can( 'edit_others_posts' ),
 				'can_manage_options'             => current_user_can( 'manage_options' ),
 				'is_github_info_cards_enabled'   => Options::is_github_info_cards_enabled(),
-				'default_github_avatar'          => Functions::get_plugin_url( 'assets/img/default-github-avatar.png' ),
+				'default_github_avatar'          => Functions::get_default_github_avatar_url(),
 			)
 		);
 

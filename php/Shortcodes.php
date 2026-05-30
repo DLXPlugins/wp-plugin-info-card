@@ -2425,9 +2425,10 @@ class Shortcodes {
 				'wppic-github-info-card-lazy-load',
 				'wppicGithubInfoCardLazyLoad',
 				array(
-					'restUrl'        => Functions::get_rest_url( 'wppic/v2/get_github_card_html' ),
-					'restNonce'      => wp_create_nonce( 'wp_rest' ),
-					'cardAttributes' => array(),
+					'restUrl'             => Functions::get_rest_url( 'wppic/v2/get_github_card_html' ),
+					'restNonce'           => wp_create_nonce( 'wp_rest' ),
+					'defaultGithubAvatar' => Functions::get_default_github_avatar_url(),
+					'cardAttributes'      => array(),
 				)
 			);
 			/**
@@ -2633,6 +2634,7 @@ class Shortcodes {
 		}
 
 		// Get avatar image.
+		$default_github_avatar = Functions::get_default_github_avatar_url();
 		$has_avatar_image      = false;
 		$avatar_image          = Functions::sanitize_attribute( $asset_data, 'avatar', 'url' );
 		$avatar_image_override = Functions::sanitize_attribute( $attributes, 'avatarimageurl', 'url' );
@@ -2644,7 +2646,7 @@ class Shortcodes {
 		}
 		if ( ! $has_avatar_image ) {
 			$has_avatar_image = true;
-			$avatar_image     = Functions::get_plugin_url( 'assets/img/default-github-avatar.png' );
+			$avatar_image     = $default_github_avatar;
 		}
 
 		// Get org name.
@@ -2892,7 +2894,16 @@ class Shortcodes {
 			<div class="wppic-github-info-card-author-section">
 				<div class="wppic-github-info-card-author-section-avatar">
 					<a href="<?php echo esc_url( $github_url ); ?>" title="<?php echo esc_attr( $repo_full_name ); ?>">
-						<img src="<?php echo esc_url( $avatar_image ); ?>" alt="<?php echo esc_attr( $repo_full_name ); ?>" />
+						<img
+							class="wppic-github-info-card-avatar-img"
+							src="<?php echo esc_url( $avatar_image ); ?>"
+							alt="<?php echo esc_attr( $repo_full_name ); ?>"
+							loading="lazy"
+							decoding="async"
+							<?php if ( $avatar_image !== $default_github_avatar ) : ?>
+							data-wppic-avatar-fallback="<?php echo esc_url( $default_github_avatar ); ?>"
+							<?php endif; ?>
+						/>
 					</a>
 				</div>
 				<div class="wppic-github-info-card-author-section-info">

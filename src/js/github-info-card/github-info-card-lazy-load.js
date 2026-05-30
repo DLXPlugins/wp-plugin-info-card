@@ -22,6 +22,25 @@ import lozad from 'lozad';
 		}
 	};
 
+	const bindAvatarFallbacks = ( root = document ) => {
+		root.querySelectorAll( 'img[data-wppic-avatar-fallback]' ).forEach( ( img ) => {
+			if ( img.dataset.wppicAvatarBound ) {
+				return;
+			}
+			img.dataset.wppicAvatarBound = 'true';
+			img.addEventListener(
+				'error',
+				() => {
+					const fallback = img.dataset.wppicAvatarFallback;
+					if ( fallback && img.src !== fallback ) {
+						img.src = fallback;
+					}
+				},
+				{ once: true },
+			);
+		} );
+	};
+
 	// Global state.
 	let cards = [];
 	let initialized = false;
@@ -55,6 +74,7 @@ import lozad from 'lozad';
 			return;
 		}
 		element.outerHTML = response.html;
+		bindAvatarFallbacks();
 		return response.html;
 	};
 
@@ -62,6 +82,7 @@ import lozad from 'lozad';
 		if ( initialized ) {
 			return;
 		}
+		bindAvatarFallbacks();
 		const maybeCards = document.querySelectorAll( DEFAULTS.selector );
 		if ( maybeCards.length === 0 ) {
 			return;

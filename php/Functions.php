@@ -1348,6 +1348,15 @@ class Functions {
 	}
 
 	/**
+	 * Return the default GitHub avatar image URL.
+	 *
+	 * @return string Default GitHub avatar URL.
+	 */
+	public static function get_default_github_avatar_url() {
+		return self::get_plugin_url( 'assets/img/default-github-avatar.png' );
+	}
+
+	/**
 	 * Gets the highest priority for a filter.
 	 *
 	 * @param int $subtract The amount to subtract from the high priority.

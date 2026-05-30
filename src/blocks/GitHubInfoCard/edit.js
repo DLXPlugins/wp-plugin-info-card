@@ -38,6 +38,7 @@ import {
 	BaseControl,
 	ButtonGroup,
 	Notice,
+	/* eslint-disable-next-line */
 	__experimentalTruncate as Truncate,
 } from '@wordpress/components';
 
@@ -55,11 +56,6 @@ const GitHubInfoCard = ( props ) => {
 	const { attributes, setAttributes, context } = props;
 
 	const blockUniqueId = context[ 'wppic/github-grid-uniqueId' ];
-
-	// Shortcircuit early if the block is not part of a grid.
-	if ( ! blockUniqueId ) {
-		return null;
-	}
 
 	const { openMediaUploader } = useMediaUploader();
 
@@ -89,6 +85,22 @@ const GitHubInfoCard = ( props ) => {
 	const [ loading, setLoading ] = useState( attributes.loading );
 	const [ mainInputField, setMainInputField ] = useState( null );
 	const [ mainButton, setMainButton ] = useState( null );
+
+	const resolveAvatarImage = () => {
+		if ( avatarImageId ) {
+			return avatarImageUrl;
+		}
+		if ( ! assetData?.avatar ) {
+			return wppic.default_github_avatar;
+		}
+		return assetData.avatar;
+	};
+
+	const [ avatarSrc, setAvatarSrc ] = useState( resolveAvatarImage );
+
+	useEffect( () => {
+		setAvatarSrc( resolveAvatarImage() );
+	}, [ assetData?.avatar, avatarImageUrl, avatarImageId ] );
 
 	const {
 		getShowTopBar,
@@ -396,6 +408,10 @@ const GitHubInfoCard = ( props ) => {
 		}
 		return parentBlock.attributes?.layout || 'large';
 	};
+	// Shortcircuit early if the block is not part of a grid.
+	if ( ! blockUniqueId ) {
+		return null;
+	}
 	if ( preview ) {
 		return (
 			<div style={ { textAlign: 'center' } }>
@@ -454,21 +470,6 @@ const GitHubInfoCard = ( props ) => {
 		}
 		buttonText = overrideButton ? ( overrideButtonText || buttonText ) : buttonText;
 		return buttonText;
-	};
-
-	/**
-	 * Get the avatar image.
-	 *
-	 * @return {string} The avatar image.
-	 */
-	const getAvatarImage = () => {
-		if ( avatarImageId ) {
-			return avatarImageUrl;
-		}
-		if ( ! assetData.avatar ) {
-			return wppic.default_github_avatar;
-		}
-		return assetData.avatar;
 	};
 	const block = (
 		<Fragment>
@@ -762,7 +763,13 @@ const GitHubInfoCard = ( props ) => {
 							) }
 							<div className="wppic-github-info-card-author-section">
 								<div className="wppic-github-info-card-author-section-avatar">
-									<img src={ getAvatarImage() } alt={ escapeHTML( assetData.full_name ) } />
+									<img
+										src={ avatarSrc }
+										alt={ escapeHTML( assetData.full_name ) }
+										loading="lazy"
+										decoding="async"
+										onError={ () => setAvatarSrc( wppic.default_github_avatar ) }
+									/>
 								</div>
 								<div className="wppic-github-info-card-author-section-info">
 									<div className="wppic-github-info-card-author-section-name">
