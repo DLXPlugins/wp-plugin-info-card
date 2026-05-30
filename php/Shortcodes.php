@@ -2147,7 +2147,7 @@ class Shortcodes {
 		$wppic_data->last_updated = date_i18n( $date_format, strtotime( $wppic_data->last_updated ) );
 
 		// Prepare the credit.
-		$credit = '';
+		$credit  = '';
 		$options = Options::get_options();
 		if ( isset( $options['credit'] ) && true === $options['credit'] ) {
 			$credit .= '<a class="wp-pic-credit" href="https://dlxplugins.com/plugins/wp-plugin-info-card/" target="_blank" data-tooltip="';
@@ -2434,6 +2434,28 @@ class Shortcodes {
 			 * Add icons to footer for plugin card.
 			 */
 			add_action( 'wp_footer', array( __CLASS__, 'add_icons_to_footer' ) );
+
+			if ( wp_style_is( 'wppic-github-info-card', 'registered' ) ) {
+				wp_enqueue_style( 'wppic-github-info-card' );
+			} else {
+				wp_enqueue_style(
+					'wppic-github-info-card',
+					Functions::get_plugin_url( 'dist/github-info-card.css' ),
+					array(),
+					Functions::get_plugin_version(),
+					'all'
+				);
+			}
+
+			add_action(
+				'wp_footer',
+				function () {
+					if ( ! wp_style_is( 'wppic-github-info-card', 'done' ) ) {
+						wp_print_styles( 'wppic-github-info-card' );
+					}
+				},
+				100
+			);
 		}
 
 		// Now let's build the shortcode.
