@@ -206,6 +206,7 @@ Yes, this video shows you how:
 * Released 2026-05-29
 * Fix: GitHub Card styles weren't loading for shortcodes.
 * Fix: GitHub Card avatars would 404 with no fallback. Avatars are now lazy-loaded with a default if the image fails to load.
+* Fix: Profile badges have been updated with the new org layout for scraping.
 
 = 6.3.2 =
 * Released 2026-05-08
@@ -648,4 +649,4 @@ Yes, this video shows you how:
 == Upgrade Notice ==
 
 = 6.3.3 =
-Fix: GitHub Card styles weren't loading for shortcode use. Fix: GitHub card avatars are now lazy-loaded and error-checked for 404's with a fallback.
+Fix: GitHub Card styles weren't loading for shortcode use. Fix: GitHub card avatars are now lazy-loaded and error-checked for 404's with a fallback. Fix: Profile badges have been updated with the new .org layout for data scraping.
