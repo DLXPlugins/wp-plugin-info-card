@@ -82,21 +82,21 @@ Add plugins that are not hosted on WordPress.org, including premium and private 
 
 == Quick Links (Shortcode Documentation) ==
 
-* <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic">[wp-pic] shortcode and parameters</a>.
-* <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic-query">[wp-pic-query] shortcode and parameters</a>.
-* <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic-site-plugins">[wp-pic-site-plugins] shortcode and parameters</a>.
-* <a href="https://wppic.dlxplugins.com/shortcodes/wp-pic-plugin-screenshots">[wp-pic-plugin-screenshots] shortcode and parameters</a>.
-* <a href="https://docs.dlxplugins.com/wp-plugin-info-card/shortcodes/github-info-card">[github-info-card] shortcode and parameters</a>.
-* <a href="https://docs.dlxplugins.com/wp-plugin-info-card/shortcodes/wp-pic-badges">[wp-pic-badges] shortcode and parameters</a>.
+* <a href="https://docs.dlxplugins.com/product/wp-plugin-info-card/wp-pic">[wp-pic] shortcode and parameters</a>.
+* <a href="https://docs.dlxplugins.com/product/wp-plugin-info-card/wp-pic-query">[wp-pic-query] shortcode and parameters</a>.
+* <a href="https://docs.dlxplugins.com/product/wp-plugin-info-card/wp-pic-site-plugins">[wp-pic-site-plugins] shortcode and parameters</a>.
+* <a href="https://docs.dlxplugins.com/product/wp-plugin-info-card/wp-pic-plugin-screenshot">[wp-pic-plugin-screenshots] shortcode and parameters</a>.
+* <a href="https://docs.dlxplugins.com/products/wp-plugin-info-card/shortcodes/github-info-card">[github-info-card] shortcode and parameters</a>.
+* <a href="https://docs.dlxplugins.com/product/wp-plugin-info-card/wp-pic-badges">[wp-pic-badges] shortcode and parameters</a>.
 
 == Quick Links (Block Documentation) ==
 
-* <a href="https://wppic.dlxplugins.com/blocks/wp-plugin-info-card-block">WP Plugin Info Card block</a>.
-* <a href="https://wppic.dlxplugins.com/blocks/wp-plugin-info-card-query-block">WP Plugin Info Card Query block</a>.
-* <a href="https://wppic.dlxplugins.com/blocks/site-plugins-card-grid">Site Plugins Card Grid block</a>.
-* <a href="https://wppic.dlxplugins.com/blocks/plugin-screenshots-info-card">WP Plugin Info Card Plugin Screenshots block</a>.
-* <a href="https://docs.dlxplugins.com/wp-plugin-info-card/blocks/the-github-info-cards-block">GitHub Info Cards Grid block</a>.
-* <a href="https://docs.dlxplugins.com/wp-plugin-info-card/blocks/badges-block">Profile Badges Block</a>.
+* <a href="https://docs.dlxplugins.com/product/wp-plugin-info-card/wp-plugin-info-card-block">WP Plugin Info Card block</a>.
+* <a href="https://docs.dlxplugins.com/product/wp-plugin-info-card/wp-plugin-info-card-query-block">WP Plugin Info Card Query block</a>.
+* <a href="https://docs.dlxplugins.com/product/wp-plugin-info-card/site-plugins-card-grid">Site Plugins Card Grid block</a>.
+* <a href="https://docs.dlxplugins.com/product/wp-plugin-info-card/plugin-screenshots-info-card">WP Plugin Info Card Plugin Screenshots block</a>.
+* <a href="https://docs.dlxplugins.com/product/wp-plugin-info-card/the-github-info-cards-block">GitHub Info Cards Grid block</a>.
+* <a href="https://docs.dlxplugins.com/product/wp-plugin-info-card/badges-block">Profile Badges Block</a>.
 
 == When should I use this plugin? ==
 
@@ -146,7 +146,7 @@ Yes. You can add third-party or private plugins, including EDD (Easy Digital Dow
 
 Yes. WP Plugin Info Card supports Easy Digital Downloads, so you can showcase your plugins alongside WordPress.org plugins.
 
-For <a href="https://docs.dlxplugins.com/wp-plugin-info-card/overview/easy-digital-downloads-integration">WP Plugin Info Card to work properly with EDD</a> the following add-ons are recommended:
+For <a href="https://docs.dlxplugins.com/product/wp-plugin-info-card/easy-digital-downloads-integration/">WP Plugin Info Card to work properly with EDD</a> the following add-ons are recommended:
 
 * Software Licensing (Required)
 * Product Reviews (optional, but nice to have)
@@ -173,11 +173,11 @@ Yes, in the block editor, you can customize the title for each displayed plugin 
 
 For shortcodes, where plugins are displayed, simply use `plugin-slug="my custom title"`. For example, for this plugin, you would use: `wp-plugin-info-card="My Plugin Info Card"`.
 
-See shortcode usage <a href="https://docs.dlxplugins.com/wp-plugin-info-card/shortcodes/wp-pic#slug-title">for custom titles</a>.
+See shortcode usage <a href="https://docs.dlxplugins.com/product/wp-plugin-info-card/wp-pic">for custom titles</a>.
 
 = What layouts/color schemes come with the plugin? =
 
-For the main plugin card block/shortcode, there are <a href="https://docs.dlxplugins.com/wp-plugin-info-card/overview/layouts">five different layouts</a>, and <a href="https://docs.dlxplugins.com/wp-plugin-info-card/overview/schemes">fourteen color schemes</a>.
+For the main plugin card block/shortcode, there are <a href="https://docs.dlxplugins.com/product/wp-plugin-info-card/layouts">five different layouts</a>, and <a href="https://docs.dlxplugins.com/product/wp-plugin-info-card/schemes">fourteen color schemes</a>.
 
 = Is the default card-flipping effect cross-browser compatible? =
 
@@ -349,7 +349,7 @@ Yes, this video shows you how:
 
 = 4.0.0 =
 * Released 2023-01-20
-* New shortcode and block: <a href="https://wppic.dlxplugins.com/blocks/site-plugins-card-grid">Site Plugins Card Grid</a>.
+* New shortcode and block: Site Plugins Card Grid.
 * The plugin's code and build scripts have been updated to the latest standards.
 
 = 3.4.6 =
