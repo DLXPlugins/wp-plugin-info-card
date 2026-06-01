@@ -203,7 +203,7 @@ Yes, this video shows you how:
 == Changelog ==
 
 = 6.3.3 =
-* Released 2026-05-29
+* Released 2026-06-01
 * Fix: GitHub Card styles weren't loading for shortcodes.
 * Fix: GitHub Card avatars would 404 with no fallback. Avatars are now lazy-loaded with a default if the image fails to load.
 * Fix: Profile badges have been updated with the new org layout for scraping.
