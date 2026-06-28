@@ -289,7 +289,7 @@ const Interface = ( props ) => {
 						</p>
 						<Button
 							variant="primary"
-							href="https://wppic.dlxplugins.com/"
+							href="https://docs.dlxplugins.com/product/wp-plugin-info-card/custom-plugin-cards/"
 							className="wppic-btn wppic-btn-alt has-icon-right btn-full-width"
 							icon={ () => <ExternalLink /> }
 							iconPosition="right"

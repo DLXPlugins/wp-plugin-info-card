@@ -83,7 +83,7 @@ add_filter( 'plugin_action_links_' . WPPIC_BASE, 'wppic_settings_link' );
  ***************************************************************/
 function wppic_meta_links( $links, $file ) {
 	if ( $file === 'wp-plugin-info-card/wp-plugin-info-card.php' ) {
-		$links[] = '<a href="https://wppic.dlxplugins.com/" target="_blank" title="' . __( 'Documentation and examples', 'wp-plugin-info-card' ) . '"><strong>' . __( 'Documentation and examples', 'wp-plugin-info-card' ) . '</strong></a>';
+		$links[] = '<a href="https://docs.dlxplugins.com/product/wp-plugin-info-card/" target="_blank" title="' . __( 'Documentation and examples', 'wp-plugin-info-card' ) . '"><strong>' . __( 'Documentation and examples', 'wp-plugin-info-card' ) . '</strong></a>';
 		$links[] = '<a href="http://b-website.com/category/plugins" target="_blank" title="' . __( 'More plugins by b*web', 'wp-plugin-info-card' ) . '">' . __( 'More plugins by b*web', 'wp-plugin-info-card' ) . '</a>';
 		$links[] = '<a href="https://dlxplugins.com/plugins/" target="_blank" title="' . __( 'More plugins by MediaRon', 'wp-plugin-info-card' ) . '">' . __( 'More plugins by DLX Plugins', 'wp-plugin-info-card' ) . '</a>';
 	}
