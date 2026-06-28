@@ -232,239 +232,243 @@ const GitHubInfoCardGrid = ( props ) => {
 	];
 
 	const inspectorControls = (
-		<InspectorControls>
-			{
-				<PanelBody title={ __( 'Layout', 'wp-plugin-info-card' ) }>
-					<SelectControl
-						label={ __( 'Margin Spacing', 'wp-plugin-info-card' ) }
-						options={ marginSpacingOptions }
-						value={ marginSpacing }
+		<>
+			<InspectorControls>
+				{
+					<PanelBody title={ __( 'Layout', 'wp-plugin-info-card' ) }>
+						<SelectControl
+							label={ __( 'Margin Spacing', 'wp-plugin-info-card' ) }
+							options={ marginSpacingOptions }
+							value={ marginSpacing }
+							onChange={ ( value ) => {
+								setAttributes( { marginSpacing: value } );
+							} }
+						/>
+						<SelectControl
+							label={ __( 'Margin Target', 'wp-plugin-info-card' ) }
+							options={ marginSpacingTargetOptions }
+							value={ marginSpacingTarget }
+							onChange={ ( value ) => {
+								setAttributes( { marginSpacingTarget: value } );
+							} }
+						/>
+						{
+							numChildren > 1 && (
+								<>
+									<PanelRow className="wppic-panel-rows-cols">
+										{ getCols() }
+									</PanelRow>
+									<PanelRow className="wppic-panel-rows-numbers">
+										<NumbersComponent
+											value={ colGap }
+											label={ __( 'Column Gap (in px)', 'wp-plugin-info-card' ) }
+											numbers={ [ 20, 40, 60, 80 ] }
+											onClick={ ( value ) => {
+												setAttributes( { colGap: parseInt( value ) } );
+											} }
+											id="wppic-col-gap"
+										/>
+									</PanelRow>
+									<PanelRow className="wppic-panel-rows-numbers">
+										<NumbersComponent
+											value={ rowGap }
+											label={ __( 'Row Gap (in px)', 'wp-plugin-info-card' ) }
+											numbers={ [ 20, 40, 60, 80 ] }
+											onClick={ ( value ) => {
+												setAttributes( { rowGap: parseInt( value ) } );
+											} }
+											id="wppic-row-gap"
+										/>
+									</PanelRow>
+								</>
+							)
+						}
+						<PanelRow>
+							<BaseControl
+								label={ __( 'Horizontal Alignment', 'wp-plugin-info-card' ) }
+								id="wppic-horizontal-align"
+							>
+								<ButtonGroup>
+									<Button
+										variant={ horizontalAlign === 'left' ? 'primary' : 'secondary' }
+										onClick={ () => {
+											setAttributes( { horizontalAlign: 'left' } );
+										} }
+										icon="align-left"
+										label={ __( 'Left', 'wp-plugin-info-card' ) }
+									/>
+									<Button
+										variant={ horizontalAlign === 'center' ? 'primary' : 'secondary' }
+										onClick={ () => {
+											setAttributes( { horizontalAlign: 'center' } );
+										} }
+										icon="align-center"
+										label={ __( 'Center', 'wp-plugin-info-card' ) }
+									/>
+									<Button
+										variant={ horizontalAlign === 'right' ? 'primary' : 'secondary' }
+										onClick={ () => {
+											setAttributes( { horizontalAlign: 'right' } );
+										} }
+										icon="align-right"
+										label={ __( 'Right', 'wp-plugin-info-card' ) }
+									/>
+								</ButtonGroup>
+							</BaseControl>
+						</PanelRow>
+					</PanelBody>
+				}
+				<PanelBody title={ __( 'Visibility Controls', 'wp-plugin-info-card' ) }>
+					<ToggleControl
+						label={ __( 'Show Top Bar', 'wp-plugin-info-card' ) }
+						checked={ showTopBar }
 						onChange={ ( value ) => {
-							setAttributes( { marginSpacing: value } );
+							setShowTopBar( value );
+							setAttributes( { showTopBar: value } );
 						} }
+						help={ __( 'Show the top bar with the icons.', 'wp-plugin-info-card' ) }
+					/>
+					<ToggleControl
+						label={ __( 'Show Stats Bar', 'wp-plugin-info-card' ) }
+						checked={ showStatsBar }
+						onChange={ ( value ) => {
+							setShowStatsBar( value );
+							setAttributes( { showStatsBar: value } );
+						} }
+						help={ __( 'Show the stats bar with the plugin stats.', 'wp-plugin-info-card' ) }
+					/>
+					<ToggleControl
+						label={ __( 'Show Author Bar', 'wp-plugin-info-card' ) }
+						checked={ showAuthorBar }
+						onChange={ ( value ) => {
+							setShowAuthorBar( value );
+							setAttributes( { showAuthorBar: value } );
+						} }
+						help={ __( 'Show the author bar with the Organization Name and login.', 'wp-plugin-info-card' ) }
+					/>
+					<ToggleControl
+						label={ __( 'Show Last Updated', 'wp-plugin-info-card' ) }
+						checked={ showLastUpdated }
+						onChange={ ( value ) => {
+							setShowLastUpdated( value );
+							setAttributes( { showLastUpdated: value } );
+						} }
+						help={ __( 'Show the last updated date.', 'wp-plugin-info-card' ) }
 					/>
 					<SelectControl
-						label={ __( 'Margin Target', 'wp-plugin-info-card' ) }
-						options={ marginSpacingTargetOptions }
-						value={ marginSpacingTarget }
+						label={ __( 'Button Target and Type', 'wp-plugin-info-card' ) }
+						value={ buttonType }
 						onChange={ ( value ) => {
-							setAttributes( { marginSpacingTarget: value } );
+							setButtonType( value );
+							setAttributes( { buttonType: value } );
 						} }
+						options={ [
+							{ label: __( 'View on GitHub', 'wp-plugin-info-card' ), value: 'github' },
+							{ label: __( 'View Website', 'wp-plugin-info-card' ), value: 'website' },
+							{ label: __( 'Sponsor', 'wp-plugin-info-card' ), value: 'sponsor' },
+							{ label: __( 'Download', 'wp-plugin-info-card' ), value: 'download' },
+							{ label: __( 'Star', 'wp-plugin-info-card' ), value: 'star' },
+						] }
+						help={ __( 'Select the type of button to display and where it will link to.', 'wp-plugin-info-card' ) }
 					/>
-					{
-						numChildren > 1 && (
-							<>
-								<PanelRow className="wppic-panel-rows-cols">
-									{ getCols() }
-								</PanelRow>
-								<PanelRow className="wppic-panel-rows-numbers">
-									<NumbersComponent
-										value={ colGap }
-										label={ __( 'Column Gap (in px)', 'wp-plugin-info-card' ) }
-										numbers={ [ 20, 40, 60, 80 ] }
-										onClick={ ( value ) => {
-											setAttributes( { colGap: parseInt( value ) } );
-										} }
-										id="wppic-col-gap"
-									/>
-								</PanelRow>
-								<PanelRow className="wppic-panel-rows-numbers">
-									<NumbersComponent
-										value={ rowGap }
-										label={ __( 'Row Gap (in px)', 'wp-plugin-info-card' ) }
-										numbers={ [ 20, 40, 60, 80 ] }
-										onClick={ ( value ) => {
-											setAttributes( { rowGap: parseInt( value ) } );
-										} }
-										id="wppic-row-gap"
-									/>
-								</PanelRow>
-							</>
-						)
-					}
-					<PanelRow>
-						<BaseControl
-							label={ __( 'Horizontal Alignment', 'wp-plugin-info-card' ) }
-							id="wppic-horizontal-align"
-						>
-							<ButtonGroup>
-								<Button
-									variant={ horizontalAlign === 'left' ? 'primary' : 'secondary' }
-									onClick={ () => {
-										setAttributes( { horizontalAlign: 'left' } );
-									} }
-									icon="align-left"
-									label={ __( 'Left', 'wp-plugin-info-card' ) }
-								/>
-								<Button
-									variant={ horizontalAlign === 'center' ? 'primary' : 'secondary' }
-									onClick={ () => {
-										setAttributes( { horizontalAlign: 'center' } );
-									} }
-									icon="align-center"
-									label={ __( 'Center', 'wp-plugin-info-card' ) }
-								/>
-								<Button
-									variant={ horizontalAlign === 'right' ? 'primary' : 'secondary' }
-									onClick={ () => {
-										setAttributes( { horizontalAlign: 'right' } );
-									} }
-									icon="align-right"
-									label={ __( 'Right', 'wp-plugin-info-card' ) }
-								/>
-							</ButtonGroup>
-						</BaseControl>
-					</PanelRow>
 				</PanelBody>
-			}
+			</InspectorControls>
 			{ hasCustomColors && (
-				<PanelColorSettings
-					__experimentalIsRenderedInSidebar
-					title={ __( 'Custom Color Settings', 'wp-plugin-info-card' ) }
-					colorSettings={ [
-						{
-							label: __( 'Background Color', 'wp-plugin-info-card' ),
-							value: backgroundColor,
-							onChange: ( value ) => {
-								setAttributes( { backgroundColor: value } );
+				<InspectorControls group="styles">
+					<PanelColorSettings
+						__experimentalIsRenderedInSidebar
+						title={ __( 'Custom Color Settings', 'wp-plugin-info-card' ) }
+						colorSettings={ [
+							{
+								label: __( 'Background Color', 'wp-plugin-info-card' ),
+								value: backgroundColor,
+								onChange: ( value ) => {
+									setAttributes( { backgroundColor: value } );
+								},
 							},
-						},
-						{
-							label: __( 'Text Color', 'wp-plugin-info-card' ),
-							value: textColor,
-							onChange: ( value ) => {
-								setAttributes( { textColor: value } );
+							{
+								label: __( 'Text Color', 'wp-plugin-info-card' ),
+								value: textColor,
+								onChange: ( value ) => {
+									setAttributes( { textColor: value } );
+								},
 							},
-						},
-						{
-							label: __( 'Icon Color', 'wp-plugin-info-card' ),
-							value: iconColor,
-							onChange: ( value ) => {
-								setAttributes( { iconColor: value } );
+							{
+								label: __( 'Icon Color', 'wp-plugin-info-card' ),
+								value: iconColor,
+								onChange: ( value ) => {
+									setAttributes( { iconColor: value } );
+								},
 							},
-						},
-						{
-							label: __( 'Icon Color Hover', 'wp-plugin-info-card' ),
-							value: iconColorHover,
-							onChange: ( value ) => {
-								setAttributes( { iconColorHover: value } );
+							{
+								label: __( 'Icon Color Hover', 'wp-plugin-info-card' ),
+								value: iconColorHover,
+								onChange: ( value ) => {
+									setAttributes( { iconColorHover: value } );
+								},
 							},
-						},
-						{
-							label: __( 'Border Color', 'wp-plugin-info-card' ),
-							value: borderColor,
-							onChange: ( value ) => {
-								setAttributes( { borderColor: value } );
+							{
+								label: __( 'Border Color', 'wp-plugin-info-card' ),
+								value: borderColor,
+								onChange: ( value ) => {
+									setAttributes( { borderColor: value } );
+								},
 							},
-						},
-						{
-							label: __( 'Language Background Color', 'wp-plugin-info-card' ),
-							value: languageBgColor,
-							onChange: ( value ) => {
-								setAttributes( { languageBgColor: value } );
+							{
+								label: __( 'Language Background Color', 'wp-plugin-info-card' ),
+								value: languageBgColor,
+								onChange: ( value ) => {
+									setAttributes( { languageBgColor: value } );
+								},
 							},
-						},
-						{
-							label: __( 'Language Text Color', 'wp-plugin-info-card' ),
-							value: languageTextColor,
-							onChange: ( value ) => {
-								setAttributes( { languageTextColor: value } );
+							{
+								label: __( 'Language Text Color', 'wp-plugin-info-card' ),
+								value: languageTextColor,
+								onChange: ( value ) => {
+									setAttributes( { languageTextColor: value } );
+								},
 							},
-						},
-						{
-							label: __( 'Sponsors Color', 'wp-plugin-info-card' ),
-							value: sponsorsColor,
-							onChange: ( value ) => {
-								setAttributes( { sponsorsColor: value } );
+							{
+								label: __( 'Sponsors Color', 'wp-plugin-info-card' ),
+								value: sponsorsColor,
+								onChange: ( value ) => {
+									setAttributes( { sponsorsColor: value } );
+								},
 							},
-						},
-						{
-							label: __( 'Button Background Color', 'wp-plugin-info-card' ),
-							value: buttonBgColor,
-							onChange: ( value ) => {
-								setAttributes( { buttonBgColor: value } );
+							{
+								label: __( 'Button Background Color', 'wp-plugin-info-card' ),
+								value: buttonBgColor,
+								onChange: ( value ) => {
+									setAttributes( { buttonBgColor: value } );
+								},
 							},
-						},
-						{
-							label: __( 'Button Background Color Hover', 'wp-plugin-info-card' ),
-							value: buttonBgColorHover,
-							onChange: ( value ) => {
-								setAttributes( { buttonBgColorHover: value } );
+							{
+								label: __( 'Button Background Color Hover', 'wp-plugin-info-card' ),
+								value: buttonBgColorHover,
+								onChange: ( value ) => {
+									setAttributes( { buttonBgColorHover: value } );
+								},
 							},
-						},
-						{
-							label: __( 'Button Text Color', 'wp-plugin-info-card' ),
-							value: buttonTextColor,
-							onChange: ( value ) => {
-								setAttributes( { buttonTextColor: value } );
+							{
+								label: __( 'Button Text Color', 'wp-plugin-info-card' ),
+								value: buttonTextColor,
+								onChange: ( value ) => {
+									setAttributes( { buttonTextColor: value } );
+								},
 							},
-						},
-						{
-							label: __( 'Button Text Color Hover', 'wp-plugin-info-card' ),
-							value: buttonTextColorHover,
-							onChange: ( value ) => {
-								setAttributes( { buttonTextColorHover: value } );
+							{
+								label: __( 'Button Text Color Hover', 'wp-plugin-info-card' ),
+								value: buttonTextColorHover,
+								onChange: ( value ) => {
+									setAttributes( { buttonTextColorHover: value } );
+								},
 							},
-						},
-					] }
-					colors={ colors }
-				/>
+						] }
+						colors={ colors }
+					/>
+				</InspectorControls>
 			) }
-			<PanelBody title={ __( 'Visibility Controls', 'wp-plugin-info-card' ) }>
-				<ToggleControl
-					label={ __( 'Show Top Bar', 'wp-plugin-info-card' ) }
-					checked={ showTopBar }
-					onChange={ ( value ) => {
-						setShowTopBar( value );
-						setAttributes( { showTopBar: value } );
-					} }
-					help={ __( 'Show the top bar with the icons.', 'wp-plugin-info-card' ) }
-				/>
-				<ToggleControl
-					label={ __( 'Show Stats Bar', 'wp-plugin-info-card' ) }
-					checked={ showStatsBar }
-					onChange={ ( value ) => {
-						setShowStatsBar( value );
-						setAttributes( { showStatsBar: value } );
-					} }
-					help={ __( 'Show the stats bar with the plugin stats.', 'wp-plugin-info-card' ) }
-				/>
-				<ToggleControl
-					label={ __( 'Show Author Bar', 'wp-plugin-info-card' ) }
-					checked={ showAuthorBar }
-					onChange={ ( value ) => {
-						setShowAuthorBar( value );
-						setAttributes( { showAuthorBar: value } );
-					} }
-					help={ __( 'Show the author bar with the Organization Name and login.', 'wp-plugin-info-card' ) }
-				/>
-				<ToggleControl
-					label={ __( 'Show Last Updated', 'wp-plugin-info-card' ) }
-					checked={ showLastUpdated }
-					onChange={ ( value ) => {
-						setShowLastUpdated( value );
-						setAttributes( { showLastUpdated: value } );
-					} }
-					help={ __( 'Show the last updated date.', 'wp-plugin-info-card' ) }
-				/>
-				<SelectControl
-					label={ __( 'Button Target and Type', 'wp-plugin-info-card' ) }
-					value={ buttonType }
-					onChange={ ( value ) => {
-						setButtonType( value );
-						setAttributes( { buttonType: value } );
-					} }
-					options={ [
-						{ label: __( 'View on GitHub', 'wp-plugin-info-card' ), value: 'github' },
-						{ label: __( 'View Website', 'wp-plugin-info-card' ), value: 'website' },
-						{ label: __( 'Sponsor', 'wp-plugin-info-card' ), value: 'sponsor' },
-						{ label: __( 'Download', 'wp-plugin-info-card' ), value: 'download' },
-						{ label: __( 'Star', 'wp-plugin-info-card' ), value: 'star' },
-					] }
-					help={ __( 'Select the type of button to display and where it will link to.', 'wp-plugin-info-card' ) }
-				/>
-			</PanelBody>
-		</InspectorControls>
+		</>
 	);
 
 	const blockProps = useBlockProps( {

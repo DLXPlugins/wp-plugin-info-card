@@ -8,8 +8,8 @@
 import axios from 'axios';
 import classnames from 'classnames';
 import { escapeAttribute, escapeHTML } from '@wordpress/escape-html';
-import { decodeEntities } from '@wordpress/html-entities';
 import Logo from '../Logo';
+import { createBlock } from '@wordpress/blocks';
 import { isURL, filterURLForDisplay } from '@wordpress/url';
 import { ForkIcon, HomeIcon, GitHubIcon, HeartIcon, StarIcon, EyeIcon, CodeIcon } from '../components/GitHubIcons';
 import { Fragment, useEffect, useState } from 'react';
@@ -53,7 +53,7 @@ import {
 import { useInstanceId } from '@wordpress/compose';
 
 const GitHubInfoCard = ( props ) => {
-	const { attributes, setAttributes, context } = props;
+	const { attributes, setAttributes, context, clientId } = props;
 
 	const blockUniqueId = context[ 'wppic/github-grid-uniqueId' ];
 
@@ -715,6 +715,50 @@ const GitHubInfoCard = ( props ) => {
 										) }
 									</DropdownMenu>
 								) }
+							</ToolbarItem>
+						</ToolbarGroup>
+						<ToolbarGroup>
+							<ToolbarButton
+								icon="admin-generic"
+								title={ __(
+									'GitHub Grid Settings',
+									'wp-plugin-info-card',
+								) }
+								onClick={ () => {
+									// Select our parent block.
+									const parentBlockClientId = select( 'core/block-editor' ).getBlockRootClientId( clientId );
+									if ( ! parentBlockClientId ) {
+										return;
+									}
+									const parentBlock = select( 'core/block-editor' ).getBlock( parentBlockClientId );
+									if ( ! parentBlock ) {
+										return;
+									}
+									dispatch( 'core/block-editor' ).selectBlock( parentBlockClientId );
+								} }
+							/>
+						</ToolbarGroup>
+						<ToolbarGroup>
+							<ToolbarItem as={ Button }
+								onClick={ () => {
+									// Select our parent block.
+									const parentBlockClientId = select( 'core/block-editor' ).getBlockRootClientId( clientId );
+									if ( ! parentBlockClientId ) {
+										return;
+									}
+									// Get the current inner blocks.
+									const parentBlock = select( 'core/block-editor' ).getBlock( parentBlockClientId );
+									const innerBlocks = parentBlock.innerBlocks;
+									const parentInnerBlocksCount = innerBlocks.length;
+									// Create a new block.
+									const newBlock = createBlock( 'wp-plugin-info-card/github-info-card' );
+									// Insert the block at the end of the inner blocks.
+									dispatch( 'core/block-editor' ).insertBlock( newBlock, parentInnerBlocksCount, parentBlockClientId );
+									// Select the new block.
+									dispatch( 'core/block-editor' ).selectBlock( newBlock.clientId );
+								} }
+							>
+								{ __( 'Add Card', 'wp-plugin-info-card' ) }
 							</ToolbarItem>
 						</ToolbarGroup>
 					</BlockControls>
