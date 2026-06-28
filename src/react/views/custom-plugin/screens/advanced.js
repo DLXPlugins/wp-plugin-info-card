@@ -249,12 +249,12 @@ const Advanced = () => {
 						</p>
 						<Button
 							variant="secondary"
-							href="https://docs.dlxplugins.com/wp-plugin-info-card/"
+							href="https://docs.dlxplugins.com/product/wp-plugin-info-card/"
 							className="wppic-btn wppic-btn-alt has-icon-right btn-full-width"
 							target="_blank"
 							onClick={ ( e ) => {
 								e.preventDefault();
-								window.open( 'https://docs.dlxplugins.com/wp-plugin-info-card/', '_blank' );
+								window.open( 'https://docs.dlxplugins.com/product/wp-plugin-info-card/', '_blank' );
 							} }
 							rel="noopener noreferrer"
 							icon={ () => <ExternalLink /> }
