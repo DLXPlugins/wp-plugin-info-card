@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Tags: cards, card, github, Edd, grid
 Requires at least: 6.8
 Tested up to: 7.0
-Stable tag: 6.3.3
+Stable tag: 6.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -201,6 +201,12 @@ Yes, this video shows you how:
 7. .org Profile badges displaying in a grid.
 
 == Changelog ==
+
+= 6.3.4 =
+* Released 2026-06-27
+* Fix: Updating documentation URLs in the plugin and admin.
+* New: GitHub Card Grid blocks have been updated to make it easier to navigate between parent and child blocks.
+* Update: Making sure Badges block and shortcode still works with new .org profile changes.
 
 = 6.3.3 =
 * Released 2026-06-01
@@ -648,5 +654,5 @@ Yes, this video shows you how:
 
 == Upgrade Notice ==
 
-= 6.3.3 =
-Fix: GitHub Card styles weren't loading for shortcode use. Fix: GitHub card avatars are now lazy-loaded and error-checked for 404's with a fallback. Fix: Profile badges have been updated with the new .org layout for data scraping.
+= 6.3.4 =
+Fix: Updating documentation URLs in the plugin and admin. New: GitHub Card Grid blocks have been updated to make it easier to navigate between parent and child blocks.
