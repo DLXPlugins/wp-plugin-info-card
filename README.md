@@ -14,6 +14,9 @@ If you use WP Plugin Info Card, please consider a code contribution or sponsorsh
 
 1. <a href="https://wordpress.org/plugins/wp-plugin-info-card">Plugin Page on WordPress.org</a>
 2. <a href="https://dlxplugins.com/plugins/wp-plugin-info-card/">Plugin Documentation</a> (hosted on DLXPlugins.com)
+3. [Contributing](CONTRIBUTING.md) — setup, build, and PR expectations
+4. [Developer docs](docs/README.md) — architecture, debt, REST, GitHub cards
+5. [AGENTS.md](AGENTS.md) — orientation for AI agents working in this repo
 
 ## Devs - To Duplicate
 
@@ -21,6 +24,8 @@ If you use WP Plugin Info Card, please consider a code contribution or sponsorsh
 2. Run `nvm use`
 3. Run `npm i --legacy-peer-deps`.
 4. Run `composer install`.
+
+Full contributor setup and coding notes: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 To run build scripts:
 
