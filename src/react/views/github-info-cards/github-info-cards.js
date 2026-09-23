@@ -305,7 +305,7 @@ const GitHubInfoCards = () => {
 	/**
 	 * Get the rates table.
 	 *
-	 * @returns {React.ReactNode} The rates table.
+	 * @return {React.ReactNode} The rates table.
 	 */
 	const getRatesTable = () => {
 		return (
@@ -394,12 +394,12 @@ const GitHubInfoCards = () => {
 						</p>
 						<Button
 							variant="secondary"
-							href="https://docs.dlxplugins.com/product/wp-plugin-info-card/github-info-cards/"
+							href="https://docs.mediaron.com/product/wp-plugin-info-card/github-info-cards/"
 							className="wppic-btn wppic-btn-alt has-icon-right btn-full-width"
 							target="_blank"
 							onClick={ ( e ) => {
 								e.preventDefault();
-								window.open( 'https://docs.dlxplugins.com/product/wp-plugin-info-card/github-info-cards/', '_blank' );
+								window.open( 'https://docs.mediaron.com/product/wp-plugin-info-card/github-info-cards/', '_blank' );
 							} }
 							rel="noopener noreferrer"
 							icon={ () => <ExternalLink /> }

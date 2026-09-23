@@ -1,6 +1,6 @@
 # Contributing to WP Plugin Info Card
 
-Thanks for helping maintain WP Plugin Info Card. User-facing docs live at [docs.dlxplugins.com](https://docs.dlxplugins.com/product/wp-plugin-info-card/). This guide covers local development and how to contribute code.
+Thanks for helping maintain WP Plugin Info Card. User-facing docs live at [docs.mediaron.com](https://docs.mediaron.com/product/wp-plugin-info-card/). This guide covers local development and how to contribute code.
 
 For architecture and debt context, start at [`docs/README.md`](docs/README.md). Agents should also read [`AGENTS.md`](AGENTS.md).
 

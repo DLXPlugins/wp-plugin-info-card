@@ -2,7 +2,7 @@
 
 How WP Plugin Info Card is structured for developers.
 
-User shortcode/block references remain on [DLX docs](https://docs.dlxplugins.com/product/wp-plugin-info-card/). This page covers the dual stack and why shortcodes still matter.
+User shortcode/block references remain on [DLX docs](https://docs.mediaron.com/product/wp-plugin-info-card/). This page covers the dual stack and why shortcodes still matter.
 
 ## High-level flow
 

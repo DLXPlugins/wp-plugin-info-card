@@ -6,7 +6,7 @@ Orientation for Cursor and other AI agents working in this repo.
 
 WordPress plugin that renders plugin/theme (and related) **info cards**. Production card HTML is **PHP**. React powers the **block editor** and **admin settings UIs**, not the frontend card markup.
 
-User-facing shortcode/block docs live at [docs.dlxplugins.com](https://docs.dlxplugins.com/product/wp-plugin-info-card/). In-repo docs under [`docs/`](docs/README.md) are for developers and agents.
+User-facing shortcode/block docs live at [docs.mediaron.com](https://docs.mediaron.com/product/wp-plugin-info-card/). In-repo docs under [`docs/`](docs/README.md) are for developers and agents.
 
 ## Bootstrap
 

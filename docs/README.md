@@ -2,7 +2,7 @@
 
 In-repo documentation for contributors and agents working on WP Plugin Info Card.
 
-**User-facing** shortcode and block docs stay on [DLX Plugins](https://docs.dlxplugins.com/product/wp-plugin-info-card/). WordPress.org listing copy lives in [`readme.txt`](../readme.txt).
+**User-facing** shortcode and block docs stay on [DLX Plugins](https://docs.mediaron.com/product/wp-plugin-info-card/). WordPress.org listing copy lives in [`readme.txt`](../readme.txt).
 
 ## Start here
 
