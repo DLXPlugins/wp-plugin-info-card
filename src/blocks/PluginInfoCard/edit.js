@@ -615,14 +615,22 @@ const WPPluginInfoCard = ( props ) => {
 
 													if ( isURL( clipboardData ) ) {
 														// Extract out the slug from the URL.
-														const urlRegex = /([^\/]*)\/$/;
-														const newSlug = urlRegex.exec(
+														const urlRegex = /(plugins|themes)\/([^\/]*)\/$/;
+														const matchData = urlRegex.exec(
 															clipboardData,
-														)[ 1 ];
-														setAttributes( {
-															slug: newSlug,
-														} );
-														setSlug( newSlug );
+														);
+														if ( matchData ) {
+															const newSlug = matchData[ 2 ];
+															const asset = 'themes' === matchData[ 1 ] ? 'theme' : 'plugin';
+															setAttributes(
+																{
+																	slug: newSlug,
+																	type: asset,
+																},
+															);
+															setSlug( newSlug );
+															setType( asset );
+														}
 													}
 												} }
 												onBlur={ () => {
