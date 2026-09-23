@@ -2,8 +2,8 @@
 Contributors: briKou, ronalfy
 Tags: cards, card, github, Edd, grid
 Requires at least: 6.8
-Tested up to: 7.0
-Stable tag: 6.3.4
+Tested up to: 7.1
+Stable tag: 6.3.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -201,6 +201,11 @@ Yes, this video shows you how:
 7. .org Profile badges displaying in a grid.
 
 == Changelog ==
+
+= 6.3.5 =
+* Released 2026-09-23
+* Fix: Copying and pasting a theme URL into the block plugin now switches you automatically to the 'theme' asset type.
+* Fix: The flex layout's image could overlap the container.
 
 = 6.3.4 =
 * Released 2026-06-27
@@ -654,5 +659,5 @@ Yes, this video shows you how:
 
 == Upgrade Notice ==
 
-= 6.3.4 =
-Fix: Updating documentation URLs in the plugin and admin. New: GitHub Card Grid blocks have been updated to make it easier to navigate between parent and child blocks.
+= 6.3.5 =
+Fix: Pasting a theme url into the block will now automatically change it to a theme option. The flex layout's image was overlapping its container.
