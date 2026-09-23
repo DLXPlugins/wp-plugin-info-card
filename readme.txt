@@ -1,6 +1,6 @@
 === WP Plugin Info Card===
 Contributors: briKou, ronalfy
-Tags: cards, card, github, Edd, grid
+Tags: cards, card, github, adopt-me, grid
 Requires at least: 6.8
 Tested up to: 7.1
 Stable tag: 6.3.5
