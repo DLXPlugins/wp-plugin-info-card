@@ -754,20 +754,22 @@ class Shortcodes {
 	 * Get the main (plugin info card) shortcode.
 	 */
 	public function get_base_shortcode() {
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Public read-only card render. No state change.
 		$attrs = array(
-			'type'        => $_GET['type'],
-			'slug'        => $_GET['slug'],
-			'image'       => isset( $_GET['image'] ) ? $_GET['image'] : '',
-			'align'       => isset( $_GET['align'] ) ? $_GET['align'] : '',
-			'containerid' => isset( $_GET['containerid'] ) ? $_GET['containerid'] : '',
-			'margin'      => isset( $_GET['margin'] ) ? $_GET['margin'] : '',
-			'clear'       => isset( $_GET['clear'] ) ? $_GET['clear'] : '',
-			'expiration'  => isset( $_GET['expiration'] ) ? $_GET['expiration'] : '',
-			'ajax'        => isset( $_GET['ajax'] ) ? $_GET['ajax'] : '',
-			'scheme'      => isset( $_GET['scheme'] ) ? $_GET['scheme'] : '',
-			'layout'      => isset( $_GET['layout'] ) ? $_GET['layout'] : '',
-			'multi'       => isset( $_GET['multi'] ) ? filter_var( $_GET['multi'], FILTER_VALIDATE_BOOLEAN ) : false,
+			'type'        => isset( $_GET['type'] ) ? sanitize_key( wp_unslash( $_GET['type'] ) ) : '',
+			'slug'        => isset( $_GET['slug'] ) ? sanitize_text_field( wp_unslash( $_GET['slug'] ) ) : '',
+			'image'       => isset( $_GET['image'] ) ? esc_url_raw( wp_unslash( $_GET['image'] ) ) : '',
+			'align'       => isset( $_GET['align'] ) ? sanitize_key( wp_unslash( $_GET['align'] ) ) : '',
+			'containerid' => isset( $_GET['containerid'] ) ? sanitize_text_field( wp_unslash( $_GET['containerid'] ) ) : '',
+			'margin'      => isset( $_GET['margin'] ) ? sanitize_text_field( wp_unslash( $_GET['margin'] ) ) : '',
+			'clear'       => isset( $_GET['clear'] ) ? sanitize_key( wp_unslash( $_GET['clear'] ) ) : '',
+			'expiration'  => isset( $_GET['expiration'] ) ? absint( wp_unslash( $_GET['expiration'] ) ) : '',
+			'ajax'        => isset( $_GET['ajax'] ) ? sanitize_key( wp_unslash( $_GET['ajax'] ) ) : '',
+			'scheme'      => isset( $_GET['scheme'] ) ? sanitize_key( wp_unslash( $_GET['scheme'] ) ) : '',
+			'layout'      => isset( $_GET['layout'] ) ? sanitize_key( wp_unslash( $_GET['layout'] ) ) : '',
+			'multi'       => isset( $_GET['multi'] ) ? filter_var( wp_unslash( $_GET['multi'] ), FILTER_VALIDATE_BOOLEAN ) : false,
 		);
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 		die( self::shortcode_function( $attrs ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Card HTML is escaped in the shortcode templates.
 	}
 
@@ -775,40 +777,47 @@ class Shortcodes {
 	 * Retrieve the query shortcode.
 	 */
 	public function get_query_shortcode() {
-		$attrs = array(
-			'cols'        => $_GET['cols'],
-			'per_page'    => $_GET['per_page'],
-			'type'        => $_GET['type'],
-			'image'       => isset( $_GET['image'] ) ? $_GET['image'] : '',
-			'align'       => isset( $_GET['align'] ) ? $_GET['align'] : '',
-			'containerid' => isset( $_GET['containerid'] ) ? $_GET['containerid'] : '',
-			'margin'      => isset( $_GET['margin'] ) ? $_GET['margin'] : '',
-			'clear'       => isset( $_GET['clear'] ) ? $_GET['clear'] : '',
-			'expiration'  => isset( $_GET['expiration'] ) ? $_GET['expiration'] : '',
-			'ajax'        => isset( $_GET['ajax'] ) ? $_GET['ajax'] : '',
-			'scheme'      => isset( $_GET['scheme'] ) ? $_GET['scheme'] : '',
-			'layout'      => isset( $_GET['layout'] ) ? $_GET['layout'] : '',
-			'sortby'      => isset( $_GET['sortby'] ) ? $_GET['sortby'] : '',
-			'sort'        => isset( $_GET['sort'] ) ? $_GET['sort'] : '',
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Public read-only card render. No state change.
+		$attrs  = array(
+			'cols'        => isset( $_GET['cols'] ) ? absint( wp_unslash( $_GET['cols'] ) ) : 0,
+			'per_page'    => isset( $_GET['per_page'] ) ? absint( wp_unslash( $_GET['per_page'] ) ) : 0,
+			'type'        => isset( $_GET['type'] ) ? sanitize_key( wp_unslash( $_GET['type'] ) ) : '',
+			'image'       => isset( $_GET['image'] ) ? esc_url_raw( wp_unslash( $_GET['image'] ) ) : '',
+			'align'       => isset( $_GET['align'] ) ? sanitize_key( wp_unslash( $_GET['align'] ) ) : '',
+			'containerid' => isset( $_GET['containerid'] ) ? sanitize_text_field( wp_unslash( $_GET['containerid'] ) ) : '',
+			'margin'      => isset( $_GET['margin'] ) ? sanitize_text_field( wp_unslash( $_GET['margin'] ) ) : '',
+			'clear'       => isset( $_GET['clear'] ) ? sanitize_key( wp_unslash( $_GET['clear'] ) ) : '',
+			'expiration'  => isset( $_GET['expiration'] ) ? absint( wp_unslash( $_GET['expiration'] ) ) : '',
+			'ajax'        => isset( $_GET['ajax'] ) ? sanitize_key( wp_unslash( $_GET['ajax'] ) ) : '',
+			'scheme'      => isset( $_GET['scheme'] ) ? sanitize_key( wp_unslash( $_GET['scheme'] ) ) : '',
+			'layout'      => isset( $_GET['layout'] ) ? sanitize_key( wp_unslash( $_GET['layout'] ) ) : '',
+			'sortby'      => isset( $_GET['sortby'] ) ? sanitize_key( wp_unslash( $_GET['sortby'] ) ) : '',
+			'sort'        => isset( $_GET['sort'] ) ? sanitize_text_field( wp_unslash( $_GET['sort'] ) ) : '',
 		);
-		if ( ! empty( $_GET['browse'] ) ) {
-			$attrs['browse'] = $_GET['browse'];
+		$browse = isset( $_GET['browse'] ) ? sanitize_text_field( wp_unslash( $_GET['browse'] ) ) : '';
+		$search = isset( $_GET['search'] ) ? sanitize_text_field( wp_unslash( $_GET['search'] ) ) : '';
+		$tag    = isset( $_GET['tag'] ) ? sanitize_text_field( wp_unslash( $_GET['tag'] ) ) : '';
+		$user   = isset( $_GET['user'] ) ? sanitize_text_field( wp_unslash( $_GET['user'] ) ) : '';
+		$author = isset( $_GET['author'] ) ? sanitize_text_field( wp_unslash( $_GET['author'] ) ) : '';
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+		if ( ! empty( $browse ) ) {
+			$attrs['browse'] = $browse;
 		}
-		if ( ! empty( $_GET['search'] ) ) {
-			$attrs['search'] = $_GET['search'];
+		if ( ! empty( $search ) ) {
+			$attrs['search'] = $search;
 		}
-		if ( ! empty( $_GET['tag'] ) ) {
-			$attrs['tag'] = $_GET['tag'];
+		if ( ! empty( $tag ) ) {
+			$attrs['tag'] = $tag;
 		}
-		if ( ! empty( $_GET['user'] ) ) {
-			$attrs['user'] = $_GET['user'];
+		if ( ! empty( $user ) ) {
+			$attrs['user'] = $user;
 		}
-		if ( ! empty( $_GET['author'] ) ) {
-			$attrs['author'] = $_GET['author'];
+		if ( ! empty( $author ) ) {
+			$attrs['author'] = $author;
 		}
 
-		$sortby = isset( $_GET['sortby'] ) ? $_GET['sortby'] : '';
-		$sort   = isset( $_GET['sort'] ) ? $_GET['sort'] : '';
+		$sortby = $attrs['sortby'];
+		$sort   = $attrs['sort'];
 
 		// Build the query.
 		$query_args = array(
@@ -911,41 +920,48 @@ class Shortcodes {
 	 * Retrieve the query shortcode.
 	 */
 	public function get_query_shortcode_v2() {
-		$attrs = array(
-			'cols'        => $_GET['cols'],
-			'per_page'    => $_GET['per_page'],
-			'type'        => $_GET['type'],
-			'image'       => isset( $_GET['image'] ) ? $_GET['image'] : '',
-			'align'       => isset( $_GET['align'] ) ? $_GET['align'] : '',
-			'containerid' => isset( $_GET['containerid'] ) ? $_GET['containerid'] : '',
-			'margin'      => isset( $_GET['margin'] ) ? $_GET['margin'] : '',
-			'clear'       => isset( $_GET['clear'] ) ? $_GET['clear'] : '',
-			'expiration'  => isset( $_GET['expiration'] ) ? $_GET['expiration'] : '',
-			'ajax'        => isset( $_GET['ajax'] ) ? $_GET['ajax'] : '',
-			'scheme'      => isset( $_GET['scheme'] ) ? $_GET['scheme'] : '',
-			'layout'      => isset( $_GET['layout'] ) ? $_GET['layout'] : '',
-			'sortby'      => isset( $_GET['sortby'] ) ? $_GET['sortby'] : '',
-			'sort'        => isset( $_GET['sort'] ) ? $_GET['sort'] : '',
-			'searchBy'    => isset( $_GET['searchBy'] ) ? $_GET['searchBy'] : '',
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Public read-only card render. No state change.
+		$attrs  = array(
+			'cols'        => isset( $_GET['cols'] ) ? absint( wp_unslash( $_GET['cols'] ) ) : 0,
+			'per_page'    => isset( $_GET['per_page'] ) ? absint( wp_unslash( $_GET['per_page'] ) ) : 0,
+			'type'        => isset( $_GET['type'] ) ? sanitize_key( wp_unslash( $_GET['type'] ) ) : '',
+			'image'       => isset( $_GET['image'] ) ? esc_url_raw( wp_unslash( $_GET['image'] ) ) : '',
+			'align'       => isset( $_GET['align'] ) ? sanitize_key( wp_unslash( $_GET['align'] ) ) : '',
+			'containerid' => isset( $_GET['containerid'] ) ? sanitize_text_field( wp_unslash( $_GET['containerid'] ) ) : '',
+			'margin'      => isset( $_GET['margin'] ) ? sanitize_text_field( wp_unslash( $_GET['margin'] ) ) : '',
+			'clear'       => isset( $_GET['clear'] ) ? sanitize_key( wp_unslash( $_GET['clear'] ) ) : '',
+			'expiration'  => isset( $_GET['expiration'] ) ? absint( wp_unslash( $_GET['expiration'] ) ) : '',
+			'ajax'        => isset( $_GET['ajax'] ) ? sanitize_key( wp_unslash( $_GET['ajax'] ) ) : '',
+			'scheme'      => isset( $_GET['scheme'] ) ? sanitize_key( wp_unslash( $_GET['scheme'] ) ) : '',
+			'layout'      => isset( $_GET['layout'] ) ? sanitize_key( wp_unslash( $_GET['layout'] ) ) : '',
+			'sortby'      => isset( $_GET['sortby'] ) ? sanitize_key( wp_unslash( $_GET['sortby'] ) ) : '',
+			'sort'        => isset( $_GET['sort'] ) ? sanitize_text_field( wp_unslash( $_GET['sort'] ) ) : '',
+			'searchBy'    => isset( $_GET['searchBy'] ) ? sanitize_key( wp_unslash( $_GET['searchBy'] ) ) : '',
 		);
-		if ( ! empty( $_GET['browse'] && 'category' === $attrs['searchBy'] ) ) {
-			$attrs['browse'] = $_GET['browse'];
+		$browse = isset( $_GET['browse'] ) ? sanitize_text_field( wp_unslash( $_GET['browse'] ) ) : '';
+		$search = isset( $_GET['search'] ) ? sanitize_text_field( wp_unslash( $_GET['search'] ) ) : '';
+		$tag    = isset( $_GET['tag'] ) ? sanitize_text_field( wp_unslash( $_GET['tag'] ) ) : '';
+		$user   = isset( $_GET['user'] ) ? sanitize_text_field( wp_unslash( $_GET['user'] ) ) : '';
+		$author = isset( $_GET['author'] ) ? sanitize_text_field( wp_unslash( $_GET['author'] ) ) : '';
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+		if ( ! empty( $browse ) && 'category' === $attrs['searchBy'] ) {
+			$attrs['browse'] = $browse;
 		}
-		if ( ! empty( $_GET['search'] ) && 'general' === $attrs['searchBy'] ) {
-			$attrs['search'] = $_GET['search'];
+		if ( ! empty( $search ) && 'general' === $attrs['searchBy'] ) {
+			$attrs['search'] = $search;
 		}
-		if ( ! empty( $_GET['tag'] ) && 'tag' === $attrs['searchBy'] ) {
-			$attrs['tag'] = $_GET['tag'];
+		if ( ! empty( $tag ) && 'tag' === $attrs['searchBy'] ) {
+			$attrs['tag'] = $tag;
 		}
-		if ( ! empty( $_GET['user'] ) && 'favorites' === $attrs['searchBy'] ) {
-			$attrs['user'] = $_GET['user'];
+		if ( ! empty( $user ) && 'favorites' === $attrs['searchBy'] ) {
+			$attrs['user'] = $user;
 		}
-		if ( ! empty( $_GET['author'] ) && 'author' === $attrs['searchBy'] ) {
-			$attrs['author'] = $_GET['author'];
+		if ( ! empty( $author ) && 'author' === $attrs['searchBy'] ) {
+			$attrs['author'] = $author;
 		}
 
-		$sortby = isset( $_GET['sortby'] ) ? $_GET['sortby'] : '';
-		$sort   = isset( $_GET['sort'] ) ? $_GET['sort'] : '';
+		$sortby = $attrs['sortby'];
+		$sort   = $attrs['sort'];
 
 		// Build the query.
 		$query_args = array(
@@ -2148,12 +2164,14 @@ class Shortcodes {
 		 * It only renders public asset data, and nonces would break on cached pages.
 		 * All input is normalized below and escaped on output.
 		 */
+		$is_ajax_request = false;
 		// phpcs:disable WordPress.Security.NonceVerification.Missing
 		if ( ! empty( $_POST['type'] ) ) {
 			$type = wp_unslash( $_POST['type'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Normalized below.
 		}
 		if ( ! empty( $_POST['slug'] ) ) {
-			$slug = wp_unslash( $_POST['slug'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Normalized below.
+			$slug            = wp_unslash( $_POST['slug'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Normalized below.
+			$is_ajax_request = true;
 		}
 		if ( ! empty( $_POST['image'] ) ) {
 			$image = wp_unslash( $_POST['image'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Normalized below.
@@ -2210,7 +2228,7 @@ class Shortcodes {
 				$error     .= '</div>';
 			$error         .= '</div>';
 
-			if ( ! empty( $_POST['slug'] ) ) {
+			if ( $is_ajax_request ) {
 				echo wp_kses( $error, Functions::get_kses_allowed_html() );
 				die();
 			} else {
@@ -2253,7 +2271,7 @@ class Shortcodes {
 		$content = '';
 		$content = apply_filters( 'wppic_add_template', $content, array( $type, $wppic_data, $image, $layout ) );
 
-		if ( ! empty( $_POST['slug'] ) ) {
+		if ( $is_ajax_request ) {
 			echo wp_kses( $content, Functions::get_kses_allowed_html() );
 			die();
 		} else {
@@ -2265,8 +2283,10 @@ class Shortcodes {
 	 * Return plugin data based on passed strings.
 	 */
 	public function get_asset_data() {
-		$type = isset( $_GET['type'] ) ? sanitize_title( $_GET['type'] ) : 'plugin';
-		$slug = isset( $_GET['slug'] ) ? $_GET['slug'] : 'wp-plugin-info-card-not-found';
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Public read-only card render. No state change.
+		$type = isset( $_GET['type'] ) ? sanitize_title( wp_unslash( $_GET['type'] ) ) : 'plugin';
+		$slug = isset( $_GET['slug'] ) ? sanitize_text_field( wp_unslash( $_GET['slug'] ) ) : 'wp-plugin-info-card-not-found';
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 
 		// Random slug: comma-separated list.
 		$slugs = explode( ',', $slug );
