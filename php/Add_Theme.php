@@ -85,7 +85,7 @@ class Add_Theme {
 		$type       = $data[0];
 		$wppic_data = $data[1]; // used in the included templates.
 		$image      = $data[2]; // used in the included templates.
-		$layout     = '-' . $data[3];
+		$layout     = '-' . sanitize_key( $data[3] );
 
 		if ( 'theme' === $type ) {
 
@@ -104,7 +104,6 @@ class Add_Theme {
 		}
 
 		return $content;
-
 	}
 
 	/**
