@@ -5,6 +5,9 @@
  * @package WP_Plugin_Info_Card
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 use MediaRon\WPPIC\Functions;
 
 /***************************************************************

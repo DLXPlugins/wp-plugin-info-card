@@ -5,6 +5,9 @@
  * @package WP_Plugin_Info_Card
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 /***************************************************************
  * $wppic_data Object contain the following values:
  * url, name, slug, version, author, author_profile, contributors, requires, tested, requires, rating, num_ratings, ratings,
