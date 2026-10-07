@@ -28,7 +28,7 @@ if ( ! empty( $wppic_data->icons['svg'] ) ) {
 // Define card image.
 // $image is the custom image URL if you provided it.
 if ( ! empty( $image ) ) {
-	$background_image = 'style="background-image: url( ' . esc_url_raw( $image ) . ' );"';
+	$background_image = 'style="background-image: url( ' . esc_url( $image ) . ' );"';
 } elseif ( isset( $icon ) ) {
 	$background_image = 'style="background-image: url( ' . esc_url_raw( $icon ) . ' );"';
 } else {
@@ -71,10 +71,10 @@ if ( isset( $wppic_data->is_edd ) && $wppic_data->is_edd ) {
 		<div class="wp-pic-bottom">
 			<div class="wp-pic-bar">
 				<a href="<?php echo esc_url( $reviews_url ); ?>" class="wp-pic-rating" target="_blank" title="<?php esc_attr_e( 'Ratings', 'wp-plugin-info-card' ); ?>">
-					<?php echo round( $wppic_data->rating ); ?>%<em><?php esc_html_e( 'Ratings', 'wp-plugin-info-card' ); ?></em>
+					<?php echo esc_html( round( $wppic_data->rating ) ); ?>%<em><?php esc_html_e( 'Ratings', 'wp-plugin-info-card' ); ?></em>
 				</a>
 				<a href="<?php echo esc_url_raw( $wppic_data->download_link ); ?>" class="wp-pic-downloaded" target="_blank" title="<?php esc_attr_e( 'Direct download', 'wp-plugin-info-card' ); ?>">
-					<?php echo number_format_i18n( $wppic_data->active_installs ); ?>+<em><?php esc_html_e( 'Installs', 'wp-plugin-info-card' ); ?></em>
+					<?php echo esc_html( number_format_i18n( $wppic_data->active_installs ) ); ?>+<em><?php esc_html_e( 'Installs', 'wp-plugin-info-card' ); ?></em>
 				</a>
 				<a href="<?php echo esc_url( $wppic_data->url ); ?>" class="wp-pic-requires" target="_blank" title="<?php esc_attr_e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ); ?>">
 					<?php echo esc_html( $wppic_data->requires ); ?><em><?php esc_html_e( 'Requires', 'wp-plugin-info-card' ); ?></em>
@@ -93,10 +93,10 @@ if ( isset( $wppic_data->is_edd ) && $wppic_data->is_edd ) {
 		<div class="wp-pic-bottom">
 			<div class="wp-pic-bar">
 				<a href="<?php echo esc_url( $reviews_url ); ?>" class="wp-pic-rating" target="_blank" title="<?php esc_attr_e( 'Ratings', 'wp-plugin-info-card' ); ?>">
-					<?php echo round( $wppic_data->rating ); ?>%<em><?php esc_html_e( 'Ratings', 'wp-plugin-info-card' ); ?></em>
+					<?php echo esc_html( round( $wppic_data->rating ) ); ?>%<em><?php esc_html_e( 'Ratings', 'wp-plugin-info-card' ); ?></em>
 				</a>
 				<a href="<?php echo esc_url( $wppic_data->download_link ); ?>" class="wp-pic-downloaded" target="_blank" title="<?php esc_attr_e( 'Direct download', 'wp-plugin-info-card' ); ?>">
-					<?php echo number_format_i18n( $wppic_data->active_installs ); ?>+<em><?php esc_html_e( 'Installs', 'wp-plugin-info-card' ); ?></em>
+					<?php echo esc_html( number_format_i18n( $wppic_data->active_installs ) ); ?>+<em><?php esc_html_e( 'Installs', 'wp-plugin-info-card' ); ?></em>
 				</a>
 				<a href="<?php echo esc_url( $wppic_data->url ); ?>" class="wp-pic-requires" target="_blank" title="<?php esc_attr_e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ); ?>">
 					<?php echo esc_html( $wppic_data->requires ); ?><em><?php esc_html_e( 'Requires', 'wp-plugin-info-card' ); ?></em>

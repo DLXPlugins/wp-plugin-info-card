@@ -19,7 +19,7 @@ require_once ABSPATH . 'wp-admin/includes/template.php';
 // $image is the custom image URL if you provided it.
 $banner = '';
 if ( ! empty( $image ) ) {
-	$banner = '<img src="' . esc_url_raw( $image ) . '" alt="' . esc_attr( $wppic_data->name ) . '" />';
+	$banner = '<img src="' . esc_url( $image ) . '" alt="' . esc_attr( $wppic_data->name ) . '" />';
 } elseif ( ! empty( $wppic_data->screenshot_url ) ) {
 	$banner = '<img src="' . esc_url_raw( $wppic_data->screenshot_url ) . '" alt="' . esc_attr( $wppic_data->name ) . '" />';
 }
@@ -57,10 +57,10 @@ if ( ! empty( $image ) ) {
 					)
 				);
 				?>
-				<span class="wp-pic-num-ratings" aria-hidden="true">(<?php echo number_format_i18n( $wppic_data->num_ratings ); ?>)</span>
+				<span class="wp-pic-num-ratings" aria-hidden="true">(<?php echo esc_html( number_format_i18n( $wppic_data->num_ratings ) ); ?>)</span>
 			</div>
 			<div class="wp-pic-column-updated">
-				<strong><?php esc_html_e( 'Last Updated:', 'wp-plugin-info-card' ); ?></strong> <?php /* Translators: %s is the time ago */ printf( esc_html__( '%s ago', 'wp-plugin-info-card' ), human_time_diff( strtotime( $wppic_data->last_updated_mk ) ) ); ?>
+				<strong><?php esc_html_e( 'Last Updated:', 'wp-plugin-info-card' ); ?></strong> <?php /* Translators: %s is the time ago */ printf( esc_html__( '%s ago', 'wp-plugin-info-card' ), esc_html( human_time_diff( strtotime( $wppic_data->last_updated_mk ) ) ) ); ?>
 			</div>
 			<div class="wp-pic-column-downloaded">
 				<?php /* Translators: %s is the number of downloads */ printf( esc_html__( '%s Downloads', 'wp-plugin-info-card' ), esc_html( number_format_i18n( Functions::get_downloaded_count_from_string( $wppic_data->downloaded ) ) ) ); ?>

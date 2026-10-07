@@ -94,7 +94,7 @@ if ( isset( $wppic_data->author_profile ) && ! empty( $wppic_data->author_profil
 				<span class="wp-pic-num-ratings" aria-hidden="true">(<?php echo esc_html( number_format_i18n( $wppic_data->num_ratings ) ); ?>)</span>
 			</div>
 			<div class="wp-pic-column-updated">
-				<strong><?php esc_html_e( 'Last Updated:', 'wp-plugin-info-card' ); ?></strong> <?php /* Translators: %s is the time ago */ printf( esc_html__( '%s ago', 'wp-plugin-info-card' ), human_time_diff( strtotime( $wppic_data->last_updated_mk ) ) ); ?>
+				<strong><?php esc_html_e( 'Last Updated:', 'wp-plugin-info-card' ); ?></strong> <?php /* Translators: %s is the time ago */ printf( esc_html__( '%s ago', 'wp-plugin-info-card' ), esc_html( human_time_diff( strtotime( $wppic_data->last_updated_mk ) ) ) ); ?>
 			</div>
 			<div class="wp-pic-column-downloaded">
 				<?php /* Translators: %s is the number of active installs */ printf( esc_html__( '%s Active Installs', 'wp-plugin-info-card' ), esc_html( $active_installs_text ) ); ?>

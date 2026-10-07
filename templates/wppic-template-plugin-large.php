@@ -90,7 +90,7 @@ if ( isset( $wppic_data->is_edd ) && $wppic_data->is_edd ) {
 			<div class="wp-pic-bottom">
 				<div class="wp-pic-bar">
 					<a href="<?php echo esc_url( $reviews_url ); ?>" class="wp-pic-rating" target="_blank" title="<?php esc_html_e( 'Ratings', 'wp-plugin-info-card' ); ?>">
-						<?php echo round( $wppic_data->rating ); ?>%<em><?php esc_html_e( 'Ratings', 'wp-plugin-info-card' ); ?></em>
+						<?php echo esc_html( round( $wppic_data->rating ) ); ?>%<em><?php esc_html_e( 'Ratings', 'wp-plugin-info-card' ); ?></em>
 					</a>
 					<a href="<?php echo esc_url( $wppic_data->download_link ); ?>" class="wp-pic-downloaded" target="_blank" title="<?php esc_html_e( 'Direct download', 'wp-plugin-info-card' ); ?>">
 						<?php echo esc_html( number_format_i18n( $wppic_data->active_installs ) ); ?>+<em><?php esc_html_e( 'Installs', 'wp-plugin-info-card' ); ?></em>

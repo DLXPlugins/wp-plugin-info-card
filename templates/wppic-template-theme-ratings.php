@@ -24,7 +24,7 @@ $background_image = esc_url( $wppic_data->screenshot_url );
 ?>
 <div class="wp-pic-ratings wp-pic-plugin-ratings wp-pic-card" style="display: none;">
 	<div class="wp-pic-ratings wp-pic-ratings-front">
-		<div class="wp-pic-logo wp-pic-rating-logo"><a class="wp-pic-logo-anchor" href="<?php echo esc_url( $wppic_data->url ); ?>" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ); ?>"><img src="<?php echo esc_url_raw( $background_image ); ?>" width="85" height="85" alt="WordPress plugin logo" /></a></div>
+		<div class="wp-pic-logo wp-pic-rating-logo"><a class="wp-pic-logo-anchor" href="<?php echo esc_url( $wppic_data->url ); ?>" target="_blank" title="<?php esc_attr_e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ); ?>"><img src="<?php echo esc_url_raw( $background_image ); ?>" width="85" height="85" alt="WordPress plugin logo" /></a></div>
 		<div class="wp-pic-rating-row">
 			<?php
 			$rating = round( $wppic_data->rating / 20, 1 );
@@ -41,7 +41,7 @@ $background_image = esc_url( $wppic_data->screenshot_url );
 		</div>
 		<div class="wp-pic-name"><?php echo esc_html( $wppic_data->name ); ?></div>
 		<?php /* Translators: %d is the number of ratings for a plugin */ ?>
-		<div class="wp-pic-rating-stats"><?php echo esc_html( round( $wppic_data->rating / 20, 1 ) ); ?> <?php printf( __( 'stars based on %s ratings', 'wp-plugin-info-card' ), number_format_i18n( absint( $wppic_data->num_ratings ) ) ); ?></div>
+		<div class="wp-pic-rating-stats"><?php echo esc_html( round( $wppic_data->rating / 20, 1 ) ); ?> <?php printf( esc_html__( 'stars based on %s ratings', 'wp-plugin-info-card' ), esc_html( number_format_i18n( absint( $wppic_data->num_ratings ) ) ) ); ?></div>
 		<div class="wp-pic-bottom wp-pic-bottom-ratings">
 			<div class="wp-pic-bar">
 				<a href="<?php echo esc_url( $wppic_data->download_link ); ?>">
@@ -82,7 +82,7 @@ $background_image = esc_url( $wppic_data->screenshot_url );
 				</a>
 			</div>
 			<div class="wp-pic-download">
-				<span><a href="<?php echo esc_url_raw( $wppic_data->download_link ); ?>"><?php _e( 'Download', 'wp-plugin-info-card' ); ?></a></span>
+				<span><a href="<?php echo esc_url_raw( $wppic_data->download_link ); ?>"><?php esc_html_e( 'Download', 'wp-plugin-info-card' ); ?></a></span>
 			</div>
 		</div>
 	</div>

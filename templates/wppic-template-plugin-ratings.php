@@ -59,7 +59,7 @@ if ( isset( $wppic_data->is_edd ) && $wppic_data->is_edd ) {
 <div class="wp-pic-ratings wp-pic-plugin-ratings wp-pic-card" style="display: none;">
 	<div class="wp-pic-ratings wp-pic-ratings-front">
 		<div class="wp-pic-ratings-content">
-			<div class="wp-pic-logo wp-pic-rating-logo"><a class="wp-pic-logo-anchor" href="<?php echo esc_url( $wppic_data->url ); ?>" target="_blank" title="<?php _e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ); ?>"><img src="<?php echo esc_url_raw( $background_image ); ?>" width="85" height="85" alt="WordPress plugin logo" /></a></div>
+			<div class="wp-pic-logo wp-pic-rating-logo"><a class="wp-pic-logo-anchor" href="<?php echo esc_url( $wppic_data->url ); ?>" target="_blank" title="<?php esc_attr_e( 'WordPress.org Plugin Page', 'wp-plugin-info-card' ); ?>"><img src="<?php echo esc_url_raw( $background_image ); ?>" width="85" height="85" alt="WordPress plugin logo" /></a></div>
 			<div class="wp-pic-rating-row">
 				<?php
 				$rating = round( $wppic_data->rating / 20, 1 );
@@ -91,7 +91,7 @@ if ( isset( $wppic_data->is_edd ) && $wppic_data->is_edd ) {
 			?>
 			<div class="wp-pic-name"><?php echo esc_html( wp_trim_words( $wppic_data->name, $plugin_trim_words ) ); ?></div>
 			<?php /* Translators: %d is the number of ratings for a plugin */ ?>
-			<div class="wp-pic-rating-stats"><?php echo esc_html( round( $wppic_data->rating / 20, 1 ) ); ?> <?php printf( __( 'stars based on %s ratings', 'wp-plugin-info-card' ), number_format_i18n( absint( $wppic_data->num_ratings ) ) ); ?></div>
+			<div class="wp-pic-rating-stats"><?php echo esc_html( round( $wppic_data->rating / 20, 1 ) ); ?> <?php printf( esc_html__( 'stars based on %s ratings', 'wp-plugin-info-card' ), esc_html( number_format_i18n( absint( $wppic_data->num_ratings ) ) ) ); ?></div>
 		</div>
 		<div class="wp-pic-bottom wp-pic-bottom-ratings">
 			<div class="wp-pic-bar">
