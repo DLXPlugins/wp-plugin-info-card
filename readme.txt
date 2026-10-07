@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Tags: cards, card, github, adopt-me, grid
 Requires at least: 6.8
 Tested up to: 7.1
-Stable tag: 6.3.5
+Stable tag: 6.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -201,6 +201,11 @@ Yes, this video shows you how:
 7. .org Profile badges displaying in a grid.
 
 == Changelog ==
+
+= 6.4.0 =
+* Released 2026-10-07
+* Security: Shortcode attributes used for AJAX-loaded cards (`type`, `layout`, `expiration`) were not escaped, allowing Contributor+ users to store a Cross-Site Scripting payload. Attributes are now validated on input and escaped on output. The AJAX card handler and custom image output in card templates were hardened as well.
+* Security: Extra template hardening thanks to Plugin Check. 
 
 = 6.3.5 =
 * Released 2026-09-23
@@ -659,5 +664,5 @@ Yes, this video shows you how:
 
 == Upgrade Notice ==
 
-= 6.3.5 =
-Fix: Pasting a theme url into the block will now automatically change it to a theme option. The flex layout's image was overlapping its container.
+= 6.4.0 =
+Security fix: Shortcode attributes for AJAX-loaded cards are now validated and escaped to prevent stored Cross-Site Scripting. Templates and other output now properly escaped as reported by Plugin Check.

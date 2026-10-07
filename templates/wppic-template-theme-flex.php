@@ -5,6 +5,9 @@
  * @package WP_Plugin_Info_Card
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 use MediaRon\WPPIC\Functions;
 
 /***************************************************************
@@ -15,7 +18,7 @@ use MediaRon\WPPIC\Functions;
 // ScreenShot URL.
 // $image is the custom image URL if you provided it.
 if ( ! empty( $image ) ) {
-	$background_image = 'style="background-image: url( ' . esc_url_raw( $image ) . ' );"';
+	$background_image = 'style="background-image: url( ' . esc_url( $image ) . ' );"';
 } elseif ( ! empty( $wppic_data->screenshot_url ) ) {
 	$background_image = 'style="background-image: url( ' . esc_url_raw( $wppic_data->screenshot_url ) . ' );"';
 } else {
@@ -47,10 +50,10 @@ if ( ! empty( $image ) ) {
 		<div class="wp-pic-bottom">
 			<div class="wp-pic-bar">
 				<a href="https://wordpress.org/support/view/theme-reviews/<?php echo esc_attr( $wppic_data->slug ); ?>" class="wp-pic-rating" target="_blank" title="<?php esc_attr_e( 'Ratings', 'wp-plugin-info-card' ); ?>">
-					<?php echo round( $wppic_data->rating ); ?>%<em><?php esc_html_e( 'Ratings', 'wp-plugin-info-card' ); ?></em>
+					<?php echo esc_html( round( $wppic_data->rating ) ); ?>%<em><?php esc_html_e( 'Ratings', 'wp-plugin-info-card' ); ?></em>
 				</a>
 				<a href="<?php echo esc_url( $wppic_data->download_link ); ?>" class="wp-pic-downloaded" target="_blank" title="<?php esc_attr_e( 'Direct download', 'wp-plugin-info-card' ); ?>">
-				<?php echo number_format_i18n( Functions::get_downloaded_count_from_string( $wppic_data->downloaded ) ); ?> <em><?php esc_html_e( 'Downloads', 'wp-plugin-info-card' ); ?></em>
+				<?php echo esc_html( number_format_i18n( Functions::get_downloaded_count_from_string( $wppic_data->downloaded ) ) ); ?> <em><?php esc_html_e( 'Downloads', 'wp-plugin-info-card' ); ?></em>
 				</a>
 				<a href="<?php echo esc_url( $wppic_data->url ); ?>" class="wp-pic-version" target="_blank" title="<?php esc_attr_e( 'WordPress.org Theme Page', 'wp-plugin-info-card' ); ?>">
 					<?php echo esc_html( $wppic_data->version ); ?><em><?php esc_html_e( 'Version', 'wp-plugin-info-card' ); ?></em>

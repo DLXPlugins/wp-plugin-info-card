@@ -7,6 +7,10 @@
 
 namespace MediaRon\WPPIC\Admin;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use MediaRon\WPPIC\Functions;
 
 /**

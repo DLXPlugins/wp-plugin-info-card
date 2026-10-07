@@ -100,7 +100,7 @@ function wppic_delete_transients() {
 	/*
 	if( extension_loaded( 'Memcache' ) )
 		return;*/
-	$wppic_transients = $wpdb->get_results(
+	$wppic_transients = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Lists plugin transients for immediate deletion, so the result is not cacheable.
 		"SELECT option_name AS name,
 		option_value AS value FROM $wpdb->options
 		WHERE option_name LIKE '_transient_wppic_%'"
@@ -115,8 +115,8 @@ function wppic_delete_transients() {
  ***************************************************************/
 function wppic_delete_options_cache() {
 	global $wpdb;
-	$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'wppic_plugin%'" );
-	$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'wppic_theme%'" );
+	$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'wppic_plugin%'" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Deletes cached plugin option rows with no cacheable result.
+	$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'wppic_theme%'" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Deletes cached theme option rows with no cacheable result.
 }
 
 /***************************************************************
@@ -126,7 +126,7 @@ function wppic_clear_author_cache() {
 	global $wpdb;
 
 	// Delete all badge profile transients.
-	$wppic_profile_transients = $wpdb->get_results(
+	$wppic_profile_transients = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Lists author badge transients for immediate deletion, so the result is not cacheable.
 		"SELECT option_name AS name,
 		option_value AS value FROM $wpdb->options
 		WHERE option_name LIKE '_transient_wppic_profile_%'"
@@ -136,10 +136,10 @@ function wppic_clear_author_cache() {
 	}
 
 	// Also delete transient timeouts.
-	$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_wppic_profile_%'" );
+	$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_wppic_profile_%'" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Deletes leftover author badge transient timeouts with no cacheable result.
 
 	// Update _wppic_last_updated to 0 for all wppic_profiles posts to force refetch.
-	$wpdb->query(
+	$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Resets profile last-updated meta in bulk because WordPress has no API for this update and it has no cacheable result.
 		$wpdb->prepare(
 			"UPDATE {$wpdb->postmeta} pm
 			INNER JOIN {$wpdb->posts} p ON pm.post_id = p.ID

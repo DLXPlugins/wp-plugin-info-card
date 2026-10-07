@@ -11,10 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( 'No direct access.' );
 }
 
-if ( ! defined( 'ABSPATH' ) ) {
-	die( 'No direct access.' );
-}
-
 use MediaRon\WPPIC\Functions;
 use MediaRon\WPPIC\Options;
 

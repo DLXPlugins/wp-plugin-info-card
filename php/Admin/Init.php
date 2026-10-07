@@ -7,6 +7,10 @@
 
 namespace MediaRon\WPPIC\Admin;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use MediaRon\WPPIC\Functions;
 use MediaRon\WPPIC\Options;
 use MediaRon\WPPIC\Import_Export;
@@ -220,7 +224,7 @@ class Init {
 		// Output json filename (prompt save as).
 		header( 'Content-Disposition: attachment; filename="' . $filename_slug . '"' );
 		header( 'Content-Type: application/json; charset=utf-8' );
-		echo json_encode( $payload );
+		echo wp_json_encode( $payload );
 		exit;
 	}
 
@@ -891,7 +895,10 @@ class Init {
 			// Register global dummy script.
 			wp_register_script(
 				'wppic-admin-null',
-				''
+				'',
+				array(),
+				Functions::get_plugin_version(),
+				false
 			);
 			wp_enqueue_script( 'wppic-admin-null' );
 			wp_localize_script(

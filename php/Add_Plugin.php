@@ -7,6 +7,10 @@
 
 namespace MediaRon\WPPIC;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Helper class for for add plugin functionality.
  */
@@ -164,7 +168,7 @@ class Add_Plugin {
 		$type       = $data[0];
 		$wppic_data = $data[1]; // $wppic_data is used in the included templates.
 		$image      = $data[2]; // $image is used in the included templates.
-		$layout     = '-' . $data[3];
+		$layout     = '-' . sanitize_key( $data[3] );
 
 		if ( 'plugin' === $type ) {
 

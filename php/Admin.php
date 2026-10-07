@@ -7,7 +7,11 @@
 
 namespace MediaRon\WPPIC;
 
-use MediaRon\WPPIC\Admin\Settings as Settings;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use MediaRon\WPPIC\Admin\Settings;
 
 /**
  * Helper class for for admin functionality.
@@ -37,6 +41,9 @@ class Admin {
 		if ( 'dashboard' === get_current_screen()->id ) {
 			wp_register_script(
 				'wppic-dashboard-widget',
+				false,
+				array(),
+				Functions::get_plugin_version(),
 				false
 			);
 			wp_localize_script(
@@ -168,7 +175,6 @@ class Admin {
 		$content .= '</div>';
 
 		echo wp_kses( $content, Functions::get_kses_allowed_html() );
-
 	}
 
 	/**

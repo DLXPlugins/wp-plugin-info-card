@@ -11,10 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( 'No direct access.' );
 }
 
-if ( ! defined( 'ABSPATH' ) ) {
-	die( 'No direct access.' );
-}
-
 /**
  * Output the EDD tab and content.
  */

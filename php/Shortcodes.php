@@ -7,6 +7,10 @@
 
 namespace MediaRon\WPPIC;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Helper class for for shortcode functionality.
  */
@@ -754,61 +758,70 @@ class Shortcodes {
 	 * Get the main (plugin info card) shortcode.
 	 */
 	public function get_base_shortcode() {
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Public read-only card render. No state change.
 		$attrs = array(
-			'type'        => $_GET['type'],
-			'slug'        => $_GET['slug'],
-			'image'       => isset( $_GET['image'] ) ? $_GET['image'] : '',
-			'align'       => isset( $_GET['align'] ) ? $_GET['align'] : '',
-			'containerid' => isset( $_GET['containerid'] ) ? $_GET['containerid'] : '',
-			'margin'      => isset( $_GET['margin'] ) ? $_GET['margin'] : '',
-			'clear'       => isset( $_GET['clear'] ) ? $_GET['clear'] : '',
-			'expiration'  => isset( $_GET['expiration'] ) ? $_GET['expiration'] : '',
-			'ajax'        => isset( $_GET['ajax'] ) ? $_GET['ajax'] : '',
-			'scheme'      => isset( $_GET['scheme'] ) ? $_GET['scheme'] : '',
-			'layout'      => isset( $_GET['layout'] ) ? $_GET['layout'] : '',
-			'multi'       => isset( $_GET['multi'] ) ? filter_var( $_GET['multi'], FILTER_VALIDATE_BOOLEAN ) : false,
+			'type'        => isset( $_GET['type'] ) ? sanitize_key( wp_unslash( $_GET['type'] ) ) : '',
+			'slug'        => isset( $_GET['slug'] ) ? sanitize_text_field( wp_unslash( $_GET['slug'] ) ) : '',
+			'image'       => isset( $_GET['image'] ) ? esc_url_raw( wp_unslash( $_GET['image'] ) ) : '',
+			'align'       => isset( $_GET['align'] ) ? sanitize_key( wp_unslash( $_GET['align'] ) ) : '',
+			'containerid' => isset( $_GET['containerid'] ) ? sanitize_text_field( wp_unslash( $_GET['containerid'] ) ) : '',
+			'margin'      => isset( $_GET['margin'] ) ? sanitize_text_field( wp_unslash( $_GET['margin'] ) ) : '',
+			'clear'       => isset( $_GET['clear'] ) ? sanitize_key( wp_unslash( $_GET['clear'] ) ) : '',
+			'expiration'  => isset( $_GET['expiration'] ) ? absint( wp_unslash( $_GET['expiration'] ) ) : '',
+			'ajax'        => isset( $_GET['ajax'] ) ? sanitize_key( wp_unslash( $_GET['ajax'] ) ) : '',
+			'scheme'      => isset( $_GET['scheme'] ) ? sanitize_key( wp_unslash( $_GET['scheme'] ) ) : '',
+			'layout'      => isset( $_GET['layout'] ) ? sanitize_key( wp_unslash( $_GET['layout'] ) ) : '',
+			'multi'       => isset( $_GET['multi'] ) ? filter_var( wp_unslash( $_GET['multi'] ), FILTER_VALIDATE_BOOLEAN ) : false,
 		);
-		die( self::shortcode_function( $attrs ) );
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+		die( self::shortcode_function( $attrs ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Card HTML is escaped in the shortcode templates.
 	}
 
 	/**
 	 * Retrieve the query shortcode.
 	 */
 	public function get_query_shortcode() {
-		$attrs = array(
-			'cols'        => $_GET['cols'],
-			'per_page'    => $_GET['per_page'],
-			'type'        => $_GET['type'],
-			'image'       => isset( $_GET['image'] ) ? $_GET['image'] : '',
-			'align'       => isset( $_GET['align'] ) ? $_GET['align'] : '',
-			'containerid' => isset( $_GET['containerid'] ) ? $_GET['containerid'] : '',
-			'margin'      => isset( $_GET['margin'] ) ? $_GET['margin'] : '',
-			'clear'       => isset( $_GET['clear'] ) ? $_GET['clear'] : '',
-			'expiration'  => isset( $_GET['expiration'] ) ? $_GET['expiration'] : '',
-			'ajax'        => isset( $_GET['ajax'] ) ? $_GET['ajax'] : '',
-			'scheme'      => isset( $_GET['scheme'] ) ? $_GET['scheme'] : '',
-			'layout'      => isset( $_GET['layout'] ) ? $_GET['layout'] : '',
-			'sortby'      => isset( $_GET['sortby'] ) ? $_GET['sortby'] : '',
-			'sort'        => isset( $_GET['sort'] ) ? $_GET['sort'] : '',
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Public read-only card render. No state change.
+		$attrs  = array(
+			'cols'        => isset( $_GET['cols'] ) ? absint( wp_unslash( $_GET['cols'] ) ) : 0,
+			'per_page'    => isset( $_GET['per_page'] ) ? absint( wp_unslash( $_GET['per_page'] ) ) : 0,
+			'type'        => isset( $_GET['type'] ) ? sanitize_key( wp_unslash( $_GET['type'] ) ) : '',
+			'image'       => isset( $_GET['image'] ) ? esc_url_raw( wp_unslash( $_GET['image'] ) ) : '',
+			'align'       => isset( $_GET['align'] ) ? sanitize_key( wp_unslash( $_GET['align'] ) ) : '',
+			'containerid' => isset( $_GET['containerid'] ) ? sanitize_text_field( wp_unslash( $_GET['containerid'] ) ) : '',
+			'margin'      => isset( $_GET['margin'] ) ? sanitize_text_field( wp_unslash( $_GET['margin'] ) ) : '',
+			'clear'       => isset( $_GET['clear'] ) ? sanitize_key( wp_unslash( $_GET['clear'] ) ) : '',
+			'expiration'  => isset( $_GET['expiration'] ) ? absint( wp_unslash( $_GET['expiration'] ) ) : '',
+			'ajax'        => isset( $_GET['ajax'] ) ? sanitize_key( wp_unslash( $_GET['ajax'] ) ) : '',
+			'scheme'      => isset( $_GET['scheme'] ) ? sanitize_key( wp_unslash( $_GET['scheme'] ) ) : '',
+			'layout'      => isset( $_GET['layout'] ) ? sanitize_key( wp_unslash( $_GET['layout'] ) ) : '',
+			'sortby'      => isset( $_GET['sortby'] ) ? sanitize_key( wp_unslash( $_GET['sortby'] ) ) : '',
+			'sort'        => isset( $_GET['sort'] ) ? sanitize_text_field( wp_unslash( $_GET['sort'] ) ) : '',
 		);
-		if ( ! empty( $_GET['browse'] ) ) {
-			$attrs['browse'] = $_GET['browse'];
+		$browse = isset( $_GET['browse'] ) ? sanitize_text_field( wp_unslash( $_GET['browse'] ) ) : '';
+		$search = isset( $_GET['search'] ) ? sanitize_text_field( wp_unslash( $_GET['search'] ) ) : '';
+		$tag    = isset( $_GET['tag'] ) ? sanitize_text_field( wp_unslash( $_GET['tag'] ) ) : '';
+		$user   = isset( $_GET['user'] ) ? sanitize_text_field( wp_unslash( $_GET['user'] ) ) : '';
+		$author = isset( $_GET['author'] ) ? sanitize_text_field( wp_unslash( $_GET['author'] ) ) : '';
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+		if ( ! empty( $browse ) ) {
+			$attrs['browse'] = $browse;
 		}
-		if ( ! empty( $_GET['search'] ) ) {
-			$attrs['search'] = $_GET['search'];
+		if ( ! empty( $search ) ) {
+			$attrs['search'] = $search;
 		}
-		if ( ! empty( $_GET['tag'] ) ) {
-			$attrs['tag'] = $_GET['tag'];
+		if ( ! empty( $tag ) ) {
+			$attrs['tag'] = $tag;
 		}
-		if ( ! empty( $_GET['user'] ) ) {
-			$attrs['user'] = $_GET['user'];
+		if ( ! empty( $user ) ) {
+			$attrs['user'] = $user;
 		}
-		if ( ! empty( $_GET['author'] ) ) {
-			$attrs['author'] = $_GET['author'];
+		if ( ! empty( $author ) ) {
+			$attrs['author'] = $author;
 		}
 
-		$sortby = isset( $_GET['sortby'] ) ? $_GET['sortby'] : '';
-		$sort   = isset( $_GET['sort'] ) ? $_GET['sort'] : '';
+		$sortby = $attrs['sortby'];
+		$sort   = $attrs['sort'];
 
 		// Build the query.
 		$query_args = array(
@@ -911,41 +924,48 @@ class Shortcodes {
 	 * Retrieve the query shortcode.
 	 */
 	public function get_query_shortcode_v2() {
-		$attrs = array(
-			'cols'        => $_GET['cols'],
-			'per_page'    => $_GET['per_page'],
-			'type'        => $_GET['type'],
-			'image'       => isset( $_GET['image'] ) ? $_GET['image'] : '',
-			'align'       => isset( $_GET['align'] ) ? $_GET['align'] : '',
-			'containerid' => isset( $_GET['containerid'] ) ? $_GET['containerid'] : '',
-			'margin'      => isset( $_GET['margin'] ) ? $_GET['margin'] : '',
-			'clear'       => isset( $_GET['clear'] ) ? $_GET['clear'] : '',
-			'expiration'  => isset( $_GET['expiration'] ) ? $_GET['expiration'] : '',
-			'ajax'        => isset( $_GET['ajax'] ) ? $_GET['ajax'] : '',
-			'scheme'      => isset( $_GET['scheme'] ) ? $_GET['scheme'] : '',
-			'layout'      => isset( $_GET['layout'] ) ? $_GET['layout'] : '',
-			'sortby'      => isset( $_GET['sortby'] ) ? $_GET['sortby'] : '',
-			'sort'        => isset( $_GET['sort'] ) ? $_GET['sort'] : '',
-			'searchBy'    => isset( $_GET['searchBy'] ) ? $_GET['searchBy'] : '',
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Public read-only card render. No state change.
+		$attrs  = array(
+			'cols'        => isset( $_GET['cols'] ) ? absint( wp_unslash( $_GET['cols'] ) ) : 0,
+			'per_page'    => isset( $_GET['per_page'] ) ? absint( wp_unslash( $_GET['per_page'] ) ) : 0,
+			'type'        => isset( $_GET['type'] ) ? sanitize_key( wp_unslash( $_GET['type'] ) ) : '',
+			'image'       => isset( $_GET['image'] ) ? esc_url_raw( wp_unslash( $_GET['image'] ) ) : '',
+			'align'       => isset( $_GET['align'] ) ? sanitize_key( wp_unslash( $_GET['align'] ) ) : '',
+			'containerid' => isset( $_GET['containerid'] ) ? sanitize_text_field( wp_unslash( $_GET['containerid'] ) ) : '',
+			'margin'      => isset( $_GET['margin'] ) ? sanitize_text_field( wp_unslash( $_GET['margin'] ) ) : '',
+			'clear'       => isset( $_GET['clear'] ) ? sanitize_key( wp_unslash( $_GET['clear'] ) ) : '',
+			'expiration'  => isset( $_GET['expiration'] ) ? absint( wp_unslash( $_GET['expiration'] ) ) : '',
+			'ajax'        => isset( $_GET['ajax'] ) ? sanitize_key( wp_unslash( $_GET['ajax'] ) ) : '',
+			'scheme'      => isset( $_GET['scheme'] ) ? sanitize_key( wp_unslash( $_GET['scheme'] ) ) : '',
+			'layout'      => isset( $_GET['layout'] ) ? sanitize_key( wp_unslash( $_GET['layout'] ) ) : '',
+			'sortby'      => isset( $_GET['sortby'] ) ? sanitize_key( wp_unslash( $_GET['sortby'] ) ) : '',
+			'sort'        => isset( $_GET['sort'] ) ? sanitize_text_field( wp_unslash( $_GET['sort'] ) ) : '',
+			'searchBy'    => isset( $_GET['searchBy'] ) ? sanitize_key( wp_unslash( $_GET['searchBy'] ) ) : '',
 		);
-		if ( ! empty( $_GET['browse'] && 'category' === $attrs['searchBy'] ) ) {
-			$attrs['browse'] = $_GET['browse'];
+		$browse = isset( $_GET['browse'] ) ? sanitize_text_field( wp_unslash( $_GET['browse'] ) ) : '';
+		$search = isset( $_GET['search'] ) ? sanitize_text_field( wp_unslash( $_GET['search'] ) ) : '';
+		$tag    = isset( $_GET['tag'] ) ? sanitize_text_field( wp_unslash( $_GET['tag'] ) ) : '';
+		$user   = isset( $_GET['user'] ) ? sanitize_text_field( wp_unslash( $_GET['user'] ) ) : '';
+		$author = isset( $_GET['author'] ) ? sanitize_text_field( wp_unslash( $_GET['author'] ) ) : '';
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+		if ( ! empty( $browse ) && 'category' === $attrs['searchBy'] ) {
+			$attrs['browse'] = $browse;
 		}
-		if ( ! empty( $_GET['search'] ) && 'general' === $attrs['searchBy'] ) {
-			$attrs['search'] = $_GET['search'];
+		if ( ! empty( $search ) && 'general' === $attrs['searchBy'] ) {
+			$attrs['search'] = $search;
 		}
-		if ( ! empty( $_GET['tag'] ) && 'tag' === $attrs['searchBy'] ) {
-			$attrs['tag'] = $_GET['tag'];
+		if ( ! empty( $tag ) && 'tag' === $attrs['searchBy'] ) {
+			$attrs['tag'] = $tag;
 		}
-		if ( ! empty( $_GET['user'] ) && 'favorites' === $attrs['searchBy'] ) {
-			$attrs['user'] = $_GET['user'];
+		if ( ! empty( $user ) && 'favorites' === $attrs['searchBy'] ) {
+			$attrs['user'] = $user;
 		}
-		if ( ! empty( $_GET['author'] ) && 'author' === $attrs['searchBy'] ) {
-			$attrs['author'] = $_GET['author'];
+		if ( ! empty( $author ) && 'author' === $attrs['searchBy'] ) {
+			$attrs['author'] = $author;
 		}
 
-		$sortby = isset( $_GET['sortby'] ) ? $_GET['sortby'] : '';
-		$sort   = isset( $_GET['sort'] ) ? $_GET['sort'] : '';
+		$sortby = $attrs['sortby'];
+		$sort   = $attrs['sort'];
 
 		// Build the query.
 		$query_args = array(
@@ -1045,6 +1065,63 @@ class Shortcodes {
 	}
 
 	/**
+	 * Normalize the card arguments shared by the shortcode and the AJAX card handler.
+	 *
+	 * Type and layout are restricted to key characters so they are safe in markup
+	 * and in template include paths, while still allowing custom types and layouts.
+	 *
+	 * @param array $args Raw arguments (type, slug, image, expiration, layout).
+	 *
+	 * @return array Normalized arguments.
+	 */
+	private static function normalize_card_args( $args ) {
+		$args = wp_parse_args(
+			$args,
+			array(
+				'type'       => '',
+				'slug'       => '',
+				'image'      => '',
+				'expiration' => '',
+				'layout'     => '',
+			)
+		);
+
+		$type = sanitize_key( $args['type'] );
+
+		return array(
+			'type'       => '' === $type ? 'plugin' : $type,
+			'slug'       => is_scalar( $args['slug'] ) ? sanitize_text_field( (string) $args['slug'] ) : '',
+			'image'      => is_scalar( $args['image'] ) ? esc_url_raw( trim( (string) $args['image'] ) ) : '',
+			'expiration' => is_scalar( $args['expiration'] ) ? absint( $args['expiration'] ) : 0,
+			'layout'     => sanitize_key( $args['layout'] ),
+		);
+	}
+
+	/**
+	 * Build the data attributes used by the AJAX card loader.
+	 *
+	 * @param string $type       Asset type.
+	 * @param string $slug       Asset slug.
+	 * @param string $image      Image override URL.
+	 * @param int    $expiration Cache expiration in minutes.
+	 * @param string $layout     Card layout.
+	 * @param array  $item_slugs Slugs with overriding titles.
+	 *
+	 * @return string Escaped data attributes, prefixed with a space.
+	 */
+	private static function get_ajax_data_attributes( $type, $slug, $image, $expiration, $layout, $item_slugs ) {
+		return sprintf(
+			' data-type="%s" data-slug="%s" data-image="%s" data-expiration="%s" data-layout="%s" data-slugs="%s"',
+			esc_attr( $type ),
+			esc_attr( $slug ),
+			esc_url( $image ),
+			esc_attr( $expiration ),
+			esc_attr( $layout ),
+			esc_attr( wp_json_encode( $item_slugs ) )
+		);
+	}
+
+	/**
 	 * Main Shortcode function.
 	 *
 	 * @param array  $atts    Shortcode attributes.
@@ -1086,18 +1163,21 @@ class Shortcodes {
 		add_filter( 'wppic_allow_scripts', '__return_true' );
 
 		$add_class = array();
+
+		$card_args = self::normalize_card_args( $attributes );
+
 		// Remove unnecessary spaces.
 		$id          = sanitize_text_field( trim( $attributes['id'] ) );
-		$type        = sanitize_text_field( trim( $attributes['type'] ) );
-		$slug        = sanitize_text_field( trim( esc_html( $attributes['slug'] ) ) );
-		$image       = sanitize_text_field( trim( esc_url( $attributes['image'] ) ) );
+		$type        = $card_args['type'];
+		$slug        = $card_args['slug'];
+		$image       = $card_args['image'];
 		$containerid = esc_attr( trim( $attributes['containerid'] ) );
 		$margin      = esc_attr( trim( $attributes['margin'] ) );
 		$clear       = sanitize_text_field( trim( $attributes['clear'] ) );
-		$expiration  = sanitize_text_field( trim( $attributes['expiration'] ) );
+		$expiration  = $card_args['expiration'];
 		$ajax        = sanitize_text_field( trim( $attributes['ajax'] ) );
 		$scheme      = sanitize_text_field( trim( $attributes['scheme'] ) );
-		$layout      = sanitize_text_field( trim( $attributes['layout'] ) );
+		$layout      = $card_args['layout'];
 		$custom      = sanitize_text_field( trim( $attributes['custom'] ) );
 		$multi       = filter_var( $attributes['multi'], FILTER_VALIDATE_BOOLEAN );
 		$align       = sanitize_text_field( trim( $attributes['align'] ) );
@@ -1212,7 +1292,7 @@ class Shortcodes {
 					$wppic_data = wppic_api_parser( $type, $asset_slug, $expiration );
 
 					if ( ! $wppic_data ) {
-						return '<strong>' . esc_html__( 'Item not found:', 'wp-plugin-info-card' ) . ' "' . $asset_slug . '" ' . esc_html__( 'does not exist.', 'wp-plugin-info-card' ) . '</strong>';
+						return '<strong>' . esc_html__( 'Item not found:', 'wp-plugin-info-card' ) . ' "' . esc_html( $asset_slug ) . '" ' . esc_html__( 'does not exist.', 'wp-plugin-info-card' ) . '</strong>';
 					}
 
 					if ( ! empty( $wppic_data->$custom ) ) {
@@ -1224,7 +1304,7 @@ class Shortcodes {
 					$ajax_data = '';
 					if ( 'yes' === $ajax ) {
 						$add_class[] = 'wp-pic-ajax';
-						$ajax_data   = 'data-type="' . $type . '" data-slug="' . $asset_slug . '" data-image="' . $image . '" data-expiration="' . $expiration . '"  data-layout="' . $layout . '" data-slugs="' . esc_attr( wp_json_encode( $attributes['itemSlugs'] ) ) . '"';
+						$ajax_data   = self::get_ajax_data_attributes( $type, $asset_slug, $image, $expiration, $layout, $attributes['itemSlugs'] );
 					}
 
 					// Align card.
@@ -1307,7 +1387,7 @@ class Shortcodes {
 				$wppic_data = wppic_api_parser( $type, $slug, $expiration );
 
 				if ( ! $wppic_data ) {
-					return '<strong>' . __( 'Item not found:', 'wp-plugin-info-card' ) . ' "' . $slug . '" ' . __( 'does not exist.', 'wp-plugin-info-card' ) . '</strong>';
+					return '<strong>' . esc_html__( 'Item not found:', 'wp-plugin-info-card' ) . ' "' . esc_html( $slug ) . '" ' . esc_html__( 'does not exist.', 'wp-plugin-info-card' ) . '</strong>';
 				}
 
 				if ( ! empty( $wppic_data->$custom ) ) {
@@ -1319,7 +1399,7 @@ class Shortcodes {
 				$ajax_data = '';
 				if ( 'yes' === $ajax ) {
 					$add_class[] = 'wp-pic-ajax';
-					$ajax_data   = 'data-type="' . $type . '" data-slug="' . $slug . '" data-image="' . $image . '" data-expiration="' . $expiration . '"  data-layout="' . $layout . '" data-slugs="' . esc_attr( wp_json_encode( $attributes['itemSlugs'] ) ) . '"';
+					$ajax_data   = self::get_ajax_data_attributes( $type, $slug, $image, $expiration, $layout, $attributes['itemSlugs'] );
 				}
 
 				// Align card.
@@ -1363,7 +1443,7 @@ class Shortcodes {
 				}
 
 				// Data attribute for ajax call.
-				$content .= '<div class="wp-pic ' . esc_html( implode( ' ', $add_class ) ) . '" ' . $containerid . $ajax_data . ' >';
+				$content .= '<div class="wp-pic ' . esc_attr( implode( ' ', $add_class ) ) . '" ' . $containerid . $ajax_data . ' >';
 				if ( 'yes' !== $ajax ) {
 					$content .= self::shortcode_content( $type, $slug, $image, $expiration, $layout, $attributes['itemSlugs'] );
 				} else {
@@ -1422,6 +1502,7 @@ class Shortcodes {
 					'sort'        => 'ASC',
 					'search'      => '',
 					'tag'         => '',
+					'author'      => '',
 					'user'        => '',
 					'browse'      => '',
 					'row_gap'     => 20,
@@ -1555,7 +1636,7 @@ class Shortcodes {
 						// Set alignment to none as these are nested.
 						$atts['align'] = 'none';
 						// Use the WPPIC shorcode to generate cards.
-						echo self::shortcode_function( $atts );
+						echo self::shortcode_function( $atts ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Card HTML is escaped in the shortcode templates.
 					}
 					?>
 				</div>
@@ -2083,33 +2164,51 @@ class Shortcodes {
 	 * @param object $item_slugs Key separated slugs with overriding titles.
 	 */
 	public static function shortcode_content( $type = null, $slug = null, $image = null, $expiration = null, $layout = null, $item_slugs = null ) {
-
+		/*
+		 * This also runs as a public (nopriv) AJAX handler without a nonce on purpose.
+		 * It only renders public asset data, and nonces would break on cached pages.
+		 * All input is normalized below and escaped on output.
+		 */
+		$is_ajax_request = false;
+		// phpcs:disable WordPress.Security.NonceVerification.Missing
 		if ( ! empty( $_POST['type'] ) ) {
-			$type = $_POST['type'];
+			$type = wp_unslash( $_POST['type'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Normalized below.
 		}
 		if ( ! empty( $_POST['slug'] ) ) {
-			$slug = $_POST['slug'];
+			$slug            = wp_unslash( $_POST['slug'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Normalized below.
+			$is_ajax_request = true;
 		}
 		if ( ! empty( $_POST['image'] ) ) {
-			$image = $_POST['image'];
+			$image = wp_unslash( $_POST['image'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Normalized below.
 		}
 		if ( ! empty( $_POST['expiration'] ) ) {
-			$expiration = $_POST['expiration'];
+			$expiration = wp_unslash( $_POST['expiration'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Normalized below.
 		}
 		if ( ! empty( $_POST['layout'] ) ) {
-			$layout = $_POST['layout'];
+			$layout = wp_unslash( $_POST['layout'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Normalized below.
 		}
 
-		$type       = esc_html( $type );
-		$slug       = esc_html( $slug );
-		$image      = esc_html( $image );
-		$expiration = esc_html( $expiration );
-		$layout     = esc_html( $layout );
+		$card_args = self::normalize_card_args(
+			array(
+				'type'       => $type,
+				'slug'       => $slug,
+				'image'      => $image,
+				'expiration' => $expiration,
+				'layout'     => $layout,
+			)
+		);
+
+		$type       = $card_args['type'];
+		$slug       = $card_args['slug'];
+		$image      = $card_args['image'];
+		$expiration = $card_args['expiration'];
+		$layout     = $card_args['layout'];
 
 		// Get item slugs.
 		if ( isset( $_POST['itemSlugs'] ) && is_array( $_POST['itemSlugs'] ) ) {
-			$item_slugs = Functions::sanitize_array_recursive( wp_unslash( $_POST['itemSlugs'] ) );
+			$item_slugs = Functions::sanitize_array_recursive( wp_unslash( $_POST['itemSlugs'] ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized recursively.
 		}
+		// phpcs:enable WordPress.Security.NonceVerification.Missing
 
 		$wppic_data = wppic_api_parser( $type, $slug, $expiration );
 
@@ -2119,7 +2218,7 @@ class Shortcodes {
 			$error      = '<div class="wp-pic-flip" style="display: none;">';
 				$error .= '<div class="wp-pic-face wp-pic-front error">';
 
-					$error .= '<span class="wp-pic-no-plugin">' . __( 'Item not found:', 'wp-plugin-info-card' ) . '</br><i>"' . esc_html( $slug ) . '"</i></br>' . __( 'does not exist.', 'wp-plugin-info-card' ) . '</span>';
+					$error .= '<span class="wp-pic-no-plugin">' . esc_html__( 'Item not found:', 'wp-plugin-info-card' ) . '</br><i>"' . esc_html( $slug ) . '"</i></br>' . esc_html__( 'does not exist.', 'wp-plugin-info-card' ) . '</span>';
 					$error .= '<div class="monster-wrapper">
 									<div class="eye-left"></div>
 									<div class="eye-right"></div>
@@ -2134,7 +2233,7 @@ class Shortcodes {
 				$error     .= '</div>';
 			$error         .= '</div>';
 
-			if ( ! empty( $_POST['slug'] ) ) {
+			if ( $is_ajax_request ) {
 				echo wp_kses( $error, Functions::get_kses_allowed_html() );
 				die();
 			} else {
@@ -2177,7 +2276,7 @@ class Shortcodes {
 		$content = '';
 		$content = apply_filters( 'wppic_add_template', $content, array( $type, $wppic_data, $image, $layout ) );
 
-		if ( ! empty( $_POST['slug'] ) ) {
+		if ( $is_ajax_request ) {
 			echo wp_kses( $content, Functions::get_kses_allowed_html() );
 			die();
 		} else {
@@ -2189,8 +2288,10 @@ class Shortcodes {
 	 * Return plugin data based on passed strings.
 	 */
 	public function get_asset_data() {
-		$type = isset( $_GET['type'] ) ? sanitize_title( $_GET['type'] ) : 'plugin';
-		$slug = isset( $_GET['slug'] ) ? $_GET['slug'] : 'wp-plugin-info-card-not-found';
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Public read-only card render. No state change.
+		$type = isset( $_GET['type'] ) ? sanitize_title( wp_unslash( $_GET['type'] ) ) : 'plugin';
+		$slug = isset( $_GET['slug'] ) ? sanitize_text_field( wp_unslash( $_GET['slug'] ) ) : 'wp-plugin-info-card-not-found';
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 
 		// Random slug: comma-separated list.
 		$slugs = explode( ',', $slug );
@@ -3001,7 +3102,7 @@ class Shortcodes {
 					if ( $show_last_updated ) :
 						?>
 						<div class="wppic-github-info-card-last-updated">
-							<span class="wppic-github-info-card-last-updated-label"><?php echo esc_html__( 'Last updated:', 'wp-plugin-info-card' ); ?></span> <?php echo date_i18n( get_option( 'date_format' ), strtotime( $last_updated_date ) ); ?>
+							<span class="wppic-github-info-card-last-updated-label"><?php echo esc_html__( 'Last updated:', 'wp-plugin-info-card' ); ?></span> <?php echo esc_html( date_i18n( get_option( 'date_format' ), strtotime( $last_updated_date ) ) ); ?>
 						</div>
 					<?php endif; ?>
 				</div>
@@ -4194,11 +4295,11 @@ class Shortcodes {
 			<div id="<?php echo esc_attr( $css_wrapper_id ); ?>" <?php echo wp_kses_post( $wrapper_attributes ); ?>>
 				<style><?php echo esc_html( $grid_styles ); ?></style>
 
-				<?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped - Badge data is trusted, attributes already escaped. ?>
+				<?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Badge data is trusted, attributes already escaped. ?>
 			</div>
 		<?php else : ?>
 			<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" id="<?php echo esc_attr( $wrapper_id ); ?>" style="<?php echo esc_attr( $inline_styles ); ?>">
-				<?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped - Badge data is trusted, attributes already escaped. ?>
+				<?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Badge data is trusted, attributes already escaped. ?>
 			</div>
 		<?php endif; ?>
 		<?php

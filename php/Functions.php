@@ -7,6 +7,10 @@
 
 namespace MediaRon\WPPIC;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Class Functions
  */
