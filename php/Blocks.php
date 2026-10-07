@@ -8,6 +8,10 @@
 
 namespace MediaRon\WPPIC;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Helper class for registering blocks.
  */

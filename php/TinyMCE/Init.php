@@ -7,6 +7,10 @@
 
 namespace MediaRon\WPPIC\TinyMCE;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use MediaRon\WPPIC\Functions;
 
 /**
@@ -94,6 +98,9 @@ class Init {
 		wp_register_script(
 			'wppic-mce-script',
 			null,
+			array(),
+			Functions::get_plugin_version(),
+			false
 		);
 		wp_localize_script(
 			'wppic-mce-script',

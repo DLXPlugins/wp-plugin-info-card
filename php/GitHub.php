@@ -7,6 +7,9 @@
 
 namespace MediaRon\WPPIC;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Helper class for for GitHub functionality.
