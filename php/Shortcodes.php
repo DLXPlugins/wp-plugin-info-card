@@ -1502,6 +1502,7 @@ class Shortcodes {
 					'sort'        => 'ASC',
 					'search'      => '',
 					'tag'         => '',
+					'author'      => '',
 					'user'        => '',
 					'browse'      => '',
 					'row_gap'     => 20,
