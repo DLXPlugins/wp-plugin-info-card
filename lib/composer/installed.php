@@ -1,0 +1,56 @@
+<?php return array(
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+    'root' => array(
+        'name' => 'mediaron/wp-plugin-info-card',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => '5d2ad17cead05c7d558d7a947ab5d9dc039fbbaf',
+        'type' => 'project',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
+    ),
+    'versions' => array(
+        'mediaron/wp-plugin-info-card' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '5d2ad17cead05c7d558d7a947ab5d9dc039fbbaf',
+            'type' => 'project',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'php-stubs/wordpress-stubs' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '6e68bffc7dca55409fd73eef5103d18c41c1951f',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../php-stubs/wordpress-stubs',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
+            'dev_requirement' => true,
+        ),
+        'phpstan/phpstan' => array(
+            'pretty_version' => '2.3.x-dev',
+            'version' => '2.3.9999999.9999999-dev',
+            'reference' => 'c475e392dddd510a6f4464713706d90ccc4c62f9',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpstan/phpstan',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'szepeviktor/phpstan-wordpress' => array(
+            'pretty_version' => '2.x-dev',
+            'version' => '2.9999999.9999999.9999999-dev',
+            'reference' => 'f8cfa97c7b6cb086492bc197a89ffc5cde1f6615',
+            'type' => 'phpstan-extension',
+            'install_path' => __DIR__ . '/../szepeviktor/phpstan-wordpress',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+    ),
+);

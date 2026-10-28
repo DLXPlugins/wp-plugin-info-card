@@ -19,9 +19,10 @@
     "url": "https://github.com/sponsors/MediaRon"
   },
   "scripts": {
+	"composer:guard": "php bin/add-composer-guards.php",
     "start": "wp-scripts start --blocks-manifest --env mode=development",
     "dev": "wp-scripts start --blocks-manifest --env mode=development",
-    "build": "wp-scripts build --blocks-manifest --env mode=production",
+    "build": "wp-scripts build --blocks-manifest --env mode=production && npm run composer:guard",
     "zip": "wp-scripts plugin-zip"
   },
   "files": [

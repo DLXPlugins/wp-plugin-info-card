@@ -45,5 +45,8 @@ badges-documentation.md
 # Built assets and Composer install (regenerate with npm run build / composer install).
 /dist/
 /build/
-/lib/
+/lib/bin/
+/lib/php-stubs/
+/lib/phpstan/
+/lib/szepeviktor/
 /.phpstan-tmp/
