@@ -1,9 +1,10 @@
 === WP Plugin Info Card===
 Contributors: briKou, ronalfy
-Tags: cards, card, github, adopt-me, grid
-Requires at least: 6.8
+Tags: cards, card, github, showcase, grid
+Requires at least: 6.9
 Tested up to: 7.1
-Stable tag: 6.4.0
+Stable tag: 6.4.1
+Requires PHP: 8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,11 +12,11 @@ Add beautiful, customizable cards to showcase plugins, themes, and projects from
 
 == Description ==
 
-WP Plugin Info Card lets you display WordPress plugins, GitHub repositories, Easy Digital Downloads plugins, and third-party plugins in beautiful, customizable cards using blocks or shortcodes (compatible with most page builders).
+WP Plugin Info Card lets you display WordPress plugins, GitHub repositories, Easy Digital Downloads plugins, and third-party plugins in a beautiful and customizable showcase using blocks or shortcodes (compatible with most page builders).
 
 Whether you are showcasing your own plugins, highlighting recommended tools, or displaying GitHub projects, WP Plugin Info Card gives you more flexibility than the default WordPress blocks by supporting multiple data sources with consistent, beautiful layouts.
 
-It works with WordPress.org plugins and themes, GitHub repositories, Easy Digital Downloads (EDD) products, and third-party plugins, so you are not limited to a single ecosystem.
+It works with WordPress.org plugins and themes, GitHub repositories, Easy Digital Downloads (EDD) products, and third-party plugins, so you are not limited to a single ecosystem to showcase your favorites.
 
 This plugin is perfect for:
 
@@ -201,6 +202,11 @@ Yes, this video shows you how:
 7. .org Profile badges displaying in a grid.
 
 == Changelog ==
+
+= 6.4.1 =
+* Released 2026-10-28
+* New: The Plugin Screenshots block/shortcode now supports FooBox Premium for launching its images in a modal.
+* Fix: Auto-load files now have abspath checks.
 
 = 6.4.0 =
 * Released 2026-10-07
@@ -664,5 +670,5 @@ Yes, this video shows you how:
 
 == Upgrade Notice ==
 
-= 6.4.0 =
-Security fix: Shortcode attributes for AJAX-loaded cards are now validated and escaped to prevent stored Cross-Site Scripting. Templates and other output now properly escaped as reported by Plugin Check.
+= 6.4.1 =
+New: Plugin Screenshots block/shortcode supports FooBox Premium when launching slideshows. Fix: Auto-load files now have abspath checks for extra security.
