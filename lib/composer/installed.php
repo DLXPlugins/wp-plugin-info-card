@@ -1,4 +1,8 @@
 <?php return array(
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
     'root' => array(
         'name' => 'mediaron/wp-plugin-info-card',
         'pretty_version' => 'dev-master',
