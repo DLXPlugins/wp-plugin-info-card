@@ -59,6 +59,31 @@ document.addEventListener( 'DOMContentLoaded', function() {
 		}
 	};
 
+	let fooboxRefreshTimer = 0;
+
+	/**
+	 * Bind FooBox after the carousel creates slides.
+	 *
+	 * FancyApps keeps only nearby slides in the DOM and builds the rest when
+	 * the next arrow reveals them. FooBox binds anchors once, so those new
+	 * links never open unless FooBox scans again. Skip the scan while a
+	 * lightbox is open so the refresh does not destroy it.
+	 */
+	const scheduleFooboxRefresh = function() {
+		if ( document.body.classList.contains( 'fbx-active' ) ) {
+			return;
+		}
+
+		window.clearTimeout( fooboxRefreshTimer );
+		fooboxRefreshTimer = window.setTimeout( function() {
+			fooboxRefreshTimer = 0;
+			if ( document.body.classList.contains( 'fbx-active' ) ) {
+				return;
+			}
+			initFoobox();
+		}, 0 );
+	};
+
 	/**
 	 * Apply either FooBox or Fancybox attributes to a screenshot anchor.
 	 *
@@ -172,7 +197,10 @@ document.addEventListener( 'DOMContentLoaded', function() {
 							slidesPerPage: 1,
 						} );
 						if ( useFoobox ) {
-							initFoobox();
+							// Carousel init is async. Bind after it is ready, and again
+							// whenever a slide element is created by the next/prev arrows.
+							newCarousel.on( 'ready', scheduleFooboxRefresh );
+							newCarousel.on( 'createSlide', scheduleFooboxRefresh );
 						}
 						// Let's go for the deferred images and load them in.
 						deferredImages.forEach( function( deferredImage ) {
@@ -181,9 +209,6 @@ document.addEventListener( 'DOMContentLoaded', function() {
 							newDeferredImage.alt = deferredImage.alt;
 							newDeferredImage.onload = async function() {
 								newCarousel.appendSlide( buildSlideNoLi( deferredImage.src, deferredImage.alt, slug, uniqueId, useFoobox ) );
-								if ( useFoobox ) {
-									initFoobox();
-								}
 							};
 						} );
 					}
