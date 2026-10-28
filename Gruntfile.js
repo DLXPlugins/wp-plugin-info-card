@@ -85,7 +85,7 @@ module.exports = function( grunt ) {
 		},
 	} );
 
-	const productionZip = [ 'composer-install-no-dev', 'composer_guard', 'compress', 'composer-install' ];
+	const productionZip = [ 'composer_guard', 'compress' ];
 
 	grunt.registerTask( 'composer_guard', 'Add ABSPATH guards to Composer-generated files.', function() {
 		const done = this.async();
