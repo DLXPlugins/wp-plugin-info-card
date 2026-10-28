@@ -85,11 +85,28 @@ module.exports = function( grunt ) {
 		},
 	} );
 
-	const productionZip = [ 'composer-install-no-dev', 'compress', 'composer-install' ];
+	const productionZip = [ 'composer-install-no-dev', 'composer_guard', 'compress', 'composer-install' ];
+
+	grunt.registerTask( 'composer_guard', 'Add ABSPATH guards to Composer-generated files.', function() {
+		const done = this.async();
+		const { exec } = require( 'child_process' );
+		exec( 'php bin/add-composer-guards.php', { cwd: process.cwd() }, function( error, stdout, stderr ) {
+			if ( error ) {
+				grunt.log.error( error );
+				if ( stderr ) {
+					grunt.log.error( stderr );
+				}
+				done( false );
+				return;
+			}
+			grunt.log.write( stdout );
+			done();
+		} );
+	} );
 
 	grunt.registerTask( 'default', productionZip );
 	grunt.registerTask( 'release', productionZip );
-	grunt.registerTask( 'compress-only', [ 'compress' ] );
+	grunt.registerTask( 'compress-only', [ 'composer_guard', 'compress' ] );
 
 	grunt.loadNpmTasks( 'grunt-contrib-compress' );
 };
