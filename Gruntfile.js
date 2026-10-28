@@ -9,11 +9,11 @@
  * lib/ and Composer (important)
  * - If lib/ was built with dev dependencies, Composer adds phpstan/bootstrap.php to autoload files, so PHPStan
  *   runs on every front-end request. Rebuild lib without dev before zipping.
- * - Run `grunt release` to run `composer install --no-dev` then compress. Afterward run `composer install`
- *   locally again if you use PHPStan from this project.
+ * - `grunt` and `grunt release` run `composer install --no-dev`, add ABSPATH guards, zip, then
+ *   `composer install` so local PHPStan dependencies are restored.
  *
  * Tasks
- * - `grunt` or `grunt release` — composer install --no-dev (strips phpstan/php-stubs from lib/), then zip.
+ * - `grunt` or `grunt release` — composer install --no-dev (strips phpstan/php-stubs from lib/), guard, zip, then composer install.
  * - `grunt compress` or `grunt compress-only` — zip only; does not run Composer (lib/ left as-is).
  */
 'use strict';
@@ -43,7 +43,7 @@ module.exports = function( grunt ) {
 	);
 	grunt.registerTask(
 		'composer-install',
-		'Install Composer deps with require-dev so lib/ autoload loads PHPStan on every request.',
+		'Restore Composer require-dev so local PHPStan still works after a production zip.',
 		function composerInstall() {
 			try {
 				execSync(
@@ -85,12 +85,12 @@ module.exports = function( grunt ) {
 		},
 	} );
 
-	const productionZip = [ 'composer_guard', 'compress' ];
+	const productionZip = [ 'composer-install-no-dev', 'composer_guard', 'compress', 'composer-install' ];
 
 	grunt.registerTask( 'composer_guard', 'Add ABSPATH guards to Composer-generated files.', function() {
 		const done = this.async();
 		const { exec } = require( 'child_process' );
-		exec( 'php bin/add-composer-guards.php', { cwd: process.cwd() }, function( error, stdout, stderr ) {
+		exec( 'php bin/add-composer-guards.php', { cwd: path.resolve( __dirname ) }, function( error, stdout, stderr ) {
 			if ( error ) {
 				grunt.log.error( error );
 				if ( stderr ) {

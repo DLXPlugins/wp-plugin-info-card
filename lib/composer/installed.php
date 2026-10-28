@@ -1,13 +1,9 @@
 <?php return array(
-// Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
     'root' => array(
         'name' => 'mediaron/wp-plugin-info-card',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '5d2ad17cead05c7d558d7a947ab5d9dc039fbbaf',
+        'reference' => '11bf0518868d76c87f6db4aa5d0be0b7925abfbe',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -17,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         'mediaron/wp-plugin-info-card' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '5d2ad17cead05c7d558d7a947ab5d9dc039fbbaf',
+            'reference' => '11bf0518868d76c87f6db4aa5d0be0b7925abfbe',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
