@@ -3,7 +3,7 @@ Contributors: briKou, ronalfy
 Tags: cards, card, github, showcase, grid
 Requires at least: 6.9
 Tested up to: 7.1
-Stable tag: 6.4.1
+Stable tag: 6.4.2
 Requires PHP: 8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -66,6 +66,8 @@ Show GitHub repositories using a dedicated block or shortcode. Display repositor
 **Plugin Screenshots Block/Shortcode**
 
 Display plugin screenshots from WordPress.org in a beautiful card featuring a responsive gallery/carousel layout with lightbox support. This is ideal for plugin landing pages, tutorials, announcements, and documentation.
+
+> The Screenshots block/shortcode is now compatible with third-party <a href="https://fooplugins.com/foobox/">lightbox plugin FooBox Premium</a>.
 
 **Profile Badges**
 
@@ -180,6 +182,10 @@ See shortcode usage <a href="https://docs.mediaron.com/product/wp-plugin-info-ca
 
 For the main plugin card block/shortcode, there are <a href="https://docs.mediaron.com/product/wp-plugin-info-card/layouts">five different layouts</a>, and <a href="https://docs.mediaron.com/product/wp-plugin-info-card/schemes">fourteen color schemes</a>.
 
+= Is the Screenshots block compatible with other Lightbox scripts? =
+
+The plugin uses Fancybox for its slideshows, but if you have <a href="https://fooplugins.com/foobox/">FooBox Premium</a>, you can use its functionality to show-off the various screenshots (including animated Gifs).
+
 = Is the default card-flipping effect cross-browser compatible? =
 
 Yes, it is compatible with most modern browsers, including iOS Safari/Chrome.
@@ -203,9 +209,10 @@ Yes, this video shows you how:
 
 == Changelog ==
 
-= 6.4.1 =
+= 6.4.2 =
 * Released 2026-10-28
-* New: The Plugin Screenshots block/shortcode now supports FooBox Premium for launching its images in a modal.
+* Fix: Clicking next/previous in a slideshow would invalidate the lightbox for FooBox Premium.
+New: The Plugin Screenshots block/shortcode now supports FooBox Premium for launching its images in a modal.
 * Fix: Auto-load files now have abspath checks.
 
 = 6.4.0 =
@@ -670,5 +677,5 @@ Yes, this video shows you how:
 
 == Upgrade Notice ==
 
-= 6.4.1 =
+= 6.4.2 =
 New: Plugin Screenshots block/shortcode supports FooBox Premium when launching slideshows. Fix: Auto-load files now have abspath checks for extra security.
