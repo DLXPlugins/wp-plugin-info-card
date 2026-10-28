@@ -37,7 +37,35 @@ class Shortcodes {
 		add_action( 'wp_ajax_nopriv_async_wppic_shortcode_content', array( static::class, 'shortcode_content' ) );
 		add_action( 'init', array( static::class, 'register_screenshots_presets_post_type' ) );
 		add_action( 'init', array( static::class, 'register_custom_plugin_post_type' ) );
+		if ( self::is_foobox_lightbox_active() ) {
+			add_filter( 'foobox_js_selectors', array( static::class, 'add_foobox_screenshot_selector' ) );
+		}
 		return $self;
+	}
+
+	/**
+	 * Whether FooBox Premium should open plugin screenshot lightboxes.
+	 *
+	 * @return bool
+	 */
+	public static function is_foobox_lightbox_active() {
+		return class_exists( 'fooboxV2' );
+	}
+
+	/**
+	 * Register the plugin screenshots carousel as a FooBox container.
+	 *
+	 * @param array $selectors Existing FooBox container selectors.
+	 * @return array
+	 */
+	public static function add_foobox_screenshot_selector( $selectors ) {
+		if ( ! is_array( $selectors ) ) {
+			$selectors = array();
+		}
+
+		$selectors[] = '.wppic-screenshot-fancyapps';
+
+		return $selectors;
 	}
 
 	/**
@@ -638,7 +666,7 @@ class Shortcodes {
 			$percentage = 100;
 		}
 
-		$return_plugins = json_decode( json_encode( $return_plugins ) );
+		$return_plugins = json_decode( wp_json_encode( $return_plugins ) );
 
 		// Get .org plugins.
 		wp_send_json_success(
@@ -726,7 +754,7 @@ class Shortcodes {
 			$percentage = 100;
 		}
 
-		$return_plugins = json_decode( json_encode( $downloads ) );
+		$return_plugins = json_decode( wp_json_encode( $downloads ) );
 
 		// Get .org plugins.
 		wp_send_json_success(
@@ -1990,7 +2018,12 @@ class Shortcodes {
 							}
 							add_action( 'wp_footer', array( __CLASS__, 'add_carousel_to_footer' ) );
 							?>
-								<div class="wp-pic-plugin-screenshots-images">
+								<div
+									class="wp-pic-plugin-screenshots-images"
+									<?php if ( self::is_foobox_lightbox_active() ) : ?>
+										data-lightbox="foobox"
+									<?php endif; ?>
+								>
 									<div class="wppic-screenshots-lazy" style="display: none;">
 										<?php
 										foreach ( $screenshots as $screenshot ) {
@@ -2406,6 +2439,8 @@ class Shortcodes {
 	 *
 	 * @param array  $attributes Shortcode attributes.
 	 * @param string $content The content of the shortcode.
+	 * @param string $shortcode_name The name of the shortcode.
+	 * @param array  $asset_data The asset data.
 	 */
 	public static function shortcode_github_info_card( $attributes, $content = '', $shortcode_name = '', $asset_data = null ) {
 		if ( is_admin() || ( defined( 'REST_REQUEST' ) && ! defined( 'WPPIC_REST_REQUEST' ) ) ) {

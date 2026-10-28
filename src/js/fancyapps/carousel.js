@@ -50,16 +50,47 @@ document.addEventListener( 'DOMContentLoaded', function() {
 		return;
 	}
 
-	const buildSlide = function( anchor, caption, slug, uniqueId ) {
+	/**
+	 * Re-scan the page so FooBox binds screenshot links added after its first init.
+	 */
+	const initFoobox = function() {
+		if ( window.FOOBOX && 'function' === typeof window.FOOBOX.init ) {
+			window.FOOBOX.init();
+		}
+	};
+
+	/**
+	 * Apply either FooBox or Fancybox attributes to a screenshot anchor.
+	 *
+	 * @param {HTMLAnchorElement} anchorEl  Screenshot link.
+	 * @param {string}            caption   Screenshot caption.
+	 * @param {string}            slug      Plugin slug.
+	 * @param {string}            uniqueId  Card instance id.
+	 * @param {boolean}           useFoobox Whether FooBox should open the image.
+	 */
+	const applyLightboxAttributes = function( anchorEl, caption, slug, uniqueId, useFoobox ) {
+		if ( useFoobox ) {
+			anchorEl.setAttribute( 'data-caption-title', escapeAttribute( caption ) );
+			// FooBox uses the image alt as the caption description when no description is set.
+			// "none" returns an empty description before that fallback, so the alt is not shown again under the title.
+			anchorEl.setAttribute( 'data-caption-desc', '' );
+			anchorEl.setAttribute( 'data-desc-source', 'none' );
+			return;
+		}
+
+		// Fancybox attributes.
+		anchorEl.setAttribute( 'data-fancybox', escapeAttribute( `wppic-screenshot-${ slug }-${ uniqueId }` ) );
+		anchorEl.setAttribute( 'data-caption', escapeAttribute( caption ) );
+	};
+
+	const buildSlide = function( anchor, caption, slug, uniqueId, useFoobox ) {
 		const liSlide = document.createElement( 'li' );
 		liSlide.classList.add( 'f-carousel__slide' );
 
 		const aSlide = document.createElement( 'a' );
 		aSlide.href = anchor;
 
-		// Fancybox attributes.
-		aSlide.setAttribute( 'data-fancybox', escapeAttribute( `wppic-screenshot-${ slug }-${ uniqueId }` ) );
-		aSlide.setAttribute( 'data-caption', escapeAttribute( caption ) );
+		applyLightboxAttributes( aSlide, caption, slug, uniqueId, useFoobox );
 
 		const imgSlide = document.createElement( 'img' );
 		imgSlide.src = anchor;
@@ -71,13 +102,11 @@ document.addEventListener( 'DOMContentLoaded', function() {
 		return liSlide;
 	};
 
-	const buildSlideNoLi = function( anchor, caption, slug, uniqueId ) {
+	const buildSlideNoLi = function( anchor, caption, slug, uniqueId, useFoobox ) {
 		const aSlide = document.createElement( 'a' );
 		aSlide.href = anchor;
 
-		// Fancybox attributes.
-		aSlide.setAttribute( 'data-fancybox', escapeAttribute( `wppic-screenshot-${ slug }-${ uniqueId }` ) );
-		aSlide.setAttribute( 'data-caption', escapeAttribute( caption ) );
+		applyLightboxAttributes( aSlide, caption, slug, uniqueId, useFoobox );
 
 		const imgSlide = document.createElement( 'img' );
 		imgSlide.src = anchor;
@@ -94,8 +123,14 @@ document.addEventListener( 'DOMContentLoaded', function() {
 	}
 
 	// Get all the internal images for the carousel.
+	let bindFancybox = false;
 	wppicScreenshotCarousels.forEach( function( carouselWrapper ) {
 		const carouselImageWrapper = carouselWrapper.querySelector( '.wppic-screenshots-lazy' );
+		const carouselUl = carouselWrapper.querySelector( '.wppic-screenshot-fancyapps' );
+		if ( null === carouselImageWrapper || null === carouselUl ) {
+			return;
+		}
+
 		const carouselImages = carouselImageWrapper.querySelectorAll( '.wppic-screenshot-lazy' );
 
 		if ( null === carouselImages ) {
@@ -104,9 +139,12 @@ document.addEventListener( 'DOMContentLoaded', function() {
 
 		const deferredImages = [];
 		let countImage = 0;
-		const carouselUl = carouselWrapper.querySelector( '.wppic-screenshot-fancyapps' );
-		const slug = carouselWrapper.getAttribute( 'data-slug' );
-		const uniqueId = carouselWrapper.getAttribute( 'data-unique-id' );
+		const slug = carouselUl.getAttribute( 'data-slug' );
+		const uniqueId = carouselUl.getAttribute( 'data-unique-id' );
+		const useFoobox = 'foobox' === carouselWrapper.getAttribute( 'data-lightbox' );
+		if ( ! useFoobox ) {
+			bindFancybox = true;
+		}
 		// Loop through the first three images and preload them.
 		carouselImages.forEach( function( image, index ) {
 			if ( index > 2 ) {
@@ -119,7 +157,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 				newImg.src = image.getAttribute( 'data-src' );
 				newImg.alt = image.getAttribute( 'data-alt' );
 				newImg.onload = async function() {
-					carouselUl.appendChild( buildSlide( image.getAttribute( 'data-src' ), image.getAttribute( 'data-alt' ), slug, uniqueId ) );
+					carouselUl.appendChild( buildSlide( image.getAttribute( 'data-src' ), image.getAttribute( 'data-alt' ), slug, uniqueId, useFoobox ) );
 					countImage++;
 					if ( countImage === 3 || countImage === carouselImages.length ) {
 						// Show carouselUL.
@@ -133,13 +171,19 @@ document.addEventListener( 'DOMContentLoaded', function() {
 							adaptiveHeight: false,
 							slidesPerPage: 1,
 						} );
+						if ( useFoobox ) {
+							initFoobox();
+						}
 						// Let's go for the deferred images and load them in.
 						deferredImages.forEach( function( deferredImage ) {
 							const newDeferredImage = new Image();
 							newDeferredImage.src = deferredImage.src;
 							newDeferredImage.alt = deferredImage.alt;
 							newDeferredImage.onload = async function() {
-								newCarousel.appendSlide( buildSlideNoLi( deferredImage.src, deferredImage.alt, slug, uniqueId ) );
+								newCarousel.appendSlide( buildSlideNoLi( deferredImage.src, deferredImage.alt, slug, uniqueId, useFoobox ) );
+								if ( useFoobox ) {
+									initFoobox();
+								}
 							};
 						} );
 					}
@@ -147,9 +191,11 @@ document.addEventListener( 'DOMContentLoaded', function() {
 			}
 		} );
 	} );
-	Fancybox.bind( '[data-fancybox]', {
-		Thumbs: {
-			type: 'classic',
-		},
-	} );
+	if ( bindFancybox ) {
+		Fancybox.bind( '[data-fancybox]', {
+			Thumbs: {
+				type: 'classic',
+			},
+		} );
+	}
 } );
