@@ -47,6 +47,9 @@ GUARD;
  *
  * The guard is placed after the namespace declaration, if one exists;
  * otherwise it is placed immediately after the opening <?php tag.
+ * Opening tags that share a line with code (for example "<?php return array("
+ * or "<?php return [") are split first so the guard is not inserted inside
+ * that statement.
  *
  * @param string $contents Original file contents.
  * @param string $guard    Guard block to insert.
@@ -62,8 +65,10 @@ function mrshortcutsgb_insert_abspath_guard( $contents, $guard ) {
 
 	$lines = preg_split( '/\r\n|\r|\n/', $contents );
 
-	// Ensure the <?php tag is on its own line so we can safely insert after it.
-	if ( isset( $lines[0] ) && preg_match( '/^<\?php(\S.*)$/', trim( $lines[0] ), $matches ) ) {
+	// Composer return maps such as installed.php keep "<?php return array(" on one line.
+	// Inserting after that line puts the guard inside the argument list and fails php -l.
+	// Whitespace after the opening tag is required; code is never glued directly to "<?php".
+	if ( isset( $lines[0] ) && preg_match( '/^<\?php\s+(\S.*)$/', trim( $lines[0] ), $matches ) ) {
 		$lines[0] = '<?php';
 		array_splice( $lines, 1, 0, array( $matches[1] ) );
 	}
